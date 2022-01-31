@@ -1,0 +1,112 @@
+h1
+{
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+.leaderboardTop 
+{
+background-color: #f8f8f8;
+border: 0px;
+border-radius: 0.7rem;
+font-weight: bold;
+margin: 0rem 2rem;
+}
+.leaderboardTitle
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem 0rem;
+}
+.leaderboardDropdown
+{
+    display: flex;
+    justify-content: end;
+}
+.leaderboardTopDetails
+{
+   display: flex; 
+   flex-direction: column;
+}
+.leaderboardTopDetailsRow > img
+{
+    height: 4rem;
+    width: 4rem;
+}
+.leaderboardTopDetailsRow
+{
+    display: flex;
+    margin: 1rem 0rem;
+    align-items: center;
+    text-align: center;
+    justify-content: start;
+}
+.LeaderboardInsideDetails
+{
+    display: flex;
+    /* flex-direction: column; */
+}
+.LeaderboardInsideDetails > h2
+{
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+.LeaderboardInsideDetails > p
+{
+    font-size: 0.8rem;
+    color: #3977ff;
+}
+.LeaderboardInsideDetails > p> span{
+    margin: 0rem;
+   color: #9d9d9d;
+}
+    .hr {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin: 0rem;
+      }
+      .view
+      {
+        display: flex;
+        justify-content: center;
+        margin: 1rem 0rem;
+        align-items: center;
+        font-weight: 00;
+        font-size: 0.8rem;
+        text-decoration: none;
+    color: black;
+      }
+
+
+
+
+      .container__down>h6> span
+      {
+margin: 0rem;
+      }
+      /* .images
+      {
+          display: flex;
+          flex-basis: 25%;
+      } */
+      .container__tile
+      {
+          margin: 2rem 0rem !important;
+      }
+
+      .sales
+      {
+          display: flex;
+          text-align: right;
+          margin-top: 2rem;
+      }
+      .sales1
+      {
+          display: flex;
+          align-items: center;
+      }
+      .hey
+      {
+          background-color: grey;
+      }
