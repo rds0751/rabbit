@@ -1,217 +1,533 @@
-@import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
+@import "../../../node_modules/bootstrap/dist/css/bootstrap.css";
 
 body {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
 
-body, button, html, input, select, textarea, div, p, span, label {
-    font-family: "Roboto", "Open Sans", "Helvetica Neue", "Helvetica", "Arial", "sans-serif" !important;
+body,
+button,
+html,
+input,
+select,
+textarea,
+div,
+p,
+span,
+label {
+  font-family: "Roboto", "Open Sans", "Helvetica Neue", "Helvetica", "Arial",
+    "sans-serif" !important;
 }
 
-html, body {
-    width: 100%;
-    height: 100%;
+html,
+body {
+  width: 100%;
+  height: 100%;
 }
 
-body, button, html, input, select, textarea, div, p, span, label {
-    font-family: "SFProText", "Open Sans", "Helvetica Neue", "Helvetica", "Arial", "sans-serif" !important;
+body,
+button,
+html,
+input,
+select,
+textarea,
+div,
+p,
+span,
+label {
+  font-family: "SFProText", "Open Sans", "Helvetica Neue", "Helvetica", "Arial",
+    "sans-serif" !important;
 }
 
 input:focus {
-    border: solid 1px #0099ff;
+  border: solid 1px #0099ff;
 }
 
 .display-none {
-    display: none !important;
+  display: none !important;
 }
 
 .display-block {
-    display: block;
+  display: block;
 }
 
 .display-flex {
-    display: flex;
+  display: flex;
 }
 
 .display-inline {
-    display: inline;
+  display: inline;
 }
 
 /*Cursor-CSS*/
 
 .cursor-pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .cursor-default {
-    cursor: default;
+  cursor: default;
 }
 
 .cursor-not-allowed {
-    cursor: not-allowed;
+  cursor: not-allowed;
 }
 
 /*Borders*/
 .b-1-blue {
-    border: 1px solid #0052cc;
+  border: 1px solid #0052cc;
 }
 
 .b-1-white {
-    border: 1px solid #e6e6e6;
+  border: 1px solid #e6e6e6;
 }
 
 /*Border-radius*/
 .br-4 {
-    border-radius: 4px;
+  border-radius: 4px;
 }
 
 /*Font-sizes*/
 
 .fs-sm {
-    font-size: 10px !important;
+  font-size: 10px !important;
 }
 
 .fs-12 {
-    font-size: 12px !important;
+  font-size: 12px !important;
 }
 
 .fs-13 {
-    font-size: 13px !important;
+  font-size: 13px !important;
 }
 
 .fs-14 {
-    font-size: 14px !important;
+  font-size: 14px !important;
 }
 
 .fs-15 {
-    font-size: 15px !important;
+  font-size: 15px !important;
 }
 
 .fs-16 {
-    font-size: 16px !important;
+  font-size: 16px !important;
 }
 
 .fs-17 {
-    font-size: 17px !important;
+  font-size: 17px !important;
 }
 
 .fs-18 {
-    font-size: 18px !important;
+  font-size: 18px !important;
 }
 
 .fs-19 {
-    font-size: 19px !important;
+  font-size: 19px !important;
 }
 
 .fs-20 {
-    font-size: 20px !important;
+  font-size: 20px !important;
 }
 
 .fs-22 {
-    font-size: 22px !important;
+  font-size: 22px !important;
 }
 
 .fs-24 {
-    font-size: 24px !important;
+  font-size: 24px !important;
 }
 
 .fs-26 {
-    font-size: 26px !important;
+  font-size: 26px !important;
 }
 
 .fs-28 {
-    font-size: 28px !important;
+  font-size: 28px !important;
 }
 
 .fs-40 {
-    font-size: 40px;
+  font-size: 40px;
 }
 
 /*Font-color*/
 
 .fc-warm-grey {
-    color: #999999;
+  color: #999999;
 }
 
 .fc-blue {
-    color: #0052cc !important;
+  color: #0052cc !important;
 }
 
 .fc-dark-slate-blue {
-    color: #172b4d;
+  color: #172b4d;
 }
 
 .fc-white {
-    color: #ffffff !important;
+  color: #ffffff !important;
 }
 
 .fc-black {
-    color: #000000;
+  color: #000000;
 }
 
 .fc-blue-grey {
-    color: #5e6c84;
+  color: #5e6c84;
 }
 
 .fc-red {
-    color: red;
+  color: red;
 }
 
 .fc-brownish-grey {
-    color: #666666;
+  color: #666666;
 }
 
 .fc-dusky-blue {
-    color: #465d85;
+  color: #465d85;
 }
 
 /*Background-color*/
 
 .bg-blue {
-    background-color: #0052cc !important;
+  background-color: #0052cc !important;
 }
 
 /*Width-CSS*/
 
 .outline-none {
-    outline: none !important;
+  outline: none !important;
 }
 
 /*Width-CSS*/
 
 .w-150 {
-    width: 150px;
+  width: 150px;
 }
 
 .w-450 {
-    width: 450px;
+  width: 450px;
 }
 
 .w-250 {
-    width: 250px;
+  width: 250px;
 }
 
 .z-index-100 {
-    z-index: 100;
+  z-index: 100;
 }
 
 .text-transform-capitalize {
-    text-transform: capitalize !important;
+  text-transform: capitalize !important;
 }
 
 .input-border {
-    border: solid 1px #dfe1e6;
-    border-radius: 2px;
-    background-color: #fafbfc;
+  border: solid 1px #dfe1e6;
+  border-radius: 2px;
+  background-color: #fafbfc;
 }
 
 .checkbox-border {
-    border-radius: 2px;
-    border: solid 1px #b9bbc2;
-    background-color: #ffffff;
+  border-radius: 2px;
+  border: solid 1px #b9bbc2;
+  background-color: #ffffff;
 }
 
 .subscription-plan-card-shadow {
-    box-shadow: 0px 3px 21px 0 rgba(0, 0, 0, 0.07);
+  box-shadow: 0px 3px 21px 0 rgba(0, 0, 0, 0.07);
 }
 
+.Collections__container {
+  margin-top: 50px;
+  width: 326px;
+  height: 350px;
+  margin-left: 128px;
+  background-color: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+  border-radius: 13px;
+  justify-content: center;
+}
+
+ul {
+  list-style: none;
+}
+
+.rounded-circle {
+  width: 100%;
+  height: 300px;
+  transform: scale(0.5);
+}
+
+#create_logo {
+  width: 39px;
+  height: 42px;
+  margin-left: 22px;
+  margin-top: 10px;
+}
+
+#create_logo {
+  width: 39px;
+  height: 42px;
+  margin-left: 22px;
+  margin-top: 10px;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Assistant:wght@600&family=Atkinson+Hyperlegible&family=Fugaz+One&family=Lato&family=Montserrat:wght@500&family=Poppins:wght@200;500&family=Shadows+Into+Light&family=Shippori+Antique&family=Varela+Round&display=swap");
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+.card {
+  cursor: pointer;
+}
+
+.card-group {
+  width: 60%;
+}
+
+* {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* .form-control {
+    width: 500px;
+  } */
+
+.bi {
+  border: 1px solid white;
+}
+
+.contains_option {
+  margin-right: 60px;
+}
+
+ul {
+  padding: 0;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Assistant:wght@600&family=Atkinson+Hyperlegible&family=Fugaz+One&family=Lato&family=Montserrat:wght@500&family=Poppins:wght@500&family=Shadows+Into+Light&family=Shippori+Antique&family=Varela+Round&display=swap");
+
+.container__tile {
+  margin-top: 40px;
+  background-color: #f8f8f8;
+  height: 248px;
+  width: 318px;
+  border-radius: 13px;
+  margin-left: 60px;
+}
+
+.container__up {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.container__down {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: "Assistant", sans-serif;
+}
+
+.value {
+  border: 2px solid green;
+  border-radius: 0.5em;
+  padding: 0px 5px 0px 5px;
+  font-size: 14px;
+  color: green;
+}
+
+.title {
+  font-weight: bolder;
+  font-size: 16px;
+}
+
+.value__high {
+  font-size: 14px;
+}
+
+.value__k {
+  font-size: 14px;
+}
+
+span {
+  color: #37f;
+}
+
+#nft__photo {
+  height: 190px;
+  cursor: pointer;
+  border-top-left-radius: 0.6em;
+  border-top-right-radius: 0.6em;
+}
+
+@media (min-width: 992px) {
+  .col-lg-3 {
+    flex: 0 0 auto;
+    width: 24%;
+  }
+}
+
+#like_icon {
+  position: absolute;
+  margin-top: -170px;
+  margin-left: 120px;
+}
+
+.Leader_Board_container {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Assistant:wght@600&family=Atkinson+Hyperlegible&family=Fugaz+One&family=Lato&family=Montserrat:wght@500&family=Poppins:wght@500&family=Shadows+Into+Light&family=Shippori+Antique&family=Varela+Round&display=swap");
+
+.upper__heading {
+  font-family: "Assistant", sans-serif;
+  display: flex;
+  font-size: 25px;
+  /* margin-top: 50px; */
+  font-weight: bolder;
+}
+
+.upper__home {
+  display: flex;
+  flex-direction: column;
+}
+
+.lower__homepage {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#filters {
+  display: flex;
+  flex-direction: row;
+}
+
+#dropdownMenuButton2 {
+  margin-left: 150px;
+}
+
+#dropdownMenuButton3 {
+  margin-right: 100px;
+}
+
+.middle__homepage {
+  display: flex;
+  margin-top: 46px;
+  margin-bottom: 52px;
+  padding: 12px;
+  border-bottom: 2px solid rgb(199, 199, 199);
+  width: 228px;
+  text-align: center;
+}
+
+.middle__heading {
+  font-family: "Assistant", sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 18.4px;
+  color: black;
+  text-decoration: none;
+}
+/* ---------------Font style css------------- */
+.font-12 {
+  font-size: 12px;
+}
+.font-13 {
+  font-size: 13px;
+}
+.font-14 {
+  font-size: 14px;
+}
+.font-15 {
+  font-size: 15px;
+}
+/* --------------Font style css---------------- */
+
+/* ------------Suggestions form css------------ */
+.suggestion-form {
+  border-radius: 15px;
+}
+
+.suggestion-input-box {
+  background-color: #f8f8f8 !important;
+}
+/* -----------Suggestions form css end--------- */
+
+/* ----------Create/Profile form css--------- */
+.card-border {
+  border-radius: 15px;
+}
+/* ----------Create/Profile form css end------- */
+
+/*-------------- Buying css------------------ */
+/* .btn-search-secondary {
+    border: 5px !important;
+  } */
+.buying-search-btn {
+  width: 300px;
+}
+.accordion-border {
+  border-radius: 5px !important;
+}
+/*-------------- Buying css end------------------ */
+
+/*-------------- CreateNFT css ------------------ */
+.create-nft-font {
+  font-weight: 1000;
+}
+.bottom-heading-font {
+  font-weight: 600;
+  font-size: 16px;
+}
+.card-height {
+  height: 110%;
+}
+/*-------------- CreateNFT css ------------------ */
+
+/*-------------- Single CreateNFT css ------------------ */
+.single-nft-card {
+  height: 60%;
+  width: 340px;
+}
+.input-heading {
+  font-size: 15px;
+  font-weight: 600;
+}
+input#ethereum {
+  background-image: url("../images/ehereum.PNG");
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-indent: 20px;
+}
+/*-------------- Single CreateNFT css end------------------ */
+
+/*-------------- Collection CreateNFT css end------------------ */
+.collection-nft-card {
+  height: 240px !important;
+  width: 250px !important;
+}
+.banner-nft-card {
+  height: 220px;
+  width: 600px;
+}
+.text-secondary {
+  color: grey !important;
+}
+/* input,
+  input::-webkit-input-placeholder {
+    font-size: 12px;
+  } */
+::placeholder {
+  font-size: 13px !important;
+}
+.top-heading {
+  margin-left: 2em !important;
+}
+/*-------------- Collection CreateNFT css end------------------ */
