@@ -10,7 +10,7 @@ import BaseComponent from "./modules/baseComponent";
 import TopBidders from "./modules/TopList/TopBidders";
 import Top_collection from "./modules/TopList/Top_collection";
 import TopSeller from "./modules/TopList/TopSeller";
-import nft_page from "./modules/Home/Nft";
+import NftPage from "./modules/Home/Nft";
 import HelpCenter from "./modules/Resources/Help/HelpCenter";
 import Suggestion from "./modules/Resources/Suggestion";
 import Collection_homepage from "./modules/Home/Collection_homepage";
@@ -20,6 +20,20 @@ import Create from "./modules/Create/Create";
 import CreateNFT from "./modules/Create/CreateNFT";
 import CreateSingleNFT from "./modules/Create/CreateSingleNFT";
 import CreateNFT_collection from "./modules/Create/CreateNFT_collection";
+import Nft_Information from "./modules/Home/Nft_Information";
+import Nft_Information_1 from "./modules/Home/Nft_Information_Offer_1";
+import Nft_Information_Offer_1 from "./modules/Home/Nft_Information_Offer_1";
+import MyItems from "./modules/MyPages/MyItems";
+import MyItems_Collection from "./modules/MyPages/MyItems_Collection";
+import Notification from "./common/components/Notification";
+import CollectionDetails from "./modules/Collections/CollectionDetails";
+import MyProfile from "./modules/MyPages/MyProfile";
+import EditItem from "./modules/Items/EditItem";
+import Collections_tile from "./modules/Collections/Collections_tile";
+import Edit_Profile from "./modules/Profile/Edit_Profile";
+import About from "./modules/About/About";
+import Fixed_Price from "./modules/Items/Fixed_Price";
+import Navbar from "./common/components/Navbar";
 
 class Routes extends BaseComponent {
   componentDidMount() {}
@@ -27,16 +41,21 @@ class Routes extends BaseComponent {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
         <Router history={history}>
+          <Navbar />
           <Switch>
-            {/* <Route exact path={"/"} component={Login} /> */}
-            <Route path="/" component={nft_page} />
-            {/* <Route exact path={"/sign-up"} component={SignUp} /> */}
-            {/* <Route path="/nfts" element={<Tile__homepage />} /> */}
+            <Route path="/nfts" component={NftPage} />
+            <Route
+              exact
+              path="/Collections_tile"
+              component={Collections_tile}
+            />
+            <Route exact path="/Nft_Information" component={Nft_Information} />
             <Route
               exact
               path="/:MarketPlace/collections"
-              element={<Collection_homepage />}
+              component={Collection_homepage}
             />
+
             <Route exact path="/HelpCenter" component={HelpCenter} />
             <Route exact path="/Suggestion" component={Suggestion} />
             <Route exact path="/Top_collection" component={Top_collection} />
@@ -52,6 +71,43 @@ class Routes extends BaseComponent {
               path="/CreateNFT_collection"
               component={CreateNFT_collection}
             />
+            <Route
+              exact
+              path="/Nft_Information_1"
+              component={Nft_Information_1}
+            />
+            <Route
+              exact
+              path="/Nft_Information_Offer_1"
+              component={Nft_Information_Offer_1}
+            />
+              
+            <Route
+              exact
+              path="/MyItems_Collection"
+              component={MyItems_Collection}
+            />
+            <Route
+              exact
+              path="/CollectionDetails"
+              component={CollectionDetails}
+            />
+            <Route exact path="/Notification" component={Notification} />
+        
+            <Route exact path="/MyProfile" component={MyProfile} />
+
+      
+            <Route exact path="/EditItem" component={EditItem} />
+         
+            {/* <Route
+              exact
+              path="/CreateNFT_collection"
+              element={<CreateNFT_collection />}
+            /> */}
+            <Route exact path="/Edit_Profile" component={Edit_Profile} />
+            <Route exact path="/About" component={About} />
+            <Route exact path="/Fixed_Price" component={Fixed_Price} />
+      
             <Redirect exact from="*" to="/" />
           </Switch>
         </Router>

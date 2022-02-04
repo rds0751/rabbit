@@ -1,166 +1,70 @@
-import React, { Component } from "react";
-import Nft_tile from "../../common/components/Nft_tile";
-// import './Tile__homepage.css'
+import React from "react";
+import { Link } from "react-router-dom";
+import { Nfts_Tile_Api } from "../../constants/Nfts_Tile_Api";
 
-export class nft_page extends Component {
-  render() {
-    return (
-      <div>
-        {/* Filter Buttons  */}
-        <div id="upper__home">
-          <div className="upper__homepage">
-            <h1 className="upper__heading">Marketplace</h1>
-          </div>
+import "../../assets/styles/custom.css"
+import Upper__homepage from "../../common/components/Upper__homepage";
+import Lower__homepage from "../../common/components/Upper__homepage";
 
-          <div className="middle__homepage">
-            {/* <Link className="middle__heading" to="/nfts"> */}
-            <div
-              style={{
-                textAlign: "center !important",
-                // border: "1px solid black",
-                display: "flex",
-                margin: "auto",
-              }}
-            >
-              <div style={{ padding: "0px 5px 0px 0px" }}>NFTS</div>
-              <div>Collections</div>
-              {/* </Link> */}
-              {/* <span style={{ color: "gray" }}>/</span> */}
-              {/* <Link className="middle__heading" to="/MarketPlace/collections"> */}
-            </div>
-
-            {/* </Link> */}
-          </div>
-        </div>
-        <div className="lower__homepage">
-          <div id="filters">
-            <div class="dropdown">
-              <button
-                class="btn btn-secondary dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                placeholder="All"
-                style={{
-                  width: "200%",
-                  backgroundColor: "white",
-                  color: "black",
-                  border: "1px solid #ddd",
-                }}
-              >
-                Sale type
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li>
-                  <a class="dropdown-item" href="#">
-                    Action
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div class="dropdown">
-              <button
-                class="btn btn-secondary dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton2"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                style={{
-                  width: "80%",
-                  backgroundColor: "white",
-                  color: "black",
-                  border: "1px solid #ddd",
-                }}
-              >
-                Price range
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li>
-                  <a class="dropdown-item" href="#">
-                    Action
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="dropdown">
-            <button
-              class="btn btn-secondary dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton3"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              style={{
-                width: "70%",
-                backgroundColor: "white",
-                color: "black",
-                border: "1px solid #ddd",
-              }}
-            >
-              Sort by
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li>
-                <a class="dropdown-item" href="#">
-                  Action
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">
-                  Another action
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">
-                  Something else here
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Collection Tile */}
-
-        <div className="row mx-0 text-center">
-          {/* map- API */}
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => {
+function NftPage() {
+  return (
+    <>
+      <div className="container">
+        {/* <Upper__homepage /> */}
+        <Lower__homepage />
+        <div
+          className="row mob_row"
+          style={{ justifyContent: "space-between" }}
+        >
+          {Nfts_Tile_Api.map((curElem) => {
+            const { id, image, title, price, maxPrice, daysLeft } = curElem;
             return (
-              <Nft_tile
-                image={
-                  "https://semidotinfotech.com/blog/wp-content/uploads/2021/05/A-Guide-to-Develop-NFT-Marketplace.jpg"
-                }
-                title={"Jelly Fish"}
-                price={"3.2 ETH"}
-                maxPrice={"0.48 ETH"}
-                daysLeft={5}
-              />
+              <div className="col-md-6 col-lg-3 col-sm-12 mt-5">
+                <Link to="/Nft_Information" style={{ textDecoration: "none" }}>
+                  <div
+                    className="card nft-card-radius border-radius"
+                    style={{ marginLeft: "1em" }}
+                  >
+                    <img
+                      className="img-fluid border-radius nft-img-radius nft_card"
+                      src={image}
+                      // style={{ width: "270px" }}
+                    />
+                    <img
+                      id="like_icon"
+                      src={require("../../assets/images/Like.png")}
+                    />
+                    <div>
+                      <div className="container__up">
+                        <h6
+                          className="font-15 font-weight-700 text-dark"
+                          style={{ marginLeft: "1em" }}
+                        >
+                          {title}
+                        </h6>
+                        <h6 className="value">{price}</h6>
+                      </div>
+                      <h6
+                        className="value__high font-13 text-dark"
+                        style={{ marginLeft: "1em" }}
+                      >
+                        Highest bid:
+                        <span className="font-weight-900">{maxPrice}</span>
+                        <span style={{ marginLeft: "2em", color: "#000" }}>
+                          <i class="far fa-clock" style={{ color: "#f54" }}></i>
+                          {daysLeft} days left
+                        </span>
+                      </h6>
+                    </div>
+                  </div>
+                </Link>
+              </div>
             );
           })}
         </div>
       </div>
-    );
-  }
+    </>
+  );
 }
 
-export default nft_page;
+export default NftPage;
