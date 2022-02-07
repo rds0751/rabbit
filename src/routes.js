@@ -34,6 +34,7 @@ import Edit_Profile from "./modules/Profile/Edit_Profile";
 import About from "./modules/About/About";
 import Fixed_Price from "./modules/Items/Fixed_Price";
 import Navbar from "./common/components/Navbar";
+import Footer from "./common/components/Footer";
 
 class Routes extends BaseComponent {
   componentDidMount() {}
@@ -43,7 +44,7 @@ class Routes extends BaseComponent {
         <Router history={history}>
           <Navbar />
           <Switch>
-            <Route path="/nfts" component={NftPage} />
+            <Route path="/" component={NftPage} />
             <Route
               exact
               path="/Collections_tile"
@@ -81,7 +82,7 @@ class Routes extends BaseComponent {
               path="/Nft_Information_Offer_1"
               component={Nft_Information_Offer_1}
             />
-              
+
             <Route
               exact
               path="/MyItems_Collection"
@@ -93,12 +94,11 @@ class Routes extends BaseComponent {
               component={CollectionDetails}
             />
             <Route exact path="/Notification" component={Notification} />
-        
+
             <Route exact path="/MyProfile" component={MyProfile} />
 
-      
             <Route exact path="/EditItem" component={EditItem} />
-         
+
             {/* <Route
               exact
               path="/CreateNFT_collection"
@@ -107,10 +107,11 @@ class Routes extends BaseComponent {
             <Route exact path="/Edit_Profile" component={Edit_Profile} />
             <Route exact path="/About" component={About} />
             <Route exact path="/Fixed_Price" component={Fixed_Price} />
-      
+
             <Redirect exact from="*" to="/" />
           </Switch>
         </Router>
+        <Footer />
       </MuiThemeProvider>
     );
   }
