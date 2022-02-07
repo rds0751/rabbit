@@ -11,11 +11,11 @@ function CreateNFT() {
         </div>
         <div className="row">
           <div
-            class="col-md-3 col-lg-3 col-sm-6 col-12 my-5 offset-sm-3"
+            class="col-md-3 col-lg-3 col-sm-6 col-12 my-5   offset-sm-3"
             style={{ cursor: "pointer" }}
           >
-            <div className="card card-border card-height">
-              <div class="card-body text-center mt-5">
+            <div className="card card-border card-height card-width" style={{padding:"0px !important"}}>
+              <div class="card-body text-center mt-5 ">
                 <Link to="/CreateSingleNFT">
                   <img src={Single} alt="Single" />
                 </Link>
@@ -29,7 +29,7 @@ function CreateNFT() {
             class="col-md-3 col-lg-3 col-sm-6 col-12 my-5 "
             style={{ cursor: "pointer" }}
           >
-            <div className="card card-border card-height">
+            <div className="card card-border card-height card-width mx-3">
               <div class="card-body text-center mt-5">
                 <Link to="/CreateNFT_collection">
                   <img src={Collection} alt="Single" />

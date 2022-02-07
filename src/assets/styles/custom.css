@@ -1,246 +1,8 @@
-@import "../../../node_modules/bootstrap/dist/css/bootstrap.css";
-
-body {
-  background-color: #ffffff;
-}
-
-body,
-button,
-html,
-input,
-select,
-textarea,
-div,
-p,
-span,
-label {
-  font-family: "Roboto", "Open Sans", "Helvetica Neue", "Helvetica", "Arial",
-    "sans-serif" !important;
-}
-
-html,
-body {
-  width: 100%;
-  height: 100%;
-}
-
-body,
-button,
-html,
-input,
-select,
-textarea,
-div,
-p,
-span,
-label {
-  font-family: "SFProText", "Open Sans", "Helvetica Neue", "Helvetica", "Arial",
-    "sans-serif" !important;
-}
-
-input:focus {
-  border: solid 1px #0099ff;
-}
-
-.display-none {
-  display: none !important;
-}
-
-.display-block {
-  display: block;
-}
-
-.display-flex {
-  display: flex;
-}
-
-.display-inline {
-  display: inline;
-}
-
-/*Cursor-CSS*/
-
-.cursor-pointer {
-  cursor: pointer;
-}
-
-.cursor-default {
-  cursor: default;
-}
-
-.cursor-not-allowed {
-  cursor: not-allowed;
-}
-
-/*Borders*/
-.b-1-blue {
-  border: 1px solid #0052cc;
-}
-
-.b-1-white {
-  border: 1px solid #e6e6e6;
-}
-
-/*Border-radius*/
-.br-4 {
-  border-radius: 4px;
-}
-
-/*Font-sizes*/
-
-.fs-sm {
-  font-size: 10px !important;
-}
-
-.fs-12 {
-  font-size: 12px !important;
-}
-
-.fs-13 {
-  font-size: 13px !important;
-}
-
-.fs-14 {
-  font-size: 14px !important;
-}
-
-.fs-15 {
-  font-size: 15px !important;
-}
-
-.fs-16 {
-  font-size: 16px !important;
-}
-
-.fs-17 {
-  font-size: 17px !important;
-}
-
-.fs-18 {
-  font-size: 18px !important;
-}
-
-.fs-19 {
-  font-size: 19px !important;
-}
-
-.fs-20 {
-  font-size: 20px !important;
-}
-
-.fs-22 {
-  font-size: 22px !important;
-}
-
-.fs-24 {
-  font-size: 24px !important;
-}
-
-.fs-26 {
-  font-size: 26px !important;
-}
-
-.fs-28 {
-  font-size: 28px !important;
-}
-
-.fs-40 {
-  font-size: 40px;
-}
-
-/*Font-color*/
-
-.fc-warm-grey {
-  color: #999999;
-}
-
-.fc-blue {
-  color: #0052cc !important;
-}
-
-.fc-dark-slate-blue {
-  color: #172b4d;
-}
-
-.fc-white {
-  color: #ffffff !important;
-}
-
-.fc-black {
-  color: #000000;
-}
-
-.fc-blue-grey {
-  color: #5e6c84;
-}
-
-.fc-red {
-  color: red;
-}
-
-.fc-brownish-grey {
-  color: #666666;
-}
-
-.fc-dusky-blue {
-  color: #465d85;
-}
-
-/*Background-color*/
-
-.bg-blue {
-  background-color: #0052cc !important;
-}
-
-/*Width-CSS*/
-
-.outline-none {
-  outline: none !important;
-}
-
-/*Width-CSS*/
-
-.w-150 {
-  width: 150px;
-}
-
-.w-450 {
-  width: 450px;
-}
-
-.w-250 {
-  width: 250px;
-}
-
-.z-index-100 {
-  z-index: 100;
-}
-
-.text-transform-capitalize {
-  text-transform: capitalize !important;
-}
-
-.input-border {
-  border: solid 1px #dfe1e6;
-  border-radius: 2px;
-  background-color: #fafbfc;
-}
-
-.checkbox-border {
-  border-radius: 2px;
-  border: solid 1px #b9bbc2;
-  background-color: #ffffff;
-}
-
-.subscription-plan-card-shadow {
-  box-shadow: 0px 3px 21px 0 rgba(0, 0, 0, 0.07);
-}
-
 .Collections__container {
   margin-top: 50px;
-  width: 326px;
-  height: 350px;
-  margin-left: 128px;
+  width: 280px;
+  height: 264px;
+  /* margin-left: 128px; */
   background-color: #f8f8f8;
   display: flex;
   flex-direction: column;
@@ -251,8 +13,10 @@ input:focus {
 ul {
   list-style: none;
 }
-
-.rounded-circle {
+.nft_card {
+  width: 400px;
+}
+ul li .rounded-circle {
   width: 100%;
   height: 300px;
   transform: scale(0.5);
@@ -284,15 +48,13 @@ ul {
 .card-group {
   width: 60%;
 }
-
-* {
-  margin-left: 5px;
-  margin-right: 5px;
+.card-text {
+  font-size: 14px;
 }
 
 /* .form-control {
-    width: 500px;
-  } */
+  width: 500px;
+} */
 
 .bi {
   border: 1px solid white;
@@ -309,12 +71,12 @@ ul {
 @import url("https://fonts.googleapis.com/css2?family=Assistant:wght@600&family=Atkinson+Hyperlegible&family=Fugaz+One&family=Lato&family=Montserrat:wght@500&family=Poppins:wght@500&family=Shadows+Into+Light&family=Shippori+Antique&family=Varela+Round&display=swap");
 
 .container__tile {
-  margin-top: 40px;
   background-color: #f8f8f8;
-  height: 248px;
-  width: 318px;
+  /* padding: 13px 13px 13px 13px; */
   border-radius: 13px;
-  margin-left: 60px;
+}
+.container__tile > img {
+  width: 312px;
 }
 
 .container__up {
@@ -329,19 +91,22 @@ ul {
   flex-direction: row;
   justify-content: space-between;
   font-family: "Assistant", sans-serif;
+  margin-top: 3px;
 }
 
 .value {
-  border: 2px solid green;
+  border: 2px solid #16ab6e;
   border-radius: 0.5em;
   padding: 0px 5px 0px 5px;
   font-size: 14px;
-  color: green;
+  color: #16ab6e;
+  margin-right: 1em;
 }
 
 .title {
   font-weight: bolder;
   font-size: 16px;
+  /* margin-left: -7px !important; */
 }
 
 .value__high {
@@ -357,23 +122,56 @@ span {
 }
 
 #nft__photo {
-  height: 190px;
+  height: 160px;
   cursor: pointer;
   border-top-left-radius: 0.6em;
   border-top-right-radius: 0.6em;
+}
+.images {
+  margin-left: 50px;
+}
+
+@media only screen and (max-width: 1170px) {
+  .container__tile > img {
+    width: 333px;
+  }
+  .single-nft-card {
+    height: 75% !important;
+  }
+  .images {
+    margin-left: 0px;
+  }
+  .buying-search-btn {
+    margin-left: 0px !important;
+    width: 374px !important;
+  }
+  .col1 {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  .col11 {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  .col12 {
+    width: 92%;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+  }
 }
 
 @media (min-width: 992px) {
   .col-lg-3 {
     flex: 0 0 auto;
-    width: 24%;
+    width: 21%;
   }
 }
 
 #like_icon {
   position: absolute;
-  margin-top: -170px;
-  margin-left: 120px;
+  margin-top: 5px;
+  margin-left: 230px;
+  width: 24px;
 }
 
 .Leader_Board_container {
@@ -389,7 +187,7 @@ span {
   font-family: "Assistant", sans-serif;
   display: flex;
   font-size: 25px;
-  /* margin-top: 50px; */
+  margin-top: 50px;
   font-weight: bolder;
 }
 
@@ -400,31 +198,25 @@ span {
 
 .lower__homepage {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
 }
 
 #filters {
   display: flex;
-  flex-direction: row;
 }
 
 #dropdownMenuButton2 {
   margin-left: 150px;
 }
 
-#dropdownMenuButton3 {
+/* #dropdownMenuButton3 {
   margin-right: 100px;
-}
+} */
 
 .middle__homepage {
   display: flex;
-  margin-top: 46px;
-  margin-bottom: 52px;
-  padding: 12px;
-  border-bottom: 2px solid rgb(199, 199, 199);
-  width: 228px;
-  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .middle__heading {
@@ -448,7 +240,53 @@ span {
 .font-15 {
   font-size: 15px;
 }
+.font-16 {
+  font-size: 16px;
+}
+.font-17 {
+  font-size: 17px;
+}
+.font-18 {
+  font-size: 18px;
+}
+.font-19 {
+  font-size: 19px;
+}
+.font-20 {
+  font-size: 20px;
+}
+.font-22 {
+  font-size: 22px;
+}
+.font-weight-500 {
+  font-weight: 500;
+}
+.font-weight-550 {
+  font-weight: 550;
+}
+.font-weight-600 {
+  font-weight: 600;
+}
+.font-weight-700 {
+  font-weight: 700;
+}
+.font-weight-900 {
+  font-weight: 900;
+}
+.font-weight-normal {
+  font-weight: normal !important;
+}
+
 /* --------------Font style css---------------- */
+
+/* --------------Color css---------------- */
+.text-grey {
+  color: #707070;
+}
+.text-sky {
+  color: #366eef;
+}
+/* --------------Color css end---------------- */
 
 /* ------------Suggestions form css------------ */
 .suggestion-form {
@@ -468,13 +306,20 @@ span {
 
 /*-------------- Buying css------------------ */
 /* .btn-search-secondary {
-    border: 5px !important;
-  } */
+  border: 5px !important;
+} */
 .buying-search-btn {
   width: 300px;
+  margin-left: 150px;
+}
+.border-input {
+  border-right: 0 !important;
 }
 .accordion-border {
   border-radius: 5px !important;
+}
+.border-search {
+  border-left: 0 !important;
 }
 /*-------------- Buying css end------------------ */
 
@@ -494,14 +339,15 @@ span {
 /*-------------- Single CreateNFT css ------------------ */
 .single-nft-card {
   height: 60%;
-  width: 340px;
+  width: 360px;
+  text-align: center;
 }
 .input-heading {
   font-size: 15px;
   font-weight: 600;
 }
 input#ethereum {
-  background-image: url("../images/ehereum.PNG");
+  background-image: url("../images/ehereum.png");
   background-size: contain;
   background-repeat: no-repeat;
   text-indent: 20px;
@@ -509,10 +355,10 @@ input#ethereum {
 /*-------------- Single CreateNFT css end------------------ */
 
 /*-------------- Collection CreateNFT css end------------------ */
-.collection-nft-card {
+/* .collection-nft-card {
   height: 240px !important;
   width: 250px !important;
-}
+} */
 .banner-nft-card {
   height: 220px;
   width: 600px;
@@ -521,9 +367,9 @@ input#ethereum {
   color: grey !important;
 }
 /* input,
-  input::-webkit-input-placeholder {
-    font-size: 12px;
-  } */
+input::-webkit-input-placeholder {
+  font-size: 12px;
+} */
 ::placeholder {
   font-size: 13px !important;
 }
@@ -531,3 +377,317 @@ input#ethereum {
   margin-left: 2em !important;
 }
 /*-------------- Collection CreateNFT css end------------------ */
+/*-------------- navbar mob css------------------ */
+@media only screen and (max-width: 575px) {
+  .navbar-brand {
+    margin-left: -35px;
+  }
+  .navbar-toggler {
+    margin-left: 280px !important;
+    /* margin-top: -51px !important; */
+    padding: 0px;
+  }
+  .navbar-nav {
+    margin-left: -40px;
+  }
+}
+.add-btn {
+  width: 180px;
+}
+.item_middle__heading {
+  line-height: 18.4px;
+  color: black;
+  text-decoration: none;
+}
+.Myitems_Collections__container {
+  margin-top: 50px;
+  width: 300px;
+  height: 340px;
+  background-color: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+  border-radius: 13px;
+  justify-content: center;
+}
+/*-------------- My Items css end------------------ */
+
+/* -------------------button styles css------------ */
+.btn-normal-size {
+  width: 120px;
+}
+.btn-text:hover {
+  color: white;
+  font-size: 14px;
+}
+/* -------------------button styles css------------ */
+
+/* -----------------Edit Profile css------------ */
+.rounded-circle {
+  width: 160px;
+  height: 150px;
+}
+.btn-choose-file {
+  margin-left: -8em !important;
+}
+/* -----------------Edit Profile css------------ */
+
+/* -----------------Nft hompage css------------ */
+.nft-card-radius {
+  border-radius: 10px !important;
+  width: 260px;
+}
+.nft-img-radius {
+  border-radius: 8px 8px 0px 0px;
+}
+/* -----------------Nft hompage css------------ */
+
+/* -----------------Collections hompage css------------ */
+.collection-img-card-radius {
+  border-radius: 50%;
+}
+.collection-card {
+  height: 260px;
+}
+/* -----------------Collections hompage css end------------ */
+
+/* -----------------Nft Info hompage css------------ */
+.second-column {
+  margin-left: -65px !important;
+}
+/* -----------------Nft Info hompage css end------------ */
+
+/* ------------------PricingGraph Css------------- */
+.apexcharts-toolbar {
+  display: none !important;
+}
+#SvgjsText1200 {
+  font-size: 15px !important;
+  font-style: normal !important;
+  font-family: sans-serif !important;
+}
+#SvgjsLine2893 {
+  display: none;
+}
+#SvgjsLine2894 {
+  display: none;
+}
+#SvgjsLine2895 {
+  display: none;
+}
+#SvgjsLine2896 {
+  display: none;
+}
+#SvgjsLine2897 {
+  display: none;
+}
+#SvgjsLine2898 {
+  display: none;
+}
+#SvgjsLine2899 {
+  display: none;
+}
+#SvgjsLine2900 {
+  display: none;
+}
+#SvgjsLine2901 {
+  display: none;
+}
+#SvgjsRect2908 {
+  display: none;
+}
+#SvgjsRect2910 {
+  display: none;
+}
+#SvgjsRect2912 {
+  display: none;
+}
+#SvgjsLine1043 {
+  display: none;
+}
+#SvgjsLine1044 {
+  display: none;
+}
+#SvgjsLine1045 {
+  display: none;
+}
+#SvgjsRect1051 {
+  display: none;
+}
+#SvgjsRect1053 {
+  display: none;
+}
+.apexcharts-text tspan {
+  font-family: sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+/* ----------------PricingGraph Css end----------- */
+
+/* ---------------Mobile/Media css  max-width 900px------------ */
+@media only screen and (max-width: 900px) {
+  /* Edit Profile */
+  .btn-choose-file {
+    display: grid;
+    width: 100px;
+  }
+  .img-responsive {
+    width: 100px;
+    height: 100px;
+    margin-top: 1em;
+  }
+  .btn-text {
+    font-size: 10px !important;
+  }
+}
+/* ---------------Mobile/Media css------------ */
+
+/* ---------------Mobile/Media css  max-width 769px------------ */
+@media only screen and (max-width: 769px) {
+  /* Edit Profile */
+  /* .form-responsive {
+    width: 550px;
+    margin-left: 3em;
+  } */
+  .btn-choose-file {
+    width: 80px;
+    margin-left: 2em !important;
+    margin-top: 3em !important;
+  }
+  .img-responsive {
+    width: 80px;
+    height: 80px;
+  }
+  .btn-text {
+    font-size: 8px !important;
+  }
+}
+/* ---------------Mobile/Media css------------ */
+
+/* ---------------Mobile view css  max-width 575px------------ */
+@media only screen and (max-width: 575px) {
+  /* Edit Profile */
+  .form-responsive {
+    width: 500px;
+    margin-left: 3em;
+  }
+  .btn-choose-file {
+    width: 150px;
+    margin-left: 10em !important;
+    margin-top: 0.7em !important;
+  }
+  .btn-text {
+    font-size: 10px !important;
+  }
+  .img-responsive {
+    width: 80px;
+    height: 80px;
+    margin-left: 12em !important;
+  }
+}
+/* ---------------Mobile view css end------------ */
+
+/* ---------------Mobile view css  max-width 530px------------ */
+@media only screen and (max-width: 530px) {
+  /* Edit Profile */
+  .form-responsive {
+    width: 500px;
+    margin-left: 1em;
+  }
+  .btn-choose-file {
+    width: 150px;
+    margin-left: 10em !important;
+    margin-top: 0.7em !important;
+  }
+  .btn-text {
+    font-size: 10px !important;
+  }
+  .img-responsive {
+    width: 80px;
+    height: 80px;
+    margin-left: 12em !important;
+  }
+}
+/* ---------------Mobile view css end------------ */
+/* ---------------Mobile view css  max-width 489px------------ */
+@media only screen and (max-width: 489px) {
+  /* Edit Profile */
+  .form-responsive {
+    width: 400px;
+  }
+  .btn-choose-file {
+    width: 150px;
+    margin-left: 6em !important;
+    margin-top: 0.7em !important;
+  }
+  .btn-text {
+    font-size: 10px !important;
+  }
+  .img-responsive {
+    width: 80px;
+    height: 80px;
+    margin-left: 8em !important;
+  }
+}
+/* ---------------Mobile view css end------------ */
+/* @media only screen and (max-width: 350px) {
+  .highest-post-btn {
+    width: "100px" !important;
+  }
+  .fixed-post-btn {
+    width: "100px" !important;
+  }
+} */
+/* .fixed-post-btn {
+    width: "300px" !important;
+  } */
+
+/* toggle switch */
+
+.form-control:focus {
+  box-shadow: none !important;
+  border-color: none !important;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+}
+.toggle-switch input[type="checkbox"] {
+  display: none;
+}
+.toggle-switch .switch {
+  width: 45px;
+  height: 20px;
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 25px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: background-color 0.2s ease;
+}
+.toggle-switch .switch::before {
+  position: absolute;
+  content: "";
+  left: 3px;
+  top: 2px;
+  width: 17px;
+  height: 17px;
+  background-color: #aaa;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+.toggle-switch input[type="checkbox"]:checked + .switch::before {
+  transform: translateX(25px);
+  background-color: #f6faf8;
+}
+.toggle-switch input[type="checkbox"]:checked + .switch {
+  background-color: #16ab6e;
+  width: 45px;
+  height: 20px;
+}

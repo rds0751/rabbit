@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
-import Image from "../../assets/images/img-format.PNG";
+import Image from "../../assets/images/img-format.png";
 
 const Button = styled.button``;
 

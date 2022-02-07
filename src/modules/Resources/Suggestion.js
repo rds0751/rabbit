@@ -1,12 +1,13 @@
 import React from "react";
+import "../../assets/styles/Notification.css";
 
 function Suggestion() {
   return (
     <>
       <div className="row mt-5">
-        <div className="col-sm-5 col-12 col-xs-12 offset-3">
+        <div className="col-sm-5 col-12 col-xs-12 offset-3 suggestionmob">
           <h4>Make a Suggestion</h4>
-          <div className="suggestion-form-box">
+          <div className="suggestion-form-box suggestionmob1">
             <form className="suggestion-form border p-4 mt-5">
               <div className="mb-3 mt-3">
                 <label for="email" className="form-label">
