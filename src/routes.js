@@ -44,7 +44,7 @@ class Routes extends BaseComponent {
         <Router history={history}>
           <Navbar />
           <Switch>
-            <Route path="/" component={NftPage} />
+            <Route exact path="/" component={NftPage} />
             <Route
               exact
               path="/Collections_tile"
