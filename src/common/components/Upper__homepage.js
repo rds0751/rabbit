@@ -8,12 +8,11 @@ function Upper__homepage() {
         <div className="upper__homepage">
           <h1 className="font-20 font-weight-700 mt-4">Marketplace</h1>
         </div>
-
         <div className="middle__homepage">
           <Link
             className="font-18 font-weight-700"
             style={{ textDecoration: "none", color: "#000" }}
-            to="/nfts"
+            to="/"
           >
             NFTS
           </Link>
