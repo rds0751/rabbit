@@ -8,10 +8,10 @@ function HelpCenter() {
   return (
     <div>
       <div className="container">
-        <h1 style={{ fontSize: "20px", marginTop: "50px", }}>
+        <h1 style={{ fontSize: "20px", marginTop: "50px", marginLeft: "50px" }}>
           Help center
         </h1>
-        <div class="row  helprow_mob">
+        <div class="row helprow_mob">
           <div class="col-sm-6 col-lg-3 col-md-5 col-12 p-5">
             <div
               className="card shadow"

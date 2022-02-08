@@ -27,17 +27,10 @@ export default function Fixed_Price() {
               >
                 <div className="row">
                   <div className="col-sm-2">
-                    <img
-                      className="mt-4 fixed_priceimgmob"
-                      src={image}
-                      width={60}
-                    />
+                    <img className="mt-4 fixed_priceimgmob" src={image} width={60} />
                   </div>
-                  <div className="col-sm-10">
-                    <div
-                      className="mt-4 fixed_pricepara"
-                      style={{ paddingLeft: "30px" }}
-                    >
+                  <div className="col-sm-10"> 
+                    <div className="mt-4 fixed_pricepara" style={{ paddingLeft: "30px" }}>
                       <p className="font-16 font-weight-550 text-dark">
                         Fixed Price
                       </p>
@@ -67,17 +60,10 @@ export default function Fixed_Price() {
               >
                 <div className="row">
                   <div className="col-sm-2">
-                    <img
-                      className="mt-4 fixed_priceimgmob"
-                      src={image1}
-                      width={50}
-                    />
+                    <img className="mt-4 fixed_priceimgmob" src={image1} width={50} />
                   </div>
                   <div className="col-sm-10">
-                    <div
-                      className="mt-4 fixed_pricepara"
-                      style={{ paddingLeft: "30px" }}
-                    >
+                    <div className="mt-4 fixed_pricepara" style={{ paddingLeft: "30px" }}>
                       <p className="font-16 font-weight-550 text-dark">
                         Highest Bid
                       </p>
@@ -110,7 +96,7 @@ const Fixed_Price_Component = () => {
   const onToggle = () => setIsToggled(!isToggled);
   return (
     <>
-      <div className="row mt-4">
+     <div className="row mt-4">
         <div className="col-lg-3"></div>
         <div className="col-lg-6">
           <form>
@@ -194,10 +180,7 @@ const Fixed_Price_Component = () => {
               </div>
             </div>
           </form>
-          <button
-            className="btn btn-primary mt-3 fixed-post-btn pricebtn"
-            style={{ width: "640px" }}
-          >
+          <button className="btn btn-primary mt-3 fixed-post-btn pricebtn" style={{ width: "640px" }}>
             Post
           </button>
         </div>
@@ -312,10 +295,7 @@ const Highest_Price_Component = () => {
               </div>
             </div>
           </form>
-          <button
-            className="btn btn-primary mt-3 highest-post-btn"
-            style={{ width: "640px" }}
-          >
+          <button className="btn btn-primary mt-3 highest-post-btn" style={{ width: "640px" }}>
             Post
           </button>
         </div>

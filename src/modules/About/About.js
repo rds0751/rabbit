@@ -4,7 +4,7 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 function About() {
   return (
     <>
-      <div className="container">
+     <div className="container">
         <div className="text-center mt-5 ml-0 mr-0">
           <p className="font-22 font-weight-700">About NFT marketplace</p>
           <p className="font-15 mt-4">

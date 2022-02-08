@@ -8,6 +8,7 @@ import {
   LeaderBoardApi5,
 } from "../../constants/LeaderBoardApi";
 
+
 export class TopSeller extends Component {
   render() {
     return (
@@ -27,9 +28,13 @@ export class TopSeller extends Component {
                 backgroundColor: "white",
                 color: "black",
                 border: "1px solid #ddd",
+                display:"flex",
+                alignItems:"center",
+                justifyContent:"space-between"
               }}
             >
               Weekly
+              <i class="fas fa-caret-down"></i>
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li>
@@ -82,5 +87,4 @@ export class TopSeller extends Component {
     );
   }
 }
-
 export default TopSeller;
