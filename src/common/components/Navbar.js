@@ -79,9 +79,9 @@ function Navbar() {
               </Link>
             </li>
 
-            <li className="nav-item ">
+            <li className="nav-item dropdown">
               <a
-                className="nav-link "
+                className="nav-link dropdown"
                 href="#"
                 id="navbarDropdown"
                 role="button"

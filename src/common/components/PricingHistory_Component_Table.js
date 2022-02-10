@@ -6,7 +6,7 @@ function PricingHistory_Component_Table() {
     <>
       <h5 className="font-weight-900 font-16">Pricing History</h5>
       <div className="row">
-        <div className="col-lg-3 col-sm-12">
+        <div className="col-lg-3 col-sm-4">
           <select
             style={{
               width: "100px",
@@ -20,7 +20,7 @@ function PricingHistory_Component_Table() {
             <option>Date</option>
           </select>
         </div>
-        <div className="col-lg-3 col-sm-12">
+        <div className="col-lg-3 col-sm-4">
           <button
             className="text-sky font-15"
             style={{
@@ -34,7 +34,7 @@ function PricingHistory_Component_Table() {
             Bids <CloseIcon style={{ fontSize: "18px", marginLeft: "1.5em" }} />
           </button>
         </div>
-        <div className="col-lg-3 col-sm-12">
+        <div className="col-lg-3 col-sm-4">
           <button
             className="text-sky font-15"
             style={{
@@ -48,7 +48,7 @@ function PricingHistory_Component_Table() {
             List <CloseIcon style={{ fontSize: "18px", marginLeft: "1.5em" }} />
           </button>
         </div>
-        <div className="col-lg-3 col-sm-12">
+        <div className="col-lg-3 col-sm-4">
           <button
             className="text-sky font-15"
             style={{
@@ -74,7 +74,7 @@ function PricingHistory_Component_Table() {
         <div className="col-2">Date</div>
       </div>
       <div
-        className="border mt-2"
+        className="border mt-2 pricingtable_mob"
         style={{ width: "550px", marginLeft: "-0.7em" }}
       >
         <div className="row font-14" style={{ padding: "10px" }}>

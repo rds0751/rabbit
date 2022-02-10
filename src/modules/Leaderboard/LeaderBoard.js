@@ -21,7 +21,7 @@ function LeaderBoard() {
         Leaderboard
       </h1>
       {/* 3 Tables */}
-      <div className="container">
+      <div className="container" >
         <div className="row align-items-start leadercol">
           <div className="col leaderboardTop">
             <div className="leaderboardTitle">
@@ -264,7 +264,7 @@ function LeaderBoard() {
               </li>
             </ul>
             {/* <!-- <input type="text" id="search_criteria" className="form-control" onkeyup="hashtagsearch_criteria(this.value)"
-    placeholder="Search for hashtag.."> --> */}
+			placeholder="Search for hashtag.."> --> */}
           </div>
           <div
             className="dropdown col leaderboardDropdown"

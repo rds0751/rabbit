@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 function Lower_homepage() {
   return (
     <>
-    <div className="lower__homepage container">
+      <div className="lower__homepage container">
         <div id="filters">
           <div class="dropdown">
           <Link to="/Menu" style={{textDecoration:"none", color:"black"}}>

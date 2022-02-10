@@ -2,15 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Nfts_Tile_Api } from "../../constants/Nfts_Tile_Api";
 
-import "../../assets/styles/custom.css"
+import "../../assets/styles/custom.css";
 import Upper__homepage from "../../common/components/Upper__homepage";
-import Lower__homepage from "../../common/components/Upper__homepage";
+import Lower__homepage from "../../common/components/Lower_homepage";
 
 function NftPage() {
   return (
     <>
       <div className="container">
-        {/* <Upper__homepage /> */}
+        <Upper__homepage />
         <Lower__homepage />
         <div
           className="row mob_row"

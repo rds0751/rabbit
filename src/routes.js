@@ -35,6 +35,8 @@ import About from "./modules/About/About";
 import Fixed_Price from "./modules/Items/Fixed_Price";
 import Navbar from "./common/components/Navbar";
 import Footer from "./common/components/Footer";
+import NftInformation_FixedPrice from "./modules/Home/NftInformation_FixedPrice";
+import Wallet from "./modules/Wallet/Wallet";
 
 class Routes extends BaseComponent {
   componentDidMount() {}
@@ -69,6 +71,16 @@ class Routes extends BaseComponent {
             <Route exact path="/CreateSingleNFT" component={CreateSingleNFT} />
             <Route
               exact
+              path="/CollectionDetails"
+              component={CollectionDetails}
+            />
+            <Route
+              exact
+              path="/Collections_tile"
+              component={Collections_tile}
+            />
+            <Route
+              exact
               path="/CreateNFT_collection"
               component={CreateNFT_collection}
             />
@@ -82,7 +94,7 @@ class Routes extends BaseComponent {
               path="/Nft_Information_Offer_1"
               component={Nft_Information_Offer_1}
             />
-
+            <Route exact path="/MyItems" component={MyItems} />
             <Route
               exact
               path="/MyItems_Collection"
@@ -97,8 +109,13 @@ class Routes extends BaseComponent {
 
             <Route exact path="/MyProfile" component={MyProfile} />
 
+            <Route
+              exact
+              path="/NftInformation_FixedPrice"
+              component={NftInformation_FixedPrice}
+            />
             <Route exact path="/EditItem" component={EditItem} />
-
+            {/* <Route path="/Menu" component={Menu} /> */}
             {/* <Route
               exact
               path="/CreateNFT_collection"
@@ -107,6 +124,7 @@ class Routes extends BaseComponent {
             <Route exact path="/Edit_Profile" component={Edit_Profile} />
             <Route exact path="/About" component={About} />
             <Route exact path="/Fixed_Price" component={Fixed_Price} />
+            <Route exact path="/Wallet" component={Wallet} />
 
             <Redirect exact from="*" to="/" />
           </Switch>
