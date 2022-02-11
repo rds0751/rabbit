@@ -16,7 +16,6 @@ function CollectionDetails()  {
     getCollection(collectionId.id).then(response=>setCollection(response))
     getNftsByCollectionId(collectionId.id).then(response=>setNfts(response))
   })
-  console.log(nfts)
   const { imageUrl, coverUrl, name} = collection
     return (
       <>
@@ -188,9 +187,8 @@ function CollectionDetails()  {
         </div>
         <div className="row mx-0 text-center justify">
           {/* <div className="col-md-3 col-lg-3 col-sm-6 col-11 images"> */}
-          {AbstractApi.map((curElem) => {
-            const { image, title, price, maxPrice, maxPrice2, daysLeft } =
-              curElem;
+          {nfts.map((nft) => {
+            const { ipfsUrl, name, salesInfo } = nft;
             return (
               <div
                 className="col-md-3 col-lg-3 col-sm-6 col-11 images collectionmob"
@@ -200,22 +198,22 @@ function CollectionDetails()  {
                   <img
                     id="nft__photo"
                     className="img-fluid"
-                    src={image}
+                    src={ipfsUrl}
                     alt="/"
                   />
                   {/* <img id='like_icon' src={require('../asset//images/Like.png')} /> */}
                   <div className="tile__details">
                     <div className="container__up">
-                      <h6 className="title">{title}</h6>
-                      <h6 className="title1">{price}</h6>
+                      <h6 className="title">{name}</h6>
+                      <h6 className="title1">{salesInfo.price}</h6>
                     </div>
                     <div className="container__down">
                       <h6 className="value__high">
-                        <span style={{ color: "black" }}>{maxPrice}</span>
-                        <span> {maxPrice2}</span>
+                        <span style={{ color: "black" }}>10</span>
+                        <span> 20</span>
                       </h6>
                       <h6 className="value__k">
-                        {daysLeft}{" "}
+                        5
                         {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
                         <i
                           className="fa-solid fa-heart"
