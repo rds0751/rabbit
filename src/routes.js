@@ -152,7 +152,7 @@ function App() {
           </Routes>
         {/* </Switch> */}
       </Router>
-      <Footer />
+      <Footer/>
     </div>
   );
 }

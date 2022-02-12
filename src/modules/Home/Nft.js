@@ -9,23 +9,23 @@ import Lower__homepage from "../../common/components/HomeNftFilters";
 function NftPage() {
   return (
     <>
-      <div className="container ">
+      <div className="container ntf_div">
         <NftToggle />
         <Lower__homepage />
         <div
-          className="row mob_row "
+          className="row mob_row ntf_row"
           style={{ justifyContent: "space-between" }}
         >
           {Nfts_Tile_Api.map((curElem) => {
             const { id, image, title, price, maxPrice, daysLeft } = curElem;
             return (
-              <div className=" col-md-6 col-lg-3 col-sm-12 mt-5 ">
+              <div className=" col-md-6 col-lg-3 col-sm-12 mt-5 nft_card">
                 <div>
                   <Link
                     to="/nft-information"
                     style={{ textDecoration: "none" }}
                   >
-                    <div className="card  nft-card-radius border-radius cardmob">
+                    <div className="card nft-card-radius border-radius cardmob">
                       <img
                         className="img-fluid border-radius nft-img-radius card_imgmob"
                         src={image}

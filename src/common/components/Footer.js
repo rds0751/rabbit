@@ -7,10 +7,11 @@ function Footer() {
   return (
     <>
       <div
-        className="conatiner mobfooter"
+        className="mobfooter"
         style={{ backgroundColor: "#FBFBFB", marginTop: "10px" }}
       >
-        <footer className="footermob">
+        <footer className="container">
+        {/* <footer className="container footermob"> */}
           <div className="row mb-0 mt-5 row-2 px-3 justify-content-sm-between navbar-width">
             <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 pt-4 order-1 footerfix1 footer">
               <ul className="list-unstyled" style={{ textAlign: "left" }}>

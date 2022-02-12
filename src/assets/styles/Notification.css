@@ -36,12 +36,12 @@ height: 47px;
   .fa-caret-down {
     display: block !important;
   }
-  .navbar {
+  /* .navbar {
     margin-left: 36px;
-  }
+  } */
   .mobfooter {
-    margin-left: 0px !important;
-    margin-right: -20px !important;
+    /* margin-left: 0px !important;
+    margin-right: -20px !important; */
   }
   .suggestionmob {
     margin-left: 10px;
@@ -95,7 +95,7 @@ height: 47px;
     /* margin-top: -25px; */
   }
   .mob_row {
-    margin-left: 17px;
+    /* margin-left: 17px; */
   }
   .btmleaderboard {
     margin-top: 6px;
@@ -116,23 +116,23 @@ height: 47px;
     margin-right: 0px !important;
     margin-left: 0px !important;
   }
-  .form-controlmob {
+  /* .form-controlmob {
     margin-top: 70px;
     margin-left: -65px;
     width: 110% !important;
-  }
-  .screachbtn {
+  } */
+  /* .screachbtn {
     margin-top: 70px !important;
     margin-bottom: 10px;
-  }
-  .navbar-brand {
+  } */
+  /* .navbar-brand {
     margin-top: -50px;
-  }
-  .navbar-toggler {
+  } */
+  /* .navbar-toggler {
     margin-top: -160px !important;
-  }
+  } */
   .cardmob {
-    margin-left: 30px !important;
+    /* margin-left: 30px !important; */
   }
   .wallet {
     display: flex;
@@ -264,7 +264,7 @@ height: 47px;
     margin-left: -50px;
   }
   .cardmob {
-    margin-left: -2em !important;
+    /* margin-left: -2em !important; */
     /* width: 110% !important; */
   }
   .card_imgmob {
@@ -337,9 +337,9 @@ height: 47px;
   margin: 0px 60px !important;
 } */
 @media only screen and (min-width: 1200px) {
-  .navbar-width {
+  /* .navbar-width {
     margin: 0px 60px !important;
-  }
+  } */
   .fa-facebook:before {
     color: #818181;
   }
@@ -381,12 +381,9 @@ height: 47px;
   .mobfooter3 {
     display: none;
   }
-  .btnnav {
-    margin-left: 25px;
-  }
-  .navbar-brand {
+  /* .navbar-brand {
     margin-left: 30px;
-  }
+  } */
   .helprow_mob {
     justify-content: space-between;
     /* margin-left: -115px; */
@@ -423,4 +420,241 @@ height: 47px;
 .footer > ul > a {
   /* border: 1px solid red; */
   text-decoration: none;
+}
+
+
+/* dileep css here */
+.scroll_off{
+  overflow: hidden;
+}
+.left_navbar{
+  width: 38%;
+}
+.right_navbar{
+  justify-content: flex-end;
+  height: 100%;
+  width: 60%;
+}
+.navbarborder{
+  box-shadow: 0px 3px 12px #00000014;
+}
+.navbar-nav{
+  display: flex;
+}
+.left_section_nav{
+  display: flex;
+}
+.left_section_nav li{
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+}
+.left_section_nav .btnnav{
+  padding: 5px 30px;
+  background: #366EEF;
+  border-color: transparent;
+  font-weight: 500;
+}
+.left_section_nav .removeinmob{
+  margin-right: 5px !important;
+  line-height: "40px";
+  color: "gray",
+}
+.left_section_nav .li_underline{
+  border-bottom: 3px solid #366EEF;
+}
+.right_section_nav{
+  display: flex;
+}
+.right_section_nav li {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+.right_section_nav .ham_burger{
+  display: none;
+}
+.right_section_nav li:first-child{
+  margin-left: 0px;
+}
+/* .right_section_nav li:last-child{
+  margin-right: 0px;
+} */
+.left_section li .nav-link {
+  font-size: 16px;
+  font-weight: 600;
+  color: #828282 !important;
+}
+.left_section li .nav-link:hover {
+  color:  #828282;
+}
+
+.nav-link:focus, .nav-link:hover{
+  color:  #828282 !important;
+}
+.nav-link.navlink_active {
+  font-weight: 600;
+  color: #191919 !important;
+}
+.unerLine{
+  width: 20px;
+  height: 2px;
+  background-color: red;
+}
+.navbar-nav{
+  justify-content: center;
+}
+
+.navbar{
+  padding-top: 0px;
+  padding-bottom: 0px;
+  height: 70px;
+  align-items: inherit;
+}
+.navbar-expand-lg .navbar-nav .nav-link{
+  padding: 0px;
+  /* margin-right: 15px;
+  margin-left: 15px; */
+}
+.container-fluid{
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.left_navbar form{
+  display: flex;
+}
+.search_box{
+  display: none;
+}
+
+/* hamburger css menu */
+.navbar_toggle{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  margin-left: 15px;
+}
+.navbar_toggle .icon-bar{
+  display: flex;
+  width: 27px;
+  height: 2px;
+  background: #366EEF;
+  margin-bottom: 6px;
+}
+.navbar_toggle .icon-bar:last-child{
+  margin-bottom: 0px;
+}
+
+.ntf_div {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.ntf_row{
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.ntf_row .nft_card{
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.ntf_div{
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+@media only screen and (min-width: 1900px) {
+  .container-fluid{
+    padding-left: 126px;
+    padding-right: 126px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .right_section_nav .ham_burger{
+    display: flex;
+  }
+  .right_navbar .navbar-nav .left_section_nav{
+    display: none;
+  }
+  .right_navbar{
+    width: auto;
+  }
+  .left_navbar{
+    width: 40%;
+  }
+  .right_navbar {
+    width: 45%;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .container {
+    padding-left: 30px;
+    padding-right: 30px;
+    width: auto;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .right_section_nav li {
+    display: flex;
+    align-items: center;
+    /* padding: 0px 5px; */
+  }
+  .left_section_nav li{
+    margin-right: 17px;
+  }
+  .left_section_nav .btnnav{
+    padding: 5px 15px;
+  }
+  .left_section_nav .removeinmob{
+    margin: 0px 8x;
+  }
+}
+@media only screen and (max-width: 700px) {
+  
+  .left_navbar{
+    justify-content: flex-start !important;
+  }
+  .left_navbar form{
+    display: none;
+  }
+  .navbar{
+    padding-top: 16px;
+    padding-bottom: 16px;
+    height: auto;
+    align-items: center;
+  }
+  .search_box{
+    width: 100%;
+    margin-top: 31px;
+    display: inline-block;
+  }
+  .search_box form{
+    display: flex;
+    width: 100%;
+    height: 42px;
+  }
+  .search_box form input{
+    background: #f8f8f8;
+    border: 0;
+  }
+  .search_box form .screachbtn{
+    border: 0;
+    width: 50px;
+    background: #f8f8f8;
+    margin-left: 5px;
+  }
+}
+
+@media only screen and (max-width: 864px) {
+  .nft_card{
+    width: 100% !important;
+  }
 }

@@ -170,7 +170,7 @@ span {
 @media (min-width: 992px) {
   .col-lg-3 {
     flex: 0 0 auto;
-    width: 23%;
+    width: 21%;
   }
 }
 
@@ -245,7 +245,8 @@ span {
   font-size: 12px;
 }
 .font-13 {
-  font-size: 13px;
+  /* font-size: 13px; */
+  font-size: 12px;
 }
 .font-14 {
   font-size: 14px;
@@ -394,9 +395,9 @@ input::-webkit-input-placeholder {
 
 /*-------------- navbar mob css------------------ */
 @media only screen and (max-width: 575px) {
-  .navbar-brand {
+  /* .navbar-brand {
     margin-left: -35px;
-  }
+  } */
   .navbar-toggler {
     margin-left: 280px !important;
     /* margin-top: -51px !important; */
@@ -442,7 +443,8 @@ input::-webkit-input-placeholder {
   height: 150px;
 }
 .btn-choose-file {
-  margin-left: -8em !important;
+  /* margin-left: -8em !important; */
+  margin: 1rem;
 }
 /* -----------------Edit Profile css------------ */
 
@@ -705,4 +707,81 @@ input::-webkit-input-placeholder {
   background-color: #16ab6e;
   width: 45px;
   height: 20px;
+}
+
+/* dileep css here */
+.ml_auto {
+  margin-left: auto;
+  /* margin-left: 15px; */
+}
+.filter {
+  display: flex;
+  width: 100%;
+}
+.filter .dropdown {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d2d2d2;
+  border-radius: 4px;
+  padding: 9px 12px 13px 12px;
+  width: 222px;
+}
+.filter .dropdown p {
+  font-weight: 500;
+  font-style: normal;
+  font-size: 14px;
+}
+.filter .dropdown select {
+  border: none;
+  width: 143px;
+}
+.second_select {
+  margin-left: 15px;
+}
+.filter .dropdown .first_select {
+  color: #858585;
+  font-weight: 500;
+  font-style: normal;
+}
+.lower__homepage .dropbtm_mob {
+  padding: 0;
+}
+select:focus-visible {
+  outline-offset: 0px;
+  outline: none;
+}
+
+.lower__homepage {
+  display: flex;
+  width: 100%;
+}
+
+@media only screen and (max-width: 900px) {
+  .filter {
+    flex-direction: column;
+  }
+  .filter .dropdown .first_select {
+    margin-left: 10px;
+    width: 90%;
+  }
+  .filter .second_select {
+    margin-left: 0px;
+  }
+  .filter .ml_auto {
+    margin-left: 0px;
+  }
+  .filter .dropdown {
+    width: initial;
+    margin-bottom: 16px;
+  }
+  .filter .dropdown:last-child {
+    margin-bottom: 0px;
+  }
+  .row {
+    --bs-gutter-x: 0px;
+  }
+  /* .filter .dropdown select{
+    border: none;
+    width: 143px;
+  } */
 }

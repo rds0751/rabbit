@@ -21,7 +21,8 @@ function Collections_tile() {
                 <a href="/collection-details">
                   <div
                     className="card nft-card-radius collection-card border-radius pt-4 cardmob"
-                    style={{ marginLeft: "1em", backgroundColor: "#F8F8F8" }}
+                    style={{ backgroundColor: "#F8F8F8" }}
+                    // style={{ marginLeft: "1em", backgroundColor: "#F8F8F8" }}
                   >
                     <div className="text-center">
                       <img
