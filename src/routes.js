@@ -1,4 +1,7 @@
 import "./App.css";
+import react,{useEffect} from 'react'
+import {Provider} from "react-redux"
+import {store} from "./reducers/store"
 import Navbar from "./common/components/Navbar";
 import NftPage from "./modules/Home/Nft";
 // import Lower__homepage from "./components/HomeNftFilters";
@@ -45,7 +48,18 @@ import FixedPrice from "./modules/Items/FixedPrice";
 import Menu from "./common/components/Menu";
 
 function App() {
+
+  
+
+//   useEffect(() => {
+//     if(typeof window !== "undefined"){
+//         const accounts = window.ethereum.request({method: "eth_requestAccounts"})
+//         console.log("accounts :",accounts);
+//     }
+// },[])
+
   return (
+      <Provider store={store}>
     <div className="App">
       <Router>
         <Navbar />
@@ -114,7 +128,7 @@ function App() {
               element={<CreateNftCollections />}
             />
             <Route exact path="/create" element={<Create />} />
-            <Route eaxct path="/my-profile" element={<MyProfile />} />
+            <Route eaxct path="/my-profile" element={<MyProfile/>} />
             <Route exact path="/edit-profile" element={<EditProfile />} />
             <Route exact path="/about" element={<About />} />
             <Route exact path="/wallet" element={<Wallet />} />
@@ -154,6 +168,7 @@ function App() {
       </Router>
       <Footer/>
     </div>
+    </Provider>
   );
 }
 

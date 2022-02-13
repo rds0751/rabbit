@@ -151,7 +151,7 @@ function Navbar() {
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
-                    <Link className="dropdown-item" to="/edit-profile">
+                    <Link className="dropdown-item" to="/my-profile">
                       Profile
                     </Link>
                   </li>
