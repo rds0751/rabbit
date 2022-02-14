@@ -28,12 +28,14 @@ function HomeNftFilters() {
               </select>
           </div> */}
         </div>
-        <div className="dropdown ml_auto">
-              <select name="sale" id="sale" className="w-100">
-                <option value="all">Sort by</option>
-                <option value="2">2</option>
-              </select>
-          </div>
+        <div className="filter">
+          <div className="dropdown ml_auto" id="sort_mobile">
+                <select name="sale" id="sale" className="w-100">
+                  <option value="all">Sort by</option>
+                  <option value="2">2</option>
+                </select>
+            </div>
+        </div>
         {/* <div className="dropdown">
           <div style={{ textDecoration: "none", color: "black" }}>
             <button

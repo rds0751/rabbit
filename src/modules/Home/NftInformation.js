@@ -34,7 +34,7 @@ export default function NftInformation() {
           </div>
           <div className="col-lg-5 col-sm-12 col-md-6">
             <div className="row">
-              <div className="">
+              <div className="" id="share_info">
                 <span className="text-dark font-22 font-weight-900">
                   Jelly Fish
                 </span>

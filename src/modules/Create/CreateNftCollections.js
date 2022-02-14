@@ -19,7 +19,7 @@ function CreateNftCollections(Collection) {
 
   return (
     <>
-      <div className="col-sm-6 col-12 col-xs-12 offset-sm-2">
+      <div className="container col-sm-6 col-12 col-xs-12 offset-sm-2" style={{marginTop: '1rem'}}>
         <div className="top-heading">
           <h4 className="create-nft-font">Create your collection</h4>
         </div>

@@ -658,3 +658,69 @@ height: 47px;
     width: 100% !important;
   }
 }
+
+/* added new break point for mobile view  */
+@media (max-width: 400px) {
+  .pricingtable_mob {
+    width: 292px !important;
+  }
+  .row .col-lg-3 select {
+    width: 100% !important;
+    margin: 5px ;
+  }
+  .row .col-lg-3 button {
+    width: 95% !important;
+    margin: 5px ;
+  }
+  .col-11 {
+    width: -webkit-fill-available;
+  }
+  .btn {
+    margin-left: 0 !important;
+  }
+  .dayleft_mob {
+    margin-left: 4.5rem !important;
+  }
+  #share_info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 5px 0px;
+  }
+  #share_info span {
+    margin-left: 5px !important;
+  }
+  .collectionsales {
+    text-align: unset !important;
+  }
+  .sales1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .sales1 .col1 {
+    width: -webkit-fill-available;
+    margin-left: 1rem;
+  }
+  #sort_mobile {
+    margin-top: 1rem;
+    margin-top: 1rem;
+  }
+  .form-responsive {
+    margin-left: 0rem !important;
+  }
+  .edit_profilemob {
+    padding: 0px 0px 0px 0px;
+    margin-right: 1rem !important;
+  }
+  .suggestion-form{
+    margin-top: 3rem ;
+  }
+}
+.bannermob {
+  width: -webkit-fill-available !important;
+}
+.create-nft-font1 {
+  margin-left: 0rem !important;
+}

@@ -57,7 +57,6 @@ function Navbar() {
               </button>
             </form>
           </div>
-
           <div className="right_navbar d-flex ">
 
           {/* <div

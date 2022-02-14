@@ -20,7 +20,7 @@ function EditProfile(Edit) {
 
   return (
     <>
-      <div className="row mt-5">
+      <div className="container row mt-5">
         <div className="col-sm-5 col-12 col-xs-12 offset-sm-3 form-responsive edit_profilemob">
           <div className="top-heading">
             <h4 className="create-nft-font text-center">Edit Profile</h4>
