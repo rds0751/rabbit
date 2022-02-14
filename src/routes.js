@@ -55,7 +55,7 @@ function App() {
             <Route path="/nfts" element={<NftPage />} />
             <Route path="/" element={<NftPage />} />
 
-            <Route exact path="/nft-information" element={<NftInformation />} />
+            <Route exact path="/nft-information/:id" element={<NftInformation />} />
 
             <Route
               exact
@@ -93,7 +93,7 @@ function App() {
             <Route exact path="/create-nft" element={<CreateNFT />} />
             <Route
               exact
-              path="/collection-details"
+              path="/collection-details/:id"
               element={<CollectionDetails />}
             />
 
