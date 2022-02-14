@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 // import './Top_collection.css'
 // import { AbstractApi } from "../../constants/LeaderBoardApi";
 import copy from "../../assets/images/copy.png";
@@ -7,19 +7,29 @@ import pencil from "../../assets/images/pencil.png";
 import "../../assets/styles/Leader.css";
 import { Link } from "react-router-dom";
 import { AbstractApi } from "../../constants/LeaderBoardApi copy";
+import { ToastContainer } from "react-toastify";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export class MyProfile extends Component {
-  render() {
+function MyProfile() {
     const ethereum = window.ethereum
 
   console.log("ethereum ",ethereum && ethereum);
+
+ 
 
   if(ethereum){
     ethereum.on('accountsChanged',function(accounts) {
 
     })
   }
+  useEffect(()=> {
+    if(ethereum){
+      toast.success('Conneted Metamask ');  
+    }
+  },[ethereum])
     return (
+      <>
       <div>
         <div className="position-relative relative">
           <img
@@ -112,8 +122,19 @@ export class MyProfile extends Component {
           })}
         </div>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      </>
     );
-  }
 }
 
 export default MyProfile;

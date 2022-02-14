@@ -58,19 +58,19 @@ function CreateSingleNFT(Single) {
   },[])
   
   
-  useEffect(() => {
-    if((userdata && userdata.data.message == "User added successfully") && (userdata && userdata.data.responseCode === 200)){
-      console.log("datatatatatatatata");
-      setFirstName("")
-      setLastName("")
-      setDescription("")
-      setCollection("")
-      setBlockchain("")
-      setPhoneNumber("")
-      setPassword("")
-      toast.success('User Added');
-    }
-  },[userdata])
+  // useEffect(() => {
+  //   if((userdata && userdata.data.message == "User added successfully") && (userdata && userdata.data.responseCode === 200)){
+  //     console.log("datatatatatatatata");
+  //     setFirstName("")
+  //     setLastName("")
+  //     setDescription("")
+  //     setCollection("")
+  //     setBlockchain("")
+  //     setPhoneNumber("")
+  //     setPassword("")
+  //     toast.success('User Added');
+  //   }
+  // },[userdata])
 
 
   const hiddenFileInput = React.useRef(null);
