@@ -24,11 +24,12 @@ function Wallet() {
         <h3 className="fontwallet">{ethereum && ethereum.chainId ? ethereum && ethereum.chainId : "Install extension to connect wallet" }</h3>
         <i className="far fa-copy"></i>
       </div>
-      <div className="balancewallet">
-        <h3>Total Balance</h3>
-        <h4>4645120 USD</h4>
-
-      </div>
+      <div className="balancewallet textVerticalCenter">
+          <div>
+            <h3>Total Balance</h3>
+            <h4>4645120 USD</h4>
+          </div>
+        </div>
         <button className="btnwallet">Add Balance</button>
       </div>
     </div>
