@@ -85,7 +85,7 @@ function Navbar() {
                 </li>
 
                 <li className={location.pathname.includes('resource') ? "nav-item dropdown li_underline" : "nav-item dropdown"}>
-                  <Link
+                  {/* <Link
                     className={location.pathname.includes('resource') ? "nav-link navlink_active" : "nav-link"}
                     to="/resource"
                     // id="navbarDropdown"
@@ -93,9 +93,9 @@ function Navbar() {
                     // data-bs-toggle="dropdown"
                     // aria-expanded="false"
                     // style={{ fontSize: "16px" }}
-                  >
+                  > */}
                   Resource
-                </Link>
+                {/* </Link> */}
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
                     <Link className="dropdown-item" to="/help-center">
