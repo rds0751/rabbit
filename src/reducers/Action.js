@@ -9,4 +9,58 @@
 
 // export default ACTION
 
-export const OPEN_NOTIFICATION = "OPEN_NOTIFICATION";
+import {BASE_URL} from "./Constants"
+import { ADD_USER,GET_ERRORS,ALL_USERS } from "./Constants"
+import axios from 'axios';
+
+export const addUseraction = (data) => (dispatch) => {
+    console.log(1);
+    axios
+    .post(BASE_URL+`/api/v1/user`,data)
+    .then(response => {
+        console.log("response",response)
+        if(response.data.responseCode === 200){
+            dispatch({
+                type : ADD_USER,
+                payload : response
+            })
+        }
+        if(response.data.responseCode === 400 || response.data.responseCode === 403 ){
+            dispatch({
+                type : GET_ERRORS,
+                payload : response.data
+            })
+        }
+    })
+    .catch(error => {
+        console.log("error",error);
+        if(error && error.responseCode && error.responseCode === 403){
+            dispatch({
+                type:GET_ERRORS,
+                payload : error.response
+            })
+        }
+    })
+};
+
+export const allUseraction = () => (dispatch) => {
+    console.log(1);
+    axios
+    .get(BASE_URL+`/api/v1/users`,)
+    .then(response => {
+        if(response.status === 200){
+            dispatch({
+                type : ALL_USERS,
+                payload : response.data
+            })
+        }
+    })
+    .catch(error => {
+        if(error && error.response && error.responseCode === 404){
+            dispatch({
+                type:GET_ERRORS,
+                payload : error.response
+            })
+        }
+    })
+};
