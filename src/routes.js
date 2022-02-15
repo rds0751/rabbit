@@ -49,6 +49,10 @@ import Menu from "./common/components/Menu";
 
 function App() {
 
+  const location = window.location
+
+  console.log("location :",location);
+
   
 
 //   useEffect(() => {
@@ -166,7 +170,8 @@ function App() {
           </Routes>
         {/* </Switch> */}
       </Router>
-      <Footer/>
+      {location.pathname !== "/wallet" ? <Footer/> : <></> }
+      {/* <Footer/> */}
     </div>
     </Provider>
   );
