@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import image from "../../assets/images/1.jpg";
 import share from "../../assets/images/share.png";
 import info from "../../assets/images/info.png";
@@ -9,9 +9,16 @@ import { BidApi, OfferApi } from "../../constants/Nft_Info_Api";
 import PricingHistoryComponentTable from "../../common/components/PricingHistoryComponentTable";
 import PricingHistoryComponentGraph from "../../common/components/PricingHistoryComponentGraph";
 // import BidsComponent from "./BidsComponent";
+import { useParams } from 'react-router-dom';
+import { getNft } from "../../services/webappMicroservice";
 
 export default function NftInformation() {
   const [activeInActive, setActiveInActive] = useState("active");
+  const nftId = useParams();
+  const [nft, setNft] = useState([])
+  useEffect(() => {
+    getNft(nftId.id).then(response=>setNft(response))
+  })
   return (
     <>
       <div className="container">
@@ -20,7 +27,7 @@ export default function NftInformation() {
           <div className="col-lg-5 col-sm-12 col-md-6">
             <div>
               <img
-                src={image}
+                src={nft.ipfsUrl}
                 className="border-radius imginfo_mob"
                 style={{
                   // width: "100%",
@@ -36,7 +43,7 @@ export default function NftInformation() {
             <div className="row">
               <div className="" id="share_info">
                 <span className="text-dark font-22 font-weight-900">
-                  Jelly Fish
+                  {nft.name}
                 </span>
                 <span className="icon-img" style={{ marginLeft: "16.5em" }}>
                   <img
@@ -280,7 +287,7 @@ export default function NftInformation() {
                       className="font-13 font-weight-900 text-dark"
                       style={{ marginLeft: "0.5em" }}
                     >
-                      100
+                      {nft.viewsCount}
                     </span>
                   </span>
                 </div>
@@ -296,7 +303,7 @@ export default function NftInformation() {
                       className="font-13 font-weight-900 text-dark"
                       style={{ marginLeft: "0.5em" }}
                     >
-                      23
+                      {nft.likesCount}
                     </span>
                   </span>
                 </div>
@@ -306,10 +313,7 @@ export default function NftInformation() {
               </div>
               <div className="row">
                 <h4 className="font-13 ">
-                  Jellyfish and sea jellies are the informal common names given
-                  to the <br /> medusa-phase of certain gelatinous members of
-                  the <br />
-                  subphylum Medusozoa, a major part of the phylum Cnidaria.
+                  {nft.description}
                 </h4>
               </div>
               <div className="row border-bottom pb-2 mt-3">
