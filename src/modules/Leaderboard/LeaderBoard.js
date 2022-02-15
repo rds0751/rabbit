@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../assets/styles/Leader.css";
 import { Link } from "react-router-dom";
 import {
@@ -9,8 +9,17 @@ import {
   Accepted,
   Rejected,
 } from "../../constants/LeaderBoardApi";
+import { getTopSellers } from "../../services/sellAndPurchaseMicroService";
 
 function LeaderBoard() {
+
+  const [topSellers, setTopSellers] = useState([]);
+
+  useEffect(() => {
+    getTopSellers().then((response) => setTopSellers(response));
+  });
+  console.log("topSellers", topSellers);
+
   // const [state, setState] = useState(LeaderBoardApi);
   const [PendingAcceptedCreated, setPendingAcceptedCreated] =
     useState("pending");
@@ -106,12 +115,12 @@ function LeaderBoard() {
                 >
                   <li>
                     <a className="dropdown-item" href="#">
-                      Action
+                      Monthly
                     </a>
                   </li>
                   <li>
                     <a className="dropdown-item" href="#">
-                      Another action
+                      Yearly
                     </a>
                   </li>
                   <li>
@@ -123,17 +132,17 @@ function LeaderBoard() {
               </div>
             </div>
             <div className="leaderboardTopDetails">
-              {LeaderBoardApi.map((curElem) => {
-                const { Image, Heading, SubHead1, SubHead2 } = curElem;
+              {topSellers.map((curElem) => {
+                const { Image, sellerFirstName, sellerLastName, SubHead1, totalPurchasedValue } = curElem;
                 return (
                   <>
                     <div className="leaderboardTopDetailsRow">
                       <img src={Image} alt="" />
                       <div className="LeaderboardInsideDetails">
-                        <h2>{Heading}</h2>
+                        <h2>{sellerFirstName}{sellerLastName}</h2>
                         <p>
                           {SubHead1}
-                          <span>{SubHead2}</span>
+                          <span>{totalPurchasedValue}</span>
                         </p>
                       </div>
                     </div>
