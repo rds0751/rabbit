@@ -25,7 +25,7 @@ function Wallet() {
         <i className="far fa-copy"></i>
       </div>
       <div className="balancewallet textVerticalCenter">
-          <div>
+          <div className="WalletContent">
             <h3>Total Balance</h3>
             <h4>4645120 USD</h4>
           </div>
