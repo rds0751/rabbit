@@ -22,7 +22,7 @@ function NftPage() {
           className="row mob_row ntf_row"
           style={{ justifyContent: "space-between" }}
         >
-          {nfts.map((nft) => {
+          {Nfts_Tile_Api.map((nft) => {
             const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
             const route = "nft-information/" + _id;
             // const { startDate, endDate } = biddingDetails;
