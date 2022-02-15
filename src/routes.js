@@ -170,7 +170,7 @@ function App() {
           </Routes>
         {/* </Switch> */}
       </Router>
-      {location.pathname !== "/wallet" ? <Footer/> : <></> }
+      {location.pathname !== "/Wallet" ? <Footer/> : <></> }
       {/* <Footer/> */}
     </div>
     </Provider>

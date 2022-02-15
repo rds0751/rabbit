@@ -21,7 +21,7 @@ function Wallet() {
         <img src={image} alt="" />
       </div>
       <div className="walleth2">
-        <h3 className="fontwallet">{ethereum && ethereum.chainId ? ethereum && ethereum.chainId : "Not Connect MetaMask" }</h3>
+        <h3 className="fontwallet">{ethereum && ethereum.chainId ? ethereum && ethereum.chainId : "Install extension to connect wallet" }</h3>
         <i className="far fa-copy"></i>
       </div>
       <div className="balancewallet">
