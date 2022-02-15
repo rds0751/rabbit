@@ -222,9 +222,12 @@ height: 47px;
     margin-top: 70px !important;
     margin-bottom: 10px;
   } */
-  /* .navbar-brand {
-    margin-top: -50px;
-  } */
+  .navbrand{
+    margin-right: 21px;
+  }
+  .navbar-brand {
+    margin-top: 0px !important;
+  }
   /* .navbar-toggler {
     margin-top: -160px !important;
   } */
@@ -541,12 +544,14 @@ height: 47px;
   display: flex;
 }
 .left_section_nav li {
-  margin-right: 20px;
+  margin-right: 56px;
   display: flex;
   align-items: center;
 }
 .left_section_nav .btnnav {
-  padding: 5px 30px;
+  /* padding: 5px 30px; */
+  width: 136px;
+  /* height: 42px; */
   background: #366eef;
   border-color: transparent;
   font-weight: 500;
@@ -565,7 +570,7 @@ height: 47px;
 .right_section_nav li {
   display: flex;
   align-items: center;
-  margin-left: 15px;
+  margin-left: 31.2px;
 }
 .right_section_nav .ham_burger {
   display: none;
@@ -610,6 +615,7 @@ height: 47px;
 }
 .navbar-expand-lg .navbar-nav .nav-link {
   padding: 0px;
+  background:  #FFFFFF 0% 0% no-repeat padding-box;
   /* margin-right: 15px;
   margin-left: 15px; */
 }

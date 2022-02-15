@@ -1,19 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 // import './Navbar.css'
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import "../../assets/styles/Notification.css";
+import { updateUserDetail } from "../../reducers/Action";
 import Menu from "./Menu";
 // import "../../assets/st.css";
 function Navbar() {
   const [humburger, setHumburger] = useState(false);
-  const ethereum = window.ethereum;
+  // const ethereum = window.ethereum;
+  const [errorMssg, setErrorMssg] = useState(null);
+  // const [defaultAccount, setDefaultAccount] = useState(null);
+  // console.log("ethereum ", ethereum && ethereum);
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state);
+  const { userDetails } = user;
 
-  console.log("ethereum ", ethereum && ethereum);
+  // useEffect(() => {
+  //   // if(ethereum){
+  //   //   toast.success('Conneted Metamask ');
+  //   // }
+  //   dispatch(updateUserDetail("hello"));
 
-  if (ethereum) {
-    ethereum.on("accountsChanged", function (accounts) {});
-  }
+  //   if (window.ethereum) {
+  //     window.ethereum
+  //       .request({ method: "eth_requestAccounts" })
+  //       .then((result) => {
+  //         accountChangeHandler(result[0]); //accounts can be a array we just wanna grab first one
+  //         console.log(result[0]);
+  //       })
+  //       .catch((e) => {
+  //         console.log(e);
+  //       });
+  //   } else {
+  //     setErrorMssg("Install Metamask");
+  //     toast.success("Connect Wallet");
+  //   }
+  // }, [window.ethereum]);
+  // const accountChangeHandler = (newAccount) => {
+  //   setDefaultAccount(newAccount);
+  // };
+  // window.ethereum.on("accountsChanged", accountChangeHandler);
+
+  // if (ethereum) {
+  //   ethereum.on("accountsChanged", function (accounts) {});
+  // }
   let location = useLocation();
 
   const handleHamburger = () => {
@@ -32,10 +65,10 @@ function Navbar() {
             style={{ backgroundColor: "white" }}
           >
             <div className="left_navbar d-flex align-items-center">
-              <Link className="navbar-brand" to="/">
+              <Link className="navbrand" to="/" style={{ marginRight: "21px" }}>
                 <img
                   src={require("../../assets/images/logo.png")}
-                  style={{ width: "40px" }}
+                  style={{ width: "50px" }}
                 />
               </Link>
               <form className=" w-100 p-0 m-0 ">
@@ -47,7 +80,9 @@ function Navbar() {
                   style={{
                     backgroundColor: "#f8f8f8",
                     width: "75%",
-                    // height: "35px",
+                    height: "42px",
+                    padding: "0px",
+                    paddingLeft: "10px",
                     border: "0",
                   }}
                 />
@@ -56,12 +91,19 @@ function Navbar() {
                   style={{
                     border: "0",
                     width: "35px",
-                    height: "35px",
+                    height: "42px",
                     backgroundColor: "#f8f8f8",
                     marginLeft: "5px",
                   }}
                 >
-                  <i className="fa fa-search" aria-hidden="true"></i>
+                  <i
+                    className="fa fa-search"
+                    style={{
+                      width: "42px",
+                      height: "50",
+                    }}
+                    aria-hidden="true"
+                  ></i>
                 </button>
               </form>
             </div>
@@ -203,7 +245,7 @@ function Navbar() {
                     </ul>
                   </li>
                   <li>
-                    <Link to={!ethereum ? "/add-wallet" : "/wallet"}>
+                    <Link to={!userDetails ? "/add-wallet" : "/wallet"}>
                       <img
                         className="btnnav_mob2"
                         src={require("../../assets/images/wallet.png")}
@@ -217,12 +259,12 @@ function Navbar() {
                   {/* <li className="ham_burger"> */}
                   <button
                     type="button"
-                    class="navbar_toggle ham_burger"
+                    className="navbar_toggle ham_burger"
                     onClick={handleHamburger}
                   >
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
                   </button>
                   {/* </li> */}
                 </ul>

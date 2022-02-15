@@ -486,7 +486,7 @@ thead {
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
-  color: grey;
+  color:#828282;
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out;
@@ -556,7 +556,7 @@ thead {
     font-weight: bold;
   }
   .nav-link {
-    color: black;
+    color:#828282;
     font-weight: bold;
     font-size: 14px;
     padding: 0.5rem 0.6rem;
