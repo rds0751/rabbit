@@ -165,7 +165,7 @@ function Navbar() {
                 </ul>
               </li>
               <li>
-                <Link to="/Create">
+                <Link to="/Wallet">
                   <img
                     className="btnnav_mob2"
                     src={require("../../assets/images/wallet.png")}

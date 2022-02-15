@@ -53,7 +53,7 @@ function MyProfile() {
           >
             <div style={{ backgroundColor: "#f3f3f3", borderRadius: "5px" }}>
               {" "}
-              {ethereum && ethereum.chainId ? ethereum && ethereum.chainId : "Not Connect MetaMask" }{" "}
+              {ethereum && ethereum.chainId ? ethereum && ethereum.chainId : "Install extension to connect wallet" }{" "}
             </div>{" "}
             <img style={{ height: "30px" }} src={copy} alt="" />
           </h6>

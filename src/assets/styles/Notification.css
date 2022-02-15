@@ -31,7 +31,92 @@ height: 47px;
 .fa-caret-down {
   display: none !important;
 }
-
+.wallet {
+  display: flex;
+  flex-direction: row;
+  /* text-align: center; */
+  /* justify-content: flex-end; */
+  align-items: flex-end;
+  height: calc( 100% - 70px );
+  position: absolute;
+  right: 0;
+  /* display: inline-block; */
+  left: 0;
+  box-shadow: 0px 3px 12px #00000014
+}
+.wallet .empty_div{
+  width: calc( 100% - 516px );
+  background: #191919;
+  height: 100%;
+  opacity: 0.5;
+}
+.wallet_div{
+  width: 516px;
+  background: #ffffff;
+  margin-left: auto;
+  height: 100%;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.walleth2 {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.balancewallet {
+  border: 1px solid gray;
+  width: 100%;
+  /* margin: 9px; */
+  padding: 5px;
+  margin-bottom: 10px;
+  /* margin-left: 18px; */
+}
+.btnwallet {
+  color: white;
+  background-color: #366eff;
+  border: 1px solid;
+  border-radius: 5px;
+  width: 100%;
+  padding: 7px;
+  /* margin-bottom: -6px; */
+  /* margin-left: -6px; */
+}
+.fontwallet {
+  text-align: left;
+  font: 16px/25px Poppins;
+  letter-spacing: 0px;
+  color: #191919;
+  opacity: 1;
+}
+.balancewallet > h3 {
+  font: 14px/21px Poppins;
+  letter-spacing: 0px;
+  color: #707070;
+  opacity: 1;
+}
+.balancewallet > h4 {
+  font: 18px/27px Poppins !important;
+  letter-spacing: 0px;
+  color: #191919;
+  opacity: 1;
+}
+.imgwallet {
+  border-radius: 3px;
+  opacity: 1;
+  padding-top: 36px;
+}
+.imgwallet > img {
+  height: 150px;
+  width: 150px;
+}
+.walleth2 > i {
+  width: 21px;
+  height: 21px;
+}
 @media only screen and (max-width: 1170px) {
   .fa-caret-down {
     display: block !important;
@@ -131,15 +216,15 @@ height: 47px;
   /* .navbar-toggler {
     margin-top: -160px !important;
   } */
-  .cardmob {
-    /* margin-left: 30px !important; */
-  }
-  .wallet {
+  /* .cardmob {
+    margin-left: 30px !important;
+  } */
+  /* .wallet {
     display: flex;
     flex-direction: column;
     text-align: center;
-  }
-  .walleth2 {
+  } */
+  /* .walleth2 {
     display: flex;
     text-align: center;
     justify-content: center;
@@ -151,9 +236,9 @@ height: 47px;
     margin: 9px;
     padding: 5px;
     margin-bottom: 0px;
-    margin-left: 18px;
-  }
-  .btnwallet {
+    margin-left: 0px;
+  } */
+  /* .btnwallet {
     color: white;
     background-color: #366eff;
     border: 1px solid;
@@ -193,7 +278,7 @@ height: 47px;
   .walleth2 > i {
     width: 21px;
     height: 21px;
-  }
+  } */
   .mobview {
     display: none !important;
   }
