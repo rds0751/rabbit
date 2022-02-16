@@ -76,8 +76,8 @@ class FirstPageNft extends BaseComponent {
       return Utils.apiFailureToast("Please select the file that to be upload");
 
     let formData = new FormData();
-    formData.append("fileName", data.nftFile?.nftName);
-    formData.append("files", data.nftFile);
+    // formData.append("fileName", data.nftFile?.nftName);
+    formData.append("attachment", data.nftFile);
 
     if(!this.props.user?.userDetails)
       return Utils.apiFailureToast("Please connect your wallet");
