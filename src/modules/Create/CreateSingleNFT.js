@@ -1,78 +1,13 @@
-import React, { useEffect,useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Image from "../../assets/images/img-format.png";
 import styled from "styled-components";
-import { useSelector,useDispatch } from "react-redux";
-import { addUseraction, allUseraction } from "../../reducers/Action";
 // import "../../assets/styles/Leader.css"
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
-import { ToastContainer } from "react-toastify";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const Button = styled.button``;
 
 function CreateSingleNFT(Single) {
-
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
-  const [description, setDescription] = useState("")
-  const [collection, setCollection] = useState("")
-  const [blockchain, setBlockchain] = useState("")
-  const [phoneNumber, setPhoneNumber] = useState("")
-  const [password, setPassword] = useState("")
-  const [allUserCount, setAllUserCount] = useState("")
-  
-
-  let dispatch = useDispatch();
-
-  const userdata = useSelector((state) => state.user.addUserData);
-  const alluserdata = useSelector((state) => state.user.allUserData);
-  const errorDATA = useSelector((state) => state.error.errorsData);
-  console.log("userdata : ",userdata);
-  console.log("errorDATA : ",errorDATA);
-
-  useEffect(() => {
-    let count = alluserdata && alluserdata.responseData && alluserdata.responseData.totalUsersCount
-    setAllUserCount(count)
-  },[alluserdata])
-
-  const handleSubmit = (e) => {
-    // console.log("event",e);
-    e.preventDefault()
-    // let data = {
-    //   userId:100 + allUserCount,
-    //   firstName:firstName,
-    //   lastName:lastName,
-    //   email:blockchain,
-    //   password:password,
-    //   phone:phoneNumber
-    // }
-    // console.log("data",data);
-    // dispatch(addUseraction(data))
-  }
-  
-
-  useEffect(() => {
-    dispatch(allUseraction())
-  },[])
-  
-  
-  // useEffect(() => {
-  //   if((userdata && userdata.data.message == "User added successfully") && (userdata && userdata.data.responseCode === 200)){
-  //     console.log("datatatatatatatata");
-  //     setFirstName("")
-  //     setLastName("")
-  //     setDescription("")
-  //     setCollection("")
-  //     setBlockchain("")
-  //     setPhoneNumber("")
-  //     setPassword("")
-  //     toast.success('User Added');
-  //   }
-  // },[userdata])
-
-
   const hiddenFileInput = React.useRef(null);
   const handleClick = (event) => {
     hiddenFileInput.current.click();
@@ -84,12 +19,10 @@ function CreateSingleNFT(Single) {
   };
 
   return (
-    <>
     <div>
       <div className="text-center mt-5">
         <h4 className="create-nft-font">Create NFT</h4>
       </div>
-      <form onSubmit={(e)=>handleSubmit(e)}>
       <div className="row no-gutters create_singlemob">
         <div className="col-sm-3 col-12 col-xs-12 createnft_mob">
           <label for="email" className="form-label">
@@ -97,7 +30,7 @@ function CreateSingleNFT(Single) {
           </label>
           <div className="card single-nft-card p-5">
             <Button
-              // onClick={handleClick}
+              onClick={handleClick}
               style={{ border: "none", backgroundColor: "#fff" }}
             >
               <img
@@ -111,8 +44,8 @@ function CreateSingleNFT(Single) {
               placeholder="Write your name"
               name="email"
               style={{ display: "none" }}
-              // ref={hiddenFileInput}
-              // onChange={handleChange}
+              ref={hiddenFileInput}
+              onChange={handleChange}
             />
             <span className="text-dark font-13">
               Drag & Drop or
@@ -127,28 +60,21 @@ function CreateSingleNFT(Single) {
         </div>
         <div className="col-sm-5 col-12 col-xs-12">
           <div className="singlenft-form-box">
-            <div className="suggestion-form  p-4 ">
+            <form className="suggestion-form  p-4 ">
               <div className="mb-3 mt-3">
-                <label  className="form-label input-heading">
+                <label for="email" className="form-label input-heading">
                   Name*
                 </label>
-                <input type="text" className="form-control" onChange={(e)=>setFirstName(e.target.value)} value={firstName}  />
+                <input type="name" className="form-control" name="email" />
               </div>
               <div className="mb-3 mt-3">
-                <label className="form-label input-heading">
-                  Name*
-                </label>
-                <input type="text" className="form-control" onChange={(e)=>setLastName(e.target.value)} value={lastName}  />
-              </div>
-              <div className="mb-3 mt-3">
-                <label className="input-heading pb-2">
+                <label for="comment" className="input-heading pb-2">
                   Description*
                 </label>
                 <textarea
                   className="form-control"
                   rows="4"
-                  onChange={(e)=>setDescription(e.target.value)} 
-                  value={description}
+                  name="text"
                   placeholder="Write description"
                 ></textarea>
                 <spna className="text-secondary font-13">
@@ -171,8 +97,7 @@ function CreateSingleNFT(Single) {
                   </Link>
                 </label>
                 {/* <Link>Create</Link> */}
-                <select className="form-select mt-3 font-13 text-secondary" onChange={(e)=>setCollection(e.target.value)} 
-                  value={collection}>
+                <select className="form-select mt-3 font-13 text-secondary">
                   <option>Select Category</option>
                   <option>2</option>
                   <option>3</option>
@@ -180,69 +105,28 @@ function CreateSingleNFT(Single) {
                 </select>
               </div>
               <div className="mb-3 mt-3">
-                <label className="form-label input-heading">
-                  Blockchain*
+                <label for="email" className="form-label input-heading">
+                  blockchain*
                 </label>
                 <input
-                  type="email"
+                  type="name"
                   className="form-control bg-light"
                   placeholder="Ethereum"
-                  // id="email"
-                  onChange={(e)=>setBlockchain(e.target.value)} 
-                  value={blockchain}
-                />
-              </div>
-              <div className="mb-3 mt-3">
-                <label className="form-label input-heading">
-                  Password*
-                </label>
-                <input
-                  type="password"
-                  className="form-control bg-light"
-                  placeholder="Enter Password"
-                  // id="password"
-                  onChange={(e)=>setPassword(e.target.value)} 
-                  value={password}
-                />
-              </div>
-              <div className="mb-3 mt-3">
-                <label className="form-label input-heading">
-                  Phone Number*
-                </label>
-                <input
-                  type="text"
-                  className="form-control bg-light"
-                  placeholder="Ethereum"
-                  // id="phonenumber"
-                  onChange={(e)=>setPhoneNumber(e.target.value)} 
-                  value={phoneNumber}
-                  // name="phone"
+                  id="ethereum"
+                  name="email"
                 />
               </div>
               <button
                 type="submit"
-                className="btn btn-primary mt-4 w-100"
+                className="btn btn-primary mt-4 w-100 disabled"
               >
                 Create
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </div>
-      </form>
     </div>
-     <ToastContainer
-     position="top-center"
-     autoClose={2000}
-     hideProgressBar={false}
-     newestOnTop={false}
-     closeOnClick
-     rtl={false}
-     pauseOnFocusLoss
-     draggable
-     pauseOnHover
-   />
-   </>
   );
 }
 
