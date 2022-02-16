@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Button = styled.button``;
 
-function CreateSingleNFT( props) {
+function CreateSingleNFT( props,Single) {
 
 
   const [firstName, setFirstName] = useState("")
@@ -92,10 +92,10 @@ function CreateSingleNFT( props) {
     hiddenFileInput.current.click();
   };
 
-  // const handleChange = (event) => {
-  //   const fileUploaded = event.target.files[0];
-  //   Single.handleFile(fileUploaded);
-  // };
+  const handleChange = (event) => {
+    const fileUploaded = event.target.files[0];
+    Single.handleFile(fileUploaded);
+  };
 
   return (
     <>
