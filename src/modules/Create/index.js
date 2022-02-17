@@ -114,22 +114,13 @@ export default class Index extends BaseComponent {
     Utils.apiSuccessToast("Your Nft has been created successfully.");
     // history.push("/nft-details/" + contentRes._id);
   };
-  // Pre   =()=> {
-  //   // e.preventDefault()
-  //   alert("name")
-  // }    
 
 
   render() {
-    // console.log("jjjjjjjjjj",this.state.nn)
     return (
       <>
         <CreateSingleNFT
-          // collection={this.state.collection}
-          // m={this.state.nn}
-          state={this.state}
           mintNft={this.mintNft}
-          // pre={this.Pre.bind(this)}
           createNftHandler={this.createNftHandler.bind(this)}
         />
         {/* <FooterComponent /> */}
@@ -138,8 +129,3 @@ export default class Index extends BaseComponent {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return { user: state.user };
-// };
-
-// export default connect(mapStateToProps, { dispatchAction })(CreateSingleNFT);
