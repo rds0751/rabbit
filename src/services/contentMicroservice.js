@@ -1,12 +1,14 @@
-import { contextType } from "react-swipe";
+// import { contextType } from "react-swipe";
 import { httpConstants } from "../constants";
-import { httpService } from "../utility/httpService";
+// import { httpService } from "../utility/httpService";
 import { httpServiceFileUpload } from "../utility/httpServiceFileUpload";
 
 export default {
     addIpfs,
 };
 async function addIpfs(requestdata) {
+  console.log("qqq")
+
     // let url = "http://localhost:3001" + "/add-file-ipfs";
     let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/add-file-ipfs";
   

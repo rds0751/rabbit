@@ -36,7 +36,6 @@ function CreateSingleNFT( props,Single) {
   console.log("userdata : ", userdata);
   console.log("errorDATA : ", errorDATA);
   const addIPFS = async () => {
-    console.log("-----------------------------ll")
     props.createNftHandler({
       nftFile,
       nftName,

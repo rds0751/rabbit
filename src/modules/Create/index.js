@@ -6,17 +6,18 @@ import CreateSingleNFT from "./CreateSingleNFT";
 import Utils, { dispatchAction } from "../../utility";
 // import { getcollection } from "../../services/adminConfigMicroservices";
 import { BlockchainService,ContentService } from "../../services";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import { eventConstants } from "../../constants";
-import { history } from "../../managers/history";
+// import { history } from "../../managers/history";
 
-class FirstPageNft extends BaseComponent {
+export default class Index extends BaseComponent {
   constructor(props) {
     super(props);
     this.state = {
       categoryId: "",
-      collection: [],
+      // collection: [],
       mintData: [],
+      // nn:[]
     };
   }
 
@@ -72,19 +73,19 @@ class FirstPageNft extends BaseComponent {
   };
 
   createNftHandler = async (data) => {
-    if (!data || Object.keys(data).length < 1 || !data.nftFile)
-      return Utils.apiFailureToast("Please select the file that to be upload");
+    // if (!data || Object.keys(data).length < 1 || !data.nftFile)
+    //   return Utils.apiFailureToast("Please select the file that to be upload");
 
     let formData = new FormData();
     // formData.append("fileName", data.nftFile?.nftName);
     formData.append("attachment", data.nftFile);
 
-    if(!this.props.user?.userDetails)
-      return Utils.apiFailureToast("Please connect your wallet");
+    // if(!this.props.user?.userDetails)
+    //   return Utils.apiFailureToast("Please connect your wallet");
 
 
     //add to IPFS
-    this.props.dispatchAction(eventConstants.SHOW_LOADER);
+    // this.props.dispatchAction(eventConstants.SHOW_LOADER);
     const [err, ipfsRes] = await Utils.parseResponse(
       ContentService.addIpfs(formData)
     );
@@ -101,6 +102,7 @@ class FirstPageNft extends BaseComponent {
         tokenURI: ipfsRes.ipfsUrl,
       })
     );
+
     console.log("tokenId=", tokenId);
     if (blockchainError || !blockchainRes) {
       this.props.dispatchAction(eventConstants.HIDE_LOADER);
@@ -137,14 +139,23 @@ class FirstPageNft extends BaseComponent {
     Utils.apiSuccessToast("Your Nft has been created successfully.");
     // history.push("/nft-details/" + contentRes._id);
   };
+  // Pre   =()=> {
+  //   // e.preventDefault()
+  //   alert("name")
+  // }    
+  
 
   render() {
+    console.log("jjjjjjjjjj",this.state.nn)
     return (
       <>
         <CreateSingleNFT
-          collection={this.state.collection}
+          // collection={this.state.collection}
+          // m={this.state.nn}
+          state={this.state}
           mintNft={this.mintNft}
-          createNftHandler={this.createNftHandler}
+          // pre={this.Pre.bind(this)}
+          createNftHandler={this.createNftHandler.bind(this)}
         />
         {/* <FooterComponent /> */}
       </>
@@ -152,8 +163,8 @@ class FirstPageNft extends BaseComponent {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { user: state.user };
-};
+// const mapStateToProps = (state) => {
+//   return { user: state.user };
+// };
 
-export default connect(mapStateToProps, { dispatchAction })(FirstPageNft);
+// export default connect(mapStateToProps, { dispatchAction })(CreateSingleNFT);

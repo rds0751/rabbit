@@ -36,7 +36,7 @@ import MyItems from "./modules/Items/MyItems";
 import EditProfile from "./modules/Profile/EditProfile";
 import MyItems_Collection from "./modules/MyPages/MyItemCollection";
 import CreateNFT from "./modules/Create/CreateNFT";
-import CreateSingleNFT from "./modules/Create/CreateSingleNFT";
+import CreateSingleNFT from "./modules/Create/index";
 import About from "./modules/About/About";
 // import Menu from "./";
 // import Fixed_Price from "./modules/";
