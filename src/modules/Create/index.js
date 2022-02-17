@@ -1,14 +1,9 @@
 import React from "react";
 import BaseComponent from "../baseComponent";
 import CreateSingleNFT from "./CreateSingleNFT";
-// import HeaderComponent from "../common/header";
-// import FooterComponent from "../common/footer";
-import Utils, { dispatchAction } from "../../utility";
-// import { getcollection } from "../../services/adminConfigMicroservices";
-import { BlockchainService,ContentService } from "../../services";
-// import { connect } from "react-redux";
+import Utils from "../../utility";
+import { BlockchainService, ContentService } from "../../services";
 import { eventConstants } from "../../constants";
-// import { history } from "../../managers/history";
 
 export default class Index extends BaseComponent {
   constructor(props) {
@@ -17,7 +12,6 @@ export default class Index extends BaseComponent {
       categoryId: "",
       // collection: [],
       mintData: [],
-      // nn:[]
     };
   }
 
@@ -25,34 +19,14 @@ export default class Index extends BaseComponent {
     await this.getCollectionsForNft();
   }
 
-//   getCollectionsForNft = async () => {
-//     let pathName = window.location.pathname;
-//     let pathArray = pathName.split("/");
-//     if (pathArray.length !== 3) return history.push("/");
-
-//     this.props.dispatchAction(eventConstants.SHOW_LOADER);
-//     const [err, response] = await Utils.parseResponse(
-//       getcollection(pathArray[pathArray.length - 1])
-//     );
-//     this.props.dispatchAction(eventConstants.HIDE_LOADER);
-
-//     if (err || !response) {
-//       return Utils.apiFailureToast(
-//         err?.message || "Unable to fetch collection list"
-//       );
-//     }
-//     this.setState({
-//       collection: response,
-//       categoryId: pathArray[pathArray.length - 1],
-//     });
-//   };
 
   getRequestDataForSaveNftContent = (tokenId, data, ipfsRes, blockchainRes) => {
     return {
       tokenId: tokenId,
       transactionHash: blockchainRes?.transactionHash || "",
       name: data?.nftName || "",
-      collectionId: data?.collection || "",
+      //TO DO  need to pass collection _id 
+      collectionId: "61e7d82400e03f66fd4d2d24",
       ipfsUrl: ipfsRes?.ipfsUrl || "",
       cdnUrl: ipfsRes?.cdnUrl || "",
       cid: ipfsRes?.cid || "",
@@ -65,27 +39,25 @@ export default class Index extends BaseComponent {
       saleData: {
         price: data?.price || 0,
       },
-      ownedBy: this.props.user?.userDetails?._id || "",
-      createdBy: this.props.user?.userDetails?._id || "",
-      updatedBy: this.props.user?.userDetails?._id || "",
-      ownerAddress: this.props.user?.userDetails?.userId || "",
+      //TO do need to pass user (owner) _id
+      ownedBy: "61e7db34c32d4e5a40567154",
+      createdBy: "61e7db34c32d4e5a40567154",
+      updatedBy: "61e7db34c32d4e5a40567154",
+      ownerAddress: "61e7db34c32d4e5a40567154",
     };
   };
 
   createNftHandler = async (data) => {
-    // if (!data || Object.keys(data).length < 1 || !data.nftFile)
-    //   return Utils.apiFailureToast("Please select the file that to be upload");
-
+    if (!data || Object.keys(data).length < 1 || !data.nftFile)
+      return Utils.apiFailureToast("Please select the file that to be upload");
+    // console.log("duke",data)
     let formData = new FormData();
-    // formData.append("fileName", data.nftFile?.nftName);
     formData.append("attachment", data.nftFile);
 
     // if(!this.props.user?.userDetails)
     //   return Utils.apiFailureToast("Please connect your wallet");
 
-
     //add to IPFS
-    // this.props.dispatchAction(eventConstants.SHOW_LOADER);
     const [err, ipfsRes] = await Utils.parseResponse(
       ContentService.addIpfs(formData)
     );
@@ -93,23 +65,26 @@ export default class Index extends BaseComponent {
       this.props.dispatchAction(eventConstants.HIDE_LOADER);
       return Utils.apiFailureToast(err || "Unable to add file on IPFS");
     }
-    // create NFT on blockchain
     //TODO we need to work on generate unique tokenId
+
     const tokenId = Utils.generateRandomNumber();
+
+    // create NFT on blockchain
     const [blockchainError, blockchainRes] = await Utils.parseResponse(
       BlockchainService.mintNFT({
+        price: data.price,
         tokenId,
         tokenURI: ipfsRes.ipfsUrl,
       })
     );
 
-    console.log("tokenId=", tokenId);
+
     if (blockchainError || !blockchainRes) {
-      this.props.dispatchAction(eventConstants.HIDE_LOADER);
       return Utils.apiFailureToast(
         blockchainError.message || "Unable to mint NFT on blockchain"
       );
     }
+
     console.log(
       this.getRequestDataForSaveNftContent(
         tokenId,
@@ -120,22 +95,22 @@ export default class Index extends BaseComponent {
     );
 
     // save NFT data on DB
-    // const [contentError, contentRes] = await Utils.parseResponse(
-    //   ContentService.createNftContent(
-    //     this.getRequestDataForSaveNftContent(
-    //       tokenId,
-    //       data,
-    //       ipfsRes,
-    //       blockchainRes
-    //     )
-    //   )
-    // );
+    const [contentError, contentRes] = await Utils.parseResponse(
+      ContentService.createNftContent(
+        this.getRequestDataForSaveNftContent(
+          tokenId,
+          data,
+          ipfsRes,
+          blockchainRes
+        )
+      )
+    );
     // this.props.dispatchAction(eventConstants.HIDE_LOADER);
-    // if (contentError || !contentRes) {
-    //   return Utils.apiFailureToast(
-    //     contentError.message || "Unable to save NFT content"
-    //   );
-    // }
+    if (contentError || !contentRes) {
+      return Utils.apiFailureToast(
+        contentError.message || "Unable to save NFT content"
+      );
+    }
     Utils.apiSuccessToast("Your Nft has been created successfully.");
     // history.push("/nft-details/" + contentRes._id);
   };
@@ -143,10 +118,10 @@ export default class Index extends BaseComponent {
   //   // e.preventDefault()
   //   alert("name")
   // }    
-  
+
 
   render() {
-    console.log("jjjjjjjjjj",this.state.nn)
+    // console.log("jjjjjjjjjj",this.state.nn)
     return (
       <>
         <CreateSingleNFT

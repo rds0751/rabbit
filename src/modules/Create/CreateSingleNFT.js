@@ -9,10 +9,12 @@ import { addUseraction, allUseraction } from "../../reducers/Action";
 import { ToastContainer } from "react-toastify";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import UploadFile from './uploadFile'
+
 
 const Button = styled.button``;
 
-function CreateSingleNFT( props,Single) {
+function CreateSingleNFT(props, Single) {
 
 
   const [firstName, setFirstName] = useState("")
@@ -113,7 +115,10 @@ function CreateSingleNFT( props,Single) {
                   // onClick={handleClick}
                   style={{ border: "none", backgroundColor: "#fff" }}
                 >
-                  <input type ="file"></input>
+                  <UploadFile onChange={(e) => setNftFile(e.target.files[0])} />
+                  {/* <UploadFile onChange={(e) => console.log("iii",(e.target.files[0]))} /> */}
+
+                  {/* <input type="file" onChange={(e) => { console.log("oooo", e) }} /> */}
                   <img
                     src={Image}
                     style={{ width: "100px", marginTop: "3em", color: "#366EEF" }}
@@ -131,7 +136,7 @@ function CreateSingleNFT( props,Single) {
                 <span className="text-dark font-13">
                   Drag & Drop or
                   {/* <Link to="/" style={{ textDecoration: "none" }}> */}
-                    Browse
+                  Browse
                   {/* </Link> */}
                 </span>
               </div>
@@ -152,7 +157,7 @@ function CreateSingleNFT( props,Single) {
                     <label className="form-label input-heading">
                       Price*
                     </label>
-                    <input type="text" className="form-control" onChange={(e) => setPrice(e.target.value)} value={nftName} />
+                    <input type="number" className="form-control" onChange={(e) => setPrice(e.target.value)} value={price} />
                   </div>
                   <div className="mb-3 mt-3">
                     <label className="input-heading pb-2">
@@ -173,16 +178,16 @@ function CreateSingleNFT( props,Single) {
                     <label for="collection" className="input-heading">
                       Collection
                       <Link
-                    to="/create-nft"
-                    className=" createbtn"
-                    style={{
-                      textDecoration: "none",
-                      marginLeft: "23em",
-                      fontWeight: "normal",
-                    }}
-                  >
-                    Create
-                  </Link>
+                        to="/create-nft"
+                        className=" createbtn"
+                        style={{
+                          textDecoration: "none",
+                          marginLeft: "23em",
+                          fontWeight: "normal",
+                        }}
+                      >
+                        Create
+                      </Link>
 
                     </label>
                     {/* <Link>Create</Link> */}

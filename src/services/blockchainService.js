@@ -3,8 +3,8 @@ import contractABI from "../assets/abi/abi.json";
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
-const contractAddress = "";
-// const contractAddress = '0x9C96456E5eEDF827F17ED2F0809b31c21d821688'
+// const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS
+const contractAddress = '0x8D4aeEEfA850aF82c2444B56B524E4b0C95946F4'
 
 
 export default {
@@ -17,9 +17,16 @@ export default {
 
 
 
-async function mintNFT({tokenURI,price}) {
-    const contractData = new ethers.Contract(contractAddress, contractABI, signer);
-    const result = await contractData.mint(tokenURI,price)
+async function mintNFT({tokenURI,price,tokenId}) {
+    // console.log("mint function",tokenURI)
+    // console.log("mint function price",price)
+
+
+    const contractData = new ethers.Contract(contractAddress, contractABI,signer);
+
+    const result = await contractData.mint(tokenURI,tokenId,ethers.utils.parseEther(price.toString()))
+    // console.log("mint function")
+
     let res = await result.wait();
     return {
         ...res,
