@@ -12,7 +12,7 @@ import likes from "../../assets/images/likes.svg";
 function NftPage() {
   const [nfts, setNfts] = useState([]);
   useEffect(() => {
-    getNfts().then((response) => setNfts(response));
+    getNfts().then((response) => setNfts(response.nftContent));
   }, []);
   const [handleLike, setHandleLike] = useState(true);
   console.log(nfts, "<<<< nfts");
@@ -25,9 +25,10 @@ function NftPage() {
           className="row mob_row ntf_row"
           style={{ justifyContent: "space-between" }}
         >
-          {Nfts_Tile_Api.map((nft) => {
+          {nfts.map((nft) => {
             const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
             const route = "nft-information/" + _id;
+
             // const { startDate, endDate } = biddingDetails;
             // const time_difference = endDate.getTime() - startDate.getTime();
             // const days_difference = time_difference / (1000 * 60 * 60 * 24);
@@ -39,7 +40,7 @@ function NftPage() {
                     <Link to={route} style={{ textDecoration: "none" }}>
                       <img
                         className="img-fluid border-radius nft-img-radius card_imgmob"
-                        // src={ipfsUrl}
+                        src={ipfsUrl}
                         // src={require("../../assets/images")}
                         // style={{ width: "270px" }}
                       />
