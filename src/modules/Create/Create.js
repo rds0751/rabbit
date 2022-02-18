@@ -15,10 +15,32 @@ function Create() {
   const [checkClick, setcheckClick] = useState(false);
   const [getBalance, setGetBalance] = useState(null);
   const dispatch = useDispatch();
-  useEffect(() => {
-    // if(ethereum){
-    //   toast.success('Conneted Metamask ');
-    // }
+  // useEffect(() => {
+  //   // if(ethereum){
+  //   //   toast.success('Conneted Metamask ');
+  //   // }
+  //   if (window.ethereum) {
+  //     window.ethereum
+  //       .request({ method: "eth_requestAccounts" })
+  //       .then((result) => {
+  //         accountChangeHandler(result[0]); //accounts can be a array we just wanna grab first one
+  //         console.log(result[0]);
+
+  //         dispatch(
+  //           updateUserDetail({ address: defaultAccount, balance: getBalance })
+  //         );
+  //         window.location.pathname = "/wallet";
+  //       })
+  //       .catch((e) => {
+  //         console.log(e, "<<< error ");
+  //       });
+  //   } else {
+  //     alert("Install MEtamask");
+  //     setErrorMssg("Install Metamask ");
+  //     toast.success("Connect Wallet");
+  //   }
+  // }, [window.ethereum, checkClick]);
+  const connectMetamask = () => {
     if (window.ethereum) {
       window.ethereum
         .request({ method: "eth_requestAccounts" })
@@ -32,14 +54,13 @@ function Create() {
           window.location.pathname = "/wallet";
         })
         .catch((e) => {
-          console.log(e);
+          console.log(e, "<<< error ");
         });
     } else {
-      alert("Install MEtamask");
       setErrorMssg("Install Metamask ");
-      toast.success("Connect Wallet");
+      toast.error("Install Metamak and Connect Wallet");
     }
-  }, [window.ethereum, checkClick]);
+  };
   const accountChangeHandler = (newAccount) => {
     setDefaultAccount(newAccount);
     getUserBalance(newAccount);
@@ -57,6 +78,20 @@ function Create() {
 
   return (
     <>
+      <div className="d-flex justify-content-between">
+        <ToastContainer
+          position="Install Metamask Extension And Connect Wallet"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+      </div>
+
       <div className="container">
         <div className="mt-5">
           <h1 style={{ fontSize: "20px", fontWeight: "bolder" }}>
@@ -78,7 +113,7 @@ function Create() {
         </div>
         <div className="row createmob">
           <div
-            onClick={() => setcheckClick(!checkClick)}
+            onClick={connectMetamask}
             className="card col-md-3 col-lg-3 col-sm-6 col-12 my-5 card-border"
             style={{ cursor: "pointer" }}
           >
@@ -135,17 +170,6 @@ function Create() {
           Show more
         </button>
       </div>
-      <ToastContainer
-        position="Install Metamask Extension And Connect Wallet"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
     </>
   );
 }

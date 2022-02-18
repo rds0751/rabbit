@@ -9,16 +9,16 @@
 
 // export default ACTION
 
-import { BASE_URL, USER_DETAILS } from "./Constants";
-import { ADD_USER, GET_ERRORS, ALL_USERS } from "./Constants";
-import axios from "axios";
+import { BASE_URL, USER_DETAILS } from './Constants';
+import { ADD_USER, GET_ERRORS, ALL_USERS } from './Constants';
+import axios from 'axios';
 
-export const addUseraction = (data) => (dispatch) => {
+export const addUseraction = data => dispatch => {
   console.log(1);
   axios
     .post(BASE_URL + `/api/v1/user`, data)
-    .then((response) => {
-      console.log("response", response);
+    .then(response => {
+      console.log('response', response);
       if (response.data.responseCode === 200) {
         dispatch({
           type: ADD_USER,
@@ -35,8 +35,8 @@ export const addUseraction = (data) => (dispatch) => {
         });
       }
     })
-    .catch((error) => {
-      console.log("error", error);
+    .catch(error => {
+      console.log('error', error);
       if (error && error.responseCode && error.responseCode === 403) {
         dispatch({
           type: GET_ERRORS,
@@ -45,16 +45,21 @@ export const addUseraction = (data) => (dispatch) => {
       }
     });
 };
-export const updateUserDetail = (data) => (dispatch) => {
-  console.log(data, "<<< data from update user detail");
+export const updateUserDetail = data => dispatch => {
+  console.log(data, '<<< data from update user detail');
   dispatch({ type: USER_DETAILS, payload: data });
 };
 
-export const allUseraction = () => (dispatch) => {
+export const addUserData = data => dispatch => {
+  console.log(data, '<<<data from addUserdata');
+  dispatch({ type: ADD_USER, payload: data });
+};
+
+export const allUseraction = () => dispatch => {
   console.log(1);
   axios
     .get(BASE_URL + `/api/v1/users`)
-    .then((response) => {
+    .then(response => {
       if (response.status === 200) {
         dispatch({
           type: ALL_USERS,
@@ -62,7 +67,7 @@ export const allUseraction = () => (dispatch) => {
         });
       }
     })
-    .catch((error) => {
+    .catch(error => {
       if (error && error.response && error.responseCode === 404) {
         dispatch({
           type: GET_ERRORS,
