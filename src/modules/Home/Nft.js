@@ -11,21 +11,65 @@ import likes from "../../assets/images/likes.svg";
 
 function NftPage() {
   const [nfts, setNfts] = useState([]);
+  const [type, setType] = useState("all");
+
   useEffect(() => {
     getNfts().then((response) => setNfts(response.nftContent));
   }, []);
+
+  const handleChange = (e) => {
+    setType(e.target.value);
+  }
+
+  let filteredNfts;
+  if (type === "all") {
+    filteredNfts = nfts;
+  } else if (type === "fix price") {
+    filteredNfts = nfts.filter((nft) => nft.type === type)
+  } else if (type === "on auction") {
+    filteredNfts = nfts.filter((nft) => nft.type === type)
+  }
+
   const [handleLike, setHandleLike] = useState(true);
-  console.log(nfts, "<<<< nfts");
+  
   return (
     <>
       <div className="container ntf_div">
         <NftToggle />
-        <Lower__homepage />
+        {/* <Lower__homepage /> */}
+        <div className="lower__homepage" style={{ width: "100%" }}>
+        <div id="filters filter-large" className="filter">
+          <div className="dropdown">
+              <p className="mb-0">Sale type</p>
+              <select name="sale" id="sale" className="first_select ml_auto"
+              onChange={(e) => handleChange(e)}>
+                <option value="all">All</option>
+                <option value="fix price">Fix price</option>
+                <option value="on auction">On auction</option>
+              </select>
+          </div>          
+          <div className="dropdown second_select">
+              <select name="sale" id="sale" className="w-100">
+                <option value="all">Price range</option>
+                <option value="2">2</option>
+              </select>
+          </div>
+        </div>
+        <div className="filter">
+          <div className="dropdown ml_auto" id="sort_mobile">
+                <select name="sale" id="sale" className="w-100">
+                  <option value="all">Sort by</option>
+                  <option value="2">2</option>
+                </select>
+            </div>
+        </div>
+        
+      </div>
         <div
           className="row mob_row ntf_row"
           style={{ justifyContent: "space-between" }}
         >
-          {nfts.map((nft) => {
+          {filteredNfts.map((nft) => {
             const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
             const route = "nft-information/" + _id;
 
