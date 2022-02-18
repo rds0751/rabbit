@@ -4,3 +4,5 @@
 //export all services from index file -
 
 // export * from './user'
+export { default as ContentService } from "./contentMicroservice";
+export { default as BlockchainService } from "./blockchainService";

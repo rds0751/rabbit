@@ -1,7 +1,60 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 import image from "../../assets/images/icon.png";
+import { ethers } from "ethers";
+import { useDispatch } from "react-redux";
+import { updateUserDetail } from "../../reducers/Action";
+import "react-toastify/dist/ReactToastify.css";
 
 function Create() {
+  const [humburger, setHumburger] = useState(false);
+  const ethereum = window.ethereum;
+  const [errorMssg, setErrorMssg] = useState(null);
+  const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
+  console.log("ethereum ", ethereum && ethereum);
+  const [checkClick, setcheckClick] = useState(false);
+  const [getBalance, setGetBalance] = useState(null);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    // if(ethereum){
+    //   toast.success('Conneted Metamask ');
+    // }
+    if (window.ethereum) {
+      window.ethereum
+        .request({ method: "eth_requestAccounts" })
+        .then((result) => {
+          accountChangeHandler(result[0]); //accounts can be a array we just wanna grab first one
+          console.log(result[0]);
+
+          dispatch(
+            updateUserDetail({ address: defaultAccount, balance: getBalance })
+          );
+          window.location.pathname = "/wallet";
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    } else {
+      alert("Install MEtamask");
+      setErrorMssg("Install Metamask ");
+      toast.success("Connect Wallet");
+    }
+  }, [window.ethereum, checkClick]);
+  const accountChangeHandler = (newAccount) => {
+    setDefaultAccount(newAccount);
+    getUserBalance(newAccount);
+  };
+  const getUserBalance = (address) => {
+    window.ethereum
+      .request({ method: "eth_getBalance", params: [address, "latest"] })
+      .then((balance) => {
+        setGetBalance(ethers.utils.formatEther(balance));
+        console.log(getBalance, "<<< balance");
+      });
+  };
+
+  window.ethereum?.on("accountsChanged", accountChangeHandler);
+
   return (
     <>
       <div className="container">
@@ -25,6 +78,7 @@ function Create() {
         </div>
         <div className="row createmob">
           <div
+            onClick={() => setcheckClick(!checkClick)}
             className="card col-md-3 col-lg-3 col-sm-6 col-12 my-5 card-border"
             style={{ cursor: "pointer" }}
           >
@@ -81,6 +135,17 @@ function Create() {
           Show more
         </button>
       </div>
+      <ToastContainer
+        position="Install Metamask Extension And Connect Wallet"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </>
   );
 }

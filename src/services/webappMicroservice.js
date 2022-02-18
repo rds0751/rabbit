@@ -2,6 +2,7 @@ import { httpService } from "../utility/httpService";
 import { httpConstants } from "../constants";
 
 export function getNfts(requestData) {
+    // let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts";
     let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts";
     return httpService(
       httpConstants.METHOD_TYPE.POST,

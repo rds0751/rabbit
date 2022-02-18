@@ -57,11 +57,15 @@ const utility = {
     secondsToTime,
     getDateFormat,
     changeDateFormat,
-    getAggregatedPercWercQueryObject
+    getAggregatedPercWercQueryObject,
+    generateRandomNumber,
+    parseResponse
 };
 export default utility;
 
-
+function generateRandomNumber() {
+    return parseInt(10000000 * (Math.random() + parseInt(10 * Math.random())));
+  }
 export const dispatchAction = (type, data) => {
     return dispatch => dispatch({type, data});
 };
@@ -76,6 +80,13 @@ function trackEvent(event, eventData) {
     //     console.log(err)
     // }
 }
+function parseResponse(promise) {
+    return promise
+      .then((data) => {
+        return [null, data];
+      })
+      .catch((err) => [err]);
+  }
 
 function getDateFormat() {
     var my_date = new Date(2019, 0, 31);
