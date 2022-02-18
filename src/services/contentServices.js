@@ -30,3 +30,15 @@ export const getCollection = async () => {
     console.log(err);
   }
 };
+
+export const getCollectionBySingleUser = async () => {
+  try {
+    const res = await fetch(`${BASE_URL2}/api/v1/users/61f7b7a4c017de6244c51144/collections`);
+    const result = await res.json();
+    const collectionData = result.responseData;
+    return collectionData;
+  } catch (err) {
+    console.log(err);
+  }
+};
+

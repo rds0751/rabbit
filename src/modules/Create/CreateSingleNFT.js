@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import Image from "../../assets/images/img-format.png";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { getCollection, uploadDocs } from "../../services/contentServices";
+import {
+  getCollection,
+  uploadDocs,
+  getCollectionBySingleUser,
+} from "../../services/contentServices";
 import { httpConstants } from "../../constants";
 import { BASE_URL2 } from "../../reducers/Constants";
 import { ToastContainer } from "react-toastify";
@@ -20,16 +24,25 @@ function CreateSingleNFT(props) {
   const [collectionData, setCollectionData] = useState([]);
   const [collectionId, setCollectionId] = useState("");
   const { user } = useSelector((state) => state);
+  const [uploadFileObj, setUploadFileObj] = useState("");
+
+  // >>>> This is user id
+
   console.log(user.addUserData._id, "<<<< user data");
+  // -------------------------------
   const name = useRef("");
+  const price = useRef("");
+
   const description = useRef("");
   const blockchain = useRef("");
   const ipfsUrl = useRef("");
-  const createdBy = (props.user && props.user._id) || "";
+  const createdBy = user?.addUserData?._id;
 
   useEffect(async () => {
     const collectionData = await getCollection();
-    setCollectionData(collectionData);
+    // setCollectionData(collectionData);
+    const collections = await getCollectionBySingleUser();
+    setCollectionData(collections);
   }, []);
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -49,6 +62,7 @@ function CreateSingleNFT(props) {
 
   const handleChange = async (event) => {
     const fileUploaded = event.target.files[0];
+    setUploadFileObj(fileUploaded);
     console.log(fileUploaded);
     let formData = new FormData();
     formData.append("folderName", "collections");
@@ -66,15 +80,32 @@ function CreateSingleNFT(props) {
   };
 
   const handleSubmit = (e) => {
+    const addIPFS = async () => {
+      props.createNftHandler({
+        nftFile: uploadFileObj,
+        nftName: name.current,
+        price: price.current,
+
+        description: description.current,
+
+        blockchain: blockchain.current,
+        createdBy: user?.addUserData?._id,
+        collection: collectionId,
+      });
+    };
+    addIPFS();
     e.preventDefault();
     let formData = new FormData();
+    console.log(collectionId, "<<<< collectionid");
     formData.append("name", name.current);
     formData.append("description", description.current);
     formData.append("blockchain", blockchain.current);
     formData.append("ipfsUrl", ipfsUrl.current);
     formData.append("createdBy", createdBy);
+    formData.append("collectionId", collectionId);
     console.log(formData.getAll("createdBy"));
     console.log(formData, "<<< formData");
+    // console.log()
     fetch(`${BASE_URL2}/api/v1/nft`, {
       method: httpConstants.METHOD_TYPE.POST,
       body: formData,
@@ -85,14 +116,6 @@ function CreateSingleNFT(props) {
         else toast.error("Internal server error");
         console.log(result, "<error");
       });
-    // console.log(
-    //   name.current,
-    //   description.current,
-    //   blockchain.current,
-    //   ipfsUrl.current,
-    //   createdBy,
-    //   collectionId
-    // );
   };
 
   return (
@@ -163,6 +186,17 @@ function CreateSingleNFT(props) {
                   />
                 </div>
                 <div className="mb-3 mt-3">
+                  <label htmlFor="email" className="form-label input-heading">
+                    Price
+                  </label>
+                  <input
+                    type="name"
+                    className="form-control"
+                    name="Number"
+                    onChange={(e) => (price.current = e.target.value)}
+                  />
+                </div>
+                <div className="mb-3 mt-3">
                   <label htmlFor="comment" className="input-heading pb-2">
                     Description*
                   </label>
@@ -196,15 +230,13 @@ function CreateSingleNFT(props) {
                   </div>
 
                   {/* <Link>Create</Link> */}
-                  <select className="form-select mt-3 font-13 text-secondary ">
+                  <select
+                    onChange={(e) => setCollectionId(e.target.value)}
+                    className="form-select mt-3 font-13 text-secondary "
+                  >
                     <option>Select Category</option>
                     {collectionData.map((item) => (
-                      <option
-                        onClick={() => setCollectionId(item._id)}
-                        key={item._id}
-                      >
-                        {item.name}
-                      </option>
+                      <option value={item._id}>{item.name}</option>
                     ))}
                   </select>
                 </div>
@@ -221,7 +253,11 @@ function CreateSingleNFT(props) {
                     onChange={(e) => (blockchain.current = e.target.value)}
                   />
                 </div>
-                <button type="submit" className="btn btn-primary mt-4 w-100">
+                <button
+                  type="submit"
+                  onClick={handleSubmit}
+                  className="btn btn-primary mt-4 w-100"
+                >
                   Create
                 </button>
               </form>
@@ -251,4 +287,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(CreateSingleNFT);
+export default CreateSingleNFT;
+// export default connect(mapStateToProps)(CreateSingleNFT);
