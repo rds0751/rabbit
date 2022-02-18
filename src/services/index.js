@@ -8,6 +8,7 @@ import { BASE_URL, BASE_URL2 } from '../reducers/Constants';
 import { httpService } from '../utility/httpService';
 
 // export * from './user'
+<<<<<<< HEAD
 
 export const addWalletAddress = async wallet_address => {
   try {
@@ -44,3 +45,7 @@ export const updateUserProfile = async (data, userId) => {
     console.log(err);
   }
 };
+=======
+export { default as ContentService } from "./contentMicroservice";
+export { default as BlockchainService } from "./blockchainService";
+>>>>>>> 5a415e2f2fbcf448ea7ba7610a2d30d8f72f7207
