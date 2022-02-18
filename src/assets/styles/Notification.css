@@ -544,7 +544,7 @@ height: 47px;
   display: flex;
 }
 .left_section_nav li {
-  margin-right: 56px;
+  margin-left: 61px;
   display: flex;
   align-items: center;
 }
@@ -557,7 +557,7 @@ height: 47px;
   font-weight: 500;
 }
 .left_section_nav .removeinmob {
-  margin-right: 5px !important;
+  margin-right: 33.6px !important;
   line-height: "40px";
   color: "gray";
 }
@@ -570,7 +570,7 @@ height: 47px;
 .right_section_nav li {
   display: flex;
   align-items: center;
-  margin-left: 31.2px;
+  /* margin-left: 31.2px; */
 }
 .right_section_nav .ham_burger {
   display: none;

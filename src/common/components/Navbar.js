@@ -206,6 +206,8 @@ function Navbar() {
                       <img
                         className="noti"
                         src={require("../../assets/images/notification.png")}
+                        width="19px"
+                        height="21px"
                       ></img>
                     </Link>
                   </li>
@@ -249,6 +251,8 @@ function Navbar() {
                       <img
                         className="btnnav_mob2"
                         src={require("../../assets/images/wallet.png")}
+                        width="21px"
+                        height="21px"
                         style={{
                           color: "gray",
                           cursor: "pointer",

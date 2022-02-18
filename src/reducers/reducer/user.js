@@ -1,4 +1,4 @@
-import { ADD_USER, ALL_USERS, USER_DETAILS } from "../Constants";
+import { ADD_USER, ALL_USERS, USER_DETAILS } from '../Constants';
 
 let initialState = {
   // isLoggedIn: false,
@@ -7,14 +7,14 @@ let initialState = {
   // sessionToken: null,
   // loading: false,
   // isForgotPasswordSuccess: false
-  addUserData: "",
-  allUserData: "",
+  addUserData: {},
+  allUserData: '',
   userDetails: null,
 };
 export const UserReducer = (state = initialState, action) => {
   switch (action.type) {
     case USER_DETAILS: {
-    console.log(action.payload,"<<< this is in user.js reducer")
+      console.log(action.payload, '<<< this is in user.js reducer');
       return { ...state, userDetails: action.payload };
     }
     case ADD_USER:

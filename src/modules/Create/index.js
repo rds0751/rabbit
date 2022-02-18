@@ -2,8 +2,14 @@ import React from "react";
 import BaseComponent from "../baseComponent";
 import CreateSingleNFT from "./CreateSingleNFT";
 import Utils from "../../utility";
-import { BlockchainService, ContentService } from "../../services";
+// import { BlockchainService, ContentService } from "../../services/blockchainService";
+import BlockchainService from '../../services/blockchainService';
+import ContentService from "../../services/contentMicroservice";
 import { eventConstants } from "../../constants";
+
+// export {​​​​​​ default as ContentService }​​​​​​ from "./contentMicroservice";export {​​​​​​ default as BlockchainService }​​​​​​ from "./blockchainService";
+
+
 
 export default class Index extends BaseComponent {
   constructor(props) {
