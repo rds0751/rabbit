@@ -63,7 +63,7 @@ function CreateSingleNFT(props) {
   const handleChange = async (event) => {
     const fileUploaded = event.target.files[0];
     setUploadFileObj(fileUploaded);
-    console.log(fileUploaded);
+    console.log("nmae",fileUploaded);
     let formData = new FormData();
     formData.append("folderName", "collections");
     formData.append("createdBy", `${props.user._id}`);

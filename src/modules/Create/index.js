@@ -50,7 +50,7 @@ export default class Index extends BaseComponent {
   };
 
   createNftHandler = async (data) => {
-    console.log(data);
+    console.log("---------------",data);
 
     if (!data || Object.keys(data).length < 1 || !data.nftFile)
       return Utils.apiFailureToast("Please select the file that to be upload");
