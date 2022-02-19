@@ -47,7 +47,7 @@ function Create() {
         .then((result) => {
           accountChangeHandler(result[0]); //accounts can be a array we just wanna grab first one
           console.log(result[0]);
-
+          
           dispatch(
             updateUserDetail({ address: defaultAccount, balance: getBalance })
           );

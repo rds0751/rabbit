@@ -3,7 +3,7 @@ import BaseComponent from "../baseComponent";
 import CreateSingleNFT from "./CreateSingleNFT";
 import Utils from "../../utility";
 import BlockchainServices from "../../services/blockchainService";
-import { getCollection } from "../../services/contentServices";
+import getCollection from "../../services/contentMicroservice";
 // import ContentService from "../../services/contentMicroservice";
 import { eventConstants } from "../../constants";
 
@@ -22,23 +22,22 @@ export default class Index extends BaseComponent {
   }
 
   getRequestDataForSaveNftContent = (tokenId, data, ipfsRes, blockchainRes) => {
-
     return {
       tokenId: tokenId,
       transactionHash: blockchainRes?.transactionHash || "",
       name: data?.nftName || "",
       //TO DO  need to pass collection _id
-      collectionId: data.collectionId,
+      collectionId: data.collection,
       ipfsUrl: ipfsRes?.ipfsUrl || "",
       cdnUrl: ipfsRes?.cdnUrl || "",
       cid: ipfsRes?.cid || "",
       description: data?.description || "",
-
+      blockchain:data?.blockchain || "",
       network: {
         chainId: blockchainRes?.chainId || "",
         name: blockchainRes?.name || "",
       },
-      saleData: {
+      salesInfo: {
         price: data?.price || 0,
       },
       //TO do need to pass user (owner) _id
@@ -50,13 +49,14 @@ export default class Index extends BaseComponent {
   };
 
   createNftHandler = async (data) => {
-    console.log("---------------",data);
+    console.log(data, "<<<<<< createnft handler");
 
     if (!data || Object.keys(data).length < 1 || !data.nftFile)
       return Utils.apiFailureToast("Please select the file that to be upload");
     // console.log("duke",data)
     let formData = new FormData();
     formData.append("attachment", data.nftFile);
+   
 
     // if(!this.props.user?.userDetails)
     //   return Utils.apiFailureToast("Please connect your wallet");
@@ -65,20 +65,20 @@ export default class Index extends BaseComponent {
     const [err, ipfsRes] = await Utils.parseResponse(
       getCollection.addIpfs(formData)
     );
+
     if (err || !ipfsRes.ipfsUrl) {
-      this.props.dispatchAction(eventConstants.HIDE_LOADER);
+      // this.props.dispatchAction(eventConstants.HIDE_LOADER);
       return Utils.apiFailureToast(err || "Unable to add file on IPFS");
     }
     //TODO we need to work on generate unique tokenId
 
     const tokenId = Utils.generateRandomNumber();
-
     // create NFT on blockchain
     const [blockchainError, blockchainRes] = await Utils.parseResponse(
       BlockchainServices.mintNFT({
+        tokenURI: ipfsRes.ipfsUrl,
         price: data.price,
         tokenId,
-        tokenURI: ipfsRes.ipfsUrl,
       })
     );
 
@@ -119,7 +119,8 @@ export default class Index extends BaseComponent {
   };
 
   render() {
-    alert("in 122 line")
+    // alert("in 122 line")
+
     return (
       <>
         <CreateSingleNFT
