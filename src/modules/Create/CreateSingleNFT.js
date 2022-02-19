@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDropzone } from "react-dropzone";
 import { useSelector } from "react-redux";
+import ImageFile from "./uploadFile";
 // import "../../assets/styles/Leader.css"
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 
@@ -21,6 +22,7 @@ const Button = styled.button``;
 
 function CreateSingleNFT(props) {
   const [collectionData, setCollectionData] = useState([]);
+  const [selectFile, setSelectFile] = useState("");
   const [collectionId, setCollectionId] = useState("");
   const { user } = useSelector((state) => state);
   const [uploadFileObj, setUploadFileObj] = useState("");
@@ -82,8 +84,9 @@ function CreateSingleNFT(props) {
 
   const handleSubmit = (e) => {
     const addIPFS = async () => {
+      console.log("file", selectFile);
       console.log("Called IPFx", {
-        nftFile: uploadFileObj,
+        nftFile: selectFile,
         nftName: name.current,
         price: price.current,
 
@@ -95,7 +98,7 @@ function CreateSingleNFT(props) {
       });
 
       props.createNftHandler({
-        nftFile: uploadFileObj,
+        nftFile: selectFile,
         nftName: name.current,
         price: price.current,
 
@@ -158,44 +161,60 @@ function CreateSingleNFT(props) {
                 style={{ border: "none", backgroundColor: "#fff" }}
               > */}
 
-            <div
+            {/* <div
               className="card single-nft-card p-5"
               style={{ display: "block" }}
-              {...getRootProps()}
+              // {...getRootProps()}
             >
-              <input {...getInputProps()} />
+              {/* <input {...getInputProps()} /> */}
+
+            <Button
+              // onClick={handleClick}
+              style={{ border: "none", backgroundColor: "#fff" }}
+            >
+              <ImageFile onChange={(e) => setSelectFile(e.target.files[0])} />
+              {/* <UploadFile onChange={(e) => console.log("iii",(e.target.files[0]))} /> */}
+              {/* <input type="file" onChange={(e) => { console.log("oooo", e) }} /> */}
               <img
                 src={Image}
                 style={{ width: "100px", marginTop: "3em", color: "#366EEF" }}
               />
+            </Button>
+
+            {/* <img
+                src={Image}
+                style={{ width: "100px", marginTop: "3em", color: "#366EEF" }}
+              />
               <div>Drag and drop your images </div>
-              {/* </div> */}
-              {/* </Button> */}
-              {/* <input
+              <ImageFile onChange={(e) => setSelectFile(e.target.value)} ></ImageFile> 
+               */}
+            {/* </div> */}
+
+            {/* </Button> */}
+            {/* <input
                 type="file"
-                className="form-control"
-                placeholder="Write your name"
-                name="email"
-                style={{ display: "none" }}
-                ref={hiddenFileInput}
-                onChange={(e) => console.log(e.target)}
+                style={{ width: "2rem" }}
+                // className="form-control"
+                // placeholder="Write your name"
+                // name="email"
+                // style={{ display: "none" }}
+                // ref={hiddenFileInput}
+                onChange={(e) => setSelectFile(e.target.value)}
               /> */}
-              <span className="text-dark font-13">
+            {/* <span className="text-dark font-13">
                 Drag & Drop or
-                <Link to="/" style={{ textDecoration: "none" }}>
                   Browse
-                </Link>
-              </span>
-            </div>
+              </span> */}
+            {/* </div> */}
             <span className="text-secondary font-13">
               Supported(JPG,PNG,GIF,SVG,MP4, WEBM,WAV) Max size 40mb
             </span>
           </div>
           <div className="col-sm-5 col-12 col-xs-12">
             <div className="singlenft-form-box">
-              <form
+              <div
                 className="suggestion-form  p-4 "
-                onSubmit={(e) => handleSubmit(e)}
+                // onSubmit={(e) => handleSubmit(e)}
               >
                 <div className="mb-3 mt-3">
                   <label htmlFor="email" className="form-label input-heading">
@@ -283,7 +302,7 @@ function CreateSingleNFT(props) {
                 >
                   Create
                 </button>
-              </form>
+              </div>
             </div>
           </div>
         </div>

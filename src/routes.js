@@ -79,7 +79,7 @@ function App() {
 
             <Route
               exact
-              path="/nft-information_1"
+              path="/nft-information_1/:id"
               element={<NftInformation1 />}
             />
             <Route

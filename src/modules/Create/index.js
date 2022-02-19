@@ -98,14 +98,14 @@ export default class Index extends BaseComponent {
 
     // save NFT data on DB
     const [contentError, contentRes] = await Utils.parseResponse(
-      getCollection.createNftContent(
-        this.getRequestDataForSaveNftContent(
-          tokenId,
-          data,
-          ipfsRes,
-          blockchainRes
-        )
-      )
+      // getCollection.createNftContent(
+      //   this.getRequestDataForSaveNftContent(
+      //     tokenId,
+      //     data,
+      //     ipfsRes,
+      //     blockchainRes
+      //   )
+      // )
     );
     // this.props.dispatchAction(eventConstants.HIDE_LOADER);
     if (contentError || !contentRes) {
