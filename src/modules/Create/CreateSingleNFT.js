@@ -4,8 +4,7 @@ import Image from "../../assets/images/img-format.png";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import {
-  getCollection,
-  uploadDocs,
+  // getCollection,
   getCollectionBySingleUser,
 } from "../../services/contentServices";
 import { httpConstants } from "../../constants";
@@ -39,7 +38,7 @@ function CreateSingleNFT(props) {
   const createdBy = user?.addUserData?._id;
 
   useEffect(async () => {
-    const collectionData = await getCollection();
+    // const collectionData = await getCollection();
     // setCollectionData(collectionData);
     const collections = await getCollectionBySingleUser();
     setCollectionData(collections);
@@ -61,26 +60,40 @@ function CreateSingleNFT(props) {
   };
 
   const handleChange = async (event) => {
-    const fileUploaded = event.target.files[0];
-    setUploadFileObj(fileUploaded);
-    console.log(fileUploaded);
-    let formData = new FormData();
-    formData.append("folderName", "collections");
-    formData.append("createdBy", `${props.user._id}`);
-    // alert(props.user._id);
-    formData.append("attachment", fileUploaded);
+    console.log(event, "<<<<< event");
+    // const fileUploaded = event;
+    console.log(event, "<<<<file uploaded");
+    setUploadFileObj(event);
+    // console.log(event);
+    // let formData = new FormData();
+    // formData.append("folderName", "collections");
+    // formData.append("createdBy", `${user._id}`);
+    // // alert(props.user._id);
+    // formData.append("attachment", event);
 
-    const res = await fetch(`${BASE_URL2}/api/v1/upload-documents`, {
-      method: httpConstants.METHOD_TYPE.POST,
-      body: formData,
-    });
-    const result = await res.json();
-    if (result.success) ipfsUrl.current = result.responseData;
-    console.log(result);
+    // const res = await fetch(`${BASE_URL2}/api/v1/upload-documents`, {
+    //   method: httpConstants.METHOD_TYPE.POST,
+    //   body: formData,
+    // });
+    // const result = await res.json();
+    // if (result.success) ipfsUrl.current = result.responseData;
+    // console.log(result);
   };
 
   const handleSubmit = (e) => {
     const addIPFS = async () => {
+      console.log("Called IPFx", {
+        nftFile: uploadFileObj,
+        nftName: name.current,
+        price: price.current,
+
+        description: description.current,
+
+        blockchain: blockchain.current,
+        createdBy: user?.addUserData?._id,
+        collection: collectionId,
+      });
+
       props.createNftHandler({
         nftFile: uploadFileObj,
         nftName: name.current,
@@ -94,28 +107,38 @@ function CreateSingleNFT(props) {
       });
     };
     addIPFS();
-    e.preventDefault();
-    let formData = new FormData();
-    console.log(collectionId, "<<<< collectionid");
-    formData.append("name", name.current);
-    formData.append("description", description.current);
-    formData.append("blockchain", blockchain.current);
-    formData.append("ipfsUrl", ipfsUrl.current);
-    formData.append("createdBy", createdBy);
-    formData.append("collectionId", collectionId);
-    console.log(formData.getAll("createdBy"));
-    console.log(formData, "<<< formData");
+    // e.preventDefault();
+    // let formData = new FormData();
+    // console.log(collectionId, "<<<< collectionid");
+    // console.log(
+    //   name.current,
+    //   description.current,
+    //   blockchain.current,
+    //   ipfsUrl.current,
+    //   createdBy,
+    //   uploadFileObj
+    // );
+    // formData.append("name", name.current);
+    // formData.append("description", description.current);
+    // formData.append("blockchain", blockchain.current);
+    // formData.append("ipfsUrl", ipfsUrl);
+    // formData.append("createdBy", createdBy);
+    // formData.append("collectionId", collectionId);
+    // console.log(formData.getAll("createdBy"));
+    // console.log(formData, "<<< formData");
     // console.log()
-    fetch(`${BASE_URL2}/api/v1/nft`, {
-      method: httpConstants.METHOD_TYPE.POST,
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result.success) toast.success("Nft created");
-        else toast.error("Internal server error");
-        console.log(result, "<error");
-      });
+
+    // ---------
+    // fetch(`${BASE_URL2}/api/v1/nft`, {
+    //   method: httpConstants.METHOD_TYPE.POST,
+    //   body: formData,
+    // })
+    //   .then((res) => res.json())
+    //   .then((result) => {
+    //     if (result.success) toast.success("Nft created");
+    //     else toast.error("Internal server error");
+    //     console.log(result, "<error");
+    //   });
   };
 
   return (
