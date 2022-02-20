@@ -7,7 +7,6 @@ import { ethers } from "ethers";
 import { updateUserDetail } from "../../reducers/Action";
 import { toast, ToastContainer } from "react-toastify";
 
-
 function CreateNFT() {
   const [humburger, setHumburger] = useState(false);
   const ethereum = window.ethereum;
@@ -24,16 +23,18 @@ function CreateNFT() {
         .request({ method: "eth_requestAccounts" })
         .then((result) => {
           accountChangeHandler(result[0]); //accounts can be a array we just wanna grab first one
-          console.log(result[0]);
+          console.log(result[0],"<<<result console");
           dispatch(
             updateUserDetail({ address: defaultAccount, balance: getBalance })
           );
           // window.location.pathname = "/wallet";
         })
         .catch((e) => {
+          window.location.pathname = "/add-wallet";
           console.log(e, "<<< error ");
         });
     } else {
+      // alert("Wallet not added")
       setErrorMssg("Install Metamask ");
       toast.error("Install Metamak and Connect Wallet");
     }

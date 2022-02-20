@@ -9,7 +9,7 @@
 
 // export default ACTION
 
-import { BASE_URL, USER_DETAILS } from './Constants';
+import { BASE_URL, OPEN_NOTIFICATION, OPEN_WALLET, USER_DETAILS } from './Constants';
 import { ADD_USER, GET_ERRORS, ALL_USERS } from './Constants';
 import axios from 'axios';
 
@@ -75,4 +75,14 @@ export const allUseraction = () => dispatch => {
         });
       }
     });
+};
+
+
+export const ManageNotiSideBar = (data) => (dispatch) => {
+  // alert("manage noti");
+  dispatch({ type: OPEN_NOTIFICATION, payload: data });
+};
+export const ManageWalletSideBar = (data) => (dispatch) => {
+  // alert("manageNotiWallet");
+  dispatch({ type: OPEN_WALLET, payload: data });
 };

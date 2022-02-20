@@ -173,6 +173,8 @@ function App() {
           {/* </Switch> */}
         </Router>
         <Footer />
+        <Wallet />
+        <Notification />
       </div>
     </Provider>
   );

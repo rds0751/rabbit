@@ -24,10 +24,10 @@ function CreateSingleNFT(props) {
   const [collectionData, setCollectionData] = useState([]);
   const [selectFile, setSelectFile] = useState("");
   const [collectionId, setCollectionId] = useState("");
-  const { user } = useSelector((state) => state);
   const [uploadFileObj, setUploadFileObj] = useState("");
-
+  
   // >>>> This is user id
+  const { user } = useSelector((state) => state);
 
   console.log(user.addUserData._id, "<<<< user data");
   // -------------------------------
