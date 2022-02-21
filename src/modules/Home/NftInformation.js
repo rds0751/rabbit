@@ -39,14 +39,14 @@ export default function NftInformation() {
     const response = await put_NftOpenForSale(nft._id);
     if (response.success) {
       toast.success(response.message);
-      window.location.reload();
+      window.location.reload(false);
     } else toast.error(response.message);
   };
   const handleRemoveSell = async () => {
     const response = await RemoveNftFromSale(nft._id);
     if (response.success) {
       toast.success(response.message);
-      window.location.reload();
+      window.location.reload(false);
     } else toast.error(response.message);
   };
 

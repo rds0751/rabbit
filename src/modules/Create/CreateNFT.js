@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import Single from "../../assets/images/single.png";
 import Collection from "../../assets/images/collection.png";
 import { useDispatch } from "react-redux";
@@ -8,6 +8,7 @@ import { updateUserDetail } from "../../reducers/Action";
 import { toast, ToastContainer } from "react-toastify";
 
 function CreateNFT() {
+  const navigate=useNavigate()
   const [humburger, setHumburger] = useState(false);
   const ethereum = window.ethereum;
   const [errorMssg, setErrorMssg] = useState(null);
@@ -30,7 +31,7 @@ function CreateNFT() {
           // window.location.pathname = "/wallet";
         })
         .catch((e) => {
-          window.location.pathname = "/add-wallet";
+          navigate("/add-wallet");
           console.log(e, "<<< error ");
         });
     } else {

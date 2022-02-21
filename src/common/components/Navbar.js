@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 // import './Navbar.css'
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -17,6 +17,7 @@ import Menu from "./Menu";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
 // import "../../assets/st.css";
 function Navbar() {
+  const navigate=useNavigate()
   const [humburger, setHumburger] = useState(false);
   const ethereum = window.ethereum;
   const [errorMssg, setErrorMssg] = useState(null);
@@ -82,7 +83,7 @@ function Navbar() {
     // alert("handleWallet called");
     if (loggedInUser == null) {
       // alert("hanlde wallet null");
-      window.location.pathname = "/add-wallet";
+      navigate("/add-wallet");
     } else {
       // alert("else part");
       dispatch(ManageWalletSideBar(!isOpenWallet));
@@ -93,7 +94,7 @@ function Navbar() {
     // alert(loggedInUser);
     if (loggedInUser == null) {
       // alert("nulll");
-      window.location.pathname = "/add-wallet";
+      navigate("/add-wallet")
     } else {
       dispatch(ManageNotiSideBar(true));
     }

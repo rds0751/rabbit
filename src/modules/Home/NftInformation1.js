@@ -26,7 +26,7 @@ function NftInformation1() {
   useEffect(() => {
     getNft(nftId)
       .then(async (response) => {
-        console.log(response,"<<<< nft response")
+        console.log(response, "<<<< nft response");
         const ownedBy = await getNameImageOfUser(response.ownedBy);
         const createdBy = await getNameImageOfUser(response.createdBy);
         setOwnedBy(ownedBy);
@@ -39,7 +39,7 @@ function NftInformation1() {
     const response = await put_NftOpenForSale(nft._id);
     if (response.success) {
       toast.success(response.message);
-      window.location.reload();
+      window.location.reload(false);
     } else toast.error(response.message);
   };
 

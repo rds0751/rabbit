@@ -3,32 +3,38 @@ import { toast, ToastContainer } from "react-toastify";
 import image from "../../assets/images/icon.png";
 import { ethers } from "ethers";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   addUseraction,
   addUserData,
+  ManageWalletSideBar,
   updateUserDetail,
 } from "../../reducers/Action";
 import "react-toastify/dist/ReactToastify.css";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
 
 function Create() {
+  const history = useNavigate();
   const [humburger, setHumburger] = useState(false);
   const ethereum = window.ethereum;
   const [errorMssg, setErrorMssg] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
   console.log("ethereum ", ethereum && ethereum);
-  const { user } = useSelector((state) => state);
+  const { user,sideBar } = useSelector((state) => state);
   const [checkClick, setcheckClick] = useState(false);
   const [getBalance, setGetBalance] = useState(null);
   const dispatch = useDispatch();
   const { userDetails, loggedInUser } = user;
+  const {isOpenWallet}=sideBar
   const [toggleEffect, setToggleEffect] = useState(false);
   useEffect(() => {
-    alert("called");
     if (loggedInUser != null) {
-      // window.location.pathname = "/wallet";
+      toast.success("Wallet connected");
+      dispatch(ManageWalletSideBar(!isOpenWallet));
+      history("/");
+
     } else {
-      // alert("not user Details");
+      toast.error("Choose the wallet");
     }
   }, [toggleEffect]);
 
