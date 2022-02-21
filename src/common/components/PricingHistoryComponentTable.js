@@ -9,6 +9,7 @@ function PricingHistoryComponentTable() {
       <div className="row no-gutters  ">
         <div className=" col-lg-3 col-sm-4">
           <select
+            id="filter_mobile"
             style={{
               width: "100px",
               fontSize: "14px",
@@ -25,6 +26,7 @@ function PricingHistoryComponentTable() {
         <div className=" col-lg-3 col-sm-4">
           <button
             className="text-sky text-start font-15"
+            id="choice_mobile"
             style={{
               width: "90px",
               height: "35px",

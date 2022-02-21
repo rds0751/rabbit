@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { CollectionTile_Api } from "../API/CollectionTile_Api";
 import { CollectionTile_Api } from "../../constants/CollectionTile_Api";
-import Lower__homepage from "../../common/components/HomeNftFilters";
+import CollectionNftFilter from "../../common/components/CollectionNFtFilter";
 import NftToggle from "../../common/components/NftToggle";
 import { getCollections } from "../../services/webappMicroservice";
 
@@ -14,7 +14,8 @@ function Collections_tile() {
     <>
       <div className="container">
         <NftToggle />
-        <Lower__homepage />
+        {/* <Lower__homepage /> */}
+        <CollectionNftFilter/>
         <div
           className="row mob_row"
           style={{ justifyContent: "space-between" }}

@@ -7,19 +7,19 @@ function HomeNftFilters() {
       <div className="lower__homepage" style={{ width: "100%" }}>
         <div id="filters filter-large" className="filter">
           <div className="dropdown">
-              <p className="mb-0">Sale type</p>
+              <p className="mb-0">Categories </p>
               <select name="sale" id="sale" className="first_select ml_auto">
                 <option value="all">All</option>
                 <option value="2">2</option>
               </select>
           </div>
           
-          <div className="dropdown second_select">
+          {/* <div className="dropdown second_select">
               <select name="sale" id="sale" className="w-100">
                 <option value="all">Price range</option>
                 <option value="2">2</option>
               </select>
-          </div>
+          </div> */}
 
           {/* <div className="dropdown ml_auto">
               <select name="sale" id="sale" className="w-100">
