@@ -1,123 +1,185 @@
-import React from "react";
-import { Router, Route } from "react-router-dom";
-import { Redirect, Switch } from "react-router";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import getMuiTheme from "material-ui/styles/getMuiTheme";
-import { connect } from "react-redux";
-import { Login, SignUp } from "./modules";
-import { history } from "./managers/history";
-import BaseComponent from "./modules/baseComponent";
-import TopBidders from "./modules/TopList/TopBidders";
-import Top_collection from "./modules/TopList/Top_collection";
-import TopSeller from "./modules/TopList/TopSeller";
+import "./App.css";
+import react, { useEffect } from "react";
+import { Provider } from "react-redux";
+import { store } from "./reducers/store";
+import Navbar from "./common/components/Navbar";
 import NftPage from "./modules/Home/Nft";
+// import Lower__homepage from "./components/HomeNftFilters";
+// import NftToggle from "./components/NftToggle";
+import Footer from "./common/components/Footer";
+import LeaderBoard from "./modules/Leaderboard/LeaderBoard";
+import Notification from "./common/components/Notification";
+import CollectionCards from "./modules/Collections/CollectionCards";
+import Top_collection from "./modules/TopList/Top_collection";
+import TopBidders from "./modules/TopList/TopBidders";
+// import TopCollection from './components/TopCollection';
+import TopSeller from "./modules/TopList/TopSeller";
+import Create from "./modules/Create/Create";
+import MyProfile from "./modules/MyPages/MyProfile";
+// import Home_2 from "./components/Home_2";
+// import Home_3 from "./components/Home_3";
+import "./assets/styles/custom.css";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  Switch,
+} from "react-router-dom";
+// import Collection_HomeNftFilters from "./components/Collection_HomeNftFilters";
+// import ToggleSwitch from "./components/ToggleSwitch";
 import HelpCenter from "./modules/Resources/Help/HelpCenter";
 import Suggestion from "./modules/Resources/Suggestion";
-import Collection_homepage from "./modules/Home/Collection_homepage";
-import LeaderBoard from "./modules/Leaderboard/LeaderBoard";
 import Buying from "./modules/Resources/Help/Buying";
-import Create from "./modules/Create/Create";
+import MyItems from "./modules/Items/MyItems";
+import EditProfile from "./modules/Profile/EditProfile";
+import MyItems_Collection from "./modules/MyPages/MyItemCollection";
 import CreateNFT from "./modules/Create/CreateNFT";
-import CreateSingleNFT from "./modules/Create/CreateSingleNFT";
-import CreateNFT_collection from "./modules/Create/CreateNFT_collection";
-import Nft_Information from "./modules/Home/Nft_Information";
-import Nft_Information_1 from "./modules/Home/Nft_Information_Offer_1";
-import Nft_Information_Offer_1 from "./modules/Home/Nft_Information_Offer_1";
-import MyItems from "./modules/MyPages/MyItems";
-import MyItems_Collection from "./modules/MyPages/MyItems_Collection";
-import Notification from "./common/components/Notification";
-import CollectionDetails from "./modules/Collections/CollectionDetails";
-import MyProfile from "./modules/MyPages/MyProfile";
-import EditItem from "./modules/Items/EditItem";
-import Collections_tile from "./modules/Collections/Collections_tile";
-import Edit_Profile from "./modules/Profile/Edit_Profile";
+import CreateSingleNFT from "./modules/Create/index";
 import About from "./modules/About/About";
-import Fixed_Price from "./modules/Items/Fixed_Price";
-import Navbar from "./common/components/Navbar";
-import Footer from "./common/components/Footer";
+// import Menu from "./";
+// import Fixed_Price from "./modules/";
+// import Highest_Bid from "./components/Highest_Bid";
+import CreateNftCollections from "./modules/Create/CreateNftCollections";
+import CollectionDetails from "./modules/Collections/CollectionDetails";
+import NftInformation from "./modules/Home/NftInformation";
+import NftInformation1 from "./modules/Home/NftInformation1";
+import NftInformation2 from "./modules/Home/NftInformation2";
+import NftInformationOffer1 from "./modules/Home/NftInformationOffer1";
+import EditItem from "./modules/Items/EditItem";
+import Wallet from "./modules/Wallet/Wallet";
+import NftInformationFixedPrice from "./modules/Home/NftInformationFixedPrice";
+import FixedPrice from "./modules/Items/FixedPrice";
+import Menu from "./common/components/Menu";
+import { WEB_APP_USER_WALLET_ADDRESS } from "./reducers/Constants";
 
-class Routes extends BaseComponent {
-  componentDidMount() {}
-  render() {
-    return (
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
-        <Router history={history}>
+function App() {
+  useEffect(() => {
+    const checkWalletAddress = localStorage.getItem(
+      WEB_APP_USER_WALLET_ADDRESS
+    );
+    
+    // alert(`${checkWalletAddress}`);
+  }, []);
+
+  return (
+    <Provider store={store}>
+      <div className="App">
+        <Router>
           <Navbar />
-          <Switch>
-            <Route exact path="/" component={NftPage} />
-            <Route
-              exact
-              path="/Collections_tile"
-              component={Collections_tile}
-            />
-            <Route exact path="/Nft_Information" component={Nft_Information} />
-            <Route
-              exact
-              path="/:MarketPlace/collections"
-              component={Collection_homepage}
-            />
+          {/* <Tile__homepage /> */}
+          {/* <Switch> */}
+          <Routes>
+            <Route path="/nfts" element={<NftPage />} />
+            <Route path="/" element={<NftPage />} />
 
-            <Route exact path="/HelpCenter" component={HelpCenter} />
-            <Route exact path="/Suggestion" component={Suggestion} />
-            <Route exact path="/Top_collection" component={Top_collection} />
-            <Route exact path="/TopBidders" component={TopBidders} />
-            <Route exact path="/TopSeller" component={TopSeller} />
-            <Route exact path="/LeaderBoard" component={LeaderBoard} />
-            <Route exact path="/Buying" component={Buying} />
-            <Route exact path="/create" component={Create} />
-            <Route exact path="/CreateNFT" component={CreateNFT} />
-            <Route exact path="/CreateSingleNFT" component={CreateSingleNFT} />
             <Route
               exact
-              path="/CreateNFT_collection"
-              component={CreateNFT_collection}
-            />
-            <Route
-              exact
-              path="/Nft_Information_1"
-              component={Nft_Information_1}
-            />
-            <Route
-              exact
-              path="/Nft_Information_Offer_1"
-              component={Nft_Information_Offer_1}
+              path="/nft-information/:id"
+              element={<NftInformation />}
             />
 
             <Route
               exact
-              path="/MyItems_Collection"
-              component={MyItems_Collection}
+              path="/nft-information_1/:id"
+              element={<NftInformation1 />}
             />
             <Route
               exact
-              path="/CollectionDetails"
-              component={CollectionDetails}
+              path="/nft-information_2"
+              element={<NftInformation2 />}
             />
-            <Route exact path="/Notification" component={Notification} />
 
-            <Route exact path="/MyProfile" component={MyProfile} />
+            <Route
+              exact
+              path="/nft-information_Offer_1"
+              element={<NftInformationOffer1 />}
+            />
+            <Route exact path="/help-center" element={<HelpCenter />} />
+            <Route exact path="/suggestion" element={<Suggestion />} />
+            {/* ------------------ */}
+            <Route exact path="/top-collection" element={<Top_collection />} />
+            <Route exact path="/top-bidder" element={<TopBidders />} />
+            <Route exact path="/top-seller" element={<TopSeller />} />
+            {/* ----------- */}
+            <Route exact path="/leader-board" element={<LeaderBoard />} />
+            <Route exact path="/buying" element={<Buying />} />
+            <Route exact path="/my-items" element={<MyItems />} />
+            <Route
+              exact
+              path="/my-items-collection"
+              element={<MyItems_Collection />}
+            />
+            <Route exact path="/create" element={<Create />} />
+            <Route exact path="/notification" element={<Notification />} />
+            <Route exact path="/create-nft" element={<CreateNFT />} />
+            <Route
+              exact
+              path="/collection-details/:id"
+              element={<CollectionDetails />}
+            />
 
-            <Route exact path="/EditItem" component={EditItem} />
+            <Route exact path="/edit-items" element={<EditItem />} />
+            <Route
+              exact
+              path="/collections-tile"
+              element={<CollectionCards />}
+            />
+            <Route
+              exact
+              path="/create-single-nft"
+              element={<CreateSingleNFT />}
+            />
+            <Route
+              exact
+              path="/create-nft-collection"
+              element={<CreateNftCollections />}
+            />
+            <Route exact path="/add-wallet" element={<Create />} />
+            <Route eaxct path="/my-profile" element={<MyProfile />} />
+            <Route exact path="/edit-profile" element={<EditProfile />} />
+            <Route exact path="/about" element={<About />} />
+            <Route exact path="/wallet" element={<Wallet />} />
+
+            <Route
+              exact
+              path="/nft-information-fixed-price"
+              element={<NftInformationFixedPrice />}
+            />
+            {/* <Route eaxct path="/MyProfile" element={<MyProfile />} /> */}
+            {/* <Route exact path="/MyProfile" element={<MyProfile />} /> */}
 
             {/* <Route
+                exact
+                path="/CollectionDetails"
+                element={<CollectionDetails />}
+              /> */}
+            <Route exact path="/fixed-price" element={<FixedPrice />} />
+            {/* <Route exact path="/CreateNFT" element={<CreateNFT />} /> */}
+            {/* <Route
+                exact
+                path="/CollectionDetails"
+                element={<CollectionDetails />}
+              /> */}
+            {/* <Route exact path="/Highest_Bid" element={<Highest_Bid />} /> */}
+            {/* <Route exact path="/ToggleSwitch" element={<ToggleSwitch />} /> */}
+            {/* <Route path="/" element={<NftToggle />} /> */}
+            {/* <Route path="/" element={<Lower__homepage />} /> */}
+            {/* <Route
               exact
-              path="/CreateNFT_collection"
-              element={<CreateNFT_collection />}
+              path="/Collection_HomeNftFilters"
+              element={<Collection_HomeNftFilters />}
             /> */}
-            <Route exact path="/Edit_Profile" component={Edit_Profile} />
-            <Route exact path="/About" component={About} />
-            <Route exact path="/Fixed_Price" component={Fixed_Price} />
-
-            <Redirect exact from="*" to="/" />
-          </Switch>
+            <Route path="/menu" element={<Menu />} />
+          </Routes>
+          {/* </Switch> */}
         </Router>
         <Footer />
-      </MuiThemeProvider>
-    );
-  }
+        <Wallet />
+        <Notification />
+      </div>
+    </Provider>
+  );
 }
 
-const mapStateToProps = (state) => {
-  return { user: state.user };
-};
-export default connect(mapStateToProps)(Routes);
+export default App;

@@ -7,12 +7,19 @@ import adding from "../../../assets/images/adding.png";
 function HelpCenter() {
   return (
     <div>
-      <div className="container">
-        <h1 style={{ fontSize: "20px", marginTop: "50px", }}>
+      <div className="container font-bold">
+        <h1
+          style={{
+            fontSize: "20px",
+            marginTop: "50px",
+            fontWeight: "bold",
+            marginBottom: "68px",
+          }}
+        >
           Help center
         </h1>
-        <div class="row  helprow_mob">
-          <div class="col-sm-6 col-lg-3 col-md-5 col-12 p-5">
+        <div className="row helprow_mob" style={{marginBottom:"150px"}}>
+          <div className="col-sm-6 col-lg-3 col-md-5 col-12 ">
             <div
               className="card shadow"
               style={{
@@ -21,23 +28,20 @@ function HelpCenter() {
                 width: "280px",
               }}
             >
-              <div class="card-body">
-                <img
-                  src={buying}
-                  style={{ width: "50px", marginLeft: "-8px" }}
-                />
+              <div className="card-body">
+                <img src={buying} style={{ width: "50px" }} />
                 <Link
-                  to="/Buying"
+                  to="/buying"
                   style={{ textDecoration: "none", color: "black" }}
                 >
                   <h5
-                    class="card-title font-16 font-weight-700"
+                    className="card-title font-16 font-weight-700"
                     style={{ marginBottom: "0.5rem", marginTop: "0.5rem" }}
                   >
                     Buying
                   </h5>
                 </Link>
-                <p class="card-text font-14">
+                <p className="card-text font-14">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor
                 </p>
@@ -45,32 +49,29 @@ function HelpCenter() {
             </div>
           </div>
 
-          <div class="col-md-5 col-lg-3 col-sm-6 col-11 p-5">
+          <div className="col-md-5 col-lg-3 col-sm-6 col-11 ">
             <div
-              class="card shadow"
+              className="card shadow"
               style={{
                 cursor: "pointer",
                 borderRadius: "10px",
                 width: "280px",
               }}
             >
-              <div class="card-body">
-                <img
-                  src={selling}
-                  style={{ width: "60px", marginLeft: "-8px" }}
-                />
+              <div className="card-body">
+                <img src={selling} style={{ width: "60px" }} />
                 <h5
-                  class="card-title font-16 font-weight-700"
+                  className="card-title font-16 font-weight-700"
                   style={{ marginBottom: "0.5rem", marginTop: "0.5rem" }}
                 >
                   <Link
-                    to="/Fixed_Price"
+                    to="/fixed-price"
                     style={{ textDecoration: "none", color: "#000" }}
                   >
                     Selling
                   </Link>
                 </h5>
-                <p class="card-text font-14">
+                <p className="card-text font-14">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor
                 </p>
@@ -78,22 +79,19 @@ function HelpCenter() {
             </div>
           </div>
 
-          <div class="col-md-5 col-lg-3 col-sm-6 col-11 p-5">
+          <div className="col-md-5 col-lg-3 col-sm-6 col-11 ">
             <div
-              class="card shadow"
+              className="card shadow"
               style={{
                 cursor: "pointer",
                 borderRadius: "10px",
                 width: "280px",
               }}
             >
-              <div class="card-body">
-                <img
-                  src={creating}
-                  style={{ width: "43px", marginLeft: "-8px" }}
-                />
+              <div className="card-body">
+                <img src={creating} style={{ width: "43px" }} />
                 <h5
-                  class="card-title font-16 font-weight-700"
+                  className="card-title font-16 font-weight-700"
                   style={{ marginBottom: "0.5rem", marginTop: "0.5rem" }}
                 >
                   <Link
@@ -103,7 +101,7 @@ function HelpCenter() {
                     Creating Collection
                   </Link>
                 </h5>
-                <p class="card-text font-14">
+                <p className="card-text font-14">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor
                 </p>
@@ -111,27 +109,24 @@ function HelpCenter() {
             </div>
           </div>
 
-          <div class="col-md-5 col-lg-3 col-sm-6 col-11 p-5">
+          <div className="col-md-5 col-lg-3 col-sm-6 col-11 ">
             <div
-              class="card shadow"
+              className="card shadow"
               style={{
                 cursor: "pointer",
                 borderRadius: "10px",
                 width: "280px",
               }}
             >
-              <div class="card-body">
-                <img
-                  src={adding}
-                  style={{ width: "44px", marginLeft: "-8px" }}
-                />
+              <div className="card-body">
+                <img src={adding} style={{ width: "44px" }} />
                 <h5
-                  class="card-title font-16 font-weight-700"
+                  className="card-title font-16 font-weight-700"
                   style={{ marginBottom: "0.5rem", marginTop: "0.5rem" }}
                 >
                   Adding NFT's
                 </h5>
-                <p class="card-text font-14">
+                <p className="card-text font-14">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor
                 </p>

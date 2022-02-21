@@ -28,23 +28,119 @@ height: 47px;
   margin-left: -35px !important;
   font-size: 14px !important;
 }
-.fa-caret-down
-{
+.fa-caret-down {
   display: none !important;
 }
+.wallet {
+  display: flex;
+  flex-direction: row;
+  /* text-align: center; */
+  /* justify-content: flex-end; */
+  align-items: flex-end;
+  height: 100%;
+  /* position: fixed; */
+  position: fixed;
 
-
+  /* position: absolute; */
+  top: 4.2rem;
+  right: 0;
+  /* display: inline-block; */
+  /* left: 0; */
+  box-shadow: 0px 3px 12px #00000014;
+}
+.wallet .empty_div {
+  width: calc(100% - 516px);
+  background: #191919;
+  height: 100%;
+  opacity: 0.5;
+}
+.WalletContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* border: 1px solid red; */
+  height: 100%;
+}
+.wallet_div {
+  width: 516px;
+  background: #ffffff;
+  margin-left: auto;
+  height: 100%;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  /* padding-left: 50px; */
+  /* padding-right: 50px; */
+  align-items: center;
+}
+.walleth2 {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.balancewallet {
+  border: 1px solid gray;
+  /* width: 100%; */
+  width: 405px;
+  height: 121px;
+  /* margin: 9px; */
+  padding: 5px;
+  margin-bottom: 10px;
+  /* margin-left: 18px; */
+}
+.btnwallet {
+  color: white;
+  background-color: #366eff;
+  border: 1px solid;
+  border-radius: 5px;
+  width: 405px;
+  padding: 7px;
+  /* margin-bottom: -6px; */
+  /* margin-left: -6px; */
+}
+.fontwallet {
+  text-align: left;
+  font: 16px/25px Poppins;
+  letter-spacing: 0px;
+  color: #191919;
+  opacity: 1;
+}
+.balancewallet > div > h3 {
+  font: 14px/21px Poppins;
+  letter-spacing: 0px;
+  color: #707070;
+  opacity: 1;
+}
+.balancewallet > div > h4 {
+  font: 18px/27px Poppins !important;
+  letter-spacing: 0px;
+  color: #191919;
+  opacity: 1;
+}
+.imgwallet {
+  border-radius: 3px;
+  opacity: 1;
+  padding-top: 36px;
+}
+.imgwallet > img {
+  height: 150px;
+  width: 150px;
+}
+.walleth2 > i {
+  width: 21px;
+  height: 21px;
+}
 @media only screen and (max-width: 1170px) {
-  .fa-caret-down
-  {
+  .fa-caret-down {
     display: block !important;
   }
-  .navbar {
+  /* .navbar {
     margin-left: 36px;
-  }
+  } */
   .mobfooter {
-    margin-left: 0px !important;
-    margin-right: -20px !important;
+    /* margin-left: 0px !important;
+    margin-right: -20px !important; */
   }
   .suggestionmob {
     margin-left: 10px;
@@ -67,11 +163,13 @@ height: 47px;
   .removeinmob {
     display: none;
   }
-  .dropbtm_mob {
-    width: 106% !important;
-    margin-bottom: 1rem;
-    text-align: start;
-  }
+  /* .dropbtm_mob {
+    /* width: 106% !important; */
+  /* margin-bottom: 1rem; */
+  /* border: 1px solid red !important; */
+  /* text-align: start; */
+  /* }  */
+
   .btn-secondary:hover {
     border: none !important;
     border-color: aliceblue;
@@ -87,16 +185,16 @@ height: 47px;
     text-align: start !important;
   }
   .dropbtm_mob2 {
-    width: 106% !important;
-    margin-bottom: 1rem;
+    /* width: 106% !important; */
+    /* margin-bottom: 1rem; */
     text-align: start;
   }
   .lower__homepage {
-    margin-left: -10px;
-    margin-top: -25px;
+    /* margin-left: -10px; */
+    /* margin-top: -25px; */
   }
   .mob_row {
-    margin-left: 17px;
+    /* margin-left: 17px; */
   }
   .btmleaderboard {
     margin-top: 6px;
@@ -117,30 +215,33 @@ height: 47px;
     margin-right: 0px !important;
     margin-left: 0px !important;
   }
-  .form-controlmob {
+  /* .form-controlmob {
     margin-top: 70px;
     margin-left: -65px;
     width: 110% !important;
-  }
-  .screachbtn {
+  } */
+  /* .screachbtn {
     margin-top: 70px !important;
     margin-bottom: 10px;
+  } */
+  .navbrand {
+    margin-right: 21px;
   }
   .navbar-brand {
-    margin-top: -50px;
+    margin-top: 0px !important;
   }
-  .navbar-toggler {
+  /* .navbar-toggler {
     margin-top: -160px !important;
-  }
-  .cardmob {
+  } */
+  /* .cardmob {
     margin-left: 30px !important;
-  }
-  .wallet {
+  } */
+  /* .wallet {
     display: flex;
     flex-direction: column;
     text-align: center;
-  }
-  .walleth2 {
+  } */
+  /* .walleth2 {
     display: flex;
     text-align: center;
     justify-content: center;
@@ -152,9 +253,9 @@ height: 47px;
     margin: 9px;
     padding: 5px;
     margin-bottom: 0px;
-    margin-left: 18px;
-  }
-  .btnwallet {
+    margin-left: 0px;
+  } */
+  /* .btnwallet {
     color: white;
     background-color: #366eff;
     border: 1px solid;
@@ -194,7 +295,7 @@ height: 47px;
   .walleth2 > i {
     width: 21px;
     height: 21px;
-  }
+  } */
   .mobview {
     display: none !important;
   }
@@ -257,51 +358,54 @@ height: 47px;
     margin-top: -170px !important;
     margin-left: 100px !important;
   }
-  .buyingmob{
+  .buyingmob {
     width: 105%;
     margin-left: -75px;
   }
-  .offset-2mob{
+  .offset-2mob {
     margin-left: -50px;
   }
-  .cardmob{
-    margin-left: -2em  !important;
-    width: 110% !important;
+  .cardmob {
+    /* margin-left: -2em !important; */
+    /* width: 110% !important; */
   }
-  .card_imgmob{
-    width: 370px !important;
+  .card_imgmob {
+    /* width: 370px !important; */
   }
-  .dayleft_mob{
+  .dayleft_mob {
     margin-left: 10em !important;
   }
-  .collection_imgmob{
+  .collection_imgmob {
     width: 120px !important;
     height: 120px !important;
   }
-  .create_card_mob{
+  .create_card_mob {
     width: 65%;
     height: 85% !important;
     margin-left: 65px !important;
   }
-  .create_imgmob{
+  .create_imgmob {
     margin-top: -36px !important;
   }
-  .tile__detailsmob{
+  .tile__detailsmob {
     margin-left: 30px;
     margin-right: 30px;
   }
-  .myitemmob{
+  .myitemmob {
     margin-right: 60px;
   }
-  .pricingtable_mob{
+  .pricingtable_mob {
     width: 360px !important;
     margin-left: 0.3em !important;
   }
-  .img_nftinfo_mob{
+  .img_nftinfo_mob {
     margin-left: 0em !important;
   }
-  .imginfo_mob{
+  .imginfo_mob {
     width: 100% !important;
+  }
+  #like_icon {
+    margin-left: 338px !important;
   }
 }
 /* @media only screen and (max-width: 900px) {
@@ -331,7 +435,13 @@ height: 47px;
         margin-right: -22px;
         }
 } */
+/* .navbar-width {
+  margin: 0px 60px !important;
+} */
 @media only screen and (min-width: 1200px) {
+  /* .navbar-width {
+    margin: 0px 60px !important;
+  } */
   .fa-facebook:before {
     color: #818181;
   }
@@ -373,15 +483,12 @@ height: 47px;
   .mobfooter3 {
     display: none;
   }
-  .btnnav {
-    margin-left: 25px;
-  }
-  .navbar-brand {
+  /* .navbar-brand {
     margin-left: 30px;
-  }
-  .helprow_mob{
+  } */
+  .helprow_mob {
     justify-content: space-between;
-    margin-left: -115px;
+    /* margin-left: -115px; */
   }
 }
 
@@ -409,4 +516,319 @@ height: 47px;
         margin-left: 160px;
         margin-top: -262px;
     } */
+}
+
+/* ------Footer------ */
+.footer > ul > a {
+  /* border: 1px solid red; */
+  text-decoration: none;
+}
+
+/* dileep css here */
+.scroll_off {
+  overflow: hidden;
+}
+.left_navbar {
+  width: 38%;
+}
+.right_navbar {
+  justify-content: flex-end;
+  height: 100%;
+  width: 60%;
+}
+.navbarborder {
+  box-shadow: 0px 3px 12px #00000014;
+}
+.navbar-nav {
+  display: flex;
+}
+.left_section_nav {
+  display: flex;
+}
+.left_section_nav li {
+  margin-left: 61px;
+  display: flex;
+  align-items: center;
+}
+.left_section_nav .btnnav {
+  /* padding: 5px 30px; */
+  width: 136px;
+  /* height: 42px; */
+  background: #366eef;
+  border-color: transparent;
+  font-weight: 500;
+}
+.left_section_nav .removeinmob {
+  margin-right: 33.6px !important;
+  line-height: "40px";
+  color: "gray";
+}
+.left_section_nav .li_underline {
+  border-bottom: 3px solid #366eef;
+}
+.right_section_nav {
+  display: flex;
+}
+.right_section_nav li {
+  display: flex;
+  align-items: center;
+  /* margin-left: 31.2px; */
+}
+.right_section_nav .ham_burger {
+  display: none;
+}
+.right_section_nav li:first-child {
+  margin-left: 0px;
+}
+/* .right_section_nav li:last-child{
+  margin-right: 0px;
+} */
+.left_section li .nav-link {
+  font-size: 16px;
+  font-weight: 600;
+  color: #828282 !important;
+}
+.left_section li .nav-link:hover {
+  color: #828282;
+}
+
+.nav-link:focus,
+.nav-link:hover {
+  color: #828282 !important;
+}
+.nav-link.navlink_active {
+  font-weight: 600;
+  color: #191919 !important;
+}
+.unerLine {
+  width: 20px;
+  height: 2px;
+  background-color: red;
+}
+.navbar-nav {
+  justify-content: center;
+}
+
+.navbar {
+  /* z-index: 99; */
+  padding-top: 0px;
+  padding-bottom: 0px;
+  height: 70px;
+  /* position: fixed; */
+  top: 0;
+  width: 100%;
+  align-items: inherit;
+}
+.navbar-expand-lg .navbar-nav .nav-link {
+  padding: 0px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  /* margin-right: 15px;
+  margin-left: 15px; */
+}
+.container-fluid {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.left_navbar form {
+  display: flex;
+}
+.search_box {
+  display: none;
+}
+
+/* hamburger css menu */
+.navbar_toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  margin-left: 15px;
+}
+.navbar_toggle .icon-bar {
+  display: flex;
+  width: 27px;
+  height: 2px;
+  background: #366eef;
+  margin-bottom: 6px;
+}
+.navbar_toggle .icon-bar:last-child {
+  margin-bottom: 0px;
+}
+
+.ntf_div {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.ntf_row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.ntf_row .nft_card {
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.ntf_div {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+@media only screen and (min-width: 1900px) {
+  .container-fluid {
+    padding-left: 126px;
+    padding-right: 126px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .right_section_nav .ham_burger {
+    display: flex;
+  }
+  .right_navbar .navbar-nav .left_section_nav {
+    display: none;
+  }
+  .right_navbar {
+    width: auto;
+  }
+  .left_navbar {
+    width: 40%;
+  }
+  .right_navbar {
+    width: 45%;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .container {
+    padding-left: 30px;
+    padding-right: 30px;
+    width: auto;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .right_section_nav li {
+    display: flex;
+    align-items: center;
+    /* padding: 0px 5px; */
+  }
+  .left_section_nav li {
+    margin-right: 17px;
+  }
+  .left_section_nav .btnnav {
+    padding: 5px 15px;
+  }
+  .left_section_nav .removeinmob {
+    margin: 0px 8x;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .left_navbar {
+    justify-content: flex-start !important;
+  }
+  .left_navbar form {
+    display: none;
+  }
+  .navbar {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    height: auto;
+    align-items: center;
+  }
+  .search_box {
+    width: 100%;
+    margin-top: 31px;
+    display: inline-block;
+  }
+  .search_box form {
+    display: flex;
+    width: 100%;
+    height: 42px;
+  }
+  .search_box form input {
+    background: #f8f8f8;
+    border: 0;
+  }
+  .search_box form .screachbtn {
+    border: 0;
+    width: 50px;
+    background: #f8f8f8;
+    margin-left: 5px;
+  }
+}
+
+@media only screen and (max-width: 864px) {
+  .nft_card {
+    width: 100% !important;
+  }
+}
+
+/* added new break point for mobile view  */
+@media (max-width: 400px) {
+  .pricingtable_mob {
+    width: 292px !important;
+  }
+  .row .col-lg-3 select {
+    width: 100% !important;
+    margin: 5px;
+  }
+  .row .col-lg-3 button {
+    width: 95% !important;
+    margin: 5px;
+  }
+  .col-11 {
+    width: -webkit-fill-available;
+  }
+  .btn {
+    margin-left: 0 !important;
+  }
+  .dayleft_mob {
+    margin-left: 4.5rem !important;
+  }
+  #share_info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 5px 0px;
+  }
+  #share_info span {
+    margin-left: 5px !important;
+  }
+  .collectionsales {
+    text-align: unset !important;
+  }
+  .sales1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .sales1 .col1 {
+    width: -webkit-fill-available;
+    margin-left: 1rem;
+  }
+  #sort_mobile {
+    margin-top: 1rem;
+    margin-top: 1rem;
+  }
+  .form-responsive {
+    margin-left: 0rem !important;
+  }
+  .edit_profilemob {
+    padding: 0px 0px 0px 0px;
+    margin-right: 1rem !important;
+  }
+  .suggestion-form {
+    margin-top: 3rem;
+  }
+}
+.bannermob {
+  width: -webkit-fill-available !important;
+}
+.create-nft-font1 {
+  margin-left: 0rem !important;
 }

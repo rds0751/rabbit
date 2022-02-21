@@ -1,27 +1,37 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 // import './Top_collection.css'
 // import { AbstractApi } from "../API/LeaderBoardApi";
 
 import "../../assets/styles/Leader.css";
 import { Link } from "react-router-dom";
 import { AbstractApi } from "../../constants/LeaderBoardApi copy";
+import { useParams } from "react-router-dom";
+import { getCollection, getNftsByCollectionId } from "../../services/webappMicroservice";
 
-export class CollectionDetails extends Component {
-  render() {
+function CollectionDetails()  {
+  const collectionId = useParams();
+  const [collection, setCollection] = useState([])
+  const [nfts, setNfts] = useState([])
+  useEffect(() => {
+    getCollection(collectionId.id).then(response=>setCollection(response))
+    getNftsByCollectionId(collectionId.id).then(response=>setNfts(response))
+  })
+  const { imageUrl, coverUrl, name} = collection
     return (
+      <>
       <div>
         <div className="position-relative relative">
           <img
-            src="https://png.pngtree.com/background/20210714/original/pngtree-blood-drop-halloween-blood-background-black-background-picture-image_1220404.jpg"
+            src= { coverUrl }
             alt=""
           />
         </div>
         <div className="position-absolute absolute">
           <img
-            src="https://th.bing.com/th/id/R.e1189efa9cd3aee29c0e1f7dbed689bf?rik=YRidGY7NPM2n3A&riu=http%3a%2f%2fwww.clipartbest.com%2fcliparts%2f7ca%2fpeo%2f7capeoboi.png&ehk=MwVRL6ome8bAroWEn5dLYQgaXLxrafgcwcIQX7N48CM%3d&risl=&pid=ImgRaw&r=0"
+            src= { imageUrl }
             alt=""
           />
-          <h2>Abstract Illusions</h2>
+          <h2>{name}</h2>
           <p style={{ marginTop: "10px", marginBottom: "0px" }}>
             The abstract illusion is a collection of NFT which consist
           </p>
@@ -40,26 +50,25 @@ export class CollectionDetails extends Component {
             aria-expanded="false"
             style={{ fontSize: "16px" }}
           >
-            <i style={{ color: "#afafaf" }} class="fas fa-ellipsis-h"></i>
+            <i style={{ color: "#afafaf" }} className="fas fa-ellipsis-h"></i>
           </a>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
             <li>
               <Link className="dropdown-item threedot" to="/Report">
                 <i
                   style={{ margin: "0px 5px 0px 10px" }}
-                  class="fas fa-flag"
+                  className="fas fa-flag"
                 ></i>{" "}
                 Report
               </Link>
             </li>
           </ul>
         </li>
-
         <div className="collectionsales collectionsalesHome">
           <div className="sales1">
             {/* <h1>Top NFT sales</h1> */}
             <div
-              class="input-group buying-search-btn"
+              className="input-group buying-search-btn"
               style={{ marginLeft: "150px" }}
             >
               <input
@@ -70,14 +79,14 @@ export class CollectionDetails extends Component {
                 aria-label="Recipient's username"
                 aria-describedby="button-addon2"
               />
-              <div class="input-group-append w-25">
+              <div className="input-group-append w-25">
                 <button
                   className="btn btn-search-secondary border border-search"
                   type="button"
                   id="button-addon2"
                   style={{ borderRadius: "0px 5px 5px 0px" }}
                 >
-                  <i class="fas fa-search"></i>
+                  <i className="fas fa-search"></i>
                 </button>
               </div>
             </div>
@@ -90,6 +99,7 @@ export class CollectionDetails extends Component {
                 aria-expanded="false"
               >
                 Status
+                <i className="fas fa-caret-down"></i>
               </button>
               <ul
                 className="dropdown-menu"
@@ -121,6 +131,7 @@ export class CollectionDetails extends Component {
                 aria-expanded="false"
               >
                 Price
+                <i className="fas fa-caret-down"></i>
               </button>
               <ul
                 className="dropdown-menu"
@@ -153,6 +164,7 @@ export class CollectionDetails extends Component {
               aria-expanded="false"
             >
               Sort by
+              <i className="fas fa-caret-down"></i>
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li>
@@ -173,11 +185,10 @@ export class CollectionDetails extends Component {
             </ul>
           </div>
         </div>
-        <div class="row mx-0 text-center justify">
+        <div className="row mx-0 text-center justify">
           {/* <div className="col-md-3 col-lg-3 col-sm-6 col-11 images"> */}
-          {AbstractApi.map((curElem) => {
-            const { image, title, price, maxPrice, maxPrice2, daysLeft } =
-              curElem;
+          {nfts.map((nft) => {
+            const { ipfsUrl, name, salesInfo } = nft;
             return (
               <div
                 className="col-md-3 col-lg-3 col-sm-6 col-11 images collectionmob"
@@ -187,25 +198,25 @@ export class CollectionDetails extends Component {
                   <img
                     id="nft__photo"
                     className="img-fluid"
-                    src={image}
+                    src={ipfsUrl}
                     alt="/"
                   />
                   {/* <img id='like_icon' src={require('../asset//images/Like.png')} /> */}
                   <div className="tile__details">
                     <div className="container__up">
-                      <h6 className="title">{title}</h6>
-                      <h6 className="title1">{price}</h6>
+                      <h6 className="title">{name}</h6>
+                      <h6 className="title1">{salesInfo.price}</h6>
                     </div>
                     <div className="container__down">
                       <h6 className="value__high">
-                        <span style={{ color: "black" }}>{maxPrice}</span>
-                        <span> {maxPrice2}</span>
+                        <span style={{ color: "black" }}>10</span>
+                        <span> 20</span>
                       </h6>
                       <h6 className="value__k">
-                        {daysLeft}{" "}
-                        {/* <i class="far fa-clock" style={{ color: "#f54" }}></i> */}
+                        5
+                        {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
                         <i
-                          class="fa-solid fa-heart"
+                          className="fa-solid fa-heart"
                           style={{ color: "#ef3643" }}
                         ></i>
                       </h6>
@@ -217,8 +228,8 @@ export class CollectionDetails extends Component {
           })}
         </div>
       </div>
+      </>
     );
-  }
 }
 
 export default CollectionDetails;

@@ -71,7 +71,7 @@ function LeaderBoard() {
                 );
               })}
             </div>
-            <Link className="view" to="/TopBidders">
+            <Link className="view" to="/top-bidder">
               {" "}
               View More
             </Link>
@@ -133,7 +133,7 @@ function LeaderBoard() {
                 );
               })}
             </div>
-            <Link className="view" to="/TopSeller">
+            <Link className="view" to="/top-seller">
               {" "}
               View More
             </Link>
@@ -195,7 +195,7 @@ function LeaderBoard() {
                 );
               })}
             </div>
-            <Link className="view" to="/Top_collection">
+            <Link className="view" to="/top-collection">
               {" "}
               View More
             </Link>
@@ -266,7 +266,7 @@ function LeaderBoard() {
             </ul>
           </div>
         </div>
-        <div class="row mx-0 text-center justify">
+        <div className="row mx-0 text-center justify">
           {/* <div className="col-md-3 col-lg-3 col-sm-6 col-11 images"> */}
           {LeaderBoardApi2.map((curElem) => {
             const { image, title, price, maxPrice, maxPrice2, daysLeft } =
@@ -296,9 +296,9 @@ function LeaderBoard() {
                       </h6>
                       <h6 className="value__k">
                         {daysLeft}{" "}
-                        {/* <i class="far fa-clock" style={{ color: "#f54" }}></i> */}
+                        {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
                         <i
-                          class="fa-solid fa-heart"
+                          className="fa-solid fa-heart"
                           style={{ color: "#ef3643" }}
                         ></i>
                       </h6>

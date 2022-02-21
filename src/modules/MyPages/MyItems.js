@@ -1,14 +1,14 @@
 import React from "react";
-import Upper_MyItems from "../../common/components/Upper_MyItems";
+import UpperMyItems from "../../common/components/UpperMyItems";
 // import { Link } from "react-router-dom";
-// import Upper_MyItems from "./Upper_MyItems";
+// import UpperMyItems from "./UpperMyItems";
 
 function MyItems() {
   return (
     <>
-      <Upper_MyItems />
+      <UpperMyItems />
       <h1>hello</h1>
-   </>
+    </>
   );
 }
 

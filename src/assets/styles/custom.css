@@ -74,6 +74,7 @@ ul {
   background-color: #f8f8f8;
   /* padding: 13px 13px 13px 13px; */
   border-radius: 13px;
+  margin-top: 1rem;
 }
 .container__tile > img {
   width: 312px;
@@ -128,18 +129,23 @@ span {
   border-top-right-radius: 0.6em;
 }
 .images {
-  margin-left: 50px;
+  /* margin-left: 50px; */
+}
+.col1 {
+  margin-left: 1rem;
 }
 
 @media only screen and (max-width: 1170px) {
   .container__tile > img {
-    width: 333px;
+    width: 360px;
   }
   .single-nft-card {
     height: 75% !important;
   }
   .images {
     margin-left: 0px;
+    padding: 0px;
+    width: 93%;
   }
   .buying-search-btn {
     margin-left: 0px !important;
@@ -148,6 +154,7 @@ span {
   .col1 {
     width: 100%;
     margin-top: 1rem;
+    margin-left: 0rem;
   }
   .col11 {
     width: 100%;
@@ -169,8 +176,10 @@ span {
 
 #like_icon {
   position: absolute;
-  margin-top: 5px;
-  margin-left: 230px;
+  /* margin-top: 7px; */
+  top: 10px;
+  /* margin-right: 10px; */
+  right: 10px;
   width: 24px;
 }
 
@@ -199,10 +208,14 @@ span {
 .lower__homepage {
   display: flex;
   justify-content: space-between;
+  padding: 0px;
+  margin: 0px;
+  /* width: 100%; */
 }
 
 #filters {
   display: flex;
+  border: "1px solid blue";
 }
 
 #dropdownMenuButton2 {
@@ -232,7 +245,8 @@ span {
   font-size: 12px;
 }
 .font-13 {
-  font-size: 13px;
+  /* font-size: 13px; */
+  font-size: 12px;
 }
 .font-14 {
   font-size: 14px;
@@ -257,6 +271,9 @@ span {
 }
 .font-22 {
   font-size: 22px;
+}
+.font-32 {
+  font-size: 32px;
 }
 .font-weight-500 {
   font-weight: 500;
@@ -338,8 +355,8 @@ span {
 
 /*-------------- Single CreateNFT css ------------------ */
 .single-nft-card {
-  height: 60%;
-  width: 360px;
+  /* height: 60%; */
+  /* width: 270px; */
   text-align: center;
 }
 .input-heading {
@@ -377,11 +394,13 @@ input::-webkit-input-placeholder {
   margin-left: 2em !important;
 }
 /*-------------- Collection CreateNFT css end------------------ */
+/*  nav large */
+
 /*-------------- navbar mob css------------------ */
 @media only screen and (max-width: 575px) {
-  .navbar-brand {
+  /* .navbar-brand {
     margin-left: -35px;
-  }
+  } */
   .navbar-toggler {
     margin-left: 280px !important;
     /* margin-top: -51px !important; */
@@ -427,14 +446,15 @@ input::-webkit-input-placeholder {
   height: 150px;
 }
 .btn-choose-file {
-  margin-left: -8em !important;
+  /* margin-left: -8em !important; */
+  margin: 1rem;
 }
 /* -----------------Edit Profile css------------ */
 
 /* -----------------Nft hompage css------------ */
 .nft-card-radius {
   border-radius: 10px !important;
-  width: 260px;
+  /* width: 260px; */
 }
 .nft-img-radius {
   border-radius: 8px 8px 0px 0px;
@@ -690,4 +710,81 @@ input::-webkit-input-placeholder {
   background-color: #16ab6e;
   width: 45px;
   height: 20px;
+}
+
+/* dileep css here */
+.ml_auto {
+  margin-left: auto;
+  /* margin-left: 15px; */
+}
+.filter {
+  display: flex;
+  width: 100%;
+}
+.filter .dropdown {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d2d2d2;
+  border-radius: 4px;
+  padding: 9px 12px 13px 12px;
+  /* width: 222px; */
+}
+.filter .dropdown p {
+  font-weight: 500;
+  font-style: normal;
+  font-size: 14px;
+}
+.filter .dropdown select {
+  border: none;
+  width: 143px;
+}
+.second_select {
+  margin-left: 15px;
+}
+.filter .dropdown .first_select {
+  color: #858585;
+  font-weight: 500;
+  font-style: normal;
+}
+.lower__homepage .dropbtm_mob {
+  padding: 0;
+}
+select:focus-visible {
+  outline-offset: 0px;
+  outline: none;
+}
+
+.lower__homepage {
+  display: flex;
+  width: 100%;
+}
+
+@media only screen and (max-width: 900px) {
+  .filter {
+    flex-direction: column;
+  }
+  .filter .dropdown .first_select {
+    margin-left: 10px;
+    width: 90%;
+  }
+  .filter .second_select {
+    margin-left: 0px;
+  }
+  .filter .ml_auto {
+    margin-left: 0px;
+  }
+  .filter .dropdown {
+    width: initial;
+    margin-bottom: 16px;
+  }
+  .filter .dropdown:last-child {
+    margin-bottom: 0px;
+  }
+  .row {
+    --bs-gutter-x: 0px;
+  }
+  /* .filter .dropdown select{
+    border: none;
+    width: 143px;
+  } */
 }

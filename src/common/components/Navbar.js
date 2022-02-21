@@ -1,178 +1,366 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation,useNavigate } from "react-router-dom";
 // import './Navbar.css'
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import "../../assets/styles/Notification.css";
+import {
+  addUserData,
+  ManageNotiSideBar,
+  ManageWalletSideBar,
+  updateUserDetail,
+} from "../../reducers/Action";
+import { ethers } from "ethers";
+
+import Menu from "./Menu";
+import { CheckUserByWalletAddress } from "../../services/UserMicroService";
 // import "../../assets/st.css";
 function Navbar() {
+  const navigate=useNavigate()
+  const [humburger, setHumburger] = useState(false);
+  const ethereum = window.ethereum;
+  const [errorMssg, setErrorMssg] = useState(null);
+  const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
+  console.log("ethereum ", ethereum && ethereum);
+  const [checkClick, setcheckClick] = useState(false);
+
+  const [getBalance, setGetBalance] = useState(null);
+  const dispatch = useDispatch();
+  const { user, sideBar } = useSelector((state) => state);
+  const { userDetails, loggedInUser } = user;
+  const { isOpenNoti, isOpenWallet } = sideBar;
+  // useEffect(() => {
+  //   if (window.ethereum) {
+  //     // window.ethereum
+  //     //   .request({ method: "eth_requestAccounts" })
+  //     //   .then((result) => {
+  //     //     accountChangeHandler(result[0]); //accounts can be a array we just wanna grab first one
+  //     //     console.log(result[0], "<<<result console");
+  //     //     dispatch(
+  //     //       updateUserDetail({ address: defaultAccount, balance: getBalance })
+  //     //     );
+
+  //     //     // window.location.pathname = "/wallet";
+  //     //   })
+  //     //   .catch((e) => {
+  //     //     // window.location.pathname = "/add-wallet";
+  //     //     console.log(e, "<<< error ");
+  //     //   });
+  //   } else {
+  //     alert("Wallet not added");
+  //     setErrorMssg("Install Metamask ");
+  //     toast.error("Install Metamak and Connect Wallet");
+  //   }
+  // }, []);
+  // const accountChangeHandler = (newAccount) => {
+  //   setDefaultAccount(newAccount);
+  //   CheckUserByWalletAddress(newAccount, (res) => {
+  //     console.log(res, "<<<<response of user");
+  //     dispatch(addUserData(res));
+  //   });
+  //   getUserBalance(newAccount);
+  //   // console.log(data, "<<<<response dta");
+  // };
+  // const getUserBalance = (address) => {
+  //   window.ethereum
+  //     .request({ method: "eth_getBalance", params: [address, "latest"] })
+  //     .then((balance) => {
+  //       setGetBalance(ethers.utils.formatEther(balance));
+  //       console.log(getBalance, "<<< balance");
+  //     });
+  // };
+  let location = useLocation();
+
+  const handleHamburger = () => {
+    if (!humburger) {
+      setHumburger(true);
+    } else {
+      setHumburger(false);
+    }
+  };
+  const handleWalletClick = () => {
+    // alert("handleWallet called");
+    if (loggedInUser == null) {
+      // alert("hanlde wallet null");
+      navigate("/add-wallet");
+    } else {
+      // alert("else part");
+      dispatch(ManageWalletSideBar(!isOpenWallet));
+    }
+  };
+  const handleNotiSideBar = () => {
+    // alert("noti open");
+    // alert(loggedInUser);
+    if (loggedInUser == null) {
+      // alert("nulll");
+      navigate("/add-wallet")
+    } else {
+      dispatch(ManageNotiSideBar(true));
+    }
+  };
+  console.log("logged in user >>> lllll", loggedInUser);
   return (
-    <div>
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container-fluid" style={{ backgroundColor: "white" }}>
-        <Link className="navbar-brand" to="/About">
-          <img
-            src={require("../../assets/images/logo.png")}
-            style={{ width: "40px" }}
-          />
-        </Link>
-        <form className="d-flex p-0 m-0 " style={{ width: "90%" }}>
-          <input
-            className="form-control form-controlmob "
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            style={{
-              backgroundColor: "#f8f8f8",
-              width: "65%",
-              height: "35px",
-              border: "0",
-            }}
-          />
-          <button
-          className="screachbtn"
-            style={{
-              border: "0",
-              width: "35px",
-              height: "35px",
-              backgroundColor: "#f8f8f8",
-              marginLeft: "5px",
-            }}
+    <>
+      <div className="navbar-width">
+        <nav className="navbarborder navbar navbar-expand-lg">
+          <div
+            className="container container-fluid"
+            style={{ backgroundColor: "white" }}
           >
-            <i className="fa fa-search" aria-hidden="true"></i>
-          </button>
-        </form>
-
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <Link to="/Menu">
-          
-          <span className="navbar-toggler-icon"></span>
-          </Link>
-        </button>
-
-        <div className="collapse navbar-collapse mobcollapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item ">
-              <Link
-                className="nav-link active"
-                aria-current="page"
-                to="/"
-                style={{ fontSize: "16px", fontWeight: "600" }}
-              >
-                Marketplace
+            <div className="left_navbar d-flex align-items-center">
+              <Link className="navbrand" to="/" style={{ marginRight: "21px" }}>
+                <img
+                  src={require("../../assets/images/logo.png")}
+                  style={{ width: "50px" }}
+                />
               </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                className="nav-link"
-                exact
-                to="/LeaderBoard"
-                style={{ fontSize: "16px" }}
-              >
-                Leaderboard
-              </Link>
-            </li>
-
-            <li className="nav-item ">
-              <a
-                className="nav-link "
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                style={{ fontSize: "16px" }}
-              >
-                Resource
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <Link className="dropdown-item" to="/HelpCenter">
-                    Help Center
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dropdown-item" to="/Suggestion">
-                    Suggestions
-                  </Link>
-                </li>
-              </ul>
-            </li>
-
-            <li>
-              <Link to="/CreateNFT">
-                <button
-                  type="button"
-                  className="btn btn-primary btnnav "
-                  style={{ padding: "5px 30px 5px 30px" }}
-                >
-                  Create
-                </button>
-              </Link>
-            </li>
-            <li className="removeinmob" style={{ lineHeight: "40px", color: "gray", marginLeft:"30px"}}>|</li>
-            <li>
-            <Link  to="/Notification">
-                   <img className="noti"
-                src={require("../../assets/images/notification.png")}
-                style={{ color: "gray", cursor: "pointer", marginTop: "6px" ,marginLeft:"10px"}}
-              ></img></Link>
-            </li>
-
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <img  className="btnnav_mob1"
-                  src={require("../../assets/images/profile.png")}
-                  style={{ color: "gray", cursor: "pointer" }}
-                ></img>
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <Link className="dropdown-item" to="/Edit_Profile">
-                    Profile
-                  </Link>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <Link className="dropdown-item" to="/MyItems">
-                    My Items
-                  </Link>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <Link to="/Create">
-                <img className="btnnav_mob2"
-                  src={require("../../assets/images/wallet.png")}
+              <form className=" w-100 p-0 m-0 ">
+                <input
+                  className="form-control form-controlmob "
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
                   style={{
-                    color: "gray",
-                    cursor: "pointer",
-                    marginTop: "6px",
-                   marginRight:"30px"
+                    backgroundColor: "#f8f8f8",
+                    width: "75%",
+                    height: "42px",
+                    padding: "0px",
+                    paddingLeft: "10px",
+                    border: "0",
                   }}
-                ></img>
-              </Link>
-            </li>
-          </ul>
+                />
+                <button
+                  className="screachbtn"
+                  style={{
+                    border: "0",
+                    width: "35px",
+                    height: "42px",
+                    backgroundColor: "#f8f8f8",
+                    marginLeft: "5px",
+                  }}
+                >
+                  <i
+                    className="fa fa-search"
+                    style={{
+                      width: "42px",
+                      height: "50",
+                    }}
+                    aria-hidden="true"
+                  ></i>
+                </button>
+              </form>
+            </div>
+
+            <div className="right_navbar d-flex ">
+              {/* <div
+            className="collapse navbar-collapse mobcollapse"
+            id="navbarSupportedContent"
+          > */}
+              <div className="navbar-nav d-flex">
+                <ul className="left_section_nav mb-0">
+                  <li
+                    className={
+                      location.pathname.includes("marketplace")
+                        ? "nav-item li_underline"
+                        : "nav-item"
+                    }
+                  >
+                    <Link
+                      className={
+                        location.pathname.includes("marketplace")
+                          ? "nav-link navlink_active"
+                          : "nav-link"
+                      }
+                      aria-current="page"
+                      to="/"
+                    >
+                      Marketplace
+                    </Link>
+                  </li>
+                  <li
+                    className={
+                      location.pathname.includes("leader-board")
+                        ? "nav-item li_underline"
+                        : "nav-item"
+                    }
+                  >
+                    <Link
+                      className={
+                        location.pathname.includes("leader-board")
+                          ? "nav-link navlink_active"
+                          : "nav-link"
+                      }
+                      exact
+                      to="/leader-board"
+                    >
+                      Leaderboard
+                    </Link>
+                  </li>
+
+                  <li
+                    className={
+                      location.pathname.includes("resource")
+                        ? "nav-item dropdown li_underline"
+                        : "nav-item dropdown"
+                    }
+                  >
+                    <Link
+                      className={
+                        location.pathname.includes("resource")
+                          ? "nav-link navlink_active"
+                          : "nav-link"
+                      }
+                      to="/resource"
+                      // id="navbarDropdown"
+                      // role="button"
+                      // data-bs-toggle="dropdown"
+                      // aria-expanded="false"
+                      // style={{ fontSize: "16px" }}
+                    >
+                      Resource
+                    </Link>
+                    <ul
+                      className="dropdown-menu"
+                      aria-labelledby="navbarDropdown"
+                    >
+                      <li>
+                        <Link className="dropdown-item" to="/help-center">
+                          Help Center
+                        </Link>
+                      </li>
+                      <li>
+                        <Link className="dropdown-item" to="/suggestion">
+                          Suggestions
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <Link
+                      to={loggedInUser == null ? "/add-wallet" : "/create-nft"}
+                      className="btn btn-primary btnnav"
+                    >
+                      Create
+                    </Link>
+                  </li>
+                  <li className="removeinmob">|</li>
+                </ul>
+
+                <ul className="right_section_nav mb-0">
+                  <li>
+                    {/* <Link
+                      to={
+                        loggedInUser == null
+                          ? "/add-wallet"
+                          : dispatch(ManageNotiSideBar(true))
+                      }
+                    > */}
+                    <img
+                      onClick={handleNotiSideBar}
+                      className="noti"
+                      src={require("../../assets/images/notification.png")}
+                      width="19px"
+                      height="21px"
+                    ></img>
+                    {/* </Link> */}
+                    {/* </Link> */}
+                  </li>
+
+                  <li className="nav-item dropdown">
+                    <a
+                      className="nav-link dropdown"
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <img
+                        className="btnnav_mob1"
+                        src={require("../../assets/images/profile.png")}
+                        style={{ color: "gray", cursor: "pointer" }}
+                      ></img>
+                    </a>
+                    <ul
+                      className="dropdown-menu"
+                      aria-labelledby="navbarDropdown"
+                    >
+                      <li>
+                        <Link
+                          className="dropdown-item"
+                          to={
+                            loggedInUser == null ? "/add-wallet" : "/my-profile"
+                          }
+                        >
+                          Profile
+                        </Link>
+                      </li>
+                      <li>
+                        <hr className="dropdown-divider" />
+                      </li>
+                      <li>
+                        <Link className="dropdown-item" to="/MyItems">
+                          My Items
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    {/* <Link
+                      to={
+                        !userDetails
+                          ? "/add-wallet"
+                          : dispatch(ManageNotiSideBar(true))
+                      }
+                    > */}
+                    <img
+                      onClick={handleWalletClick}
+                      className="btnnav_mob2"
+                      src={require("../../assets/images/wallet.png")}
+                      width="21px"
+                      height="21px"
+                      style={{
+                        color: "gray",
+                        cursor: "pointer",
+                      }}
+                    ></img>
+                    {/* </Link> */}
+                  </li>
+                  {/* <li className="ham_burger"> */}
+                  <button
+                    type="button"
+                    className="navbar_toggle ham_burger"
+                    onClick={handleHamburger}
+                  >
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                  </button>
+                  {/* </li> */}
+                </ul>
+              </div>
+            </div>
+            <div className="search_box">
+              <form className="p-0 m-0 ">
+                <input
+                  className="form-control form-controlmob "
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button className="screachbtn">
+                  <i className="fa fa-search" aria-hidden="true"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </nav>
+        <div className={humburger ? "scroll_off" : <></>}>
+          {humburger ? <Menu /> : <></>}
         </div>
       </div>
-    </nav>
-  </div>
+    </>
   );
 }
 

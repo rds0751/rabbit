@@ -11,9 +11,15 @@ import {
 export class TopSeller extends Component {
   render() {
     return (
-      <div className="topselller_mob" style={{ marginLeft: "128PX", marginRight: "128px" }}>
+      <div
+        className="topselller_mob"
+        style={{ marginLeft: "128PX", marginRight: "128px" }}
+      >
         {/* <h2>Hello</h2> */}
-        <div className="Leader_Board_container" style={{marginBottom : "30px"}}>
+        <div
+          className="Leader_Board_container"
+          style={{ marginBottom: "30px" }}
+        >
           <h1 style={{ fontSize: "20px", fontWeight: "bold" }}>Top Sellers</h1>
           <div className="dropdown">
             <button
@@ -27,9 +33,13 @@ export class TopSeller extends Component {
                 backgroundColor: "white",
                 color: "black",
                 border: "1px solid #ddd",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
               }}
             >
               Weekly
+              <i className="fas fa-caret-down"></i>
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li>
@@ -50,37 +60,52 @@ export class TopSeller extends Component {
             </ul>
           </div>
         </div>
-       
 
-        <div class="container CollectionHeading">
-          <div class="row">
-            <div class="col" style={{paddingLeft : "40px"}}>Name</div>
-            <div class="col" style={{padding:"0px",margin:"0px"}}>Volume</div>
-            <div class="col" style={{padding:"0px",margin:"0px"}}>Items sold</div>
+        <div className="container CollectionHeading">
+          <div className="row">
+            <div className="col" style={{ paddingLeft: "40px" }}>
+              Name
+            </div>
+            <div className="col" style={{ padding: "0px", margin: "0px" }}>
+              Volume
+            </div>
+            <div className="col" style={{ padding: "0px", margin: "0px" }}>
+              Items sold
+            </div>
           </div>
         </div>
         {LeaderBoardApi5.map((curElem) => {
-              const { name, volume, itemssold } = curElem;
-              return (
-        <div class="container ">
-          <div class="row CollectionItem" style={{ backgroundColor: "#f8f8f8"}}>
-            <div class="col"> <img
-                      className="rounded-circle"
-                      src="https://earncashto.com/wp-content/uploads/2021/06/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png"
-                      alt="/"
-                     
-                    /><h2> {name}</h2>
-                    </div>
-            <div class="col" style={{color: "#818181" , fontWeight: "normal"}}>  <span>34 ETH</span>
-                    {volume}</div>
-            <div class="col">{itemssold}</div>
-          </div>
-        </div>
-         );
+          const { name, volume, itemssold } = curElem;
+          return (
+            <div className="container ">
+              <div
+                className="row CollectionItem"
+                style={{ backgroundColor: "#f8f8f8" }}
+              >
+                <div className="col">
+                  {" "}
+                  <img
+                    className="rounded-circle"
+                    src="https://earncashto.com/wp-content/uploads/2021/06/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png"
+                    alt="/"
+                  />
+                  <h2> {name}</h2>
+                </div>
+                <div
+                  className="col"
+                  style={{ color: "#818181", fontWeight: "normal" }}
+                >
+                  {" "}
+                  <span>34 ETH</span>
+                  {volume}
+                </div>
+                <div className="col">{itemssold}</div>
+              </div>
+            </div>
+          );
         })}
       </div>
     );
   }
 }
-
 export default TopSeller;

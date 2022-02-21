@@ -6,8 +6,8 @@ function About() {
     <>
       <div className="container">
         <div className="text-center mt-5 ml-0 mr-0">
-          <p className="font-22 font-weight-700">About NFT marketplace</p>
-          <p className="font-15 mt-4">
+          <p className="font-32 font-weight-700">About NFT marketplace</p>
+          <p className="font-16 mt-4">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
             <br /> Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -17,7 +17,7 @@ function About() {
             <br /> proident, sunt in culpa qui officia deserunt mollit anim id
             est laborum
           </p>
-          <p className="mt-4">
+          <p className="mt-4 font-16">
             Sed ut perspiciatis unde omnis iste natus error sit voluptatem
             accusantium doloremque laudantium, totam rem aperiam,
             <br /> eaque ipsa quae ab illo inventore veritatis et quasi
@@ -27,7 +27,7 @@ function About() {
             nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit
             amet, consectetur, adipisci velit, sed quia
           </p>
-          <h6 className="font-16 font-weight-700 mt-4">
+          <h6 className="font-18 font-weight-700 mt-4">
             NFT marketplace in numbers
           </h6>
         </div>
@@ -36,16 +36,16 @@ function About() {
         <div className="row text-center mt-5">
           <div className="col-sm-3"></div>
           <div className="col-sm-2 col-12">
-            <p className="text-primary font-weight-700">$274M</p>
-            <p>Trading volume</p>
+            <p className="text-primary font-weight-700 font-22 ">$274M</p>
+            <p className="font-16">Trading volume</p>
           </div>
           <div className="col-sm-2 col-12">
-            <p className="text-primary font-weight-700">405K</p>
-            <p>NFTs created</p>
+            <p className="text-primary font-weight-700 font-22">405K</p>
+            <p className="font-16">NFTs created</p>
           </div>
           <div className="col-sm-2 col-12">
-            <p className="text-primary font-weight-700">1.6M</p>
-            <p className="font-20">Total users</p>
+            <p className="text-primary font-weight-700 font-22">1.6M</p>
+            <p className="font-16">Total users</p>
           </div>
           <div className="col-sm-3"></div>
         </div>
@@ -61,7 +61,8 @@ function About() {
                   style={{ fontSize: "35px" }}
                   className="text-primary"
                 />
-                Contact Us: <a href="mailto:nftmarketplace.com">nftmarketplace.com</a>
+                Contact Us:{" "}
+                <a href="mailto:nftmarketplace.com">nftmarketplace.com</a>
               </h6>
             </div>
           </div>

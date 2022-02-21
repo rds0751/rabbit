@@ -7,117 +7,137 @@ function Footer() {
   return (
     <>
       <div
-        className="conatiner mobfooter"
+        className="mobfooter"
         style={{ backgroundColor: "#FBFBFB", marginTop: "10px" }}
       >
-        <footer className="footermob">
-          <div className="row mb-0 mt-5 mx-5 row-2 justify-content-xl-around justify-content-sm-between">
-            <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 pt-4 order-1 footerfix1">
+        <footer className="container">
+        {/* <footer className="container footermob"> */}
+          <div className="row mb-0 mt-5 row-2 px-3 justify-content-sm-between navbar-width">
+            <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 pt-4 order-1 footerfix1 footer">
               <ul className="list-unstyled" style={{ textAlign: "left" }}>
-                <li
-                  className="mt-md-0 mt-0"
-                  style={{
-                    fontSize: "18px",
-                    color: "#8F8F8F",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Marketplace
-                </li>
-                <li
-                  style={{
-                    fontSize: "16px",
-                    color: "#8F8F8F",
-                    fontWeight: "normal",
-                    marginTop: "5px",
-                  }}
-                >
-                  NFT
-                </li>
-                <li
-                  style={{
-                    fontSize: "16px",
-                    color: "#8F8F8F",
-                    fontWeight: "normal",
-                    marginTop: "5px",
-                  }}
-                >
-                  Collections
-                </li>
+                <a href="/">
+                  {" "}
+                  <li
+                    className="mt-md-0 mt-0"
+                    style={{
+                      fontSize: "18px",
+                      color: "#8F8F8F",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Marketplace
+                  </li>
+                </a>
+                <a href="/">
+                  <li
+                    style={{
+                      fontSize: "18px",
+                      color: "#8F8F8F",
+                      fontWeight: "normal",
+                      marginTop: "8px",marginBottom:"8px",
+                    }}
+                  >
+                    NFT
+                  </li>
+                </a>
+                <a href="/collections-tile">
+                  <li
+                    style={{
+                      fontSize: "18px",
+                      color: "#8F8F8F",
+                      fontWeight: "normal",
+                      marginTop: "8px",marginBottom:"8px",
+                    }}
+                  >
+                    Collections
+                  </li>
+                </a>
               </ul>
 
               <ul
                 className="list-unstyled mobfooter1"
                 style={{ textAlign: "left" }}
               >
-                <li
-                  className="mt-md-0 mt-4"
-                  style={{
-                    fontSize: "18px",
-                    color: "#8F8F8F",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Leaderboard
-                </li>
-                <li
-                  style={{
-                    fontSize: "16px",
-                    color: "#8F8F8F",
-                    fontWeight: "normal",
-                    marginTop: "5px",
-                  }}
-                >
-                  Top Seller
-                </li>
-                <li
-                  style={{
-                    fontSize: "16px",
-                    color: "#8F8F8F",
-                    fontWeight: "normal",
-                    marginTop: "5px",
-                  }}
-                >
-                  Top Bidder
-                </li>
-                <li
-                  style={{
-                    fontSize: "16px",
-                    color: "#8F8F8F",
-                    fontWeight: "normal",
-                    marginTop: "5px",
-                  }}
-                >
-                  Top Collections
-                </li>
+                <a href="LeaderBoard">
+                  <li
+                    className="mt-md-0 mt-4"
+                    style={{
+                      fontSize: "18px",
+                      color: "#8F8F8F",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Leaderboard
+                  </li>
+                </a>
+                <a href="/top-seller">
+                  <li
+                    style={{
+                      fontSize: "18px",
+                      color: "#8F8F8F",
+                      fontWeight: "normal",
+                      marginTop: "8px",marginBottom:"8px",
+                    }}
+                  >
+                    Top Seller
+                  </li>
+                </a>
+                <a href="/top-bidder">
+                  <li
+                    style={{
+                      fontSize: "18px",
+                      color: "#8F8F8F",
+                      fontWeight: "normal",
+                      marginTop: "8px",marginBottom:"8px",
+                    }}
+                  >
+                    Top Buyer
+                  </li>
+                </a>
+                <a href="/top-collection">
+                  <li
+                    style={{
+                      fontSize: "18px",
+                      color: "#8F8F8F",
+                      fontWeight: "normal",
+                      marginTop: "8px",marginBottom:"8px",
+                    }}
+                  >
+                    Top Collections
+                  </li>
+                </a>
               </ul>
               <ul
-                className="list-unstyled mobfooter3"
+                className="list-unstyled mobfooter3 footer"
                 style={{ textAlign: "left" }}
               >
-                <li
-                  className="mt-md-0 mt-0"
-                  style={{
-                    fontSize: "18px",
-                    color: "#8F8F8F",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Company
-                </li>
-                <li
-                  style={{
-                    fontSize: "16px",
-                    color: "#8F8F8F",
-                    fontWeight: "normal",
-                    marginTop: "5px",
-                  }}
-                >
-                  About{" "}
-                </li>
+                <a href="/about">
+                  <li
+                    className="mt-md-0 mt-0"
+                    style={{
+                      fontSize: "18px",
+                      color: "#8F8F8F",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Company
+                  </li>
+                </a>
+                <a href="/about">
+                  <li
+                    style={{
+                      fontSize: "18px",
+                      color: "#8F8F8F",
+                      fontWeight: "normal",
+                      marginTop: "8px",marginBottom:"8px",
+                    }}
+                  >
+                    About{" "}
+                  </li>
+                </a>
               </ul>
               <ul
-                className="list-unstyled mobfooter2"
+                className="list-unstyled mobfooter2 footer"
                 style={{ textAlign: "left" }}
               >
                 <li
@@ -130,39 +150,45 @@ function Footer() {
                 >
                   Community
                 </li>
-                <li
-                  style={{
-                    fontSize: "16px",
-                    color: "#8F8F8F",
-                    fontWeight: "normal",
-                    marginTop: "5px",
-                  }}
-                >
-                  Help Centers
-                </li>
-                <li
-                  style={{
-                    fontSize: "16px",
-                    color: "#8F8F8F",
-                    fontWeight: "normal",
-                    marginTop: "5px",
-                  }}
-                >
-                  FAQs
-                </li>
-                <li
-                  style={{
-                    fontSize: "16px",
-                    color: "#8F8F8F",
-                    fontWeight: "normal",
-                    marginTop: "5px",
-                  }}
-                >
-                  Suggestions
-                </li>
+                <a href="/help-center">
+                  <li
+                    style={{
+                      fontSize: "18px",
+                      color: "#8F8F8F",
+                      fontWeight: "normal",
+                      marginTop: "8px",marginBottom:"8px",
+                    }}
+                  >
+                    Help Centers
+                  </li>
+                </a>
+                <a href="#">
+                  <li
+                    style={{
+                      fontSize: "18px",
+                      color: "#8F8F8F",
+                      fontWeight: "normal",
+                      marginTop: "8px",marginBottom:"8px",
+                    }}
+                  >
+                    FAQs
+                  </li>
+                </a>
+                <a href="Suggestions">
+                  <li
+                    style={{
+                      fontSize: "18px",
+                      color: "#8F8F8F",
+                      fontWeight: "normal",
+                      marginTop: "8px",marginBottom:"8px",
+                    }}
+                  >
+                    Suggestions
+                  </li>
+                </a>
               </ul>
             </div>
-            <div className="col-xl-3 col-lg-4 col-md-4 col-sm-6 pt-4 order-2 footerfix mobview">
+            <div className="col-xl-3 col-lg-4 col-md-4 col-sm-6 pt-4 order-2 footerfix mobview footer">
               <ul className="list-unstyled" style={{ textAlign: "left" }}>
                 <li
                   className="mt-md-0 mt-0"
@@ -174,39 +200,45 @@ function Footer() {
                 >
                   Community
                 </li>
-                <li
-                  style={{
-                    fontSize: "16px",
-                    color: "#8F8F8F",
-                    fontWeight: "normal",
-                    marginTop: "5px",
-                  }}
-                >
-                  Help Centers
-                </li>
-                <li
-                  style={{
-                    fontSize: "16px",
-                    color: "#8F8F8F",
-                    fontWeight: "normal",
-                    marginTop: "5px",
-                  }}
-                >
-                  FAQs
-                </li>
-                <li
-                  style={{
-                    fontSize: "16px",
-                    color: "#8F8F8F",
-                    fontWeight: "normal",
-                    marginTop: "5px",
-                  }}
-                >
-                  Suggestions
-                </li>
+                <a href="/help-center">
+                  <li
+                    style={{
+                      fontSize: "18px",
+                      color: "#8F8F8F",
+                      fontWeight: "normal",
+                      marginTop: "8px",marginBottom:"8px",
+                    }}
+                  >
+                    Help Centers
+                  </li>
+                </a>
+                <a href="#">
+                  <li
+                    style={{
+                      fontSize: "18px",
+                      color: "#8F8F8F",
+                      fontWeight: "normal",
+                      marginTop: "8px",marginBottom:"8px",
+                    }}
+                  >
+                    FAQs
+                  </li>
+                </a>
+                <a href="/suggestion">
+                  <li
+                    style={{
+                      fontSize: "18px",
+                      color: "#8F8F8F",
+                      fontWeight: "normal",
+                      marginTop: "8px",marginBottom:"8px",
+                    }}
+                  >
+                    Suggestions
+                  </li>
+                </a>
               </ul>
             </div>
-            <div className="col-xl-auto col-lg-6 col-md-6 pt-4 col-sm-6 my-sm-0 order-md-3 order-sm-1 d-flex mobview">
+            <div className="col-xl-auto col-lg-6 col-md-6 pt-4 col-sm-6 my-sm-0 order-md-3 order-sm-1 d-flex mobview footer">
               <ul
                 className="list-unstyled footerfix3"
                 style={{ textAlign: "left" }}
@@ -221,16 +253,18 @@ function Footer() {
                 >
                   Company
                 </li>
-                <li
-                  style={{
-                    fontSize: "16px",
-                    color: "#8F8F8F",
-                    fontWeight: "normal",
-                    marginTop: "5px",
-                  }}
-                >
-                  About{" "}
-                </li>
+                <a href="/about">
+                  <li
+                    style={{
+                      fontSize: "18px",
+                      color: "#8F8F8F",
+                      fontWeight: "normal",
+                      marginTop: "8px",marginBottom:"8px",
+                    }}
+                  >
+                    About{" "}
+                  </li>
+                </a>
               </ul>
             </div>
 
@@ -244,12 +278,12 @@ function Footer() {
                 </p>
               </li>
               <li>
-                <i class="fab fa-facebook"></i>
-                <i class="fab fa-twitter"></i>
-                <i class="fab fa-instagram"></i>
+                <i className="fab fa-facebook"></i>
+                <i className="fab fa-twitter"></i>
+                <i className="fab fa-instagram"></i>
               </li>
               <li
-                style={{ fontSize: "18px", color: "#8F8F8F", marginTop: "5px" }}
+                style={{ fontSize: "18px", color: "#8F8F8F", marginTop: "8px",marginBottom:"8px" }}
               >
                 Subscribe to our newsletter for the latest NFTs{" "}
               </li>
@@ -279,6 +313,7 @@ function Footer() {
                     id="button-addon2"
                     style={{
                       height: "38px",
+                      fontWeight:"400px",
                       borderTopLeftRadius: "0em",
                       borderBottomLeftRadius: "0em",
                     }}
@@ -294,6 +329,7 @@ function Footer() {
                   fontSize: "18px",
                   color: "#8F8F8F",
                   textAlign: "left",
+                   marginTop:"37px"
                 }}
               >
                 About DLT NFT marketplace
