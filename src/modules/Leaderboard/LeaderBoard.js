@@ -10,6 +10,7 @@ import {
   Rejected,
 } from "../../constants/LeaderBoardApi";
 import { getTopSellers } from "../../services/sellAndPurchaseMicroService";
+import { getTopCollections } from "../../services/sellAndPurchaseMicroService";
 
 function LeaderBoard() {
 
@@ -19,6 +20,13 @@ function LeaderBoard() {
     getTopSellers().then((response) => setTopSellers(response));
   });
   console.log("topSellers", topSellers);
+
+  const [topCollections, setTopCollections] = useState([]);
+
+  useEffect(() => {
+    getTopCollections().then((response) => setTopCollections(response));
+  });
+  console.log("topCollections", topCollections);
 
   // const [state, setState] = useState(LeaderBoardApi);
   const [PendingAcceptedCreated, setPendingAcceptedCreated] =
@@ -194,17 +202,17 @@ function LeaderBoard() {
               </div>
             </div>
             <div className="leaderboardTopDetails">
-              {LeaderBoardApi.map((curElem) => {
-                const { Image, Heading, SubHead1, SubHead2 } = curElem;
+              {topCollections.map((curElem) => {
+                const { collectionPhoto, collectionName, SubHead1 } = curElem.items;
                 return (
                   <>
                     <div className="leaderboardTopDetailsRow">
-                      <img src={Image} alt="" />
+                      <img src={collectionPhoto} alt="" />
                       <div className="LeaderboardInsideDetails">
-                        <h2>{Heading}</h2>
+                        <h2>{collectionName}</h2>
                         <p>
                           {SubHead1}
-                          <span>{SubHead2}</span>
+                          <span> {curElem.totalVolume}</span>
                         </p>
                       </div>
                     </div>
