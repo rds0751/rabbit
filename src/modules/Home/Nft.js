@@ -5,13 +5,17 @@ import { Nfts_Tile_Api } from "../../constants/Nfts_Tile_Api";
 import "../../assets/styles/custom.css";
 import NftToggle from "../../common/components/NftToggle";
 import Lower__homepage from "../../common/components/HomeNftFilters";
-import { getNfts } from "../../services/webappMicroservice";
+import { getNfts, addLikeNft } from "../../services/webappMicroservice";
 import Like from "../../assets/images/Like.svg";
 import likes from "../../assets/images/likes.svg";
+import { useSelector } from "react-redux";
+
 
 function NftPage() {
   const [nfts, setNfts] = useState([]);
   const [type, setType] = useState("all");
+  const { user } = useSelector((state) => state);
+
 
   useEffect(() => {
     getNfts().then((response) => setNfts(response.nftContent));
@@ -31,6 +35,15 @@ function NftPage() {
   }
 
   const [handleLike, setHandleLike] = useState(true);
+
+  const likeNft = (id) => {
+    const data = {
+      contentId: id,
+      // addedBy: user.addUserData._id,
+    }
+    addLikeNft(data)
+    setHandleLike(!handleLike)
+  }
   
   return (
     <>
@@ -91,7 +104,7 @@ function NftPage() {
                     </Link>
                     <img
                       id="like_icon"
-                      onClick={() => setHandleLike(!handleLike)}
+                      onClick={() => likeNft(_id)}
                       // src={require("../../assets/images/Like.png")}
                       // src={require("../../assets/images/Like.svg")}
                       src={handleLike ? Like : likes}
