@@ -17,7 +17,7 @@ import { useSelector } from "react-redux";
 import { put_NftOpenForSale, RemoveNftFromSale } from "../../services/contentServices";
 import { toast } from "react-toastify";
 
-export default function NftInformation() {
+export default function NftInformation(props) {
   const [activeInActive, setActiveInActive] = useState("active");
   const { user } = useSelector((state) => state);
   const [isCurrUserNft, setIsCurrUserNft] = useState(null);
@@ -27,8 +27,10 @@ export default function NftInformation() {
   const [nft, setNft] = useState([]);
   useEffect(() => {
     getNft(id).then((response) => {
+      alert("data")
+
       setNft(response);
-      console.log(response, "<<<response", loggedInUser._id);
+      console.log(response, "<<<response");
       setIsCurrUserNft(response?.createdBy == loggedInUser._id);
       setisOpenForSell(response?.salesInfo?.isOpenForSale);
     });
@@ -36,12 +38,36 @@ export default function NftInformation() {
   // alert(`${isCurrUserNft},${loggedInUser._id},${isOpenForSell}`);
 
   const handleSell = async () => {
+      props.sellNowNft({
+        sellerId:loggedInUser._id,
+        // buyerId:loggedInUser._id,
+        saleData:response.salesInfo,
+        tokenId:response.tokenId,
+        nftId:response._id,
+      });
+    
+    const removeNFTFromSell = async () => {
+      props.removeNftFromSale({
+        sellerId:loggedInUser._id,
+        // buyerId:loggedInUser._id,
+        saleData:response.salesInfo,
+        tokenId:response.tokenId,
+        nftId:response._id,
+       
+      });
+    };
+    const buyNft = async () => {
+      props.BuyNowNft({
+       
+      });
+    };
     const response = await put_NftOpenForSale(nft._id);
     if (response.success) {
       toast.success(response.message);
       window.location.reload(false);
     } else toast.error(response.message);
   };
+  
   const handleRemoveSell = async () => {
     const response = await RemoveNftFromSale(nft._id);
     if (response.success) {

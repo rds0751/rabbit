@@ -3,7 +3,8 @@ import BaseComponent from "../baseComponent";
 // import HeaderComponent from "../common/header";
 import NftDetails from "./NftInformation1";
 import Utils from "../../utility";
-import { BlockchainService, ContentService } from "../../services";
+import BlockchainService from "../../services/blockchainService"; 
+import ContentService  from "../../services/contentMicroservice";
 // import {history} from "../../managers/history";
 // import {connect} from "react-redux";
 import { transactionConstants } from "../../constants";
@@ -56,11 +57,11 @@ export default class NftDetail extends BaseComponent {
         this.updateNftDataInDb(requestData, transactionConstants.BUY,this.state?.nftDetails?._id || '')
     }
 
-    sellNowNft = async () => {
+    sellNowNft = async (data) => {
         console.log("jjjjj")
         const [blockchainError, blockchainRes] = await Utils.parseResponse(
             BlockchainService.putOnSaleNft({
-                tokenId: 43622716,
+                tokenId: data.tokenId,
             })
         );
         console.log("blockchainError=sellNowNft==", blockchainError)
@@ -73,15 +74,17 @@ export default class NftDetail extends BaseComponent {
         let requestData = {
             type: transactionConstants.SELL,
             transaction: blockchainRes?.transactionHash || '',
-            seller: this.state?.nftDetails?.ownedBy?._id || this.state?.nftDetails?.ownedBy || '',
-            buyer: this.state?.nftDetails?.ownedBy?._id || this.state?.nftDetails?.ownedBy || '',
+            seller: data.sellerId || '',
+            buyer: data.sellerId || '',
             // _id: this.state?.nftDetails?._id || '',
             saleData: {
-                ...this.state?.nftDetails?.saleData,
+                ...data.saleData,
                 isOpenForSale: true
             },
+
         }
-        this.updateNftDataInDb(requestData, transactionConstants.SELL,this.state?.nftDetails?._id || '')
+        console.log("nannnn",requestData)
+        this.updateNftDataInDb(requestData, transactionConstants.SELL,data.nftId || '')
 
     }
 
@@ -89,7 +92,7 @@ export default class NftDetail extends BaseComponent {
         console.log("removeNftFromSale")
         const [blockchainError, blockchainRes] = await Utils.parseResponse(
             BlockchainService.removeFromSaleNft({
-                tokenId: 43622716,
+                tokenId: data.tokenId,
             })
         );
         if (blockchainError || !blockchainRes) {
@@ -100,15 +103,15 @@ export default class NftDetail extends BaseComponent {
         let requestData = {
             type: transactionConstants.REMOVE_FROM_SALE,
             transaction: blockchainRes.transactionHash || '',
-            seller: this.state?.nftDetails?.ownedBy?._id || this.state?.nftDetails?.ownedBy || '',
-            buyer: this.state?.nftDetails?.ownedBy?._id || this.state?.nftDetails?.ownedBy || '',
+            seller: data.sellerId || '',
+            buyer: data.sellerId || '',
             // _id: this.state?.nftDetails?._id || '',
             saleData: {
-                ...this.state?.nftDetails?.saleData,
+                ...data.saleData,
                 isOpenForSale: false
             },
         }
-        this.updateNftDataInDb(requestData, transactionConstants.REMOVE_FROM_SALE,this.state?.nftDetails?._id || '')
+        this.updateNftDataInDb(requestData, transactionConstants.REMOVE_FROM_SALE,data.nftId  || '')
     }
 
     updateNftDataInDb = async (requestData, type,_id) => {
