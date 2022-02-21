@@ -76,8 +76,8 @@ export function getCollections(requestData) {
 
 export function getCollection(requestData) {
   let url =
-    process.env.REACT_APP_WEBAPP_MICROSERVICE +"api/v1/collection/" + requestData + "/nfts";
-  return httpService( httpConstants.METHOD_TYPE.GET,
+    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/collection/" + requestData + "/nfts";
+  return httpService(httpConstants.METHOD_TYPE.GET,
     { 'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON },
     {},
     url
