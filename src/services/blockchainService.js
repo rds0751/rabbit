@@ -10,6 +10,7 @@ const BlockchainServices = {
   changeListedPrice,
   buyNFT,
   removeFromSaleNft,
+  putOnSaleNft
 };
 
 export default BlockchainServices;
@@ -90,3 +91,17 @@ async function buyNFT({ tokenId }) {
     name: provider?._network?.name || "",
   };
 }
+async function putOnSaleNft({tokenId}) {
+  const contractData = new ethers.Contract(contractAddress, contractABI, signer);
+  console.log("blockchain fn",contractData)
+
+  const result = await contractData.updateListingStatus(tokenId,true)
+
+  let res = await result.wait();
+  return {
+      ...res,
+      chainId: provider?._network?.chainId || '',
+      name: provider?._network?.name || '',
+  }
+}
+
