@@ -19,7 +19,7 @@ function getHeaders() {
 
 async function addIpfs(requestdata) {
   // let url = "http://localhost:3001" + "/add-file-ipfs";
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/add-file-ipfs";
+  let url = "http://whitelabel-nft-lb-dev-1838936337.us-east-1.elb.amazonaws.com:3002/api/v1/add-file-ipfs";
 
   return httpServiceFileUpload(
     httpConstants.METHOD_TYPE.POST,
