@@ -3,8 +3,8 @@ import BaseComponent from "../baseComponent";
 // import HeaderComponent from "../common/header";
 import NftDetails from "./NftInformation";
 import Utils from "../../utility";
-import BlockchainService from "../../services/blockchainService"; 
-import ContentService  from "../../services/contentMicroservice";
+import BlockchainService from "../../services/blockchainService";
+import ContentService from "../../services/contentMicroservice";
 // import {history} from "../../managers/history";
 import { getNft } from "../../services/webappMicroservice";
 
@@ -16,33 +16,33 @@ export default class NftDetail extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
-            createdBy:"",
-            responseData:[],
-            salesInfo:null
+            createdBy: "",
+            responseData: [],
+            salesInfo: null
 
         };
     }
 
     componentDidMount() {
-         this.getNftDetail();
+        this.getNftDetail();
 
     }
     getNftDetail = async () => {
-    getNft("6210b6f5bd9910002a5ad3d1").then((response) => {
-        // alert("data")
-        this.setState({
-            responseData:response,
-            createdBy: "61de9sf37905a9s3863300611d",
-            salesInfo: response?.salesInfo?.isOpenForSale,
-          });
-          console.log("----------",this.state.responseData)
-  
-        // setNft(response);
-        // console.log(response, "<<<response");
-        // // setIsCurrUserNft(response?.createdBy == loggedInUser._id);
-        // setIsCurrUserNft(response?.createdBy == "61de9f37905a9s3863300611d");
-        // setisOpenForSell(response?.salesInfo?.isOpenForSale);
-      });
+        getNft("6210b6f5bd9910002a5ad3d1").then((response) => {
+            // alert("data")
+            this.setState({
+                responseData: response,
+                createdBy: "61de9sf37905a9s3863300611d",
+                salesInfo: response?.salesInfo?.isOpenForSale,
+            });
+            console.log("----------", this.state.responseData)
+
+            // setNft(response);
+            // console.log(response, "<<<response");
+            // // setIsCurrUserNft(response?.createdBy == loggedInUser._id);
+            // setIsCurrUserNft(response?.createdBy == "61de9f37905a9s3863300611d");
+            // setisOpenForSell(response?.salesInfo?.isOpenForSale);
+        });
     }
     // BuyNowNft = async () => {
     //     console.log('BUY')
@@ -78,7 +78,7 @@ export default class NftDetail extends BaseComponent {
     // }
 
     sellNowNft = async () => {
-        console.log("jjjjj",this.state.responseData.tokenId)
+        console.log("jjjjj", this.state.responseData.tokenId)
         const [blockchainError, blockchainRes] = await Utils.parseResponse(
             BlockchainService.putOnSaleNft({
                 tokenId: 1,
@@ -91,28 +91,35 @@ export default class NftDetail extends BaseComponent {
                 blockchainError?.data?.message || "Unable to sell NFT on blockchain"
             );
         }
-        let requestData = {
-            // type: transactionConstants.SELL,
-            transactionHash: blockchainRes?.transactionHash || '',
-            // seller: data.sellerId || '',
-            // buyer: data.sellerId || '',
-            // _id: this.state?.nftDetails?._id || '',
-            salesInfo: {
-                ...this.state.responseData.salesInfo,
-                isOpenForSale: true
-            },
+        // let requestData = {
+        //     // type: transactionConstants.SELL,
+        //     // transactionHash: blockchainRes?.transactionHash || '',
+        //     // seller: data.sellerId || '',
+        //     // buyer: data.sellerId || '',
+        //     // _id: this.state?.nftDetails?._id || '',
+        //     // salesInfo: {
+        //     //     ...this.state.responseData.salesInfo,
+        //     //     isOpenForSale: true
+        //     // },
 
+        // }
+        // console.log("nannnn",requestData)
+        // this.updateNftDataInDb(requestData, eventConstants.SELL,this.state.responseData._id || '')
+        if (!this.state.responseData._id)
+            return;
+        let [error, result] = await Utils.parseResponse(ContentService.updateNftContent({_id:this.state.responseData._id}))
+        console.log("---", result)
+        if (error || !result) {
+            return Utils.apiFailureToast(error || "Unable to update Nft content.");
         }
-        console.log("nannnn",requestData)
-        this.updateNftDataInDb(requestData, eventConstants.SELL,this.state.responseData._id || '')
-
+        this.setState({ nftDetails: result })
     }
 
     removeNftFromSale = async (data) => {
         console.log("removeNftFromSale")
         const [blockchainError, blockchainRes] = await Utils.parseResponse(
             BlockchainService.removeFromSaleNft({
-                tokenId:1,
+                tokenId: 1,
             })
         );
         if (blockchainError || !blockchainRes) {
@@ -131,14 +138,14 @@ export default class NftDetail extends BaseComponent {
                 isOpenForSale: false
             },
         }
-        this.updateNftDataInDb(requestData, eventConstants.REMOVE_FROM_SALE,this.state.responseData._id  || '')
+        this.updateNftDataInDb(requestData, eventConstants.REMOVE_FROM_SALE, this.state.responseData._id || '')
     }
 
-    updateNftDataInDb = async (requestData, type,_id) => {
+    updateNftDataInDb = async (requestData, type, _id) => {
         if (!requestData || !_id)
             return;
-        let [error, result] = await Utils.parseResponse(ContentService.updateNftContent(requestData,_id))
-        console.log("---",result)
+        let [error, result] = await Utils.parseResponse(ContentService.updateNftContent(requestData, _id))
+        console.log("---", result)
         if (error || !result) {
             return Utils.apiFailureToast(error || "Unable to update Nft content.");
         }
