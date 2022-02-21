@@ -52,13 +52,21 @@ import NftInformationFixedPrice from "./modules/Home/NftInformationFixedPrice";
 import FixedPrice from "./modules/Items/FixedPrice";
 import Menu from "./common/components/Menu";
 import { WEB_APP_USER_WALLET_ADDRESS } from "./reducers/Constants";
+import { addUseraction, addUserData } from "./reducers/Action";
+import { CheckUserByWalletAddress } from "./services/UserMicroService";
 
 function App() {
   useEffect(() => {
     const checkWalletAddress = localStorage.getItem(
       WEB_APP_USER_WALLET_ADDRESS
     );
-    
+    if (checkWalletAddress != null) {
+      CheckUserByWalletAddress(checkWalletAddress, (res) => {
+        console.log(res, "<<<< response at routes.js");
+        addUserData(res);
+      });
+    }
+
     // alert(`${checkWalletAddress}`);
   }, []);
 

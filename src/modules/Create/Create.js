@@ -5,10 +5,11 @@ import { ethers } from "ethers";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
-  addUseraction,
-  addUserData,
+  
+  AddWalletDetails,
   ManageWalletSideBar,
-  updateUserDetail,
+  
+  addUserData
 } from "../../reducers/Action";
 import "react-toastify/dist/ReactToastify.css";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
@@ -46,14 +47,12 @@ function Create() {
           console.log(result[0]);
 
           dispatch(
-            updateUserDetail({ address: defaultAccount, balance: getBalance })
+            AddWalletDetails({ address: defaultAccount, balance: getBalance })
           );
           localStorage.setItem(
             WEB_APP_USER_WALLET_ADDRESS,
             `${defaultAccount}`
           );
-          // CheckUserByWalletAddress(defaultAccount);
-          // setToggleEffect(!toggleEffect);
           CheckUserByWalletAddress(defaultAccount, (res) => {
             dispatch(addUserData(res));
             setToggleEffect(!toggleEffect);
