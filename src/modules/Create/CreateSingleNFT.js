@@ -4,8 +4,7 @@ import Image from "../../assets/images/img-format.png";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import {
-  getCollection,
-  uploadDocs,
+  // getCollection,
   getCollectionBySingleUser,
 } from "../../services/contentServices";
 import { httpConstants } from "../../constants";
@@ -15,6 +14,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDropzone } from "react-dropzone";
 import { useSelector } from "react-redux";
+import ImageFile from "./uploadFile";
 // import "../../assets/styles/Leader.css"
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 
@@ -22,11 +22,12 @@ const Button = styled.button``;
 
 function CreateSingleNFT(props) {
   const [collectionData, setCollectionData] = useState([]);
+  const [selectFile, setSelectFile] = useState("");
   const [collectionId, setCollectionId] = useState("");
-  const { user } = useSelector((state) => state);
   const [uploadFileObj, setUploadFileObj] = useState("");
-
+  
   // >>>> This is user id
+  const { user } = useSelector((state) => state);
 
   console.log(user.addUserData._id, "<<<< user data");
   // -------------------------------
@@ -39,7 +40,7 @@ function CreateSingleNFT(props) {
   const createdBy = user?.addUserData?._id;
 
   useEffect(async () => {
-    const collectionData = await getCollection();
+    // const collectionData = await getCollection();
     // setCollectionData(collectionData);
     const collections = await getCollectionBySingleUser();
     setCollectionData(collections);
@@ -61,28 +62,43 @@ function CreateSingleNFT(props) {
   };
 
   const handleChange = async (event) => {
-    const fileUploaded = event.target.files[0];
-    setUploadFileObj(fileUploaded);
-    console.log("nmae",fileUploaded);
-    let formData = new FormData();
-    formData.append("folderName", "collections");
-    formData.append("createdBy", `${props.user._id}`);
-    // alert(props.user._id);
-    formData.append("attachment", fileUploaded);
+    console.log(event, "<<<<< event");
+    // const fileUploaded = event;
+    console.log(event, "<<<<file uploaded");
+    setUploadFileObj(event);
+    // console.log(event);
+    // let formData = new FormData();
+    // formData.append("folderName", "collections");
+    // formData.append("createdBy", `${user._id}`);
+    // // alert(props.user._id);
+    // formData.append("attachment", event);
 
-    const res = await fetch(`${BASE_URL2}/api/v1/upload-documents`, {
-      method: httpConstants.METHOD_TYPE.POST,
-      body: formData,
-    });
-    const result = await res.json();
-    if (result.success) ipfsUrl.current = result.responseData;
-    console.log(result);
+    // const res = await fetch(`${BASE_URL2}/api/v1/upload-documents`, {
+    //   method: httpConstants.METHOD_TYPE.POST,
+    //   body: formData,
+    // });
+    // const result = await res.json();
+    // if (result.success) ipfsUrl.current = result.responseData;
+    // console.log(result);
   };
 
   const handleSubmit = (e) => {
     const addIPFS = async () => {
+      console.log("file", selectFile);
+      console.log("Called IPFx", {
+        nftFile: selectFile,
+        nftName: name.current,
+        price: price.current,
+
+        description: description.current,
+
+        blockchain: blockchain.current,
+        createdBy: user?.addUserData?._id,
+        collection: collectionId,
+      });
+
       props.createNftHandler({
-        nftFile: uploadFileObj,
+        nftFile: selectFile,
         nftName: name.current,
         price: price.current,
 
@@ -94,28 +110,38 @@ function CreateSingleNFT(props) {
       });
     };
     addIPFS();
-    e.preventDefault();
-    let formData = new FormData();
-    console.log(collectionId, "<<<< collectionid");
-    formData.append("name", name.current);
-    formData.append("description", description.current);
-    formData.append("blockchain", blockchain.current);
-    formData.append("ipfsUrl", ipfsUrl.current);
-    formData.append("createdBy", createdBy);
-    formData.append("collectionId", collectionId);
-    console.log(formData.getAll("createdBy"));
-    console.log(formData, "<<< formData");
+    // e.preventDefault();
+    // let formData = new FormData();
+    // console.log(collectionId, "<<<< collectionid");
+    // console.log(
+    //   name.current,
+    //   description.current,
+    //   blockchain.current,
+    //   ipfsUrl.current,
+    //   createdBy,
+    //   uploadFileObj
+    // );
+    // formData.append("name", name.current);
+    // formData.append("description", description.current);
+    // formData.append("blockchain", blockchain.current);
+    // formData.append("ipfsUrl", ipfsUrl);
+    // formData.append("createdBy", createdBy);
+    // formData.append("collectionId", collectionId);
+    // console.log(formData.getAll("createdBy"));
+    // console.log(formData, "<<< formData");
     // console.log()
-    fetch(`${BASE_URL2}/api/v1/nft`, {
-      method: httpConstants.METHOD_TYPE.POST,
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result.success) toast.success("Nft created");
-        else toast.error("Internal server error");
-        console.log(result, "<error");
-      });
+
+    // ---------
+    // fetch(`${BASE_URL2}/api/v1/nft`, {
+    //   method: httpConstants.METHOD_TYPE.POST,
+    //   body: formData,
+    // })
+    //   .then((res) => res.json())
+    //   .then((result) => {
+    //     if (result.success) toast.success("Nft created");
+    //     else toast.error("Internal server error");
+    //     console.log(result, "<error");
+    //   });
   };
 
   return (
@@ -135,44 +161,60 @@ function CreateSingleNFT(props) {
                 style={{ border: "none", backgroundColor: "#fff" }}
               > */}
 
-            <div
+            {/* <div
               className="card single-nft-card p-5"
               style={{ display: "block" }}
-              {...getRootProps()}
+              // {...getRootProps()}
             >
-              <input {...getInputProps()} />
+              {/* <input {...getInputProps()} /> */}
+
+            <Button
+              // onClick={handleClick}
+              style={{ border: "none", backgroundColor: "#fff" }}
+            >
+              <ImageFile onChange={(e) => setSelectFile(e.target.files[0])} />
+              {/* <UploadFile onChange={(e) => console.log("iii",(e.target.files[0]))} /> */}
+              {/* <input type="file" onChange={(e) => { console.log("oooo", e) }} /> */}
               <img
                 src={Image}
                 style={{ width: "100px", marginTop: "3em", color: "#366EEF" }}
               />
+            </Button>
+
+            {/* <img
+                src={Image}
+                style={{ width: "100px", marginTop: "3em", color: "#366EEF" }}
+              />
               <div>Drag and drop your images </div>
-              {/* </div> */}
-              {/* </Button> */}
-              {/* <input
+              <ImageFile onChange={(e) => setSelectFile(e.target.value)} ></ImageFile> 
+               */}
+            {/* </div> */}
+
+            {/* </Button> */}
+            {/* <input
                 type="file"
-                className="form-control"
-                placeholder="Write your name"
-                name="email"
-                style={{ display: "none" }}
-                ref={hiddenFileInput}
-                onChange={(e) => console.log(e.target)}
+                style={{ width: "2rem" }}
+                // className="form-control"
+                // placeholder="Write your name"
+                // name="email"
+                // style={{ display: "none" }}
+                // ref={hiddenFileInput}
+                onChange={(e) => setSelectFile(e.target.value)}
               /> */}
-              <span className="text-dark font-13">
+            {/* <span className="text-dark font-13">
                 Drag & Drop or
-                <Link to="/" style={{ textDecoration: "none" }}>
                   Browse
-                </Link>
-              </span>
-            </div>
+              </span> */}
+            {/* </div> */}
             <span className="text-secondary font-13">
               Supported(JPG,PNG,GIF,SVG,MP4, WEBM,WAV) Max size 40mb
             </span>
           </div>
           <div className="col-sm-5 col-12 col-xs-12">
             <div className="singlenft-form-box">
-              <form
+              <div
                 className="suggestion-form  p-4 "
-                onSubmit={(e) => handleSubmit(e)}
+                // onSubmit={(e) => handleSubmit(e)}
               >
                 <div className="mb-3 mt-3">
                   <label htmlFor="email" className="form-label input-heading">
@@ -260,7 +302,7 @@ function CreateSingleNFT(props) {
                 >
                   Create
                 </button>
-              </form>
+              </div>
             </div>
           </div>
         </div>

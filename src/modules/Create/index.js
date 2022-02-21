@@ -3,7 +3,7 @@ import BaseComponent from "../baseComponent";
 import CreateSingleNFT from "./CreateSingleNFT";
 import Utils from "../../utility";
 import BlockchainServices from "../../services/blockchainService";
-import { getCollection } from "../../services/contentServices";
+import getCollection from "../../services/contentMicroservice";
 // import ContentService from "../../services/contentMicroservice";
 import { eventConstants } from "../../constants";
 
@@ -22,7 +22,6 @@ export default class Index extends BaseComponent {
   }
 
   getRequestDataForSaveNftContent = (tokenId, data, ipfsRes, blockchainRes) => {
-
     return {
       tokenId: tokenId,
       transactionHash: blockchainRes?.transactionHash || "",
@@ -50,7 +49,7 @@ export default class Index extends BaseComponent {
   };
 
   createNftHandler = async (data) => {
-    console.log("---------------",data);
+    console.log(data, "<<<<<< createnft handler");
 
     if (!data || Object.keys(data).length < 1 || !data.nftFile)
       return Utils.apiFailureToast("Please select the file that to be upload");
@@ -99,14 +98,14 @@ export default class Index extends BaseComponent {
 
     // save NFT data on DB
     const [contentError, contentRes] = await Utils.parseResponse(
-      getCollection.createNftContent(
-        this.getRequestDataForSaveNftContent(
-          tokenId,
-          data,
-          ipfsRes,
-          blockchainRes
-        )
-      )
+      // getCollection.createNftContent(
+      //   this.getRequestDataForSaveNftContent(
+      //     tokenId,
+      //     data,
+      //     ipfsRes,
+      //     blockchainRes
+      //   )
+      // )
     );
     // this.props.dispatchAction(eventConstants.HIDE_LOADER);
     if (contentError || !contentRes) {
@@ -119,7 +118,8 @@ export default class Index extends BaseComponent {
   };
 
   render() {
-    alert("in 122 line")
+    // alert("in 122 line")
+
     return (
       <>
         <CreateSingleNFT

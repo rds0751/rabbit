@@ -1,52 +1,75 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 // import './Navbar.css'
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../../assets/styles/Notification.css";
-import { updateUserDetail } from "../../reducers/Action";
+import {
+  addUserData,
+  ManageNotiSideBar,
+  ManageWalletSideBar,
+  updateUserDetail,
+} from "../../reducers/Action";
+import { ethers } from "ethers";
+
 import Menu from "./Menu";
+import { CheckUserByWalletAddress } from "../../services/UserMicroService";
 // import "../../assets/st.css";
 function Navbar() {
+  const navigate=useNavigate()
   const [humburger, setHumburger] = useState(false);
-  // const ethereum = window.ethereum;
+  const ethereum = window.ethereum;
   const [errorMssg, setErrorMssg] = useState(null);
-  // const [defaultAccount, setDefaultAccount] = useState(null);
-  // console.log("ethereum ", ethereum && ethereum);
+  const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
+  console.log("ethereum ", ethereum && ethereum);
+  const [checkClick, setcheckClick] = useState(false);
+
+  const [getBalance, setGetBalance] = useState(null);
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state);
-  const { userDetails } = user;
-
+  const { user, sideBar } = useSelector((state) => state);
+  const { userDetails, loggedInUser } = user;
+  const { isOpenNoti, isOpenWallet } = sideBar;
   // useEffect(() => {
-  //   // if(ethereum){
-  //   //   toast.success('Conneted Metamask ');
-  //   // }
-  //   dispatch(updateUserDetail("hello"));
-
   //   if (window.ethereum) {
-  //     window.ethereum
-  //       .request({ method: "eth_requestAccounts" })
-  //       .then((result) => {
-  //         accountChangeHandler(result[0]); //accounts can be a array we just wanna grab first one
-  //         console.log(result[0]);
-  //       })
-  //       .catch((e) => {
-  //         console.log(e);
-  //       });
+  //     // window.ethereum
+  //     //   .request({ method: "eth_requestAccounts" })
+  //     //   .then((result) => {
+  //     //     accountChangeHandler(result[0]); //accounts can be a array we just wanna grab first one
+  //     //     console.log(result[0], "<<<result console");
+  //     //     dispatch(
+  //     //       updateUserDetail({ address: defaultAccount, balance: getBalance })
+  //     //     );
+
+  //     //     // window.location.pathname = "/wallet";
+  //     //   })
+  //     //   .catch((e) => {
+  //     //     // window.location.pathname = "/add-wallet";
+  //     //     console.log(e, "<<< error ");
+  //     //   });
   //   } else {
-  //     setErrorMssg("Install Metamask");
-  //     toast.success("Connect Wallet");
+  //     alert("Wallet not added");
+  //     setErrorMssg("Install Metamask ");
+  //     toast.error("Install Metamak and Connect Wallet");
   //   }
-  // }, [window.ethereum]);
+  // }, []);
   // const accountChangeHandler = (newAccount) => {
   //   setDefaultAccount(newAccount);
+  //   CheckUserByWalletAddress(newAccount, (res) => {
+  //     console.log(res, "<<<<response of user");
+  //     dispatch(addUserData(res));
+  //   });
+  //   getUserBalance(newAccount);
+  //   // console.log(data, "<<<<response dta");
   // };
-  // window.ethereum.on("accountsChanged", accountChangeHandler);
-
-  // if (ethereum) {
-  //   ethereum.on("accountsChanged", function (accounts) {});
-  // }
+  // const getUserBalance = (address) => {
+  //   window.ethereum
+  //     .request({ method: "eth_getBalance", params: [address, "latest"] })
+  //     .then((balance) => {
+  //       setGetBalance(ethers.utils.formatEther(balance));
+  //       console.log(getBalance, "<<< balance");
+  //     });
+  // };
   let location = useLocation();
 
   const handleHamburger = () => {
@@ -56,6 +79,27 @@ function Navbar() {
       setHumburger(false);
     }
   };
+  const handleWalletClick = () => {
+    // alert("handleWallet called");
+    if (loggedInUser == null) {
+      // alert("hanlde wallet null");
+      navigate("/add-wallet");
+    } else {
+      // alert("else part");
+      dispatch(ManageWalletSideBar(!isOpenWallet));
+    }
+  };
+  const handleNotiSideBar = () => {
+    // alert("noti open");
+    // alert(loggedInUser);
+    if (loggedInUser == null) {
+      // alert("nulll");
+      navigate("/add-wallet")
+    } else {
+      dispatch(ManageNotiSideBar(true));
+    }
+  };
+  console.log("logged in user >>> lllll", loggedInUser);
   return (
     <>
       <div className="navbar-width">
@@ -193,7 +237,10 @@ function Navbar() {
                     </ul>
                   </li>
                   <li>
-                    <Link to="/create-nft" className="btn btn-primary btnnav">
+                    <Link
+                      to={loggedInUser == null ? "/add-wallet" : "/create-nft"}
+                      className="btn btn-primary btnnav"
+                    >
                       Create
                     </Link>
                   </li>
@@ -202,14 +249,22 @@ function Navbar() {
 
                 <ul className="right_section_nav mb-0">
                   <li>
-                    <Link to="/notification">
-                      <img
-                        className="noti"
-                        src={require("../../assets/images/notification.png")}
-                        width="19px"
-                        height="21px"
-                      ></img>
-                    </Link>
+                    {/* <Link
+                      to={
+                        loggedInUser == null
+                          ? "/add-wallet"
+                          : dispatch(ManageNotiSideBar(true))
+                      }
+                    > */}
+                    <img
+                      onClick={handleNotiSideBar}
+                      className="noti"
+                      src={require("../../assets/images/notification.png")}
+                      width="19px"
+                      height="21px"
+                    ></img>
+                    {/* </Link> */}
+                    {/* </Link> */}
                   </li>
 
                   <li className="nav-item dropdown">
@@ -232,7 +287,12 @@ function Navbar() {
                       aria-labelledby="navbarDropdown"
                     >
                       <li>
-                        <Link className="dropdown-item" to="/my-profile">
+                        <Link
+                          className="dropdown-item"
+                          to={
+                            loggedInUser == null ? "/add-wallet" : "/my-profile"
+                          }
+                        >
                           Profile
                         </Link>
                       </li>
@@ -247,18 +307,25 @@ function Navbar() {
                     </ul>
                   </li>
                   <li>
-                    <Link to={!userDetails ? "/add-wallet" : "/wallet"}>
-                      <img
-                        className="btnnav_mob2"
-                        src={require("../../assets/images/wallet.png")}
-                        width="21px"
-                        height="21px"
-                        style={{
-                          color: "gray",
-                          cursor: "pointer",
-                        }}
-                      ></img>
-                    </Link>
+                    {/* <Link
+                      to={
+                        !userDetails
+                          ? "/add-wallet"
+                          : dispatch(ManageNotiSideBar(true))
+                      }
+                    > */}
+                    <img
+                      onClick={handleWalletClick}
+                      className="btnnav_mob2"
+                      src={require("../../assets/images/wallet.png")}
+                      width="21px"
+                      height="21px"
+                      style={{
+                        color: "gray",
+                        cursor: "pointer",
+                      }}
+                    ></img>
+                    {/* </Link> */}
                   </li>
                   {/* <li className="ham_burger"> */}
                   <button
