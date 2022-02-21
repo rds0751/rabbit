@@ -1,9 +1,99 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 import image from "../../assets/images/icon.png";
+import { ethers } from "ethers";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addUseraction,
+  addUserData,
+  updateUserDetail,
+} from "../../reducers/Action";
+import "react-toastify/dist/ReactToastify.css";
+import { CheckUserByWalletAddress } from "../../services/UserMicroService";
 
 function Create() {
+  const [humburger, setHumburger] = useState(false);
+  const ethereum = window.ethereum;
+  const [errorMssg, setErrorMssg] = useState(null);
+  const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
+  console.log("ethereum ", ethereum && ethereum);
+  const { user } = useSelector((state) => state);
+  const [checkClick, setcheckClick] = useState(false);
+  const [getBalance, setGetBalance] = useState(null);
+  const dispatch = useDispatch();
+  const { userDetails, loggedInUser } = user;
+  const [toggleEffect, setToggleEffect] = useState(false);
+  useEffect(() => {
+    alert("called");
+    if (loggedInUser != null) {
+      // window.location.pathname = "/wallet";
+    } else {
+      // alert("not user Details");
+    }
+  }, [toggleEffect]);
+
+  const connectMetamask = () => {
+    if (window.ethereum) {
+      window.ethereum
+        .request({ method: "eth_requestAccounts" })
+        .then((result) => {
+          accountChangeHandler(result[0]); //accounts can be a array we just wanna grab first one
+          console.log(result[0]);
+
+          dispatch(
+            updateUserDetail({ address: defaultAccount, balance: getBalance })
+          );
+          // CheckUserByWalletAddress(defaultAccount);
+          // setToggleEffect(!toggleEffect);
+          CheckUserByWalletAddress(defaultAccount, (res) => {
+            dispatch(addUserData(res));
+            setToggleEffect(!toggleEffect);
+          });
+          // window.location.pathname = "/wallet";
+        })
+        .catch((e) => {
+          // alert("Connect Your Wallet");
+          toast.error(" Connect Your Metamask Wallet");
+          console.log(e, "<<< error ");
+        });
+    } else {
+      // setErrorMssg("Install Metamask ");
+      alert("Install Metamask ");
+
+      toast.error("Install Metamak and Connect Wallet");
+    }
+  };
+  const accountChangeHandler = (newAccount) => {
+    setDefaultAccount(newAccount);
+    getUserBalance(newAccount);
+  };
+  const getUserBalance = (address) => {
+    window.ethereum
+      .request({ method: "eth_getBalance", params: [address, "latest"] })
+      .then((balance) => {
+        setGetBalance(ethers.utils.formatEther(balance));
+        console.log(getBalance, "<<< balance");
+      });
+  };
+
+  window.ethereum?.on("accountsChanged", accountChangeHandler);
+  console.log(loggedInUser, "<<<<<this iser user detail");
   return (
     <>
+      <div className="d-flex justify-content-between">
+        <ToastContainer
+          position="Install Metamask Extension And Connect Wallet"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+      </div>
+
       <div className="container">
         <div className="mt-5">
           <h1 style={{ fontSize: "20px", fontWeight: "bolder" }}>
@@ -25,6 +115,7 @@ function Create() {
         </div>
         <div className="row createmob">
           <div
+            onClick={connectMetamask}
             className="card col-md-3 col-lg-3 col-sm-6 col-12 my-5 card-border"
             style={{ cursor: "pointer" }}
           >

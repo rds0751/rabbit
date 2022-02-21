@@ -1,4 +1,7 @@
 import "./App.css";
+import react, { useEffect } from "react";
+import { Provider } from "react-redux";
+import { store } from "./reducers/store";
 import Navbar from "./common/components/Navbar";
 import NftPage from "./modules/Home/Nft";
 // import Lower__homepage from "./components/HomeNftFilters";
@@ -16,8 +19,13 @@ import MyProfile from "./modules/MyPages/MyProfile";
 // import Home_2 from "./components/Home_2";
 // import Home_3 from "./components/Home_3";
 import "./assets/styles/custom.css";
-
-import { BrowserRouter as Router, Routes, Route, Link ,Switch} from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  Switch,
+} from "react-router-dom";
 // import Collection_HomeNftFilters from "./components/Collection_HomeNftFilters";
 // import ToggleSwitch from "./components/ToggleSwitch";
 import HelpCenter from "./modules/Resources/Help/HelpCenter";
@@ -27,7 +35,7 @@ import MyItems from "./modules/Items/MyItems";
 import EditProfile from "./modules/Profile/EditProfile";
 import MyItems_Collection from "./modules/MyPages/MyItemCollection";
 import CreateNFT from "./modules/Create/CreateNFT";
-import CreateSingleNFT from "./modules/Create/CreateSingleNFT";
+import CreateSingleNFT from "./modules/Create/index";
 import About from "./modules/About/About";
 // import Menu from "./";
 // import Fixed_Price from "./modules/";
@@ -45,21 +53,33 @@ import FixedPrice from "./modules/Items/FixedPrice";
 import Menu from "./common/components/Menu";
 
 function App() {
+  //   useEffect(() => {
+  //     if(typeof window !== "undefined"){
+  //         const accounts = window.ethereum.request({method: "eth_requestAccounts"})
+  //         console.log("accounts :",accounts);
+  //     }
+  // },[])
+
   return (
-    <div className="App">
-      <Router>
-        <Navbar />
-        {/* <Tile__homepage /> */}
-        {/* <Switch> */}
+    <Provider store={store}>
+      <div className="App">
+        <Router>
+          <Navbar />
+          {/* <Tile__homepage /> */}
+          {/* <Switch> */}
           <Routes>
             <Route path="/nfts" element={<NftPage />} />
             <Route path="/" element={<NftPage />} />
 
-            <Route exact path="/nft-information/:id" element={<NftInformation />} />
+            <Route
+              exact
+              path="/nft-information/:id"
+              element={<NftInformation />}
+            />
 
             <Route
               exact
-              path="/nft-information_1"
+              path="/nft-information_1/:id"
               element={<NftInformation1 />}
             />
             <Route
@@ -113,7 +133,7 @@ function App() {
               path="/create-nft-collection"
               element={<CreateNftCollections />}
             />
-            <Route exact path="/create" element={<Create />} />
+            <Route exact path="/add-wallet" element={<Create />} />
             <Route eaxct path="/my-profile" element={<MyProfile />} />
             <Route exact path="/edit-profile" element={<EditProfile />} />
             <Route exact path="/about" element={<About />} />
@@ -150,10 +170,13 @@ function App() {
             /> */}
             <Route path="/menu" element={<Menu />} />
           </Routes>
-        {/* </Switch> */}
-      </Router>
-      <Footer/>
-    </div>
+          {/* </Switch> */}
+        </Router>
+        <Footer />
+        <Wallet />
+        <Notification />
+      </div>
+    </Provider>
   );
 }
 
