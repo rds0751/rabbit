@@ -6,6 +6,7 @@ import { httpServiceFileUpload } from "../utility/httpServiceFileUpload";
 const getCollection = {
   addIpfs,
   createNftContent,
+  updateNftContent
 };
 export default getCollection;
 
@@ -51,6 +52,18 @@ async function createNftContent(requestdata) {
         response.responseData.length === 0
       )
         return Promise.reject();
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+async function updateNftContent(requestData, requestId) {
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/" + requestId;
+  let headers = getHeaders();
+  return httpService(httpConstants.METHOD_TYPE.PUT, headers, requestData, url)
+    .then((response) => {
+      if (!response.success || !response.responseData) return Promise.reject();
       return Promise.resolve(response.responseData);
     })
     .catch(function (err) {

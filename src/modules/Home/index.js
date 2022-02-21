@@ -49,7 +49,7 @@ export default class NftDetail extends BaseComponent {
             ownerAddress: this.props?.user?.userDetails?.userId || '',
             updatedBy: this.props?.user?.userDetails?._id || '',
             // _id: this.state?.nftDetails?._id || '',
-            saleData: {
+            salesInfo: {
                 ...this.state?.nftDetails?.saleData,
                 isOpenForSale: false
             },
@@ -72,12 +72,12 @@ export default class NftDetail extends BaseComponent {
             );
         }
         let requestData = {
-            type: transactionConstants.SELL,
-            transaction: blockchainRes?.transactionHash || '',
-            seller: data.sellerId || '',
-            buyer: data.sellerId || '',
+            // type: transactionConstants.SELL,
+            transactionHash: blockchainRes?.transactionHash || '',
+            // seller: data.sellerId || '',
+            // buyer: data.sellerId || '',
             // _id: this.state?.nftDetails?._id || '',
-            saleData: {
+            salesInfo: {
                 ...data.saleData,
                 isOpenForSale: true
             },
@@ -101,12 +101,12 @@ export default class NftDetail extends BaseComponent {
             );
         }
         let requestData = {
-            type: transactionConstants.REMOVE_FROM_SALE,
-            transaction: blockchainRes.transactionHash || '',
-            seller: data.sellerId || '',
-            buyer: data.sellerId || '',
+            // type: transactionConstants.REMOVE_FROM_SALE,
+            transactionHash: blockchainRes.transactionHash || '',
+            // seller: data.sellerId || '',
+            // buyer: data.sellerId || '',
             // _id: this.state?.nftDetails?._id || '',
-            saleData: {
+            salesInfo: {
                 ...data.saleData,
                 isOpenForSale: false
             },
