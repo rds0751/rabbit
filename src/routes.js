@@ -19,7 +19,6 @@ import MyProfile from "./modules/MyPages/MyProfile";
 // import Home_2 from "./components/Home_2";
 // import Home_3 from "./components/Home_3";
 import "./assets/styles/custom.css";
-
 import {
   BrowserRouter as Router,
   Routes,
@@ -80,7 +79,7 @@ function App() {
 
             <Route
               exact
-              path="/nft-information_1"
+              path="/nft-information_1/:id"
               element={<NftInformation1 />}
             />
             <Route
@@ -174,6 +173,8 @@ function App() {
           {/* </Switch> */}
         </Router>
         <Footer />
+        <Wallet />
+        <Notification />
       </div>
     </Provider>
   );

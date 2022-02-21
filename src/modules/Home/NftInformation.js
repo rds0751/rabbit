@@ -9,16 +9,47 @@ import { BidApi, OfferApi } from "../../constants/Nft_Info_Api";
 import PricingHistoryComponentTable from "../../common/components/PricingHistoryComponentTable";
 import PricingHistoryComponentGraph from "../../common/components/PricingHistoryComponentGraph";
 // import BidsComponent from "./BidsComponent";
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from "react-router-dom";
+
+import { Button } from "@mui/material";
 import { getNft } from "../../services/webappMicroservice";
+import { useSelector } from "react-redux";
+import { put_NftOpenForSale, RemoveNftFromSale } from "../../services/contentServices";
+import { toast } from "react-toastify";
 
 export default function NftInformation() {
   const [activeInActive, setActiveInActive] = useState("active");
-  const nftId = useParams();
-  const [nft, setNft] = useState([])
+  const { user } = useSelector((state) => state);
+  const [isCurrUserNft, setIsCurrUserNft] = useState(null);
+  const [isOpenForSell, setisOpenForSell] = useState(null);
+  const { loggedInUser } = user;
+  const { id } = useParams();
+  const [nft, setNft] = useState([]);
   useEffect(() => {
-    getNft(nftId.id).then(response=>setNft(response))
-  })
+    getNft(id).then((response) => {
+      setNft(response);
+      console.log(response, "<<<response", loggedInUser._id);
+      setIsCurrUserNft(response?.createdBy == loggedInUser._id);
+      setisOpenForSell(response?.salesInfo?.isOpenForSale);
+    });
+  }, []);
+  // alert(`${isCurrUserNft},${loggedInUser._id},${isOpenForSell}`);
+
+  const handleSell = async () => {
+    const response = await put_NftOpenForSale(nft._id);
+    if (response.success) {
+      toast.success(response.message);
+      window.location.reload();
+    } else toast.error(response.message);
+  };
+  const handleRemoveSell = async () => {
+    const response = await RemoveNftFromSale(nft._id);
+    if (response.success) {
+      toast.success(response.message);
+      window.location.reload();
+    } else toast.error(response.message);
+  };
+
   return (
     <>
       <div className="container">
@@ -41,6 +72,47 @@ export default function NftInformation() {
           </div>
           <div className="col-lg-5 col-sm-12 col-md-6">
             <div className="row">
+              <span className="nftsell">
+                <Button
+                  style={{
+                    display: isCurrUserNft ? "block" : "none",
+                  }}
+                >
+                  <Link
+                    to="/edit-items"
+                    style={{
+                      textDecoration: "none",
+                      textTransform: "none",
+                    }}
+                  >
+                    Edit
+                  </Link>
+                </Button>
+                <Button
+                  style={{
+                    display: isCurrUserNft && !isOpenForSell ? "block" : "none",
+                    marginLeft: "1rem",
+                    color: "white",
+                    backgroundColor: "#366eff",
+                    textTransform: "none",
+                  }}
+                  onClick={handleSell}
+                >
+                  Sell
+                </Button>
+                <Button
+                  style={{
+                    display: isCurrUserNft && isOpenForSell ? "block" : "none",
+                    marginLeft: "1rem",
+                    color: "white",
+                    backgroundColor: "#366eff",
+                    textTransform: "none",
+                  }}
+                  onClick={handleRemoveSell}
+                >
+                  Remove From Sell
+                </Button>
+              </span>
               <div className="" id="share_info">
                 <span className="text-dark font-22 font-weight-900">
                   {nft.name}
@@ -312,9 +384,7 @@ export default function NftInformation() {
                 <h4 className="font-13  font-weight-900 mt-3">Description</h4>
               </div>
               <div className="row">
-                <h4 className="font-13 ">
-                  {nft.description}
-                </h4>
+                <h4 className="font-13 ">{nft.description}</h4>
               </div>
               <div className="row border-bottom pb-2 mt-3">
                 {/* <div className="col-1">
@@ -354,7 +424,10 @@ export default function NftInformation() {
               {activeInActive == "active" ? (
                 <button
                   className="btn btn-primary mt-3"
+                  data-bs-toggle="modal"
+                  data-bs-target="#myModalShare"
                   style={{
+                    display: !isCurrUserNft && isOpenForSell ? "block" : "none",
                     height: "40px",
                     width: "180px",
                     padding: "0px",
