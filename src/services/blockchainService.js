@@ -93,7 +93,7 @@ async function buyNFT({ tokenId }) {
 }
 async function putOnSaleNft({tokenId}) {
   const contractData = new ethers.Contract(contractAddress, contractABI, signer);
-  console.log("blockchain fn",contractData)
+  console.log("blockchain fn",tokenId)
 
   const result = await contractData.updateListingStatus(tokenId,true)
 
