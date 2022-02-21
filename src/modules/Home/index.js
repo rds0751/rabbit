@@ -81,7 +81,7 @@ export default class NftDetail extends BaseComponent {
         console.log("jjjjj",this.state.responseData.tokenId)
         const [blockchainError, blockchainRes] = await Utils.parseResponse(
             BlockchainService.putOnSaleNft({
-                tokenId: this.state.responseData.tokenId,
+                tokenId: 1,
             })
         );
         console.log("blockchainError=sellNowNft==", blockchainError)
@@ -112,7 +112,7 @@ export default class NftDetail extends BaseComponent {
         console.log("removeNftFromSale")
         const [blockchainError, blockchainRes] = await Utils.parseResponse(
             BlockchainService.removeFromSaleNft({
-                tokenId:this.state.responseData.tokenId,
+                tokenId:1,
             })
         );
         if (blockchainError || !blockchainRes) {
@@ -138,6 +138,7 @@ export default class NftDetail extends BaseComponent {
         if (!requestData || !_id)
             return;
         let [error, result] = await Utils.parseResponse(ContentService.updateNftContent(requestData,_id))
+        console.log("---",result)
         if (error || !result) {
             return Utils.apiFailureToast(error || "Unable to update Nft content.");
         }

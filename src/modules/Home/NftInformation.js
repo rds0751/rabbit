@@ -42,7 +42,7 @@ export default function NftInformation(props) {
   // console.log("===",isOpenForSell)
 
   const demoHandleSell = async () => {
-    props.sellNowNft({
+    props.removeNftFromSale({
       // sellerId:loggedInUser._id,
       // buyerId:loggedInUser._id,
       // saleData:response.salesInfo,

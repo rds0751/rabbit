@@ -72,6 +72,8 @@ async function updateNftContent(requestData, requestId) {
   let headers = getHeaders();
   return httpService(httpConstants.METHOD_TYPE.PUT, headers, requestData, url)
     .then((response) => {
+      console.log("------ssss",response.responseData);
+
       if (!response.success || !response.responseData) return Promise.reject();
       return Promise.resolve(response.responseData);
     })

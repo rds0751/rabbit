@@ -4,7 +4,7 @@ import contractABI from "../assets/abi/abi.json";
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
 // const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS
-const contractAddress = "0x8D4aeEEfA850aF82c2444B56B524E4b0C95946F4";
+const contractAddress = "0xd3E390083BC66d87aFD1457879A2fDDfBBe16e06";
 const BlockchainServices = {
   mintNFT,
   changeListedPrice,
