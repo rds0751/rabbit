@@ -20,20 +20,23 @@ function Create() {
   const [errorMssg, setErrorMssg] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
   console.log("ethereum ", ethereum && ethereum);
-  const { user,sideBar } = useSelector((state) => state);
+  const { user, sideBar } = useSelector((state) => state);
   const [checkClick, setcheckClick] = useState(false);
   const [getBalance, setGetBalance] = useState(null);
   const dispatch = useDispatch();
   const { userDetails, loggedInUser } = user;
-  const {isOpenWallet}=sideBar
+  const { isOpenWallet } = sideBar;
   const [toggleEffect, setToggleEffect] = useState(false);
   useEffect(() => {
+    // alert("called");
     if (loggedInUser != null) {
+      // alert("no null");
       toast.success("Wallet connected");
       dispatch(ManageWalletSideBar(!isOpenWallet));
       history("/");
-
     } else {
+      // alert("else");
+      history("/add-wallet");
       toast.error("Choose the wallet");
     }
   }, [toggleEffect]);

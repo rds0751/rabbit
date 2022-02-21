@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Link ,useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Single from "../../assets/images/single.png";
 import Collection from "../../assets/images/collection.png";
 import { useDispatch } from "react-redux";
 import { ethers } from "ethers";
 import { updateUserDetail } from "../../reducers/Action";
 import { toast, ToastContainer } from "react-toastify";
+import { useSelector } from "react-redux";
 
 function CreateNFT() {
-  const navigate=useNavigate()
+  const { user } = useSelector((state) => state);
+  const { loggedInUser } = user;
+  const navigate = useNavigate();
   const [humburger, setHumburger] = useState(false);
   const ethereum = window.ethereum;
   const [errorMssg, setErrorMssg] = useState(null);
@@ -19,12 +22,15 @@ function CreateNFT() {
   const [getBalance, setGetBalance] = useState(null);
   const dispatch = useDispatch();
   useEffect(() => {
+    if (loggedInUser == null) {
+      navigate("/add-wallet");
+    }
     if (window.ethereum) {
       window.ethereum
         .request({ method: "eth_requestAccounts" })
         .then((result) => {
           accountChangeHandler(result[0]); //accounts can be a array we just wanna grab first one
-          console.log(result[0],"<<<result console");
+          console.log(result[0], "<<<result console");
           dispatch(
             updateUserDetail({ address: defaultAccount, balance: getBalance })
           );
