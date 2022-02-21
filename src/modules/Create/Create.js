@@ -12,7 +12,7 @@ import {
 } from "../../reducers/Action";
 import "react-toastify/dist/ReactToastify.css";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
-
+import { WEB_APP_USER_WALLET_ADDRESS } from "../../reducers/Constants";
 function Create() {
   const history = useNavigate();
   const [humburger, setHumburger] = useState(false);
@@ -28,15 +28,11 @@ function Create() {
   const { isOpenWallet } = sideBar;
   const [toggleEffect, setToggleEffect] = useState(false);
   useEffect(() => {
-    // alert("called");
     if (loggedInUser != null) {
-      // alert("no null");
       toast.success("Wallet connected");
       dispatch(ManageWalletSideBar(!isOpenWallet));
       history("/");
     } else {
-      // alert("else");
-      history("/add-wallet");
       toast.error("Choose the wallet");
     }
   }, [toggleEffect]);
@@ -51,6 +47,10 @@ function Create() {
 
           dispatch(
             updateUserDetail({ address: defaultAccount, balance: getBalance })
+          );
+          localStorage.setItem(
+            WEB_APP_USER_WALLET_ADDRESS,
+            `${defaultAccount}`
           );
           // CheckUserByWalletAddress(defaultAccount);
           // setToggleEffect(!toggleEffect);
