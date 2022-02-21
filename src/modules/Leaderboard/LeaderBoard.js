@@ -11,6 +11,7 @@ import {
 } from "../../constants/LeaderBoardApi";
 import { getTopSellers } from "../../services/sellAndPurchaseMicroService";
 import { getTopCollections } from "../../services/sellAndPurchaseMicroService";
+import { getTopNftSales } from "../../services/webappMicroservice";
 
 function LeaderBoard() {
 
@@ -27,6 +28,16 @@ function LeaderBoard() {
     getTopCollections().then((response) => setTopCollections(response));
   });
   console.log("topCollections", topCollections);
+
+  const [topNftSales, setTopNftSales] = useState([]);
+
+  useEffect(() => {
+    getTopNftSales().then((response) => setTopNftSales(response));
+  });
+  console.log("topNftSales", topNftSales);
+
+
+
 
   // const [state, setState] = useState(LeaderBoardApi);
   const [PendingAcceptedCreated, setPendingAcceptedCreated] =
@@ -403,8 +414,8 @@ function LeaderBoard() {
         </div>
         <div className="row mx-0 text-center justify">
           {/* <div className="col-md-3 col-lg-3 col-sm-6 col-11 images"> */}
-          {LeaderBoardApi2.map((curElem) => {
-            const { image, title, price, maxPrice, maxPrice2, daysLeft } =
+          {topNftSales.map((curElem) => {
+            const { cdnUrl, name, ownedBy, maxPrice2, daysLeft } =
               curElem;
             return (
               <div className="col-md-3 col-lg-3 col-sm-6 col-11 images">
@@ -412,21 +423,21 @@ function LeaderBoard() {
                   <img
                     id="nft__photo"
                     className="img-fluid"
-                    src={image}
+                    src={cdnUrl}
                     alt="/"
                   />
                   {/* <img id='like_icon' src={require('../asset//images/Like.png')} /> */}
                   <div className="tile__details">
                     <div className="container__up">
-                      <h6 className="title">{title}</h6>
+                      <h6 className="title">{name}</h6>
                     </div>
                     <div className="container__down">
                       <h6 className="value__high">
                         Sold to
                         <span style={{ fontWeight: "bold", color: "black" }}>
-                          {maxPrice}
+                          {ownedBy}
                         </span>
-                        for<span>{maxPrice2}</span>
+                        for<span>{curElem.biddingDetails.currency}</span>
                       </h6>
                       <h6 className="value__k">
                         {daysLeft}{" "}
