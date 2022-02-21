@@ -83,8 +83,7 @@ export function getCollections(requestData) {
 }
 
 export function getCollection(requestData) {
-  let url =
-    process.env.REACT_APP_WEBAPP_MICROSERVICE +
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE +
     "api/v1/collection/" +
     requestData +
     "/nfts";
@@ -135,6 +134,28 @@ export function getNftsByCollectionId(requestData) {
       return Promise.reject(err);
     });
 }
+export function getTopNftSales(requestData) {
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/get-top-nfts";
+  return httpService(
+    httpConstants.METHOD_TYPE.GET,
+    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    requestData,
+    url
+  )
+    .then((response) => {
+      if (
+        !response.success ||
+        response.responseCode !== 200 ||
+        !response.responseData ||
+        response.responseData.length === 0
+      )
+        return Promise.reject();
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
 
 export async function getNameImageOfUser(_id) {
   try {
@@ -148,4 +169,27 @@ export async function getNameImageOfUser(_id) {
   } catch (err) {
     console.log(err);
   }
+}
+
+export function addNftReport(requestData) {
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/add-nft-report" ;
+  return httpService(
+    httpConstants.METHOD_TYPE.POST,
+    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    requestData,
+    url
+  )
+    .then((response) => {
+      if (
+        !response.success ||
+        response.responseCode !== 200 ||
+        !response.responseData ||
+        response.responseData.length === 0
+      )
+        return Promise.reject();
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
 }
