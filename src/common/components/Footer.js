@@ -31,10 +31,10 @@ function Footer() {
                 <a href="/">
                   <li
                     style={{
-                      fontSize: "16px",
+                      fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "5px",
+                      marginTop: "8px",marginBottom:"8px",
                     }}
                   >
                     NFT
@@ -43,10 +43,10 @@ function Footer() {
                 <a href="/collections-tile">
                   <li
                     style={{
-                      fontSize: "16px",
+                      fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "5px",
+                      marginTop: "8px",marginBottom:"8px",
                     }}
                   >
                     Collections
@@ -73,10 +73,10 @@ function Footer() {
                 <a href="/top-seller">
                   <li
                     style={{
-                      fontSize: "16px",
+                      fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "5px",
+                      marginTop: "8px",marginBottom:"8px",
                     }}
                   >
                     Top Seller
@@ -85,10 +85,10 @@ function Footer() {
                 <a href="/top-bidder">
                   <li
                     style={{
-                      fontSize: "16px",
+                      fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "5px",
+                      marginTop: "8px",marginBottom:"8px",
                     }}
                   >
                     Top Buyer
@@ -97,10 +97,10 @@ function Footer() {
                 <a href="/top-collection">
                   <li
                     style={{
-                      fontSize: "16px",
+                      fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "5px",
+                      marginTop: "8px",marginBottom:"8px",
                     }}
                   >
                     Top Collections
@@ -126,10 +126,10 @@ function Footer() {
                 <a href="/about">
                   <li
                     style={{
-                      fontSize: "16px",
+                      fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "5px",
+                      marginTop: "8px",marginBottom:"8px",
                     }}
                   >
                     About{" "}
@@ -153,10 +153,10 @@ function Footer() {
                 <a href="/help-center">
                   <li
                     style={{
-                      fontSize: "16px",
+                      fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "5px",
+                      marginTop: "8px",marginBottom:"8px",
                     }}
                   >
                     Help Centers
@@ -165,10 +165,10 @@ function Footer() {
                 <a href="#">
                   <li
                     style={{
-                      fontSize: "16px",
+                      fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "5px",
+                      marginTop: "8px",marginBottom:"8px",
                     }}
                   >
                     FAQs
@@ -177,10 +177,10 @@ function Footer() {
                 <a href="Suggestions">
                   <li
                     style={{
-                      fontSize: "16px",
+                      fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "5px",
+                      marginTop: "8px",marginBottom:"8px",
                     }}
                   >
                     Suggestions
@@ -203,10 +203,10 @@ function Footer() {
                 <a href="/help-center">
                   <li
                     style={{
-                      fontSize: "16px",
+                      fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "5px",
+                      marginTop: "8px",marginBottom:"8px",
                     }}
                   >
                     Help Centers
@@ -215,10 +215,10 @@ function Footer() {
                 <a href="#">
                   <li
                     style={{
-                      fontSize: "16px",
+                      fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "5px",
+                      marginTop: "8px",marginBottom:"8px",
                     }}
                   >
                     FAQs
@@ -227,10 +227,10 @@ function Footer() {
                 <a href="/suggestion">
                   <li
                     style={{
-                      fontSize: "16px",
+                      fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "5px",
+                      marginTop: "8px",marginBottom:"8px",
                     }}
                   >
                     Suggestions
@@ -256,10 +256,10 @@ function Footer() {
                 <a href="/about">
                   <li
                     style={{
-                      fontSize: "16px",
+                      fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "5px",
+                      marginTop: "8px",marginBottom:"8px",
                     }}
                   >
                     About{" "}
@@ -283,7 +283,7 @@ function Footer() {
                 <i className="fab fa-instagram"></i>
               </li>
               <li
-                style={{ fontSize: "18px", color: "#8F8F8F", marginTop: "5px" }}
+                style={{ fontSize: "18px", color: "#8F8F8F", marginTop: "8px",marginBottom:"8px" }}
               >
                 Subscribe to our newsletter for the latest NFTs{" "}
               </li>
@@ -313,6 +313,7 @@ function Footer() {
                     id="button-addon2"
                     style={{
                       height: "38px",
+                      fontWeight:"400px",
                       borderTopLeftRadius: "0em",
                       borderBottomLeftRadius: "0em",
                     }}
@@ -328,6 +329,7 @@ function Footer() {
                   fontSize: "18px",
                   color: "#8F8F8F",
                   textAlign: "left",
+                   marginTop:"37px"
                 }}
               >
                 About DLT NFT marketplace

@@ -1,15 +1,18 @@
-import { httpService } from "../utility/httpService";
-import { httpConstants } from "../constants";
+import { httpService } from '../utility/httpService';
+import { httpConstants } from '../constants';
+import { BASE_URL } from '../reducers/Constants';
 
 export function getNfts(requestData) {
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts";
+  // let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts";
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + 'api/v1/nfts';
   return httpService(
-    httpConstants.METHOD_TYPE.POST,
-    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    httpConstants.METHOD_TYPE.GET,
+    { 'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON },
     requestData,
     url
   )
-    .then((response) => {
+    .then(response => {
+      console.log(response, '<<<< response');
       if (
         !response.success ||
         response.responseCode !== 200 ||
@@ -26,16 +29,14 @@ export function getNfts(requestData) {
 
 export function getNft(requestData) {
   let url =
-    process.env.REACT_APP_WEBAPP_MICROSERVICE +
-    "api/v1/nft/" +
-    requestData;
+    process.env.REACT_APP_WEBAPP_MICROSERVICE + 'api/v1/nft/' + requestData;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
-    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    { 'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON },
     {},
     url
   )
-    .then((response) => {
+    .then(response => {
       if (
         !response.success ||
         response.responseCode !== 200 ||
@@ -51,14 +52,14 @@ export function getNft(requestData) {
 }
 
 export function getCollections(requestData) {
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/collections";
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + 'api/v1/collections';
   return httpService(
-    httpConstants.METHOD_TYPE.POST,
+    httpConstants.METHOD_TYPE.GET,
     { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
     requestData,
     url
   )
-    .then((response) => {
+    .then(response => {
       if (
         !response.success ||
         response.responseCode !== 200 ||
@@ -75,16 +76,13 @@ export function getCollections(requestData) {
 
 export function getCollection(requestData) {
   let url =
-    process.env.REACT_APP_WEBAPP_MICROSERVICE +
-    "api/v1/collection/" +
-    requestData;
-  return httpService(
-    httpConstants.METHOD_TYPE.GET,
-    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/collection/" + requestData + "/nfts";
+  return httpService(httpConstants.METHOD_TYPE.GET,
+    { 'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON },
     {},
     url
   )
-    .then((response) => {
+    .then(response => {
       if (
         !response.success ||
         response.responseCode !== 200 ||
@@ -102,14 +100,16 @@ export function getCollection(requestData) {
 export function getNftsByCollectionId(requestData) {
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
-    "api/v1/collection/" + requestData + "/nfts"
+    'api/v1/collection/' +
+    requestData +
+    '/nfts';
   return httpService(
     httpConstants.METHOD_TYPE.GET,
-    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    { 'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON },
     requestData,
     url
   )
-    .then((response) => {
+    .then(response => {
       if (
         !response.success ||
         response.responseCode !== 200 ||
@@ -122,4 +122,18 @@ export function getNftsByCollectionId(requestData) {
     .catch(function (err) {
       return Promise.reject(err);
     });
+}
+
+export async function getNameImageOfUser(_id) {
+  try {
+    const res = await fetch(`${BASE_URL}/api/v1/user/${_id}`);
+    const result = await res.json();
+    const user = result.responseData;
+    return {
+      name: user.firstName + ' ' + user.lastName,
+      imageUrl: user.cdnUrl,
+    };
+  } catch (err) {
+    console.log(err);
+  }
 }

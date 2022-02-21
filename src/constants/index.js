@@ -2,7 +2,14 @@
  * Created by Ayush Kulshrestha on 18/09/2019.
  */
 
-
+ export const eventConstants = {
+    SHOW_LOADER: "SHOW_LOADER",
+    HIDE_LOADER: "HIDE_LOADER",
+  
+    SIGN_IN_SUCCESS: "SIGN_IN_SUCCESS",
+    LOGOUT_SUCCESS: "LOGOUT_SUCCESS",
+  };
+  
 export const httpConstants = {
     METHOD_TYPE: {
         POST: 'POST',
