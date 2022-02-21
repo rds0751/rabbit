@@ -12,10 +12,11 @@ import PricingHistoryComponentGraph from "../../common/components/PricingHistory
 import { useParams, Link } from "react-router-dom";
 
 import { Button } from "@mui/material";
-import { getNft } from "../../services/webappMicroservice";
+import { getNft, addNftReport } from "../../services/webappMicroservice";
 import { useSelector } from "react-redux";
 import { put_NftOpenForSale, RemoveNftFromSale } from "../../services/contentServices";
 import { toast } from "react-toastify";
+import { getUser } from "../../services/UserMicroService";
 
 export default function NftInformation() {
   const [activeInActive, setActiveInActive] = useState("active");
@@ -25,6 +26,12 @@ export default function NftInformation() {
   const { loggedInUser } = user;
   const { id } = useParams();
   const [nft, setNft] = useState([]);
+  const [userDetails, setUserDetails] = useState([]);
+  const [report, setReport] = useState({
+    content:id,
+    // addedBy: user.addUserData._id,
+    reason:""
+  })
   useEffect(() => {
     getNft(id).then((response) => {
       setNft(response);
@@ -32,7 +39,8 @@ export default function NftInformation() {
       setIsCurrUserNft(response?.createdBy == loggedInUser._id);
       setisOpenForSell(response?.salesInfo?.isOpenForSale);
     });
-  }, []);
+    getUser(nft.ownedBy).then(response=>setUserDetails(response))
+  });
   // alert(`${isCurrUserNft},${loggedInUser._id},${isOpenForSell}`);
 
   const handleSell = async () => {
@@ -49,6 +57,16 @@ export default function NftInformation() {
       window.location.reload();
     } else toast.error(response.message);
   };
+
+  const handleChange = (e) => setReport({
+    ...report,
+    reason:e.target.value,
+  })
+
+  const makeReport = () => {
+    console.log("report", report)
+    addNftReport(report)
+  }
 
   return (
     <>
@@ -281,11 +299,13 @@ export default function NftInformation() {
                             <select
                               className="form-select"
                               id="inputGroupSelect02"
+                              onChange={(e) => handleChange(e)}
                             >
-                              <option selected>Choose...</option>
-                              <option value="1">One</option>
-                              <option value="2">Two</option>
-                              <option value="3">Three</option>
+                              <option value="Fake collection or possible scam" selected>Fake collection or possible scam</option>
+                              <option value="Explicit and sensitive content">Explicit and sensitive content</option>
+                              <option value="Spam">Spam</option>
+                              <option value="Might be stolen">Might be stolen</option>
+                              <option value="Other">Other</option>
                             </select>
                           </div>
                         </div>
@@ -297,6 +317,7 @@ export default function NftInformation() {
                             className="btn btn-primary w-100"
                             data-bs-dismiss="modal"
                             style={{ marginLeft: "1.1em" }}
+                            onClick = {makeReport}
                           >
                             Make Offer
                           </button>
@@ -336,7 +357,7 @@ export default function NftInformation() {
                   <span className="font-13 text-dark">
                     Owned by:
                     <span className="font-13 font-weight-900 text-dark">
-                      Beeple
+                      {userDetails.firstName}
                     </span>
                   </span>
                 </div>
@@ -344,7 +365,7 @@ export default function NftInformation() {
                   <span className="font-13 text-dark">
                     Created by:
                     <span className="font-13 font-weight-900 text-dark">
-                      Beeple
+                      {userDetails.firstName}
                     </span>
                   </span>
                 </div>
@@ -529,7 +550,7 @@ export default function NftInformation() {
             <PricingHistoryComponentTable />
           </div>
           <div className="col-lg-5 col-sm-12">
-            <PricingHistoryComponentGraph />
+            <PricingHistoryComponentGraph id={id} />
           </div>
           <div className="col-1"></div>
         </div>
