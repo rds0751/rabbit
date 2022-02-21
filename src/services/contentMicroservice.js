@@ -9,6 +9,15 @@ const getCollection = {
   updateNftContent
 };
 export default getCollection;
+function getHeaders() {
+  return {
+    "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON,
+    skip: true,
+    "Access-Control-Allow-Origin": "*",
+    // 'Authorization': `Bearer ${utility.getAccessToken()}`
+  };
+}
+
 
 async function addIpfs(requestdata) {
   // let url = "http://localhost:3001" + "/add-file-ipfs";

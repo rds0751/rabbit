@@ -26,19 +26,20 @@ export default function NftInformation(props) {
   const { id } = useParams();
   const [nft, setNft] = useState([]);
   useEffect(() => {
-    getNft("6210b6f5bd9910002a5ad3d1").then((response) => {
-      alert("data")
+    getNft("620e7b4107515b002ab23afe").then((response) => {
+      // alert("data")
 
       setNft(response);
       console.log(response, "<<<response");
       // setIsCurrUserNft(response?.createdBy == loggedInUser._id);
-      setIsCurrUserNft(response?.createdBy == "6210b6f5bd9910002a5ad3d1");
+      setIsCurrUserNft(response?.createdBy == "61de9f37905a9s3863300611d");
       setisOpenForSell(response?.salesInfo?.isOpenForSale);
     });
   }, []);
   // alert(`${isCurrUserNft},${loggedInUser._id},${isOpenForSell}`);
 
   const handleSell = async () => {
+    alert("00000000")
       props.sellNowNft({
         // sellerId:loggedInUser._id,
         // buyerId:loggedInUser._id,

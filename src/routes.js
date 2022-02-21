@@ -42,7 +42,7 @@ import About from "./modules/About/About";
 // import Highest_Bid from "./components/Highest_Bid";
 import CreateNftCollections from "./modules/Create/CreateNftCollections";
 import CollectionDetails from "./modules/Collections/CollectionDetails";
-import NftInformation from "./modules/Home/NftInformation";
+import NftInformation from "./modules/Home/index";
 import NftInformation1 from "./modules/Home/NftInformation1";
 import NftInformation2 from "./modules/Home/NftInformation2";
 import NftInformationOffer1 from "./modules/Home/NftInformationOffer1";

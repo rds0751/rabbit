@@ -1,7 +1,7 @@
 import React from "react";
 import BaseComponent from "../baseComponent";
 // import HeaderComponent from "../common/header";
-import NftDetails from "./NftInformation1";
+import NftDetails from "./NftInformation";
 import Utils from "../../utility";
 import BlockchainService from "../../services/blockchainService"; 
 import ContentService  from "../../services/contentMicroservice";
@@ -88,7 +88,7 @@ export default class NftDetail extends BaseComponent {
 
     }
 
-    removeNftFromSale = async () => {
+    removeNftFromSale = async (data) => {
         console.log("removeNftFromSale")
         const [blockchainError, blockchainRes] = await Utils.parseResponse(
             BlockchainService.removeFromSaleNft({
