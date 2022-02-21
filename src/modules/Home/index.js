@@ -28,7 +28,7 @@ export default class NftDetail extends BaseComponent {
 
     }
     getNftDetail = async () => {
-        getNft("6210b6f5bd9910002a5ad3d1").then((response) => {
+        getNft("620e7b4107515b002ab23afe").then((response) => {
             // alert("data")
             this.setState({
                 responseData: response,
@@ -91,23 +91,14 @@ export default class NftDetail extends BaseComponent {
                 blockchainError?.data?.message || "Unable to sell NFT on blockchain"
             );
         }
-        // let requestData = {
-        //     // type: transactionConstants.SELL,
-        //     // transactionHash: blockchainRes?.transactionHash || '',
-        //     // seller: data.sellerId || '',
-        //     // buyer: data.sellerId || '',
-        //     // _id: this.state?.nftDetails?._id || '',
-        //     // salesInfo: {
-        //     //     ...this.state.responseData.salesInfo,
-        //     //     isOpenForSale: true
-        //     // },
-
-        // }
+        let requestData = {
+            _id: this.state.responseData._id
+        }
         // console.log("nannnn",requestData)
         // this.updateNftDataInDb(requestData, eventConstants.SELL,this.state.responseData._id || '')
         if (!this.state.responseData._id)
             return;
-        let [error, result] = await Utils.parseResponse(ContentService.updateNftContent({_id:this.state.responseData._id}))
+        let [error, result] = await Utils.parseResponse(ContentService.openForSale(requestData))
         console.log("---", result)
         if (error || !result) {
             return Utils.apiFailureToast(error || "Unable to update Nft content.");
@@ -128,18 +119,19 @@ export default class NftDetail extends BaseComponent {
             );
         }
         let requestData = {
-            // type: transactionConstants.REMOVE_FROM_SALE,
-            transactionHash: blockchainRes.transactionHash || '',
-            // seller: data.sellerId || '',
-            // buyer: data.sellerId || '',
-            // _id: this.state?.nftDetails?._id || '',
-            salesInfo: {
-                ...this.state.responseData.salesInfo,
-                isOpenForSale: false
-            },
+            _id: this.state.responseData._id
         }
-        this.updateNftDataInDb(requestData, eventConstants.REMOVE_FROM_SALE, this.state.responseData._id || '')
+        if (!this.state.responseData._id)
+            return;
+        let [error, result] = await Utils.parseResponse(ContentService.removeFromSale(requestData))
+        console.log("---", result)
+        if (error || !result) {
+            return Utils.apiFailureToast(error || "Unable to update Nft content.");
+        }
+        this.setState({ nftDetails: result })
     }
+
+
 
     updateNftDataInDb = async (requestData, type, _id) => {
         if (!requestData || !_id)
@@ -161,7 +153,7 @@ export default class NftDetail extends BaseComponent {
 
         Utils.apiSuccessToast(message);
 
-    }
+    };
 
     render() {
         return (
@@ -182,3 +174,4 @@ export default class NftDetail extends BaseComponent {
         );
     }
 }
+

@@ -6,7 +6,8 @@ import { httpServiceFileUpload } from "../utility/httpServiceFileUpload";
 const getCollection = {
   addIpfs,
   createNftContent,
-  openForSale
+  openForSale,
+  removeFromSale
 };
 export default getCollection;
 function getHeaders() {
@@ -69,6 +70,20 @@ async function createNftContent(requestdata) {
 }
 async function openForSale(requestData) {
   let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/open-for-sale";
+  let headers = getHeaders();
+  return httpService(httpConstants.METHOD_TYPE.PUT, headers, requestData, url)
+    .then((response) => {
+      console.log("------ssss",response.responseData);
+
+      if (!response.success || !response.responseData) return Promise.reject();
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+async function removeFromSale(requestData) {
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/remove-nft-from-sale";
   let headers = getHeaders();
   return httpService(httpConstants.METHOD_TYPE.PUT, headers, requestData, url)
     .then((response) => {
