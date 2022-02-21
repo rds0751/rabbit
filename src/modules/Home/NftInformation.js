@@ -14,7 +14,10 @@ import { useParams, Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import { getNft, addNftReport } from "../../services/webappMicroservice";
 import { useSelector } from "react-redux";
-import { put_NftOpenForSale, RemoveNftFromSale } from "../../services/contentServices";
+import {
+  put_NftOpenForSale,
+  RemoveNftFromSale,
+} from "../../services/contentServices";
 import { toast } from "react-toastify";
 import { getUser } from "../../services/UserMicroService";
 
@@ -33,11 +36,17 @@ export default function NftInformation() {
     reason:""
   })
   useEffect(() => {
-    getNft(id).then((response) => {
-      setNft(response);
-      console.log(response, "<<<response", loggedInUser._id);
-      setIsCurrUserNft(response?.createdBy == loggedInUser._id);
-      setisOpenForSell(response?.salesInfo?.isOpenForSale);
+    // getNft(id).then((response) => {
+    //   setNft(response);
+    //   console.log(response, "<<<response", loggedInUser._id);
+    //   setIsCurrUserNft(response?.createdBy == loggedInUser._id);
+    //   setisOpenForSell(response?.salesInfo?.isOpenForSale);
+    // });
+    getNft(id, (res) => {
+      setNft(res);
+      console.log(res, "response of nft");
+      setIsCurrUserNft(res?.createdBy == loggedInUser?._id);
+      setisOpenForSell(res?.salesInfo?.isOpenForSale);
     });
     getUser(nft.ownedBy).then(response=>setUserDetails(response))
   });
@@ -47,14 +56,14 @@ export default function NftInformation() {
     const response = await put_NftOpenForSale(nft._id);
     if (response.success) {
       toast.success(response.message);
-      window.location.reload();
+      window.location.reload(false);
     } else toast.error(response.message);
   };
   const handleRemoveSell = async () => {
     const response = await RemoveNftFromSale(nft._id);
     if (response.success) {
       toast.success(response.message);
-      window.location.reload();
+      window.location.reload(false);
     } else toast.error(response.message);
   };
 

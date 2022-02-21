@@ -1,5 +1,8 @@
 import { ADD_USER, ALL_USERS, USER_DETAILS } from "../Constants";
 
+//  userDetails  has only address and wallet amount
+// loggedInUser has Full User details
+
 let initialState = {
   // isLoggedIn: false,
   // loginFailure: null,

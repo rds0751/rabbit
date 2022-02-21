@@ -12,16 +12,16 @@ function Wallet() {
   const [checkClick, setcheckClick] = useState(false);
   const [getBalance, setGetBalance] = useState(null);
 
-  const ethereum = window.ethereum;
-  console.log("ethereum : ", ethereum);
+  // const ethereum = window.ethereum;
+  // console.log("ethereum : ", ethereum);
   const { user, sideBar } = useSelector((state) => state);
   // console.log(data);
+  const { userDetails } = user;
   console.log(sideBar, "<<<<sidebar");
   const { isOpenWallet } = sideBar;
   useEffect(() => {
     // if(ethereum){
     //   toast.success('Conneted Metamask ');
-
     // }
     // if (window.ethereum) {
     //   window.ethereum
@@ -29,7 +29,6 @@ function Wallet() {
     //     .then((result) => {
     //       accountChangeHandler(result[0]); //accounts can be a array we just wanna grab first one
     //       console.log(result[0]);
-
     //       // window.location.pathname = "/wallet";
     //     })
     //     .catch((e) => {
@@ -41,27 +40,26 @@ function Wallet() {
     //   toast.success("Connect Wallet");
     // }
   }, [window.ethereum, checkClick]);
-  const accountChangeHandler = (newAccount) => {
-    setDefaultAccount(newAccount);
-    getUserBalance(newAccount);
-  };
-  const getUserBalance = (address) => {
-    window.ethereum
-      .request({ method: "eth_getBalance", params: [address, "latest"] })
-      .then((balance) => {
-        setGetBalance(ethers.utils.formatEther(balance));
-        console.log(getBalance, "<<< balance");
-      });
-  };
+  // const accountChangeHandler = (newAccount) => {
+  //   setDefaultAccount(newAccount);
+  //   getUserBalance(newAccount);
+  // };
+  // const getUserBalance = (address) => {
+  //   window.ethereum
+  //     .request({ method: "eth_getBalance", params: [address, "latest"] })
+  //     .then((balance) => {
+  //       setGetBalance(ethers.utils.formatEther(balance));
+  //       console.log(getBalance, "<<< balance");
+  //     });
+  // };
 
-  window.ethereum?.on("accountsChanged", accountChangeHandler);
+  // window.ethereum?.on("accountsChanged", accountChangeHandler);
 
   return (
     <div
       className="wallet"
       style={{
         display: isOpenWallet ? null : "none",
-      
       }}
     >
       <div className="empty_div"></div>
@@ -75,14 +73,14 @@ function Wallet() {
               ? ethereum && ethereum.chainId
               : "Install extension to connect wallet"} */}
             {/* {userDetails?.address} */}
-            {defaultAccount}
+            {userDetails?.address}
           </h3>
           <i className="far fa-copy"></i>
         </div>
         <div className="balancewallet textVerticalCenter">
           <div className="WalletContent">
             <h3>Total Balance</h3>
-            <h4>{getBalance}</h4>
+            <h4>{userDetails?.balance}</h4>
           </div>
         </div>
         <button className="btnwallet">Add Balance</button>
