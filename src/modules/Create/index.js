@@ -14,7 +14,7 @@ export default class Index extends BaseComponent {
       categoryId: "",
       // collection: [],
       mintData: [],
-      isNftCreated:false
+      isNftCreated: false
     };
   }
 
@@ -33,7 +33,7 @@ export default class Index extends BaseComponent {
       cdnUrl: ipfsRes?.cdnUrl || "",
       cid: ipfsRes?.cid || "",
       description: data?.description || "",
-      blockchain:data?.blockchain || "",
+      blockchain: data?.blockchain || "",
       network: {
         chainId: blockchainRes?.chainId || "",
         name: blockchainRes?.name || "",
@@ -45,7 +45,7 @@ export default class Index extends BaseComponent {
       ownedBy: data?.createdBy,
       createdBy: data?.createdBy,
       updatedBy: data?.createdBy,
-      ownerAddress: data?.ownerAddress[0] || data?.ownerAddress || '', // put metamask address
+      ownerAddress: data?.ownerAddress || '', // put metamask address
     };
   };
 
@@ -59,7 +59,7 @@ export default class Index extends BaseComponent {
     // console.log("duke",data)
     let formData = new FormData();
     formData.append("attachment", data.nftFile);
-   
+
 
     // if(!this.props.user?.userDetails)
     //   return Utils.apiFailureToast("Please connect your wallet");
