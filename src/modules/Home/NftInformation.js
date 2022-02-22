@@ -73,7 +73,6 @@ export default function NftInformation() {
   })
 
   const makeReport = () => {
-    console.log("report", report)
     addNftReport(report)
   }
 
