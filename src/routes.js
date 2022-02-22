@@ -51,14 +51,16 @@ import Wallet from "./modules/Wallet/Wallet";
 import NftInformationFixedPrice from "./modules/Home/NftInformationFixedPrice";
 import FixedPrice from "./modules/Items/FixedPrice";
 import Menu from "./common/components/Menu";
+import { WEB_APP_USER_WALLET_ADDRESS } from "./reducers/Constants";
 
 function App() {
-  //   useEffect(() => {
-  //     if(typeof window !== "undefined"){
-  //         const accounts = window.ethereum.request({method: "eth_requestAccounts"})
-  //         console.log("accounts :",accounts);
-  //     }
-  // },[])
+  useEffect(() => {
+    const checkWalletAddress = localStorage.getItem(
+      WEB_APP_USER_WALLET_ADDRESS
+    );
+    
+    // alert(`${checkWalletAddress}`);
+  }, []);
 
   return (
     <Provider store={store}>
@@ -79,7 +81,7 @@ function App() {
 
             <Route
               exact
-              path="/nft-information_1"
+              path="/nft-information_1/:id"
               element={<NftInformation1 />}
             />
             <Route
@@ -173,6 +175,8 @@ function App() {
           {/* </Switch> */}
         </Router>
         <Footer />
+        <Wallet />
+        <Notification />
       </div>
     </Provider>
   );

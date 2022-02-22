@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Image from "../../assets/images/img-format.png";
 import styled from "styled-components";
 import { connect } from "react-redux";
@@ -22,20 +22,26 @@ function CreateSingleNFT(props) {
   const [collectionData, setCollectionData] = useState([]);
   const [selectFile, setSelectFile] = useState("");
   const [collectionId, setCollectionId] = useState("");
-  const { user } = useSelector((state) => state);
   const [uploadFileObj, setUploadFileObj] = useState("");
+
   // >>>> This is user id
-  console.log(user.addUserData._id, "<<<< user data");
+  const { user } = useSelector((state) => state);
+  const navigation = useNavigate();
+  const { loggedInUser } = user;
+  // console.log(user.addUserData._id, "<<<< user data");
   // -------------------------------
   const name = useRef("");
   const price = useRef("");
   const description = useRef("");
   const blockchain = useRef("");
   const ipfsUrl = useRef("");
-  const createdBy = user?.addUserData?._id;
+  const createdBy = loggedInUser?._id;
   useEffect(async () => {
     // const collectionData = await getCollection();
     // setCollectionData(collectionData);
+    if (loggedInUser == null) {
+      navigation("/add-wallet");
+    }
     const collections = await getCollectionBySingleUser();
     setCollectionData(collections);
   }, []);
@@ -79,7 +85,7 @@ function CreateSingleNFT(props) {
         price: price.current,
         description: description.current,
         blockchain: blockchain.current,
-        createdBy: user?.addUserData?._id,
+        createdBy: loggedInUser._id,
         collection: collectionId,
       });
       props.createNftHandler({
@@ -88,7 +94,7 @@ function CreateSingleNFT(props) {
         price: price.current,
         description: description.current,
         blockchain: blockchain.current,
-        createdBy: user?.addUserData?._id,
+        createdBy: loggedInUser._id,
         collection: collectionId,
       });
     };
@@ -147,6 +153,7 @@ function CreateSingleNFT(props) {
               // {...getRootProps()}
             >
               {/* <input {...getInputProps()} /> */}
+
             <Button
               // onClick={handleClick}
               style={{ border: "none", backgroundColor: "#fff" }}

@@ -5,7 +5,7 @@ import Cookies from 'universal-cookie';
 import React from 'react';
 import ToastService from 'react-material-toast';
 import aws from 'aws-sdk';
-
+import {useNavigation} from "react-router-dom"
 const toast = ToastService.new({
   place: 'topRight',
   duration: 1,
@@ -69,11 +69,10 @@ function generateRandomNumber() {
 export const dispatchAction = (type, data) => {
   return dispatch => dispatch({ type, data });
 };
-
 function trackEvent(event, eventData) {
   // try {
-  //     if (!eventData)
-  //         mixpanel.track(event);
+    //     if (!eventData)
+    //         mixpanel.track(event);
   //     else
   //         mixpanel.track(event, eventData);
   // } catch (err) {
@@ -97,7 +96,7 @@ function getDateFormat() {
   var second = '';
   var third = '';
   var date_parts = [];
-
+  
   // get separator : "-", "/" or " ", format based on toLocaleDateString function
   if (my_date.toLocaleDateString().split('-').length === 3) {
     separator = ' - ';
@@ -111,7 +110,8 @@ function getDateFormat() {
     separator = ' ';
     date_parts = my_date.toLocaleDateString().split(' ');
   }
-
+  // const navigation=useNavigation()
+  
   // get first part
   if (date_parts[0] == 2019) {
     first = 'YYYY';
