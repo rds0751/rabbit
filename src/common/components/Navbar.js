@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation,useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 // import './Navbar.css'
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -9,7 +9,6 @@ import {
   addUserData,
   ManageNotiSideBar,
   ManageWalletSideBar,
-  updateUserDetail,
 } from "../../reducers/Action";
 import { ethers } from "ethers";
 
@@ -17,7 +16,7 @@ import Menu from "./Menu";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
 // import "../../assets/st.css";
 function Navbar() {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const [humburger, setHumburger] = useState(false);
   const ethereum = window.ethereum;
   const [errorMssg, setErrorMssg] = useState(null);
@@ -28,8 +27,9 @@ function Navbar() {
   const [getBalance, setGetBalance] = useState(null);
   const dispatch = useDispatch();
   const { user, sideBar } = useSelector((state) => state);
-  const { userDetails, loggedInUser } = user;
+  const { userDetails, loggedInUser, walletAddress } = user;
   const { isOpenNoti, isOpenWallet } = sideBar;
+  console.log(walletAddress,"<<<<this is wallet address")
   // useEffect(() => {
   //   if (window.ethereum) {
   //     // window.ethereum
@@ -81,7 +81,7 @@ function Navbar() {
   };
   const handleWalletClick = () => {
     // alert("handleWallet called");
-    if (loggedInUser == null) {
+    if (walletAddress == null) {
       // alert("hanlde wallet null");
       navigate("/add-wallet");
     } else {
@@ -94,7 +94,7 @@ function Navbar() {
     // alert(loggedInUser);
     if (loggedInUser == null) {
       // alert("nulll");
-      navigate("/add-wallet")
+      navigate("/add-wallet");
     } else {
       dispatch(ManageNotiSideBar(true));
     }
@@ -238,7 +238,7 @@ function Navbar() {
                   </li>
                   <li>
                     <Link
-                      to={loggedInUser == null ? "/add-wallet" : "/create-nft"}
+                      to={walletAddress == null ? "/add-wallet" : "/create-nft"}
                       className="btn btn-primary btnnav"
                     >
                       Create
@@ -290,7 +290,9 @@ function Navbar() {
                         <Link
                           className="dropdown-item"
                           to={
-                            loggedInUser == null ? "/add-wallet" : "/my-profile"
+                            walletAddress == null
+                              ? "/add-wallet"
+                              : "/my-profile"
                           }
                         >
                           Profile

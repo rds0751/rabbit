@@ -6,8 +6,12 @@ import { httpServiceFileUpload } from "../utility/httpServiceFileUpload";
 export default {
   addIpfs,
   createNftContent,
-  updateNftContent
+  // updateNftContent,
+  openForSale,
+  removeFromSale,
+  ownershipTransfer
 };
+// export default getCollection;
 function getHeaders() {
   return {
     "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON,
@@ -69,8 +73,7 @@ async function addIpfs(requestdata) {
 //     });
 // }
 async function createNftContent(requestdata) {
-  let url =
-    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft";
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft";
 
   return httpService(
     httpConstants.METHOD_TYPE.POST,
@@ -92,11 +95,43 @@ async function createNftContent(requestdata) {
       return Promise.reject(err);
     });
 }
-async function updateNftContent(requestData, requestId) {
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/" + requestId;
+async function openForSale(requestData) {
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/open-for-sale";
   let headers = getHeaders();
   return httpService(httpConstants.METHOD_TYPE.PUT, headers, requestData, url)
     .then((response) => {
+      console.log("------ssss", response.responseData);
+
+      if (!response.success || !response.responseData) return Promise.reject();
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+async function removeFromSale(requestData) {
+  let url =
+    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/remove-nft-from-sale";
+  let headers = getHeaders();
+  return httpService(httpConstants.METHOD_TYPE.PUT, headers, requestData, url)
+    .then((response) => {
+      console.log("------ssss", response.responseData);
+
+      if (!response.success || !response.responseData) return Promise.reject();
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+async function ownershipTransfer(requestData,contentId) {
+  let url =
+    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft/transfer/"+contentId;
+  let headers = getHeaders();
+  return httpService(httpConstants.METHOD_TYPE.PUT, headers, requestData, url)
+    .then((response) => {
+      console.log("------ssss", response.responseData);
+
       if (!response.success || !response.responseData) return Promise.reject();
       return Promise.resolve(response.responseData);
     })

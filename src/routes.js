@@ -42,7 +42,7 @@ import About from "./modules/About/About";
 // import Highest_Bid from "./components/Highest_Bid";
 import CreateNftCollections from "./modules/Create/CreateNftCollections";
 import CollectionDetails from "./modules/Collections/CollectionDetails";
-import NftInformation from "./modules/Home/NftInformation";
+import NftInformation from "./modules/Home/index";
 import NftInformation1 from "./modules/Home/NftInformation1";
 import NftInformation2 from "./modules/Home/NftInformation2";
 import NftInformationOffer1 from "./modules/Home/NftInformationOffer1";
@@ -52,13 +52,21 @@ import NftInformationFixedPrice from "./modules/Home/NftInformationFixedPrice";
 import FixedPrice from "./modules/Items/FixedPrice";
 import Menu from "./common/components/Menu";
 import { WEB_APP_USER_WALLET_ADDRESS } from "./reducers/Constants";
+import { addUseraction, addUserData } from "./reducers/Action";
+import { CheckUserByWalletAddress } from "./services/UserMicroService";
 
 function App() {
   useEffect(() => {
     const checkWalletAddress = localStorage.getItem(
       WEB_APP_USER_WALLET_ADDRESS
     );
-    
+    if (checkWalletAddress != null) {
+      CheckUserByWalletAddress(checkWalletAddress, (res) => {
+        console.log(res, "<<<< response at routes.js");
+        addUserData(res);
+      });
+    }
+
     // alert(`${checkWalletAddress}`);
   }, []);
 

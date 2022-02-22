@@ -9,12 +9,11 @@
 
 // export default ACTION
 
-import { BASE_URL, OPEN_NOTIFICATION, OPEN_WALLET, USER_DETAILS } from './Constants';
+import { BASE_URL,ADD_WALLET, OPEN_NOTIFICATION,LOGGED_IN_UER_DETAILS, OPEN_WALLET, USER_DETAILS } from './Constants';
 import { ADD_USER, GET_ERRORS, ALL_USERS } from './Constants';
 import axios from 'axios';
 
 export const addUseraction = data => dispatch => {
-  console.log(1);
   axios
     .post(BASE_URL + `/api/v1/user`, data)
     .then(response => {
@@ -45,14 +44,14 @@ export const addUseraction = data => dispatch => {
       }
     });
 };
-export const updateUserDetail = data => dispatch => {
+export const AddWalletDetails = data => dispatch => {
   console.log(data, '<<< data from update user detail');
-  dispatch({ type: USER_DETAILS, payload: data });
+  dispatch({ type: ADD_WALLET, payload: data });
 };
 
 export const addUserData = data => dispatch => {
   console.log(data, '<<<data from addUserdata');
-  dispatch({ type: ADD_USER, payload: data });
+  dispatch({ type: LOGGED_IN_UER_DETAILS, payload: data });
 };
 
 export const allUseraction = () => dispatch => {

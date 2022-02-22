@@ -29,6 +29,7 @@ export function getNfts(requestData) {
 }
 
 export const getNft = async (requestData, successCallBack) => {
+  // alert("clled getNft")
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft/" + requestData;
   const { data } = await axios.get(url);
@@ -84,7 +85,7 @@ export function getCollections(requestData) {
 
 export function getCollection(requestData) {
   let url =
-    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/collection/" + requestData;
+    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/collection/" + requestData ;
   return httpService(httpConstants.METHOD_TYPE.GET,
     { 'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON },
     {},
@@ -227,6 +228,29 @@ export function addNftReport(requestData) {
 
 export function addLikeNft(requestData) {
   let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft/like";
+  return httpService(
+    httpConstants.METHOD_TYPE.POST,
+    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    requestData,
+    url
+  )
+    .then((response) => {
+      if (
+        !response.success ||
+        response.responseCode !== 200 ||
+        !response.responseData ||
+        response.responseData.length === 0
+      )
+        return Promise.reject();
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+
+export function addLikeNft(requestData) {
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft/like" ;
   return httpService(
     httpConstants.METHOD_TYPE.POST,
     { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },

@@ -16,7 +16,7 @@ function Wallet() {
   // console.log("ethereum : ", ethereum);
   const { user, sideBar } = useSelector((state) => state);
   // console.log(data);
-  const { userDetails } = user;
+  const { userDetails,walletAddress } = user;
   console.log(sideBar, "<<<<sidebar");
   const { isOpenWallet } = sideBar;
   useEffect(() => {
@@ -73,14 +73,14 @@ function Wallet() {
               ? ethereum && ethereum.chainId
               : "Install extension to connect wallet"} */}
             {/* {userDetails?.address} */}
-            {userDetails?.address}
+            {walletAddress?.address}
           </h3>
           <i className="far fa-copy"></i>
         </div>
         <div className="balancewallet textVerticalCenter">
           <div className="WalletContent">
             <h3>Total Balance</h3>
-            <h4>{userDetails?.balance}</h4>
+            <h4>{walletAddress?.balance}</h4>
           </div>
         </div>
         <button className="btnwallet">Add Balance</button>

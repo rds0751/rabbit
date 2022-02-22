@@ -3,12 +3,13 @@ import { httpService } from "../utility/httpService";
 import { BASE_URL } from "../reducers/Constants";
 import axios from "axios";
 import { addUseraction, addUserData } from "../reducers/Action";
+
+
+
 export const CheckUserByWalletAddress = async (
   walletAddress,
   successCallBack
 ) => {
-  // alert("check user");
-  // const dispatch = useDispatch();
   let url = BASE_URL + "/api/v1/wallet-address";
   console.log(url, walletAddress, "<<<< wallet address");
   const { data } = await axios.put(url, { wallet_address: walletAddress });
