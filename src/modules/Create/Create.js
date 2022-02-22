@@ -5,14 +5,15 @@ import { ethers } from "ethers";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
-  addUseraction,
-  addUserData,
+  
+  AddWalletDetails,
   ManageWalletSideBar,
-  updateUserDetail,
+  
+  addUserData
 } from "../../reducers/Action";
 import "react-toastify/dist/ReactToastify.css";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
-
+import { WEB_APP_USER_WALLET_ADDRESS } from "../../reducers/Constants";
 function Create() {
   const history = useNavigate();
   const [humburger, setHumburger] = useState(false);
@@ -20,19 +21,18 @@ function Create() {
   const [errorMssg, setErrorMssg] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
   console.log("ethereum ", ethereum && ethereum);
-  const { user,sideBar } = useSelector((state) => state);
+  const { user, sideBar } = useSelector((state) => state);
   const [checkClick, setcheckClick] = useState(false);
   const [getBalance, setGetBalance] = useState(null);
   const dispatch = useDispatch();
   const { userDetails, loggedInUser } = user;
-  const {isOpenWallet}=sideBar
+  const { isOpenWallet } = sideBar;
   const [toggleEffect, setToggleEffect] = useState(false);
   useEffect(() => {
     if (loggedInUser != null) {
       toast.success("Wallet connected");
       dispatch(ManageWalletSideBar(!isOpenWallet));
       history("/");
-
     } else {
       toast.error("Choose the wallet");
     }
@@ -47,10 +47,12 @@ function Create() {
           console.log(result[0]);
 
           dispatch(
-            updateUserDetail({ address: defaultAccount, balance: getBalance })
+            AddWalletDetails({ address: defaultAccount, balance: getBalance })
           );
-          // CheckUserByWalletAddress(defaultAccount);
-          // setToggleEffect(!toggleEffect);
+          localStorage.setItem(
+            WEB_APP_USER_WALLET_ADDRESS,
+            `${defaultAccount}`
+          );
           CheckUserByWalletAddress(defaultAccount, (res) => {
             dispatch(addUserData(res));
             setToggleEffect(!toggleEffect);

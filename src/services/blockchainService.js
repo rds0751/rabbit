@@ -1,4 +1,4 @@
-import { ethers } from "ethers";
+import {ethers} from 'ethers';
 import contractABI from "../assets/abi/abi.json";
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -41,55 +41,55 @@ async function mintNFT({ tokenURI, price, tokenId }) {
 }
 
 //price should be in wei
-async function changeListedPrice({ tokenId, price }) {
-  const contractData = new ethers.Contract(
-    contractAddress,
-    contractABI,
-    signer
-  );
-  const result = await contractData.updatePrice(
-    tokenId,
-    ethers.utils.parseEther(price.toString())
-  );
-  let res = await result.wait();
+async function changeListedPrice({tokenId, price}) {
+    const contractData = new ethers.Contract(contractAddress, contractABI, signer);
+    const result = await contractData.updatePrice(tokenId, ethers.utils.parseEther(price.toString()))
+    let res = await result.wait();
 
-  return {
-    ...res,
-    chainId: provider?._network?.chainId || "",
-    name: provider?._network?.name || "",
-  };
+    return {
+        ...res,
+        chainId: provider?._network?.chainId || '',
+        name: provider?._network?.name || '',
+    }
 }
 
-async function removeFromSaleNft({ tokenId }) {
-  const contractData = new ethers.Contract(
-    contractAddress,
-    contractABI,
-    signer
-  );
-  const result = await contractData.updateListingStatus(tokenId, false);
-  let res = await result.wait();
-  return {
-    ...res,
-    chainId: provider?._network?.chainId || "",
-    name: provider?._network?.name || "",
-  };
+async function removeFromSaleNft({tokenId}) {
+    const contractData = new ethers.Contract(contractAddress, contractABI, signer);
+    const result = await contractData.updateListingStatus(tokenId,false)
+    let res = await result.wait();
+    return {
+        ...res,
+        chainId: provider?._network?.chainId || '',
+        name: provider?._network?.name || '',
+    }
+}
+async function putOnSaleNft({tokenId}) {
+    const contractData = new ethers.Contract(contractAddress, contractABI, signer);
+    console.log("blockchain fn",contractData)
+
+    const result = await contractData.updateListingStatus(tokenId,true)
+
+    let res = await result.wait();
+    return {
+        ...res,
+        chainId: provider?._network?.chainId || '',
+        name: provider?._network?.name || '',
+    }
 }
 
 //1bnb=0.136ether
-async function buyNFT({ tokenId }) {
-  const contractData = new ethers.Contract(
-    contractAddress,
-    contractABI,
-    signer
-  );
-  const result = await contractData.buy(tokenId);
-  let res = await result.wait();
+async function buyNFT({tokenId}) {
+    const contractData = new ethers.Contract(contractAddress, contractABI, signer);
+    const result = await contractData.buy(tokenId)
+    let res = await result.wait();
 
-  return {
-    ...res,
-    chainId: provider?._network?.chainId || "",
-    name: provider?._network?.name || "",
-  };
+    return {
+        ...res,
+        chainId: provider?._network?.chainId || '',
+        name: provider?._network?.name || '',
+    }
+
+
 }
 async function putOnSaleNft({tokenId}) {
   const contractData = new ethers.Contract(contractAddress, contractABI, signer);
