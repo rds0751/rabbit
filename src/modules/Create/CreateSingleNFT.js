@@ -79,6 +79,7 @@ function CreateSingleNFT(props) {
   };
   const handleSubmit = (e) => {
     const addIPFS = async () => {
+      // console.log("address of owner", walletAddress.address)
       console.log("file", selectFile);
       console.log("Called IPFx", {
         nftFile: selectFile,
@@ -89,6 +90,7 @@ function CreateSingleNFT(props) {
         createdBy: loggedInUser._id,
         collection: collectionId,
         ownerAddress: walletAddress.address
+
       });
       props.createNftHandler({
         nftFile: selectFile,
@@ -98,6 +100,8 @@ function CreateSingleNFT(props) {
         blockchain: blockchain.current,
         createdBy: loggedInUser._id,
         collection: collectionId,
+        ownerAddress: walletAddress.address
+
       });
     };
     addIPFS();
