@@ -20,6 +20,7 @@ export default class NftDetail extends BaseComponent {
             createdBy: "",
             responseData: [],
             salesInfo: null,
+            nftDetails: null
         };
     }
 
@@ -46,7 +47,9 @@ export default class NftDetail extends BaseComponent {
         });
     };
     BuyNowNft = async (data) => {
-        console.log('BUY')
+        console.log("--sssssssssssssssss-",data?.newOwnerAddress[0])
+
+        console.log('BUY',data)
         const [blockchainError, blockchainRes] = await Utils.parseResponse(
             BlockchainService.buyNFT({
                 //TO do
@@ -94,23 +97,23 @@ export default class NftDetail extends BaseComponent {
         let requestData = {
             transactionHash: blockchainRes.transactionHash || '',
             ownedBy: data?.buyerId || '',
-            ownerAddress: data?.newOwnerAddress || '',
+            ownerAddress: data?.newOwnerAddress[0] || data?.newOwnerAddress || '',
             updatedBy: data?.buyerId || '',
-            _id: this.state?.responseData?._id || '',
+            // _id: this.state?.responseData?._id || '',
             salesInfo: {
                 ...this.state?.responseData?.salesInfo,
                 isOpenForSale: false
             },
         }
-        // if (!this.state.responseData._id) return;
-        // let [error, result] = await Utils.parseResponse(
-        // //   addNftTx(requestData)
-        // );
-        // console.log("--buy nFT resi;t-", result);
-        // if (error || !result) {
-        //     return Utils.apiFailureToast(error || "Unable to update Nft tx.");
-        // }
-        this.setState({ nftDetails: result });
+        if (!this.state.responseData._id) return;
+        let [err, res] = await Utils.parseResponse(
+           ContentService.ownershipTransfer(requestData,this.state?.responseData?._id)
+        );
+        console.log("--buy nFT ressssssi;t-", res);
+        if (err || !res) {
+            return Utils.apiFailureToast(err || "Unable to update Nft ownership transfer.");
+        }
+        this.setState({ nftDetails: res });
         Utils.apiSuccessToast("This nft has been buy successfully.");
 
     };

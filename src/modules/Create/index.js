@@ -45,14 +45,14 @@ export default class Index extends BaseComponent {
       ownedBy: data?.createdBy,
       createdBy: data?.createdBy,
       updatedBy: data?.createdBy,
-      ownerAddress: data?.ownerAddress[0], // put metamask address
+      ownerAddress: data?.ownerAddress[0] || data?.ownerAddress || '', // put metamask address
     };
   };
 
   createNftHandler = async (data) => {
     // const navigate =useNavigate()
 
-    console.log(data?.ownerAddress[0], "dattttttttttttttttt");
+    console.log(data?.ownerAddress, "dattttttttttttttttt");
 
     if (!data || Object.keys(data).length < 1 || !data.nftFile)
       return Utils.apiFailureToast("Please select the file that to be upload");
