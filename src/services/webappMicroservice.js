@@ -1,14 +1,7 @@
-<<<<<<< HEAD
 import { httpService } from '../utility/httpService';
 import { httpConstants } from '../constants';
 import { BASE_URL } from '../reducers/Constants';
-import { BASE_URL2 } from '../reducers/Constants';
-=======
-import { httpService } from "../utility/httpService";
-import { httpConstants } from "../constants";
-import { BASE_URL } from "../reducers/Constants";
 import axios from "axios";
->>>>>>> b0fd06a6c75aafe495667038dfa5db418dd672f9
 
 export function getNfts(requestData) {
   // let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts";
@@ -91,7 +84,7 @@ export function getCollections(requestData) {
 
 export function getCollection(requestData) {
   let url =
-    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/collection/" + requestData ;
+    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/collection/" + requestData;
   return httpService(httpConstants.METHOD_TYPE.GET,
     { 'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON },
     {},
@@ -174,18 +167,10 @@ export async function getNameImageOfUser(_id) {
     console.log(err);
   }
 }
-<<<<<<< HEAD
 export function getNotificationListById(requestData) {
   let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/notification/" + requestData;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
-=======
-
-export function addNftReport(requestData) {
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/add-nft-report" ;
-  return httpService(
-    httpConstants.METHOD_TYPE.POST,
->>>>>>> b0fd06a6c75aafe495667038dfa5db418dd672f9
     { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
     requestData,
     url
@@ -204,7 +189,29 @@ export function addNftReport(requestData) {
       return Promise.reject(err);
     });
 }
-<<<<<<< HEAD
+
+export function addNftReport(requestData) {
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/add-nft-report";
+  return httpService(
+    httpConstants.METHOD_TYPE.POST,
+    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    requestData,
+    url
+  )
+    .then((response) => {
+      if (
+        !response.success ||
+        response.responseCode !== 200 ||
+        !response.responseData ||
+        response.responseData.length === 0
+      )
+        return Promise.reject();
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
 // export const getNotificationListById = async () => {
 //   try {
 //     const res = await fetch(
@@ -217,10 +224,9 @@ export function addNftReport(requestData) {
 //     console.log(err);
 //   }
 // };
-=======
 
 export function addLikeNft(requestData) {
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft/like" ;
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft/like";
   return httpService(
     httpConstants.METHOD_TYPE.POST,
     { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -241,4 +247,3 @@ export function addLikeNft(requestData) {
       return Promise.reject(err);
     });
 }
->>>>>>> b0fd06a6c75aafe495667038dfa5db418dd672f9
