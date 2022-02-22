@@ -248,7 +248,6 @@ export function addLikeNft(requestData) {
       return Promise.reject(err);
     });
 }
-<<<<<<< HEAD
 
 export function addLikeNft(requestData) {
   let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft/like" ;
@@ -272,5 +271,3 @@ export function addLikeNft(requestData) {
       return Promise.reject(err);
     });
 }
-=======
->>>>>>> 78f66ab798a7e82dbb320fe70f27b9df57c630c3
