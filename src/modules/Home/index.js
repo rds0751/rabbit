@@ -47,7 +47,7 @@ export default class NftDetail extends BaseComponent {
         });
     };
     BuyNowNft = async (data) => {
-        console.log("--sssssssssssssssss-",data?.newOwnerAddress[0])
+        console.log("--sssssssssssssssss-",data?.newOwnerAddress)
 
         console.log('BUY',data)
         const [blockchainError, blockchainRes] = await Utils.parseResponse(
@@ -97,7 +97,7 @@ export default class NftDetail extends BaseComponent {
         let requestData = {
             transactionHash: blockchainRes.transactionHash || '',
             ownedBy: data?.buyerId || '',
-            ownerAddress: data?.newOwnerAddress[0] || data?.newOwnerAddress || '',
+            ownerAddress: data?.newOwnerAddress || '',
             updatedBy: data?.buyerId || '',
             // _id: this.state?.responseData?._id || '',
             salesInfo: {
