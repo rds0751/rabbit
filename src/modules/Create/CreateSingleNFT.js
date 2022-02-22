@@ -68,6 +68,7 @@ function CreateSingleNFT(props) {
     // formData.append("createdBy", `${user._id}`);
     // // alert(props.user._id);
     // formData.append("attachment", event);
+
     // const res = await fetch(`${BASE_URL2}/api/v1/upload-documents`, {
     //   method: httpConstants.METHOD_TYPE.POST,
     //   body: formData,

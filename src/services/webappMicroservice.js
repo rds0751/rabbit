@@ -29,6 +29,7 @@ export function getNfts(requestData) {
 }
 
 export const getNft = async (requestData, successCallBack) => {
+  // alert("clled getNft")
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft/" + requestData;
   const { data } = await axios.get(url);
