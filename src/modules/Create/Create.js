@@ -5,11 +5,9 @@ import { ethers } from "ethers";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
-  
   AddWalletDetails,
   ManageWalletSideBar,
-  
-  addUserData
+  addUserData,
 } from "../../reducers/Action";
 import "react-toastify/dist/ReactToastify.css";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
@@ -30,6 +28,7 @@ function Create() {
   const [toggleEffect, setToggleEffect] = useState(false);
   useEffect(() => {
     if (loggedInUser != null) {
+      alert("toggle called");
       toast.success("Wallet connected");
       dispatch(ManageWalletSideBar(!isOpenWallet));
       history("/");
@@ -46,18 +45,19 @@ function Create() {
           accountChangeHandler(result[0]); //accounts can be a array we just wanna grab first one
           console.log(result[0]);
 
-          dispatch(
-            AddWalletDetails({ address: defaultAccount, balance: getBalance })
-          );
-          localStorage.setItem(
-            WEB_APP_USER_WALLET_ADDRESS,
-            `${defaultAccount}`
-          );
-          CheckUserByWalletAddress(defaultAccount, (res) => {
-            dispatch(addUserData(res));
-            setToggleEffect(!toggleEffect);
-          });
-          // window.location.pathname = "/wallet";
+        //   dispatch(
+        //     AddWalletDetails({ address: defaultAccount, balance: getBalance })
+        //   );
+        //   CheckUserByWalletAddress(defaultAccount, (res) => {
+        //     dispatch(addUserData(res));
+        //     setToggleEffect(!toggleEffect);
+        //   });
+        //   // localStorage.setItem(
+        //   //   WEB_APP_USER_WALLET_ADDRESS,
+        //   //   `${defaultAccount}`
+        //   // );
+
+        //   // window.location.pathname = "/wallet";
         })
         .catch((e) => {
           // alert("Connect Your Wallet");
@@ -66,14 +66,21 @@ function Create() {
         });
     } else {
       // setErrorMssg("Install Metamask ");
-      alert("Install Metamask ");
+      // alert("Install Metamask ");
 
       toast.error("Install Metamak and Connect Wallet");
     }
   };
   const accountChangeHandler = (newAccount) => {
+    // alert("account changes");
     setDefaultAccount(newAccount);
     getUserBalance(newAccount);
+    dispatch(AddWalletDetails({ address: newAccount, balance: getBalance }));
+    CheckUserByWalletAddress(newAccount, (res) => {
+      console.log(res, "<<<< Account changed");
+      dispatch(addUserData(res));
+      setToggleEffect(!toggleEffect);
+    });
   };
   const getUserBalance = (address) => {
     window.ethereum

@@ -69,3 +69,26 @@ export function pricingHistoryGraphOfNft(requestData) {
         return Promise.reject(err);
       });
 }
+export function addNftTx(requestData) {
+  let url =
+    process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/add-transaction" ;
+  return httpService(
+    httpConstants.METHOD_TYPE.POST,
+    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    requestData,
+    url
+  )
+    .then((response) => {
+      if (
+        !response.success ||
+        response.responseCode !== 200 ||
+        !response.responseData ||
+        response.responseData.length === 0
+      )
+        return Promise.reject();
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}

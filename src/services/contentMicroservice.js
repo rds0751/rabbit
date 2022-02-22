@@ -6,9 +6,11 @@ import { httpServiceFileUpload } from "../utility/httpServiceFileUpload";
 export default {
   addIpfs,
   createNftContent,
-  openForSale
+  // updateNftContent,
+  openForSale,
+  removeFromSale,
 };
-export default getCollection;
+// export default getCollection;
 function getHeaders() {
   return {
     "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON,
@@ -70,8 +72,7 @@ async function addIpfs(requestdata) {
 //     });
 // }
 async function createNftContent(requestdata) {
-  let url =
-    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft";
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft";
 
   return httpService(
     httpConstants.METHOD_TYPE.POST,
@@ -98,7 +99,22 @@ async function openForSale(requestData) {
   let headers = getHeaders();
   return httpService(httpConstants.METHOD_TYPE.PUT, headers, requestData, url)
     .then((response) => {
-      console.log("------ssss",response.responseData);
+      console.log("------ssss", response.responseData);
+
+      if (!response.success || !response.responseData) return Promise.reject();
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+async function removeFromSale(requestData) {
+  let url =
+    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/remove-nft-from-sale";
+  let headers = getHeaders();
+  return httpService(httpConstants.METHOD_TYPE.PUT, headers, requestData, url)
+    .then((response) => {
+      console.log("------ssss", response.responseData);
 
       if (!response.success || !response.responseData) return Promise.reject();
       return Promise.resolve(response.responseData);

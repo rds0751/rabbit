@@ -19,6 +19,7 @@ import ImageFile from "./uploadFile";
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 const Button = styled.button``;
 function CreateSingleNFT(props) {
+  console.log("ppppppppppppp",props?.isNftCreated)
   const [collectionData, setCollectionData] = useState([]);
   const [selectFile, setSelectFile] = useState("");
   const [collectionId, setCollectionId] = useState("");
@@ -27,7 +28,7 @@ function CreateSingleNFT(props) {
   // >>>> This is user id
   const { user } = useSelector((state) => state);
   const navigation = useNavigate();
-  const { loggedInUser } = user;
+  const { loggedInUser,walletAddress } = user;
   // console.log(user.addUserData._id, "<<<< user data");
   // -------------------------------
   const name = useRef("");
@@ -87,6 +88,7 @@ function CreateSingleNFT(props) {
         blockchain: blockchain.current,
         createdBy: loggedInUser._id,
         collection: collectionId,
+        ownerAddress: walletAddress.address
       });
       props.createNftHandler({
         nftFile: selectFile,

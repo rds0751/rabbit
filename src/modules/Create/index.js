@@ -6,7 +6,7 @@ import BlockchainServices from "../../services/blockchainService";
 import getCollection from "../../services/contentMicroservice";
 // import ContentService from "../../services/contentMicroservice";
 import { eventConstants } from "../../constants";
-
+import { useNavigate } from "react-router-dom";
 export default class Index extends BaseComponent {
   constructor(props) {
     super(props);
@@ -14,6 +14,7 @@ export default class Index extends BaseComponent {
       categoryId: "",
       // collection: [],
       mintData: [],
+      isNftCreated:false
     };
   }
 
@@ -41,14 +42,16 @@ export default class Index extends BaseComponent {
         price: data?.price || 0,
       },
       //TO do need to pass user (owner) _id
-      ownedBy: data.createdBy,
-      createdBy: data.createdBy,
-      updatedBy: data.createdBy,
-      ownerAddress: data.createdBy,
+      ownedBy: data?.createdBy,
+      createdBy: data?.createdBy,
+      updatedBy: data?.createdBy,
+      ownerAddress: data?.ownerAddress, // put metamask address
     };
   };
 
   createNftHandler = async (data) => {
+    // const navigate =useNavigate()
+
     console.log(data, "<<<<<< createnft handler");
 
     if (!data || Object.keys(data).length < 1 || !data.nftFile)
@@ -99,14 +102,14 @@ export default class Index extends BaseComponent {
 
     // save NFT data on DB
     const [contentError, contentRes] = await Utils.parseResponse(
-      // getCollection.createNftContent(
-      //   this.getRequestDataForSaveNftContent(
-      //     tokenId,
-      //     data,
-      //     ipfsRes,
-      //     blockchainRes
-      //   )
-      // )
+      getCollection.createNftContent(
+        this.getRequestDataForSaveNftContent(
+          tokenId,
+          data,
+          ipfsRes,
+          blockchainRes
+        )
+      )
     );
     // this.props.dispatchAction(eventConstants.HIDE_LOADER);
     if (contentError || !contentRes) {
@@ -115,7 +118,11 @@ export default class Index extends BaseComponent {
       );
     }
     Utils.apiSuccessToast("Your Nft has been created successfully.");
-    // history.push("/nft-details/" + contentRes._id);
+    // navigate(`/nft-information/${contentRes._id}`);
+    // this.setState(isNftCreated)
+    this.setState({ isNftCreated: true });
+    // '/nft-detail${id}'
+
   };
 
   render() {
@@ -125,6 +132,8 @@ export default class Index extends BaseComponent {
       <>
         <CreateSingleNFT
           mintNft={this.mintNft}
+          isNftCreated={this.isNftCreated}
+
           createNftHandler={this.createNftHandler.bind(this)}
         />
         {/* <FooterComponent /> */}
