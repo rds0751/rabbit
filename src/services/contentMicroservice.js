@@ -2,14 +2,14 @@
 import { httpConstants } from "../constants";
 import { httpService } from "../utility/httpService";
 import { httpServiceFileUpload } from "../utility/httpServiceFileUpload";
-
+import axios from "axios";
 export default {
   addIpfs,
   createNftContent,
   // updateNftContent,
   openForSale,
   removeFromSale,
-  ownershipTransfer
+  ownershipTransfer,
 };
 // export default getCollection;
 function getHeaders() {
@@ -124,9 +124,11 @@ async function removeFromSale(requestData) {
       return Promise.reject(err);
     });
 }
-async function ownershipTransfer(requestData,contentId) {
+async function ownershipTransfer(requestData, contentId) {
   let url =
-    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft/transfer/"+contentId;
+    process.env.REACT_APP_WEBAPP_MICROSERVICE +
+    "api/v1/nft/transfer/" +
+    contentId;
   let headers = getHeaders();
   return httpService(httpConstants.METHOD_TYPE.PUT, headers, requestData, url)
     .then((response) => {
@@ -139,3 +141,16 @@ async function ownershipTransfer(requestData,contentId) {
       return Promise.reject(err);
     });
 }
+
+export  const addSuggestion = async (bodyData, successCallback) => {
+  try {
+    const url =
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/add-suggestion";
+    const { data } = await axios.post(url, bodyData);
+    if (data.success) {
+      successCallback(data.responseData);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
