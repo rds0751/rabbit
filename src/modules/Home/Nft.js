@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Nfts_Tile_Api } from "../../constants/Nfts_Tile_Api";
 
 import "../../assets/styles/custom.css";
@@ -10,28 +10,34 @@ import Like from "../../assets/images/Like.svg";
 import likes from "../../assets/images/likes.svg";
 import { useSelector } from "react-redux";
 
-
+const queryString = require('query-string');
 function NftPage() {
   const [nfts, setNfts] = useState([]);
-  const [type, setType] = useState("all");
   const { user } = useSelector((state) => state);
 
+  const search = useLocation().search;
+  const name = new URLSearchParams(search).get('searchByName');
 
-  useEffect(() => {
-    getNfts().then((response) => setNfts(response.nftContent));
-  }, []);
-
-  const handleChange = (e) => {
-    setType(e.target.value);
+  const defaultReq = {
+    type: "all",
+    searchByName: name? name : "",
+    minPrice: 0,
+    maxPrice: "",
   }
 
-  let filteredNfts;
-  if (type === "all") {
-    filteredNfts = nfts;
-  } else if (type === "fix price") {
-    filteredNfts = nfts.filter((nft) => nft.type === type)
-  } else if (type === "on auction") {
-    filteredNfts = nfts.filter((nft) => nft.type === type)
+  const [data, setData] = useState(defaultReq);
+  
+  const reqObj1 = queryString.stringify(defaultReq);
+
+  useEffect(() => {
+    getNfts(reqObj1).then((response) => setNfts(response.nftContent));
+  });
+
+  const handleChange = (e) => {
+    setData({...data,[e.target.name]:e.target.value})
+    const reqObj2 = queryString.stringify(data)
+    getNfts(reqObj2).then((response) => setNfts(response.nftContent));
+    setData(defaultReq)
   }
 
   const [handleLike, setHandleLike] = useState(true);
@@ -54,7 +60,7 @@ function NftPage() {
         <div id="filters filter-large" className="filter">
           <div className="dropdown">
               <p className="mb-0">Sale type</p>
-              <select name="sale" id="sale" className="first_select ml_auto"
+              <select name="type" id="sale" className="first_select ml_auto"
               onChange={(e) => handleChange(e)}>
                 <option value="all">All</option>
                 <option value="fix price">Fix price</option>
@@ -82,7 +88,7 @@ function NftPage() {
           className="row mob_row ntf_row"
           style={{ justifyContent: "space-between" }}
         >
-          {filteredNfts.map((nft) => {
+          {nfts.map((nft) => {
             const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
             const route = "nft-information/" + _id;
 
