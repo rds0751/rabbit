@@ -115,10 +115,11 @@ function Navbar() {
                   style={{ width: "50px" }}
                 />
               </Link>
-              <form className=" w-100 p-0 m-0 ">
+              <form className=" w-100 p-0 m-0" action="/" method="get">
                 <input
                   className="form-control form-controlmob "
                   type="search"
+                  name="searchByName"
                   placeholder="Search"
                   aria-label="Search"
                   style={{

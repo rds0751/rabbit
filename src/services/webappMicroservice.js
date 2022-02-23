@@ -5,7 +5,7 @@ import axios from "axios";
 
 export function getNfts(requestData) {
   // let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts";
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts";
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts?" + requestData;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
