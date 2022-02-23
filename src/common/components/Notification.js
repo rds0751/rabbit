@@ -22,11 +22,11 @@ function Notification() {
   const { user } = useSelector((state) => state);
 
   const [notifications, setNotifications] = useState([]);
-  console.log(user.addUserData._id, "<<<< user data");
-  // console.log(user?.addUserData?._id, "<<<< user data");
+  console.log(user?.loggedInUser?._id, "<<<< user data");
+  // console.log(user?.loggedInUser?._id, "<<<< user data");
 
   useEffect(() => {
-    getNotificationListById(user.addUserData._id).then((response) => setNotifications(response));
+    getNotificationListById(user?.loggedInUser?._id).then((response) => setNotifications(response));
   });
   console.log("notifications", notifications);
 
