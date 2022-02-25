@@ -102,7 +102,7 @@ function Navbar() {
   console.log("logged in user >>> lllll", loggedInUser);
   return (
     <>
-      <div className="navbar-width">
+      <div className="navbar-width" style={{width:"100%", height:"70px"}}>
         <nav className="navbarborder navbar navbar-expand-lg">
           <div
             className="container container-fluid"
@@ -153,7 +153,24 @@ function Navbar() {
               </form>
             </div>
 
-            <div className="right_navbar d-flex ">
+            
+
+            <div className="search_box">
+              <form className="p-0 m-0 ">
+                <input
+                  className="form-control form-controlmob "
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button className="screachbtn">
+                  <i className="fa fa-search" aria-hidden="true"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+          
+          <div className="right_navbar d-flex ">
               {/* <div
             className="collapse navbar-collapse mobcollapse"
             id="navbarSupportedContent"
@@ -261,8 +278,8 @@ function Navbar() {
                       onClick={handleNotiSideBar}
                       className="noti"
                       src={require("../../assets/images/notification.png")}
-                      width="19px"
-                      height="21px"
+                      width="18.51px"
+                      height="21.21px"
                     ></img>
                     {/* </Link> */}
                     {/* </Link> */}
@@ -280,7 +297,8 @@ function Navbar() {
                       <img
                         className="btnnav_mob1"
                         src={require("../../assets/images/profile.png")}
-                        style={{ color: "gray", cursor: "pointer" }}
+                        style={{ color: "gray", cursor: "pointer",marginLeft:"31.22px" ,marginRight:"22.43px"
+                       }}
                       ></img>
                     </a>
                     <ul
@@ -322,7 +340,7 @@ function Navbar() {
                       className="btnnav_mob2"
                       src={require("../../assets/images/wallet.png")}
                       width="21px"
-                      height="21px"
+                      height="21.21px"
                       style={{
                         color: "gray",
                         cursor: "pointer",
@@ -344,21 +362,8 @@ function Navbar() {
                 </ul>
               </div>
             </div>
-            <div className="search_box">
-              <form className="p-0 m-0 ">
-                <input
-                  className="form-control form-controlmob "
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                />
-                <button className="screachbtn">
-                  <i className="fa fa-search" aria-hidden="true"></i>
-                </button>
-              </form>
-            </div>
-          </div>
         </nav>
+        
         <div className={humburger ? "scroll_off" : <></>}>
           {humburger ? <Menu /> : <></>}
         </div>
