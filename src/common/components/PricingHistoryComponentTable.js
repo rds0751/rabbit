@@ -1,124 +1,178 @@
-import React from "react";
-import CloseIcon from "@mui/icons-material/Close";
-import "../../assets/styles/Leader.css";
+import React, { useState } from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import styled from "styled-components";
 
-function PricingHistoryComponentTable() {
-  return (
-    <>
-      <h5 className="font-weight-900 font-16">Pricing History</h5>
-      <div className="row no-gutters  ">
-        <div className=" col-lg-3 col-sm-4">
-          <select
-            id="filter_mobile"
-            style={{
-              width: "100px",
-              fontSize: "14px",
-              height: "37px",
-              borderRadius: "5px",
-            }}
-          >
-            <option>Filter</option>
-            <option>Events</option>
-            <option>Price</option>
-            <option>Date</option>
-          </select>
-        </div>
-        <div className=" col-lg-3 col-sm-4">
-          <button
-            className="text-sky text-start font-15"
-            id="choice_mobile"
-            style={{
-              width: "90px",
-              height: "35px",
-              fontSize: "14px",
-              borderRadius: "5px",
-              borderColor: "#366EEF",
-              backgroundColor: "#fff",
-            }}
-          >
-            Bids <CloseIcon style={{ fontSize: "18px", marginLeft: "1.8em" }} />
-          </button>
-        </div>
-        <div className=" col-lg-3 col-sm-4">
-          <button
-            className="text-sky text-start font-15"
-            style={{
-              width: "90px",
-              height: "35px",
-              fontSize: "14px",
+const MainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const Title = styled.h1`
+  color: #000000;
+  font-size: 16px;
+  font-weight: bold;
+`;
+const FilterContainer = styled.div`
+  display: flex;
+`;
+const Select = styled.select`
+  border: 1px solid #d2d2d2;
+  border-radius: 4px;
+  width: 100px;
+  padding: 5px;
+`;
+const Option = styled.option`
+  font-size: 14px;
+`;
+const Filter = styled.div`
+  display: flex;
+  align-items: center;
+  border: 1px solid #d2d2d2;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #366eef;
+  font-size: 14px;
+  margin-left: 16px;
+  padding: 0px 5px 0px 5px;
+`;
+const Button = styled.button`
+  background-color: transparent;
+  border: none;
+  color: #366eef;
+`;
 
-              borderRadius: "5px",
-              borderColor: "#366EEF",
-              backgroundColor: "#fff",
-            }}
-          >
-            List <CloseIcon style={{ fontSize: "18px", marginLeft: "1.8em" }} />
-          </button>
-        </div>
-        <div className=" col-lg-3 col-sm-4">
-          <button
-            className="text-sky text-start font-15"
-            style={{
-              width: "90px",
-              height: "35px",
-              borderRadius: "5px",
-              fontSize: "14px",
-
-              borderColor: "#366EEF",
-              backgroundColor: "#fff",
-            }}
-          >
-            Offer{" "}
-            <CloseIcon style={{ fontSize: "18px", marginLeft: "1.6em" }} />
-          </button>
-        </div>
-      </div>
-      {/* </div> */}
-      <div
-        className="row no-gutters mt-3 font-15 font-weight-900"
-        style={{ backgroundColor: "#FBFBFB", padding: "10px" }}
-      >
-        <div className=" col-3">Event</div>
-        <div className=" col-2">Price</div>
-        <div className=" col-2">From</div>
-        <div className=" col-3">To</div>
-        <div className=" col-2">Date</div>
-      </div>
-      <div
-        className="border mt-2 pricingtable_mob"
-        style={{ width: "550px", marginLeft: "-0.7em" }}
-      >
-        <div className="row no-gutters font-14" style={{ padding: "10px" }}>
-          <div className=" col-3 border-bottom">List</div>
-          <div className=" col-2 border-bottom">0.09 ETH</div>
-          <div className=" col-2 border-bottom">CreatX</div>
-          <div className=" col-3 border-bottom">Beeple</div>
-          <div className=" col-2 border-bottom">1 July</div>
-        </div>
-        <div className="row no-gutters font-14" style={{ padding: "10px" }}>
-          <div className=" col-3 border-bottom">List</div>
-          <div className=" col-2 border-bottom">0.09 ETH</div>
-          <div className=" col-2 border-bottom">CreatX</div>
-          <div className=" col-3 border-bottom">Beeple</div>
-          <div className=" col-2 border-bottom">1 July</div>
-        </div>
-        <div className="row no-gutters font-14" style={{ padding: "10px" }}>
-          <div className=" col-3 border-bottom">List</div>
-          <div className=" col-2 border-bottom">0.09 ETH</div>
-          <div className=" col-2 border-bottom">CreatX</div>
-          <div className=" col-3 border-bottom">Beeple</div>
-          <div className=" col-2 border-bottom">1 July</div>
-        </div>
-        {/* <div className="row no-gutters font-14" style={{ padding: "10px" }}>
-          <div className="col-3">List</div>
-          <div className="col-2">0.09 ETH</div>
-          <div className="col-2">CreatX</div>
-          <div className="col-3">Beeple</div>
-          <div className="col-2">1 July</div>
-        </div> */}
-      </div>
-    </>
-  );
+function createData(Event, Price, From, To, Date) {
+  return { Event, Price, From, To, Date };
 }
 
-export default PricingHistoryComponentTable;
+const rows = [
+  createData("List", "0.32ETH", "Ravi", "John", "25Feb"),
+  createData("Buy", "0.32ETH", "Ravi", "John", "25Feb"),
+  createData("price", "0.32ETH", "Ravi", "John", "25Feb"),
+];
+
+export default function PricingHistoryComponentTable() {
+  const [list, setEvent] = useState(false);
+  const [price, setPrice] = useState(false);
+  const [buy, setBuy] = useState(false);
+
+  const handleChange = (e) => {
+    if (e.target.value === "list") {
+      setEvent(!list);
+    } else if (e.target.value === "price") {
+      setPrice(!price);
+    } else if (e.target.value === "buy") {
+      setBuy(!buy);
+    }
+  };
+
+  const closeFilter = (key) => {
+    if (key === "list") {
+      setEvent(!list);
+    } else if (key === "price") {
+      setPrice(!price);
+    } else if (key === "buy") {
+      setBuy(!buy);
+    }
+  };
+
+  return (
+    <MainContainer>
+      <Title>Activities</Title>
+      <FilterContainer>
+        <Select name="filter" onChange={(e) => handleChange(e)}>
+          <Option>Filter</Option>
+          <Option value="list">List</Option>
+          <Option value="price">Price</Option>
+          <Option value="buy">Buy</Option>
+        </Select>
+        {list ? (
+          <Filter>
+            <span style={{ marginRight: "10px" }}>List</span>
+            <Button onClick={() => closeFilter("list")}>
+              <i class="fa-solid fa-xmark"></i>
+            </Button>
+          </Filter>
+        ) : (
+          ""
+        )}
+        {price ? (
+          <Filter>
+            <span style={{ marginRight: "10px" }}>Price</span>
+            <Button onClick={() => closeFilter("price")}>
+              <i class="fa-solid fa-xmark"></i>
+            </Button>
+          </Filter>
+        ) : (
+          ""
+        )}
+        {buy ? (
+          <Filter>
+            <span style={{ marginRight: "10px" }}>Buy</span>
+            <Button onClick={() => closeFilter("buy")}>
+              <i class="fa-solid fa-xmark"></i>
+            </Button>
+          </Filter>
+        ) : (
+          ""
+        )}
+      </FilterContainer>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 300 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell style={{ color: "#191919", fontWeight: "bold" }}>
+                Event
+              </TableCell>
+              <TableCell
+                align="right"
+                style={{ color: "#191919", fontWeight: "bold" }}
+              >
+                Price
+              </TableCell>
+              <TableCell
+                align="right"
+                style={{ color: "#191919", fontWeight: "bold" }}
+              >
+                From
+              </TableCell>
+              <TableCell
+                align="right"
+                style={{ color: "#191919", fontWeight: "bold" }}
+              >
+                To
+              </TableCell>
+              <TableCell
+                align="right"
+                style={{ color: "#191919", fontWeight: "bold" }}
+              >
+                Date
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow
+                key={row.name}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {row.Event}
+                </TableCell>
+                <TableCell align="right">{row.Price}</TableCell>
+                <TableCell align="right">{row.From}</TableCell>
+                <TableCell align="right">{row.To}</TableCell>
+                <TableCell align="right">{row.Date}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </MainContainer>
+  );
+}
