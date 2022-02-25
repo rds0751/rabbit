@@ -102,7 +102,7 @@ function Navbar() {
   console.log("logged in user >>> lllll", loggedInUser);
   return (
     <>
-      <div className="navbar-width" style={{width:"100%", height:"70px"}}>
+      <div className="navbar-width">
         <nav className="navbarborder navbar navbar-expand-lg">
           <div
             className="container container-fluid"
@@ -125,7 +125,6 @@ function Navbar() {
                   style={{
                     backgroundColor: "#f8f8f8",
                     width: "75%",
-                    height: "42px",
                     padding: "0px",
                     paddingLeft: "10px",
                     border: "0",
@@ -136,7 +135,6 @@ function Navbar() {
                   style={{
                     border: "0",
                     width: "35px",
-                    height: "42px",
                     backgroundColor: "#f8f8f8",
                     marginLeft: "5px",
                   }}
@@ -168,7 +166,7 @@ function Navbar() {
                 </button>
               </form>
             </div>
-          </div>
+          
           
           <div className="right_navbar d-flex ">
               {/* <div
@@ -361,6 +359,7 @@ function Navbar() {
                   {/* </li> */}
                 </ul>
               </div>
+            </div>
             </div>
         </nav>
         
