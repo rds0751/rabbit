@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Nfts_Tile_Api } from "../../constants/Nfts_Tile_Api";
 // import "../../assets/styles/custom.css";
 import "../../assets/styles/Notification.css";
@@ -11,15 +11,29 @@ import Like from "../../assets/images/Like.svg";
 import likes from "../../assets/images/likes.svg";
 import { useSelector } from "react-redux";
 
+const queryString = require("query-string");
 function NftPage() {
   const [nfts, setNfts] = useState([]);
-  const [type, setType] = useState("all");
   const { user } = useSelector((state) => state);
   const [toggleNft, setToggleNft] = useState(true);
+  const [type, setType] = useState("");
+  const search = useLocation().search;
+  const name = new URLSearchParams(search).get("searchByName");
+
+  const defaultReq = {
+    type: "all",
+    searchByName: name ? name : "",
+    minPrice: 0,
+    maxPrice: "",
+  };
+
+  const [data, setData] = useState(defaultReq);
+
+  const reqObj1 = queryString.stringify(defaultReq);
 
   useEffect(() => {
-    getNfts().then((response) => setNfts(response.nftContent));
-  }, []);
+    getNfts(reqObj1).then((response) => setNfts(response.nftContent));
+  });
 
   const handleChange = (e) => {
     setType(e.target.value);
@@ -75,7 +89,6 @@ function NftPage() {
                 // className="first_select ml_auto"
                 className="priceRangeDropDown"
                 style={{ backgroundColor: "white" }}
-
               >
                 <option value="all">Price range</option>
                 <option value="2">2</option>
@@ -89,7 +102,6 @@ function NftPage() {
               // className="first_select ml_auto"
               className="priceRangeDropDown"
               style={{ backgroundColor: "white" }}
-
             >
               <option value="all">Sort By</option>
               <option value="2">2</option>
@@ -100,7 +112,7 @@ function NftPage() {
           className="nftTileContainer row  ntf_row"
           style={{ justifyContent: "space-between" }}
         >
-          {filteredNfts.map((nft) => {
+          {nfts.map((nft) => {
             const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
             const route = "nft-information/" + _id;
 
