@@ -116,19 +116,24 @@ export default function NftInformation(props) {
     });
 
   const makeReport = () => {
-    console.log("report", report);
     addNftReport(report);
   };
+
+  useEffect(() => {
+    getUser(props?.responseData?.ownedBy).then((response) => setUserDetails(response));
+  });
+
+  console.log("user", userDetails)
 
   return (
     <>
       <div className="container">
         <div className="row mt-5">
-          <div className="col-1"></div>
+          <div className="col-lg-1"></div>
           <div className="col-lg-5 col-sm-12 col-md-6">
             <div>
               <img
-                src={nft.ipfsUrl}
+                src={props?.responseData?.ipfsUrl}
                 className="border-radius imginfo_mob"
                 style={{
                   // width: "100%",
@@ -216,7 +221,7 @@ export default function NftInformation(props) {
                 </Button>
               </span>
 
-              <div className="" id="share_info">
+              <div className="align-row" id="share_info">
                 <span className="text-dark font-22 font-weight-900">
                   {props?.responseData?.name}
                 </span>
@@ -421,37 +426,26 @@ export default function NftInformation(props) {
                   </div>
                 </span>
               </div>
-              <div className="second-text  mt-4">
-                <span className="font-13 text-dark">Minimum Bid: </span>
-                <span
+              <div className="second-text  mt-4 align-row" >
+              <span className="font-13 text-dark">Current Price:
+              <span
                   className="font-13 font-weight-700"
                   style={{ color: "#16AB6E" }}
                 >
-                  0.32 ETH
-                </span>
-                <span
-                  className="font-13 text-dark"
-                  style={{ marginLeft: "1em" }}
-                >
-                  Highest Bid:{" "}
-                </span>
-                <span
-                  className="font-13 font-weight-700"
-                  style={{ color: "#366EEF" }}
-                >
-                  0.49 ETH
-                </span>
-                <span style={{ marginLeft: "2em" }}>
+                   0.32 ETH
+                </span></span>
+                <span className="align-row">
                   <i className="far fa-clock" style={{ color: "#f54" }}></i>
+                  <span className="font-13 text-dark" style={{marginLeft:"5px"}}>Ends in 5 days </span>
                 </span>
-                <span className="font-13 text-dark"> Ends in 5 days </span>
+                
               </div>
               <div className="row">
                 <div className="col-lg-3 col-sm-12  mt-3">
                   <span className="font-13 text-dark">
                     Owned by:
                     <span className="font-13 font-weight-900 text-dark">
-                      {props?.responseData?.ownerAddress}
+                      {userDetails.firstName}
                     </span>
                   </span>
                 </div>
@@ -464,26 +458,20 @@ export default function NftInformation(props) {
                   </span>
                 </div>
               </div>
-              <div className="row">
-                <div className="col-lg-2 col-sm-12  mt-3">
-                  <span className="font-13 text-dark">
-                    <VisibilityIcon
+              <div style={{display:"flex", marginTop:"16px"}}>
+                <div style={{marginRight:"20px"}}>
+                  <VisibilityIcon
                       style={{ fontSize: "20px", color: "#366EEF" }}
-                    />
-                    <span
+                  />
+                  <span
                       className="font-13 font-weight-900 text-dark"
                       style={{ marginLeft: "0.5em" }}
                     >
                       {props?.responseData?.viewsCount}
-                    </span>
                   </span>
                 </div>
-                <div className="col-lg-2 col-sm-12  mt-3">
-                  <span
-                    className="font-13 text-dark img_nftinfo_mob"
-                    style={{ marginLeft: "-2em" }}
-                  >
-                    <FavoriteIcon
+                <div>
+                  <FavoriteIcon
                       style={{ fontSize: "20px", color: "#EF3643" }}
                     />
                     <span
@@ -492,16 +480,14 @@ export default function NftInformation(props) {
                     >
                       {props?.responseData?.likesCount}
                     </span>
-                  </span>
+
                 </div>
-              </div>
-              <div className="row">
+              </div>              
+              <div className="row" style={{marginBottom:"16px"}}>
                 <h4 className="font-13  font-weight-900 mt-3">Description</h4>
-              </div>
-              <div className="row">
-                <h4 className="font-13 ">
+                <hp className="font-13 ">
                   {props?.responseDatat?.description}e
-                </h4>
+                </hp>
               </div>
 
               {/*  IF nft is not created by logged in user these buttons will be shown */}
@@ -517,6 +503,7 @@ export default function NftInformation(props) {
                         ? "block"
                         : "none",
                     color: "white",
+                    marginRight: "1rem",
                     backgroundColor: "#366eff",
                     // marginLeft: "1rem",
                     textTransform: "none",
@@ -534,7 +521,6 @@ export default function NftInformation(props) {
                         !props?.responseData?.salesInfo?.isOpenForSale
                         ? "block"
                         : "none",
-                    marginLeft: "1rem",
                     color: "white",
                     backgroundColor: "#366eff",
                     textTransform: "none",
