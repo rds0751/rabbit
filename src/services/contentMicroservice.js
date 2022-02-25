@@ -95,6 +95,11 @@ async function createNftContent(requestdata) {
       return Promise.reject(err);
     });
 }
+// async function updateNftContent(requestData, requestId) {
+//   let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/" + requestId;
+//   let headers = getHeaders();
+//   return httpService(httpConstants.METHOD_TYPE.PUT, headers, requestData, url)
+//     .then((response) => {
 async function openForSale(requestData) {
   let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/open-for-sale";
   let headers = getHeaders();

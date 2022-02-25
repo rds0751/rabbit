@@ -329,7 +329,7 @@ export default function NftInformation(props) {
                             data-bs-target="#myModalShare"
                             className="btn btn-primary w-100"
                             data-bs-dismiss="modal"
-                          // style={{ marginLeft: "1.1em" }}
+                            // style={{ marginLeft: "1.1em" }}
                           >
                             Make Offer
                           </button>
