@@ -13,7 +13,7 @@ export function getNfts(requestData) {
     url
   )
     .then((response) => {
-      console.log(response, "<<<< response");
+      // console.log(response, "<<<< response");
       if (
         !response.success ||
         response.responseCode !== 200 ||

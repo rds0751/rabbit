@@ -788,3 +788,9 @@ select:focus-visible {
     width: 143px;
   } */
 }
+.center {
+margin:auto;
+width:10%;
+padding:10px;
+transform-origin: center;
+}

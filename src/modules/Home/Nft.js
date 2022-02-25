@@ -14,6 +14,7 @@ const queryString = require('query-string');
 function NftPage() {
   const [nfts, setNfts] = useState([]);
   const { user } = useSelector((state) => state);
+const { loggedInUser, walletAddress } = user;
 
   const search = useLocation().search;
   const name = new URLSearchParams(search).get('searchByName');
@@ -43,11 +44,16 @@ function NftPage() {
   const [handleLike, setHandleLike] = useState(true);
 
   const likeNft = (id) => {
+    alert(id)
     const data = {
       contentId: id,
+      addedBy:loggedInUser?._id,
       // addedBy: user.addUserData._id,
     }
-    addLikeNft(data)
+    const res=addLikeNft(data)
+    console.log("sssss",res)
+
+// console.log("kkkkkkkkkkkkkkkkk",blockchainRes)
     setHandleLike(!handleLike)
   }
   
@@ -88,8 +94,9 @@ function NftPage() {
           className="row mob_row ntf_row"
           style={{ justifyContent: "space-between" }}
         >
-          {nfts.map((nft) => {
+          {nfts.map((nft,index) => {
             const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
+            // console.log("[[[[[[[",biddingDetails.minPrice)
             const route = "nft-information/" + _id;
 
             // const { startDate, endDate } = biddingDetails;
@@ -98,7 +105,7 @@ function NftPage() {
 
             return (
               <div className=" col-md-6 col-lg-3 col-sm-12 mt-5 nft_card">
-                <div>
+                <div >
                   <div className="card nft-card-radius border-radius cardmob">
                     <Link to={route} style={{ textDecoration: "none" }}>
                       <img
@@ -108,12 +115,14 @@ function NftPage() {
                         // style={{ width: "270px" }}
                       />
                     </Link>
+                    {index}
                     <img
                       id="like_icon"
+                      key={index}
                       onClick={() => likeNft(_id)}
                       // src={require("../../assets/images/Like.png")}
                       // src={require("../../assets/images/Like.svg")}
-                      src={handleLike ? Like : likes}
+                        src={handleLike ? Like : likes}
                     />
                     <div>
                       <div className="container__up">
@@ -132,7 +141,7 @@ function NftPage() {
                         style={{ marginLeft: "1em" }}
                       >
                         Highest bid:
-                        <span className="font-weight-900">100</span>
+                        <span className="font-weight-900">{biddingDetails.minPrice}</span>
                         <span
                           className="dayleft_mob"
                           style={{ marginLeft: "2em", color: "#000" }}

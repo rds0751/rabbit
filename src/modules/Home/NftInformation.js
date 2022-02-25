@@ -20,6 +20,8 @@ import {
 } from "../../services/contentServices";
 import { toast } from "react-toastify";
 import { getUser } from "../../services/UserMicroService";
+import { Oval } from  'react-loader-spinner'
+
 
 export default function NftInformation(props) {
   console.log(props?.responseData, "<<<response");
@@ -120,6 +122,9 @@ export default function NftInformation(props) {
 
   return (
     <>
+     {
+      props?.loaderState?<div className= "center"> <Oval  vertical= "top" horizontal="center"   color="#00BFFF" height={30} width={30} /></div>:""
+    }
       <div className="container">
         <div className="row mt-5">
           <div className="col-1"></div>

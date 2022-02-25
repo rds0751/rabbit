@@ -15,15 +15,23 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDropzone } from "react-dropzone";
 import { useSelector } from "react-redux";
 import ImageFile from "./uploadFile";
+import { Oval } from  'react-loader-spinner'
+const loader = styled.div`
+vertical: top;
+horizontal: center; 
+`;
+
+
 // import "../../assets/styles/Leader.css"
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 const Button = styled.button``;
 function CreateSingleNFT(props) {
-  console.log("ppppppppppppp",props?.isNftCreated)
+  console.log("ppppppppppppp",props?.loaderState)
   const [collectionData, setCollectionData] = useState([]);
   const [selectFile, setSelectFile] = useState("");
   const [collectionId, setCollectionId] = useState("");
   const [uploadFileObj, setUploadFileObj] = useState("");
+
 
   // >>>> This is user id
   const { user } = useSelector((state) => state);
@@ -92,6 +100,8 @@ function CreateSingleNFT(props) {
         ownerAddress: walletAddress.address
 
       });
+      // setloader(true)
+
       props.createNftHandler({
         nftFile: selectFile,
         nftName: name.current,
@@ -103,6 +113,8 @@ function CreateSingleNFT(props) {
         ownerAddress: walletAddress.address
 
       });
+      // setloader(false)
+
     };
     addIPFS();
     // e.preventDefault();
@@ -139,7 +151,11 @@ function CreateSingleNFT(props) {
   };
   return (
     <>
+    {
+      props?.loaderState?<div className= "center"> <Oval  vertical= "top" horizontal="center"   color="#00BFFF" height={30} width={30} /></div>:""
+    }
       <div>
+      {/* {loader?<div><Oval color="#00BFFF" height={80} width={80} /></div> : "jfdskjdjdjd"} */}
         <div className="text-center mt-5">
           <h4 className="create-nft-font">Create NFT</h4>
         </div>
@@ -291,6 +307,7 @@ function CreateSingleNFT(props) {
                 >
                   Create
                 </button>
+
               </div>
             </div>
           </div>
