@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import "../../assets/styles/Notification.css";
+import "../../assets/styles/suggestion.css";
 import { addSuggestion } from "../../services/contentMicroservice";
 import { ToastContainer } from "react-toastify";
+
 import { toast } from "react-toastify";
 function Suggestion() {
   const [formData, setFormData] = useState({
@@ -43,13 +44,13 @@ function Suggestion() {
         draggable
         pauseOnHover
       />
-      <div className="row mt-5">
-        <div className="col-sm-5 col-12 col-xs-12 offset-3 suggestionmob">
-          <h4>Make a Suggestion</h4>
-          <div className="suggestion-form-box suggestionmob1">
-            <div className="suggestion-form border p-4 mt-5">
-              <div className="mb-3 mt-3">
-                <label for="email" className="form-label">
+      <div className="suggestion-body ">
+        <div className="suggestion suggestionmob">
+          <h4 className="make-suggestion">Make a Suggestion</h4>
+          <div className="form-box">
+            <div className="form-inner">
+              <div className="">
+                <label for="email" className="label-key">
                   Email
                 </label>
                 <input
@@ -57,40 +58,47 @@ function Suggestion() {
                   name="email"
                   value={formData.email}
                   onChange={(e) => handleChange(e.target.name, e.target.value)}
-                  className="form-control bg-light"
+                  className="sugg-input"
                   placeholder="Write your email address"
                   name="email"
                 />
               </div>
-              <div className="mb-3">
-                <label for="pwd" className="form-label">
+              <div className="">
+                <label for="pwd" className="label-key">
                   Title
                 </label>
                 <input
                   name="title"
                   value={formData.title}
                   onChange={(e) => handleChange(e.target.name, e.target.value)}
-                  className="form-control bg-light"
+                  className="sugg-input"
                   placeholder="A short description title"
                 />
               </div>
-              <label for="comment">Detail</label>
+              <label for="comment" className="label-key">
+                Detail
+              </label>
               <textarea
                 name="detail"
                 value={formData.detail}
                 onChange={(e) => handleChange(e.target.name, e.target.value)}
-                className="form-control bg-light"
+                className="sugg-input text-area"
                 rows="4"
                 placeholder="Write comment"
               ></textarea>
-              <button
-                onClick={PostSuggestion}
-                // type="submit"
-                className="btn btn-primary offset-9 mt-4 w-25 "
-                disabled={checkButtonStatus}
-              >
-                Send
-              </button>
+              <div className="butt-outer">
+                <button
+                  onClick={PostSuggestion}
+                  // type="submit"
+                  className="send-button"
+                  style={{
+                    opacity: checkButtonStatus ? 0.8 : 1,
+                  }}
+                  disabled={checkButtonStatus}
+                >
+                  Send
+                </button>
+              </div>
             </div>
           </div>
         </div>

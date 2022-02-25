@@ -9,15 +9,23 @@
 
 // export default ACTION
 
-import { BASE_URL,ADD_WALLET, OPEN_NOTIFICATION,LOGGED_IN_UER_DETAILS, OPEN_WALLET, USER_DETAILS } from './Constants';
-import { ADD_USER, GET_ERRORS, ALL_USERS } from './Constants';
-import axios from 'axios';
+import {
+  BASE_URL,
+  ADD_WALLET,
+  OPEN_NOTIFICATION,
+  LOGGED_IN_UER_DETAILS,
+  OPEN_WALLET,
+  USER_DETAILS,
+  REDIRECT_URL,
+} from "./Constants";
+import { ADD_USER, GET_ERRORS, ALL_USERS } from "./Constants";
+import axios from "axios";
 
-export const addUseraction = data => dispatch => {
+export const addUseraction = (data) => (dispatch) => {
   axios
     .post(BASE_URL + `/api/v1/user`, data)
-    .then(response => {
-      console.log('response', response);
+    .then((response) => {
+      console.log("response", response);
       if (response.data.responseCode === 200) {
         dispatch({
           type: ADD_USER,
@@ -34,8 +42,8 @@ export const addUseraction = data => dispatch => {
         });
       }
     })
-    .catch(error => {
-      console.log('error', error);
+    .catch((error) => {
+      console.log("error", error);
       if (error && error.responseCode && error.responseCode === 403) {
         dispatch({
           type: GET_ERRORS,
@@ -44,21 +52,21 @@ export const addUseraction = data => dispatch => {
       }
     });
 };
-export const AddWalletDetails = data => dispatch => {
-  console.log(data, '<<< data from update user detail');
+export const AddWalletDetails = (data) => (dispatch) => {
+  console.log(data, "<<< data from update user detail");
   dispatch({ type: ADD_WALLET, payload: data });
 };
 
-export const addUserData = data => dispatch => {
-  console.log(data, '<<<data from addUserdata');
+export const addUserData = (data) => (dispatch) => {
+  console.log(data, "<<<data from addUserdata");
   dispatch({ type: LOGGED_IN_UER_DETAILS, payload: data });
 };
 
-export const allUseraction = () => dispatch => {
+export const allUseraction = () => (dispatch) => {
   console.log(1);
   axios
     .get(BASE_URL + `/api/v1/users`)
-    .then(response => {
+    .then((response) => {
       if (response.status === 200) {
         dispatch({
           type: ALL_USERS,
@@ -66,7 +74,7 @@ export const allUseraction = () => dispatch => {
         });
       }
     })
-    .catch(error => {
+    .catch((error) => {
       if (error && error.response && error.responseCode === 404) {
         dispatch({
           type: GET_ERRORS,
@@ -76,7 +84,9 @@ export const allUseraction = () => dispatch => {
     });
 };
 
-
+export const RedirectTo = (data) => (dispatch) => {
+  dispatch({ type: REDIRECT_URL, payload: data });
+};
 export const ManageNotiSideBar = (data) => (dispatch) => {
   // alert("manage noti");
   dispatch({ type: OPEN_NOTIFICATION, payload: data });

@@ -87,9 +87,7 @@ export default function NftInformation(props) {
   const buyNft = async () => {
     props?.BuyNowNft({
       buyerId: loggedInUser?._id,
-      newOwnerAddress: walletAddress?.address
-
-
+      newOwnerAddress: walletAddress?.address,
     });
 
     //   const response = await put_NftOpenForSale(nft._id);
@@ -161,7 +159,7 @@ export default function NftInformation(props) {
                   style={{
                     display:
                       props?.responseData?.createdBy == loggedInUser?._id &&
-                        !props?.responseData?.salesInfo?.isOpenForSale
+                      !props?.responseData?.salesInfo?.isOpenForSale
                         ? "block"
                         : "none",
                   }}
@@ -184,7 +182,7 @@ export default function NftInformation(props) {
                   style={{
                     display:
                       props?.responseData?.createdBy == loggedInUser?._id &&
-                        !props?.responseData?.salesInfo?.isOpenForSale
+                      !props?.responseData?.salesInfo?.isOpenForSale
                         ? "block"
                         : "none",
                     color: "white",
@@ -200,7 +198,7 @@ export default function NftInformation(props) {
                   style={{
                     display:
                       props?.responseData?.createdBy == loggedInUser?._id &&
-                        props?.responseData?.salesInfo?.isOpenForSale
+                      props?.responseData?.salesInfo?.isOpenForSale
                         ? "block"
                         : "none",
                     marginLeft: "1rem",
@@ -329,7 +327,7 @@ export default function NftInformation(props) {
                             data-bs-target="#myModalShare"
                             className="btn btn-primary w-100"
                             data-bs-dismiss="modal"
-                          // style={{ marginLeft: "1.1em" }}
+                            // style={{ marginLeft: "1.1em" }}
                           >
                             Make Offer
                           </button>
@@ -505,13 +503,10 @@ export default function NftInformation(props) {
               {/*  IF nft is not created by logged in user these buttons will be shown */}
               <span className="nftsell">
                 <Button
-                  // className="btn btn-primary mt-3"
-                  // data-bs-toggle="modal"
-                  // data-bs-target="#myModalShare"
-                  style={{
+              style={{
                     display:
                       props?.responseData?.createdBy != loggedInUser?._id &&
-                        props?.responseData?.salesInfo?.isOpenForSale
+                      props?.responseData?.salesInfo?.isOpenForSale
                         ? "block"
                         : "none",
                     color: "white",
@@ -529,7 +524,7 @@ export default function NftInformation(props) {
                   style={{
                     display:
                       props?.responseData?.createdBy != loggedInUser?._id &&
-                        !props?.responseData?.salesInfo?.isOpenForSale
+                      props?.responseData?.salesInfo?.isOpenForSale
                         ? "block"
                         : "none",
                     marginLeft: "1rem",
@@ -586,7 +581,7 @@ export default function NftInformation(props) {
                   style={{
                     display:
                       props?.responseData?.createdBy != loggedInUser?._id &&
-                        props?.responseData?.salesInfo?.isOpenForSale
+                      props?.responseData?.salesInfo?.isOpenForSale
                         ? "block"
                         : "none",
                     height: "40px",

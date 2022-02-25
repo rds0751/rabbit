@@ -53,13 +53,7 @@ function EditProfile(props) {
     };
     const result = await updateUserProfile(data, props.user._id);
     console.log(result);
-    // console.log(
-    //   username.current,
-    //   bio.current,
-    //   personalSite.current,
-    //   cdnUrl.current
-    // );
-  };
+     };
 
   return (
     <>

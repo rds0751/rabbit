@@ -9,6 +9,7 @@ import {
   addUserData,
   ManageNotiSideBar,
   ManageWalletSideBar,
+  RedirectTo,
 } from "../../reducers/Action";
 import { ethers } from "ethers";
 
@@ -29,7 +30,7 @@ function Navbar() {
   const { user, sideBar } = useSelector((state) => state);
   const { userDetails, loggedInUser, walletAddress } = user;
   const { isOpenNoti, isOpenWallet } = sideBar;
-  console.log(walletAddress,"<<<<this is wallet address")
+  console.log(walletAddress, "<<<<this is wallet address");
   // useEffect(() => {
   //   if (window.ethereum) {
   //     // window.ethereum
@@ -71,7 +72,24 @@ function Navbar() {
   //     });
   // };
   let location = useLocation();
-
+  const manageNavigation = (name) => {
+    if (name == "create") {
+      if (walletAddress == null) {
+        dispatch(RedirectTo("create"));
+        navigate("/add-wallet");
+      } else {
+        navigate("/create-nft");
+      }
+    }
+    if (name == "profile") {
+      if (walletAddress == null) {
+        dispatch(RedirectTo("profile"));
+        navigate("/add-wallet");
+      } else {
+        navigate("/my-profile");
+      }
+    }
+  };
   const handleHamburger = () => {
     if (!humburger) {
       setHumburger(true);
@@ -80,21 +98,17 @@ function Navbar() {
     }
   };
   const handleWalletClick = () => {
-    // alert("handleWallet called");
     if (walletAddress == null) {
-      // alert("hanlde wallet null");
       navigate("/add-wallet");
+      dispatch(RedirectTo("wallet"));
     } else {
-      // alert("else part");
       dispatch(ManageWalletSideBar(!isOpenWallet));
     }
   };
   const handleNotiSideBar = () => {
-    // alert("noti open");
-    // alert(loggedInUser);
     if (loggedInUser == null) {
-      // alert("nulll");
       navigate("/add-wallet");
+      dispatch(RedirectTo("notification"));
     } else {
       dispatch(ManageNotiSideBar(true));
     }
@@ -236,7 +250,7 @@ function Navbar() {
                       </li>
                     </ul>
                   </li>
-                  <li>
+                  <li onClick={() => manageNavigation("create")}>
                     <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}
                       className="btn btn-primary btnnav"
@@ -286,17 +300,17 @@ function Navbar() {
                       className="dropdown-menu"
                       aria-labelledby="navbarDropdown"
                     >
-                      <li>
-                        <Link
+                      <li onClick={() => manageNavigation("profile")}>
+                        {/* <Link
                           className="dropdown-item"
                           to={
                             walletAddress == null
                               ? "/add-wallet"
                               : "/my-profile"
-                          }
-                        >
-                          Profile
-                        </Link>
+                          } */}
+                        {/* > */}
+                        Profile
+                        {/* </Link> */}
                       </li>
                       <li>
                         <hr className="dropdown-divider" />

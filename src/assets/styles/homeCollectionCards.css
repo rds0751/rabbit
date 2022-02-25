@@ -1,0 +1,31 @@
+.collectionCardEach {
+  /* border: 2px solid red; */
+  width: 17.185vw !important;
+  height: 16vw;
+  overflow: hidden;
+  background-color: #f8f8f8;
+  border-radius: 13px;
+}
+.collectionCardEach a {
+  text-decoration: none !important;
+}
+.collectionCardEachName {
+  margin-top: 2% !important;
+}
+.collectionCardEachTotalitems {
+  margin-top: 1% !important;
+}
+@media only screen and (max-width: 1024px) {
+  .collectionCardEach {
+    /* border: 2px solid red; */
+    width: 37.185vw !important;
+    height: 36vw;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .collectionCardEach {
+    /* border: 2px solid red; */
+    width: 87.185vw !important;
+    height: 86vw;
+  }
+}

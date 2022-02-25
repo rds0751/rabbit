@@ -1,0 +1,154 @@
+.editProfileButton {
+    font-size: 0.9vw !important ;
+    font-family: "poppins" !important;
+  }
+  .profileItemContainer {
+    width: 85% !important;
+    margin: 0px auto;
+  }
+  .profileNftContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+  }
+  .profileNftContainerInner {
+    width: 17.085vw !important;
+    margin-right: 1.2vw;
+    /* border: 2px solid blue; */
+  }
+  .profileNftContainerInner img {
+    width: 17.085vw !important;
+    height: 9.81vw !important;
+  }
+  .profileNftDetailFirstContainer {
+    /* border: 2px solid green; */
+    padding: 3% 3% !important;
+  }
+  .profileNftDetailSecondContainer {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    font-size: 0.9vw;
+    font-family: "poppins";
+    padding: 4% 3% !important;
+  }
+  .postTypeProfileContainer {
+    border-bottom: 1px solid #c9c9c9;
+    height: 8vh;
+  }
+  .postTypeProfile {
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    cursor: pointer;
+  }
+  .postTypeProfile--active {
+    border-bottom: 2px solid #000000;
+    height: 100% !important;
+  
+    font-family: "poppins-semibold";
+  }
+  @media only screen and (max-width: 1024px) {
+    .editProfileButton {
+      font-size: 1.9vw !important ;
+      font-family: "poppins" !important;
+    }
+    .profileItemContainer {
+      width: 90% !important;
+      margin: 0px auto;
+    }
+    .profileNftContainer {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      box-sizing: border-box;
+    }
+    .profileNftContainerInner {
+      width: 42.085vw !important;
+      margin-right: 2.7vw;
+      /* border: 2px solid blue; */
+    }
+    .profileNftContainerInner img {
+      width: 42.085vw !important;
+      height: 27.085vw !important;
+    }
+    .profileNftDetailFirstContainer {
+      /* border: 2px solid green; */
+      padding: 3% 3% !important;
+    }
+    .profileNftDetailSecondContainer {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      font-size: 1.9vw;
+      font-family: "poppins";
+      padding: 4% 3% !important;
+    }
+    .postTypeProfile {
+      display: flex;
+      box-sizing: border-box;
+      align-items: center;
+      cursor: pointer;
+    }
+    .postTypeProfile--active {
+      border-bottom: 2px solid #000000;
+      height: 100% !important;
+  
+      font-family: "poppins-semibold";
+    }
+  }
+  @media only screen and (max-width: 480px) {
+    .editProfileButton {
+      font-size: 3.4vw !important ;
+      font-family: "poppins" !important;
+    }
+    .profileItemContainer {
+      width: 100% !important;
+      margin: 0px auto;
+    }
+    .profileNftContainer {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      box-sizing: border-box;
+    }
+    .profileNftContainerInner {
+      width: 82.085vw !important;
+      /* margin-right: 2.7vw; */
+      margin: 1% auto;
+      /* border: 2px solid blue; */
+    }
+    .profileNftContainerInner img {
+      width: 82.085vw !important;
+      height: 47.085vw !important;
+    }
+    .profileNftDetailFirstContainer {
+      /* border: 2px solid green; */
+      padding: 3% 3% !important;
+    }
+    .profileNftDetailSecondContainer {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      font-size: 3.9vw;
+      font-family: "poppins";
+      padding: 4% 3% !important;
+    }
+    .postTypeProfile {
+      display: flex;
+      box-sizing: border-box;
+      align-items: center;
+      cursor: pointer;
+    }
+    .postTypeProfile--active {
+      border-bottom: 2px solid #000000;
+      height: 100% !important;
+  
+      font-family: "poppins-semibold";
+    }
+  }
+  
