@@ -18,6 +18,15 @@ export default function PricingHistoryComponent(props) {
     );
   });
 
+  let total= 0;
+  let average = 0;
+  nftPricingHistory.forEach((item) => {
+    total = total + item.total
+  })
+  if (total !== 0){
+    average = total/nftPricingHistory.length
+  }
+
   const object = {
     series: [
       {
@@ -78,7 +87,7 @@ export default function PricingHistoryComponent(props) {
           <div className="col-1"></div>
           <div className="col-4">
             <h5 className="font-15 text-secondary mt-4">
-              Average Price: <span className="text-dark">0.23</span>
+              Average Price: <span className="text-dark">{average}</span>
             </h5>
           </div>
           <div className="col-3"></div>

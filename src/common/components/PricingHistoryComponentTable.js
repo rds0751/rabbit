@@ -123,7 +123,7 @@ export default function PricingHistoryComponentTable() {
         )}
       </FilterContainer>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 300 }} aria-label="simple table">
+        <Table aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell style={{ color: "#191919", fontWeight: "bold" }}>

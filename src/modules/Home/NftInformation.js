@@ -123,8 +123,6 @@ export default function NftInformation(props) {
     getUser(props?.responseData?.ownedBy).then((response) => setUserDetails(response));
   });
 
-  console.log("user", userDetails)
-
   return (
     <>
       <div className="container">
@@ -201,7 +199,7 @@ export default function NftInformation(props) {
                   }}
                   onClick={demoHandleSell}
                 >
-                  Put on sell
+                  Sell
                 </Button>
                 <Button
                   style={{
@@ -486,7 +484,7 @@ export default function NftInformation(props) {
               <div className="row" style={{marginBottom:"16px"}}>
                 <h4 className="font-13  font-weight-900 mt-3">Description</h4>
                 <hp className="font-13 ">
-                  {props?.responseDatat?.description}e
+                  {props?.responseData?.description}
                 </hp>
               </div>
 
@@ -518,11 +516,11 @@ export default function NftInformation(props) {
                   style={{
                     display:
                       props?.responseData?.createdBy != loggedInUser?._id &&
-                        !props?.responseData?.salesInfo?.isOpenForSale
+                        props?.responseData?.salesInfo?.isOpenForSale
                         ? "block"
                         : "none",
-                    color: "white",
-                    backgroundColor: "#366eff",
+                    color: "#366EEF",
+                    backgroundColor: "white",
                     textTransform: "none",
                   }}
                   onClick={removeNFTFromSell}
