@@ -5,6 +5,9 @@ import { httpServiceFileUpload } from "../utility/httpServiceFileUpload";
 import axios from "axios";
 import { AuthToken } from "./UserAuthToken";
 import { WHITE_LABEL_TOKEN } from "../reducers/Constants";
+
+const dev_url = "https://goi4mbj86f.execute-api.us-east-1.amazonaws.com/dev/"; // need to store it in .env file
+
 export default {
   addIpfs,
   createNftContent,
@@ -156,5 +159,15 @@ export const addSuggestion = async (bodyData, successCallback) => {
     }
   } catch (e) {
     console.log(e);
+  }
+};
+
+export const getAboutData = async (id, successCallBack) => {
+  const url = `${dev_url}api/v1/about/61f7b7a4c017de6244c51144`;
+  const { data } = await axios.get(url);
+  if (data.responseCode) {
+    successCallBack(data.responseData);
+  } else {
+    console.log(data);
   }
 };
