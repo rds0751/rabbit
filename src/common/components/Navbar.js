@@ -135,7 +135,8 @@ function Navbar() {
                   className="screachbtn"
                   style={{
                     border: "0",
-                    width: "35px",
+                    width: "50px",
+                    height:"42px",
                     backgroundColor: "#f8f8f8",
                     marginLeft: "5px",
                   }}

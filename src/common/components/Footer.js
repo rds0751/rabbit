@@ -56,13 +56,13 @@ function Footer() {
                     id="button-addon2"
                     style={{
                       height: "36px",
-                      fontWeight:"400px",
+                      fontWeight:"400",
                       borderTopLeftRadius: "0em",
                       borderBottomLeftRadius: "0em",
                     }}
                   >
                     {" "}
-                    <b>Submit</b>
+                    Submit
                   </button>
                 </div>
               </div>
