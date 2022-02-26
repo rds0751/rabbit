@@ -72,7 +72,7 @@ export default function PricingHistoryComponent(props) {
 
   return (
     <div id="chart">
-      <p className="font-15 font-weight-900">Pricing History</p>
+      {/* <p className="font-15 font-weight-900">Pricing History</p> */}
       <div className="border">
         <div className="row no-gutters">
           <div className="col-1"></div>

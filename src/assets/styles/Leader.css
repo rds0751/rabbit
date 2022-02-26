@@ -7,6 +7,7 @@
   font-weight: bold;
   margin-left: 7rem;
   margin-top: 1rem;
+  
 }
 .leader1 {
   font-size: 1.3rem;
@@ -782,4 +783,10 @@ thead {
 .no-gutters > [class*="col-"] {
   padding-right: 0;
   padding-left: 0;
+}
+
+.align-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

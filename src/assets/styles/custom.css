@@ -1,3 +1,4 @@
+
 .Collections__container {
   margin-top: 50px;
   width: 280px;
@@ -860,4 +861,11 @@ select:focus-visible {
 
 @media screen and (max-width:764px) {
   
+.tabs-list{
+  display: flex;
+  margin-top: 20px;
+  font-size:14px;
+  color: #828282;
+  cursor: pointer;
+}
 }
