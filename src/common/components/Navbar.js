@@ -133,7 +133,7 @@ function Navbar() {
                   }}
                 />
                 <button
-                  className="screachbtn"
+                  className=""
                   style={{
                     border: "0",
                     width: "50px",

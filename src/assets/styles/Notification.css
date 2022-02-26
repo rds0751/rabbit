@@ -600,7 +600,8 @@ height: 47px;
   color: #828282 !important;
 }
 .nav-link.navlink_active {
-  font-weight: 600;
+  
+  font:normal normal 600 16px/25px Poppins;
   color: #191919 !important;
 }
 .unerLine {
