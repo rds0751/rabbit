@@ -101,9 +101,13 @@ function Navbar() {
     if (walletAddress == null) {
       navigate("/add-wallet");
       dispatch(RedirectTo("wallet"));
+      // document.body.style.overflow = "visible";
     } else {
       dispatch(ManageWalletSideBar(!isOpenWallet));
+      //document.body.style.overflow = "hidden";
     }
+    //document.body.classList.add('overflow-hidden');
+    // document.body.toggleAttribute.style;
   };
   const handleNotiSideBar = () => {
     if (loggedInUser == null) {
@@ -192,14 +196,14 @@ function Navbar() {
                 <ul className="left_section_nav mb-0">
                   <li
                     className={
-                      location.pathname.includes("/") && !location.pathname.includes("leader-board") && !location.pathname.includes("resource")
+                      location.pathname.includes("/") && !location.pathname.includes("leader-board") && !location.pathname.includes("resource") && !location.pathname.includes("create-nft")
                         ? "nav-item li_underline"
                         : "nav-item"
                     }
                   >
                     <Link
                       className={
-                        location.pathname.includes("/") && !location.pathname.includes("leader-board") && !location.pathname.includes("resource")
+                        location.pathname.includes("/") && !location.pathname.includes("leader-board") && !location.pathname.includes("resource") && !location.pathname.includes("create-nft")
                           ? "nav-link navlink_active"
                           : "nav-link"
                       }
