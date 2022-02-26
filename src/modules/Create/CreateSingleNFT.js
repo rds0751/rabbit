@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Image from "../../assets/images/img-format.png";
+import ehereum from "../../assets/images/ehereum.png";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import {
@@ -37,7 +38,7 @@ function CreateSingleNFT(props) {
   const name = useRef("");
   const price = useRef("");
   const description = useRef("");
-  const blockchain = useRef("");
+  const blockchain = useRef("Ethereum");
   const ipfsUrl = useRef("");
   const createdBy = loggedInUser?._id;
   useEffect(async () => {
@@ -324,7 +325,7 @@ function CreateSingleNFT(props) {
               <label htmlFor="email" className="input-label">
                 Blockchain*
               </label>
-              <select
+              {/* <select
                 onChange={(e) => {
                   blockchain.current = e.target.value;
                   checkChanges();
@@ -333,7 +334,23 @@ function CreateSingleNFT(props) {
               >
                 <option value="">Select Blockchain</option>
                 <option value="Ethereum">Ehtereum</option>
-              </select>
+              </select> */}
+              <div className="block-chain-container">
+                <div>
+                  <img src={ehereum} height="32px" />
+                </div>
+                <div className="block-chain-right">
+                  <select
+                    className="input-box-1 rm-border"
+                    onChange={(e) => (blockchain.current = e.target.value)}
+                  >
+                    <option value="">Select Category</option>
+                    <option selected value="Ethereum">
+                      Ethereum
+                    </option>
+                  </select>
+                </div>
+              </div>
             </div>
             <button
               type="submit"

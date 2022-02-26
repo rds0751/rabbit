@@ -78,6 +78,8 @@ function Create() {
     CheckUserByWalletAddress(newAccount[0], (res) => {
       console.log(res, "<<<< Account changed");
       dispatch(addUserData(res));
+      localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
+
       setToggleEffect(!toggleEffect);
     });
   };

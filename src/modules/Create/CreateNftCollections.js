@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,38 +13,45 @@ import { httpConstants } from "../../constants";
 import { BASE_URL2 } from "../../reducers/Constants";
 import { createCollection } from "../../services/createServices";
 import "../../assets/styles/collection.css";
+import { getCategories } from "../../services/UserMicroService";
+
 const Button = styled.button``;
 
 function CreateNftCollections(props) {
+  const navigate = useNavigate();
   const { user } = useSelector((state) => state);
-
+  const [Categories, setCategories] = useState([]);
+  const [DesLength, setDesLength] = useState(0);
   const name = useRef("");
   const description = useRef("");
   const imageUrl = useRef("");
   const coverUrl = useRef("");
-  const blockchain = useRef("");
+  const blockchain = useRef("Ethereum");
   const categoryId = useRef("");
-
   const hiddenFileInputImage = useRef(null);
   const hiddenFileInputBanner = useRef(null);
-
   const handleClickImage = (event) => {
     hiddenFileInputImage.current.click();
   };
-
   const handleClickBanner = (event) => {
     hiddenFileInputBanner.current.click();
   };
+  useEffect(() => {
+    getCategories((res) => {
+      setCategories(res.responseData);
+    });
+  }, []);
 
   const handleChangeImage = async (event) => {
     const fileUploaded = event.target.files[0];
+    alert("onchage");
     // props.handleFileImage(fileUploaded);
+    console.log(user.loggedInUser._id, "<<<");
 
     let formData = new FormData();
     formData.append("folderName", "collections");
-    formData.append("createdBy", `${user.addUserData._id}`);
+    formData.append("createdBy", `${user.loggedInUser._id}`);
     formData.append("attachment", fileUploaded);
-
     const res = await fetch(`${BASE_URL2}/api/v1/upload-documents`, {
       method: httpConstants.METHOD_TYPE.POST,
       body: formData,
@@ -60,7 +67,7 @@ function CreateNftCollections(props) {
 
     let formData = new FormData();
     formData.append("folderName", "collections");
-    formData.append("createdBy", `${user.addUserData._id}`);
+    formData.append("createdBy", `${user.loggedInUser._id}`);
     formData.append("attachment", fileUploaded);
 
     const res = await fetch(`${BASE_URL2}/api/v1/upload-documents`, {
@@ -71,21 +78,46 @@ function CreateNftCollections(props) {
     if (result.success) coverUrl.current = result.responseData;
     console.log(result, ">>> banner upload");
   };
+  const onChangeDes = () => {
+    setDesLength(description.current.length);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // e.preventDefault();
+    if (
+      imageUrl.current == "" ||
+      name.current == "" ||
+      description.current == "" ||
+      blockchain.current == ""
+    ) {
+      console.log(
+        imageUrl.current,
+        name.current,
+        description.current,
+        blockchain.current,
+        "<<<"
+      );
+      console.log("require");
+      toast.error("Fill the required field");
+      return null;
+    }
+
+    console.log("here");
     const data = {
       coverUrl: coverUrl.current,
       imageUrl: imageUrl.current,
       name: name.current,
       description: description.current,
       blockchain: blockchain.current,
-      addedBy: user.addUserData._id,
+      addedBy: user.loggedInUser._id,
       // categoryId:categoryId.current,
     };
     const result = await createCollection(data);
-    if (result.success) toast.success("Collection created");
-    else toast.error(result.message);
+    if (result.success) {
+      toast.success("Collection created");
+      navigate("collections-tile");
+    } else toast.error(result.message);
     console.log(result, ">>> submit nftCollection");
   };
 
@@ -97,16 +129,21 @@ function CreateNftCollections(props) {
           <div className="form-label">Upload Logo*</div>
           <div className="upload-file-outer">
             {/* <Button onClick={handleClickImage}> */}
+            {/* <div className="input-outer"> */}
             <input
               type="file"
               placeholder="Write your name"
-              name="email"
+              name="file"
               ref={hiddenFileInputImage}
               className="fileInput  input-box-1"
               onChange={handleChangeImage}
             />
+            {/* </div> */}
             <div className="upload-image-upper">
-              <img className="image-upload" src={Image} />
+              <img
+                className="image-upload"
+                src={imageUrl.current == "" ? Image : imageUrl.current}
+              />
 
               {/* </Button> */}
               <div className="drag-and-drop">
@@ -129,7 +166,11 @@ function CreateNftCollections(props) {
               onChange={handleChangeBanner}
             />
             <div className="upload-image-upper">
-              <img className="image-upload" src={Image} />
+              <img
+                className="image-upload"
+                src={coverUrl.current == "" ? Image : coverUrl.current}
+                // style={{ display: coverUrl.current == "" ? "none" : "block" }}
+              />
               <div className="drag-and-drop">
                 Drag & Drop or
                 <Link to="/">Browse</Link>
@@ -157,22 +198,30 @@ function CreateNftCollections(props) {
                 name="text"
                 placeholder="Write description"
                 className="input-box-1"
-                onChange={(e) => (description.current = e.target.value)}
+                onChange={(e) => {
+                  description.current = e.target.value;
+                  onChangeDes();
+                }}
               ></textarea>
-              <span>0 of 1000 characters used</span>
+              <span>{DesLength} of 1000 characters used</span>
             </div>
             <div>
               <div className="form-label category-label">Category</div>
               {/* <Link>Create</Link> */}
-              <select className="input-box-1">
+              <select
+                className="input-box-1"
+                onChange={(e) => (categoryId.current = e.target.value)}
+              >
                 <option>Select Category</option>
-                <option>2</option>
+                {Categories.map((item, key) => {
+                  return <option value={item?._id}>{item?.name}</option>;
+                })}
+                {/* <option>2</option>
                 <option>3</option>
-                <option>4</option>
+                <option>4</option> */}
               </select>
             </div>
             <div>
-             
               <div className="form-label">Blockchain*</div>
               <div className="block-chain-container">
                 <div>
@@ -182,8 +231,8 @@ function CreateNftCollections(props) {
                   <select
                     className="input-box-1 rm-border"
                     onChange={(e) => (blockchain.current = e.target.value)}
-                  > 
-                    <option>Select Category</option>
+                  >
+                    <option value="">Select Category</option>
                     <option selected value="Ethereum">
                       Ethereum
                     </option>
@@ -199,7 +248,7 @@ function CreateNftCollections(props) {
       </div>
       <ToastContainer
         position="top-center"
-        autoClose={2000}
+        autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

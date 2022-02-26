@@ -13,5 +13,6 @@ export const ALL_USERS = "ALL_USERS";
 export const OPEN_NOTIFICATION = "OPEN_NOTIFICATION";
 export const REDIRECT_URL="REDIRECT_URL"
 export const OPEN_WALLET = "OPEN_WALLET";
+export const WHITE_LABEL_TOKEN="WHITE_LABEL_TOKEN"
 
 export const ADD_USER = "ADD_USER"; // --- WE ARE NOT USING THIS

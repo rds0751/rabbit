@@ -22,13 +22,13 @@ function Notification() {
   const { user } = useSelector((state) => state);
 
   const [notifications, setNotifications] = useState([]);
-  console.log(user?.loggedInUser?._id, "<<<< user data");
+  // console.log(user?.loggedInUser?._id, "<<<< user data");
   // console.log(user?.loggedInUser?._id, "<<<< user data");
 
   useEffect(() => {
     getNotificationListById(user?.loggedInUser?._id).then((response) => setNotifications(response));
   });
-  console.log("notifications", notifications);
+  // console.log("notifications", notifications);
 
 
   const [state, setState] = React.useState({

@@ -82,7 +82,7 @@ export const allUseraction = () => (dispatch) => {
         });
       }
     });
-};
+}
 
 export const RedirectTo = (data) => (dispatch) => {
   dispatch({ type: REDIRECT_URL, payload: data });

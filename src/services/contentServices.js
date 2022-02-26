@@ -1,5 +1,6 @@
 import { httpConstants } from '../constants';
 import { BASE_URL2 } from '../reducers/Constants';
+import { AuthToken } from './UserAuthToken';
 
 export const uploadDocs = async data => {
   console.log('run uploadocs');
@@ -64,9 +65,10 @@ export  const RemoveNftFromSale = async _id => {
   try {
     const res = await fetch(`${BASE_URL2}/api/v1/remove-nft-from-sale`, {
       method: httpConstants.METHOD_TYPE.PUT,
-      headers: {
-        'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON,
-      },
+      headers:AuthToken,
+      // headers: {
+      //   'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON,
+      // },
       body: JSON.stringify({ _id }),
     });
     const result = await res.json();

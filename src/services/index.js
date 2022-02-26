@@ -38,7 +38,7 @@ export const updateUserProfile = async (data, userId) => {
       body: JSON.stringify(data),
     });
     const result = await res.json();
-    console.log(result);
+    console.log(result, "<<<result");
     return result;
   } catch (err) {
     console.log(err);

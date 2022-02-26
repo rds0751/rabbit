@@ -10,6 +10,12 @@ function Suggestion() {
     title: "",
     detail: "",
   });
+
+  function validateEmail(email) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  }
+
   const [checkButtonStatus, setCheckButtonStatus] = useState(true);
   const PostSuggestion = () => {
     const { email, title, detail } = formData;
@@ -18,6 +24,12 @@ function Suggestion() {
       toast.error("Fill All Fields");
       return null;
     }
+    const checkMail = validateEmail(email);
+    if (!checkMail) {
+      toast.error("Invalid Email");
+      return null;
+    }
+
     addSuggestion(formData, (res) => {
       console.log(res);
       toast.success("Suggestion Sent");
