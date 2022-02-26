@@ -125,6 +125,7 @@ function Navbar() {
                   style={{
                     backgroundColor: "#f8f8f8",
                     width: "75%",
+                    height:"42px",
                     padding: "0px",
                     paddingLeft: "10px",
                     border: "0",
