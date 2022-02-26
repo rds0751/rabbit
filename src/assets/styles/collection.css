@@ -1,0 +1,127 @@
+.collection-outer {
+  width: 50%;
+  margin: auto;
+}
+.collection-heading {
+  font-weight: bold;
+  font-size: 32px;
+  font-family: "poppins-medium";
+  margin-top: 90px;
+  color: #191919;
+}
+
+.collection-form-outer {
+  margin-top: 50px;
+}
+
+.input-outer {
+  position: relative;
+}
+.fileInput {
+  opacity: 0;
+  position: absolute;
+  /* width: 100%; */
+  width: 100px;
+  /* border: 1px solid red !important; */
+  height: 100%;
+  /* z-index: 10; */
+}
+.upload-file-outer {
+  position: relative;
+  width: 300px;
+  border: 1px solid rgb(207, 207, 207);
+  height: 300px;
+  margin-bottom: 20px;
+}
+.upload-image-upper {
+  /* width: 40%; */
+  /* margin: auto; */
+  /* position: absolute; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* left: 50%; */
+  /* top: 50%; */
+  /* top: auto; */
+  /* left: auto; */
+}
+.upload-image-banner {
+  position: relative;
+  width: 100%;
+  border: 1px solid rgb(207, 207, 207);
+  height: 300px;
+  margin-bottom: 20px;
+}
+.image-upload {
+  width: 70%;
+  object-fit: contain;
+  /* z-index: -1; */
+  margin: auto;
+  /* position: absolute; */
+}
+.drag-and-drop {
+  text-align: center;
+  margin: 20px 0px;
+}
+.form-label {
+  margin: 0px 0px 20px 0px;
+  font-weight: 600;
+  font-family: "poppins-medium";
+}
+
+.input-box-1 {
+  border: 1px solid rgb(207, 207, 207);
+  width: 100%;
+  margin-bottom: 20px;
+  background-color: white;
+  padding: 4px 0px;
+}
+.block-chain-container {
+  /* border: 1px solid rgb(139, 7, 7) !important; */
+  border: 1px solid rgb(207, 207, 207);
+  padding: 3px 0px;
+  display: flex;
+}
+.block-chain-left {
+  /* width: 20%; */
+}
+.block-chain-right {
+  width: 100%;
+}
+.rm-border {
+  border: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.submit-button {
+  width: 100%;
+  /* height: 20px; */
+  color: white;
+  border-radius: 4px;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.category-label {
+  margin-top: 20px;
+}
+@media screen and (min-width: 1600px) {
+  .collection-outer {
+    width: 50%;
+    margin: auto;
+    margin-top: 90px;
+  }
+}
+
+@media screen and (max-width: 764px) {
+  .upload-file-outer {
+    width: 100%;
+    /* margin: auto; */
+  }
+  .collection-outer {
+    width: 86%;
+    margin: auto;
+  }
+}

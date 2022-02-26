@@ -20,11 +20,11 @@ const rows = [
 export default function ListingsTable() {
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 300 }} aria-label="simple table">
+      <Table aria-label="simple table" style={{tableLayout:"fixed", width:"100%"}}>
         <TableHead>
           <TableRow>
             <TableCell style={{color:"#191919", fontWeight:"bold"}}>Price</TableCell>
-            <TableCell align="right" style={{color:"#191919", fontWeight:"bold"}}>Expiration</TableCell>
+            <TableCell align="center" style={{color:"#191919", fontWeight:"bold"}}>Expiration</TableCell>
             <TableCell align="right" style={{color:"#191919", fontWeight:"bold"}}>From</TableCell>
           </TableRow>
         </TableHead>
@@ -37,7 +37,7 @@ export default function ListingsTable() {
               <TableCell component="th" scope="row">
                 {row.Price}
               </TableCell>
-              <TableCell align="right">{row.Expiration}</TableCell>
+              <TableCell align="center">{row.Expiration}</TableCell>
               <TableCell align="right" style={{color:"#366EEF"}}>{row.From}</TableCell>
             </TableRow>
           ))}

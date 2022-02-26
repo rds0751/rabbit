@@ -9,6 +9,7 @@ import {
   addUserData,
   ManageNotiSideBar,
   ManageWalletSideBar,
+  RedirectTo,
 } from "../../reducers/Action";
 import { ethers } from "ethers";
 
@@ -29,7 +30,7 @@ function Navbar() {
   const { user, sideBar } = useSelector((state) => state);
   const { userDetails, loggedInUser, walletAddress } = user;
   const { isOpenNoti, isOpenWallet } = sideBar;
-  console.log(walletAddress,"<<<<this is wallet address")
+  console.log(walletAddress, "<<<<this is wallet address");
   // useEffect(() => {
   //   if (window.ethereum) {
   //     // window.ethereum
@@ -71,7 +72,24 @@ function Navbar() {
   //     });
   // };
   let location = useLocation();
-
+  const manageNavigation = (name) => {
+    if (name == "create") {
+      if (walletAddress == null) {
+        dispatch(RedirectTo("create"));
+        navigate("/add-wallet");
+      } else {
+        navigate("/create-nft");
+      }
+    }
+    if (name == "profile") {
+      if (walletAddress == null) {
+        dispatch(RedirectTo("profile"));
+        navigate("/add-wallet");
+      } else {
+        navigate("/my-profile");
+      }
+    }
+  };
   const handleHamburger = () => {
     if (!humburger) {
       setHumburger(true);
@@ -80,21 +98,17 @@ function Navbar() {
     }
   };
   const handleWalletClick = () => {
-    // alert("handleWallet called");
     if (walletAddress == null) {
-      // alert("hanlde wallet null");
       navigate("/add-wallet");
+      dispatch(RedirectTo("wallet"));
     } else {
-      // alert("else part");
       dispatch(ManageWalletSideBar(!isOpenWallet));
     }
   };
   const handleNotiSideBar = () => {
-    // alert("noti open");
-    // alert(loggedInUser);
     if (loggedInUser == null) {
-      // alert("nulll");
       navigate("/add-wallet");
+      dispatch(RedirectTo("notification"));
     } else {
       dispatch(ManageNotiSideBar(true));
     }
@@ -125,7 +139,7 @@ function Navbar() {
                   style={{
                     backgroundColor: "#f8f8f8",
                     width: "75%",
-                    height: "42px",
+                    height:"42px",
                     padding: "0px",
                     paddingLeft: "10px",
                     border: "0",
@@ -136,7 +150,6 @@ function Navbar() {
                   style={{
                     border: "0",
                     width: "35px",
-                    height: "42px",
                     backgroundColor: "#f8f8f8",
                     marginLeft: "5px",
                   }}
@@ -153,7 +166,24 @@ function Navbar() {
               </form>
             </div>
 
-            <div className="right_navbar d-flex ">
+            
+
+            <div className="search_box">
+              <form className="p-0 m-0 ">
+                <input
+                  className="form-control form-controlmob "
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button className="screachbtn">
+                  <i className="fa fa-search" aria-hidden="true"></i>
+                </button>
+              </form>
+            </div>
+          
+          
+          <div className="right_navbar d-flex ">
               {/* <div
             className="collapse navbar-collapse mobcollapse"
             id="navbarSupportedContent"
@@ -237,7 +267,7 @@ function Navbar() {
                       </li>
                     </ul>
                   </li>
-                  <li>
+                  <li onClick={() => manageNavigation("create")}>
                     <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}
                       className="btn btn-primary btnnav"
@@ -261,8 +291,8 @@ function Navbar() {
                       onClick={handleNotiSideBar}
                       className="noti"
                       src={require("../../assets/images/notification.png")}
-                      width="19px"
-                      height="21px"
+                      width="18.51px"
+                      height="21.21px"
                     ></img>
                     {/* </Link> */}
                     {/* </Link> */}
@@ -280,24 +310,25 @@ function Navbar() {
                       <img
                         className="btnnav_mob1"
                         src={require("../../assets/images/profile.png")}
-                        style={{ color: "gray", cursor: "pointer" }}
+                        style={{ color: "gray", cursor: "pointer",marginLeft:"31.22px" ,marginRight:"22.43px"
+                       }}
                       ></img>
                     </a>
                     <ul
                       className="dropdown-menu"
                       aria-labelledby="navbarDropdown"
                     >
-                      <li>
-                        <Link
+                      <li onClick={() => manageNavigation("profile")}>
+                        {/* <Link
                           className="dropdown-item"
                           to={
                             walletAddress == null
                               ? "/add-wallet"
                               : "/my-profile"
-                          }
-                        >
-                          Profile
-                        </Link>
+                          } */}
+                        {/* > */}
+                        Profile
+                        {/* </Link> */}
                       </li>
                       <li>
                         <hr className="dropdown-divider" />
@@ -322,7 +353,7 @@ function Navbar() {
                       className="btnnav_mob2"
                       src={require("../../assets/images/wallet.png")}
                       width="21px"
-                      height="21px"
+                      height="21.21px"
                       style={{
                         color: "gray",
                         cursor: "pointer",
@@ -344,21 +375,9 @@ function Navbar() {
                 </ul>
               </div>
             </div>
-            <div className="search_box">
-              <form className="p-0 m-0 ">
-                <input
-                  className="form-control form-controlmob "
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                />
-                <button className="screachbtn">
-                  <i className="fa fa-search" aria-hidden="true"></i>
-                </button>
-              </form>
             </div>
-          </div>
         </nav>
+        
         <div className={humburger ? "scroll_off" : <></>}>
           {humburger ? <Menu /> : <></>}
         </div>

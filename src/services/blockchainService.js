@@ -4,7 +4,7 @@ import contractABI from "../assets/abi/abi.json";
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
 // const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS
-const contractAddress = "0x6C91250d5CB9EA134b5Db188533d24bFa23A039b";
+const contractAddress = "0xd3E390083BC66d87aFD1457879A2fDDfBBe16e06";
 const BlockchainServices = {
   mintNFT,
   changeListedPrice,
@@ -88,17 +88,16 @@ async function removeFromSaleNft({ tokenId }) {
 //     }
 // }
 
-
 //1bnb=0.136ether
-async function buyNFT({ tokenId ,price }) {
+async function buyNFT({ tokenId, price }) {
   const contractData = new ethers.Contract(
     contractAddress,
     contractABI,
     signer
   );
-  const options = {value: ethers.utils.parseEther(price.toString())}
+  const options = { value: ethers.utils.parseEther(price.toString()) };
 
-  const result = await contractData.buy(tokenId,options);
+  const result = await contractData.buy(tokenId, options);
   let res = await result.wait();
 
   return {
@@ -107,9 +106,13 @@ async function buyNFT({ tokenId ,price }) {
     name: provider?._network?.name || "",
   };
 }
-async function putOnSaleNft({tokenId}) {
-  const contractData = new ethers.Contract(contractAddress, contractABI, signer);
-  console.log("blockchain fn",tokenId)
+async function putOnSaleNft({ tokenId }) {
+  const contractData = new ethers.Contract(
+    contractAddress,
+    contractABI,
+    signer
+  );
+  console.log("blockchain fn", tokenId);
 
   const result = await contractData.updateListingStatus(tokenId, true);
 

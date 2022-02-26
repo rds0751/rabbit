@@ -6,8 +6,8 @@ import globe from "../../assets/images/globe.png";
 import pencil from "../../assets/images/pencil.png";
 import "../../assets/styles/Leader.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ethers } from "ethers";
-
 import { AbstractApi } from "../../constants/LeaderBoardApi copy";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
@@ -16,8 +16,10 @@ import { addUserData, AddWalletDetails } from "../../reducers/Action";
 import { useDispatch } from "react-redux";
 import { addWalletAddress } from "../../services";
 import { useSelector } from "react-redux";
+import "../../assets/styles/myProfile.css";
 function MyProfile() {
   const { user } = useSelector((state) => state);
+  const navigate = useNavigate();
   const { walletAddress, loggedInUser } = user;
   const [humburger, setHumburger] = useState(false);
   const ethereum = window.ethereum;
@@ -28,22 +30,12 @@ function MyProfile() {
   const [getBalance, setGetBalance] = useState("");
   const dispatch = useDispatch();
 
+  const [typeofProfilePost, setTypeofProfilePost] = useState("on-sale");
+
   useEffect(() => {
-    // if (window.ethereum) {
-    //   window.ethereum
-    //     .request({ method: "eth_requestAccounts" })
-    //     .then(async (result) => {
-    //       setDefaultAccount(result[0]);
-    //       accountChangeHandler(result[0]); //accounts can be a array we just wanna grab first one
-    //     })
-    //     .catch((e) => {
-    //       console.log(e);
-    //     });
-    // } else {
-    //   alert("Install Metamask");
-    //   setErrorMssg("Install Metamask");
-    //   toast.success("Connect Wallet");
-    // }
+    if (loggedInUser == null) {
+      // navigate("/add-wallet");
+    }
   }, [window.ethereum, checkClick]);
 
   const accountChangeHandler = (newAccount) => {
@@ -111,59 +103,94 @@ function MyProfile() {
           </h6>
         </div>
         <Link to="/edit-profile">
-          <div className="position-absolute absolute1">Edit Profile</div>
+          <div className="editProfileButton position-absolute absolute1">
+            Edit Profile
+          </div>
         </Link>
         {/* <div className="position-absolute absolute2">
       <img style={{height :"30px"}} src={pencil} alt="" />
       </div> */}
-
-        <div className="collectionsales MyProfilesales">
-          <div>On sale</div>
-          <div>Owned</div>
-          <div>Created</div>
-          <div>Liked</div>
-        </div>
-        <hr />
-
-        <div className="row mx-0 text-center image1">
-          {/* <div className="col-md-3 col-lg-3 col-sm-6 col-11 images"> */}
-          {AbstractApi.map((curElem) => {
-            const { image, title, price, maxPrice, maxPrice2, daysLeft } =
-              curElem;
-            return (
-              <div className="col-md-3 col-lg-3 col-sm-6 col-11 images">
-                <div className="container__tile">
+        <div className="profileItemContainer">
+          <div className="postTypeProfileContainer collectionsales MyProfilesales">
+            <div
+              className={`postTypeProfile ${
+                typeofProfilePost === "on-sale" && "postTypeProfile--active"
+              }`}
+              onClick={() => setTypeofProfilePost("on-sale")}
+            >
+              On sale
+            </div>
+            <div
+              className={`postTypeProfile ${
+                typeofProfilePost === "owned" && "postTypeProfile--active"
+              }`}
+              onClick={() => setTypeofProfilePost("owned")}
+            >
+              Owned
+            </div>
+            <div
+              className={`postTypeProfile ${
+                typeofProfilePost === "created" && "postTypeProfile--active"
+              }`}
+              onClick={() => setTypeofProfilePost("created")}
+            >
+              Created
+            </div>
+            <div
+              className={`postTypeProfile ${
+                typeofProfilePost === "liked" && "postTypeProfile--active"
+              }`}
+              onClick={() => setTypeofProfilePost("liked")}
+            >
+              Liked
+            </div>
+          </div>
+          {/* <hr /> */}
+          <div className="profileNftContainer row mx-0 text-center image1">
+            {AbstractApi.map((curElem) => {
+              const { image, title, price, maxPrice, maxPrice2, daysLeft } =
+                curElem;
+              return (
+                <div className="profileNftContainerInner container__tile">
                   <img
                     id="nft__photo"
-                    className="img-fluid"
+                    className="nftTileEachImage"
                     src={image}
                     alt="/"
                   />
                   {/* <img id='like_icon' src={require('../asset//images/Like.png')} /> */}
                   <div className="tile__details">
-                    <div className="container__up">
-                      <h6 className="title">{title}</h6>
-                      <h6 className="title1">{price}</h6>
+                    <div className="profileNftDetailFirstContainer container__up">
+                      <div className="title">{title}</div>
+                      <div className="title1">{price}</div>
                     </div>
-                    <div className="container__down">
-                      <h6 className="value__high">
+                    <div className="profileNftDetailSecondContainer container__down">
+                      <div className="">
                         <span style={{ color: "black" }}>{maxPrice}</span>
-                        <span> {maxPrice2}</span>
-                      </h6>
-                      <h6 className="value__k">
+                        <span
+                          style={{
+                            color: "#366EEF",
+                            fontFamily: "poppins-bold",
+                          }}
+                        >
+                          {" "}
+                          {maxPrice2}
+                        </span>
+                      </div>
+                      <div className="">
                         {daysLeft}{" "}
                         {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
                         <i
                           className="fa-solid fa-heart"
                           style={{ color: "#ef3643" }}
                         ></i>
-                      </h6>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
       <ToastContainer
