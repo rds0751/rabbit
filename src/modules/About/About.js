@@ -1,5 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+// useEffect(() => {
+  
+
+//   return () => {};
+// }, []);
 
 function About() {
   return (

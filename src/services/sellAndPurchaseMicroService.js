@@ -1,11 +1,13 @@
 import { httpService } from "../utility/httpService";
 import { httpConstants } from "../constants";
+import { AuthToken } from "./UserAuthToken";
 
 export function getTopSellers(requestData) {
     let url = process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/top-sellers";
     return httpService(
         httpConstants.METHOD_TYPE.GET,
-        { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+        // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+        AuthToken,
         requestData,
         url
     )
@@ -27,7 +29,8 @@ export function getTopCollections(requestData) {
     let url = process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/top-collections";
     return httpService(
         httpConstants.METHOD_TYPE.GET,
-        { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+        // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+        AuthToken,
         requestData,
         url
     )
@@ -51,7 +54,8 @@ export function pricingHistoryGraphOfNft(requestData) {
       process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "sold-price-graphs-of-particular-nft" ;
     return httpService(
       httpConstants.METHOD_TYPE.POST,
-      { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+      // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+      AuthToken,
       requestData,
       url
     )
@@ -74,7 +78,8 @@ export function addNftTx(requestData) {
     process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/add-transaction" ;
   return httpService(
     httpConstants.METHOD_TYPE.POST,
-    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    AuthToken,
     requestData,
     url
   )

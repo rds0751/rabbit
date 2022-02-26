@@ -88,17 +88,16 @@ async function removeFromSaleNft({ tokenId }) {
 //     }
 // }
 
-
 //1bnb=0.136ether
-async function buyNFT({ tokenId ,price }) {
+async function buyNFT({ tokenId, price }) {
   const contractData = new ethers.Contract(
     contractAddress,
     contractABI,
     signer
   );
-  const options = {value: ethers.utils.parseEther(price.toString())}
+  const options = { value: ethers.utils.parseEther(price.toString()) };
 
-  const result = await contractData.buy(tokenId,options);
+  const result = await contractData.buy(tokenId, options);
   let res = await result.wait();
 
   return {
@@ -107,9 +106,13 @@ async function buyNFT({ tokenId ,price }) {
     name: provider?._network?.name || "",
   };
 }
-async function putOnSaleNft({tokenId}) {
-  const contractData = new ethers.Contract(contractAddress, contractABI, signer);
-  console.log("blockchain fn",tokenId)
+async function putOnSaleNft({ tokenId }) {
+  const contractData = new ethers.Contract(
+    contractAddress,
+    contractABI,
+    signer
+  );
+  console.log("blockchain fn", tokenId);
 
   const result = await contractData.updateListingStatus(tokenId, true);
 

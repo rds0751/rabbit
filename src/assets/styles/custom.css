@@ -10,13 +10,13 @@
   border-radius: 13px;
   justify-content: center;
 }
-
+.toggleNft {
+  border: 1px solid red;
+}
 ul {
   list-style: none;
 }
-.nft_card {
-  width: 400px;
-}
+
 ul li .rounded-circle {
   width: 100%;
   height: 300px;
@@ -85,7 +85,9 @@ ul {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 8px;
+  /* margin-top: 13.41px; */
+  /* margin-left: 14px; */
+  /* margin-right: 12px; */
 }
 
 .container__down {
@@ -97,12 +99,15 @@ ul {
 }
 
 .value {
-  border: 2px solid #16ab6e;
-  border-radius: 0.5em;
-  padding: 0px 5px 0px 5px;
+  border: 1px solid #16ab6e;
+  border-radius: 6px;
+  padding: 6px 5px 5px 5px;
   font-size: 14px;
   color: #16ab6e;
-  margin-right: 1em;
+  /* margin-right: 1em; */
+}
+.card-lower {
+  background: #f8f8f8 0% 0% no-repeat padding-box;
 }
 
 .title {
@@ -110,9 +115,24 @@ ul {
   font-size: 16px;
   /* margin-left: -7px !important; */
 }
-
+.sale-type {
+  font: normal normal medium 14px/21px Poppins;
+}
+.options {
+  font: normal normal medium 14px/21px Poppins;
+  color: #858585;
+}
 .value__high {
   font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  font: normal normal normal 14px/21px Poppins;
+  text-align: left;
+  letter-spacing: 0px;
+  color: #191919;
+  /* margin-left: 14px;
+  margin-right: 12px; */
 }
 
 .value__k {
@@ -204,6 +224,8 @@ span {
 .upper__home {
   display: flex;
   flex-direction: column;
+
+  /* border: 1px solid red !important; */
 }
 
 .lower__homepage {
@@ -396,6 +418,13 @@ input::-webkit-input-placeholder {
 }
 /*-------------- Collection CreateNFT css end------------------ */
 /*  nav large */
+@media only screen and (max-width: 1010px) {
+  .filter {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
 
 /*-------------- navbar mob css------------------ */
 @media only screen and (max-width: 575px) {
@@ -718,17 +747,17 @@ input::-webkit-input-placeholder {
   margin-left: auto;
   /* margin-left: 15px; */
 }
-.filter {
+/* .filter {
   display: flex;
   width: 100%;
-}
+} */
 .filter .dropdown {
   display: flex;
   align-items: center;
   border: 1px solid #d2d2d2;
   border-radius: 4px;
   padding: 9px 12px 13px 12px;
-  /* width: 222px; */
+  width: 222px;
 }
 .filter .dropdown p {
   font-weight: 500;
@@ -740,16 +769,29 @@ input::-webkit-input-placeholder {
   width: 143px;
 }
 .second_select {
-  margin-left: 15px;
+  margin-left: 32px;
 }
 .filter .dropdown .first_select {
   color: #858585;
   font-weight: 500;
+  width: 143px;
   font-style: normal;
+  /* margin-left: 32px; */
 }
 .lower__homepage .dropbtm_mob {
   padding: 0;
 }
+.sort-drop {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d2d2d2;
+  border-radius: 4px;
+  padding: 9px 12px 13px 12px;
+  width: 166px;
+}
+/* .sort-drop > select {
+  border: none;
+} */
 select:focus-visible {
   outline-offset: 0px;
   outline: none;
@@ -760,13 +802,13 @@ select:focus-visible {
   width: 100%;
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1010px) {
   .filter {
     flex-direction: column;
   }
   .filter .dropdown .first_select {
-    margin-left: 10px;
-    width: 90%;
+    /* margin-left: 10px; */
+    /* width: 90%; */
   }
   .filter .second_select {
     margin-left: 0px;
@@ -784,17 +826,46 @@ select:focus-visible {
   .row {
     --bs-gutter-x: 0px;
   }
-  
+  .sort-drop {
+    width: 100%;
+  }
   /* .filter .dropdown select{
     border: none;
     width: 143px;
   } */
 }
 
+/*  1920 */
+@media only screen and (max-width: 2000px) and (min-width: 1600px) {
+  .nft-img-radius {
+    width: 100%;
+    /* width: 326px; */
+    height: 187.19px;
+    object-fit: contain;
+  }
+  .nft_div {
+    padding: 0px !important;
+    margin: 0px 128px;
+    width: 1664px !important;
+    /* margin: 0px 128px; */
+    border: 1px solid red !important;
+  }
+  .upper__home {
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+
+    /* border: 1px solid red !important; */
+  }
+}
+
+@media screen and (max-width:764px) {
+  
 .tabs-list{
   display: flex;
   margin-top: 20px;
   font-size:14px;
   color: #828282;
   cursor: pointer;
+}
 }
