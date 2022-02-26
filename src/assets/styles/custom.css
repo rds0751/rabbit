@@ -1,3 +1,4 @@
+
 .Collections__container {
   margin-top: 50px;
   width: 280px;
@@ -783,6 +784,7 @@ select:focus-visible {
   .row {
     --bs-gutter-x: 0px;
   }
+  
   /* .filter .dropdown select{
     border: none;
     width: 143px;
