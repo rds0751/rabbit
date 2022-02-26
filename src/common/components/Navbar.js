@@ -192,14 +192,14 @@ function Navbar() {
                 <ul className="left_section_nav mb-0">
                   <li
                     className={
-                      location.pathname.includes("marketplace")
+                      location.pathname.includes("/") && !location.pathname.includes("leader-board") && !location.pathname.includes("resource")
                         ? "nav-item li_underline"
                         : "nav-item"
                     }
                   >
                     <Link
                       className={
-                        location.pathname.includes("marketplace")
+                        location.pathname.includes("/") && !location.pathname.includes("leader-board") && !location.pathname.includes("resource")
                           ? "nav-link navlink_active"
                           : "nav-link"
                       }
@@ -211,7 +211,7 @@ function Navbar() {
                   </li>
                   <li
                     className={
-                      location.pathname.includes("leader-board")
+                      location.pathname.includes("leader-board") 
                         ? "nav-item li_underline"
                         : "nav-item"
                     }
