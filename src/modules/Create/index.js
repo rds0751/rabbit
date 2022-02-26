@@ -14,7 +14,8 @@ export default class Index extends BaseComponent {
       categoryId: "",
       // collection: [],
       mintData: [],
-      isNftCreated: false
+      isNftCreated: false,
+      url: "",
     };
   }
 
@@ -45,7 +46,7 @@ export default class Index extends BaseComponent {
       ownedBy: data?.createdBy,
       createdBy: data?.createdBy,
       updatedBy: data?.createdBy,
-      ownerAddress: data?.ownerAddress || '', // put metamask address
+      ownerAddress: data?.ownerAddress || "", // put metamask address
     };
   };
 
@@ -60,7 +61,6 @@ export default class Index extends BaseComponent {
     let formData = new FormData();
     formData.append("attachment", data.nftFile);
 
-
     // if(!this.props.user?.userDetails)
     //   return Utils.apiFailureToast("Please connect your wallet");
 
@@ -73,6 +73,7 @@ export default class Index extends BaseComponent {
       // this.props.dispatchAction(eventConstants.HIDE_LOADER);
       return Utils.apiFailureToast(err || "Unable to add file on IPFS");
     }
+    this.setState({ url: ipfsRes?.ipfsUrl || "" });
     //TODO we need to work on generate unique tokenId
 
     const tokenId = Utils.generateRandomNumber();
@@ -91,7 +92,8 @@ export default class Index extends BaseComponent {
       );
     }
 
-    console.log("checkngggggg-----",
+    console.log(
+      "checkngggggg-----",
       this.getRequestDataForSaveNftContent(
         tokenId,
         data,
@@ -122,7 +124,6 @@ export default class Index extends BaseComponent {
     // this.setState(isNftCreated)
     this.setState({ isNftCreated: true });
     // '/nft-detail${id}'
-
   };
 
   render() {
@@ -133,8 +134,8 @@ export default class Index extends BaseComponent {
         <CreateSingleNFT
           mintNft={this.mintNft}
           isNftCreated={this.isNftCreated}
-
           createNftHandler={this.createNftHandler.bind(this)}
+          url
         />
         {/* <FooterComponent /> */}
       </>

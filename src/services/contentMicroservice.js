@@ -3,6 +3,11 @@ import { httpConstants } from "../constants";
 import { httpService } from "../utility/httpService";
 import { httpServiceFileUpload } from "../utility/httpServiceFileUpload";
 import axios from "axios";
+import { AuthToken } from "./UserAuthToken";
+import { WHITE_LABEL_TOKEN } from "../reducers/Constants";
+
+const dev_url = "https://goi4mbj86f.execute-api.us-east-1.amazonaws.com/dev/"; // need to store it in .env file
+
 export default {
   addIpfs,
   createNftContent,
@@ -17,6 +22,7 @@ function getHeaders() {
     "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON,
     skip: true,
     "Access-Control-Allow-Origin": "*",
+    Authorization: `Bearer ${localStorage.getItem(WHITE_LABEL_TOKEN)}`,
     // 'Authorization': `Bearer ${utility.getAccessToken()}`
   };
 }
@@ -77,7 +83,8 @@ async function createNftContent(requestdata) {
 
   return httpService(
     httpConstants.METHOD_TYPE.POST,
-    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    AuthToken,
     requestdata,
     url
   )
@@ -147,15 +154,25 @@ async function ownershipTransfer(requestData, contentId) {
     });
 }
 
-export  const addSuggestion = async (bodyData, successCallback) => {
+export const addSuggestion = async (bodyData, successCallback) => {
   try {
     const url =
       process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/add-suggestion";
-    const { data } = await axios.post(url, bodyData);
+    const { data } = await axios.post(url, bodyData, { headers: AuthToken });
     if (data.success) {
       successCallback(data.responseData);
     }
   } catch (e) {
     console.log(e);
+  }
+};
+
+export const getAboutData = async (id, successCallBack) => {
+  const url = `${dev_url}api/v1/about/61f7b7a4c017de6244c51144`;
+  const { data } = await axios.get(url);
+  if (data.responseCode) {
+    successCallBack(data.responseData);
+  } else {
+    console.log(data);
   }
 };

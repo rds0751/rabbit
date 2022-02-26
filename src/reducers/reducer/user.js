@@ -3,21 +3,17 @@ import {
   ALL_USERS,
   USER_DETAILS,
   LOGGED_IN_UER_DETAILS,
+  REDIRECT_URL,
 } from "../Constants";
 
 //  userDetails  has only address and wallet amount
 // loggedInUser has Full User details
 
 let initialState = {
-  // isLoggedIn: false,
-  // loginFailure: null,
-  // deviceId: null,
-  // sessionToken: null,
-  // loading: false,
-  // isForgotPasswordSuccess: false
   loggedInUser: null,
   allUserData: "",
   walletAddress: null,
+  redirectUrl: "",
 };
 export const UserReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -39,6 +35,10 @@ export const UserReducer = (state = initialState, action) => {
         allUserData: action.payload,
       };
     default:
+    case REDIRECT_URL:
+      {
+        return { ...state, redirectUrl: action.payload };
+      }
       return state;
   }
 };
