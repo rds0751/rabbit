@@ -91,7 +91,7 @@ function Footer() {
                 <br /> dolore magna aliqua. Ut enim ad minim veniam.
               </p>
             </div>
-            <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 pt-4 footerfix1 footer">
+            <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 pt-4 footerfix1 footer   d-flex flex-column align-items-center">
               <ul className="list-unstyled" style={{ textAlign: "left" }}>
                 <a href="/">
                   {" "}
@@ -275,7 +275,7 @@ function Footer() {
                 </a>
               </ul>
             </div>
-            <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 pt-4 footerfix mobview footer">
+            <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 pt-4 footerfix mobview footer  d-flex flex-column align-items-center">
               <ul className="list-unstyled" style={{ textAlign: "left" }}>
                 <li
                   className="mt-md-0 mt-0"
@@ -328,7 +328,7 @@ function Footer() {
                 </a>
               </ul>
             </div>
-            <div className="col-xl-2 col-lg-2 col-md-6 pt-4 col-sm-6 mobview footer">
+            <div className="col-xl-2 col-lg-2 col-md-6 pt-4 col-sm-6 mobview footer d-flex flex-column align-items-right">
               <ul
                 className="list-unstyled"
                 style={{ textAlign: "left" }}
@@ -358,10 +358,6 @@ function Footer() {
                 </a>
               </ul>
             </div>
-
-            
-
-            
           </div>
         </footer>
       </div>

@@ -11,6 +11,7 @@ import {
   ManageWalletSideBar,
 } from "../../reducers/Action";
 import { ethers } from "ethers";
+import "../../assets/styles/topNavBar.css";
 
 import Menu from "./Menu";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
@@ -278,8 +279,8 @@ function Navbar() {
                       onClick={handleNotiSideBar}
                       className="noti"
                       src={require("../../assets/images/notification.png")}
-                      width="18.51px"
-                      height="21.21px"
+                      width="19px"
+                      height="21px"
                     ></img>
                     {/* </Link> */}
                     {/* </Link> */}
