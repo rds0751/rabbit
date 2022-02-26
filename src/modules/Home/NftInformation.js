@@ -20,6 +20,7 @@ import {
 } from "../../services/contentServices";
 import { toast } from "react-toastify";
 import { getUser } from "../../services/UserMicroService";
+import ListingsTable from "../../common/components/ListingTable";
 
 export default function NftInformation(props) {
   console.log(props?.responseData, "<<<response");
@@ -32,6 +33,7 @@ export default function NftInformation(props) {
   const { id } = useParams();
   const [nft, setNft] = useState(props?.responseData);
   const [userDetails, setUserDetails] = useState([]);
+  const [tab, setTab] = useState(1)
   const [report, setReport] = useState({
     content: id,
     // addedBy: user.addUserData._id,
@@ -114,19 +116,24 @@ export default function NftInformation(props) {
     });
 
   const makeReport = () => {
-    console.log("report", report);
     addNftReport(report);
   };
+
+  useEffect(() => {
+    getUser(props?.responseData?.ownedBy).then((response) => setUserDetails(response));
+  });
+
+  console.log("user", userDetails)
 
   return (
     <>
       <div className="container">
         <div className="row mt-5">
-          <div className="col-1"></div>
+          <div className="col-lg-1"></div>
           <div className="col-lg-5 col-sm-12 col-md-6">
             <div>
               <img
-                src={nft.ipfsUrl}
+                src={props?.responseData?.ipfsUrl}
                 className="border-radius imginfo_mob"
                 style={{
                   // width: "100%",
@@ -214,7 +221,7 @@ export default function NftInformation(props) {
                 </Button>
               </span>
 
-              <div className="" id="share_info">
+              <div className="align-row" id="share_info">
                 <span className="text-dark font-22 font-weight-900">
                   {props?.responseData?.name}
                 </span>
@@ -419,37 +426,26 @@ export default function NftInformation(props) {
                   </div>
                 </span>
               </div>
-              <div className="second-text  mt-4">
-                <span className="font-13 text-dark">Minimum Bid: </span>
-                <span
+              <div className="second-text  mt-4 align-row" >
+              <span className="font-13 text-dark">Current Price:
+              <span
                   className="font-13 font-weight-700"
                   style={{ color: "#16AB6E" }}
                 >
-                  0.32 ETH
-                </span>
-                <span
-                  className="font-13 text-dark"
-                  style={{ marginLeft: "1em" }}
-                >
-                  Highest Bid:{" "}
-                </span>
-                <span
-                  className="font-13 font-weight-700"
-                  style={{ color: "#366EEF" }}
-                >
-                  0.49 ETH
-                </span>
-                <span style={{ marginLeft: "2em" }}>
+                   0.32 ETH
+                </span></span>
+                <span className="align-row">
                   <i className="far fa-clock" style={{ color: "#f54" }}></i>
+                  <span className="font-13 text-dark" style={{marginLeft:"5px"}}>Ends in 5 days </span>
                 </span>
-                <span className="font-13 text-dark"> Ends in 5 days </span>
+                
               </div>
               <div className="row">
                 <div className="col-lg-3 col-sm-12  mt-3">
                   <span className="font-13 text-dark">
                     Owned by:
                     <span className="font-13 font-weight-900 text-dark">
-                      {props?.responseData?.ownerAddress}
+                      {userDetails.firstName}
                     </span>
                   </span>
                 </div>
@@ -462,26 +458,20 @@ export default function NftInformation(props) {
                   </span>
                 </div>
               </div>
-              <div className="row">
-                <div className="col-lg-2 col-sm-12  mt-3">
-                  <span className="font-13 text-dark">
-                    <VisibilityIcon
+              <div style={{display:"flex", marginTop:"16px"}}>
+                <div style={{marginRight:"20px"}}>
+                  <VisibilityIcon
                       style={{ fontSize: "20px", color: "#366EEF" }}
-                    />
-                    <span
+                  />
+                  <span
                       className="font-13 font-weight-900 text-dark"
                       style={{ marginLeft: "0.5em" }}
                     >
                       {props?.responseData?.viewsCount}
-                    </span>
                   </span>
                 </div>
-                <div className="col-lg-2 col-sm-12  mt-3">
-                  <span
-                    className="font-13 text-dark img_nftinfo_mob"
-                    style={{ marginLeft: "-2em" }}
-                  >
-                    <FavoriteIcon
+                <div>
+                  <FavoriteIcon
                       style={{ fontSize: "20px", color: "#EF3643" }}
                     />
                     <span
@@ -490,16 +480,14 @@ export default function NftInformation(props) {
                     >
                       {props?.responseData?.likesCount}
                     </span>
-                  </span>
+
                 </div>
-              </div>
-              <div className="row">
+              </div>              
+              <div className="row" style={{marginBottom:"16px"}}>
                 <h4 className="font-13  font-weight-900 mt-3">Description</h4>
-              </div>
-              <div className="row">
-                <h4 className="font-13 ">
+                <hp className="font-13 ">
                   {props?.responseDatat?.description}e
-                </h4>
+                </hp>
               </div>
 
               {/*  IF nft is not created by logged in user these buttons will be shown */}
@@ -515,6 +503,7 @@ export default function NftInformation(props) {
                         ? "block"
                         : "none",
                     color: "white",
+                    marginRight: "1rem",
                     backgroundColor: "#366eff",
                     // marginLeft: "1rem",
                     textTransform: "none",
@@ -532,7 +521,6 @@ export default function NftInformation(props) {
                         !props?.responseData?.salesInfo?.isOpenForSale
                         ? "block"
                         : "none",
-                    marginLeft: "1rem",
                     color: "white",
                     backgroundColor: "#366eff",
                     textTransform: "none",
@@ -542,155 +530,54 @@ export default function NftInformation(props) {
                   Make Offer
                 </Button>
               </span>
-
-              <div className="row border-bottom pb-2 mt-3">
-                {/* <div className="col-1">
-                  <a
-                    className="text-dark font-15 font-weight-900"
-                    style={{ textDecoration: "none" }}
-                    href="#pills-active_section"
-                    role="tab"
-                    aria-controls="pills-active_section"
-                    aria-selected="true"
-                    onClick={() => setActiveInActive("active")}
-                  >
-                    Bidsd
-                  </a>
-                </div> */}
-                <div className="col-1">
-                  <a
-                    className="text-secondary font-15 font-weight-900"
-                    style={{ textDecoration: "none" }}
-                    href="#pills-inactive_section"
-                    role="tab"
-                    aria-controls="pills-inactive_section"
-                    aria-selected="false"
-                    onClick={() => setActiveInActive("inActive")}
-                  >
-                    Offers
-                  </a>
-                </div>
-              </div>
-              <div className="Data">
-                {activeInActive === "active" ? (
-                  <NftActiveInActiveBlock apiData={BidApi} />
-                ) : (
-                  <NftActiveInActiveBlock apiData={OfferApi} />
-                )}
-              </div>
-              {activeInActive == "active" ? (
-                <button
-                  className="btn btn-primary mt-3"
-                  data-bs-toggle="modal"
-                  data-bs-target="#myModalShare"
-                  style={{
-                    display:
-                      props?.responseData?.createdBy != loggedInUser?._id &&
-                        props?.responseData?.salesInfo?.isOpenForSale
-                        ? "block"
-                        : "none",
-                    height: "40px",
-                    width: "180px",
-                    padding: "0px",
-                    marginLeft: "1em",
+              
+              <div>
+                <ul className="tabs-list">
+                  <li
+                  onClick={() => {
+                    setTab(1);
                   }}
-                >
-                  Place Bid
-                </button>
-              ) : (
-                <>
-                  <button
-                    className="btn btn-primary mt-3"
-                    data-bs-toggle="modal"
-                    data-bs-target="#myModalShare"
-                    style={{
-                      height: "40px",
-                      width: "180px",
-                      padding: "0px",
-                      marginLeft: "1em",
-                    }}
-                  >
-                    Make Offer
-                  </button>
-                </>
-              )}
-
-              {/* <!-- The Modal --> */}
-              <div className="modal" id="myModal">
-                <div className="modal-dialog">
-                  <div
-                    className="modal-content"
-                    style={{ borderRadius: "10px", paddingRight: "10px" }}
-                  >
-                    {/* <!-- Modal Header --> */}
-                    <div className="modal-header">
-                      <h4 className="modal-title font-15 font-weight-700">
-                        Make Bid
-                      </h4>
-                      <button
-                        type="button"
-                        className="btn-close"
-                        data-bs-dismiss="modal"
-                        style={{
-                          width: "10px",
-                          height: "10px",
-                          boxShadow: "none",
-                        }}
-                      ></button>
-                    </div>
-
-                    {/* <!-- Modal body --> */}
-                    <div className="modal-body">
-                      <h5
-                        className="font-14 font-weight-700"
-                        style={{ marginLeft: "-0.6em" }}
-                      >
-                        Price*
-                      </h5>
-                      <div className="input-group">
-                        <span
-                          className="input-group-text text-primary bg-white font-15"
-                          id="basic-addon1"
-                          style={{ marginLeft: "-0.6em" }}
-                        >
-                          ETH
-                        </span>
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="0.01($210)"
-                          aria-label="Username"
-                          aria-describedby="basic-addon1"
-                        />
-                      </div>
-                    </div>
-
-                    {/* <!-- Modal footer --> */}
-                    <div className="modal-footer mb-4">
-                      <button
-                        type="button"
-                        className="btn btn-primary w-100"
-                        data-bs-dismiss="modal"
-                        style={{ marginLeft: "1.1em" }}
-                      >
-                        Make Bid
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                  style={{
+                    borderBottom: tab === 1 ? "2px solid #366EEF" : "",
+                    color: tab === 1 ? "#000000" : "#858585",
+                    fontWeight: tab === 1 ? 600 : "",
+                    marginRight: "16px",
+                  }}
+                  >Pricing History</li>
+                  <li
+                  onClick={() => {
+                    setTab(2);
+                  }}
+                  style={{
+                    borderBottom: tab === 2 ? "2px solid #366EEF" : "",
+                    color: tab === 2 ? "#000000" : "#858585",
+                    fontWeight: tab === 2 ? 600 : "",
+                    marginRight: "16px",
+                  }}
+                  >Listings</li>
+                  <li
+                  onClick={() => {
+                    setTab(3);
+                  }}
+                  style={{
+                    borderBottom: tab === 3 ? "2px solid #366EEF" : "",
+                    color: tab === 3 ? "#000000" : "#858585",
+                    fontWeight: tab === 3 ? 600 : "",
+                  }}
+                  >Offers</li>
+                </ul>
+                {tab === 1 ? <PricingHistoryComponentGraph id={id} /> : "" }
+                {tab === 2 ? <ListingsTable /> : "" }
+                {tab === 3 ? <ListingsTable /> : "" }
+              </div>              
             </div>
           </div>
           <div className="col-1"></div>
         </div>
         <div className="row mt-4">
           <div className="col-1"></div>
-
           <div className="col-lg-5 col-sm-12">
             <PricingHistoryComponentTable />
-          </div>
-          <div className="col-lg-5 col-sm-12">
-            <PricingHistoryComponentGraph id={id} />
           </div>
           <div className="col-1"></div>
         </div>

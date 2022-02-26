@@ -788,3 +788,11 @@ select:focus-visible {
     width: 143px;
   } */
 }
+
+.tabs-list{
+  display: flex;
+  margin-top: 20px;
+  font-size:14px;
+  color: #828282;
+  cursor: pointer;
+}

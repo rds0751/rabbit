@@ -777,3 +777,9 @@ thead {
   padding-right: 0;
   padding-left: 0;
 }
+
+.align-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
