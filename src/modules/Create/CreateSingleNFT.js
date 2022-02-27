@@ -53,6 +53,9 @@ function CreateSingleNFT(props) {
     console.log(acceptedFiles, "<<<< accepted files");
     handleChange(acceptedFiles);
   }, []);
+
+  const [desLength, setDesLength] = useState(0);
+
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
   });
@@ -278,11 +281,14 @@ function CreateSingleNFT(props) {
                 name="text"
                 placeholder="Write description"
                 onChange={(e) => {
-                  description.current = e.target.value;
-                  checkChanges();
+                  if (desLength <= 1000) {
+                    description.current = e.target.value;
+                    setDesLength(description.current.length);
+                    checkChanges();
+                  }
                 }}
               ></textarea>
-              <span className="">0 of 1000 characters used</span>
+              <span className="">{desLength} of 1000 characters used</span>
             </div>
             <div className="">
               <div className="create-collection">

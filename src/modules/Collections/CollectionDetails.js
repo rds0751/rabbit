@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 // import { AbstractApi } from "../API/LeaderBoardApi";
 
 import "../../assets/styles/Leader.css";
+import "../../assets/styles/collectiondetail.css";
 import { Link } from "react-router-dom";
 import { AbstractApi } from "../../constants/LeaderBoardApi copy";
 import { useParams } from "react-router-dom";
@@ -23,6 +24,7 @@ function CollectionDetails() {
     );
   });
   const { imageUrl, coverUrl, name } = collection;
+  // const [checkLike, setCheckLike] = useState(false);
   const handleLike = () => {
     setcheckLike(!checkLike);
   };
@@ -30,10 +32,16 @@ function CollectionDetails() {
     <>
       <div>
         <div className="position-relative relative">
-          <img src={coverUrl} alt="" />
+          <img src={coverUrl} alt="" style={{ objectFit: "cover" }} />
         </div>
         <div className="position-absolute absolute">
-          <img src={imageUrl} alt="" />
+          <img
+            src={imageUrl}
+            alt=""
+            height="140px"
+            width="140px"
+            style={{ borderRadius: "50%" }}
+          />
           <h2>{name}</h2>
           <p style={{ marginTop: "10px", marginBottom: "0px" }}>
             The abstract illusion is a collection of NFT which consist
@@ -67,176 +75,225 @@ function CollectionDetails() {
             </li>
           </ul>
         </li>
-        <div className="collectionsales collectionsalesHome">
-          <div className="sales1">
-            {/* <h1>Top NFT sales</h1> */}
-            <div
-              className="input-group buying-search-btn"
-              style={{ marginLeft: "150px" }}
-            >
-              <input
-                type="text"
-                className="form-control border-input input-box-border"
-                style={{ marginLeft: "1em", borderRight: "0" }}
-                placeholder="Search"
-                aria-label="Recipient's username"
-                aria-describedby="button-addon2"
-              />
-              <div className="input-group-append w-25">
-                <button
-                  className="btn btn-search-secondary border border-search"
-                  type="button"
-                  id="button-addon2"
-                  style={{ borderRadius: "0px 5px 5px 0px" }}
-                >
-                  <i className="fas fa-search"></i>
-                </button>
-              </div>
-            </div>
-            <div className="dropdown col col1">
-              <button
-                className="btn border dropdown-toggle col12"
-                type="button"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Status
-                <i className="fas fa-caret-down"></i>
-              </button>
-              <ul
-                className="dropdown-menu"
-                aria-labelledby="dropdownMenuButton1"
-              >
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className="dropdown col col1">
-              <button
-                className="btn border dropdown-toggle col12"
-                type="button"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Price
-                <i className="fas fa-caret-down"></i>
-              </button>
-              <ul
-                className="dropdown-menu"
-                aria-labelledby="dropdownMenuButton1"
-              >
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="dropdown col col11" style={{ marginRight: "3rem" }}>
-            <button
-              className="btn border dropdown-toggle col12"
-              type="button"
-              id="dropdownMenuButton1"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Sort by
-              <i className="fas fa-caret-down"></i>
-            </button>
-            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li>
-                <a className="dropdown-item" href="#">
-                  Action
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="row mx-0 text-center justify">
-          {/* <div className="col-md-3 col-lg-3 col-sm-6 col-11 images"> */}
-          {nfts.map((nft) => {
-            const { ipfsUrl, name, salesInfo } = nft;
-            return (
+        <div className="collection-card-container">
+          <div className="collectionsales collectionsalesHome">
+            <div className="sales1">
+              {/* <h1>Top NFT sales</h1> */}
               <div
-                className="col-md-3 col-lg-3 col-sm-6 col-11 images collectionmob"
-                style={{ marginLeft: "35px" }}
+                className="input-group buying-search-btn"
+                style={{ marginLeft: "150px" }}
               >
-                <div className="container__tile">
-                  <img
-                    id="nft__photo"
-                    className="img-fluid"
-                    src={ipfsUrl}
-                    alt="/"
-                  />
-                  {/* <img id='like_icon' src={require('../asset//images/Like.png')} /> */}
-                  <div className="tile__details">
-                    <div className="container__up">
-                      <h6 className="title">{name}</h6>
-                      <h6 className="title1">{salesInfo.price}</h6>
-                    </div>
-                    <div className="container__down">
-                      <h6 className="value__high">
-                        <span style={{ color: "black" }}>10</span>
-                        <span> 20</span>
-                      </h6>
-                      <h6 className="value__k">
-                        5
-                        <i
-                          className="far fa-clock"
-                          style={{ color: "#f54" }}
-                        ></i>
-                        <i
-                          onClick={handleLike}
-                          className="fa-solid fa-heart"
-                          style={{
-                            color: checkLike ? "#ef3643" : "white",
-                            // border: "1px solid black",
-                          }}
-                          // style={{ color: "white" }}
-                        ></i>
-                      </h6>
-                    </div>
-                  </div>
+                <input
+                  type="text"
+                  className="form-control border-input input-box-border"
+                  style={{ marginLeft: "1em", borderRight: "0" }}
+                  placeholder="Search"
+                  aria-label="Recipient's username"
+                  aria-describedby="button-addon2"
+                />
+                <div className="input-group-append w-25">
+                  <button
+                    className="btn btn-search-secondary border border-search"
+                    type="button"
+                    id="button-addon2"
+                    style={{ borderRadius: "0px 5px 5px 0px" }}
+                  >
+                    <i className="fas fa-search"></i>
+                  </button>
                 </div>
               </div>
-            );
-          })}
+              <div className="dropdown col col1">
+                <button
+                  className="btn border dropdown-toggle col12"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Status
+                  <i className="fas fa-caret-down"></i>
+                </button>
+                <ul
+                  className="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton1"
+                >
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Action
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Another action
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Something else here
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div className="dropdown col col1">
+                <button
+                  className="btn border dropdown-toggle col12"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Price
+                  <i className="fas fa-caret-down"></i>
+                </button>
+                <ul
+                  className="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton1"
+                >
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Action
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Another action
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Something else here
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="dropdown col col11" style={{ marginRight: "3rem" }}>
+              <button
+                className="btn border dropdown-toggle col12"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Sort by
+                <i className="fas fa-caret-down"></i>
+              </button>
+              <ul
+                className="dropdown-menu"
+                aria-labelledby="dropdownMenuButton1"
+              >
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Action
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Another action
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Something else here
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          {/* <div className="" style={{marginLeft:"40px",}}> */}
+          <div
+            className="profileNftContainer row mx-0 text-center image1"
+            style={{ margin: "2% 2%" }}
+          >
+            {/* <div className="col-md-3 col-lg-3 col-sm-6/ col-11 images"> */}
+            {nfts.map((nft) => {
+              const { ipfsUrl, name, salesInfo } = nft;
+              return (
+                <>
+                  <div className="profileNftContainerInner container__tile">
+                    <img
+                      id="nft__photo"
+                      className="nftTileEachImage"
+                      src={ipfsUrl}
+                      alt="/"
+                    />
+                    {/* <img id='like_icon' src={require('../asset//images/Like.png')} /> */}
+                    <div className="tile__details">
+                      <div className="profileNftDetailFirstContainer container__up">
+                        <div className="title">{name}</div>
+                        <div className="title1">{salesInfo.price} ETH</div>
+                      </div>
+                      <div className="profileNftDetailSecondContainer container__down">
+                        <div className="">
+                          <span style={{ color: "black" }}>Highest Bid:</span>
+                          <span
+                            style={{
+                              color: "#366EEF",
+                              fontFamily: "poppins-bold",
+                            }}
+                          >
+                            {" "}
+                            {10}
+                          </span>
+                        </div>
+                        <div className="">
+                          {4}{" "}
+                          {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
+                          <i
+                            onClick={handleLike}
+                            className="fa-solid fa-heart"
+                            style={{ color: checkLike ? "#ef3643" : "grey" }}
+                          ></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </>
+                // <div
+                //   className="col-md-3 col-lg-3 col-sm-6 col-11 images collectionmob"
+                //   style={{ marginLeft: "35px" }}
+                // >
+                //   <div className="container__tile">
+                //     <img
+                //       id="nft__photo"
+                //       className="img-fluid"
+                //       src={ipfsUrl}
+                //       alt="/"
+                //     />
+                //     {/* <img id='like_icon' src={require('../asset//images/Like.png')} /> */}
+                //     <div className="tile__details">
+                //       <div className="container__up">
+                //         <h6 className="title">{name}</h6>
+                //         <h6 className="title1">{salesInfo.price}</h6>
+                //       </div>
+                //       <div className="container__down">
+                //         <h6 className="value__high">
+                //           <span style={{ color: "black" }}>10</span>
+                //           <span> 20</span>
+                //         </h6>
+                //         <h6 className="value__k">
+                //           5
+                //           <i
+                //             className="far fa-clock"
+                //             style={{ color: "#f54" }}
+                //           ></i>
+                //           <i
+                //             onClick={handleLike}
+                //             className="fa-solid fa-heart"
+                //             style={{
+                //               color: checkLike ? "#ef3643" : "white",
+                //               // border: "1px solid black",
+                //             }}
+                //             // style={{ color: "white" }}
+                //           ></i>
+                //         </h6>
+                //       </div>
+                //     </div>
+                //   </div>
+                // </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </>

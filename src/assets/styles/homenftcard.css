@@ -67,7 +67,8 @@
   .mobilenftTilePageFirstSelect {
     display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
+    /* justify-content: space-between !important; */
+    /* justify-content: space-between !important; */
   }
   .mobilenftTilePageSecondSelect {
     margin-left: 0px !important;
@@ -93,7 +94,7 @@
     font-size: 3.9vw;
   }
   .nftTileEachImage {
-    height: 32.81vw;
+    height: 52.81vw;
   }
   .mobilenftTilePageFirstSelect {
     display: flex !important;

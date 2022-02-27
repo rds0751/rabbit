@@ -170,9 +170,10 @@ export const addSuggestion = async (bodyData, successCallback) => {
 export const getAboutData = async (id, successCallBack) => {
   const url = `${dev_url}api/v1/about/61f7b7a4c017de6244c51144`;
   const { data } = await axios.get(url);
-  if (data.responseCode) {
+  console.log(data, "<<<dataabout");
+  if (data.success) {
     successCallBack(data.responseData);
   } else {
-    console.log(data);
+    console.log(data, "<<error");
   }
 };

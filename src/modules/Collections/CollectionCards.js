@@ -5,6 +5,7 @@ import CollectionNftFilter from "../../common/components/CollectionNFtFilter";
 import NftToggle from "../../common/components/NftToggle";
 import { getCollections } from "../../services/webappMicroservice";
 import "../../assets/styles/homeCollectionCards.css";
+import "../../assets/styles/collectiondetail.css";
 
 function Collections_tile() {
   const [collections, setCollections] = useState([]);
@@ -14,7 +15,7 @@ function Collections_tile() {
   }, []);
   return (
     <>
-      <div className="container">
+      <div className="ntf_div">
         <NftToggle toggleNft={toggleNft} />
         {/* <Lower__homepage /> */}
         <CollectionNftFilter />

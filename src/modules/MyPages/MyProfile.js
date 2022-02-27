@@ -73,24 +73,12 @@ function MyProfile() {
           {/* <h2>{ethereum && ethereum.selectedAddress}</h2> */}
           {/* <h2>{window.ethereum && defaultAccount}</h2> */}
           {/* {defaultAccount} */}
-          {walletAddress?.address}
-          <h6
-            style={{
-              color: "black",
-              display: "flex",
-              alignItems: "center",
-              marginTop: "10px",
-            }}
-          >
-            <div style={{ backgroundColor: "#f3f3f3", borderRadius: "5px" }}>
-              {" "}
-              {/* {window.ethereum && window.ethereum.chainId
-                ? window.ethereum && window.ethereum.chainId
-                : "Install extension to connect wallet"}{" "} */}
-              {/* {window.ethereum && defaultAccount} */}
-            </div>{" "}
+          <div className="profile-user">User Name</div>
+          <div className="add-cover">
+            <div className="wallet-address-text">{walletAddress?.address}</div>
             <img style={{ height: "30px" }} src={copy} alt="" />
-          </h6>
+          </div>
+
           <p style={{ marginTop: "10px", marginBottom: "0px" }}>
             Hi my name is TechieArt I am an artist based in New York my
           </p>

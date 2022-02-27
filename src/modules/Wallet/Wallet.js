@@ -69,37 +69,33 @@ function Wallet() {
   };
   return (
     <div
-      className="wallet"
+      className="walletAddressContainer"
       style={{
         display: isOpenWallet ? null : "none",
       }}
     >
-      <div className="empty_div"></div>
-      <div className="wallet_div">
-        <div className="imgwallet">
-          <img src={image} alt="" />
-        </div>
-        <div className="walletAddressContainer walleth2">
-          <div className="walletAddress fontwallet">
-            {/* {ethereum && ethereum.chainId
+      {/* <div className="walle"> */}
+      <div className="">
+        <img src={image} alt="" width="75px" height="75px" />
+      </div>
+      <div className="wallet-add-container">
+        <div className="walletAddress fontwallet">
+          {/* {ethereum && ethereum.chainId
               ? ethereum && ethereum.chainId
               : "Install extension to connect wallet"} */}
-            {/* {userDetails?.address} */}
-            {walletAddress?.address}
-          </div>
-          <i
-            className="far fa-copy"
-            onClick={() => handleCopyToClipboard()}
-          ></i>
+          {/* {userDetails?.address} */}
+          {walletAddress?.address}
         </div>
-        <div className="balancewallet textVerticalCenter">
-          <div className="WalletContent">
-            <h3>Total Balance</h3>
-            <h4>{walletAddress?.balance}</h4>
-          </div>
-        </div>
-        <button className="btnwallet">Add Balance</button>
+        <i className="far fa-copy" onClick={() => handleCopyToClipboard()}></i>
       </div>
+      <div className="balance-out">
+        <div className="balance-text">
+          <div>Total Balance</div>
+          <div className="balance-value">{walletAddress?.balance}</div>
+        </div>
+      </div>
+      <button className="balance-button">Add Balance</button>
+      {/* </div> */}
     </div>
   );
 }

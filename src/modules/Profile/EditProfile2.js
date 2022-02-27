@@ -6,19 +6,14 @@ import { connect } from "react-redux";
 import { BASE_URL2 } from "../../reducers/Constants";
 import { httpConstants } from "../../constants";
 import { updateUserProfile } from "../../services";
-import { useSelector } from "react-redux";
-import { ToastContainer } from "react-toastify";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import "../../assets/styles/editProfile.css";
-import { AuthToken } from "../../services/UserAuthToken";
+
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 
 const Button = styled.button``;
 
 function EditProfile(props) {
   const hiddenFileInput = useRef(null);
-  const { user } = useSelector((state) => state);
   const tempUrl =
     "https://earncashto.com/wp-content/uploads/2021/06/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png";
   const [imageUrl, setImageUrl] = useState(tempUrl);
@@ -36,62 +31,36 @@ function EditProfile(props) {
     console.log(fileUploaded);
     let formData = new FormData();
     formData.append("folderName", "collections");
-
-    formData.append("createdBy", `${user?.loggedInUser?._id}`);
+    formData.append("createdBy", `${props.user._id}`);
     formData.append("attachment", fileUploaded);
 
     const res = await fetch(`${BASE_URL2}/api/v1/upload-documents`, {
       method: httpConstants.METHOD_TYPE.POST,
       body: formData,
-      headers: AuthToken,
     });
     const result = await res.json();
     if (result.success) cdnUrl.current = result.responseData;
     console.log(result);
     setImageUrl(cdnUrl.current);
+
     // Edit.handleFile(fileUploaded);
   };
 
   const handleSubmit = async (e) => {
-    console.log(user.loggedInUser, "<<user");
+    console.log(props);
     e.preventDefault();
     const data = {
       username: username.current,
       bio: bio.current,
       personalSite: personalSite.current,
       cdnUrl: cdnUrl.current,
-      userId: user?.loggedInUser?.userId,
-      // firstName: user?.loggedInUser?.firstName,
-      firstName: "dfd",
-      // lastName: user?.loggedInUser?.lastName,
-      lastName: "lastname",
-      email: "dfdfd@gmail.com",
-      password: "dfdf",
-      phone: "7458965412",
     };
-    console.log(data, "<<<data to send");
-    const result = await updateUserProfile(data, user?.loggedInUser?._id);
+    const result = await updateUserProfile(data, props.user._id);
     console.log(result);
-    if (result.success) {
-      toast.success("Profile Updated");
-    } else {
-      toast.error("Error While updating ");
-    }
   };
 
   return (
     <>
-      <ToastContainer
-        position="top-center"
-        autoClose={6000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
       <div className="editProfileContainer container row mt-5">
         {/* <div className="col-sm-5 col-12 col-xs-12 offset-sm-3 form-responsive edit_profilemob"> */}
         <div className="editProfileTopHeading top-heading">
@@ -108,8 +77,8 @@ function EditProfile(props) {
             <img
               className="rounded-circle img-fluid img-responsive"
               // src="https://earncashto.com/wp-content/uploads/2021/06/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png"
-              // alt="/"
               src={imageUrl}
+              alt="/"
             />
             <Button
               onClick={handleClick}
@@ -186,9 +155,8 @@ function EditProfile(props) {
 const mapStateToProps = (state) => {
   console.log(state);
   return {
-    user: state.user.loggedInUser,
+    user: state.user.addUserData,
   };
 };
 
 export default connect(mapStateToProps)(EditProfile);
-// yash

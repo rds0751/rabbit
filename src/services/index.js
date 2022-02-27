@@ -20,6 +20,7 @@ export const addWalletAddress = async (wallet_address) => {
         wallet_address,
       }),
     });
+    console.log(res,"<<<<datawalletaddress")
     const result = await res.json();
     const user = result.responseData;
     return user;

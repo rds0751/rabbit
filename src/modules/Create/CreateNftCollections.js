@@ -41,6 +41,7 @@ function CreateNftCollections(props) {
       setCategories(res.responseData);
     });
   }, []);
+  const [desLEngth, setDesLEngth] = useState(0);
 
   const handleChangeImage = async (event) => {
     const fileUploaded = event.target.files[0];
@@ -137,6 +138,7 @@ function CreateNftCollections(props) {
               ref={hiddenFileInputImage}
               className="fileInput  input-box-1"
               onChange={handleChangeImage}
+              style={{ border: "4px solid red" }}
             />
             {/* </div> */}
             <div className="upload-image-upper">
@@ -148,14 +150,14 @@ function CreateNftCollections(props) {
               {/* </Button> */}
               <div className="drag-and-drop">
                 Drag & Drop or
-                <Link to="/">Browse</Link>
+                <span className="drag-and-drop-browse"> Browse</span>
               </div>
             </div>
           </div>
         </div>
         <div>
           <div className="form-label">Upload Banner*</div>
-          <div className="upload-image-banner">
+          <div className="upload-file-outer bannerwidth">
             {/* <Button onClick={handleClickImage}> */}
             <input
               type="file"
@@ -173,7 +175,7 @@ function CreateNftCollections(props) {
               />
               <div className="drag-and-drop">
                 Drag & Drop or
-                <Link to="/">Browse</Link>
+                <span className="drag-and-drop-browse"> Browse</span>
               </div>
             </div>
             {/* </Button> */}

@@ -1,0 +1,59 @@
+.editProfileContainer {
+    width: 39%;
+    margin: 0px auto;
+    padding: 0px !important;
+    box-sizing: border-box;
+  }
+  .editProfileTopHeading {
+    margin-left: 0px !important;
+    padding: 0px !important;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .editProfileHeadingTitle {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .chooseProfilePicContainer {
+    /* border: 2px solid red !important; */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+  }
+  .chooseProfilePicInnerContainer {
+    border: none !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+  }
+  .editProfileChooseFileButton {
+    background-color: white;
+    border: 1px solid #366eef;
+    width: 40%;
+  }
+  .editProfileFormContainer {
+    padding-left: 0px !important;
+    box-sizing: border-box;
+  }
+  .editProfileFormContainerEach {
+    width: 100%;
+    margin: 0px !important;
+    box-sizing: border-box !important;
+  }
+  .editProfileFormContainerEachInput {
+    box-sizing: border-box;
+  }
+  @media only screen and (max-width: 1024px) {
+    .editProfileContainer {
+      width: 87%;
+    }
+  }
+  @media only screen and (max-width: 480px) {
+    .editProfileContainer {
+      width: 93%;
+    }
+  }

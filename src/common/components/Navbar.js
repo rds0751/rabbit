@@ -84,7 +84,8 @@ function Navbar() {
     if (name == "profile") {
       if (walletAddress == null) {
         dispatch(RedirectTo("profile"));
-        navigate("/add-wallet");
+        // navigate("/add-wallet");
+        navigate("/my-profile");
       } else {
         navigate("/my-profile");
       }
@@ -100,17 +101,21 @@ function Navbar() {
   const handleWalletClick = () => {
     if (walletAddress == null) {
       navigate("/add-wallet");
-      dispatch(RedirectTo("wallet"));
+      // dispatch(RedirectTo("wallet"));
+      dispatch(ManageWalletSideBar(!isOpenWallet));
     } else {
       dispatch(ManageWalletSideBar(!isOpenWallet));
     }
   };
   const handleNotiSideBar = () => {
+    console.log(isOpenNoti, "<<<isopen noti");
     if (loggedInUser == null) {
-      navigate("/add-wallet");
-      dispatch(RedirectTo("notification"));
+      // navigate("/add-wallet");
+      dispatch(ManageNotiSideBar(!isOpenNoti));
+
+      // dispatch(RedirectTo("notification"));
     } else {
-      dispatch(ManageNotiSideBar(true));
+      dispatch(ManageNotiSideBar(!isOpenNoti));
     }
   };
   console.log("logged in user >>> lllll", loggedInUser);
@@ -139,7 +144,7 @@ function Navbar() {
                   style={{
                     backgroundColor: "#f8f8f8",
                     width: "75%",
-                    height:"42px",
+                    height: "42px",
                     padding: "0px",
                     paddingLeft: "10px",
                     border: "0",
@@ -166,8 +171,6 @@ function Navbar() {
               </form>
             </div>
 
-            
-
             <div className="search_box">
               <form className="p-0 m-0 ">
                 <input
@@ -181,9 +184,8 @@ function Navbar() {
                 </button>
               </form>
             </div>
-          
-          
-          <div className="right_navbar d-flex ">
+
+            <div className="right_navbar d-flex ">
               {/* <div
             className="collapse navbar-collapse mobcollapse"
             id="navbarSupportedContent"
@@ -310,8 +312,12 @@ function Navbar() {
                       <img
                         className="btnnav_mob1"
                         src={require("../../assets/images/profile.png")}
-                        style={{ color: "gray", cursor: "pointer",marginLeft:"31.22px" ,marginRight:"22.43px"
-                       }}
+                        style={{
+                          color: "gray",
+                          cursor: "pointer",
+                          marginLeft: "31.22px",
+                          marginRight: "22.43px",
+                        }}
                       ></img>
                     </a>
                     <ul
@@ -375,9 +381,9 @@ function Navbar() {
                 </ul>
               </div>
             </div>
-            </div>
+          </div>
         </nav>
-        
+
         <div className={humburger ? "scroll_off" : <></>}>
           {humburger ? <Menu /> : <></>}
         </div>
