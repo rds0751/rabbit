@@ -104,20 +104,22 @@ function Navbar() {
     if (walletAddress == null) {
       navigate("/add-wallet");
       // dispatch(RedirectTo("wallet"));
-      dispatch(ManageWalletSideBar(!isOpenWallet));
+
+      // dispatch(ManageWalletSideBar(!isOpenWallet));
     } else {
       dispatch(ManageWalletSideBar(!isOpenWallet));
+      dispatch(ManageNotiSideBar(false));
     }
   };
   const handleNotiSideBar = () => {
     console.log(isOpenNoti, "<<<isopen noti");
     if (loggedInUser == null) {
       // navigate("/add-wallet");
-      dispatch(ManageNotiSideBar(!isOpenNoti));
-
+      // dispatch(ManageNotiSideBar(!isOpenNoti));
       // dispatch(RedirectTo("notification"));
     } else {
       dispatch(ManageNotiSideBar(!isOpenNoti));
+      dispatch(ManageWalletSideBar(false));
     }
   };
 

@@ -1,12 +1,13 @@
 import React, { Component, useEffect, useState } from "react";
 // import './Top_collection.css'
 // import { AbstractApi } from "../../constants/LeaderBoardApi";
-import copy from "../../assets/images/copy.png";
-import globe from "../../assets/images/globe.png";
+import copy from "../../assets/images/copy.svg";
+import globe from "../../assets/images/web.svg";
 import pencil from "../../assets/images/pencil.png";
 import randomimage from "../../assets/images/1.jpg";
 import "../../assets/styles/Leader.css";
 import { Link } from "react-router-dom";
+
 import { useNavigate } from "react-router-dom";
 import { ethers } from "ethers";
 import { AbstractApi } from "../../constants/LeaderBoardApi copy";
@@ -65,6 +66,16 @@ function MyProfile() {
 
   // ------------------------------- Calling apis --------------------- to get user data
 
+  const handleCopyToClipboard = () => {
+    const { wallet_address } = loggedInUser;
+    navigator.clipboard.writeText(`${wallet_address}`);
+    // navigator.clipboard.writeText(walletAddressUnquoted);
+    // setCopiedText(true);
+    toast.success("Text Copied");
+    // setTimeout(() => {
+    // setCopiedText(false);
+    // }, 1000);
+  };
   const getCreatedByNft = () => {
     NftCreatedByUser((response) => {
       console.log(response, "myprofile");
@@ -150,11 +161,11 @@ function MyProfile() {
             type="file"
             className="pencilicon"
             on
-            style={{ border: "5px solid white", zIndex: "99",opacity:"0" }}
+            style={{ border: "5px solid white", zIndex: "99", opacity: "0" }}
           />
           <img className="pencilicon" width="16px" height="16px" src={pencil} />
         </div>
-        <div className="position-absolute  absolute">
+        <div className="profileavatar  absolute">
           <img
             src={loggedInUser?.photo != "" ? loggedInUser?.photo : defaultPic}
             alt=""
@@ -167,10 +178,15 @@ function MyProfile() {
             <div className="wallet-address-text">
               {loggedInUser?.wallet_address}
             </div>
-            <img style={{ height: "30px" }} src={copy} alt="" />
+            <img
+              style={{ height: "30px" }}
+              src={copy}
+              alt=""
+              onClick={handleCopyToClipboard}
+            />
           </div>
 
-          <p  style={{ marginTop: "10px", marginBottom: "0px" }}>
+          <p style={{ marginTop: "10px", marginBottom: "0px" }}>
             {loggedInUser?.bio}
           </p>
           {/* <p style={{ marginBottom: "0px" }}>
@@ -247,9 +263,9 @@ function MyProfile() {
             </div> */}
             {/* {[...AbstractApi, , ...AbstractApi].map((curElem) => { */}
             {isloading && <Spinner />}
-            {(()=>{
-              if(!isloading && Nfts.length <1){
-                return <NonftText text="No Nft"/>
+            {(() => {
+              if (!isloading && Nfts.length < 1) {
+                return <NonftText text="No Nft" />;
               }
             })()}
 

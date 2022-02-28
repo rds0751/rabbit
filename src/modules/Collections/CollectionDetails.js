@@ -14,6 +14,7 @@ import {
 import search from "../../assets/images/search.svg";
 import dropdown from "../../assets/images/dropdown.svg";
 import NftCardsHome from "../../common/components/NftCardsHome";
+import CollDetailCard from "../../common/components/CollDetailCard";
 
 function CollectionDetails() {
   const collectionId = useParams();
@@ -33,7 +34,7 @@ function CollectionDetails() {
       setNfts(response);
       console.log(response, "<<<<< collectionresponse");
     });
-  });
+  },[]);
   const { imageUrl, coverUrl, name } = collection;
   // const [checkLike, setCheckLike] = useState(false);
   const handleLike = () => {
@@ -147,12 +148,13 @@ function CollectionDetails() {
           </div>
           {/* <div className="" style={{marginLeft:"40px",}}> */}
           <div   className="nftTileContainer row  ntf_row"
-          style={{ justifyContent: "space-between" }}>
+          style={{ justifyContent:"flex-start" }}>
             
             {/* <div className="col-md-3 col-lg-3 col-sm-6/ col-11 images"> */}
             {[...nfts].map((nft) => {
               const { ipfsUrl, name, salesInfo } = nft;
-              return <NftCardsHome nft={nft} />;
+              // return <NftCardsHome nft={nft} />;
+              return <CollDetailCard nft={nft} />;
               {
                 /* <div className="profileNftContainerInner container__tile">
                     <img className="nftTileEachImage" src={ipfsUrl} alt="/" />

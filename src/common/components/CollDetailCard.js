@@ -9,7 +9,7 @@ import {
   addLikeNft,
   getNFtsData,
 } from "../../services/webappMicroservice";
-function NftCardsHome({ nft }) {
+function CollDetailCard({ nft }) {
   const navigate = useNavigate();
   const { user, sideBar } = useSelector((state) => state);
   const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
@@ -31,7 +31,10 @@ function NftCardsHome({ nft }) {
   };
 
   return (
-    <div className=" col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
+    <div
+      className=" col-md-6 col-lg-3  col-sm-12  mt-5 mr-2 nft_card"
+      style={{ marginLeft: "1rem" }}
+    >
       <div className="card nft-card-radius border-radius cardmob">
         <Link to={route} style={{ textDecoration: "none" }}>
           <img
@@ -96,4 +99,4 @@ function NftCardsHome({ nft }) {
   );
 }
 
-export default NftCardsHome;
+export default CollDetailCard;

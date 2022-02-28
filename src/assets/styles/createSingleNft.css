@@ -4,6 +4,7 @@
 
 .create-single-nft-outer {
   margin-top: 10px;
+  position: relative;
 }
 .single-form {
   /* border: 8px solid lightblue; */

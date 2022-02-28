@@ -82,7 +82,9 @@
   width: 16px;
   bottom: 8%;
 }
-
+.profileavatar{
+  border-radius: 50%;
+}
 @media only screen and (max-width: 1024px) {
   .editProfileButton {
     font-size: 1.9vw !important ;

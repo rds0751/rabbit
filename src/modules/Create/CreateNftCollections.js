@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import Image from "../../assets/images/img-format.png";
-import ethereum from "../../assets/images/ehereum.png";
+import ethereum from "../../assets/images/ethereum.svg";
 
 import { httpConstants } from "../../constants";
 import { BASE_URL2 } from "../../reducers/Constants";
@@ -200,9 +200,12 @@ function CreateNftCollections(props) {
                 name="text"
                 placeholder="Write description"
                 className="input-box-1"
+                value={description.current}
                 onChange={(e) => {
-                  description.current = e.target.value;
-                  onChangeDes();
+                  if (DesLength < 1000) {
+                    description.current = e.target.value;
+                    onChangeDes();
+                  }
                 }}
               ></textarea>
               <span>{DesLength} of 1000 characters used</span>

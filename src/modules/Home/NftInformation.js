@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import image from "../../assets/images/1.jpg";
-import share from "../../assets/images/share.png";
-import info from "../../assets/images/info.png";
+import share from "../../assets/images/share.svg";
+import info from "../../assets/images/report.svg";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 // import { Link } from "react-router-dom";
@@ -9,7 +9,7 @@ import { BidApi, OfferApi } from "../../constants/Nft_Info_Api";
 import PricingHistoryComponentTable from "../../common/components/PricingHistoryComponentTable";
 import PricingHistoryComponentGraph from "../../common/components/PricingHistoryComponentGraph";
 // import BidsComponent from "./BidsComponent";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 
 import { Button } from "@mui/material";
 import { getNft, addNftReport } from "../../services/webappMicroservice";
@@ -24,7 +24,7 @@ import ListingsTable from "../../common/components/ListingTable";
 
 export default function NftInformation(props) {
   console.log(props?.responseData, "<<<response");
-
+  const navigate = useNavigate();
   const [activeInActive, setActiveInActive] = useState("active");
   const { user } = useSelector((state) => state);
   const [isCurrUserNft, setIsCurrUserNft] = useState(null);
@@ -33,7 +33,7 @@ export default function NftInformation(props) {
   const { id } = useParams();
   const [nft, setNft] = useState(props?.responseData);
   const [userDetails, setUserDetails] = useState([]);
-  const [tab, setTab] = useState(1)
+  const [tab, setTab] = useState(1);
   const [report, setReport] = useState({
     content: id,
     // addedBy: user.addUserData._id,
@@ -44,7 +44,8 @@ export default function NftInformation(props) {
     props?.responseData,
     "<<<< this is data to match"
   );
-  // alert(loggedInUser?._id == props?.responseData?.createdBy);
+  alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
+
   // useEffect(() => {
   //   alert(`${loggedInUser?._id}`);
   //   console.log(
@@ -87,10 +88,14 @@ export default function NftInformation(props) {
     });
   };
   const buyNft = async () => {
-    props?.BuyNowNft({
-      buyerId: loggedInUser?._id,
-      newOwnerAddress: walletAddress?.address,
-    });
+    if (user.loggedInUser != null) {
+      props?.BuyNowNft({
+        buyerId: loggedInUser?._id,
+        newOwnerAddress: walletAddress?.address,
+      });
+    } else {
+      navigate("/add-wallet");
+    }
 
     //   const response = await put_NftOpenForSale(nft._id);
     //   if (response.success) {
@@ -118,10 +123,12 @@ export default function NftInformation(props) {
   };
 
   useEffect(() => {
-    getUser(props?.responseData?.ownedBy).then((response) => setUserDetails(response));
+    getUser(props?.responseData?.ownedBy).then((response) =>
+      setUserDetails(response)
+    );
   });
 
-  console.log("user", userDetails)
+  console.log("user", userDetails);
 
   return (
     <>
@@ -172,7 +179,7 @@ export default function NftInformation(props) {
                   }}
                 >
                   <Link
-                    to="/edit-items"
+                    to={`/edit-items/${props?.responseData._id}`}
                     style={{
                       textDecoration: "none",
                       textTransform: "none",
@@ -424,19 +431,25 @@ export default function NftInformation(props) {
                   </div>
                 </span>
               </div>
-              <div className="second-text  mt-4 align-row" >
-              <span className="font-13 text-dark">Current Price:
-              <span
-                  className="font-13 font-weight-700"
-                  style={{ color: "#16AB6E" }}
-                >
-                   0.32 ETH
-                </span></span>
+              <div className="second-text  mt-4 align-row">
+                <span className="font-13 text-dark">
+                  Current Price:
+                  <span
+                    className="font-13 font-weight-700"
+                    style={{ color: "#16AB6E" }}
+                  > 
+                    0.32 ETH
+                  </span>
+                </span>
                 <span className="align-row">
                   <i className="far fa-clock" style={{ color: "#f54" }}></i>
-                  <span className="font-13 text-dark" style={{marginLeft:"5px"}}>Ends in 5 days </span>
+                  <span
+                    className="font-13 text-dark"
+                    style={{ marginLeft: "5px" }}
+                  >
+                    Ends in 5 days{" "}
+                  </span>
                 </span>
-                
               </div>
               <div className="row">
                 <div className="col-lg-3 col-sm-12  mt-3">
@@ -456,32 +469,31 @@ export default function NftInformation(props) {
                   </span>
                 </div>
               </div>
-              <div style={{display:"flex", marginTop:"16px"}}>
-                <div style={{marginRight:"20px"}}>
+              <div style={{ display: "flex", marginTop: "16px" }}>
+                <div style={{ marginRight: "20px" }}>
                   <VisibilityIcon
-                      style={{ fontSize: "20px", color: "#366EEF" }}
+                    style={{ fontSize: "20px", color: "#366EEF" }}
                   />
                   <span
-                      className="font-13 font-weight-900 text-dark"
-                      style={{ marginLeft: "0.5em" }}
-                    >
-                      {props?.responseData?.viewsCount}
+                    className="font-13 font-weight-900 text-dark"
+                    style={{ marginLeft: "0.5em" }}
+                  >
+                    {props?.responseData?.viewsCount}
                   </span>
                 </div>
                 <div>
                   <FavoriteIcon
-                      style={{ fontSize: "20px", color: "#EF3643" }}
-                    />
-                    <span
-                      className="font-13 font-weight-900 text-dark"
-                      style={{ marginLeft: "0.5em" }}
-                    >
-                      {props?.responseData?.likesCount}
-                    </span>
-
+                    style={{ fontSize: "20px", color: "#EF3643" }}
+                  />
+                  <span
+                    className="font-13 font-weight-900 text-dark"
+                    style={{ marginLeft: "0.5em" }}
+                  >
+                    {props?.responseData?.likesCount}
+                  </span>
                 </div>
-              </div>              
-              <div className="row" style={{marginBottom:"16px"}}>
+              </div>
+              <div className="row" style={{ marginBottom: "16px" }}>
                 <h4 className="font-13  font-weight-900 mt-3">Description</h4>
                 <hp className="font-13 ">
                   {props?.responseDatat?.description}e
@@ -491,9 +503,9 @@ export default function NftInformation(props) {
               {/*  IF nft is not created by logged in user these buttons will be shown */}
               <span className="nftsell">
                 <Button
-              style={{
+                  style={{
                     display:
-                      props?.responseData?.createdBy != loggedInUser?._id &&
+                      props?.responseData?.ownedBy != loggedInUser?._id &&
                       props?.responseData?.salesInfo?.isOpenForSale
                         ? "block"
                         : "none",
@@ -525,46 +537,52 @@ export default function NftInformation(props) {
                   Make Offer
                 </Button>
               </span>
-              
+
               <div>
                 <ul className="tabs-list">
                   <li
-                  onClick={() => {
-                    setTab(1);
-                  }}
-                  style={{
-                    borderBottom: tab === 1 ? "2px solid #366EEF" : "",
-                    color: tab === 1 ? "#000000" : "#858585",
-                    fontWeight: tab === 1 ? 600 : "",
-                    marginRight: "16px",
-                  }}
-                  >Pricing History</li>
+                    onClick={() => {
+                      setTab(1);
+                    }}
+                    style={{
+                      borderBottom: tab === 1 ? "2px solid #366EEF" : "",
+                      color: tab === 1 ? "#000000" : "#858585",
+                      fontWeight: tab === 1 ? 600 : "",
+                      marginRight: "16px",
+                    }}
+                  >
+                    Pricing History
+                  </li>
                   <li
-                  onClick={() => {
-                    setTab(2);
-                  }}
-                  style={{
-                    borderBottom: tab === 2 ? "2px solid #366EEF" : "",
-                    color: tab === 2 ? "#000000" : "#858585",
-                    fontWeight: tab === 2 ? 600 : "",
-                    marginRight: "16px",
-                  }}
-                  >Listings</li>
+                    onClick={() => {
+                      setTab(2);
+                    }}
+                    style={{
+                      borderBottom: tab === 2 ? "2px solid #366EEF" : "",
+                      color: tab === 2 ? "#000000" : "#858585",
+                      fontWeight: tab === 2 ? 600 : "",
+                      marginRight: "16px",
+                    }}
+                  >
+                    Listings
+                  </li>
                   <li
-                  onClick={() => {
-                    setTab(3);
-                  }}
-                  style={{
-                    borderBottom: tab === 3 ? "2px solid #366EEF" : "",
-                    color: tab === 3 ? "#000000" : "#858585",
-                    fontWeight: tab === 3 ? 600 : "",
-                  }}
-                  >Offers</li>
+                    onClick={() => {
+                      setTab(3);
+                    }}
+                    style={{
+                      borderBottom: tab === 3 ? "2px solid #366EEF" : "",
+                      color: tab === 3 ? "#000000" : "#858585",
+                      fontWeight: tab === 3 ? 600 : "",
+                    }}
+                  >
+                    Offers
+                  </li>
                 </ul>
-                {tab === 1 ? <PricingHistoryComponentGraph id={id} /> : "" }
-                {tab === 2 ? <ListingsTable /> : "" }
-                {tab === 3 ? <ListingsTable /> : "" }
-              </div>              
+                {tab === 1 ? <PricingHistoryComponentGraph id={id} /> : ""}
+                {tab === 2 ? <ListingsTable /> : ""}
+                {tab === 3 ? <ListingsTable /> : ""}
+              </div>
             </div>
           </div>
           <div className="col-1"></div>

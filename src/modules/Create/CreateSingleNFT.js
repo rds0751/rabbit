@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Image from "../../assets/images/img-format.png";
-import ehereum from "../../assets/images/ehereum.png";
+import ethereum from "../../assets/images/ethereum.svg";
 // import { FaCloudUploadAlt } from "react-icons/fa";
 import styled from "styled-components";
 import { connect } from "react-redux";
@@ -18,16 +18,18 @@ import { useDropzone } from "react-dropzone";
 import { useSelector } from "react-redux";
 import ImageFile from "./uploadFile";
 import "../../assets/styles/createSingleNft.css";
+import "../../assets/styles/MintModal.css";
 import UploadSingleNft from "./CreateSingleUploadFile";
 // import "../../assets/styles/Leader.css"
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 const Button = styled.button``;
 function CreateSingleNFT(props) {
-  console.log("ppppppppppppp", props?.isNftCreated);
+  console.log("ppppppppppppp", props, "");
   const [collectionData, setCollectionData] = useState([]);
   const [selectFile, setSelectFile] = useState("");
   const [collectionId, setCollectionId] = useState("");
   const [uploadFileObj, setUploadFileObj] = useState("");
+  const [openMintodal, setOpenMintodal] = useState(false);
 
   // >>>> This is user id
   const { user } = useSelector((state) => state);
@@ -134,6 +136,7 @@ function CreateSingleNFT(props) {
       "<<<<price current "
     );
     const addIPFS = async () => {
+      console.log(selectFile, "<<<selectedFile");
       // console.log("address of owner", walletAddress.address)
       // console.log(
       //   "file",
@@ -274,7 +277,6 @@ function CreateSingleNFT(props) {
             {/* <div className="draganddropbox" {...getRootProps()}>
               <input {...getInputProps()} />
               <div className="draganddropboxinnerdiv">
-              
                 <img
                   src={Image}
                   style={{ width: "100px", marginTop: "3em", color: "#366EEF" }}
@@ -330,8 +332,9 @@ function CreateSingleNFT(props) {
                 rows="4"
                 name="text"
                 placeholder="Write description"
+                value={description.current}
                 onChange={(e) => {
-                  if (desLength <= 1000) {
+                  if (desLength < 1000) {
                     description.current = e.target.value;
                     setDesLength(description.current.length);
                     checkChanges();
@@ -393,7 +396,7 @@ function CreateSingleNFT(props) {
               </select> */}
               <div className="block-chain-container">
                 <div>
-                  <img src={ehereum} height="32px" />
+                  <img src={ethereum.svg} height="32px" />
                 </div>
                 <div className="block-chain-right">
                   <select
@@ -417,6 +420,58 @@ function CreateSingleNFT(props) {
             >
               Create
             </button>
+          </div>
+        </div>
+      </div>
+      <div
+        className="mint-outer"
+        style={{ display: openMintodal ? "block" : "none" }}
+      >
+        <div className="mintbody">
+          <div
+            className="completelistin"
+            onClick={() => setOpenMintodal(false)}
+          >
+            Complete your listing
+          </div>
+          <div className="abstractillusion">
+            <img src={Image} />
+            <div className="abstractillusioncontent">
+              <div className="abstracttitle">Abstract illusion</div>
+              <div className="abstractposter">Abstract Poster</div>
+              <div className="ethprice">0.49ETH</div>
+              <div className="ethprice">$162.09</div>
+            </div>
+          </div>
+          <div className="checkpostcontainer">
+            <div className="checkpost">
+              <img src={Image} className="checkvalue" />
+              <div className="checkposttext">
+                <div>Uploading</div>
+                <div>Uploading all Media assests and metadata to Ipfs</div>
+              </div>
+            </div>
+            <div className="checkpost">
+              <div className="checkvalue checkvaluetext">2</div>
+              <div className="checkposttext">
+                <div>Mint</div>
+                <div>Send transaction to create your nft</div>
+              </div>
+            </div>
+            <div className="checkpost">
+              <div className="checkvalue checkvaluetext">3</div>
+              <div className="checkposttext">
+                <div>Approve</div>
+                <div>This transaction conducted only once per collection</div>
+              </div>
+            </div>
+            <div className="checkpost">
+              <div className="checkvalue checkvaluetext noborder">4</div>
+              <div className="checkposttext">
+                <div>Put on sale</div>
+                <div>Sign message to set fixed price</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

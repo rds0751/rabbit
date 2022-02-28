@@ -12,6 +12,7 @@ import { getALLCollectionById } from "../../services/contentMicroservice";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import Spinner from "../../common/components/Spinner";
+import { Link } from "react-router-dom";
 
 function Collections_tile() {
   const initialFilterData = {
@@ -38,9 +39,6 @@ function Collections_tile() {
       console.log(res, "<<<<<<categories");
     });
   }, []);
-
-
-  
 
   const handleFilter = (e) => {
     const { name, value } = e.target;
@@ -125,10 +123,10 @@ function Collections_tile() {
           <div></div>
           {collections.map((collection) => {
             const { _id, imageUrl, name, nfts } = collection;
-            const route = "collection-details/" + _id;
+            const route = "/collection-details/" + _id;
             return (
               <div className="collectionCardEach col-md-6 col-lg-3 col-sm-12 mt-5">
-                <a href={route}>
+                <Link to={route}>
                   <div
                     className=" nft-card-radius collection-card border-radius pt-4 cardmob"
                     style={{ backgroundColor: "#F8F8F8" }}
@@ -160,7 +158,7 @@ function Collections_tile() {
                       </p>
                     </div>
                   </div>
-                </a>
+                </Link>
               </div>
             );
           })}

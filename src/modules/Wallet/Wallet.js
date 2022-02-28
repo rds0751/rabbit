@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import image from "../../assets/images/1.jpg";
+import copy from "../../assets/images/copy.svg";
 import "../../assets/styles/Notification.css";
 import { useSelector } from "react-redux";
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
 import "../../assets/styles/wallet.css";
+import { ToastContainer } from "react-toastify";
 
 function Wallet() {
   const [humburger, setHumburger] = useState(false);
@@ -59,10 +61,13 @@ function Wallet() {
 
   const handleCopyToClipboard = () => {
     // const temp = walletAddress?.walletAddress;
-    const walletAddressQuoted = JSON.stringify(walletAddress);
-    const walletAddressUnquoted = walletAddressQuoted.replace(/\"/g, "");
-    navigator.clipboard.writeText(walletAddressUnquoted);
+    // const walletAddressQuoted = JSON.stringify(walletAddress);
+    // const walletAddressUnquoted = walletAddressQuoted.replace(/\"/g, "");
+    const { address } = walletAddress;
+    navigator.clipboard.writeText(`${address}`);
+    // navigator.clipboard.writeText(walletAddressUnquoted);
     setCopiedText(true);
+    toast.success("Text Copied");
     setTimeout(() => {
       setCopiedText(false);
     }, 1000);
@@ -86,7 +91,12 @@ function Wallet() {
           {/* {userDetails?.address} */}
           {walletAddress?.address}
         </div>
-        <i className="far fa-copy" onClick={() => handleCopyToClipboard()}></i>
+        <img
+          style={{ height: "30px" }}
+          src={copy}
+          alt=""
+          onClick={handleCopyToClipboard}
+        />
       </div>
       <div className="balance-out">
         <div className="balance-text">
@@ -96,6 +106,17 @@ function Wallet() {
       </div>
       <button className="balance-button">Add Balance</button>
       {/* </div> */}
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }

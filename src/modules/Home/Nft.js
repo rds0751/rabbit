@@ -191,6 +191,7 @@ function NftPage() {
         </div>
         <div
           className="nftTileContainer row  ntf_row"
+          // className="nftTileContainer gird-container  ntf_row"
           style={{ justifyContent: "space-between" }}
         >
           <div className="spinnerloader">{isloading && <Spinner />}</div>

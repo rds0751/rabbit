@@ -135,17 +135,18 @@ function EditProfile(props) {
               onClick={handleClick}
               className="btn btn-outline-primary btn-normal-size btn-choose-file"
               // style={{ marginTop: "4em" }}
-              onChange={(e) => handleChange(e)}
+              // onChange={(e) => handleChange(e)}
             >
               <span className="btn-text font-14">Choose File</span>
             </Button>
+
             <input
               type="file"
               className="form-control"
               placeholder="Write your name"
               // name=""
               style={{ display: "none" }}
-              // ref={hiddenFileInput}
+              ref={hiddenFileInput}
               onChange={handleChange}
             />
           </div>

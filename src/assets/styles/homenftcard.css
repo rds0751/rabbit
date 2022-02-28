@@ -48,6 +48,16 @@
 .clockNftDetails {
   margin-right: 1% !important;
 }
+
+.gird-container{
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 10px;
+  /* background-color: #2196F3; */
+  /* padding: 10px; */
+}
+
+
 @media only screen and (max-width: 1024px) {
   .nftTilePageSecondSelect {
     font-size: 1.9vw;
