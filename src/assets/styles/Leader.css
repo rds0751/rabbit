@@ -5,7 +5,6 @@
   margin-bottom: 30px;
   font-size: 1.3rem;
   font-weight: bold;
-  margin-left: 7rem;
   margin-top: 1rem;
 }
 .leader1 {
@@ -20,8 +19,8 @@
   border: 0px;
   border-radius: 0.7rem;
   font-weight: bold;
-  margin: 0rem 1rem;
   margin-top: 10px;
+  
 }
 .leaderboardTitle {
   display: flex;
@@ -46,25 +45,19 @@
   align-items: center;
   text-align: center;
   justify-content: start;
-  margin-left: 1rem;
-}
-.LeaderboardInsideDetails {
-  display: flex;
-  /* flex-direction: column; */
+  padding:22px
 }
 .LeaderboardInsideDetails > h2 {
   font-size: 0.9rem;
   font-weight: bold;
-  margin-top: 30px;
   margin-left: 0.5rem;
 }
 .LeaderboardInsideDetails > p {
   font-size: 0.8rem;
-  color: #3977ff;
-  margin-top: 60px;
-  margin-left: -85px;
+  color: #366EEF;
+  margin-left: 0.5rem;
 }
-.LeaderboardInsideDetails > p > span {
+.LeaderboardInsideDetails > p > span{
   margin: 0rem;
   color: #9d9d9d;
 }
@@ -75,14 +68,16 @@
   margin: 0rem;
 }
 .view {
+  padding-bottom: 20px;
+  padding-top: 25px;
+  font: 16px Poppins;;
+  text-decoration: none;
+  color: #191919;
   display: flex;
   justify-content: center;
-  margin: 1rem 0rem;
-  align-items: center;
-  font-weight: 00;
-  font-size: 0.8rem;
-  text-decoration: none;
-  color: black;
+}
+.view-button{
+  bottom: 0px;
 }
 
 .container__down > h6 > span {
@@ -95,6 +90,7 @@
       } */
 .CollectionItem {
   margin-top: 20px;
+  height: 68px;
 }
 .CollectionItem > div {
   display: flex;
@@ -776,4 +772,44 @@ thead {
 .no-gutters > [class*="col-"] {
   padding-right: 0;
   padding-left: 0;
+}
+.dropdown-item1 {
+  width: 192px;
+  display: block;
+  padding: 0.25rem 1rem;
+  clear: both;
+  font-weight: 400;
+  color: #212529;
+  text-align: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+}
+
+.img-fluid{
+  width: 100%!important;
+  height:195px !important;
+}
+.container-details{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.top-img{
+  border-radius: 50%;
+}
+.card{
+  background-color: transparent !important;
+  border: none!important;
+}
+.col-lg-3{
+  width: 22%!important;
+}
+.topnft-section{
+  margin-top: 5%;
+}
+@media only screen and (max-width: 1170px) {
+  .leaderboard-big {
+      display: none;
+  }
 }
