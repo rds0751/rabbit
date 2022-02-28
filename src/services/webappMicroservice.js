@@ -29,11 +29,25 @@ export function getNfts(requestData) {
     });
 }
 
+// --------------------get nfts -----
+export const getNFtsData = async (filterObj, successCallBack) => {
+  try {
+    const url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts";
+    const { data } = await axios.get(url, { params: filterObj });
+    successCallBack(data);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+// --------
+
 export const getNft = async (requestData, successCallBack) => {
   // alert("clled getNft")
+  // console.log(req)
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft/" + requestData;
-  const { data } = await axios.get(url, {headers:AuthToken});
+  const { data } = await axios.get(url, { headers: AuthToken });
   if (data.success) {
     successCallBack(data.responseData);
   } else {
@@ -249,6 +263,7 @@ export function addLikeNft(requestData) {
     url
   )
     .then((response) => {
+      console.log("likeresponse",response,"<<<<")
       if (
         !response.success ||
         response.responseCode !== 200 ||

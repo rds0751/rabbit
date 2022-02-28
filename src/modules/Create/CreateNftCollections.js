@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import Image from "../../assets/images/img-format.png";
-import ethereum from "../../assets/images/ehereum.png";
+import ethereum from "../../assets/images/ethereum.svg";
 
 import { httpConstants } from "../../constants";
 import { BASE_URL2 } from "../../reducers/Constants";
@@ -41,6 +41,7 @@ function CreateNftCollections(props) {
       setCategories(res.responseData);
     });
   }, []);
+  const [desLEngth, setDesLEngth] = useState(0);
 
   const handleChangeImage = async (event) => {
     const fileUploaded = event.target.files[0];
@@ -137,6 +138,7 @@ function CreateNftCollections(props) {
               ref={hiddenFileInputImage}
               className="fileInput  input-box-1"
               onChange={handleChangeImage}
+              style={{ border: "4px solid red" }}
             />
             {/* </div> */}
             <div className="upload-image-upper">
@@ -148,14 +150,14 @@ function CreateNftCollections(props) {
               {/* </Button> */}
               <div className="drag-and-drop">
                 Drag & Drop or
-                <Link to="/">Browse</Link>
+                <span className="drag-and-drop-browse"> Browse</span>
               </div>
             </div>
           </div>
         </div>
         <div>
           <div className="form-label">Upload Banner*</div>
-          <div className="upload-image-banner">
+          <div className="upload-file-outer bannerwidth">
             {/* <Button onClick={handleClickImage}> */}
             <input
               type="file"
@@ -173,7 +175,7 @@ function CreateNftCollections(props) {
               />
               <div className="drag-and-drop">
                 Drag & Drop or
-                <Link to="/">Browse</Link>
+                <span className="drag-and-drop-browse"> Browse</span>
               </div>
             </div>
             {/* </Button> */}
@@ -198,9 +200,12 @@ function CreateNftCollections(props) {
                 name="text"
                 placeholder="Write description"
                 className="input-box-1"
+                value={description.current}
                 onChange={(e) => {
-                  description.current = e.target.value;
-                  onChangeDes();
+                  if (DesLength < 1000) {
+                    description.current = e.target.value;
+                    onChangeDes();
+                  }
                 }}
               ></textarea>
               <span>{DesLength} of 1000 characters used</span>

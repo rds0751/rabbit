@@ -41,17 +41,17 @@ function HelpCenter() {
           {data.map((item, key) => {
             return (
               <>
-                <div className="single-card">
-                  <div className="">
+                <Link to="/buying" className="link">
+                  <div className="single-card">
                     <div className="">
-                      <img src={item.image} />
-                      <Link to="/buying" className="link">
+                      <div className="">
+                        <img src={item.image} />
                         <div className="title-help">{item.title}</div>
-                      </Link>
-                      <p className="content">{item.description}</p>
+                        <p className="content">{item.description}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               </>
             );
           })}

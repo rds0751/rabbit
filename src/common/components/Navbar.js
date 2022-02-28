@@ -10,6 +10,7 @@ import {
   ManageNotiSideBar,
   ManageWalletSideBar,
   RedirectTo,
+  searchNav,
 } from "../../reducers/Action";
 import { ethers } from "ethers";
 import "../../assets/styles/topNavBar.css";
@@ -20,6 +21,7 @@ import { CheckUserByWalletAddress } from "../../services/UserMicroService";
 function Navbar() {
   const navigate = useNavigate();
   const [humburger, setHumburger] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
   const ethereum = window.ethereum;
   const [errorMssg, setErrorMssg] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
@@ -85,7 +87,8 @@ function Navbar() {
     if (name == "profile") {
       if (walletAddress == null) {
         dispatch(RedirectTo("profile"));
-        navigate("/add-wallet");
+        // navigate("/add-wallet");
+        navigate("/my-profile");
       } else {
         navigate("/my-profile");
       }
@@ -101,19 +104,30 @@ function Navbar() {
   const handleWalletClick = () => {
     if (walletAddress == null) {
       navigate("/add-wallet");
-      dispatch(RedirectTo("wallet"));
+      // dispatch(RedirectTo("wallet"));
+
+      // dispatch(ManageWalletSideBar(!isOpenWallet));
     } else {
       dispatch(ManageWalletSideBar(!isOpenWallet));
+      dispatch(ManageNotiSideBar(false));
     }
   };
   const handleNotiSideBar = () => {
+    console.log(isOpenNoti, "<<<isopen noti");
     if (loggedInUser == null) {
-      navigate("/add-wallet");
-      dispatch(RedirectTo("notification"));
+      // navigate("/add-wallet");
+      // dispatch(ManageNotiSideBar(!isOpenNoti));
+      // dispatch(RedirectTo("notification"));
     } else {
-      dispatch(ManageNotiSideBar(true));
+      dispatch(ManageNotiSideBar(!isOpenNoti));
+      dispatch(ManageWalletSideBar(false));
     }
   };
+
+  const handleSearch = () => {
+    if (searchInput.trim() != "") dispatch(searchNav(searchInput));
+  };
+
   console.log("logged in user >>> lllll", loggedInUser);
   return (
     <>
@@ -130,45 +144,67 @@ function Navbar() {
                   style={{ width: "50px" }}
                 />
               </Link>
-              <form className=" w-100 p-0 m-0" action="/" method="get">
-                <input
-                  className="form-control form-controlmob "
-                  type="search"
-                  name="searchByName"
-                  placeholder="Search"
-                  aria-label="Search"
+              {/* <form
+                className=" w-100 p-0 m-0"
+                onSubmit={(e) => e.preventDefault()}
+              > */}
+              <input
+                className="form-control form-controlmob "
+                type="search"
+                name="searchByName"
+                placeholder="Search"
+                aria-label="Search"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                style={{
+                  backgroundColor: "#f8f8f8",
+                  width: "75%",
+                  height: "42px",
+                  padding: "0px",
+                  paddingLeft: "10px",
+                  border: "0",
+                }}
+              />
+              <button
+                className="screachbtn"
+                onClick={handleSearch}
+                // type="submit"
+                style={{
+                  border: "0",
+                  width: "35px",
+                  backgroundColor: "#f8f8f8",
+                  marginLeft: "5px",
+                }}
+              >
+                <i
+                  className="fa fa-search"
                   style={{
-                    backgroundColor: "#f8f8f8",
-                    width: "75%",
-                    height:"42px",
-                    padding: "0px",
-                    paddingLeft: "10px",
-                    border: "0",
+                    width: "42px",
+                    height: "50",
                   }}
                 />
-                <button
-                  className=""
+              </button>
+              <button
+                className=""
+                style={{
+                  border: "0",
+                  width: "50px",
+                  height: "42px",
+                  backgroundColor: "#f8f8f8",
+                  marginLeft: "5px",
+                }}
+              >
+                <i
+                  className="fa fa-search"
                   style={{
-                    border: "0",
-                    width: "50px",
-                    height:"42px",
-                    backgroundColor: "#f8f8f8",
-                    marginLeft: "5px",
+                    width: "42px",
+                    height: "50",
                   }}
-                >
-                  <i
-                    className="fa fa-search"
-                    style={{
-                      width: "42px",
-                      height: "50",
-                    }}
-                    aria-hidden="true"
-                  ></i>
-                </button>
-              </form>
+                  aria-hidden="true"
+                ></i>
+              </button>
+              {/* </form> */}
             </div>
-
-            
 
             <div className="search_box">
               <form className="p-0 m-0 ">
@@ -183,9 +219,8 @@ function Navbar() {
                 </button>
               </form>
             </div>
-          
-          
-          <div className="right_navbar d-flex ">
+
+            <div className="right_navbar d-flex ">
               {/* <div
             className="collapse navbar-collapse mobcollapse"
             id="navbarSupportedContent"
@@ -269,7 +304,10 @@ function Navbar() {
                       </li>
                     </ul>
                   </li>
-                  <li className="create-button" onClick={() => manageNavigation("create")}>
+                  <li
+                    className="create-button"
+                    onClick={() => manageNavigation("create")}
+                  >
                     <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}
                       className="btn btn-primary btnnav"
@@ -312,8 +350,12 @@ function Navbar() {
                       <img
                         className="btnnav_mob1"
                         src={require("../../assets/images/profile.png")}
-                        style={{ color: "gray", cursor: "pointer",marginLeft:"31.22px" ,marginRight:"22.43px"
-                       }}
+                        style={{
+                          color: "gray",
+                          cursor: "pointer",
+                          marginLeft: "31.22px",
+                          marginRight: "22.43px",
+                        }}
                       ></img>
                     </a>
                     <ul
@@ -377,9 +419,9 @@ function Navbar() {
                 </ul>
               </div>
             </div>
-            </div>
+          </div>
         </nav>
-        
+
         <div className={humburger ? "scroll_off" : <></>}>
           {humburger ? <Menu /> : <></>}
         </div>

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import image from "../../assets/images/1.jpg";
-import share from "../../assets/images/share.png";
-import info from "../../assets/images/info.png";
+import share from "../../assets/images/share.svg";
+import info from "../../assets/images/report.svg";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { BidApi, OfferApi } from "../../constants/Nft_Info_Api";
 import PricingHistoryComponentTable from "../../common/components/PricingHistoryComponentTable";
 import PricingHistoryComponentGraph from "../../common/components/PricingHistoryComponentGraph";
 // import BidsComponent from "./BidsComponent";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 
 import { Button } from "@mui/material";
 import { getNft, addNftReport } from "../../services/webappMicroservice";
@@ -25,7 +25,7 @@ import ListingsTable from "../../common/components/ListingTable";
 
 export default function NftInformation(props) {
   console.log(props?.responseData, "<<<response");
-
+  const navigate = useNavigate();
   const [activeInActive, setActiveInActive] = useState("active");
   const { user } = useSelector((state) => state);
   const [isCurrUserNft, setIsCurrUserNft] = useState(null);
@@ -34,7 +34,7 @@ export default function NftInformation(props) {
   const { id } = useParams();
   const [nft, setNft] = useState(props?.responseData);
   const [userDetails, setUserDetails] = useState([]);
-  const [tab, setTab] = useState(1)
+  const [tab, setTab] = useState(1);
   const [report, setReport] = useState({
     content: id,
     // addedBy: user.addUserData._id,
@@ -46,7 +46,8 @@ export default function NftInformation(props) {
     props?.loaderState,
     "<<<< this is data toooooooooooooooooooooooooooooooo match"
   );
-  // alert(loggedInUser?._id == props?.responseData?.createdBy);
+  alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
+
   // useEffect(() => {
   //   alert(`${loggedInUser?._id}`);
   //   console.log(
@@ -89,10 +90,14 @@ export default function NftInformation(props) {
     });
   };
   const buyNft = async () => {
-    props?.BuyNowNft({
-      buyerId: loggedInUser?._id,
-      newOwnerAddress: walletAddress?.address,
-    });
+    if (user.loggedInUser != null) {
+      props?.BuyNowNft({
+        buyerId: loggedInUser?._id,
+        newOwnerAddress: walletAddress?.address,
+      });
+    } else {
+      navigate("/add-wallet");
+    }
 
     //   const response = await put_NftOpenForSale(nft._id);
     //   if (response.success) {
@@ -120,7 +125,9 @@ export default function NftInformation(props) {
   };
 
   useEffect(() => {
-    getUser(props?.responseData?.ownedBy).then((response) => setUserDetails(response));
+    getUser(props?.responseData?.ownedBy).then((response) =>
+      setUserDetails(response)
+    );
   });
 
   return (
@@ -369,7 +376,7 @@ export default function NftInformation(props) {
                   }}
                 >
                   <Link
-                    to="/edit-items"
+                    to={`/edit-items/${props?.responseData._id}`}
                     style={{
                       textDecoration: "none",
                       textTransform: "none",
@@ -635,7 +642,6 @@ export default function NftInformation(props) {
                   <i className="far fa-clock clock-icon"></i>
                   <span className="time">Ends in 5 days </span>
                 </span>
-                
               </div>
               <div className="row">
                 <div className="col-lg-3 col-sm-12  mt-3">
@@ -655,8 +661,8 @@ export default function NftInformation(props) {
                   </span>
                 </div>
               </div>
-              <div style={{display:"flex", marginTop:"16px"}}>
-                <div style={{marginRight:"20px"}}>
+              <div style={{ display: "flex", marginTop: "16px" }}>
+                <div style={{ marginRight: "20px" }}>
                   <VisibilityIcon
                       style={{ fontSize: "22px", color: "#366EEF" }}
                   />
@@ -692,7 +698,7 @@ export default function NftInformation(props) {
                 <Button
                   style={{
                     display:
-                      props?.responseData?.createdBy != loggedInUser?._id &&
+                      props?.responseData?.ownedBy != loggedInUser?._id &&
                       props?.responseData?.salesInfo?.isOpenForSale
                         ? "block"
                         : "none",

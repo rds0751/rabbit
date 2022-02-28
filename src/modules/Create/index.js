@@ -63,6 +63,7 @@ class Index extends BaseComponent {
       this.setState({loaderState:false})
 
       return Utils.apiFailureToast("Please select the file that to be upload");
+    console.log(data.nftFile, "<<<< this is file attachment");
     // console.log("duke",data)
     }
     let formData = new FormData();
