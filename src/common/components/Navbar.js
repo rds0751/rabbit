@@ -269,7 +269,7 @@ function Navbar() {
                       </li>
                     </ul>
                   </li>
-                  <li onClick={() => manageNavigation("create")}>
+                  <li className="create-button" onClick={() => manageNavigation("create")}>
                     <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}
                       className="btn btn-primary btnnav"
