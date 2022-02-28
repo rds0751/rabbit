@@ -150,7 +150,7 @@ function Navbar() {
                 onSubmit={(e) => e.preventDefault()}
               > */}
               <input
-                className="form-control form-controlmob "
+                className="form-control form-controlmob search-input-mob"
                 type="search"
                 name="searchByName"
                 placeholder="Search"
@@ -167,7 +167,7 @@ function Navbar() {
                 }}
               />
               <button
-                className=""
+                className="search-icon-mob"
                 onClick={handleSearch}
                 style={{
                   border: "0",
@@ -189,7 +189,7 @@ function Navbar() {
               {/* </form> */}
             </div>
 
-            <div className="search_box">
+            <div className="search_box order-2">
               <form className="p-0 m-0 ">
                 <input
                   className="form-control form-controlmob "
@@ -203,7 +203,7 @@ function Navbar() {
               </form>
             </div>
 
-            <div className="right_navbar d-flex ">
+            <div className="right_navbar d-flex order-1">
               {/* <div
             className="collapse navbar-collapse mobcollapse"
             id="navbarSupportedContent"
