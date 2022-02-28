@@ -1,5 +1,5 @@
 .walletAddressContainer {
-  width: 516px;
+  /* width: 516px;
   display: flex;
   height: 100%;
   flex-direction: column;
@@ -8,10 +8,10 @@
   background-color: white !important;
   position: fixed;
 
-  top: 70px;
+  top: 70px; */
   padding-top: 36px;
-  right: 0;
-  box-shadow: 0px 3px 12px #00000014;
+  /* right: 0;
+  box-shadow: 0px 3px 12px #00000014; */
 }
 .walletAddress {
   width: 75px;

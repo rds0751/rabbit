@@ -36,6 +36,7 @@ function Navbar() {
   const { user, sideBar } = useSelector((state) => state);
   const { userDetails, loggedInUser, walletAddress } = user;
   const { isOpenNoti, isOpenWallet } = sideBar;
+
   console.log(walletAddress, "<<<<this is wallet address");
 
   useEffect(() => {
@@ -126,7 +127,7 @@ function Navbar() {
       // dispatch(ManageWalletSideBar(!isOpenWallet));
     } else {
       dispatch(ManageWalletSideBar(!isOpenWallet));
-      dispatch(ManageNotiSideBar(false));
+      document.body.style.overflow = (!isOpenWallet) ? "hidden" : "visible";
     }
   };
   const handleNotiSideBar = () => {
@@ -184,26 +185,8 @@ function Navbar() {
                 }}
               />
               <button
-                className="screachbtn"
-                onClick={handleSearch}
-                // type="submit"
-                style={{
-                  border: "0",
-                  width: "35px",
-                  backgroundColor: "#f8f8f8",
-                  marginLeft: "5px",
-                }}
-              >
-                <i
-                  className="fa fa-search"
-                  style={{
-                    width: "42px",
-                    height: "50",
-                  }}
-                />
-              </button>
-              <button
                 className=""
+                onClick={handleSearch}
                 style={{
                   border: "0",
                   width: "50px",
@@ -243,23 +226,25 @@ function Navbar() {
             className="collapse navbar-collapse mobcollapse"
             id="navbarSupportedContent"
           > */}
-              <div className="navbar-nav d-flex">
+              <div className="navbar-nav d-flex" >
                 <ul className="left_section_nav mb-0">
                   <li
                     className={
-                      location.pathname.includes("marketplace")
+                      location.pathname.includes("/") && !location.pathname.includes("leader-board") && !location.pathname.includes("resource") && !location.pathname.includes("create-nft")
                         ? "nav-items li_underline"
                         : "nav-items"
                     }
+                    onClick={isOpenWallet}
                   >
                     <Link
                       className={
-                        location.pathname.includes("marketplace")
+                        location.pathname.includes("/") && !location.pathname.includes("leader-board") && !location.pathname.includes("resource") && !location.pathname.includes("create-nft")
                           ? "nav-link navlink_active"
                           : "nav-link"
                       }
                       aria-current="page"
                       to="/"
+
                     >
                       Marketplace
                     </Link>
@@ -270,6 +255,7 @@ function Navbar() {
                         ? "nav-items li_underline"
                         : "nav-items"
                     }
+                    onClick={isOpenWallet}
                   >
                     <Link
                       className={
@@ -290,6 +276,7 @@ function Navbar() {
                         ? "nav-items dropdown li_underline"
                         : "nav-items dropdown"
                     }
+                    onClick={isOpenWallet}
                   >
                     <Link
                       className={
@@ -298,11 +285,11 @@ function Navbar() {
                           : "nav-link"
                       }
                       to="/resource"
-                      // id="navbarDropdown"
-                      // role="button"
-                      // data-bs-toggle="dropdown"
-                      // aria-expanded="false"
-                      // style={{ fontSize: "16px" }}
+                    // id="navbarDropdown"
+                    // role="button"
+                    // data-bs-toggle="dropdown"
+                    // aria-expanded="false"
+                    // style={{ fontSize: "16px" }}
                     >
                       Resource
                     </Link>

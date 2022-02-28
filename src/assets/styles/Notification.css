@@ -45,11 +45,11 @@ height: 47px;
   top: 4.2rem;
   right: 0;
   /* display: inline-block; */
-  /* left: 0; */
+  left: 0;
   box-shadow: 0px 3px 12px #00000014;
 }
 .wallet .empty_div {
-  width: calc(100% - 516px);
+  width: calc(100% - 28%);
   background: #191919;
   height: 100%;
   opacity: 0.5;
@@ -62,7 +62,7 @@ height: 47px;
   height: 100%;
 }
 .wallet_div {
-  width: 516px;
+  width: 28%;
   background: #ffffff;
   margin-left: auto;
   height: 100%;
@@ -82,7 +82,7 @@ height: 47px;
 .balancewallet {
   border: 1px solid gray;
   /* width: 100%; */
-  width: 405px;
+  width: 90%;
   height: 121px;
   /* margin: 9px; */
   /* padding: 5px; */
@@ -94,7 +94,7 @@ height: 47px;
   background-color: #366eff;
   border: 1px solid;
   border-radius: 5px;
-  width: 405px;
+  width: 90%;
   padding: 7px;
   /* margin-bottom: -6px; */
   /* margin-left: -6px; */
@@ -556,7 +556,7 @@ height: 47px;
 .left_section_nav .btnnav {
   /* padding: 5px 30px; */
   width: 120px;
-  height: 28px;
+  /* height: 28px; */
   /* width: 136px; height: 42px; */
   background: #366eef;
   border-color: transparent;
@@ -896,6 +896,7 @@ height: 47px;
     /* margin: 0px 128px; */
     /* border: 1px solid red !important; */
   }
+
 }
 
 @media screen and (max-width: 764px) {
