@@ -78,6 +78,7 @@ function Wallet() {
       style={{
         display: isOpenWallet ? null : "none",
       }}
+      id="wallet"
     >
       {/* <div className="walle"> */}
       <div className="">
