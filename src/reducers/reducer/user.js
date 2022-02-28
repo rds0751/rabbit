@@ -5,6 +5,8 @@ import {
   LOGGED_IN_UER_DETAILS,
   REDIRECT_URL,
 } from "../Constants";
+import { eventConstants} from "../../constants";
+
 
 //  userDetails  has only address and wallet amount
 // loggedInUser has Full User details
@@ -34,6 +36,17 @@ export const UserReducer = (state = initialState, action) => {
         ...state,
         allUserData: action.payload,
       };
+      case eventConstants.SHOW_LOADER:
+        return {
+            ...state,
+            loading: true
+        }
+    case eventConstants.HIDE_LOADER:
+        return {
+            ...state,
+            loading: false
+        }
+
     default:
     case REDIRECT_URL:
       {
