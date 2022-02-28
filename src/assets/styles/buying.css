@@ -1,0 +1,82 @@
+.buyingContainer {
+    width: 50% !important;
+    box-sizing: border-box;
+    margin: 0px auto;
+  }
+  .buyingContainerHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 2% auto;
+  }
+  .buyingHeaderSearch {
+    width: 40%;
+    margin-left: 3%;
+  }
+  .buyingRulesContainer {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .accordionTitleBuying {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 2%;
+    font-family: "poppins-medium";
+  }
+  @media only screen and (max-width: 1024px) {
+    .buyingContainer {
+      width: 80% !important;
+      box-sizing: border-box;
+      margin: 0px auto;
+    }
+    .buyingContainerHeader {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 2% auto;
+    }
+    .buyingHeaderSearch {
+      width: 40%;
+      margin-left: 3%;
+    }
+    .buyingRulesContainer {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .accordionTitleBuying {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 2%;
+      font-family: "poppins-medium";
+    }
+  }
+  @media only screen and (max-width: 480px) {
+    .buyingContainer {
+      width: 95% !important;
+      box-sizing: border-box;
+      margin: 0px auto;
+    }
+    .buyingContainerHeader {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 2% auto;
+    }
+    .buyingHeaderSearch {
+      width: 40%;
+      margin-left: 3%;
+    }
+    .buyingRulesContainer {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .accordionTitleBuying {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 2%;
+      font-family: "poppins-medium";
+    }
+  }

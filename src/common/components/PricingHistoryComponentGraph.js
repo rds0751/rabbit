@@ -1,28 +1,50 @@
 import React, { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
 import ReactApexChart from "react-apexcharts";
 import "../../assets/styles/Leader.css";
-// import reactDom from "react-dom";
 import { pricingHistoryGraphOfNft } from "../../services/sellAndPurchaseMicroService";
+import moment from "moment";
 
 export default function PricingHistoryComponent(props) {
   const [nftPricingHistory, setNftPricingHistory] = useState([]);
+  const [filter, setFilter] = useState();
 
-  const data = {
+  const handleChange = (e) => {
+    setFilter(e.target.value);
+  };
+
+  const reqObject = {
     contentId: props.id,
   };
 
   useEffect(() => {
-    pricingHistoryGraphOfNft(data).then((response) =>
+    pricingHistoryGraphOfNft(reqObject).then((response) =>
       setNftPricingHistory(response)
     );
   });
 
+  let prices = nftPricingHistory.map((each) => each.total);
+  let dates = nftPricingHistory.map((each) => moment(new Date(each._id.addedOn)).format('D MMM YY'));
+
+  if (filter === "month") {
+    dates = nftPricingHistory.map((each) => moment(new Date(each._id.addedOn)).format('MMM YY'));
+  } else if (filter === "year") {
+    dates = nftPricingHistory.map((each) => moment(new Date(each._id.addedOn)).format('YYYY'));
+  }
+
+  let total= 0;
+  let average = 0;
+  nftPricingHistory.forEach((item) => {
+    total = total + item.total
+  })
+  if (total !== 0){
+    average = total/nftPricingHistory.length
+  }
+
   const object = {
     series: [
       {
-        name: "1july",
-        data: nftPricingHistory.map((each) => each.total),
+        name: "pricingHistory",
+        data: prices,
       },
     ],
     options: {
@@ -39,10 +61,6 @@ export default function PricingHistoryComponent(props) {
       stroke: {
         curve: "straight",
       },
-      // title: {
-      //   text: "Pricing History",
-      //   align: "left",
-      // },
       grid: {
         row: {
           colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
@@ -50,61 +68,39 @@ export default function PricingHistoryComponent(props) {
         },
       },
       xaxis: {
-        categories: nftPricingHistory.map(
-          (each) =>
-            `${new Date(each._id.addedOn).getDate()}` +
-            `${new Date(each._id.addedOn).toLocaleString("default", {
-              month: "short",
-            })}`
-        ),
-      },
-      yaxis: {
-        categories: nftPricingHistory.map(
-          (each) =>
-            `${new Date(each._id.addedOn).getDate()}` +
-            `${new Date(each._id.addedOn).toLocaleString("default", {
-              month: "short",
-            })}`
-        ),
+        categories: dates,
       },
     },
   };
 
   return (
     <div id="chart">
-      <p className="font-15 font-weight-900">Pricing History</p>
       <div className="border">
-        <div className="row no-gutters">
-          <div className="col-1"></div>
-          <div className="col-4">
-            <h5 className="font-15 text-secondary mt-4">
-              Average Price: <span className="text-dark">0.23</span>
+        <div className="d-flex justify-content-between align-items-center p-2">
+            <h5 className="font-15 text-secondary">
+              Average Price: <span className="text-dark">{average}</span>
             </h5>
-          </div>
-          <div className="col-3"></div>
-          <div className="col-3">
-            <select
+            <select name="filter"
+              onChange={(e) => handleChange(e)}
               style={{
                 width: "100px",
                 height: "35px",
                 borderRadius: "5px",
-                marginTop: "1em",
+                fontSize:"14px",
               }}
             >
-              <option className="font-15">All time</option>
-              <option className="font-15">Month</option>
-              <option className="font-15">Year</option>
-              <option className="font-15">Days</option>
+              <option className="font-15" value="all">All time</option>
+              <option className="font-15" value="month">Month</option>
+              <option className="font-15" value="year">Year</option>
+              <option className="font-15" value="days">Days</option>
             </select>
-          </div>
-          <div className="col-1"></div>
         </div>
         <ReactApexChart
           options={object.options}
           series={object.series}
-          type="line"
+          type="area"
           height={197}
-          className=""
+          width="100%"
         />
       </div>
     </div>

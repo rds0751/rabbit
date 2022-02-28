@@ -79,6 +79,7 @@ function trackEvent(event, eventData) {
   //     console.log(err)
   // }
 }
+
 function parseResponse(promise) {
   return promise
     .then(data => {

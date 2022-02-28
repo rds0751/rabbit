@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import image from "../../assets/images/1.jpg";
+import copy from "../../assets/images/copy.svg";
 import "../../assets/styles/Notification.css";
 import { useSelector } from "react-redux";
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
+import "../../assets/styles/wallet.css";
+import { ToastContainer } from "react-toastify";
 
 function Wallet() {
   const [humburger, setHumburger] = useState(false);
@@ -16,7 +19,7 @@ function Wallet() {
   // console.log("ethereum : ", ethereum);
   const { user, sideBar } = useSelector((state) => state);
   // console.log(data);
-  const { userDetails } = user;
+  const { userDetails, walletAddress } = user;
   console.log(sideBar, "<<<<sidebar");
   const { isOpenWallet } = sideBar;
   useEffect(() => {
@@ -54,37 +57,66 @@ function Wallet() {
   // };
 
   // window.ethereum?.on("accountsChanged", accountChangeHandler);
+  const [copiedText, setCopiedText] = useState(false);
 
+  const handleCopyToClipboard = () => {
+    // const temp = walletAddress?.walletAddress;
+    // const walletAddressQuoted = JSON.stringify(walletAddress);
+    // const walletAddressUnquoted = walletAddressQuoted.replace(/\"/g, "");
+    const { address } = walletAddress;
+    navigator.clipboard.writeText(`${address}`);
+    // navigator.clipboard.writeText(walletAddressUnquoted);
+    setCopiedText(true);
+    toast.success("Text Copied");
+    setTimeout(() => {
+      setCopiedText(false);
+    }, 1000);
+  };
   return (
     <div
-      className="wallet"
+      className="walletAddressContainer"
       style={{
         display: isOpenWallet ? null : "none",
       }}
     >
-      <div className="empty_div"></div>
-      <div className="wallet_div">
-        <div className="imgwallet">
-          <img src={image} alt="" />
-        </div>
-        <div className="walleth2">
-          <h3 className="fontwallet">
-            {/* {ethereum && ethereum.chainId
+      {/* <div className="walle"> */}
+      <div className="">
+        <img src={image} alt="" width="75px" height="75px" />
+      </div>
+      <div className="wallet-add-container">
+        <div className="walletAddress fontwallet">
+          {/* {ethereum && ethereum.chainId
               ? ethereum && ethereum.chainId
               : "Install extension to connect wallet"} */}
-            {/* {userDetails?.address} */}
-            {userDetails?.address}
-          </h3>
-          <i className="far fa-copy"></i>
+          {/* {userDetails?.address} */}
+          {walletAddress?.address}
         </div>
-        <div className="balancewallet textVerticalCenter">
-          <div className="WalletContent">
-            <h3>Total Balance</h3>
-            <h4>{userDetails?.balance}</h4>
-          </div>
-        </div>
-        <button className="btnwallet">Add Balance</button>
+        <img
+          style={{ height: "30px" }}
+          src={copy}
+          alt=""
+          onClick={handleCopyToClipboard}
+        />
       </div>
+      <div className="balance-out">
+        <div className="balance-text">
+          <div>Total Balance</div>
+          <div className="balance-value">{walletAddress?.balance}</div>
+        </div>
+      </div>
+      <button className="balance-button">Add Balance</button>
+      {/* </div> */}
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }

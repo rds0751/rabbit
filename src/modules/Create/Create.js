@@ -4,11 +4,13 @@ import image from "../../assets/images/icon.png";
 import { ethers } from "ethers";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import "../../assets/styles/createWallet.css";
 import {
-  addUseraction,
-  addUserData,
+  AddWalletDetails,
   ManageWalletSideBar,
-  updateUserDetail,
+  addUserData,
+  RedirectTo,
+  ManageNotiSideBar,
 } from "../../reducers/Action";
 import "react-toastify/dist/ReactToastify.css";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
@@ -24,57 +26,65 @@ function Create() {
   const [checkClick, setcheckClick] = useState(false);
   const [getBalance, setGetBalance] = useState(null);
   const dispatch = useDispatch();
-  const { userDetails, loggedInUser } = user;
+  const { userDetails, loggedInUser, redirectUrl } = user;
   const { isOpenWallet } = sideBar;
   const [toggleEffect, setToggleEffect] = useState(false);
   useEffect(() => {
     if (loggedInUser != null) {
       toast.success("Wallet connected");
-      dispatch(ManageWalletSideBar(!isOpenWallet));
-      history("/");
+      // dispatch(ManageWalletSideBar(!isOpenWallet));
+      if (redirectUrl != "") {
+        // history(redirectUrl);
+        if (redirectUrl == "profile") {
+          history("/my-profile");
+        }
+        if (redirectUrl == "create") {
+          history("/create-nft");
+        }
+        if (redirectUrl == "wallet") {
+          dispatch(ManageWalletSideBar(!isOpenWallet));
+        }
+        if (redirectUrl == "notification") {
+          dispatch(ManageNotiSideBar(true));
+        }
+        // alert(`${redirectUrl}`);
+      } else {
+        history("/my-profile");
+      }
     } else {
-      toast.error("Choose the wallet");
+      // toast.error("Choose the wallet");
     }
   }, [toggleEffect]);
-
   const connectMetamask = () => {
     if (window.ethereum) {
+      // alert("ok");
       window.ethereum
         .request({ method: "eth_requestAccounts" })
         .then((result) => {
-          accountChangeHandler(result[0]); //accounts can be a array we just wanna grab first one
-          console.log(result[0]);
-
-          dispatch(
-            updateUserDetail({ address: defaultAccount, balance: getBalance })
-          );
-          localStorage.setItem(
-            WEB_APP_USER_WALLET_ADDRESS,
-            `${defaultAccount}`
-          );
-          // CheckUserByWalletAddress(defaultAccount);
-          // setToggleEffect(!toggleEffect);
-          CheckUserByWalletAddress(defaultAccount, (res) => {
-            dispatch(addUserData(res));
-            setToggleEffect(!toggleEffect);
-          });
-          // window.location.pathname = "/wallet";
+          accountChangeHandler(result);
+          console.log(result);
         })
         .catch((e) => {
-          // alert("Connect Your Wallet");
           toast.error(" Connect Your Metamask Wallet");
           console.log(e, "<<< error ");
         });
     } else {
-      // setErrorMssg("Install Metamask ");
-      alert("Install Metamask ");
-
       toast.error("Install Metamak and Connect Wallet");
     }
   };
   const accountChangeHandler = (newAccount) => {
-    setDefaultAccount(newAccount);
-    getUserBalance(newAccount);
+    setDefaultAccount(newAccount[0]);
+    // console.log(, "<<<< defaultaccount");
+    getUserBalance(newAccount[0]);
+    console.log(getBalance, "getUser balance");
+    dispatch(AddWalletDetails({ address: newAccount[0], balance: getBalance }));
+    CheckUserByWalletAddress(newAccount[0], (res) => {
+      console.log(res, "<<<< Account changed");
+      dispatch(addUserData(res));
+      localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
+
+      setToggleEffect(!toggleEffect);
+    });
   };
   const getUserBalance = (address) => {
     window.ethereum
@@ -125,7 +135,7 @@ function Create() {
         <div className="row createmob">
           <div
             onClick={connectMetamask}
-            className="card col-md-3 col-lg-3 col-sm-6 col-12 my-5 card-border"
+            className="eachWalletTypeBox card col-md-3 col-lg-3 col-sm-6 col-12 my-5 card-border"
             style={{ cursor: "pointer" }}
           >
             <img
@@ -142,7 +152,7 @@ function Create() {
             </div>
           </div>
 
-          <div className="card col-md-3 col-lg-3 col-sm-6 col-12 mx-4 my-5 card-border createmob2">
+          <div className="eachWalletTypeBox card col-md-3 col-lg-3 col-sm-6 col-12 mx-4 my-5 card-border createmob2">
             <img
               id="create_logo"
               src={image}
@@ -158,7 +168,7 @@ function Create() {
             </div>
           </div>
 
-          <div className="card col-md-3 col-lg-3 col-sm-6 col-12 my-5 card-border">
+          <div className="eachWalletTypeBox card col-md-3 col-lg-3 col-sm-6 col-12 my-5 card-border">
             <img
               id="create_logo"
               src="https://api.nuget.org/v3-flatcontainer/walletconnect.core/1.6.5/icon"
@@ -176,7 +186,7 @@ function Create() {
         </div>
         <button
           type="button"
-          className="btn btn-outline-primary btn-size createmobbtn"
+          className="ShowMoreButtonConnectWallet btn btn-outline-primary btn-size createmobbtn"
         >
           Show more
         </button>

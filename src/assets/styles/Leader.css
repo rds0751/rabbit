@@ -6,6 +6,7 @@
   font-size: 1.3rem;
   font-weight: bold;
   margin-top: 1rem;
+  
 }
 .leader1 {
   font-size: 1.3rem;
@@ -159,10 +160,10 @@ thead {
   font-size: 16px;
 }
 
-.relative > img {
+/* .relative > img {
   height: 250px;
   width: 100%;
-}
+} */
 .absolute {
   display: flex;
   flex-direction: column;
@@ -249,7 +250,7 @@ thead {
 .MyProfilesales {
   display: flex;
   margin-top: 19rem;
-  margin-left: 70px;
+  /* margin-left: 70px; */
 }
 .MyProfilesales > div {
   margin-right: 39px;
@@ -448,9 +449,7 @@ thead {
 .justify {
   justify-content: flex-start;
 }
-.icon-img {
-  margin-left: 14rem;
-}
+
 
 .icon-img2 {
   margin-left: 13.5rem;
@@ -472,7 +471,7 @@ thead {
   display: none;
 }
 .filter {
-  width: 400px;
+  /* width: 400px; */
   /* border: 5px solid red; */
 }
 .nav-pills .nav-link.active,
@@ -486,7 +485,7 @@ thead {
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
-  color:#828282;
+  color: #828282;
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out;
@@ -500,10 +499,9 @@ thead {
 } */
 
 @media only screen and (max-width: 1170px) {
-  .filter {
+  /* .filter {
     width: 100%;
-    /* border:5px solid red */
-  }
+  } */
   .filter > button {
     display: flex;
     justify-content: space-between;
@@ -556,7 +554,7 @@ thead {
     font-weight: bold;
   }
   .nav-link {
-    color:#828282;
+    color: #828282;
     font-weight: bold;
     font-size: 14px;
     padding: 0.5rem 0.6rem;
@@ -579,9 +577,9 @@ thead {
   .createnft_mob {
     width: 90%;
   }
-  .lower__homepage {
+  /* .lower__homepage {
     flex-direction: column;
-  }
+  } */
   #filters {
     /* flex-direction: column; */
     /* border: "5px solid green"; */
@@ -682,7 +680,9 @@ thead {
     text-align: right;
     margin-top: 20rem; */
     flex-direction: column;
+    
   }
+
   .absolute1 {
     color: #366eef;
     border: 2px solid #336eef;
@@ -737,12 +737,17 @@ thead {
     margin-right: 0rem;
   }
 }
+@media screen and (max-width: 1010px) {
+  .lower__homepage {
+    flex-direction: column;
+  }
+}
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 768px) {
   .filter {
     display: flex;
     /* border: 1px solid green; */
-    justify-content: space-between;
+    /* justify-content: space-between; */
   }
   .dropbtm_mob {
     display: flex;
@@ -827,4 +832,58 @@ thead {
 .card-small{
   background-color: #F8F8F8;
   border: none!important;
+}
+
+.align-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nft-name{
+  color: #191919;
+  font-weight: bold;
+  font-size:32px;
+}
+.text{
+  color:#191919;
+  font-size:16px;
+}
+.nft-value{
+  color:#16AB6E;
+  font-weight:bold;
+  font-size:16px;
+}
+.clock-icon{
+  width:22px;
+  color:#EF4F36;
+}
+.time{
+  color:#191919;
+  font-size:16px;
+  font-weight:500;
+}
+.fw-b{
+  font-weight:bold;
+}
+@media screen and (max-width: 375px){
+  .nft-name{
+    font-size:18px;
+  }
+  .text{
+    font-size:14px;
+  }
+  .nft-value{
+    font-size:14px;
+  }
+  .clock-icon{
+    width:18px;
+  }
+  .time{
+    font-size:14px
+  }
+}
+@media screen and (min-width:376px) and (max-width: 768px){
+  .nft-name{
+    font-size:20px;
+  }
 }

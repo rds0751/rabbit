@@ -1,0 +1,123 @@
+/* css for filters */
+.nftTilePageSecondSelect {
+  margin-left: 3%;
+  font-family: "poppins-medium";
+  font-size: 0.9vw;
+  width: 100%;
+}
+.nftTilePageSecondSelect select {
+  border: none !important;
+  width: 100% !important;
+}
+/* css for NFt cards */
+.nftTileEachImage {
+  box-sizing: border-box;
+  height: 9.81vw;
+  object-fit: cover;
+}
+.nftTileEachDetails {
+}
+.nftTileEachDetailsFirstContainer {
+  width: 100%;
+  font-size: 1vw !important;
+  display: flex;
+  align-items: center;
+  padding-top: 4%;
+}
+.nftTileEachDetailsFirstContainerName {
+  font-family: "poppins-bold";
+}
+.nftTileEachDetailsFirstContainerValue {
+  border: 1px solid #16ab6e;
+  border-radius: 6px;
+  padding: 0.5% 3%;
+  font-size: 0.87vw;
+  color: #16ab6e;
+  font-family: "poppins-semibold";
+  /* margin-right: 1em; */
+}
+.nftTileEachDetailsSecondContainerValueHighest {
+  font-family: "poppins";
+  font-size: 0.9vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin: 4% 0px;
+}
+.clockNftDetails {
+  margin-right: 1% !important;
+}
+
+.gird-container{
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 10px;
+  /* background-color: #2196F3; */
+  /* padding: 10px; */
+}
+
+
+@media only screen and (max-width: 1024px) {
+  .nftTilePageSecondSelect {
+    font-size: 1.9vw;
+  }
+  .nftTileEachDetailsFirstContainer {
+    font-size: 2vw !important;
+  }
+  .nftTileEachDetailsFirstContainerValue {
+    font-size: 1.87vw;
+  }
+  .nftTileEachDetailsSecondContainerValueHighest {
+    font-size: 1.9vw;
+  }
+  .nftTileEachImage {
+    height: 19.81vw;
+  }
+  .mobilenftTilePageFirstSelect {
+    display: flex !important;
+    align-items: center !important;
+    /* justify-content: space-between !important; */
+    /* justify-content: space-between !important; */
+  }
+  .mobilenftTilePageSecondSelect {
+    margin-left: 0px !important;
+    margin-top: -1% !important;
+  }
+  .mobilenftTilePageThirdSelect {
+    margin-left: 0px !important;
+    margin-top: 3% !important;
+    width: 100% !important;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .nftTilePageSecondSelect {
+    font-size: 3.9vw;
+  }
+  .nftTileEachDetailsFirstContainer {
+    font-size: 4vw !important;
+  }
+  .nftTileEachDetailsFirstContainerValue {
+    font-size: 3.87vw;
+  }
+  .nftTileEachDetailsSecondContainerValueHighest {
+    font-size: 3.9vw;
+  }
+  .nftTileEachImage {
+    height: 52.81vw;
+  }
+  .mobilenftTilePageFirstSelect {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+  .mobilenftTilePageSecondSelect {
+    margin-left: 0px !important;
+    margin-top: -1% !important;
+  }
+  .mobilenftTilePageThirdSelect {
+    margin-left: 0px !important;
+    margin-top: 3% !important;
+    width: 100% !important;
+  }
+}
