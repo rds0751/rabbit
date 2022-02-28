@@ -42,6 +42,7 @@ function Create() {
           history("/create-nft");
         }
         if (redirectUrl == "wallet") {
+          document.body.style.overflow = "hidden";
           dispatch(ManageWalletSideBar(!isOpenWallet));
         }
         if (redirectUrl == "notification") {

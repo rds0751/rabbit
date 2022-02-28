@@ -30,6 +30,7 @@ function Navbar() {
   const { user, sideBar } = useSelector((state) => state);
   const { userDetails, loggedInUser, walletAddress } = user;
   const { isOpenNoti, isOpenWallet } = sideBar;
+
   console.log(walletAddress, "<<<<this is wallet address");
   // useEffect(() => {
   //   if (window.ethereum) {
@@ -101,13 +102,10 @@ function Navbar() {
     if (walletAddress == null) {
       navigate("/add-wallet");
       dispatch(RedirectTo("wallet"));
-      // document.body.style.overflow = "visible";
     } else {
       dispatch(ManageWalletSideBar(!isOpenWallet));
-      //document.body.style.overflow = "hidden";
+      document.body.style.overflow = (!isOpenWallet) ? "hidden" : "visible";
     }
-    //document.body.classList.add('overflow-hidden');
-    // document.body.toggleAttribute.style;
   };
   const handleNotiSideBar = () => {
     if (loggedInUser == null) {
@@ -117,6 +115,7 @@ function Navbar() {
       dispatch(ManageNotiSideBar(true));
     }
   };
+
   console.log("logged in user >>> lllll", loggedInUser);
   return (
     <>
@@ -143,7 +142,7 @@ function Navbar() {
                   style={{
                     backgroundColor: "#f8f8f8",
                     width: "75%",
-                    height:"42px",
+                    height: "42px",
                     padding: "0px",
                     paddingLeft: "10px",
                     border: "0",
@@ -170,7 +169,7 @@ function Navbar() {
               </form>
             </div>
 
-            
+
 
             <div className="search_box">
               <form className="p-0 m-0 ">
@@ -185,14 +184,14 @@ function Navbar() {
                 </button>
               </form>
             </div>
-          
-          
-          <div className="right_navbar d-flex ">
+
+
+            <div className="right_navbar d-flex " >
               {/* <div
             className="collapse navbar-collapse mobcollapse"
             id="navbarSupportedContent"
           > */}
-              <div className="navbar-nav d-flex">
+              <div className="navbar-nav d-flex" >
                 <ul className="left_section_nav mb-0">
                   <li
                     className={
@@ -200,6 +199,7 @@ function Navbar() {
                         ? "nav-item li_underline"
                         : "nav-item"
                     }
+                    onClick={isOpenWallet}
                   >
                     <Link
                       className={
@@ -209,16 +209,18 @@ function Navbar() {
                       }
                       aria-current="page"
                       to="/"
+
                     >
                       Marketplace
                     </Link>
                   </li>
                   <li
                     className={
-                      location.pathname.includes("leader-board") 
+                      location.pathname.includes("leader-board")
                         ? "nav-item li_underline"
                         : "nav-item"
                     }
+                    onClick={isOpenWallet}
                   >
                     <Link
                       className={
@@ -239,6 +241,7 @@ function Navbar() {
                         ? "nav-item dropdown li_underline"
                         : "nav-item dropdown"
                     }
+                    onClick={isOpenWallet}
                   >
                     <Link
                       className={
@@ -247,11 +250,11 @@ function Navbar() {
                           : "nav-link"
                       }
                       to="/resource"
-                      // id="navbarDropdown"
-                      // role="button"
-                      // data-bs-toggle="dropdown"
-                      // aria-expanded="false"
-                      // style={{ fontSize: "16px" }}
+                    // id="navbarDropdown"
+                    // role="button"
+                    // data-bs-toggle="dropdown"
+                    // aria-expanded="false"
+                    // style={{ fontSize: "16px" }}
                     >
                       Resource
                     </Link>
@@ -314,8 +317,9 @@ function Navbar() {
                       <img
                         className="btnnav_mob1"
                         src={require("../../assets/images/profile.png")}
-                        style={{ color: "gray", cursor: "pointer",marginLeft:"31.22px" ,marginRight:"22.43px"
-                       }}
+                        style={{
+                          color: "gray", cursor: "pointer", marginLeft: "31.22px", marginRight: "22.43px"
+                        }}
                       ></img>
                     </a>
                     <ul
@@ -379,9 +383,9 @@ function Navbar() {
                 </ul>
               </div>
             </div>
-            </div>
+          </div>
         </nav>
-        
+
         <div className={humburger ? "scroll_off" : <></>}>
           {humburger ? <Menu /> : <></>}
         </div>
