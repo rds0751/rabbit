@@ -213,8 +213,8 @@ function Navbar() {
                   <li
                     className={
                       location.pathname.includes("/") && !location.pathname.includes("leader-board") && !location.pathname.includes("resource") && !location.pathname.includes("create-nft")
-                        ? "nav-item li_underline"
-                        : "nav-item"
+                        ? "nav-items li_underline"
+                        : "nav-items"
                     }
                     onClick={isOpenWallet}
                   >
