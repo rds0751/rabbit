@@ -7,7 +7,6 @@
   font-weight: bold;
   margin-left: 7rem;
   margin-top: 1rem;
-  
 }
 .leader1 {
   font-size: 1.3rem;
@@ -180,6 +179,8 @@ thead {
 .absolute > img {
   height: 140px;
   width: 140px;
+  border-radius: 50%;
+  z-index: 99;
 }
 
 .absolute > h2 {
@@ -192,8 +193,9 @@ thead {
   color: #366eef;
   border: 2px solid #336eef;
   border-radius: 5px;
-  right: 9rem;
-  margin-top: 2rem;
+  /* right: 9rem; */
+  /* bottom: 4rem;
+  margin-top: 2rem; */
   /* margin-right: 2rem; */
   padding: 4px 20px;
   font-size: 12px;
@@ -228,7 +230,7 @@ thead {
 .collectionsales {
   display: flex;
   text-align: left;
-  margin-top: 13rem;
+  margin-top: 4rem;
   /* font-size: 80px; */
   /* font-size:60px; */
 }
@@ -253,7 +255,7 @@ thead {
 
 .MyProfilesales {
   display: flex;
-  margin-top: 19rem;
+  /* margin-top: 19rem; */
   /* margin-left: 70px; */
 }
 .MyProfilesales > div {
@@ -453,7 +455,6 @@ thead {
 .justify {
   justify-content: flex-start;
 }
-
 
 .icon-img2 {
   margin-left: 13.5rem;
@@ -684,7 +685,6 @@ thead {
     text-align: right;
     margin-top: 20rem; */
     flex-direction: column;
-    
   }
 
   .absolute1 {
@@ -783,56 +783,56 @@ thead {
   padding-left: 0;
 }
 
-.align-row{
+.align-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.nft-name{
+.nft-name {
   color: #191919;
   font-weight: bold;
-  font-size:32px;
+  font-size: 32px;
 }
-.text{
-  color:#191919;
-  font-size:16px;
+.text {
+  color: #191919;
+  font-size: 16px;
 }
-.nft-value{
-  color:#16AB6E;
-  font-weight:bold;
-  font-size:16px;
+.nft-value {
+  color: #16ab6e;
+  font-weight: bold;
+  font-size: 16px;
 }
-.clock-icon{
-  width:22px;
-  color:#EF4F36;
+.clock-icon {
+  width: 22px;
+  color: #ef4f36;
 }
-.time{
-  color:#191919;
-  font-size:16px;
-  font-weight:500;
+.time {
+  color: #191919;
+  font-size: 16px;
+  font-weight: 500;
 }
-.fw-b{
-  font-weight:bold;
+.fw-b {
+  font-weight: bold;
 }
-@media screen and (max-width: 375px){
-  .nft-name{
-    font-size:18px;
+@media screen and (max-width: 375px) {
+  .nft-name {
+    font-size: 18px;
   }
-  .text{
-    font-size:14px;
+  .text {
+    font-size: 14px;
   }
-  .nft-value{
-    font-size:14px;
+  .nft-value {
+    font-size: 14px;
   }
-  .clock-icon{
-    width:18px;
+  .clock-icon {
+    width: 18px;
   }
-  .time{
-    font-size:14px
+  .time {
+    font-size: 14px;
   }
 }
-@media screen and (min-width:376px) and (max-width: 768px){
-  .nft-name{
-    font-size:20px;
+@media screen and (min-width: 376px) and (max-width: 768px) {
+  .nft-name {
+    font-size: 20px;
   }
 }
