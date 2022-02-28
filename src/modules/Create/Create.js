@@ -53,11 +53,12 @@ function Create() {
         history("/my-profile");
       }
     } else {
-      toast.error("Choose the wallet");
+      // toast.error("Choose the wallet");
     }
   }, [toggleEffect]);
   const connectMetamask = () => {
     if (window.ethereum) {
+      // alert("ok");
       window.ethereum
         .request({ method: "eth_requestAccounts" })
         .then((result) => {
@@ -74,7 +75,9 @@ function Create() {
   };
   const accountChangeHandler = (newAccount) => {
     setDefaultAccount(newAccount[0]);
+    // console.log(, "<<<< defaultaccount");
     getUserBalance(newAccount[0]);
+    console.log(getBalance, "getUser balance");
     dispatch(AddWalletDetails({ address: newAccount[0], balance: getBalance }));
     CheckUserByWalletAddress(newAccount[0], (res) => {
       console.log(res, "<<<< Account changed");

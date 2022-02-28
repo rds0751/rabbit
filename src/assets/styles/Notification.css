@@ -85,7 +85,7 @@ height: 47px;
   width: 90%;
   height: 121px;
   /* margin: 9px; */
-  padding: 5px;
+  /* padding: 5px; */
   margin-bottom: 10px;
   /* margin-left: 18px; */
 }
@@ -101,7 +101,8 @@ height: 47px;
 }
 .fontwallet {
   text-align: left;
-  font: 16px/25px Poppins;
+  font: 16px;
+  font-family: "poppins-medium";
   letter-spacing: 0px;
   color: #191919;
   opacity: 1;
@@ -124,8 +125,8 @@ height: 47px;
   padding-top: 36px;
 }
 .imgwallet > img {
-  height: 79px;
-  width: 79px;
+  height: 75px;
+  width: 75px;
 }
 .walleth2 > i {
   width: 21px;
@@ -542,9 +543,15 @@ height: 47px;
 }
 .left_section_nav li {
   /* margin-left: 61px; */
-  margin-left: 35px;
+  /* margin-left: 35px; */
   display: flex;
   align-items: center;
+}
+.nav-items{
+  margin-right: 60px;
+}
+.create-button{
+  margin-right: 28.62px;
 }
 .left_section_nav .btnnav {
   /* padding: 5px 30px; */
@@ -594,7 +601,8 @@ height: 47px;
   color: #828282 !important;
 }
 .nav-link.navlink_active {
-  font-weight: 600;
+  
+  font:normal normal 600 16px/25px Poppins;
   color: #191919 !important;
 }
 .unerLine {
@@ -707,7 +715,7 @@ height: 47px;
   .right_navbar {
     width: 45%;
   }
-  .form-control{
+  .form-control {
     width: 50%;
   }
 }
@@ -926,6 +934,12 @@ height: 47px;
   
     border: 1px solid red !important;
   } */
+}
+
+@media screen and (max-width: 764px) {
+  .balancewallet {
+    /* width: 100% !important; */
+  }
 }
 
 /* @media screen and (max-width: 1400px) {

@@ -7,17 +7,59 @@ import { getCollections } from "../../services/webappMicroservice";
 import "../../assets/styles/homeCollectionCards.css";
 
 function Collections_tile() {
+  const initialFilterData = {
+    sort: 1,
+    categoryId: "",
+    searchByName: "",
+  };
+
   const [collections, setCollections] = useState([]);
+  const [filterData, setFilterData] = useState(initialFilterData);
   const [toggleNft, setToggleNft] = useState(false);
   useEffect(() => {
     getCollections().then((response) => setCollections(response));
   }, []);
+
+  const handleFilter = (e) => {
+    const { name, value } = e.target;
+    setFilterData({ ...filterData, [name]: value });
+  };
+
   return (
     <>
       <div className="container">
         <NftToggle toggleNft={toggleNft} />
         {/* <Lower__homepage /> */}
-        <CollectionNftFilter />
+        {/* <CollectionNftFilter /> */}
+
+        {/* ----------filters */}
+        <div className="lower__homepage" style={{ width: "100%" }}>
+          <div id="filters filter-large" className="filter">
+            <div className="mobilenftTilePageFirstSelect dropdown">
+              <p className="mb-0">Categories </p>
+              <select name="sale" id="sale" className="first_select ml_auto" onChange={e=>handleFilter(e)}>
+                <option value="all">All</option>
+                <option value="2">2</option>
+              </select>
+            </div>
+          </div>
+          <div className="filter">
+            <div className="mobilenftTilePageThirdSelect dropdown sort-drop nftTilePageSecondSelect">
+              <select
+                name="sale"
+                id="sale"
+                // className="first_select ml_auto"
+                className="priceRangeDropDown"
+              >
+                <option value="all">Sort By</option>
+                <option value="2">2</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        {/* ------------- */}
+
         <div
           className="row mob_row"
           style={{ justifyContent: "space-between" }}

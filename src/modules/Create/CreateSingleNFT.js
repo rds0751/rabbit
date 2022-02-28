@@ -1,9 +1,13 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Image from "../../assets/images/img-format.png";
-import ehereum from "../../assets/images/ehereum.png";
+import ethereum from "../../assets/images/ethereum.svg";
+// import { FaCloudUploadAlt } from "react-icons/fa";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import Utils from "../../utility";
+import BlockchainServices from "../../services/blockchainService";
+import getCollection from "../../services/contentMicroservice";
 import {
   // getCollection,
   getCollectionBySingleUser,
@@ -16,17 +20,28 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDropzone } from "react-dropzone";
 import { useSelector } from "react-redux";
 import ImageFile from "./uploadFile";
+import { Oval } from  'react-loader-spinner';
 import "../../assets/styles/createSingleNft.css";
+import "../../assets/styles/MintModal.css";
 import UploadSingleNft from "./CreateSingleUploadFile";
+
+
+
 // import "../../assets/styles/Leader.css"
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 const Button = styled.button``;
 function CreateSingleNFT(props) {
-  console.log("ppppppppppppp", props?.isNftCreated);
+  console.log("ppppppppppppp", props, "");
+  console.log("ppppppppppppp",props?.loaderState)
+  // console.log("ppppppppppppp", props?.isNftCreated);
   const [collectionData, setCollectionData] = useState([]);
   const [selectFile, setSelectFile] = useState("");
   const [collectionId, setCollectionId] = useState("");
+  const [ipfsUrl, setIpfsUrl] = useState("");
+  const [cdnUrl, setcdnUrl] = useState("");
   const [uploadFileObj, setUploadFileObj] = useState("");
+  const [openMintodal, setOpenMintodal] = useState(false);
+
 
   // >>>> This is user id
   const { user } = useSelector((state) => state);
@@ -39,8 +54,13 @@ function CreateSingleNFT(props) {
   const price = useRef("");
   const description = useRef("");
   const blockchain = useRef("Ethereum");
-  const ipfsUrl = useRef("");
+  // const ipfsUrl = useRef("");
   const createdBy = loggedInUser?._id;
+
+  const [desLength, setDesLength] = useState(0);
+
+  // ----------------------------------------------states end-------------
+
   useEffect(async () => {
     if (loggedInUser == null) {
       navigation("/add-wallet");
@@ -48,19 +68,58 @@ function CreateSingleNFT(props) {
     const collections = await getCollectionBySingleUser();
     setCollectionData(collections);
   }, []);
+
+  // --------------------------------React Drop Zone---------------------
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: "image/*",
+    onDrop: (acceptedFiles) => {
+      setSelectFile(
+        acceptedFiles.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          })
+        )
+      );
+      let formData = new FormData();
+      formData.append("attachment", selectFile[0]);
+      // const [err, ipfsRes] = addIPFS(formData)
+      (async () => {
+        const [err, ipfsRes] = await Utils.parseResponse(
+          getCollection.addIpfs(formData)
+        );
+        if (err || !ipfsRes.ipfsUrl) {
+          toast.error("Unable to add file to IPFS");
+        } else {
+          console.log(ipfsRes, "<<<<ipfs Res");
+          setIpfsUrl(ipfsRes.ipfsUrl);
+          setcdnUrl(ipfsRes.cdnUrl);
+
+
+
+        }
+      })();
+
+      // setLogoPresent(true);
+    },
+  });
+  // ----------------old drop----------
+
+  // const { getRootProps, getInputProps } = useDropzone({
+  //   onDrop,
+  // });
   const onDrop = useCallback((acceptedFiles) => {
     console.log(acceptedFiles);
     console.log(acceptedFiles, "<<<< accepted files");
     handleChange(acceptedFiles);
   }, []);
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop,
-  });
   const hiddenFileInput = useRef(null);
   const handleClick = (event) => {
     hiddenFileInput.current.click();
   };
   const handleChange = async (event) => {
+    // let formData = new FormData();
+    // formData.append("attachment", data.nftFile);
+
     console.log(event, "<<<<< event");
     // const fileUploaded = event;
     console.log(event, "<<<<file uploaded");
@@ -92,7 +151,21 @@ function CreateSingleNFT(props) {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    console.log(selectFile, "<<<selected file");
+    let formData = new FormData();
+    formData.append("attachment", selectFile[0]);
+    // const [err, ipfsRes] = addIPFS(formData)
+    const [err, ipfsRes] = await Utils.parseResponse(
+      getCollection.addIpfs(formData)
+    );
+    if (err || !ipfsRes.ipfsUrl) {
+      toast.error("Unable to add file to IPFS");
+    }
+    console.log(err, ipfsRes, "<<<<<<");
+
+    return null;
+
     if (
       name.current == "" ||
       price.current == "" ||
@@ -111,8 +184,13 @@ function CreateSingleNFT(props) {
       "<<<<price current "
     );
     const addIPFS = async () => {
+      console.log(selectFile, "<<<selectedFile");
       // console.log("address of owner", walletAddress.address)
-      console.log("file", selectFile);
+      // console.log(
+      //   "file",
+      //   { ...selectFile[0], filename: selectFile[0].name },
+      //   selectFile[0]
+      // );
       console.log("Called IPFx", {
         nftFile: selectFile,
         nftName: name.current,
@@ -123,6 +201,8 @@ function CreateSingleNFT(props) {
         collection: collectionId,
         ownerAddress: walletAddress.address,
       });
+      // setloader(true)
+
       props.createNftHandler({
         nftFile: selectFile,
         nftName: name.current,
@@ -133,6 +213,8 @@ function CreateSingleNFT(props) {
         collection: collectionId,
         ownerAddress: walletAddress.address,
       });
+      // setloader(false)
+
     };
     addIPFS();
     // e.preventDefault();
@@ -170,6 +252,9 @@ function CreateSingleNFT(props) {
   console.log(selectFile, "<<<s");
   return (
     <>
+       {
+      props?.loaderState?<div className= "center"> <Oval  vertical= "top" horizontal="center"   color="#00BFFF" height={30} width={30} /></div>:""
+    }
       <ToastContainer
         position="top-center"
         autoClose={6000}
@@ -213,13 +298,17 @@ function CreateSingleNFT(props) {
                 Supported(JPG,PNG,GIF,SVG,MP4, WEBM,WAV) Max size 40mb
               </span> */}
             </div>
+
+            {/* --------------------------------------------- */}
             {/* <img
-                src={Image}
-                style={{ width: "100px", marginTop: "3em", color: "#366EEF" }}
-              />
-              <div>Drag and drop your images </div>
-              <ImageFile onChange={(e) => setSelectFile(e.target.value)} ></ImageFile> 
-               */}
+              src={Image}
+              style={{ width: "100px", marginTop: "3em", color: "#366EEF" }}
+            />
+            <div>Drag and drop your images </div>
+            <ImageFile
+              onChange={(e) => setSelectFile(e.target.value)}
+            ></ImageFile> */}
+            {/* ------------------------------------ */}
             {/* </div> */}
             {/* </Button> */}
             {/* <input
@@ -237,6 +326,27 @@ function CreateSingleNFT(props) {
                   Browse
               </span> */}
             {/* </div> */}
+
+            {/* -----------------------NEW DRA GAND DROP */}
+
+            <div className="draganddropbox" {...getRootProps()}>
+              <input {...getInputProps()} />
+              <div className="draganddropboxinnerdiv">
+                <img
+                  src={cdnUrl != "" ? cdnUrl : Image}
+                  style={{ width: "100px", marginTop: "3em", color: "#366EEF" }}
+                />
+                <span className="draganddropboxinnerdivtextspan">
+                  Drag and Drop or
+                  <span className="draganddropboxinnerdivtextspanbrowse">
+                    {" "}
+                    Browse
+                  </span>
+                </span>
+              </div>
+            </div>
+
+            {/* ----------------- */}
           </div>
           <div className="single-form">
             <div className="">
@@ -277,12 +387,16 @@ function CreateSingleNFT(props) {
                 rows="4"
                 name="text"
                 placeholder="Write description"
+                value={description.current}
                 onChange={(e) => {
-                  description.current = e.target.value;
-                  checkChanges();
+                  if (desLength < 1000) {
+                    description.current = e.target.value;
+                    setDesLength(description.current.length);
+                    checkChanges();
+                  }
                 }}
               ></textarea>
-              <span className="">0 of 1000 characters used</span>
+              <span className="">{desLength} of 1000 characters used</span>
             </div>
             <div className="">
               <div className="create-collection">
@@ -337,7 +451,7 @@ function CreateSingleNFT(props) {
               </select> */}
               <div className="block-chain-container">
                 <div>
-                  <img src={ehereum} height="32px" />
+                  <img src={ethereum.svg} height="32px" />
                 </div>
                 <div className="block-chain-right">
                   <select
@@ -361,6 +475,58 @@ function CreateSingleNFT(props) {
             >
               Create
             </button>
+          </div>
+        </div>
+      </div>
+      <div
+        className="mint-outer"
+        style={{ display: openMintodal ? "block" : "none" }}
+      >
+        <div className="mintbody">
+          <div
+            className="completelistin"
+            onClick={() => setOpenMintodal(false)}
+          >
+            Complete your listing
+          </div>
+          <div className="abstractillusion">
+            <img src={Image} />
+            <div className="abstractillusioncontent">
+              <div className="abstracttitle">Abstract illusion</div>
+              <div className="abstractposter">Abstract Poster</div>
+              <div className="ethprice">0.49ETH</div>
+              <div className="ethprice">$162.09</div>
+            </div>
+          </div>
+          <div className="checkpostcontainer">
+            <div className="checkpost">
+              <img src={Image} className="checkvalue" />
+              <div className="checkposttext">
+                <div>Uploading</div>
+                <div>Uploading all Media assests and metadata to Ipfs</div>
+              </div>
+            </div>
+            <div className="checkpost">
+              <div className="checkvalue checkvaluetext">2</div>
+              <div className="checkposttext">
+                <div>Mint</div>
+                <div>Send transaction to create your nft</div>
+              </div>
+            </div>
+            <div className="checkpost">
+              <div className="checkvalue checkvaluetext">3</div>
+              <div className="checkposttext">
+                <div>Approve</div>
+                <div>This transaction conducted only once per collection</div>
+              </div>
+            </div>
+            <div className="checkpost">
+              <div className="checkvalue checkvaluetext noborder">4</div>
+              <div className="checkposttext">
+                <div>Put on sale</div>
+                <div>Sign message to set fixed price</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

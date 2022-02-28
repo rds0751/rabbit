@@ -1,4 +1,4 @@
-import { OPEN_NOTIFICATION, OPEN_WALLET } from "../Constants";
+import { OPEN_NOTIFICATION, OPEN_WALLET, SEARCH_FROM_NAV } from "../Constants";
 
 let initialState = {
   // isLoggedIn: false,
@@ -9,6 +9,7 @@ let initialState = {
   // isForgotPasswordSuccess: false
   isOpenWallet: false,
   isOpenNoti: false,
+  navSearchValue: "",
 };
 export const SideBarReducer = (state = initialState, action) => {
   console.log(action, "<<<< this is action");
@@ -21,6 +22,11 @@ export const SideBarReducer = (state = initialState, action) => {
       return {
         ...state,
         isOpenWallet: action.payload,
+      };
+    case SEARCH_FROM_NAV:
+      return {
+        ...state,
+        navSearchValue: action.payload,
       };
 
     default:

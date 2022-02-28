@@ -10,8 +10,10 @@ import {
   ManageNotiSideBar,
   ManageWalletSideBar,
   RedirectTo,
+  searchNav,
 } from "../../reducers/Action";
 import { ethers } from "ethers";
+import "../../assets/styles/topNavBar.css";
 
 import Menu from "./Menu";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
@@ -19,6 +21,7 @@ import { CheckUserByWalletAddress } from "../../services/UserMicroService";
 function Navbar() {
   const navigate = useNavigate();
   const [humburger, setHumburger] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
   const ethereum = window.ethereum;
   const [errorMssg, setErrorMssg] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
@@ -85,7 +88,8 @@ function Navbar() {
     if (name == "profile") {
       if (walletAddress == null) {
         dispatch(RedirectTo("profile"));
-        navigate("/add-wallet");
+        // navigate("/add-wallet");
+        navigate("/my-profile");
       } else {
         navigate("/my-profile");
       }
@@ -101,19 +105,28 @@ function Navbar() {
   const handleWalletClick = () => {
     if (walletAddress == null) {
       navigate("/add-wallet");
-      dispatch(RedirectTo("wallet"));
+      // dispatch(RedirectTo("wallet"));
+
+      // dispatch(ManageWalletSideBar(!isOpenWallet));
     } else {
       dispatch(ManageWalletSideBar(!isOpenWallet));
       document.body.style.overflow = (!isOpenWallet) ? "hidden" : "visible";
     }
   };
   const handleNotiSideBar = () => {
+    console.log(isOpenNoti, "<<<isopen noti");
     if (loggedInUser == null) {
-      navigate("/add-wallet");
-      dispatch(RedirectTo("notification"));
+      // navigate("/add-wallet");
+      // dispatch(ManageNotiSideBar(!isOpenNoti));
+      // dispatch(RedirectTo("notification"));
     } else {
-      dispatch(ManageNotiSideBar(true));
+      dispatch(ManageNotiSideBar(!isOpenNoti));
+      dispatch(ManageWalletSideBar(false));
     }
+  };
+
+  const handleSearch = () => {
+    if (searchInput.trim() != "") dispatch(searchNav(searchInput));
   };
 
   console.log("logged in user >>> lllll", loggedInUser);
@@ -132,44 +145,49 @@ function Navbar() {
                   style={{ width: "50px" }}
                 />
               </Link>
-              <form className=" w-100 p-0 m-0" action="/" method="get">
-                <input
-                  className="form-control form-controlmob "
-                  type="search"
-                  name="searchByName"
-                  placeholder="Search"
-                  aria-label="Search"
+              {/* <form
+                className=" w-100 p-0 m-0"
+                onSubmit={(e) => e.preventDefault()}
+              > */}
+              <input
+                className="form-control form-controlmob "
+                type="search"
+                name="searchByName"
+                placeholder="Search"
+                aria-label="Search"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                style={{
+                  backgroundColor: "#f8f8f8",
+                  width: "75%",
+                  height: "42px",
+                  padding: "0px",
+                  paddingLeft: "10px",
+                  border: "0",
+                }}
+              />
+              <button
+                className=""
+                onClick={handleSearch}
+                style={{
+                  border: "0",
+                  width: "50px",
+                  height: "42px",
+                  backgroundColor: "#f8f8f8",
+                  marginLeft: "5px",
+                }}
+              >
+                <i
+                  className="fa fa-search"
                   style={{
-                    backgroundColor: "#f8f8f8",
-                    width: "75%",
-                    height: "42px",
-                    padding: "0px",
-                    paddingLeft: "10px",
-                    border: "0",
+                    width: "42px",
+                    height: "50",
                   }}
-                />
-                <button
-                  className="screachbtn"
-                  style={{
-                    border: "0",
-                    width: "35px",
-                    backgroundColor: "#f8f8f8",
-                    marginLeft: "5px",
-                  }}
-                >
-                  <i
-                    className="fa fa-search"
-                    style={{
-                      width: "42px",
-                      height: "50",
-                    }}
-                    aria-hidden="true"
-                  ></i>
-                </button>
-              </form>
+                  aria-hidden="true"
+                ></i>
+              </button>
+              {/* </form> */}
             </div>
-
-
 
             <div className="search_box">
               <form className="p-0 m-0 ">
@@ -185,8 +203,7 @@ function Navbar() {
               </form>
             </div>
 
-
-            <div className="right_navbar d-flex " >
+            <div className="right_navbar d-flex ">
               {/* <div
             className="collapse navbar-collapse mobcollapse"
             id="navbarSupportedContent"
@@ -217,8 +234,8 @@ function Navbar() {
                   <li
                     className={
                       location.pathname.includes("leader-board")
-                        ? "nav-item li_underline"
-                        : "nav-item"
+                        ? "nav-items li_underline"
+                        : "nav-items"
                     }
                     onClick={isOpenWallet}
                   >
@@ -238,8 +255,8 @@ function Navbar() {
                   <li
                     className={
                       location.pathname.includes("resource")
-                        ? "nav-item dropdown li_underline"
-                        : "nav-item dropdown"
+                        ? "nav-items dropdown li_underline"
+                        : "nav-items dropdown"
                     }
                     onClick={isOpenWallet}
                   >
@@ -274,7 +291,10 @@ function Navbar() {
                       </li>
                     </ul>
                   </li>
-                  <li onClick={() => manageNavigation("create")}>
+                  <li
+                    className="create-button"
+                    onClick={() => manageNavigation("create")}
+                  >
                     <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}
                       className="btn btn-primary btnnav"
@@ -298,8 +318,8 @@ function Navbar() {
                       onClick={handleNotiSideBar}
                       className="noti"
                       src={require("../../assets/images/notification.png")}
-                      width="18.51px"
-                      height="21.21px"
+                      width="19px"
+                      height="21px"
                     ></img>
                     {/* </Link> */}
                     {/* </Link> */}
@@ -318,7 +338,10 @@ function Navbar() {
                         className="btnnav_mob1"
                         src={require("../../assets/images/profile.png")}
                         style={{
-                          color: "gray", cursor: "pointer", marginLeft: "31.22px", marginRight: "22.43px"
+                          color: "gray",
+                          cursor: "pointer",
+                          marginLeft: "31.22px",
+                          marginRight: "22.43px",
                         }}
                       ></img>
                     </a>

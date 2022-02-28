@@ -1,10 +1,23 @@
 import { ethers } from "ethers";
 import contractABI from "../assets/abi/abi.json";
+import { toast } from "react-toastify";
 
-const provider = new ethers.providers.Web3Provider(window.ethereum);
-const signer = provider.getSigner();
-// const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS
-const contractAddress = "0xd3E390083BC66d87aFD1457879A2fDDfBBe16e06";
+import Utils from "../utility";
+
+let signer;
+let provider;
+if (!window.ethereum) {
+  // toast.error("Please install metamask ext otherwise you will not able to do tx");
+  //  alert("")
+  Utils.apiFailureToast("Please install metamask ext otherwise you will not able to do tx");
+}
+else {
+  provider = new ethers.providers.Web3Provider(window.ethereum);
+  signer = provider.getSigner();
+}
+const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS
+
+// const contractAddress = "0xd3E390083BC66d87aFD1457879A2fDDfBBe16e06";
 const BlockchainServices = {
   mintNFT,
   changeListedPrice,

@@ -1,38 +1,26 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Image from "../../assets/images/img-format.png";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { BASE_URL2, WHITE_LABEL_TOKEN } from "../../reducers/Constants";
+import { BASE_URL2 } from "../../reducers/Constants";
 import { httpConstants } from "../../constants";
 import { updateUserProfile } from "../../services";
-import { useSelector } from "react-redux";
-import { ToastContainer } from "react-toastify";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import "../../assets/styles/editProfile.css";
-import { AuthToken } from "../../services/UserAuthToken";
+
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 
 const Button = styled.button``;
 
 function EditProfile(props) {
   const hiddenFileInput = useRef(null);
-  const { user } = useSelector((state) => state);
-  const [formData, setFormData] = useState({
-    photo: user?.loggedInUser?.photo,
-    userName: user?.loggedInUser?.userName,
-    bio: user?.loggedInUser?.bio,
-    portfolio: user?.loggedInUser?.portfolio,
-  });
   const tempUrl =
     "https://earncashto.com/wp-content/uploads/2021/06/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png";
   const [imageUrl, setImageUrl] = useState(tempUrl);
-  console.log(user.loggedInUser, "<<<loggedin");
-  // const photo = useRef(user?.loggedInUser?.photo);
-  // const bio = useRef(user?.loggedInUser?.bio);
-  // const userName = useRef(user?.loggedInUser?.userName);
-  // const portfolio = useRef(user?.loggedInUser?.portfolio);
+  const cdnUrl = useRef("");
+  const bio = useRef("");
+  const username = useRef("");
+  const personalSite = useRef("");
 
   const handleClick = (event) => {
     hiddenFileInput.current.click();
@@ -43,75 +31,36 @@ function EditProfile(props) {
     console.log(fileUploaded);
     let formData = new FormData();
     formData.append("folderName", "collections");
-
-    formData.append("createdBy", `${user?.loggedInUser?._id}`);
+    formData.append("createdBy", `${props.user._id}`);
     formData.append("attachment", fileUploaded);
 
     const res = await fetch(`${BASE_URL2}/api/v1/upload-documents`, {
       method: httpConstants.METHOD_TYPE.POST,
       body: formData,
-      // headers: AuthToken,
     });
     const result = await res.json();
-    if (result.success) {
-      setFormData({ ...formData, photo: result.responseData });
-    }
-
-    // else toast.error("")
+    if (result.success) cdnUrl.current = result.responseData;
     console.log(result);
-    setImageUrl(result.responseData);
+    setImageUrl(cdnUrl.current);
+
     // Edit.handleFile(fileUploaded);
   };
-  useEffect(() => {
-    console.log(localStorage.getItem(WHITE_LABEL_TOKEN), "<<<this is token");
-    if (user.loggedInUser?.photo != "") {
-      setImageUrl(user?.loggedInUser?.photo);
-    }
-    // setImageUrl()
-    // photo.current = user?.loggedInUser?.photo;
-    // bio.current = user?.loggedInUser?.bio;
-    // userName.current = user?.loggedInUser?.userName;
-    // portfolio.current = user?.loggedInUser?.portfolio;
-  }, []);
 
   const handleSubmit = async (e) => {
-    console.log(user.loggedInUser, "<<user");
+    console.log(props);
     e.preventDefault();
-    // const data = {
-    //   userName: userName.current,
-    //   bio: bio.current,
-    //   portfolio: portfolio.current,
-    //   photo: photo.current,
-    //   userId: user?.loggedInUser?.userId,
-    // };
-    // console.log(data, "<<<data to send");
-    const result = await updateUserProfile(formData, user?.loggedInUser?._id);
-    console.log(result, "<<<<<< profile updated value");
-    if (result.success) {
-      toast.success("Profile Updated");
-    } else {
-      toast.error("Error While updating ");
-    }
-  };
-
-  const handleForm = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const data = {
+      username: username.current,
+      bio: bio.current,
+      personalSite: personalSite.current,
+      cdnUrl: cdnUrl.current,
+    };
+    const result = await updateUserProfile(data, props.user._id);
+    console.log(result);
   };
 
   return (
     <>
-      <ToastContainer
-        position="top-center"
-        autoClose={6000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
       <div className="editProfileContainer container row mt-5">
         {/* <div className="col-sm-5 col-12 col-xs-12 offset-sm-3 form-responsive edit_profilemob"> */}
         <div className="editProfileTopHeading top-heading">
@@ -128,23 +77,22 @@ function EditProfile(props) {
             <img
               className="rounded-circle img-fluid img-responsive"
               // src="https://earncashto.com/wp-content/uploads/2021/06/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png"
-              // alt="/"
               src={imageUrl}
+              alt="/"
             />
             <Button
               onClick={handleClick}
               className="btn btn-outline-primary btn-normal-size btn-choose-file"
               // style={{ marginTop: "4em" }}
-              // onChange={(e) => handleChange(e)}
+              onChange={(e) => handleChange(e)}
             >
               <span className="btn-text font-14">Choose File</span>
             </Button>
-
             <input
               type="file"
               className="form-control"
               placeholder="Write your name"
-              // name=""
+              name="email"
               style={{ display: "none" }}
               ref={hiddenFileInput}
               onChange={handleChange}
@@ -155,15 +103,13 @@ function EditProfile(props) {
           <form className="suggestion-form " onSubmit={(e) => handleSubmit(e)}>
             <div className=" mb-3 mt-3">
               <label htmlFor="email" className="form-label input-heading">
-                userName
+                Username
               </label>
               <input
                 type="name"
                 className="editProfileFormContainerEachInput form-control"
-                name="userName"
-                value={formData.userName}
-                // value={userName.current}
-                onChange={(e) => handleForm(e)}
+                name="email"
+                onChange={(e) => (username.current = e.target.value)}
               />
             </div>
             <div className=" mb-3 mt-3">
@@ -173,13 +119,9 @@ function EditProfile(props) {
               <textarea
                 className="editProfileFormContainerEachInput form-control"
                 rows="4"
-                // name="text"
-                name="bio"
-                value={formData.bio}
-                // value={userName.current}
-                onChange={(e) => handleForm(e)}
+                name="text"
                 placeholder="Write description"
-                // onChange={(e) => (bio.current = e.target.value)}
+                onChange={(e) => (bio.current = e.target.value)}
               ></textarea>
               <span className="text-secondary font-13">
                 0 of 1000 characters used
@@ -193,10 +135,7 @@ function EditProfile(props) {
                 type="name"
                 className="editProfileFormContainerEachInput form-control bg-light"
                 placeholder="www.example.com"
-                name="portfolio"
-                value={formData.portfolio}
-                // value={userName.current}
-                onChange={(e) => handleForm(e)}
+                onChange={(e) => (personalSite.current = e.target.value)}
               />
             </div>
             <button
@@ -216,9 +155,8 @@ function EditProfile(props) {
 const mapStateToProps = (state) => {
   console.log(state);
   return {
-    user: state.user.loggedInUser,
+    user: state.user.addUserData,
   };
 };
 
 export default connect(mapStateToProps)(EditProfile);
-// yash
