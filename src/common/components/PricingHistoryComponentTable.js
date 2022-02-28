@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,6 +7,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import styled from "styled-components";
+import { getPricingHistory } from "../../services/webappMicroservice";
+import { useParams } from "react-router-dom";
 
 const MainContainer = styled.div`
   display: flex;
@@ -81,6 +83,10 @@ export default function PricingHistoryComponentTable() {
     }
   };
 
+  useEffect(() => {
+    getPricingHistory()
+  })
+
   return (
     <MainContainer>
       <Title>Activities</Title>
@@ -123,26 +129,26 @@ export default function PricingHistoryComponentTable() {
         )}
       </FilterContainer>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 300 }} aria-label="simple table">
+        <Table aria-label="simple table" style={{tableLayout:"auto", width:"100%"}}>
           <TableHead>
             <TableRow>
               <TableCell style={{ color: "#191919", fontWeight: "bold" }}>
                 Event
               </TableCell>
               <TableCell
-                align="right"
+                align="center"
                 style={{ color: "#191919", fontWeight: "bold" }}
               >
                 Price
               </TableCell>
               <TableCell
-                align="right"
+                align="center"
                 style={{ color: "#191919", fontWeight: "bold" }}
               >
                 From
               </TableCell>
               <TableCell
-                align="right"
+                align="center"
                 style={{ color: "#191919", fontWeight: "bold" }}
               >
                 To
@@ -164,9 +170,9 @@ export default function PricingHistoryComponentTable() {
                 <TableCell component="th" scope="row">
                   {row.Event}
                 </TableCell>
-                <TableCell align="right">{row.Price}</TableCell>
-                <TableCell align="right">{row.From}</TableCell>
-                <TableCell align="right">{row.To}</TableCell>
+                <TableCell align="center">{row.Price}</TableCell>
+                <TableCell align="center">{row.From}</TableCell>
+                <TableCell align="center">{row.To}</TableCell>
                 <TableCell align="right">{row.Date}</TableCell>
               </TableRow>
             ))}
