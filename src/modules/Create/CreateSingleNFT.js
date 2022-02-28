@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Image from "../../assets/images/img-format.png";
 import ehereum from "../../assets/images/ehereum.png";
+// import { FaCloudUploadAlt } from "react-icons/fa";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import {
@@ -41,6 +42,11 @@ function CreateSingleNFT(props) {
   const blockchain = useRef("Ethereum");
   const ipfsUrl = useRef("");
   const createdBy = loggedInUser?._id;
+
+  const [desLength, setDesLength] = useState(0);
+
+  // ----------------------------------------------states end-------------
+
   useEffect(async () => {
     if (loggedInUser == null) {
       navigation("/add-wallet");
@@ -48,17 +54,31 @@ function CreateSingleNFT(props) {
     const collections = await getCollectionBySingleUser();
     setCollectionData(collections);
   }, []);
+
+  // --------------------------------React Drop Zone---------------------
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: "image/*",
+    onDrop: (acceptedFiles) => {
+      setSelectFile(
+        acceptedFiles.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          })
+        )
+      );
+      // setLogoPresent(true);
+    },
+  });
+  // ----------------old drop----------
+
+  // const { getRootProps, getInputProps } = useDropzone({
+  //   onDrop,
+  // });
   const onDrop = useCallback((acceptedFiles) => {
     console.log(acceptedFiles);
     console.log(acceptedFiles, "<<<< accepted files");
     handleChange(acceptedFiles);
   }, []);
-
-  const [desLength, setDesLength] = useState(0);
-
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop,
-  });
   const hiddenFileInput = useRef(null);
   const handleClick = (event) => {
     hiddenFileInput.current.click();
@@ -115,7 +135,11 @@ function CreateSingleNFT(props) {
     );
     const addIPFS = async () => {
       // console.log("address of owner", walletAddress.address)
-      console.log("file", selectFile);
+      // console.log(
+      //   "file",
+      //   { ...selectFile[0], filename: selectFile[0].name },
+      //   selectFile[0]
+      // );
       console.log("Called IPFx", {
         nftFile: selectFile,
         nftName: name.current,
@@ -216,13 +240,17 @@ function CreateSingleNFT(props) {
                 Supported(JPG,PNG,GIF,SVG,MP4, WEBM,WAV) Max size 40mb
               </span> */}
             </div>
+
+            {/* --------------------------------------------- */}
             {/* <img
-                src={Image}
-                style={{ width: "100px", marginTop: "3em", color: "#366EEF" }}
-              />
-              <div>Drag and drop your images </div>
-              <ImageFile onChange={(e) => setSelectFile(e.target.value)} ></ImageFile> 
-               */}
+              src={Image}
+              style={{ width: "100px", marginTop: "3em", color: "#366EEF" }}
+            />
+            <div>Drag and drop your images </div>
+            <ImageFile
+              onChange={(e) => setSelectFile(e.target.value)}
+            ></ImageFile> */}
+            {/* ------------------------------------ */}
             {/* </div> */}
             {/* </Button> */}
             {/* <input
@@ -240,6 +268,28 @@ function CreateSingleNFT(props) {
                   Browse
               </span> */}
             {/* </div> */}
+
+            {/* -----------------------NEW DRA GAND DROP */}
+
+            {/* <div className="draganddropbox" {...getRootProps()}>
+              <input {...getInputProps()} />
+              <div className="draganddropboxinnerdiv">
+              
+                <img
+                  src={Image}
+                  style={{ width: "100px", marginTop: "3em", color: "#366EEF" }}
+                />
+                <span className="draganddropboxinnerdivtextspan">
+                  Drag and Drop or
+                  <span className="draganddropboxinnerdivtextspanbrowse">
+                    {" "}
+                    Browse
+                  </span>
+                </span>
+              </div>
+            </div> */}
+
+            {/* ----------------- */}
           </div>
           <div className="single-form">
             <div className="">

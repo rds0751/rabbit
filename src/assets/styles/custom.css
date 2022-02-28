@@ -74,7 +74,7 @@ ul {
 .container__tile {
   background-color: #f8f8f8;
   /* padding: 13px 13px 13px 13px; */
-  border-radius: 13px;
+  border-radius: 4px;
   margin-top: 1rem;
 }
 .container__tile > img {
@@ -841,7 +841,7 @@ select:focus-visible {
     width: 100%;
     /* width: 326px; */
     height: 187.19px;
-    object-fit: contain;
+    object-fit: cover;
   }
   .nft_div {
     padding: 0px !important;

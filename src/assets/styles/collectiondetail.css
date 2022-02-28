@@ -1,3 +1,183 @@
 .collection-card-container {
   /* border: 1px solid red; */
 }
+* {
+  box-sizing: border-box;
+}
+.coldet-banner {
+  width: 100%;
+  /* height: 280px; */
+  /* border: 5px solid red; */
+}
+
+.coldet-banner > img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+}
+.coldet-bio {
+  margin: auto;
+  margin-top: -130px;
+  width: 100%;
+  /* height: 198px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid blue; */
+}
+.coldet-avatar {
+  height: 198px;
+}
+.col-avatar {
+  height: 198px;
+  width: 198px;
+  margin: auto;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 46%;
+}
+.colusername {
+  margin-top: 14px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #191919;
+}
+.coluserdes {
+  font-family: "poppins-medium";
+  width: 26.4%;
+  text-align: center;
+  margin-top: 22px;
+}
+.collection-body {
+  margin: 0% 6.5%;
+  margin-top: 61px;
+}
+.collectionscardouter {
+  display: flex;
+  justify-content: stretch;
+  flex-wrap: wrap;
+  margin-top: 53.12px;
+}
+
+.collfilters {
+  display: flex;
+  justify-content: space-between;
+}
+.colleftfilter {
+  display: flex;
+  /* justify-content: center; */
+  justify-content: space-between;
+  width: 40%;
+}
+.searchboxcol {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d2d2d2;
+  border-radius: 4px;
+  box-sizing: border-box;
+  height: 42px;
+  padding: 0% 2%;
+  width: 40%;
+}
+
+.searchicon {
+  height: 20.31px;
+  width: 20.31px;
+}
+.searchboxcol > input {
+  /* height: 42px; */
+  box-sizing: border-box;
+  width: 100%;
+  border: none;
+}
+.colldrop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #d2d2d2;
+  width: 20%;
+  padding: 0% 1%;
+  position: relative;
+}
+.sortbydrop {
+  width: 10% !important;
+}
+.statusText {
+  display: flex;
+  font-size: 14px;
+  font-family: "poppins-medium";
+  align-items: center;
+  color: #191919;
+}
+.dropitems {
+  position: absolute;
+  top: 40px;
+  border: 1px solid #d2d2d2;
+  border-top: none;
+  left: 0px;
+}
+.dropsingleitem {
+  border-bottom: 1px solid #d2d2d2;
+  width: 100px;
+  /* width: 50%; */
+}
+/* .dropdowntext {
+  width: 163px;
+} */
+
+@media screen and (max-width: 1024px) {
+  .coluserdes {
+    width: 70%;
+  }
+  .colleftfilter {
+    display: flex;  
+    /* justify-content: center; */
+    /* justify-content: ; */
+    /* flex-direction: column; */
+    width: 70%;
+  }
+   .sortbydrop {
+    width: 20% !important;
+  }
+}
+
+@media screen and (max-width: 764px) {
+  .collfilters {
+    display: flex;
+    flex-direction: column;
+  }
+  .colleftfilter {
+    display: flex;
+    /* justify-content: center; */
+    /* justify-content: ; */
+    flex-direction: column;
+    width: 100%;
+  }
+  .searchboxcol {
+    display: flex;
+    align-items: center;
+    border: 1px solid #d2d2d2;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 42px;
+    padding: 0% 2%;
+    width: 100%;
+  }
+
+  .colldrop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #d2d2d2;
+    width: 100%;
+    padding: 0% 1%;
+    position: relative;
+    height: 42px;
+    margin-top: 16px;
+  }
+  .sortbydrop {
+    width: 100% !important;
+  }
+}
+

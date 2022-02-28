@@ -57,7 +57,7 @@ export default class Index extends BaseComponent {
 
     if (!data || Object.keys(data).length < 1 || !data.nftFile)
       return Utils.apiFailureToast("Please select the file that to be upload");
-    // console.log("duke",data)
+    console.log(data.nftFile, "<<<< this is file attachment");
     let formData = new FormData();
     formData.append("attachment", data.nftFile);
 

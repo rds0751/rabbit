@@ -11,17 +11,28 @@ import {
   getCollection,
   getNftsByCollectionId,
 } from "../../services/webappMicroservice";
+import search from "../../assets/images/search.svg";
+import dropdown from "../../assets/images/dropdown.svg";
+import NftCardsHome from "../../common/components/NftCardsHome";
 
 function CollectionDetails() {
   const collectionId = useParams();
   const [collection, setCollection] = useState([]);
+  const [statusDrop, setStatusDrop] = useState(false);
+  const [priceDrop, setpriceDrop] = useState(false);
+  const [sortDrop, setsortDrop] = useState(false);
+
   const [nfts, setNfts] = useState([]);
   const [checkLike, setcheckLike] = useState(false);
   useEffect(() => {
-    getCollection(collectionId.id).then((response) => setCollection(response));
-    getNftsByCollectionId(collectionId.id).then((response) =>
-      setNfts(response)
-    );
+    getCollection(collectionId.id).then((response) => {
+      setCollection(response);
+      console.log(response, "<<<<response");
+    });
+    getNftsByCollectionId(collectionId.id).then((response) => {
+      setNfts(response);
+      console.log(response, "<<<<< collectionresponse");
+    });
   });
   const { imageUrl, coverUrl, name } = collection;
   // const [checkLike, setCheckLike] = useState(false);
@@ -31,193 +42,120 @@ function CollectionDetails() {
   return (
     <>
       <div>
-        <div className="position-relative relative">
+        <div className="coldet-banner">
           <img src={coverUrl} alt="" style={{ objectFit: "cover" }} />
         </div>
-        <div className="position-absolute absolute">
-          <img
-            src={imageUrl}
-            alt=""
-            height="140px"
-            width="140px"
-            style={{ borderRadius: "50%" }}
-          />
-          <h2>{name}</h2>
-          <p style={{ marginTop: "10px", marginBottom: "0px" }}>
-            The abstract illusion is a collection of NFT which consist
-          </p>
-          <p style={{ marginBottom: "0px" }}>
-            abstract patterns that create illusion
-          </p>
+        <div className="coldet-bio">
+          <div className="coldet-avatar">
+            <img className="col-avatar" src={imageUrl} alt="" />
+          </div>
+          <div className="colusername">{name}</div>
+          <div className="coluserdes">
+            The abstract illusion is a collection of NFT which consist abstract
+            patterns that create illusion
+          </div>
         </div>
 
-        <li className="nav-item dropdown position-absolute absolutedot list-unstyled">
+        {/* <li>
           <a
-            className="nav-link dropdown"
             href="#"
             id="navbarDropdown"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-            style={{ fontSize: "16px" }}
           >
             <i style={{ color: "#afafaf" }} className="fas fa-ellipsis-h"></i>
           </a>
-          <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+          <ul>
             <li>
-              <Link className="dropdown-item threedot" to="/Report">
-                <i
-                  style={{ margin: "0px 5px 0px 10px" }}
-                  className="fas fa-flag"
-                ></i>{" "}
-                Report
+              <Link to="/Report">
+                <i></i> Report
               </Link>
             </li>
           </ul>
-        </li>
-        <div className="collection-card-container">
-          <div className="collectionsales collectionsalesHome">
-            <div className="sales1">
+        </li> */}
+        <div className="collection-body">
+          <div className="collfilters">
+            <div className="colleftfilter">
               {/* <h1>Top NFT sales</h1> */}
-              <div
-                className="input-group buying-search-btn"
-                style={{ marginLeft: "150px" }}
-              >
+              <div className="searchboxcol">
                 <input
                   type="text"
-                  className="form-control border-input input-box-border"
-                  style={{ marginLeft: "1em", borderRight: "0" }}
                   placeholder="Search"
                   aria-label="Recipient's username"
                   aria-describedby="button-addon2"
+                  className="inputsearch"
                 />
-                <div className="input-group-append w-25">
-                  <button
-                    className="btn btn-search-secondary border border-search"
-                    type="button"
-                    id="button-addon2"
-                    style={{ borderRadius: "0px 5px 5px 0px" }}
-                  >
-                    <i className="fas fa-search"></i>
-                  </button>
+                <div>
+                  {/* <button type="button" id="button-addon2"> */}
+                  <img src={search} className="searchicon" />
+                  {/* </button> */}
                 </div>
               </div>
-              <div className="dropdown col col1">
-                <button
-                  className="btn border dropdown-toggle col12"
-                  type="button"
-                  id="dropdownMenuButton1"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
+              <div
+                className="colldrop"
+                onClick={() => setStatusDrop(!statusDrop)}
+              >
+                <div className="statusText">Status</div>
+                <div>
+                  <img src={dropdown} />
+                </div>
+                <div
+                  className="dropitems "
+                  style={{ display: statusDrop ? "block" : "none" }}
                 >
-                  Status
-                  <i className="fas fa-caret-down"></i>
-                </button>
-                <ul
-                  className="dropdown-menu"
-                  aria-labelledby="dropdownMenuButton1"
-                >
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </li>
-                </ul>
+                  <div className="dropsingleitem">status 1</div>
+                  <div className="dropsingleitem">status 1</div>
+                  <div className="dropsingleitem">status 1</div>
+                </div>
               </div>
-              <div className="dropdown col col1">
-                <button
-                  className="btn border dropdown-toggle col12"
-                  type="button"
-                  id="dropdownMenuButton1"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
+              <div
+                className="colldrop"
+                onClick={() => setpriceDrop(!priceDrop)}
+              >
+                <div className="statusText">Price</div>
+                <div>
+                  <img src={dropdown} />
+                </div>
+                <div
+                  className="dropitems"
+                  style={{ display: priceDrop ? "block" : "none" }}
                 >
-                  Price
-                  <i className="fas fa-caret-down"></i>
-                </button>
-                <ul
-                  className="dropdown-menu"
-                  aria-labelledby="dropdownMenuButton1"
-                >
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </li>
-                </ul>
+                  <div className="dropsingleitem">status 1</div>
+                  <div className="dropsingleitem">status 1</div>
+                  <div className="dropsingleitem">status 1</div>
+                </div>
               </div>
             </div>
-            <div className="dropdown col col11" style={{ marginRight: "3rem" }}>
-              <button
-                className="btn border dropdown-toggle col12"
-                type="button"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+            <div
+              className="colldrop sortbydrop"
+              onClick={() => setsortDrop(!sortDrop)}
+            >
+              <div className="statusText">Sort By</div>
+              <div>
+                <img src={dropdown} />
+              </div>
+              <div
+                className="dropitems "
+                style={{ display: sortDrop ? "block" : "none" }}
               >
-                Sort by
-                <i className="fas fa-caret-down"></i>
-              </button>
-              <ul
-                className="dropdown-menu"
-                aria-labelledby="dropdownMenuButton1"
-              >
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                </li>
-              </ul>
+                <div className="dropsingleitem">status 1</div>
+                <div className="dropsingleitem">status 1</div>
+                <div className="dropsingleitem">status 1</div>
+              </div>
             </div>
           </div>
           {/* <div className="" style={{marginLeft:"40px",}}> */}
-          <div
-            className="profileNftContainer row mx-0 text-center image1"
-            style={{ margin: "2% 2%" }}
-          >
+          <div   className="nftTileContainer row  ntf_row"
+          style={{ justifyContent: "space-between" }}>
+            
             {/* <div className="col-md-3 col-lg-3 col-sm-6/ col-11 images"> */}
-            {nfts.map((nft) => {
+            {[...nfts].map((nft) => {
               const { ipfsUrl, name, salesInfo } = nft;
-              return (
-                <>
-                  <div className="profileNftContainerInner container__tile">
-                    <img
-                      id="nft__photo"
-                      className="nftTileEachImage"
-                      src={ipfsUrl}
-                      alt="/"
-                    />
-                    {/* <img id='like_icon' src={require('../asset//images/Like.png')} /> */}
+              return <NftCardsHome nft={nft} />;
+              {
+                /* <div className="profileNftContainerInner container__tile">
+                    <img className="nftTileEachImage" src={ipfsUrl} alt="/" />
                     <div className="tile__details">
                       <div className="profileNftDetailFirstContainer container__up">
                         <div className="title">{name}</div>
@@ -238,7 +176,6 @@ function CollectionDetails() {
                         </div>
                         <div className="">
                           {4}{" "}
-                          {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
                           <i
                             onClick={handleLike}
                             className="fa-solid fa-heart"
@@ -247,51 +184,51 @@ function CollectionDetails() {
                         </div>
                       </div>
                     </div>
-                  </div>
-                </>
-                // <div
-                //   className="col-md-3 col-lg-3 col-sm-6 col-11 images collectionmob"
-                //   style={{ marginLeft: "35px" }}
-                // >
-                //   <div className="container__tile">
-                //     <img
-                //       id="nft__photo"
-                //       className="img-fluid"
-                //       src={ipfsUrl}
-                //       alt="/"
-                //     />
-                //     {/* <img id='like_icon' src={require('../asset//images/Like.png')} /> */}
-                //     <div className="tile__details">
-                //       <div className="container__up">
-                //         <h6 className="title">{name}</h6>
-                //         <h6 className="title1">{salesInfo.price}</h6>
-                //       </div>
-                //       <div className="container__down">
-                //         <h6 className="value__high">
-                //           <span style={{ color: "black" }}>10</span>
-                //           <span> 20</span>
-                //         </h6>
-                //         <h6 className="value__k">
-                //           5
-                //           <i
-                //             className="far fa-clock"
-                //             style={{ color: "#f54" }}
-                //           ></i>
-                //           <i
-                //             onClick={handleLike}
-                //             className="fa-solid fa-heart"
-                //             style={{
-                //               color: checkLike ? "#ef3643" : "white",
-                //               // border: "1px solid black",
-                //             }}
-                //             // style={{ color: "white" }}
-                //           ></i>
-                //         </h6>
-                //       </div>
-                //     </div>
-                //   </div>
-                // </div>
-              );
+                  </div> */
+              }
+
+              // <div
+              //   className="col-md-3 col-lg-3 col-sm-6 col-11 images collectionmob"
+              //   style={{ marginLeft: "35px" }}
+              // >
+              //   <div className="container__tile">
+              //     <img
+              //       id="nft__photo"
+              //       className="img-fluid"
+              //       src={ipfsUrl}
+              //       alt="/"
+              //     />
+              //     {/* <img id='like_icon' src={require('../asset//images/Like.png')} /> */}
+              //     <div className="tile__details">
+              //       <div className="container__up">
+              //         <h6 className="title">{name}</h6>
+              //         <h6 className="title1">{salesInfo.price}</h6>
+              //       </div>
+              //       <div className="container__down">
+              //         <h6 className="value__high">
+              //           <span style={{ color: "black" }}>10</span>
+              //           <span> 20</span>
+              //         </h6>
+              //         <h6 className="value__k">
+              //           5
+              //           <i
+              //             className="far fa-clock"
+              //             style={{ color: "#f54" }}
+              //           ></i>
+              //           <i
+              //             onClick={handleLike}
+              //             className="fa-solid fa-heart"
+              //             style={{
+              //               color: checkLike ? "#ef3643" : "white",
+              //               // border: "1px solid black",
+              //             }}
+              //             // style={{ color: "white" }}
+              //           ></i>
+              //         </h6>
+              //       </div>
+              //     </div>
+              //   </div>
+              // </div>
             })}
           </div>
         </div>

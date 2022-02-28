@@ -9,7 +9,11 @@
   margin-top: 90px;
   color: #191919;
 }
-
+.spinnerloader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .collection-form-outer {
   margin-top: 50px;
 }

@@ -164,10 +164,10 @@ thead {
   font-size: 16px;
 }
 
-.relative > img {
+/* .relative > img {
   height: 250px;
   width: 100%;
-}
+} */
 .absolute {
   display: flex;
   flex-direction: column;
@@ -254,7 +254,7 @@ thead {
 .MyProfilesales {
   display: flex;
   margin-top: 19rem;
-  margin-left: 70px;
+  /* margin-left: 70px; */
 }
 .MyProfilesales > div {
   margin-right: 39px;

@@ -18,8 +18,9 @@
   /* border: 2px solid blue; */
 }
 .profileNftContainerInner img {
-  width: 17.085vw !important;
+  /* width: 17.085vw !important; */
   height: 9.81vw !important;
+  border-radius: 4px;
 }
 .profileNftDetailFirstContainer {
   /* border: 2px solid green; */
@@ -68,6 +69,18 @@
 
   width: 10%;
   /* border: 1px solid red; */
+}
+.profilecover {
+  height: 280px;
+  width: 100%;
+  object-fit: cover;
+}
+.pencilicon {
+  position: absolute;
+  right: 1%;
+  height: 16px;
+  width: 16px;
+  bottom: 8%;
 }
 
 @media only screen and (max-width: 1024px) {

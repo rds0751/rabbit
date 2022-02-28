@@ -10,6 +10,7 @@ import {
   ManageNotiSideBar,
   ManageWalletSideBar,
   RedirectTo,
+  searchNav,
 } from "../../reducers/Action";
 import { ethers } from "ethers";
 
@@ -19,6 +20,7 @@ import { CheckUserByWalletAddress } from "../../services/UserMicroService";
 function Navbar() {
   const navigate = useNavigate();
   const [humburger, setHumburger] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
   const ethereum = window.ethereum;
   const [errorMssg, setErrorMssg] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
@@ -118,6 +120,11 @@ function Navbar() {
       dispatch(ManageNotiSideBar(!isOpenNoti));
     }
   };
+
+  const handleSearch = () => {
+    if (searchInput.trim() != "") dispatch(searchNav(searchInput));
+  };
+
   console.log("logged in user >>> lllll", loggedInUser);
   return (
     <>
@@ -134,41 +141,48 @@ function Navbar() {
                   style={{ width: "50px" }}
                 />
               </Link>
-              <form className=" w-100 p-0 m-0" action="/" method="get">
-                <input
-                  className="form-control form-controlmob "
-                  type="search"
-                  name="searchByName"
-                  placeholder="Search"
-                  aria-label="Search"
+              {/* <form
+                className=" w-100 p-0 m-0"
+                onSubmit={(e) => e.preventDefault()}
+              > */}
+              <input
+                className="form-control form-controlmob "
+                type="search"
+                name="searchByName"
+                placeholder="Search"
+                aria-label="Search"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                style={{
+                  backgroundColor: "#f8f8f8",
+                  width: "75%",
+                  height: "42px",
+                  padding: "0px",
+                  paddingLeft: "10px",
+                  border: "0",
+                }}
+              />
+              <button
+                className="screachbtn"
+                onClick={handleSearch}
+                // type="submit"
+                style={{
+                  border: "0",
+                  width: "35px",
+                  backgroundColor: "#f8f8f8",
+                  marginLeft: "5px",
+                }}
+              >
+                <i
+                  className="fa fa-search"
                   style={{
-                    backgroundColor: "#f8f8f8",
-                    width: "75%",
-                    height: "42px",
-                    padding: "0px",
-                    paddingLeft: "10px",
-                    border: "0",
+                    width: "42px",
+                    height: "50",
                   }}
-                />
-                <button
-                  className="screachbtn"
-                  style={{
-                    border: "0",
-                    width: "35px",
-                    backgroundColor: "#f8f8f8",
-                    marginLeft: "5px",
-                  }}
-                >
-                  <i
-                    className="fa fa-search"
-                    style={{
-                      width: "42px",
-                      height: "50",
-                    }}
-                    aria-hidden="true"
-                  ></i>
-                </button>
-              </form>
+                  aria-hidden="true"
+                ></i>
+              </button>
+              {/* </form> */}
             </div>
 
             <div className="search_box">

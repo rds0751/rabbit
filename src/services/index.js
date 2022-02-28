@@ -6,6 +6,7 @@
 import { httpConstants } from "../constants";
 import { BASE_URL, BASE_URL2 } from "../reducers/Constants";
 import { httpService } from "../utility/httpService";
+import { AuthToken } from "./UserAuthToken";
 
 // export * from './user'
 
@@ -20,7 +21,7 @@ export const addWalletAddress = async (wallet_address) => {
         wallet_address,
       }),
     });
-    console.log(res,"<<<<datawalletaddress")
+    console.log(res, "<<<<datawalletaddress");
     const result = await res.json();
     const user = result.responseData;
     return user;
@@ -31,11 +32,10 @@ export const addWalletAddress = async (wallet_address) => {
 
 export const updateUserProfile = async (data, userId) => {
   try {
+    console.log(AuthToken);
     const res = await fetch(`${BASE_URL}/api/v1/user/${userId}`, {
       method: httpConstants.METHOD_TYPE.PUT,
-      headers: {
-        "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON,
-      },
+      headers: AuthToken,
       body: JSON.stringify(data),
     });
     const result = await res.json();
