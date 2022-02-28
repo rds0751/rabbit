@@ -230,8 +230,8 @@ function Navbar() {
                   <li
                     className={
                       location.pathname.includes("marketplace")
-                        ? "nav-item li_underline"
-                        : "nav-item"
+                        ? "nav-items li_underline"
+                        : "nav-items"
                     }
                   >
                     <Link
@@ -249,8 +249,8 @@ function Navbar() {
                   <li
                     className={
                       location.pathname.includes("leader-board")
-                        ? "nav-item li_underline"
-                        : "nav-item"
+                        ? "nav-items li_underline"
+                        : "nav-items"
                     }
                   >
                     <Link
@@ -269,8 +269,8 @@ function Navbar() {
                   <li
                     className={
                       location.pathname.includes("resource")
-                        ? "nav-item dropdown li_underline"
-                        : "nav-item dropdown"
+                        ? "nav-items dropdown li_underline"
+                        : "nav-items dropdown"
                     }
                   >
                     <Link

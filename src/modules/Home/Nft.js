@@ -125,8 +125,10 @@ function NftPage() {
   const [handleLike, setHandleLike] = useState(true);
 
   const likeNft = (id) => {
+    alert(id)
     const data = {
       contentId: id,
+      // addedBy:loggedInUser?._id,
       // addedBy: user.addUserData._id,
     };
     addLikeNft(data);
@@ -198,6 +200,7 @@ function NftPage() {
 
           {nfts.map((nft) => {
             const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
+            // console.log("[[[[[[[",biddingDetails.minPrice)
             const route = "nft-information/" + _id;
 
             // const { startDate, endDate } = biddingDetails;
