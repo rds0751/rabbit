@@ -543,9 +543,15 @@ height: 47px;
 }
 .left_section_nav li {
   /* margin-left: 61px; */
-  margin-left: 35px;
+  /* margin-left: 35px; */
   display: flex;
   align-items: center;
+}
+.nav-item{
+  margin-right: 60px;
+}
+.create-button{
+  margin-right: 28.62px;
 }
 .left_section_nav .btnnav {
   /* padding: 5px 30px; */
@@ -595,7 +601,8 @@ height: 47px;
   color: #828282 !important;
 }
 .nav-link.navlink_active {
-  font-weight: 600;
+  
+  font:normal normal 600 16px/25px Poppins;
   color: #191919 !important;
 }
 .unerLine {

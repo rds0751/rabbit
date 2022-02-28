@@ -453,9 +453,7 @@ thead {
 .justify {
   justify-content: flex-start;
 }
-.icon-img {
-  margin-left: 14rem;
-}
+
 
 .icon-img2 {
   margin-left: 13.5rem;
@@ -789,4 +787,52 @@ thead {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.nft-name{
+  color: #191919;
+  font-weight: bold;
+  font-size:32px;
+}
+.text{
+  color:#191919;
+  font-size:16px;
+}
+.nft-value{
+  color:#16AB6E;
+  font-weight:bold;
+  font-size:16px;
+}
+.clock-icon{
+  width:22px;
+  color:#EF4F36;
+}
+.time{
+  color:#191919;
+  font-size:16px;
+  font-weight:500;
+}
+.fw-b{
+  font-weight:bold;
+}
+@media screen and (max-width: 375px){
+  .nft-name{
+    font-size:18px;
+  }
+  .text{
+    font-size:14px;
+  }
+  .nft-value{
+    font-size:14px;
+  }
+  .clock-icon{
+    width:18px;
+  }
+  .time{
+    font-size:14px
+  }
+}
+@media screen and (min-width:376px) and (max-width: 768px){
+  .nft-name{
+    font-size:20px;
+  }
 }
