@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Image from "../../assets/images/img-format.png";
+import ehereum from "../../assets/images/ehereum.png";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import {
@@ -22,11 +23,14 @@ horizontal: center;
 `;
 
 
+import "../../assets/styles/createSingleNft.css";
+import UploadSingleNft from "./CreateSingleUploadFile";
 // import "../../assets/styles/Leader.css"
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 const Button = styled.button``;
 function CreateSingleNFT(props) {
   console.log("ppppppppppppp",props?.loaderState)
+  console.log("ppppppppppppp", props?.isNftCreated);
   const [collectionData, setCollectionData] = useState([]);
   const [selectFile, setSelectFile] = useState("");
   const [collectionId, setCollectionId] = useState("");
@@ -36,18 +40,17 @@ function CreateSingleNFT(props) {
   // >>>> This is user id
   const { user } = useSelector((state) => state);
   const navigation = useNavigate();
-  const { loggedInUser,walletAddress } = user;
+  const { loggedInUser, walletAddress } = user;
+  const [checkDisable, setcheckDisable] = useState(true);
   // console.log(user.addUserData._id, "<<<< user data");
   // -------------------------------
   const name = useRef("");
   const price = useRef("");
   const description = useRef("");
-  const blockchain = useRef("");
+  const blockchain = useRef("Ethereum");
   const ipfsUrl = useRef("");
   const createdBy = loggedInUser?._id;
   useEffect(async () => {
-    // const collectionData = await getCollection();
-    // setCollectionData(collectionData);
     if (loggedInUser == null) {
       navigation("/add-wallet");
     }
@@ -85,7 +88,37 @@ function CreateSingleNFT(props) {
     // if (result.success) ipfsUrl.current = result.responseData;
     // console.log(result);
   };
+  const checkChanges = () => {
+    if (name.current && price.current && description.current) {
+      if (
+        name.current != "" &&
+        price.current != "" &&
+        description.current != "" &&
+        selectFile != ""
+      ) {
+        setcheckDisable(false);
+      }
+    }
+  };
+
   const handleSubmit = (e) => {
+    if (
+      name.current == "" ||
+      price.current == "" ||
+      description.current == "" ||
+      selectFile == ""
+    ) {
+      // setcheckDisable(false);
+      toast.error("Enter The Required Field");
+      return null;
+    }
+    // if(price.current=="")
+    console.log(
+      price.current,
+      name.current,
+      description.current,
+      "<<<<price current "
+    );
     const addIPFS = async () => {
       // console.log("address of owner", walletAddress.address)
       console.log("file", selectFile);
@@ -97,8 +130,7 @@ function CreateSingleNFT(props) {
         blockchain: blockchain.current,
         createdBy: loggedInUser._id,
         collection: collectionId,
-        ownerAddress: walletAddress.address
-
+        ownerAddress: walletAddress.address,
       });
       // setloader(true)
 
@@ -110,8 +142,7 @@ function CreateSingleNFT(props) {
         blockchain: blockchain.current,
         createdBy: loggedInUser._id,
         collection: collectionId,
-        ownerAddress: walletAddress.address
-
+        ownerAddress: walletAddress.address,
       });
       // setloader(false)
 
@@ -149,19 +180,27 @@ function CreateSingleNFT(props) {
     //     console.log(result, "<error");
     //   });
   };
+  console.log(selectFile, "<<<s");
   return (
     <>
-    {
-      props?.loaderState?<div className= "center"> <Oval  vertical= "top" horizontal="center"   color="#00BFFF" height={30} width={30} /></div>:""
-    }
-      <div>
-      {/* {loader?<div><Oval color="#00BFFF" height={80} width={80} /></div> : "jfdskjdjdjd"} */}
-        <div className="text-center mt-5">
-          <h4 className="create-nft-font">Create NFT</h4>
-        </div>
-        <div className="row no-gutters create_singlemob">
-          <div className="col-sm-3 col-12 col-xs-12 createnft_mob">
-            <label htmlFor="email" className="form-label">
+      <ToastContainer
+        position="top-center"
+        autoClose={6000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <div className="">
+        <div className="create-nft-text">Create NFT</div>
+      </div>
+      <div className="create-single-nft-outer">
+        <div className="create-nft-form">
+          <div className="nft-file-upload">
+            <label htmlFor="email" className="form-key">
               Upload File*
             </label>
             {/* <div className="card single-nft-card p-5"> */}
@@ -176,18 +215,17 @@ function CreateSingleNFT(props) {
             >
               {/* <input {...getInputProps()} /> */}
 
-            <Button
-              // onClick={handleClick}
-              style={{ border: "none", backgroundColor: "#fff" }}
-            >
-              <ImageFile onChange={(e) => setSelectFile(e.target.files[0])} />
-              {/* <UploadFile onChange={(e) => console.log("iii",(e.target.files[0]))} /> */}
-              {/* <input type="file" onChange={(e) => { console.log("oooo", e) }} /> */}
-              <img
-                src={Image}
-                style={{ width: "100px", marginTop: "3em", color: "#366EEF" }}
+            <div className="inpput-image-wrap">
+              {/* <ImageFile onChange={(e) => setSelectFile(e.target.files[0])} /> */}
+              <UploadSingleNft
+                onChange={(e) => setSelectFile(e.target.files[0])}
               />
-            </Button>
+              {/* <UploadFile onChange={(e) => console.log("iii",(e.target.files[0]))} /> */}
+              {/* <img src={} /> */}
+              {/* <span className="">
+                Supported(JPG,PNG,GIF,SVG,MP4, WEBM,WAV) Max size 40mb
+              </span> */}
+            </div>
             {/* <img
                 src={Image}
                 style={{ width: "100px", marginTop: "3em", color: "#366EEF" }}
@@ -200,7 +238,7 @@ function CreateSingleNFT(props) {
             {/* <input
                 type="file"
                 style={{ width: "2rem" }}
-                // className="form-control"
+                // className="form-control-1"
                 // placeholder="Write your name"
                 // name="email"
                 // style={{ display: "none" }}
@@ -212,118 +250,133 @@ function CreateSingleNFT(props) {
                   Browse
               </span> */}
             {/* </div> */}
-            <span className="text-secondary font-13">
-              Supported(JPG,PNG,GIF,SVG,MP4, WEBM,WAV) Max size 40mb
-            </span>
           </div>
-          <div className="col-sm-5 col-12 col-xs-12">
-            <div className="singlenft-form-box">
-              <div
-                className="suggestion-form  p-4 "
-                // onSubmit={(e) => handleSubmit(e)}
-              >
-                <div className="mb-3 mt-3">
-                  <label htmlFor="email" className="form-label input-heading">
-                    Name*
-                  </label>
-                  <input
-                    type="name"
-                    className="form-control"
-                    name="email"
-                    onChange={(e) => (name.current = e.target.value)}
-                  />
+          <div className="single-form">
+            <div className="">
+              <label htmlFor="email" className=" input-label">
+                Name*
+              </label>
+              <input
+                type="email"
+                className="form-control-1"
+                name="email"
+                onChange={(e) => {
+                  name.current = e.target.value;
+                  checkChanges();
+                }}
+              />
+            </div>
+            <div className="">
+              <label htmlFor="email" className=" input-label">
+                Price*
+              </label>
+              <input
+                type="price"
+                className="form-control-1"
+                min="0"
+                type="number"
+                onChange={(e) => {
+                  price.current = e.target.value;
+                  checkChanges();
+                }}
+              />
+            </div>
+            <div className="">
+              <label htmlFor="comment" className="input-label pb-2">
+                Description*
+              </label>
+              <textarea
+                className="form-control-1 text-area-input"
+                rows="4"
+                name="text"
+                placeholder="Write description"
+                onChange={(e) => {
+                  description.current = e.target.value;
+                  checkChanges();
+                }}
+              ></textarea>
+              <span className="">0 of 1000 characters used</span>
+            </div>
+            <div className="">
+              <div className="create-collection">
+                <div
+                  htmlFor="collection"
+                  className="input-label collection-label"
+                >
+                  Collection
                 </div>
-                <div className="mb-3 mt-3">
-                  <label htmlFor="email" className="form-label input-heading">
-                    Price
-                  </label>
-                  <input
-                    type="name"
-                    className="form-control"
-                    name="Number"
-                    onChange={(e) => (price.current = e.target.value)}
-                  />
-                </div>
-                <div className="mb-3 mt-3">
-                  <label htmlFor="comment" className="input-heading pb-2">
-                    Description*
-                  </label>
-                  <textarea
-                    className="form-control"
-                    rows="4"
-                    name="text"
-                    placeholder="Write description"
-                    onChange={(e) => (description.current = e.target.value)}
-                  ></textarea>
-                  <span className="text-secondary font-13">
-                    0 of 1000 characters used
-                  </span>
-                </div>
-                <div className="mb-3 mt-3">
-                  <div className="d-flex justify-content-between">
-                    <label htmlFor="collection" className="input-heading">
-                      Collection
-                      <Link
-                        to="/create-nft"
-                        className=" createbtn"
-                        style={{
-                          textDecoration: "none",
-                          marginLeft: "23em",
-                          fontWeight: "normal",
-                        }}
-                      >
-                        <div>Create</div>
-                      </Link>
-                    </label>
-                  </div>
-                  {/* <Link>Create</Link> */}
-                  <select
-                    onChange={(e) => setCollectionId(e.target.value)}
-                    className="form-select mt-3 font-13 text-secondary "
+
+                <div>
+                  <Link
+                    to="/create-nft"
+                    style={{
+                      textDecoration: "none",
+                      fontWeight: "normal",
+                    }}
                   >
-                    <option>Select Category</option>
-                    {collectionData.map((item) => (
-                      <option value={item._id}>{item.name}</option>
-                    ))}
+                    Create
+                  </Link>
+                </div>
+              </div>
+              {/* <Link>Create</Link> */}
+              <select
+                onChange={(e) => {
+                  setCollectionId(e.target.value);
+                  checkChanges();
+                }}
+                className="form-control-1 category-select"
+              >
+                <option>Select collection</option>
+                {collectionData.map((item) => (
+                  <option className="option" value={item._id}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="mb-3 mt-3">
+              <label htmlFor="email" className="input-label">
+                Blockchain*
+              </label>
+              {/* <select
+                onChange={(e) => {
+                  blockchain.current = e.target.value;
+                  checkChanges();
+                }}
+                className="form-control-1"
+              >
+                <option value="">Select Blockchain</option>
+                <option value="Ethereum">Ehtereum</option>
+              </select> */}
+              <div className="block-chain-container">
+                <div>
+                  <img src={ehereum} height="32px" />
+                </div>
+                <div className="block-chain-right">
+                  <select
+                    className="input-box-1 rm-border"
+                    onChange={(e) => (blockchain.current = e.target.value)}
+                  >
+                    <option value="">Select Category</option>
+                    <option selected value="Ethereum">
+                      Ethereum
+                    </option>
                   </select>
                 </div>
-                <div className="mb-3 mt-3">
-                  <label htmlFor="email" className="form-label input-heading">
-                    blockchain*
-                  </label>
-                  <input
-                    type="name"
-                    className="form-control bg-light"
-                    placeholder="Ethereum"
-                    id="ethereum"
-                    name="email"
-                    onChange={(e) => (blockchain.current = e.target.value)}
-                  />
-                </div>
-                <button
-                  type="submit"
-                  onClick={handleSubmit}
-                  className="btn btn-primary mt-4 w-100"
-                >
-                  Create
-                </button>
-
               </div>
             </div>
+            <button
+              type="submit"
+              onClick={handleSubmit}
+              className="submit-button"
+              style={{ opacity: checkDisable ? 0.6 : 1 }}
+              disabled={checkDisable}
+            >
+              Create
+            </button>
           </div>
         </div>
       </div>
-      <ToastContainer
-        position="top-center"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
     </>
   );
 }

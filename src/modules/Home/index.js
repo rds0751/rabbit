@@ -173,6 +173,16 @@ export default class NftDetail extends BaseComponent {
             Utils.apiSuccessToast("Your nft has been updated for put on sell successfully.");
         }
     };
+    if (!this.state.responseData._id) return;
+    let [error, result] = await Utils.parseResponse(
+      ContentService.removeFromSale(requestData)
+    );
+    console.log("---", result);
+    if (error || !result) {
+      return Utils.apiFailureToast(error || "Unable to update Nft content.");
+    }
+    this.setState({ nftDetails: result });
+  };
 
     removeNftFromSale = async (data) => {
         this.setState({ loaderState: true })
@@ -211,6 +221,8 @@ export default class NftDetail extends BaseComponent {
         }
     };
 
+    Utils.apiSuccessToast(message);
+  };
 
     render() {
         return (
@@ -222,11 +234,11 @@ export default class NftDetail extends BaseComponent {
                     // salesInfo:null
                     loaderState={this.state.loaderState}
 
-                    BuyNowNft={this.BuyNowNft}
-                    sellNowNft={this.sellNowNft}
-                    removeNftFromSale={this.removeNftFromSale}
-                />
-            </>
-        );
-    }
+          BuyNowNft={this.BuyNowNft}
+          sellNowNft={this.sellNowNft}
+          removeNftFromSale={this.removeNftFromSale}
+        />
+      </>
+    );
+  }
 }

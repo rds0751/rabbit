@@ -6,31 +6,34 @@ import "../../assets/styles/Leader.css";
 import { Link } from "react-router-dom";
 import { AbstractApi } from "../../constants/LeaderBoardApi copy";
 import { useParams } from "react-router-dom";
-import { getCollection, getNftsByCollectionId } from "../../services/webappMicroservice";
+import {
+  getCollection,
+  getNftsByCollectionId,
+} from "../../services/webappMicroservice";
 
-function CollectionDetails()  {
+function CollectionDetails() {
   const collectionId = useParams();
-  const [collection, setCollection] = useState([])
-  const [nfts, setNfts] = useState([])
+  const [collection, setCollection] = useState([]);
+  const [nfts, setNfts] = useState([]);
+  const [checkLike, setcheckLike] = useState(false);
   useEffect(() => {
-    getCollection(collectionId.id).then(response=>setCollection(response))
-    getNftsByCollectionId(collectionId.id).then(response=>setNfts(response))
-  })
-  const { imageUrl, coverUrl, name} = collection
-    return (
-      <>
+    getCollection(collectionId.id).then((response) => setCollection(response));
+    getNftsByCollectionId(collectionId.id).then((response) =>
+      setNfts(response)
+    );
+  });
+  const { imageUrl, coverUrl, name } = collection;
+  const handleLike = () => {
+    setcheckLike(!checkLike);
+  };
+  return (
+    <>
       <div>
         <div className="position-relative relative">
-          <img
-            src= { coverUrl }
-            alt=""
-          />
+          <img src={coverUrl} alt="" />
         </div>
         <div className="position-absolute absolute">
-          <img
-            src= { imageUrl }
-            alt=""
-          />
+          <img src={imageUrl} alt="" />
           <h2>{name}</h2>
           <p style={{ marginTop: "10px", marginBottom: "0px" }}>
             The abstract illusion is a collection of NFT which consist
@@ -214,10 +217,18 @@ function CollectionDetails()  {
                       </h6>
                       <h6 className="value__k">
                         5
-                        {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
                         <i
+                          className="far fa-clock"
+                          style={{ color: "#f54" }}
+                        ></i>
+                        <i
+                          onClick={handleLike}
                           className="fa-solid fa-heart"
-                          style={{ color: "#ef3643" }}
+                          style={{
+                            color: checkLike ? "#ef3643" : "white",
+                            // border: "1px solid black",
+                          }}
+                          // style={{ color: "white" }}
                         ></i>
                       </h6>
                     </div>
@@ -228,8 +239,8 @@ function CollectionDetails()  {
           })}
         </div>
       </div>
-      </>
-    );
+    </>
+  );
 }
 
 export default CollectionDetails;

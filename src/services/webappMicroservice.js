@@ -1,14 +1,17 @@
-import { httpService } from '../utility/httpService';
-import { httpConstants } from '../constants';
-import { BASE_URL } from '../reducers/Constants';
+import { httpService } from "../utility/httpService";
+import { httpConstants } from "../constants";
+import { BASE_URL } from "../reducers/Constants";
 import axios from "axios";
+import { AuthToken } from "./UserAuthToken";
 
 export function getNfts(requestData) {
   // let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts";
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts?" + requestData;
+  let url =
+    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts?" + requestData;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
-    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    AuthToken,
     requestData,
     url
   )
@@ -32,7 +35,7 @@ export const getNft = async (requestData, successCallBack) => {
   // alert("clled getNft")
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft/" + requestData;
-  const { data } = await axios.get(url);
+  const { data } = await axios.get(url, {headers:AuthToken});
   if (data.success) {
     successCallBack(data.responseData);
   } else {
@@ -64,7 +67,8 @@ export function getCollections(requestData) {
   let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/collections";
   return httpService(
     httpConstants.METHOD_TYPE.GET,
-    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    AuthToken,
     requestData,
     url
   )
@@ -85,9 +89,13 @@ export function getCollections(requestData) {
 
 export function getCollection(requestData) {
   let url =
-    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/collection/" + requestData ;
-  return httpService(httpConstants.METHOD_TYPE.GET,
-    { 'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    process.env.REACT_APP_WEBAPP_MICROSERVICE +
+    "api/v1/collection/" +
+    requestData;
+  return httpService(
+    httpConstants.METHOD_TYPE.GET,
+    // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    AuthToken,
     {},
     url
   )
@@ -114,7 +122,8 @@ export function getNftsByCollectionId(requestData) {
     "/nfts";
   return httpService(
     httpConstants.METHOD_TYPE.GET,
-    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    AuthToken,
     requestData,
     url
   )
@@ -136,7 +145,8 @@ export function getTopNftSales(requestData) {
   let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/get-top-nfts";
   return httpService(
     httpConstants.METHOD_TYPE.GET,
-    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    AuthToken,
     requestData,
     url
   )
@@ -169,10 +179,14 @@ export async function getNameImageOfUser(_id) {
   }
 }
 export function getNotificationListById(requestData) {
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/notification/" + requestData;
+  let url =
+    process.env.REACT_APP_WEBAPP_MICROSERVICE +
+    "api/v1/notification/" +
+    requestData;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
-    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    AuthToken,
     requestData,
     url
   )
@@ -195,7 +209,8 @@ export function addNftReport(requestData) {
   let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/add-nft-report";
   return httpService(
     httpConstants.METHOD_TYPE.POST,
-    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    AuthToken,
     requestData,
     url
   )
@@ -230,7 +245,8 @@ export function addLikeNft(requestData) {
   let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft/like";
   return httpService(
     httpConstants.METHOD_TYPE.POST,
-    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    AuthToken,
     requestData,
     url
   )
