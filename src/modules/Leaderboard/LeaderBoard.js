@@ -266,12 +266,12 @@ function LeaderBoard() {
           </div>
         </div>
 
-        <div className="card  mb-4 leadercolmob">
+        <div className="card-small  mb-4 leadercolmob">
           <div
             className="card-header py-3"
             style={{ backgroundColor: "#f8f8f8" }}
           >
-            <ul className="nav nav-pills" id="pills-tab" role="tablist">
+            <ul className="nav nav-pills" id="pills-tab" role="tablist" style={{ justifyContent: "space-between" }}>
               <li className="nav-item">
                 <a
                   className="nav-link active"
@@ -355,23 +355,32 @@ function LeaderBoard() {
             </ul>
           </div>
           <div className="card-body">
-            {PendingAcceptedCreated === "pending" ? (
-              <BuildPendingAcceptedRejectedBlock apiData={Pending} />
-            ) : (
-              <></>
-            )}
+            <div>
+              {PendingAcceptedCreated === "pending" ? (
+                <BuildPendingAcceptedRejectedBlock apiData={Pending} />
+              ) : (
+                <>
+                </>
+              )}
 
-            {PendingAcceptedCreated === "accepted" ? (
-              <BuildPendingAcceptedRejectedBlock apiData={topSellers} />
-            ) : (
-              <></>
-            )}
+            </div>
+            <div>
+              {PendingAcceptedCreated === "accepted" ? (
+                <BuildAcceptedBlock apiData={topSellers} />
+              ) : (
+                <>
+                </>
+              )}
+            </div>
+            <div>
 
-            {PendingAcceptedCreated === "rejected" ? (
-              <BuildPendingAcceptedRejectedBlock apiData={Rejected} />
-            ) : (
-              <></>
-            )}
+              {PendingAcceptedCreated === "rejected" ? (
+                <BuildRejectedBlock apiData={topCollections} />
+              ) : (
+                <>
+                </>
+              )}
+            </div>
           </div>
         </div>
         <div className="topnft-section">
@@ -445,7 +454,7 @@ function LeaderBoard() {
               const { cdnUrl, name, ownedBy, maxPrice2, daysLeft } =
                 curElem;
               return (
-                <div className="col-md-3 col-lg-3 col-sm-6 col-11 p-0">
+                <div className="col-md-3 col-lg-3 col-sm-12 p-0">
                   <div className="container__tile">
                     <img
                       id="nft__photo"
@@ -495,25 +504,102 @@ function LeaderBoard() {
 }
 const BuildPendingAcceptedRejectedBlock = ({ apiData }) => {
   return (
-    <div className="leaderboardTopDetails">
-      {apiData.map((curElem) => {
-        const { Image, Heading, SubHead1, SubHead2 } = curElem;
-        return (
-          <>
-            <div className="leaderboardTopDetailsRow">
-              <img src={Image} alt="" />
-              <div className="LeaderboardInsideDetails">
-                <h2>{Heading}</h2>
-                <p>
-                  {SubHead1}
-                  <span>{SubHead2}</span>
-                </p>
+    <div>
+      <div className="leaderboardTopDetails">
+        {apiData.map((curElem) => {
+          const { Image, Heading, SubHead1, SubHead2 } = curElem;
+          return (
+            <>
+              <div className="leaderboardTopDetailsRow">
+                <img src={Image} alt="" />
+                <div className="LeaderboardInsideDetails">
+                  <h2>{Heading}</h2>
+                  <p>
+                    {SubHead1}
+                    <span>{SubHead2}</span>
+                  </p>
+                </div>
               </div>
-            </div>
-            <hr className="hr" />
-          </>
-        );
-      })}
+              <hr className="hr" />
+            </>
+          );
+        })}
+      </div>
+      <div className="view-more">
+        <Link className="view" to="/top-bidder" style={{ paddingBottom: "inherit" }}>
+          {" "}
+          View More
+        </Link>
+      </div>
+    </div>
+  );
+};
+const BuildAcceptedBlock = ({ apiData }) => {
+  return (
+    <div>
+      <div className="leaderboardTopDetails">
+        {apiData.map((curElem) => {
+          const { Image, sellerFirstName, sellerLastName, SubHead2, totalPurchasedValue } = curElem;
+          return (
+            <>
+              <div className="leaderboardTopDetailsRow">
+                <img className="top-img" src={Image} alt="" />
+                <div className="LeaderboardInsideDetails">
+                  <h2>{sellerFirstName}{sellerLastName}</h2>
+                  <p style={{ display: 'flex' }}>
+                    ETH
+                    <span>{totalPurchasedValue}</span>
+                  </p>
+                </div>
+              </div>
+              <hr className="hr" />
+            </>
+          );
+        })}
+      </div>
+      {apiData.length === 0 && (<div>
+        <h1>No Data Found</h1>
+      </div>)}
+      <div className="view-more">
+        <Link className="view" to="/top-seller" style={{ paddingBottom: "inherit" }}>
+          {" "}
+          View More
+        </Link>
+      </div>
+    </div>
+  );
+};
+const BuildRejectedBlock = ({ apiData }) => {
+  return (
+    <div>
+      <div className="leaderboardTopDetails">
+        {apiData.map((curElem) => {
+          const { collectionPhoto, collectionName, nftCount } = curElem;
+          return (
+            <>
+              <div className="leaderboardTopDetailsRow">
+                <img className="top-img" src={collectionPhoto} alt="" />
+                <div className="LeaderboardInsideDetails">
+                  <h2>{collectionName}</h2>
+                  <p style={{ display: 'flex' }}>
+                    {curElem.nftCount}&nbsp;items
+                  </p>
+                </div>
+              </div>
+              <hr className="hr" />
+            </>
+          );
+        })}
+      </div>
+      {apiData.length === 0 && (<div>
+        <h1>No Data Found</h1>
+      </div>)}
+      <div className="view-more">
+        <Link className="view" to="/top-collection" style={{ paddingBottom: "inherit" }}>
+          {" "}
+          View More
+        </Link>
+      </div>
     </div>
   );
 };
