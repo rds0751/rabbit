@@ -12,6 +12,7 @@ import {
   RedirectTo,
 } from "../../reducers/Action";
 import { ethers } from "ethers";
+import "../../assets/styles/topNavBar.css";
 
 import Menu from "./Menu";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
@@ -146,10 +147,11 @@ function Navbar() {
                   }}
                 />
                 <button
-                  className="screachbtn"
+                  className=""
                   style={{
                     border: "0",
-                    width: "35px",
+                    width: "50px",
+                    height:"42px",
                     backgroundColor: "#f8f8f8",
                     marginLeft: "5px",
                   }}
@@ -267,7 +269,7 @@ function Navbar() {
                       </li>
                     </ul>
                   </li>
-                  <li onClick={() => manageNavigation("create")}>
+                  <li className="create-button" onClick={() => manageNavigation("create")}>
                     <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}
                       className="btn btn-primary btnnav"
@@ -291,8 +293,8 @@ function Navbar() {
                       onClick={handleNotiSideBar}
                       className="noti"
                       src={require("../../assets/images/notification.png")}
-                      width="18.51px"
-                      height="21.21px"
+                      width="19px"
+                      height="21px"
                     ></img>
                     {/* </Link> */}
                     {/* </Link> */}
