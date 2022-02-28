@@ -1,12 +1,15 @@
 import { ethers } from "ethers";
 import contractABI from "../assets/abi/abi.json";
-// import Utils from "../../utility";
+import { toast } from "react-toastify";
+
+import Utils from "../utility";
 
 let signer;
 let provider;
 if (!window.ethereum) {
-  alert("Please install metamask ext otherwise you will not able to do tx")
-  // return Utils.apiFailureToast("Please install your wallet");
+  // toast.error("Please install metamask ext otherwise you will not able to do tx");
+  //  alert("")
+  Utils.apiFailureToast("Please install metamask ext otherwise you will not able to do tx");
 }
 else {
   provider = new ethers.providers.Web3Provider(window.ethereum);
