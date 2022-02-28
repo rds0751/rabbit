@@ -141,7 +141,7 @@ export default class NftDetail extends BaseComponent {
                 tokenId: this.state.responseData?.tokenId,
             })
         );
-        console.log("blockchainError=sellNowNft==", blockchainError);
+        console.log("blockchainError=sellNowNft=", blockchainError);
         console.log("blockchainRes==sellNowNft=", blockchainRes);
         if (blockchainError || !blockchainRes) {
             this.setState({ loaderState: false })
