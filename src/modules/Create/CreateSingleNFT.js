@@ -5,6 +5,9 @@ import ethereum from "../../assets/images/ethereum.svg";
 // import { FaCloudUploadAlt } from "react-icons/fa";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import Utils from "../../utility";
+import BlockchainServices from "../../services/blockchainService";
+import getCollection from "../../services/contentMicroservice";
 import {
   // getCollection,
   getCollectionBySingleUser,
@@ -28,6 +31,8 @@ function CreateSingleNFT(props) {
   const [collectionData, setCollectionData] = useState([]);
   const [selectFile, setSelectFile] = useState("");
   const [collectionId, setCollectionId] = useState("");
+  const [ipfsUrl, setIpfsUrl] = useState("");
+  const [cdnUrl, setcdnUrl] = useState("");
   const [uploadFileObj, setUploadFileObj] = useState("");
   const [openMintodal, setOpenMintodal] = useState(false);
 
@@ -42,7 +47,7 @@ function CreateSingleNFT(props) {
   const price = useRef("");
   const description = useRef("");
   const blockchain = useRef("Ethereum");
-  const ipfsUrl = useRef("");
+  // const ipfsUrl = useRef("");
   const createdBy = loggedInUser?._id;
 
   const [desLength, setDesLength] = useState(0);
@@ -68,6 +73,25 @@ function CreateSingleNFT(props) {
           })
         )
       );
+      let formData = new FormData();
+      formData.append("attachment", selectFile[0]);
+      // const [err, ipfsRes] = addIPFS(formData)
+      (async () => {
+        const [err, ipfsRes] = await Utils.parseResponse(
+          getCollection.addIpfs(formData)
+        );
+        if (err || !ipfsRes.ipfsUrl) {
+          toast.error("Unable to add file to IPFS");
+        } else {
+          console.log(ipfsRes, "<<<<ipfs Res");
+          setIpfsUrl(ipfsRes.ipfsUrl);
+          setcdnUrl(ipfsRes.cdnUrl);
+
+
+
+        }
+      })();
+
       // setLogoPresent(true);
     },
   });
@@ -86,6 +110,9 @@ function CreateSingleNFT(props) {
     hiddenFileInput.current.click();
   };
   const handleChange = async (event) => {
+    // let formData = new FormData();
+    // formData.append("attachment", data.nftFile);
+
     console.log(event, "<<<<< event");
     // const fileUploaded = event;
     console.log(event, "<<<<file uploaded");
@@ -117,7 +144,21 @@ function CreateSingleNFT(props) {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    console.log(selectFile, "<<<selected file");
+    let formData = new FormData();
+    formData.append("attachment", selectFile[0]);
+    // const [err, ipfsRes] = addIPFS(formData)
+    const [err, ipfsRes] = await Utils.parseResponse(
+      getCollection.addIpfs(formData)
+    );
+    if (err || !ipfsRes.ipfsUrl) {
+      toast.error("Unable to add file to IPFS");
+    }
+    console.log(err, ipfsRes, "<<<<<<");
+
+    return null;
+
     if (
       name.current == "" ||
       price.current == "" ||
@@ -274,11 +315,11 @@ function CreateSingleNFT(props) {
 
             {/* -----------------------NEW DRA GAND DROP */}
 
-            {/* <div className="draganddropbox" {...getRootProps()}>
+            <div className="draganddropbox" {...getRootProps()}>
               <input {...getInputProps()} />
               <div className="draganddropboxinnerdiv">
                 <img
-                  src={Image}
+                  src={cdnUrl != "" ? cdnUrl : Image}
                   style={{ width: "100px", marginTop: "3em", color: "#366EEF" }}
                 />
                 <span className="draganddropboxinnerdivtextspan">
@@ -289,7 +330,7 @@ function CreateSingleNFT(props) {
                   </span>
                 </span>
               </div>
-            </div> */}
+            </div>
 
             {/* ----------------- */}
           </div>
