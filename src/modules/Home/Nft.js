@@ -15,13 +15,8 @@ const queryString = require("query-string");
 function NftPage() {
   const [nfts, setNfts] = useState([]);
   const { user } = useSelector((state) => state);
-<<<<<<< HEAD
-const { loggedInUser, walletAddress } = user;
-
-=======
   const [toggleNft, setToggleNft] = useState(true);
   const [type, setType] = useState("");
->>>>>>> d421b2b1325883763ac560ea376dcc38a8112630
   const search = useLocation().search;
   const name = new URLSearchParams(search).get("searchByName");
 
@@ -59,24 +54,13 @@ const { loggedInUser, walletAddress } = user;
     alert(id)
     const data = {
       contentId: id,
-      addedBy:loggedInUser?._id,
+      // addedBy:loggedInUser?._id,
       // addedBy: user.addUserData._id,
-<<<<<<< HEAD
-    }
-    const res=addLikeNft(data)
-    console.log("sssss",res)
-
-// console.log("kkkkkkkkkkkkkkkkk",blockchainRes)
-    setHandleLike(!handleLike)
-  }
-  
-=======
     };
     addLikeNft(data);
     setHandleLike(!handleLike);
   };
 
->>>>>>> d421b2b1325883763ac560ea376dcc38a8112630
   return (
     <>
       {/* <div className="container ntf_div"> */}
@@ -140,34 +124,12 @@ const { loggedInUser, walletAddress } = user;
             // const days_difference = time_difference / (1000 * 60 * 60 * 24);
 
             return (
-<<<<<<< HEAD
-              <div className=" col-md-6 col-lg-3 col-sm-12 mt-5 nft_card">
-                <div >
-                  <div className="card nft-card-radius border-radius cardmob">
-                    <Link to={route} style={{ textDecoration: "none" }}>
-                      <img
-                        className="img-fluid border-radius nft-img-radius card_imgmob"
-                        src={ipfsUrl}
-                        // src={require("../../assets/images")}
-                        // style={{ width: "270px" }}
-                      />
-                    </Link>
-                    {index}
-                    <img
-                      id="like_icon"
-                      key={index}
-                      onClick={() => likeNft(_id)}
-                      // src={require("../../assets/images/Like.png")}
-                      // src={require("../../assets/images/Like.svg")}
-                        src={handleLike ? Like : likes}
-=======
               <div className=" col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
                 <div className="card nft-card-radius border-radius cardmob">
                   <Link to={route} style={{ textDecoration: "none" }}>
                     <img
                       className="nftTileEachImage img-fluid border-radius nft-img-radius card_imgmob"
                       src={ipfsUrl}
->>>>>>> d421b2b1325883763ac560ea376dcc38a8112630
                     />
                   </Link>
                   <img
@@ -202,14 +164,6 @@ const { loggedInUser, walletAddress } = user;
                           color: "#16AB6E",
                         }}
                       >
-<<<<<<< HEAD
-                        Highest bid:
-                        <span className="font-weight-900">{biddingDetails.minPrice}</span>
-                        <span
-                          className="dayleft_mob"
-                          style={{ marginLeft: "2em", color: "#000" }}
-                        >
-=======
                         {salesInfo?.price + salesInfo?.currency}
                       </span>
                     </div>
@@ -224,7 +178,6 @@ const { loggedInUser, walletAddress } = user;
                       </div>
                       <div>
                         <span className="" style={{ color: "#000" }}>
->>>>>>> d421b2b1325883763ac560ea376dcc38a8112630
                           <i
                             className="far fa-clock"
                             style={{ color: "#f54" }}

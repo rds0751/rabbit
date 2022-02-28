@@ -1,10 +1,20 @@
 import { ethers } from "ethers";
 import contractABI from "../assets/abi/abi.json";
+// import Utils from "../../utility";
 
-const provider = new ethers.providers.Web3Provider(window.ethereum);
-const signer = provider.getSigner();
-// const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS
-const contractAddress = "0xd3E390083BC66d87aFD1457879A2fDDfBBe16e06";
+let signer;
+let provider;
+if (!window.ethereum) {
+  alert("Please install metamask ext otherwise you will not able to do tx")
+  // return Utils.apiFailureToast("Please install your wallet");
+}
+else {
+  provider = new ethers.providers.Web3Provider(window.ethereum);
+  signer = provider.getSigner();
+}
+const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS
+
+// const contractAddress = "0xd3E390083BC66d87aFD1457879A2fDDfBBe16e06";
 const BlockchainServices = {
   mintNFT,
   changeListedPrice,

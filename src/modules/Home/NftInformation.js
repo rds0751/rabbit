@@ -19,12 +19,9 @@ import {
 } from "../../services/contentServices";
 import { toast } from "react-toastify";
 import { getUser } from "../../services/UserMicroService";
-<<<<<<< HEAD
 import { Oval } from  'react-loader-spinner'
 
-=======
 import ListingsTable from "../../common/components/ListingTable";
->>>>>>> d421b2b1325883763ac560ea376dcc38a8112630
 
 export default function NftInformation(props) {
   console.log(props?.responseData, "<<<response");
@@ -46,7 +43,8 @@ export default function NftInformation(props) {
   console.log(
     loggedInUser?._id,
     props?.responseData,
-    "<<<< this is data to match"
+    props?.loaderState,
+    "<<<< this is data toooooooooooooooooooooooooooooooo match"
   );
   // alert(loggedInUser?._id == props?.responseData?.createdBy);
   // useEffect(() => {

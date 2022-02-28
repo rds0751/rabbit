@@ -19,6 +19,7 @@ class Index extends BaseComponent {
       mintData: [],
       isNftCreated: false,
       url: "",
+      loaderState:false
     };
   }
 
@@ -74,7 +75,7 @@ class Index extends BaseComponent {
     //   return Utils.apiFailureToast("Please connect your wallet");
 
     //add to IPFS
-    this.props.dispatchAction(eventConstants.SHOW_LOADER);
+    // this.props.dispatchAction(eventConstants.SHOW_LOADER);
 
     const [err, ipfsRes] = await Utils.parseResponse(
       getCollection.addIpfs(formData)
@@ -107,7 +108,6 @@ class Index extends BaseComponent {
     }
 
     console.log(
-      "checkngggggg-----",
       this.getRequestDataForSaveNftContent(
         tokenId,
         data,
