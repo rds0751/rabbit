@@ -394,6 +394,10 @@ function CreateSingleNFT(props) {
               </div>
             )}
             {/* ----------------- */}
+            <div >
+              <p className="m-0" style={{ color: '#828282', font: '14px Poppins', width: '290px', paddingTop: '20px' }}>Supported(JPG,PNG,GIF,SVG,MP4,WEBM,WAV)</p>
+              <p className="m-0" style={{ color: '#828282', font: '14px Poppins' }}>Max size:40 mb</p>
+            </div>
           </div>
           <div className="single-form">
             <div className="">
