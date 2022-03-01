@@ -138,10 +138,11 @@ function Navbar() {
       <div className="navbar-width">
         <nav className="navbarborder navbar navbar-expand-lg">
           <div
-            className="container container-fluid"
+            // className="container container-fluid"
+            className="container-fluid"
             style={{ backgroundColor: "white" }}
           >
-            <div className="left_navbar d-flex align-items-center">
+            <div className="left_navbar d-flex align-items-center LeftNavBar">
               <Link className="navbrand" to="/" style={{ marginRight: "21px" }}>
                 <img
                   src={require("../../assets/images/logo.png")}
@@ -153,21 +154,14 @@ function Navbar() {
                 onSubmit={(e) => e.preventDefault()}
               > */}
               <input
-                className="form-control form-controlmob "
+                className="form-control form-controlmob inputbox "
                 type="search"
                 name="searchByName"
                 placeholder="Search"
                 aria-label="Search"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
-                style={{
-                  backgroundColor: "#f8f8f8",
-                  width: "75%",
-                  height: "42px",
-                  padding: "0px",
-                  paddingLeft: "10px",
-                  border: "0",
-                }}
+                
               />
               <button
                 className=""
@@ -206,7 +200,7 @@ function Navbar() {
               </form>
             </div>
 
-            <div className="right_navbar d-flex ">
+            <div className="right_navbar d-flex RightNavBar">
               {/* <div
             className="collapse navbar-collapse mobcollapse"
             id="navbarSupportedContent"
@@ -255,12 +249,12 @@ function Navbar() {
                     </Link>
                   </li>
           <NavDropdown title="Resource" id="navbarScrollingDropdown" className={
-                      location.pathname.includes("s")
+                      location.pathname.includes("resource") && !location.pathname.includes("leader-board") && !location.pathname.includes("marketplace") && !location.pathname.includes("create-nft")
                         ? "nav-items dropdown li_underline"
                         : "nav-items dropdown"
                     }>
           <NavDropdown.Item href="/help-center">Help Center</NavDropdown.Item>
-          <NavDropdown.Item href="/suggestion">Suggestion</NavDropdown.Item>
+          <NavDropdown.Item href="/suggestion">Suggestions</NavDropdown.Item>
           </NavDropdown>
 
                   {/* <li
