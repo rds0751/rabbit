@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+
+import {NavDropdown} from 'react-bootstrap';
 // import './Navbar.css'
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -16,6 +18,7 @@ import "../../assets/styles/topNavBar.css";
 
 import Menu from "./Menu";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
+
 // import "../../assets/st.css";
 function Navbar() {
   const navigate = useNavigate();
@@ -31,6 +34,10 @@ function Navbar() {
   const { user, sideBar } = useSelector((state) => state);
   const { userDetails, loggedInUser, walletAddress } = user;
   const { isOpenNoti, isOpenWallet } = sideBar;
+
+
+
+
   console.log(walletAddress, "<<<<this is wallet address");
   // useEffect(() => {
   //   if (window.ethereum) {
@@ -230,13 +237,22 @@ function Navbar() {
                       Leaderboard
                     </Link>
                   </li>
+          <NavDropdown title="Resource" id="navbarScrollingDropdown" className={
+                      location.pathname.includes("s")
+                        ? "nav-items dropdown li_underline"
+                        : "nav-items dropdown"
+                    }>
+          <NavDropdown.Item href="/help-center">Help Center</NavDropdown.Item>
+          <NavDropdown.Item href="/suggestion">Suggestion</NavDropdown.Item>
+          </NavDropdown>
 
-                  <li
+                  {/* <li
                     className={
                       location.pathname.includes("resource")
                         ? "nav-items dropdown li_underline"
                         : "nav-items dropdown"
                     }
+                    
                   >
                     <Link
                       className={
@@ -253,6 +269,7 @@ function Navbar() {
                     >
                       Resource
                     </Link>
+                   
                     <ul
                       className="dropdown-menu"
                       aria-labelledby="navbarDropdown"
@@ -268,7 +285,7 @@ function Navbar() {
                         </Link>
                       </li>
                     </ul>
-                  </li>
+                  </li> */}
                   <li className="create-button" onClick={() => manageNavigation("create")}>
                     <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}
