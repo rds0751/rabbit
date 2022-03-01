@@ -20,19 +20,17 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDropzone } from "react-dropzone";
 import { useSelector } from "react-redux";
 import ImageFile from "./uploadFile";
-import { Oval } from  'react-loader-spinner';
+import { Oval } from "react-loader-spinner";
 import "../../assets/styles/createSingleNft.css";
 import "../../assets/styles/MintModal.css";
 import UploadSingleNft from "./CreateSingleUploadFile";
-
-
 
 // import "../../assets/styles/Leader.css"
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 const Button = styled.button``;
 function CreateSingleNFT(props) {
   console.log("ppppppppppppp", props, "");
-  console.log("ppppppppppppp",props?.loaderState)
+  console.log("ppppppppppppp", props?.loaderState);
   // console.log("ppppppppppppp", props?.isNftCreated);
   const [collectionData, setCollectionData] = useState([]);
   const [selectFile, setSelectFile] = useState("");
@@ -42,12 +40,12 @@ function CreateSingleNFT(props) {
   const [uploadFileObj, setUploadFileObj] = useState("");
   const [openMintodal, setOpenMintodal] = useState(false);
 
-
   // >>>> This is user id
   const { user } = useSelector((state) => state);
   const navigation = useNavigate();
   const { loggedInUser, walletAddress } = user;
   const [checkDisable, setcheckDisable] = useState(true);
+  const [isFileSelected, setIsFileSelected] = useState(false);
   // console.log(user.addUserData._id, "<<<< user data");
   // -------------------------------
   const name = useRef("");
@@ -81,7 +79,14 @@ function CreateSingleNFT(props) {
         )
       );
       let formData = new FormData();
-      formData.append("attachment", selectFile[0]);
+      formData.append(
+        "attachment",
+        acceptedFiles.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          })
+        )[0]
+      );
       // const [err, ipfsRes] = addIPFS(formData)
       (async () => {
         const [err, ipfsRes] = await Utils.parseResponse(
@@ -91,11 +96,10 @@ function CreateSingleNFT(props) {
           toast.error("Unable to add file to IPFS");
         } else {
           console.log(ipfsRes, "<<<<ipfs Res");
+
           setIpfsUrl(ipfsRes.ipfsUrl);
           setcdnUrl(ipfsRes.cdnUrl);
-
-
-
+          setIsFileSelected(true);
         }
       })();
 
@@ -153,18 +157,18 @@ function CreateSingleNFT(props) {
 
   const handleSubmit = async (e) => {
     console.log(selectFile, "<<<selected file");
-    let formData = new FormData();
-    formData.append("attachment", selectFile[0]);
-    // const [err, ipfsRes] = addIPFS(formData)
-    const [err, ipfsRes] = await Utils.parseResponse(
-      getCollection.addIpfs(formData)
-    );
-    if (err || !ipfsRes.ipfsUrl) {
-      toast.error("Unable to add file to IPFS");
-    }
-    console.log(err, ipfsRes, "<<<<<<");
+    // let formData = new FormData();
+    // formData.append("attachment", selectFile[0]);
+    // // const [err, ipfsRes] = addIPFS(formData)
+    // const [err, ipfsRes] = await Utils.parseResponse(
+    //   getCollection.addIpfs(formData)
+    // );
+    // if (err || !ipfsRes.ipfsUrl) {
+    //   toast.error("Unable to add file to IPFS");
+    // }
+    // console.log(err, ipfsRes, "<<<<<<");
 
-    return null;
+    // return null;
 
     if (
       name.current == "" ||
@@ -192,7 +196,7 @@ function CreateSingleNFT(props) {
       //   selectFile[0]
       // );
       console.log("Called IPFx", {
-        nftFile: selectFile,
+        // nftFile: selectFile,
         nftName: name.current,
         price: price.current,
         description: description.current,
@@ -204,7 +208,9 @@ function CreateSingleNFT(props) {
       // setloader(true)
 
       props.createNftHandler({
-        nftFile: selectFile,
+        // nftFile: selectFile,
+        ipfsUrl: ipfsUrl,
+        cdnUrl: cdnUrl,
         nftName: name.current,
         price: price.current,
         description: description.current,
@@ -214,7 +220,6 @@ function CreateSingleNFT(props) {
         ownerAddress: walletAddress.address,
       });
       // setloader(false)
-
     };
     addIPFS();
     // e.preventDefault();
@@ -252,9 +257,20 @@ function CreateSingleNFT(props) {
   console.log(selectFile, "<<<s");
   return (
     <>
-       {
-      props?.loaderState?<div className= "center"> <Oval  vertical= "top" horizontal="center"   color="#00BFFF" height={30} width={30} /></div>:""
-    }
+      {props?.loaderState ? (
+        <div className="center">
+          {" "}
+          <Oval
+            vertical="top"
+            horizontal="center"
+            color="#00BFFF"
+            height={30}
+            width={30}
+          />
+        </div>
+      ) : (
+        ""
+      )}
       <ToastContainer
         position="top-center"
         autoClose={6000}
@@ -289,9 +305,11 @@ function CreateSingleNFT(props) {
 
             <div className="inpput-image-wrap">
               {/* <ImageFile onChange={(e) => setSelectFile(e.target.files[0])} /> */}
-              <UploadSingleNft
+              {/* ----------------------------------------------------- */}
+              {/* <UploadSingleNft
                 onChange={(e) => setSelectFile(e.target.files[0])}
-              />
+              /> */}
+              {/* ----------------------------upload image handleer */}
               {/* <UploadFile onChange={(e) => console.log("iii",(e.target.files[0]))} /> */}
               {/* <img src={} /> */}
               {/* <span className="">
@@ -329,23 +347,52 @@ function CreateSingleNFT(props) {
 
             {/* -----------------------NEW DRA GAND DROP */}
 
-            <div className="draganddropbox" {...getRootProps()}>
-              <input {...getInputProps()} />
-              <div className="draganddropboxinnerdiv">
-                <img
-                  src={cdnUrl != "" ? cdnUrl : Image}
-                  style={{ width: "100px", marginTop: "3em", color: "#366EEF" }}
-                />
-                <span className="draganddropboxinnerdivtextspan">
-                  Drag and Drop or
-                  <span className="draganddropboxinnerdivtextspanbrowse">
-                    {" "}
-                    Browse
+            {!isFileSelected && (
+              <div className="draganddropbox" {...getRootProps()}>
+                <input {...getInputProps()} />
+                <div className="draganddropboxinnerdiv">
+                  <img
+                    src={cdnUrl != "" ? cdnUrl : Image}
+                    style={{
+                      width: "100px",
+                      marginTop: "3em",
+                      color: "#366EEF",
+                    }}
+                  />
+                  <span className="draganddropboxinnerdivtextspan">
+                    Drag and Drop or
+                    <span className="draganddropboxinnerdivtextspanbrowse">
+                      {" "}
+                      Browse
+                    </span>
                   </span>
-                </span>
+                </div>
               </div>
-            </div>
+            )}
 
+            {isFileSelected && (
+              <div className="draganddropbox" {...getRootProps()}>
+                <input {...getInputProps()} />
+                <div className="draganddropboxinnerdiv">
+                  <img
+                    src={cdnUrl != "" ? cdnUrl : Image}
+                    style={{
+                      width: "100%",
+                      // marginTop: "3em",
+                      height: "100%",
+                      color: "#366EEF",
+                    }}
+                  />
+                  {/* <span className="draganddropboxinnerdivtextspan">
+                    Drag and Drop or
+                    <span className="draganddropboxinnerdivtextspanbrowse">
+                      {" "}
+                      Browse
+                    </span>
+                  </span> */}
+                </div>
+              </div>
+            )}
             {/* ----------------- */}
           </div>
           <div className="single-form">
@@ -480,7 +527,7 @@ function CreateSingleNFT(props) {
       </div>
       <div
         className="mint-outer"
-        style={{ display: openMintodal ? "block" : "none" }}
+        style={{ display: openMintodal ? "none" : "none" }}
       >
         <div className="mintbody">
           <div

@@ -22,19 +22,16 @@ function UpperMyItems() {
         </div>
 
         <div className="middle__myitem mt-4">
-          <Link
-            className="item_middle__heading font-weight-700 font-16"
-            to="/my-items"
-          >
+          <div className="item_middle__heading font-weight-700 font-16">
             Single
-          </Link>
-          <Link
+          </div>
+          <div
             className="item_middle__heading font-weight-700 font-16"
             style={{ marginLeft: "1em" }}
-            to="/MyItems_Collection"
+            // to="/MyItems_Collection"
           >
             Collections
-          </Link>
+          </div>
         </div>
         <button type="submit" className="btn btn-primary mt-4 add-btn">
           <span

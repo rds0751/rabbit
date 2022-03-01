@@ -125,7 +125,7 @@ function NftPage() {
   const [handleLike, setHandleLike] = useState(true);
 
   const likeNft = (id) => {
-    alert(id)
+    alert(id);
     const data = {
       contentId: id,
       // addedBy:loggedInUser?._id,
@@ -171,7 +171,11 @@ function NftPage() {
                 style={{ backgroundColor: "white" }}
               >
                 <option value="all">Price range</option>
-                <option value="2">2</option>
+                <option value="1">1</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
               </select>
             </div>
           </div>
@@ -186,8 +190,8 @@ function NftPage() {
               value={filterType.sort}
             >
               <option value="all">Sort By</option>
-              <option value="recently added">Recently Added</option>
-              <option value="recently sold">Recently Sold</option>
+              <option value="1">Recently Added</option>
+              <option value="2">Recently Sold</option>
             </select>
           </div>
         </div>
@@ -278,130 +282,6 @@ function NftPage() {
               // </div>
             );
           })}
-          <div className=" col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
-            <div className="card nft-card-radius border-radius cardmob">
-              {/* <Link to={route} style={{ textDecoration: "none" }}> */}
-                <img
-                  className="nftTileEachImage img-fluid border-radius nft-img-radius card_imgmob"
-                  // src={ipfsUrl}
-                />
-              {/* </Link> */}
-              <img
-                id="like_icon"
-                // onClick={() => likeNft(_id)}
-                // src={require("../../assets/images/Like.png")}
-                // src={require("../../assets/images/Like.svg")}
-                src={handleLike ? Like : likes}
-              />
-              <div
-                className="nftTileEachDetails card-lower"
-                style={{
-                  padding: "0px 14px 0px 12px",
-                }}
-              >
-                <div className="nftTileEachDetailsFirstContainer container__up">
-                  <div
-                    className="nftTileEachDetailsFirstContainerName"
-                    style={{
-                      color: "#191919",
-                      height: "20px",
-                      overflow: "hidden",
-                    }}
-                  >
-                    {/* {name} */}
-                  </div>
-                  <span
-                    className="nftTileEachDetailsFirstContainerValue"
-                    style={{
-                      fontSize: "14px",
-                      fontWeight: "600px",
-                      color: "#16AB6E",
-                    }}
-                  >
-                    {/* {salesInfo?.price + salesInfo?.currency} */}dfdf
-                  </span>
-                </div>
-                <div
-                  className="nftTileEachDetailsSecondContainerValueHighest"
-                  // style={{ marginLeft: "1em" }}
-                >
-                  <div>
-                    {" "}
-                    {/* Highest bid:{" "}
-            <span className="font-weight-900">100</span>{" "} */}
-                  </div>
-                  <div>
-                    <span className="" style={{ color: "#000" }}>
-                      <i className="far fa-clock" style={{ color: "#f54" }}></i>
-                      5 days left
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className=" col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
-            <div className="card nft-card-radius border-radius cardmob">
-              {/* <Link to={route} style={{ textDecoration: "none" }}> */}
-                <img
-                  className="nftTileEachImage img-fluid border-radius nft-img-radius card_imgmob"
-                  // src={ipfsUrl}
-                />
-              {/* </Link> */}
-              <img
-                id="like_icon"
-                // onClick={() => likeNft(_id)}
-                // src={require("../../assets/images/Like.png")}
-                // src={require("../../assets/images/Like.svg")}
-                src={handleLike ? Like : likes}
-              />
-              <div
-                className="nftTileEachDetails card-lower"
-                style={{
-                  padding: "0px 14px 0px 12px",
-                }}
-              >
-                <div className="nftTileEachDetailsFirstContainer container__up">
-                  <div
-                    className="nftTileEachDetailsFirstContainerName"
-                    style={{
-                      color: "#191919",
-                      height: "20px",
-                      overflow: "hidden",
-                    }}
-                  >
-                    {/* {name} */}
-                  </div>
-                  <span
-                    className="nftTileEachDetailsFirstContainerValue"
-                    style={{
-                      fontSize: "14px",
-                      fontWeight: "600px",
-                      color: "#16AB6E",
-                    }}
-                  >
-                    {/* {salesInfo?.price + salesInfo?.currency} */}dfdf
-                  </span>
-                </div>
-                <div
-                  className="nftTileEachDetailsSecondContainerValueHighest"
-                  // style={{ marginLeft: "1em" }}
-                >
-                  <div>
-                    {" "}
-                    {/* Highest bid:{" "}
-            <span className="font-weight-900">100</span>{" "} */}
-                  </div>
-                  <div>
-                    <span className="" style={{ color: "#000" }}>
-                      <i className="far fa-clock" style={{ color: "#f54" }}></i>
-                      5 days left
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
       <ToastContainer
