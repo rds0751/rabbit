@@ -199,9 +199,9 @@ height: 47px;
     margin-right: 0px !important;
     margin-left: 0px !important;
   }
-  .Leader_Board_container {
+  /* .Leader_Board_container {
     margin: 10px;
-  }
+  } */
   .topselller_mob {
     margin-right: 0px !important;
     margin-left: 0px !important;
@@ -547,10 +547,10 @@ height: 47px;
   display: flex;
   align-items: center;
 }
-.nav-items{
+.nav-items {
   margin-right: 60px;
 }
-.create-button{
+.create-button {
   margin-right: 28.62px;
 }
 .left_section_nav .btnnav {
@@ -601,8 +601,7 @@ height: 47px;
   color: #828282 !important;
 }
 .nav-link.navlink_active {
-  
-  font:normal normal 600 16px/25px Poppins;
+  font: normal normal 600 16px/25px Poppins;
   color: #191919 !important;
 }
 .unerLine {
@@ -675,6 +674,7 @@ height: 47px;
   padding-right: 0px;
   margin-left: 0px;
   margin-right: 0px;
+  display: inline !important;
 }
 
 /* .ntf_div {
@@ -778,6 +778,12 @@ height: 47px;
     width: 50px;
     background: #f8f8f8;
     margin-left: 5px;
+  }
+  .search-input-mob, .search-icon-mob{
+    display: none;
+  }
+  .search_box .form-controlmob{
+    width: 100%;
   }
 }
 
@@ -943,6 +949,14 @@ height: 47px;
   }
 }
 
+@media only screen and (max-width: 480px){
+  .wallet_div{
+    width: 100%;
+  }
+  .wallet .empty_div{
+    width: auto;
+  }
+}
 /* @media screen and (max-width: 1400px) {
 
 } */

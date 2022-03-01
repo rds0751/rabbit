@@ -194,7 +194,7 @@ export function getNotificationListById(requestData) {
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
     "api/v1/notification/" +
-    requestData;
+    "6210ce09e9384c0035598c31";
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -203,6 +203,7 @@ export function getNotificationListById(requestData) {
     url
   )
     .then((response) => {
+      console.log(response, "sri")
       if (
         !response.success ||
         response.responseCode !== 200 ||
@@ -263,7 +264,7 @@ export function addLikeNft(requestData) {
     url
   )
     .then((response) => {
-      console.log("likeresponse",response,"<<<<")
+      console.log("likeresponse", response, "<<<<")
       if (
         !response.success ||
         response.responseCode !== 200 ||
