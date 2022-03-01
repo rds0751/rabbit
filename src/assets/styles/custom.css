@@ -36,7 +36,7 @@ ul li .rounded-circle {
   margin-top: 10px;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Assistant:wght@600&family=Atkinson+Hyperlegible&family=Fugaz+One&family=Lato&family=Montserrat:wght@500&family=Poppins:wght@200;500&family=Shadows+Into+Light&family=Shippori+Antique&family=Varela+Round&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Assistant:wght@600&family=Atkinson+Hyperlegible&family=Fugaz+One&family=Lato&family=Montserrat:wght@500&family=Poppins:wght@200;500&family=Shadows+Into+Light&family=Shippori+Antique&family=Varela+Round&display=swap"); */
 * {
   font-family: "Poppins";
 }
@@ -68,7 +68,7 @@ ul {
   padding: 0;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Assistant:wght@600&family=Atkinson+Hyperlegible&family=Fugaz+One&family=Lato&family=Montserrat:wght@500&family=Poppins:wght@500&family=Shadows+Into+Light&family=Shippori+Antique&family=Varela+Round&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Assistant:wght@600&family=Atkinson+Hyperlegible&family=Fugaz+One&family=Lato&family=Montserrat:wght@500&family=Poppins:wght@500&family=Shadows+Into+Light&family=Shippori+Antique&family=Varela+Round&display=swap"); */
 
 .container__tile {
   background-color: #f8f8f8;
@@ -210,7 +210,7 @@ span {
   justify-content: space-between;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Assistant:wght@600&family=Atkinson+Hyperlegible&family=Fugaz+One&family=Lato&family=Montserrat:wght@500&family=Poppins:wght@500&family=Shadows+Into+Light&family=Shippori+Antique&family=Varela+Round&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Assistant:wght@600&family=Atkinson+Hyperlegible&family=Fugaz+One&family=Lato&family=Montserrat:wght@500&family=Poppins:wght@500&family=Shadows+Into+Light&family=Shippori+Antique&family=Varela+Round&display=swap"); */
 
 .upper__heading {
   font-family: "Assistant", sans-serif;
