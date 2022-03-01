@@ -17,6 +17,7 @@ import {
   OPEN_WALLET,
   USER_DETAILS,
   REDIRECT_URL,
+  SEARCH_FROM_NAV,
 } from "./Constants";
 import { ADD_USER, GET_ERRORS, ALL_USERS } from "./Constants";
 import axios from "axios";
@@ -82,7 +83,7 @@ export const allUseraction = () => (dispatch) => {
         });
       }
     });
-}
+};
 
 export const RedirectTo = (data) => (dispatch) => {
   dispatch({ type: REDIRECT_URL, payload: data });
@@ -94,4 +95,8 @@ export const ManageNotiSideBar = (data) => (dispatch) => {
 export const ManageWalletSideBar = (data) => (dispatch) => {
   // alert("manageNotiWallet");
   dispatch({ type: OPEN_WALLET, payload: data });
+};
+
+export const searchNav = (data) => (dispatch) => {
+  dispatch({ type: SEARCH_FROM_NAV, payload: data });
 };

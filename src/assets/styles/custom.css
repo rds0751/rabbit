@@ -1,4 +1,3 @@
-
 .Collections__container {
   margin-top: 50px;
   width: 280px;
@@ -74,7 +73,7 @@ ul {
 .container__tile {
   background-color: #f8f8f8;
   /* padding: 13px 13px 13px 13px; */
-  border-radius: 13px;
+  border-radius: 4px;
   margin-top: 1rem;
 }
 .container__tile > img {
@@ -387,7 +386,7 @@ span {
   font-weight: 600;
 }
 input#ethereum {
-  background-image: url("../images/ehereum.png");
+  background-image: url("../images/ethereum.svg");
   background-size: contain;
   background-repeat: no-repeat;
   text-indent: 20px;
@@ -478,6 +477,7 @@ input::-webkit-input-placeholder {
 .btn-choose-file {
   /* margin-left: -8em !important; */
   margin: 1rem;
+  margin-left: 2rem;
 }
 /* -----------------Edit Profile css------------ */
 
@@ -834,14 +834,19 @@ select:focus-visible {
     width: 143px;
   } */
 }
-
+.center {
+margin:auto;
+width:10%;
+padding:10px;
+transform-origin: center;
+}
 /*  1920 */
 @media only screen and (max-width: 2000px) and (min-width: 1600px) {
   .nft-img-radius {
     width: 100%;
     /* width: 326px; */
     height: 187.19px;
-    object-fit: contain;
+    object-fit: cover;
   }
   .nft_div {
     padding: 0px !important;
@@ -859,13 +864,12 @@ select:focus-visible {
   }
 }
 
-@media screen and (max-width:764px) {
-  
-.tabs-list{
-  display: flex;
-  margin-top: 20px;
-  font-size:14px;
-  color: #828282;
-  cursor: pointer;
-}
+@media screen and (max-width: 764px) {
+  .tabs-list {
+    display: flex;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #828282;
+    cursor: pointer;
+  }
 }

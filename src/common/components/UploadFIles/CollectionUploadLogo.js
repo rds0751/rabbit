@@ -61,7 +61,7 @@ class uploadLogo extends React.Component {
             </div>
             {/* <div className=""> */}
             <div className="upload-text">
-              Drag & Drop Or <span style={{ color: "blue" }}> Brows</span>{" "}
+              Drag & Drop Or <span style={{ color: "blue" }}>{" "}Brows</span>{" "}
             </div>
             {/* </div> */}
           </div>

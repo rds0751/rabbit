@@ -22,7 +22,7 @@ function getHeaders() {
     "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON,
     skip: true,
     "Access-Control-Allow-Origin": "*",
-    Authorization: `Bearer ${localStorage.getItem(WHITE_LABEL_TOKEN)}`,
+    "x-access-token": `${localStorage.getItem(WHITE_LABEL_TOKEN)}`,
     // 'Authorization': `Bearer ${utility.getAccessToken()}`
   };
 }
@@ -121,6 +121,72 @@ async function openForSale(requestData) {
       return Promise.reject(err);
     });
 }
+
+// ---- nft created by user----
+
+// export async function NftCreatedByUser(requestData) {
+//   let url =
+//     process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft-createdby-user";
+//   let headers = getHeaders();
+//   return httpService(httpConstants.METHOD_TYPE.GET, headers, requestData, url)
+//     .then((response) => {
+//       console.log("------ssss", response.responseData);
+
+//       if (!response.success || !response.responseData) return Promise.reject();
+//       return Promise.resolve(response.responseData);
+//     })
+//     .catch(function (err) {
+//       return Promise.reject(err);
+//     });
+// }
+
+export const NftCreatedByUser = async (successCallBack) => {
+  try {
+    const url =
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft-createdby-user";
+    const { data } = await axios.get(url);
+    if (data.success) {
+      successCallBack(data);
+    } else {
+      successCallBack({ success: false, msg: "Unable To Fetch Data" });
+    }
+    console.log(data, "<<<<myprofile");
+  } catch (e) {
+    console.log(e);
+  }
+};
+// ------nft owned by user
+export const NftOwnedByUser = async (successCallBack) => {
+  try {
+    const url =
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft-ownedby-user";
+    const { data } = await axios.get(url);
+    if (data.success) {
+      successCallBack(data);
+    } else {
+      successCallBack({ success: false, msg: "Unable To Fetch Data" });
+    }
+    console.log(data, "<<<<myprofile");
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+// =------------------ Get nfts by collection  id----
+export const getALLCollectionById = async (id, successCallBack) => {
+  try {
+    const url =
+      process.env.REACT_APP_WEBAPP_MICROSERVICE +
+      `api/v1/collection/${id}/nfts`;
+    const { data } = await axios.get(url);
+
+    successCallBack(data);
+  } catch (e) {
+    console.log(e);
+  }
+};
+// ----
+
 async function removeFromSale(requestData) {
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/remove-nft-from-sale";
@@ -170,9 +236,10 @@ export const addSuggestion = async (bodyData, successCallback) => {
 export const getAboutData = async (id, successCallBack) => {
   const url = `${dev_url}api/v1/about/61f7b7a4c017de6244c51144`;
   const { data } = await axios.get(url);
-  if (data.responseCode) {
+  console.log(data, "<<<dataabout");
+  if (data.success) {
     successCallBack(data.responseData);
   } else {
-    console.log(data);
+    console.log(data, "<<error");
   }
 };

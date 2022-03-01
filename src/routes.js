@@ -127,7 +127,7 @@ function App() {
               element={<CollectionDetails />}
             />
 
-            <Route exact path="/edit-items" element={<EditItem />} />
+            <Route exact path="/edit-items/:id" element={<EditItem />} />
             <Route
               exact
               path="/collections-tile"

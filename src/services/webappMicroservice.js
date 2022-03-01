@@ -5,9 +5,7 @@ import axios from "axios";
 import { AuthToken } from "./UserAuthToken";
 
 export function getNfts(requestData) {
-  // let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts";
-  let url =
-    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts?" + requestData;
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts?" + requestData;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -16,7 +14,7 @@ export function getNfts(requestData) {
     url
   )
     .then((response) => {
-      console.log(response, "<<<< response");
+      // console.log(response, "<<<< response");
       if (
         !response.success ||
         response.responseCode !== 200 ||
@@ -31,11 +29,25 @@ export function getNfts(requestData) {
     });
 }
 
+// --------------------get nfts -----
+export const getNFtsData = async (filterObj, successCallBack) => {
+  try {
+    const url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts";
+    const { data } = await axios.get(url, { params: filterObj });
+    successCallBack(data);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+// --------
+
 export const getNft = async (requestData, successCallBack) => {
   // alert("clled getNft")
+  // console.log(req)
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft/" + requestData;
-  const { data } = await axios.get(url, {headers:AuthToken});
+  const { data } = await axios.get(url, { headers: AuthToken });
   if (data.success) {
     successCallBack(data.responseData);
   } else {
@@ -251,6 +263,7 @@ export function addLikeNft(requestData) {
     url
   )
     .then((response) => {
+      console.log("likeresponse",response,"<<<<")
       if (
         !response.success ||
         response.responseCode !== 200 ||
@@ -265,25 +278,25 @@ export function addLikeNft(requestData) {
     });
 }
 
-// export function addLikeNft(requestData) {
-//   let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft/like" ;
-//   return httpService(
-//     httpConstants.METHOD_TYPE.POST,
-//     { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
-//     requestData,
-//     url
-//   )
-//     .then((response) => {
-//       if (
-//         !response.success ||
-//         response.responseCode !== 200 ||
-//         !response.responseData ||
-//         response.responseData.length === 0
-//       )
-//         return Promise.reject();
-//       return Promise.resolve(response.responseData);
-//     })
-//     .catch(function (err) {
-//       return Promise.reject(err);
-//     });
-// }
+export function getPricingHistory(requestData) {
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/pricing-history?" + requestData;
+  return httpService(
+    httpConstants.METHOD_TYPE.GET,
+    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    requestData,
+    url
+  )
+    .then((response) => {
+      if (
+        !response.success ||
+        response.responseCode !== 200 ||
+        !response.responseData ||
+        response.responseData.length === 0
+      )
+        return Promise.reject();
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
