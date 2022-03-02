@@ -992,3 +992,10 @@ thead {
     width: 62.7%;
   }
 }
+
+@media (min-width: 768px){
+.medium-container{
+    flex: 0 0 auto;
+    width: 30%;
+}
+}
