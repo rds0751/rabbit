@@ -25,15 +25,7 @@ ul li .rounded-circle {
 #create_logo {
   width: 39px;
   height: 42px;
-  margin-left: 22px;
-  margin-top: 10px;
-}
-
-#create_logo {
-  width: 39px;
-  height: 42px;
-  margin-left: 22px;
-  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 /* @import url("https://fonts.googleapis.com/css2?family=Assistant:wght@600&family=Atkinson+Hyperlegible&family=Fugaz+One&family=Lato&family=Montserrat:wght@500&family=Poppins:wght@200;500&family=Shadows+Into+Light&family=Shippori+Antique&family=Varela+Round&display=swap"); */
@@ -138,9 +130,9 @@ ul {
   font-size: 14px;
 }
 
-span {
+/* span {
   color: #37f;
-}
+} */
 
 #nft__photo {
   height: 160px;
@@ -871,5 +863,88 @@ transform-origin: center;
     font-size: 14px;
     color: #828282;
     cursor: pointer;
+  }
+}
+
+
+/* add wallet screen css */
+.connect-wallet{
+  margin-top: 97px;
+  margin-bottom: 206px;
+  padding-left: 7%;
+  padding-right: 7%;
+}
+.connect-wallet .title{
+  font-family: 'poppins-semibold';
+  font-size: 20px;
+  line-height: 30px;
+  color: #191919;
+  margin-bottom: 14px;
+}
+.connect-wallet .text{
+  font-family: 'poppins';
+  font-size: 20px;
+  line-height: 30px;
+  color: #8B8B8B;
+  margin-bottom: 47px;
+}
+.connect-wallet .text span{
+  font-family: 'poppins-bold';
+  font-size: 20px;
+  line-height: 30px;
+  color: #8B8B8B;
+}
+.connect-wallet .eachWalletTypeBox .card{
+  background: #FFFFFF!important;
+  border: 2px solid #F1F1F1!important;
+  border-radius: 13px;
+  width: 289px;
+  min-height: 193px;
+  padding: 17px 17px 23px 31px;
+  margin-right: 33px;
+  margin-bottom: 39px;
+}
+.connect-wallet .eachWalletTypeBox .card:last-child{
+  margin-right: 0px;
+}
+.connect-wallet .eachWalletTypeBox .card:hover{
+  border: 2px solid #8B8B8B!important;
+}
+.connect-wallet .eachWalletTypeBox .card-title{
+  font-family: 'poppins-semibold';
+  font-size: 16px;
+  line-height: 25px;
+  color: #191919;
+  margin-bottom: 5px;
+}
+.connect-wallet .eachWalletTypeBox .card-text{
+  font-family: 'poppins';
+  font-size: 14px;
+  line-height: 21px;
+  color: #191919;
+  margin-bottom: 0px;
+}
+.connect-wallet .eachWalletTypeBox .card-body{
+  padding: 0px;
+}
+@media only screen and (max-width:1600px){
+  .connect-wallet{
+    padding-left: 8.5%;
+    padding-right: 8.5%;
+  }
+}
+@media only screen and (max-width:1440px){
+  .connect-wallet{
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+}
+@media only screen and (max-width:480px){
+  .connect-wallet{
+    margin-bottom: 97px;
+  }
+  .connect-wallet .eachWalletTypeBox .card{
+    width: 100%;
+    margin-right: 0px;
   }
 }
