@@ -7,36 +7,51 @@ function Footer() {
   return (
     <>
       <div
-        className="mobfooter"
-        style={{ backgroundColor: "#FBFBFB", marginTop: "10px" }}
+        className="mobfooter mainfooter"
+        //style={{ backgroundColor: "#FBFBFB", marginTop: "10px" }}
       >
-        <footer className="container">
-        {/* <footer className="container footermob"> */}
+        <footer className="container footer">
+          {/* <footer className="container footermob"> */}
           <div className="row mb-0 mt-5">
-          <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 pt-4">
-              <ul className="list-unstyled   mt-0 " style={{ textAlign: "left" }}>
-              <li>
-                <p
-                  className="mb-0 pb-0 mt-4 mb-2"
-                  style={{ fontSize: "18px", color: "#8F8F8F" }}
-                >
-                  Join our Community
-                </p>
-              </li>
-              <li>
-                <i className="fab fa-facebook"  style={{marginRight:"34px" ,fontSize:"24px"}}></i>
-                <i className="fab fa-twitter"  style={{marginRight:"34px",fontSize:"24px"}}></i>
-                <i className="fab fa-instagram " style={{fontSize:"24px"}}  ></i>
-              </li>
-              <li
-                style={{ fontSize: "18px", color: "#8F8F8F", 
-                marginTop: "20px",marginBottom:"8px"
-                // marginTop: "17.49px",
-                 }}
+            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 pt-4">
+              <ul
+                className="list-unstyled   mt-0 "
+                style={{ textAlign: "left" }}
               >
-                Subscribe to our newsletter for the latest NFTs{" "}
-              </li>
-            </ul>
+                <li>
+                  <p
+                    className="mb-0 pb-0 mt-4 mb-2"
+                    style={{ fontSize: "18px", color: "#8F8F8F" }}
+                  >
+                    Join our Community
+                  </p>
+                </li>
+                <li>
+                  <i
+                    className="fab fa-facebook"
+                    style={{ marginRight: "34px", fontSize: "24px" }}
+                  ></i>
+                  <i
+                    className="fab fa-twitter"
+                    style={{ marginRight: "34px", fontSize: "24px" }}
+                  ></i>
+                  <i
+                    className="fab fa-instagram "
+                    style={{ fontSize: "24px" }}
+                  ></i>
+                </li>
+                <li
+                  style={{
+                    fontSize: "18px",
+                    color: "#8F8F8F",
+                    marginTop: "20px",
+                    marginBottom: "8px",
+                    // marginTop: "17.49px",
+                  }}
+                >
+                  Subscribe to our newsletter for the latest NFTs{" "}
+                </li>
+              </ul>
               <div className="input-group-lg input-group mb-3 mt-md-0 mt-4 ml-0 footerinputbox">
                 <input
                   type="text"
@@ -56,7 +71,7 @@ function Footer() {
                     id="button-addon2"
                     style={{
                       height: "36px",
-                      fontWeight:"400",
+                      fontWeight: "400",
                       borderTopLeftRadius: "0em",
                       borderBottomLeftRadius: "0em",
                     }}
@@ -72,8 +87,8 @@ function Footer() {
                   fontSize: "18px",
                   color: "#8F8F8F",
                   textAlign: "left",
-                   marginTop:"37px",
-                   fontWeight:"400"
+                  marginTop: "37px",
+                  fontWeight: "400",
                 }}
               >
                 About DLT NFT marketplace
@@ -91,6 +106,7 @@ function Footer() {
                 <br /> dolore magna aliqua. Ut enim ad minim veniam.
               </p>
             </div>
+
             <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 pt-4 footerfix1 footer   d-flex flex-column align-items-center">
               <ul className="list-unstyled" style={{ textAlign: "left" }}>
                 <a href="/">
@@ -112,8 +128,9 @@ function Footer() {
                       fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "16px",marginBottom:"8px",
-                       // marginTop: "8px"
+                      marginTop: "16px",
+                      marginBottom: "8px",
+                      // marginTop: "8px"
                     }}
                   >
                     NFT
@@ -125,8 +142,9 @@ function Footer() {
                       fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "16px",marginBottom:"8px",
-                       // marginTop: "8px"
+                      marginTop: "16px",
+                      marginBottom: "8px",
+                      // marginTop: "8px"
                     }}
                   >
                     Collections
@@ -136,7 +154,11 @@ function Footer() {
 
               <ul
                 className="list-unstyled mobfooter1"
-                style={{ textAlign: "left",marginTop:"19px" }}
+                style={{
+                  textAlign: "left",
+                  marginTop: "19px",
+                  marginLeft: "19px",
+                }}
               >
                 <a href="LeaderBoard">
                   <li
@@ -156,7 +178,8 @@ function Footer() {
                       fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "16px",marginBottom:"8px",
+                      marginTop: "16px",
+                      marginBottom: "8px",
                       // marginTop: "8px"
                     }}
                   >
@@ -169,8 +192,9 @@ function Footer() {
                       fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "16px",marginBottom:"8px",
-                       // marginTop: "8px"
+                      marginTop: "16px",
+                      marginBottom: "8px",
+                      // marginTop: "8px"
                     }}
                   >
                     Top Buyer
@@ -182,8 +206,9 @@ function Footer() {
                       fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "16px",marginBottom:"8px",
-                       // marginTop: "8px"
+                      marginTop: "16px",
+                      marginBottom: "8px",
+                      // marginTop: "8px"
                     }}
                   >
                     Top Collections
@@ -212,8 +237,9 @@ function Footer() {
                       fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "16px",marginBottom:"8px",
-                       // marginTop: "8px"
+                      marginTop: "16px",
+                      marginBottom: "8px",
+                      // marginTop: "8px"
                     }}
                   >
                     About{" "}
@@ -240,8 +266,9 @@ function Footer() {
                       fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "16px",marginBottom:"8px",
-                       // marginTop: "8px"
+                      marginTop: "16px",
+                      marginBottom: "8px",
+                      // marginTop: "8px"
                     }}
                   >
                     Help Centers
@@ -253,8 +280,9 @@ function Footer() {
                       fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "16px",marginBottom:"8px",
-                       // marginTop: "8px"
+                      marginTop: "16px",
+                      marginBottom: "8px",
+                      // marginTop: "8px"
                     }}
                   >
                     FAQs
@@ -266,8 +294,9 @@ function Footer() {
                       fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "16px",marginBottom:"8px",
-                       // marginTop: "8px"
+                      marginTop: "16px",
+                      marginBottom: "8px",
+                      // marginTop: "8px"
                     }}
                   >
                     Suggestions
@@ -293,8 +322,9 @@ function Footer() {
                       fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "16px",marginBottom:"8px",
-                       // marginTop: "8px"
+                      marginTop: "16px",
+                      marginBottom: "8px",
+                      // marginTop: "8px"
                     }}
                   >
                     Help Centers
@@ -306,8 +336,9 @@ function Footer() {
                       fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "16px",marginBottom:"8px",
-                       // marginTop: "8px"
+                      marginTop: "16px",
+                      marginBottom: "8px",
+                      // marginTop: "8px"
                     }}
                   >
                     FAQs
@@ -319,8 +350,9 @@ function Footer() {
                       fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "16px",marginBottom:"8px",
-                       // marginTop: "8px"
+                      marginTop: "16px",
+                      marginBottom: "8px",
+                      // marginTop: "8px"
                     }}
                   >
                     Suggestions
@@ -328,11 +360,8 @@ function Footer() {
                 </a>
               </ul>
             </div>
-            <div className="col-xl-2 col-lg-2 col-md-6 pt-4 col-sm-6 mobview footer d-flex flex-column align-items-right">
-              <ul
-                className="list-unstyled"
-                style={{ textAlign: "left" }}
-              >
+            <div className="col-xl-2 col-lg-2 col-md-6 pt-4 col-sm-6 mobview footer d-flex flex-column align-items-end">
+              <ul className="list-unstyled" style={{ textAlign: "left" }}>
                 <li
                   className="mt-md-0 mt-0"
                   style={{
@@ -349,8 +378,9 @@ function Footer() {
                       fontSize: "18px",
                       color: "#8F8F8F",
                       fontWeight: "normal",
-                      marginTop: "16px",marginBottom:"8px",
-                       // marginTop: "8px"
+                      marginTop: "16px",
+                      marginBottom: "8px",
+                      // marginTop: "8px"
                     }}
                   >
                     About{" "}
