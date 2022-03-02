@@ -37,10 +37,10 @@ function Footer() {
                 Subscribe to our newsletter for the latest NFTs{" "}
               </li>
             </ul>
-              <div className="input-group-lg input-group mb-3 mt-md-0 mt-4 ml-0">
+              <div className="input-group-lg input-group mb-3 mt-md-0 mt-4 ml-0 footerinputbox">
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control "
                   placeholder="Your email"
                   aria-label="Recipient's username"
                   aria-describedby="button-addon2"
@@ -49,7 +49,7 @@ function Footer() {
                     borderBottomLeftRadius: "0.2em",
                   }}
                 />
-                <div className="input-group-append">
+                <div className="input-group-append inputfooter">
                   <button
                     className="btn btn-primary"
                     type="button"
