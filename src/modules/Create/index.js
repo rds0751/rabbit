@@ -90,7 +90,7 @@ class Index extends BaseComponent {
     //TODO we need to work on generate unique tokenId
 
     const tokenId = Utils.generateRandomNumber();
-    // create NFT on blockchain
+    // create NFT on blockchai
     const [blockchainError, blockchainRes] = await Utils.parseResponse(
       BlockchainServices.mintNFT({
         tokenURI: data.ipfsUrl,
