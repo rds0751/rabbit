@@ -478,7 +478,7 @@ function CreateSingleNFT(props) {
                       <img src={success} className="checkimg" />
                     )}
                     {!props.isMintSuccess && (
-                      <div className="checkvalue checkvaluetext">3</div>
+                      <div className="checkvalue checkvaluetext">23</div>
                     )}
                     <div className="checkposttext">
                       <div>Approve</div>

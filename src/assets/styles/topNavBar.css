@@ -1,6 +1,14 @@
-
-@media only screen and (max-width:1024px) {
-    .form-control {
+.inputbox{
+  background-color: #f8f8f8;
+  width:75%;
+  height:42px;
+  padding:0px;
+  padding-left:10px;
+  border-radius: 4px 0px 0px 4px;
+  opacity: 1;
+}
+@media only screen and (min-width:1600px) {
+    .inputbox {
       width: 459px;
     }
 }

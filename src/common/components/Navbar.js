@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+
+import {NavDropdown} from 'react-bootstrap';
 // import './Navbar.css'
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -18,6 +20,7 @@ import "../../assets/styles/topNavBar.css";
 
 import Menu from "./Menu";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
+
 // import "../../assets/st.css";
 function Navbar() {
   const navigate = useNavigate();
@@ -174,10 +177,11 @@ function Navbar() {
       <div className="navbar-width">
         <nav className="navbarborder navbar navbar-expand-lg">
           <div
-            className="container container-fluid"
+            // className="container container-fluid"
+            className="container-fluid"
             style={{ backgroundColor: "white" }}
           >
-            <div className="left_navbar d-flex align-items-center">
+            <div className="left_navbar d-flex align-items-center LeftNavBar">
               <Link className="navbrand" to="/" style={{ marginRight: "21px" }}>
                 <img
                   src={require("../../assets/images/logo.png")}
@@ -185,24 +189,17 @@ function Navbar() {
                 />
               </Link>
               <input
-                className="form-control form-controlmob "
+                className="form-control form-controlmob inputbox search-input-mob"
                 type="search"
                 name="searchByName"
                 placeholder="Search"
                 aria-label="Search"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
-                style={{
-                  backgroundColor: "#f8f8f8",
-                  width: "75%",
-                  height: "42px",
-                  padding: "0px",
-                  paddingLeft: "10px",
-                  border: "0",
-                }}
+                
               />
               <button
-                className=""
+                className="search-icon-mob"
                 onClick={handleSearch}
                 style={{
                   border: "0",
@@ -224,7 +221,7 @@ function Navbar() {
               {/* </form> */}
             </div>
 
-            <div className="search_box">
+            <div className="search_box order-2">
               <form className="p-0 m-0 ">
                 <input
                   className="form-control form-controlmob "
@@ -238,9 +235,12 @@ function Navbar() {
               </form>
             </div>
 
-            <div className="right_navbar d-flex ">
-          
-              <div className="navbar-nav d-flex">
+            <div className="right_navbar d-flex RightNavBar order-1">
+              {/* <div
+            className="collapse navbar-collapse mobcollapse"
+            id="navbarSupportedContent"
+          > */}
+              <div className="navbar-nav d-flex" >
                 <ul className="left_section_nav mb-0">
                   <li
                     className={
@@ -288,8 +288,16 @@ function Navbar() {
                       Leaderboard
                     </Link>
                   </li>
+          <NavDropdown title="Resource" id="navbarScrollingDropdown" className={
+                      location.pathname.includes("resource") && !location.pathname.includes("leader-board") && !location.pathname.includes("marketplace") && !location.pathname.includes("create-nft")
+                        ? "nav-items dropdown li_underline"
+                        : "nav-items dropdown"
+                    }>
+          <NavDropdown.Item href="/help-center">Help Center</NavDropdown.Item>
+          <NavDropdown.Item href="/suggestion">Suggestions</NavDropdown.Item>
+          </NavDropdown>
 
-                  <li
+                  {/* <li
                     className={
                       location.pathname.includes("resource")
                         ? "nav-items dropdown li_underline"
@@ -308,6 +316,7 @@ function Navbar() {
                     >
                       Resource
                     </Link>
+                   
                     <ul
                       className="dropdown-menu"
                       aria-labelledby="navbarDropdown"
@@ -323,11 +332,8 @@ function Navbar() {
                         </Link>
                       </li>
                     </ul>
-                  </li>
-                  <li
-                    className="create-button"
-                    onClick={() => manageNavigation("create")}
-                  >
+                  </li> */}
+                  <li className="create-button" onClick={() => manageNavigation("create")}>
                     <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}
                       className="btn btn-primary btnnav"

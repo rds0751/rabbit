@@ -26,6 +26,7 @@ function Notification() {
   const [notifications, setNotifications] = useState([]);
   
   useEffect(() => {
+    console.log(user, "srinivas")
     getNotificationListById(user?.loggedInUser?._id).then((response) =>
       setNotifications(response)
     );
@@ -53,59 +54,33 @@ function Notification() {
  
   return (
     <div style={{ display: isOpenNoti ? "block" : "none" }}>
-      {/*  ------------ */}
-      <div className="noti-full-box">
-        <div className="empty-div-noti"></div>
-        <div className="noti-outer">
-          <div className="noti-container">
-            <div className="notification-text">Notification</div>
-            <div className="all-noti">
-              <div className="single-noti">
-                <div className="single-noti-inner ">
-                  <img
-                    src={profile}
-                    width="24px"
-                    height="24px"
-                    className="noti-image"
-                  />
-                  <div className="noti-text">
-                    <span className="heightlight">Eva 44</span> Textdfdf
+      {/* ------------ */}
+      <div className="noti-outer">
+        <div className="noti-container">
+          <div className="notification-text">Notification</div>
+          <div className="all-noti">
+            {notifications.map((curElem) => {
+              const { addedOn, type, userId } = curElem;
+              return (
+                <div className="single-noti">
+                  <div className="single-noti-inner ">
+                    <img
+                      src={profile}
+                      width="24px"
+                      height="24px"
+                      className="noti-image"
+                    />
+                    <div className="noti-text">
+                      <span>
+                        {(String(userId).length >= 7) ? (!userId ? " " : (String(userId).substring(0, 8) + "...")) : (String(userId) === undefined ? "" : userId)}
+                      </span>&nbsp;{type}&nbsp;your item.
+                    </div>
                   </div>
-                </div>
 
-                <div className="time">11.03</div>
-              </div>
-              <div className="single-noti">
-                <div className="single-noti-inner ">
-                  <img
-                    src={profile}
-                    width="24px"
-                    height="24px"
-                    className="noti-image"
-                  />
-                  <div className="noti-text">
-                    <span className="heightlight">Eva 44</span> Textdfdf
-                  </div>
+                  <div className="time">{addedOn}</div>
                 </div>
-
-                <div className="time">11.03</div>
-              </div>
-              <div className="single-noti">
-                <div className="single-noti-inner ">
-                  <img
-                    src={profile}
-                    width="24px"
-                    height="24px"
-                    className="noti-image"
-                  />
-                  <div className="noti-text">
-                    <span className="heightlight">Eva 44</span> Textdfdf
-                  </div>
-                </div>
-
-                <div className="time">11.03</div>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>

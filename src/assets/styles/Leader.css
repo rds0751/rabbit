@@ -146,7 +146,7 @@ thead {
 
 .CollectionItem {
   align-items: center;
-  margin: 16px 0px 35px 0px;
+  /* margin: 16px 0px 35px 0px; */
   /* padding: 8px 0px; */
   border: 0px solid;
   border-radius: 10px;
@@ -906,5 +906,107 @@ thead {
 @media screen and (min-width: 376px) and (max-width: 768px) {
   .nft-name {
     font-size: 20px;
+  }
+}
+
+
+/* create nft card css */
+.create-nft{
+  margin-top: 90px;
+  margin-bottom: 151px;
+}
+.create-nft .create-nft-font{
+  font-family: 'poppins-bold';
+  font-size: 32px;
+  line-height: 48px;
+  color: #191919;
+  margin-bottom: 22px;
+}
+.create-nft .col-lg-3{
+  width: 24.17%;
+  margin-left: 27px;
+  margin-right: 27px;
+}
+.create-nft .card{
+  background: #FFFFFF!important;
+  border: 1px solid #C8C8C8!important;
+  border-radius: 13px;
+  margin-bottom: 28px;
+}
+.create-nft .card-body{
+  padding: 84px 0px;
+}
+.create-nft .bottom-heading-font{
+  font-family: 'poppins-semibold';
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: 600;
+  color: #191919;
+  margin-bottom: 0px;
+}
+@media only screen and (max-width:1366px) {
+  .create-nft .col-lg-3{
+    width: 28%;
+    margin-left: 27px;
+    margin-right: 27px;
+  }
+}
+@media only screen and (max-width:1024px) {
+  .create-nft .col-lg-3{
+    width: 33.3%;
+    margin-left: 27px;
+    margin-right: 27px;
+  }
+}
+@media only screen and (max-width:768px) {
+  .create-nft{
+    margin-top: 41px;
+    margin-bottom: 59px;
+  }
+  .create-nft .create-nft-font{
+    font-family: 'poppins-semibold';
+    font-size: 20px;
+    line-height: 30px;
+    margin-bottom: 43px;
+  }
+  .create-nft .col-lg-3{
+    width: 42.1%;
+  }
+  .create-nft{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+@media only screen and (max-width:480px) {
+  .create-nft{
+    margin-top: 52px;
+    margin-bottom: 17px;
+  }
+  .create-nft .create-nft-font{
+    font-size: 18px;
+    line-height: 27px;
+    margin-bottom: 53px;
+  }
+  .create-nft .col-lg-3{
+    width: 47%;
+  }
+  .create-nft .card{
+    margin-bottom: 16px;
+  }
+  .create-nft .card-body {
+    padding: 24px 0px;
+  }
+  .create-nft .bottom-heading-font{
+    margin-bottom: 35px;
+  }
+}
+@media only screen and (max-width:375px) {
+  .create-nft .col-lg-3{
+    width: 53%;
+  }
+}
+@media only screen and (max-width:320px) {
+  .create-nft .col-lg-3{
+    width: 62.7%;
   }
 }

@@ -35,6 +35,7 @@ function CreateNftCollections(props) {
   const [isBannerSelected, setisBannerSelected] = useState(false);
   const [clickedOn, setClickedOn] = useState("");
   const [selectFile, setSelectFile] = useState("");
+  const [checkReqField, setCheckReqField] = useState(false);
 
   // -------
   const [Categories, setCategories] = useState([]);
@@ -63,13 +64,6 @@ function CreateNftCollections(props) {
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
-      // setSelectFile(
-      //   acceptedFiles.map((file) =>
-      //     Object.assign(file, {
-      //       preview: URL.createObjectURL(file),
-      //     })
-      //   )
-      // );
       console.log(getInputProps, "<<<<<<", getRootProps, "<<<props");
       let formData = new FormData();
       formData.append(
@@ -80,14 +74,13 @@ function CreateNftCollections(props) {
           })
         )[0]
       );
-      // const [err, ipfsRes] = addIPFS(formData)
 
       (async () => {
         const [err, ipfsRes] = await Utils.parseResponse(
           getCollection.addIpfs(formData)
         );
         if (err || !ipfsRes.ipfsUrl) {
-          toast.error("Unable to add file to IPFS");
+          toast.error("Unable to upload this image");
         } else {
           setlogoipfs(ipfsRes.ipfsUrl);
           setlogoCdn(ipfsRes.cdnUrl);
@@ -145,7 +138,8 @@ function CreateNftCollections(props) {
     e.preventDefault();
     // e.preventDefault();
     if (
-      imageUrl.current == "" ||
+      logoCdn == "" ||
+      bannerCdn == "" ||
       name.current == "" ||
       description.current == "" ||
       blockchain.current == ""
@@ -158,14 +152,15 @@ function CreateNftCollections(props) {
         "<<<"
       );
       console.log("require");
+      alert("154");
       toast.error("Fill the required field");
       return null;
     }
-
+    alert("here");
     console.log("here");
     const data = {
-      coverUrl: coverUrl.current,
-      imageUrl: imageUrl.current,
+      coverUrl: bannerCdn,
+      imageUrl: logoCdn,
       name: name.current,
       description: description.current,
       blockchain: blockchain.current,
@@ -175,9 +170,26 @@ function CreateNftCollections(props) {
     const result = await createCollection(data);
     if (result.success) {
       toast.success("Collection created");
-      navigate("collections-tile");
+      navigate("/collections-tile");
     } else toast.error(result.message);
     console.log(result, ">>> submit nftCollection");
+  };
+  const checkReqFieldFun = () => {
+    const currname = name.current;
+    const currdes = description.current;
+    const currblock = blockchain.current;
+
+    if (
+      currname.trim() == "" ||
+      currdes.trim() == "" ||
+      currblock.trim() == "" ||
+      logoCdn == "" ||
+      bannerCdn == ""
+    ) {
+      setCheckReqField(false);
+    } else {
+      setCheckReqField(true);
+    }
   };
 
   return (
@@ -185,7 +197,7 @@ function CreateNftCollections(props) {
       <div className="collection-outer">
         <div className="collection-heading">Create your collection</div>
         <div className="collection-form-outer">
-                  {!isLogoSelected && (
+          {!isLogoSelected && (
             <span>
               <div
                 onClick={() => setClickedOn("logo")}
@@ -231,7 +243,7 @@ function CreateNftCollections(props) {
                     color: "#366EEF",
                   }}
                 />
-                            </div>
+              </div>
             </div>
           )}
           {/* ----------- */}
@@ -242,7 +254,15 @@ function CreateNftCollections(props) {
           <div className="form-label" style={{ marginTop: "2rem" }}>
             Upload Banner*
           </div>
-      
+
+          <Bannerdrop
+            bannerCdn={bannerCdn}
+            setbannerCdn={setbannerCdn}
+            bannerIpfs={bannerIpfs}
+            setbannerIpfs={setbannerIpfs}
+          />
+
+          {/* ----------------------------- */}
         </div>
         <div>
           <form onSubmit={(e) => handleSubmit(e)}>
@@ -250,17 +270,20 @@ function CreateNftCollections(props) {
               <div className="form-label">Name*</div>
               <input
                 type="name"
-                name="email"
+                name="name"
                 className="input-box-1"
                 placeholder="Write your name"
-                onChange={(e) => (name.current = e.target.value)}
+                onChange={(e) => {
+                  name.current = e.target.value;
+                  checkReqFieldFun();
+                }}
               />
             </div>
             <div className="">
               <div className="form-label">Description*</div>
               <textarea
                 rows="4"
-                name="text"
+                name="Description"
                 placeholder="Write description"
                 className="input-box-1"
                 value={description.current}
@@ -268,6 +291,7 @@ function CreateNftCollections(props) {
                   if (DesLength < 1000) {
                     description.current = e.target.value;
                     onChangeDes();
+                    checkReqFieldFun();
                   }
                 }}
               ></textarea>
@@ -298,7 +322,10 @@ function CreateNftCollections(props) {
                 <div className="block-chain-right">
                   <select
                     className="input-box-1 rm-border"
-                    onChange={(e) => (blockchain.current = e.target.value)}
+                    onChange={(e) => {
+                      blockchain.current = e.target.value;
+                      checkReqFieldFun();
+                    }}
                   >
                     <option value="">Select Category</option>
                     <option selected value="Ethereum">
@@ -308,7 +335,12 @@ function CreateNftCollections(props) {
                 </div>
               </div>
             </div>
-            <button type="submit" className="submit-button">
+            <button
+              type="submit"
+              disabled={checkReqField ? false : true}
+              className="submit-button"
+              style={{ opacity: checkReqField ? "1" : "0.5" }}
+            >
               Create
             </button>
           </form>

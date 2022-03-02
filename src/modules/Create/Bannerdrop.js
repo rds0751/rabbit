@@ -12,13 +12,7 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
-      // setSelectFile(
-      //   acceptedFiles.map((file) =>
-      //     Object.assign(file, {
-      //       preview: URL.createObjectURL(file),
-      //     })
-      //   )
-      // );
+     
       console.log(getInputProps, "<<<<<<", getRootProps, "<<<props");
       let formData = new FormData();
       formData.append(
@@ -78,9 +72,9 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
           </span>
         )}
         {isBannerSelected && (
-          <div className="draganddropbox" {...getRootProps()}>
+          <div className="draganddropboxbanner" {...getRootProps()}>
             <input {...getInputProps()} name="banner" />
-            <div className="draganddropboxinnerdiv">
+            <div className="draganddropboxinnerdiv" style={{width:"100%"}}>
               <img
                 src={bannerCdn != "" ? bannerCdn : Image}
                 style={{

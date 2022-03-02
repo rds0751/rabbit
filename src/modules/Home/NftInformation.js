@@ -256,6 +256,66 @@ export default function NftInformation(props) {
                             aria-describedby="basic-addon1"
                           />
                         </div>
+                        <h5
+                          className="font-14 font-weight-700 mt-4 text-dark"
+                          style={{ marginLeft: "-0.6em" }}
+                        >
+                          Expiration Date
+                        </h5>
+                        <div className="input-group">
+                          <button
+                            className="btn border dropdown-toggle font-15"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                            style={{ marginLeft: "-0.6em" }}
+                          >
+                            A month
+                          </button>
+                          <ul className="dropdown-menu">
+                            <li>
+                              <a className="dropdown-item" href="#">
+                                Jan
+                              </a>
+                            </li>
+                            <li>
+                              <a className="dropdown-item" href="#">
+                                Feb
+                              </a>
+                            </li>
+                            <li>
+                              <a className="dropdown-item" href="#">
+                                Mar
+                              </a>
+                            </li>
+                            <li>
+                              <a className="dropdown-item" href="#">
+                                Apr
+                              </a>
+                            </li>
+                          </ul>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="&#xf017; 11:25 AM"
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                          />
+                        </div>
+                      </div>
+
+                      {/* <!-- Modal footer --> */}
+                      <div className="modal-footer mb-4">
+                        <button
+                          type="button"
+                          data-bs-toggle="modal"
+                          data-bs-target="#myModalShare"
+                          className="btn btn-primary w-100"
+                          data-bs-dismiss="modal"
+                          // style={{ marginLeft: "1.1em" }}
+                        >
+                          Make Offer
+                        </button>
                       </div>
 
                       {/* <!-- Modal footer --> */}
@@ -367,13 +427,13 @@ export default function NftInformation(props) {
                 className="border-radius imginfo_mob"
                 style={{
                   width: "100%",
-                  height: "620px",
+                  height: "700px",
                   borderRadius: "8px",
                 }}
               />
             </div>
           </div>
-          <div className="col-lg-4">
+          <div className="col-lg-4" style={{ paddingLeft: "40px" }}>
             <div className="d-flex mt-2">
               <Button
                 style={{
@@ -548,6 +608,7 @@ export default function NftInformation(props) {
                             data-bs-target="#myModalShare"
                             className="btn btn-primary w-100"
                             data-bs-dismiss="modal"
+                            // style={{ marginLeft: "1.1em" }}
                             // style={{ marginLeft: "1.1em" }}
                           >
                             Make Offer
