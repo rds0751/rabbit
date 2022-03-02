@@ -3,23 +3,40 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
+import { useDropzone } from "react-dropzone";
+import Utils from "../../utility";
+import BlockchainServices from "../../services/blockchainService";
+import getCollection from "../../services/contentMicroservice";
+
 import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import Image from "../../assets/images/img-format.png";
-import ethereum from "../../assets/images/ehereum.png";
+import ethereum from "../../assets/images/ethereum.svg";
 
 import { httpConstants } from "../../constants";
 import { BASE_URL2 } from "../../reducers/Constants";
 import { createCollection } from "../../services/createServices";
 import "../../assets/styles/collection.css";
 import { getCategories } from "../../services/UserMicroService";
+import Bannerdrop from "./Bannerdrop";
 
 const Button = styled.button``;
 
 function CreateNftCollections(props) {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state);
+  // -------
+  const [logoCdn, setlogoCdn] = useState("");
+  const [bannerCdn, setbannerCdn] = useState("");
+  const [logoipfs, setlogoipfs] = useState("");
+  const [bannerIpfs, setbannerIpfs] = useState("");
+  const [isLogoSelected, setisLogoSelected] = useState(false);
+  const [isBannerSelected, setisBannerSelected] = useState(false);
+  const [clickedOn, setClickedOn] = useState("");
+  const [selectFile, setSelectFile] = useState("");
+
+  // -------
   const [Categories, setCategories] = useState([]);
   const [DesLength, setDesLength] = useState(0);
   const name = useRef("");
@@ -42,9 +59,51 @@ function CreateNftCollections(props) {
     });
   }, []);
 
+  // ------------------drag and drop
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: "image/*",
+    onDrop: (acceptedFiles) => {
+      // setSelectFile(
+      //   acceptedFiles.map((file) =>
+      //     Object.assign(file, {
+      //       preview: URL.createObjectURL(file),
+      //     })
+      //   )
+      // );
+      console.log(getInputProps, "<<<<<<", getRootProps, "<<<props");
+      let formData = new FormData();
+      formData.append(
+        "attachment",
+        acceptedFiles.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          })
+        )[0]
+      );
+      // const [err, ipfsRes] = addIPFS(formData)
+
+      (async () => {
+        const [err, ipfsRes] = await Utils.parseResponse(
+          getCollection.addIpfs(formData)
+        );
+        if (err || !ipfsRes.ipfsUrl) {
+          toast.error("Unable to add file to IPFS");
+        } else {
+          setlogoipfs(ipfsRes.ipfsUrl);
+          setlogoCdn(ipfsRes.cdnUrl);
+          setisLogoSelected(true);
+        }
+      })();
+
+      // setLogoPresent(true);
+    },
+  });
+  // -------------
+  const [desLEngth, setDesLEngth] = useState(0);
+
   const handleChangeImage = async (event) => {
     const fileUploaded = event.target.files[0];
-    alert("onchage");
+    // alert("onchage");
     // props.handleFileImage(fileUploaded);
     console.log(user.loggedInUser._id, "<<<");
 
@@ -127,36 +186,102 @@ function CreateNftCollections(props) {
         <div className="collection-heading">Create your collection</div>
         <div className="collection-form-outer">
           <div className="form-label">Upload Logo*</div>
-          <div className="upload-file-outer">
-            {/* <Button onClick={handleClickImage}> */}
-            {/* <div className="input-outer"> */}
-            <input
+          {/* --------------------------------------------- =------------------------- input file lgo*/}
+          {/* <div className="upload-file-outer"> */}
+          {/* <input
               type="file"
               placeholder="Write your name"
-              name="file"
+              name="logo"
               ref={hiddenFileInputImage}
               className="fileInput  input-box-1"
               onChange={handleChangeImage}
-            />
-            {/* </div> */}
-            <div className="upload-image-upper">
+              style={{ border: "4px solid red" }}
+            /> */}
+          {/* </div> */}
+          {/* -------------------------------INPUT FILE */}
+          {/* <div className="upload-image-upper">
               <img
                 className="image-upload"
                 src={imageUrl.current == "" ? Image : imageUrl.current}
               />
 
-              {/* </Button> */}
+         
               <div className="drag-and-drop">
                 Drag & Drop or
-                <Link to="/">Browse</Link>
+                <span className="drag-and-drop-browse"> Browse</span>
+              </div>
+            </div> */}
+          {/* </div> */}
+
+          {/* ---------------------------------------------------------------------------- */}
+          {/* ----------------------DRAG LOGO */}
+
+          {!isLogoSelected && (
+            <span>
+              <div
+                onClick={() => setClickedOn("logo")}
+                className="draganddropbox"
+                {...getRootProps()}
+              >
+                <input
+                  {...getInputProps()}
+                  name="logo"
+                  onChange={() => setClickedOn("logo")}
+                />
+                <div className="draganddropboxinnerdiv">
+                  <img
+                    src={logoCdn != "" ? logoCdn : Image}
+                    style={{
+                      width: "100px",
+                      marginTop: "3em",
+                      color: "#366EEF",
+                    }}
+                  />
+                  <span className="draganddropboxinnerdivtextspan">
+                    Drag and Drop or
+                    <span className="draganddropboxinnerdivtextspanbrowse">
+                      {" "}
+                      Browse
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </span>
+          )}
+          {isLogoSelected && (
+            <div className="draganddropbox" {...getRootProps()}>
+              <input {...getInputProps()} name="logo" />
+              <div className="draganddropboxinnerdiv">
+                <img
+                  src={logoCdn != "" ? logoCdn : Image}
+                  style={{
+                    // width: "100px",
+                    width: "100%",
+                    height: "100%",
+                    // marginTop: "3em",
+                    color: "#366EEF",
+                  }}
+                />
+                {/* <span className="draganddropboxinnerdivtextspan">
+                  Drag and Drop or
+                  <span className="draganddropboxinnerdivtextspanbrowse">
+                    {" "}
+                    Browse
+                  </span>
+                </span> */}
               </div>
             </div>
-          </div>
+          )}
+          {/* ----------- */}
+          {/*  */}
         </div>
         <div>
-          <div className="form-label">Upload Banner*</div>
-          <div className="upload-image-banner">
-            {/* <Button onClick={handleClickImage}> */}
+          {/* ---------------------------OLD BANNER UPLOAD----------------- */}
+          <div className="form-label" style={{ marginTop: "2rem" }}>
+            Upload Banner*
+          </div>
+          {/* 
+          <div className="upload-file-outer bannerwidth">
             <input
               type="file"
               placeholder="Write your name"
@@ -173,11 +298,83 @@ function CreateNftCollections(props) {
               />
               <div className="drag-and-drop">
                 Drag & Drop or
-                <Link to="/">Browse</Link>
+                <span className="drag-and-drop-browse"> Browse</span>
               </div>
             </div>
-            {/* </Button> */}
-          </div>
+          </div> */}
+          {/* ------------------------old banner upload */}
+          {/* ----------------------new drop down banner */}
+          {/* {!isBannerSelected && (
+            <span>
+              <div
+                onClick={() => setClickedOn("banner")}
+                className="draganddropbox"
+                {...getRootProps()}
+              >
+                <input
+                  {...getInputProps()}
+                  name="banner"
+                  onChange={() => setClickedOn("banner")}
+                />
+                <div className="draganddropboxinnerdiv">
+                  <img
+                    src={Image}
+                    style={{
+                      width: "100px",
+                      marginTop: "3em",
+                      color: "#366EEF",
+                    }}
+                  />
+                  <span className="draganddropboxinnerdivtextspan">
+                    Drag and Drop or
+                    <span className="draganddropboxinnerdivtextspanbrowse">
+                      {" "}
+                      Browse
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </span>
+          )}
+          {isBannerSelected && (
+            <div
+              onClick={() => setClickedOn("banner")}
+              className="draganddropbox"
+              {...getRootProps()}
+            >
+              <input
+                {...getInputProps()}
+                name="banner"
+                onChange={() => setClickedOn("banner")}
+              />
+              <div className="draganddropboxinnerdiv">
+                <img
+                  src={bannerCdn != "" ? bannerCdn : Image}
+                  style={{
+                    width: "100px",
+                    marginTop: "3em",
+                    color: "#366EEF",
+                  }}
+                />
+                <span className="draganddropboxinnerdivtextspan">
+                  Drag and Drop or
+                  <span className="draganddropboxinnerdivtextspanbrowse">
+                    {" "}
+                    Browse
+                  </span>
+                </span>
+              </div>
+            </div>
+          )} */}
+
+          <Bannerdrop
+            bannerCdn={bannerCdn}
+            setbannerCdn={setbannerCdn}
+            bannerIpfs={bannerIpfs}
+            setbannerIpfs={setbannerIpfs}
+          />
+
+          {/* ----------------------------- */}
         </div>
         <div>
           <form onSubmit={(e) => handleSubmit(e)}>
@@ -198,9 +395,12 @@ function CreateNftCollections(props) {
                 name="text"
                 placeholder="Write description"
                 className="input-box-1"
+                value={description.current}
                 onChange={(e) => {
-                  description.current = e.target.value;
-                  onChangeDes();
+                  if (DesLength < 1000) {
+                    description.current = e.target.value;
+                    onChangeDes();
+                  }
                 }}
               ></textarea>
               <span>{DesLength} of 1000 characters used</span>

@@ -1,25 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+
+import {NavDropdown} from 'react-bootstrap';
 // import './Navbar.css'
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../../assets/styles/Notification.css";
 import {
   addUserData,
+  AddWalletDetails,
   ManageNotiSideBar,
   ManageWalletSideBar,
   RedirectTo,
+  searchNav,
 } from "../../reducers/Action";
 import { ethers } from "ethers";
 import "../../assets/styles/topNavBar.css";
 
 import Menu from "./Menu";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
+
 // import "../../assets/st.css";
 function Navbar() {
   const navigate = useNavigate();
   const [humburger, setHumburger] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+  const [toggleEffect, setToggleEffect] = useState(false);
+
   const ethereum = window.ethereum;
   const [errorMssg, setErrorMssg] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
@@ -31,47 +39,62 @@ function Navbar() {
   const { user, sideBar } = useSelector((state) => state);
   const { userDetails, loggedInUser, walletAddress } = user;
   const { isOpenNoti, isOpenWallet } = sideBar;
-  console.log(walletAddress, "<<<<this is wallet address");
-  // useEffect(() => {
-  //   if (window.ethereum) {
-  //     // window.ethereum
-  //     //   .request({ method: "eth_requestAccounts" })
-  //     //   .then((result) => {
-  //     //     accountChangeHandler(result[0]); //accounts can be a array we just wanna grab first one
-  //     //     console.log(result[0], "<<<result console");
-  //     //     dispatch(
-  //     //       updateUserDetail({ address: defaultAccount, balance: getBalance })
-  //     //     );
 
-  //     //     // window.location.pathname = "/wallet";
-  //     //   })
-  //     //   .catch((e) => {
-  //     //     // window.location.pathname = "/add-wallet";
-  //     //     console.log(e, "<<< error ");
-  //     //   });
-  //   } else {
-  //     alert("Wallet not added");
-  //     setErrorMssg("Install Metamask ");
-  //     toast.error("Install Metamak and Connect Wallet");
-  //   }
-  // }, []);
-  // const accountChangeHandler = (newAccount) => {
-  //   setDefaultAccount(newAccount);
-  //   CheckUserByWalletAddress(newAccount, (res) => {
-  //     console.log(res, "<<<<response of user");
-  //     dispatch(addUserData(res));
-  //   });
-  //   getUserBalance(newAccount);
-  //   // console.log(data, "<<<<response dta");
-  // };
-  // const getUserBalance = (address) => {
-  //   window.ethereum
-  //     .request({ method: "eth_getBalance", params: [address, "latest"] })
-  //     .then((balance) => {
-  //       setGetBalance(ethers.utils.formatEther(balance));
-  //       console.log(getBalance, "<<< balance");
-  //     });
-  // };
+  console.log(walletAddress, "<<<<this is wallet address");
+
+  useEffect(() => {
+    // console.log(window.ethereum.on(), "<<<<<account");
+    if (loggedInUser == null) {
+      connectMetamask();
+    }
+  }, [toggleEffect]);
+
+  //  ---------------------------------
+  const connectMetamask = () => {
+    if (window.ethereum) {
+      // alert("ok");
+      window.ethereum
+        .request({ method: "eth_requestAccounts" })
+        .then((result) => {
+          accountChangeHandler(result);
+          console.log(result);
+        })
+        .catch((e) => {
+          toast.error(" Connect Your Metamask Wallet");
+          console.log(e, "<<< error ");
+        });
+    } else {
+      toast.error("Install Metamak and Connect Wallet");
+    }
+  };
+  const accountChangeHandler = (newAccount) => {
+    // alert("account change");
+    setDefaultAccount(newAccount[0]);
+    // console.log(, "<<<< defaultaccount");
+    getUserBalance(newAccount[0]);
+    console.log(getBalance, "getUser balance");
+    dispatch(AddWalletDetails({ address: newAccount[0], balance: getBalance }));
+    CheckUserByWalletAddress(newAccount[0], (res) => {
+      console.log(res, "<<<< Account changed");
+      dispatch(addUserData(res));
+      localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
+
+      setToggleEffect(!toggleEffect);
+    });
+  };
+  const getUserBalance = (address) => {
+    window.ethereum
+      .request({ method: "eth_getBalance", params: [address, "latest"] })
+      .then((balance) => {
+        setGetBalance(ethers.utils.formatEther(balance));
+        console.log(getBalance, "<<< balance");
+      });
+  };
+
+  window.ethereum?.on("accountsChanged", accountChangeHandler);
+  console.log(loggedInUser, "<<<<<this iser user detail");
+
+  // ---------------------------
   let location = useLocation();
   const manageNavigation = (name) => {
     if (name == "create") {
@@ -86,6 +109,7 @@ function Navbar() {
       if (walletAddress == null) {
         dispatch(RedirectTo("profile"));
         navigate("/add-wallet");
+        // navigate("/my-profile");
       } else {
         navigate("/my-profile");
       }
@@ -101,76 +125,86 @@ function Navbar() {
   const handleWalletClick = () => {
     if (walletAddress == null) {
       navigate("/add-wallet");
-      dispatch(RedirectTo("wallet"));
+      // dispatch(RedirectTo("wallet"));
+
+      // dispatch(ManageWalletSideBar(!isOpenWallet));
     } else {
       dispatch(ManageWalletSideBar(!isOpenWallet));
+      document.body.style.overflow = (!isOpenWallet) ? "hidden" : "visible";
     }
   };
   const handleNotiSideBar = () => {
+    console.log(isOpenNoti, "<<<isopen noti");
     if (loggedInUser == null) {
       navigate("/add-wallet");
-      dispatch(RedirectTo("notification"));
+      // dispatch(ManageNotiSideBar(!isOpenNoti));
+      // dispatch(RedirectTo("notification"));
     } else {
-      dispatch(ManageNotiSideBar(true));
+      dispatch(ManageNotiSideBar(!isOpenNoti));
+      dispatch(ManageWalletSideBar(false));
     }
   };
+
+  const handleSearch = () => {
+    if (searchInput.trim() != "") dispatch(searchNav(searchInput));
+  };
+
   console.log("logged in user >>> lllll", loggedInUser);
+
   return (
     <>
       <div className="navbar-width">
         <nav className="navbarborder navbar navbar-expand-lg">
           <div
-            className="container container-fluid"
+            // className="container container-fluid"
+            className="container-fluid"
             style={{ backgroundColor: "white" }}
           >
-            <div className="left_navbar d-flex align-items-center">
+            <div className="left_navbar d-flex align-items-center LeftNavBar">
               <Link className="navbrand" to="/" style={{ marginRight: "21px" }}>
                 <img
                   src={require("../../assets/images/logo.png")}
                   style={{ width: "50px" }}
                 />
               </Link>
-              <form className=" w-100 p-0 m-0" action="/" method="get">
-                <input
-                  className="form-control form-controlmob "
-                  type="search"
-                  name="searchByName"
-                  placeholder="Search"
-                  aria-label="Search"
+              {/* <form
+                className=" w-100 p-0 m-0"
+                onSubmit={(e) => e.preventDefault()}
+              > */}
+              <input
+                className="form-control form-controlmob inputbox search-input-mob"
+                type="search"
+                name="searchByName"
+                placeholder="Search"
+                aria-label="Search"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                
+              />
+              <button
+                className="search-icon-mob"
+                onClick={handleSearch}
+                style={{
+                  border: "0",
+                  width: "50px",
+                  height: "42px",
+                  backgroundColor: "#f8f8f8",
+                  marginLeft: "5px",
+                }}
+              >
+                <i
+                  className="fa fa-search"
                   style={{
-                    backgroundColor: "#f8f8f8",
-                    width: "75%",
-                    height:"42px",
-                    padding: "0px",
-                    paddingLeft: "10px",
-                    border: "0",
+                    width: "42px",
+                    height: "50",
                   }}
-                />
-                <button
-                  className=""
-                  style={{
-                    border: "0",
-                    width: "50px",
-                    height:"42px",
-                    backgroundColor: "#f8f8f8",
-                    marginLeft: "5px",
-                  }}
-                >
-                  <i
-                    className="fa fa-search"
-                    style={{
-                      width: "42px",
-                      height: "50",
-                    }}
-                    aria-hidden="true"
-                  ></i>
-                </button>
-              </form>
+                  aria-hidden="true"
+                ></i>
+              </button>
+              {/* </form> */}
             </div>
 
-            
-
-            <div className="search_box">
+            <div className="search_box order-2">
               <form className="p-0 m-0 ">
                 <input
                   className="form-control form-controlmob "
@@ -183,30 +217,31 @@ function Navbar() {
                 </button>
               </form>
             </div>
-          
-          
-          <div className="right_navbar d-flex ">
+
+            <div className="right_navbar d-flex RightNavBar order-1">
               {/* <div
             className="collapse navbar-collapse mobcollapse"
             id="navbarSupportedContent"
           > */}
-              <div className="navbar-nav d-flex">
+              <div className="navbar-nav d-flex" >
                 <ul className="left_section_nav mb-0">
                   <li
                     className={
-                      location.pathname.includes("marketplace")
-                        ? "nav-item li_underline"
-                        : "nav-item"
+                      location.pathname.includes("/") && !location.pathname.includes("leader-board") && !location.pathname.includes("resource") && !location.pathname.includes("create-nft")
+                        ? "nav-items li_underline"
+                        : "nav-items"
                     }
+                    onClick={isOpenWallet}
                   >
                     <Link
                       className={
-                        location.pathname.includes("marketplace")
+                        location.pathname.includes("/") && !location.pathname.includes("leader-board") && !location.pathname.includes("resource") && !location.pathname.includes("create-nft")
                           ? "nav-link navlink_active"
                           : "nav-link"
                       }
                       aria-current="page"
                       to="/"
+
                     >
                       Marketplace
                     </Link>
@@ -214,9 +249,10 @@ function Navbar() {
                   <li
                     className={
                       location.pathname.includes("leader-board")
-                        ? "nav-item li_underline"
-                        : "nav-item"
+                        ? "nav-items li_underline"
+                        : "nav-items"
                     }
+                    onClick={isOpenWallet}
                   >
                     <Link
                       className={
@@ -230,13 +266,22 @@ function Navbar() {
                       Leaderboard
                     </Link>
                   </li>
+          <NavDropdown title="Resource" id="navbarScrollingDropdown" className={
+                      location.pathname.includes("resource") && !location.pathname.includes("leader-board") && !location.pathname.includes("marketplace") && !location.pathname.includes("create-nft")
+                        ? "nav-items dropdown li_underline"
+                        : "nav-items dropdown"
+                    }>
+          <NavDropdown.Item href="/help-center">Help Center</NavDropdown.Item>
+          <NavDropdown.Item href="/suggestion">Suggestions</NavDropdown.Item>
+          </NavDropdown>
 
-                  <li
+                  {/* <li
                     className={
                       location.pathname.includes("resource")
-                        ? "nav-item dropdown li_underline"
-                        : "nav-item dropdown"
+                        ? "nav-items dropdown li_underline"
+                        : "nav-items dropdown"
                     }
+                    onClick={isOpenWallet}
                   >
                     <Link
                       className={
@@ -245,14 +290,15 @@ function Navbar() {
                           : "nav-link"
                       }
                       to="/resource"
-                      // id="navbarDropdown"
-                      // role="button"
-                      // data-bs-toggle="dropdown"
-                      // aria-expanded="false"
-                      // style={{ fontSize: "16px" }}
+                    // id="navbarDropdown"
+                    // role="button"
+                    // data-bs-toggle="dropdown"
+                    // aria-expanded="false"
+                    // style={{ fontSize: "16px" }}
                     >
                       Resource
                     </Link>
+                   
                     <ul
                       className="dropdown-menu"
                       aria-labelledby="navbarDropdown"
@@ -268,7 +314,7 @@ function Navbar() {
                         </Link>
                       </li>
                     </ul>
-                  </li>
+                  </li> */}
                   <li className="create-button" onClick={() => manageNavigation("create")}>
                     <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}
@@ -312,8 +358,12 @@ function Navbar() {
                       <img
                         className="btnnav_mob1"
                         src={require("../../assets/images/profile.png")}
-                        style={{ color: "gray", cursor: "pointer",marginLeft:"31.22px" ,marginRight:"22.43px"
-                       }}
+                        style={{
+                          color: "gray",
+                          cursor: "pointer",
+                          marginLeft: "31.22px",
+                          marginRight: "22.43px",
+                        }}
                       ></img>
                     </a>
                     <ul
@@ -377,9 +427,9 @@ function Navbar() {
                 </ul>
               </div>
             </div>
-            </div>
+          </div>
         </nav>
-        
+
         <div className={humburger ? "scroll_off" : <></>}>
           {humburger ? <Menu /> : <></>}
         </div>

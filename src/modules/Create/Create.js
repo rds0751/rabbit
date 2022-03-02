@@ -42,6 +42,7 @@ function Create() {
           history("/create-nft");
         }
         if (redirectUrl == "wallet") {
+          document.body.style.overflow = "hidden";
           dispatch(ManageWalletSideBar(!isOpenWallet));
         }
         if (redirectUrl == "notification") {
@@ -52,11 +53,12 @@ function Create() {
         history("/my-profile");
       }
     } else {
-      toast.error("Choose the wallet");
+      // toast.error("Choose the wallet");
     }
   }, [toggleEffect]);
   const connectMetamask = () => {
     if (window.ethereum) {
+      // alert("ok");
       window.ethereum
         .request({ method: "eth_requestAccounts" })
         .then((result) => {
@@ -73,7 +75,9 @@ function Create() {
   };
   const accountChangeHandler = (newAccount) => {
     setDefaultAccount(newAccount[0]);
+    // console.log(, "<<<< defaultaccount");
     getUserBalance(newAccount[0]);
+    console.log(getBalance, "getUser balance");
     dispatch(AddWalletDetails({ address: newAccount[0], balance: getBalance }));
     CheckUserByWalletAddress(newAccount[0], (res) => {
       console.log(res, "<<<< Account changed");
@@ -149,7 +153,7 @@ function Create() {
             </div>
           </div>
 
-          <div className="eachWalletTypeBox card col-md-3 col-lg-3 col-sm-6 col-12 mx-4 my-5 card-border createmob2">
+          {/* <div className="eachWalletTypeBox card col-md-3 col-lg-3 col-sm-6 col-12 mx-4 my-5 card-border createmob2">
             <img
               id="create_logo"
               src={image}
@@ -163,9 +167,9 @@ function Create() {
                 <br /> Facebook, Twitter or Discord
               </p>
             </div>
-          </div>
+          </div> */}
 
-          <div className="eachWalletTypeBox card col-md-3 col-lg-3 col-sm-6 col-12 my-5 card-border">
+          {/* <div className="eachWalletTypeBox card col-md-3 col-lg-3 col-sm-6 col-12 my-5 card-border">
             <img
               id="create_logo"
               src="https://api.nuget.org/v3-flatcontainer/walletconnect.core/1.6.5/icon"
@@ -179,14 +183,14 @@ function Create() {
                 Wallets to Dapps
               </p>
             </div>
-          </div>
+          </div> */}
         </div>
-        <button
+        {/* <button
           type="button"
           className="ShowMoreButtonConnectWallet btn btn-outline-primary btn-size createmobbtn"
         >
           Show more
-        </button>
+        </button> */}
       </div>
     </>
   );

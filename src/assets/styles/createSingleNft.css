@@ -4,6 +4,7 @@
 
 .create-single-nft-outer {
   margin-top: 10px;
+  position: relative;
 }
 .single-form {
   /* border: 8px solid lightblue; */
@@ -118,6 +119,67 @@
 
 .upload-text {
   font-size: 12px;
+}
+
+/* ------------Drag and drop */
+.draganddropbox {
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  width: 17.2vw;
+  height: 14.2vw;
+  border: 2px dashed #d0d0d0;
+  border-radius: 12px;
+  margin-top: 1.2vh;
+}
+.draganddropboxbanner {
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 2rem;
+  height: 14.2vw;
+  border: 2px dashed #d0d0d0;
+  border-radius: 12px;
+  margin-top: 1.2vh;
+}
+
+.draganddropboxUploadAgain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 12.2vw;
+  height: 6.2vw;
+  border-radius: 12px;
+  margin-top: 1.2vh;
+  font-size: 0.9vw;
+  font-family: "poppins-semibold";
+  color: var(--color-primary);
+}
+
+.draganddropboxUploadAgainIcon {
+  font-size: 2vw;
+}
+.draganddropboxinnerdiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "poppins";
+}
+
+.draganddropboxinnerdivtextspan {
+  color: #333333;
+  font-size: 0.81vw;
+}
+.draganddropboxinnerdivtextspanbrowse {
+  color: var(--color-primary);
+  font-family: "poppins-semibold";
+}
+.draganddropboxIcon {
+  font-size: 4vw;
+  color: #789cbf;
 }
 
 /* ---- */

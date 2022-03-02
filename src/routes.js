@@ -70,6 +70,9 @@ function App() {
     // alert(`${checkWalletAddress}`);
   }, []);
 
+
+
+  
   return (
     <Provider store={store}>
       <div className="App">
@@ -87,13 +90,13 @@ function App() {
               element={<NftInformation />}
             />
 
-            <Route
+            {/* <Route
               exact
               path="/nft-information_1/:id"
               element={<NftInformation1 />}
-            />
+            /> */}
             <Route
-              exact
+              // exact
               path="/nft-information_2"
               element={<NftInformation2 />}
             />
@@ -127,7 +130,7 @@ function App() {
               element={<CollectionDetails />}
             />
 
-            <Route exact path="/edit-items" element={<EditItem />} />
+            <Route exact path="/edit-items/:id" element={<EditItem />} />
             <Route
               exact
               path="/collections-tile"

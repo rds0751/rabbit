@@ -16,14 +16,15 @@ export const CheckUserByWalletAddress = async (
   walletAddress,
   successCallBack
 ) => {
+  console.log("<<< token by auth token");
   let url = BASE_URL + "/api/v1/wallet-address";
   console.log(url, walletAddress, "<<<< wallet address");
   const { data } = await axios.put(
     url,
-    { wallet_address: walletAddress },
-    { headers: AuthToken }
+    { wallet_address: walletAddress }
+    // { headers: AuthToken }
   );
-  console.log(data, "<<<<data");
+  console.log(data, "<<<<datawalletaddress");
   if (data.success) {
     // return data.responseData;
     successCallBack(data.responseData);
