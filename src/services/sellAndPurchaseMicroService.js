@@ -97,3 +97,31 @@ export function addNftTx(requestData) {
       return Promise.reject(err);
     });
 }
+export function updateTxStatus(requestData,requestId) {
+  // console.log("requestId--",requestId)
+  // console.log("requestData--",requestData)
+
+  let url =
+    process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/transactions/"+requestId+"/status";
+  // console.log("url------------",url)
+    return httpService(
+    httpConstants.METHOD_TYPE.POST,
+    // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    AuthToken,
+    requestData,
+    url
+  )
+    .then((response) => {
+      if (
+        !response.success ||
+        response.responseCode !== 200 ||
+        !response.responseData ||
+        response.responseData.length === 0
+      )
+        return Promise.reject();
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
