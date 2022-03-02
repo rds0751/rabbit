@@ -1,6 +1,15 @@
 .editProfileButton {
   font-size: 0.9vw !important ;
   font-family: "poppins" !important;
+  color: #366eef;
+  border: 2px solid #336eef;
+  border-radius: 5px;
+  right: 8rem;
+  bottom: 2rem;
+  margin-top: 2rem;
+  /* margin-right: 2rem; */
+  padding: 4px 20px;
+  font-size: 12px;
 }
 .profileItemContainer {
   width: 85% !important;
@@ -21,6 +30,8 @@
   /* width: 17.085vw !important; */
   height: 9.81vw !important;
   border-radius: 4px;
+  width: 100%;
+  object-fit: cover;
 }
 .profileNftDetailFirstContainer {
   /* border: 2px solid green; */
@@ -82,7 +93,7 @@
   width: 16px;
   bottom: 8%;
 }
-.profileavatar{
+.profileavatar {
   border-radius: 50%;
 }
 @media only screen and (max-width: 1024px) {
@@ -106,8 +117,9 @@
     /* border: 2px solid blue; */
   }
   .profileNftContainerInner img {
-    width: 42.085vw !important;
+    width: 100% !important;
     height: 27.085vw !important;
+    object-fit: cover;
   }
   .profileNftDetailFirstContainer {
     /* border: 2px solid green; */
@@ -157,8 +169,10 @@
     /* border: 2px solid blue; */
   }
   .profileNftContainerInner img {
-    width: 82.085vw !important;
+    /* width: 82.085vw !important; */
     height: 47.085vw !important;
+    width: 100%;
+    object-fit: cover;
   }
   .profileNftDetailFirstContainer {
     /* border: 2px solid green; */

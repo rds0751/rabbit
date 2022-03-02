@@ -282,7 +282,7 @@ function MyProfile() {
               } = curElem;
               return (
                 <>
-                  <div className="profileNftContainerInner container__tile">
+                  <div className="profileNftContainerInner ">
                     <img
                       className="nftTileEachImage"
                       // src={randomimage}

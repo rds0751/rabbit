@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+
+import {NavDropdown} from 'react-bootstrap';
 // import './Navbar.css'
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../../assets/styles/Notification.css";
 import {
   addUserData,
+  AddWalletDetails,
   ManageNotiSideBar,
   ManageWalletSideBar,
   RedirectTo,
@@ -17,11 +20,14 @@ import "../../assets/styles/topNavBar.css";
 
 import Menu from "./Menu";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
+
 // import "../../assets/st.css";
 function Navbar() {
   const navigate = useNavigate();
   const [humburger, setHumburger] = useState(false);
   const [searchInput, setSearchInput] = useState("");
+  const [toggleEffect, setToggleEffect] = useState(false);
+
   const ethereum = window.ethereum;
   const [errorMssg, setErrorMssg] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
@@ -35,46 +41,60 @@ function Navbar() {
   const { isOpenNoti, isOpenWallet } = sideBar;
 
   console.log(walletAddress, "<<<<this is wallet address");
-  // useEffect(() => {
-  //   if (window.ethereum) {
-  //     // window.ethereum
-  //     //   .request({ method: "eth_requestAccounts" })
-  //     //   .then((result) => {
-  //     //     accountChangeHandler(result[0]); //accounts can be a array we just wanna grab first one
-  //     //     console.log(result[0], "<<<result console");
-  //     //     dispatch(
-  //     //       updateUserDetail({ address: defaultAccount, balance: getBalance })
-  //     //     );
 
-  //     //     // window.location.pathname = "/wallet";
-  //     //   })
-  //     //   .catch((e) => {
-  //     //     // window.location.pathname = "/add-wallet";
-  //     //     console.log(e, "<<< error ");
-  //     //   });
-  //   } else {
-  //     alert("Wallet not added");
-  //     setErrorMssg("Install Metamask ");
-  //     toast.error("Install Metamak and Connect Wallet");
-  //   }
-  // }, []);
-  // const accountChangeHandler = (newAccount) => {
-  //   setDefaultAccount(newAccount);
-  //   CheckUserByWalletAddress(newAccount, (res) => {
-  //     console.log(res, "<<<<response of user");
-  //     dispatch(addUserData(res));
-  //   });
-  //   getUserBalance(newAccount);
-  //   // console.log(data, "<<<<response dta");
-  // };
-  // const getUserBalance = (address) => {
-  //   window.ethereum
-  //     .request({ method: "eth_getBalance", params: [address, "latest"] })
-  //     .then((balance) => {
-  //       setGetBalance(ethers.utils.formatEther(balance));
-  //       console.log(getBalance, "<<< balance");
-  //     });
-  // };
+  useEffect(() => {
+    // console.log(window.ethereum.on(), "<<<<<account");
+    if (loggedInUser == null) {
+      connectMetamask();
+    }
+  }, [toggleEffect]);
+
+  //  ---------------------------------
+  const connectMetamask = () => {
+    if (window.ethereum) {
+      // alert("ok");
+      window.ethereum
+        .request({ method: "eth_requestAccounts" })
+        .then((result) => {
+          accountChangeHandler(result);
+          console.log(result);
+        })
+        .catch((e) => {
+          toast.error(" Connect Your Metamask Wallet");
+          console.log(e, "<<< error ");
+        });
+    } else {
+      toast.error("Install Metamak and Connect Wallet");
+    }
+  };
+  const accountChangeHandler = (newAccount) => {
+    // alert("account change");
+    setDefaultAccount(newAccount[0]);
+    // console.log(, "<<<< defaultaccount");
+    getUserBalance(newAccount[0]);
+    console.log(getBalance, "getUser balance");
+    dispatch(AddWalletDetails({ address: newAccount[0], balance: getBalance }));
+    CheckUserByWalletAddress(newAccount[0], (res) => {
+      console.log(res, "<<<< Account changed");
+      dispatch(addUserData(res));
+      localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
+
+      setToggleEffect(!toggleEffect);
+    });
+  };
+  const getUserBalance = (address) => {
+    window.ethereum
+      .request({ method: "eth_getBalance", params: [address, "latest"] })
+      .then((balance) => {
+        setGetBalance(ethers.utils.formatEther(balance));
+        console.log(getBalance, "<<< balance");
+      });
+  };
+
+  window.ethereum?.on("accountsChanged", accountChangeHandler);
+  console.log(loggedInUser, "<<<<<this iser user detail");
+
+  // ---------------------------
   let location = useLocation();
   const manageNavigation = (name) => {
     if (name == "create") {
@@ -88,8 +108,8 @@ function Navbar() {
     if (name == "profile") {
       if (walletAddress == null) {
         dispatch(RedirectTo("profile"));
-        // navigate("/add-wallet");
-        navigate("/my-profile");
+        navigate("/add-wallet");
+        // navigate("/my-profile");
       } else {
         navigate("/my-profile");
       }
@@ -116,7 +136,7 @@ function Navbar() {
   const handleNotiSideBar = () => {
     console.log(isOpenNoti, "<<<isopen noti");
     if (loggedInUser == null) {
-      // navigate("/add-wallet");
+      navigate("/add-wallet");
       // dispatch(ManageNotiSideBar(!isOpenNoti));
       // dispatch(RedirectTo("notification"));
     } else {
@@ -130,6 +150,7 @@ function Navbar() {
   };
 
   console.log("logged in user >>> lllll", loggedInUser);
+
   return (
     <>
       <div className="navbar-width">
@@ -251,8 +272,16 @@ function Navbar() {
                       Leaderboard
                     </Link>
                   </li>
+          <NavDropdown title="Resource" id="navbarScrollingDropdown" className={
+                      location.pathname.includes("s")
+                        ? "nav-items dropdown li_underline"
+                        : "nav-items dropdown"
+                    }>
+          <NavDropdown.Item href="/help-center">Help Center</NavDropdown.Item>
+          <NavDropdown.Item href="/suggestion">Suggestion</NavDropdown.Item>
+          </NavDropdown>
 
-                  <li
+                  {/* <li
                     className={
                       location.pathname.includes("resource")
                         ? "nav-items dropdown li_underline"
@@ -275,6 +304,7 @@ function Navbar() {
                     >
                       Resource
                     </Link>
+                   
                     <ul
                       className="dropdown-menu"
                       aria-labelledby="navbarDropdown"
@@ -290,11 +320,8 @@ function Navbar() {
                         </Link>
                       </li>
                     </ul>
-                  </li>
-                  <li
-                    className="create-button"
-                    onClick={() => manageNavigation("create")}
-                  >
+                  </li> */}
+                  <li className="create-button" onClick={() => manageNavigation("create")}>
                     <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}
                       className="btn btn-primary btnnav"
