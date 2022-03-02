@@ -61,18 +61,18 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
                 <img
                   src={Image}
                   style={{
-                    width: "100px",
-                    marginTop: "3em",
+                    width: "70%",
+                    // marginTop: "3em",
                     color: "#366EEF",
                   }}
                 />
-                {/* <span className="draganddropboxinnerdivtextspan">
-                Drag and Drop or
-                <span className="draganddropboxinnerdivtextspanbrowse">
-                  {" "}
-                  Browse
+                <span className="draganddropboxinnerdivtextspan">
+                  Drag and Drop or
+                  <span className="draganddropboxinnerdivtextspanbrowse">
+                    {" "}
+                    Browse
+                  </span>
                 </span>
-              </span> */}
               </div>
             </div>
           </span>
@@ -90,13 +90,13 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
                   color: "#366EEF",
                 }}
               />
-              <span className="draganddropboxinnerdivtextspan">
+              {/* <span className="draganddropboxinnerdivtextspan">
                 Drag and Drop or
                 <span className="draganddropboxinnerdivtextspanbrowse">
                   {" "}
                   Browse
                 </span>
-              </span>
+              </span> */}
             </div>
           </div>
         )}

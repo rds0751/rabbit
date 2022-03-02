@@ -14,12 +14,12 @@
   box-shadow: 0px 3px 12px #00000014; */
 }
 .walletAddress {
-  width: 75px;
-  overflow: hidden;
+  /* width: 75px; */
+  /* overflow: hidden; */
   font-size: 16px;
   text-overflow: ellipsis;
   /* margin-top: 20px; */
-  font-family: "poppins-medium" !important;
+  font-family: "poppins-normal" !important;
 }
 .balancewallet {
   margin-top: 20px !important;

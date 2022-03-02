@@ -147,6 +147,7 @@ span {
   cursor: pointer;
   border-top-left-radius: 0.6em;
   border-top-right-radius: 0.6em;
+  object-fit: cover;
 }
 .images {
   /* margin-left: 50px; */
@@ -262,7 +263,30 @@ span {
   color: black;
   text-decoration: none;
 }
+
+/* ----border  */
+.borderF2px {
+  border: 2px solid #f1f1f1;
+}
+.borderF1px {
+  border: 2px solid #f1f1f1;
+}
+
+/* ----bold */
+.bold-600 {
+  font-weight: 600;
+}
+.bold-bold {
+  font-weight: bold;
+}
 /* ---------------Font style css------------- */
+.color82 {
+  color: #828282;
+}
+.color36 {
+  color: #366eef;
+}
+
 .font-12 {
   font-size: 12px;
 }
@@ -293,6 +317,9 @@ span {
 }
 .font-22 {
   font-size: 22px;
+}
+.font-48 {
+  font-size: 48px;
 }
 .font-32 {
   font-size: 32px;
@@ -364,7 +391,7 @@ span {
 
 /*-------------- CreateNFT css ------------------ */
 .create-nft-font {
-  font-weight: 1000;
+  font-weight: bold;
 }
 .bottom-heading-font {
   font-weight: 600;
@@ -474,11 +501,7 @@ input::-webkit-input-placeholder {
   width: 160px;
   height: 150px;
 }
-.btn-choose-file {
-  /* margin-left: -8em !important; */
-  margin: 1rem;
-  margin-left: 2rem;
-}
+
 /* -----------------Edit Profile css------------ */
 
 /* -----------------Nft hompage css------------ */
@@ -577,10 +600,7 @@ input::-webkit-input-placeholder {
 /* ---------------Mobile/Media css  max-width 900px------------ */
 @media only screen and (max-width: 900px) {
   /* Edit Profile */
-  .btn-choose-file {
-    display: grid;
-    width: 100px;
-  }
+
   .img-responsive {
     width: 100px;
     height: 100px;
@@ -599,11 +619,7 @@ input::-webkit-input-placeholder {
     width: 550px;
     margin-left: 3em;
   } */
-  .btn-choose-file {
-    width: 80px;
-    margin-left: 2em !important;
-    margin-top: 3em !important;
-  }
+
   .img-responsive {
     width: 80px;
     height: 80px;
@@ -621,11 +637,7 @@ input::-webkit-input-placeholder {
     width: 500px;
     margin-left: 3em;
   }
-  .btn-choose-file {
-    width: 150px;
-    margin-left: 10em !important;
-    margin-top: 0.7em !important;
-  }
+
   .btn-text {
     font-size: 10px !important;
   }
@@ -644,11 +656,7 @@ input::-webkit-input-placeholder {
     width: 500px;
     margin-left: 1em;
   }
-  .btn-choose-file {
-    width: 150px;
-    margin-left: 10em !important;
-    margin-top: 0.7em !important;
-  }
+
   .btn-text {
     font-size: 10px !important;
   }
@@ -665,11 +673,7 @@ input::-webkit-input-placeholder {
   .form-responsive {
     width: 400px;
   }
-  .btn-choose-file {
-    width: 150px;
-    margin-left: 6em !important;
-    margin-top: 0.7em !important;
-  }
+
   .btn-text {
     font-size: 10px !important;
   }
@@ -835,10 +839,10 @@ select:focus-visible {
   } */
 }
 .center {
-margin:auto;
-width:10%;
-padding:10px;
-transform-origin: center;
+  margin: auto;
+  width: 10%;
+  padding: 10px;
+  transform-origin: center;
 }
 /*  1920 */
 @media only screen and (max-width: 2000px) and (min-width: 1600px) {

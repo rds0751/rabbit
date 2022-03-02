@@ -21,10 +21,14 @@ import { useSelector } from "react-redux";
 import "../../assets/styles/myProfile.css";
 import {
   NftCreatedByUser,
+  NftLikedByUser,
   NftOwnedByUser,
+  NftSellByUser,
 } from "../../services/contentMicroservice";
 import Spinner from "../../common/components/Spinner";
 import NonftText from "../../common/components/NonftText";
+import { updateBannerByUserId } from "../../services/UserMicroService";
+import SplitWalletAdd from "../../common/components/SplitWalletAdd";
 function MyProfile() {
   const defaultCoverpic =
     "https://png.pngtree.com/background/20210714/original/pngtree-blood-drop-halloween-blood-background-black-background-picture-image_1220404.jpg";
@@ -53,14 +57,16 @@ function MyProfile() {
 
   useEffect(() => {
     if (loggedInUser == null) {
-      // navigate("/add-wallet");
+      navigate("/my-profile");
+      navigate("/add-wallet");
+    } else {
       setIsloading(true);
       getCreatedByNft();
       getOwnedByNft();
+      getLikedNft();
+      getOnSaleNft();
+
       setIsloading(false);
-    } else {
-      getCreatedByNft();
-      getOwnedByNft();
     }
   }, [window.ethereum, checkClick]);
 
@@ -99,28 +105,26 @@ function MyProfile() {
     });
   };
   const getOnSaleNft = () => {
-    // NftOwnedByUser((response) => {
-    //   console.log(response, "myprofile");
-    //   if (response.success) {
-    //     setownedNft(response.responseData);
-
-    //   } else {
-    //     toast.error(response.msg);
-    //   }
-    // });
-    setonSaleNft([]);
+    NftSellByUser((response) => {
+      console.log(response, "myprofile");
+      if (response.success) {
+        setownedNft(response.responseData);
+      } else {
+        // toast.error(response.msg);
+      }
+    });
+    // setonSaleNft([]);
   };
   const getLikedNft = () => {
-    // NftOwnedByUser((response) => {
-    //   console.log(response, "myprofile");
-    //   if (response.success) {
-    //     setownedNft(response.responseData);
-
-    //   } else {
-    //     toast.error(response.msg);
-    //   }
-    // });
-    setlikedNft([]);
+    NftLikedByUser((response) => {
+      console.log(response, "myprofile");
+      if (response.success) {
+        setownedNft(response.responseData);
+      } else {
+        // toast.error(response.msg);
+      }
+    });
+    // setlikedNft([]);
   };
 
   // -----------------------
@@ -143,6 +147,29 @@ function MyProfile() {
   };
 
   // window.ethereum?.on("accountsChanged", accountChangeHandler);
+  // -----------------------
+  const updateBanner = (e) => {
+    console.log(e.target.files[0], "<<<<<<<<<<update fule");
+    const file = e.target.files[0];
+    let formData = new FormData();
+    formData.append("files", e.target.files[0]);
+    formData.append("fileName", file.name);
+    updateBannerByUserId(formData, loggedInUser._id, (res) => {
+      if (res.success) {
+        toast.success("Banner Updated Successfully");
+        window.location.reload(true);
+      } else {
+        toast.error("Unabale to updated banner");
+        window.location.reload(true);
+      }
+      console.log(res, "<<<<<< updated banner");
+    });
+  };
+  const splitAddress = (address) => {
+    const sub = address.substring(0, 2);
+    console.log(sub, "<<<split address");
+  };
+  splitAddress("akshay");
 
   return (
     <>
@@ -160,10 +187,13 @@ function MyProfile() {
           <input
             type="file"
             className="pencilicon"
-            on
+            onChange={updateBanner}
             style={{ border: "5px solid white", zIndex: "99", opacity: "0" }}
           />
           <img className="pencilicon" width="16px" height="16px" src={pencil} />
+          <Link to="/edit-profile" className="textdecornone">
+            <button className="profileeditbutton">Edit Profile</button>
+          </Link>
         </div>
         <div className="profileavatar  absolute">
           <img
@@ -176,10 +206,11 @@ function MyProfile() {
           <div className="profile-user">{loggedInUser?.userName}</div>
           <div className="add-cover">
             <div className="wallet-address-text">
-              {loggedInUser?.wallet_address}
+              {/* {loggedInUser?.wallet_address} */}
+              <SplitWalletAdd address={loggedInUser?.wallet_address} />
             </div>
             <img
-              style={{ height: "30px" }}
+              style={{ width: "21.47px", height: "21.47px" }}
               src={copy}
               alt=""
               onClick={handleCopyToClipboard}
@@ -196,12 +227,11 @@ function MyProfile() {
             <img style={{ height: "30px" }} src={globe} alt="" />
             {loggedInUser?.portfolio}
           </h6>
+          <Link to="/edit-profile" className="textdecornone">
+            <button className="profileeditbuttonatbottom">Edit Profile</button>
+          </Link>
         </div>
-        <Link to="/edit-profile">
-          <div className="editProfileButton position-absolute absolute1">
-            Edit Profile
-          </div>
-        </Link>
+
         {/* <div className="position-absolute absolute2">
       <img style={{height :"30px"}} src={pencil} alt="" />
       </div> */}
@@ -257,7 +287,8 @@ function MyProfile() {
             </div>
           </div>
           {/* <hr /> */}
-          <div className="profileNftContainer row mx-0 text-center image1">
+          {/* <div className="profileNftContainer row mx-0 text-center p-0 cards-gap image1"> */}
+          <div className="nftTileContainer row   ntf_row cards-gap">
             {/* <div class="spinner-border text-primary" role="status">
               <span class="sr-only">Loading...</span>
             </div> */}
@@ -282,7 +313,8 @@ function MyProfile() {
               } = curElem;
               return (
                 <>
-                  <div className="profileNftContainerInner ">
+                  {/* <div className="profileNftContainerInner "> */}
+                  <div className="col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
                     <img
                       className="nftTileEachImage"
                       // src={randomimage}
@@ -321,104 +353,9 @@ function MyProfile() {
                     </div>
                   </div>
 
-                  {/* <div className=" col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
-                    <div className="card nft-card-radius border-radius cardmob">
-                
-                      <img
-                        className="nftTileEachImage img-fluid border-radius nft-img-radius card_imgmob"
-                        src={randomimage}
-                      />
-              
-
-                      <div
-                        className="nftTileEachDetails card-lower"
-                        style={{
-                          padding: "0px 14px 0px 12px",
-                        }}
-                      >
-                        <div className="nftTileEachDetailsFirstContainer container__up">
-                          <div
-                            className="nftTileEachDetailsFirstContainerName"
-                            style={{
-                              color: "#191919",
-                              height: "20px",
-                              overflow: "hidden",
-                            }}
-                          >
-                            {title}
-                          </div>
-                          <span
-                            className="nftTileEachDetailsFirstContainerValue"
-                            style={{
-                              fontSize: "14px",
-                              fontWeight: "600px",
-                              color: "#16AB6E",
-                            }}
-                          >
-                            {maxPrice2}
-                          </span>
-                        </div>
-                        <div
-                          className="nftTileEachDetailsSecondContainerValueHighest"
-                          // style={{ marginLeft: "1em" }}
-                        >
-                          <div>
-                            {" "}
-                            Highest bid:{" "}
-                            <span className="font-weight-900">100</span>{" "}
-                          </div>
-                          <div>
-                            <span className="" style={{ color: "#000" }}>
-                              <i
-                                className="far fa-clock"
-                                style={{ color: "#f54" }}
-                              ></i>
-                              5 days left
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div> */}
+                 
                 </>
-                // <div className="profileNftContainerInner container__tile">
-                //   <img
-                //     // id="nft__photo"
-                //     className="nftTileEachImage"
-                //     src={image}
-                //     alt="/"
-                //   />
-                //   {/* <img id='like_icon' src={require('../asset//images/Like.png')} /> */}
-                //   <div className="tile__details">
-                //     <div className="profileNftDetailFirstContainer container__up">
-                //       <div className="title">{title}</div>
-                //       <div className="title1">{price}</div>
-                //     </div>
-                //     <div className="profileNftDetailSecondContainer container__down">
-                //       <div className="">
-                //         <span style={{ color: "black" }}>{maxPrice}</span>
-                //         <span
-                //           style={{
-                //             color: "#366EEF",
-                //             fontFamily: "poppins-bold",
-                //           }}
-                //         >
-                //           {" "}
-                //           {maxPrice2}
-                //         </span>
-                //       </div>
-                //       <div className="">
-                //         {daysLeft}{" "}
-                //         {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
-                //         <i
-                //           className="fa-solid fa-heart"
-                //           style={{ color: "#ef3643" }}
-                //         ></i>
-                //       </div>
-                //     </div>
-                //   </div>
-                // </div>
-              );
+                            );
             })}
           </div>
         </div>

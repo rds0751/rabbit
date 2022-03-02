@@ -13,17 +13,22 @@
 }
 .profileItemContainer {
   width: 85% !important;
-  margin: 0px auto;
+  margin: auto;
+  margin-top: 47px;
 }
 .profileNftContainer {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   box-sizing: border-box;
+  margin-top: 59.19px;
 }
 .profileNftContainerInner {
-  width: 17.085vw !important;
-  margin-right: 1.2vw;
+  /* width: 17.085vw !important; */
+  width: 21%;
+  padding: 0%;
+  margin: 0%;
+  /* margin-right: 1.2vw; */
   /* border: 2px solid blue; */
 }
 .profileNftContainerInner img {
@@ -77,7 +82,7 @@
 .add-cover {
   display: flex;
   margin-top: 1.5%;
-
+  text-align: center;
   width: 10%;
   /* border: 1px solid red; */
 }
@@ -96,6 +101,44 @@
 .profileavatar {
   border-radius: 50%;
 }
+.profileeditbutton {
+  width: 145px;
+  height: 42px;
+  border: 1px solid #366eef;
+  border-radius: 4px;
+  text-align: center;
+  background-color: white;
+  color: #366eef;
+  position: absolute;
+  z-index: 99;
+  right: 47px;
+  bottom: -53px;
+}
+.profileeditbuttonatbottom {
+  display: none;
+  width: 145px;
+  height: 42px;
+  border: 1px solid #366eef;
+  border-radius: 4px;
+  text-align: center;
+  background-color: white;
+  color: #366eef;
+  text-decoration: none;
+}
+.textdecornone {
+  text-decoration: none;
+}
+
+@media screen and (max-width: 764px) {
+  .profileeditbutton {
+    display: none;
+    margin-top: 20px;
+    text-decoration: none;
+  }
+  .profileeditbuttonatbottom {
+    display: block;
+  }
+}
 @media only screen and (max-width: 1024px) {
   .editProfileButton {
     font-size: 1.9vw !important ;
@@ -103,13 +146,14 @@
   }
   .profileItemContainer {
     width: 90% !important;
-    margin: 0px auto;
+    /* margin-top: 59.12px; */
   }
   .profileNftContainer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     box-sizing: border-box;
+    margin-top: 59.19px;
   }
   .profileNftContainerInner {
     width: 42.085vw !important;
@@ -153,7 +197,7 @@
     font-family: "poppins" !important;
   }
   .profileItemContainer {
-    width: 100% !important;
+    /* width: 100% !important; */
     margin: 0px auto;
   }
   .profileNftContainer {

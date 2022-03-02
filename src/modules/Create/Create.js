@@ -35,6 +35,9 @@ function Create() {
       // dispatch(ManageWalletSideBar(!isOpenWallet));
       if (redirectUrl != "") {
         // history(redirectUrl);
+        if (redirectUrl == "myitems") {
+          history("/my-items");
+        }
         if (redirectUrl == "profile") {
           history("/my-profile");
         }
@@ -58,13 +61,34 @@ function Create() {
   }, [toggleEffect]);
   const connectMetamask = () => {
     if (window.ethereum) {
-      // alert("ok");
+      // address;
       window.ethereum
         .request({ method: "eth_requestAccounts" })
-        .then((result) => {
-          accountChangeHandler(result);
-          console.log(result);
-        })
+        .then((newAccount) => {
+          const address = newAccount[0];
+          // alert("connecting");
+          window.ethereum
+            .request({ method: "eth_getBalance", params: [address, "latest"] })
+            .then((wallet_balance) => {
+              // setGetBalance(ethers.utils.formatEther(balance));
+              const balance = ethers.utils.formatEther(wallet_balance);
+              console.log(getBalance, "<<< balance");
+              // -----------------
+              dispatch(
+                AddWalletDetails({
+                  address,
+                  balance,
+                })
+              );
+              CheckUserByWalletAddress(address, (res) => {
+                console.log(res, "<<<< Account changed");
+                dispatch(addUserData(res));
+                localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
+                setToggleEffect(!toggleEffect);
+              });
+              // -------------
+            });
+               })
         .catch((e) => {
           toast.error(" Connect Your Metamask Wallet");
           console.log(e, "<<< error ");
@@ -74,18 +98,28 @@ function Create() {
     }
   };
   const accountChangeHandler = (newAccount) => {
-    setDefaultAccount(newAccount[0]);
+    // setDefaultAccount(newAccount[0]);
+    const address = newAccount[0];
     // console.log(, "<<<< defaultaccount");
-    getUserBalance(newAccount[0]);
-    console.log(getBalance, "getUser balance");
-    dispatch(AddWalletDetails({ address: newAccount[0], balance: getBalance }));
-    CheckUserByWalletAddress(newAccount[0], (res) => {
-      console.log(res, "<<<< Account changed");
-      dispatch(addUserData(res));
-      localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
+    // getUserBalance(newAccount[0]);
+    // balance
+    window.ethereum
+      .request({ method: "eth_getBalance", params: [address, "latest"] })
+      .then((wallet_balalnce) => {
+        // setGetBalance(ethers.utils.formatEther(wallet_balalnce));
+        const balance = ethers.utils.formatEther(wallet_balalnce); //balance
+        console.log(getBalance, "<<< balance");
+        // --------------------------------------------------------setting it to reducer
+        dispatch(AddWalletDetails({ address, balance }));
+        CheckUserByWalletAddress(address, (res) => {
+          console.log(res, "<<<< Account changed");
+          dispatch(addUserData(res));
+          localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
 
-      setToggleEffect(!toggleEffect);
-    });
+          setToggleEffect(!toggleEffect);
+        });
+      });
+    // ---
   };
   const getUserBalance = (address) => {
     window.ethereum
@@ -102,7 +136,7 @@ function Create() {
     <>
       <div className="d-flex justify-content-between">
         <ToastContainer
-          position="Install Metamask Extension And Connect Wallet"
+          position="top-center"
           autoClose={2000}
           hideProgressBar={false}
           newestOnTop={false}
@@ -115,16 +149,20 @@ function Create() {
       </div>
 
       <div className="container">
-        <div className="mt-5">
-          <h1 style={{ fontSize: "20px", fontWeight: "bolder" }}>
+        <div className="" style={{ marginTop: "47px" }}>
+          <h1 className="font-20 blackish bold-600 poppins-normal">
             Connect your wallet
           </h1>
 
           <p
-            style={{ fontSize: "18px", color: "#8B8B8B", fontWeight: "normal" }}
+            style={{ color: "#8B8B8B", fontWeight: "normal" }}
+            className="font-20 poppins-normal"
           >
             Connect with one of our most popular{" "}
-            <span style={{ color: "#8B8B8B", fontWeight: "bold" }}>
+            <span
+              style={{ color: "#8B8B8B" }}
+              className="poppins-normal bold-bold font-20"
+            >
               {" "}
               wallets
             </span>{" "}
@@ -136,7 +174,7 @@ function Create() {
         <div className="row createmob">
           <div
             onClick={connectMetamask}
-            className="eachWalletTypeBox card col-md-3 col-lg-3 col-sm-6 col-12 my-5 card-border"
+            className="eachWalletTypeBox  col-md-3 col-lg-3 col-sm-6 col-12 my-5 card-border borderF2px"
             style={{ cursor: "pointer" }}
           >
             <img
@@ -145,52 +183,21 @@ function Create() {
               alt="..."
             />
             <div className="card-body">
-              <h5 className="card-title"> Metamask</h5>
-              <p className="card-text">
+              <h5 className=" poppins-normal blackish font-16 bold-600 ">
+                {" "}
+                Metamask
+              </h5>
+              <p className="card-text  poppins-normal blackish">
                 One of the most secure wallets
                 <br /> with great flexibility
               </p>
             </div>
           </div>
 
-          {/* <div className="eachWalletTypeBox card col-md-3 col-lg-3 col-sm-6 col-12 mx-4 my-5 card-border createmob2">
-            <img
-              id="create_logo"
-              src={image}
-              className="card-img-top"
-              alt="..."
-            />
-            <div className="card-body">
-              <h5 className="card-title">Torus</h5>
-              <p className="card-text">
-                Connect with your Google,
-                <br /> Facebook, Twitter or Discord
-              </p>
-            </div>
-          </div> */}
-
-          {/* <div className="eachWalletTypeBox card col-md-3 col-lg-3 col-sm-6 col-12 my-5 card-border">
-            <img
-              id="create_logo"
-              src="https://api.nuget.org/v3-flatcontainer/walletconnect.core/1.6.5/icon"
-              className="card-img-top"
-              alt="..."
-            />
-            <div className="card-body">
-              <h5 className="card-title">Wallet Connect</h5>
-              <p className="card-text">
-                Open protocol for connecting <br />
-                Wallets to Dapps
-              </p>
-            </div>
-          </div> */}
+       
+         
         </div>
-        {/* <button
-          type="button"
-          className="ShowMoreButtonConnectWallet btn btn-outline-primary btn-size createmobbtn"
-        >
-          Show more
-        </button> */}
+      
       </div>
     </>
   );

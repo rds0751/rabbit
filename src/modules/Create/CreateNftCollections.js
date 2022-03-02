@@ -185,38 +185,7 @@ function CreateNftCollections(props) {
       <div className="collection-outer">
         <div className="collection-heading">Create your collection</div>
         <div className="collection-form-outer">
-          <div className="form-label">Upload Logo*</div>
-          {/* --------------------------------------------- =------------------------- input file lgo*/}
-          {/* <div className="upload-file-outer"> */}
-          {/* <input
-              type="file"
-              placeholder="Write your name"
-              name="logo"
-              ref={hiddenFileInputImage}
-              className="fileInput  input-box-1"
-              onChange={handleChangeImage}
-              style={{ border: "4px solid red" }}
-            /> */}
-          {/* </div> */}
-          {/* -------------------------------INPUT FILE */}
-          {/* <div className="upload-image-upper">
-              <img
-                className="image-upload"
-                src={imageUrl.current == "" ? Image : imageUrl.current}
-              />
-
-         
-              <div className="drag-and-drop">
-                Drag & Drop or
-                <span className="drag-and-drop-browse"> Browse</span>
-              </div>
-            </div> */}
-          {/* </div> */}
-
-          {/* ---------------------------------------------------------------------------- */}
-          {/* ----------------------DRAG LOGO */}
-
-          {!isLogoSelected && (
+                  {!isLogoSelected && (
             <span>
               <div
                 onClick={() => setClickedOn("logo")}
@@ -232,8 +201,8 @@ function CreateNftCollections(props) {
                   <img
                     src={logoCdn != "" ? logoCdn : Image}
                     style={{
-                      width: "100px",
-                      marginTop: "3em",
+                      width: "70%",
+                      // marginTop: "3em",
                       color: "#366EEF",
                     }}
                   />
@@ -262,14 +231,7 @@ function CreateNftCollections(props) {
                     color: "#366EEF",
                   }}
                 />
-                {/* <span className="draganddropboxinnerdivtextspan">
-                  Drag and Drop or
-                  <span className="draganddropboxinnerdivtextspanbrowse">
-                    {" "}
-                    Browse
-                  </span>
-                </span> */}
-              </div>
+                            </div>
             </div>
           )}
           {/* ----------- */}
@@ -280,101 +242,7 @@ function CreateNftCollections(props) {
           <div className="form-label" style={{ marginTop: "2rem" }}>
             Upload Banner*
           </div>
-          {/* 
-          <div className="upload-file-outer bannerwidth">
-            <input
-              type="file"
-              placeholder="Write your name"
-              name="email"
-              ref={hiddenFileInputBanner}
-              className="fileInput  input-box-1"
-              onChange={handleChangeBanner}
-            />
-            <div className="upload-image-upper">
-              <img
-                className="image-upload"
-                src={coverUrl.current == "" ? Image : coverUrl.current}
-                // style={{ display: coverUrl.current == "" ? "none" : "block" }}
-              />
-              <div className="drag-and-drop">
-                Drag & Drop or
-                <span className="drag-and-drop-browse"> Browse</span>
-              </div>
-            </div>
-          </div> */}
-          {/* ------------------------old banner upload */}
-          {/* ----------------------new drop down banner */}
-          {/* {!isBannerSelected && (
-            <span>
-              <div
-                onClick={() => setClickedOn("banner")}
-                className="draganddropbox"
-                {...getRootProps()}
-              >
-                <input
-                  {...getInputProps()}
-                  name="banner"
-                  onChange={() => setClickedOn("banner")}
-                />
-                <div className="draganddropboxinnerdiv">
-                  <img
-                    src={Image}
-                    style={{
-                      width: "100px",
-                      marginTop: "3em",
-                      color: "#366EEF",
-                    }}
-                  />
-                  <span className="draganddropboxinnerdivtextspan">
-                    Drag and Drop or
-                    <span className="draganddropboxinnerdivtextspanbrowse">
-                      {" "}
-                      Browse
-                    </span>
-                  </span>
-                </div>
-              </div>
-            </span>
-          )}
-          {isBannerSelected && (
-            <div
-              onClick={() => setClickedOn("banner")}
-              className="draganddropbox"
-              {...getRootProps()}
-            >
-              <input
-                {...getInputProps()}
-                name="banner"
-                onChange={() => setClickedOn("banner")}
-              />
-              <div className="draganddropboxinnerdiv">
-                <img
-                  src={bannerCdn != "" ? bannerCdn : Image}
-                  style={{
-                    width: "100px",
-                    marginTop: "3em",
-                    color: "#366EEF",
-                  }}
-                />
-                <span className="draganddropboxinnerdivtextspan">
-                  Drag and Drop or
-                  <span className="draganddropboxinnerdivtextspanbrowse">
-                    {" "}
-                    Browse
-                  </span>
-                </span>
-              </div>
-            </div>
-          )} */}
-
-          <Bannerdrop
-            bannerCdn={bannerCdn}
-            setbannerCdn={setbannerCdn}
-            bannerIpfs={bannerIpfs}
-            setbannerIpfs={setbannerIpfs}
-          />
-
-          {/* ----------------------------- */}
+      
         </div>
         <div>
           <form onSubmit={(e) => handleSubmit(e)}>

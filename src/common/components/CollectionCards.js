@@ -61,8 +61,8 @@ function Collections_tile() {
         {/* ------------- */}
 
         <div
-          className="row mob_row"
-          style={{ justifyContent: "space-between" }}
+          className="row mob_row col-cards-gap"
+          style={{ justifyContent: "start" }}
         >
           {collections.map((collection) => {
             const { _id, imageUrl, name, nfts } = collection;

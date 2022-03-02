@@ -42,8 +42,7 @@ function NftCardsHome({ nft }) {
         <img
           id="like_icon"
           onClick={() => likeNft(_id)}
-          // src={require("../../assets/images/Like.png")}
-          // src={require("../../assets/images/Like.svg")}
+
           src={handleLike ? Like : likes}
         />
         <div
@@ -57,7 +56,7 @@ function NftCardsHome({ nft }) {
               className="nftTileEachDetailsFirstContainerName"
               style={{
                 color: "#191919",
-                height: "20px",
+                // height: "20px",
                 overflow: "hidden",
               }}
             >

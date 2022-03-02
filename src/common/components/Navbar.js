@@ -40,7 +40,6 @@ function Navbar() {
   console.log(walletAddress, "<<<<this is wallet address");
 
   useEffect(() => {
-    // console.log(window.ethereum.on(), "<<<<<account");
     if (loggedInUser == null) {
       connectMetamask();
     }
@@ -49,25 +48,41 @@ function Navbar() {
   //  ---------------------------------
   const connectMetamask = () => {
     if (window.ethereum) {
-      // alert("ok");
-      window.ethereum
+         window.ethereum
         .request({ method: "eth_requestAccounts" })
-        .then((result) => {
-          accountChangeHandler(result);
-          console.log(result);
-        })
+        .then((newAccount) => {
+          const address = newAccount[0];
+                   window.ethereum
+            .request({ method: "eth_getBalance", params: [address, "latest"] })
+            .then((wallet_balance) => {
+              const balance = ethers.utils.formatEther(wallet_balance);
+              console.log(getBalance, "<<< balance");
+              // -----------------
+              dispatch(
+                AddWalletDetails({
+                  address,
+                  balance,
+                })
+              );
+              CheckUserByWalletAddress(address, (res) => {
+                console.log(res, "<<<< Account changed");
+                dispatch(addUserData(res));
+                localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
+                setToggleEffect(!toggleEffect);
+              });
+              // -------------
+            });
+                })
         .catch((e) => {
-          toast.error(" Connect Your Metamask Wallet");
+          // toast.error(" Connect Your Metamask Wallet");
           console.log(e, "<<< error ");
         });
     } else {
-      toast.error("Install Metamak and Connect Wallet");
+      // toast.error("Install Metamak and Connect Wallet");
     }
   };
   const accountChangeHandler = (newAccount) => {
-    // alert("account change");
     setDefaultAccount(newAccount[0]);
-    // console.log(, "<<<< defaultaccount");
     getUserBalance(newAccount[0]);
     console.log(getBalance, "getUser balance");
     dispatch(AddWalletDetails({ address: newAccount[0], balance: getBalance }));
@@ -94,6 +109,14 @@ function Navbar() {
   // ---------------------------
   let location = useLocation();
   const manageNavigation = (name) => {
+    if (name == "myitems") {
+      if (walletAddress == null) {
+        dispatch(RedirectTo("myitems"));
+        navigate("/add-wallet");
+      } else {
+        navigate("/create-nft");
+      }
+    }
     if (name == "create") {
       if (walletAddress == null) {
         dispatch(RedirectTo("create"));
@@ -127,15 +150,13 @@ function Navbar() {
       // dispatch(ManageWalletSideBar(!isOpenWallet));
     } else {
       dispatch(ManageWalletSideBar(!isOpenWallet));
-      document.body.style.overflow = (!isOpenWallet) ? "hidden" : "visible";
+      dispatch(ManageNotiSideBar(false));
     }
   };
   const handleNotiSideBar = () => {
     console.log(isOpenNoti, "<<<isopen noti");
     if (loggedInUser == null) {
       navigate("/add-wallet");
-      // dispatch(ManageNotiSideBar(!isOpenNoti));
-      // dispatch(RedirectTo("notification"));
     } else {
       dispatch(ManageNotiSideBar(!isOpenNoti));
       dispatch(ManageWalletSideBar(false));
@@ -163,10 +184,6 @@ function Navbar() {
                   style={{ width: "50px" }}
                 />
               </Link>
-              {/* <form
-                className=" w-100 p-0 m-0"
-                onSubmit={(e) => e.preventDefault()}
-              > */}
               <input
                 className="form-control form-controlmob "
                 type="search"
@@ -222,15 +239,15 @@ function Navbar() {
             </div>
 
             <div className="right_navbar d-flex ">
-              {/* <div
-            className="collapse navbar-collapse mobcollapse"
-            id="navbarSupportedContent"
-          > */}
-              <div className="navbar-nav d-flex" >
+          
+              <div className="navbar-nav d-flex">
                 <ul className="left_section_nav mb-0">
                   <li
                     className={
-                      location.pathname.includes("/") && !location.pathname.includes("leader-board") && !location.pathname.includes("resource") && !location.pathname.includes("create-nft")
+                      location.pathname.includes("/") &&
+                      !location.pathname.includes("leader-board") &&
+                      !location.pathname.includes("resource") &&
+                      !location.pathname.includes("create-nft")
                         ? "nav-items li_underline"
                         : "nav-items"
                     }
@@ -238,13 +255,15 @@ function Navbar() {
                   >
                     <Link
                       className={
-                        location.pathname.includes("/") && !location.pathname.includes("leader-board") && !location.pathname.includes("resource") && !location.pathname.includes("create-nft")
+                        location.pathname.includes("/") &&
+                        !location.pathname.includes("leader-board") &&
+                        !location.pathname.includes("resource") &&
+                        !location.pathname.includes("create-nft")
                           ? "nav-link navlink_active"
                           : "nav-link"
                       }
                       aria-current="page"
                       to="/"
-
                     >
                       Marketplace
                     </Link>
@@ -285,11 +304,7 @@ function Navbar() {
                           : "nav-link"
                       }
                       to="/resource"
-                    // id="navbarDropdown"
-                    // role="button"
-                    // data-bs-toggle="dropdown"
-                    // aria-expanded="false"
-                    // style={{ fontSize: "16px" }}
+                     
                     >
                       Resource
                     </Link>
@@ -325,13 +340,7 @@ function Navbar() {
 
                 <ul className="right_section_nav mb-0">
                   <li>
-                    {/* <Link
-                      to={
-                        loggedInUser == null
-                          ? "/add-wallet"
-                          : dispatch(ManageNotiSideBar(true))
-                      }
-                    > */}
+                   
                     <img
                       onClick={handleNotiSideBar}
                       className="noti"
@@ -339,8 +348,7 @@ function Navbar() {
                       width="19px"
                       height="21px"
                     ></img>
-                    {/* </Link> */}
-                    {/* </Link> */}
+                   
                   </li>
 
                   <li className="nav-item dropdown">
@@ -368,35 +376,20 @@ function Navbar() {
                       aria-labelledby="navbarDropdown"
                     >
                       <li onClick={() => manageNavigation("profile")}>
-                        {/* <Link
-                          className="dropdown-item"
-                          to={
-                            walletAddress == null
-                              ? "/add-wallet"
-                              : "/my-profile"
-                          } */}
-                        {/* > */}
+                       
                         Profile
-                        {/* </Link> */}
                       </li>
                       <li>
                         <hr className="dropdown-divider" />
                       </li>
-                      <li>
-                        <Link className="dropdown-item" to="/MyItems">
-                          My Items
-                        </Link>
+                      <li onClick={() => manageNavigation("myitems")}>
+                      
+                        My Items
                       </li>
                     </ul>
                   </li>
                   <li>
-                    {/* <Link
-                      to={
-                        !userDetails
-                          ? "/add-wallet"
-                          : dispatch(ManageNotiSideBar(true))
-                      }
-                    > */}
+                 
                     <img
                       onClick={handleWalletClick}
                       className="btnnav_mob2"
@@ -408,9 +401,7 @@ function Navbar() {
                         cursor: "pointer",
                       }}
                     ></img>
-                    {/* </Link> */}
                   </li>
-                  {/* <li className="ham_burger"> */}
                   <button
                     type="button"
                     className="navbar_toggle ham_burger"
@@ -420,7 +411,6 @@ function Navbar() {
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                   </button>
-                  {/* </li> */}
                 </ul>
               </div>
             </div>

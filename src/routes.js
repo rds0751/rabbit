@@ -70,9 +70,6 @@ function App() {
     // alert(`${checkWalletAddress}`);
   }, []);
 
-
-
-  
   return (
     <Provider store={store}>
       <div className="App">
