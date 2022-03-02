@@ -46,7 +46,7 @@ export default function NftInformation(props) {
     props?.loaderState,
     "<<<< this is data toooooooooooooooooooooooooooooooo match"
   );
-  alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
+  // alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
 
   // useEffect(() => {
   //   alert(`${loggedInUser?._id}`);
