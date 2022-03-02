@@ -713,7 +713,8 @@ height: 47px;
     width: 40%;
   }
   .right_navbar {
-    width: 45%;
+    /* width: 45%; */
+    width: auto;
   }
   .form-control {
     width: 50%;
@@ -959,16 +960,7 @@ height: 47px;
 /* @media screen and (max-width: 1400px) {
 
 } */
-.dropdown-item{
-width:154px;
-height:auto;
-font: normal normal 600 16px/19px Segoe UI;
-letter-spacing: 0px;
-color: #191919;
-opacity: 1;
-text-align: left;
 
-}
 #navbarScrollingDropdown{
   margin-top: 8px;
   
@@ -978,7 +970,36 @@ text-align: left;
   display: none;
 }
 
-.nav-items dropdown li_underline nav-item show dropdown{
+.nav-items dropdown li_underline{
   font: normal normal 600 16px/25px Poppins;
   color: #191919;
+}
+
+.nav-items  .dropdown-menu {
+  margin-top: 20px;
+}
+.dropdown-menu .dropdown-item{
+  padding: 20px;
+}
+.LeftNavBar{
+  margin-left: 5%;
+}
+@media only screen and (min-width:1600px) {
+  .LeftNavBar{
+    margin-left: 126px;
+  }
+}
+
+.RightNavBar{
+  margin-right: 5%;
+}
+@media only screen and (min-width:1600px) {
+  .RightNavBar{
+    margin-left: 127.56px;
+  }
+}
+
+
+.footerinputbox>.form-control, .footerinputbox>.form-select{
+  height: 36px;
 }
