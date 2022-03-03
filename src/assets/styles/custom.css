@@ -100,7 +100,7 @@ ul {
 .card-lower {
   background: #f8f8f8 0% 0% no-repeat padding-box;
   height: 122px;
-  border-radius: 4px;
+  border-radius: 13px 13px 0px 0px;
 }
 
 .title {
@@ -439,13 +439,13 @@ input::-webkit-input-placeholder {
 }
 /*-------------- Collection CreateNFT css end------------------ */
 /*  nav large */
-@media only screen and (max-width: 1010px) {
+/* @media only screen and (max-width: 1010px) {
   .filter {
     width: 100%;
     display: flex;
     flex-direction: column;
   }
-}
+} */
 
 /*-------------- navbar mob css------------------ */
 @media only screen and (max-width: 575px) {
@@ -505,7 +505,7 @@ input::-webkit-input-placeholder {
   /* width: 260px; */
 }
 .nft-img-radius {
-  border-radius: 8px 8px 0px 0px;
+  border-radius: 13px 13px 0px 0px;
 }
 /* -----------------Nft hompage css------------ */
 
@@ -802,8 +802,8 @@ select:focus-visible {
 }
 
 @media only screen and (max-width: 1010px) {
-  .filter {
-    flex-direction: column;
+  .ntf_div{
+    margin: 0 50px;
   }
   .filter .dropdown .first_select {
     /* margin-left: 10px; */
@@ -814,24 +814,10 @@ select:focus-visible {
   }
   .filter .ml_auto {
     margin-left: 0px;
-  }
-  .filter .dropdown {
-    width: initial;
-    margin-bottom: 16px;
-  }
-  .filter .dropdown:last-child {
-    margin-bottom: 0px;
-  }
+  }  
   .row {
     --bs-gutter-x: 0px;
   }
-  .sort-drop {
-    width: 100%;
-  }
-  /* .filter .dropdown select{
-    border: none;
-    width: 143px;
-  } */
 }
 .center {
   margin: auto;
@@ -863,13 +849,27 @@ select:focus-visible {
   }
 }
 
-@media screen and (max-width: 764px) {
+@media screen and (max-width: 767px) {
   .tabs-list {
     display: flex;
     margin-top: 20px;
     font-size: 14px;
     color: #828282;
     cursor: pointer;
+  }
+  .filter {
+    flex-direction: column;
+  }
+  .sort-drop {
+    width: 100%;
+  }
+  .filter .dropdown select{
+    border: none;
+    width: 143px;
+  }
+  .filter .dropdown {
+    width: initial;
+    margin-bottom: 16px;
   }
 }
 
@@ -945,6 +945,16 @@ select:focus-visible {
     padding-right: 6%;
   }
 }
+@media only screen and (max-width:767px){  
+  .lower__homepage{
+    flex-direction: column;
+  }
+  .filter .dropdown {
+    width: initial;
+    margin-bottom: 16px;
+    margin-left: 0px;
+  }
+}
 @media only screen and (max-width: 480px) {
   .connect-wallet {
     margin-bottom: 97px;
@@ -954,3 +964,5 @@ select:focus-visible {
     margin-right: 0px;
   }
 }
+
+/* add wallet screen css end*/

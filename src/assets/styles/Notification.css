@@ -672,8 +672,8 @@ height: 47px;
 .ntf_row .nft_card {
   padding-left: 0px;
   padding-right: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
+  /* margin-left: 0px;
+  margin-right: 0px; */
   display: inline !important;
 }
 
@@ -987,7 +987,7 @@ height: 47px;
 }
 
 .RightNavBar{
-  margin-right: 5%;
+  margin-right: 6%;
 }
 @media only screen and (min-width:1600px) {
   .RightNavBar{
