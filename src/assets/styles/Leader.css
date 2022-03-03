@@ -1,3 +1,6 @@
+.blackish {
+  color: #191919;
+}
 .form-control:focus {
   box-shadow: none;
 }
@@ -20,7 +23,6 @@
   border-radius: 0.7rem;
   font-weight: bold;
   margin-top: 10px;
-  
 }
 .leaderboardTitle {
   display: flex;
@@ -45,7 +47,7 @@
   align-items: center;
   text-align: center;
   justify-content: start;
-  padding:22px
+  padding: 22px;
 }
 .LeaderboardInsideDetails > h2 {
   font-size: 0.9rem;
@@ -54,10 +56,10 @@
 }
 .LeaderboardInsideDetails > p {
   font-size: 0.8rem;
-  color: #366EEF;
+  color: #366eef;
   margin-left: 0.5rem;
 }
-.LeaderboardInsideDetails > p > span{
+.LeaderboardInsideDetails > p > span {
   margin: 0rem;
   color: #9d9d9d;
 }
@@ -70,13 +72,13 @@
 .view {
   padding-bottom: 20px;
   padding-top: 25px;
-  font: 16px Poppins;;
+  font: 16px Poppins;
   text-decoration: none;
   color: #191919;
   display: flex;
   justify-content: center;
 }
-.view-button{
+.view-button {
   bottom: 0px;
 }
 
@@ -553,7 +555,7 @@ thead {
   .nav-pills .show > .nav-link {
     color: black;
     background-color: white;
-    border-bottom: 4px solid #366EEF;
+    border-bottom: 4px solid #366eef;
     font-size: 14px;
     font-weight: bold;
   }
@@ -712,8 +714,8 @@ thead {
     text-decoration: none;
   }
   .leader {
-   display: flex;
-   justify-content: center;
+    display: flex;
+    justify-content: center;
   }
   .CollectionItem > div > h2 {
     font-size: 10px;
@@ -741,9 +743,9 @@ thead {
   }
 }
 @media screen and (max-width: 1010px) {
-  .lower__homepage {
+  /* .lower__homepage {
     flex-direction: column;
-  }
+  } */
 }
 
 @media screen and (min-width: 768px) {
@@ -760,6 +762,25 @@ thead {
   }
 }
 
+.cards-gap {
+  /* gap: 6.53%; */
+  gap:calc(16%/2.6)
+}
+@media screen and (min-width: 1400px) {
+  .cards-gap {
+    gap:calc(16%/3.02022)
+  }
+}
+@media screen and (max-width: 1400px) {
+  .cards-gap {
+    gap:calc(16%/3.01)
+  }
+}
+@media screen and (max-width: 989px) {
+  .cards-gap {
+    gap: 10%;
+  }
+}
 @media screen and (max-width: 480px) {
   .dropbtm_mob {
     display: flex;
@@ -796,45 +817,45 @@ thead {
   border: 0;
 }
 
-.img-fluid{
-  width: 100%!important;
-  height:195px !important;
+.img-fluid {
+  /* width: 100%!important; */
+  /* height:195px !important; */
 }
-.container-details{
+.container-details {
   padding-left: 10px;
   padding-right: 10px;
 }
-.top-img{
+.top-img {
   border-radius: 50%;
 }
-.card{
-  background-color: transparent !important;
-  border: none!important;
+.card {
+  /* background-color: transparent !important; */
+  border: none !important;
 }
 
-.topnft-section{
+.topnft-section {
   margin-top: 5%;
 }
 
-@media (min-width: 1200px){
-.col-lg-3 {
+@media (min-width: 1200px) {
+  .col-lg-3 {
     flex: 0 0 auto;
-    width: 22% !important;
-}
+    width: 22%;
+  }
 }
 @media only screen and (max-width: 1170px) {
   .leaderboard-big {
-      display: none;
+    display: none;
   }
 }
 @media only screen and (max-width: 1170px) {
   .view {
-      padding-bottom: inherit !important;
+    padding-bottom: inherit !important;
   }
 }
-.card-small{
-  background-color: #F8F8F8;
-  border: none!important;
+.card-small {
+  background-color: #f8f8f8;
+  border: none !important;
 }
 
 .align-row {
@@ -892,7 +913,7 @@ thead {
 }
 
 
-/* create nft card css */
+/* create nft card css start */
 .create-nft{
   margin-top: 90px;
   margin-bottom: 151px;
@@ -924,7 +945,7 @@ thead {
   line-height: 27px;
   font-weight: 600;
   color: #191919;
-  margin-bottom: 0px;
+  margin-bottom: 35px;
 }
 @media only screen and (max-width:1366px) {
   .create-nft .col-lg-3{
@@ -957,6 +978,10 @@ thead {
   .create-nft{
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .medium-container{
+    flex: 0 0 auto;
+    width: 30%;
   }
 }
 @media only screen and (max-width:480px) {
@@ -992,6 +1017,7 @@ thead {
     width: 62.7%;
   }
 }
+/* create nft card css end */
 
 @media (min-width: 768px){
 .medium-container{

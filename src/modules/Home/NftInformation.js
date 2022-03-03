@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import image from "../../assets/images/1.jpg";
 import share from "../../assets/images/share.svg";
 import info from "../../assets/images/report.svg";
+import "../../assets/styles/nftReportModal.css";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { BidApi, OfferApi } from "../../constants/Nft_Info_Api";
@@ -20,7 +21,7 @@ import {
 } from "../../services/contentServices";
 import { toast } from "react-toastify";
 import { getUser } from "../../services/UserMicroService";
-import { Oval } from 'react-loader-spinner'
+import { Oval } from "react-loader-spinner";
 
 import ListingsTable from "../../common/components/ListingTable";
 
@@ -34,6 +35,7 @@ export default function NftInformation(props) {
   const { loggedInUser, walletAddress } = user;
   const { id } = useParams();
   const [nft, setNft] = useState(props?.responseData);
+  const [openReportModal, setOpenReportModal] = useState(false);
   const [userDetails, setUserDetails] = useState([]);
   const [tab, setTab] = useState(1);
   const [report, setReport] = useState({
@@ -133,17 +135,26 @@ export default function NftInformation(props) {
 
   return (
     <>
-      {
-        props?.loaderState ? <div className="center"> <Oval vertical="top" horizontal="center" color="#00BFFF" height={30} width={30} /></div> : ""
-      }
+      {props?.loaderState ? (
+        <div className="center">
+          {" "}
+          <Oval
+            vertical="top"
+            horizontal="center"
+            color="#00BFFF"
+            height={30}
+            width={30}
+          />
+        </div>
+      ) : (
+        ""
+      )}
       <div className="container">
         <div className="row mt-5">
           <div className="col-lg-1"></div>
           <div className="d-sm-block d-md-block d-lg-none mb-2">
             <div className="align-row" id="share_info">
-              <span className="nft-name">
-                {props?.responseData?.name}
-              </span>
+              <span className="nft-name">{props?.responseData?.name}</span>
               <span>
                 <img
                   alt="share"
@@ -246,6 +257,52 @@ export default function NftInformation(props) {
                             aria-describedby="basic-addon1"
                           />
                         </div>
+                        <h5
+                          className="font-14 font-weight-700 mt-4 text-dark"
+                          style={{ marginLeft: "-0.6em" }}
+                        >
+                          Expiration Date
+                        </h5>
+                        <div className="input-group">
+                          <button
+                            className="btn border dropdown-toggle font-15"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                            style={{ marginLeft: "-0.6em" }}
+                          >
+                            A month
+                          </button>
+                          <ul className="dropdown-menu">
+                            <li>
+                              <a className="dropdown-item" href="#">
+                                Jan
+                              </a>
+                            </li>
+                            <li>
+                              <a className="dropdown-item" href="#">
+                                Feb
+                              </a>
+                            </li>
+                            <li>
+                              <a className="dropdown-item" href="#">
+                                Mar
+                              </a>
+                            </li>
+                            <li>
+                              <a className="dropdown-item" href="#">
+                                Apr
+                              </a>
+                            </li>
+                          </ul>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="&#xf017; 11:25 AM"
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                          />
+                        </div>
                       </div>
 
                       {/* <!-- Modal footer --> */}
@@ -256,7 +313,21 @@ export default function NftInformation(props) {
                           data-bs-target="#myModalShare"
                           className="btn btn-primary w-100"
                           data-bs-dismiss="modal"
-                        // style={{ marginLeft: "1.1em" }}
+                          // style={{ marginLeft: "1.1em" }}
+                        >
+                          Make Offer
+                        </button>
+                      </div>
+
+                      {/* <!-- Modal footer --> */}
+                      <div className="modal-footer mb-4">
+                        <button
+                          type="button"
+                          data-bs-toggle="modal"
+                          data-bs-target="#myModalShare"
+                          className="btn btn-primary w-100"
+                          data-bs-dismiss="modal"
+                          // style={{ marginLeft: "1.1em" }}
                         >
                           Make Offer
                         </button>
@@ -269,7 +340,8 @@ export default function NftInformation(props) {
                   alt="info"
                   style={{ width: "40px", height: "30px" }}
                   data-bs-toggle="modal"
-                  data-bs-target="#myModalReport"
+                  // data-bs-target="#myModalReport"
+                  onClick={() => setOpenReportModal(true)}
                 />
                 {/* <!-- The Modal --> */}
                 <div className="modal" id="myModalReport">
@@ -368,7 +440,7 @@ export default function NftInformation(props) {
                 style={{
                   display:
                     props?.responseData?.createdBy == loggedInUser?._id &&
-                      !props?.responseData?.salesInfo?.isOpenForSale
+                    !props?.responseData?.salesInfo?.isOpenForSale
                       ? "block"
                       : "none",
                   color: "#366EEF",
@@ -393,7 +465,7 @@ export default function NftInformation(props) {
                 style={{
                   display:
                     props?.responseData?.createdBy == loggedInUser?._id &&
-                      !props?.responseData?.salesInfo?.isOpenForSale
+                    !props?.responseData?.salesInfo?.isOpenForSale
                       ? "block"
                       : "none",
                   color: "white",
@@ -409,7 +481,7 @@ export default function NftInformation(props) {
                 style={{
                   display:
                     props?.responseData?.createdBy == loggedInUser?._id &&
-                      props?.responseData?.salesInfo?.isOpenForSale
+                    props?.responseData?.salesInfo?.isOpenForSale
                       ? "block"
                       : "none",
                   marginLeft: "1rem",
@@ -424,9 +496,7 @@ export default function NftInformation(props) {
             </div>
             <div className="d-none d-sm-none d-md-none d-lg-block">
               <div className="align-row" id="share_info">
-                <span className="nft-name">
-                  {props?.responseData?.name}
-                </span>
+                <span className="nft-name">{props?.responseData?.name}</span>
                 <span>
                   <img
                     alt="share"
@@ -539,7 +609,8 @@ export default function NftInformation(props) {
                             data-bs-target="#myModalShare"
                             className="btn btn-primary w-100"
                             data-bs-dismiss="modal"
-                          // style={{ marginLeft: "1.1em" }}
+                            // style={{ marginLeft: "1.1em" }}
+                            // style={{ marginLeft: "1.1em" }}
                           >
                             Make Offer
                           </button>
@@ -551,8 +622,11 @@ export default function NftInformation(props) {
                     src={info}
                     alt="info"
                     style={{ width: "40px", height: "30px" }}
-                    data-bs-toggle="modal"
-                    data-bs-target="#myModalReport"
+                    // data-bs-toggle="modal"
+                    // data-bs-target="#myModalReport"
+                    onClick={() => {
+                      setOpenReportModal(true);
+                    }}
                   />
                   {/* <!-- The Modal --> */}
                   <div className="modal" id="myModalReport">
@@ -631,14 +705,13 @@ export default function NftInformation(props) {
                 </span>
               </div>
             </div>
-            <div className="second-text  mt-4 align-row" >
-              <span className="text">Current Price:
-                <span
-                  className="nft-value"
-                  style={{ color: "#16AB6E" }}
-                >
+            <div className="second-text  mt-4 align-row">
+              <span className="text">
+                Current Price:
+                <span className="nft-value" style={{ color: "#16AB6E" }}>
                   0.32 ETH
-                </span></span>
+                </span>
+              </span>
               <span className="align-row">
                 <i className="far fa-clock clock-icon"></i>
                 <span className="time">Ends in 5 days </span>
@@ -648,17 +721,13 @@ export default function NftInformation(props) {
               <div className="col-lg-3 col-sm-12  mt-3">
                 <span className="text">
                   Owned by:
-                  <span className="text fw-b">
-                    {userDetails.firstName}
-                  </span>
+                  <span className="text fw-b">{userDetails.firstName}</span>
                 </span>
               </div>
               <div className="col-lg-3 col-sm-12  mt-3">
                 <span className="text">
                   Created by:
-                  <span className="text fw-b">
-                    {userDetails.firstName}
-                  </span>
+                  <span className="text fw-b">{userDetails.firstName}</span>
                 </span>
               </div>
             </div>
@@ -667,31 +736,23 @@ export default function NftInformation(props) {
                 <VisibilityIcon
                   style={{ fontSize: "22px", color: "#366EEF" }}
                 />
-                <span
-                  className="text fw-b"
-                  style={{ marginLeft: "0.5em" }}
-                >
+                <span className="text fw-b" style={{ marginLeft: "0.5em" }}>
                   {props?.responseData?.viewsCount}
                 </span>
               </div>
               <div>
-                <FavoriteIcon
-                  style={{ fontSize: "22px", color: "#EF3643" }}
-                />
-                <span
-                  className="text fw-b"
-                  style={{ marginLeft: "0.5em" }}
-                >
+                <FavoriteIcon style={{ fontSize: "22px", color: "#EF3643" }} />
+                <span className="text fw-b" style={{ marginLeft: "0.5em" }}>
                   {props?.responseData?.likesCount}
                 </span>
-
               </div>
             </div>
-            <div className="" style={{ marginBottom: "16px", marginTop: "16px" }}>
+            <div
+              className=""
+              style={{ marginBottom: "16px", marginTop: "16px" }}
+            >
               <h4 className="text fw-b">Description</h4>
-              <p className="text">
-                {props?.responseData?.description}
-              </p>
+              <p className="text">{props?.responseData?.description}</p>
             </div>
 
             {/*  IF nft is not created by logged in user these buttons will be shown */}
@@ -700,7 +761,7 @@ export default function NftInformation(props) {
                 style={{
                   display:
                     props?.responseData?.ownedBy != loggedInUser?._id &&
-                      props?.responseData?.salesInfo?.isOpenForSale
+                    props?.responseData?.salesInfo?.isOpenForSale
                       ? "block"
                       : "none",
                   color: "white",
@@ -718,7 +779,7 @@ export default function NftInformation(props) {
                 style={{
                   display:
                     props?.responseData?.createdBy != loggedInUser?._id &&
-                      props?.responseData?.salesInfo?.isOpenForSale
+                    props?.responseData?.salesInfo?.isOpenForSale
                       ? "block"
                       : "none",
                   color: "#366EEF",
@@ -745,7 +806,9 @@ export default function NftInformation(props) {
                     marginRight: "16px",
                     cursor: "pointer",
                   }}
-                >Pricing History</li>
+                >
+                  Pricing History
+                </li>
                 <li
                   onClick={() => {
                     setTab(2);
@@ -757,7 +820,9 @@ export default function NftInformation(props) {
                     marginRight: "16px",
                     cursor: "pointer",
                   }}
-                >Listings</li>
+                >
+                  Listings
+                </li>
                 <li
                   onClick={() => {
                     setTab(3);
@@ -768,13 +833,14 @@ export default function NftInformation(props) {
                     fontWeight: tab === 3 ? 600 : "",
                     cursor: "pointer",
                   }}
-                >Offers</li>
+                >
+                  Offers
+                </li>
               </ul>
               {tab === 1 ? <PricingHistoryComponentGraph id={id} /> : ""}
               {tab === 2 ? <ListingsTable /> : ""}
               {tab === 3 ? <ListingsTable /> : ""}
             </div>
-
           </div>
           <div className="col-lg-3"></div>
         </div>
@@ -784,6 +850,35 @@ export default function NftInformation(props) {
             <PricingHistoryComponentTable id={id} />
           </div>
           <div className="col-1"></div>
+        </div>
+      </div>
+      <div
+        className="report-outer"
+        style={{ display: openReportModal ? "block" : "none" }}
+      >
+        <div className="report-abs-modal">
+          <div className="report-modal">
+            <div className="report-inner" style={{ opacity: "1" }}>
+              <div className="reportthisitem">
+                <div className="reporttext poppins-normal">
+                  Report this item
+                </div>
+                <div
+                  className="corsstext"
+                  onClick={() => setOpenReportModal(false)}
+                >
+                  X
+                </div>
+              </div>
+              <div className="singlerowmodal">
+                <div> Reason</div>
+                <select>
+                  <option value="select reason">Select reason</option>
+                </select>
+              </div>
+              <button className="makeofferbtnreport">Report</button>
+            </div>
+          </div>
         </div>
       </div>
     </>

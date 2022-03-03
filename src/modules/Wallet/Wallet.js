@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import image from "../../assets/images/1.jpg";
+import copy from "../../assets/images/copy.svg";
 import "../../assets/styles/Notification.css";
 import { useSelector } from "react-redux";
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
 import "../../assets/styles/wallet.css";
+import SplitWalletAdd from "../../common/components/SplitWalletAdd";
 
 function Wallet() {
   const [humburger, setHumburger] = useState(false);
@@ -82,16 +84,16 @@ function Wallet() {
         </div>
         <div className="walletAddressContainer walleth2">
           <div className="walletAddress fontwallet">
-            {/* {ethereum && ethereum.chainId
-              ? ethereum && ethereum.chainId
-              : "Install extension to connect wallet"} */}
-            {/* {userDetails?.address} */}
-            {walletAddress?.address}
+         
+            <SplitWalletAdd address={walletAddress?.address} />
           </div>
-          <i
-            className="far fa-copy"
-            onClick={() => handleCopyToClipboard()}
-          ></i>
+       
+          <img
+            style={{ width: "21.47px", height: "21.47px" }}
+            src={copy}
+            alt=""
+            onClick={handleCopyToClipboard}
+          />
         </div>
         <div className="balancewallet textVerticalCenter">
           <div className="WalletContent">

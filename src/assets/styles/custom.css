@@ -76,7 +76,7 @@ ul {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* margin-top: 13.41px; */
+  margin-top: 9px;
   /* margin-left: 14px; */
   /* margin-right: 12px; */
 }
@@ -99,6 +99,8 @@ ul {
 }
 .card-lower {
   background: #f8f8f8 0% 0% no-repeat padding-box;
+  height: 122px;
+  border-radius: 13px 13px 0px 0px;
 }
 
 .title {
@@ -139,6 +141,7 @@ ul {
   cursor: pointer;
   border-top-left-radius: 0.6em;
   border-top-right-radius: 0.6em;
+  object-fit: cover;
 }
 .images {
   /* margin-left: 50px; */
@@ -189,10 +192,11 @@ ul {
 #like_icon {
   position: absolute;
   /* margin-top: 7px; */
-  top: 10px;
+  top: 12px;
   /* margin-right: 10px; */
-  right: 10px;
-  width: 24px;
+  right: 6px;
+  width: 26px;
+  height: 26px;
 }
 
 .Leader_Board_container {
@@ -254,7 +258,30 @@ ul {
   color: black;
   text-decoration: none;
 }
+
+/* ----border  */
+.borderF2px {
+  border: 2px solid #f1f1f1;
+}
+.borderF1px {
+  border: 2px solid #f1f1f1;
+}
+
+/* ----bold */
+.bold-600 {
+  font-weight: 600;
+}
+.bold-bold {
+  font-weight: bold;
+}
 /* ---------------Font style css------------- */
+.color82 {
+  color: #828282;
+}
+.color36 {
+  color: #366eef;
+}
+
 .font-12 {
   font-size: 12px;
 }
@@ -285,6 +312,9 @@ ul {
 }
 .font-22 {
   font-size: 22px;
+}
+.font-48 {
+  font-size: 48px;
 }
 .font-32 {
   font-size: 32px;
@@ -356,7 +386,7 @@ ul {
 
 /*-------------- CreateNFT css ------------------ */
 .create-nft-font {
-  font-weight: 1000;
+  font-weight: bold;
 }
 .bottom-heading-font {
   font-weight: 600;
@@ -409,13 +439,13 @@ input::-webkit-input-placeholder {
 }
 /*-------------- Collection CreateNFT css end------------------ */
 /*  nav large */
-@media only screen and (max-width: 1010px) {
+/* @media only screen and (max-width: 1010px) {
   .filter {
     width: 100%;
     display: flex;
     flex-direction: column;
   }
-}
+} */
 
 /*-------------- navbar mob css------------------ */
 @media only screen and (max-width: 575px) {
@@ -466,11 +496,7 @@ input::-webkit-input-placeholder {
   width: 160px;
   height: 150px;
 }
-.btn-choose-file {
-  /* margin-left: -8em !important; */
-  margin: 1rem;
-  margin-left: 2rem;
-}
+
 /* -----------------Edit Profile css------------ */
 
 /* -----------------Nft hompage css------------ */
@@ -479,7 +505,7 @@ input::-webkit-input-placeholder {
   /* width: 260px; */
 }
 .nft-img-radius {
-  border-radius: 8px 8px 0px 0px;
+  border-radius: 13px 13px 0px 0px;
 }
 /* -----------------Nft hompage css------------ */
 
@@ -488,7 +514,7 @@ input::-webkit-input-placeholder {
   border-radius: 50%;
 }
 .collection-card {
-  height: 260px;
+  /* height: 260px; */
 }
 /* -----------------Collections hompage css end------------ */
 
@@ -569,10 +595,7 @@ input::-webkit-input-placeholder {
 /* ---------------Mobile/Media css  max-width 900px------------ */
 @media only screen and (max-width: 900px) {
   /* Edit Profile */
-  .btn-choose-file {
-    display: grid;
-    width: 100px;
-  }
+
   .img-responsive {
     width: 100px;
     height: 100px;
@@ -591,11 +614,7 @@ input::-webkit-input-placeholder {
     width: 550px;
     margin-left: 3em;
   } */
-  .btn-choose-file {
-    width: 80px;
-    margin-left: 2em !important;
-    margin-top: 3em !important;
-  }
+
   .img-responsive {
     width: 80px;
     height: 80px;
@@ -613,11 +632,7 @@ input::-webkit-input-placeholder {
     width: 500px;
     margin-left: 3em;
   }
-  .btn-choose-file {
-    width: 150px;
-    margin-left: 10em !important;
-    margin-top: 0.7em !important;
-  }
+
   .btn-text {
     font-size: 10px !important;
   }
@@ -636,11 +651,7 @@ input::-webkit-input-placeholder {
     width: 500px;
     margin-left: 1em;
   }
-  .btn-choose-file {
-    width: 150px;
-    margin-left: 10em !important;
-    margin-top: 0.7em !important;
-  }
+
   .btn-text {
     font-size: 10px !important;
   }
@@ -657,11 +668,7 @@ input::-webkit-input-placeholder {
   .form-responsive {
     width: 400px;
   }
-  .btn-choose-file {
-    width: 150px;
-    margin-left: 6em !important;
-    margin-top: 0.7em !important;
-  }
+
   .btn-text {
     font-size: 10px !important;
   }
@@ -795,8 +802,8 @@ select:focus-visible {
 }
 
 @media only screen and (max-width: 1010px) {
-  .filter {
-    flex-direction: column;
+  .ntf_div{
+    margin: 0 50px;
   }
   .filter .dropdown .first_select {
     /* margin-left: 10px; */
@@ -807,30 +814,16 @@ select:focus-visible {
   }
   .filter .ml_auto {
     margin-left: 0px;
-  }
-  .filter .dropdown {
-    width: initial;
-    margin-bottom: 16px;
-  }
-  .filter .dropdown:last-child {
-    margin-bottom: 0px;
-  }
+  }  
   .row {
     --bs-gutter-x: 0px;
   }
-  .sort-drop {
-    width: 100%;
-  }
-  /* .filter .dropdown select{
-    border: none;
-    width: 143px;
-  } */
 }
 .center {
-margin:auto;
-width:10%;
-padding:10px;
-transform-origin: center;
+  margin: auto;
+  width: 10%;
+  padding: 10px;
+  transform-origin: center;
 }
 /*  1920 */
 @media only screen and (max-width: 2000px) and (min-width: 1600px) {
@@ -856,7 +849,7 @@ transform-origin: center;
   }
 }
 
-@media screen and (max-width: 764px) {
+@media screen and (max-width: 767px) {
   .tabs-list {
     display: flex;
     margin-top: 20px;
@@ -864,39 +857,52 @@ transform-origin: center;
     color: #828282;
     cursor: pointer;
   }
+  .filter {
+    flex-direction: column;
+  }
+  .sort-drop {
+    width: 100%;
+  }
+  .filter .dropdown select{
+    border: none;
+    width: 143px;
+  }
+  .filter .dropdown {
+    width: initial;
+    margin-bottom: 16px;
+  }
 }
 
-
 /* add wallet screen css */
-.connect-wallet{
+.connect-wallet {
   margin-top: 97px;
   margin-bottom: 206px;
   padding-left: 7%;
   padding-right: 7%;
 }
-.connect-wallet .title{
-  font-family: 'poppins-semibold';
+.connect-wallet .title {
+  font-family: "poppins-semibold";
   font-size: 20px;
   line-height: 30px;
   color: #191919;
   margin-bottom: 14px;
 }
-.connect-wallet .text{
-  font-family: 'poppins';
+.connect-wallet .text {
+  font-family: "poppins";
   font-size: 20px;
   line-height: 30px;
-  color: #8B8B8B;
+  color: #8b8b8b;
   margin-bottom: 47px;
 }
-.connect-wallet .text span{
-  font-family: 'poppins-bold';
+.connect-wallet .text span {
+  font-family: "poppins-bold";
   font-size: 20px;
   line-height: 30px;
-  color: #8B8B8B;
+  color: #8b8b8b;
 }
-.connect-wallet .eachWalletTypeBox .card{
-  background: #FFFFFF!important;
-  border: 2px solid #F1F1F1!important;
+.connect-wallet .eachWalletTypeBox .card {
+  background: #ffffff !important;
+  border: 2px solid #f1f1f1 !important;
   border-radius: 13px;
   width: 289px;
   min-height: 193px;
@@ -904,47 +910,59 @@ transform-origin: center;
   margin-right: 33px;
   margin-bottom: 39px;
 }
-.connect-wallet .eachWalletTypeBox .card:last-child{
+.connect-wallet .eachWalletTypeBox .card:last-child {
   margin-right: 0px;
 }
-.connect-wallet .eachWalletTypeBox .card:hover{
-  border: 2px solid #8B8B8B!important;
+.connect-wallet .eachWalletTypeBox .card:hover {
+  border: 2px solid #8b8b8b !important;
 }
-.connect-wallet .eachWalletTypeBox .card-title{
-  font-family: 'poppins-semibold';
+.connect-wallet .eachWalletTypeBox .card-title {
+  font-family: "poppins-semibold";
   font-size: 16px;
   line-height: 25px;
   color: #191919;
   margin-bottom: 5px;
 }
-.connect-wallet .eachWalletTypeBox .card-text{
-  font-family: 'poppins';
+.connect-wallet .eachWalletTypeBox .card-text {
+  font-family: "poppins";
   font-size: 14px;
   line-height: 21px;
   color: #191919;
   margin-bottom: 0px;
 }
-.connect-wallet .eachWalletTypeBox .card-body{
+.connect-wallet .eachWalletTypeBox .card-body {
   padding: 0px;
 }
-@media only screen and (max-width:1600px){
-  .connect-wallet{
+@media only screen and (max-width: 1600px) {
+  .connect-wallet {
     padding-left: 8.5%;
     padding-right: 8.5%;
   }
 }
-@media only screen and (max-width:1440px){
-  .connect-wallet{
+@media only screen and (max-width: 1440px) {
+  .connect-wallet {
     padding-left: 6%;
     padding-right: 6%;
   }
 }
-@media only screen and (max-width:480px){
-  .connect-wallet{
+@media only screen and (max-width:767px){  
+  .lower__homepage{
+    flex-direction: column;
+  }
+  .filter .dropdown {
+    width: initial;
+    margin-bottom: 16px;
+    margin-left: 0px;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .connect-wallet {
     margin-bottom: 97px;
   }
-  .connect-wallet .eachWalletTypeBox .card{
+  .connect-wallet .eachWalletTypeBox .card {
     width: 100%;
     margin-right: 0px;
   }
 }
+
+/* add wallet screen css end*/
