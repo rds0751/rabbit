@@ -33,7 +33,6 @@ function CollDetailCard({ nft }) {
   return (
     <div
       className=" col-md-6 col-lg-3  col-sm-12  mt-5 mr-2 nft_card"
-      style={{ marginLeft: "1rem" }}
     >
       <div className="card nft-card-radius border-radius cardmob">
         <Link to={route} style={{ textDecoration: "none" }}>
@@ -45,8 +44,7 @@ function CollDetailCard({ nft }) {
         <img
           id="like_icon"
           onClick={() => likeNft(_id)}
-          // src={require("../../assets/images/Like.png")}
-          // src={require("../../assets/images/Like.svg")}
+        
           src={handleLike ? Like : likes}
         />
         <div
@@ -82,9 +80,7 @@ function CollDetailCard({ nft }) {
             // style={{ marginLeft: "1em" }}
           >
             <div>
-              {" "}
-              {/* Highest bid:{" "}
-            <span className="font-weight-900">100</span>{" "} */}
+        
             </div>
             <div>
               <span className="" style={{ color: "#000" }}>

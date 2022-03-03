@@ -172,6 +172,41 @@ export const NftOwnedByUser = async (successCallBack) => {
   }
 };
 
+//   get liked nfts in profile section
+
+export const NftLikedByUser = async (successCallBack) => {
+  try {
+    const url =
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/get-liked-nfts";
+    const { data } = await axios.post(url);
+    if (data.success) {
+      successCallBack(data);
+    } else {
+      successCallBack({ success: false, msg: "Unable To Fetch Data" });
+    }
+    console.log(data, "<<<<myprofile");
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+// ---- nft   sale by user
+export const NftSellByUser = async (userId, successCallBack) => {
+  try {
+    const url =
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts-onsale-by-user";
+    const { data } = await axios.post(url, { ownedBy: userId });
+    if (data.success) {
+      successCallBack(data);
+    } else {
+      successCallBack({ success: false, msg: "Unable To Fetch Data" });
+    }
+    console.log(data, "<<<<myprofile");
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 // =------------------ Get nfts by collection  id----
 export const getALLCollectionById = async (id, successCallBack) => {
   try {

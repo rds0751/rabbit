@@ -34,7 +34,7 @@ function CollectionDetails() {
       setNfts(response);
       console.log(response, "<<<<< collectionresponse");
     });
-  },[]);
+  }, []);
   const { imageUrl, coverUrl, name } = collection;
   // const [checkLike, setCheckLike] = useState(false);
   const handleLike = () => {
@@ -146,91 +146,11 @@ function CollectionDetails() {
               </div>
             </div>
           </div>
-          {/* <div className="" style={{marginLeft:"40px",}}> */}
-          <div   className="nftTileContainer row  ntf_row"
-          style={{ justifyContent:"flex-start" }}>
-            
-            {/* <div className="col-md-3 col-lg-3 col-sm-6/ col-11 images"> */}
-            {[...nfts].map((nft) => {
+          <div className="nftTileContainer row cards-gap ntf_row">
+            {[...nfts, ...nfts, ...nfts, ...nfts].map((nft) => {
               const { ipfsUrl, name, salesInfo } = nft;
-              // return <NftCardsHome nft={nft} />;
               return <CollDetailCard nft={nft} />;
-              {
-                /* <div className="profileNftContainerInner container__tile">
-                    <img className="nftTileEachImage" src={ipfsUrl} alt="/" />
-                    <div className="tile__details">
-                      <div className="profileNftDetailFirstContainer container__up">
-                        <div className="title">{name}</div>
-                        <div className="title1">{salesInfo.price} ETH</div>
-                      </div>
-                      <div className="profileNftDetailSecondContainer container__down">
-                        <div className="">
-                          <span style={{ color: "black" }}>Highest Bid:</span>
-                          <span
-                            style={{
-                              color: "#366EEF",
-                              fontFamily: "poppins-bold",
-                            }}
-                          >
-                            {" "}
-                            {10}
-                          </span>
-                        </div>
-                        <div className="">
-                          {4}{" "}
-                          <i
-                            onClick={handleLike}
-                            className="fa-solid fa-heart"
-                            style={{ color: checkLike ? "#ef3643" : "grey" }}
-                          ></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div> */
-              }
-
-              // <div
-              //   className="col-md-3 col-lg-3 col-sm-6 col-11 images collectionmob"
-              //   style={{ marginLeft: "35px" }}
-              // >
-              //   <div className="container__tile">
-              //     <img
-              //       id="nft__photo"
-              //       className="img-fluid"
-              //       src={ipfsUrl}
-              //       alt="/"
-              //     />
-              //     {/* <img id='like_icon' src={require('../asset//images/Like.png')} /> */}
-              //     <div className="tile__details">
-              //       <div className="container__up">
-              //         <h6 className="title">{name}</h6>
-              //         <h6 className="title1">{salesInfo.price}</h6>
-              //       </div>
-              //       <div className="container__down">
-              //         <h6 className="value__high">
-              //           <span style={{ color: "black" }}>10</span>
-              //           <span> 20</span>
-              //         </h6>
-              //         <h6 className="value__k">
-              //           5
-              //           <i
-              //             className="far fa-clock"
-              //             style={{ color: "#f54" }}
-              //           ></i>
-              //           <i
-              //             onClick={handleLike}
-              //             className="fa-solid fa-heart"
-              //             style={{
-              //               color: checkLike ? "#ef3643" : "white",
-              //               // border: "1px solid black",
-              //             }}
-              //             // style={{ color: "white" }}
-              //           ></i>
-              //         </h6>
-              //       </div>
-              //     </div>
-              //   </div>
-              // </div>
+            
             })}
           </div>
         </div>
@@ -240,4 +160,3 @@ function CollectionDetails() {
 }
 
 export default CollectionDetails;
-//   https://image.shutterstock.com/image-vector/background-water-droplets-on-surface-260nw-274829663.jpg

@@ -24,9 +24,7 @@ function Notification() {
   const { sideBar, user } = useSelector((state) => state);
   const { isOpenNoti } = sideBar;
   const [notifications, setNotifications] = useState([]);
-  // console.log(user?.loggedInUser?._id, "<<<< user data");
-  // console.log(user?.loggedInUser?._id, "<<<< user data");
-
+  
   useEffect(() => {
     console.log(user, "srinivas")
     getNotificationListById(user?.loggedInUser?._id).then((response) =>
@@ -53,42 +51,7 @@ function Notification() {
     setState({ ...state, [anchor]: open });
   };
 
-  // const list = (anchor) => (
-  //   <Box
-  //     sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
-  //     role="presentation"
-  //     onClick={toggleDrawer(anchor, false)}
-  //     onKeyDown={toggleDrawer(anchor, false)}
-
-  //   >
-  //     <h4 className="head">Notification</h4>
-  //     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-  //       <ListItem alignItems="flex-start">
-  //         <ListItemAvatar>
-  //           <Avatar className="noti_img" alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-  //         </ListItemAvatar>
-  //         <ListItemText className="notihead"
-  //           primary="Brunch this weekend?"
-  //           secondary={
-  //             <React.Fragment>
-  //               <Typography
-  //                 sx={{ display: 'inline' }}
-  //                 component="span"
-  //                 variant="body2"
-  //                 color="text.primary"
-  //               >
-  //                 Ali Connors
-  //               </Typography >
-  //               {" — I'll be in your neighborhood doing errands this…"}
-  //             </React.Fragment>
-  //           }
-  //         />
-  //       </ListItem>
-  //     </List>
-
-  //   </Box>
-  // );
-
+ 
   return (
     <div style={{ display: isOpenNoti ? "block" : "none" }}>
       {/* ------------ */}
@@ -124,19 +87,7 @@ function Notification() {
 
       {/* ------------------ */}
 
-      {/* {["right"].map((anchor) => (
-        <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-          <Drawer
-
-            anchor={anchor}
-            open={state[anchor] }
-            onClose={toggleDrawer(anchor, false)}
-          >
-            {list(anchor)}
-          </Drawer>
-        </React.Fragment>
-      ))}*/}
+    
     </div>
   );
 }
