@@ -439,13 +439,13 @@ input::-webkit-input-placeholder {
 }
 /*-------------- Collection CreateNFT css end------------------ */
 /*  nav large */
-@media only screen and (max-width: 1010px) {
+/* @media only screen and (max-width: 1010px) {
   .filter {
     width: 100%;
     display: flex;
     flex-direction: column;
   }
-}
+} */
 
 /*-------------- navbar mob css------------------ */
 @media only screen and (max-width: 575px) {
@@ -802,8 +802,8 @@ select:focus-visible {
 }
 
 @media only screen and (max-width: 1010px) {
-  .filter {
-    flex-direction: column;
+  .ntf_div{
+    margin: 0 50px;
   }
   .filter .dropdown .first_select {
     /* margin-left: 10px; */
@@ -814,24 +814,10 @@ select:focus-visible {
   }
   .filter .ml_auto {
     margin-left: 0px;
-  }
-  .filter .dropdown {
-    width: initial;
-    margin-bottom: 16px;
-  }
-  .filter .dropdown:last-child {
-    margin-bottom: 0px;
-  }
+  }  
   .row {
     --bs-gutter-x: 0px;
   }
-  .sort-drop {
-    width: 100%;
-  }
-  /* .filter .dropdown select{
-    border: none;
-    width: 143px;
-  } */
 }
 .center {
   margin: auto;
@@ -870,6 +856,20 @@ select:focus-visible {
     font-size: 14px;
     color: #828282;
     cursor: pointer;
+  }
+  .filter {
+    flex-direction: column;
+  }
+  .sort-drop {
+    width: 100%;
+  }
+  .filter .dropdown select{
+    border: none;
+    width: 143px;
+  }
+  .filter .dropdown {
+    width: initial;
+    margin-bottom: 16px;
   }
 }
 
@@ -953,4 +953,9 @@ select:focus-visible {
     width: 100%;
     margin-right: 0px;
   }
+  .lower__homepage{
+    flex-direction: column;
+  }
 }
+
+/* add wallet screen css end*/

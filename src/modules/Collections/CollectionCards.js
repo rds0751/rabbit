@@ -105,8 +105,8 @@ function Collections_tile() {
         </div>
         {/* --------------- */}
         <div
-          className="row mob_row cards-col-gap nftTileContainer" 
-          // style={{ justifyContent: "start" }}
+          className="nftTileContainer row  ntf_row mob_row"
+          style={{ justifyContent: "start" }}
         >
           <div
             style={{ width: "100%", display: "flex", justifyContent: "center" }}
@@ -124,7 +124,7 @@ function Collections_tile() {
             const { _id, imageUrl, name, nfts } = collection;
             const route = "/collection-details/" + _id;
             return (
-              <div className="collectionCardEach col-md-6 col-lg-3 col-sm-12 mt-5">
+              <div className="collectionCardEach col-md-6 col-lg-3 col-sm-12 mt-5 nft_card">
                 <Link to={route}>
                   <div
                     className=" nft-card-radius collection-card border-radius pt-4 cardmob"

@@ -743,9 +743,9 @@ thead {
   }
 }
 @media screen and (max-width: 1010px) {
-  .lower__homepage {
+  /* .lower__homepage {
     flex-direction: column;
-  }
+  } */
 }
 
 @media screen and (min-width: 768px) {
@@ -913,7 +913,7 @@ thead {
 }
 
 
-/* create nft card css */
+/* create nft card css start */
 .create-nft{
   margin-top: 90px;
   margin-bottom: 151px;
@@ -979,6 +979,10 @@ thead {
     padding-left: 10px;
     padding-right: 10px;
   }
+  .medium-container{
+    flex: 0 0 auto;
+    width: 30%;
+  }
 }
 @media only screen and (max-width:480px) {
   .create-nft{
@@ -1013,10 +1017,5 @@ thead {
     width: 62.7%;
   }
 }
+/* create nft card css end */
 
-@media (min-width: 768px){
-.medium-container{
-    flex: 0 0 auto;
-    width: 30%;
-}
-}
