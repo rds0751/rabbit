@@ -194,14 +194,14 @@ function CreateNftCollections(props) {
 
   return (
     <>
-      <div className="collection-outer">
-        <div className="collection-heading">Create your collection</div>
-        <div className="collection-form-outer">
+      <div className="main-container">
+        <h1 className="fs-32 fw-b c-b title">Create your collection</h1>
+        <p className="fs-16 fw-b c-b pt-3">Upload Logo*</p>
+        <div>
           {!isLogoSelected && (
-            <span>
               <div
                 onClick={() => setClickedOn("logo")}
-                className="draganddropbox"
+                className="img-div"
                 {...getRootProps()}
               >
                 <input
@@ -209,51 +209,27 @@ function CreateNftCollections(props) {
                   name="logo"
                   onChange={() => setClickedOn("logo")}
                 />
-                <div className="draganddropboxinnerdiv">
                   <img
                     src={logoCdn != "" ? logoCdn : Image}
-                    style={{
-                      width: "70%",
-                      // marginTop: "3em",
-                      color: "#366EEF",
-                    }}
+                    alt="upload-icon"
                   />
-                  <span className="draganddropboxinnerdivtextspan">
-                    Drag and Drop or
-                    <span className="draganddropboxinnerdivtextspanbrowse">
-                      {" "}
-                      Browse
-                    </span>
-                  </span>
-                </div>
+                  <p className="fw-b" style={{color:"#366EEF"}}>Upload</p>
               </div>
-            </span>
           )}
           {isLogoSelected && (
-            <div className="draganddropbox" {...getRootProps()}>
+            <div className="img-div" {...getRootProps()}>
               <input {...getInputProps()} name="logo" />
-              <div className="draganddropboxinnerdiv">
-                <img
-                  src={logoCdn != "" ? logoCdn : Image}
-                  style={{
-                    // width: "100px",
-                    width: "100%",
-                    height: "100%",
-                    // marginTop: "3em",
-                    color: "#366EEF",
-                  }}
-                />
-              </div>
+              <img
+                src={logoCdn != "" ? logoCdn : Image}
+                alt="upload-icon"
+              />
+              <p className="fw-b" style={{color:"#366EEF"}}>Upload</p>
             </div>
           )}
-          {/* ----------- */}
-          {/*  */}
         </div>
         <div>
           {/* ---------------------------OLD BANNER UPLOAD----------------- */}
-          <div className="form-label" style={{ marginTop: "2rem" }}>
-            Upload Banner*
-          </div>
+          <div className="fs-16 fw-b c-b pt-3 pb-3">Upload Banner*</div>
 
           <Bannerdrop
             bannerCdn={bannerCdn}
@@ -267,7 +243,7 @@ function CreateNftCollections(props) {
         <div>
           <form onSubmit={(e) => handleSubmit(e)}>
             <div>
-              <div className="form-label">Name*</div>
+              <p className="fs-16 fw-b c-b pt-3">Name*</p>
               <input
                 type="name"
                 name="name"
@@ -279,8 +255,8 @@ function CreateNftCollections(props) {
                 }}
               />
             </div>
-            <div className="">
-              <div className="form-label">Description*</div>
+            <div>
+              <p className="fs-16 fw-b c-b pt-3">Description*</p>
               <textarea
                 rows="4"
                 name="Description"
@@ -295,18 +271,18 @@ function CreateNftCollections(props) {
                   }
                 }}
               ></textarea>
-              <span>{DesLength} of 1000 characters used</span>
+              <span className="fs-14" style={{color:"#707070"}}>{DesLength} of 1000 characters used</span>
             </div>
             <div>
-              <div className="form-label category-label">Category</div>
+              <div className="fs-16 fw-b c-b pt-3 pb-3">Category</div>
               {/* <Link>Create</Link> */}
               <select
                 className="input-box-1"
                 onChange={(e) => (categoryId.current = e.target.value)}
               >
-                <option>Select Category</option>
+                <option style={{color:"#707070"}}>Select Category</option>
                 {Categories.map((item, key) => {
-                  return <option value={item?._id}>{item?.name}</option>;
+                  return <option value={item?._id} style={{color:"#707070"}}>{item?.name}</option>;
                 })}
                 {/* <option>2</option>
                 <option>3</option>
@@ -314,7 +290,7 @@ function CreateNftCollections(props) {
               </select>
             </div>
             <div>
-              <div className="form-label">Blockchain*</div>
+              <div className="fs-16 fw-b c-b pt-3 pb-3">Blockchain*</div>
               <div className="block-chain-container">
                 <div>
                   <img src={ethereum} height="32px" />

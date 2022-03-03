@@ -48,50 +48,23 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
       {" "}
       <div style={{ width: "100%" }}>
         {!isBannerSelected && (
-          <span>
-            <div className="draganddropboxbanner" {...getRootProps()}>
+            <div className="img-sec-div" {...getRootProps()}>
               <input {...getInputProps()} name="banner" />
-              <div className="draganddropboxinnerdiv">
                 <img
                   src={Image}
-                  style={{
-                    width: "70%",
-                    // marginTop: "3em",
-                    color: "#366EEF",
-                  }}
+                  alt="upload-icon"
                 />
-                <span className="draganddropboxinnerdivtextspan">
-                  Drag and Drop or
-                  <span className="draganddropboxinnerdivtextspanbrowse">
-                    {" "}
-                    Browse
-                  </span>
-                </span>
-              </div>
+                <p className="fw-b" style={{color:"#366EEF"}}>Upload</p>
             </div>
-          </span>
         )}
         {isBannerSelected && (
-          <div className="draganddropboxbanner" {...getRootProps()}>
+          <div className="img-sec-div" {...getRootProps()}>
             <input {...getInputProps()} name="banner" />
-            <div className="draganddropboxinnerdiv" style={{width:"100%"}}>
-              <img
-                src={bannerCdn != "" ? bannerCdn : Image}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  // marginTop: "3em",
-                  color: "#366EEF",
-                }}
-              />
-              {/* <span className="draganddropboxinnerdivtextspan">
-                Drag and Drop or
-                <span className="draganddropboxinnerdivtextspanbrowse">
-                  {" "}
-                  Browse
-                </span>
-              </span> */}
-            </div>
+            <img
+              src={bannerCdn != "" ? bannerCdn : Image}
+              alt="upload-icon"                
+            />
+            <p className="fw-b" style={{color:"#366EEF"}}>Upload</p>            
           </div>
         )}
       </div>
