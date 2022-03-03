@@ -5,6 +5,9 @@
   overflow: hidden;
   background-color: #f8f8f8;
   border-radius: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .collectionCardEach a {
   text-decoration: none !important;

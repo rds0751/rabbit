@@ -69,11 +69,13 @@
 }
 .wallet-address-text {
   /* width: 101px; */
+  background-color: #f3f3f3;
+  border-radius: 6px;
   /* width: 10%; */
   /* display: flex; */
   margin-top: 5px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
 }
 .profile-user {
   margin-top: 1%;
@@ -83,6 +85,7 @@
   display: flex;
   margin-top: 1.5%;
   text-align: center;
+  align-items: center;
   width: 10%;
   /* border: 1px solid red; */
 }

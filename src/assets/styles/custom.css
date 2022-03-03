@@ -76,7 +76,7 @@ ul {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* margin-top: 13.41px; */
+  margin-top: 9px;
   /* margin-left: 14px; */
   /* margin-right: 12px; */
 }
@@ -99,6 +99,8 @@ ul {
 }
 .card-lower {
   background: #f8f8f8 0% 0% no-repeat padding-box;
+  height: 122px;
+  border-radius: 4px;
 }
 
 .title {
@@ -190,10 +192,11 @@ ul {
 #like_icon {
   position: absolute;
   /* margin-top: 7px; */
-  top: 10px;
+  top: 12px;
   /* margin-right: 10px; */
-  right: 10px;
-  width: 24px;
+  right: 6px;
+  width: 26px;
+  height: 26px;
 }
 
 .Leader_Board_container {
@@ -511,7 +514,7 @@ input::-webkit-input-placeholder {
   border-radius: 50%;
 }
 .collection-card {
-  height: 260px;
+  /* height: 260px; */
 }
 /* -----------------Collections hompage css end------------ */
 
@@ -870,37 +873,36 @@ select:focus-visible {
   }
 }
 
-
 /* add wallet screen css */
-.connect-wallet{
+.connect-wallet {
   margin-top: 97px;
   margin-bottom: 206px;
   padding-left: 7%;
   padding-right: 7%;
 }
-.connect-wallet .title{
-  font-family: 'poppins-semibold';
+.connect-wallet .title {
+  font-family: "poppins-semibold";
   font-size: 20px;
   line-height: 30px;
   color: #191919;
   margin-bottom: 14px;
 }
-.connect-wallet .text{
-  font-family: 'poppins';
+.connect-wallet .text {
+  font-family: "poppins";
   font-size: 20px;
   line-height: 30px;
-  color: #8B8B8B;
+  color: #8b8b8b;
   margin-bottom: 47px;
 }
-.connect-wallet .text span{
-  font-family: 'poppins-bold';
+.connect-wallet .text span {
+  font-family: "poppins-bold";
   font-size: 20px;
   line-height: 30px;
-  color: #8B8B8B;
+  color: #8b8b8b;
 }
-.connect-wallet .eachWalletTypeBox .card{
-  background: #FFFFFF!important;
-  border: 2px solid #F1F1F1!important;
+.connect-wallet .eachWalletTypeBox .card {
+  background: #ffffff !important;
+  border: 2px solid #f1f1f1 !important;
   border-radius: 13px;
   width: 289px;
   min-height: 193px;
@@ -908,46 +910,46 @@ select:focus-visible {
   margin-right: 33px;
   margin-bottom: 39px;
 }
-.connect-wallet .eachWalletTypeBox .card:last-child{
+.connect-wallet .eachWalletTypeBox .card:last-child {
   margin-right: 0px;
 }
-.connect-wallet .eachWalletTypeBox .card:hover{
-  border: 2px solid #8B8B8B!important;
+.connect-wallet .eachWalletTypeBox .card:hover {
+  border: 2px solid #8b8b8b !important;
 }
-.connect-wallet .eachWalletTypeBox .card-title{
-  font-family: 'poppins-semibold';
+.connect-wallet .eachWalletTypeBox .card-title {
+  font-family: "poppins-semibold";
   font-size: 16px;
   line-height: 25px;
   color: #191919;
   margin-bottom: 5px;
 }
-.connect-wallet .eachWalletTypeBox .card-text{
-  font-family: 'poppins';
+.connect-wallet .eachWalletTypeBox .card-text {
+  font-family: "poppins";
   font-size: 14px;
   line-height: 21px;
   color: #191919;
   margin-bottom: 0px;
 }
-.connect-wallet .eachWalletTypeBox .card-body{
+.connect-wallet .eachWalletTypeBox .card-body {
   padding: 0px;
 }
-@media only screen and (max-width:1600px){
-  .connect-wallet{
+@media only screen and (max-width: 1600px) {
+  .connect-wallet {
     padding-left: 8.5%;
     padding-right: 8.5%;
   }
 }
-@media only screen and (max-width:1440px){
-  .connect-wallet{
+@media only screen and (max-width: 1440px) {
+  .connect-wallet {
     padding-left: 6%;
     padding-right: 6%;
   }
 }
-@media only screen and (max-width:480px){
-  .connect-wallet{
+@media only screen and (max-width: 480px) {
+  .connect-wallet {
     margin-bottom: 97px;
   }
-  .connect-wallet .eachWalletTypeBox .card{
+  .connect-wallet .eachWalletTypeBox .card {
     width: 100%;
     margin-right: 0px;
   }

@@ -17,6 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { addUserData, AddWalletDetails } from "../../reducers/Action";
 import { useDispatch } from "react-redux";
 import { addWalletAddress } from "../../services";
+import NftCardHome from "../../common/components/NftCardsHome";
 import { useSelector } from "react-redux";
 import "../../assets/styles/myProfile.css";
 import {
@@ -207,10 +208,15 @@ function MyProfile() {
           <div className="add-cover">
             <div className="wallet-address-text">
               {/* {loggedInUser?.wallet_address} */}
+
               <SplitWalletAdd address={loggedInUser?.wallet_address} />
             </div>
             <img
-              style={{ width: "21.47px", height: "21.47px" }}
+              style={{
+                width: "21.47px",
+                height: "21.47px",
+                marginLeft: "30.6px",
+              }}
               src={copy}
               alt=""
               onClick={handleCopyToClipboard}
@@ -313,15 +319,13 @@ function MyProfile() {
               } = curElem;
               return (
                 <>
-                  {/* <div className="profileNftContainerInner "> */}
-                  <div className="col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
+                  <NftCardHome nft={curElem} />
+                  {/* <div className="col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
                     <img
                       className="nftTileEachImage"
-                      // src={randomimage}
                       src={ipfsUrl}
                       alt="nft"
                     />
-                    {/* <img id='like_icon' src={require('../asset//images/Like.png')} /> */}
                     <div className="tile__details">
                       <div className="profileNftDetailFirstContainer container__up">
                         <div className="title">{name}</div>
@@ -329,33 +333,27 @@ function MyProfile() {
                       </div>
                       <div className="profileNftDetailSecondContainer container__down">
                         <div className="">
-                          {/* <span style={{ color: "black" }}>Highest Bid:</span> */}
                           <span
                             style={{
                               color: "#366EEF",
                               fontFamily: "poppins-bold",
                             }}
                           >
-                            {" "}
-                            {/* {10} */}
+                          
                           </span>
                         </div>
                         <div className="">
                           {likesCount}
-                          {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
+                        
                           <i
-                            // onClick={handleLike}
-                            className="fa-solid fa-heart"
                             style={{ color: "#ef3643" }}
                           ></i>
                         </div>
                       </div>
                     </div>
-                  </div>
-
-                 
+                  </div> */}
                 </>
-                            );
+              );
             })}
           </div>
         </div>

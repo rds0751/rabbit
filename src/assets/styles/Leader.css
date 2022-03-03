@@ -826,7 +826,7 @@ thead {
   border-radius: 50%;
 }
 .card {
-  background-color: transparent !important;
+  /* background-color: transparent !important; */
   border: none !important;
 }
 

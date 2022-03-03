@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import {NavDropdown} from 'react-bootstrap';
+import { NavDropdown } from "react-bootstrap";
 // import './Navbar.css'
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -39,6 +39,7 @@ function Navbar() {
   const { user, sideBar } = useSelector((state) => state);
   const { userDetails, loggedInUser, walletAddress } = user;
   const { isOpenNoti, isOpenWallet } = sideBar;
+  var provider = new ethers.providers.Web3Provider(ethereum);
 
   console.log(walletAddress, "<<<<this is wallet address");
 
@@ -49,37 +50,55 @@ function Navbar() {
   }, [toggleEffect]);
 
   //  ---------------------------------
-  const connectMetamask = () => {
+  const isMetaMaskConnected = async () => {
+    const accounts = await provider.listAccounts();
+    return accounts.length > 0;
+  };
+
+  const connectMetamask = async () => {
     if (window.ethereum) {
-         window.ethereum
-        .request({ method: "eth_requestAccounts" })
-        .then((newAccount) => {
-          const address = newAccount[0];
-                   window.ethereum
-            .request({ method: "eth_getBalance", params: [address, "latest"] })
-            .then((wallet_balance) => {
-              const balance = ethers.utils.formatEther(wallet_balance);
-              console.log(getBalance, "<<< balance");
-              // -----------------
-              dispatch(
-                AddWalletDetails({
-                  address,
-                  balance,
+      await isMetaMaskConnected().then((connected) => {
+        if (connected) {
+          window.ethereum
+            .request({ method: "eth_requestAccounts" })
+            .then((newAccount) => {
+              const address = newAccount[0];
+              window.ethereum
+                .request({
+                  method: "eth_getBalance",
+                  params: [address, "latest"],
                 })
-              );
-              CheckUserByWalletAddress(address, (res) => {
-                console.log(res, "<<<< Account changed");
-                dispatch(addUserData(res));
-                localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
-                setToggleEffect(!toggleEffect);
-              });
-              // -------------
+                .then((wallet_balance) => {
+                  const balance = ethers.utils.formatEther(wallet_balance);
+                  console.log(getBalance, "<<< balance");
+                  // -----------------
+                  dispatch(
+                    AddWalletDetails({
+                      address,
+                      balance,
+                    })
+                  );
+                  CheckUserByWalletAddress(address, (res) => {
+                    console.log(res, "<<<< Account changed");
+                    dispatch(addUserData(res));
+                    localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
+                    setToggleEffect(!toggleEffect);
+                  });
+                  // -------------
+                });
+            })
+            .catch((e) => {
+              // toast.error(" Connect Your Metamask Wallet");
+              console.log(e, "<<< error ");
             });
-                })
-        .catch((e) => {
-          // toast.error(" Connect Your Metamask Wallet");
-          console.log(e, "<<< error ");
-        });
+          // alert("connected");
+        } else {
+          // metamask is not connected
+          return null;
+          // alert("not connected");
+        }
+      });
+      // return null;
     } else {
       // toast.error("Install Metamak and Connect Wallet");
     }
@@ -196,7 +215,6 @@ function Navbar() {
                 aria-label="Search"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
-                
               />
               <button
                 className="search-icon-mob"
@@ -240,7 +258,7 @@ function Navbar() {
             className="collapse navbar-collapse mobcollapse"
             id="navbarSupportedContent"
           > */}
-              <div className="navbar-nav d-flex" >
+              <div className="navbar-nav d-flex">
                 <ul className="left_section_nav mb-0">
                   <li
                     className={
@@ -288,14 +306,25 @@ function Navbar() {
                       Leaderboard
                     </Link>
                   </li>
-          <NavDropdown title="Resource" id="navbarScrollingDropdown" className={
-                      location.pathname.includes("resource") && !location.pathname.includes("leader-board") && !location.pathname.includes("marketplace") && !location.pathname.includes("create-nft")
+                  <NavDropdown
+                    title="Resource"
+                    id="navbarScrollingDropdown"
+                    className={
+                      location.pathname.includes("resource") &&
+                      !location.pathname.includes("leader-board") &&
+                      !location.pathname.includes("marketplace") &&
+                      !location.pathname.includes("create-nft")
                         ? "nav-items dropdown li_underline"
                         : "nav-items dropdown"
-                    }>
-          <NavDropdown.Item href="/help-center">Help Center</NavDropdown.Item>
-          <NavDropdown.Item href="/suggestion">Suggestions</NavDropdown.Item>
-          </NavDropdown>
+                    }
+                  >
+                    <NavDropdown.Item href="/help-center">
+                      Help Center
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="/suggestion">
+                      Suggestions
+                    </NavDropdown.Item>
+                  </NavDropdown>
 
                   {/* <li
                     className={
@@ -333,7 +362,10 @@ function Navbar() {
                       </li>
                     </ul>
                   </li> */}
-                  <li className="create-button" onClick={() => manageNavigation("create")}>
+                  <li
+                    className="create-button"
+                    onClick={() => manageNavigation("create")}
+                  >
                     <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}
                       className="btn btn-primary btnnav"
@@ -346,7 +378,6 @@ function Navbar() {
 
                 <ul className="right_section_nav mb-0">
                   <li>
-                   
                     <img
                       onClick={handleNotiSideBar}
                       className="noti"
@@ -354,7 +385,6 @@ function Navbar() {
                       width="19px"
                       height="21px"
                     ></img>
-                   
                   </li>
 
                   <li className="nav-item dropdown">
@@ -382,20 +412,17 @@ function Navbar() {
                       aria-labelledby="navbarDropdown"
                     >
                       <li onClick={() => manageNavigation("profile")}>
-                       
                         Profile
                       </li>
                       <li>
                         <hr className="dropdown-divider" />
                       </li>
                       <li onClick={() => manageNavigation("myitems")}>
-                      
                         My Items
                       </li>
                     </ul>
                   </li>
                   <li>
-                 
                     <img
                       onClick={handleWalletClick}
                       className="btnnav_mob2"

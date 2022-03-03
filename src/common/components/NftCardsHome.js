@@ -35,14 +35,13 @@ function NftCardsHome({ nft }) {
       <div className="card nft-card-radius border-radius cardmob">
         <Link to={route} style={{ textDecoration: "none" }}>
           <img
-            className="nftTileEachImage img-fluid border-radius nft-img-radius card_imgmob"
+            className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
             src={ipfsUrl}
           />
         </Link>
         <img
           id="like_icon"
           onClick={() => likeNft(_id)}
-
           src={handleLike ? Like : likes}
         />
         <div
@@ -53,7 +52,7 @@ function NftCardsHome({ nft }) {
         >
           <div className="nftTileEachDetailsFirstContainer container__up">
             <div
-              className="nftTileEachDetailsFirstContainerName"
+              className="nftTileEachDetailsFirstContainerName poppins-normal bold-bold font-16"
               style={{
                 color: "#191919",
                 // height: "20px",
@@ -63,14 +62,14 @@ function NftCardsHome({ nft }) {
               {name}
             </div>
             <span
-              className="nftTileEachDetailsFirstContainerValue"
+              className="nftTileEachDetailsFirstContainerValue poppins-normal bold-600"
               style={{
                 fontSize: "14px",
                 fontWeight: "600px",
                 color: "#16AB6E",
               }}
             >
-              {salesInfo?.price + salesInfo?.currency}
+              {`${salesInfo?.price}  ${salesInfo?.currency}`}
             </span>
           </div>
           <div
@@ -83,9 +82,11 @@ function NftCardsHome({ nft }) {
             <span className="font-weight-900">100</span>{" "} */}
             </div>
             <div>
-              <span className="" style={{ color: "#000" }}>
-                <i className="far fa-clock" style={{ color: "#f54" }}></i>5 days
-                left
+              <span className="" style={{ color: "#000", marginRight: "4px" }}>
+                <i className="far fa-clock" style={{ color: "#f54" }}></i>
+              </span>
+              <span className="poppins-normal blackish font-14">
+                5 days left
               </span>
             </div>
           </div>

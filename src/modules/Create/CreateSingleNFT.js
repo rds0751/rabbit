@@ -206,7 +206,14 @@ function CreateSingleNFT(props) {
         <div className="create-nft-text">Create NFT</div>
 
         <div className="create-single-nft-outer">
-          <div className="create-nft-form" style={{}}>
+          <div
+            className="create-nft-form"
+            style={
+              {
+                // flexDirection: "column",
+              }
+            }
+          >
             <div className="nft-file-upload">
               <label htmlFor="email" className="form-key">
                 Upload File*
