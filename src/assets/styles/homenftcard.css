@@ -92,6 +92,13 @@
     width: 100% !important;
   } */
 }
+@media only screen and (max-width:767px){
+  .mobilenftTilePageThirdSelect {
+    margin-left: 0px !important;
+    /* margin-top: 3% !important; */
+    width: 100% !important;
+  }
+}
 @media only screen and (max-width: 480px) {
   .nftTilePageSecondSelect {
     font-size: 3.9vw;
@@ -116,10 +123,5 @@
   .mobilenftTilePageSecondSelect {
     margin-left: 0px !important;
     margin-top: -1% !important;
-  }
-  .mobilenftTilePageThirdSelect {
-    margin-left: 0px !important;
-    /* margin-top: 3% !important; */
-    width: 100% !important;
   }
 }

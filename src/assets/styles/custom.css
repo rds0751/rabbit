@@ -849,7 +849,7 @@ select:focus-visible {
   }
 }
 
-@media screen and (max-width: 764px) {
+@media screen and (max-width: 767px) {
   .tabs-list {
     display: flex;
     margin-top: 20px;
@@ -945,6 +945,16 @@ select:focus-visible {
     padding-right: 6%;
   }
 }
+@media only screen and (max-width:767px){  
+  .lower__homepage{
+    flex-direction: column;
+  }
+  .filter .dropdown {
+    width: initial;
+    margin-bottom: 16px;
+    margin-left: 0px;
+  }
+}
 @media only screen and (max-width: 480px) {
   .connect-wallet {
     margin-bottom: 97px;
@@ -952,9 +962,6 @@ select:focus-visible {
   .connect-wallet .eachWalletTypeBox .card {
     width: 100%;
     margin-right: 0px;
-  }
-  .lower__homepage{
-    flex-direction: column;
   }
 }
 
