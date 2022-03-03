@@ -31,7 +31,7 @@ function NftCardsHome({ nft }) {
   };
 
   return (
-    <div className=" col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
+    <div className="nftCardEach col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
       <div className="card nft-card-radius border-radius cardmob">
         <Link to={route} style={{ textDecoration: "none" }}>
           <img
@@ -57,7 +57,6 @@ function NftCardsHome({ nft }) {
               className="nftTileEachDetailsFirstContainerName"
               style={{
                 color: "#191919",
-                height: "20px",
                 overflow: "hidden",
               }}
             >
@@ -85,7 +84,7 @@ function NftCardsHome({ nft }) {
             </div>
             <div>
               <span className="" style={{ color: "#000" }}>
-                <i className="far fa-clock" style={{ color: "#f54" }}></i>5 days
+                <i className="far fa-clock" style={{ color: "#f54" }}></i> 5 days
                 left
               </span>
             </div>

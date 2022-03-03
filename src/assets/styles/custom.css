@@ -409,13 +409,13 @@ input::-webkit-input-placeholder {
 }
 /*-------------- Collection CreateNFT css end------------------ */
 /*  nav large */
-@media only screen and (max-width: 1010px) {
+/* @media only screen and (max-width: 1010px) {
   .filter {
     width: 100%;
     display: flex;
     flex-direction: column;
   }
-}
+} */
 
 /*-------------- navbar mob css------------------ */
 @media only screen and (max-width: 575px) {
@@ -487,9 +487,9 @@ input::-webkit-input-placeholder {
 .collection-img-card-radius {
   border-radius: 50%;
 }
-.collection-card {
+/* .collection-card {
   height: 260px;
-}
+} */
 /* -----------------Collections hompage css end------------ */
 
 /* -----------------Nft Info hompage css------------ */
@@ -795,8 +795,8 @@ select:focus-visible {
 }
 
 @media only screen and (max-width: 1010px) {
-  .filter {
-    flex-direction: column;
+  .ntf_div{
+    margin: 0 50px;
   }
   .filter .dropdown .first_select {
     /* margin-left: 10px; */
@@ -807,24 +807,10 @@ select:focus-visible {
   }
   .filter .ml_auto {
     margin-left: 0px;
-  }
-  .filter .dropdown {
-    width: initial;
-    margin-bottom: 16px;
-  }
-  .filter .dropdown:last-child {
-    margin-bottom: 0px;
-  }
+  }  
   .row {
     --bs-gutter-x: 0px;
   }
-  .sort-drop {
-    width: 100%;
-  }
-  /* .filter .dropdown select{
-    border: none;
-    width: 143px;
-  } */
 }
 .center {
 margin:auto;
@@ -864,10 +850,24 @@ transform-origin: center;
     color: #828282;
     cursor: pointer;
   }
+  .filter {
+    flex-direction: column;
+  }
+  .sort-drop {
+    width: 100%;
+  }
+  .filter .dropdown select{
+    border: none;
+    width: 143px;
+  }
+  .filter .dropdown {
+    width: initial;
+    margin-bottom: 16px;
+  }
 }
 
 
-/* add wallet screen css */
+/* add wallet screen css start*/
 .connect-wallet{
   margin-top: 97px;
   margin-bottom: 206px;
@@ -947,4 +947,9 @@ transform-origin: center;
     width: 100%;
     margin-right: 0px;
   }
+  .lower__homepage{
+    flex-direction: column;
+  }
 }
+
+/* add wallet screen css end*/
