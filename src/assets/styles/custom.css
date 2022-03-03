@@ -100,7 +100,7 @@ ul {
 .card-lower {
   background: #f8f8f8 0% 0% no-repeat padding-box;
   height: 122px;
-  border-radius: 4px;
+  border-radius: 13px 13px 0px 0px;
 }
 
 .title {
@@ -505,7 +505,7 @@ input::-webkit-input-placeholder {
   /* width: 260px; */
 }
 .nft-img-radius {
-  border-radius: 8px 8px 0px 0px;
+  border-radius: 13px 13px 0px 0px;
 }
 /* -----------------Nft hompage css------------ */
 
