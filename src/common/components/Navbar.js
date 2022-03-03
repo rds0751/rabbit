@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import {NavDropdown} from 'react-bootstrap';
+import { NavDropdown } from "react-bootstrap";
 // import './Navbar.css'
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -130,7 +130,7 @@ function Navbar() {
       // dispatch(ManageWalletSideBar(!isOpenWallet));
     } else {
       dispatch(ManageWalletSideBar(!isOpenWallet));
-      document.body.style.overflow = (!isOpenWallet) ? "hidden" : "visible";
+      document.body.style.overflow = !isOpenWallet ? "hidden" : "visible";
     }
   };
   const handleNotiSideBar = () => {
@@ -179,7 +179,6 @@ function Navbar() {
                 aria-label="Search"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
-                
               />
               <button
                 className="search-icon-mob"
@@ -223,11 +222,14 @@ function Navbar() {
             className="collapse navbar-collapse mobcollapse"
             id="navbarSupportedContent"
           > */}
-              <div className="navbar-nav d-flex" >
+              <div className="navbar-nav d-flex">
                 <ul className="left_section_nav mb-0">
                   <li
                     className={
-                      location.pathname.includes("/") && !location.pathname.includes("leader-board") && !location.pathname.includes("resource") && !location.pathname.includes("create-nft")
+                      location.pathname.includes("/") &&
+                      !location.pathname.includes("leader-board") &&
+                      !location.pathname.includes("resource") &&
+                      !location.pathname.includes("create-nft")
                         ? "nav-items li_underline"
                         : "nav-items"
                     }
@@ -235,13 +237,15 @@ function Navbar() {
                   >
                     <Link
                       className={
-                        location.pathname.includes("/") && !location.pathname.includes("leader-board") && !location.pathname.includes("resource") && !location.pathname.includes("create-nft")
+                        location.pathname.includes("/") &&
+                        !location.pathname.includes("leader-board") &&
+                        !location.pathname.includes("resource") &&
+                        !location.pathname.includes("create-nft")
                           ? "nav-link navlink_active"
                           : "nav-link"
                       }
                       aria-current="page"
                       to="/"
-
                     >
                       Marketplace
                     </Link>
@@ -266,14 +270,25 @@ function Navbar() {
                       Leaderboard
                     </Link>
                   </li>
-          <NavDropdown title="Resource" id="navbarScrollingDropdown" className={
-                      location.pathname.includes("resource") && !location.pathname.includes("leader-board") && !location.pathname.includes("marketplace") && !location.pathname.includes("create-nft")
+                  <NavDropdown
+                    title="Resource"
+                    id="navbarScrollingDropdown"
+                    className={
+                      location.pathname.includes("resource") &&
+                      !location.pathname.includes("leader-board") &&
+                      !location.pathname.includes("marketplace") &&
+                      !location.pathname.includes("create-nft")
                         ? "nav-items dropdown li_underline"
                         : "nav-items dropdown"
-                    }>
-          <NavDropdown.Item href="/help-center">Help Center</NavDropdown.Item>
-          <NavDropdown.Item href="/suggestion">Suggestions</NavDropdown.Item>
-          </NavDropdown>
+                    }
+                  >
+                    <NavDropdown.Item href="/help-center">
+                      Help Center
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="/suggestion">
+                      Suggestions
+                    </NavDropdown.Item>
+                  </NavDropdown>
 
                   {/* <li
                     className={
@@ -315,7 +330,10 @@ function Navbar() {
                       </li>
                     </ul>
                   </li> */}
-                  <li className="create-button" onClick={() => manageNavigation("create")}>
+                  <li
+                    className="create-button"
+                    onClick={() => manageNavigation("create")}
+                  >
                     <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}
                       className="btn btn-primary btnnav"
