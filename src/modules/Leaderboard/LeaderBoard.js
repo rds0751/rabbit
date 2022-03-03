@@ -454,7 +454,7 @@ function LeaderBoard() {
               const { cdnUrl, name, ownedBy, maxPrice2, daysLeft } =
                 curElem;
               return (
-                <div className="col-md-3 col-lg-3 col-sm-12 p-0">
+                <div className="col-md-3 col-lg-3 col-sm-12 p-0 medium-container">
                   <div className="container__tile">
                     <img
                       id="nft__photo"

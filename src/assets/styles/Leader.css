@@ -83,6 +83,9 @@
 .container__down > h6 > span {
   margin: 0rem;
 }
+.container__down{
+  margin-bottom: 25px;
+}
 /* .images
       {
           display: flex;
@@ -647,7 +650,7 @@ thead {
     flex-direction: column;
   }
   .btn1 {
-    width: 100%;
+    width: 108%;
     margin-top: 1rem;
   }
   .btn2 {
@@ -816,7 +819,7 @@ thead {
 @media (min-width: 1200px){
 .col-lg-3 {
     flex: 0 0 auto;
-    width: 22%;
+    width: 22% !important;
 }
 }
 @media only screen and (max-width: 1170px) {
@@ -988,4 +991,11 @@ thead {
   .create-nft .col-lg-3{
     width: 62.7%;
   }
+}
+
+@media (min-width: 768px){
+.medium-container{
+    flex: 0 0 auto;
+    width: 30%;
+}
 }
