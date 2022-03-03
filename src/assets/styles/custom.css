@@ -100,7 +100,7 @@ ul {
 .card-lower {
   background: #f8f8f8 0% 0% no-repeat padding-box;
   height: 122px;
-  border-radius: 13px;
+  border-radius: 13px 13px 0px 0px;
 }
 
 .title {
