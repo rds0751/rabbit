@@ -80,7 +80,7 @@ async function addIpfs(requestdata) {
 // }
 async function createNftContent(requestdata) {
   let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft";
-
+  // console.log(requestdata, "<<<<<<<<", url, "<<<<< createnfft response");
   return httpService(
     httpConstants.METHOD_TYPE.POST,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },

@@ -20,6 +20,7 @@ class Index extends BaseComponent {
       url: "",
       loaderState: false,
       isMintSuccess: false,
+      isOpenMintModal:true,
     };
   }
 
@@ -107,29 +108,23 @@ class Index extends BaseComponent {
     }
 
     console.log(
-      this.getRequestDataForSaveNftContent(
-        tokenId,
-        data,
-        blockchainRes
-      )
+      this.getRequestDataForSaveNftContent(tokenId, data, blockchainRes)
     );
 
     // save NFT data on DB
     const [contentError, contentRes] = await Utils.parseResponse(
+  
       getCollection.createNftContent(
-        this.getRequestDataForSaveNftContent(
-          tokenId,
-          data,
-          blockchainRes
-        )
+        this.getRequestDataForSaveNftContent(tokenId, data, blockchainRes)
       )
     );
     this.props.dispatchAction(eventConstants.HIDE_LOADER);
     if (contentError || !contentRes) {
       this.setState({ loaderState: false });
-
+      this.setState({ isMintSuccess: null });
+      this.setState({ isOpenMintModal: false });
       return Utils.apiFailureToast(
-        contentError.message || "Unable to save NFT content"
+        contentError?.message || "Unable to save NFT content"
       );
     }
     // else if(contentRes.length <=0 )
@@ -140,6 +135,7 @@ class Index extends BaseComponent {
     else {
       this.setState({ loaderState: false });
       this.setState({ isMintSuccess: true });
+      this.setState({ isOpenMintModal: false });
       Utils.apiSuccessToast("Your Nft has been created successfully.");
       this.setState({ isNftCreated: true });
     }
@@ -159,6 +155,7 @@ class Index extends BaseComponent {
           createNftHandler={this.createNftHandler.bind(this)}
           url
           isMintSuccess={this.state.isMintSuccess}
+          isOpenMintModal={this.state.isOpenMintModal}
         />
         {/* <FooterComponent /> */}
       </>

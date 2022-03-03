@@ -156,7 +156,7 @@ function CreateNftCollections(props) {
       toast.error("Fill the required field");
       return null;
     }
-    alert("here");
+    // alert("here");
     console.log("here");
     const data = {
       coverUrl: bannerCdn,

@@ -64,7 +64,7 @@ function CreateSingleNFT(props) {
     if (loggedInUser == null) {
       navigation("/add-wallet");
     }
-    const collections = await getCollectionBySingleUser();
+    const collections = await getCollectionBySingleUser(loggedInUser?._id);
     setCollectionData(collections);
   }, []);
 
@@ -124,15 +124,22 @@ function CreateSingleNFT(props) {
     setUploadFileObj(event);
   };
   const checkChanges = () => {
-    if (name.current && price.current && description.current) {
-      if (
-        name.current != "" &&
-        price.current != "" &&
-        description.current != "" &&
-        selectFile != ""
-      ) {
-        setcheckDisable(false);
-      }
+    console.log(
+      name.current,
+      price.current,
+      description.current,
+      selectFile,
+      "<<<<formdata"
+    );
+    if (
+      name.current != "" &&
+      price.current != "" &&
+      description.current != "" &&
+      selectFile != ""
+    ) {
+      setcheckDisable(false);
+    } else {
+      setcheckDisable(true);
     }
   };
 
@@ -418,7 +425,9 @@ function CreateSingleNFT(props) {
       {/* <div className="mint-mod-outer"> */}
       <div
         className="mint-mod-outer"
-        style={{ display: openMintodal ? "block" : "none" }}
+        style={{
+          display: openMintodal ? "block" : "none",
+        }}
       >
         {/* <div className=""> */}
         <div className="mint-abs">
@@ -485,7 +494,7 @@ function CreateSingleNFT(props) {
                       <img src={success} className="checkimg" />
                     )}
                     {!props.isMintSuccess && (
-                      <div className="checkvalue checkvaluetext">23</div>
+                      <div className="checkvalue checkvaluetext">3</div>
                     )}
                     <div className="checkposttext">
                       <div>Approve</div>
