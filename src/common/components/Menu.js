@@ -26,7 +26,7 @@ function Menu() {
         <div className="menuin">
           <h2>
             <Link
-              to="/LeaderBoard"
+              to="/leader-board"
               style={{
                 textDecoration: "none",
                 color: "black",
@@ -59,7 +59,7 @@ function Menu() {
               style={{ width: "450%" }}
             >
               <li>
-                <Link className="dropdown-item" to="/HelpCenter">
+                <Link className="dropdown-item" to="/help-center">
                   Help Center
                 </Link>
               </li>
