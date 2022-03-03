@@ -2,10 +2,10 @@
   box-shadow: none;
 }
 .leader {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   font-size: 1.3rem;
   font-weight: bold;
-  margin-top: 1rem;
+  margin-top: 2.5rem;
 }
 .leader1 {
   font-size: 1.3rem;
@@ -599,7 +599,7 @@ thead {
     display: block;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 20vh;
   }
   .menuphone > button {
     color: white;
@@ -997,5 +997,10 @@ thead {
 .medium-container{
     flex: 0 0 auto;
     width: 30%;
+}
+}
+@media (min-width: 1400px){
+.leader-container{
+  max-width: 88%;
 }
 }
