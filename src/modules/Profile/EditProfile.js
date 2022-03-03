@@ -18,6 +18,7 @@ const Button = styled.button``;
 
 function EditProfile(props) {
   const hiddenFileInput = useRef(null);
+  const [desLength, setDesLength] = useState(0);
   const { user } = useSelector((state) => state);
   const [formData, setFormData] = useState({
     photo: user?.loggedInUser?.photo,
@@ -52,9 +53,12 @@ function EditProfile(props) {
       body: formData,
       // headers: AuthToken,
     });
+    console.log(res, "<<<< res");
     const result = await res.json();
     if (result.success) {
       setFormData({ ...formData, photo: result.responseData });
+    } else {
+      toast.error("Unable to change image");
     }
 
     // else toast.error("")
@@ -73,22 +77,28 @@ function EditProfile(props) {
     // userName.current = user?.loggedInUser?.userName;
     // portfolio.current = user?.loggedInUser?.portfolio;
   }, []);
-
+  function hasBlankSpaces(str) {
+    return str.match(/^\s+$/) !== null;
+  }
   const handleSubmit = async (e) => {
-    console.log(user.loggedInUser, "<<user");
     e.preventDefault();
-    // const data = {
-    //   userName: userName.current,
-    //   bio: bio.current,
-    //   portfolio: portfolio.current,
-    //   photo: photo.current,
-    //   userId: user?.loggedInUser?.userId,
-    // };
-    // console.log(data, "<<<data to send");
+    console.log(user.loggedInUser, "<<user");
+    const userName = formData.userName;
+    if (userName.trim() == "") {
+      toast.error("Username is required");
+      return null;
+    }
+    if (/\s/.test(formData.userName)) {
+      // It has any kind of whitespace
+      toast.error("Username should not have space");
+      return null;
+    }
+
     const result = await updateUserProfile(formData, user?.loggedInUser?._id);
     console.log(result, "<<<<<< profile updated value");
     if (result.success) {
       toast.success("Profile Updated");
+      window.location.reload(true);
     } else {
       toast.error("Error While updating ");
     }
@@ -96,6 +106,9 @@ function EditProfile(props) {
 
   const handleForm = (e) => {
     const { name, value } = e.target;
+    if (name == "bio") {
+      setDesLength(value.length);
+    }
     setFormData({ ...formData, [name]: value });
   };
 
@@ -112,37 +125,42 @@ function EditProfile(props) {
         draggable
         pauseOnHover
       />
-      <div className="editProfileContainer container row mt-5">
-        {/* <div className="col-sm-5 col-12 col-xs-12 offset-sm-3 form-responsive edit_profilemob"> */}
+      <div className="editProfileContainer container  mt-5">
         <div className="editProfileTopHeading top-heading">
           <div className="editProfileHeadingTitle">
-            <h4 className="create-nft-font ">Edit Profile</h4>
+            <div className="create-nft-font poppins-normal font-32">
+              Edit Profile
+            </div>
           </div>
 
-          <h3 className=" font-15 font-weight-700 border-bottom pb-3">
+          <h3 className=" input-heading generalsettingl poppins-normal pb-1">
             General Setting
           </h3>
         </div>
-        <div className="chooseProfilePicContainer border-0">
-          <div className="chooseProfilePicInnerContainer row border">
-            <img
-              className="rounded-circle img-fluid img-responsive"
-              // src="https://earncashto.com/wp-content/uploads/2021/06/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png"
-              // alt="/"
-              src={imageUrl}
-            />
-            <Button
-              onClick={handleClick}
-              className="btn btn-outline-primary btn-normal-size btn-choose-file"
-              // style={{ marginTop: "4em" }}
-              // onChange={(e) => handleChange(e)}
-            >
-              <span className="btn-text font-14">Choose File</span>
-            </Button>
+        <div className="chooseProfilePicContainer">
+          <div className="chooseProfilePicInnerContainer ">
+            <div className="editprofile-image">
+              <img
+                width="80%"
+                height="100%"
+                style={{ objectFit: "cover" }}
+                src={imageUrl}
+              />
+            </div>
+            <div className="editprofile-button-outer">
+              <Button
+                onClick={handleClick}
+                className=" btn-choose-file"
+                // style={{ marginTop: "4em" }}
+                // onChange={(e) => handleChange(e)}
+              >
+                <span className="poppins-normal font-14">Choose File</span>
+              </Button>
+            </div>
 
             <input
               type="file"
-              className="form-control"
+              className="edit-input-box"
               placeholder="Write your name"
               // name=""
               style={{ display: "none" }}
@@ -154,12 +172,15 @@ function EditProfile(props) {
         <div className="editProfileFormContainer singlenft-form-box">
           <form className="suggestion-form " onSubmit={(e) => handleSubmit(e)}>
             <div className=" mb-3 mt-3">
-              <label htmlFor="email" className="form-label input-heading">
-                userName
+              <label
+                htmlFor="username"
+                className=" input-heading poppins-normal"
+              >
+                username
               </label>
               <input
-                type="name"
-                className="editProfileFormContainerEachInput form-control"
+                type="text"
+                className="editProfileFormContainerEachInput "
                 name="userName"
                 value={formData.userName}
                 // value={userName.current}
@@ -167,26 +188,30 @@ function EditProfile(props) {
               />
             </div>
             <div className=" mb-3 mt-3">
-              <label htmlFor="comment" className="input-heading pb-2">
+              <label htmlFor="comment" className="input-heading poppins-normal">
                 Bio
               </label>
               <textarea
-                className="editProfileFormContainerEachInput form-control"
+                className="editProfileFormContainerEachInput input-down-text"
                 rows="4"
                 // name="text"
                 name="bio"
                 value={formData.bio}
                 // value={userName.current}
-                onChange={(e) => handleForm(e)}
+                onChange={(e) => {
+                  if (desLength < 1000) {
+                    handleForm(e);
+                  }
+                }}
                 placeholder="Write description"
                 // onChange={(e) => (bio.current = e.target.value)}
               ></textarea>
-              <span className="text-secondary font-13">
-                0 of 1000 characters used
+              <span className="input-down-text  ">
+                {desLength} of 1000 characters used
               </span>
             </div>
             <div className="mb-3 mt-3">
-              <label htmlFor="email" className="form-label input-heading">
+              <label htmlFor="email" className="input-heading poppins-normal">
                 Personal site or Portfolio
               </label>
               <input
@@ -199,15 +224,11 @@ function EditProfile(props) {
                 onChange={(e) => handleForm(e)}
               />
             </div>
-            <button
-              type="submit"
-              className="editProfileFormContainerEachInput btn btn-primary mt-4 w-100"
-            >
+            <button type="submit" className=" editprofileSubmitButton ">
               <span className=" font-14 text-white">Update Profile</span>
             </button>
           </form>
         </div>
-        {/* </div> */}
       </div>
     </>
   );

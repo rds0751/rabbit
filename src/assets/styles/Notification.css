@@ -44,7 +44,7 @@ height: 47px;
   /* position: absolute; */
   top: 4.2rem;
   right: 0;
-  /* display: inline-block; */
+  /* display: inline-block; */  
   left: 0;
   box-shadow: 0px 3px 12px #00000014;
 }
@@ -678,8 +678,8 @@ height: 47px;
 .ntf_row .nft_card {
   padding-left: 0px;
   padding-right: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
+  /* margin-left: 0px;
+  margin-right: 0px; */
   display: inline !important;
 }
 
@@ -731,7 +731,7 @@ height: 47px;
   .container {
     padding-left: 30px;
     padding-right: 30px;
-    width: auto;
+    /* width: auto; */
   }
 }
 
@@ -794,10 +794,7 @@ height: 47px;
 }
 
 @media only screen and (min-width: 1400px) {
-  .nft_card {
-    width: 17.085vw !important;
-    /* height: 17vw; */
-  }
+ 
   .nft-img-radius {
     width: 100%;
     /* width: 326px; */
@@ -909,7 +906,6 @@ height: 47px;
     /* margin: 0px 128px; */
     /* border: 1px solid red !important; */
   }
-
 }
 
 @media screen and (max-width: 764px) {
@@ -997,7 +993,7 @@ height: 47px;
 }
 
 .RightNavBar{
-  margin-right: 5%;
+  margin-right: 6%;
 }
 @media only screen and (min-width:1600px) {
   .RightNavBar{

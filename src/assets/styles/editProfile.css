@@ -4,6 +4,32 @@
   padding: 0px !important;
   box-sizing: border-box;
 }
+.generalsettingl {
+  width: 70%;
+  border-bottom: 1px solid #c8c8c8;
+}
+.editprofile-image {
+  width: 25%;
+  /* height: 151px; */
+}
+.input-heading {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 13px;
+  font-family: "poppins";
+}
+.btn-choose-file {
+  background-color: #ffffff;
+  border: 1px solid #366eef;
+  border-radius: 4px;
+}
+.btn-text {
+  color: #366eef !important;
+}
+.editprofile-button-outer {
+  width: 70%;
+}
+
 .editProfileTopHeading {
   margin-left: 0px !important;
   padding: 0px !important;
@@ -29,6 +55,7 @@
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
+  margin-top: 25px;
 }
 .editProfileChooseFileButton {
   background-color: white;
@@ -46,6 +73,31 @@
 }
 .editProfileFormContainerEachInput {
   box-sizing: border-box;
+  padding: 1%;
+  border-radius: 4px;
+  /* background-color: #366eef; */
+  border: 1px solid #c8c8c8;
+  font-family: "poppins-normal";
+  width: 100%;
+}
+.poppins-normal {
+  font-family: "poppins-normal";
+}
+.poppins-medium {
+  font-family: "poppins-medium";
+}
+.input-down-text {
+  font-size: 14px !important;
+  font-family: "poppins-normal" !important;
+  color: #707070 !important;
+}
+.editprofileSubmitButton {
+  width: 100%;
+  background-color: #366eef;
+  border: none;
+  height: 42px;
+  margin-top: 28px;
+  border-radius: 4px;
 }
 .fileinputedit {
   color: transparent;

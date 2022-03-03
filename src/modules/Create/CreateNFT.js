@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Single from "../../assets/images/single.png";
-import Collection from "../../assets/images/collection.png";
+import Single from "../../assets/images/single.svg";
+import Collection from "../../assets/images/collection.svg";
 import { useDispatch } from "react-redux";
 import { ethers } from "ethers";
 import { AddWalletDetails } from "../../reducers/Action";
 import { toast, ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
+import "../../assets/styles/createnft.css";
 
 function CreateNFT() {
   const { user } = useSelector((state) => state);
@@ -21,43 +22,7 @@ function CreateNFT() {
 
   const [getBalance, setGetBalance] = useState(null);
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (loggedInUser == null) {
-      navigate("/add-wallet");
-    }
-    // if (window.ethereum) {
-    //   window.ethereum
-    //     .request({ method: "eth_requestAccounts" })
-    //     .then((result) => {
-    //       accountChangeHandler(result[0]); //accounts can be a array we just wanna grab first one
-    //       console.log(result[0], "<<<result console");
-    //       dispatch(
-    //         AddWalletDetails({ address: defaultAccount, balance: getBalance })
-    //       );
-    //       // window.location.pathname = "/wallet";
-    //     })
-    //     .catch((e) => {
-    //       navigate("/add-wallet");
-    //       console.log(e, "<<< error ");
-    //     });
-    // } else {
-    //   // alert("Wallet not added")
-    //   setErrorMssg("Install Metamask ");
-    //   toast.error("Install Metamak and Connect Wallet");
-    // }
-  }, []);
-  // const accountChangeHandler = (newAccount) => {
-  //   setDefaultAccount(newAccount);
-  //   getUserBalance(newAccount);
-  // };
-  // const getUserBalance = (address) => {
-  //   window.ethereum
-  //     .request({ method: "eth_getBalance", params: [address, "latest"] })
-  //     .then((balance) => {
-  //       setGetBalance(ethers.utils.formatEther(balance));
-  //       console.log(getBalance, "<<< balance");
-  //     });
-  // };
+ 
 
   return (
     <div>
