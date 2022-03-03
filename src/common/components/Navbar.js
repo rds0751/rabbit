@@ -222,16 +222,16 @@ function Navbar() {
             className="collapse navbar-collapse mobcollapse"
             id="navbarSupportedContent"
           > */}
-              <div className="navbar-nav d-flex">
-                <ul className="left_section_nav mb-0">
+              <div className="navbar-nav d-flex ">
+                <ul className="left_section_nav mb-0 leftSec">
                   <li
                     className={
                       location.pathname.includes("/") &&
                       !location.pathname.includes("leader-board") &&
                       !location.pathname.includes("resource") &&
                       !location.pathname.includes("create-nft")
-                        ? "nav-items li_underline"
-                        : "nav-items"
+                        ? "nav-items li_underline marketplace"
+                        : "nav-items marketplace"
                     }
                     onClick={isOpenWallet}
                   >
@@ -253,8 +253,8 @@ function Navbar() {
                   <li
                     className={
                       location.pathname.includes("leader-board")
-                        ? "nav-items li_underline"
-                        : "nav-items"
+                        ? "nav-items li_underline leaderboard"
+                        : "nav-items leaderboard"
                     }
                     onClick={isOpenWallet}
                   >
@@ -278,8 +278,8 @@ function Navbar() {
                       !location.pathname.includes("leader-board") &&
                       !location.pathname.includes("marketplace") &&
                       !location.pathname.includes("create-nft")
-                        ? "nav-items dropdown li_underline"
-                        : "nav-items dropdown"
+                        ? "nav-items dropdown li_underline resource"
+                        : "nav-items dropdown resource"
                     }
                   >
                     <NavDropdown.Item href="/help-center">

@@ -56,7 +56,7 @@ function Footer() {
               <div className="fs-18" style={{color:"#8F8F8F"}}>
                 <h3 className="fs-18 fw-b">
                   <a href="/" style={{textDecoration: "none", color:"#8F8F8F"}}>Marketplace</a></h3>
-                <p><a href="/" style={{textDecoration: "none", color:"#8F8F8F"}}>Nft</a></p>
+                <p><a href="/" style={{textDecoration: "none", color:"#8F8F8F"}}>NFT</a></p>
                 <p><a href="/collections-tile" style={{textDecoration: "none", color:"#8F8F8F"}}>Collections</a></p>
               </div>
               <div className="fs-18">
