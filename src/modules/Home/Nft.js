@@ -198,7 +198,8 @@ function NftPage() {
         <div
           className="nftTileContainer row   ntf_row cards-gap"
           // className="nftTileContainer gird-container  ntf_row"
-          style={{ justifyContent: "start" }}
+          // style={{ justifyContent: "start" }}
+          style={{ justifyContent: "space-between", gridRowGap: '30px' }}
         >
           <div className="spinnerloader">{isloading && <Spinner />}</div>
 

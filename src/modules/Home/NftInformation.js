@@ -10,6 +10,7 @@ import PricingHistoryComponentTable from "../../common/components/PricingHistory
 import PricingHistoryComponentGraph from "../../common/components/PricingHistoryComponentGraph";
 // import BidsComponent from "./BidsComponent";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import "../../assets/styles/createSingleNft.css";
 
 import { Button } from "@mui/material";
 import { getNft, addNftReport } from "../../services/webappMicroservice";
@@ -433,7 +434,7 @@ export default function NftInformation(props) {
               />
             </div>
           </div>
-          <div className="col-lg-4" style={{ paddingLeft: "40px" }}>
+          <div className="col-lg-4 details-section">
             <div className="d-flex mt-2">
               <Button
                 style={{

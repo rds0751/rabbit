@@ -173,6 +173,7 @@ function Navbar() {
     } else {
       dispatch(ManageWalletSideBar(!isOpenWallet));
       dispatch(ManageNotiSideBar(false));
+      document.body.style.overflow = !isOpenWallet ? "hidden" : "visible";
     }
   };
   const handleNotiSideBar = () => {

@@ -85,6 +85,9 @@
 .container__down > h6 > span {
   margin: 0rem;
 }
+.container__down{
+  margin-bottom: 25px;
+}
 /* .images
       {
           display: flex;
@@ -649,7 +652,7 @@ thead {
     flex-direction: column;
   }
   .btn1 {
-    width: 100%;
+    width: 108%;
     margin-top: 1rem;
   }
   .btn2 {
@@ -1009,4 +1012,11 @@ thead {
   .create-nft .col-lg-3{
     width: 62.7%;
   }
+}
+
+@media (min-width: 768px){
+.medium-container{
+    flex: 0 0 auto;
+    width: 30%;
+}
 }
