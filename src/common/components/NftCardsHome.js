@@ -57,8 +57,7 @@ function NftCardsHome({ nft }) {
               className="nftTileEachDetailsFirstContainerName"
               style={{
                 color: "#191919",
-                // height: "20px",
-                height:"auto",
+                height: "20px",
                 overflow: "hidden",
               }}
             >
