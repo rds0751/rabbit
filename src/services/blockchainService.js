@@ -9,7 +9,7 @@ let provider;
 if (!window.ethereum) {
   // toast.error("Please install metamask ext otherwise you will not able to do tx");
   //  alert("")
-  // Utils.apiFailureToast("Please install metamask ext otherwise you will not able to do tx");
+  Utils.apiFailureToast("Please install metamask ext otherwise you will not able to do tx");
 }
 else {
   provider = new ethers.providers.Web3Provider(window.ethereum);
