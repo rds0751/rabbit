@@ -1003,3 +1003,22 @@ height: 47px;
 .footerinputbox>.form-control, .footerinputbox>.form-select{
   height: 36px;
 }
+.footer{
+  max-width: 85%;
+}
+
+.footer .col-lg-3{
+  width: 25%;
+}
+
+.mainfooter{
+  background-Color: #FBFBFB;
+  margin-top:52.95px;
+  padding-bottom: 104px;
+  padding-top: 1px;
+}
+@media only screen and (min-width:1600px){
+  .footerinputbox{
+    width: 80%;
+  }
+}
