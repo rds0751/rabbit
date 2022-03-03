@@ -1,14 +1,14 @@
-import { httpConstants } from '../constants';
-import { BASE_URL2 } from '../reducers/Constants';
-import { AuthToken } from './UserAuthToken';
+import { httpConstants } from "../constants";
+import { BASE_URL2 } from "../reducers/Constants";
+import { AuthToken } from "./UserAuthToken";
 
-export const uploadDocs = async data => {
-  console.log('run uploadocs');
+export const uploadDocs = async (data) => {
+  console.log("run uploadocs");
   const form_data = new FormData();
 
-  form_data.append('folderName', data.folderName);
-  form_data.append('createdBy', data.createdBy);
-  form_data.append('attachment', data.attachment);
+  form_data.append("folderName", data.folderName);
+  form_data.append("createdBy", data.createdBy);
+  form_data.append("attachment", data.attachment);
 
   const res = await fetch(`${BASE_URL2}/api/v1/upload-documents`, {
     method: httpConstants.METHOD_TYPE.POST,
@@ -32,11 +32,9 @@ export const getCollection = async () => {
   }
 };
 
-export const getCollectionBySingleUser = async () => {
+export const getCollectionBySingleUser = async (userId) => {
   try {
-    const res = await fetch(
-      `${BASE_URL2}/api/v1/users/61f7b7a4c017de6244c51144/collections`
-    );
+    const res = await fetch(`${BASE_URL2}/api/v1/users/${userId}/collections`);
     const result = await res.json();
     const collectionData = result.responseData;
     return collectionData;
@@ -45,34 +43,34 @@ export const getCollectionBySingleUser = async () => {
   }
 };
 
-export  const put_NftOpenForSale = async _id => {
+export const put_NftOpenForSale = async (_id) => {
   try {
     const res = await fetch(`${BASE_URL2}/api/v1/open-for-sale`, {
       method: httpConstants.METHOD_TYPE.PUT,
       headers: {
-        'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON,
+        "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON,
       },
       body: JSON.stringify({ _id }),
     });
     const result = await res.json();
-    console.log(result, '>>> nft-open-for-sale');
+    console.log(result, ">>> nft-open-for-sale");
     return result;
   } catch (err) {
     console.log(err);
   }
 };
-export  const RemoveNftFromSale = async _id => {
+export const RemoveNftFromSale = async (_id) => {
   try {
     const res = await fetch(`${BASE_URL2}/api/v1/remove-nft-from-sale`, {
       method: httpConstants.METHOD_TYPE.PUT,
-      headers:AuthToken,
+      headers: AuthToken,
       // headers: {
       //   'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON,
       // },
       body: JSON.stringify({ _id }),
     });
     const result = await res.json();
-    console.log(result, '>>> nft-open-for-sale');
+    console.log(result, ">>> nft-open-for-sale");
     return result;
   } catch (err) {
     console.log(err);

@@ -103,3 +103,21 @@ export const updateUser = async (userData, successCallBack) => {
     console.log(e);
   }
 };
+
+export const updateBannerByUserId = async (
+  formData,
+  userId,
+  successCallBack
+) => {
+  try {
+    alert("ok");
+    const url =
+      process.env.REACT_APP_WEBAPP_USER_MICROSERVICE +
+      `api/v1/edit-banner/${userId}`;
+    const { data } = await axios.post(url, formData);
+    successCallBack(data);
+    console.log(data, "<<<<< REsponse after updating user profile");
+  } catch (e) {
+    console.log(e);
+  }
+};

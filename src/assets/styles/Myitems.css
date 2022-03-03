@@ -2,3 +2,30 @@
   width: 85%;
   margin: auto;
 }
+
+.my-item-container {
+  margin-top: 36px;
+}
+
+.toggle-items {
+  display: flex;
+  margin-top: 23px;
+  width: 30.8%;
+  border-bottom: 1px solid #c8c8c8;
+}
+
+.add-item-button {
+  background-color: #366eef;
+  width: 8.6%;
+  color: white;
+  height: 42px;
+  margin-top: 27.12px;
+  border: none;
+}
+.bord-rad-4 {
+  border-radius: 4px;
+}
+.my-item-card {
+  height: 309.19px;
+  background-color: #f8f8f8;
+}

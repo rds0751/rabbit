@@ -12,13 +12,7 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
-      // setSelectFile(
-      //   acceptedFiles.map((file) =>
-      //     Object.assign(file, {
-      //       preview: URL.createObjectURL(file),
-      //     })
-      //   )
-      // );
+     
       console.log(getInputProps, "<<<<<<", getRootProps, "<<<props");
       let formData = new FormData();
       formData.append(
@@ -61,26 +55,26 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
                 <img
                   src={Image}
                   style={{
-                    width: "100px",
-                    marginTop: "3em",
+                    width: "70%",
+                    // marginTop: "3em",
                     color: "#366EEF",
                   }}
                 />
-                {/* <span className="draganddropboxinnerdivtextspan">
-                Drag and Drop or
-                <span className="draganddropboxinnerdivtextspanbrowse">
-                  {" "}
-                  Browse
+                <span className="draganddropboxinnerdivtextspan">
+                  Drag and Drop or
+                  <span className="draganddropboxinnerdivtextspanbrowse">
+                    {" "}
+                    Browse
+                  </span>
                 </span>
-              </span> */}
               </div>
             </div>
           </span>
         )}
         {isBannerSelected && (
-          <div className="draganddropbox" {...getRootProps()}>
+          <div className="draganddropboxbanner" {...getRootProps()}>
             <input {...getInputProps()} name="banner" />
-            <div className="draganddropboxinnerdiv">
+            <div className="draganddropboxinnerdiv" style={{width:"100%"}}>
               <img
                 src={bannerCdn != "" ? bannerCdn : Image}
                 style={{
@@ -90,13 +84,13 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
                   color: "#366EEF",
                 }}
               />
-              <span className="draganddropboxinnerdivtextspan">
+              {/* <span className="draganddropboxinnerdivtextspan">
                 Drag and Drop or
                 <span className="draganddropboxinnerdivtextspanbrowse">
                   {" "}
                   Browse
                 </span>
-              </span>
+              </span> */}
             </div>
           </div>
         )}

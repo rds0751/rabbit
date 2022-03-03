@@ -120,7 +120,6 @@ function Collections_tile() {
               }
             })()}
           </div>
-          <div></div>
           {collections.map((collection) => {
             const { _id, imageUrl, name, nfts } = collection;
             const route = "/collection-details/" + _id;

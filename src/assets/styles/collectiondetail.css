@@ -125,19 +125,25 @@
 /* .dropdowntext {
   width: 163px;
 } */
-
+.nftTileContainer {
+  display: flex;
+}
 @media screen and (max-width: 1024px) {
+  .nftTileContainer {
+    display: flex;
+    /* justify-content: space-between; */
+  }
   .coluserdes {
     width: 70%;
   }
   .colleftfilter {
-    display: flex;  
+    display: flex;
     /* justify-content: center; */
     /* justify-content: ; */
     /* flex-direction: column; */
     width: 70%;
   }
-   .sortbydrop {
+  .sortbydrop {
     width: 20% !important;
   }
 }
@@ -180,4 +186,3 @@
     width: 100% !important;
   }
 }
-

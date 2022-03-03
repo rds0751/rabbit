@@ -12,8 +12,10 @@
 /* css for NFt cards */
 .nftTileEachImage {
   box-sizing: border-box;
-  height: 9.81vw;
+  /* height: 9.81vw; */
+  height: 187.19;
   object-fit: cover;
+  width: 100%;
 }
 .nftTileEachDetails {
 }
@@ -22,7 +24,7 @@
   font-size: 1vw !important;
   display: flex;
   align-items: center;
-  padding-top: 4%;
+  /* padding-top: 4%; */
 }
 .nftTileEachDetailsFirstContainerName {
   font-family: "poppins-bold";
@@ -43,20 +45,20 @@
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  margin: 4% 0px;
+  /* margin: 4% 0px; */
+  margin-top: 20px;
 }
 .clockNftDetails {
   margin-right: 1% !important;
 }
 
-.gird-container{
+.gird-container {
   display: grid;
   grid-template-columns: auto auto auto auto;
-  grid-gap: 10px;
+  /* grid-gap: 10px; */
   /* background-color: #2196F3; */
   /* padding: 10px; */
 }
-
 
 @media only screen and (max-width: 1024px) {
   .nftTilePageSecondSelect {
