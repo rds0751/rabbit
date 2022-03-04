@@ -14,7 +14,10 @@ function NftCardsHome({ nft }) {
   const { user, sideBar } = useSelector((state) => state);
   const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
   const [handleLike, setHandleLike] = useState(true);
-
+  // const currDate = new Date();
+  // const endDate = biddingDetails.endDate;
+  // const daysleft = new Date(endDate - currDate).getDate() - 1;
+  // console.log(daysleft, "<<<daysleft");
   const route = "nft-information/" + _id;
   const likeNft = (id) => {
     if (user.loggedInUser == null) {
@@ -29,6 +32,17 @@ function NftCardsHome({ nft }) {
     addLikeNft(data);
     setHandleLike(!handleLike);
   };
+  const difftime = (timestamp1, timestamp2) => {
+    var difference = timestamp1 - timestamp2;
+    var daysDifference = Math.floor(difference / 1000 / 60 / 60 / 24);
+
+    return daysDifference;
+  };
+  const currDate = new Date();
+  const stamp2 = Date.now(currDate);
+  const stamp1 = Date.now(nft.biddingDetails.endDate);
+  const days = difftime(stamp1, stamp2);
+  // console.log(difftime(stamp1, stamp2),"<<<days");
 
   return (
     <div className="nftCardEach col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
@@ -85,7 +99,7 @@ function NftCardsHome({ nft }) {
                 <i className="far fa-clock" style={{ color: "#f54" }}></i>
               </span>
               <span className="poppins-normal blackish font-14">
-                5 days left
+                {days} days left
               </span>
             </div>
           </div>
