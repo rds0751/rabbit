@@ -362,14 +362,16 @@ function Navbar() {
                     </ul>
                   </li> */}
                   <li
-                    className="create-button"
+                    style={{marginRight:"28px"}}
                     onClick={() => manageNavigation("create")}
                   >
                     <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}
-                      className="btn btn-primary btnnav"
                     >
-                      Create
+                      <button 
+                      className="create-btn"
+                      style={{color:"#ffffff", backgroundColor: "#366EEF"}}>
+                        Create</button>
                     </Link>
                   </li>
                   <li className="removeinmob">|</li>
@@ -395,7 +397,7 @@ function Navbar() {
                       aria-expanded="false"
                     >
                       <img
-                        className="btnnav_mob1"
+                        className="profile-icon"
                         src={require("../../assets/images/profile.png")}
                         alt="profile"
                         style={{
@@ -403,8 +405,6 @@ function Navbar() {
                           cursor: "pointer",
                           marginLeft: "31.22px",
                           marginRight: "22.43px",
-                          width:"18px",
-                          height:"21px"
                         }}
                       ></img>
                     </a>
@@ -426,11 +426,9 @@ function Navbar() {
                   <li>
                     <img
                       onClick={handleWalletClick}
-                      className="btnnav_mob2"
+                      className="wallet-icon"
                       src={require("../../assets/images/wallet.png")}
                       alt="wallet"
-                      width="21px"
-                      height="21px"
                       style={{
                         color: "gray",
                         cursor: "pointer",
