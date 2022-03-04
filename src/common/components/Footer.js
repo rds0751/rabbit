@@ -8,16 +8,21 @@ function Footer() {
         <div className="row footer-cont"> 
           <div className="footer-top">
             <p className="fs-18">Join our community</p>
-            <div>
-              <i className="fab fa-facebook fs-24"></i>
-              <i className="fab fa-twitter fs-24 ml-10"></i>
-              <i className="fab fa-instagram fs-24 ml-10"></i>              
+            <div className="allicon">
+              <i className="fab fa-instagram fs-24 Icon"></i>
+              <i className="fab fa-twitter fs-24 Icon"></i>
+              <i className="fab fa-reddit fs-24 Icon hideicon "></i>  
+              <i className="fab fa-telegram fs-24 Icon hideicon"></i>
+              <i className="fab fa-facebook fs-24 Icon"></i>
+              <i className="fab fa-linkedin fs-24 Icon hideicon"></i> 
+              <i className="fab fa-twitter fs-24 Icon hideicon" ></i>
+              <i className="fab fa-youtube fs-24 Icon hideicon"></i>               
             </div>
-            <p className="fs-18 fs-14  subscribe">Subscribe to our newsletter for the latest NFTs</p>
+            <p className="subscribe">Subscribe to our newsletter for the latest NFTs</p>
             <div className="input-group-lg input-group  footerinputbox">
                   <input
                     type="text"
-                    className="form-control "
+                    className="form-control ib "
                     placeholder="Your email"
                     aria-label="Recipient's username"
                     aria-describedby="button-addon2"
@@ -34,6 +39,8 @@ function Footer() {
                       style={{
                         height: "36px",
                         fontWeight:"400",
+                        width: "116px",
+                        
                         borderTopLeftRadius: "0em",
                         borderBottomLeftRadius: "0em",
                       }}
@@ -43,8 +50,8 @@ function Footer() {
                     </button>
                   </div>
             </div>
-            <h3 className="fs-18 fs-sm-18">About DLT NFT marketplace</h3>
-            <div  className="d-none d-sm-none d-md-block d-lg-block fs-16">
+            <h3 className="about">About DLT NFT marketplace</h3>
+            <div  className="d-none d-sm-none d-md-block d-lg-block fs-16 aboutdes">
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
             </div>
             <div className="d-sm-block d-md-none d-lg-none fs-16">
