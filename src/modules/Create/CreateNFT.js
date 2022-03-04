@@ -22,7 +22,6 @@ function CreateNFT() {
 
   const [getBalance, setGetBalance] = useState(null);
   const dispatch = useDispatch();
- 
 
   return (
     <div>
@@ -64,11 +63,11 @@ function CreateNFT() {
             </div>
             <div className="create-type-text">
               <h5 className="poppins-normal bold-600 font-18 blackish">
-                Single
+                Collection
               </h5>
             </div>
           </div>
-        </div>          
+        </div>
       </div>
     </div>
   );

@@ -20,6 +20,7 @@ import {
   RemoveNftFromSale,
 } from "../../services/contentServices";
 import { toast } from "react-toastify";
+
 import { getUser } from "../../services/UserMicroService";
 import { Oval } from "react-loader-spinner";
 
@@ -439,8 +440,7 @@ export default function NftInformation(props) {
               <Button
                 style={{
                   display:
-                    props?.responseData?.createdBy == loggedInUser?._id &&
-                    !props?.responseData?.salesInfo?.isOpenForSale
+                    props?.responseData?.createdBy == loggedInUser?._id
                       ? "block"
                       : "none",
                   color: "#366EEF",
