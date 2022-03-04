@@ -547,8 +547,14 @@ height: 47px;
   display: flex;
   align-items: center;
 }
-.nav-items {
+.leftSec .marketplace {
+  margin-right: 56px;
+}
+.leftSec .leaderboard {
   margin-right: 60px;
+}
+.leftSec .resource {
+  margin-right: 56px;
 }
 .create-button {
   margin-right: 28.62px;
@@ -672,8 +678,8 @@ height: 47px;
 .ntf_row .nft_card {
   padding-left: 0px;
   padding-right: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
+  /* margin-left: 0px;
+  margin-right: 0px; */
   display: inline !important;
 }
 
@@ -987,7 +993,7 @@ height: 47px;
 }
 
 .RightNavBar{
-  margin-right: 5%;
+  margin-right: 6%;
 }
 @media only screen and (min-width:1600px) {
   .RightNavBar{
@@ -1090,4 +1096,7 @@ height: 47px;
   .footer-bottom-sm{
     display: none;
   }
+}
+.footerinputbox {
+  width: 88.7%;
 }

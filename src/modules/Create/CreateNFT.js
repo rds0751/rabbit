@@ -25,42 +25,33 @@ function CreateNFT() {
 
   return (
     <div>
-      <div className="create-nft-outer">
-        <div className="">
-          <h4 className="poppins-normal bold-bold font-32 blackish">
-            Create NFT
-          </h4>
+      <div className="container create-nft">
+        <div className="row">
+          <div className="col-xl-12 text-center">
+            <h4 className="create-nft-font">Create NFT</h4>
+          </div>
         </div>
-        <div className="create-box-container">
-          <div className="single-create-type">
-            <div
-              className="single-box bord-rad-4"
-              style={{ cursor: "pointer" }}
-            >
-              <Link to="/create-single-nft">
-                <div className="img-set-center">
+        <div className="row justify-content-center">
+          <div className="col-md-3 col-lg-3 col-sm-6 col-12">
+            <Link to="/create-single-nft">
+              <div className="card card-border card-width">
+                <div className="card-body text-center">
                   <img src={Single} alt="Single" className="" />
                 </div>
-              </Link>
-            </div>
-            <div className="create-type-text">
-              <h5 className="poppins-normal bold-600 font-18 blackish">
-                Single
-              </h5>
+              </div>
+            </Link>
+            <div className="text-center">
+              <h5 className="bottom-heading-font">Single</h5>
             </div>
           </div>
-          {/* ---------------collection--- */}
-          <div className="single-create-type">
-            <div
-              className="single-box bord-rad-4"
-              style={{ cursor: "pointer" }}
-            >
-              <Link to="/create-nft-collection">
-                <div className="img-set-center">
+          <div className="col-md-3 col-lg-3 col-sm-6 col-12">
+            <Link to="/create-nft-collection">
+              <div className="card card-border card-width">
+                <div className="card-body text-center">
                   <img src={Collection} alt="Single" className="" />
                 </div>
-              </Link>
-            </div>
+              </div>
+            </Link>
             <div className="create-type-text">
               <h5 className="poppins-normal bold-600 font-18 blackish">
                 Collection

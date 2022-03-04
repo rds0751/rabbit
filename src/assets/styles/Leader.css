@@ -5,10 +5,10 @@
   box-shadow: none;
 }
 .leader {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   font-size: 1.3rem;
   font-weight: bold;
-  margin-top: 1rem;
+  margin-top: 2.5rem;
 }
 .leader1 {
   font-size: 1.3rem;
@@ -597,12 +597,15 @@ thead {
   .upper__homepage {
     text-align: center;
   }
-  .menuphone {
+  /* .menuphone {
     display: block;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 20vh;
   }
+     height: 100vh; 
+    height: auto;
+  } */
   .menuphone > button {
     color: white;
     background-color: #366eff;
@@ -743,9 +746,9 @@ thead {
   }
 }
 @media screen and (max-width: 1010px) {
-  .lower__homepage {
+  /* .lower__homepage {
     flex-direction: column;
-  }
+  } */
 }
 
 @media screen and (min-width: 768px) {
@@ -913,7 +916,7 @@ thead {
 }
 
 
-/* create nft card css */
+/* create nft card css start */
 .create-nft{
   margin-top: 90px;
   margin-bottom: 151px;
@@ -945,7 +948,7 @@ thead {
   line-height: 27px;
   font-weight: 600;
   color: #191919;
-  margin-bottom: 0px;
+  margin-bottom: 35px;
 }
 @media only screen and (max-width:1366px) {
   .create-nft .col-lg-3{
@@ -978,6 +981,10 @@ thead {
   .create-nft{
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .medium-container{
+    flex: 0 0 auto;
+    width: 30%;
   }
 }
 @media only screen and (max-width:480px) {
@@ -1013,10 +1020,25 @@ thead {
     width: 62.7%;
   }
 }
+/* create nft card css end */
 
 @media (min-width: 768px){
 .medium-container{
     flex: 0 0 auto;
     width: 30%;
 }
+}
+@media (min-width: 1400px){
+.leader-container{
+  max-width: 88%;
+}
+}
+
+@media only screen and (max-width: 1000px){
+  .menuphone {
+    display: block;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
 }

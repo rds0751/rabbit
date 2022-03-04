@@ -148,57 +148,85 @@ function Create() {
         />
       </div>
 
-      <div className="container">
-        <div className="" style={{ marginTop: "47px" }}>
-          <h1 className="font-20 blackish bold-600 poppins-normal">
-            Connect your wallet
-          </h1>
-
-          <p
-            style={{ color: "#8B8B8B", fontWeight: "normal" }}
-            className="font-20 poppins-normal"
-          >
-            Connect with one of our most popular{" "}
-            <span
-              style={{ color: "#8B8B8B" }}
-              className="poppins-normal bold-bold font-20"
-            >
-              {" "}
-              wallets
-            </span>{" "}
-            providers
-            <br />
-            or create a new one
-          </p>
-        </div>
-        <div className="row createmob">
-          <div
-            onClick={connectMetamask}
-            className="eachWalletTypeBox  col-md-3 col-lg-3 col-sm-6 col-12 my-5 card-border borderF2px"
-            style={{ cursor: "pointer" }}
-          >
-            <img
-              id="create_logo"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/800px-MetaMask_Fox.svg.png"
-              alt="..."
-            />
-            <div className="card-body">
-              <h5 className=" poppins-normal blackish font-16 bold-600 ">
+      <div className="container-fluid connect-wallet">
+        <div className="row">
+          <div className="col-xl-12">
+            <h1 className="title">Connect your wallet</h1>
+            <p className="text">
+              Connect with one of our most popular{" "}
+              <span>
                 {" "}
-                Metamask
-              </h5>
-              <p className="card-text  poppins-normal blackish">
-                One of the most secure wallets
-                <br /> with great flexibility
-              </p>
-            </div>
+                wallets
+              </span>{" "}
+              providers
+              <br />
+              or create a new one
+            </p>
           </div>
-
-       
-
-       
         </div>
-     
+        <div className="row">
+          <div className="col-xl-12">
+            <div className="eachWalletTypeBox d-flex justify-content-start flex-wrap">
+              <div
+                onClick={connectMetamask}
+                className="card"
+                style={{ cursor: "pointer" }}
+              >
+                <img
+                  id="create_logo"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/800px-MetaMask_Fox.svg.png"
+                  alt="..."
+                />
+                <div className="card-body">
+                  <h5 className="card-title"> Metamask</h5>
+                  <p className="card-text">
+                    One of the most secure wallets
+                    <br /> with great flexibility
+                  </p>
+                </div>
+              </div>
+
+              {/* <div className="card">
+                <img
+                  id="create_logo"
+                  src={image}
+                  className="card-img-top"
+                  alt="..."
+                />
+                <div className="card-body">
+                  <h5 className="card-title">Torus</h5>
+                  <p className="card-text">
+                    Connect with your Google,
+                    <br /> Facebook, Twitter or Discord
+                  </p>
+                </div>
+              </div>
+
+              <div className="card">
+                <img
+                  id="create_logo"
+                  src="https://api.nuget.org/v3-flatcontainer/walletconnect.core/1.6.5/icon"
+                  className="card-img-top"
+                  alt="..."
+                />
+                <div className="card-body">
+                  <h5 className="card-title">Wallet Connect</h5>
+                  <p className="card-text">
+                    Open protocol for connecting <br />
+                    Wallets to Dapps
+                  </p>
+                </div>
+              </div> */}
+            </div>
+         
+            {/* <button
+              type="button"
+              className="btn btn-outline-primary btn-size"
+            >
+              Show more
+            </button> */}
+          </div>
+        </div>
       </div>
     </>
   );
