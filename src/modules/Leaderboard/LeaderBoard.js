@@ -20,6 +20,7 @@ function LeaderBoard() {
   useEffect(() => {
     getTopSellers().then((response) => setTopSellers(response));
   });
+  var limitSellers = topSellers.slice(0, 4)
   console.log("topSellers", topSellers);
 
   const [topCollections, setTopCollections] = useState([]);
@@ -27,6 +28,7 @@ function LeaderBoard() {
   useEffect(() => {
     getTopCollections().then((response) => setTopCollections(response));
   });
+  var limitCollections = topCollections.slice(0, 4)
   console.log("topCollections", topCollections);
 
   const [topNftSales, setTopNftSales] = useState([]);
@@ -44,8 +46,8 @@ function LeaderBoard() {
     useState("pending");
   const [state, setState] = useState(LeaderBoardApi);
   return (
-    <div className="container">
-      <h1 className="leader" style={{ marginBottom: "30px" }}>
+    <div className="container leader-container" >
+      <h1 className="leader">
         Leaderboard
       </h1>
       {/* 3 Tables */}
@@ -159,7 +161,7 @@ function LeaderBoard() {
                   </div>
                 </div>
                 <div className="leaderboardTopDetails">
-                  {topSellers.map((curElem) => {
+                  {limitSellers.map((curElem) => {
                     const { Image, sellerFirstName, sellerLastName, SubHead1, totalPurchasedValue } = curElem;
                     return (
                       <>
@@ -233,7 +235,7 @@ function LeaderBoard() {
                   </div>
                 </div>
                 <div className="leaderboardTopDetails">
-                  {topCollections.map((curElem) => {
+                  {limitCollections.map((curElem) => {
                     const { collectionPhoto, collectionName, nftCount } = curElem.items;
                     return (
                       <>
