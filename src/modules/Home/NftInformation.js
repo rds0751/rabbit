@@ -440,7 +440,7 @@ export default function NftInformation(props) {
               <Button
                 style={{
                   display:
-                    props?.responseData?.createdBy == loggedInUser?._id
+                    props?.responseData?.ownerAddress == loggedInUser?.wallet_address
                       ? "block"
                       : "none",
                   color: "#366EEF",
@@ -464,7 +464,7 @@ export default function NftInformation(props) {
                 // data-bs-target="#myModalShare"
                 style={{
                   display:
-                    props?.responseData?.createdBy == loggedInUser?._id &&
+                    props?.responseData?.ownerAddress == loggedInUser?.wallet_address &&
                     !props?.responseData?.salesInfo?.isOpenForSale
                       ? "block"
                       : "none",
@@ -480,7 +480,7 @@ export default function NftInformation(props) {
               <Button
                 style={{
                   display:
-                    props?.responseData?.createdBy == loggedInUser?._id &&
+                    props?.responseData?.ownerAddress == loggedInUser?.wallet_address &&
                     props?.responseData?.salesInfo?.isOpenForSale
                       ? "block"
                       : "none",
