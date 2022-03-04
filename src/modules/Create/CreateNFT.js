@@ -22,7 +22,6 @@ function CreateNFT() {
 
   const [getBalance, setGetBalance] = useState(null);
   const dispatch = useDispatch();
- 
 
   return (
     <div>
@@ -37,7 +36,7 @@ function CreateNFT() {
             <Link to="/create-single-nft">
               <div className="card card-border card-width">
                 <div className="card-body text-center">
-                    <img src={Single} alt="Single" className="" />
+                  <img src={Single} alt="Single" className="" />
                 </div>
               </div>
             </Link>
@@ -49,19 +48,17 @@ function CreateNFT() {
             <Link to="/create-nft-collection">
               <div className="card card-border card-width">
                 <div className="card-body text-center">
-                    <img
-                      src={Collection}
-                      alt="Single"
-                      className=""
-                    />
+                  <img src={Collection} alt="Single" className="" />
                 </div>
               </div>
             </Link>
-            <div className="text-center">
-              <h5 className="bottom-heading-font">Collection</h5>
+            <div className="create-type-text">
+              <h5 className="poppins-normal bold-600 font-18 blackish">
+                Collection
+              </h5>
             </div>
           </div>
-        </div>          
+        </div>
       </div>
     </div>
   );
