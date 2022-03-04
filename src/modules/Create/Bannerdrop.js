@@ -50,11 +50,12 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
         {!isBannerSelected && (
             <div className="img-sec-div" {...getRootProps()}>
               <input {...getInputProps()} name="banner" />
-                <img
-                  src={Image}
-                  alt="upload-icon"
-                />
-                <p className="fw-b" style={{color:"#366EEF"}}>Upload</p>
+              <img
+                src={Image}
+                alt="upload-icon"
+                className="upload-icon"
+              />
+              <p className="fs-14 fw-b pt-20">Drag & Drop or <span style={{color:"#366EEF"}}>Browse</span></p>
             </div>
         )}
         {isBannerSelected && (
@@ -62,9 +63,10 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
             <input {...getInputProps()} name="banner" />
             <img
               src={bannerCdn != "" ? bannerCdn : Image}
-              alt="upload-icon"                
+              alt="upload-icon"    
+              className="upload-icon"            
             />
-            <p className="fw-b" style={{color:"#366EEF"}}>Upload</p>            
+            <p className="fs-14 fw-b pt-20">Drag & Drop or <span style={{color:"#366EEF"}}>Browse</span></p>
           </div>
         )}
       </div>

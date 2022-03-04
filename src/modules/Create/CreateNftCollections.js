@@ -196,7 +196,7 @@ function CreateNftCollections(props) {
     <>
       <div className="main-container">
         <h1 className="fs-32 fw-b c-b title">Create your collection</h1>
-        <p className="fs-16 fw-b c-b pt-3">Upload Logo*</p>
+        <p className="fs-16 fw-600 c-b pt-50">Upload Logo*</p>
         <div>
           {!isLogoSelected && (
               <div
@@ -212,8 +212,9 @@ function CreateNftCollections(props) {
                   <img
                     src={logoCdn != "" ? logoCdn : Image}
                     alt="upload-icon"
+                    className="upload-icon"
                   />
-                  <p className="fw-b" style={{color:"#366EEF"}}>Upload</p>
+                  <p className="fs-14 fw-b pt-20">Drag & Drop or <span style={{color:"#366EEF"}}>Browse</span></p>
               </div>
           )}
           {isLogoSelected && (
@@ -222,14 +223,15 @@ function CreateNftCollections(props) {
               <img
                 src={logoCdn != "" ? logoCdn : Image}
                 alt="upload-icon"
+                className="upload-icon"
               />
-              <p className="fw-b" style={{color:"#366EEF"}}>Upload</p>
+              <p className="fs-14 fw-b pt-20">Drag & Drop or <span style={{color:"#366EEF"}}>Browse</span></p>
             </div>
           )}
         </div>
         <div>
           {/* ---------------------------OLD BANNER UPLOAD----------------- */}
-          <div className="fs-16 fw-b c-b pt-3 pb-3">Upload Banner*</div>
+          <div className="fs-16 fw-600 c-b pt-20 pb-20">Upload Banner*</div>
 
           <Bannerdrop
             bannerCdn={bannerCdn}
@@ -243,7 +245,7 @@ function CreateNftCollections(props) {
         <div>
           <form onSubmit={(e) => handleSubmit(e)}>
             <div>
-              <p className="fs-16 fw-b c-b pt-3">Name*</p>
+              <p className="fs-16 fw-b c-b pt-4">Name*</p>
               <input
                 type="name"
                 name="name"
