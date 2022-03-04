@@ -311,10 +311,8 @@ function Navbar() {
                     title="Resource"
                     id="navbarScrollingDropdown"
                     className={
-                      location.pathname.includes("resource") &&
-                      !location.pathname.includes("leader-board") &&
-                      !location.pathname.includes("marketplace") &&
-                      !location.pathname.includes("create-nft")
+                      location.pathname.includes("help-center") ||
+                      location.pathname.includes("suggestion")
                         ? "nav-items dropdown li_underline resource"
                         : "nav-items dropdown resource"
                     }

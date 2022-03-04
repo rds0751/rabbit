@@ -13,8 +13,8 @@ function Footer() {
               <i className="fab fa-twitter fs-24 ml-10"></i>
               <i className="fab fa-instagram fs-24 ml-10"></i>              
             </div>
-            <p className="fs-18 fs-14 mt-3">Subscribe to our newsletter for the latest NFTs</p>
-            <div className="input-group-lg input-group mb-3 mt-4 footerinputbox">
+            <p className="fs-18 fs-14  subscribe">Subscribe to our newsletter for the latest NFTs</p>
+            <div className="input-group-lg input-group  footerinputbox">
                   <input
                     type="text"
                     className="form-control "
