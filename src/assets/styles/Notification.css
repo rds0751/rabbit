@@ -998,6 +998,9 @@ height: 47px;
 
 .footerinputbox>.form-control, .footerinputbox>.form-select{
   height: 36px;
+  color: #3D3D3D;
+  font-size: 16px;
+  line-height: 25px;
 }
 
 .footer-main-cont{
