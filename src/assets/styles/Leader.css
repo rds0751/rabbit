@@ -597,12 +597,13 @@ thead {
   .upper__homepage {
     text-align: center;
   }
-  .menuphone {
+  /* .menuphone {
     display: block;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-  }
+     height: 100vh; 
+    height: auto;
+  } */
   .menuphone > button {
     color: white;
     background-color: #366eff;
@@ -1019,3 +1020,18 @@ thead {
 }
 /* create nft card css end */
 
+@media (min-width: 768px){
+.medium-container{
+    flex: 0 0 auto;
+    width: 30%;
+}
+}
+
+@media only screen and (max-width: 1000px){
+  .menuphone {
+    display: block;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+}
