@@ -230,10 +230,7 @@ function Navbar() {
               >
                 <i
                   className="fa fa-search"
-                  style={{
-                    width: "42px",
-                    height: "50",
-                  }}
+                  style={{fontSize: "14px"}}
                   aria-hidden="true"
                 ></i>
               </button>
@@ -247,9 +244,10 @@ function Navbar() {
                   type="search"
                   placeholder="Search"
                   aria-label="Search"
+                  style={{fontWeight: "bold"}}
                 />
                 <button className="screachbtn">
-                  <i className="fa fa-search" aria-hidden="true"></i>
+                  <i className="fa fa-search" aria-hidden="true" style={{fontSize:"14px"}}></i>
                 </button>
               </form>
             </div>
@@ -381,10 +379,9 @@ function Navbar() {
                   <li>
                     <img
                       onClick={handleNotiSideBar}
-                      className="noti"
+                      className="notification-icon"
                       src={require("../../assets/images/notification.png")}
-                      width="19px"
-                      height="21px"
+                      alt="notification"
                     ></img>
                   </li>
 
@@ -400,11 +397,14 @@ function Navbar() {
                       <img
                         className="btnnav_mob1"
                         src={require("../../assets/images/profile.png")}
+                        alt="profile"
                         style={{
                           color: "gray",
                           cursor: "pointer",
                           marginLeft: "31.22px",
                           marginRight: "22.43px",
+                          width:"18px",
+                          height:"21px"
                         }}
                       ></img>
                     </a>
@@ -428,8 +428,9 @@ function Navbar() {
                       onClick={handleWalletClick}
                       className="btnnav_mob2"
                       src={require("../../assets/images/wallet.png")}
+                      alt="wallet"
                       width="21px"
-                      height="21.21px"
+                      height="21px"
                       style={{
                         color: "gray",
                         cursor: "pointer",
