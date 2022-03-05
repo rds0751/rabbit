@@ -46,7 +46,8 @@ function LeaderBoard() {
     useState("pending");
   const [state, setState] = useState(LeaderBoardApi);
   return (
-    <div className="container leader-container" >
+    <div className="container
+     leader-container" >
       <h1 className="leader">
         Leaderboard
       </h1>
@@ -54,13 +55,18 @@ function LeaderBoard() {
       <div className="container5">
         <div className="row leaderboard-big g-0" style={{ gap: '4%' }}>
           <div className="col leaderboardTop" style={{ backgroundColor: '#F8F8F8 !important' }}>
-            <div className="card h-100">
+            <div className=" h-100">
               <div className="card-body p-0">
                 <div className="leaderboardTitle">
                   <div className="col" style={{ fontSize: "16px" }}>
                     Top Buyers
                   </div>
-                  <div className="dropdown col leaderboardDropdown">
+                  <select className="top-dropdown">
+                    <option>Weekly</option>
+                    <option>Monthly</option>
+                    <option>Yearly</option>
+                  </select>
+                  {/* <div className="dropdown col leaderboardDropdown">
                     <button
                       className="btn border dropdown-toggle"
                       type="button"
@@ -70,27 +76,27 @@ function LeaderBoard() {
                     >
                       Weekly
                     </button>
-                    <ul
+                    <select
                       className="dropdown-menu"
                       aria-labelledby="dropdownMenuButton1"
                     >
-                      <li>
+                      <option>
                         <a className="dropdown-item" href="#">
                           Weekly
                         </a>
-                      </li>
-                      <li>
+                      </option>
+                      <option>
                         <a className="dropdown-item" href="#">
                           Monthly
                         </a>
-                      </li>
-                      <li>
+                      </option>
+                      <option>
                         <a className="dropdown-item" href="#">
                           Yearly
                         </a>
-                      </li>
-                    </ul>
-                  </div>
+                      </option>
+                    </select>
+                  </div> */}
                 </div>
                 <div className="leaderboardTopDetails">
                   {LeaderBoardApi.map((curElem) => {
@@ -122,13 +128,18 @@ function LeaderBoard() {
             </div>
           </div>
           <div className="col leaderboardTop">
-            <div className="card h-100">
+            <div className="h-100">
               <div className="card-body p-0">
                 <div className="leaderboardTitle">
                   <div className="col" style={{ fontSize: "16px" }}>
                     Top Seller
                   </div>
-                  <div className="dropdown col leaderboardDropdown">
+                  <select className="top-dropdown">
+                    <option>Weekly</option>
+                    <option>Monthly</option>
+                    <option>Yearly</option>
+                  </select>
+                  {/* <div className="dropdown col leaderboardDropdown">
                     <button
                       className="btn border dropdown-toggle"
                       type="button"
@@ -158,7 +169,7 @@ function LeaderBoard() {
                         </a>
                       </li>
                     </ul>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="leaderboardTopDetails">
                   {limitSellers.map((curElem) => {
@@ -196,13 +207,18 @@ function LeaderBoard() {
             </div>
           </div>
           <div className="col leaderboardTop">
-            <div className="card h-100">
+            <div className="h-100">
               <div className="card-body p-0">
                 <div className="leaderboardTitle">
                   <div className="col" style={{ fontSize: "16px" }}>
                     Top Collections
                   </div>
-                  <div className="dropdown col leaderboardDropdown">
+                  <select className="top-dropdown">
+                    <option>Weekly</option>
+                    <option>Monthly</option>
+                    <option>Yearly</option>
+                  </select>
+                  {/* <div className="dropdown col leaderboardDropdown">
                     <button
                       className="btn border dropdown-toggle"
                       type="button"
@@ -232,7 +248,7 @@ function LeaderBoard() {
                         </a>
                       </li>
                     </ul>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="leaderboardTopDetails">
                   {limitCollections.map((curElem) => {
@@ -270,8 +286,8 @@ function LeaderBoard() {
 
         <div className="card-small  mb-4 leadercolmob">
           <div
-            className="card-header py-3"
-            style={{ backgroundColor: "#f8f8f8" }}
+            className="card-header"
+            style={{ backgroundColor: "#f8f8f8", paddingTop: '1rem', borderTopLeftRadius: '13px', borderTopRightRadius: '13px' }}
           >
             <ul className="nav nav-pills" id="pills-tab" role="tablist" style={{ justifyContent: "space-between" }}>
               <li className="nav-item">
@@ -323,40 +339,12 @@ function LeaderBoard() {
             {/* <!-- <input type="text" id="search_criteria" className="form-control" onkeyup="hashtagsearch_criteria(this.value)"
     placeholder="Search for hashtag.."> --> */}
           </div>
-          <div
-            className="dropdown col leaderboardDropdown"
-            style={{ width: "100%", marginTop: "1rem" }}
-          >
-            <button
-              className="btn border dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton1"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              style={{ width: "100%", textAlign: "start", margin: "0rem 1rem" }}
-            >
-              Weekly
-              <i className="fas fa-caret-down"></i>
-            </button>
-            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li>
-                <a className="dropdown-item" href="#">
-                  Weekly
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Monthly
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Yearly
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="card-body">
+          <select className="small-leaderboard-dropdown">
+            <option>Weekly</option>
+            <option>Monthly</option>
+            <option>Yearly</option>
+          </select>
+          <div className="small-leaderboard-body" style={{ padding: 'none !important' }}>
             <div>
               {PendingAcceptedCreated === "pending" ? (
                 <BuildPendingAcceptedRejectedBlock apiData={Pending} />
@@ -368,7 +356,7 @@ function LeaderBoard() {
             </div>
             <div>
               {PendingAcceptedCreated === "accepted" ? (
-                <BuildAcceptedBlock apiData={topSellers} />
+                <BuildAcceptedBlock apiData={limitSellers} />
               ) : (
                 <>
                 </>
@@ -377,7 +365,7 @@ function LeaderBoard() {
             <div>
 
               {PendingAcceptedCreated === "rejected" ? (
-                <BuildRejectedBlock apiData={topCollections} />
+                <BuildRejectedBlock apiData={limitCollections} />
               ) : (
                 <>
                 </>
@@ -456,11 +444,11 @@ function LeaderBoard() {
               const { cdnUrl, name, ownedBy, maxPrice2, daysLeft } =
                 curElem;
               return (
-                <div className="col-md-3 col-lg-3 col-sm-12 p-0 medium-container">
-                  <div className="container__tile">
+                <div className="col-md-3 col-lg-3 col-sm-12 p-0 ">
+                  <div className="container-tile">
                     <img
                       id="nft__photo"
-                      className="img-fluid"
+                      className="img-sale-nft"
                       src={cdnUrl}
                       // alt="No image"
                       onError="this.onerror=null;this.src='/images/image.svg';"
@@ -528,7 +516,7 @@ const BuildPendingAcceptedRejectedBlock = ({ apiData }) => {
         })}
       </div>
       <div className="view-more">
-        <Link className="view" to="/top-bidder" style={{ paddingBottom: "inherit" }}>
+        <Link className="view" to="/top-bidder">
           {" "}
           View More
         </Link>
@@ -563,7 +551,7 @@ const BuildAcceptedBlock = ({ apiData }) => {
         <h1>No Data Found</h1>
       </div>)}
       <div className="view-more">
-        <Link className="view" to="/top-seller" style={{ paddingBottom: "inherit" }}>
+        <Link className="view" to="/top-seller">
           {" "}
           View More
         </Link>
@@ -597,7 +585,7 @@ const BuildRejectedBlock = ({ apiData }) => {
         <h1>No Data Found</h1>
       </div>)}
       <div className="view-more">
-        <Link className="view" to="/top-collection" style={{ paddingBottom: "inherit" }}>
+        <Link className="view" to="/top-collection">
           {" "}
           View More
         </Link>
