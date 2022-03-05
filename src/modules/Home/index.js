@@ -75,7 +75,7 @@ export default class NftDetail extends BaseComponent {
             //       isOpenForSale: false
             //   },
         }
-        console.log("response data-----", requestDataInTx)
+        console.log("response dasssssssssssssssssta-----", requestDataInTx)
         if (!this.state.responseData._id) return;
         let [error, result] = await Utils.parseResponse(
             addNftTx(requestDataInTx)

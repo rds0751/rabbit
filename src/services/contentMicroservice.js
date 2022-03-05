@@ -278,3 +278,16 @@ export const getAboutData = async (id, successCallBack) => {
     console.log(data, "<<error");
   }
 };
+
+// ---Edit nft
+export const EditNft = async (userId, reqData, successCallBack) => {
+  try {
+    const url =
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + `api/v1/nfts/${userId}`;
+    const { data } = await axios.put(url, reqData, { headers: AuthToken });
+    console.log(data, "<<<<data while updating nft");
+    successCallBack(data);
+  } catch (e) {
+    console.log(e);
+  }
+};
