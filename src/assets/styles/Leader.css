@@ -5,10 +5,10 @@
   box-shadow: none;
 }
 .leader {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   font-size: 1.3rem;
   font-weight: bold;
-  margin-top: 1rem;
+  margin-top: 2.5rem;
 }
 .leader1 {
   font-size: 1.3rem;
@@ -597,12 +597,15 @@ thead {
   .upper__homepage {
     text-align: center;
   }
-  .menuphone {
+  /* .menuphone {
     display: block;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 20vh;
   }
+     height: 100vh; 
+    height: auto;
+  } */
   .menuphone > button {
     color: white;
     background-color: #366eff;
@@ -1019,3 +1022,23 @@ thead {
 }
 /* create nft card css end */
 
+@media (min-width: 768px){
+.medium-container{
+    flex: 0 0 auto;
+    width: 30%;
+}
+}
+@media (min-width: 1400px){
+.leader-container{
+  max-width: 88%;
+}
+}
+
+@media only screen and (max-width: 1000px){
+  .menuphone {
+    display: block;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+}

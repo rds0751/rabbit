@@ -1,23 +1,8 @@
-.collection-outer {
-  width: 50%;
-  margin: auto;
-}
-.collection-heading {
-  font-weight: bold;
-  font-size: 32px;
-  font-family: "poppins-medium";
-  margin-top: 90px;
-  color: #191919;
-}
 .spinnerloader {
   width: 100%;
   display: flex;
   justify-content: center;
 }
-.collection-form-outer {
-  margin-top: 50px;
-}
-
 .input-outer {
   position: relative;
 }
@@ -88,11 +73,6 @@
 .drag-and-drop-browse {
   color: #366eef;
   font-family: "poppins-semibold";
-}
-.form-label {
-  margin: 0px 0px 20px 0px;
-  font-weight: 600;
-  font-family: "poppins-medium";
 }
 
 .input-box-1 {
@@ -299,21 +279,114 @@
   }
 }
 
-@media screen and (min-width: 1600px) {
-  .collection-outer {
-    width: 50%;
-    margin: auto;
-    margin-top: 90px;
-  }
-}
-
 @media screen and (max-width: 764px) {
   .upload-file-outer {
     width: 100%;
     /* margin: auto; */
   }
-  .collection-outer {
+}
+
+.fw-b{
+  font-weight: bold;
+}
+.fw-600{
+  font-weight: 600;
+}
+.fs-14{
+  font-size: 14px;
+}
+.fs-16{
+  font-size: 16px;
+}
+.fs-32{
+  font-size: 32px;
+}
+.c-b{
+  color:#191919;
+}
+.c-bl{
+  color:"#366EEF";
+}
+.c-g{
+  color:"#707070";
+}
+.pt-50{
+  padding-top:50px;
+}
+.pt-20{ 
+  padding-top: 20px;
+}
+.pb-20{
+  padding-bottom: 20px;
+}
+.main-container {
+  width: 50%;
+  margin: auto;
+  margin-top:90px;
+}
+.img-div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 244px;
+  height: 244px;
+  border: 1px solid #C8C8C8;
+  border-radius: 7px;
+}
+.img-sec-div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 240px;
+  border: 1px solid #C8C8C8;
+  border-radius: 7px;
+}
+.upload-icon{
+  width:100px;
+  height: 100px;
+}
+
+/* mobile-view */
+@media screen and (max-width:426px){
+  .main-container {
     width: 86%;
     margin: auto;
+    margin-top:60px;
+  }
+  .fs-32{
+    font-size: 18px;
+  }
+  .title{
+    text-align: center;
+  }
+  .img-div{
+    width: 240px;
+    height: 240px;
+  }
+  .img-sec-div{
+    height: 200px;
+  }
+}
+
+/* tab-view */
+@media screen and (min-width:426px) and (max-width:769px){
+  .main-container {
+    width: 90%;
+    margin: auto;
+    margin-top:40px;
+  }
+  .title{
+    text-align: center;
+    font-size: 20px;
+  }
+  .pt-50{
+    padding-top: 44px;
+  }
+  .img-div{
+    width: 340px;
+    height: 340px;
   }
 }

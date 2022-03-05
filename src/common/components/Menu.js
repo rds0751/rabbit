@@ -1,9 +1,41 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
+import {
+  
+  RedirectTo,
+ 
+} from "../../reducers/Action";
+import { useNavigate } from "react-router-dom";
 // import Upper_MyItems from "./Upper_MyItems";
 // import { Myitem_API } from "../API/MyItemApi";
 
 function Menu() {
+  const { user, sideBar } = useSelector((state) => state);
+  const { userDetails, loggedInUser, walletAddress } = user;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const manageNavigation = (name) => {
+    if (name == "create") {
+      if (walletAddress == null) {
+        dispatch(RedirectTo("create"));
+        navigate("/add-wallet");
+      } else {
+        navigate("/create-nft");
+      }
+    }
+    if (name == "profile") {
+      if (walletAddress == null) {
+        dispatch(RedirectTo("profile"));
+        navigate("/add-wallet");
+        // navigate("/my-profile");
+      } else {
+        navigate("/my-profile");
+      }
+    }
+  };
   return (
     <>
       <div className="container menuphone">
@@ -26,7 +58,7 @@ function Menu() {
         <div className="menuin">
           <h2>
             <Link
-              to="/LeaderBoard"
+              to="/leader-board"
               style={{
                 textDecoration: "none",
                 color: "black",
@@ -59,7 +91,7 @@ function Menu() {
               style={{ width: "450%" }}
             >
               <li>
-                <Link className="dropdown-item" to="/HelpCenter">
+                <Link className="dropdown-item" to="/help-center">
                   Help Center
                 </Link>
               </li>
@@ -73,7 +105,17 @@ function Menu() {
           <i className="fas fa-chevron-right"></i>
         </div>
 
-        <button className="py-2">Create</button>
+        <button className="py-2" onClick={() => manageNavigation("create")}>
+
+        <Link
+         to={walletAddress == null ? "/add-wallet" : "/create-nft"}
+          className="btn btn-primary btnnav"
+          style={{backgroundColor:"transparent" ,border:"none"}}
+         >
+          Create
+          </Link>
+          
+          </button>
       </div>
     </>
   );

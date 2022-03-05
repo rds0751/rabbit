@@ -17,7 +17,7 @@ export default function PricingHistoryComponent(props) {
   };
 
   useEffect(() => {
-    pricingHistoryGraphOfNft(reqObject).then((response) =>
+    pricingHistoryGraphOfNft(reqObject).then((response) => 
       setNftPricingHistory(response)
     );
   });

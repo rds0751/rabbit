@@ -547,8 +547,14 @@ height: 47px;
   display: flex;
   align-items: center;
 }
-.nav-items {
+.leftSec .marketplace {
+  margin-right: 56px;
+}
+.leftSec .leaderboard {
   margin-right: 60px;
+}
+.leftSec .resource {
+  margin-right: 56px;
 }
 .create-button {
   margin-right: 28.62px;
@@ -1093,4 +1099,7 @@ height: 47px;
   .footer-bottom-sm{
     display: none;
   }
+}
+.footerinputbox {
+  width: 88.7%;
 }

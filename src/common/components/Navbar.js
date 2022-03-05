@@ -27,11 +27,8 @@ function Navbar() {
   const [humburger, setHumburger] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [toggleEffect, setToggleEffect] = useState(false);
-
-  const ethereum = window.ethereum;
   const [errorMssg, setErrorMssg] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
-  console.log("ethereum ", ethereum && ethereum);
   const [checkClick, setcheckClick] = useState(false);
 
   const [getBalance, setGetBalance] = useState(null);
@@ -39,9 +36,6 @@ function Navbar() {
   const { user, sideBar } = useSelector((state) => state);
   const { userDetails, loggedInUser, walletAddress } = user;
   const { isOpenNoti, isOpenWallet } = sideBar;
-  var provider = new ethers.providers.Web3Provider(ethereum);
-
-  console.log(walletAddress, "<<<<this is wallet address");
 
   useEffect(() => {
     if (loggedInUser == null) {
@@ -51,6 +45,9 @@ function Navbar() {
 
   //  ---------------------------------
   const isMetaMaskConnected = async () => {
+    if(!window.ethereum)
+      return Promise.reject("Please install metamask")
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
     const accounts = await provider.listAccounts();
     return accounts.length > 0;
   };
@@ -70,8 +67,6 @@ function Navbar() {
                 })
                 .then((wallet_balance) => {
                   const balance = ethers.utils.formatEther(wallet_balance);
-                  console.log(getBalance, "<<< balance");
-                  // -----------------
                   dispatch(
                     AddWalletDetails({
                       address,
@@ -79,40 +74,29 @@ function Navbar() {
                     })
                   );
                   CheckUserByWalletAddress(address, (res) => {
-                    console.log(res, "<<<< Account changed");
                     dispatch(addUserData(res));
                     localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
                     setToggleEffect(!toggleEffect);
                   });
-                  // -------------
                 });
             })
             .catch((e) => {
-              // toast.error(" Connect Your Metamask Wallet");
               console.log(e, "<<< error ");
             });
-          // alert("connected");
         } else {
-          // metamask is not connected
           return null;
-          // alert("not connected");
         }
       });
-      // return null;
     } else {
-      // toast.error("Install Metamak and Connect Wallet");
     }
   };
   const accountChangeHandler = (newAccount) => {
     setDefaultAccount(newAccount[0]);
     getUserBalance(newAccount[0]);
-    console.log(getBalance, "getUser balance");
     dispatch(AddWalletDetails({ address: newAccount[0], balance: getBalance }));
     CheckUserByWalletAddress(newAccount[0], (res) => {
-      console.log(res, "<<<< Account changed");
       dispatch(addUserData(res));
       localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
-
       setToggleEffect(!toggleEffect);
     });
   };
@@ -126,9 +110,6 @@ function Navbar() {
   };
 
   window.ethereum?.on("accountsChanged", accountChangeHandler);
-  console.log(loggedInUser, "<<<<<this iser user detail");
-
-  // ---------------------------
   let location = useLocation();
   const manageNavigation = (name) => {
     if (name == "myitems") {
@@ -167,9 +148,6 @@ function Navbar() {
   const handleWalletClick = () => {
     if (walletAddress == null) {
       navigate("/add-wallet");
-      // dispatch(RedirectTo("wallet"));
-
-      // dispatch(ManageWalletSideBar(!isOpenWallet));
     } else {
       dispatch(ManageWalletSideBar(!isOpenWallet));
       dispatch(ManageNotiSideBar(false));
@@ -189,9 +167,6 @@ function Navbar() {
   const handleSearch = () => {
     if (searchInput.trim() != "") dispatch(searchNav(searchInput));
   };
-
-  console.log("logged in user >>> lllll", loggedInUser);
-
   return (
     <>
       <div className="navbar-width">
@@ -259,16 +234,16 @@ function Navbar() {
             className="collapse navbar-collapse mobcollapse"
             id="navbarSupportedContent"
           > */}
-              <div className="navbar-nav d-flex">
-                <ul className="left_section_nav mb-0">
+              <div className="navbar-nav d-flex ">
+                <ul className="left_section_nav mb-0 leftSec">
                   <li
                     className={
                       location.pathname.includes("/") &&
                       !location.pathname.includes("leader-board") &&
                       !location.pathname.includes("resource") &&
                       !location.pathname.includes("create-nft")
-                        ? "nav-items li_underline"
-                        : "nav-items"
+                        ? "nav-items li_underline marketplace"
+                        : "nav-items marketplace"
                     }
                     onClick={isOpenWallet}
                   >
@@ -290,8 +265,8 @@ function Navbar() {
                   <li
                     className={
                       location.pathname.includes("leader-board")
-                        ? "nav-items li_underline"
-                        : "nav-items"
+                        ? "nav-items li_underline leaderboard"
+                        : "nav-items leaderboard"
                     }
                     onClick={isOpenWallet}
                   >
@@ -315,8 +290,8 @@ function Navbar() {
                       !location.pathname.includes("leader-board") &&
                       !location.pathname.includes("marketplace") &&
                       !location.pathname.includes("create-nft")
-                        ? "nav-items dropdown li_underline"
-                        : "nav-items dropdown"
+                        ? "nav-items dropdown li_underline resource"
+                        : "nav-items dropdown resource"
                     }
                   >
                     <NavDropdown.Item href="/help-center">
