@@ -374,7 +374,7 @@ function Navbar() {
                         Create</button>
                     </Link>
                   </li>
-                  <li className="removeinmob">|</li>
+                  <li className="removeinmob"></li>
                 </ul>
 
                 <ul className="right_section_nav mb-0">
