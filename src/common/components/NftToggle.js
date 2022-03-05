@@ -15,7 +15,7 @@ function NftToggle({ toggleNft }) {
             className="font-18 text-center"
             style={{
               textDecoration: "none",
-              width: "80px",
+              width: "108px",
               color: toggleNft ? "#191919" : "#858585",
               // color: "#000",
               borderBottom: toggleNft
@@ -36,7 +36,7 @@ function NftToggle({ toggleNft }) {
               textDecoration: "none",
               color: !toggleNft ? "#191919" : "#858585",
               // marginLeft: "2em",
-              width: "140px",
+              width: "120px",
               borderBottom: !toggleNft
                 ? "4px solid #366EEF"
                 : "1px solid #C7C7C7",
