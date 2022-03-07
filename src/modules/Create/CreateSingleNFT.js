@@ -278,6 +278,9 @@ function CreateSingleNFT(props) {
                 </div>
               )}
               {/* ----------------- */}
+              <div className="draganddropboxmsg">
+                Supported(JPG, PNG, GIF, SVG, MP4, WEBM, WAV) <br></br>Max size: 40 mb
+              </div>
             </div>
             <div className="single-form">
               <div className="">
@@ -352,7 +355,7 @@ function CreateSingleNFT(props) {
                         textDecoration: "none",
                       }}
                     >
-                      <span className="color36 font-16 poppins-normal">
+                      <span className="color36 font-16 poppins-normal create-text">
                         {" "}
                         Create
                       </span>
@@ -375,7 +378,7 @@ function CreateSingleNFT(props) {
                   ))}
                 </select>
               </div>
-              <div className="mb-3 mt-3">
+              <div className="">
                 <label htmlFor="email" className="input-label">
                   Blockchain*
                 </label>
@@ -389,9 +392,9 @@ function CreateSingleNFT(props) {
                 <option value="">Select Blockchain</option>
                 <option value="Ethereum">Ehtereum</option>
               </select> */}
-                <div className="block-chain-container">
+                <div className="d-flex block-chain-container">
                   <div>
-                    <img src={ethereum.svg} height="32px" />
+                    <img src={ethereum} height="32px" />
                   </div>
                   <div className="block-chain-right">
                     <select

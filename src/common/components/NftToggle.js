@@ -8,41 +8,45 @@ function NftToggle({ toggleNft }) {
     <>
       <div id="upper__home" className="">
         <div className="upper__homepage">
-          <h1 className="font-20 font-weight-700 mt-4">Marketplace</h1>
+          <h1 className="font-20 font-weight-700">Marketplace</h1>
         </div>
         <div className="middle__homepage">
           <Link
-            className="font-18 font-weight-700 text-center"
+            className="font-18 text-center"
             style={{
               textDecoration: "none",
-              width: "80px",
-              color: toggleNft ? "black" : "#848482",
+              width: "108px",
+              color: toggleNft ? "#191919" : "#858585",
               // color: "#000",
               borderBottom: toggleNft
-                ? "4px solid #3399ff"
-                : "1px solid #848482",
+                ? "4px solid #366EEF"
+                : "1px solid #C7C7C7",
+              fontFamily: toggleNft ? "poppins-semibold" : "poppins",
+              paddingBottom: "12px",
             }}
             to="/"
           >
             {/* <div onClick={() => setToggleNft(true)}>NFTS</div> */}
-            <div>NFTS</div>
+            NFTS
           </Link>
           <Link
             // onClick={() => setToggleNft(false)}
-            className="font-18 font-weight-700 text-center"
+            className="font-18 text-center"
             style={{
               textDecoration: "none",
-              color: !toggleNft ? "black" : "#848482",
+              color: !toggleNft ? "#191919" : "#858585",
               // marginLeft: "2em",
-              width: "140px",
+              width: "120px",
               borderBottom: !toggleNft
-                ? "4px solid #3399ff"
-                : "1px solid #848482",
+                ? "4px solid #366EEF"
+                : "1px solid #C7C7C7",
+              fontFamily: !toggleNft ? "poppins-semibold" : "poppins",
+              paddingBottom: "12px",
             }}
             to="/collections-tile"
           >
             {/* <div onClick={() => setToggleNft(false)}>Collections</div> */}
-            <div>Collections</div>
+            Collections
           </Link>
         </div>
       </div>

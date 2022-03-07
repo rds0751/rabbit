@@ -1,3 +1,10 @@
+/* Marketplace page top height */
+#upper__home{
+  margin-top: 36px;
+}
+#upper__home h1{
+  font-family: 'poppins-semibold';
+}
 /* css for filters */
 .nftTilePageSecondSelect {
   margin-left: 3%;
@@ -23,19 +30,22 @@
   width: 100%;
   font-size: 1vw !important;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   /* padding-top: 4%; */
 }
 .nftTileEachDetailsFirstContainerName {
   font-family: "poppins-bold";
 }
 .nftTileEachDetailsFirstContainerValue {
-  border: 1px solid #16ab6e;
+  border: 1px solid #16AB6E;
   border-radius: 6px;
-  padding: 0.5% 3%;
-  font-size: 0.87vw;
-  color: #16ab6e;
+  padding: 6px 5px 5px 5px;
+  font-size: 14px;
+  line-height: 21px;
+  color: #16AB6E;
   font-family: "poppins-semibold";
+  background-color: #FFFFFF00;
+  min-width: 78px;
   /* margin-right: 1em; */
 }
 .nftTileEachDetailsSecondContainerValueHighest {
@@ -46,7 +56,7 @@
   justify-content: space-between;
   width: 100%;
   /* margin: 4% 0px; */
-  margin-top: 20px;
+  margin-top: 16px;
 }
 .clockNftDetails {
   margin-right: 1% !important;
@@ -67,9 +77,9 @@
   .nftTileEachDetailsFirstContainer {
     font-size: 2vw !important;
   }
-  .nftTileEachDetailsFirstContainerValue {
+  /* .nftTileEachDetailsFirstContainerValue {
     font-size: 1.87vw;
-  }
+  } */
   .nftTileEachDetailsSecondContainerValueHighest {
     font-size: 1.9vw;
   }
@@ -91,6 +101,14 @@
     margin-top: 3% !important;
     width: 100% !important;
   } */
+}
+@media only screen and (width:768px){
+  .nftTilePageSecondSelect{
+    margin-left: 7%;
+  }
+  #upper__home{
+    margin-top: 41px;
+  }
 }
 @media only screen and (max-width:767px){
   .mobilenftTilePageThirdSelect {
@@ -123,5 +141,8 @@
   .mobilenftTilePageSecondSelect {
     margin-left: 0px !important;
     margin-top: -1% !important;
+  }
+  #upper__home{
+    margin-top: 52px;
   }
 }

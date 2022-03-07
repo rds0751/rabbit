@@ -46,7 +46,7 @@ function NftCardsHome({ nft }) {
 
   return (
     <div className="nftCardEach col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
-      <div className="card nft-card-radius border-radius cardmob">
+      <div className="card nft-card-radius border-radius cardmob h-100">
         <Link to={route} style={{ textDecoration: "none" }}>
           <img
             className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
@@ -61,7 +61,7 @@ function NftCardsHome({ nft }) {
         <div
           className="nftTileEachDetails card-lower"
           style={{
-            padding: "0px 14px 0px 12px",
+            padding: "0px 12px 0px 14px",
           }}
         >
           <div className="nftTileEachDetailsFirstContainer container__up">
@@ -75,14 +75,9 @@ function NftCardsHome({ nft }) {
               {name}
             </div>
             <span
-              className="nftTileEachDetailsFirstContainerValue poppins-normal bold-600"
-              style={{
-                fontSize: "14px",
-                fontWeight: "600px",
-                color: "#16AB6E",
-              }}
+              className="nftTileEachDetailsFirstContainerValue"
             >
-              {`${salesInfo?.price}  ${salesInfo?.currency}`}
+              {`${salesInfo?.price}  ${salesInfo?.currency} ETH`}
             </span>
           </div>
           <div
@@ -96,7 +91,7 @@ function NftCardsHome({ nft }) {
             </div>
             <div>
               <span className="" style={{ color: "#000", marginRight: "4px" }}>
-                <i className="far fa-clock" style={{ color: "#f54" }}></i>
+                <i className="far fa-clock" style={{ color: "#f54", fontSize:"13.36px", }}></i>
               </span>
               <span className="poppins-normal blackish font-14">
                 {days} days left
