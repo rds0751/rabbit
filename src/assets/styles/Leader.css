@@ -1123,3 +1123,161 @@ thead {
     padding-top:115px;
   }
 }
+/* nft-information nft detail page css start*/
+.nft-detail .nftdetail-img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  /* background-color: #f3f3f3; */
+  margin-bottom: 38px;
+}
+.nft-detail .imginfo_mob{
+  margin-bottom: 38px;
+}
+.nft-detail #share_info{
+  margin-bottom: 29px;
+}
+.nft-detail .edit-sell-button, .nft-detail .buy-offer-btn{
+  display: flex;
+  flex-wrap: wrap;
+}
+.nft-detail .edit-sell-button button{
+  width: 181px;
+  height: 52px;
+  margin-bottom: 50px;
+  font-family: 'poppins-medium';
+  font-size: 18px;
+  line-height: 27px;
+}
+.nft-detail .second-text, .nft-detail .third-text{
+  margin-bottom: 22px;
+}
+.nft-detail .fourth-text{
+  margin-bottom: 23px;
+  display: flex;
+}
+.nft-detail .nft-name{
+  font-family: 'poppins-bold';
+  font-size: 32px;
+  line-height: 48px;
+  color: #191919;
+}
+.nft-detail .text{
+  font-family: 'poppins-medium';
+  font-size: 16px;
+  line-height: 25px;
+  color: #191919;
+}
+.nft-detail .nft-value{
+  font-family: 'poppins-bold';
+  font-size: 16px;
+  line-height: 25px;
+  color: #16AB6E;
+}
+.nft-detail .time{
+  font-family: 'poppins-medium';
+  font-size: 16px;
+  line-height: 25px;
+  color: #191919;
+}
+.nft-detail .text .text-name{
+  font-family: 'poppins-bold';
+}
+.nft-detail .title{
+  font-family: 'poppins-bold';
+  font-size: 16px;
+  line-height: 25px;
+  color: #191919;
+  margin-bottom: 27px;
+  text-align: left;
+}
+.nft-detail .description{
+  font-family: 'poppins-medium';
+  font-size: 16px;
+  line-height: 25px;
+  color: #191919;
+  margin-bottom: 32px;
+}
+.nft-detail .buy-offer-btn button{
+  width: 227px;
+  height: 65px;
+  margin-bottom: 32px;
+  font-family: 'poppins-medium';
+  font-size: 24px;
+  line-height: 35px;
+}
+.nft-detail .grap-area ul{
+  display: flex;
+  border-bottom: 1px solid #DDDDDD;
+  margin-bottom: 27px;
+}
+.nft-detail .grap-area ul li{
+  width: 120px;
+  padding-bottom: 22px;
+  text-align: center;
+  cursor: pointer;
+}
+.nft-detail #chart{
+  border: 1px solid #C8C8C8;
+  border-radius: 3px;
+}
+.nft-detail #chart .avg-price{
+  font-family: 'poppins';
+  font-size: 16px;
+  line-height: 25px;
+  color: #707070;
+}
+.nft-detail #chart .avg-price span{
+  color: #000000;
+}
+.nft-detail #chart .chart-filter{
+  border: 1px solid #D2D2D2;
+  border-radius: 4px;
+  font-family: 'poppins-medium';
+  font-size: 14px;
+  line-height: 21px;
+  color: #191919;
+  width: 108px;
+  height: 42px;
+  padding-left: 12px;
+  background-color: #fff;
+}
+.nft-detail .grap-area table thead, .nft-detail .pricing-history table thead{
+  background: #FBFBFB;
+  border-radius: 3px 3px 0px 0px;
+}
+.nft-detail .grap-area table thead th, .nft-detail .pricing-history table thead th{
+  font-family: 'poppins-semibold';
+  font-size: 14px;
+  line-height: 21px;
+  color: #191919;
+  padding: 8px 11px;
+}
+.nft-detail .grap-area table tbody td, .nft-detail .pricing-history table tbody td{
+  font-family: 'poppins';
+  font-size: 14px;
+  line-height: 21px;
+  color: #191919;
+  padding: 11px 13px;
+}
+
+@media only screen and (max-width:1440) {
+  .nft-detail{
+    margin: 0 5%;
+  }
+}
+@media only screen and (max-width:768) {
+  .nft-detail #share_info{
+    margin-bottom: 39px;
+  }
+}
+@media only screen and (max-width:767) {
+  .nft-detail #share_info{
+    margin-bottom: 22px;
+  }
+}
+@media only screen and (max-width:480) {
+
+}
+/* nft-information nft detail page css end*/

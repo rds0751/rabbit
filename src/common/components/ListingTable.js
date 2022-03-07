@@ -23,9 +23,9 @@ export default function ListingsTable() {
       <Table aria-label="simple table" style={{tableLayout:"fixed", width:"100%"}}>
         <TableHead>
           <TableRow>
-            <TableCell style={{color:"#191919", fontWeight:"bold"}}>Price</TableCell>
-            <TableCell align="center" style={{color:"#191919", fontWeight:"bold"}}>Expiration</TableCell>
-            <TableCell align="right" style={{color:"#191919", fontWeight:"bold"}}>From</TableCell>
+            <TableCell>Price</TableCell>
+            <TableCell align="center">Expiration</TableCell>
+            <TableCell align="right">From</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -34,7 +34,7 @@ export default function ListingsTable() {
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
+              <TableCell component="td" scope="row">
                 {row.Price}
               </TableCell>
               <TableCell align="center">{row.Expiration}</TableCell>
