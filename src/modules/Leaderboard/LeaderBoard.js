@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../../assets/styles/Leader.css";
+import "../../assets/styles/Notification.css";
+import "../../assets/styles/custom.css";
+import "../../assets/styles/homenftcard.css";
 import { Link } from "react-router-dom";
 import {
   LeaderBoardApi,
@@ -373,123 +376,80 @@ function LeaderBoard() {
             </div>
           </div>
         </div>
-        <div className="topnft-section">
-          <div className="sales">
-            <div className="sales1">
-              <h1 className="leader1">Top NFT sales</h1>
-              <div className="dropdown col btn1">
-                <button
-                  className="btn border dropdown-toggle btn2"
-                  type="button"
-                  id="dropdownMenuButton1"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Weekly
-                </button>
-                <ul
-                  className="dropdown-menu"
-                  aria-labelledby="dropdownMenuButton1"
-                >
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Weekly
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Monthly
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Yearly
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="dropdown col btn1">
-              <button
-                className="btn border dropdown-toggle btmleaderboard btn2"
-                type="button"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Sort by
-              </button>
-              <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Weekly
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Monthly
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Yearly
-                  </a>
-                </li>
-              </ul>
-            </div>
+      </div>
+      <div className="topNft-section">
+        <div className="filters-cont">
+          <label for="topNft-sales" className="fs-20 fw-sb c-b pb-16 d-sm-block d-md-none">Top NFT sales</label>
+          <div className="d-flex align-items-center">
+            <label for="topNft-sales" className="fs-20 fw-sb c-b pr-12 d-none d-sm-none d-md-block">Top NFT sales</label>
+            <select id="topNft-sales" name="topNfts" className="sales-selector fs-14 fw-m c-b">
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+              <option value="yearly">yearly</option>
+            </select>
           </div>
-          <div className="row mx-0 text-center justify" style={{ gap: '4%', rowGap: "25px", marginTop: "20px" }}>
-            {/* <div className="col-md-3 col-lg-3 col-sm-6 col-11 images"> */}
-            {topNftSales.map((curElem) => {
-              const { cdnUrl, name, ownedBy, maxPrice2, daysLeft } =
-                curElem;
-              return (
-                <div className="col-md-3 col-lg-3 col-sm-12 p-0 ">
-                  <div className="container-tile">
-                    <img
-                      id="nft__photo"
-                      className="img-sale-nft"
-                      src={cdnUrl}
-                      // alt="No image"
-                      onError="this.onerror=null;this.src='/images/image.svg';"
-                    />
-                    {/* <img id='like_icon' src={require('../asset//images/')} /> */}
-                    <div className="container-details">
-                      <div className="tile__details">
-                        <div className="container__up" style={{ paddingTop: '10px' }}>
-                          <h6 className="title">{name}</h6>
-                        </div>
-                        <div className="container__down">
-                          <h6 className="value__high" style={{ margin: 'inherit' }}>
-                            Sold to&nbsp;
-                            <span style={{ fontWeight: "bold", color: "black" }}  >
-                              {(String(ownedBy).length >= 7) ? (!ownedBy ? " " : (String(ownedBy).substring(0, 8) + "...")) : (String(ownedBy) === undefined ? "" : ownedBy)}
-                            </span>
-                            &nbsp;for<span> &nbsp;{curElem.biddingDetails.currency}</span>
-                          </h6>
-                          <h6 className="value__k">
-                            {daysLeft}{" "}
-                            {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
-                            <i
-                              className="fa-solid fa-heart"
-                              style={{ color: "#ef3643" }}
-                            ></i>
-                          </h6>
-                        </div>
+          <div>
+            <select name="sortBy" className="sort-selector fs-14 c-b">
+              <option>Sort by</option>
+              <option value="">option1</option>
+              <option value="">option2</option>
+            </select>
+          </div>
+        </div>
+        <div className="nfts-cont row ntf_row">
+          {/* <div className="col-md-3 col-lg-3 col-sm-6 col-11 images"> */}
+          {topNftSales.map((curElem) => {
+            const { cdnUrl, name, ownedBy, maxPrice2, daysLeft } =
+              curElem;
+            return (
+              <div className="nftCard col-md-6 col-lg-3 col-sm-12 nft_card card-mar">
+                <div className="card nft-card-radius border-radius cardmob">
+                  <img
+                    // id="nft__photo"
+                    className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
+                    src={cdnUrl}
+                    alt="nft"
+                    onError="this.onerror=null;this.src='/images/image.svg';"
+                  />
+                  {/* <img id='like_icon' src={require('../asset//images/')} /> */}
+                  <div className="nftTileEachDetails card-lower"
+                    style={{
+                      padding: "0px 14px 0px 12px",
+                    }}>
+                    <div className="tile__details">
+                      <div className="container__up" style={{ paddingTop: '10px' }}>
+                        <h6 className="title">{name}</h6>
+                      </div>
+                      <div className="container__down">
+                        <h6 className="value__high" style={{ margin: 'inherit' }}>
+                          Sold to&nbsp;
+                          <span style={{ fontWeight: "bold", color: "black" }}  >
+                            {(String(ownedBy).length >= 7) ? (!ownedBy ? " " : (String(ownedBy).substring(0, 8) + "...")) : (String(ownedBy) === undefined ? "" : ownedBy)}
+                          </span>
+                          &nbsp;for<span> &nbsp;{curElem.biddingDetails.currency}</span>
+                        </h6>
+                        <h6 className="value__k">
+                          {daysLeft}{" "}
+                          {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
+                          <i
+                            className="fa-solid fa-heart"
+                            style={{ color: "#ef3643" }}
+                          ></i>
+                        </h6>
                       </div>
                     </div>
                   </div>
                 </div>
-              );
-            })}
-            {/* My Commit */}
-          </div>
+              </div>
+            );
+          })}
+          {/* My Commit */}
         </div>
-        {/* </div> */}
-
-        {/* Top NFT sales */}
       </div>
-    </div >
+      {/* </div> */}
+
+      {/* Top NFT sales */}
+    </div>
   );
 }
 const BuildPendingAcceptedRejectedBlock = ({ apiData }) => {
