@@ -75,19 +75,14 @@ export default function PricingHistoryComponent(props) {
 
   return (
     <div id="chart">
-      <div className="border">
-        <div className="d-flex justify-content-between align-items-center p-2">
-            <h5 className="font-15 text-secondary">
-              Average Price: <span className="text-dark">{average}</span>
+      <div className="">
+        <div className="d-flex justify-content-around align-items-center py-4">
+            <h5 className="avg-price">
+              Average Price: <span>{average}</span>
             </h5>
             <select name="filter"
               onChange={(e) => handleChange(e)}
-              style={{
-                width: "100px",
-                height: "35px",
-                borderRadius: "5px",
-                fontSize:"14px",
-              }}
+              className="chart-filter"
             >
               <option className="font-15" value="all">All time</option>
               <option className="font-15" value="month">Month</option>
