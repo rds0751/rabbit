@@ -57,8 +57,7 @@ function Notification() {
       {/* ------------ */}
       <div className="empty_div"></div>
       <div className="noti-outer">
-        <div className="noti-container">
-          <div className="notification-text">Notification</div>
+        <h3 className="notification-text">Notification</h3>
           <div className="all-noti">
             {notifications.map((curElem) => {
               const { addedOn, type, userId } = curElem;
@@ -83,7 +82,6 @@ function Notification() {
               );
             })}
           </div>
-        </div>
       </div>
 
       {/* ------------------ */}

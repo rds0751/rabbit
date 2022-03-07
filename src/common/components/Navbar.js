@@ -45,8 +45,7 @@ function Navbar() {
 
   //  ---------------------------------
   const isMetaMaskConnected = async () => {
-    if(!window.ethereum)
-      return Promise.reject("Please install metamask")
+    if (!window.ethereum) return Promise.reject("Please install metamask");
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const accounts = await provider.listAccounts();
     return accounts.length > 0;
@@ -113,6 +112,8 @@ function Navbar() {
   let location = useLocation();
   const manageNavigation = (name) => {
     if (name == "myitems") {
+      dispatch(ManageNotiSideBar(false));
+      dispatch(ManageWalletSideBar(false));
       if (walletAddress == null) {
         dispatch(RedirectTo("myitems"));
         navigate("/add-wallet");
@@ -121,6 +122,8 @@ function Navbar() {
       }
     }
     if (name == "create") {
+      dispatch(ManageNotiSideBar(false));
+      dispatch(ManageWalletSideBar(false));
       if (walletAddress == null) {
         dispatch(RedirectTo("create"));
         navigate("/add-wallet");
@@ -129,6 +132,8 @@ function Navbar() {
       }
     }
     if (name == "profile") {
+      dispatch(ManageNotiSideBar(false));
+      dispatch(ManageWalletSideBar(false));
       if (walletAddress == null) {
         dispatch(RedirectTo("profile"));
         navigate("/add-wallet");
@@ -167,6 +172,10 @@ function Navbar() {
 
   const handleSearch = () => {
     if (searchInput.trim() != "") dispatch(searchNav(searchInput));
+  };
+  const closeWalletAndNoti = () => {
+    dispatch(ManageNotiSideBar(false));
+    dispatch(ManageWalletSideBar(false));
   };
   return (
     <>
@@ -244,7 +253,7 @@ function Navbar() {
                         ? "nav-items li_underline marketplace"
                         : "nav-items marketplace"
                     }
-                    onClick={isOpenWallet}
+                    onClick={closeWalletAndNoti}
                   >
                     <Link
                       className={
@@ -267,7 +276,7 @@ function Navbar() {
                         ? "nav-items li_underline leaderboard"
                         : "nav-items leaderboard"
                     }
-                    onClick={isOpenWallet}
+                    onClick={closeWalletAndNoti}  
                   >
                     <Link
                       className={
@@ -282,6 +291,7 @@ function Navbar() {
                     </Link>
                   </li>
                   <NavDropdown
+                    onClick={closeWalletAndNoti}
                     title="Resource"
                     id="navbarScrollingDropdown"
                     className={
