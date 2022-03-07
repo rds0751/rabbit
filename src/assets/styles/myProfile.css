@@ -73,17 +73,22 @@
   border-radius: 6px;
   /* width: 10%; */
   /* display: flex; */
-  margin-top: 5px;
+  /* margin-top: 5px; */
   /* overflow: hidden; */
   /* text-overflow: ellipsis; */
+  padding: 4px;
 }
 .profile-user {
-  margin-top: 1%;
+  font-family: 'poppins-bold';
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+  margin-bottom: 22px;
 }
 
 .add-cover {
   display: flex;
-  margin-top: 1.5%;
+  margin-bottom: 20px;
   text-align: center;
   align-items: center;
   width: 10%;
@@ -130,6 +135,24 @@
 }
 .textdecornone {
   text-decoration: none;
+}
+
+/* my profile page css */
+.profileavatar.absolute{
+  margin-top: -105px;
+}
+.profileavatar.absolute img{
+  width: 198px;
+  height: 198px;
+  margin-bottom: 14px;
+}
+.profile-description{
+  font-family: 'poppins';
+  font-size: 16px;
+  line-height: 25px;
+  color: #000000;
+  margin-bottom: 19px;
+  width: 27%;
 }
 
 @media screen and (max-width: 764px) {
