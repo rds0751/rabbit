@@ -540,6 +540,7 @@ height: 47px;
 }
 .left_section_nav {
   display: flex;
+  align-items: center;
 }
 .left_section_nav li {
   /* margin-left: 61px; */
@@ -568,10 +569,13 @@ height: 47px;
   border-color: transparent;
   font-weight: 500;
 }
-.left_section_nav .removeinmob {
-  margin-right: 33.6px !important;
-  line-height: "40px";
-  color: "gray";
+.left_section_nav {
+  margin-right: 33.6px !important;  
+}
+.removeinmob{
+  border: 0.2px solid #828282;
+  width: 0px;
+  height: 31px;
 }
 .left_section_nav .li_underline {
   border-bottom: 3px solid #366eef;
@@ -963,11 +967,11 @@ height: 47px;
 
 } */
 
-#navbarScrollingDropdown{
+/* #navbarScrollingDropdown{
   margin-top: 8px;
   
   
-}
+} */
 .dropdown-toggle::after{
   display: none;
 }
