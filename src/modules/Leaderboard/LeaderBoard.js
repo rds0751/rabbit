@@ -290,7 +290,7 @@ function LeaderBoard() {
         <div className="card-small  mb-4 leadercolmob">
           <div
             className="card-header"
-            style={{ backgroundColor: "#f8f8f8", paddingTop: '1rem', borderTopLeftRadius: '13px', borderTopRightRadius: '13px' }}
+            style={{ backgroundColor: "#f8f8f8", padding: "inherit", paddingTop: '30px', borderTopLeftRadius: '13px', borderTopRightRadius: '13px' }}
           >
             <ul className="small-nav nav nav-pills" id="pills-tab" role="tablist">
               <li className="nav-item">
@@ -302,7 +302,7 @@ function LeaderBoard() {
                   role="tab"
                   aria-controls="pills-pending"
                   aria-selected="true"
-                  style={{ fontSize: "13px" }}
+                  style={{ fontSize: "13px", borderRadius: 'inherit' }}
                   onClick={() => setPendingAcceptedCreated("pending")}
                 >
                   Top Buyers
@@ -317,7 +317,7 @@ function LeaderBoard() {
                   role="tab"
                   aria-controls="pills-accepted"
                   aria-selected="false"
-                  style={{ fontSize: "13px" }}
+                  style={{ fontSize: "13px", borderRadius: 'inherit' }}
                   onClick={() => setPendingAcceptedCreated("accepted")}
                 >
                   Top Sellers
@@ -332,7 +332,7 @@ function LeaderBoard() {
                   role="tab"
                   aria-controls="pills-rejected"
                   aria-selected="false"
-                  style={{ fontSize: "13px" }}
+                  style={{ fontSize: "13px", borderRadius: 'inherit' }}
                   onClick={() => setPendingAcceptedCreated("rejected")}
                 >
                   Top Collections
