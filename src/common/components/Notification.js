@@ -53,8 +53,9 @@ function Notification() {
 
  
   return (
-    <div style={{ display: isOpenNoti ? "block" : "none" }}>
+    <div style={{ display: isOpenNoti ? null : "none" }} className="main-cont">
       {/* ------------ */}
+      <div className="empty_div"></div>
       <div className="noti-outer">
         <div className="noti-container">
           <div className="notification-text">Notification</div>

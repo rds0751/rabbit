@@ -161,6 +161,7 @@ function Navbar() {
     } else {
       dispatch(ManageNotiSideBar(!isOpenNoti));
       dispatch(ManageWalletSideBar(false));
+      document.body.style.overflow = !isOpenNoti ? "hidden" : "visible";
     }
   };
 
