@@ -15,18 +15,27 @@ const MainContainer = styled.div`
   flex-direction: column;
 `;
 const Title = styled.h1`
-  color: #000000;
+  font-family: 'poppins-bold';
   font-size: 16px;
-  font-weight: bold;
+  line-height: 25px;
+  color: #000000;
+  margin-bottom:23px;
 `;
 const FilterContainer = styled.div`
   display: flex;
+  margin-bottom:20px;
 `;
 const Select = styled.select`
   border: 1px solid #d2d2d2;
   border-radius: 4px;
-  width: 100px;
+  width: 108px;
+  height:42px;
   padding: 5px;
+  font-family: 'poppins-medium';
+  font-size: 14px;
+  line-height: 21px;
+  color: #191919;
+  background-color:#fff;
 `;
 const Option = styled.option`
   font-size: 14px;
@@ -34,6 +43,7 @@ const Option = styled.option`
 const Filter = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   border: 1px solid #d2d2d2;
   border-radius: 4px;
   background: #ffffff;
@@ -41,6 +51,11 @@ const Filter = styled.div`
   font-size: 14px;
   margin-left: 16px;
   padding: 0px 5px 0px 5px;
+  width:108px;
+  height:42px;
+  font-family: 'poppins-medium';
+  font-size: 14px;
+  line-height: 21px;
 `;
 const Button = styled.button`
   background-color: transparent;
@@ -88,7 +103,7 @@ export default function PricingHistoryComponentTable() {
   })
 
   return (
-    <MainContainer>
+    <MainContainer className="pricing-history">
       <Title>Activities</Title>
       <FilterContainer>
         <Select name="filter" onChange={(e) => handleChange(e)}>
@@ -167,7 +182,7 @@ export default function PricingHistoryComponentTable() {
                 key={row.name}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell component="th" scope="row">
+                <TableCell component="td" scope="row">
                   {row.Event}
                 </TableCell>
                 <TableCell align="center">{row.Price}</TableCell>
