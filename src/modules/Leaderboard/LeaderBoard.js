@@ -292,7 +292,7 @@ function LeaderBoard() {
             className="card-header"
             style={{ backgroundColor: "#f8f8f8", paddingTop: '1rem', borderTopLeftRadius: '13px', borderTopRightRadius: '13px' }}
           >
-            <ul className="nav nav-pills" id="pills-tab" role="tablist" style={{ justifyContent: "space-between" }}>
+            <ul className="small-nav nav nav-pills" id="pills-tab" role="tablist">
               <li className="nav-item">
                 <a
                   className="nav-link active"
@@ -305,7 +305,7 @@ function LeaderBoard() {
                   style={{ fontSize: "13px" }}
                   onClick={() => setPendingAcceptedCreated("pending")}
                 >
-                  Top Bidders
+                  Top Buyers
                 </a>
               </li>
               <li className="nav-item">
