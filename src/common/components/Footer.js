@@ -4,19 +4,20 @@ import "../../assets/styles/Notification.css";
 function Footer() {
   return (
     <>
+    
       <div className="container-fluid footer-main-cont" style={{color:"#8F8F8F", backgroundColor:"#FBFBFB",width:"100%",paddingLeft:"8%",paddingRight:"8%"}}>
         <div className="row footer-cont"> 
           <div className="footer-top">
             <p className="fs-18">Join our community</p>
             <div className="allicon">
-              <i className="fab fa-instagram fs-24 Icon"></i>
-              <i className="fab fa-twitter fs-24 Icon"></i>
-              <i className="fab fa-reddit fs-24 Icon hideicon "></i>  
-              <i className="fab fa-telegram fs-24 Icon hideicon"></i>
-              <i className="fab fa-facebook fs-24 Icon"></i>
-              <i className="fab fa-linkedin fs-24 Icon hideicon"></i> 
-              <i className="fab fa-twitter fs-24 Icon hideicon" ></i>
-              <i className="fab fa-youtube fs-24 Icon hideicon"></i>               
+              <i className="fab fa-instagram  Icon"></i>
+              <i className="fab fa-twitter  Icon twiitericon"></i>
+              <i className="fab fa-reddit  Icon hideicon "></i>  
+              <i className="fab fa-telegram  Icon hideicon"></i>
+              <i class="fa-brands fa-facebook-f Icon"></i>
+              <i className="fab fa-linkedin  Icon hideicon"></i> 
+              <i className="fab fa-twitter  Icon hideicon" ></i>
+              <i className="fab fa-youtube  Icon hideicon"></i>               
             </div>
             <p className="subscribe">Subscribe to our newsletter for the latest NFTs</p>
             <div className="input-group-lg input-group  footerinputbox">
@@ -33,16 +34,11 @@ function Footer() {
                   />
                   <div className="input-group-append inputfooter">
                     <button
-                      className="btn btn-primary"
+                      className="btn btn-primary submitbuttonfooter"
                       type="button"
                       id="button-addon2"
                       style={{
-                        height: "36px",
-                        fontWeight:"400",
-                        width: "116px",
                         
-                        borderTopLeftRadius: "0em",
-                        borderBottomLeftRadius: "0em",
                       }}
                     >
                       {" "}
@@ -60,32 +56,31 @@ function Footer() {
           </div>
           <div className="footer-bottom">
             <div>
-              <div className="fs-18" style={{color:"#8F8F8F"}}>
-                <h3 className="fs-18 fw-b">
-                  <a href="/" style={{textDecoration: "none", color:"#8F8F8F"}}>Marketplace</a></h3>
-                <p><a href="/" style={{textDecoration: "none", color:"#8F8F8F"}}>NFT</a></p>
-                <p><a href="/collections-tile" style={{textDecoration: "none", color:"#8F8F8F"}}>Collections</a></p>
+              <div className="fs-18 d-flex flex-column" style={{color:"#8F8F8F"}}>
+              
+                <a  className="footertitle" href="/">Marketplace</a>
+                <a href="/" className="footersubtitle">NFT</a>
+                <a href="/collections-tile" style={{textDecoration: "none", color:"#8F8F8F",paddingBottom:"19px"}}>Collections</a>
               </div>
-              <div className="fs-18">
-                <h3 className="fs-18 fw-b">
-                  <a href="/leader-board" style={{textDecoration: "none", color:"#8F8F8F"}}>Leaderboard</a></h3>
-                <p><a href="/top-seller" style={{textDecoration: "none", color:"#8F8F8F"}}>Top Seller</a></p>
-                <p><a href="/top-bidder" style={{textDecoration: "none", color:"#8F8F8F"}}>Top Bidder</a></p>
-                <p><a href="/top-collection" style={{textDecoration: "none", color:"#8F8F8F"}}>Top Collections</a></p> 
+              <div className="fs-18 d-flex flex-column">
+                <a className="footertitle" href="/leader-board" >Leaderboard</a>
+                <p><a href="/top-seller"  className="footersubtitle">Top Seller</a></p>
+                <p><a href="/top-bidder"  className="footersubtitle">Top Bidder</a></p>
+                <p><a href="/top-collection" style={{textDecoration: "none", color:"#8F8F8F"}} >Top Collections</a></p> 
               </div>
             </div>
-            <div className="fs-18">
-              <h3 className="fs-18 fw-b">Community</h3>
-              <p><a href="/help-center" style={{textDecoration: "none", color:"#8F8F8F"}}>Help Centers</a></p>
-              <p><a href="/#" style={{textDecoration: "none", color:"#8F8F8F"}}>FAQs</a></p>
-              <p><a href="/suggestion" style={{textDecoration: "none", color:"#8F8F8F"}}>Suggestions</a></p>
+            <div className="fs-18 d-flex flex-column">
+              <a className="footertitle" href="/community">Community</a>
+              <p><a href="/help-center"  className="footersubtitle">Help Centers</a></p>
+              <p><a href="/#"   className="footersubtitle">FAQs</a></p>
+              <p><a href="/suggestion" style={{textDecoration: "none", color:"#8F8F8F"}} >Suggestions</a></p>
             </div>
-            <div className="fs-18">
-              <h3 className="fs-18 fw-b">
-              <a href="/about" style={{textDecoration: "none", color:"#8F8F8F"}}>Company</a></h3>
+            <div className="fs-18 d-flex flex-column">
+              <a href="/about" className="footertitle">Company</a>
               <p><a href="/about" style={{textDecoration: "none", color:"#8F8F8F"}}>About</a></p>
             </div>
           </div>
+
           <div className="row footer-bottom-sm">
             <div className="col-7">
             <h3 className="fs-18 fw-b">

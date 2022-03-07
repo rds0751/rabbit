@@ -39,42 +39,43 @@ function Menu() {
   return (
     <>
       <div className="container menuphone">
-        <div className="menuin">
-          <h2>
-            <Link
-              to="/"
-              style={{
+
+        <div className="menuin" style={{ display:"flex",cursor:"pointer",
+                justifyContent:"space-between"}} onClick={()=>navigate('/')}>
+          <h2 style={{
                 textDecoration: "none",
                 color: "black",
                 fontSize: "1.1rem",
                 fontWeight: "600",
-              }}
-            >
+               
+              }}>
+          
               Marketplace
-            </Link>
-          </h2>
-          <i className="fas fa-chevron-right"></i>
+              
+              </h2>
+              <i className="fas fa-chevron-right"></i>
+          
+         
+        
         </div>
-        <div className="menuin">
-          <h2>
-            <Link
-              to="/leader-board"
-              style={{
+        <div className="menuin" style={{ display:"flex",cursor:"pointer",
+                justifyContent:"space-between"}} onClick={()=>navigate('/leader-board')}>
+          <h2 style={{
                 textDecoration: "none",
                 color: "black",
                 fontSize: "1.1rem",
                 fontWeight: "600",
-              }}
-            >
+              }}> 
+           
               Leaderboard
-            </Link>
+           
           </h2>
           <i className="fas fa-chevron-right"></i>
         </div>
+
         <div className="menuin">
           {/* <h2>Resources</h2> */}
           <li className="nav-item dropdown list-unstyled">
-            
             <a
               className="nav-link dropdown"
               href="#"

@@ -1039,6 +1039,11 @@ thead {
     display: block;
     display: flex;
     flex-direction: column;
-    height: auto;
+    height: 105vh;
   }
 }
+@media only screen and (min-width:320px){
+  .navbar-expand-lg .navbar-nav .dropdown-menu {
+    position: absolute;
+    left: -96px;
+}}

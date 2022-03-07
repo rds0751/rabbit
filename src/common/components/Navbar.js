@@ -241,7 +241,9 @@ function Navbar() {
                       location.pathname.includes("/") &&
                       !location.pathname.includes("leader-board") &&
                       !location.pathname.includes("resource") &&
-                      !location.pathname.includes("create-nft")
+                      !location.pathname.includes("create-nft") && 
+                      !location.pathname.includes("help-center") && 
+                      !location.pathname.includes("suggestion")
                         ? "nav-items li_underline marketplace"
                         : "nav-items marketplace"
                     }
@@ -252,7 +254,9 @@ function Navbar() {
                         location.pathname.includes("/") &&
                         !location.pathname.includes("leader-board") &&
                         !location.pathname.includes("resource") &&
-                        !location.pathname.includes("create-nft")
+                        !location.pathname.includes("create-nft")&& 
+                        !location.pathname.includes("help-center") && 
+                        !location.pathname.includes("suggestion")
                           ? "nav-link navlink_active"
                           : "nav-link"
                       }
@@ -282,20 +286,21 @@ function Navbar() {
                       Leaderboard
                     </Link>
                   </li>
+
                   <NavDropdown
                     title="Resource"
                     id="navbarScrollingDropdown"
                     className={
-                      location.pathname.includes("help-center") ||
-                      location.pathname.includes("suggestion")
-                        ? "nav-items dropdown li_underline resource"
+                      location.pathname.includes("help-center") || 
+                      location.pathname.includes("suggestion") 
+                        ? "nav-items dropdown li_underline resource nav-link navlink_active resource"
                         : "nav-items dropdown resource"
                     }
                   >
-                    <NavDropdown.Item href="/help-center">
+                    <NavDropdown.Item onClick={()=>navigate('/help-center')}>
                       Help Center
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="/suggestion">
+                    <NavDropdown.Item onClick={()=>navigate('/suggestion')}>
                       Suggestions
                     </NavDropdown.Item>
                   </NavDropdown>
@@ -371,27 +376,24 @@ function Navbar() {
                       aria-expanded="false"
                     >
                       <img
-                        className="btnnav_mob1"
+                        className="btnnav_mob1 profileimg"
                         src={require("../../assets/images/profile.png")}
                         style={{
-                          color: "gray",
-                          cursor: "pointer",
-                          marginLeft: "31.22px",
-                          marginRight: "22.43px",
+                          
                         }}
                       ></img>
                     </a>
                     <ul
-                      className="dropdown-menu"
+                      className="dropdown-menu profilemenu"
                       aria-labelledby="navbarDropdown"
                     >
-                      <li onClick={() => manageNavigation("profile")}>
+                      <li className="profileitem" onClick={() => manageNavigation("profile")}>
                         Profile
                       </li>
-                      <li>
+                      
                         <hr className="dropdown-divider" />
-                      </li>
-                      <li onClick={() => manageNavigation("myitems")}>
+                      
+                      <li className="profileitem" onClick={() => manageNavigation("myitems")}>
                         My Items
                       </li>
                     </ul>

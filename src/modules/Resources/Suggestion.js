@@ -84,7 +84,7 @@ function Suggestion() {
                   value={formData.title}
                   onChange={(e) => handleChange(e.target.name, e.target.value)}
                   className="sugg-input"
-                  placeholder="A short description title"
+                  placeholder="A short descriptive title"
                 />
               </div>
               <label for="comment" className="label-key">
