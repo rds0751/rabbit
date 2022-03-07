@@ -49,7 +49,8 @@ function LeaderBoard() {
     useState("pending");
   const [state, setState] = useState(LeaderBoardApi);
   return (
-    <div className="container leader-container" >
+    <div className="container
+     leader-container" >
       <h1 className="leader">
         Leaderboard
       </h1>
@@ -57,13 +58,18 @@ function LeaderBoard() {
       <div className="container5">
         <div className="row leaderboard-big g-0" style={{ gap: '4%' }}>
           <div className="col leaderboardTop" style={{ backgroundColor: '#F8F8F8 !important' }}>
-            <div className="card h-100">
+            <div className=" h-100">
               <div className="card-body p-0">
                 <div className="leaderboardTitle">
                   <div className="col" style={{ fontSize: "16px" }}>
                     Top Buyers
                   </div>
-                  <div className="dropdown col leaderboardDropdown">
+                  <select className="top-dropdown">
+                    <option>Weekly</option>
+                    <option>Monthly</option>
+                    <option>Yearly</option>
+                  </select>
+                  {/* <div className="dropdown col leaderboardDropdown">
                     <button
                       className="btn border dropdown-toggle"
                       type="button"
@@ -73,27 +79,27 @@ function LeaderBoard() {
                     >
                       Weekly
                     </button>
-                    <ul
+                    <select
                       className="dropdown-menu"
                       aria-labelledby="dropdownMenuButton1"
                     >
-                      <li>
+                      <option>
                         <a className="dropdown-item" href="#">
                           Weekly
                         </a>
-                      </li>
-                      <li>
+                      </option>
+                      <option>
                         <a className="dropdown-item" href="#">
                           Monthly
                         </a>
-                      </li>
-                      <li>
+                      </option>
+                      <option>
                         <a className="dropdown-item" href="#">
                           Yearly
                         </a>
-                      </li>
-                    </ul>
-                  </div>
+                      </option>
+                    </select>
+                  </div> */}
                 </div>
                 <div className="leaderboardTopDetails">
                   {LeaderBoardApi.map((curElem) => {
@@ -125,13 +131,18 @@ function LeaderBoard() {
             </div>
           </div>
           <div className="col leaderboardTop">
-            <div className="card h-100">
+            <div className="h-100">
               <div className="card-body p-0">
                 <div className="leaderboardTitle">
                   <div className="col" style={{ fontSize: "16px" }}>
                     Top Seller
                   </div>
-                  <div className="dropdown col leaderboardDropdown">
+                  <select className="top-dropdown">
+                    <option>Weekly</option>
+                    <option>Monthly</option>
+                    <option>Yearly</option>
+                  </select>
+                  {/* <div className="dropdown col leaderboardDropdown">
                     <button
                       className="btn border dropdown-toggle"
                       type="button"
@@ -161,7 +172,7 @@ function LeaderBoard() {
                         </a>
                       </li>
                     </ul>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="leaderboardTopDetails">
                   {limitSellers.map((curElem) => {
@@ -199,13 +210,18 @@ function LeaderBoard() {
             </div>
           </div>
           <div className="col leaderboardTop">
-            <div className="card h-100">
+            <div className="h-100">
               <div className="card-body p-0">
                 <div className="leaderboardTitle">
                   <div className="col" style={{ fontSize: "16px" }}>
                     Top Collections
                   </div>
-                  <div className="dropdown col leaderboardDropdown">
+                  <select className="top-dropdown">
+                    <option>Weekly</option>
+                    <option>Monthly</option>
+                    <option>Yearly</option>
+                  </select>
+                  {/* <div className="dropdown col leaderboardDropdown">
                     <button
                       className="btn border dropdown-toggle"
                       type="button"
@@ -235,7 +251,7 @@ function LeaderBoard() {
                         </a>
                       </li>
                     </ul>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="leaderboardTopDetails">
                   {limitCollections.map((curElem) => {
@@ -273,10 +289,10 @@ function LeaderBoard() {
 
         <div className="card-small  mb-4 leadercolmob">
           <div
-            className="card-header py-3"
-            style={{ backgroundColor: "#f8f8f8" }}
+            className="card-header"
+            style={{ backgroundColor: "#f8f8f8", paddingTop: '1rem', borderTopLeftRadius: '13px', borderTopRightRadius: '13px' }}
           >
-            <ul className="nav nav-pills" id="pills-tab" role="tablist" style={{ justifyContent: "space-between" }}>
+            <ul className="small-nav nav nav-pills" id="pills-tab" role="tablist">
               <li className="nav-item">
                 <a
                   className="nav-link active"
@@ -289,7 +305,7 @@ function LeaderBoard() {
                   style={{ fontSize: "13px" }}
                   onClick={() => setPendingAcceptedCreated("pending")}
                 >
-                  Top Bidders
+                  Top Buyers
                 </a>
               </li>
               <li className="nav-item">
@@ -326,40 +342,12 @@ function LeaderBoard() {
             {/* <!-- <input type="text" id="search_criteria" className="form-control" onkeyup="hashtagsearch_criteria(this.value)"
     placeholder="Search for hashtag.."> --> */}
           </div>
-          <div
-            className="dropdown col leaderboardDropdown"
-            style={{ width: "100%", marginTop: "1rem" }}
-          >
-            <button
-              className="btn border dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton1"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              style={{ width: "100%", textAlign: "start", margin: "0rem 1rem" }}
-            >
-              Weekly
-              <i className="fas fa-caret-down"></i>
-            </button>
-            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li>
-                <a className="dropdown-item" href="#">
-                  Weekly
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Monthly
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Yearly
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="card-body">
+          <select className="small-leaderboard-dropdown">
+            <option>Weekly</option>
+            <option>Monthly</option>
+            <option>Yearly</option>
+          </select>
+          <div className="small-leaderboard-body" style={{ padding: 'none !important' }}>
             <div>
               {PendingAcceptedCreated === "pending" ? (
                 <BuildPendingAcceptedRejectedBlock apiData={Pending} />
@@ -371,7 +359,7 @@ function LeaderBoard() {
             </div>
             <div>
               {PendingAcceptedCreated === "accepted" ? (
-                <BuildAcceptedBlock apiData={topSellers} />
+                <BuildAcceptedBlock apiData={limitSellers} />
               ) : (
                 <>
                 </>
@@ -380,7 +368,7 @@ function LeaderBoard() {
             <div>
 
               {PendingAcceptedCreated === "rejected" ? (
-                <BuildRejectedBlock apiData={topCollections} />
+                <BuildRejectedBlock apiData={limitCollections} />
               ) : (
                 <>
                 </>
@@ -390,77 +378,77 @@ function LeaderBoard() {
         </div>
       </div>
       <div className="topNft-section">
-          <div className="filters-cont">
-            <label for="topNft-sales" className="fs-20 fw-sb c-b pb-16 d-sm-block d-md-none">Top NFT sales</label>            
-            <div className="d-flex align-items-center">
-              <label for="topNft-sales" className="fs-20 fw-sb c-b pr-12 d-none d-sm-none d-md-block">Top NFT sales</label>
-              <select id="topNft-sales" name="topNfts" className="sales-selector fs-14 fw-m c-b">
-                <option value="weekly">Weekly</option>
-                <option value="monthly">Monthly</option>
-                <option value="yearly">yearly</option>
-              </select>
-            </div>
-            <div>
-              <select name="sortBy" className="sort-selector fs-14 c-b">
-                <option>Sort by</option>
-                <option value="">option1</option>
-                <option value="">option2</option>
-              </select>
-            </div>
+        <div className="filters-cont">
+          <label for="topNft-sales" className="fs-20 fw-sb c-b pb-16 d-sm-block d-md-none">Top NFT sales</label>
+          <div className="d-flex align-items-center">
+            <label for="topNft-sales" className="fs-20 fw-sb c-b pr-12 d-none d-sm-none d-md-block">Top NFT sales</label>
+            <select id="topNft-sales" name="topNfts" className="sales-selector fs-14 fw-m c-b">
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+              <option value="yearly">yearly</option>
+            </select>
           </div>
-          <div className="nfts-cont row ntf_row">
-            {/* <div className="col-md-3 col-lg-3 col-sm-6 col-11 images"> */}
-            {topNftSales.map((curElem) => {
-              const { cdnUrl, name, ownedBy, maxPrice2, daysLeft } =
-                curElem;
-              return (
-                <div className="nftCard col-md-6 col-lg-3 col-sm-12 nft_card card-mar">
-                  <div className="card nft-card-radius border-radius cardmob">
-                    <img
-                      // id="nft__photo"
-                      className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
-                      src={cdnUrl}
-                      alt="nft"
-                      onError="this.onerror=null;this.src='/images/image.svg';"
-                    />
-                    {/* <img id='like_icon' src={require('../asset//images/')} /> */}
-                    <div className="nftTileEachDetails card-lower"
-                      style={{
-                        padding: "0px 14px 0px 12px",
-                      }}>
-                      <div className="tile__details">
-                        <div className="container__up" style={{ paddingTop: '10px' }}>
-                          <h6 className="title">{name}</h6>
-                        </div>
-                        <div className="container__down">
-                          <h6 className="value__high" style={{ margin: 'inherit' }}>
-                            Sold to&nbsp;
-                            <span style={{ fontWeight: "bold", color: "black" }}  >
-                              {(String(ownedBy).length >= 7) ? (!ownedBy ? " " : (String(ownedBy).substring(0, 8) + "...")) : (String(ownedBy) === undefined ? "" : ownedBy)}
-                            </span>
-                            &nbsp;for<span> &nbsp;{curElem.biddingDetails.currency}</span>
-                          </h6>
-                          <h6 className="value__k">
-                            {daysLeft}{" "}
-                            {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
-                            <i
-                              className="fa-solid fa-heart"
-                              style={{ color: "#ef3643" }}
-                            ></i>
-                          </h6>
-                        </div>
+          <div>
+            <select name="sortBy" className="sort-selector fs-14 c-b">
+              <option>Sort by</option>
+              <option value="">option1</option>
+              <option value="">option2</option>
+            </select>
+          </div>
+        </div>
+        <div className="nfts-cont row ntf_row">
+          {/* <div className="col-md-3 col-lg-3 col-sm-6 col-11 images"> */}
+          {topNftSales.map((curElem) => {
+            const { cdnUrl, name, ownedBy, maxPrice2, daysLeft } =
+              curElem;
+            return (
+              <div className="nftCard col-md-6 col-lg-3 col-sm-12 nft_card card-mar">
+                <div className="card nft-card-radius border-radius cardmob">
+                  <img
+                    // id="nft__photo"
+                    className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
+                    src={cdnUrl}
+                    alt="nft"
+                    onError="this.onerror=null;this.src='/images/image.svg';"
+                  />
+                  {/* <img id='like_icon' src={require('../asset//images/')} /> */}
+                  <div className="nftTileEachDetails card-lower"
+                    style={{
+                      padding: "0px 14px 0px 12px",
+                    }}>
+                    <div className="tile__details">
+                      <div className="container__up" style={{ paddingTop: '10px' }}>
+                        <h6 className="title">{name}</h6>
+                      </div>
+                      <div className="container__down">
+                        <h6 className="value__high" style={{ margin: 'inherit' }}>
+                          Sold to&nbsp;
+                          <span style={{ fontWeight: "bold", color: "black" }}  >
+                            {(String(ownedBy).length >= 7) ? (!ownedBy ? " " : (String(ownedBy).substring(0, 8) + "...")) : (String(ownedBy) === undefined ? "" : ownedBy)}
+                          </span>
+                          &nbsp;for<span> &nbsp;{curElem.biddingDetails.currency}</span>
+                        </h6>
+                        <h6 className="value__k">
+                          {daysLeft}{" "}
+                          {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
+                          <i
+                            className="fa-solid fa-heart"
+                            style={{ color: "#ef3643" }}
+                          ></i>
+                        </h6>
                       </div>
                     </div>
                   </div>
                 </div>
-              );
-            })}
-            {/* My Commit */}
-          </div>
+              </div>
+            );
+          })}
+          {/* My Commit */}
+        </div>
       </div>
-        {/* </div> */}
+      {/* </div> */}
 
-        {/* Top NFT sales */}
+      {/* Top NFT sales */}
     </div>
   );
 }
@@ -488,7 +476,7 @@ const BuildPendingAcceptedRejectedBlock = ({ apiData }) => {
         })}
       </div>
       <div className="view-more">
-        <Link className="view" to="/top-bidder" style={{ paddingBottom: "inherit" }}>
+        <Link className="view" to="/top-bidder">
           {" "}
           View More
         </Link>
@@ -523,7 +511,7 @@ const BuildAcceptedBlock = ({ apiData }) => {
         <h1>No Data Found</h1>
       </div>)}
       <div className="view-more">
-        <Link className="view" to="/top-seller" style={{ paddingBottom: "inherit" }}>
+        <Link className="view" to="/top-seller">
           {" "}
           View More
         </Link>
@@ -557,7 +545,7 @@ const BuildRejectedBlock = ({ apiData }) => {
         <h1>No Data Found</h1>
       </div>)}
       <div className="view-more">
-        <Link className="view" to="/top-collection" style={{ paddingBottom: "inherit" }}>
+        <Link className="view" to="/top-collection">
           {" "}
           View More
         </Link>

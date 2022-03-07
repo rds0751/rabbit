@@ -223,7 +223,7 @@ function MyProfile() {
             />
           </div>
 
-          <p style={{ marginTop: "10px", marginBottom: "0px" }}>
+          <p className="profile-description">
             {loggedInUser?.bio}
           </p>
           {/* <p style={{ marginBottom: "0px" }}>

@@ -9,6 +9,11 @@
   border-radius: 13px;
   justify-content: center;
 }
+
+.max-width-250{
+  max-width: 250px;
+}
+
 .toggleNft {
   border: 1px solid red;
 }
