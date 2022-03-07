@@ -1039,7 +1039,6 @@ thead {
     height: auto;
   }
 }
-<<<<<<< HEAD
 .leader-container{
   padding-right: var(--bs-gutter-x,.75rem);
     padding-left: var(--bs-gutter-x,.75rem);
@@ -1063,7 +1062,6 @@ margin-top: 20px;
 .small-leaderboard-body{
   padding: none !important;
 }
-=======
 
 /* nft-information nft detail page css start*/
 .nft-detail .nftdetail-img{
@@ -1223,4 +1221,3 @@ margin-top: 20px;
 
 }
 /* nft-information nft detail page css end*/
->>>>>>> b270bb9ad88fd1b00b8a75879654437cce2bb77f
