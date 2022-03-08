@@ -54,6 +54,7 @@ import Menu from "./common/components/Menu";
 import { WEB_APP_USER_WALLET_ADDRESS } from "./reducers/Constants";
 import { addUseraction, addUserData } from "./reducers/Action";
 import { CheckUserByWalletAddress } from "./services/UserMicroService";
+import FAQsPage from "./modules/Faqs/index";
 
 function App() {
   useEffect(() => {
@@ -78,6 +79,7 @@ function App() {
           {/* <Tile__homepage /> */}
           {/* <Switch> */}
           <Routes>
+            <Route path="/FAQs" element={<FAQsPage />} />
             <Route path="/nfts" element={<NftPage />} />
             <Route path="/" element={<NftPage />} />
 
