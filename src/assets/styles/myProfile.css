@@ -113,6 +113,7 @@
   height: 16px;
   width: 16px;
   bottom: 8%;
+  cursor: pointer;
 }
 .profileavatar {
   border-radius: 50%;

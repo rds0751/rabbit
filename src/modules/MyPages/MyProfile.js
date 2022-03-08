@@ -216,7 +216,7 @@ function MyProfile() {
               style={{
                 width: "21.47px",
                 height: "21.47px",
-                marginLeft: "30.6px",
+                marginLeft: "20px",
               }}
               src={copy}
               alt=""
