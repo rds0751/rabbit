@@ -704,10 +704,12 @@ thead {
     font-size: 8px;
     text-decoration: none;
   }
+  @media only screen and (max-width: 600px){
   .leader {
     display: flex;
     justify-content: center;
   }
+}
   .CollectionItem > div > h2 {
     font-size: 10px;
     margin-bottom: 0rem;
@@ -1015,7 +1017,7 @@ thead {
 }
 .leader-container{
   padding-right: var(--bs-gutter-x,.75rem);
-    padding-left: var(--bs-gutter-x,.75rem);
+    padding-left: var(--bs-gutter-x,1.25rem);
 }
 .top-dropdown{
 width: 118px;
@@ -1025,13 +1027,28 @@ border: 1px solid #707070;
 border-radius: 6px;
 }
 .small-leaderboard-dropdown{
-width: 319px;
+width: 90%;
+margin-left: 5%;
 height: 42px;
 background: #FFFFFF00 0% 0% no-repeat padding-box;
 border: 1px solid #707070;
 border-radius: 6px;
-margin-left: 20px;
 margin-top: 20px;
+}
+@media screen and (min-width:700px) and (max-width:1100px){
+.small-leaderboard-dropdown{
+  width: 118px;
+  margin-left: 80%;
+}
+}
+@media screen and (min-width:500px) and (max-width:800px){
+  .small-nav{
+column-gap: 15%;
+justify-content: inherit !important;
+  }
+}
+.small-nav{
+  justify-content: space-between;
 }
 .small-leaderboard-body{
   padding: none !important;
