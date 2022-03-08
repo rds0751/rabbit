@@ -12,7 +12,7 @@ function NonftText({ text }) {
         fontFamily: "poppins-medium",
       }}
     >
-      <div>{text} </div>
+      <div className="mt-4">{text} </div>
     </div>
   );
 }

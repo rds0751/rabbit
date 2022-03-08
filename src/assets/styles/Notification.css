@@ -614,6 +614,7 @@ height: 47px;
   font: normal normal 600 16px/25px Poppins;
   color: #191919 !important;
 }
+
 .unerLine {
   width: 20px;
   height: 2px;
@@ -994,6 +995,7 @@ height: 47px;
   .LeftNavBar{
     margin-left: 126px;
   }
+ 
 }
 
 .RightNavBar{
@@ -1015,8 +1017,10 @@ height: 47px;
 
 .footer-main-cont{
   margin-top: 40px;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  /* padding-top: 40px;
+  padding-bottom: 40px; */
+  padding-top: 74px;
+  padding-bottom: 109px;
 }
 .fs-16{
   font-size:16px;
@@ -1106,4 +1110,148 @@ height: 47px;
 }
 .footerinputbox {
   width: 88.7%;
+  margin-top: 18px;
+  margin-bottom: 37px;
+}
+.subscribe{
+margin-top: 18px;
+text-align: left;
+font: normal normal normal 18px/27px Poppins;
+letter-spacing: 0px;
+color: #8F8F8F;
+opacity: 1;
+}
+
+.inputfooter{
+  max-width: 100%;
+}
+.footerinputbox .ib{
+  max-width: 292px;
+}
+.allicon{
+display: flex;
+justify-content: space-between;
+width: 87%;
+}
+.Icon{
+ 
+  opacity: 1;
+  font-size: 24px;
+  color: #818181 0% 0% no-repeat padding-box;
+  cursor:pointer;
+}
+
+.about{
+text-align: left;
+font: normal normal normal 18px/27px Poppins;
+letter-spacing: 0px;
+color: #8F8F8F;
+opacity: 1;
+}
+.aboutdes{
+  width: 88.7%;
+  margin-top: 22px;
+  font: normal normal normal 16px/25px Poppins;
+  text-align: left;
+  letter-spacing: 0px;
+  color: #8F8F8F;
+  opacity: 1;
+
+
+}
+@media screen and (max-width:991px){
+  .footer-top .hideicon{
+    display: none;
+  }
+  .Icon{
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+  .facebookIcon{
+    margin-right: 0px;
+  }
+  .twittericon{
+    margin-left: 9.62px;
+    margin-right: 13.36px;
+  }
+  .allicon{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: start;
+   
+  }
+}
+
+.footertitle{
+text-align: left;
+font: normal normal bold 18px/27px Poppins;
+letter-spacing: 0px;
+color: #8F8F8F;
+opacity: 1;
+text-decoration: none;
+text-decoration: none;
+padding-bottom: 16px;
+}
+.footersubtitle{
+text-align: left;
+font: normal normal normal 18px/27px Poppins;
+letter-spacing: 0px;
+color: #8F8F8F;
+opacity: 1;
+padding-bottom: 16px;
+text-decoration: none;
+}
+ .dropdown-menu[data-bs-popper] {
+  margin-top: 14px;
+}
+.profileitem{
+ padding-left: 10px;
+font: normal normal normal 14px/21px Poppins;
+letter-spacing: 0px;
+color: #191919;
+opacity: 1;
+cursor: pointer;
+}
+.dropdown-divider{
+background: #FFFFFF 0% 0% no-repeat padding-box;
+border: 0.2px solid #E8E8E8;
+opacity: 1;
+}
+.dropdown .profileimg{
+  color: gray;
+  cursor: pointer;
+  margin-Left:31.22px;
+  margin-Right: 22.43px;
+  }
+
+@media only screen and (min-width:285px) and (max-width:425px){
+  .dropdown .profileimg{
+    margin-Left:16.03px;
+    margin-Right: 15.71px;
+  }
+}
+
+@media only screen and (min-width:1024px) and (max-width:1600px){
+  .leftSec .marketplace {
+    margin-right: 30px;
+  }
+  .leftSec .leaderboard {
+    margin-right: 30px;
+  }
+  .leftSec .resource {
+    margin-right: 30px;
+  }
+}
+
+@media only screen and (min-width:1688px) {
+ .allicon{
+   width: 409px;
+ }
+}
+.submitbuttonfooter{
+  height:36px;
+  fontWeight:400;
+  width: 116px;
+  borderTopLeftRadius:0em;
+  borderBottomLeftRadius: 0em;
 }

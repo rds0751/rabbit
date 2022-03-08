@@ -14,6 +14,16 @@
       width: 75%;
     }
 }
+
+@media only screen and (min-width:700px) and (max-width:1000px){
+  .inputbox{
+    width:291px
+  }
+}
+@media only screen and (min-width:1000px) and (max-width:1300px){
+  .inputbox{
+    width:100px;}
+  }
 .notification-icon{
   width:19px;
   height:21px;
@@ -33,6 +43,7 @@
   border-radius: 4px;
 
 }
+
 /* mobile-view */
 @media screen and (max-width:426px){
   .notification-icon{
@@ -45,6 +56,6 @@
   }
   .wallet-icon{
     width: 18px;
-    height: 18px
+    height: 18px;
   }
 }

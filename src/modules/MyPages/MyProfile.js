@@ -200,6 +200,7 @@ function MyProfile() {
           <img
             src={loggedInUser?.photo != "" ? loggedInUser?.photo : defaultPic}
             alt=""
+            className="user-img"
           />
           {/* <h2>{ethereum && ethereum.selectedAddress}</h2> */}
           {/* <h2>{window.ethereum && defaultAccount}</h2> */}
@@ -223,13 +224,13 @@ function MyProfile() {
             />
           </div>
 
-          <p style={{ marginTop: "10px", marginBottom: "0px" }}>
+          <p className="profile-description">
             {loggedInUser?.bio}
           </p>
           {/* <p style={{ marginBottom: "0px" }}>
             main focus in art is to make digital abstract painting
           </p> */}
-          <h6 style={{ color: "#b1b1b1", marginTop: "12px" }}>
+          <h6 className="profile-portfolio">
             <img style={{ height: "30px" }} src={globe} alt="" />
             {loggedInUser?.portfolio}
           </h6>
@@ -294,7 +295,7 @@ function MyProfile() {
           </div>
           {/* <hr /> */}
           {/* <div className="profileNftContainer row mx-0 text-center p-0 cards-gap image1"> */}
-          <div className="nftTileContainer row   ntf_row cards-gap">
+          <div className="nftTileContainer row ntf_row" style={{justifyContent : "start",}}>
             {/* <div class="spinner-border text-primary" role="status">
               <span class="sr-only">Loading...</span>
             </div> */}

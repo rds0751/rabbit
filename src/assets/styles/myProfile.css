@@ -12,9 +12,8 @@
   font-size: 12px;
 }
 .profileItemContainer {
-  width: 85% !important;
+  width: 86% !important;
   margin: auto;
-  margin-top: 47px;
 }
 .profileNftContainer {
   display: flex;
@@ -54,18 +53,26 @@
 .postTypeProfileContainer {
   border-bottom: 1px solid #c9c9c9;
   height: 8vh;
+  margin-top: 0px;
+  width: 40%;
 }
 .postTypeProfile {
   display: flex;
   box-sizing: border-box;
   align-items: center;
   cursor: pointer;
+  font-family: 'poppins';
+  font-size: 14px;
+  line-height: 21px;
+  color: #707070;
+  padding: 0px 4px 11px 4px;
+  justify-content: center;
 }
 .postTypeProfile--active {
   border-bottom: 2px solid #000000;
   height: 100% !important;
-
   font-family: "poppins-semibold";
+  color: #000000;
 }
 .wallet-address-text {
   /* width: 101px; */
@@ -73,21 +80,27 @@
   border-radius: 6px;
   /* width: 10%; */
   /* display: flex; */
-  margin-top: 5px;
+  /* margin-top: 5px; */
   /* overflow: hidden; */
   /* text-overflow: ellipsis; */
+  padding: 4px;
 }
 .profile-user {
-  margin-top: 1%;
+  font-family: 'poppins-bold';
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+  margin-bottom: 22px;
 }
 
 .add-cover {
   display: flex;
-  margin-top: 1.5%;
+  margin-bottom: 20px;
   text-align: center;
   align-items: center;
   width: 10%;
   /* border: 1px solid red; */
+  justify-content: center;
 }
 .profilecover {
   height: 280px;
@@ -113,7 +126,7 @@
   background-color: white;
   color: #366eef;
   position: absolute;
-  z-index: 99;
+  z-index: 0;
   right: 47px;
   bottom: -53px;
 }
@@ -130,18 +143,40 @@
 }
 .textdecornone {
   text-decoration: none;
+  margin-bottom: 37px;
 }
 
-@media screen and (max-width: 764px) {
-  .profileeditbutton {
-    display: none;
-    margin-top: 20px;
-    text-decoration: none;
-  }
-  .profileeditbuttonatbottom {
-    display: block;
-  }
+/* my profile page css */
+.profileavatar.absolute{
+  margin-top: -105px;
 }
+.profileavatar.absolute .user-img{
+  width: 198px;
+  height: 198px;
+  margin-bottom: 14px;
+}
+.profile-description{
+  font-family: 'poppins';
+  font-size: 16px;
+  line-height: 25px;
+  color: #000000;
+  margin-bottom: 19px;
+  width: 27%;
+}
+.profile-portfolio{
+  font-family: 'poppins';
+  font-size: 16px;
+  line-height: 25px;
+  color: #707070;
+  margin-bottom: 47px;
+}
+.profileItemContainer .nftTileContainer .nftCardEach:nth-child(4n + 1){
+  margin-right: 5.3%;
+}
+.profileItemContainer .nftTileContainer .nftCardEach:nth-child(4n+4) {
+  margin-right: 0px;
+}
+
 @media only screen and (max-width: 1024px) {
   .editProfileButton {
     font-size: 1.9vw !important ;
@@ -190,10 +225,38 @@
   .postTypeProfile--active {
     border-bottom: 2px solid #000000;
     height: 100% !important;
-
     font-family: "poppins-semibold";
   }
+  .postTypeProfileContainer{
+    width: 50%;
+  }
 }
+@media only screen and (min-width: 720px) and (max-width: 990px){
+  .profileItemContainer .nftTileContainer .nftCardEach{
+    margin-right: 10%!important;
+  }
+  .profileItemContainer .nftTileContainer .nftCardEach:nth-child(even){
+    margin-right: 0px!important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .postTypeProfileContainer{
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .profileeditbutton {
+    display: none;
+    margin-top: 20px;
+    text-decoration: none;
+  }
+  .profileeditbuttonatbottom {
+    display: block;
+  }
+}
+
 @media only screen and (max-width: 480px) {
   .editProfileButton {
     font-size: 3.4vw !important ;
@@ -239,11 +302,11 @@
     box-sizing: border-box;
     align-items: center;
     cursor: pointer;
+    margin-right: auto!important;
   }
   .postTypeProfile--active {
     border-bottom: 2px solid #000000;
     height: 100% !important;
-
     font-family: "poppins-semibold";
   }
 }
