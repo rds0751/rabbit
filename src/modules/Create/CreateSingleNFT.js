@@ -302,7 +302,6 @@ function CreateSingleNFT(props) {
                   Price*
                 </label>
                 <input
-                  type="price"
                   className="form-control-1"
                   min="0"
                   type="number"
