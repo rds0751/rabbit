@@ -177,7 +177,7 @@ function Navbar() {
             style={{ backgroundColor: "white" }}
           >
             <div className="left_navbar d-flex align-items-center LeftNavBar">
-              <Link className="navbrand" to="/" style={{ marginRight: "21px" }}>
+              <Link className="navbrand" to="/" style={{ marginRight: "21px" }}  onClick={isOpenWallet}>
                 <img
                   src={require("../../assets/images/logo.png")}
                   style={{ width: "50px" }}
