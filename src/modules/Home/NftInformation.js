@@ -196,7 +196,7 @@ export default function NftInformation(props) {
                       }}
                       onClick={demoHandleSell}
                     >
-                      Sell
+                      sale
                     </Button>
                     <Button
                       style={{
@@ -211,7 +211,7 @@ export default function NftInformation(props) {
                       }}
                       onClick={removeNFTFromSell}
                     >
-                      Remove From Sell
+                      Remove From Sale
                     </Button>
                   </div>
                   <span className="nft-name">{props?.responseData?.name}</span>
@@ -542,7 +542,7 @@ export default function NftInformation(props) {
                         }}
                         onClick={demoHandleSell}
                       >
-                        Sell
+                        Sale
                       </Button>
                       <Button
                         style={{

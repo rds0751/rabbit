@@ -1,13 +1,28 @@
+.main-cont {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  position: fixed;
+  top: 4.2rem;
+  right: 0;
+  left: 0;
+  box-shadow: 0px 3px 12px #00000014;
+}
+.empty_div { 
+  width: calc(100% - 19.11%);
+  background: #191919;
+  height: 100%;
+  opacity: 0.5;
+}
 .noti-outer {
+  padding-left: 17px;
   width: 19.11%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  /* position: absolute; */
   background-color: white !important;
-
   box-shadow: 0px 3px 12px #00000014;
+  overflow-y: scroll;
 }
 .noti-full-box {
   width: 100%;
@@ -55,6 +70,7 @@
   display: flex;
 }
 .notification-text {
+  padding-top:33px;
   font-size: 18px;
   font-weight: 600;
   font-family: "poppins";
