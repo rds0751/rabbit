@@ -133,6 +133,11 @@
   object-fit: cover;
 }
 
+@media only screen and (max-width: 1440px) {
+  .editProfileContainer{
+    margin-bottom: 231px;
+  }
+}
 @media only screen and (max-width: 1024px) {
   .editProfileContainer {
     width: 87%;
