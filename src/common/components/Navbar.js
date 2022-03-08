@@ -117,7 +117,7 @@ function Navbar() {
         dispatch(RedirectTo("myitems"));
         navigate("/add-wallet");
       } else {
-        navigate("/create-nft");
+        navigate("/my-items");
       }
     }
     if (name == "create") {
@@ -166,6 +166,7 @@ function Navbar() {
     } else {
       dispatch(ManageNotiSideBar(!isOpenNoti));
       dispatch(ManageWalletSideBar(false));
+      document.body.style.overflow = !isOpenNoti ? "hidden" : "visible";
     }
   };
 
@@ -284,7 +285,7 @@ function Navbar() {
                         ? "nav-items li_underline leaderboard"
                         : "nav-items leaderboard"
                     }
-                    onClick={closeWalletAndNoti}
+                    onClick={closeWalletAndNoti}  
                   >
                     <Link
                       className={

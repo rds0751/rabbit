@@ -13,7 +13,7 @@ function MyItems() {
         {/* ----- Toggle Upper Part */}
         <div className="my-item-container">
           <div className="">
-            <h1 className="poppins-normal bold-600 font-20 blackish">
+            <h1 className="poppins-normal bold-600 font-20 blackish mb-0">
               My Items
             </h1>
           </div>
@@ -41,9 +41,15 @@ function MyItems() {
               Collections
             </div>
           </div>
+          {!toggleSelect ?
           <button type="submit" className="add-item-button p-0 bord-rad-4">
-            Add Item
+            Add item
           </button>
+          :
+          <button type="submit" className="add-item-button p-0 bord-rad-4">
+            Create Collection
+          </button>
+          }
         </div>
 
         {/* ----------- */}
