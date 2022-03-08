@@ -51,12 +51,14 @@ function  NftCardsHome({ nft }) {
           <img
             className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
             src={ipfsUrl}
+            alt="nft-img"
           />
         </Link>
         <img
           id="like_icon"
           onClick={() => likeNft(_id)}
           src={handleLike ? Like : likes}
+          alt="like"
         />
         <div
           className="nftTileEachDetails card-lower"

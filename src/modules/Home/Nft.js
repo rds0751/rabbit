@@ -206,10 +206,6 @@ function NftPage() {
             const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
             // console.log("[[[[[[[",biddingDetails.minPrice)
             const route = "nft-information/" + _id;
-              
-            // const { startDate, endDate } = biddingDetails;
-            // const time_difference = endDate.getTime() - startDate.getTime();
-            // const days_difference = time_difference / (1000 * 60 * 60 * 24);
 
             return (
               <>

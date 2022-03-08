@@ -924,23 +924,26 @@ export default function NftInformation(props) {
           <div className="report-modal">
             <div className="report-inner" style={{ opacity: "1" }}>
               <div className="reportthisitem">
-                <div className="reporttext poppins-normal">
+                <h3 className="report-text poppins-normal">
                   Report this item
-                </div>
-                <div
-                  className="corsstext"
-                  onClick={() => setOpenReportModal(false)}
-                >
-                  X
-                </div>
+                </h3>                
+                <i className="fa-solid fa-xmark cross-icon"
+                  onClick={() => setOpenReportModal(false)}>
+                </i>
               </div>
               <div className="singlerowmodal">
-                <div> Reason</div>
-                <select>
-                  <option value="select reason">Select reason</option>
-                </select>
+                <h3 className="reason-text"> Reason</h3>
+                <div className="select-div">
+                  <select className="select-box">
+                    <option>Select reason</option>
+                    <option>Fake collection or possible scam</option>
+                    <option>Explicit and sensitive content</option>
+                    <option>Might be stolen</option>
+                    <option>Other</option>
+                  </select>
+                </div>
               </div>
-              <button className="makeofferbtnreport">Report</button>
+              <button className="report-btn">Report</button>
             </div>
           </div>
         </div>
