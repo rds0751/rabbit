@@ -72,7 +72,7 @@ function Footer() {
             <div className="fs-18 d-flex flex-column">
               <a className="footertitle" href="/community">Community</a>
               <p><a href="/help-center"  className="footersubtitle">Help Centers</a></p>
-              <p><a href="/#"   className="footersubtitle">FAQs</a></p>
+              <p><a href="/FAQs"   className="footersubtitle">FAQs</a></p>
               <p><a href="/suggestion" style={{textDecoration: "none", color:"#8F8F8F"}} >Suggestions</a></p>
             </div>
             <div className="fs-18 d-flex flex-column">
@@ -98,7 +98,7 @@ function Footer() {
             <div className="col-7 mt-3">
               <h3 className="fs-18 fw-b">Community</h3>
               <p><a href="/help-center" style={{textDecoration: "none", color:"#8F8F8F"}}>Help Centers</a></p>
-              <p><a href="/#" style={{textDecoration: "none", color:"#8F8F8F"}}>FAQs</a></p>
+              <p><a href="/FAQs" style={{textDecoration: "none", color:"#8F8F8F"}}>FAQs</a></p>
               <p><a href="/suggestion" style={{textDecoration: "none", color:"#8F8F8F"}}>Suggestions</a></p>
             </div>
             <div className="col-5 mt-3">

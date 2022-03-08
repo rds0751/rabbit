@@ -30,7 +30,6 @@ function Navbar() {
   const [errorMssg, setErrorMssg] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
   const [checkClick, setcheckClick] = useState(false);
-
   const [getBalance, setGetBalance] = useState(null);
   const dispatch = useDispatch();
   const { user, sideBar } = useSelector((state) => state);
@@ -45,8 +44,7 @@ function Navbar() {
 
   //  ---------------------------------
   const isMetaMaskConnected = async () => {
-    if(!window.ethereum)
-      return Promise.reject("Please install metamask")
+    if (!window.ethereum) return Promise.reject("Please install metamask");
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const accounts = await provider.listAccounts();
     return accounts.length > 0;
@@ -114,14 +112,18 @@ function Navbar() {
   
   const manageNavigation = (name) => {
     if (name == "myitems") {
+      dispatch(ManageNotiSideBar(false));
+      dispatch(ManageWalletSideBar(false));
       if (walletAddress == null) {
         dispatch(RedirectTo("myitems"));
         navigate("/add-wallet");
       } else {
-        navigate("/create-nft");
+        navigate("/my-items");
       }
     }
     if (name == "create") {
+      dispatch(ManageNotiSideBar(false));
+      dispatch(ManageWalletSideBar(false));
       if (walletAddress == null) {
         dispatch(RedirectTo("create"));
         navigate("/add-wallet");
@@ -130,9 +132,12 @@ function Navbar() {
       }
     }
     if (name == "profile") {
+      dispatch(ManageNotiSideBar(false));
+      dispatch(ManageWalletSideBar(false));
       if (walletAddress == null) {
         dispatch(RedirectTo("profile"));
         navigate("/add-wallet");
+
         // navigate("/my-profile");
       } else {
         navigate("/my-profile");
@@ -162,11 +167,17 @@ function Navbar() {
     } else {
       dispatch(ManageNotiSideBar(!isOpenNoti));
       dispatch(ManageWalletSideBar(false));
+      document.body.style.overflow = !isOpenNoti ? "hidden" : "visible";
     }
   };
 
   const handleSearch = () => {
     if (searchInput.trim() != "") dispatch(searchNav(searchInput));
+  };
+
+  const closeWalletAndNoti = () => {
+    dispatch(ManageNotiSideBar(false));
+    dispatch(ManageWalletSideBar(false));
   };
   return (
     <>
@@ -178,7 +189,7 @@ function Navbar() {
             style={{ backgroundColor: "white" }}
           >
             <div className="left_navbar d-flex align-items-center LeftNavBar">
-              <Link className="navbrand" to="/" style={{ marginRight: "21px" }}>
+              <Link className="navbrand" to="/" style={{ marginRight: "21px" }}  onClick={isOpenWallet}>
                 <img
                   src={require("../../assets/images/logo.png")}
                   style={{ width: "50px" }}
@@ -206,7 +217,7 @@ function Navbar() {
               >
                 <i
                   className="fa fa-search"
-                  style={{fontSize: "14px"}}
+                  style={{ fontSize: "14px" }}
                   aria-hidden="true"
                 ></i>
               </button>
@@ -220,10 +231,14 @@ function Navbar() {
                   type="search"
                   placeholder="Search"
                   aria-label="Search"
-                  style={{fontWeight: "bold"}}
+                  style={{ fontWeight: "bold" }}
                 />
                 <button className="screachbtn">
-                  <i className="fa fa-search" aria-hidden="true" style={{fontSize:"14px"}}></i>
+                  <i
+                    className="fa fa-search"
+                    aria-hidden="true"
+                    style={{ fontSize: "14px" }}
+                  ></i>
                 </button>
               </form>
             </div>
@@ -246,7 +261,7 @@ function Navbar() {
                         ? "nav-items li_underline marketplace"
                         : "nav-items marketplace"
                     }
-                    onClick={isOpenWallet}
+                    onClick={closeWalletAndNoti}
                   >
                     <Link
                       className={
@@ -271,7 +286,7 @@ function Navbar() {
                         ? "nav-items li_underline leaderboard"
                         : "nav-items leaderboard"
                     }
-                    onClick={isOpenWallet}
+                    onClick={closeWalletAndNoti}  
                   >
                     <Link
                       className={
@@ -287,6 +302,7 @@ function Navbar() {
                   </li>
 
                   <NavDropdown
+                    onClick={closeWalletAndNoti}
                     title="Resource"
                     id="navbarScrollingDropdown"
                     className={
@@ -341,16 +357,18 @@ function Navbar() {
                     </ul>
                   </li> */}
                   <li
-                    style={{marginRight:"28px"}}
+                    style={{ marginRight: "28px" }}
                     onClick={() => manageNavigation("create")}
                   >
                     <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}
                     >
-                      <button 
-                      className="create-btn"
-                      style={{color:"#ffffff", backgroundColor: "#366EEF"}}>
-                        Create</button>
+                      <button
+                        className="create-btn"
+                        style={{ color: "#ffffff", backgroundColor: "#366EEF" }}
+                      >
+                        Create
+                      </button>
                     </Link>
                   </li>
                   <li className="removeinmob"></li>
