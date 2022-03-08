@@ -779,9 +779,9 @@ export default function NftInformation(props) {
               </div>
               <div className="second-text align-row">
                 <span className="text">
-                  Current Price:
+                  Current Price:&nbsp;
                   <span className="nft-value" style={{ color: "#16AB6E" }}>
-                    <span className="text-name fw-b">{props?.responseData?.salesInfo?.price}</span>
+                    {props?.responseData?.salesInfo?.price}
                   </span>
                 </span>
                 <span className="align-row">
@@ -798,8 +798,9 @@ export default function NftInformation(props) {
                 </div>
                 <div className="col-lg-6 col-sm-12">
                   <span className="text">
-                    Created by:
+                    Created by:&nbsp;
                     <span className="text-name fw-b">{props?.responseData?.createdBy}</span>
+                    <span className="text-name fw-b"></span>
                   </span>
                 </div>
               </div>
