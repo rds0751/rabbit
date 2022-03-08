@@ -1,6 +1,8 @@
-import {ethers} from "ethers";
+import { ethers } from "ethers";
 import contractABI from "../assets/abi/abi.json";
-import {toast} from "react-toastify";
+import contractCollectionABI from "../assets/abi/collectionAbi.json";
+
+import { toast } from "react-toastify";
 
 import Utils from "../utility";
 
@@ -14,7 +16,8 @@ import Utils from "../utility";
 //     provider = new ethers.providers.Web3Provider(window.ethereum);
 //     signer = provider.getSigner();
 // }
-const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS
+// const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS
+const contractCollectionAddress = process.env.REACT_APP_CONTRACT_COLLECTION_ADDRESS
 
 // const contractAddress = "0xd3E390083BC66d87aFD1457879A2fDDfBBe16e06";
 const BlockchainServices = {
@@ -23,12 +26,13 @@ const BlockchainServices = {
     buyNFT,
     removeFromSaleNft,
     putOnSaleNft,
+    createCollections
 };
 
 export default BlockchainServices;
 
-async function mintNFT({tokenURI, price, tokenId}) {
-    if(!window.ethereum)
+async function mintNFT({ tokenURI, price, tokenId, contractAddress }) {
+    if (!window.ethereum)
         return Promise.reject("Please install metamask")
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -47,8 +51,8 @@ async function mintNFT({tokenURI, price, tokenId}) {
 }
 
 //price should be in wei
-async function changeListedPrice({tokenId, price}) {
-    if(!window.ethereum)
+async function changeListedPrice({ tokenId, price,contractAddress}) {
+    if (!window.ethereum)
         return Promise.reject("Please install metamask")
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -70,8 +74,8 @@ async function changeListedPrice({tokenId, price}) {
     };
 }
 
-async function removeFromSaleNft({tokenId}) {
-    if(!window.ethereum)
+async function removeFromSaleNft({ tokenId ,contractAddress }) {
+    if (!window.ethereum)
         return Promise.reject("Please install metamask")
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -104,8 +108,8 @@ async function removeFromSaleNft({tokenId}) {
 // }
 
 //1bnb=0.136ether
-async function buyNFT({tokenId, price}) {
-    if(!window.ethereum)
+async function buyNFT({ tokenId, price ,contractAddress}) {
+    if (!window.ethereum)
         return Promise.reject("Please install metamask")
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -114,7 +118,7 @@ async function buyNFT({tokenId, price}) {
         contractABI,
         signer
     );
-    const options = {value: ethers.utils.parseEther(price.toString())};
+    const options = { value: ethers.utils.parseEther(price.toString()) };
 
     const result = await contractData.buy(tokenId, options);
     let res = await result.wait();
@@ -126,8 +130,8 @@ async function buyNFT({tokenId, price}) {
     };
 }
 
-async function putOnSaleNft({tokenId}) {
-    if(!window.ethereum)
+async function putOnSaleNft({ tokenId ,contractAddress}) {
+    if (!window.ethereum)
         return Promise.reject("Please install metamask")
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -141,6 +145,32 @@ async function putOnSaleNft({tokenId}) {
     let res = await result.wait();
     return {
         ...res,
+        chainId: provider?._network?.chainId || "",
+        name: provider?._network?.name || "",
+    };
+}
+// for create collections
+async function createCollections({ name, symbol }) {
+    if (!window.ethereum)
+        return Promise.reject("Please install metamask")
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contractData = new ethers.Contract(
+        contractCollectionAddress,
+        contractCollectionABI,
+        signer
+    );
+    const result = await contractData.createCollection(name, symbol);
+
+    let res = await result.wait();
+    console.log("---------ssss----")
+    // console.log("000000000000000000000000", pp.logs)
+    // console.log("000000wwww000000000000000000",)
+    const getReceipt = await provider.getTransactionReceipt(res.transactionHash)
+    // console.log("lssssssss",getReceipt.logs[0].address)
+    return {
+        ...res,
+        contract_address: getReceipt.logs[0].address,
         chainId: provider?._network?.chainId || "",
         name: provider?._network?.name || "",
     };
