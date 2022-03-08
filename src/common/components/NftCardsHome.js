@@ -9,7 +9,7 @@ import {
   addLikeNft,
   getNFtsData,
 } from "../../services/webappMicroservice";
-function NftCardsHome({ nft }) {
+function  NftCardsHome({ nft }) {
   const navigate = useNavigate();
   const { user, sideBar } = useSelector((state) => state);
   const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;

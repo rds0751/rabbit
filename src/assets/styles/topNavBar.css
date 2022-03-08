@@ -6,6 +6,8 @@
   padding-left:10px;
   border-radius: 4px 0px 0px 4px;
   opacity: 1;
+  border: none;
+  font-weight: bold;
 }
 @media only screen and (max-width:1600px) {
     .inputbox {
@@ -20,6 +22,40 @@
 }
 @media only screen and (min-width:1000px) and (max-width:1300px){
   .inputbox{
-    width:100px
+    width:100px;}
+  }
+.notification-icon{
+  width:19px;
+  height:21px;
+}
+.profile-icon{
+  width: 18px;
+  height: 21px;
+}
+.wallet-icon{
+  width: 21px;
+  height: 21px
+}
+.create-btn{
+  width:146px;
+  height: 42px;
+  border:none;
+  border-radius: 4px;
+
+}
+
+/* mobile-view */
+@media screen and (max-width:426px){
+  .notification-icon{
+    width: 15px;
+    height: 18px;
+  }
+  .profile-icon{
+    width: 26px;
+    height: 26px;
+  }
+  .wallet-icon{
+    width: 18px;
+    height: 18px;
   }
 }

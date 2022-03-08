@@ -205,10 +205,7 @@ function Navbar() {
               >
                 <i
                   className="fa fa-search"
-                  style={{
-                    width: "42px",
-                    height: "50",
-                  }}
+                  style={{fontSize: "14px"}}
                   aria-hidden="true"
                 ></i>
               </button>
@@ -222,9 +219,10 @@ function Navbar() {
                   type="search"
                   placeholder="Search"
                   aria-label="Search"
+                  style={{fontWeight: "bold"}}
                 />
                 <button className="screachbtn">
-                  <i className="fa fa-search" aria-hidden="true"></i>
+                  <i className="fa fa-search" aria-hidden="true" style={{fontSize:"14px"}}></i>
                 </button>
               </form>
             </div>
@@ -342,27 +340,28 @@ function Navbar() {
                     </ul>
                   </li> */}
                   <li
-                    className="create-button"
+                    style={{marginRight:"28px"}}
                     onClick={() => manageNavigation("create")}
                   >
                     <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}
-                      className="btn btn-primary btnnav"
                     >
-                      Create
+                      <button 
+                      className="create-btn"
+                      style={{color:"#ffffff", backgroundColor: "#366EEF"}}>
+                        Create</button>
                     </Link>
                   </li>
-                  <li className="removeinmob">|</li>
+                  <li className="removeinmob"></li>
                 </ul>
 
                 <ul className="right_section_nav mb-0">
                   <li>
                     <img
                       onClick={handleNotiSideBar}
-                      className="noti"
+                      className="notification-icon"
                       src={require("../../assets/images/notification.png")}
-                      width="19px"
-                      height="21px"
+                      alt="notification"
                     ></img>
                   </li>
 
@@ -376,8 +375,9 @@ function Navbar() {
                       aria-expanded="false"
                     >
                       <img
-                        className="btnnav_mob1 profileimg"
+                        className="btnnav_mob1 profileimg profile-icon"
                         src={require("../../assets/images/profile.png")}
+                        alt="profile"
                         style={{
                           
                         }}
@@ -401,10 +401,9 @@ function Navbar() {
                   <li>
                     <img
                       onClick={handleWalletClick}
-                      className="btnnav_mob2"
+                      className="wallet-icon"
                       src={require("../../assets/images/wallet.png")}
-                      width="21px"
-                      height="21.21px"
+                      alt="wallet"
                       style={{
                         color: "gray",
                         cursor: "pointer",
