@@ -118,7 +118,7 @@ function Navbar() {
         dispatch(RedirectTo("myitems"));
         navigate("/add-wallet");
       } else {
-        navigate("/create-nft");
+        navigate("/my-items");
       }
     }
     if (name == "create") {
