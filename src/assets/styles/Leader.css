@@ -254,7 +254,7 @@ thead {
   /* margin-left: 70px; */
 }
 .MyProfilesales > div {
-  margin-right: 39px;
+  margin-right: 44px;
 }
 .MyProfilesales > h2 {
   margin-left: 70px;
@@ -1012,9 +1012,14 @@ thead {
     display: block;
     display: flex;
     flex-direction: column;
-    height: auto;
+    height: 105vh;
   }
 }
+@media only screen and (min-width:320px){
+  .navbar-expand-lg .navbar-nav .dropdown-menu {
+    position: absolute;
+    left: -96px;
+}}
 .leader-container{
   padding-right: var(--bs-gutter-x,.75rem);
     padding-left: var(--bs-gutter-x,1.25rem);

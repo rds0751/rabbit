@@ -30,7 +30,6 @@ function Navbar() {
   const [errorMssg, setErrorMssg] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
   const [checkClick, setcheckClick] = useState(false);
-
   const [getBalance, setGetBalance] = useState(null);
   const dispatch = useDispatch();
   const { user, sideBar } = useSelector((state) => state);
@@ -137,6 +136,7 @@ function Navbar() {
       if (walletAddress == null) {
         dispatch(RedirectTo("profile"));
         navigate("/add-wallet");
+
         // navigate("/my-profile");
       } else {
         navigate("/my-profile");
@@ -173,6 +173,7 @@ function Navbar() {
   const handleSearch = () => {
     if (searchInput.trim() != "") dispatch(searchNav(searchInput));
   };
+
   const closeWalletAndNoti = () => {
     dispatch(ManageNotiSideBar(false));
     dispatch(ManageWalletSideBar(false));
@@ -187,7 +188,7 @@ function Navbar() {
             style={{ backgroundColor: "white" }}
           >
             <div className="left_navbar d-flex align-items-center LeftNavBar">
-              <Link className="navbrand" to="/" style={{ marginRight: "21px" }}>
+              <Link className="navbrand" to="/" style={{ marginRight: "21px" }}  onClick={isOpenWallet}>
                 <img
                   src={require("../../assets/images/logo.png")}
                   style={{ width: "50px" }}
@@ -215,7 +216,7 @@ function Navbar() {
               >
                 <i
                   className="fa fa-search"
-                  style={{fontSize: "14px"}}
+                  style={{ fontSize: "14px" }}
                   aria-hidden="true"
                 ></i>
               </button>
@@ -229,10 +230,14 @@ function Navbar() {
                   type="search"
                   placeholder="Search"
                   aria-label="Search"
-                  style={{fontWeight: "bold"}}
+                  style={{ fontWeight: "bold" }}
                 />
                 <button className="screachbtn">
-                  <i className="fa fa-search" aria-hidden="true" style={{fontSize:"14px"}}></i>
+                  <i
+                    className="fa fa-search"
+                    aria-hidden="true"
+                    style={{ fontSize: "14px" }}
+                  ></i>
                 </button>
               </form>
             </div>
@@ -249,7 +254,9 @@ function Navbar() {
                       location.pathname.includes("/") &&
                       !location.pathname.includes("leader-board") &&
                       !location.pathname.includes("resource") &&
-                      !location.pathname.includes("create-nft")
+                      !location.pathname.includes("create-nft") && 
+                      !location.pathname.includes("help-center") && 
+                      !location.pathname.includes("suggestion")
                         ? "nav-items li_underline marketplace"
                         : "nav-items marketplace"
                     }
@@ -260,7 +267,9 @@ function Navbar() {
                         location.pathname.includes("/") &&
                         !location.pathname.includes("leader-board") &&
                         !location.pathname.includes("resource") &&
-                        !location.pathname.includes("create-nft")
+                        !location.pathname.includes("create-nft")&& 
+                        !location.pathname.includes("help-center") && 
+                        !location.pathname.includes("suggestion")
                           ? "nav-link navlink_active"
                           : "nav-link"
                       }
@@ -290,23 +299,22 @@ function Navbar() {
                       Leaderboard
                     </Link>
                   </li>
+
                   <NavDropdown
                     onClick={closeWalletAndNoti}
                     title="Resource"
                     id="navbarScrollingDropdown"
                     className={
-                      location.pathname.includes("resource") &&
-                      !location.pathname.includes("leader-board") &&
-                      !location.pathname.includes("marketplace") &&
-                      !location.pathname.includes("create-nft")
-                        ? "nav-items dropdown li_underline resource"
+                      location.pathname.includes("help-center") || 
+                      location.pathname.includes("suggestion") 
+                        ? "nav-items dropdown li_underline resource nav-link navlink_active resource"
                         : "nav-items dropdown resource"
                     }
                   >
-                    <NavDropdown.Item href="/help-center">
+                    <NavDropdown.Item onClick={()=>navigate('/help-center')}>
                       Help Center
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="/suggestion">
+                    <NavDropdown.Item onClick={()=>navigate('/suggestion')}>
                       Suggestions
                     </NavDropdown.Item>
                   </NavDropdown>
@@ -348,16 +356,18 @@ function Navbar() {
                     </ul>
                   </li> */}
                   <li
-                    style={{marginRight:"28px"}}
+                    style={{ marginRight: "28px" }}
                     onClick={() => manageNavigation("create")}
                   >
                     <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}
                     >
-                      <button 
-                      className="create-btn"
-                      style={{color:"#ffffff", backgroundColor: "#366EEF"}}>
-                        Create</button>
+                      <button
+                        className="create-btn"
+                        style={{ color: "#ffffff", backgroundColor: "#366EEF" }}
+                      >
+                        Create
+                      </button>
                     </Link>
                   </li>
                   <li className="removeinmob"></li>
@@ -383,28 +393,25 @@ function Navbar() {
                       aria-expanded="false"
                     >
                       <img
-                        className="profile-icon"
+                        className="btnnav_mob1 profileimg profile-icon"
                         src={require("../../assets/images/profile.png")}
                         alt="profile"
                         style={{
-                          color: "gray",
-                          cursor: "pointer",
-                          marginLeft: "31.22px",
-                          marginRight: "22.43px",
+                          
                         }}
                       ></img>
                     </a>
                     <ul
-                      className="dropdown-menu"
+                      className="dropdown-menu profilemenu"
                       aria-labelledby="navbarDropdown"
                     >
-                      <li onClick={() => manageNavigation("profile")}>
+                      <li className="profileitem" onClick={() => manageNavigation("profile")}>
                         Profile
                       </li>
-                      <li>
+                      
                         <hr className="dropdown-divider" />
-                      </li>
-                      <li onClick={() => manageNavigation("myitems")}>
+                      
+                      <li className="profileitem" onClick={() => manageNavigation("myitems")}>
                         My Items
                       </li>
                     </ul>
