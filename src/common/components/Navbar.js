@@ -111,6 +111,7 @@ function Navbar() {
 
   window.ethereum?.on("accountsChanged", accountChangeHandler);
   let location = useLocation();
+  
   const manageNavigation = (name) => {
     if (name == "myitems") {
       if (walletAddress == null) {

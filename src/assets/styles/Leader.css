@@ -18,11 +18,17 @@
   margin-right: 12px;
 }
 .leaderboardTop {
-  background-color: #f8f8f8;
-  border: 0px;
-  border-radius: 0.7rem;
+  /* background-color: #f8f8f8; */
+  /* border: 0px;
+  border-radius: 0.7rem; */
   font-weight: bold;
   margin-top: 10px;
+
+
+background: #F8F8F8 0% 0% no-repeat padding-box;
+border: 1px solid #FCFCFC;
+border-radius: 13px;
+opacity: 1;
 }
 .leaderboardTitle {
   display: flex;
@@ -1012,7 +1018,8 @@ thead {
     display: block;
     display: flex;
     flex-direction: column;
-    height: 105vh;
+    /* height: 105vh; */
+    height: 323px;
   }
 }
 @media only screen and (min-width:320px){
@@ -1323,3 +1330,11 @@ justify-content: inherit !important;
 
 }
 /* nft-information nft detail page css end*/
+
+/* leaderboard */
+@media only screen and (min-width: 700px) and (max-width: 764px){
+.small-leaderboard-dropdown{
+  margin-left: 75%;
+}
+
+}

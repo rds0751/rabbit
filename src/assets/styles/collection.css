@@ -102,6 +102,7 @@
   border: 0px;
   padding: 0px;
   margin: 0px;
+  margin-top: 5px;
 }
 
 .submit-button {
@@ -115,6 +116,9 @@
 
 .category-label {
   margin-top: 20px;
+}
+.blockchainSelect{
+  appearance: none;
 }
 
 /* .col-cards-gap {
