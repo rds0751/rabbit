@@ -156,7 +156,7 @@ export default function NftInformation(props) {
       )}
       <div className="nft-detail">
         <div className="container">
-          <div className="row mt-5">
+          <div className="row" style={{ marginTop: "5rem" }}>
             <div className="d-sm-block d-md-block d-lg-none mb-2">
               <div className="row" id="share_info">
                 <div className="col-xl-10 col-lg-10 col-md-9 col-sm-9">
@@ -497,7 +497,7 @@ export default function NftInformation(props) {
                   className="border-radius imginfo_mob"
                   style={{
                     maxWidth: "100%",
-                    height: "auto",
+                    height: "810px",
                     borderRadius: "8px",
                   }}
                 />
@@ -937,9 +937,9 @@ export default function NftInformation(props) {
                 <div
                   className="corsstext"
                   onClick={() => setOpenReportModal(false)}
-                  style={{cursor:"pointer"}}
+                  style={{ cursor: "pointer" }}
                 >
-                  <img src={Close} width="12px" height="12px"/>
+                  <img src={Close} width="12px" height="12px" />
                 </div>
               </div>
               <div className="singlerowmodal">
