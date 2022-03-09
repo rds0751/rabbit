@@ -12,6 +12,7 @@ import PricingHistoryComponentGraph from "../../common/components/PricingHistory
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "../../assets/styles/createSingleNft.css";
 import dropdowmImage from "../../assets/images/drop down.png";
+import Close from "../../assets/images/close.png";
 
 import { Button } from "@mui/material";
 import { getNft, addNftReport } from "../../services/webappMicroservice";
@@ -28,6 +29,9 @@ import { Oval } from "react-loader-spinner";
 import ListingsTable from "../../common/components/ListingTable";
 
 export default function NftInformation(props) {
+
+
+
   console.log(props?.responseData, "<<<response");
   const navigate = useNavigate();
   const [activeInActive, setActiveInActive] = useState("active");
@@ -193,7 +197,7 @@ export default function NftInformation(props) {
                       style={{
                         display:
                           props?.responseData?.ownerAddress == loggedInUser?.wallet_address &&
-                          !props?.responseData?.salesInfo?.isOpenForSale
+                            !props?.responseData?.salesInfo?.isOpenForSale
                             ? "block"
                             : "none",
                         color: "white",
@@ -209,7 +213,7 @@ export default function NftInformation(props) {
                       style={{
                         display:
                           props?.responseData?.ownerAddress == loggedInUser?.wallet_address &&
-                          props?.responseData?.salesInfo?.isOpenForSale
+                            props?.responseData?.salesInfo?.isOpenForSale
                             ? "block"
                             : "none",
                         color: "white",
@@ -221,7 +225,9 @@ export default function NftInformation(props) {
                       Remove From Sale
                     </Button>
                   </div>
-                  <span className="nft-name">{props?.responseData?.name}</span>
+                  <span className="nft-name">
+
+                  </span>
                 </div>
                 <div className="col-xl-2 col-lg-2 col-md-3 col-sm-3">
                   <span>
@@ -382,7 +388,7 @@ export default function NftInformation(props) {
                               data-bs-target="#myModalShare"
                               className="btn btn-primary w-100"
                               data-bs-dismiss="modal"
-                              // style={{ marginLeft: "1.1em" }}
+                            // style={{ marginLeft: "1.1em" }}
                             >
                               Make Offer
                             </button>
@@ -396,7 +402,7 @@ export default function NftInformation(props) {
                               data-bs-target="#myModalShare"
                               className="btn btn-primary w-100"
                               data-bs-dismiss="modal"
-                              // style={{ marginLeft: "1.1em" }}
+                            // style={{ marginLeft: "1.1em" }}
                             >
                               Make Offer
                             </button>
@@ -429,7 +435,7 @@ export default function NftInformation(props) {
                   }}
                 />
               </div>
-              
+
             </div>
             <div className="col-xl-7 col-lg-7 col-md-12 details-section">
               <div className="d-none d-sm-none d-md-none d-lg-block">
@@ -465,7 +471,7 @@ export default function NftInformation(props) {
                         style={{
                           display:
                             props?.responseData?.ownerAddress == loggedInUser?.wallet_address &&
-                            !props?.responseData?.salesInfo?.isOpenForSale
+                              !props?.responseData?.salesInfo?.isOpenForSale
                               ? "block"
                               : "none",
                           color: "white",
@@ -481,7 +487,7 @@ export default function NftInformation(props) {
                         style={{
                           display:
                             props?.responseData?.ownerAddress == loggedInUser?.wallet_address &&
-                            props?.responseData?.salesInfo?.isOpenForSale
+                              props?.responseData?.salesInfo?.isOpenForSale
                               ? "block"
                               : "none",
                           color: "white",
@@ -608,8 +614,8 @@ export default function NftInformation(props) {
                                 data-bs-target="#myModalShare"
                                 className="btn btn-primary w-100"
                                 data-bs-dismiss="modal"
-                                // style={{ marginLeft: "1.1em" }}
-                                // style={{ marginLeft: "1.1em" }}
+                              // style={{ marginLeft: "1.1em" }}
+                              // style={{ marginLeft: "1.1em" }}
                               >
                                 Make Offer
                               </button>
@@ -707,9 +713,9 @@ export default function NftInformation(props) {
               </div>
               <div className="second-text align-row">
                 <span className="text">
-                  Current Price:
+                  Current Price:&nbsp;
                   <span className="nft-value" style={{ color: "#16AB6E" }}>
-                    0.32 ETH
+                    {props?.responseData?.salesInfo?.price}
                   </span>
                 </span>
                 <span className="align-row">
@@ -720,14 +726,15 @@ export default function NftInformation(props) {
               <div className="row third-text">
                 <div className="col-lg-6 col-sm-12">
                   <span className="text">
-                    Owned by:
-                    <span className="text-name fw-b">{userDetails.firstName}</span>
+                    Owned by:&nbsp;
+                    <span className="text-name fw-b">{props?.responseData?.ownedBy}</span>
                   </span>
                 </div>
                 <div className="col-lg-6 col-sm-12">
                   <span className="text">
-                    Created by:
-                    <span className="text-name fw-b">{userDetails.firstName}</span>
+                    Created by:&nbsp;
+                    <span className="text-name fw-b">{props?.responseData?.createdBy}</span>
+                    <span className="text-name fw-b"></span>
                   </span>
                 </div>
               </div>
@@ -760,7 +767,7 @@ export default function NftInformation(props) {
                   style={{
                     display:
                       props?.responseData?.ownedBy != loggedInUser?._id &&
-                      props?.responseData?.salesInfo?.isOpenForSale
+                        props?.responseData?.salesInfo?.isOpenForSale
                         ? "block"
                         : "none",
                     color: "white",
@@ -778,7 +785,7 @@ export default function NftInformation(props) {
                   style={{
                     display:
                       props?.responseData?.createdBy != loggedInUser?._id &&
-                      props?.responseData?.salesInfo?.isOpenForSale
+                        props?.responseData?.salesInfo?.isOpenForSale
                         ? "block"
                         : "none",
                     color: "#366EEF",
@@ -866,7 +873,7 @@ export default function NftInformation(props) {
               </div>
               <div className="singlerowmodal">
                 <h3 className="reason-text"> Reason</h3>
-                  <select>
+                  <select className="select-box">
                     <option>Select reason</option>
                     <option value="Fake collection or possible scam">Fake collection or possible scam</option>
                     <option value="Explicit and sensitive content">Explicit and sensitive content</option>

@@ -52,8 +52,8 @@ function CreateNFT() {
                 </div>
               </div>
             </Link>
-            <div className="create-type-text">
-              <h5 className="poppins-normal bold-600 font-18 blackish">
+            <div className="text-center">
+              <h5 className="bottom-heading-font">
                 Collection
               </h5>
             </div>

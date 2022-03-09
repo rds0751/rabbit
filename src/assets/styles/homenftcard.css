@@ -14,7 +14,19 @@
 }
 .nftTilePageSecondSelect select {
   border: none !important;
-  width: 100% !important;
+  width: 90% !important;
+  width: 61% !important;
+}
+
+.price-range-dropdown {
+  margin-left: 3%;
+  font-family: "poppins-medium";
+  font-size: 0.9vw;
+  width: 100%;
+}
+.price-range-dropdown select {
+  border: none !important;
+  width: 90% !important;
 }
 /* css for NFt cards */
 .nftTileEachImage {
@@ -70,6 +82,58 @@
   /* padding: 10px; */
 }
 
+/* nft page filter css start */
+.ntf_div .filter-drop{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 55%;
+  padding: 0% 1%;
+  position: relative;
+}
+.ntf_div .filter-drop .text{
+  display: flex;
+  font-size: 14px;
+  font-family: "poppins-medium";
+  align-items: center;
+  color: #858585;
+}
+.ntf_div .filter-drop .filter-item{
+  position: absolute;
+  top: 45px;
+  left: -94px;
+  border-top: none;
+  width: 279px;
+  z-index: 1;
+  background: #FFFFFF;
+  box-shadow: 0px 3px 6px #0000001F;
+  border: 1px solid #F4F4F4;
+  border-radius: 4px;
+  padding: 12px;
+}
+.ntf_div .filter-drop .filter-item .to{
+  font-family: 'poppins-medium';
+  font-size: 14px;
+  line-height: 21px;
+  color: #191919;
+}
+.ntf_div .filter-drop .filter-item .btn-outline-primary {
+  font-family: 'poppins-medium';
+  font-size: 16px;
+  line-height: 25px;
+  color: #366EEF;
+  border: 1px solid #366EEF;
+  border-radius: 4px;
+  width: 100%;
+}
+.ntf_div .filter-drop .filter-item .btn-outline-primary:hover {
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+/* nft page filter css end */
+
 @media only screen and (max-width: 1024px) {
   .nftTilePageSecondSelect {
     font-size: 1.9vw;
@@ -101,6 +165,12 @@
     margin-top: 3% !important;
     width: 100% !important;
   } */
+  .ntf_div .filter-drop .filter-item .form-control{
+    width: 100%;
+  }
+  .ntf_div .filter-drop .filter-item .row {
+    --bs-gutter-x: 16px;
+  }
 }
 @media only screen and (width:768px){
   .nftTilePageSecondSelect{
@@ -146,3 +216,7 @@
     margin-top: 52px;
   }
 }
+/* .dropdown-img{
+  background-image: url("/whitelablenft-webapp/src/assets/images/drop-down-arrow.svg") no-repeat right #ffffff;
+} */
+

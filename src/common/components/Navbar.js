@@ -109,6 +109,7 @@ function Navbar() {
 
   window.ethereum?.on("accountsChanged", accountChangeHandler);
   let location = useLocation();
+  
   const manageNavigation = (name) => {
     if (name == "myitems") {
       dispatch(ManageNotiSideBar(false));
@@ -269,7 +270,7 @@ function Navbar() {
                         !location.pathname.includes("resource") &&
                         !location.pathname.includes("create-nft")&& 
                         !location.pathname.includes("help-center") && 
-                        !location.pathname.includes("suggestion")
+                        !location.pathname.includes("suggestion") 
                           ? "nav-link navlink_active"
                           : "nav-link"
                       }
@@ -304,6 +305,7 @@ function Navbar() {
                     onClick={closeWalletAndNoti}
                     title="Resource"
                     id="navbarScrollingDropdown"
+                    style={{padding:"0"}}
                     className={
                       location.pathname.includes("help-center") || 
                       location.pathname.includes("suggestion") 
@@ -404,6 +406,13 @@ function Navbar() {
                     <ul
                       className="dropdown-menu profilemenu"
                       aria-labelledby="navbarDropdown"
+                      style={{borderRadius: "0px 0px 6px 6px",
+                      boxShadow: "0px 3px 6px #0000001A",
+                      borderTop:"none",
+                      border: "1px solid #ECECEC",
+                      marginTop:"-0.5px",
+                      padding:"0px",
+                    }}
                     >
                       <li className="profileitem" onClick={() => manageNavigation("profile")}>
                         Profile
@@ -411,7 +420,9 @@ function Navbar() {
                       
                         <hr className="dropdown-divider" />
                       
-                      <li className="profileitem" onClick={() => manageNavigation("myitems")}>
+                      <li className="profileitem"
+                        style={{padding: "13.25px 89px 7px 13px"}}
+                       onClick={() => manageNavigation("myitems")}>
                         My Items
                       </li>
                     </ul>

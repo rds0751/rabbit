@@ -35,7 +35,7 @@ class Index extends BaseComponent {
       transactionHash: blockchainRes?.transactionHash || "",
       name: data?.nftName || "",
       //TO DO  need to pass collection _id
-      collectionId: data.collection,
+      collectionId: data.collection , // to do
       ipfsUrl: data?.ipfsUrl || "",
       cdnUrl: data?.cdnUrl || "",
       cid: data?.cid || "",
@@ -57,6 +57,7 @@ class Index extends BaseComponent {
   };
 
   createNftHandler = async (data) => {
+    let blockchainRes;
     this.setState({ loaderState: true });
     console.log(data?.ownerAddress, "dattttttttttttttttt");
 
@@ -91,21 +92,51 @@ class Index extends BaseComponent {
 
     const tokenId = Utils.generateRandomNumber();
     // create NFT on blockchai
-    const [blockchainError, blockchainRes] = await Utils.parseResponse(
+    if(data.collection.length > 0 ){
+     
+    const [blockchainError, blockchainResult] = await Utils.parseResponse(
       BlockchainServices.mintNFT({
         tokenURI: data.ipfsUrl,
         price: data.price,
         tokenId,
+        contractAddress:data.collection
       })
     );
 
-    if (blockchainError || !blockchainRes) {
+    if (blockchainError || !blockchainResult) {
       this.setState({ loaderState: false });
 
       return Utils.apiFailureToast(
         blockchainError.message || "Unable to mint NFT on blockchain"
       );
     }
+    blockchainRes = blockchainResult
+  }
+
+
+  else{
+    const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS
+
+    const [blockchainError, blockchainResult] = await Utils.parseResponse(
+      BlockchainServices.mintNFT({
+        tokenURI: data.ipfsUrl,
+        price: data.price,
+        tokenId,
+        contractAddress:contractAddress
+      })
+    );
+
+    if (blockchainError || !blockchainResult) {
+      this.setState({ loaderState: false });
+
+      return Utils.apiFailureToast(
+        blockchainError.message || "Unable to mint NFT on blockchain"
+      );
+    }
+    blockchainRes = blockchainResult
+  }
+
+
 
     console.log(
       this.getRequestDataForSaveNftContent(tokenId, data, blockchainRes)

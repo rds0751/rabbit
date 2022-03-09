@@ -49,7 +49,7 @@ height: 47px;
   box-shadow: 0px 3px 12px #00000014;
 }
 .wallet .empty_div {
-  width: calc(100% - 28%);
+  width: calc(100% - 27%);
   background: #191919;
   height: 100%;
   opacity: 0.5;
@@ -62,7 +62,7 @@ height: 47px;
   height: 100%;
 }
 .wallet_div {
-  width: 28%;
+  width: 27%;
   background: #ffffff;
   margin-left: auto;
   height: 100%;
@@ -86,7 +86,7 @@ height: 47px;
   height: 121px;
   /* margin: 9px; */
   /* padding: 5px; */
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   /* margin-left: 18px; */
 }
 .btnwallet {
@@ -108,13 +108,13 @@ height: 47px;
   opacity: 1;
 }
 .balancewallet > div > h3 {
-  font: 14px/21px Poppins;
+  font: 14px/21px 'poppins-medium';
   letter-spacing: 0px;
   color: #707070;
   opacity: 1;
 }
 .balancewallet > div > h4 {
-  font: 18px/27px Poppins !important;
+  font: 18px/27px 'poppins-medium' !important;
   letter-spacing: 0px;
   color: #191919;
   opacity: 1;
@@ -125,12 +125,20 @@ height: 47px;
   padding-top: 36px;
 }
 .imgwallet > img {
-  height: 75px;
-  width: 75px;
+  height: 79px;
+  width: 79px;
+  border-radius: 3px;
 }
 .walleth2 > i {
   width: 21px;
   height: 21px;
+}
+.submitbuttonfooter{
+  height:36px;
+  fontWeight:400;
+  width: 116px;
+  borderTopLeftRadius:0em;
+  borderBottomLeftRadius: 0em;
 }
 @media only screen and (max-width: 1170px) {
   .fa-caret-down {
@@ -578,6 +586,7 @@ height: 47px;
   height: 31px;
 }
 .left_section_nav .li_underline {
+ 
   border-bottom: 3px solid #366eef;
 }
 .right_section_nav {
@@ -637,6 +646,8 @@ height: 47px;
 .navbar-expand-lg .navbar-nav .nav-link {
   padding: 0px;
   background: #ffffff 0% 0% no-repeat padding-box;
+  padding-bottom: 20px;
+  padding-top: 20px;
   /* margin-right: 15px;
   margin-left: 15px; */
 }
@@ -903,7 +914,9 @@ height: 47px;
     /* width: 326px; */
     height: 187.19px;
     object-fit: contain;
+
   }
+
   .ntf_div {
     padding: 0px !important;
     margin: 0px 80px;
@@ -983,7 +996,7 @@ height: 47px;
 }
 
 .nav-items  .dropdown-menu {
-  margin-top: 20px;
+  margin-top: 1px;
 }
 .dropdown-menu .dropdown-item{
   padding: 20px;
@@ -1074,7 +1087,7 @@ height: 47px;
     flex-direction: column;
   }
   .footer-top{
-    width:60%;
+    width:72%;
   }
   .footer-bottom{
     display: flex;
@@ -1202,20 +1215,21 @@ padding-bottom: 16px;
 text-decoration: none;
 }
  .dropdown-menu[data-bs-popper] {
-  margin-top: 14px;
+  margin-top: 1px;
 }
 .profileitem{
- padding-left: 10px;
-font: normal normal normal 14px/21px Poppins;
-letter-spacing: 0px;
-color: #191919;
-opacity: 1;
-cursor: pointer;
+  padding: 14px 110px 4px 10px;
+  font: normal normal normal 14px/21px Poppins;
+  letter-spacing: 0px;
+  color: #191919;
+  opacity: 1;
+  cursor: pointer;
 }
 .dropdown-divider{
 background: #FFFFFF 0% 0% no-repeat padding-box;
-border: 0.2px solid #E8E8E8;
+border: 0.1px solid #E8E8E8;
 opacity: 1;
+margin:0px;
 }
 .dropdown .profileimg{
   color: gray;
@@ -1248,10 +1262,64 @@ opacity: 1;
    width: 409px;
  }
 }
+
+@media only screen and (min-width:375px) and (max-width:769px){
+  .footerinputbox{
+    width: 107%;
+  }
+}
+
+@media only screen and (min-width:320px) and (max-width:426px){
+ .subscribe{
+  text-align: left;
+  font: normal normal normal 14px/21px Poppins;
+  letter-spacing: 0px;
+  color: #8F8F8F;
+  opacity: 1;
+  white-space: nowrap;
+ }
+ .footerdes{
+  text-align: left;
+  font: normal normal normal 14px/21px Poppins;
+  letter-spacing: 0px;
+  color: #8F8F8F;
+  opacity: 1;
+ }
+ .Icon{
+   font-size: 20px;
+ }
+}
+@media only screen and (max-width:370px) {
+  .subscribe{
+    white-space: normal;
+  }
+ }
+
+
 .submitbuttonfooter{
   height:36px;
   fontWeight:400;
   width: 116px;
   borderTopLeftRadius:0em;
   borderBottomLeftRadius: 0em;
+}
+.dropdown-toggle-ellipsis{
+  appearance: none;
+  background: url("../images/drop-down-arrow.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+order: 0;
+background-position: right;
+    position: absolute;
+    right: 10px;
+   
+    background-size: 17px;
+}
+.sort-drop-down{
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-image: url(../images/drop-arrow.png);
+  width: 100px;
+  background-repeat: no-repeat;
 }

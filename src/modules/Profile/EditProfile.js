@@ -125,15 +125,15 @@ function EditProfile(props) {
         draggable
         pauseOnHover
       />
-      <div className="editProfileContainer container  mt-5">
+      <div className="editProfileContainer container">
         <div className="editProfileTopHeading top-heading">
           <div className="editProfileHeadingTitle">
-            <div className="create-nft-font poppins-normal font-32">
+            <h3 className="title">
               Edit Profile
-            </div>
+            </h3>
           </div>
 
-          <h3 className=" input-heading generalsettingl poppins-normal pb-1">
+          <h3 className=" input-heading generalsettingl">
             General Setting
           </h3>
         </div>
@@ -141,9 +141,6 @@ function EditProfile(props) {
           <div className="chooseProfilePicInnerContainer ">
             <div className="editprofile-image">
               <img
-                width="80%"
-                height="100%"
-                style={{ objectFit: "cover" }}
                 src={imageUrl}
               />
             </div>
@@ -171,10 +168,10 @@ function EditProfile(props) {
         </div>
         <div className="editProfileFormContainer singlenft-form-box">
           <form className="suggestion-form " onSubmit={(e) => handleSubmit(e)}>
-            <div className=" mb-3 mt-3">
+            <div className="">
               <label
                 htmlFor="username"
-                className=" input-heading poppins-normal"
+                className=" label-heading"
               >
                 username
               </label>
@@ -187,12 +184,12 @@ function EditProfile(props) {
                 onChange={(e) => handleForm(e)}
               />
             </div>
-            <div className=" mb-3 mt-3">
-              <label htmlFor="comment" className="input-heading poppins-normal">
+            <div className="" style={{marginBottom:"28px"}}>
+              <label htmlFor="comment" className="label-heading">
                 Bio
               </label>
               <textarea
-                className="editProfileFormContainerEachInput input-down-text"
+                className="editProfileFormContainerEachInput mb-0"
                 rows="4"
                 // name="text"
                 name="bio"
@@ -206,17 +203,18 @@ function EditProfile(props) {
                 placeholder="Write description"
                 // onChange={(e) => (bio.current = e.target.value)}
               ></textarea>
-              <span className="input-down-text  ">
+              <div className="clearfix"></div>
+              <span className="input-down-text">
                 {desLength} of 1000 characters used
               </span>
             </div>
-            <div className="mb-3 mt-3">
-              <label htmlFor="email" className="input-heading poppins-normal">
+            <div className="">
+              <label htmlFor="email" className="label-heading">
                 Personal site or Portfolio
               </label>
               <input
                 type="name"
-                className="editProfileFormContainerEachInput form-control bg-light"
+                className="editProfileFormContainerEachInput form-control"
                 placeholder="www.example.com"
                 name="portfolio"
                 value={formData.portfolio}

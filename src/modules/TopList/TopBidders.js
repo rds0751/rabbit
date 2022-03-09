@@ -18,13 +18,18 @@ export class TopBidders extends Component {
         {/* <h2>Hello</h2> */}
         <div className="container">
           <div className="row">
-            <div className="col">
+            <div className="col" style={{padding:"0"}}>
               <div
                 className="Leader_Board_container"
                 style={{ marginBottom: "30px" }}
               >
                 <h1 style={{ fontSize: "20px", fontWeight: "bold" }}>Top Buyers</h1>
-                <div className="dropdown">
+                <select className="top-dropdown">
+                  <option>Weekly</option>
+                  <option>Monthly</option>
+                  <option>Yearly</option>
+                </select>
+                {/* <div className="dropdown">
                   <button
                     className="btn btn-secondary dropdown-toggle"
                     type="button"
@@ -42,7 +47,7 @@ export class TopBidders extends Component {
                     }}
                   >
                     Weekly
-                    <i className="fas fa-caret-down"></i>
+                    <img src={require("../../assets/images/downarrow.png")} style={{marginLeft:"39px"}}/>
                   </button>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li>
@@ -61,7 +66,7 @@ export class TopBidders extends Component {
                       </a>
                     </li>
                   </ul>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -69,7 +74,7 @@ export class TopBidders extends Component {
 
         <div className="container CollectionHeading">
           <div className="row">
-            <div className="col" 
+            <div className="col"
             // style={{ paddingLeft: "40px" }}
             >
               Name
@@ -104,7 +109,8 @@ export class TopBidders extends Component {
                   style={{ color: "#818181", fontWeight: "normal" }}
                 >
                   {" "}
-                  <span>34 ETH</span>
+                  <span style={{textAlign: "left",font: "normal normal medium 16px/25px Poppins",
+                  letterSpacing: "0px",color:"#366EEF"}}>34 ETH</span>
                   {volume}
                 </div>
                 <div className="col">{itemsbought}</div>
