@@ -20,6 +20,8 @@ import { useSelector } from "react-redux";
 import Spinner from "../../common/components/Spinner";
 import axios from "axios";
 import NftCardsHome from "../../common/components/NftCardsHome";
+import dropdown from "../../assets/images/dropdown.svg";
+import {Button} from "react-bootstrap"
 const queryString = require("query-string");
 function NftPage() {
   const defaultReq = {
@@ -135,6 +137,8 @@ function NftPage() {
     setHandleLike(!handleLike);
   };
 
+  const [statusDrop, setStatusDrop] = useState(false);
+
   return (
     <>
       {/* <div className="container ntf_div"> */}
@@ -160,8 +164,43 @@ function NftPage() {
                 <option value="on auction">On auction</option>
               </select>
             </div>
-            <div className="mobilenftTilePageSecondSelect dropdown nftTilePageSecondSelect ">
-              <select
+            <div className="mobilenftTilePageSecondSelect dropdown nftTilePageSecondSelect">
+              <p className="mb-0 sale-type">Price range</p>
+              <div className="filter-drop">
+                <div onClick={() => setStatusDrop(!statusDrop)} className="d-flex justify-content-between w-100">
+                  <div className="text">All</div>
+                  <div>
+                    <img src={dropdown} />
+                  </div>
+                </div>
+                <div
+                  className="filter-item"
+                  style={{ display: statusDrop ? "block" : "none" }}
+                >
+                  <form>
+                    <div className="row mb-3 align-items-center">
+                      <div className="col-5">
+                        <input type="number" className="form-control" placeholder="Min"/> 
+                      </div>
+                      <div className="col-2 text-center">
+                        <span className="to">to</span>
+                      </div>
+                      <div className="col-5">
+                        <input type="number" className="form-control" placeholder="Max"/>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-6">
+                      <Button variant="outline-primary">Clear</Button>
+                      </div>
+                      <div className="col-6">
+                      <Button variant="outline-primary">Apply</Button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              {/* <select
                 name="maxPrice"
                 id="sale"
                 // className="first_select ml_auto"
@@ -176,23 +215,27 @@ function NftPage() {
                 <option value="10">10</option>
                 <option value="25">25</option>
                 <option value="30">30</option>
-              </select>
+              </select> */}
+
             </div>
           </div>
-          <div className="mobilenftTilePageThirdSelect dropdown sort-drop nftTilePageSecondSelect">
-            <select
-              name="sort"
-              id="sale"
-              // className="first_select ml_auto"
-              className="priceRangeDropDown"
-              style={{ backgroundColor: "white" }}
-              onChange={(e) => handlefilter(e)}
-              value={filterType.sort}
-            >
-              <option value="all">Sort By</option>
-              <option value="1">Recently Added</option>
-              <option value="2">Recently Sold</option>
-            </select>
+          <div className="filter">
+            <div className="mobilenftTilePageThirdSelect dropdown sort-drop nftTilePageSecondSelect">
+              <p className="mb-0">Sort By </p>
+              <select
+                name="sort"
+                id="sale"
+                // className="first_select ml_auto"
+                className="priceRangeDropDown"
+                style={{ backgroundColor: "white" }}
+                onChange={(e) => handlefilter(e)}
+                value={filterType.sort}
+              >
+                <option value="all">All</option>
+                <option value="1">Recently Added</option>
+                <option value="2">Recently Sold</option>
+              </select>
+            </div>
           </div>
         </div>
         <div

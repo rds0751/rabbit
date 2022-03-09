@@ -36,6 +36,7 @@
   object-fit: cover;
   border-radius: 50%;
   margin-bottom: 46%;
+  border: 4px solid #fff;
 }
 .colusername {
   margin-top: 14px;

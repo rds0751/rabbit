@@ -24,10 +24,11 @@
   background-color: white;
   opacity: 1 !important;
   top: 126px;
+  border-radius: 13px;
 }
 .report-inner {
   width: 85.8%;
-  padding: 2% 0% 2% 0%;
+  padding: 34px 0px 41px;
   opacity: 1;
   margin: auto;
 }
@@ -40,17 +41,24 @@
   color: #686868;
 }
 .reporttext {
-  font-weight: bold;
+  font-family: "poppins-bold";
   font-size: 18px;
+  line-height: 27px;
   color: #191919;
 }
 .singlerowmodal {
   margin-top: 28px;
 }
+.singlerowmodal .label{
+  font-family: "poppins-bold";
+  font-size: 16px;
+  line-height: 25px;
+  color: #191919;
+}
 .singlerowmodal > select {
   width: 100%;
   border: 1px solid #c8c8c8;
-  padding: 2%;
+  padding: 1.5%;
   margin-top: 13px;
   border-radius: 6px;
 }
