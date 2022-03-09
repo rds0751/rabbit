@@ -41,6 +41,7 @@ function MyProfile() {
   const [ownedNft, setownedNft] = useState([]);
   const [onSaleNft, setonSaleNft] = useState([]);
   const [likedNft, setlikedNft] = useState([]);
+  const [userId, setUserId] = useState("");
 
   const { user } = useSelector((state) => state);
   const navigate = useNavigate();
@@ -57,6 +58,10 @@ function MyProfile() {
   const [typeofProfilePost, setTypeofProfilePost] = useState("on-sale");
 
   useEffect(() => {
+    setUserId(loggedInUser._id)
+    // console.log()
+        console.log("logiiiiiiiii user",loggedInUser._id)
+
     if (loggedInUser == null) {
       navigate("/my-profile");
       navigate("/add-wallet");
@@ -87,14 +92,14 @@ function MyProfile() {
     NftCreatedByUser((response) => {
       console.log(response, "myprofile");
       if (response.success) {
-        setNfts(response.responseData);
+        // setNfts(response.responseData);
         setcreatedNft(response.responseData);
       } else {
         toast.error(response.msg);
       }
-    });
+    },loggedInUser._id);
   };
-
+console.log("kkkkkkkkkkddddddddddddd",Nfts)
   const getOwnedByNft = () => {
     NftOwnedByUser((response) => {
       console.log(response, "myprofile");
@@ -103,28 +108,28 @@ function MyProfile() {
       } else {
         toast.error(response.msg);
       }
-    });
+    },loggedInUser._id);
   };
   const getOnSaleNft = () => {
     NftSellByUser((response) => {
       console.log(response, "myprofile");
       if (response.success) {
-        setownedNft(response.responseData);
+        setonSaleNft(response.responseData);
       } else {
-        // toast.error(response.msg);
+        toast.error(response.msg);
       }
-    });
+    },loggedInUser._id);
     // setonSaleNft([]);
   };
   const getLikedNft = () => {
     NftLikedByUser((response) => {
       console.log(response, "myprofile");
       if (response.success) {
-        setownedNft(response.responseData);
+        setlikedNft(response.responseData);
       } else {
-        // toast.error(response.msg);
+        toast.error(response.msg);
       }
-    });
+    },loggedInUser._id);
     // setlikedNft([]);
   };
 
@@ -200,6 +205,7 @@ function MyProfile() {
           <img
             src={loggedInUser?.photo != "" ? loggedInUser?.photo : defaultPic}
             alt=""
+            className="user-img"
           />
           {/* <h2>{ethereum && ethereum.selectedAddress}</h2> */}
           {/* <h2>{window.ethereum && defaultAccount}</h2> */}
@@ -229,7 +235,7 @@ function MyProfile() {
           {/* <p style={{ marginBottom: "0px" }}>
             main focus in art is to make digital abstract painting
           </p> */}
-          <h6 style={{ color: "#b1b1b1", marginTop: "12px" }}>
+          <h6 className="profile-portfolio">
             <img style={{ height: "30px" }} src={globe} alt="" />
             {loggedInUser?.portfolio}
           </h6>
@@ -294,7 +300,7 @@ function MyProfile() {
           </div>
           {/* <hr /> */}
           {/* <div className="profileNftContainer row mx-0 text-center p-0 cards-gap image1"> */}
-          <div className="nftTileContainer row   ntf_row cards-gap">
+          <div className="nftTileContainer row ntf_row" style={{justifyContent : "start",}}>
             {/* <div class="spinner-border text-primary" role="status">
               <span class="sr-only">Loading...</span>
             </div> */}
