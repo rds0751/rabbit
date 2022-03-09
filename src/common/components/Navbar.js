@@ -109,6 +109,7 @@ function Navbar() {
 
   window.ethereum?.on("accountsChanged", accountChangeHandler);
   let location = useLocation();
+  
   const manageNavigation = (name) => {
     if (name == "myitems") {
       dispatch(ManageNotiSideBar(false));
@@ -269,7 +270,7 @@ function Navbar() {
                         !location.pathname.includes("resource") &&
                         !location.pathname.includes("create-nft")&& 
                         !location.pathname.includes("help-center") && 
-                        !location.pathname.includes("suggestion")
+                        !location.pathname.includes("suggestion") 
                           ? "nav-link navlink_active"
                           : "nav-link"
                       }
@@ -304,6 +305,7 @@ function Navbar() {
                     onClick={closeWalletAndNoti}
                     title="Resource"
                     id="navbarScrollingDropdown"
+                    style={{padding:"0"}}
                     className={
                       location.pathname.includes("help-center") || 
                       location.pathname.includes("suggestion") 

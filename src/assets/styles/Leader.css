@@ -18,11 +18,17 @@
   margin-right: 12px;
 }
 .leaderboardTop {
-  background-color: #f8f8f8;
-  border: 0px;
-  border-radius: 0.7rem;
+  /* background-color: #f8f8f8; */
+  /* border: 0px;
+  border-radius: 0.7rem; */
   font-weight: bold;
   margin-top: 10px;
+
+
+background: #F8F8F8 0% 0% no-repeat padding-box;
+border: 1px solid #FCFCFC;
+border-radius: 13px;
+opacity: 1;
 }
 .leaderboardTitle {
   display: flex;
@@ -49,15 +55,20 @@
   justify-content: start;
   padding: 22px;
 }
+.LeaderboardInsideDetails{
+  margin-left: 7px;
+  margin-top: auto;
+}
+
 .LeaderboardInsideDetails > h2 {
   font-size: 0.9rem;
   font-weight: bold;
-  margin-left: 0.5rem;
+  /* margin-left: 0.5rem; */
 }
 .LeaderboardInsideDetails > p {
   font-size: 0.8rem;
   color: #366eef;
-  margin-left: 0.5rem;
+  /* margin-left: 0.5rem; */
 }
 .LeaderboardInsideDetails > p > span {
   margin: 0rem;
@@ -1010,6 +1021,8 @@ thead {
     display: block;
     display: flex;
     flex-direction: column;
+    /* height: 105vh; */
+    height: 323px;
     height: auto;
   }
 }
@@ -1281,6 +1294,18 @@ margin-top: 20px;
   color: #191919;
   padding: 11px 13px;
 }
+.ethCurrencySeller{
+  text-align: left;
+  font: normal normal medium 16px/25px Poppins;
+  letter-spacing: 0px;
+  color: #366EEF;
+  }
+  .purchaseValue{
+  text-align: left;
+  font: normal normal normal 16px/25px Poppins;
+  letter-spacing: 0px;
+  color: #818181;
+  }
 
 @media only screen and (max-width:1440) {
   .nft-detail{
@@ -1301,3 +1326,11 @@ margin-top: 20px;
 
 }
 /* nft-information nft detail page css end*/
+
+/* leaderboard */
+@media only screen and (min-width: 700px) and (max-width: 764px){
+.small-leaderboard-dropdown{
+  margin-left: 75%;
+}
+
+}

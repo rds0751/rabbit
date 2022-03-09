@@ -326,7 +326,7 @@ const data = {
                   </div>
                   <div className="block-chain-right">
                     <select
-                        className="input-box-1 rm-border"
+                        className="input-box-1 rm-border blockchainSelect"
                         onChange={(e) => {
                           blockchain.current = e.target.value;
                           checkReqFieldFun();
