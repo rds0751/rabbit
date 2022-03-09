@@ -18,7 +18,7 @@ export class TopBidders extends Component {
         {/* <h2>Hello</h2> */}
         <div className="container">
           <div className="row">
-            <div className="col">
+            <div className="col" style={{padding:"0"}}>
               <div
                 className="Leader_Board_container"
                 style={{ marginBottom: "30px" }}
@@ -47,7 +47,7 @@ export class TopBidders extends Component {
                     }}
                   >
                     Weekly
-                    <i className="fas fa-caret-down"></i>
+                    <img src={require("../../assets/images/downarrow.png")} style={{marginLeft:"39px"}}/>
                   </button>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li>
@@ -109,7 +109,8 @@ export class TopBidders extends Component {
                   style={{ color: "#818181", fontWeight: "normal" }}
                 >
                   {" "}
-                  <span>34 ETH</span>
+                  <span style={{textAlign: "left",font: "normal normal medium 16px/25px Poppins",
+                  letterSpacing: "0px",color:"#366EEF"}}>34 ETH</span>
                   {volume}
                 </div>
                 <div className="col">{itemsbought}</div>
