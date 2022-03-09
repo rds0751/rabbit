@@ -979,4 +979,16 @@ select:focus-visible {
   }
 }
 
+.ethCurrency{
+font: normal normal bold 14px/21px Poppins;
+letter-spacing: 0px;
+color: #366EEF;
+}
+
+.namesold{
+text-align: left;
+font: normal normal 600 14px/21px Poppins;
+letter-spacing: 0px;
+color: #191919;
+}
 /* add wallet screen css end*/

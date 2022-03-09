@@ -55,15 +55,20 @@ opacity: 1;
   justify-content: start;
   padding: 22px;
 }
+.LeaderboardInsideDetails{
+  margin-left: 7px;
+  margin-top: auto;
+}
+
 .LeaderboardInsideDetails > h2 {
   font-size: 0.9rem;
   font-weight: bold;
-  margin-left: 0.5rem;
+  /* margin-left: 0.5rem; */
 }
 .LeaderboardInsideDetails > p {
   font-size: 0.8rem;
   color: #366eef;
-  margin-left: 0.5rem;
+  /* margin-left: 0.5rem; */
 }
 .LeaderboardInsideDetails > p > span {
   margin: 0rem;
@@ -1310,6 +1315,18 @@ justify-content: inherit !important;
   color: #191919;
   padding: 11px 13px;
 }
+.ethCurrencySeller{
+  text-align: left;
+  font: normal normal medium 16px/25px Poppins;
+  letter-spacing: 0px;
+  color: #366EEF;
+  }
+  .purchaseValue{
+  text-align: left;
+  font: normal normal normal 16px/25px Poppins;
+  letter-spacing: 0px;
+  color: #818181;
+  }
 
 @media only screen and (max-width:1440) {
   .nft-detail{
