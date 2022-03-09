@@ -65,6 +65,7 @@ function LeaderBoard() {
                     Top Buyers
                   </div>
                   <select className="top-dropdown">
+                    <option>All</option>
                     <option>Weekly</option>
                     <option>Monthly</option>
                     <option>Yearly</option>
@@ -138,6 +139,7 @@ function LeaderBoard() {
                     Top Seller
                   </div>
                   <select className="top-dropdown">
+                    <option>All</option>
                     <option>Weekly</option>
                     <option>Monthly</option>
                     <option>Yearly</option>
@@ -217,6 +219,7 @@ function LeaderBoard() {
                     Top Collections
                   </div>
                   <select className="top-dropdown">
+                    <option>All</option>
                     <option>Weekly</option>
                     <option>Monthly</option>
                     <option>Yearly</option>
@@ -343,6 +346,7 @@ function LeaderBoard() {
     placeholder="Search for hashtag.."> --> */}
           </div>
           <select className="small-leaderboard-dropdown">
+            <option>All</option>
             <option>Weekly</option>
             <option>Monthly</option>
             <option>Yearly</option>
@@ -383,6 +387,7 @@ function LeaderBoard() {
           <div className="d-flex align-items-center">
             <label for="topNft-sales" className="fs-20 fw-sb c-b pr-12 d-none d-sm-none d-md-block">Top NFT sales</label>
             <select id="topNft-sales" name="topNfts" className="sales-selector fs-14 fw-m c-b">
+              <option>All</option>
               <option value="weekly">Weekly</option>
               <option value="monthly">Monthly</option>
               <option value="yearly">yearly</option>
@@ -390,7 +395,7 @@ function LeaderBoard() {
           </div>
           <div>
             <select name="sortBy" className="sort-selector fs-14 c-b">
-              <option>Sort by</option>
+              <option>Sort by All</option>
               <option value="">option1</option>
               <option value="">option2</option>
             </select>
