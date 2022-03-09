@@ -140,10 +140,11 @@ async function openForSale(requestData) {
 //     });
 // }
 
-export const NftCreatedByUser = async (successCallBack) => {
+export const NftCreatedByUser = async (successCallBack,_id) => {
+  console.log("jjjjjjjjjjjjjjjjjjjjjjjj",_id)
   try {
     const url =
-      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft-createdby-user";
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/"+_id+"/created";
     const { data } = await axios.get(url);
     if (data.success) {
       successCallBack(data);
@@ -156,10 +157,10 @@ export const NftCreatedByUser = async (successCallBack) => {
   }
 };
 // ------nft owned by user
-export const NftOwnedByUser = async (successCallBack) => {
+export const NftOwnedByUser = async (successCallBack,_id) => {
   try {
     const url =
-      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft-ownedby-user";
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/"+_id+"/owned";
     const { data } = await axios.get(url);
     if (data.success) {
       successCallBack(data);
@@ -174,10 +175,10 @@ export const NftOwnedByUser = async (successCallBack) => {
 
 //   get liked nfts in profile section
 
-export const NftLikedByUser = async (successCallBack) => {
+export const NftLikedByUser = async (successCallBack,_id) => {
   try {
     const url =
-      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/get-liked-nfts";
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/"+_id+"/liked";
     const { data } = await axios.post(url);
     if (data.success) {
       successCallBack(data);
@@ -191,11 +192,11 @@ export const NftLikedByUser = async (successCallBack) => {
 };
 
 // ---- nft   sale by user
-export const NftSellByUser = async (userId, successCallBack) => {
+export const NftSellByUser = async (successCallBack,userId) => {
   try {
     const url =
-      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts-onsale-by-user";
-    const { data } = await axios.post(url, { ownedBy: userId });
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/"+userId+"/onsale";
+    const { data } = await axios.get(url);
     if (data.success) {
       successCallBack(data);
     } else {
