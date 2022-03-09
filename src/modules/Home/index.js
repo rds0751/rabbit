@@ -150,15 +150,16 @@ export default class NftDetail extends BaseComponent {
     };
 
     sellNowNft = async () => {
+        console.log("daaaaaaaaaa",this.state?.responseData?.collectionId)
         this.setState({ loaderState: true })
         const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS
 
         console.log("jjjjj", this.state.responseData.tokenId);
-        if (this.state?.responseData?.contractAddress > 0) {
+        if (this.state?.responseData?.collectionId > 0) {
             const [blockchainError, blockchainRes] = await Utils.parseResponse(
                 BlockchainService.putOnSaleNft({
                     tokenId: this.state.responseData?.tokenId,
-                    contractAddress: this.state?.responseData?.contractAddress
+                    contractAddress: this.state?.responseData?.collectionId
                 })
             );
             console.log("blockchainError=sellNowNft=", blockchainError);
@@ -220,11 +221,11 @@ export default class NftDetail extends BaseComponent {
         const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS
 
         console.log("removeNftFromSale");
-        if (this.state?.responseData?.contractAddress > 0) {
+        if (this.state?.responseData?.collectionId > 0) {
         const [blockchainError, blockchainRes] = await Utils.parseResponse(
             BlockchainService.removeFromSaleNft({
                 tokenId: this.state.responseData?.tokenId,
-                contractAddress :this.state?.responseData?.contractAddress,
+                contractAddress :this.state?.responseData?.collectionId,
             })
         );
         if (blockchainError || !blockchainRes) {
