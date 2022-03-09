@@ -34,7 +34,12 @@ function Top_collection() {
               <h1 style={{ fontSize: "20px", fontWeight: "bold" }}>
                 Top Collections
               </h1>
-              <div className="dropdown">
+              <select className="top-dropdown">
+                <option>Weekly</option>
+                <option>Monthly</option>
+                <option>Yearly</option>
+              </select>
+              {/* <div className="dropdown">
                 <button
                   className="btn btn-secondary dropdown-toggle"
                   type="button"
@@ -71,7 +76,7 @@ function Top_collection() {
                     </a>
                   </li>
                 </ul>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -79,7 +84,7 @@ function Top_collection() {
 
       <div className="container CollectionHeading">
         <div className="row">
-          <div className="col" 
+          <div className="col"
           // style={{ paddingLeft: "40px" }}
           >
             Name

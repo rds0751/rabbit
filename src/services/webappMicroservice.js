@@ -40,6 +40,7 @@ export const getNFtsData = async (filterObj, successCallBack) => {
   }
 };
 
+
 // --------
 
 export const getNft = async (requestData, successCallBack) => {

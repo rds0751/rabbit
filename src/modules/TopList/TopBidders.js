@@ -24,7 +24,12 @@ export class TopBidders extends Component {
                 style={{ marginBottom: "30px" }}
               >
                 <h1 style={{ fontSize: "20px", fontWeight: "bold" }}>Top Buyers</h1>
-                <div className="dropdown">
+                <select className="top-dropdown">
+                  <option>Weekly</option>
+                  <option>Monthly</option>
+                  <option>Yearly</option>
+                </select>
+                {/* <div className="dropdown">
                   <button
                     className="btn btn-secondary dropdown-toggle"
                     type="button"
@@ -61,7 +66,7 @@ export class TopBidders extends Component {
                       </a>
                     </li>
                   </ul>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -69,7 +74,7 @@ export class TopBidders extends Component {
 
         <div className="container CollectionHeading">
           <div className="row">
-            <div className="col" 
+            <div className="col"
             // style={{ paddingLeft: "40px" }}
             >
               Name
