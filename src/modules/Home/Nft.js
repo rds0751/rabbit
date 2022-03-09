@@ -20,8 +20,13 @@ import { useSelector } from "react-redux";
 import Spinner from "../../common/components/Spinner";
 import axios from "axios";
 import NftCardsHome from "../../common/components/NftCardsHome";
-import dropdown from "../../assets/images/dropdown.svg";
-import {Button} from "react-bootstrap"
+import styled from "styled-components";
+
+// const Select = styled.select`
+// appearance:none;
+// background-image:url(/images/Fixed.png)
+// `;
+
 const queryString = require("query-string");
 function NftPage() {
   const defaultReq = {
@@ -137,8 +142,6 @@ function NftPage() {
     setHandleLike(!handleLike);
   };
 
-  const [statusDrop, setStatusDrop] = useState(false);
-
   return (
     <>
       {/* <div className="container ntf_div"> */}
@@ -152,7 +155,7 @@ function NftPage() {
               <select
                 name="type"
                 id="sale"
-                className="first_select ml_auto"
+                className="first_select dropdown-toggle-ellipsis"
                 placeholder="Sale Type"
                 value={filterType.type}
                 // onChange={(e) => handleChange(e)}
@@ -160,52 +163,17 @@ function NftPage() {
                 style={{ backgroundColor: "white" }}
               >
                 <option value="all">All</option>
-                <option value="fix price">Fix price</option>
+                <option value="fix price">Fix Price</option>
                 <option value="on auction">On auction</option>
               </select>
             </div>
-            <div className="mobilenftTilePageSecondSelect dropdown nftTilePageSecondSelect">
-              <p className="mb-0 sale-type">Price range</p>
-              <div className="filter-drop">
-                <div onClick={() => setStatusDrop(!statusDrop)} className="d-flex justify-content-between w-100">
-                  <div className="text">All</div>
-                  <div>
-                    <img src={dropdown} />
-                  </div>
-                </div>
-                <div
-                  className="filter-item"
-                  style={{ display: statusDrop ? "block" : "none" }}
-                >
-                  <form>
-                    <div className="row mb-3 align-items-center">
-                      <div className="col-5">
-                        <input type="number" className="form-control" placeholder="Min"/> 
-                      </div>
-                      <div className="col-2 text-center">
-                        <span className="to">to</span>
-                      </div>
-                      <div className="col-5">
-                        <input type="number" className="form-control" placeholder="Max"/>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-6">
-                      <Button variant="outline-primary">Clear</Button>
-                      </div>
-                      <div className="col-6">
-                      <Button variant="outline-primary">Apply</Button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-              {/* <select
+            <div className="mobilenftTilePageSecondSelect dropdown price-range-dropdown">
+              <select
                 name="maxPrice"
                 id="sale"
                 // className="first_select ml_auto"
                 value={filterType.maxPrice}
-                className="priceRangeDropDown"
+                className="priceRangeDropDown dropdown-toggle-ellipsis"
                 onChange={(e) => handlefilter(e)}
                 style={{ backgroundColor: "white" }}
               >
@@ -215,27 +183,27 @@ function NftPage() {
                 <option value="10">10</option>
                 <option value="25">25</option>
                 <option value="30">30</option>
-              </select> */}
-
-            </div>
-          </div>
-          <div className="filter">
-            <div className="mobilenftTilePageThirdSelect dropdown sort-drop nftTilePageSecondSelect">
-              <p className="mb-0">Sort By </p>
-              <select
-                name="sort"
-                id="sale"
-                // className="first_select ml_auto"
-                className="priceRangeDropDown"
-                style={{ backgroundColor: "white" }}
-                onChange={(e) => handlefilter(e)}
-                value={filterType.sort}
-              >
-                <option value="all">All</option>
-                <option value="1">Recently Added</option>
-                <option value="2">Recently Sold</option>
               </select>
             </div>
+          </div>
+          {/* <select className="sort-drop-down">
+            <option>Option 1</option>
+            <option>Option 2</option>
+          </select> */}
+          <div className="mobilenftTilePageThirdSelect dropdown sort-drop price-range-dropdown">
+            <select
+              name="sort"
+              id="sale"
+              // className="first_select ml_auto"
+              className="priceRangeDropDown dropdown-toggle-ellipsis"
+              style={{ backgroundColor: "white" }}
+              onChange={(e) => handlefilter(e)}
+              value={filterType.sort}
+            >
+              <option value="all">Sort By</option>
+              <option value="1">Recently Added</option>
+              <option value="2">Recently Sold</option>
+            </select>
           </div>
         </div>
         <div
@@ -249,7 +217,7 @@ function NftPage() {
             const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
             // console.log("[[[[[[[",biddingDetails.minPrice)
             const route = "nft-information/" + _id;
-              
+
             // const { startDate, endDate } = biddingDetails;
             // const time_difference = endDate.getTime() - startDate.getTime();
             // const days_difference = time_difference / (1000 * 60 * 60 * 24);
