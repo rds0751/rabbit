@@ -19,8 +19,10 @@ function NftToggle({ toggleNft }) {
               color: toggleNft ? "#191919" : "#858585",
               // color: "#000",
               borderBottom: toggleNft
-                ? "4px solid #366EEF"
+                ? "8px solid #366EEF"
                 : "1px solid #C7C7C7",
+              borderBottomRightRadius: "10px",
+              borderTopRightRadius: "10px",
               fontFamily: toggleNft ? "poppins-semibold" : "poppins",
               paddingBottom: "12px",
             }}
