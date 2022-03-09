@@ -14,10 +14,11 @@
 }
 .create-nft-text {
   text-align: center;
-  font-weight: bold;
   font-size: 32px;
-  font-family: "Poppins";
+  line-height: 48px;
+  font-family: "poppins-bold";
   /* margin-top: 90px; */
+  color: #191919;
 }
 
 .form-control-1 {
@@ -207,9 +208,6 @@
   line-height: 21px;
   margin-bottom: 24px;
   color: #828282;
-}
-.create-collection .create-text{
-  margin-right: 20px;
 }
 
 /* ---- */

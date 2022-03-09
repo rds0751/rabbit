@@ -83,6 +83,10 @@
   padding: 1% 2%;
   box-sizing: border-box;
   border-radius: 4px;
+  font-family: 'poppins-medium';
+  font-size: 16px;
+  line-height: 25px;
+  color: #191919;
 }
 .block-chain-container {
   /* border: 1px solid rgb(139, 7, 7) !important; */

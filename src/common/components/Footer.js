@@ -38,7 +38,7 @@ function Footer() {
                       type="button"
                       id="button-addon2"
                       style={{
-                        
+                        zIndex: "0"
                       }}
                     >
                       {" "}
