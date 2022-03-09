@@ -290,7 +290,7 @@ const data = {
                     rows="4"
                     name="Description"
                     placeholder="Write description"
-                    className="input-box-1"
+                    className="input-box-1 mb-0"
                     value={description.current}
                     onChange={(e) => {
                       if (DesLength < 1000) {

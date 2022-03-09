@@ -28,9 +28,8 @@ ul li .rounded-circle {
 }
 
 #create_logo {
-  width: 39px;
-  height: 42px;
-  margin-bottom: 20px;
+  width: 68px;
+  height: 68px;
 }
 
 /* @import url("https://fonts.googleapis.com/css2?family=Assistant:wght@600&family=Atkinson+Hyperlegible&family=Fugaz+One&family=Lato&family=Montserrat:wght@500&family=Poppins:wght@200;500&family=Shadows+Into+Light&family=Shippori+Antique&family=Varela+Round&display=swap"); */
@@ -772,7 +771,7 @@ input::-webkit-input-placeholder {
 .filter .dropdown select {
   border: none;
   width: 143px;
-  color: #191919;
+  color: #858585;
   font-family: 'poppins-medium';
   font-size: 14px;
   line-height: 21px;

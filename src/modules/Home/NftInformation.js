@@ -11,6 +11,7 @@ import PricingHistoryComponentGraph from "../../common/components/PricingHistory
 // import BidsComponent from "./BidsComponent";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "../../assets/styles/createSingleNft.css";
+import Close from "../../assets/images/close.png";
 
 import { Button } from "@mui/material";
 import { getNft, addNftReport } from "../../services/webappMicroservice";
@@ -924,18 +925,19 @@ export default function NftInformation(props) {
           <div className="report-modal">
             <div className="report-inner" style={{ opacity: "1" }}>
               <div className="reportthisitem">
-                <div className="reporttext poppins-normal">
+                <div className="reporttext">
                   Report this item
                 </div>
                 <div
                   className="corsstext"
                   onClick={() => setOpenReportModal(false)}
+                  style={{cursor:"pointer"}}
                 >
-                  X
+                  <img src={Close} width="12px" height="12px"/>
                 </div>
               </div>
               <div className="singlerowmodal">
-                <div> Reason</div>
+                <div className="label"> Reason</div>
                 <select>
                   <option value="select reason">Select reason</option>
                 </select>

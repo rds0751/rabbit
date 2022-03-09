@@ -105,7 +105,7 @@ function CollectionDetails() {
                   className="dropitems "
                   style={{ display: statusDrop ? "block" : "none" }}
                 >
-                  <div className="dropsingleitem">status 1</div>
+                  <div className="dropsingleitem">All</div>
                   <div className="dropsingleitem">status 1</div>
                   <div className="dropsingleitem">status 1</div>
                 </div>
@@ -122,7 +122,7 @@ function CollectionDetails() {
                   className="dropitems"
                   style={{ display: priceDrop ? "block" : "none" }}
                 >
-                  <div className="dropsingleitem">status 1</div>
+                  <div className="dropsingleitem">All</div>
                   <div className="dropsingleitem">status 1</div>
                   <div className="dropsingleitem">status 1</div>
                 </div>
@@ -140,7 +140,7 @@ function CollectionDetails() {
                 className="dropitems "
                 style={{ display: sortDrop ? "block" : "none" }}
               >
-                <div className="dropsingleitem">status 1</div>
+                <div className="dropsingleitem">All</div>
                 <div className="dropsingleitem">status 1</div>
                 <div className="dropsingleitem">status 1</div>
               </div>
