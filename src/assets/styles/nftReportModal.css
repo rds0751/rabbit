@@ -1,3 +1,6 @@
+body.active-modal{
+  overflow-y: hidden;
+}
 .report-outer {
   position: fixed;
   width: 100%;
@@ -14,8 +17,6 @@
 }
 .report-modal {
   position: absolute;
-  width: 32.8%;
-  left: 35.6%;
   background-color: white;
   opacity: 1 !important;
   top: 126px;
@@ -48,23 +49,23 @@
 .singlerowmodal {
   padding-top: 28px;
 }
-.select-div{
+select{
   width:100%;
-  background: #FFFFFF 0% 0% no-repeat padding-box;
-  border: 1px solid #C8C8C8;
-  border-radius: 6px;
   height: 42px;
-  display: flex;
-  align-items: center;
-  margin-top: 13px;
   padding: 10px 24px 9px 17px;
-}
-.select-box{
-  border: none;
-  width: 100%;
-  background-color: #fff;
-  color: #828282;
-  font-weight: 600;
+  font-size: 16px;
+  color:#828282;
+  font-weight: 500;
+  border: 1px solid #C8C8C8;
+  background: #FFFFFF;  
+  border-radius: 6px;  
+  margin-top: 13px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url(../images/drop\ down.png);
+  background-repeat: no-repeat; 
+  background-position:97% center;
 }
 .report-btn {
   width: 100%;
@@ -75,4 +76,28 @@
   border-radius: 4px;
   color: #ffffff;
   height: 42px;
+}
+
+/* mobile-view */
+@media screen and (max-width:426px){
+  .report-modal{
+    width:85%;
+    left:7.5%;
+  }
+}
+
+/* tab-view */
+@media screen and (min-width:426px) and (max-width:769px){
+  .report-modal{
+    width:82%;
+    left: 69px;
+  }
+}
+
+/* windows-view */
+@media screen and (min-width:769px){
+  .report-modal{
+    width: 32.8%;
+    left: 35.6%;
+  }
 }

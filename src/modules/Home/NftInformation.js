@@ -11,6 +11,7 @@ import PricingHistoryComponentGraph from "../../common/components/PricingHistory
 // import BidsComponent from "./BidsComponent";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "../../assets/styles/createSingleNft.css";
+import dropdowmImage from "../../assets/images/drop down.png";
 
 import { Button } from "@mui/material";
 import { getNft, addNftReport } from "../../services/webappMicroservice";
@@ -44,6 +45,12 @@ export default function NftInformation(props) {
     // addedBy: user.addUserData._id,
     reason: "",
   });
+
+  if (openReportModal) {
+    document.body.classList.add('active-modal')
+  } else {
+    document.body.classList.remove('active-modal')
+  }
   console.log(
     loggedInUser?._id,
     props?.responseData,
@@ -405,80 +412,6 @@ export default function NftInformation(props) {
                       // data-bs-target="#myModalReport"
                       onClick={() => setOpenReportModal(true)}
                     />
-                    {/* <!-- The Modal --> */}
-                    <div className="modal" id="myModalReport">
-                      <div className="modal-dialog">
-                        <div
-                          className="modal-content"
-                          style={{ borderRadius: "10px", paddingRight: "10px" }}
-                        >
-                          {/* <!-- Modal Header --> */}
-                          <div className="modal-header">
-                            <h4 className="modal-title font-15 font-weight-700 text-dark">
-                              Report this item
-                            </h4>
-                            <button
-                              type="button"
-                              className="btn-close"
-                              data-bs-dismiss="modal"
-                              style={{
-                                width: "10px",
-                                height: "10px",
-                                boxShadow: "none",
-                              }}
-                            ></button>
-                          </div>
-
-                          {/* <!-- Modal body --> */}
-                          <div className="modal-body">
-                            <h5
-                              className="font-14 font-weight-700 text-dark"
-                              style={{ marginLeft: "-0.6em" }}
-                            >
-                              Reason
-                            </h5>
-                            <div
-                              className="input-group mt-3"
-                              style={{ marginLeft: "-0.6em" }}
-                            >
-                              <select
-                                className="form-select"
-                                id="inputGroupSelect02"
-                                onChange={(e) => handleChange(e)}
-                              >
-                                <option
-                                  value="Fake collection or possible scam"
-                                  selected
-                                >
-                                  Fake collection or possible scam
-                                </option>
-                                <option value="Explicit and sensitive content">
-                                  Explicit and sensitive content
-                                </option>
-                                <option value="Spam">Spam</option>
-                                <option value="Might be stolen">
-                                  Might be stolen
-                                </option>
-                                <option value="Other">Other</option>
-                              </select>
-                            </div>
-                          </div>
-
-                          {/* <!-- Modal footer --> */}
-                          <div className="modal-footer mb-4">
-                            <button
-                              type="button"
-                              className="btn btn-primary w-100"
-                              data-bs-dismiss="modal"
-                              style={{ marginLeft: "1.1em" }}
-                              onClick={makeReport}
-                            >
-                              Make Offer
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </span>
                 </div>
               </div>
@@ -933,17 +866,15 @@ export default function NftInformation(props) {
               </div>
               <div className="singlerowmodal">
                 <h3 className="reason-text"> Reason</h3>
-                <div className="select-div">
-                  <select className="select-box">
+                  <select>
                     <option>Select reason</option>
-                    <option>Fake collection or possible scam</option>
-                    <option>Explicit and sensitive content</option>
-                    <option>Might be stolen</option>
-                    <option>Other</option>
+                    <option value="Fake collection or possible scam">Fake collection or possible scam</option>
+                    <option value="Explicit and sensitive content">Explicit and sensitive content</option>
+                    <option value="Might be stolen">Might be stolen</option>
+                    <option value="Other">Other</option>
                   </select>
-                </div>
               </div>
-              <button className="report-btn">Report</button>
+              <button className="report-btn" onClick={() => setOpenReportModal(false)}>Report</button>
             </div>
           </div>
         </div>
