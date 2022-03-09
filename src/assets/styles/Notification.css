@@ -1255,3 +1255,23 @@ opacity: 1;
   borderTopLeftRadius:0em;
   borderBottomLeftRadius: 0em;
 }
+.dropdown-toggle-ellipsis{
+  appearance: none;
+  background: url("../images/drop-down-arrow.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+order: 0;
+background-position: right;
+    position: absolute;
+    right: 10px;
+   
+    background-size: 17px;
+}
+.sort-drop-down{
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-image: url(../images/drop-arrow.png);
+  width: 100px;
+  background-repeat: no-repeat;
+}

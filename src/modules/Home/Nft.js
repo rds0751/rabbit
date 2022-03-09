@@ -20,6 +20,13 @@ import { useSelector } from "react-redux";
 import Spinner from "../../common/components/Spinner";
 import axios from "axios";
 import NftCardsHome from "../../common/components/NftCardsHome";
+import styled from "styled-components";
+
+// const Select = styled.select`
+// appearance:none;
+// background-image:url(/images/Fixed.png)
+// `;
+
 const queryString = require("query-string");
 function NftPage() {
   const defaultReq = {
@@ -148,7 +155,7 @@ function NftPage() {
               <select
                 name="type"
                 id="sale"
-                className="first_select ml_auto"
+                className="first_select dropdown-toggle-ellipsis"
                 placeholder="Sale Type"
                 value={filterType.type}
                 // onChange={(e) => handleChange(e)}
@@ -156,7 +163,7 @@ function NftPage() {
                 style={{ backgroundColor: "white" }}
               >
                 <option value="all">All</option>
-                <option value="fix price">Fix price</option>
+                <option value="fix price">Fix Price</option>
                 <option value="on auction">On auction</option>
               </select>
             </div>
@@ -166,7 +173,7 @@ function NftPage() {
                 id="sale"
                 // className="first_select ml_auto"
                 value={filterType.maxPrice}
-                className="priceRangeDropDown"
+                className="priceRangeDropDown dropdown-toggle-ellipsis"
                 onChange={(e) => handlefilter(e)}
                 style={{ backgroundColor: "white" }}
               >
@@ -179,12 +186,16 @@ function NftPage() {
               </select>
             </div>
           </div>
+          {/* <select className="sort-drop-down">
+            <option>Option 1</option>
+            <option>Option 2</option>
+          </select> */}
           <div className="mobilenftTilePageThirdSelect dropdown sort-drop nftTilePageSecondSelect">
             <select
               name="sort"
               id="sale"
               // className="first_select ml_auto"
-              className="priceRangeDropDown"
+              className="priceRangeDropDown dropdown-toggle-ellipsis"
               style={{ backgroundColor: "white" }}
               onChange={(e) => handlefilter(e)}
               value={filterType.sort}
@@ -206,7 +217,7 @@ function NftPage() {
             const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
             // console.log("[[[[[[[",biddingDetails.minPrice)
             const route = "nft-information/" + _id;
-              
+
             // const { startDate, endDate } = biddingDetails;
             // const time_difference = endDate.getTime() - startDate.getTime();
             // const days_difference = time_difference / (1000 * 60 * 60 * 24);

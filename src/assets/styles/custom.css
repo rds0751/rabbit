@@ -765,16 +765,13 @@ input::-webkit-input-placeholder {
 }
 .filter .dropdown p {
   font-family: 'poppins-medium';
-  font-size: 14px;
   line-height: 21px;
   color: #191919;
 }
 .filter .dropdown select {
   border: none;
-  width: 143px;
   color: #191919;
   font-family: 'poppins-medium';
-  font-size: 14px;
   line-height: 21px;
 }
 .second_select {
@@ -784,7 +781,6 @@ input::-webkit-input-placeholder {
   color: #858585;
   width: 120px;
   font-family: 'poppins-medium';
-  font-size: 14px;
   line-height: 21px;
   /* margin-left: 32px; */
 }
@@ -797,9 +793,8 @@ input::-webkit-input-placeholder {
   border: 1px solid #d2d2d2;
   border-radius: 4px;
   padding: 9px 12px 13px 12px;
-  width: 163px;
+  width: 190px;
   font-family: 'poppins-medium';
-  font-size: 14px;
   line-height: 21px;
 }
 /* .sort-drop > select {
