@@ -167,7 +167,7 @@ function NftPage() {
                 <option value="on auction">On auction</option>
               </select>
             </div>
-            <div className="mobilenftTilePageSecondSelect dropdown nftTilePageSecondSelect ">
+            <div className="mobilenftTilePageSecondSelect dropdown price-range-dropdown">
               <select
                 name="maxPrice"
                 id="sale"
@@ -190,7 +190,7 @@ function NftPage() {
             <option>Option 1</option>
             <option>Option 2</option>
           </select> */}
-          <div className="mobilenftTilePageThirdSelect dropdown sort-drop nftTilePageSecondSelect">
+          <div className="mobilenftTilePageThirdSelect dropdown sort-drop price-range-dropdown">
             <select
               name="sort"
               id="sale"
