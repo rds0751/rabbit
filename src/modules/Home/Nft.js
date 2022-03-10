@@ -146,7 +146,6 @@ function NftPage() {
     <>
       {/* <div className="container ntf_div"> */}
       <div className="ntf_div">
-        <Link to="/edit-items/:id">Ravi</Link>
         <NftToggle toggleNft={toggleNft} />
         {/* <Lower__homepage /> */}
         <div className="lower__homepage" style={{ width: "100%" }}>
