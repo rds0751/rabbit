@@ -19,11 +19,15 @@ import profile from "../../assets/images/profile.png";
 import { Link } from "react-router-dom";
 import { getNotificationListById } from "../../services/webappMicroservice";
 import { useSelector } from "react-redux";
+import { ManageNotiSideBar, ManageWalletSideBar } from "../../reducers/Action";
+import { useDispatch } from "react-redux";
+
 
 function Notification() {
   const { sideBar, user } = useSelector((state) => state);
   const { isOpenNoti } = sideBar;
   const [notifications, setNotifications] = useState([]);
+  const dispatch = useDispatch();
   
   useEffect(() => {
     console.log(user, "srinivas")
@@ -52,6 +56,8 @@ function Notification() {
   };
 
   const handleChange = (e) => {
+      dispatch(ManageNotiSideBar(!isOpenNoti));
+      dispatch(ManageWalletSideBar(false));
   }
 
  
