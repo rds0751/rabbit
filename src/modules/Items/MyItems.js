@@ -62,9 +62,10 @@ function MyItems() {
                 <img
                   className="nftTileEachImage img-fluid border-radius nft-img-radius card_imgmob"
                   src={Image}
+                  alt="nft-img"
                 />
                 {/* </Link> */}
-                <img id="like_icon" />
+                {/* <img id="like_icon" /> */}
                 <div
                   className="nftTileEachDetails card-lower"
                   style={{
@@ -76,7 +77,7 @@ function MyItems() {
                       className="nftTileEachDetailsFirstContainerName"
                       style={{
                         color: "#191919",
-                        height: "20px",
+                        // height: "20px",
                         overflow: "hidden",
                       }}
                     >
