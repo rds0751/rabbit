@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "../../assets/styles/Leader.css";
 import { getTopCollections } from "../../services/sellAndPurchaseMicroService";
 import styled from "styled-components";
 import dropdown from "../../assets/images/drop down.png";
