@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Image from "../../assets/images/img-format.png";
-import success from "../../assets/images/success.png";
+import success from "../../assets/images/Check.svg";
 import ethereum from "../../assets/images/ethereum.svg";
 // import { FaCloudUploadAlt } from "react-icons/fa";
 import styled from "styled-components";
@@ -25,6 +25,7 @@ import { Oval } from "react-loader-spinner";
 import "../../assets/styles/createSingleNft.css";
 import "../../assets/styles/MintModal.css";
 import UploadSingleNft from "./CreateSingleUploadFile";
+import Close from "../../assets/images/close.png";
 
 // import "../../assets/styles/Leader.css"
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
@@ -462,12 +463,12 @@ function CreateSingleNFT(props) {
                   >
                     Complete your listing
                   </div>
-                  <div
+                  {/* <div
                     onClick={() => setOpenMintodal(false)}
                     className="completelistin"
                   >
-                    X
-                  </div>
+                    <img src={Close} width="12px" height="12px" />
+                  </div> */}
                 </div>
 
                 <div className="abstractillusion">
@@ -488,9 +489,9 @@ function CreateSingleNFT(props) {
                       <div className="checkvalue checkvaluetext">1</div>
                     )}
                     <div className="checkposttext">
-                      <div>Uploading</div>
-                      <div>
-                        Uploading all Media assests and metadata to Ipfs
+                      <div className="heading">Uploading</div>
+                      <div className="description">
+                        Uploading all media assets and metadata to IPFS
                       </div>
                     </div>
                   </div>
@@ -502,11 +503,11 @@ function CreateSingleNFT(props) {
                       <div className="checkvalue checkvaluetext">2</div>
                     )}
                     <div className="checkposttext">
-                      <div>Mint</div>
-                      <div>Send transaction to create your nft</div>
+                      <div className="heading">Mint</div>
+                      <div className="description">Send Transaction to Create your NFT</div>
                     </div>
                   </div>
-                  <div className="checkpost">
+                  {/* <div className="checkpost">
                     {props.isMintSuccess && (
                       <img src={success} className="checkimg" />
                     )}
@@ -514,17 +515,17 @@ function CreateSingleNFT(props) {
                       <div className="checkvalue checkvaluetext">3</div>
                     )}
                     <div className="checkposttext">
-                      <div>Approve</div>
-                      <div>
+                      <div className="heading">Approve</div>
+                      <div className="description">
                         This transaction conducted only once per collection
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   {/* <div className="checkpost">
               <div className="checkvalue checkvaluetext noborder">4</div>
               <div className="checkposttext">
-                <div>Put on sale</div>
-                <div>Sign message to set fixed price</div>
+                <div className="heading">Put on sale</div>
+                <div className="description">Sign message to set fixed price</div>
               </div>
             </div> */}
                 </div>
