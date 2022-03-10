@@ -1312,8 +1312,8 @@ order: 0;
 background-position: right;
     position: absolute;
     right: 10px;
-   
-    background-size: 17px;
+   padding-left: 8px;;
+    background-size: 15px;
 }
 .sort-drop-down{
   appearance: none;
