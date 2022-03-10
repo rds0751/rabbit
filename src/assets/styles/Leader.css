@@ -1339,3 +1339,16 @@ margin-top: 20px;
 }
 
 }
+
+.list-item{
+  padding:10px;
+}
+.icon{
+  width:24px;
+  height:24px;
+}
+.icon-text{
+  font-size:16px;
+  font-weight:600;
+  padding-left:10px;
+}

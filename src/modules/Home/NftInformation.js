@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import image from "../../assets/images/1.jpg";
 import share from "../../assets/images/share.svg";
 import info from "../../assets/images/report.svg";
+import copyIcon from "../../assets/images/copy.png";
+import facebookIcon from "../../assets/images/Facebook.png";
+import twitterIcon from "../../assets/images/Twitter.png";
 import "../../assets/styles/nftReportModal.css";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -226,7 +229,7 @@ export default function NftInformation(props) {
                     </Button>
                   </div>
                   <span className="nft-name">
-
+                    {props?.responseData?.name}
                   </span>
                 </div>
                 <div className="col-xl-2 col-lg-2 col-md-3 col-sm-3">
@@ -234,188 +237,13 @@ export default function NftInformation(props) {
                     <img
                       alt="share"
                       src={share}
-                      data-bs-toggle="modal"
-                      data-bs-target="#myModalShare"
                       style={{ width: "31px", height: "31px", marginRight: "20px", }}
-                    />
-                    {/* <!-- The Modal --> */}
-                    <div className="modal" id="myModalShare">
-                      <div className="modal-dialog">
-                        <div
-                          className="modal-content"
-                          style={{ borderRadius: "10px", paddingRight: "10px" }}
-                        >
-                          {/* <!-- Modal Header --> */}
-                          <div className="modal-header">
-                            <h4
-                              className="modal-title font-15 font-weight-700 text-dark"
-                              style={{ padding: "0px" }}
-                            >
-                              Make an Offer
-                            </h4>
-                            <button
-                              type="button"
-                              className="btn-close"
-                              data-bs-dismiss="modal"
-                              style={{
-                                width: "10px",
-                                height: "10px",
-                                boxShadow: "none",
-                              }}
-                            ></button>
-                          </div>
-
-                          {/* <!-- Modal body --> */}
-                          <div className="modal-body px-4">
-                            <h5 className="font-14 font-weight-700 text-dark">
-                              Price
-                            </h5>
-                            <div className="input-group">
-                              <span
-                                className="input-group-text font-15 text-primary bg-white"
-                                id="basic-addon1"
-                                style={{ marginLeft: "-0.6em" }}
-                              >
-                                ETH
-                              </span>
-                              <input
-                                type="text"
-                                className="form-control"
-                                placeholder="0.01($210)"
-                                aria-label="Username"
-                                aria-describedby="basic-addon1"
-                              />
-                            </div>
-                            <h5
-                              className="font-14 font-weight-700 mt-4 text-dark"
-                              style={{ marginLeft: "-0.6em" }}
-                            >
-                              Expiration Date
-                            </h5>
-                            <div className="input-group">
-                              <button
-                                className="btn border dropdown-toggle font-15"
-                                type="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                                style={{ marginLeft: "-0.6em" }}
-                              >
-                                A month
-                              </button>
-                              <ul className="dropdown-menu">
-                                <li>
-                                  <a className="dropdown-item" href="#">
-                                    Jan
-                                  </a>
-                                </li>
-                                <li>
-                                  <a className="dropdown-item" href="#">
-                                    Feb
-                                  </a>
-                                </li>
-                                <li>
-                                  <a className="dropdown-item" href="#">
-                                    Mar
-                                  </a>
-                                </li>
-                                <li>
-                                  <a className="dropdown-item" href="#">
-                                    Apr
-                                  </a>
-                                </li>
-                              </ul>
-                              <input
-                                type="text"
-                                className="form-control"
-                                placeholder="&#xf017; 11:25 AM"
-                                aria-label="Username"
-                                aria-describedby="basic-addon1"
-                              />
-                            </div>
-                            <h5
-                              className="font-14 font-weight-700 mt-4 text-dark"
-                              style={{ marginLeft: "-0.6em" }}
-                            >
-                              Expiration Date
-                            </h5>
-                            <div className="input-group">
-                              <button
-                                className="btn border dropdown-toggle font-15"
-                                type="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                                style={{ marginLeft: "-0.6em" }}
-                              >
-                                A month
-                              </button>
-                              <ul className="dropdown-menu">
-                                <li>
-                                  <a className="dropdown-item" href="#">
-                                    Jan
-                                  </a>
-                                </li>
-                                <li>
-                                  <a className="dropdown-item" href="#">
-                                    Feb
-                                  </a>
-                                </li>
-                                <li>
-                                  <a className="dropdown-item" href="#">
-                                    Mar
-                                  </a>
-                                </li>
-                                <li>
-                                  <a className="dropdown-item" href="#">
-                                    Apr
-                                  </a>
-                                </li>
-                              </ul>
-                              <input
-                                type="text"
-                                className="form-control"
-                                placeholder="&#xf017; 11:25 AM"
-                                aria-label="Username"
-                                aria-describedby="basic-addon1"
-                              />
-                            </div>
-                          </div>
-
-                          {/* <!-- Modal footer --> */}
-                          <div className="modal-footer mb-4">
-                            <button
-                              type="button"
-                              data-bs-toggle="modal"
-                              data-bs-target="#myModalShare"
-                              className="btn btn-primary w-100"
-                              data-bs-dismiss="modal"
-                            // style={{ marginLeft: "1.1em" }}
-                            >
-                              Make Offer
-                            </button>
-                          </div>
-
-                          {/* <!-- Modal footer --> */}
-                          <div className="modal-footer mb-4">
-                            <button
-                              type="button"
-                              data-bs-toggle="modal"
-                              data-bs-target="#myModalShare"
-                              className="btn btn-primary w-100"
-                              data-bs-dismiss="modal"
-                            // style={{ marginLeft: "1.1em" }}
-                            >
-                              Make Offer
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    />                    
                     <img
                       src={info}
                       alt="info"
                       style={{ width: "31px", height: "31px" }}
                       data-bs-toggle="modal"
-                      // data-bs-target="#myModalReport"
                       onClick={() => setOpenReportModal(true)}
                     />
                   </span>
@@ -501,128 +329,49 @@ export default function NftInformation(props) {
                     </div>
                     <span className="nft-name">{props?.responseData?.name}</span>
                   </div>
-                  <div className="col-xl-2 col-lg-2 col-md-3 col-sm-3">
-                    <span className="share-img">
+                  <div className="col-xl-2 col-lg-2 col-md-3 col-sm-3 d-flex align-items-center">
+                    <div>
+                      <a
+                        className="nav-link dropdown"
+                        href="#"
+                        id="navbarDropdown"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
                       <img
-                        alt="share"
-                        src={share}
-                        data-bs-toggle="modal"
-                        data-bs-target="#myModalShare"
-                        style={{ width: "31px", height: "31px", marginRight: "20px", }}
-                      />
-                      {/* <!-- The Modal --> */}
-                      <div className="modal" id="myModalShare">
-                        <div className="modal-dialog">
-                          <div
-                            className="modal-content"
-                            style={{ borderRadius: "10px", paddingRight: "10px" }}
-                          >
-                            {/* <!-- Modal Header --> */}
-                            <div className="modal-header">
-                              <h4
-                                className="modal-title font-15 font-weight-700 text-dark"
-                                style={{ padding: "0px" }}
-                              >
-                                Make an Offer
-                              </h4>
-                              <button
-                                type="button"
-                                className="btn-close"
-                                data-bs-dismiss="modal"
-                                style={{
-                                  width: "10px",
-                                  height: "10px",
-                                  boxShadow: "none",
-                                }}
-                              ></button>
-                            </div>
-
-                            {/* <!-- Modal body --> */}
-                            <div className="modal-body px-4">
-                              <h5 className="font-14 font-weight-700 text-dark">
-                                Price
-                              </h5>
-                              <div className="input-group">
-                                <span
-                                  className="input-group-text font-15 text-primary bg-white"
-                                  id="basic-addon1"
-                                  style={{ marginLeft: "-0.6em" }}
-                                >
-                                  ETH
-                                </span>
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  placeholder="0.01($210)"
-                                  aria-label="Username"
-                                  aria-describedby="basic-addon1"
-                                />
-                              </div>
-                              <h5
-                                className="font-14 font-weight-700 mt-4 text-dark"
-                                style={{ marginLeft: "-0.6em" }}
-                              >
-                                Expiration Date
-                              </h5>
-                              <div className="input-group">
-                                <button
-                                  className="btn border dropdown-toggle font-15"
-                                  type="button"
-                                  data-bs-toggle="dropdown"
-                                  aria-expanded="false"
-                                  style={{ marginLeft: "-0.6em" }}
-                                >
-                                  A month
-                                </button>
-                                <ul className="dropdown-menu">
-                                  <li>
-                                    <a className="dropdown-item" href="#">
-                                      Jan
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a className="dropdown-item" href="#">
-                                      Feb
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a className="dropdown-item" href="#">
-                                      Mar
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a className="dropdown-item" href="#">
-                                      Apr
-                                    </a>
-                                  </li>
-                                </ul>
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  placeholder="&#xf017; 11:25 AM"
-                                  aria-label="Username"
-                                  aria-describedby="basic-addon1"
-                                />
-                              </div>
-                            </div>
-
-                            {/* <!-- Modal footer --> */}
-                            <div className="modal-footer mb-4">
-                              <button
-                                type="button"
-                                data-bs-toggle="modal"
-                                data-bs-target="#myModalShare"
-                                className="btn btn-primary w-100"
-                                data-bs-dismiss="modal"
-                              // style={{ marginLeft: "1.1em" }}
-                              // style={{ marginLeft: "1.1em" }}
-                              >
-                                Make Offer
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                          alt="share"
+                          src={share}
+                          style={{ width: "31px", height: "31px", marginRight: "20px", }}
+                        />
+                      </a>
+                      <ul
+                        className="dropdown-menu profilemenu"
+                        aria-labelledby="navbarDropdown"
+                        style={{
+                          width:"220px",
+                          position: "absolute",
+                          marginLeft:"30px",
+                          boxShadow: "0px 3px 6px #00000012",
+                          border: "1px solid #F4F4F4",
+                          borderRadius: "6px",
+                          background: "#FFFFFF",                        
+                        }}
+                      >
+                      <li className="list-item">
+                        <img src={copyIcon} alt="icon" className="icon" />
+                        <span className="icon-text">Copy link</span>
+                      </li>
+                      <li className="list-item">
+                        <img src={facebookIcon} alt="icon" className="icon" />
+                        <span className="icon-text">Share on Facebook</span>
+                      </li>
+                      <li className="list-item">
+                        <img src={twitterIcon} alt="icon" className="icon"/>
+                        <span className="icon-text">Share on Twitter</span>
+                      </li>
+                    </ul>                        
+                    </div>
                       <img
                         src={info}
                         alt="info"
@@ -707,7 +456,6 @@ export default function NftInformation(props) {
                           </div>
                         </div>
                       </div>
-                    </span>
                   </div>
                 </div>
               </div>
