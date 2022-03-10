@@ -198,6 +198,23 @@ function CreateSingleNFT(props) {
       ) : (
         ""
       )}
+
+
+      {/* ----------------------------- */}
+      {props?.isNftCreated ? (
+        <div className="center">
+          {" "}
+          <Oval
+            vertical="top"
+            horizontal="center"
+            color="#00BFFF"
+            height={30}
+            width={30}
+          />
+        </div>
+      ) : (
+        ""
+      )}
       <ToastContainer
         position="top-center"
         autoClose={6000}

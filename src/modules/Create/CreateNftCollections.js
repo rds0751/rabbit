@@ -7,7 +7,7 @@ import { useDropzone } from "react-dropzone";
 import Utils from "../../utility";
 import BlockchainServices from "../../services/blockchainService";
 import getCollection from "../../services/contentMicroservice";
-
+import { Oval } from "react-loader-spinner";
 import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
@@ -36,6 +36,7 @@ function CreateNftCollections(props) {
   const [clickedOn, setClickedOn] = useState("");
   const [selectFile, setSelectFile] = useState("");
   const [checkReqField, setCheckReqField] = useState(false);
+  const [loaderState, setloaderState] = useState(false);
 
   // -------
   const [Categories, setCategories] = useState([]);
@@ -134,6 +135,7 @@ function CreateNftCollections(props) {
   };
 
   const handleSubmit = async (e) => {
+    setloaderState(true);
     e.preventDefault();
     // e.preventDefault();
     if (
@@ -152,6 +154,8 @@ function CreateNftCollections(props) {
       );
       console.log("require");
       alert("154");
+      setloaderState(false);
+
       toast.error("Fill the required field");
       return null;
     }
@@ -182,6 +186,7 @@ const [blockchainError, blockchainRes] = await Utils.parseResponse(
 console.log("colllectionnnnnnnnnnnnnnnnnnnnssssss",blockchainRes.contract_address)
 if (blockchainError || !blockchainRes) {
   // this.setState({ loaderState: false });
+  setloaderState(false);
 
   return Utils.apiFailureToast(
     blockchainError.message || "Unable to Create Collection on blockchain"
@@ -201,9 +206,13 @@ const data = {
 //-----------------------
     const result = await createCollection(data);
     if (result.success) {
+      setloaderState(false);
+
       toast.success("Collection created");
       navigate("/collections-tile");
     } else toast.error(result.message);
+    setloaderState(false);
+
     console.log(result, ">>> submit nftCollection");
   };
   const checkReqFieldFun = () => {
@@ -226,6 +235,20 @@ const data = {
 
   return (
       <>
+      {loaderState ? (
+        <div className="center">
+          {" "}
+          <Oval
+            vertical="top"
+            horizontal="center"
+            color="#00BFFF"
+            height={30}
+            width={30}
+          />
+        </div>
+      ) : (
+        ""
+      )}
         <div className="main-container">
           <h1 className="fs-32 fw-b c-b title">Create your collection</h1>
           <p className="fs-16 fw-600 c-b pt-50">Upload Logo*</p>
