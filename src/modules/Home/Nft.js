@@ -173,7 +173,7 @@ function NftPage() {
                     <img src={dropdown} />
                   </div>
                 </div>
-                <div
+                <div 
                   className="filter-item"
                   style={{ display: statusDrop ? "block" : "none" }}
                 >
