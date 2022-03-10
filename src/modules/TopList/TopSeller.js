@@ -1,4 +1,4 @@
-import { style } from "@mui/system";
+//import { style } from "@mui/system";
 import React, { Component, useState, useEffect } from "react";
 import "../../assets/styles/Leader.css";
 // import './Top_collection.css'

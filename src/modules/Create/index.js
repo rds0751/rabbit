@@ -181,7 +181,7 @@ class Index extends BaseComponent {
       <>
         <CreateSingleNFT
           mintNft={this.mintNft}
-          isNftCreated={this.isNftCreated}
+          isNftCreated={this.state.isNftCreated}
           loaderState={this.state.loaderState}
           createNftHandler={this.createNftHandler.bind(this)}
           url

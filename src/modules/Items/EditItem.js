@@ -114,10 +114,10 @@ function EditItem(Collection) {
   return (
     <>
       <div className="editItem">
-        <div className="blackish bold-bold font-32">
+        <h3 className="blackish bold-bold font-32" style={{marginLeft:"-8px"}}>
           <img src={leftArrow} alt="" />
           Edit Item
-        </div>
+        </h3>
 
         <div className="UploadFile row">
           <label
@@ -168,12 +168,12 @@ function EditItem(Collection) {
                 src={UpArrow}
                 alt=""
                 style={{
-                  width: "1.2rem",
-                  height: "1.2rem",
-                  marginTop: "0.5rem",
+                  width: "24px",
+                  height: "24px",
+                  marginTop: "37px",
                 }}
               />
-              <div style={{ fontSize: "0.7rem", color: "#366eff" }}>
+              <div style={{ fontSize: "14px", color: "#366eff" }}>
                 Replace File
               </div>
             </div>
@@ -220,20 +220,20 @@ function EditItem(Collection) {
           enctype="multipart/form-data"
           action=""
         >
-          <div className="form-group row">
+          <div className="row">
             <label
               for="fname"
               className=" control-label poppins-medium"
               style={{
-                fontSize: 14,
+                fontSize: "16px",
                 fontWeight: "bold",
-                marginTop: "0.5rem",
-                marginBottom: "0.3rem",
+                marginTop: "30px",
+                marginBottom: "13px",
               }}
             >
               Name*:
             </label>
-            <div className="">
+            <div style={{height:"42px"}}>
               <input
                 type="text"
                 id="sound_name"
@@ -245,19 +245,19 @@ function EditItem(Collection) {
               />
             </div>
           </div>
-          <div className="form-group row marg-top-32">
+          <div className="row">
             <label
               for="fname"
               className=" control-label poppins-medium bold-bold font-16"
               style={{
                 fontWeight: "bold",
-                marginTop: "0.5rem",
-                marginBottom: "0.3rem",
+                marginTop: "28px",
+                marginBottom: "13px",
               }}
             >
               Description*
             </label>
-            <div className="">
+            <div>
               <textarea
                 type="text"
                 id="sound_name"
@@ -288,10 +288,10 @@ function EditItem(Collection) {
               for="fname"
               className=" control-label"
               style={{
-                fontSize: 14,
+                fontSize: "16px",
                 fontWeight: "bold",
-                marginTop: "0.5rem",
-                marginBottom: "0.3rem",
+                marginTop: "28px",
+                marginBottom: "13px",
               }}
             >
               Collection
@@ -323,8 +323,15 @@ function EditItem(Collection) {
                 </option>
               ))} */}
           <div>
-            <div className="form-label marg-top-32">Blockchain*</div>
-            <div className="block-chain-container background-f3">
+            <div className="form-label marg-top-32" style={{fontWeight: 'bold'}}>Blockchain</div>
+            <div>
+              <input
+                type="text"
+                className="edit-form-input"
+                name="blockchain"
+              />
+            </div>
+            {/* <div className="block-chain-container background-f3">
               <div>
                 <img src={ethereum} height="32px" />
               </div>
@@ -341,7 +348,7 @@ function EditItem(Collection) {
                   </option>
                 </select>
               </div>
-            </div>
+            </div> */}
           </div>
           {/* --- */}
           {/* <div>
@@ -378,15 +385,18 @@ function EditItem(Collection) {
               className="form-control"
               style={{ backgroundColor: "#f3f3f3" }}
             />
-          </div>
+          </div>  
         </div> */}
         </form>
         <div className="done">
           <button
             onClick={onSubmit}
             type="button"
-            className="btn btn-secondary"
-            style={{ width: "30%", backgroundColor: "#366eef" }}
+            className="btn btn-primary"
+            style={{ 
+              width: "164px",
+              height:"42px",
+            }}
           >
             Done
           </button>

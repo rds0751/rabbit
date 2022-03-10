@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Like from "../../assets/images/Like.svg";
 import likes from "../../assets/images/likes.svg";
 import { useSelector } from "react-redux";
+// import { useHistory } from "react-router-dom";
 
 import {
   getNfts,
@@ -10,6 +11,8 @@ import {
   getNFtsData,
 } from "../../services/webappMicroservice";
 function  NftCardsHome({ nft }) {
+  // let history = useHistory();
+
   const navigate = useNavigate();
   const { user, sideBar } = useSelector((state) => state);
   const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
@@ -18,7 +21,7 @@ function  NftCardsHome({ nft }) {
   // const endDate = biddingDetails.endDate;
   // const daysleft = new Date(endDate - currDate).getDate() - 1;
   // console.log(daysleft, "<<<daysleft");
-  const route = "nft-information/" + _id;
+  const route = "/nft-information/" + _id;
   const likeNft = (id) => {
     if (user.loggedInUser == null) {
       navigate("/add-wallet");
@@ -51,12 +54,14 @@ function  NftCardsHome({ nft }) {
           <img
             className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
             src={ipfsUrl}
+            alt="nft-img"
           />
         </Link>
         <img
           id="like_icon"
           onClick={() => likeNft(_id)}
           src={handleLike ? Like : likes}
+          alt="like"
         />
         <div
           className="nftTileEachDetails card-lower"

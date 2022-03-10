@@ -21,7 +21,8 @@ import Spinner from "../../common/components/Spinner";
 import axios from "axios";
 import NftCardsHome from "../../common/components/NftCardsHome";
 import styled from "styled-components";
-
+import dropdown from "../../assets/images/dropdown.svg";
+import {Button} from "react-bootstrap"
 // const Select = styled.select`
 // appearance:none;
 // background-image:url(/images/Fixed.png)
@@ -142,6 +143,8 @@ function NftPage() {
     setHandleLike(!handleLike);
   };
 
+  const [statusDrop, setStatusDrop] = useState(false);
+
   return (
     <>
       {/* <div className="container ntf_div"> */}
@@ -167,8 +170,43 @@ function NftPage() {
                 <option value="on auction">On auction</option>
               </select>
             </div>
-            <div className="mobilenftTilePageSecondSelect dropdown price-range-dropdown">
-              <select
+            <div className="mobilenftTilePageSecondSelect dropdown nftTilePageSecondSelect">
+              <p className="mb-0 sale-type">Price range</p>
+              <div className="filter-drop">
+                <div onClick={() => setStatusDrop(!statusDrop)} className="d-flex justify-content-between w-100">
+                  <div className="text">All</div>
+                  <div>
+                    <img src={dropdown} />
+                  </div>
+                </div>
+                <div 
+                  className="filter-item"
+                  style={{ display: statusDrop ? "block" : "none" }}
+                >
+                  <form>
+                    <div className="row mb-3 align-items-center">
+                      <div className="col-5">
+                        <input type="number" className="form-control" placeholder="Min"/> 
+                      </div>
+                      <div className="col-2 text-center">
+                        <span className="to">to</span>
+                      </div>
+                      <div className="col-5">
+                        <input type="number" className="form-control" placeholder="Max"/>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-6">
+                      <Button variant="outline-primary">Clear</Button>
+                      </div>
+                      <div className="col-6">
+                      <Button variant="outline-primary">Apply</Button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              {/* <select
                 name="maxPrice"
                 id="sale"
                 // className="first_select ml_auto"
@@ -183,7 +221,7 @@ function NftPage() {
                 <option value="10">10</option>
                 <option value="25">25</option>
                 <option value="30">30</option>
-              </select>
+              </select>*/}
             </div>
           </div>
           {/* <select className="sort-drop-down">
@@ -217,10 +255,6 @@ function NftPage() {
             const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
             // console.log("[[[[[[[",biddingDetails.minPrice)
             const route = "nft-information/" + _id;
-
-            // const { startDate, endDate } = biddingDetails;
-            // const time_difference = endDate.getTime() - startDate.getTime();
-            // const days_difference = time_difference / (1000 * 60 * 60 * 24);
 
             return (
               <>
