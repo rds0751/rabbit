@@ -51,11 +51,14 @@ function Notification() {
     setState({ ...state, [anchor]: open });
   };
 
+  const handleChange = (e) => {
+  }
+
  
   return (
     <div style={{ display: isOpenNoti ? null : "none" }} className="main-cont">
       {/* ------------ */}
-      <div className="empty_div"></div>
+      <div className="empty_div" onClick = {() => handleChange()}></div>
       <div className="noti-outer">
         <h3 className="notification-text">Notification</h3>
           <div className="all-noti">
