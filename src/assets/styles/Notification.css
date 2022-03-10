@@ -1323,3 +1323,10 @@ background-position: right;
   width: 100px;
   background-repeat: no-repeat;
 }
+
+.toggle-line{
+  border-radius: 10px;
+}
+.toggle-container{
+  display: flex;
+}
