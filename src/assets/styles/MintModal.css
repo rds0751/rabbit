@@ -153,3 +153,29 @@
   line-height: 25px;
   color: #191919;
 }
+
+@media only screen and (max-width:1440px) {
+  .mint-outer{
+    width: 40%;
+  }
+}
+@media only screen and (max-width:1200px) {
+  .mint-outer{
+    width: 50%;
+    left: 25%;
+  }
+}
+@media only screen and (max-width:1024px) {
+  .abstractillusioncontent {
+    width: 65%;
+  }
+}
+@media only screen and (max-width:480px) {
+  .mint-outer{
+    left: 5%;
+    width: 90%;
+  }
+  .checkimg {
+    left: -5%;
+  }
+}
