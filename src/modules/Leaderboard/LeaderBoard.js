@@ -15,6 +15,7 @@ import {
 import { getTopSellers } from "../../services/sellAndPurchaseMicroService";
 import { getTopCollections } from "../../services/sellAndPurchaseMicroService";
 import { getTopNftSales } from "../../services/webappMicroservice";
+import { borderRadius } from "@mui/system";
 
 function LeaderBoard() {
 
@@ -65,6 +66,7 @@ function LeaderBoard() {
                     Top Buyers
                   </div>
                   <select className="top-dropdown">
+                    <option>All</option>
                     <option>Weekly</option>
                     <option>Monthly</option>
                     <option>Yearly</option>
@@ -135,9 +137,10 @@ function LeaderBoard() {
               <div className="card-body p-0">
                 <div className="leaderboardTitle">
                   <div className="col" style={{ fontSize: "16px" }}>
-                    Top Seller
+                    Top Sellers
                   </div>
                   <select className="top-dropdown">
+                    <option>All</option>
                     <option>Weekly</option>
                     <option>Monthly</option>
                     <option>Yearly</option>
@@ -187,7 +190,7 @@ function LeaderBoard() {
                             <h2>{sellerFirstName}{sellerLastName}</h2>
                             <p style={{ display: 'flex' }}>
                               ETH
-                              <span>({totalPurchasedValue})</span>
+                              <span className="purchaseValue">({totalPurchasedValue})</span>
                             </p>
 
                           </div>
@@ -217,6 +220,7 @@ function LeaderBoard() {
                     Top Collections
                   </div>
                   <select className="top-dropdown">
+                    <option>All</option>
                     <option>Weekly</option>
                     <option>Monthly</option>
                     <option>Yearly</option>
@@ -343,6 +347,7 @@ function LeaderBoard() {
     placeholder="Search for hashtag.."> --> */}
           </div>
           <select className="small-leaderboard-dropdown">
+            <option>All</option>
             <option>Weekly</option>
             <option>Monthly</option>
             <option>Yearly</option>
@@ -383,6 +388,7 @@ function LeaderBoard() {
           <div className="d-flex align-items-center">
             <label for="topNft-sales" className="fs-20 fw-sb c-b pr-12 d-none d-sm-none d-md-block">Top NFT sales</label>
             <select id="topNft-sales" name="topNfts" className="sales-selector fs-14 fw-m c-b">
+              <option>All</option>
               <option value="weekly">Weekly</option>
               <option value="monthly">Monthly</option>
               <option value="yearly">yearly</option>
@@ -390,7 +396,7 @@ function LeaderBoard() {
           </div>
           <div>
             <select name="sortBy" className="sort-selector fs-14 c-b">
-              <option>Sort by</option>
+              <option>Sort by All</option>
               <option value="">option1</option>
               <option value="">option2</option>
             </select>
@@ -399,7 +405,7 @@ function LeaderBoard() {
         <div className="nfts-cont row ntf_row">
           {/* <div className="col-md-3 col-lg-3 col-sm-6 col-11 images"> */}
           {topNftSales.map((curElem) => {
-            const { cdnUrl, name, ownedBy, maxPrice2, daysLeft } =
+            const { cdnUrl, name, ownedBy, maxPrice2, daysLeft,likesCount } =
               curElem;
             return (
               <div className="nftCard col-md-6 col-lg-3 col-sm-12 nft_card card-mar">
@@ -423,19 +429,28 @@ function LeaderBoard() {
                       <div className="container__down">
                         <h6 className="value__high" style={{ margin: 'inherit' }}>
                           Sold to&nbsp;
-                          <span style={{ fontWeight: "bold", color: "black" }}  >
+                          <span className="namesold"  >
                             {(String(ownedBy).length >= 7) ? (!ownedBy ? " " : (String(ownedBy).substring(0, 8) + "...")) : (String(ownedBy) === undefined ? "" : ownedBy)}
                           </span>
-                          &nbsp;for<span> &nbsp;{curElem.biddingDetails.currency}</span>
+                          &nbsp;for<span className="ethCurrency">&nbsp; {(curElem.salesInfo.price)}&nbsp;{(curElem.biddingDetails.currency).toUpperCase()}</span>
                         </h6>
+                        <div style={{display: "flex", height: "auto",marginTop:"3px"}}>
                         <h6 className="value__k">
-                          {daysLeft}{" "}
+                          {/* {daysLeft}{" "} */}
+                          {likesCount}{" "}
                           {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
+                                                
+                          
+                        </h6>
+                        <div style={{background: "#FFFFFF 0% 0% no-repeat padding-box",border:"1px solid #FFFFFF",borderRadius:"5px",width:"19px",height:"19px",display:"flex",justifyContent:"center",alignItems:"center",marginLeft:"8.38px"}}>
                           <i
                             className="fa-solid fa-heart"
-                            style={{ color: "#ef3643" }}
+                            style={{ color: "#ef3643"}}
                           ></i>
-                        </h6>
+                            </div>  
+
+                        </div>
+                        
                       </div>
                     </div>
                   </div>

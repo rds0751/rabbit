@@ -9,6 +9,9 @@
   border: none;
   font-weight: bold;
 }
+.inputbox:focus, .inputbox:hover {
+  background-color: #f8f8f8;
+}
 @media only screen and (max-width:1600px) {
     .inputbox {
       width: 75%;
@@ -25,16 +28,16 @@
     width:100px;}
   }
 .notification-icon{
-  width:19px;
-  height:21px;
+  width:28px;
+  height:30px;
 }
 .profile-icon{
-  width: 18px;
-  height: 21px;
+  width: 31px;
+  height: 31px;
 }
 .wallet-icon{
-  width: 21px;
-  height: 21px
+  width:28px;
+  height:30px;
 }
 .create-btn{
   width:146px;

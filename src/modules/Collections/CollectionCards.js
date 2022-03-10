@@ -88,6 +88,7 @@ function Collections_tile() {
           </div>
           <div className="filter">
             <div className="mobilenftTilePageThirdSelect dropdown sort-drop nftTilePageSecondSelect">
+              <p className="mb-0">Sort By </p>
               <select
                 name="sort"
                 value={filterData.sort}
@@ -96,7 +97,7 @@ function Collections_tile() {
                 onChange={(e) => handleFilter(e)}
                 className="priceRangeDropDown"
               >
-                <option value="all">Sort By</option>
+                <option value="all">All</option>
                 <option value="recently added">Recently Added</option>
                 <option value="recently sold">Recently Sold</option>
               </select>

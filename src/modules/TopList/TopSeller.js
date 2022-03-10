@@ -1,3 +1,4 @@
+import { style } from "@mui/system";
 import React, { Component, useState, useEffect } from "react";
 import "../../assets/styles/Leader.css";
 // import './Top_collection.css'
@@ -28,13 +29,18 @@ function TopSeller() {
       {/* <h2>Hello</h2> */}
       <div className="container">
         <div className="row">
-          <div className="col">
+          <div className="col" style={{padding:"0"}}>
             <div
               className="Leader_Board_container "
               style={{ marginBottom: "30px" }}
             >
               <h1 style={{ fontSize: "20px", fontWeight: "bold" }}>Top Sellers</h1>
-              <div className="dropdown">
+              <select className="top-dropdown">
+                <option>Weekly</option>
+                <option>Monthly</option>
+                <option>Yearly</option>
+              </select>
+              {/* <div className="dropdown">
                 <button
                   className="btn btn-secondary dropdown-toggle"
                   type="button"
@@ -52,9 +58,9 @@ function TopSeller() {
                   }}
                 >
                   Weekly
-                  <i className="fas fa-caret-down"></i>
+                 <img src={require("../../assets/images/downarrow.png")} style={{marginLeft:"39px"}}/>
                 </button>
-                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
                   <li>
                     <a className="dropdown-item" href="#">
                       Weekly
@@ -71,7 +77,7 @@ function TopSeller() {
                     </a>
                   </li>
                 </ul>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -79,7 +85,7 @@ function TopSeller() {
 
       <div className="container CollectionHeading">
         <div className="row">
-          <div className="col" 
+          <div className="col"
           // style={{ paddingLeft: "40px" }}
           >
             Name
@@ -113,8 +119,8 @@ function TopSeller() {
                 style={{ color: "#818181", fontWeight: "normal" }}
               >
                 {" "}
-                <span> ETH</span>
-                ({totalPurchasedValue})
+                <span className="ethCurrencySeller"> ETH</span>
+                ({"$"+totalPurchasedValue})
               </div>
               <div className="col">{itemssold}</div>
             </div>
