@@ -619,6 +619,7 @@ height: 47px;
 .nav-link:hover {
   color: #828282 !important;
 }
+
 .nav-link.navlink_active {
   font: normal normal 600 16px/25px Poppins;
   color: #191919 !important;
@@ -1292,10 +1293,7 @@ opacity: 1;
   .subscribe{
     white-space: normal;
   }
- }
-
-
-.submitbuttonfooter{
+ }.submitbuttonfooter{
   height:36px;
   fontWeight:400;
   width: 116px;

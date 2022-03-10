@@ -99,7 +99,7 @@ function TopSeller() {
         </div>
       </div>
       {topSellers.map((curElem) => {
-        const { Image, sellerFirstName, sellerLastName, itemssold, totalPurchasedValue } = curElem;
+        const { Image, sellerFirstName, sellerLastName, itemssold, totalPurchasedValue,topSeller } = curElem;
         return (
           <div className="container ">
             <div

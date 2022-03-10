@@ -1023,7 +1023,7 @@ thead {
     flex-direction: column;
     /* height: 105vh; */
     height: 323px;
-    height: auto;
+    /* height: auto; */
   }
 }
 .leader-container{

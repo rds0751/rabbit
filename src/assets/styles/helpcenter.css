@@ -75,6 +75,7 @@
     margin-bottom: 9%;
   }
 }
+
 @media screen and (max-width: 572px) {
   .single-card {
     padding: 20px 34px;
@@ -89,5 +90,48 @@
   }
   .help-center {
     text-align: center;
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .single-card {
+    margin-top: 24px;
+  }
+  .card-outer-body {
+    margin-top: 8px;
+  }
+  .help-center {
+    text-align: left;
+    text-align: left;
+    font: normal normal 600 18px/27px Poppins;
+    letter-spacing: 0px;
+    color: #191919;
+    opacity: 1;
+  }
+  .help-outer {
+    margin: 0% 3.6%;
+    margin-top: 52px;
+    margin-bottom: 9%;
+  }
+}
+@media only screen and (min-width: 426px) and (max-width: 980px) {
+  .single-card {
+    padding-left: 14px;
+    padding-right: 9px;
+    width: 310px;
+    margin-bottom: 49px;
+  }
+  .card-outer-body {
+    margin-top: 39px;
+  }
+  .help-center {
+    text-align: left;
+    font: normal normal 600 20px/30px Poppins;
+    letter-spacing: 0px;
+    color: #191919;
+    opacity: 1;
+  }
+  .help-outer{
+    margin-top: 41px;
   }
 }
