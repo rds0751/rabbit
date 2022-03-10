@@ -133,6 +133,13 @@ height: 47px;
   width: 21px;
   height: 21px;
 }
+.submitbuttonfooter{
+  height:36px;
+  fontWeight:400;
+  width: 116px;
+  borderTopLeftRadius:0em;
+  borderBottomLeftRadius: 0em;
+}
 @media only screen and (max-width: 1170px) {
   .fa-caret-down {
     display: block !important;
@@ -579,6 +586,7 @@ height: 47px;
   height: 31px;
 }
 .left_section_nav .li_underline {
+ 
   border-bottom: 3px solid #366eef;
 }
 .right_section_nav {
@@ -638,6 +646,8 @@ height: 47px;
 .navbar-expand-lg .navbar-nav .nav-link {
   padding: 0px;
   background: #ffffff 0% 0% no-repeat padding-box;
+  padding-bottom: 23px;
+  padding-top: 20px;
   /* margin-right: 15px;
   margin-left: 15px; */
 }
@@ -904,7 +914,9 @@ height: 47px;
     /* width: 326px; */
     height: 187.19px;
     object-fit: contain;
+
   }
+
   .ntf_div {
     padding: 0px !important;
     margin: 0px 80px;
@@ -984,7 +996,7 @@ height: 47px;
 }
 
 .nav-items  .dropdown-menu {
-  margin-top: 20px;
+  margin-top: 1px;
 }
 .dropdown-menu .dropdown-item{
   padding: 20px;
@@ -1075,7 +1087,7 @@ height: 47px;
     flex-direction: column;
   }
   .footer-top{
-    width:60%;
+    width:72%;
   }
   .footer-bottom{
     display: flex;
@@ -1203,7 +1215,7 @@ padding-bottom: 16px;
 text-decoration: none;
 }
  .dropdown-menu[data-bs-popper] {
-  margin-top: 14px;
+  margin-top: 1px;
 }
 .profileitem{
  padding-left: 10px;
@@ -1249,10 +1261,64 @@ opacity: 1;
    width: 409px;
  }
 }
+
+@media only screen and (min-width:375px) and (max-width:769px){
+  .footerinputbox{
+    width: 107%;
+  }
+}
+
+@media only screen and (min-width:320px) and (max-width:426px){
+ .subscribe{
+  text-align: left;
+  font: normal normal normal 14px/21px Poppins;
+  letter-spacing: 0px;
+  color: #8F8F8F;
+  opacity: 1;
+  white-space: nowrap;
+ }
+ .footerdes{
+  text-align: left;
+  font: normal normal normal 14px/21px Poppins;
+  letter-spacing: 0px;
+  color: #8F8F8F;
+  opacity: 1;
+ }
+ .Icon{
+   font-size: 20px;
+ }
+}
+@media only screen and (max-width:370px) {
+  .subscribe{
+    white-space: normal;
+  }
+ }
+
+
 .submitbuttonfooter{
   height:36px;
   fontWeight:400;
   width: 116px;
   borderTopLeftRadius:0em;
   borderBottomLeftRadius: 0em;
+}
+.dropdown-toggle-ellipsis{
+  appearance: none;
+  background: url("../images/drop-down-arrow.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+order: 0;
+background-position: right;
+    position: absolute;
+    right: 10px;
+   padding-left: 8px;;
+    background-size: 15px;
+}
+.sort-drop-down{
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-image: url(../images/drop-arrow.png);
+  width: 100px;
+  background-repeat: no-repeat;
 }

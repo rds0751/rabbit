@@ -157,15 +157,48 @@ function CreateNftCollections(props) {
     }
     // alert("here");
     console.log("here");
-    const data = {
-      coverUrl: bannerCdn,
-      imageUrl: logoCdn,
-      name: name.current,
-      description: description.current,
-      blockchain: blockchain.current,
-      addedBy: user.loggedInUser._id,
-      // categoryId:categoryId.current,
-    };
+    // const data = {
+    //   coverUrl: bannerCdn,
+    //   imageUrl: logoCdn,
+    //   name: name.current,
+    //   description: description.current,
+    //   blockchain: blockchain.current,
+    //   addedBy: user.loggedInUser._id,
+    //   // categoryId:categoryId.current,
+    // };
+//---------------------
+const [blockchainError, blockchainRes] = await Utils.parseResponse(
+  BlockchainServices.createCollections({
+    name:name,
+    symbol:'WL'
+
+    // tokenURI: data.ipfsUrl,
+    // price: data.price,
+    // tokenId,
+  })
+);
+// alert('kkkkk')
+
+console.log("colllectionnnnnnnnnnnnnnnnnnnnssssss",blockchainRes.contract_address)
+if (blockchainError || !blockchainRes) {
+  // this.setState({ loaderState: false });
+
+  return Utils.apiFailureToast(
+    blockchainError.message || "Unable to Create Collection on blockchain"
+  );
+}
+const data = {
+  coverUrl: bannerCdn,
+  contractAddress : blockchainRes.contract_address,
+  imageUrl: logoCdn,
+  name: name.current,
+  description: description.current,
+  blockchain: blockchain.current,
+  addedBy: user.loggedInUser._id,
+  // categoryId:categoryId.current,
+};
+
+//-----------------------
     const result = await createCollection(data);
     if (result.success) {
       toast.success("Collection created");
@@ -293,7 +326,7 @@ function CreateNftCollections(props) {
                   </div>
                   <div className="block-chain-right">
                     <select
-                        className="input-box-1 rm-border"
+                        className="input-box-1 rm-border blockchainSelect"
                         onChange={(e) => {
                           blockchain.current = e.target.value;
                           checkReqFieldFun();

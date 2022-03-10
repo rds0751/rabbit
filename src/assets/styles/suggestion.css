@@ -82,6 +82,9 @@
   }
 }
 @media screen and (max-width: 577px) {
+  .make-suggestion {
+   margin-left: 5%;
+  }
   .suggestion {
     /* margin: 0px 16px; */
     width: 100%;
@@ -92,6 +95,10 @@
   }
   .send-button {
     width: 100%;
+  }
+  .form-box{
+    margin-left: 2%;
+    margin-right: 2%;
   }
 }
 .label-key {

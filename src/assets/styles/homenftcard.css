@@ -14,7 +14,19 @@
 }
 .nftTilePageSecondSelect select {
   border: none !important;
+  width: 90% !important;
   width: 61% !important;
+}
+
+.price-range-dropdown {
+  margin-left: 3%;
+  font-family: "poppins-medium";
+  font-size: 0.9vw;
+  width: 100%;
+}
+.price-range-dropdown select {
+  border: none !important;
+  width: 90% !important;
 }
 /* css for NFt cards */
 .nftTileEachImage {
@@ -204,3 +216,7 @@
     margin-top: 52px;
   }
 }
+/* .dropdown-img{
+  background-image: url("/whitelablenft-webapp/src/assets/images/drop-down-arrow.svg") no-repeat right #ffffff;
+} */
+

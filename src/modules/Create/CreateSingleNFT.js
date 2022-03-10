@@ -371,7 +371,7 @@ function CreateSingleNFT(props) {
                 >
                   <option className="color82">Select collection</option>
                   {collectionData.map((item) => (
-                    <option className="option color82" value={item._id}>
+                    <option className="option color82" value={item.contractAddress}>
                       {item.name}
                     </option>
                   ))}
