@@ -232,21 +232,56 @@ export default function NftInformation(props) {
                     {props?.responseData?.name}
                   </span>
                 </div>
-                <div className="col-xl-2 col-lg-2 col-md-3 col-sm-3">
-                  <span>
-                    <img
-                      alt="share"
-                      src={share}
-                      style={{ width: "31px", height: "31px", marginRight: "20px", }}
-                    />                    
+                <div className="col-xl-2 col-lg-2 col-md-3 col-sm-3 d-flex align-items-center">
+                    <div>
+                      <a
+                        className="nav-link dropdown"
+                        href="#"
+                        id="navbarDropdown"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                      <img
+                          alt="share"
+                          src={share}
+                          style={{ width: "31px", height: "31px", marginRight: "20px", }}
+                        />
+                      </a>
+                      <ul
+                        className="dropdown-menu profilemenu"
+                        aria-labelledby="navbarDropdown"
+                        style={{
+                          width:"220px",
+                          position: "absolute",
+                          marginLeft:"30px",
+                          boxShadow: "0px 3px 6px #00000012",
+                          border: "1px solid #F4F4F4",
+                          borderRadius: "6px",
+                          background: "#FFFFFF",                        
+                        }}
+                      >
+                      <li className="list-item">
+                        <img src={copyIcon} alt="icon" className="icon" />
+                        <span className="icon-text">Copy link</span>
+                      </li>
+                      <li className="list-item">
+                        <img src={facebookIcon} alt="icon" className="icon" />
+                        <span className="icon-text">Share on Facebook</span>
+                      </li>
+                      <li className="list-item">
+                        <img src={twitterIcon} alt="icon" className="icon"/>
+                        <span className="icon-text">Share on Twitter</span>
+                      </li>
+                    </ul>                        
+                    </div>                  
                     <img
                       src={info}
                       alt="info"
                       style={{ width: "31px", height: "31px" }}
-                      data-bs-toggle="modal"
+                      // data-bs-toggle="modal"
                       onClick={() => setOpenReportModal(true)}
                     />
-                  </span>
                 </div>
               </div>
             </div>
