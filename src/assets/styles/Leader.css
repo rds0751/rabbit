@@ -1141,12 +1141,12 @@ margin-top: 20px;
     align-items: flex-start;
   }
   .sales-selector{
-    width: 320px;
+    width: 350px;
     font-weight: 500;
     margin-bottom: 16px;
   }
   .sort-selector{
-    width: 320px;
+    width: 350px;
     font-weight: 500;
     border-radius: 6px;
   }
@@ -1360,4 +1360,7 @@ margin-top: 20px;
   font-size:16px;
   font-weight:600;
   padding-left:10px;
+}
+.small-nav{
+  justify-content: space-between;
 }

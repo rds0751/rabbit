@@ -22,7 +22,7 @@ import axios from "axios";
 import NftCardsHome from "../../common/components/NftCardsHome";
 import styled from "styled-components";
 import dropdown from "../../assets/images/dropdown.svg";
-import {Button} from "react-bootstrap"
+import { Button } from "react-bootstrap"
 // const Select = styled.select`
 // appearance:none;
 // background-image:url(/images/Fixed.png)
@@ -152,7 +152,7 @@ function NftPage() {
         <NftToggle toggleNft={toggleNft} />
         {/* <Lower__homepage /> */}
         <div className="lower__homepage" style={{ width: "100%" }}>
-          <div id="filters filter-large" className="filter">
+          <div id="filters filter-large" className="filter" style={{ gap: '30px' }}>
             <div className="mobilenftTilePageFirstSelect dropdown">
               <p className="mb-0 sale-type">Sale type</p>
               <select
@@ -170,37 +170,37 @@ function NftPage() {
                 <option value="on auction">On auction</option>
               </select>
             </div>
-            <div className="mobilenftTilePageSecondSelect dropdown nftTilePageSecondSelect">
+            <div className="mobilenftTilePageFirstSelect dropdown">
               <p className="mb-0 sale-type">Price range</p>
               <div className="filter-drop">
                 <div onClick={() => setStatusDrop(!statusDrop)} className="d-flex justify-content-between w-100">
                   <div className="text">All</div>
                   <div>
-                    <img src={dropdown} />
+                    <img src={dropdown} style={{ height: "17px", marginLeft: '8px' }} />
                   </div>
                 </div>
-                <div 
+                <div
                   className="filter-item"
                   style={{ display: statusDrop ? "block" : "none" }}
                 >
                   <form>
                     <div className="row mb-3 align-items-center">
                       <div className="col-5">
-                        <input type="number" className="form-control" placeholder="Min"/> 
+                        <input type="number" className="form-control" placeholder="Min" />
                       </div>
                       <div className="col-2 text-center">
                         <span className="to">to</span>
                       </div>
                       <div className="col-5">
-                        <input type="number" className="form-control" placeholder="Max"/>
+                        <input type="number" className="form-control" placeholder="Max" />
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-6">
-                      <Button variant="outline-primary">Clear</Button>
+                        <Button variant="outline-primary">Clear</Button>
                       </div>
                       <div className="col-6">
-                      <Button variant="outline-primary">Apply</Button>
+                        <Button variant="outline-primary">Apply</Button>
                       </div>
                     </div>
                   </form>
@@ -229,16 +229,18 @@ function NftPage() {
             <option>Option 2</option>
           </select> */}
           <div className="mobilenftTilePageThirdSelect dropdown sort-drop price-range-dropdown">
+            <p className="mb-0 sale-type">Sort By</p>
             <select
               name="sort"
               id="sale"
               // className="first_select ml_auto"
               className="priceRangeDropDown dropdown-toggle-ellipsis"
+              placeholder="Sort By"
               style={{ backgroundColor: "white" }}
               onChange={(e) => handlefilter(e)}
               value={filterType.sort}
             >
-              <option value="all">Sort By</option>
+              <option value="all">All</option>
               <option value="1">Recently Added</option>
               <option value="2">Recently Sold</option>
             </select>
