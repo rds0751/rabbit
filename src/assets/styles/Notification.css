@@ -47,6 +47,7 @@ height: 47px;
   /* display: inline-block; */  
   left: 0;
   box-shadow: 0px 3px 12px #00000014;
+  z-index: 1;
 }
 .wallet .empty_div {
   width: calc(100% - 27%);
@@ -1322,4 +1323,11 @@ background-position: right;
   background-image: url(../images/drop-arrow.png);
   width: 100px;
   background-repeat: no-repeat;
+}
+
+.toggle-line{
+  border-radius: 10px;
+}
+.toggle-container{
+  display: flex;
 }

@@ -83,6 +83,11 @@ function App() {
             <Route path="/nfts" element={<NftPage />} />
             <Route path="/" element={<NftPage />} />
 
+            {/* <Route
+              exact
+              path="/my-profile/nft-information/:id"
+              element={<NftInformation />}
+            /> */}
             <Route
               exact
               path="/nft-information/:id"
