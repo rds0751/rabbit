@@ -529,9 +529,7 @@ thead {
 }
   
 @media only screen and (max-width: 1170px) {
-  /* .filter {
-    width: 100%;
-  } */
+  
   .filter > button {
     display: flex;
     justify-content: space-between;
