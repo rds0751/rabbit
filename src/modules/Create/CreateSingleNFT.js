@@ -465,7 +465,7 @@ function CreateSingleNFT(props) {
                     className="completelistin"
                     onClick={() => setOpenMintodal(false)}
                   >
-                    Complete your listing
+                    Complete your minting
                   </div>
                   {/* <div
                     onClick={() => setOpenMintodal(false)}

@@ -55,6 +55,7 @@ import { WEB_APP_USER_WALLET_ADDRESS } from "./reducers/Constants";
 import { addUseraction, addUserData } from "./reducers/Action";
 import { CheckUserByWalletAddress } from "./services/UserMicroService";
 import FAQsPage from "./modules/Faqs/index";
+import Home from "./modules/Home/Home";
 
 function App() {
   useEffect(() => {
@@ -186,6 +187,7 @@ function App() {
               element={<Collection_HomeNftFilters />}
             /> */}
             <Route path="/menu" element={<Menu />} />
+            <Route path="/home" element={<Home />} />
           </Routes>
           {/* </Switch> */}
         </Router>

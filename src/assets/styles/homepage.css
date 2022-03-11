@@ -1,0 +1,90 @@
+.homepage .banner{
+  background-image: url('../images/Banner.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 115px;
+  padding-bottom: 95px;
+  margin-bottom: 177px;
+}
+.homepage .left-text .heading{
+  font-family: 'poppins-semibold';
+  font-size: 48px;
+  line-height: 70px;
+  color: #FFFFFF;
+  margin-bottom: 22px;
+  padding-top: 81px;
+}
+.homepage .left-text .text{
+  font-family: 'poppins-medium';
+  font-size: 22px;
+  line-height: 70px;
+  color: #FFFFFF;
+  margin-bottom: 45px;
+}
+.homepage .left-text .btn-custom{
+  font-family: 'poppins-medium';
+  font-size: 18px ;
+  line-height: 24px;
+  width: 137px;
+  height: 44px;
+  color: #FFFFFF;
+  background: #F8F8F800;
+  border: 1px solid #FFFFFF;
+  border-radius: 10px;
+  margin-right: 32px;
+}
+.homepage .left-text .btn-custom:hover{
+  color: #141520;
+  background-color: #FFFFFF;
+}
+.homepage .create-sell-nft{
+  margin-bottom: 241px;
+}
+.homepage .create-sell-nft .heading{
+  font-family: 'poppins-bold';
+  font-size: 32px;
+  line-height: 48px;
+  color: #191919;
+  margin-bottom: 66px;
+  text-align: center;
+}
+.homepage .create-sell-nft .card{
+  width: 294px;
+  height: 294px;
+  background: #F7F7F7;
+  border-radius: 19px;
+  padding: 29px 27px 34.41px 28px;
+  margin-right: 5%;
+  text-align: center;
+}
+.homepage .create-sell-nft .card .card-img-top{
+  width: 89px;
+  height: 89px;
+  margin-bottom: 20px;
+  margin: 0 auto;
+}
+.homepage .why-marketplace{
+  background-color: #366def08;
+  padding-top: 125px;
+  padding-bottom: 235px;
+}
+.homepage .why-marketplace .heading{
+  font-family: 'poppins-bold';
+  font-size: 32px;
+  line-height: 48px;
+  color: #191919;
+  margin-bottom: 97px;
+  text-align: center;
+}
+
+@media only screen and (min-width: 1400px){
+  .inner-width{
+    width: 85%;
+    margin: 0px auto;
+  }
+}
+@media only screen and (max-width: 1400px){
+  .homepage{
+    margin: 0 80px;
+  }
+}
