@@ -38,15 +38,20 @@ function NftPage() {
     // maxPrice: "",
     // --------------------------
     // sort: 0,
-    type: "all",
+    // type: "allprice",
     // searchByName: name ? name : "",
     searchByName: "",
-    minPrice: 0,
-    maxPrice: "",
+    // minPrice: 0,
+    // maxPrice: "",
+    sort: -1
   };
   const [nfts, setNfts] = useState([]);
   const { user, sideBar } = useSelector((state) => state);
   const [toggleNft, setToggleNft] = useState(true);
+  const [minPrice, setminPrice] = useState("");
+
+  const [maxPrice, setmaxPrice] = useState("");
+
   const [filterType, setFilterType] = useState(defaultReq);
   const [isloading, setIsloading] = useState(false);
   const [type, setType] = useState("");
@@ -66,6 +71,7 @@ function NftPage() {
       // console.log(res, "filterResponse");
       setIsloading(true);
       if (res.success) {
+
         setNfts(res.responseData.nftContent);
         setIsloading(false);
       } else {
@@ -83,6 +89,7 @@ function NftPage() {
           // console.log(res, "filterResponse");
           setIsloading(true);
           if (res.success) {
+
             setNfts(res.responseData.nftContent);
             setIsloading(false);
           } else {
@@ -97,13 +104,39 @@ function NftPage() {
   const handleChange = (e) => {
     setType(e.target.value);
   };
-  // ---- handlefilter-----
+  // const setMinPr = (e) => {
+  //   setminPrice(e.target.value);
+  // };
+  // const setMaxPr = (e) => {
 
+  //   setmaxPrice(e.target.value);
+  // };
+  // ---- handlefilter-----
+  const handlePriceFilter = (e) => {
+    // alert(evt.target)
+    // alert(maxPrice)
+    // setFilterType({ ...filterType, [name]: value });
+    // console.log("kkkkkkkkkkkk",{ })
+    setFilterType({ ...filterType, "minPrice": minPrice, "maxPrice": maxPrice });
+
+  }
+  const clearPriceFilter = (e) => {
+    // alert(evt.target)
+    // alert(maxPrice)
+    // setFilterType({ ...filterType, [name]: value });
+    setmaxPrice("")
+    setminPrice("")
+    setFilterType({ ...filterType, "minPrice": "", "maxPrice": "" });
+
+    // console.log("kkkkkkkkkkkk",{ ...filterType, "minPrice": "","maxPrice": "" })
+  }
   const handlefilter = (e) => {
     const { name, value } = e.target;
+    // alert(name)
+    // alert(value)
     setFilterType({ ...filterType, [name]: value });
   };
-
+  // console.log("mfmmfmfmfmfm",nfts)
   // ------------------
   let filteredNfts;
   if (type === "all") {
@@ -170,7 +203,8 @@ function NftPage() {
                 <option value="on auction">On auction</option>
               </select>
             </div>
-            <div className="mobilenftTilePageFirstSelect dropdown">
+
+            <div className="mobilenftTilePageSecondSelect dropdown">
               <p className="mb-0 sale-type">Price range</p>
               <div className="filter-drop">
                 <div onClick={() => setStatusDrop(!statusDrop)} className="d-flex justify-content-between w-100">
@@ -183,27 +217,28 @@ function NftPage() {
                   className="filter-item"
                   style={{ display: statusDrop ? "block" : "none" }}
                 >
-                  <form>
-                    <div className="row mb-3 align-items-center">
-                      <div className="col-5">
-                        <input type="number" className="form-control" placeholder="Min" />
-                      </div>
-                      <div className="col-2 text-center">
-                        <span className="to">to</span>
-                      </div>
-                      <div className="col-5">
-                        <input type="number" className="form-control" placeholder="Max" />
-                      </div>
+
+                  {/* <form onSubmit={handleSubmit}> */}
+                  <div className="row mb-3 align-items-center">
+                    <div className="col-5">
+                      <input type="number" className="form-control" placeholder="Min" value={minPrice} onChange={e => setminPrice(e.target.value)} />
                     </div>
-                    <div className="row">
-                      <div className="col-6">
-                        <Button variant="outline-primary">Clear</Button>
-                      </div>
-                      <div className="col-6">
-                        <Button variant="outline-primary">Apply</Button>
-                      </div>
+                    <div className="col-2 text-center">
+                      <span className="to">to</span>
                     </div>
-                  </form>
+                    <div className="col-5">
+                      <input type="number" className="form-control" placeholder="Max" value={maxPrice} onChange={e => setmaxPrice(e.target.value)} />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-6">
+                      <Button type="submit" onClick={(e) => clearPriceFilter(e)} variant="outline-primary">Clear</Button>
+                    </div>
+                    <div className="col-6">
+                      <Button onClick={(e) => handlePriceFilter(e)} variant="outline-primary">Apply</Button>
+                    </div>
+                  </div>
+                  {/* </form> */}
                 </div>
               </div>
               {/* <select
@@ -240,9 +275,8 @@ function NftPage() {
               onChange={(e) => handlefilter(e)}
               value={filterType.sort}
             >
-              <option value="all">All</option>
-              <option value="1">Recently Added</option>
-              <option value="2">Recently Sold</option>
+              <option value="-1">Ascending Order</option>
+              <option value="1">Descending Order</option>
             </select>
           </div>
         </div>
