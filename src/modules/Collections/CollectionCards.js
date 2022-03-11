@@ -73,11 +73,11 @@ function Collections_tile() {
             <div className="mobilenftTilePageFirstSelect dropdown">
               <p className="mb-0">Categories </p>
               <select
-                name="categoryName"
+                name="categoryName "
                 id="sale"
                 onChange={(e) => getCollectionById(e.target.value)}
                 value={filterData.categoryName}
-                className="first_select ml_auto"
+                className="first_select ml_auto dropdown-toggle-ellipsis"
               >
                 <option value="">All</option>
                 {Categories.map((item, key) => {
@@ -87,7 +87,7 @@ function Collections_tile() {
             </div>
           </div>
           <div className="filter">
-            <div className="mobilenftTilePageThirdSelect dropdown sort-drop nftTilePageSecondSelect">
+            <div className="mobilenftTilePageThirdSelect dropdown sort-drop ">
               <p className="mb-0">Sort By </p>
               <select
                 name="sort"
@@ -95,7 +95,7 @@ function Collections_tile() {
                 id="sale"
                 // className="first_select ml_auto"
                 onChange={(e) => handleFilter(e)}
-                className="priceRangeDropDown"
+                className="priceRangeDropDown dropdown-toggle-ellipsis"
               >
                 <option value="all">All</option>
                 <option value="recently added">Recently Added</option>
@@ -130,7 +130,7 @@ function Collections_tile() {
                   <div
                     className=" nft-card-radius collection-card border-radius pt-4 cardmob"
                     style={{ backgroundColor: "#F8F8F8" }}
-                    // style={{ marginLeft: "1em", backgroundColor: "#F8F8F8" }}
+                  // style={{ marginLeft: "1em", backgroundColor: "#F8F8F8" }}
                   >
                     <div className="text-center">
                       <img
