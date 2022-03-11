@@ -31,7 +31,7 @@ import Close from "../../assets/images/close.png";
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 const Button = styled.button``;
 function CreateSingleNFT(props) {
-  
+
   console.log("ppppppppppppp", props, "");
   console.log("ppppppppppppp", props?.loaderState);
   // console.log("ppppppppppppp", props?.isNftCreated);
@@ -68,7 +68,7 @@ function CreateSingleNFT(props) {
     if (loggedInUser == null) {
       navigation("/add-wallet");
     }
-   
+
     setmyProfileUrl("/my-profile")
     const collections = await getCollectionBySingleUser(loggedInUser?._id);
     setCollectionData(collections);
@@ -187,11 +187,15 @@ function CreateSingleNFT(props) {
     };
     addIPFS();
   };
-  console.log("00000000000000000000000000000000",props?.isNftCreated)
+  console.log("00000000000000000000000000000000", props?.isNftCreated)
   console.log(selectFile, "<<<s");
+
+  // File uploading loader
+
+
   return (
     <>
-    
+
       {props?.loaderState ? (
         <div className="center">
           {" "}
@@ -209,10 +213,10 @@ function CreateSingleNFT(props) {
 
 
       {/* ----------------------------- */}
-      {props?.isNftCreated ? 
-           navigation(myProfileUrl) : (
-        ""
-      )}
+      {props?.isNftCreated ?
+        navigation(myProfileUrl) : (
+          ""
+        )}
 
       <ToastContainer
         position="top-center"
@@ -489,23 +493,44 @@ function CreateSingleNFT(props) {
                       <div className="checkvalue checkvaluetext">1</div>
                     )}
                     <div className="checkposttext">
-                      <div className="heading">Uploading</div>
+                      <div className="heading">
+                        {props.isFileSelected === 'true' ? (
+                          'Uploading'
+                        ) : (
+                          'Upload'
+                        )}  
+                      </div>
                       <div className="description">
                         Uploading all media assets and metadata to IPFS
                       </div>
                     </div>
                   </div>
                   <div className="checkpost">
-                    {props.isMintSuccess && (
+                    {props.isMintSuccess === true ? (
                       <img src={success} className="checkimg" />
+                    ) : (
+                      <div className="checkimg">
+                        <Oval
+                          vertical="top"
+                          horizontal="center"
+                          color="#00BFFF"
+                          height={30}
+                          width={30} />
+                      </div>
                     )}
-                    {!props.isMintSuccess && (
-                      <div className="checkvalue checkvaluetext">2</div>
-                    )}
-                    <div className="checkposttext">
-                      <div className="heading">Mint</div>
-                      <div className="description">Send Transaction to Create your NFT</div>
-                    </div>
+                     {/* {!props.isMintSuccess && (
+                         <div className="checkvalue checkvaluetext">2</div>
+                       )} */}
+                      <div className="checkposttext">
+                        <div className="heading">
+                          {props.isMintSuccess === 'true' ? (
+                            'Mint'
+                          ) : (
+                            'Minting'
+                          )}
+                        </div>
+                        <div className="description">Send Transaction to Create your NFT</div>
+                      </div>
                   </div>
                   {/* <div className="checkpost">
                     {props.isMintSuccess && (
