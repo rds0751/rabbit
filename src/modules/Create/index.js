@@ -21,6 +21,7 @@ class Index extends BaseComponent {
       loaderState: false,
       isMintSuccess: false,
       isOpenMintModal:true,
+      mintedNftId:""
     };
   }
 
@@ -167,6 +168,7 @@ class Index extends BaseComponent {
       this.setState({ loaderState: false });
       this.setState({ isMintSuccess: true });
       this.setState({ isOpenMintModal: false });
+      this.setState({ mintedNftId: contentRes._id });
       Utils.apiSuccessToast("Your Nft has been created successfully.");
       this.setState({ isNftCreated: true });
     }
@@ -185,6 +187,8 @@ class Index extends BaseComponent {
           loaderState={this.state.loaderState}
           createNftHandler={this.createNftHandler.bind(this)}
           url
+          mintedNftId={this.state.mintedNftId}
+
           isMintSuccess={this.state.isMintSuccess}
           isOpenMintModal={this.state.isOpenMintModal}
         />
