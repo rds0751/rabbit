@@ -31,7 +31,7 @@ import UploadSingleNft from "./CreateSingleUploadFile";
 const Button = styled.button``;
 function CreateSingleNFT(props) {
   
-  console.log("ppppppppppppp", props, "");
+  console.log("ppppppppdddddddddddppppp", props?.mintedNftId);
   console.log("ppppppppppppp", props?.loaderState);
   // console.log("ppppppppppppp", props?.isNftCreated);
   const [collectionData, setCollectionData] = useState([]);
@@ -68,7 +68,7 @@ function CreateSingleNFT(props) {
       navigation("/add-wallet");
     }
    
-    setmyProfileUrl("/my-profile")
+    setmyProfileUrl("/nft-information/")
     const collections = await getCollectionBySingleUser(loggedInUser?._id);
     setCollectionData(collections);
   }, []);
@@ -209,7 +209,7 @@ function CreateSingleNFT(props) {
 
       {/* ----------------------------- */}
       {props?.isNftCreated ? 
-           navigation(myProfileUrl) : (
+           navigation(myProfileUrl+props?.mintedNftId) : (
         ""
       )}
 
