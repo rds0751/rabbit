@@ -47,6 +47,7 @@ height: 47px;
   /* display: inline-block; */  
   left: 0;
   box-shadow: 0px 3px 12px #00000014;
+  z-index: 1;
 }
 .wallet .empty_div {
   width: calc(100% - 27%);
@@ -646,7 +647,7 @@ height: 47px;
 .navbar-expand-lg .navbar-nav .nav-link {
   padding: 0px;
   background: #ffffff 0% 0% no-repeat padding-box;
-  padding-bottom: 23px;
+  padding-bottom: 20px;
   padding-top: 20px;
   /* margin-right: 15px;
   margin-left: 15px; */
@@ -1218,17 +1219,18 @@ text-decoration: none;
   margin-top: 1px;
 }
 .profileitem{
- padding-left: 10px;
-font: normal normal normal 14px/21px Poppins;
-letter-spacing: 0px;
-color: #191919;
-opacity: 1;
-cursor: pointer;
+  padding: 14px 110px 4px 10px;
+  font: normal normal normal 14px/21px Poppins;
+  letter-spacing: 0px;
+  color: #191919;
+  opacity: 1;
+  cursor: pointer;
 }
 .dropdown-divider{
 background: #FFFFFF 0% 0% no-repeat padding-box;
-border: 0.2px solid #E8E8E8;
+border: 0.1px solid #E8E8E8;
 opacity: 1;
+margin:0px;
 }
 .dropdown .profileimg{
   color: gray;
@@ -1321,4 +1323,11 @@ background-position: right;
   background-image: url(../images/drop-arrow.png);
   width: 100px;
   background-repeat: no-repeat;
+}
+
+.toggle-line{
+  border-radius: 10px;
+}
+.toggle-container{
+  display: flex;
 }

@@ -23,6 +23,7 @@ const Title = styled.h1`
 `;
 const FilterContainer = styled.div`
   display: flex;
+  align-items: baseline;
   margin-bottom:20px;
 `;
 const Select = styled.select`
@@ -77,6 +78,7 @@ export default function PricingHistoryComponentTable() {
   const [list, setEvent] = useState(false);
   const [price, setPrice] = useState(false);
   const [buy, setBuy] = useState(false);
+  const [minted, setMinted] = useState(false);
 
   const handleChange = (e) => {
     if (e.target.value === "list") {
@@ -85,6 +87,8 @@ export default function PricingHistoryComponentTable() {
       setPrice(!price);
     } else if (e.target.value === "buy") {
       setBuy(!buy);
+    } else if (e.target.value === "minted") {
+      setMinted(!minted)
     }
   };
 
@@ -95,6 +99,8 @@ export default function PricingHistoryComponentTable() {
       setPrice(!price);
     } else if (key === "buy") {
       setBuy(!buy);
+    } else if (key === "minted") {
+      setMinted(!minted);
     }
   };
 
@@ -111,6 +117,7 @@ export default function PricingHistoryComponentTable() {
           <Option value="list">List</Option>
           <Option value="price">Price</Option>
           <Option value="buy">Buy</Option>
+          <Option value="minted">Minted</Option>
         </Select>
         {list ? (
           <Filter>
@@ -136,6 +143,16 @@ export default function PricingHistoryComponentTable() {
           <Filter>
             <span style={{ marginRight: "10px" }}>Buy</span>
             <Button onClick={() => closeFilter("buy")}>
+              <i class="fa-solid fa-xmark"></i>
+            </Button>
+          </Filter>
+        ) : (
+          ""
+        )}
+        {minted ? (
+          <Filter>
+            <span style={{ marginRight: "10px" }}>Minted</span>
+            <Button onClick={() => closeFilter("minted")}>
               <i class="fa-solid fa-xmark"></i>
             </Button>
           </Filter>

@@ -398,7 +398,15 @@ thead {
 }
 
 .editItem {
-  margin: 30px 470px 0px 570px;
+  /* margin: 30px 470px 0px 570px; */
+  display: flex;
+  flex-direction: column;
+  padding:4.7% 30.3% 0% 32.7%;
+}
+@media screen and (max-width:769px){
+  .editItem{
+    padding:50px 10px 20px 10px;
+  }
 }
 .edititems {
   font-size: 1.5rem;
@@ -407,14 +415,15 @@ thead {
 
 .done {
   display: flex;
-  margin-top: 1rem;
+  padding-top: 47px;
+  margin-bottom: 100px;
   justify-content: right;
 }
 
 .UploadFile {
   display: flex;
   flex-direction: column;
-  width: 28%;
+  width: 244px;
   justify-content: center;
   align-items: center;
 }
@@ -1026,6 +1035,11 @@ thead {
     height: auto;
   }
 }
+@media only screen and (min-width:320px){
+  .navbar-expand-lg .navbar-nav .dropdown-menu {
+    position: absolute;
+    left: -100px;
+}}
 .leader-container{
   padding-right: var(--bs-gutter-x,.75rem);
     padding-left: var(--bs-gutter-x,.75rem);
@@ -1176,7 +1190,7 @@ margin-top: 20px;
   flex-wrap: wrap;
 }
 .nft-detail .edit-sell-button button{
-  width: 181px;
+  width: 186px;
   height: 52px;
   margin-bottom: 50px;
   font-family: 'poppins-medium';
@@ -1333,4 +1347,17 @@ margin-top: 20px;
   margin-left: 75%;
 }
 
+}
+
+.list-item{
+  padding:10px;
+}
+.icon{
+  width:24px;
+  height:24px;
+}
+.icon-text{
+  font-size:16px;
+  font-weight:600;
+  padding-left:10px;
 }
