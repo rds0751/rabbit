@@ -74,7 +74,12 @@ function MyProfile() {
 
       setIsloading(false);
     }
+    
+      // setNfts(onSaleNft);
+      // setTypeofProfilePost("on-sale");
+    
   }, [window.ethereum, checkClick]);
+  
 
   // ------------------------------- Calling apis --------------------- to get user data
 
@@ -115,6 +120,8 @@ console.log("kkkkkkkkkkddddddddddddd",Nfts)
       console.log(response, "myprofile");
       if (response.success) {
         setonSaleNft(response.responseData);
+        setNfts(response.responseData);
+        setTypeofProfilePost("on-sale");
       } else {
         toast.error(response.msg);
       }

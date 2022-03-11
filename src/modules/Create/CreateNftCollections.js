@@ -24,7 +24,7 @@ import Bannerdrop from "./Bannerdrop";
 const Button = styled.button``;
 
 function CreateNftCollections(props) {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
   const { user } = useSelector((state) => state);
   // -------
   const [logoCdn, setlogoCdn] = useState("");
