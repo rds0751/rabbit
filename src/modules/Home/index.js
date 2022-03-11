@@ -112,7 +112,7 @@ export default class NftDetail extends BaseComponent {
                 updateTxStatus({ status: "failed" }, result._id)
             );
             return Utils.apiFailureToast(
-                blockchainError?.data?.message || "Unable to sell NFT on blockchain"
+                blockchainError?.data?.message || "Unable to buy NFT on blockchain"
             );
         }
         blockchainRes= blockchainResult
