@@ -12,7 +12,7 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
-     
+
       console.log(getInputProps, "<<<<<<", getRootProps, "<<<props");
       let formData = new FormData();
       formData.append(
@@ -46,27 +46,32 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
   return (
     <>
       {" "}
-      <div style={{ width: "100%" }}>
+      <div >
         {!isBannerSelected && (
-            <div className="img-sec-div" {...getRootProps()}>
-              <input {...getInputProps()} name="banner" />
-              <img
-                src={Image}
-                alt="upload-icon"
-                className="upload-icon"
-              />
-              <p className="fs-14 fw-b pt-20">Drag & Drop or <span style={{color:"#366EEF"}}>Browse</span></p>
+          <div className="img-sec-div" {...getRootProps()}>
+            <input {...getInputProps()} name="banner" />
+            <img
+              src={Image}
+              alt="upload-icon"
+              className="upload-icon"
+            />
+            <div>
+              <p className="fs-14 fw-b pt-20">Drag & Drop or <span style={{ color: "#366EEF" }}>Browse</span></p>
             </div>
+          </div>
         )}
         {isBannerSelected && (
           <div className="img-sec-div" {...getRootProps()}>
             <input {...getInputProps()} name="banner" />
             <img
+              style={{
+                width: "100%",
+                height: "100%"
+              }}
               src={bannerCdn != "" ? bannerCdn : Image}
-              alt="upload-icon"    
-              className="upload-icon"            
+              alt="upload-icon"
+              className="upload-icon"
             />
-            <p className="fs-14 fw-b pt-20">Drag & Drop or <span style={{color:"#366EEF"}}>Browse</span></p>
           </div>
         )}
       </div>
