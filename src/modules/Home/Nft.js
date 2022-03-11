@@ -264,7 +264,6 @@ function NftPage() {
             <option>Option 2</option>
           </select> */}
           <div className="mobilenftTilePageThirdSelect dropdown sort-drop price-range-dropdown">
-            <p className="mb-0 sale-type">Sort By</p>
             <select
               name="sort"
               id="sale"
@@ -275,6 +274,7 @@ function NftPage() {
               onChange={(e) => handlefilter(e)}
               value={filterType.sort}
             >
+              <option value="-1">Sort By</option>
               <option value="-1">Ascending Order</option>
               <option value="1">Descending Order</option>
             </select>

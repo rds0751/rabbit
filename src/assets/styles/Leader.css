@@ -521,7 +521,7 @@ thead {
     border-bottom: 1px solid #C7C7C7;
     height: 46px;
     margin-left: -20px;
-    width: 375px;
+    width: 120%;
   }
   .upper__homepage {
     text-align: center;

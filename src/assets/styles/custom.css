@@ -804,6 +804,7 @@ input::-webkit-input-placeholder {
   font-family: 'poppins-medium';
   line-height: 21px;
   font-size: 16px;
+  height: 42px;
 }
 /* .sort-drop > select {
   border: none;
@@ -882,7 +883,7 @@ select:focus-visible {
   }
   .filter .dropdown select{
     border: none;
-    width: 143px;
+    width: 180px;
   }
   .filter .dropdown {
     width: initial;
@@ -970,6 +971,8 @@ select:focus-visible {
     width: initial;
     margin-bottom: 16px;
     margin-left: 0px;
+    display: flex;
+    justify-content: space-between;
   }
 }
 @media only screen and (max-width: 480px) {
