@@ -307,6 +307,7 @@ function CreateSingleNFT(props) {
                   type="email"
                   className="form-control-1"
                   name="email"
+                  autoComplete="off"
                   onChange={(e) => {
                     name.current = e.target.value;
                     checkChanges();
@@ -321,6 +322,7 @@ function CreateSingleNFT(props) {
                   className="form-control-1"
                   min="0"
                   type="number"
+                  autoComplete="off"
                   onChange={(e) => {
                     price.current = e.target.value;
                     checkChanges();

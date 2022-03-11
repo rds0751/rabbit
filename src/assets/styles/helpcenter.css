@@ -57,7 +57,7 @@
   .single-card {
     padding: 20px 34px;
     width: 284px;
-    margin-top: 66px;
+    /* margin-top: 66px; */
   }
 }
 @media screen and (max-width: 1600px) {

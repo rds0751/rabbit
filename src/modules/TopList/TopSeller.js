@@ -99,20 +99,38 @@ function TopSeller() {
         </div>
       </div>
       {topSellers.map((curElem) => {
-        const { Image, sellerFirstName, sellerLastName, itemssold, totalPurchasedValue,topSeller } = curElem;
+        const { Image, sellerFirstName, sellerLastName, itemsSold, totalPurchasedValue,topSellers,volume } = curElem;
+        var precise = volume.toPrecision(4); 
+        var result = parseFloat(precise);
         return (
           <div className="container ">
             <div
               className="row CollectionItem"
               style={{ backgroundColor: "#f8f8f8" }}
             >
-              <div className="col">
+              <div className="col namediv">
                 {" "}
-                <img
-                  className="top-img" style={{ width: '42px', height: '42px' }} src={Image}
+
+                {topSellers.coverPhoto == "" ?(
+                  <img
+                  className="top-img" style={{ width: '42px', height: '42px' }} src={require("../../assets/images/profile.png")}
                   alt=""
                 />
-                <h2>{sellerFirstName}{sellerLastName}</h2>
+
+                ):(
+                  <img
+                  className="top-img" style={{ width: '42px', height: '42px' }} src={topSellers.coverPhoto}
+                  alt=""
+                />
+
+                )}
+               
+               {topSellers.userName==""? (
+                 <h2 className="nameseller">no name</h2>
+               ):(
+                <h2 className="nameseller">{topSellers.userName}</h2>
+               )}
+            
               </div>
               <div
                 className="col"
@@ -120,9 +138,9 @@ function TopSeller() {
               >
                 {" "}
                 <span className="ethCurrencySeller"> ETH</span>
-                ({"$"+totalPurchasedValue})
+                ({"$"+result})
               </div>
-              <div className="col">{itemssold}</div>
+              <div className="col">{itemsSold}</div>
             </div>
           </div>
         );

@@ -10,6 +10,7 @@ import {
   addLikeNft,
   getNFtsData,
 } from "../../services/webappMicroservice";
+
 function  NftCardsHome({ nft }) {
   // let history = useHistory();
 
