@@ -498,8 +498,6 @@ thead {
 .nav-pills .show > .nav-link {
   color: #fff;
   background-color: transparent;
-  color: #027dd7;
-  border-bottom: 3px solid #027dd7;
 }
 
 .nav-link {
@@ -517,7 +515,6 @@ thead {
     border: 5px solid red;
   }
 } */
-
 @media only screen and (max-width: 1170px) {
   /* .filter {
     width: 100%;
@@ -567,11 +564,16 @@ thead {
   }
   .nav-pills .nav-link.active,
   .nav-pills .show > .nav-link {
-    color: black;
-    border-bottom: 4px solid #366eef;
+    color: black !important;
     font-size: 14px;
     font-weight: bold;
   }
+  .nav-pills .nav-link.active hr{
+height: 4px !important;
+color: #366EEF;
+border-radius: 10px; 
+width: 170%;
+    }
   .nav-link {
     color: #828282;
     font-weight: bold;
@@ -1052,7 +1054,7 @@ border: 1px solid #707070;
 border-radius: 6px;
 }
 .small-leaderboard-dropdown{
-width: 319px;
+width: 90%;
 height: 42px;
 background: #FFFFFF00 0% 0% no-repeat padding-box;
 border: 1px solid #707070;
@@ -1342,12 +1344,13 @@ margin-top: 20px;
 /* nft-information nft detail page css end*/
 
 /* leaderboard */
-@media only screen and (min-width: 700px) and (max-width: 764px){
+
+/* @media only screen and (min-width: 700px) and (max-width: 764px){
 .small-leaderboard-dropdown{
   margin-left: 75%;
 }
 
-}
+} */
 
 .list-item{
   padding:10px;
@@ -1363,4 +1366,21 @@ margin-top: 20px;
 }
 .small-nav{
   justify-content: space-between;
+}
+
+@media only screen and (min-width:500px) and (max-width: 1150px) {
+  .small-nav{
+    justify-content: flex-start;
+    gap:6%;
+  }
+  
+}
+@media only screen and (min-width:500px) and (max-width: 1150px) {
+  .small-leaderboard-dropdown{
+
+width: 23%;
+height: 42px;
+margin-left: 70%;
+  }
+  
 }

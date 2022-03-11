@@ -31,7 +31,7 @@ import Close from "../../assets/images/close.png";
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 const Button = styled.button``;
 function CreateSingleNFT(props) {
-  
+
   console.log("ppppppppppppp", props, "");
   console.log("ppppppppppppp", props?.loaderState);
   // console.log("ppppppppppppp", props?.isNftCreated);
@@ -68,7 +68,7 @@ function CreateSingleNFT(props) {
     if (loggedInUser == null) {
       navigation("/add-wallet");
     }
-   
+
     setmyProfileUrl("/my-profile")
     const collections = await getCollectionBySingleUser(loggedInUser?._id);
     setCollectionData(collections);
@@ -187,11 +187,11 @@ function CreateSingleNFT(props) {
     };
     addIPFS();
   };
-  console.log("00000000000000000000000000000000",props?.isNftCreated)
+  console.log("00000000000000000000000000000000", props?.isNftCreated)
   console.log(selectFile, "<<<s");
   return (
     <>
-    
+
       {props?.loaderState ? (
         <div className="center">
           {" "}
@@ -209,10 +209,10 @@ function CreateSingleNFT(props) {
 
 
       {/* ----------------------------- */}
-      {props?.isNftCreated ? 
-           navigation(myProfileUrl) : (
-        ""
-      )}
+      {props?.isNftCreated ?
+        navigation(myProfileUrl) : (
+          ""
+        )}
 
       <ToastContainer
         position="top-center"
