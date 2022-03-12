@@ -580,8 +580,8 @@ thead {
   }
   .shadow {
     box-shadow: none !important;
-    border: 0px;
-    background-color: #f8f8f8;
+    border:1px solid #D5D5D4;
+    background-color: #FFFFFF;
   }
 
   .card-header {
