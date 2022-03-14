@@ -14,7 +14,7 @@ function MyItems() {
         <div className="my-item-container">
           <div className="">
             <h1 className="poppins-normal bold-600 font-20 blackish mb-0">
-              My Items
+              My Items go
             </h1>
           </div>
 
@@ -42,13 +42,13 @@ function MyItems() {
             </div>
           </div>
           {!toggleSelect ?
-          <button type="submit" className="add-item-button p-0 bord-rad-4">
-            Add item
-          </button>
-          :
-          <button type="submit" className="add-item-button p-0 bord-rad-4">
-            Create Collection
-          </button>
+            <button type="submit" className="add-item-button p-0 bord-rad-4">
+              Add item
+            </button>
+            :
+            <button type="submit" className="add-item-button p-0 bord-rad-4">
+              Create Collection
+            </button>
           }
         </div>
 
@@ -95,7 +95,7 @@ function MyItems() {
             <div
               className=" nft-card-radius collection-card border-radius pt-4 cardmob"
               style={{ backgroundColor: "#F8F8F8" }}
-              // style={{ marginLeft: "1em", backgroundColor: "#F8F8F8" }}
+            // style={{ marginLeft: "1em", backgroundColor: "#F8F8F8" }}
             >
               <div className="text-center">
                 <img

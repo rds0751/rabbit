@@ -3,7 +3,7 @@ import image from "../../assets/images/1.jpg";
 import share from "../../assets/images/share.svg";
 import info from "../../assets/images/report.svg";
 import copyIcon from "../../assets/images/copy.png";
-import facebookIcon from "../../assets/images/Facebook.png";
+import facebookIcon from "../../assets/images/facebook.png";
 import twitterIcon from "../../assets/images/Twitter.png";
 import "../../assets/styles/nftReportModal.css";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -233,34 +233,34 @@ export default function NftInformation(props) {
                   </span>
                 </div>
                 <div className="col-xl-2 col-lg-2 col-md-3 col-sm-3 d-flex align-items-center">
-                    <div>
-                      <a
-                        className="nav-link dropdown"
-                        href="#"
-                        id="navbarDropdown"
-                        role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
+                  <div>
+                    <a
+                      className="nav-link dropdown"
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
                       <img
-                          alt="share"
-                          src={share}
-                          style={{ width: "31px", height: "31px", marginRight: "20px", }}
-                        />
-                      </a>
-                      <ul
-                        className="dropdown-menu profilemenu"
-                        aria-labelledby="navbarDropdown"
-                        style={{
-                          width:"220px",
-                          position: "absolute",
-                          marginLeft:"30px",
-                          boxShadow: "0px 3px 6px #00000012",
-                          border: "1px solid #F4F4F4",
-                          borderRadius: "6px",
-                          background: "#FFFFFF",                        
-                        }}
-                      >
+                        alt="share"
+                        src={share}
+                        style={{ width: "31px", height: "31px", marginRight: "20px", }}
+                      />
+                    </a>
+                    <ul
+                      className="dropdown-menu profilemenu"
+                      aria-labelledby="navbarDropdown"
+                      style={{
+                        width: "220px",
+                        position: "absolute",
+                        marginLeft: "30px",
+                        boxShadow: "0px 3px 6px #00000012",
+                        border: "1px solid #F4F4F4",
+                        borderRadius: "6px",
+                        background: "#FFFFFF",
+                      }}
+                    >
                       <li className="list-item">
                         <img src={copyIcon} alt="icon" className="icon" />
                         <span className="icon-text">Copy link</span>
@@ -270,18 +270,18 @@ export default function NftInformation(props) {
                         <span className="icon-text">Share on Facebook</span>
                       </li>
                       <li className="list-item">
-                        <img src={twitterIcon} alt="icon" className="icon"/>
+                        <img src={twitterIcon} alt="icon" className="icon" />
                         <span className="icon-text">Share on Twitter</span>
                       </li>
-                    </ul>                        
-                    </div>                  
-                    <img
-                      src={info}
-                      alt="info"
-                      style={{ width: "31px", height: "31px" }}
-                      // data-bs-toggle="modal"
-                      onClick={() => setOpenReportModal(true)}
-                    />
+                    </ul>
+                  </div>
+                  <img
+                    src={info}
+                    alt="info"
+                    style={{ width: "31px", height: "31px" }}
+                    // data-bs-toggle="modal"
+                    onClick={() => setOpenReportModal(true)}
+                  />
                 </div>
               </div>
             </div>
@@ -374,7 +374,7 @@ export default function NftInformation(props) {
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
                       >
-                      <img
+                        <img
                           alt="share"
                           src={share}
                           style={{ width: "31px", height: "31px", marginRight: "20px", }}
@@ -384,113 +384,113 @@ export default function NftInformation(props) {
                         className="dropdown-menu profilemenu"
                         aria-labelledby="navbarDropdown"
                         style={{
-                          width:"220px",
+                          width: "220px",
                           position: "absolute",
-                          marginLeft:"30px",
+                          marginLeft: "30px",
                           boxShadow: "0px 3px 6px #00000012",
                           border: "1px solid #F4F4F4",
                           borderRadius: "6px",
-                          background: "#FFFFFF",                        
+                          background: "#FFFFFF",
                         }}
                       >
-                      <li className="list-item">
-                        <img src={copyIcon} alt="icon" className="icon" />
-                        <span className="icon-text">Copy link</span>
-                      </li>
-                      <li className="list-item">
-                        <img src={facebookIcon} alt="icon" className="icon" />
-                        <span className="icon-text">Share on Facebook</span>
-                      </li>
-                      <li className="list-item">
-                        <img src={twitterIcon} alt="icon" className="icon"/>
-                        <span className="icon-text">Share on Twitter</span>
-                      </li>
-                    </ul>                        
+                        <li className="list-item">
+                          <img src={copyIcon} alt="icon" className="icon" />
+                          <span className="icon-text">Copy link</span>
+                        </li>
+                        <li className="list-item">
+                          <img src={facebookIcon} alt="icon" className="icon" />
+                          <span className="icon-text">Share on Facebook</span>
+                        </li>
+                        <li className="list-item">
+                          <img src={twitterIcon} alt="icon" className="icon" />
+                          <span className="icon-text">Share on Twitter</span>
+                        </li>
+                      </ul>
                     </div>
-                      <img
-                        src={info}
-                        alt="info"
-                        style={{ width: "31px", height: "31px" }}
-                        // data-bs-toggle="modal"
-                        // data-bs-target="#myModalReport"
-                        onClick={() => {
-                          setOpenReportModal(true);
-                        }}
-                      />
-                      {/* <!-- The Modal --> */}
-                      <div className="modal" id="myModalReport">
-                        <div className="modal-dialog">
-                          <div
-                            className="modal-content"
-                            style={{ borderRadius: "10px", paddingRight: "10px" }}
-                          >
-                            {/* <!-- Modal Header --> */}
-                            <div className="modal-header">
-                              <h4 className="modal-title font-15 font-weight-700 text-dark">
-                                Report this item
-                              </h4>
-                              <button
-                                type="button"
-                                className="btn-close"
-                                data-bs-dismiss="modal"
-                                style={{
-                                  width: "10px",
-                                  height: "10px",
-                                  boxShadow: "none",
-                                }}
-                              ></button>
-                            </div>
+                    <img
+                      src={info}
+                      alt="info"
+                      style={{ width: "31px", height: "31px" }}
+                      // data-bs-toggle="modal"
+                      // data-bs-target="#myModalReport"
+                      onClick={() => {
+                        setOpenReportModal(true);
+                      }}
+                    />
+                    {/* <!-- The Modal --> */}
+                    <div className="modal" id="myModalReport">
+                      <div className="modal-dialog">
+                        <div
+                          className="modal-content"
+                          style={{ borderRadius: "10px", paddingRight: "10px" }}
+                        >
+                          {/* <!-- Modal Header --> */}
+                          <div className="modal-header">
+                            <h4 className="modal-title font-15 font-weight-700 text-dark">
+                              Report this item
+                            </h4>
+                            <button
+                              type="button"
+                              className="btn-close"
+                              data-bs-dismiss="modal"
+                              style={{
+                                width: "10px",
+                                height: "10px",
+                                boxShadow: "none",
+                              }}
+                            ></button>
+                          </div>
 
-                            {/* <!-- Modal body --> */}
-                            <div className="modal-body">
-                              <h5
-                                className="font-14 font-weight-700 text-dark"
-                                style={{ marginLeft: "-0.6em" }}
+                          {/* <!-- Modal body --> */}
+                          <div className="modal-body">
+                            <h5
+                              className="font-14 font-weight-700 text-dark"
+                              style={{ marginLeft: "-0.6em" }}
+                            >
+                              Reason
+                            </h5>
+                            <div
+                              className="input-group mt-3"
+                              style={{ marginLeft: "-0.6em" }}
+                            >
+                              <select
+                                className="form-select"
+                                id="inputGroupSelect02"
+                                onChange={(e) => handleChange(e)}
                               >
-                                Reason
-                              </h5>
-                              <div
-                                className="input-group mt-3"
-                                style={{ marginLeft: "-0.6em" }}
-                              >
-                                <select
-                                  className="form-select"
-                                  id="inputGroupSelect02"
-                                  onChange={(e) => handleChange(e)}
+                                <option
+                                  value="Fake collection or possible scam"
+                                  selected
                                 >
-                                  <option
-                                    value="Fake collection or possible scam"
-                                    selected
-                                  >
-                                    Fake collection or possible scam
-                                  </option>
-                                  <option value="Explicit and sensitive content">
-                                    Explicit and sensitive content
-                                  </option>
-                                  <option value="Spam">Spam</option>
-                                  <option value="Might be stolen">
-                                    Might be stolen
-                                  </option>
-                                  <option value="Other">Other</option>
-                                </select>
-                              </div>
+                                  Fake collection or possible scam
+                                </option>
+                                <option value="Explicit and sensitive content">
+                                  Explicit and sensitive content
+                                </option>
+                                <option value="Spam">Spam</option>
+                                <option value="Might be stolen">
+                                  Might be stolen
+                                </option>
+                                <option value="Other">Other</option>
+                              </select>
                             </div>
+                          </div>
 
-                            {/* <!-- Modal footer --> */}
-                            <div className="modal-footer mb-4">
-                              <button
-                                type="button"
-                                className="btn btn-primary w-100"
-                                data-bs-dismiss="modal"
-                                style={{ marginLeft: "1.1em" }}
-                                onClick={makeReport}
-                              >
-                                Make Offer
-                              </button>
-                            </div>
+                          {/* <!-- Modal footer --> */}
+                          <div className="modal-footer mb-4">
+                            <button
+                              type="button"
+                              className="btn btn-primary w-100"
+                              data-bs-dismiss="modal"
+                              style={{ marginLeft: "1.1em" }}
+                              onClick={makeReport}
+                            >
+                              Make Offer
+                            </button>
                           </div>
                         </div>
                       </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -649,20 +649,20 @@ export default function NftInformation(props) {
               <div className="reportthisitem">
                 <h3 className="report-text poppins-normal">
                   Report this item
-                </h3>                
+                </h3>
                 <i className="fa-solid fa-xmark cross-icon"
                   onClick={() => setOpenReportModal(false)}>
                 </i>
               </div>
               <div className="singlerowmodal">
                 <h3 className="reason-text"> Reason</h3>
-                  <select className="select-box">
-                    <option>Select reason</option>
-                    <option value="Fake collection or possible scam">Fake collection or possible scam</option>
-                    <option value="Explicit and sensitive content">Explicit and sensitive content</option>
-                    <option value="Might be stolen">Might be stolen</option>
-                    <option value="Other">Other</option>
-                  </select>
+                <select className="select-box">
+                  <option>Select reason</option>
+                  <option value="Fake collection or possible scam">Fake collection or possible scam</option>
+                  <option value="Explicit and sensitive content">Explicit and sensitive content</option>
+                  <option value="Might be stolen">Might be stolen</option>
+                  <option value="Other">Other</option>
+                </select>
               </div>
               <button className="report-btn" onClick={() => setOpenReportModal(false)}>Report</button>
             </div>
