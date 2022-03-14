@@ -26,7 +26,7 @@ function Home() {
           <div className="inner-width">
             <Container fluid>
               <Row>
-                <Col md={6}>
+                <Col lg={6}>
                   <div className="left-text">
                     <h1 className="heading">Buy, Trade and Sell your <br></br>NFTs</h1>
                     <p className="text">One stop solution for all types of NFTs</p>
@@ -34,9 +34,9 @@ function Home() {
                     <Button variant="custom">Create</Button>
                   </div>  
                 </Col>
-                <Col md={6}>
+                <Col lg={6}>
                   <div className="right-slider">
-                    <OwlCarousel className='owl-theme' items={1}>
+                    <OwlCarousel className='owl-theme' margin={10} items={1}>
                       <div className='item'>
                         <div className="d-flex flex-wrap">
                           <Card>
@@ -169,50 +169,52 @@ function Home() {
         
         <div className="create-sell-nft">
           <h2 className="heading">Create and sell your NFTs</h2>
-          <div className="d-flex justify-content-center flex-wrap">
-            <Card>
-              <Card.Img variant="top" src={Wallet} />
-              <Card.Body>
-                <Card.Title>Create Wallet</Card.Title>
-                <Card.Text>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                </Card.Text>
-              </Card.Body>
-            </Card>
-            <Card>
-              <Card.Img variant="top" src={Sale} />
-              <Card.Body>
-                <Card.Title>Create Collection</Card.Title>
-                <Card.Text>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                </Card.Text>
-              </Card.Body>
-            </Card>
-            <Card>
-              <Card.Img variant="top" src={NFTs} />
-              <Card.Body>
-                <Card.Title>Add NFTs</Card.Title>
-                <Card.Text>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                </Card.Text>
-              </Card.Body>
-            </Card>
-            <Card>
-              <Card.Img variant="top" src={Collection} />
-              <Card.Body>
-                <Card.Title>List them for sale</Card.Title>
-                <Card.Text>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                </Card.Text>
-              </Card.Body>
-            </Card>
+          <div className="inner-width">
+            <div className="d-flex justify-content-center flex-wrap">
+              <Card>
+                <Card.Img variant="top" src={Wallet} />
+                <Card.Body>
+                  <Card.Title>Create Wallet</Card.Title>
+                  <Card.Text>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+              <Card>
+                <Card.Img variant="top" src={Collection} />
+                <Card.Body>
+                  <Card.Title>Create Collection</Card.Title>
+                  <Card.Text>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+              <Card>
+                <Card.Img variant="top" src={NFTs} />
+                <Card.Body>
+                  <Card.Title>Add NFTs</Card.Title>
+                  <Card.Text>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+              <Card>
+                <Card.Img variant="top" src={Sale} />
+                <Card.Body>
+                  <Card.Title>List them for sale</Card.Title>
+                  <Card.Text>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </div>
           </div>
         </div>
 
         <div className="why-marketplace">
           <h2 className="heading">Why this Marketplace</h2>
           <div className="inner-width">
-            <div className="d-flex justify-content-start flex-wrap">
+            <div className="d-flex justify-content-lg-start justify-content-md-center flex-wrap">
               <div className="d-flex align-items-center justify-content-center media">
                 <div className="flex-shrink-0">
                   <img src={Category} alt="Category" width="60px" height="60px"/>
