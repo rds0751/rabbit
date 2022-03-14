@@ -3,7 +3,7 @@ import image from "../../assets/images/1.jpg";
 import share from "../../assets/images/share.svg";
 import info from "../../assets/images/report.svg";
 import copyIcon from "../../assets/images/copy.png";
-import facebookIcon from "../../assets/images/Facebook.png";
+import facebookIcon from "../../assets/images/facebook.png";
 import twitterIcon from "../../assets/images/Twitter.png";
 import "../../assets/styles/nftReportModal.css";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -150,6 +150,7 @@ export default function NftInformation(props) {
 
   return (
     <>
+    {props?.refreshPage ? window.location.reload(true):""}
       {props?.loaderState ? (
         <div className="center">
           {" "}
