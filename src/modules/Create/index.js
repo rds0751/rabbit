@@ -40,6 +40,7 @@ class Index extends BaseComponent {
       ipfsUrl: data?.ipfsUrl || "",
       cdnUrl: data?.cdnUrl || "",
       cid: data?.cid || "",
+      contractAddress:data.contractAddress || "",
       description: data?.description || "",
       blockchain: data?.blockchain || "",
       network: {
@@ -93,14 +94,14 @@ class Index extends BaseComponent {
 
     const tokenId = Utils.generateRandomNumber();
     // create NFT on blockchai
-    if(data.collection.length > 0 ){
+    if(data.contractAddress.length > 0 ){
      
     const [blockchainError, blockchainResult] = await Utils.parseResponse(
       BlockchainServices.mintNFT({
         tokenURI: data.ipfsUrl,
         price: data.price,
         tokenId,
-        contractAddress:data.collection
+        contractAddress:data.contractAddress
       })
     );
 

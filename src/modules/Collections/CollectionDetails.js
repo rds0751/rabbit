@@ -26,6 +26,7 @@ function CollectionDetails() {
   const [nfts, setNfts] = useState([]);
   const [checkLike, setcheckLike] = useState(false);
   useEffect(() => {
+    // console.log("000000000dddddddd",collectionId)
     getCollection(collectionId.id).then((response) => {
       setCollection(response);
       console.log(response, "<<<<response");
@@ -146,7 +147,7 @@ function CollectionDetails() {
             </div>
           </div>
           <div className="nftTileContainer row cards-gap ntf_row">
-            {[...nfts, ...nfts, ...nfts, ...nfts].map((nft) => {
+            {[...nfts].map((nft) => {
               const { ipfsUrl, name, salesInfo } = nft;
               return <CollDetailCard nft={nft} />;
 
