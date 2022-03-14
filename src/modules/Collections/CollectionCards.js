@@ -22,6 +22,9 @@ function Collections_tile() {
   };
 
   const [collections, setCollections] = useState([]);
+  console.log("<<<<<<<<collections", collections);
+
+
   const [Categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [filterData, setFilterData] = useState(initialFilterData);
