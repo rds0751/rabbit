@@ -76,11 +76,27 @@
   margin-bottom: 97px;
   text-align: center;
 }
+.homepage .why-marketplace .media{
+  background-color: #FFFFFF;
+  width: 396px;
+  padding: 28px 0px;
+  margin-right: 131px;
+  margin-bottom: 54px;
+}
+.homepage .why-marketplace .media:nth-child(3n+2){
+  margin-right: 90px;
+}
+.homepage .why-marketplace .media:nth-child(3n+3){
+  margin-right: 0px;
+}
 
 @media only screen and (min-width: 1400px){
   .inner-width{
     width: 85%;
     margin: 0px auto;
+  }
+  .homepage .why-marketplace .inner-width{
+    width: 73.4%;
   }
 }
 @media only screen and (max-width: 1400px){
