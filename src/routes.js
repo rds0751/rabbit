@@ -55,6 +55,7 @@ import { WEB_APP_USER_WALLET_ADDRESS } from "./reducers/Constants";
 import { addUseraction, addUserData } from "./reducers/Action";
 import { CheckUserByWalletAddress } from "./services/UserMicroService";
 import FAQsPage from "./modules/Faqs/index";
+import BuyPage from "./modules/Buying/index";
 
 function App() {
   useEffect(() => {
@@ -118,7 +119,7 @@ function App() {
             <Route exact path="/top-seller" element={<TopSeller />} />
             {/* ----------- */}
             <Route exact path="/leader-board" element={<LeaderBoard />} />
-            <Route exact path="/buying" element={<Buying />} />
+            <Route exact path="/buying" element={<BuyPage />} />
             <Route exact path="/my-items" element={<MyItems />} />
             <Route
               exact

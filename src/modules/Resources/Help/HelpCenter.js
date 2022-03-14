@@ -36,7 +36,7 @@ function HelpCenter() {
   return (
     <div>
       <div className="help-outer">
-        <div className="help-center">Help center</div>
+        <div className="help-center">Helpcenter</div>
         <div className="card-outer-body">
           {data.map((item, key) => {
             return (
@@ -47,7 +47,11 @@ function HelpCenter() {
                       <div className="">
                         <img src={item.image} />
                         <div className="title-help">{item.title}</div>
+                        <div style={{width:"101.4%"}}>
                         <p className="content">{item.description}</p>
+
+                        </div>
+                     
                       </div>
                     </div>
                   </div>
