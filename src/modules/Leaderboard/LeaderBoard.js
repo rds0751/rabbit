@@ -317,9 +317,9 @@ function LeaderBoard() {
         <div className="card-small  mb-4 leadercolmob">
           <div
             className="card-header"
-            style={{ backgroundColor: "#f8f8f8", padding: "inherit", paddingTop: '30px', borderTopLeftRadius: '13px', borderTopRightRadius: '13px' }}
+            style={{ backgroundColor: "#f8f8f8", padding: "inherit", borderTopLeftRadius: '13px', borderTopRightRadius: '13px', border: 'none' }}
           >
-            <ul className="small-nav nav nav-pills" id="pills-tab" role="tablist">
+            <ul className="small-nav nav nav-pills" id="pills-tab" role="tablist" style={{ borderBottom: "1px solid #D8D8D8", paddingTop: "20px", height: '66px' }}>
               <li className="nav-item">
                 <a
                   className="nav-link active"
@@ -329,10 +329,11 @@ function LeaderBoard() {
                   role="tab"
                   aria-controls="pills-pending"
                   aria-selected="true"
-                  style={{ fontSize: "13px", borderRadius: 'inherit' }}
+                  style={{ fontSize: "13px", borderRadius: 'inherit', paddingLeft: '20px' }}
                   onClick={() => setPendingAcceptedCreated("pending")}
                 >
                   Top Buyers
+                  <hr style={{ width: "150%", marginLeft: '-22px', height: 'auto', opacity: 'inherit' }} />
                 </a>
               </li>
               <li className="nav-item">
@@ -348,6 +349,7 @@ function LeaderBoard() {
                   onClick={() => setPendingAcceptedCreated("accepted")}
                 >
                   Top Sellers
+                  <hr style={{ width: "173%", marginLeft: '-25px', height: 'auto', opacity: 'inherit' }} />
                 </a>
               </li>
               <li className="nav-item">
@@ -363,6 +365,7 @@ function LeaderBoard() {
                   onClick={() => setPendingAcceptedCreated("rejected")}
                 >
                   Top Collections
+                  <hr style={{ width: "125%", height: 'auto', opacity: 'inherit', marginLeft: "-14px" }} />
                 </a>
               </li>
             </ul>
@@ -462,23 +465,23 @@ function LeaderBoard() {
                           </span>
                           &nbsp;for<span className="ethCurrency">&nbsp; {(curElem.salesInfo.price)}&nbsp;{(curElem.biddingDetails.currency).toUpperCase()}</span>
                         </h6>
-                        <div style={{display: "flex", height: "auto",marginTop:"3px"}}>
-                        <h6 className="value__k">
-                          {/* {daysLeft}{" "} */}
-                          {likesCount}{" "}
-                          {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
-                                                
-                          
-                        </h6>
-                        <div style={{background: "#FFFFFF 0% 0% no-repeat padding-box",border:"1px solid #FFFFFF",borderRadius:"5px",width:"19px",height:"19px",display:"flex",justifyContent:"center",alignItems:"center",marginLeft:"8.38px"}}>
-                          <i
-                            className="fa-solid fa-heart"
-                            style={{ color: "#ef3643"}}
-                          ></i>
-                            </div>  
+                        <div style={{ display: "flex", height: "auto", marginTop: "3px" }}>
+                          <h6 className="value__k">
+                            {/* {daysLeft}{" "} */}
+                            {likesCount}{" "}
+                            {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
+
+
+                          </h6>
+                          <div style={{ background: "#FFFFFF 0% 0% no-repeat padding-box", border: "1px solid #FFFFFF", borderRadius: "5px", width: "19px", height: "19px", display: "flex", justifyContent: "center", alignItems: "center", marginLeft: "8.38px" }}>
+                            <i
+                              className="fa-solid fa-heart"
+                              style={{ color: "#ef3643" }}
+                            ></i>
+                          </div>
 
                         </div>
-                        
+
                       </div>
                     </div>
                   </div>
