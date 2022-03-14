@@ -15,7 +15,7 @@ function CollDetailCard({ nft }) {
   const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
   const [handleLike, setHandleLike] = useState(true);
 
-  const route = "nft-information/" + _id;
+  const route = "/nft-information/" + _id;
   const likeNft = (id) => {
     if (user.loggedInUser == null) {
       navigate("/add-wallet");
