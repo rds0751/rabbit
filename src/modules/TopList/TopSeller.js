@@ -15,9 +15,9 @@ function TopSeller() {
 
   const [topSellers, setTopSellers] = useState([]);
 
-  useEffect(() => {
-    getTopSellers().then((response) => setTopSellers(response));
-  });
+  useEffect(async () => {
+   await getTopSellers().then((response) => setTopSellers(response));
+  },[]);
   console.log("topSellers", topSellers);
 
 

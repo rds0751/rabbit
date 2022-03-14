@@ -446,7 +446,7 @@ height: 47px;
   /* .navbar-width {
     margin: 0px 60px !important;
   } */
-  .fa-facebook:before {
+  /* .fa-facebook:before {
     color: #818181;
   }
   .fa-facebook:hover {
@@ -464,7 +464,7 @@ height: 47px;
   }
   .fa-instagram:hover {
     color: #000;
-  }
+  } */
   /* .footerfix {
     margin-top: -130px;
     margin-left: -60px;
@@ -496,7 +496,7 @@ height: 47px;
   }
 }
 
-@media only screen and (max-width: 1199px) {
+/* @media only screen and (max-width: 1199px) {
   .fa-facebook:before {
     color: #818181;
   }
@@ -520,7 +520,8 @@ height: 47px;
         margin-left: 160px;
         margin-top: -262px;
     } */
-}
+ 
+*/
 
 /* ------Footer------ */
 .footer > ul > a {
@@ -1154,7 +1155,14 @@ width: 87%;
   font-size: 24px;
   color: #818181 0% 0% no-repeat padding-box;
   cursor:pointer;
+  
 }
+.Icon:hover{
+  color: #366EEF;
+  opacity: 1;
+
+}
+
 
 .about{
 text-align: left;

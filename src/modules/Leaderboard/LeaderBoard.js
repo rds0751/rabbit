@@ -12,6 +12,7 @@ import {
   Accepted,
   Rejected,
 } from "../../constants/LeaderBoardApi";
+import { Oval } from "react-loader-spinner";
 import { getTopSellers } from "../../services/sellAndPurchaseMicroService";
 import { getTopCollections } from "../../services/sellAndPurchaseMicroService";
 import { getTopNftSales } from "../../services/webappMicroservice";
@@ -21,28 +22,27 @@ function LeaderBoard() {
 
   const [topSellers, setTopSellers] = useState([]);
 
-  useEffect(() => {
-    getTopSellers().then((response) => setTopSellers(response));
-  });
+  useEffect(async () => {
+    await getTopSellers().then((response) => setTopSellers(response));
+  },[]);
+  
   var limitSellers = topSellers.slice(0, 4)
   console.log("topSellers", topSellers);
 
   const [topCollections, setTopCollections] = useState([]);
 
-  useEffect(() => {
-    getTopCollections().then((response) => setTopCollections(response));
-  });
+  useEffect(async () => {
+   await getTopCollections().then((response) => setTopCollections(response));
+  },[]);
   var limitCollections = topCollections.slice(0, 4)
   console.log("topCollections", topCollections);
 
   const [topNftSales, setTopNftSales] = useState([]);
 
-  useEffect(() => {
-    getTopNftSales().then((response) => setTopNftSales(response));
-  });
+  useEffect(async () => {
+    await getTopNftSales().then((response) => setTopNftSales(response));
+  },[]);
   console.log("topNftSales", topNftSales);
-
-
 
 
   // const [state, setState] = useState(LeaderBoardApi);
@@ -222,8 +222,9 @@ function LeaderBoard() {
                     );
                   })}
                 </div>
-                {topSellers.length === 0 && (<div>
-                  <h1>No Data Found</h1>
+                {topSellers.length === 0 && (
+                <div className="loader">
+                  
                 </div>)}
               </div>
               <div className="view-more">

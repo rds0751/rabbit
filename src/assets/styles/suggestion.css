@@ -21,6 +21,8 @@
   resize: none;
 }
 .sugg-input {
+/* 
+  font: normal normal medium 14px/21px Poppins; */
   /* width: 100%; */
 
   /* width: 432px;
@@ -33,7 +35,9 @@
   border-radius: 4px;
   margin: 10px 0px 21px 0px;
   border: 0px;
-  font: normal normal medium 14px/21px Poppins;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: normal;
   letter-spacing: 0px;
   opacity: 1;
 }
@@ -88,7 +92,7 @@
 @media screen and (min-width: 764px) {
   .suggestion {
     width: 524px;
-    margin: 66px 861px 76px 535px;
+    margin: 66px auto 76px auto;
   }
 }
 
