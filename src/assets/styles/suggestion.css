@@ -14,7 +14,8 @@
 .form-box {
   border: 1px solid #d5d5d5;
   border-radius: 16px;
-  margin-top: 40px;
+  /* margin-top: 40px; */
+  margin-top: 48px;
 }
 .text-area {
   min-height: 105px;
@@ -67,8 +68,9 @@
   color: #191919;
   font-family: Poppins;
   font-weight: bold;
-
   opacity: 1;
+  font-size: 14px;
+  line-height: 21px;
 }
 
 .form-inner input::-webkit-input-placeholder {
@@ -93,6 +95,7 @@
   .suggestion {
     width: 524px;
     margin: 66px auto 76px auto;
+    /* margin: 66px 861px 76px 535px; */
   }
 }
 
@@ -112,12 +115,13 @@
   }
   .sugg-input {
     width: 100%;
-    padding: 0px;
+    padding: 6px 12px;
   }
   .send-button {
     width: 100%;
   }
   .form-box {
+    margin-top: 22px;
     margin-left: 2%;
     margin-right: 2%;
   }
