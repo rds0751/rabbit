@@ -37,6 +37,40 @@
   color: #141520;
   background-color: #FFFFFF;
 }
+.homepage .right-slider .card{
+  width: 400px;
+  box-shadow: 0px 3px 9px #0000000D;
+  border-radius: 12px;
+  margin-right: 23px;
+  margin-bottom: 42px;
+}
+.homepage .right-slider .card:nth-child(even){
+  margin-right: 0px;
+}
+.homepage .right-slider .card-img-top{
+  width: 400px;
+  height: 273px;
+  border-radius: 12px;
+}
+.homepage .right-slider .card .profile-img{
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+}
+.homepage .right-slider .card .title{
+  font-family: 'poppins-semibold';
+  font-size: 16px;
+  line-height: 22px;
+  color: #585858;
+  margin-bottom: 2px;
+}
+.homepage .right-slider .card .description{
+  font-family: 'poppins-semibold';
+  font-size: 14px;
+  line-height: 19px;
+  color: #585858;
+  margin-bottom: 2px;
+}
 .homepage .create-sell-nft{
   margin-bottom: 241px;
 }
@@ -92,8 +126,8 @@
 
 @media only screen and (min-width: 1400px){
   .inner-width{
-    width: 85%;
-    margin: 0px auto;
+    margin-left: 126px;
+    margin-right: 100px;
   }
   .homepage .why-marketplace .inner-width{
     width: 73.4%;
