@@ -61,8 +61,8 @@ opacity: 1;
 }
 
 .LeaderboardInsideDetails > h2 {
-  font-size: 0.9rem;
-  font-weight: bold;
+  /* font-size: 0.9rem;
+  font-weight: bold; */
   /* margin-left: 0.5rem; */
 }
 .LeaderboardInsideDetails > p {
@@ -498,8 +498,6 @@ thead {
 .nav-pills .show > .nav-link {
   color: #fff;
   background-color: transparent;
-  color: #027dd7;
-  border-bottom: 3px solid #027dd7;
 }
 
 .nav-link {
@@ -517,11 +515,21 @@ thead {
     border: 5px solid red;
   }
 } */
-
+@media only screen and (max-width: 500px) {
+  .middle__homepage {
+    justify-content: center;
+    border-bottom: 1px solid #C7C7C7;
+    height: 46px;
+    margin-left: -20px;
+    width: 120%;
+  }
+  .upper__homepage {
+    text-align: center;
+  }
+}
+  
 @media only screen and (max-width: 1170px) {
-  /* .filter {
-    width: 100%;
-  } */
+  
   .filter > button {
     display: flex;
     justify-content: space-between;
@@ -567,11 +575,16 @@ thead {
   }
   .nav-pills .nav-link.active,
   .nav-pills .show > .nav-link {
-    color: black;
-    border-bottom: 4px solid #366eef;
+    color: black !important;
     font-size: 14px;
     font-weight: bold;
   }
+  .nav-pills .nav-link.active hr{
+height: 4px !important;
+color: #366EEF;
+border-radius: 10px; 
+width: 170%;
+    }
   .nav-link {
     color: #828282;
     font-weight: bold;
@@ -580,8 +593,8 @@ thead {
   }
   .shadow {
     box-shadow: none !important;
-    border: 0px;
-    background-color: #f8f8f8;
+    border:1px solid #D5D5D4;
+    background-color: #FFFFFF;
   }
 
   .card-header {
@@ -604,12 +617,6 @@ thead {
     /* border: "5px solid green"; */
   }
 
-  .middle__homepage {
-    justify-content: center;
-  }
-  .upper__homepage {
-    text-align: center;
-  }
   /* .menuphone {
     display: block;
     display: flex;
@@ -1032,7 +1039,7 @@ thead {
     flex-direction: column;
     /* height: 105vh; */
     height: 323px;
-    height: auto;
+    /* height: auto; */
   }
 }
 @media only screen and (min-width:320px){
@@ -1052,7 +1059,7 @@ border: 1px solid #707070;
 border-radius: 6px;
 }
 .small-leaderboard-dropdown{
-width: 319px;
+width: 90%;
 height: 42px;
 background: #FFFFFF00 0% 0% no-repeat padding-box;
 border: 1px solid #707070;
@@ -1141,12 +1148,12 @@ margin-top: 20px;
     align-items: flex-start;
   }
   .sales-selector{
-    width: 320px;
+    width: 350px;
     font-weight: 500;
     margin-bottom: 16px;
   }
   .sort-selector{
-    width: 320px;
+    width: 350px;
     font-weight: 500;
     border-radius: 6px;
   }
@@ -1342,12 +1349,13 @@ margin-top: 20px;
 /* nft-information nft detail page css end*/
 
 /* leaderboard */
-@media only screen and (min-width: 700px) and (max-width: 764px){
+
+/* @media only screen and (min-width: 700px) and (max-width: 764px){
 .small-leaderboard-dropdown{
   margin-left: 75%;
 }
 
-}
+} */
 
 .list-item{
   padding:10px;
@@ -1360,4 +1368,78 @@ margin-top: 20px;
   font-size:16px;
   font-weight:600;
   padding-left:10px;
+}
+.nameseller{
+  margin: auto auto auto 14px;
+}
+.namediv{
+  margin: auto auto auto 31px;
+}
+.sellerName{
+text-align: left;
+font: normal normal bold 18px/27px Poppins;
+letter-spacing: 0px;
+color: #000000;
+opacity: 1;
+}
+.volumeData{
+  display:flex;
+  text-align: left;
+  font: normal normal medium 16px/25px Poppins;
+  letter-spacing: 0px;
+  color: #366EEF;
+
+
+}
+.ethValue{
+text-align: left;
+font: normal normal normal 16px/25px Poppins;
+letter-spacing: 0px;
+color: #818181;
+}
+.descriptiontopSeller{
+  margin-left: 7px;
+}
+
+.loader {
+  border: 16px solid #3498db;
+  border-radius: 50%;
+  border-top: 16px solid  #f3f3f3;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.view-more{
+  position: relative;}
+.small-nav{
+  justify-content: space-between;
+}
+
+@media only screen and (min-width:500px) and (max-width: 1150px) {
+  .small-nav{
+    justify-content: flex-start;
+    gap:6%;
+  }
+  
+}
+@media only screen and (min-width:500px) and (max-width: 1150px) {
+  .small-leaderboard-dropdown{
+
+width: 23%;
+height: 42px;
+margin-left: 70%;
+  }
+  
 }

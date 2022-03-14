@@ -31,13 +31,15 @@ import Close from "../../assets/images/close.png";
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 const Button = styled.button``;
 function CreateSingleNFT(props) {
-  
+
   console.log("ppppppppdddddddddddppppp", props?.mintedNftId);
   console.log("ppppppppppppp", props?.loaderState);
   // console.log("ppppppppppppp", props?.isNftCreated);
   const [collectionData, setCollectionData] = useState([]);
   const [selectFile, setSelectFile] = useState("");
   const [collectionId, setCollectionId] = useState("");
+  const [contractAddress, setContractAddress] = useState("");
+
   const [ipfsUrl, setIpfsUrl] = useState("");
   const [myProfileUrl, setmyProfileUrl] = useState("");
 
@@ -68,7 +70,7 @@ function CreateSingleNFT(props) {
     if (loggedInUser == null) {
       navigation("/add-wallet");
     }
-   
+
     setmyProfileUrl("/nft-information/")
     const collections = await getCollectionBySingleUser(loggedInUser?._id);
     setCollectionData(collections);
@@ -169,7 +171,9 @@ function CreateSingleNFT(props) {
     );
     const addIPFS = async () => {
       console.log(selectFile, "<<<selectedFile");
-
+      // alert(contractAddress)
+      // alert(collectionId)
+      // alert(contractAddress)
       props.createNftHandler({
         // nftFile: selectFile,
         ipfsUrl: ipfsUrl,
@@ -180,6 +184,7 @@ function CreateSingleNFT(props) {
         blockchain: blockchain.current,
         createdBy: loggedInUser._id,
         collection: collectionId,
+        contractAddress: contractAddress,
         ownerAddress: walletAddress.address,
       });
       // setloader(false)
@@ -213,10 +218,10 @@ function CreateSingleNFT(props) {
 
 
       {/* ----------------------------- */}
-      {props?.isNftCreated ? 
-           navigation(myProfileUrl+props?.mintedNftId) : (
-        ""
-      )}
+      {props?.isNftCreated ?
+        navigation(myProfileUrl + props?.mintedNftId) : (
+          ""
+        )}
 
       <ToastContainer
         position="top-center"
@@ -311,6 +316,7 @@ function CreateSingleNFT(props) {
                   type="email"
                   className="form-control-1"
                   name="email"
+                  autoComplete="off"
                   onChange={(e) => {
                     name.current = e.target.value;
                     checkChanges();
@@ -325,6 +331,7 @@ function CreateSingleNFT(props) {
                   className="form-control-1"
                   min="0"
                   type="number"
+                  autoComplete="off"
                   onChange={(e) => {
                     price.current = e.target.value;
                     checkChanges();
@@ -384,18 +391,28 @@ function CreateSingleNFT(props) {
                 {/* <Link>Create</Link> */}
                 <select
                   onChange={(e) => {
-                    setCollectionId(e.target.value);
+                    // setCollectionId(e.target.value);
+                    const addressId = e.target.value.split(",")
+                    setCollectionId(addressId[0]);
+                    // alert(contractAddress);
+                    setContractAddress(addressId[1]);
+                    // alert(collectionId);
+                    // alert(contractAddress);
+
                     checkChanges();
+
+
                   }}
                   className="form-control-1 category-select"
                 >
                   <option className="color82">Select collection</option>
-                  {collectionData.map((item) => (
-                    <option className="option color82" value={item.contractAddress}>
-                      {item.name}
+                  {collectionData.map((item, index) => (
+                    <option className="option color82" value={[item._id, item.contractAddress]} >
+                      {item?.name}
                     </option>
                   ))}
                 </select>
+
               </div>
               <div className="">
                 <label htmlFor="email" className="input-label">
