@@ -35,7 +35,7 @@ function CollectionDetails() {
       console.log(response, "<<<<< collectionresponse");
     });
   }, []);
-  const { imageUrl, coverUrl, name } = collection;
+  const { imageUrl, coverUrl, name, description } = collection;
   // const [checkLike, setCheckLike] = useState(false);
   const handleLike = () => {
     setcheckLike(!checkLike);
@@ -52,8 +52,7 @@ function CollectionDetails() {
           </div>
           <div className="colusername">{name}</div>
           <div className="coluserdes">
-            The abstract illusion is a collection of NFT which consist abstract
-            patterns that create illusion
+            {description}
           </div>
         </div>
 
@@ -150,7 +149,7 @@ function CollectionDetails() {
             {[...nfts, ...nfts, ...nfts, ...nfts].map((nft) => {
               const { ipfsUrl, name, salesInfo } = nft;
               return <CollDetailCard nft={nft} />;
-            
+
             })}
           </div>
         </div>

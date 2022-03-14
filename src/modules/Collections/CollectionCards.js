@@ -22,6 +22,9 @@ function Collections_tile() {
   };
 
   const [collections, setCollections] = useState([]);
+  console.log("<<<<<<<<collections", collections);
+
+
   const [Categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [filterData, setFilterData] = useState(initialFilterData);
@@ -130,7 +133,7 @@ function Collections_tile() {
                   <div
                     className=" nft-card-radius collection-card border-radius pt-4 cardmob"
                     style={{ backgroundColor: "#F8F8F8" }}
-                    // style={{ marginLeft: "1em", backgroundColor: "#F8F8F8" }}
+                  // style={{ marginLeft: "1em", backgroundColor: "#F8F8F8" }}
                   >
                     <div className="text-center">
                       <img
