@@ -18,8 +18,8 @@ import { httpConstants } from "../../constants";
 import { BASE_URL2 } from "../../reducers/Constants";
 import { createCollection } from "../../services/createServices";
 import "../../assets/styles/collection.css";
-import { getCategories } from "../../services/UserMicroService";
 import Bannerdrop from "./Bannerdrop";
+import { getCategories } from "../../services/clientConfigMicroService";
 
 const Button = styled.button``;
 
@@ -39,7 +39,19 @@ function CreateNftCollections(props) {
   const [loaderState, setloaderState] = useState(false);
 
   // -------
+
+
+
+
+
+
   const [Categories, setCategories] = useState([]);
+  useEffect(() => {
+    getCategories().then((response) => setCategories(response));
+  });
+  console.log("categories list", Categories);
+
+
   const [DesLength, setDesLength] = useState(0);
   const name = useRef("");
   const description = useRef("");

@@ -26,8 +26,13 @@
 }
 .price-range-dropdown select {
   border: none !important;
-  width: 175px;
+  width: 240px;
 }
+@media only screen and (min-width:300px) and (max-width:1000px) {
+  .price-range-dropdown select{
+    width: 95%;
+  }
+  }
 /* css for NFt cards */
 .nftTileEachImage {
   box-sizing: border-box;

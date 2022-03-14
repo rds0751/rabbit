@@ -515,10 +515,21 @@ thead {
     border: 5px solid red;
   }
 } */
+@media only screen and (max-width: 500px) {
+  .middle__homepage {
+    justify-content: center;
+    border-bottom: 1px solid #C7C7C7;
+    height: 46px;
+    margin-left: -20px;
+    width: 120%;
+  }
+  .upper__homepage {
+    text-align: center;
+  }
+}
+  
 @media only screen and (max-width: 1170px) {
-  /* .filter {
-    width: 100%;
-  } */
+  
   .filter > button {
     display: flex;
     justify-content: space-between;
@@ -606,12 +617,6 @@ width: 170%;
     /* border: "5px solid green"; */
   }
 
-  .middle__homepage {
-    justify-content: center;
-  }
-  .upper__homepage {
-    text-align: center;
-  }
   /* .menuphone {
     display: block;
     display: flex;

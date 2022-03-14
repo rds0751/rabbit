@@ -31,7 +31,7 @@ function NftToggle({ toggleNft }) {
               </Link>
             </div>
             <div style={{ paddingTop: toggleNft ? "0px" : '2px' }}>
-              <hr style={{ width: "108px", height: toggleNft ? "4px" : "1px", color: toggleNft ? "#366EEF" : '#C7C7C7' }}
+              <hr style={{ width: "108px", height: toggleNft ? "4px" : "1px", color: toggleNft ? "#366EEF" : '#C7C7C7', opacity: 'inherit' }}
                 className="toggle-line" />
             </div>
           </div>
@@ -53,7 +53,7 @@ function NftToggle({ toggleNft }) {
               </Link>
             </div>
             <div style={{ paddingTop: toggleNft ? "2px" : '0px' }}>
-              <hr style={{ width: "118px", height: toggleNft ? "1px" : "4px", color: toggleNft ? "#C7C7C7" : '#366EEF' }}
+              <hr style={{ width: "118px", height: toggleNft ? "1px" : "4px", color: toggleNft ? "#C7C7C7" : '#366EEF', opacity: 'inherit' }}
                 className="toggle-line" /></div>
           </div>
         </div>

@@ -37,7 +37,7 @@ function Collections_tile() {
           <div id="filters filter-large" className="filter">
             <div className="mobilenftTilePageFirstSelect dropdown">
               <p className="mb-0">Categories </p>
-              <select name="sale" id="sale" className="first_select ml_auto" onChange={e=>handleFilter(e)}>
+              <select name="sale" id="sale" className="first_select ml_auto" onChange={e => handleFilter(e)}>
                 <option value="all">All</option>
                 <option value="2">2</option>
               </select>
@@ -73,7 +73,7 @@ function Collections_tile() {
                   <div
                     className=" nft-card-radius collection-card border-radius pt-4 cardmob"
                     style={{ backgroundColor: "#F8F8F8" }}
-                    // style={{ marginLeft: "1em", backgroundColor: "#F8F8F8" }}
+                  // style={{ marginLeft: "1em", backgroundColor: "#F8F8F8" }}
                   >
                     <div className="text-center">
                       <img

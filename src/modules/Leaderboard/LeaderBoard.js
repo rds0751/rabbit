@@ -310,7 +310,7 @@ function LeaderBoard() {
                   onClick={() => setPendingAcceptedCreated("pending")}
                 >
                   Top Buyers
-                  <hr style={{ width: "150%", marginLeft: '-20px', height: 'auto' }} />
+                  <hr style={{ width: "150%", marginLeft: '-22px', height: 'auto', opacity: 'inherit' }} />
                 </a>
               </li>
               <li className="nav-item">
@@ -326,7 +326,7 @@ function LeaderBoard() {
                   onClick={() => setPendingAcceptedCreated("accepted")}
                 >
                   Top Sellers
-                  <hr style={{ width: "173%", marginLeft: '-25px', height: 'auto' }} />
+                  <hr style={{ width: "173%", marginLeft: '-25px', height: 'auto', opacity: 'inherit' }} />
                 </a>
               </li>
               <li className="nav-item">
@@ -342,7 +342,7 @@ function LeaderBoard() {
                   onClick={() => setPendingAcceptedCreated("rejected")}
                 >
                   Top Collections
-                  <hr style={{ width: "110%", height: 'auto' }} />
+                  <hr style={{ width: "125%", height: 'auto', opacity: 'inherit', marginLeft: "-14px" }} />
                 </a>
               </li>
             </ul>

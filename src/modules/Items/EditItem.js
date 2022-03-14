@@ -79,6 +79,10 @@ function EditItem(Collection) {
     // Collection.handleFile(fileUploaded);
   };
 
+  function changeBlockchain(event){
+    setEditForm({ ...editForm, blockchain: event.target.value });
+  }
+
   const handleForm = (e) => {
     const { name, value } = e.target;
     if (name == "description") {
@@ -329,6 +333,7 @@ function EditItem(Collection) {
                 type="text"
                 className="edit-form-input"
                 name="blockchain"
+                onChange={changeBlockchain}
               />
             </div>
             {/* <div className="block-chain-container background-f3">

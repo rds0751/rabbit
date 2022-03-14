@@ -19,11 +19,15 @@ import profile from "../../assets/images/profile.png";
 import { Link } from "react-router-dom";
 import { getNotificationListById } from "../../services/webappMicroservice";
 import { useSelector } from "react-redux";
+import { ManageNotiSideBar, ManageWalletSideBar } from "../../reducers/Action";
+import { useDispatch } from "react-redux";
+
 
 function Notification() {
   const { sideBar, user } = useSelector((state) => state);
   const { isOpenNoti } = sideBar;
   const [notifications, setNotifications] = useState([]);
+  const dispatch = useDispatch();
   
   useEffect(() => {
     console.log(user, "srinivas")
@@ -51,11 +55,17 @@ function Notification() {
     setState({ ...state, [anchor]: open });
   };
 
+  const handleChange = (e) => {
+      dispatch(ManageNotiSideBar(!isOpenNoti));
+      dispatch(ManageWalletSideBar(false));
+      document.body.style.overflow = !isOpenNoti ? "hidden" : "visible";
+  }
+
  
   return (
     <div style={{ display: isOpenNoti ? null : "none" }} className="main-cont">
       {/* ------------ */}
-      <div className="empty_div"></div>
+      <div className="empty_div" onClick = {() => handleChange()}></div>
       <div className="noti-outer">
         <h3 className="notification-text">Notification</h3>
           <div className="all-noti">
