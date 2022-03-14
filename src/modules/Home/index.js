@@ -21,7 +21,8 @@ export default class NftDetail extends BaseComponent {
             responseData: [],
             salesInfo: null,
             nftDetails: null,
-            loaderState: false
+            loaderState: false,
+            refreshPage:false
 
 
         };
@@ -69,7 +70,7 @@ export default class NftDetail extends BaseComponent {
             currency: this.state?.responseData?.salesInfo?.currency || 'eth',
             addedBy: data?.buyerId || '',
             loyality: 5, // to do
-            collectionId: this.state?.responseData?.collectionId || ''
+            collectionId: this.state?.responseData?.contractAddress || ''
             //   ownedBy: this.props?.user?.userDetails?._id || '',
             //   ownerAddress: this.props?.user?.userDetails?.userId || '',
             //   updatedBy: this.props?.user?.userDetails?._id || '',
@@ -91,7 +92,7 @@ export default class NftDetail extends BaseComponent {
             return Utils.apiFailureToast(error || "Unable to update Nft tx.");
         }
 
-        if (this.state?.responseData?.collectionId > 0) {
+        if (this.state?.responseData?.contractAddress > 0) {
 
         //-------------------------------------------------------
         const [blockchainError, blockchainResult] = await Utils.parseResponse(
@@ -99,7 +100,7 @@ export default class NftDetail extends BaseComponent {
                 //TO do
                 tokenId: this.state.responseData?.tokenId,
                 price: this.state?.responseData?.salesInfo?.price,
-                contractAddress: this.state?.responseData?.collectionId
+                contractAddress: this.state?.responseData?.contractAddress
 
             })
         );
@@ -183,6 +184,7 @@ export default class NftDetail extends BaseComponent {
             }
             else {
                 this.setState({ loaderState: false })
+                this.setState({ refreshPage: true })
 
                 this.setState({ nftDetails: res });
                 Utils.apiSuccessToast("This nft has been buy successfully.");
@@ -191,16 +193,16 @@ export default class NftDetail extends BaseComponent {
     };
 
     sellNowNft = async () => {
-        console.log("daaaaaaaaaa",this.state?.responseData?.collectionId)
+        console.log("daaaaaaaaaa",this.state?.responseData?.contractAddress)
         this.setState({ loaderState: true })
         const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS
 
         console.log("jjjjj", this.state.responseData.tokenId);
-        if (this.state?.responseData?.collectionId > 0) {
+        if (this.state?.responseData?.contractAddress > 0) {
             const [blockchainError, blockchainRes] = await Utils.parseResponse(
                 BlockchainService.putOnSaleNft({
                     tokenId: this.state.responseData?.tokenId,
-                    contractAddress: this.state?.responseData?.collectionId
+                    contractAddress: this.state?.responseData?.contractAddress
                 })
             );
             console.log("blockchainError=sellNowNft=", blockchainError);
@@ -251,6 +253,7 @@ export default class NftDetail extends BaseComponent {
         }
         else {
             this.setState({ loaderState: false })
+            this.setState({ refreshPage: true })
 
             this.setState({ nftDetails: result });
             Utils.apiSuccessToast("Your nft has been updated for put on sell successfully.");
@@ -262,11 +265,11 @@ export default class NftDetail extends BaseComponent {
         const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS
 
         console.log("removeNftFromSale");
-        if (this.state?.responseData?.collectionId > 0) {
+        if (this.state?.responseData?.contractAddress > 0) {
         const [blockchainError, blockchainRes] = await Utils.parseResponse(
             BlockchainService.removeFromSaleNft({
                 tokenId: this.state.responseData?.tokenId,
-                contractAddress :this.state?.responseData?.collectionId,
+                contractAddress :this.state?.responseData?.contractAddress,
             })
         );
         if (blockchainError || !blockchainRes) {
@@ -308,6 +311,7 @@ export default class NftDetail extends BaseComponent {
         }
         else {
             this.setState({ loaderState: false })
+            this.setState({ refreshPage: true })
 
             this.setState({ nftDetails: result });
             Utils.apiSuccessToast("Your nft has been removed for sell successfully.");
@@ -327,6 +331,8 @@ export default class NftDetail extends BaseComponent {
                     loaderState={this.state.loaderState}
 
                     BuyNowNft={this.BuyNowNft}
+                    refreshPage={this.state.refreshPage}
+
                     sellNowNft={this.sellNowNft}
                     removeNftFromSale={this.removeNftFromSale}
                 />

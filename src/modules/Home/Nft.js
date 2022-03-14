@@ -274,12 +274,12 @@ function NftPage() {
               onChange={(e) => handlefilter(e)}
               value={filterType.sort}
             >
-              <option value="-1">Sort By</option>
+              <option value="all">Sort By</option>
               <option value="-1">Ascending Order</option>
               <option value="1">Descending Order</option>
             </select>
           </div>
-        </div>
+        </div >
         <div
           className="nftTileContainer row   ntf_row"
           // className="nftTileContainer gird-container  ntf_row"
@@ -299,7 +299,7 @@ function NftPage() {
             );
           })}
         </div>
-      </div>
+      </div >
       <ToastContainer
         position="top-center"
         autoClose={2000}

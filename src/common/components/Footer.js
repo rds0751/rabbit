@@ -10,8 +10,8 @@ function Footer() {
           <div className="footer-top">
             <p className="fs-18">Join our community</p>
             <div className="allicon">
-              <i className="fab fa-instagram  Icon"></i>
-              <i className="fab fa-twitter  Icon twiitericon"></i>
+              <i className="fa-brands fa-instagram Icon"></i>
+              <i className="fab fa-twitter  Icon twittericon"></i>
               <i className="fab fa-reddit  Icon hideicon "></i>  
               <i className="fab fa-telegram  Icon hideicon"></i>
               <i class="fa-brands fa-facebook-f Icon"></i>
