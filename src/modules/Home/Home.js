@@ -46,7 +46,7 @@ function Home() {
                                 <div className="flex-shrink-0">
                                   <img src={Image1} alt="Image1" width="38px" height="38px" className="profile-img" />
                                 </div>
-                                <div className="flex-grow-1 ms-3">
+                                <div className="flex-grow-1 ms-2">
                                   <h3 className="title">Swoard Art online</h3>
                                   <p className="description">Xwarrior</p>
                                 </div>
@@ -60,7 +60,7 @@ function Home() {
                                 <div className="flex-shrink-0">
                                   <img src={Image2} alt="Image1" width="38px" height="38px" className="profile-img" />
                                 </div>
-                                <div className="flex-grow-1 ms-3">
+                                <div className="flex-grow-1 ms-2">
                                   <h3 className="title">Revenge of the Val</h3>
                                   <p className="description">Mr Lazy</p>
                                 </div>
@@ -74,7 +74,7 @@ function Home() {
                                 <div className="flex-shrink-0">
                                   <img src={Image3} alt="Image1" width="38px" height="38px" className="profile-img" />
                                 </div>
-                                <div className="flex-grow-1 ms-3">
+                                <div className="flex-grow-1 ms-2">
                                   <h3 className="title">Magic crystal</h3>
                                   <p className="description">Xwarrior</p>
                                 </div>
@@ -88,7 +88,7 @@ function Home() {
                                 <div className="flex-shrink-0">
                                   <img src={Image4} alt="Image1" width="38px" height="38px" className="profile-img" />
                                 </div>
-                                <div className="flex-grow-1 ms-3">
+                                <div className="flex-grow-1 ms-2">
                                   <h3 className="title">The Gang</h3>
                                   <p className="description">Mr Lazy</p>
                                 </div>
@@ -107,7 +107,7 @@ function Home() {
                                 <div className="flex-shrink-0">
                                   <img src={Image1} alt="Image1" width="38px" height="38px" className="profile-img" />
                                 </div>
-                                <div className="flex-grow-1 ms-3">
+                                <div className="flex-grow-1 ms-2">
                                   <h3 className="title">Swoard Art online</h3>
                                   <p className="description">Xwarrior</p>
                                 </div>
@@ -121,7 +121,7 @@ function Home() {
                                 <div className="flex-shrink-0">
                                   <img src={Image2} alt="Image1" width="38px" height="38px" className="profile-img" />
                                 </div>
-                                <div className="flex-grow-1 ms-3">
+                                <div className="flex-grow-1 ms-2">
                                   <h3 className="title">Revenge of the Val</h3>
                                   <p className="description">Mr Lazy</p>
                                 </div>
@@ -135,7 +135,7 @@ function Home() {
                                 <div className="flex-shrink-0">
                                   <img src={Image3} alt="Image1" width="38px" height="38px" className="profile-img" />
                                 </div>
-                                <div className="flex-grow-1 ms-3">
+                                <div className="flex-grow-1 ms-2">
                                   <h3 className="title">Magic crystal</h3>
                                   <p className="description">Xwarrior</p>
                                 </div>
@@ -149,7 +149,7 @@ function Home() {
                                 <div className="flex-shrink-0">
                                   <img src={Image4} alt="Image1" width="38px" height="38px" className="profile-img" />
                                 </div>
-                                <div className="flex-grow-1 ms-3">
+                                <div className="flex-grow-1 ms-2">
                                   <h3 className="title">The Gang</h3>
                                   <p className="description">Mr Lazy</p>
                                 </div>

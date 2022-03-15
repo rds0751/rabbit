@@ -24,7 +24,7 @@ function NftToggle({ toggleNft }) {
                   // color: "#000",
                   fontFamily: toggleNft ? "poppins-semibold" : "poppins",
                 }}
-                to="/"
+                to="/nfts"
               >
                 {/* <div onClick={() => setToggleNft(true)}>NFTS</div> */}
                 NFTS

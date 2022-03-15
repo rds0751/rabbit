@@ -83,7 +83,7 @@ function App() {
           <Routes>
             <Route path="/FAQs" element={<FAQsPage />} />
             <Route path="/nfts" element={<NftPage />} />
-            <Route path="/" element={<NftPage />} />
+            <Route path="/" element={<Home />} />
 
             {/* <Route
               exact

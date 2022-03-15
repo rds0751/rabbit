@@ -305,3 +305,27 @@ export function getPricingHistory(requestData) {
       return Promise.reject(err);
     });
 }
+export function updateCollectionTxStatus(requestData,_id) {
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/collections/"+_id+"/status";
+  console.log("urllllllllllllll",url)
+  return httpService(
+    httpConstants.METHOD_TYPE.PUT,
+    // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    AuthToken,
+    requestData,
+    url
+  )
+    .then((response) => {
+      if (
+        !response.success ||
+        response.responseCode !== 200 ||
+        !response.responseData ||
+        response.responseData.length === 0
+      )
+        return Promise.reject();
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
