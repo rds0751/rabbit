@@ -178,12 +178,22 @@
   }
 }
 @media only screen and (max-width: 1599px){
+  .homepage .banner{
+    margin-bottom: 77px;
+  }
   .homepage .banner .inner-width{
     margin-left: 5%;
     margin-right: 5%;
   }
+  .homepage .create-sell-nft {
+    margin-bottom: 90px;
+  }
   .homepage .create-sell-nft .inner-width{
     width: 95%;
+  }
+  .homepage .why-marketplace {
+    padding-top: 90px;
+    padding-bottom: 90px;
   }
   .homepage .why-marketplace .inner-width{
     width: 95%;

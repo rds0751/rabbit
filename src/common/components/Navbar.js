@@ -252,7 +252,7 @@ function Navbar() {
                 <ul className="left_section_nav mb-0 leftSec">
                   <li
                     className={
-                      location.pathname.includes("/") &&
+                      location.pathname.includes("/nfts") &&
                       !location.pathname.includes("leader-board") &&
                       !location.pathname.includes("resource") &&
                       !location.pathname.includes("create-nft") && 
@@ -265,7 +265,7 @@ function Navbar() {
                   >
                     <Link
                       className={
-                        location.pathname.includes("/") &&
+                        location.pathname.includes("/nfts") &&
                         !location.pathname.includes("leader-board") &&
                         !location.pathname.includes("resource") &&
                         !location.pathname.includes("create-nft")&& 
@@ -275,7 +275,7 @@ function Navbar() {
                           : "nav-link"
                       }
                       aria-current="page"
-                      to="/"
+                      to="/nfts"
                     >
                       Marketplace
                     </Link>
