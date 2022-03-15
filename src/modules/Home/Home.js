@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {Button, Container, Row, Col, Card } from "react-bootstrap";
+import { Button, Container, Row, Col, Card } from "react-bootstrap";
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
@@ -19,7 +19,7 @@ import Image3 from '../../assets/images/Image3.png';
 import Image4 from '../../assets/images/Image4.png';
 
 function Home() {
-  return(
+  return (
     <>
       <div className="homepage">
         <div className="banner">
@@ -32,7 +32,7 @@ function Home() {
                     <p className="text">One stop solution for all types of NFTs</p>
                     <Button variant="custom">Explore</Button>
                     <Button variant="custom">Create</Button>
-                  </div>  
+                  </div>
                 </Col>
                 <Col md={6}>
                   <div className="right-slider">
@@ -40,7 +40,7 @@ function Home() {
                       <div className='item'>
                         <div className="d-flex flex-wrap">
                           <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src={Image1}/>
+                            <Card.Img variant="top" src={Image1} />
                             <Card.Body>
                               <div className="d-flex align-items-center justify-content-center media">
                                 <div className="flex-shrink-0">
@@ -53,8 +53,8 @@ function Home() {
                               </div>
                             </Card.Body>
                           </Card>
-                            
-                        </div>                   
+
+                        </div>
                       </div>
                     </OwlCarousel>
                   </div>
@@ -63,7 +63,7 @@ function Home() {
             </Container>
           </div>
         </div>
-        
+
         <div className="create-sell-nft">
           <h2 className="heading">Create and sell your NFTs</h2>
           <div className="d-flex justify-content-center flex-wrap">
@@ -112,7 +112,7 @@ function Home() {
             <div className="d-flex justify-content-start flex-wrap">
               <div className="d-flex align-items-center justify-content-center media">
                 <div className="flex-shrink-0">
-                  <img src={Category} alt="Category" width="60px" height="60px"/>
+                  <img src={Category} alt="Category" width="60px" height="60px" />
                 </div>
                 <div className="flex-grow-0 ms-3">
                   Browse by Category

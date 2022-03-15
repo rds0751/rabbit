@@ -1,12 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 import Image from "../../assets/images/1.jpg";
 import "../../assets/styles/Myitems.css";
 import UpperMyItems from "../../common/components/UpperMyItems";
+import { NftOwnedByUser } from "../../services/contentMicroservice";
 
 function MyItems() {
   const [activeInActive, setActiveInActive] = useState("active");
   const [toggleSelect, setToggleSelect] = useState(true);
+
+  const [ownedNft, setownedNft] = useState([]);
+
+  useEffect(async () => {
+    await NftOwnedByUser().then((response) => setownedNft(response));
+  }, []);
+  console.log("Nft Owned by user", ownedNft);
+
+
+
   return (
     <>
       <div className="myItemspage">
@@ -14,13 +25,13 @@ function MyItems() {
         <div className="my-item-container">
           <div className="">
             <h1 className="poppins-normal bold-600 font-20 blackish mb-0">
-              My Items go
+              My Items
             </h1>
           </div>
 
           <div className="toggle-items">
             <div
-              onClick={() => setToggleSelect(false)}
+              onClick={() => setToggleSelect(true)}
               className="font-16 bold-bold poppins-normal"
               style={{
                 color: !toggleSelect ? "#191919" : "#828282",
@@ -30,7 +41,7 @@ function MyItems() {
               Single
             </div>
             <div
-              onClick={() => setToggleSelect(true)}
+              onClick={() => setToggleSelect(false)}
               className="font-16 bold-bold poppins-normal"
               style={{
                 marginLeft: "18px",
