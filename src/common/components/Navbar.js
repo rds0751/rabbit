@@ -192,7 +192,7 @@ function Navbar() {
               <Link className="navbrand" to="/" style={{ marginRight: "21px" }}  onClick={isOpenWallet}>
                 <img
                   src={require("../../assets/images/logo.png")}
-                  style={{ width: "50px" }}
+                  style={{ width: "60px" }}
                 />
               </Link>
               <input

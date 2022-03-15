@@ -140,11 +140,11 @@ async function openForSale(requestData) {
 //     });
 // }
 
-export const NftCreatedByUser = async (successCallBack,_id) => {
-  console.log("jjjjjjjjjjjjjjjjjjjjjjjj",_id)
+export const NftCreatedByUser = async (successCallBack, _id) => {
+  console.log("jjjjjjjjjjjjjjjjjjjjjjjj", _id)
   try {
     const url =
-      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/"+_id+"/created";
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/" + _id + "/created";
     const { data } = await axios.get(url);
     if (data.success) {
       successCallBack(data);
@@ -157,10 +157,10 @@ export const NftCreatedByUser = async (successCallBack,_id) => {
   }
 };
 // ------nft owned by user
-export const NftOwnedByUser = async (successCallBack,_id) => {
+export const NftOwnedByUser = async (successCallBack, _id) => {
   try {
     const url =
-      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/"+_id+"/owned";
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/" + _id + "/owned";
     const { data } = await axios.get(url);
     if (data.success) {
       successCallBack(data);
@@ -173,12 +173,68 @@ export const NftOwnedByUser = async (successCallBack,_id) => {
   }
 };
 
+export function getNftOwnedByUser(requestData) {
+  let url =
+    process.env.REACT_APP_WEBAPP_MICROSERVICE +
+    "api/v1/nfts/" +
+    "6210ce09e9384c0035598c31" + "/owned";
+  return httpService(
+    httpConstants.METHOD_TYPE.GET,
+    // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    AuthToken,
+    requestData,
+    url
+  )
+    .then((response) => {
+      console.log(response, "nft owned by user")
+      if (
+        !response.success ||
+        response.responseCode !== 200 ||
+        !response.responseData ||
+        response.responseData.length === 0
+      )
+        return Promise.reject();
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+
+export function getCollectionOwnedByUser(requestData) {
+  let url =
+    process.env.REACT_APP_WEBAPP_MICROSERVICE +
+    "api/v1/users/" +
+    "6210ce09e9384c0035598c31" + "/collections";
+  return httpService(
+    httpConstants.METHOD_TYPE.GET,
+    // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    AuthToken,
+    requestData,
+    url
+  )
+    .then((response) => {
+      console.log(response, "sri collections")
+      if (
+        !response.success ||
+        response.responseCode !== 200 ||
+        !response.responseData ||
+        response.responseData.length === 0
+      )
+        return Promise.reject();
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+
 //   get liked nfts in profile section
 
-export const NftLikedByUser = async (successCallBack,_id) => {
+export const NftLikedByUser = async (successCallBack, _id) => {
   try {
     const url =
-      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/"+_id+"/liked";
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/" + _id + "/liked";
     const { data } = await axios.post(url);
     if (data.success) {
       successCallBack(data);
@@ -192,10 +248,10 @@ export const NftLikedByUser = async (successCallBack,_id) => {
 };
 
 // ---- nft   sale by user
-export const NftSellByUser = async (successCallBack,userId) => {
+export const NftSellByUser = async (successCallBack, userId) => {
   try {
     const url =
-      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/"+userId+"/onsale";
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/" + userId + "/onsale";
     const { data } = await axios.get(url);
     if (data.success) {
       successCallBack(data);
