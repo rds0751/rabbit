@@ -1343,4 +1343,7 @@ background-position: right;
   .LeftNavBar{
     margin-left: 2%;
   }
+  .left_section_nav {
+    margin-right: 15px !important;
+  }
 }
