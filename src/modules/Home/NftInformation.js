@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
 import image from "../../assets/images/1.jpg";
-import share from "../../assets/images/share.png";
-import info from "../../assets/images/info.png";
+import share from "../../assets/images/share.svg";
+import info from "../../assets/images/report.svg";
+import copyIcon from "../../assets/images/copy.png";
+import facebookIcon from "../../assets/images/facebook.png";
+import twitterIcon from "../../assets/images/Twitter.png";
+import "../../assets/styles/nftReportModal.css";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-// import { Link } from "react-router-dom";
 import { BidApi, OfferApi } from "../../constants/Nft_Info_Api";
 import PricingHistoryComponentTable from "../../common/components/PricingHistoryComponentTable";
 import PricingHistoryComponentGraph from "../../common/components/PricingHistoryComponentGraph";
 // import BidsComponent from "./BidsComponent";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import "../../assets/styles/createSingleNft.css";
+import dropdowmImage from "../../assets/images/drop down.png";
+import Close from "../../assets/images/close.png";
 
 import { Button } from "@mui/material";
 import { getNft, addNftReport } from "../../services/webappMicroservice";
@@ -19,30 +25,48 @@ import {
   RemoveNftFromSale,
 } from "../../services/contentServices";
 import { toast } from "react-toastify";
+
 import { getUser } from "../../services/UserMicroService";
+import { Oval } from "react-loader-spinner";
+
+import ListingsTable from "../../common/components/ListingTable";
 
 export default function NftInformation(props) {
-  console.log(props?.responseData, "<<<response");
 
+
+
+  console.log(props?.responseData, "<<<response");
+  const navigate = useNavigate();
   const [activeInActive, setActiveInActive] = useState("active");
   const { user } = useSelector((state) => state);
   const [isCurrUserNft, setIsCurrUserNft] = useState(null);
   const [isOpenForSell, setisOpenForSell] = useState(null);
-  const { loggedInUser } = user;
+  const { loggedInUser, walletAddress } = user;
   const { id } = useParams();
-  const [nft, setNft] = useState(props?.responseData);
+  const nft = props?.responseData;
+  const { owner, creator, salesInfo } = nft;
+  const [openReportModal, setOpenReportModal] = useState(false);
   const [userDetails, setUserDetails] = useState([]);
+  const [tab, setTab] = useState(1);
   const [report, setReport] = useState({
     content: id,
     // addedBy: user.addUserData._id,
     reason: "",
   });
+
+  if (openReportModal) {
+    document.body.classList.add('active-modal')
+  } else {
+    document.body.classList.remove('active-modal')
+  }
   console.log(
     loggedInUser?._id,
     props?.responseData,
-    "<<<< this is data to match"
+    props?.loaderState,
+    "<<<< this is data toooooooooooooooooooooooooooooooo match"
   );
-  // alert(loggedInUser?._id == props?.responseData?.createdBy);
+  // alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
+
   // useEffect(() => {
   //   alert(`${loggedInUser?._id}`);
   //   console.log(
@@ -85,13 +109,20 @@ export default function NftInformation(props) {
     });
   };
   const buyNft = async () => {
-    props?.BuyNowNft({});
+    if (user.loggedInUser != null) {
+      props?.BuyNowNft({
+        buyerId: loggedInUser?._id,
+        newOwnerAddress: walletAddress?.address,
+      });
+    } else {
+      navigate("/add-wallet");
+    }
 
-    const response = await put_NftOpenForSale(nft._id);
-    if (response.success) {
-      toast.success(response.message);
-      window.location.reload(false);
-    } else toast.error(response.message);
+    //   const response = await put_NftOpenForSale(nft._id);
+    //   if (response.success) {
+    //     toast.success(response.message);
+    //     window.location.reload(false);
+    //   } else toast.error(response.message);
   };
 
   const handleRemoveSell = async () => {
@@ -109,409 +140,420 @@ export default function NftInformation(props) {
     });
 
   const makeReport = () => {
-    console.log("report", report);
     addNftReport(report);
   };
 
   return (
     <>
-      <div className="container">
-        <div className="row mt-5">
-          <div className="col-1"></div>
-          <div className="col-lg-5 col-sm-12 col-md-6">
-            <div>
-              <img
-                src={nft.ipfsUrl}
-                className="border-radius imginfo_mob"
-                style={{
-                  // width: "100%",
-                  width: "480px",
-                  // paddingRight: "20px",
-                  height: "620px",
-                  borderRadius: "8px",
-                }}
-              />
+    {props?.refreshPage ? window.location.reload(true):""}
+      {props?.loaderState ? (
+        <div className="center">
+          {" "}
+          <Oval
+            vertical="top"
+            horizontal="center"
+            color="#00BFFF"
+            height={30}
+            width={30}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+      <div className="nft-detail">
+        <div className="container">
+          <div className="row" style={{ marginTop: "5rem" }}>
+            <div className="d-sm-block d-md-block d-lg-none mb-2">
+              <div className="row" id="share_info">
+                <div className="col-xl-10 col-lg-10 col-md-9 col-sm-9">
+                  <div className="edit-sell-button">
+                    <Button
+                      style={{
+                        display:
+                          props?.responseData?.ownerAddress == loggedInUser?.wallet_address
+                            ? "block"
+                            : "none",
+                        color: "#366EEF",
+                        backgroundColor: "white",
+                        border: "1px solid #366EEF",
+                        marginRight: "1rem",
+                      }}
+                    >
+                      <Link
+                        to={`/edit-items/${props?.responseData._id}`}
+                        style={{
+                          textDecoration: "none",
+                          textTransform: "none",
+                        }}
+                      >
+                        Edit
+                      </Link>
+                    </Button>
+                    <Button
+                      // className="btn btn-primary mt-3"
+                      // data-bs-toggle="modal"
+                      // data-bs-target="#myModalShare"
+                      style={{
+                        display:
+                          props?.responseData?.ownerAddress == loggedInUser?.wallet_address &&
+                            !props?.responseData?.salesInfo?.isOpenForSale
+                            ? "block"
+                            : "none",
+                        color: "white",
+                        backgroundColor: "#366eff",
+                        marginRight: "1rem",
+                        textTransform: "none",
+                      }}
+                      onClick={demoHandleSell}
+                    >
+                      sale
+                    </Button>
+                    <Button
+                      style={{
+                        display:
+                          props?.responseData?.ownerAddress == loggedInUser?.wallet_address &&
+                            props?.responseData?.salesInfo?.isOpenForSale
+                            ? "block"
+                            : "none",
+                        color: "white",
+                        backgroundColor: "#366eff",
+                        textTransform: "none",
+                      }}
+                      onClick={removeNFTFromSell}
+                    >
+                      Remove From Sale
+                    </Button>
+                  </div>
+                  <span className="nft-name">
+                    {nft.name}
+                  </span>
+                </div>
+                <div className="col-xl-2 col-lg-2 col-md-3 col-sm-3 d-flex align-items-center">
+                    <div>
+                      <a
+                        className="nav-link dropdown"
+                        href="#"
+                        id="navbarDropdown"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                      <img
+                          alt="share"
+                          src={share}
+                          style={{ width: "31px", height: "31px", marginRight: "20px", }}
+                        />
+                      </a>
+                      <ul
+                        className="dropdown-menu profilemenu"
+                        aria-labelledby="navbarDropdown"
+                        style={{
+                          width:"220px",
+                          position: "absolute",
+                          marginLeft:"30px",
+                          boxShadow: "0px 3px 6px #00000012",
+                          border: "1px solid #F4F4F4",
+                          borderRadius: "6px",
+                          background: "#FFFFFF",                        
+                        }}
+                      >
+                      <li className="list-item">
+                        <img src={copyIcon} alt="icon" className="icon" />
+                        <span className="icon-text">Copy link</span>
+                      </li>
+                      <li className="list-item">
+                        <img src={facebookIcon} alt="icon" className="icon" />
+                        <span className="icon-text">Share on Facebook</span>
+                      </li>
+                      <li className="list-item">
+                        <img src={twitterIcon} alt="icon" className="icon"/>
+                        <span className="icon-text">Share on Twitter</span>
+                      </li>
+                    </ul>                        
+                    </div>                  
+                    <img
+                      src={info}
+                      alt="info"
+                      style={{ width: "31px", height: "31px" }}
+                      // data-bs-toggle="modal"
+                      onClick={() => setOpenReportModal(true)}
+                    />
+                </div>
+              </div>
             </div>
-          </div>
-          {/* <button
-                className="btn btn-primary mt-3"
-                // data-bs-toggle="modal"
-                // data-bs-target="#myModalShare"
-                style={{
-                  height: "40px",
-                  width: "180px",
-                  padding: "0px",
-                  marginLeft: "1em",
-                }}
-                onClick={demoHandleSell}
-
-              >
-                Put on sell
-              </button> */}
-
-          <div className="col-lg-5 col-sm-12 col-md-6">
-            <div className="row">
-              <span className="nftsell">
-                <Button
+            <div className="col-xl-5 col-lg-5 col-md-12">
+              <div className="nftdetail-img">
+                <img
+                  src={nft.ipfsUrl}
+                  alt="nft"
+                  className="border-radius imginfo_mob"
                   style={{
-                    display:
-                      props?.responseData?.createdBy == loggedInUser?._id &&
-                      !props?.responseData?.salesInfo?.isOpenForSale
-                        ? "block"
-                        : "none",
+                    maxWidth: "100%",
+                    height: "810px",
+                    borderRadius: "8px",
                   }}
-                >
-                  <Link
-                    to="/edit-items"
-                    style={{
-                      textDecoration: "none",
-                      textTransform: "none",
-                    }}
-                  >
-                    Edit
-                  </Link>
-                </Button>
+                />
+              </div>
 
-                <Button
-                  // className="btn btn-primary mt-3"
-                  // data-bs-toggle="modal"
-                  // data-bs-target="#myModalShare"
-                  style={{
-                    display:
-                      props?.responseData?.createdBy == loggedInUser?._id &&
-                      !props?.responseData?.salesInfo?.isOpenForSale
-                        ? "block"
-                        : "none",
-                    color: "white",
-                    backgroundColor: "#366eff",
-                    marginLeft: "1rem",
-                    textTransform: "none",
-                  }}
-                  onClick={demoHandleSell}
-                >
-                  Put on sell
-                </Button>
-                <Button
-                  style={{
-                    display:
-                      props?.responseData?.createdBy == loggedInUser?._id &&
-                      props?.responseData?.salesInfo?.isOpenForSale
-                        ? "block"
-                        : "none",
-                    marginLeft: "1rem",
-                    color: "white",
-                    backgroundColor: "#366eff",
-                    textTransform: "none",
-                  }}
-                  onClick={removeNFTFromSell}
-                >
-                  Remove From Sell
-                </Button>
-              </span>
-
-              <div className="" id="share_info">
-                <span className="text-dark font-22 font-weight-900">
-                  {props?.responseData?.name}
-                </span>
-                <span className="icon-img" style={{ marginLeft: "16.5em" }}>
-                  <img
-                    src={share}
-                    data-bs-toggle="modal"
-                    data-bs-target="#myModalShare"
-                    style={{ width: "35px", height: "30px" }}
-                  />
-                  {/* <!-- The Modal --> */}
-                  <div className="modal" id="myModalShare">
-                    <div className="modal-dialog">
-                      <div
-                        className="modal-content"
-                        style={{ borderRadius: "10px", paddingRight: "10px" }}
+            </div>
+            <div className="col-xl-7 col-lg-7 col-md-12 details-section">
+              <div className="d-none d-sm-none d-md-none d-lg-block">
+                <div className="row" id="share_info">
+                  <div className="col-xl-10 col-lg-10 col-md-9 col-sm-9">
+                    <div className="edit-sell-button">
+                      <Button
+                        style={{
+                          display:
+                            props?.responseData?.ownerAddress == loggedInUser?.wallet_address
+                              ? "block"
+                              : "none",
+                          color: "#366EEF",
+                          backgroundColor: "white",
+                          border: "1px solid #366EEF",
+                          marginRight: "1rem",
+                        }}
                       >
-                        {/* <!-- Modal Header --> */}
-                        <div className="modal-header">
-                          <h4
-                            className="modal-title font-15 font-weight-700 text-dark"
-                            style={{ padding: "0px" }}
-                          >
-                            Make an Offer
-                          </h4>
-                          <button
-                            type="button"
-                            className="btn-close"
-                            data-bs-dismiss="modal"
-                            style={{
-                              width: "10px",
-                              height: "10px",
-                              boxShadow: "none",
-                            }}
-                          ></button>
-                        </div>
-
-                        {/* <!-- Modal body --> */}
-                        <div className="modal-body px-4">
-                          <h5 className="font-14 font-weight-700 text-dark">
-                            Price
-                          </h5>
-                          <div className="input-group">
-                            <span
-                              className="input-group-text font-15 text-primary bg-white"
-                              id="basic-addon1"
-                              style={{ marginLeft: "-0.6em" }}
-                            >
-                              ETH
-                            </span>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="0.01($210)"
-                              aria-label="Username"
-                              aria-describedby="basic-addon1"
-                            />
-                          </div>
-                          <h5
-                            className="font-14 font-weight-700 mt-4 text-dark"
-                            style={{ marginLeft: "-0.6em" }}
-                          >
-                            Expiration Date
-                          </h5>
-                          <div className="input-group">
-                            <button
-                              className="btn border dropdown-toggle font-15"
-                              type="button"
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false"
-                              style={{ marginLeft: "-0.6em" }}
-                            >
-                              A month
-                            </button>
-                            <ul className="dropdown-menu">
-                              <li>
-                                <a className="dropdown-item" href="#">
-                                  Jan
-                                </a>
-                              </li>
-                              <li>
-                                <a className="dropdown-item" href="#">
-                                  Feb
-                                </a>
-                              </li>
-                              <li>
-                                <a className="dropdown-item" href="#">
-                                  Mar
-                                </a>
-                              </li>
-                              <li>
-                                <a className="dropdown-item" href="#">
-                                  Apr
-                                </a>
-                              </li>
-                            </ul>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="&#xf017; 11:25 AM"
-                              aria-label="Username"
-                              aria-describedby="basic-addon1"
-                            />
-                          </div>
-                        </div>
-
-                        {/* <!-- Modal footer --> */}
-                        <div className="modal-footer mb-4">
-                          <button
-                            type="button"
-                            data-bs-toggle="modal"
-                            data-bs-target="#myModalShare"
-                            className="btn btn-primary w-100"
-                            data-bs-dismiss="modal"
-                            // style={{ marginLeft: "1.1em" }}
-                          >
-                            Make Offer
-                          </button>
-                        </div>
-                      </div>
+                        <Link
+                          to={`/edit-items/${props?.responseData._id}`}
+                          style={{
+                            textDecoration: "none",
+                            textTransform: "none",
+                          }}
+                        >
+                          Edit
+                        </Link>
+                      </Button>
+                      <Button
+                        // className="btn btn-primary mt-3"
+                        // data-bs-toggle="modal"
+                        // data-bs-target="#myModalShare"
+                        style={{
+                          display:
+                            props?.responseData?.ownerAddress == loggedInUser?.wallet_address &&
+                              !props?.responseData?.salesInfo?.isOpenForSale
+                              ? "block"
+                              : "none",
+                          color: "white",
+                          backgroundColor: "#366eff",
+                          marginRight: "1rem",
+                          textTransform: "none",
+                        }}
+                        onClick={demoHandleSell}
+                      >
+                        Sale
+                      </Button>
+                      <Button
+                        style={{
+                          display:
+                            props?.responseData?.ownerAddress == loggedInUser?.wallet_address &&
+                              props?.responseData?.salesInfo?.isOpenForSale
+                              ? "block"
+                              : "none",
+                          color: "white",
+                          backgroundColor: "#366eff",
+                          textTransform: "none",
+                        }}
+                        onClick={removeNFTFromSell}
+                      >
+                        Remove From Sell
+                      </Button>
                     </div>
+                    <span className="nft-name">{nft.name}</span>
                   </div>
-                  <img
-                    src={info}
-                    style={{ width: "40px", height: "30px" }}
-                    data-bs-toggle="modal"
-                    data-bs-target="#myModalReport"
-                  />
-                  {/* <!-- The Modal --> */}
-                  <div className="modal" id="myModalReport">
-                    <div className="modal-dialog">
-                      <div
-                        className="modal-content"
-                        style={{ borderRadius: "10px", paddingRight: "10px" }}
+                  <div className="col-xl-2 col-lg-2 col-md-3 col-sm-3 d-flex align-items-center">
+                    <div>
+                      <a
+                        className="nav-link dropdown"
+                        href="#"
+                        id="navbarDropdown"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
                       >
-                        {/* <!-- Modal Header --> */}
-                        <div className="modal-header">
-                          <h4 className="modal-title font-15 font-weight-700 text-dark">
-                            Report this item
-                          </h4>
-                          <button
-                            type="button"
-                            className="btn-close"
-                            data-bs-dismiss="modal"
-                            style={{
-                              width: "10px",
-                              height: "10px",
-                              boxShadow: "none",
-                            }}
-                          ></button>
-                        </div>
-
-                        {/* <!-- Modal body --> */}
-                        <div className="modal-body">
-                          <h5
-                            className="font-14 font-weight-700 text-dark"
-                            style={{ marginLeft: "-0.6em" }}
-                          >
-                            Reason
-                          </h5>
+                      <img
+                          alt="share"
+                          src={share}
+                          style={{ width: "31px", height: "31px", marginRight: "20px", }}
+                        />
+                      </a>
+                      <ul
+                        className="dropdown-menu profilemenu"
+                        aria-labelledby="navbarDropdown"
+                        style={{
+                          width:"220px",
+                          position: "absolute",
+                          marginLeft:"30px",
+                          boxShadow: "0px 3px 6px #00000012",
+                          border: "1px solid #F4F4F4",
+                          borderRadius: "6px",
+                          background: "#FFFFFF",                        
+                        }}
+                      >
+                      <li className="list-item">
+                        <img src={copyIcon} alt="icon" className="icon" />
+                        <span className="icon-text">Copy link</span>
+                      </li>
+                      <li className="list-item">
+                        <img src={facebookIcon} alt="icon" className="icon" />
+                        <span className="icon-text">Share on Facebook</span>
+                      </li>
+                      <li className="list-item">
+                        <img src={twitterIcon} alt="icon" className="icon"/>
+                        <span className="icon-text">Share on Twitter</span>
+                      </li>
+                    </ul>                        
+                    </div>
+                      <img
+                        src={info}
+                        alt="info"
+                        style={{ width: "31px", height: "31px" }}
+                        // data-bs-toggle="modal"
+                        // data-bs-target="#myModalReport"
+                        onClick={() => {
+                          setOpenReportModal(true);
+                        }}
+                      />
+                      {/* <!-- The Modal --> */}
+                      <div className="modal" id="myModalReport">
+                        <div className="modal-dialog">
                           <div
-                            className="input-group mt-3"
-                            style={{ marginLeft: "-0.6em" }}
+                            className="modal-content"
+                            style={{ borderRadius: "10px", paddingRight: "10px" }}
                           >
-                            <select
-                              className="form-select"
-                              id="inputGroupSelect02"
-                              onChange={(e) => handleChange(e)}
-                            >
-                              <option
-                                value="Fake collection or possible scam"
-                                selected
+                            {/* <!-- Modal Header --> */}
+                            <div className="modal-header">
+                              <h4 className="modal-title font-15 font-weight-700 text-dark">
+                                Report this item
+                              </h4>
+                              <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="modal"
+                                style={{
+                                  width: "10px",
+                                  height: "10px",
+                                  boxShadow: "none",
+                                }}
+                              ></button>
+                            </div>
+
+                            {/* <!-- Modal body --> */}
+                            <div className="modal-body">
+                              <h5
+                                className="font-14 font-weight-700 text-dark"
+                                style={{ marginLeft: "-0.6em" }}
                               >
-                                Fake collection or possible scam
-                              </option>
-                              <option value="Explicit and sensitive content">
-                                Explicit and sensitive content
-                              </option>
-                              <option value="Spam">Spam</option>
-                              <option value="Might be stolen">
-                                Might be stolen
-                              </option>
-                              <option value="Other">Other</option>
-                            </select>
+                                Reason
+                              </h5>
+                              <div
+                                className="input-group mt-3"
+                                style={{ marginLeft: "-0.6em" }}
+                              >
+                                <select
+                                  className="form-select"
+                                  id="inputGroupSelect02"
+                                  onChange={(e) => handleChange(e)}
+                                >
+                                  <option
+                                    value="Fake collection or possible scam"
+                                    selected
+                                  >
+                                    Fake collection or possible scam
+                                  </option>
+                                  <option value="Explicit and sensitive content">
+                                    Explicit and sensitive content
+                                  </option>
+                                  <option value="Spam">Spam</option>
+                                  <option value="Might be stolen">
+                                    Might be stolen
+                                  </option>
+                                  <option value="Other">Other</option>
+                                </select>
+                              </div>
+                            </div>
+
+                            {/* <!-- Modal footer --> */}
+                            <div className="modal-footer mb-4">
+                              <button
+                                type="button"
+                                className="btn btn-primary w-100"
+                                data-bs-dismiss="modal"
+                                style={{ marginLeft: "1.1em" }}
+                                onClick={makeReport}
+                              >
+                                Make Offer
+                              </button>
+                            </div>
                           </div>
                         </div>
-
-                        {/* <!-- Modal footer --> */}
-                        <div className="modal-footer mb-4">
-                          <button
-                            type="button"
-                            className="btn btn-primary w-100"
-                            data-bs-dismiss="modal"
-                            style={{ marginLeft: "1.1em" }}
-                            onClick={makeReport}
-                          >
-                            Make Offer
-                          </button>
-                        </div>
                       </div>
-                    </div>
                   </div>
+                </div>
+              </div>
+              <div className="second-text align-row">
+                <span className="text">
+                  Current Price:&nbsp;
+                  <span className="nft-value" style={{ color: "#16AB6E" }}>
+                    {salesInfo?.price}
+                  </span>
+                </span>
+                <span className="align-row">
+                  <i className="far fa-clock clock-icon"></i>
+                  <span className="time">Ends in 5 days </span>
                 </span>
               </div>
-              <div className="second-text  mt-4">
-                <span className="font-13 text-dark">Minimum Bid: </span>
-                <span
-                  className="font-13 font-weight-700"
-                  style={{ color: "#16AB6E" }}
-                >
-                  0.32 ETH
-                </span>
-                <span
-                  className="font-13 text-dark"
-                  style={{ marginLeft: "1em" }}
-                >
-                  Highest Bid:{" "}
-                </span>
-                <span
-                  className="font-13 font-weight-700"
-                  style={{ color: "#366EEF" }}
-                >
-                  0.49 ETH
-                </span>
-                <span style={{ marginLeft: "2em" }}>
-                  <i className="far fa-clock" style={{ color: "#f54" }}></i>
-                </span>
-                <span className="font-13 text-dark"> Ends in 5 days </span>
-              </div>
-              <div className="row">
-                <div className="col-lg-3 col-sm-12  mt-3">
-                  <span className="font-13 text-dark">
-                    Owned by:
-                    <span className="font-13 font-weight-900 text-dark">
-                      {props?.responseData?.ownerAddress}
-                    </span>
+              <div className="row third-text">
+                <div className="col-lg-6 col-sm-12">
+                  <span className="text">
+                    Owned by:&nbsp;
+                    <span className="text-name fw-b">
+                      {owner?.firstName ? owner?.firstName : owner?._id}</span>
                   </span>
                 </div>
-                <div className="col-lg-3 col-sm-12  mt-3">
-                  <span className="font-13 text-dark">
-                    Created by:
-                    <span className="font-13 font-weight-900 text-dark">
-                      {userDetails.firstName}
-                    </span>
+                <div className="col-lg-6 col-sm-12">
+                  <span className="text">
+                    Created by:&nbsp;
+                    <span className="text-name fw-b">
+                      {creator?.firstName ? creator?.firstName : creator?._id}</span>
+                    <span className="text-name fw-b"></span>
                   </span>
                 </div>
               </div>
-              <div className="row">
-                <div className="col-lg-2 col-sm-12  mt-3">
-                  <span className="font-13 text-dark">
-                    <VisibilityIcon
-                      style={{ fontSize: "20px", color: "#366EEF" }}
-                    />
-                    <span
-                      className="font-13 font-weight-900 text-dark"
-                      style={{ marginLeft: "0.5em" }}
-                    >
-                      {props?.responseData?.viewsCount}
-                    </span>
+              <div className="fourth-text">
+                <div style={{ marginRight: "20px" }}>
+                  <VisibilityIcon
+                    style={{ fontSize: "21px", color: "#366EEF" }}
+                  />
+                  <span className="text fw-b" style={{ marginLeft: "0.5em" }}>
+                    {nft.viewsCount}
                   </span>
                 </div>
-                <div className="col-lg-2 col-sm-12  mt-3">
-                  <span
-                    className="font-13 text-dark img_nftinfo_mob"
-                    style={{ marginLeft: "-2em" }}
-                  >
-                    <FavoriteIcon
-                      style={{ fontSize: "20px", color: "#EF3643" }}
-                    />
-                    <span
-                      className="font-13 font-weight-900 text-dark"
-                      style={{ marginLeft: "0.5em" }}
-                    >
-                      {props?.responseData?.likesCount}
-                    </span>
+                <div>
+                  <FavoriteIcon style={{ fontSize: "17px", color: "#EF3643" }} />
+                  <span className="text fw-b" style={{ marginLeft: "0.5em" }}>
+                    {nft.likesCount}
                   </span>
                 </div>
               </div>
-              <div className="row">
-                <h4 className="font-13  font-weight-900 mt-3">Description</h4>
-              </div>
-              <div className="row">
-                <h4 className="font-13 ">
-                  {props?.responseDatat?.description}e
-                </h4>
+              <div
+                className=""
+              >
+                <h4 className="title">Description</h4>
+                <p className="description">{nft.description}</p>
               </div>
 
               {/*  IF nft is not created by logged in user these buttons will be shown */}
-              <span className="nftsell">
+              <div className="buy-offer-btn">
                 <Button
-                  // className="btn btn-primary mt-3"
-                  // data-bs-toggle="modal"
-                  // data-bs-target="#myModalShare"
                   style={{
                     display:
-                      props?.responseData?.createdBy != loggedInUser?._id &&
-                      !props?.responseData?.salesInfo?.isOpenForSale
+                      props?.responseData?.ownedBy != loggedInUser?._id &&
+                        props?.responseData?.salesInfo?.isOpenForSale
                         ? "block"
                         : "none",
                     color: "white",
+                    marginRight: "2rem",
                     backgroundColor: "#366eff",
-                    // marginLeft: "1rem",
                     textTransform: "none",
                   }}
                   onClick={buyNft}
@@ -524,170 +566,105 @@ export default function NftInformation(props) {
                   style={{
                     display:
                       props?.responseData?.createdBy != loggedInUser?._id &&
-                      !props?.responseData?.salesInfo?.isOpenForSale
+                        props?.responseData?.salesInfo?.isOpenForSale
                         ? "block"
                         : "none",
-                    marginLeft: "1rem",
-                    color: "white",
-                    backgroundColor: "#366eff",
+                    color: "#366EEF",
+                    backgroundColor: "white",
                     textTransform: "none",
+                    border: "1px solid #366EEF",
                   }}
                   onClick={removeNFTFromSell}
                 >
                   Make Offer
                 </Button>
-              </span>
+              </div>
 
-              <div className="row border-bottom pb-2 mt-3">
-                {/* <div className="col-1">
-                  <a
-                    className="text-dark font-15 font-weight-900"
-                    style={{ textDecoration: "none" }}
-                    href="#pills-active_section"
-                    role="tab"
-                    aria-controls="pills-active_section"
-                    aria-selected="true"
-                    onClick={() => setActiveInActive("active")}
-                  >
-                    Bidsd
-                  </a>
-                </div> */}
-                <div className="col-1">
-                  <a
-                    className="text-secondary font-15 font-weight-900"
-                    style={{ textDecoration: "none" }}
-                    href="#pills-inactive_section"
-                    role="tab"
-                    aria-controls="pills-inactive_section"
-                    aria-selected="false"
-                    onClick={() => setActiveInActive("inActive")}
-                  >
-                    Offers
-                  </a>
-                </div>
-              </div>
-              <div className="Data">
-                {activeInActive === "active" ? (
-                  <NftActiveInActiveBlock apiData={BidApi} />
-                ) : (
-                  <NftActiveInActiveBlock apiData={OfferApi} />
-                )}
-              </div>
-              {activeInActive == "active" ? (
-                <button
-                  className="btn btn-primary mt-3"
-                  data-bs-toggle="modal"
-                  data-bs-target="#myModalShare"
-                  style={{
-                    display:
-                      props?.responseData?.createdBy &&
-                      props?.responseData?.salesInfo?.isOpenForSale
-                        ? "block"
-                        : "none",
-                    height: "40px",
-                    width: "180px",
-                    padding: "0px",
-                    marginLeft: "1em",
-                  }}
-                >
-                  Place Bid
-                </button>
-              ) : (
-                <>
-                  <button
-                    className="btn btn-primary mt-3"
-                    data-bs-toggle="modal"
-                    data-bs-target="#myModalShare"
+              <div className="grap-area">
+                <ul>
+                  <li
+                    onClick={() => {
+                      setTab(1);
+                    }}
                     style={{
-                      height: "40px",
-                      width: "180px",
-                      padding: "0px",
-                      marginLeft: "1em",
+                      borderBottom: tab === 1 ? "2px solid #366EEF" : "",
+                      color: tab === 1 ? "#000000" : "#828282",
+                      fontWeight: tab === 1 ? 600 : "",
+                      marginRight: "16px",
+                      fontFamily: tab === 1 ? "poppins-bold" : "poppins",
                     }}
                   >
-                    Make Offer
-                  </button>
-                </>
-              )}
-
-              {/* <!-- The Modal --> */}
-              <div className="modal" id="myModal">
-                <div className="modal-dialog">
-                  <div
-                    className="modal-content"
-                    style={{ borderRadius: "10px", paddingRight: "10px" }}
+                    Pricing History
+                  </li>
+                  <li
+                    onClick={() => {
+                      setTab(2);
+                    }}
+                    style={{
+                      borderBottom: tab === 2 ? "2px solid #366EEF" : "",
+                      color: tab === 2 ? "#000000" : "#828282",
+                      fontWeight: tab === 2 ? 600 : "",
+                      marginRight: "16px",
+                      fontFamily: tab === 2 ? "poppins-bold" : "poppins",
+                    }}
                   >
-                    {/* <!-- Modal Header --> */}
-                    <div className="modal-header">
-                      <h4 className="modal-title font-15 font-weight-700">
-                        Make Bid
-                      </h4>
-                      <button
-                        type="button"
-                        className="btn-close"
-                        data-bs-dismiss="modal"
-                        style={{
-                          width: "10px",
-                          height: "10px",
-                          boxShadow: "none",
-                        }}
-                      ></button>
-                    </div>
-
-                    {/* <!-- Modal body --> */}
-                    <div className="modal-body">
-                      <h5
-                        className="font-14 font-weight-700"
-                        style={{ marginLeft: "-0.6em" }}
-                      >
-                        Price*
-                      </h5>
-                      <div className="input-group">
-                        <span
-                          className="input-group-text text-primary bg-white font-15"
-                          id="basic-addon1"
-                          style={{ marginLeft: "-0.6em" }}
-                        >
-                          ETH
-                        </span>
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="0.01($210)"
-                          aria-label="Username"
-                          aria-describedby="basic-addon1"
-                        />
-                      </div>
-                    </div>
-
-                    {/* <!-- Modal footer --> */}
-                    <div className="modal-footer mb-4">
-                      <button
-                        type="button"
-                        className="btn btn-primary w-100"
-                        data-bs-dismiss="modal"
-                        style={{ marginLeft: "1.1em" }}
-                      >
-                        Make Bid
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                    Listings
+                  </li>
+                  <li
+                    onClick={() => {
+                      setTab(3);
+                    }}
+                    style={{
+                      borderBottom: tab === 3 ? "2px solid #366EEF" : "",
+                      color: tab === 3 ? "#000000" : "#828282",
+                      fontWeight: tab === 3 ? 600 : "",
+                      fontFamily: tab === 3 ? "poppins-bold" : "poppins",
+                    }}
+                  >
+                    Offers
+                  </li>
+                </ul>
+                {tab === 1 ? <PricingHistoryComponentGraph id={id} /> : ""}
+                {tab === 2 ? <ListingsTable /> : ""}
+                {tab === 3 ? <ListingsTable /> : ""}
               </div>
             </div>
           </div>
-          <div className="col-1"></div>
+          <div className="row mt-4">
+            <div className="col-xl-5 col-lg-5 col-md-12 col-sm-12">
+              <PricingHistoryComponentTable id={id} />
+            </div>
+          </div>
         </div>
-        <div className="row mt-4">
-          <div className="col-1"></div>
-
-          <div className="col-lg-5 col-sm-12">
-            <PricingHistoryComponentTable />
+      </div>
+      <div
+        className="report-outer"
+        style={{ display: openReportModal ? "block" : "none" }}
+      >
+        <div className="report-abs-modal">
+          <div className="report-modal">
+            <div className="report-inner" style={{ opacity: "1" }}>
+              <div className="reportthisitem">
+                <h3 className="report-text poppins-normal">
+                  Report this item
+                </h3>                
+                <i className="fa-solid fa-xmark cross-icon"
+                  onClick={() => setOpenReportModal(false)}>
+                </i>
+              </div>
+              <div className="singlerowmodal">
+                <h3 className="reason-text"> Reason</h3>
+                  <select className="select-box">
+                    <option>Select reason</option>
+                    <option value="Fake collection or possible scam">Fake collection or possible scam</option>
+                    <option value="Explicit and sensitive content">Explicit and sensitive content</option>
+                    <option value="Might be stolen">Might be stolen</option>
+                    <option value="Other">Other</option>
+                  </select>
+              </div>
+              <button className="report-btn" onClick={() => setOpenReportModal(false)}>Report</button>
+            </div>
           </div>
-          <div className="col-lg-5 col-sm-12">
-            <PricingHistoryComponentGraph id={id} />
-          </div>
-          <div className="col-1"></div>
         </div>
       </div>
     </>

@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../../assets/styles/Leader.css";
+import "../../assets/styles/Notification.css";
+import "../../assets/styles/custom.css";
+import "../../assets/styles/homenftcard.css";
 import { Link } from "react-router-dom";
 import {
   LeaderBoardApi,
@@ -9,242 +12,314 @@ import {
   Accepted,
   Rejected,
 } from "../../constants/LeaderBoardApi";
+import { Oval } from "react-loader-spinner";
 import { getTopSellers } from "../../services/sellAndPurchaseMicroService";
 import { getTopCollections } from "../../services/sellAndPurchaseMicroService";
 import { getTopNftSales } from "../../services/webappMicroservice";
+//import { borderRadius } from "@mui/system";
 
 function LeaderBoard() {
 
   const [topSellers, setTopSellers] = useState([]);
 
-  useEffect(() => {
-    getTopSellers().then((response) => setTopSellers(response));
-  });
+  useEffect(async () => {
+    await getTopSellers().then((response) => setTopSellers(response));
+  },[]);
+  
+  var limitSellers = topSellers.slice(0, 4)
   console.log("topSellers", topSellers);
 
   const [topCollections, setTopCollections] = useState([]);
 
-  useEffect(() => {
-    getTopCollections().then((response) => setTopCollections(response));
-  });
+  useEffect(async () => {
+   await getTopCollections().then((response) => setTopCollections(response));
+  },[]);
+  var limitCollections = topCollections.slice(0, 4)
   console.log("topCollections", topCollections);
 
   const [topNftSales, setTopNftSales] = useState([]);
 
-  useEffect(() => {
-    getTopNftSales().then((response) => setTopNftSales(response));
-  });
+  useEffect(async () => {
+    await getTopNftSales().then((response) => setTopNftSales(response));
+  },[]);
   console.log("topNftSales", topNftSales);
-
-
 
 
   // const [state, setState] = useState(LeaderBoardApi);
   const [PendingAcceptedCreated, setPendingAcceptedCreated] =
     useState("pending");
   const [state, setState] = useState(LeaderBoardApi);
+
+ 
   return (
-    <div>
-      <h1 className="leader" style={{ marginBottom: "30px" }}>
+    <div className="container
+     leader-container" >
+      <h1 className="leader">
         Leaderboard
       </h1>
       {/* 3 Tables */}
-      <div className="container">
-        <div className="row align-items-start leadercol">
-          <div className="col leaderboardTop">
-            <div className="leaderboardTitle">
-              <div className="col" style={{ fontSize: "16px" }}>
-                Top Buyers
+      <div className="container5">
+        <div className="row leaderboard-big g-0" style={{ gap: '4%' }}>
+          <div className="col leaderboardTop" style={{ backgroundColor: '#F8F8F8 !important' }}>
+            <div className=" h-100">
+              <div className="card-body p-0">
+                <div className="leaderboardTitle">
+                  <div className="col" style={{ fontSize: "16px" }}>
+                    Top Buyers
+                  </div>
+                  <select className="top-dropdown">
+                    <option>All</option>
+                    <option>Weekly</option>
+                    <option>Monthly</option>
+                    <option>Yearly</option>
+                  </select>
+                  {/* <div className="dropdown col leaderboardDropdown">
+                    <button
+                      className="btn border dropdown-toggle"
+                      type="button"
+                      id="dropdownMenuButton1"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Weekly
+                    </button>
+                    <select
+                      className="dropdown-menu"
+                      aria-labelledby="dropdownMenuButton1"
+                    >
+                      <option>
+                        <a className="dropdown-item" href="#">
+                          Weekly
+                        </a>
+                      </option>
+                      <option>
+                        <a className="dropdown-item" href="#">
+                          Monthly
+                        </a>
+                      </option>
+                      <option>
+                        <a className="dropdown-item" href="#">
+                          Yearly
+                        </a>
+                      </option>
+                    </select>
+                  </div> */}
+                </div>
+                <div className="leaderboardTopDetails">
+                  {LeaderBoardApi.map((curElem) => {
+                    const { Image, Heading, SubHead1, SubHead2 } = curElem;
+                    return (
+                      <>
+                        <div className="leaderboardTopDetailsRow">
+                          <img src={Image} alt="" />
+                          <div className="LeaderboardInsideDetails">
+                            <h2 className="sellerName">{Heading}</h2>
+                            <p className="volumeData">
+                              {SubHead1}
+                              <span className="ethValue">{SubHead2}</span>
+                            </p>
+                          </div>
+                        </div>
+                        <hr className="hr" />
+                      </>
+                    );
+                  })}
+                </div>
               </div>
-              <div className="dropdown col leaderboardDropdown">
-                <button
-                  className="btn border dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton1"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Weekly
-                </button>
-                <ul
-                  className="dropdown-menu"
-                  aria-labelledby="dropdownMenuButton1"
-                >
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </li>
-                </ul>
+              <div className="view-more">
+                <Link className="view" to="/top-bidder">
+                  {" "}
+                  View More
+                </Link>
               </div>
             </div>
-            <div className="leaderboardTopDetails">
-              {LeaderBoardApi.map((curElem) => {
-                const { Image, Heading, SubHead1, SubHead2 } = curElem;
-                return (
-                  <>
-                    <div className="leaderboardTopDetailsRow">
-                      <img src={Image} alt="" />
-                      <div className="LeaderboardInsideDetails">
-                        <h2>{Heading}</h2>
-                        <p>
-                          {SubHead1}
-                          <span>{SubHead2}</span>
-                        </p>
-                      </div>
-                    </div>
-                    <hr className="hr" />
-                  </>
-                );
-              })}
-            </div>
-            <Link className="view" to="/TopBidders">
-              {" "}
-              View More
-            </Link>
           </div>
           <div className="col leaderboardTop">
-            <div className="leaderboardTitle">
-              <div className="col" style={{ fontSize: "16px" }}>
-                Top Seller
+            <div className="h-100">
+              <div className="card-body p-0">
+                <div className="leaderboardTitle">
+                  <div className="col" style={{ fontSize: "16px" }}>
+                    Top Sellers
+                  </div>
+                  <select className="top-dropdown">
+                    <option>All</option>
+                    <option>Weekly</option>
+                    <option>Monthly</option>
+                    <option>Yearly</option>
+                  </select>
+                  {/* <div className="dropdown col leaderboardDropdown">
+                    <button
+                      className="btn border dropdown-toggle"
+                      type="button"
+                      id="dropdownMenuButton1"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Weekly
+                    </button>
+                    <ul
+                      className="dropdown-menu"
+                      aria-labelledby="dropdownMenuButton1"
+                    >
+                      <li>
+                        <a className="dropdown-item" href="#">
+                          Weekly
+                        </a>
+                      </li>
+                      <li>
+                        <a className="dropdown-item" href="#">
+                          Monthly
+                        </a>
+                      </li>
+                      <li>
+                        <a className="dropdown-item" href="#">
+                          Yearly
+                        </a>
+                      </li>
+                    </ul>
+                  </div> */}
+                </div>
+                <div className="leaderboardTopDetails">
+                  {limitSellers.map((curElem) => {
+                    const { Image, sellerFirstName, sellerLastName, SubHead1, totalPurchasedValue,volume,topSellers} = curElem;
+                    var precise = volume.toPrecision(4); 
+                    var result = parseFloat(precise);
+                    return (
+                      <>
+                        <div className="leaderboardTopDetailsRow">
+                        {topSellers.coverPhoto == "" ?(
+                  <img
+                  className="top-img" style={{ width: '71px', height: '71px' }} src={require("../../assets/images/profile.png")}
+                  alt=""
+                />
+
+                ):(
+                  <img
+                  className="top-img" style={{ width: '71px', height: '71px' }} src={topSellers.coverPhoto}
+                  alt=""
+                />
+
+                )}
+
+
+                          <div className="descriptiontopSeller">
+                            
+               {topSellers.userName==""? (
+                 <h2 className="sellerName">no name</h2>
+               ):(
+                <h2 className="sellerName">{topSellers.userName}</h2>
+               )}
+            
+                            <p className="volumeData">
+                              ETH
+                              <span className="ethValue">({"$"+result})</span>
+                            </p>
+
+                          </div>
+                        </div>
+                        <hr className="hr" />
+                      </>
+                    );
+                  })}
+                </div>
+                {topSellers.length === 0 && (
+                <div className="loader">
+                  
+                </div>)}
               </div>
-              <div className="dropdown col leaderboardDropdown">
-                <button
-                  className="btn border dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton1"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Weekly
-                </button>
-                <ul
-                  className="dropdown-menu"
-                  aria-labelledby="dropdownMenuButton1"
-                >
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Monthly
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Yearly
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </li>
-                </ul>
+              <div className="view-more">
+                <Link className="view" to="/top-seller">
+                  {" "}
+                  View More
+                </Link>
               </div>
             </div>
-            <div className="leaderboardTopDetails">
-              {topSellers.map((curElem) => {
-                const { Image, sellerFirstName, sellerLastName, SubHead1, totalPurchasedValue } = curElem;
-                return (
-                  <>
-                    <div className="leaderboardTopDetailsRow">
-                      <img src={Image} alt="" />
-                      <div className="LeaderboardInsideDetails">
-                        <h2>{sellerFirstName}{sellerLastName}</h2>
-                        <p>
-                          {SubHead1}
-                          <span>{totalPurchasedValue}</span>
-                        </p>
-                      </div>
-                    </div>
-                    <hr className="hr" />
-                  </>
-                );
-              })}
-            </div>
-            <Link className="view" to="/top-seller">
-              {" "}
-              View More
-            </Link>
           </div>
           <div className="col leaderboardTop">
-            <div className="leaderboardTitle">
-              <div className="col" style={{ fontSize: "16px" }}>
-                Top Collections
+            <div className="h-100">
+              <div className="card-body p-0">
+                <div className="leaderboardTitle">
+                  <div className="col" style={{ fontSize: "16px" }}>
+                    Top Collections
+                  </div>
+                  <select className="top-dropdown">
+                    <option>All</option>
+                    <option>Weekly</option>
+                    <option>Monthly</option>
+                    <option>Yearly</option>
+                  </select>
+                  {/* <div className="dropdown col leaderboardDropdown">
+                    <button
+                      className="btn border dropdown-toggle"
+                      type="button"
+                      id="dropdownMenuButton1"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Weekly
+                    </button>
+                    <ul
+                      className="dropdown-menu"
+                      aria-labelledby="dropdownMenuButton1"
+                    >
+                      <li>
+                        <a className="dropdown-item" href="#">
+                          Weekly
+                        </a>
+                      </li>
+                      <li>
+                        <a className="dropdown-item" href="#">
+                          Monthly
+                        </a>
+                      </li>
+                      <li>
+                        <a className="dropdown-item" href="#">
+                          Yearly
+                        </a>
+                      </li>
+                    </ul>
+                  </div> */}
+                </div>
+                <div className="leaderboardTopDetails">
+                  {limitCollections.map((curElem) => {
+                    const { collectionPhoto, collectionName, nftCount } = curElem.items;
+                    return (
+                      <>
+                        <div className="leaderboardTopDetailsRow">
+                          <img className="top-img" src={collectionPhoto} alt="" />
+                          <div className="LeaderboardInsideDetails">
+                            <h2>{collectionName}</h2>
+                            <p style={{ display: 'flex' }}>
+                              {curElem.nftCount}
+                              &nbsp;items
+                            </p>
+                          </div>
+                        </div>
+                        <hr className="hr" />
+                      </>
+                    );
+                  })}
+                </div>
+                {topCollections.length === 0 && (<div>
+                  <h1>No Data Found</h1>
+                </div>)}
               </div>
-              <div className="dropdown col leaderboardDropdown">
-                <button
-                  className="btn border dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton1"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Weekly
-                </button>
-                <ul
-                  className="dropdown-menu"
-                  aria-labelledby="dropdownMenuButton1"
-                >
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </li>
-                </ul>
+              <div className="view-more">
+                <Link className="view" to="/top-collection">
+                  {" "}
+                  View More
+                </Link>
               </div>
             </div>
-            <div className="leaderboardTopDetails">
-              {topCollections.map((curElem) => {
-                const { collectionPhoto, collectionName, SubHead1 } = curElem.items;
-                return (
-                  <>
-                    <div className="leaderboardTopDetailsRow">
-                      <img src={collectionPhoto} alt="" />
-                      <div className="LeaderboardInsideDetails">
-                        <h2>{collectionName}</h2>
-                        <p>
-                          {SubHead1}
-                          <span> {curElem.totalVolume}</span>
-                        </p>
-                      </div>
-                    </div>
-                    <hr className="hr" />
-                  </>
-                );
-              })}
-            </div>
-            <Link className="view" to="/Top_collection">
-              {" "}
-              View More
-            </Link>
           </div>
         </div>
 
-        <div className="card shadow mb-4 leadercolmob">
+        <div className="card-small  mb-4 leadercolmob">
           <div
-            className="card-header py-3"
-            style={{ backgroundColor: "#f8f8f8" }}
+            className="card-header"
+            style={{ backgroundColor: "#f8f8f8", padding: "inherit", borderTopLeftRadius: '13px', borderTopRightRadius: '13px', border: 'none' }}
           >
-            <ul className="nav nav-pills" id="pills-tab" role="tablist">
+            <ul className="small-nav nav nav-pills" id="pills-tab" role="tablist" style={{ borderBottom: "1px solid #D8D8D8", paddingTop: "20px", height: '66px' }}>
               <li className="nav-item">
                 <a
                   className="nav-link active"
@@ -254,10 +329,11 @@ function LeaderBoard() {
                   role="tab"
                   aria-controls="pills-pending"
                   aria-selected="true"
-                  style={{ fontSize: "13px" }}
+                  style={{ fontSize: "13px", borderRadius: 'inherit', paddingLeft: '20px' }}
                   onClick={() => setPendingAcceptedCreated("pending")}
                 >
-                  Top Bidders
+                  Top Buyers
+                  <hr style={{ width: "150%", marginLeft: '-22px', height: 'auto', opacity: 'inherit' }} />
                 </a>
               </li>
               <li className="nav-item">
@@ -269,10 +345,11 @@ function LeaderBoard() {
                   role="tab"
                   aria-controls="pills-accepted"
                   aria-selected="false"
-                  style={{ fontSize: "13px" }}
+                  style={{ fontSize: "13px", borderRadius: 'inherit' }}
                   onClick={() => setPendingAcceptedCreated("accepted")}
                 >
                   Top Sellers
+                  <hr style={{ width: "173%", marginLeft: '-25px', height: 'auto', opacity: 'inherit' }} />
                 </a>
               </li>
               <li className="nav-item">
@@ -284,169 +361,128 @@ function LeaderBoard() {
                   role="tab"
                   aria-controls="pills-rejected"
                   aria-selected="false"
-                  style={{ fontSize: "13px" }}
+                  style={{ fontSize: "13px", borderRadius: 'inherit' }}
                   onClick={() => setPendingAcceptedCreated("rejected")}
                 >
                   Top Collections
+                  <hr style={{ width: "125%", height: 'auto', opacity: 'inherit', marginLeft: "-14px" }} />
                 </a>
               </li>
             </ul>
             {/* <!-- <input type="text" id="search_criteria" className="form-control" onkeyup="hashtagsearch_criteria(this.value)"
     placeholder="Search for hashtag.."> --> */}
           </div>
-          <div
-            className="dropdown col leaderboardDropdown"
-            style={{ width: "100%", marginTop: "1rem" }}
-          >
-            <button
-              className="btn border dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton1"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              style={{ width: "100%", textAlign: "start", margin: "0rem 1rem" }}
-            >
-              Weekly
-              <i className="fas fa-caret-down"></i>
-            </button>
-            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li>
-                <a className="dropdown-item" href="#">
-                  Action
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="card-body">
-            {PendingAcceptedCreated === "pending" ? (
-              <BuildPendingAcceptedRejectedBlock apiData={Pending} />
-            ) : (
-              <></>
-            )}
+          <select className="small-leaderboard-dropdown">
+            <option>All</option>
+            <option>Weekly</option>
+            <option>Monthly</option>
+            <option>Yearly</option>
+          </select>
+          <div className="small-leaderboard-body" style={{ padding: 'none !important' }}>
+            <div>
+              {PendingAcceptedCreated === "pending" ? (
+                <BuildPendingAcceptedRejectedBlock apiData={Pending} />
+              ) : (
+                <>
+                </>
+              )}
 
-            {PendingAcceptedCreated === "accepted" ? (
-              <BuildPendingAcceptedRejectedBlock apiData={Accepted} />
-            ) : (
-              <></>
-            )}
+            </div>
+            <div>
+              {PendingAcceptedCreated === "accepted" ? (
+                <BuildAcceptedBlock apiData={limitSellers} />
+              ) : (
+                <>
+                </>
+              )}
+            </div>
+            <div>
 
-            {PendingAcceptedCreated === "rejected" ? (
-              <BuildPendingAcceptedRejectedBlock apiData={Rejected} />
-            ) : (
-              <></>
-            )}
-          </div>
-        </div>
-
-        <div className="sales">
-          <div className="sales1">
-            <h1 className="leader1">Top NFT sales</h1>
-            <div className="dropdown col btn1">
-              <button
-                className="btn border dropdown-toggle btn2"
-                type="button"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Weekly
-              </button>
-              <ul
-                className="dropdown-menu"
-                aria-labelledby="dropdownMenuButton1"
-              >
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                </li>
-              </ul>
+              {PendingAcceptedCreated === "rejected" ? (
+                <BuildRejectedBlock apiData={limitCollections} />
+              ) : (
+                <>
+                </>
+              )}
             </div>
           </div>
-          <div className="dropdown col btn1">
-            <button
-              className="btn border dropdown-toggle btmleaderboard btn2"
-              type="button"
-              id="dropdownMenuButton1"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Sort by
-            </button>
-            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li>
-                <a className="dropdown-item" href="#">
-                  Action
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
-              </li>
-            </ul>
+        </div>
+      </div>
+      <div className="topNft-section">
+        <div className="filters-cont">
+          <label for="topNft-sales" className="fs-20 fw-sb c-b pb-16 d-sm-block d-md-none">Top NFT sales</label>
+
+          <div className="d-flex align-items-center">
+            <label for="topNft-sales" className="fs-20 fw-sb c-b pr-12 d-none d-sm-none d-md-block">Top NFT sales</label>
+            <select id="topNft-sales" name="topNfts" className="sales-selector fs-14 fw-m c-b">
+              <option>All</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+              <option value="yearly">yearly</option>
+            </select>
+          </div>
+          <div>
+            <select name="sortBy" className="sort-selector fs-14 c-b">
+              <option>Sort by All</option>
+              <option value="">option1</option>
+              <option value="">option2</option>
+            </select>
           </div>
         </div>
-        <div className="row mx-0 text-center justify">
+        <div className="nfts-cont row ntf_row">
           {/* <div className="col-md-3 col-lg-3 col-sm-6 col-11 images"> */}
           {topNftSales.map((curElem) => {
-            const { cdnUrl, name, ownedBy, maxPrice2, daysLeft } =
+            const { cdnUrl, name, ownedBy, maxPrice2, daysLeft,likesCount,_id } =
               curElem;
+              const route = "/nft-information/" + _id;
             return (
-              <div className="col-md-3 col-lg-3 col-sm-6 col-11 images">
-                <div className="container__tile">
+              <div className="nftCard col-md-6 col-lg-3 col-sm-12 nft_card card-mar">
+                <div className="card nft-card-radius border-radius cardmob">
+
+                <Link to={route} style={{ textDecoration: "none" }}>
                   <img
-                    id="nft__photo"
-                    className="img-fluid"
+                    // id="nft__photo"
+                    className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
                     src={cdnUrl}
-                    alt="/"
+                    alt="nft"
+                    onError="this.onerror=null;this.src='/images/image.svg';"
                   />
-                  {/* <img id='like_icon' src={require('../asset//images/Like.png')} /> */}
-                  <div className="tile__details">
-                    <div className="container__up">
-                      <h6 className="title">{name}</h6>
-                    </div>
-                    <div className="container__down">
-                      <h6 className="value__high">
-                        Sold to
-                        <span style={{ fontWeight: "bold", color: "black" }}>
-                          {ownedBy}
-                        </span>
-                        for<span>{curElem.biddingDetails.currency}</span>
-                      </h6>
-                      <h6 className="value__k">
-                        {daysLeft}{" "}
-                        {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
-                        <i
-                          className="fa-solid fa-heart"
-                          style={{ color: "#ef3643" }}
-                        ></i>
-                      </h6>
+                  </Link>
+                  {/* <img id='like_icon' src={require('../asset//images/')} /> */}
+                  <div className="nftTileEachDetails card-lower"
+                    style={{
+                      padding: "0px 14px 0px 12px",
+                    }}>
+                    <div className="tile__details">
+                      <div className="container__up" style={{ paddingTop: '10px' }}>
+                        <h6 className="title">{name}</h6>
+                      </div>
+                      <div className="container__down">
+                        <h6 className="value__high" style={{ margin: 'inherit' }}>
+                          Sold to&nbsp;
+                          <span className="namesold"  >
+                            {(String(ownedBy).length >= 7) ? (!ownedBy ? " " : (String(ownedBy).substring(0, 8) + "...")) : (String(ownedBy) === undefined ? "" : ownedBy)}
+                          </span>
+                          &nbsp;for<span className="ethCurrency">&nbsp; {(curElem.salesInfo.price)}&nbsp;{(curElem.biddingDetails.currency).toUpperCase()}</span>
+                        </h6>
+                        <div style={{ display: "flex", height: "auto", marginTop: "3px" }}>
+                          <h6 className="value__k">
+                            {/* {daysLeft}{" "} */}
+                            {likesCount}{" "}
+                            {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
+
+
+                          </h6>
+                          <div style={{ background: "#FFFFFF 0% 0% no-repeat padding-box", border: "1px solid #FFFFFF", borderRadius: "5px", width: "19px", height: "19px", display: "flex", justifyContent: "center", alignItems: "center", marginLeft: "8.38px" }}>
+                            <i
+                              className="fa-solid fa-heart"
+                              style={{ color: "#ef3643" }}
+                            ></i>
+                          </div>
+
+                        </div>
+
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -455,34 +491,136 @@ function LeaderBoard() {
           })}
           {/* My Commit */}
         </div>
-        {/* </div> */}
-
-        {/* Top NFT sales */}
       </div>
+      {/* </div> */}
+
+      {/* Top NFT sales */}
     </div>
   );
 }
 const BuildPendingAcceptedRejectedBlock = ({ apiData }) => {
   return (
-    <div className="leaderboardTopDetails">
-      {apiData.map((curElem) => {
-        const { Image, Heading, SubHead1, SubHead2 } = curElem;
-        return (
-          <>
-            <div className="leaderboardTopDetailsRow">
-              <img src={Image} alt="" />
-              <div className="LeaderboardInsideDetails">
-                <h2>{Heading}</h2>
-                <p>
+    <div>
+      <div className="leaderboardTopDetails">
+        {apiData.map((curElem) => {
+          const { Image, Heading, SubHead1, SubHead2 } = curElem;
+          return (
+            <>
+              <div className="leaderboardTopDetailsRow">
+                <img src={Image} alt="" />
+                <div className="LeaderboardInsideDetails">
+                <h2 className="sellerName">{Heading}</h2>
+                <p className="volumeData">
                   {SubHead1}
-                  <span>{SubHead2}</span>
-                </p>
+                <span className="ethValue">{SubHead2}</span>
+                  </p>
+                </div>
               </div>
-            </div>
-            <hr className="hr" />
-          </>
-        );
-      })}
+              <hr className="hr" />
+            </>
+          );
+        })}
+      </div>
+      <div className="view-more">
+        <Link className="view" to="/top-bidder">
+          {" "}
+          View More
+        </Link>
+      </div>
+    </div>
+  );
+};
+const BuildAcceptedBlock = ({ apiData }) => {
+  return (
+    <div>
+      <div className="leaderboardTopDetails">
+        {apiData.map((curElem) => {
+          const { Image, sellerFirstName, sellerLastName, SubHead2, totalPurchasedValue,volume,topSellers} = curElem;
+          var precise = volume.toPrecision(4); 
+          var result = parseFloat(precise);
+          return (
+            <>
+              <div className="leaderboardTopDetailsRow">
+
+
+                {topSellers.coverPhoto == "" ?(
+                  <img
+                  className="top-img" style={{ width: '71px', height: '71px' }} src={require("../../assets/images/profile.png")}
+                  alt=""
+                />
+
+                ):(
+                  <img
+                  className="top-img" style={{ width: '71px', height: '71px' }} src={topSellers.coverPhoto}
+                  alt=""
+                />
+
+                )}
+
+
+                          <div className="descriptiontopSeller">
+                            
+               {topSellers.userName==""? (
+                 <h2 className="sellerName">no name</h2>
+               ):(
+                <h2 className="sellerName">{topSellers.userName}</h2>
+               )}
+            
+                            <p className="volumeData">
+                              ETH
+                              <span className="ethValue">({"$"+result})</span>
+                            </p>
+
+                          </div>
+              </div>
+              <hr className="hr" />
+            </>
+          );
+        })}
+      </div>
+      {apiData.length === 0 && (<div>
+        <h1>No Data Found</h1>
+      </div>)}
+      <div className="view-more">
+        <Link className="view" to="/top-seller">
+          {" "}
+          View More
+        </Link>
+      </div>
+    </div>
+  );
+};
+const BuildRejectedBlock = ({ apiData }) => {
+  return (
+    <div>
+      <div className="leaderboardTopDetails">
+        {apiData.map((curElem) => {
+          const { collectionPhoto, collectionName, nftCount } = curElem;
+          return (
+            <>
+              <div className="leaderboardTopDetailsRow">
+                <img className="top-img" src={collectionPhoto} alt="" />
+                <div className="LeaderboardInsideDetails">
+                  <h2>{collectionName}</h2>
+                  <p style={{ display: 'flex' }}>
+                    {curElem.nftCount}&nbsp;items
+                  </p>
+                </div>
+              </div>
+              <hr className="hr" />
+            </>
+          );
+        })}
+      </div>
+      {apiData.length === 0 && (<div>
+        <h1>No Data Found</h1>
+      </div>)}
+      <div className="view-more">
+        <Link className="view" to="/top-collection">
+          {" "}
+          View More
+        </Link>
+      </div>
     </div>
   );
 };

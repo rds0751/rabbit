@@ -1,0 +1,64 @@
+.inputbox{
+  background-color: #f8f8f8;
+  width: 459px;
+  height:42px;
+  padding:0px;
+  padding-left:10px;
+  border-radius: 4px 0px 0px 4px;
+  opacity: 1;
+  border: none;
+  font-weight: bold;
+}
+.inputbox:focus, .inputbox:hover {
+  background-color: #f8f8f8;
+}
+@media only screen and (max-width:1600px) {
+    .inputbox {
+      width: 75%;
+    }
+}
+
+@media only screen and (min-width:700px) and (max-width:1000px){
+  .inputbox{
+    width:291px
+  }
+}
+@media only screen and (min-width:1000px) and (max-width:1300px){
+  .inputbox{
+    width:100px;}
+  }
+.notification-icon{
+  width:28px;
+  height:30px;
+}
+.profile-icon{
+  width: 31px;
+  height: 31px;
+}
+.wallet-icon{
+  width:28px;
+  height:30px;
+}
+.create-btn{
+  width:146px;
+  height: 42px;
+  border:none;
+  border-radius: 4px;
+
+}
+
+/* mobile-view */
+@media screen and (max-width:426px){
+  .notification-icon{
+    width: 15px;
+    height: 18px;
+  }
+  .profile-icon{
+    width: 26px;
+    height: 26px;
+  }
+  .wallet-icon{
+    width: 18px;
+    height: 18px;
+  }
+}

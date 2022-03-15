@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import image from "../../assets/images/1.jpg";
+import copy from "../../assets/images/copy.svg";
 import "../../assets/styles/Notification.css";
 import { useSelector } from "react-redux";
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
+import "../../assets/styles/wallet.css";
+import SplitWalletAdd from "../../common/components/SplitWalletAdd";
 
 function Wallet() {
   const [humburger, setHumburger] = useState(false);
@@ -16,7 +19,7 @@ function Wallet() {
   // console.log("ethereum : ", ethereum);
   const { user, sideBar } = useSelector((state) => state);
   // console.log(data);
-  const { userDetails,walletAddress } = user;
+  const { userDetails, walletAddress } = user;
   console.log(sideBar, "<<<<sidebar");
   const { isOpenWallet } = sideBar;
   useEffect(() => {
@@ -54,28 +57,43 @@ function Wallet() {
   // };
 
   // window.ethereum?.on("accountsChanged", accountChangeHandler);
+  const [copiedText, setCopiedText] = useState(false);
 
+  const handleCopyToClipboard = () => {
+    // const temp = walletAddress?.walletAddress;
+    const walletAddressQuoted = JSON.stringify(walletAddress);
+    const walletAddressUnquoted = walletAddressQuoted.replace(/\"/g, "");
+    navigator.clipboard.writeText(walletAddressUnquoted);
+    setCopiedText(true);
+    setTimeout(() => {
+      setCopiedText(false);
+    }, 1000);
+  };
   return (
     <div
       className="wallet"
       style={{
         display: isOpenWallet ? null : "none",
       }}
+      id="wallet"
     >
       <div className="empty_div"></div>
       <div className="wallet_div">
         <div className="imgwallet">
           <img src={image} alt="" />
         </div>
-        <div className="walleth2">
-          <h3 className="fontwallet">
-            {/* {ethereum && ethereum.chainId
-              ? ethereum && ethereum.chainId
-              : "Install extension to connect wallet"} */}
-            {/* {userDetails?.address} */}
-            {walletAddress?.address}
-          </h3>
-          <i className="far fa-copy"></i>
+        <div className="walletAddressContainer walleth2">
+          <div className="walletAddress fontwallet">
+         
+            <SplitWalletAdd address={walletAddress?.address} />
+          </div>
+       
+          <img
+            style={{ width: "21.47px", height: "21.47px" }}
+            src={copy}
+            alt=""
+            onClick={handleCopyToClipboard}
+          />
         </div>
         <div className="balancewallet textVerticalCenter">
           <div className="WalletContent">

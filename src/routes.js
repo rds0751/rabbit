@@ -54,6 +54,9 @@ import Menu from "./common/components/Menu";
 import { WEB_APP_USER_WALLET_ADDRESS } from "./reducers/Constants";
 import { addUseraction, addUserData } from "./reducers/Action";
 import { CheckUserByWalletAddress } from "./services/UserMicroService";
+import FAQsPage from "./modules/Faqs/index";
+import Home from "./modules/Home/Home";
+import BuyPage from "./modules/Buying/index";
 
 function App() {
   useEffect(() => {
@@ -78,22 +81,28 @@ function App() {
           {/* <Tile__homepage /> */}
           {/* <Switch> */}
           <Routes>
+            <Route path="/FAQs" element={<FAQsPage />} />
             <Route path="/nfts" element={<NftPage />} />
             <Route path="/" element={<NftPage />} />
 
+            {/* <Route
+              exact
+              path="/my-profile/nft-information/:id"
+              element={<NftInformation />}
+            /> */}
             <Route
               exact
               path="/nft-information/:id"
               element={<NftInformation />}
             />
 
-            <Route
+            {/* <Route
               exact
               path="/nft-information_1/:id"
               element={<NftInformation1 />}
-            />
+            /> */}
             <Route
-              exact
+              // exact
               path="/nft-information_2"
               element={<NftInformation2 />}
             />
@@ -111,7 +120,7 @@ function App() {
             <Route exact path="/top-seller" element={<TopSeller />} />
             {/* ----------- */}
             <Route exact path="/leader-board" element={<LeaderBoard />} />
-            <Route exact path="/buying" element={<Buying />} />
+            <Route exact path="/buying" element={<BuyPage />} />
             <Route exact path="/my-items" element={<MyItems />} />
             <Route
               exact
@@ -127,7 +136,7 @@ function App() {
               element={<CollectionDetails />}
             />
 
-            <Route exact path="/edit-items" element={<EditItem />} />
+            <Route exact path="/edit-items/:id" element={<EditItem />} />
             <Route
               exact
               path="/collections-tile"
@@ -179,6 +188,7 @@ function App() {
               element={<Collection_HomeNftFilters />}
             /> */}
             <Route path="/menu" element={<Menu />} />
+            <Route path="/home" element={<Home />} />
           </Routes>
           {/* </Switch> */}
         </Router>

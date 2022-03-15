@@ -1,23 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getAboutData } from "../../services/contentMicroservice";
+import axios from "axios";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+const dev_url = "https://goi4mbj86f.execute-api.us-east-1.amazonaws.com/dev/"; // need to store it in .env file
 
 function About() {
+  const [aboutData, setAboutData] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const url = `${dev_url}api/v1/about/61f7b7a4c017de6244c51144`;
+      const { data } = await axios.get(url);
+      console.log(data, "<<<in about page");
+      setAboutData(data.responseData.about);
+    })();
+
+    // return () => {};
+  }, []);
   return (
     <>
       <div className="container">
         <div className="text-center mt-5 ml-0 mr-0">
-          <p className="font-32 font-weight-700">About NFT marketplace</p>
-          <p className="font-16 mt-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            <br /> Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-            <br /> dolor in reprehenderit in voluptate velit esse cillum dolore
-            eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non{" "}
-            <br /> proident, sunt in culpa qui officia deserunt mollit anim id
-            est laborum
-          </p>
-          <p className="mt-4 font-16">
+          <p className="font-32 font-weight-700">{aboutData.title}</p>
+          <p className="font-16 mt-4">{aboutData.description}</p>
+          {/* <p className="mt-4 font-16">
             Sed ut perspiciatis unde omnis iste natus error sit voluptatem
             accusantium doloremque laudantium, totam rem aperiam,
             <br /> eaque ipsa quae ab illo inventore veritatis et quasi
@@ -26,7 +31,7 @@ function About() {
             consequuntur magni dolores eos qui ratione voluptatem <br /> sequi
             nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit
             amet, consectetur, adipisci velit, sed quia
-          </p>
+          </p> */}
           <h6 className="font-18 font-weight-700 mt-4">
             NFT marketplace in numbers
           </h6>
@@ -62,7 +67,7 @@ function About() {
                   className="text-primary"
                 />
                 Contact Us:{" "}
-                <a href="mailto:nftmarketplace.com">nftmarketplace.com</a>
+                <a href="mailto:nftmarketplace.com">{aboutData.contactEmail}</a>
               </h6>
             </div>
           </div>

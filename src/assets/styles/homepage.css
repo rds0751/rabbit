@@ -1,0 +1,278 @@
+.homepage .banner{
+  background-image: url('../images/Banner.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 115px;
+  padding-bottom: 95px;
+  margin-bottom: 177px;
+}
+.homepage .banner .inner-width{
+  margin-left: 126px;
+  margin-right: 100px;
+}
+.homepage .left-text .heading{
+  font-family: 'poppins-semibold';
+  font-size: 48px;
+  line-height: 70px;
+  color: #FFFFFF;
+  margin-bottom: 22px;
+  padding-top: 81px;
+}
+.homepage .left-text .text{
+  font-family: 'poppins-medium';
+  font-size: 22px;
+  line-height: 70px;
+  color: #FFFFFF;
+  margin-bottom: 45px;
+}
+.homepage .left-text .btn-custom{
+  font-family: 'poppins-medium';
+  font-size: 18px ;
+  line-height: 24px;
+  width: 137px;
+  height: 44px;
+  color: #FFFFFF;
+  background: #F8F8F800;
+  border: 1px solid #FFFFFF;
+  border-radius: 10px;
+  margin-right: 32px;
+}
+.homepage .left-text .btn-custom:hover{
+  color: #141520;
+  background-color: #FFFFFF;
+}
+.homepage .right-slider .card{
+  width: 48.603%;
+  box-shadow: 0px 3px 9px #0000000D;
+  border-radius: 12px;
+  margin-right: 23px;
+  margin-bottom: 42px;
+}
+.homepage .right-slider .card:nth-child(even){
+  margin-right: 0px;
+}
+.homepage .right-slider .card-img-top{
+  width: 100%;
+  height: 273px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+.homepage .right-slider .card .profile-img{
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+}
+.homepage .right-slider .card .title{
+  font-family: 'poppins-semibold';
+  font-size: 16px;
+  line-height: 22px;
+  color: #585858;
+  margin-bottom: 2px;
+}
+.homepage .right-slider .card .description{
+  font-family: 'poppins-semibold';
+  font-size: 14px;
+  line-height: 19px;
+  color: #585858;
+  margin-bottom: 2px;
+}
+.owl-theme .owl-dots .owl-dot span{
+  border: 1px solid #D5D5D5;
+  background: #D5D5D500;
+  width: 12px;
+  height: 12px;
+}
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span{
+  background: #FFFFFF;
+}
+.homepage .create-sell-nft{
+  margin-bottom: 241px;
+}
+.homepage .create-sell-nft .inner-width{
+  width: 73.4%;
+  margin: 0 auto;
+}
+.homepage .create-sell-nft .heading{
+  font-family: 'poppins-bold';
+  font-size: 32px;
+  line-height: 48px;
+  color: #191919;
+  margin-bottom: 66px;
+  text-align: center;
+}
+.homepage .create-sell-nft .card{
+  width: 294px;
+  height: 294px;
+  background: #F7F7F7;
+  border-radius: 19px;
+  padding: 29px 27px 34.41px 28px;
+  margin-right: 5%;
+  text-align: center;
+}
+.homepage .create-sell-nft .card:last-child{
+  margin-right: 0px;
+}
+.homepage .create-sell-nft .card .card-img-top{
+  width: 89px;
+  height: 89px;
+  margin-bottom: 20px;
+  margin: 0 auto;
+}
+.homepage .create-sell-nft .card-title{
+  font-family: 'poppins-semibold';
+  font-size: 18px;
+  line-height: 27px;
+  color: #191919;
+  margin-bottom: 23.59px;
+}
+.homepage .create-sell-nft .card-text{
+  font-family: 'poppins-medium';
+  font-size: 16px;
+  line-height: 25px;
+  color: #191919;
+  margin-bottom: 0px;
+}
+.homepage .why-marketplace{
+  background-color: #366def08;
+  padding-top: 125px;
+  padding-bottom: 181px;
+}
+.homepage .why-marketplace .inner-width{
+  width: 73.4%;
+  margin: 0 auto;
+}
+.homepage .why-marketplace .heading{
+  font-family: 'poppins-bold';
+  font-size: 32px;
+  line-height: 48px;
+  color: #191919;
+  margin-bottom: 97px;
+  text-align: center;
+}
+.homepage .why-marketplace .media{
+  background-color: #FFFFFF;
+  width: 396px;
+  padding: 28px 0px;
+  margin-right: 131px;
+  margin-bottom: 54px;
+  border-radius: 19px;
+}
+.homepage .why-marketplace .media:nth-child(3n+2){
+  margin-right: 90px;
+}
+.homepage .why-marketplace .media:nth-child(3n+3){
+  margin-right: 0px;
+}
+@media only screen and (max-width: 1918px){
+  .homepage .right-slider .card{
+    width: 48%;
+  }
+  .homepage .create-sell-nft .inner-width{
+    width: 87%;
+  }
+  .homepage .why-marketplace .inner-width{
+    width: 87%;
+  }
+  .homepage .why-marketplace .media{
+    margin-right: 90px;
+  }
+}
+@media only screen and (max-width: 1599px){
+  .homepage .banner .inner-width{
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  .homepage .create-sell-nft .inner-width{
+    width: 95%;
+  }
+  .homepage .why-marketplace .inner-width{
+    width: 95%;
+  }
+}
+@media only screen and (max-width: 1456px){
+  .homepage .create-sell-nft .card{
+    margin-right: 2%;
+  }
+  .homepage .why-marketplace .media, .homepage .why-marketplace .media:nth-child(3n+2){
+    margin-right: 50px;
+  }
+}
+@media only screen and (max-width: 1366px){
+  .homepage .right-slider .card{
+    width: 45%;
+  }
+  .homepage .left-text .heading{
+    font-size: 36px;
+  }
+  .homepage .why-marketplace .media{
+    width: 30%;
+  }
+  .homepage .create-sell-nft .card{
+    width: 22%;
+    height: auto;
+  }
+}
+@media only screen and (max-width: 1052px){
+  .homepage .why-marketplace .media, .homepage .why-marketplace .media:nth-child(3n+2){
+    margin-right: 30px;
+  }
+}
+@media only screen and (max-width: 991px){
+  .homepage .left-text{
+    margin-bottom: 30px;
+  }
+  .homepage .left-text .heading{
+    padding-top: 0px;
+  }
+  .homepage .create-sell-nft .card{
+    width: 40%;
+    margin-bottom: 20px;
+  }
+  .homepage .create-sell-nft .card:nth-child(even){
+    margin-right: 0px;
+  }
+  .homepage .why-marketplace .media{
+    width: 45%;
+  }
+  .homepage .why-marketplace .media:nth-child(even){
+    margin-right: 0px;
+  }
+  .homepage .why-marketplace .media:nth-child(odd){
+    margin-right: 30px;
+  }
+}
+@media only screen and (max-width: 600px){
+  .homepage .banner{
+    margin-bottom: 77px;
+  }
+  .homepage .create-sell-nft {
+    margin-bottom: 141px;
+  }
+  .homepage .create-sell-nft .card{
+    width: 100%;
+  }
+  .homepage .create-sell-nft .card {
+    margin-right: 0!important;
+  }
+  .homepage .why-marketplace{
+    padding-bottom: 81px;
+  }
+  .homepage .why-marketplace .media {
+    width: 100%;
+  }
+  .homepage .why-marketplace .media{
+    margin-right: 0!important;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .homepage .left-text .btn-custom{
+    margin-right: 10px;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .homepage .left-text .btn-custom{
+    margin-right: 0px;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+}

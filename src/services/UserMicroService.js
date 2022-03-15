@@ -1,22 +1,34 @@
 import { httpConstants } from "../constants";
 import { httpService } from "../utility/httpService";
-import { BASE_URL } from "../reducers/Constants";
+import { BASE_URL, WHITE_LABEL_TOKEN } from "../reducers/Constants";
 import axios from "axios";
 import { addUseraction, addUserData } from "../reducers/Action";
-
-
+const dev_url = "https://goi4mbj86f.execute-api.us-east-1.amazonaws.com/dev/"; // need to store it in .env file
+const AuthToken = {
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Content-type": "Application/json",
+    Authorization: `Bearer ${localStorage.getItem(WHITE_LABEL_TOKEN)}`,
+  },
+};
 
 export const CheckUserByWalletAddress = async (
   walletAddress,
   successCallBack
 ) => {
+  console.log("<<< token by auth token");
   let url = BASE_URL + "/api/v1/wallet-address";
   console.log(url, walletAddress, "<<<< wallet address");
-  const { data } = await axios.put(url, { wallet_address: walletAddress });
-  console.log(data, "<<<<data");
+  const { data } = await axios.put(
+    url,
+    { wallet_address: walletAddress }
+    // { headers: AuthToken }
+  );
+  console.log(data, "<<<<datawalletaddress");
   if (data.success) {
     // return data.responseData;
     successCallBack(data.responseData);
+
     // dispatch(addUserData(data.responseData));
   } else {
     console.log(data);
@@ -50,7 +62,8 @@ export function getUser(requestData) {
     process.env.REACT_APP_USER_MICROSERVICE + "api/v1/user/" + requestData;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
-    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    AuthToken,
     requestData,
     url
   )
@@ -68,3 +81,43 @@ export function getUser(requestData) {
       return Promise.reject(err);
     });
 }
+
+export const getCategories = async (successCallBack) => {
+  const url = dev_url + "api/v1/categories";
+  console.log(url, "<<<url");
+  const { data } = await axios.get(url, { headers: AuthToken });
+  if (data.success && data.responseCode == 200) {
+    successCallBack(data);
+  } else {
+    console.log(data);
+  }
+};
+
+export const updateUser = async (userData, successCallBack) => {
+  try {
+    const url =
+      process.env.REACT_APP_USER_MICROSERVICE + `api/v1/user/${userData._id}`;
+    const { data } = await axios.put(url, { userData }, { headers: AuthToken });
+    console.log(data, "<<<<");
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const updateBannerByUserId = async (
+  formData,
+  userId,
+  successCallBack
+) => {
+  try {
+    alert("ok");
+    const url =
+      process.env.REACT_APP_WEBAPP_USER_MICROSERVICE +
+      `api/v1/edit-banner/${userId}`;
+    const { data } = await axios.post(url, formData);
+    successCallBack(data);
+    console.log(data, "<<<<< REsponse after updating user profile");
+  } catch (e) {
+    console.log(e);
+  }
+};

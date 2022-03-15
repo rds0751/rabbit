@@ -1,65 +1,138 @@
-import React, { useRef } from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import styled from 'styled-components';
+import React, { useRef, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import { useDropzone } from "react-dropzone";
+import Utils from "../../utility";
+import BlockchainServices from "../../services/blockchainService";
+import getCollection from "../../services/contentMicroservice";
+import { Oval } from "react-loader-spinner";
+import "react-toastify/dist/ReactToastify.css";
+import styled from "styled-components";
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
-import Image from '../../assets/images/img-format.png';
-import { httpConstants } from '../../constants';
-import { BASE_URL2 } from '../../reducers/Constants';
-import { createCollection } from '../../services/createServices';
+import Image from "../../assets/images/img-format.png";
+import ethereum from "../../assets/images/ethereum.svg";
+
+import { httpConstants } from "../../constants";
+import { BASE_URL2 } from "../../reducers/Constants";
+import { createCollection } from "../../services/createServices";
+import "../../assets/styles/collection.css";
+import Bannerdrop from "./Bannerdrop";
+import { getCategories } from "../../services/clientConfigMicroService";
 
 const Button = styled.button``;
 
 function CreateNftCollections(props) {
-  const { user } = useSelector(state => state);
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state);
+  // -------
+  const [logoCdn, setlogoCdn] = useState("");
+  const [bannerCdn, setbannerCdn] = useState("");
+  const [logoipfs, setlogoipfs] = useState("");
+  const [bannerIpfs, setbannerIpfs] = useState("");
+  const [isLogoSelected, setisLogoSelected] = useState(false);
+  const [isBannerSelected, setisBannerSelected] = useState(false);
+  const [clickedOn, setClickedOn] = useState("");
+  const [selectFile, setSelectFile] = useState("");
+  const [checkReqField, setCheckReqField] = useState(false);
+  const [loaderState, setloaderState] = useState(false);
 
-  const name = useRef('');
-  const description = useRef('');
-  const imageUrl = useRef('');
-  const coverUrl = useRef('');
-  const blockchain = useRef('');
-  const categoryId = useRef('');
+  // -------
 
+
+
+
+
+
+  const [Categories, setCategories] = useState([]);
+  useEffect(() => {
+    getCategories().then((response) => setCategories(response));
+  });
+  console.log("categories list", Categories);
+
+
+  const [DesLength, setDesLength] = useState(0);
+  const name = useRef("");
+  const description = useRef("");
+  const imageUrl = useRef("");
+  const coverUrl = useRef("");
+  const blockchain = useRef("Ethereum");
+  const categoryId = useRef("");
   const hiddenFileInputImage = useRef(null);
   const hiddenFileInputBanner = useRef(null);
-
-  const handleClickImage = event => {
+  const handleClickImage = (event) => {
     hiddenFileInputImage.current.click();
   };
-
-  const handleClickBanner = event => {
+  const handleClickBanner = (event) => {
     hiddenFileInputBanner.current.click();
   };
+  useEffect(() => {
+    getCategories((res) => {
+      setCategories(res.responseData);
+    });
+  }, []);
 
-  const handleChangeImage = async event => {
+  // ------------------drag and drop
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: "image/*",
+    onDrop: (acceptedFiles) => {
+      let formData = new FormData();
+      formData.append(
+        "attachment",
+        acceptedFiles.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          })
+        )[0]
+      );
+
+      (async () => {
+        const [err, ipfsRes] = await Utils.parseResponse(
+          getCollection.addIpfs(formData)
+        );
+        if (err || !ipfsRes.ipfsUrl) {
+          toast.error("Unable to upload this image");
+        } else {
+          setlogoipfs(ipfsRes.ipfsUrl);
+          setlogoCdn(ipfsRes.cdnUrl);
+          setisLogoSelected(true);
+        }
+      })();
+
+      // setLogoPresent(true);
+    },
+  });
+  // -------------
+  const [desLEngth, setDesLEngth] = useState(0);
+
+  const handleChangeImage = async (event) => {
     const fileUploaded = event.target.files[0];
+    // alert("onchage");
     // props.handleFileImage(fileUploaded);
+    console.log(user.loggedInUser._id, "<<<");
 
     let formData = new FormData();
-    formData.append('folderName', 'collections');
-    formData.append('createdBy', `${user.addUserData._id}`);
-    formData.append('attachment', fileUploaded);
-
+    formData.append("folderName", "collections");
+    formData.append("createdBy", `${user.loggedInUser._id}`);
+    formData.append("attachment", fileUploaded);
     const res = await fetch(`${BASE_URL2}/api/v1/upload-documents`, {
       method: httpConstants.METHOD_TYPE.POST,
       body: formData,
     });
     const result = await res.json();
     if (result.success) imageUrl.current = result.responseData;
-    console.log(result, '>>> image upload');
+    console.log(result, ">>> image upload");
   };
 
-  const handleChangeBanner = async event => {
+  const handleChangeBanner = async (event) => {
     const fileUploaded = event.target.files[0];
     // props.handleFileBanner(fileUploaded);
 
     let formData = new FormData();
-    formData.append('folderName', 'collections');
-    formData.append('createdBy', `${user.addUserData._id}`);
-    formData.append('attachment', fileUploaded);
+    formData.append("folderName", "collections");
+    formData.append("createdBy", `${user.loggedInUser._id}`);
+    formData.append("attachment", fileUploaded);
 
     const res = await fetch(`${BASE_URL2}/api/v1/upload-documents`, {
       method: httpConstants.METHOD_TYPE.POST,
@@ -67,160 +140,255 @@ function CreateNftCollections(props) {
     });
     const result = await res.json();
     if (result.success) coverUrl.current = result.responseData;
-    console.log(result, '>>> banner upload');
+    console.log(result, ">>> banner upload");
+  };
+  const onChangeDes = () => {
+    setDesLength(description.current.length);
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
+    setloaderState(true);
     e.preventDefault();
+    // e.preventDefault();
+    if (
+      logoCdn == "" ||
+      bannerCdn == "" ||
+      name.current == "" ||
+      description.current == "" ||
+      blockchain.current == ""
+    ) {
+      console.log(
+        imageUrl.current,
+        name.current,
+        description.current,
+        blockchain.current,
+        "<<<"
+      );
+      console.log("require");
+      alert("154");
+      setloaderState(false);
+
+      toast.error("Fill the required field");
+      return null;
+    }
+    // alert("here");
+    console.log("here");
+    // const data = {
+    //   coverUrl: bannerCdn,
+    //   imageUrl: logoCdn,
+    //   name: name.current,
+    //   description: description.current,
+    //   blockchain: blockchain.current,
+    //   addedBy: user.loggedInUser._id,
+    //   // categoryId:categoryId.current,
+    // };
+    //---------------------
+    const [blockchainError, blockchainRes] = await Utils.parseResponse(
+      BlockchainServices.createCollections({
+        name: name,
+        symbol: 'WL'
+
+        // tokenURI: data.ipfsUrl,
+        // price: data.price,
+        // tokenId,
+      })
+    );
+    // alert('kkkkk')
+
+    console.log("colllectionnnnnnnnnnnnnnnnnnnnssssss", blockchainRes.contract_address)
+    if (blockchainError || !blockchainRes) {
+      // this.setState({ loaderState: false });
+      setloaderState(false);
+
+      return Utils.apiFailureToast(
+        blockchainError.message || "Unable to Create Collection on blockchain"
+      );
+    }
     const data = {
-      coverUrl: coverUrl.current,
-      imageUrl: imageUrl.current,
+      coverUrl: bannerCdn,
+      contractAddress: blockchainRes.contract_address,
+      imageUrl: logoCdn,
       name: name.current,
       description: description.current,
       blockchain: blockchain.current,
-      addedBy: user.addUserData._id,
+      addedBy: user.loggedInUser._id,
       // categoryId:categoryId.current,
     };
+
+    //-----------------------
     const result = await createCollection(data);
-    if (result.success) toast.success('Collection created');
-    else toast.error(result.message);
-    console.log(result, '>>> submit nftCollection');
+    if (result.success) {
+      setloaderState(false);
+
+      toast.success("Collection created");
+      navigate("/collections-tile");
+    } else toast.error(result.message);
+    setloaderState(false);
+
+    console.log(result, ">>> submit nftCollection");
+  };
+  const checkReqFieldFun = () => {
+    const currname = name.current;
+    const currdes = description.current;
+    const currblock = blockchain.current;
+
+    if (
+      currname.trim() == "" ||
+      currdes.trim() == "" ||
+      currblock.trim() == "" ||
+      logoCdn == "" ||
+      bannerCdn == ""
+    ) {
+      setCheckReqField(false);
+    } else {
+      setCheckReqField(true);
+    }
   };
 
   return (
     <>
-      <div
-        className='container col-sm-6 col-12 col-xs-12 offset-sm-2'
-        style={{ marginTop: '1rem' }}
-      >
-        <div className='top-heading'>
-          <h4 className='create-nft-font'>Create your collection</h4>
+      {loaderState ? (
+        <div className="center">
+          {" "}
+          <Oval
+            vertical="top"
+            horizontal="center"
+            color="#00BFFF"
+            height={30}
+            width={30}
+          />
         </div>
-        <div className='create-nft-font1'>
-          <label htmlFor='email' className='form-label mt-3'>
-            Upload File*
-          </label>
-          <div className='card collection-nft-card'>
-            <Button
-              onClick={handleClickImage}
-              style={{ border: 'none', backgroundColor: '#fff' }}
-            >
-              <img
-                src={Image}
-                style={{ width: '100px', color: '#366EEF', marginTop: '3em' }}
-              />
-            </Button>
-            <input
-              type='file'
-              className='form-control'
-              placeholder='Write your name'
-              name='email'
-              style={{ display: 'none' }}
-              ref={hiddenFileInputImage}
-              onChange={handleChangeImage}
-            />
-            <span
-              className='text-dark text-center mt-2 font-13'
-              style={{ flexDirection: 'row' }}
-            >
-              Drag & Drop or
-              <Link to='/' style={{ textDecoration: 'none' }}>
-                Browse
-              </Link>
-            </span>
-          </div>
+      ) : (
+        ""
+      )}
+      <div className="main-container">
+        <h1 className="fs-32 fw-b c-b title">Create your collection</h1>
+        <p className="fs-16 fw-600 c-b pt-50">Upload Logo*</p>
+        <div className="max-width-250">
+          {/*{!isLogoSelected && (*/}
+          {/*    <div*/}
+          {/*      onClick={() => setClickedOn("logo")}*/}
+          {/*      className="img-div"*/}
+          {/*      {...getRootProps()}*/}
+          {/*    >*/}
+          {/*      <input*/}
+          {/*        {...getInputProps()}*/}
+          {/*        name="logo"*/}
+          {/*        onChange={() => setClickedOn("logo")}*/}
+          {/*      />*/}
+          {/*        <img*/}
+          {/*          src={logoCdn != "" ? logoCdn : Image}*/}
+          {/*          alt="upload-icon"*/}
+          {/*          className="upload-icon"*/}
+          {/*        />*/}
+          {/*        <p className="fs-14 fw-b pt-20">Drag & Drop or <span style={{color:"#366EEF"}}>Browse</span></p>*/}
+          {/*    </div>*/}
+          {/*)}*/}
+          <Bannerdrop
+            bannerCdn={logoCdn}
+            setbannerCdn={setlogoCdn}
+            bannerIpfs={logoipfs}
+            setbannerIpfs={setlogoipfs}
+          />
         </div>
-        <div className='create-nft-font1'>
-          <label htmlFor='email' className='form-label mt-3'>
-            Upload Banner*
-          </label>
-          <div className='card banner-nft-card p-5 bannermob'>
-            <Button
-              onClick={handleClickBanner}
-              style={{ border: 'none', backgroundColor: '#fff' }}
-            >
-              <img src={Image} style={{ width: '100px', color: '#366EEF' }} />
-            </Button>
-            <input
-              type='file'
-              className='form-control'
-              style={{ display: 'none' }}
-              ref={hiddenFileInputBanner}
-              onChange={handleChangeBanner}
-            />
-            <span className='text-dark font-13 text-center mt-2'>
-              Drag & Drop or
-              <Link to='/' style={{ textDecoration: 'none' }}>
-                Browse
-              </Link>
-            </span>
-          </div>
+        <div>
+          {/* ---------------------------OLD BANNER UPLOAD----------------- */}
+          <div className="fs-16 fw-600 c-b pt-20 pb-20">Upload Banner*</div>
+
+          <Bannerdrop
+            bannerCdn={bannerCdn}
+            setbannerCdn={setbannerCdn}
+            bannerIpfs={bannerIpfs}
+            setbannerIpfs={setbannerIpfs}
+          />
+
+          {/* ----------------------------- */}
         </div>
-        <div className='singlenft-form-box'>
-          <form
-            className='suggestion-form  p-4'
-            onSubmit={e => handleSubmit(e)}
-          >
-            <div className='mb-3 mt-3'>
-              <label htmlFor='email' className='form-label input-heading'>
-                Name*
-              </label>
+        <div>
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <div>
+              <p className="fs-16 fw-b c-b pt-4">Name*</p>
               <input
-                type='name'
-                className='form-control'
-                name='email'
-                placeholder='Write your name'
-                onChange={e => (name.current = e.target.value)}
+                type="name"
+                name="name"
+                className="input-box-1"
+                placeholder="Write your name"
+                onChange={(e) => {
+                  name.current = e.target.value;
+                  checkReqFieldFun();
+                }}
               />
             </div>
-            <div className='mb-3 mt-3'>
-              <label htmlFor='comment' className='input-heading pb-2'>
-                Description*
-              </label>
+            <div>
+              <p className="fs-16 fw-b c-b pt-3">Description*</p>
               <textarea
-                className='form-control'
-                rows='4'
-                name='text'
-                placeholder='Write description'
-                onChange={e => (description.current = e.target.value)}
+                rows="4"
+                name="Description"
+                placeholder="Write description"
+                className="input-box-1 mb-0"
+                value={description.current}
+                onChange={(e) => {
+                  if (DesLength < 1000) {
+                    description.current = e.target.value;
+                    onChangeDes();
+                    checkReqFieldFun();
+                  }
+                }}
               ></textarea>
-              <span className='text-secondary font-13'>
-                0 of 1000 characters used
-              </span>
+              <span className="fs-14" style={{ color: "#707070" }}>{DesLength} of 1000 characters used</span>
             </div>
-            <div className='mb-3 mt-3'>
-              <label htmlFor='collection' className='input-heading'>
-                Category
-              </label>
+            <div>
+              <div className="fs-16 fw-b c-b pt-3 pb-3">Category</div>
               {/* <Link>Create</Link> */}
-              <select className='form-select mt-3 font-13 text-secondary'>
-                <option className='text-secondary'>Select Category</option>
-                <option>2</option>
+              <select
+                className="input-box-1"
+                onChange={(e) => (categoryId.current = e.target.value)}
+              >
+                <option style={{ color: "#707070" }}>Select Category</option>
+                {Categories.map((item, key) => {
+                  return <option value={item?._id} style={{ color: "#707070" }}>{item?.name}</option>;
+                })}
+                {/* <option>2</option>
                 <option>3</option>
-                <option>4</option>
+                <option>4</option> */}
               </select>
             </div>
-            <div className='mb-3 mt-3'>
-              <label htmlFor='email' className='form-label input-heading'>
-                blockchain*
-              </label>
-              <input
-                type='name'
-                className='form-control bg-light'
-                placeholder='Ethereum'
-                id='ethereum'
-                onChange={e => (blockchain.current = e.target.value)}
-              />
+            <div>
+              <div className="fs-16 fw-b c-b pt-3 pb-3">Blockchain*</div>
+              <div className="block-chain-container">
+                <div>
+                  <img src={ethereum} height="32px" />
+                </div>
+                <div className="block-chain-right">
+                  <select
+                    className="input-box-1 rm-border blockchainSelect"
+                    onChange={(e) => {
+                      blockchain.current = e.target.value;
+                      checkReqFieldFun();
+                    }}
+                  >
+                    <option value="">Select Category</option>
+                    <option selected value="Ethereum">
+                      Ethereum
+                    </option>
+                  </select>
+                </div>
+              </div>
             </div>
-            <button type='submit' className='btn btn-primary mt-4 w-100 '>
+            <button
+              type="submit"
+              disabled={checkReqField ? false : true}
+              className="submit-button"
+              style={{ opacity: checkReqField ? "1" : "0.5" }}
+            >
               Create
             </button>
           </form>
         </div>
       </div>
       <ToastContainer
-        position='top-center'
-        autoClose={2000}
+        position="top-center"
+        autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

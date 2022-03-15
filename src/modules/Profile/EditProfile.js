@@ -1,163 +1,241 @@
-import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
-import Image from '../../assets/images/img-format.png';
-import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { BASE_URL2 } from '../../reducers/Constants';
-import { httpConstants } from '../../constants';
-import { updateUserProfile } from '../../services';
-
+import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import Image from "../../assets/images/img-format.png";
+import styled from "styled-components";
+import { connect } from "react-redux";
+import { BASE_URL2, WHITE_LABEL_TOKEN } from "../../reducers/Constants";
+import { httpConstants } from "../../constants";
+import { updateUserProfile } from "../../services";
+import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../../assets/styles/editProfile.css";
+import { AuthToken } from "../../services/UserAuthToken";
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 
 const Button = styled.button``;
 
 function EditProfile(props) {
   const hiddenFileInput = useRef(null);
+  const [desLength, setDesLength] = useState(0);
+  const { user } = useSelector((state) => state);
+  const [formData, setFormData] = useState({
+    photo: user?.loggedInUser?.photo,
+    userName: user?.loggedInUser?.userName,
+    bio: user?.loggedInUser?.bio,
+    portfolio: user?.loggedInUser?.portfolio,
+  });
+  const tempUrl =
+    "https://earncashto.com/wp-content/uploads/2021/06/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png";
+  const [imageUrl, setImageUrl] = useState(tempUrl);
+  console.log(user.loggedInUser, "<<<loggedin");
+  // const photo = useRef(user?.loggedInUser?.photo);
+  // const bio = useRef(user?.loggedInUser?.bio);
+  // const userName = useRef(user?.loggedInUser?.userName);
+  // const portfolio = useRef(user?.loggedInUser?.portfolio);
 
-  const cdnUrl = useRef('');
-  const bio = useRef('');
-  const username = useRef('');
-  const personalSite = useRef('');
-
-  const handleClick = event => {
+  const handleClick = (event) => {
     hiddenFileInput.current.click();
   };
 
-  const handleChange = async event => {
+  const handleChange = async (event) => {
     const fileUploaded = event.target.files[0];
     console.log(fileUploaded);
     let formData = new FormData();
-    formData.append('folderName', 'collections');
-    formData.append('createdBy', `${props.user._id}`);
-    formData.append('attachment', fileUploaded);
+    formData.append("folderName", "collections");
+
+    formData.append("createdBy", `${user?.loggedInUser?._id}`);
+    formData.append("attachment", fileUploaded);
 
     const res = await fetch(`${BASE_URL2}/api/v1/upload-documents`, {
       method: httpConstants.METHOD_TYPE.POST,
       body: formData,
+      // headers: AuthToken,
     });
+    console.log(res, "<<<< res");
     const result = await res.json();
-    if (result.success) cdnUrl.current = result.responseData;
-    console.log(result);
+    if (result.success) {
+      setFormData({ ...formData, photo: result.responseData });
+    } else {
+      toast.error("Unable to change image");
+    }
 
+    // else toast.error("")
+    console.log(result);
+    setImageUrl(result.responseData);
     // Edit.handleFile(fileUploaded);
   };
-
-  const handleSubmit = async e => {
-    console.log(props);
+  useEffect(() => {
+    console.log(localStorage.getItem(WHITE_LABEL_TOKEN), "<<<this is token");
+    if (user.loggedInUser?.photo != "") {
+      setImageUrl(user?.loggedInUser?.photo);
+    }
+    // setImageUrl()
+    // photo.current = user?.loggedInUser?.photo;
+    // bio.current = user?.loggedInUser?.bio;
+    // userName.current = user?.loggedInUser?.userName;
+    // portfolio.current = user?.loggedInUser?.portfolio;
+  }, []);
+  function hasBlankSpaces(str) {
+    return str.match(/^\s+$/) !== null;
+  }
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = {
-      username: username.current,
-      bio: bio.current,
-      personalSite: personalSite.current,
-      cdnUrl: cdnUrl.current,
-    };
-    const result = await updateUserProfile(data, props.user._id);
-    console.log(result);
-    // console.log(
-    //   username.current,
-    //   bio.current,
-    //   personalSite.current,
-    //   cdnUrl.current
-    // );
+    console.log(user.loggedInUser, "<<user");
+    const userName = formData.userName;
+    if (userName.trim() == "") {
+      toast.error("Username is required");
+      return null;
+    }
+    if (/\s/.test(formData.userName)) {
+      // It has any kind of whitespace
+      toast.error("Username should not have space");
+      return null;
+    }
+
+    const result = await updateUserProfile(formData, user?.loggedInUser?._id);
+    console.log(result, "<<<<<< profile updated value");
+    if (result.success) {
+      toast.success("Profile Updated");
+      window.location.reload(true);
+    } else {
+      toast.error("Error While updating ");
+    }
+  };
+
+  const handleForm = (e) => {
+    const { name, value } = e.target;
+    if (name == "bio") {
+      setDesLength(value.length);
+    }
+    setFormData({ ...formData, [name]: value });
   };
 
   return (
     <>
-      <div className='container row mt-5'>
-        <div className='col-sm-5 col-12 col-xs-12 offset-sm-3 form-responsive edit_profilemob'>
-          <div className='top-heading'>
-            <h4 className='create-nft-font text-center'>Edit Profile</h4>
-            <h3
-              className='font-15 font-weight-700 border-bottom pb-3'
-              style={{ marginLeft: '-30px' }}
-            >
-              General Setting
+      <ToastContainer
+        position="top-center"
+        autoClose={6000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <div className="editProfileContainer container">
+        <div className="editProfileTopHeading top-heading">
+          <div className="editProfileHeadingTitle">
+            <h3 className="title">
+              Edit Profile
             </h3>
           </div>
-          <div className='card border-0'>
-            <div className='row border' style={{ display: 'flex' }}>
-              <div className='col-sm-4  col-12 col-md-6'>
-                <img
-                  className='rounded-circle img-fluid img-responsive'
-                  src='https://earncashto.com/wp-content/uploads/2021/06/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png'
-                  alt='/'
-                />
-              </div>
-              <div className='col-sm-4 col-12 col-md-6'>
-                <Button
-                  onClick={handleClick}
-                  className='btn btn-outline-primary btn-normal-size btn-choose-file'
-                  style={{ marginTop: '4em' }}
-                  onChange={e => handleChange(e)}
-                >
-                  <span className='btn-text font-14'>Choose File</span>
-                </Button>
-                <input
-                  type='file'
-                  className='form-control'
-                  placeholder='Write your name'
-                  name='email'
-                  style={{ display: 'none' }}
-                  ref={hiddenFileInput}
-                  onChange={handleChange}
-                />
-              </div>
+
+          <h3 className=" input-heading generalsettingl">
+            General Setting
+          </h3>
+        </div>
+        <div className="chooseProfilePicContainer">
+          <div className="chooseProfilePicInnerContainer ">
+            <div className="editprofile-image">
+              <img
+                src={imageUrl}
+              />
             </div>
+            <div className="editprofile-button-outer">
+              <Button
+                onClick={handleClick}
+                className=" btn-choose-file"
+                // style={{ marginTop: "4em" }}
+                // onChange={(e) => handleChange(e)}
+              >
+                <span className="poppins-normal font-14">Choose File</span>
+              </Button>
+            </div>
+
+            <input
+              type="file"
+              className="edit-input-box"
+              placeholder="Write your name"
+              // name=""
+              style={{ display: "none" }}
+              ref={hiddenFileInput}
+              onChange={handleChange}
+            />
           </div>
-          <div className='singlenft-form-box'>
-            <form className='suggestion-form ' onSubmit={e => handleSubmit(e)}>
-              <div className='mb-3 mt-3'>
-                <label htmlFor='email' className='form-label input-heading'>
-                  Username
-                </label>
-                <input
-                  type='name'
-                  className='form-control'
-                  name='email'
-                  onChange={e => (username.current = e.target.value)}
-                />
-              </div>
-              <div className='mb-3 mt-3'>
-                <label htmlFor='comment' className='input-heading pb-2'>
-                  Bio
-                </label>
-                <textarea
-                  className='form-control'
-                  rows='4'
-                  name='text'
-                  placeholder='Write description'
-                  onChange={e => (bio.current = e.target.value)}
-                ></textarea>
-                <span className='text-secondary font-13'>
-                  0 of 1000 characters used
-                </span>
-              </div>
-              <div className='mb-3 mt-3'>
-                <label htmlFor='email' className='form-label input-heading'>
-                  Personal site or Portfolio
-                </label>
-                <input
-                  type='name'
-                  className='form-control bg-light'
-                  placeholder='www.example.com'
-                  onChange={e => (personalSite.current = e.target.value)}
-                />
-              </div>
-              <button type='submit' className='btn btn-primary mt-4 w-100'>
-                <span className='font-14 text-white'>Update Profile</span>
-              </button>
-            </form>
-          </div>
+        </div>
+        <div className="editProfileFormContainer singlenft-form-box">
+          <form className="suggestion-form " onSubmit={(e) => handleSubmit(e)}>
+            <div className="">
+              <label
+                htmlFor="username"
+                className=" label-heading"
+              >
+                username
+              </label>
+              <input
+                type="text"
+                className="editProfileFormContainerEachInput "
+                name="userName"
+                value={formData.userName}
+                // value={userName.current}
+                onChange={(e) => handleForm(e)}
+              />
+            </div>
+            <div className="" style={{marginBottom:"28px"}}>
+              <label htmlFor="comment" className="label-heading">
+                Bio
+              </label>
+              <textarea
+                className="editProfileFormContainerEachInput mb-0"
+                rows="4"
+                // name="text"
+                name="bio"
+                value={formData.bio}
+                // value={userName.current}
+                onChange={(e) => {
+                  if (desLength < 1000) {
+                    handleForm(e);
+                  }
+                }}
+                placeholder="Write description"
+                // onChange={(e) => (bio.current = e.target.value)}
+              ></textarea>
+              <div className="clearfix"></div>
+              <span className="input-down-text">
+                {desLength} of 1000 characters used
+              </span>
+            </div>
+            <div className="">
+              <label htmlFor="email" className="label-heading">
+                Personal site or Portfolio
+              </label>
+              <input
+                type="name"
+                className="editProfileFormContainerEachInput form-control"
+                placeholder="www.example.com"
+                name="portfolio"
+                value={formData.portfolio}
+                // value={userName.current}
+                onChange={(e) => handleForm(e)}
+              />
+            </div>
+            <button type="submit" className=" editprofileSubmitButton ">
+              <span className=" font-14 text-white">Update Profile</span>
+            </button>
+          </form>
         </div>
       </div>
     </>
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   console.log(state);
   return {
-    user: state.user.addUserData,
+    user: state.user.loggedInUser,
   };
 };
 
