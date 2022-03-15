@@ -17,7 +17,6 @@ const Container = styled.div`
   margin-right: 130px;
   color: #191919;
   margin-top: 29px;
-  @
 `;
 const Header = styled.div`
   display: flex;
