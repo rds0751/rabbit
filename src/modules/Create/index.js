@@ -2,14 +2,10 @@ import React from "react";
 import BaseComponent from "../baseComponent";
 import CreateSingleNFT from "./CreateSingleNFT";
 import Utils from "../../utility";
-// import { BlockchainService, ContentService } from "../../services/blockchainService";
-import BlockchainService from '../../services/blockchainService';
-import ContentService from "../../services/contentMicroservice";
+import BlockchainServices from "../../services/blockchainService";
+import getCollection from "../../services/contentMicroservice";
+// import ContentService from "../../services/contentMicroservice";
 import { eventConstants } from "../../constants";
-
-// export {​​​​​​ default as ContentService }​​​​​​ from "./contentMicroservice";export {​​​​​​ default as BlockchainService }​​​​​​ from "./blockchainService";
-
-
 
 export default class Index extends BaseComponent {
   constructor(props) {
@@ -25,65 +21,66 @@ export default class Index extends BaseComponent {
     await this.getCollectionsForNft();
   }
 
-
   getRequestDataForSaveNftContent = (tokenId, data, ipfsRes, blockchainRes) => {
     return {
       tokenId: tokenId,
       transactionHash: blockchainRes?.transactionHash || "",
       name: data?.nftName || "",
-      //TO DO  need to pass collection _id 
-      collectionId: "61e7d82400e03f66fd4d2d24",
+      //TO DO  need to pass collection _id
+      collectionId: data.collection,
       ipfsUrl: ipfsRes?.ipfsUrl || "",
       cdnUrl: ipfsRes?.cdnUrl || "",
       cid: ipfsRes?.cid || "",
       description: data?.description || "",
-
+      blockchain:data?.blockchain || "",
       network: {
         chainId: blockchainRes?.chainId || "",
         name: blockchainRes?.name || "",
       },
-      saleData: {
+      salesInfo: {
         price: data?.price || 0,
       },
       //TO do need to pass user (owner) _id
-      ownedBy: "61e7db34c32d4e5a40567154",
-      createdBy: "61e7db34c32d4e5a40567154",
-      updatedBy: "61e7db34c32d4e5a40567154",
-      ownerAddress: "61e7db34c32d4e5a40567154",
+      ownedBy: data.createdBy,
+      createdBy: data.createdBy,
+      updatedBy: data.createdBy,
+      ownerAddress: data.createdBy,
     };
   };
 
   createNftHandler = async (data) => {
+    console.log(data, "<<<<<< createnft handler");
+
     if (!data || Object.keys(data).length < 1 || !data.nftFile)
       return Utils.apiFailureToast("Please select the file that to be upload");
     // console.log("duke",data)
     let formData = new FormData();
     formData.append("attachment", data.nftFile);
+   
 
     // if(!this.props.user?.userDetails)
     //   return Utils.apiFailureToast("Please connect your wallet");
 
     //add to IPFS
     const [err, ipfsRes] = await Utils.parseResponse(
-      ContentService.addIpfs(formData)
+      getCollection.addIpfs(formData)
     );
+
     if (err || !ipfsRes.ipfsUrl) {
-      this.props.dispatchAction(eventConstants.HIDE_LOADER);
+      // this.props.dispatchAction(eventConstants.HIDE_LOADER);
       return Utils.apiFailureToast(err || "Unable to add file on IPFS");
     }
     //TODO we need to work on generate unique tokenId
 
     const tokenId = Utils.generateRandomNumber();
-
     // create NFT on blockchain
     const [blockchainError, blockchainRes] = await Utils.parseResponse(
-      BlockchainService.mintNFT({
+      BlockchainServices.mintNFT({
+        tokenURI: ipfsRes.ipfsUrl,
         price: data.price,
         tokenId,
-        tokenURI: ipfsRes.ipfsUrl,
       })
     );
-
 
     if (blockchainError || !blockchainRes) {
       return Utils.apiFailureToast(
@@ -102,7 +99,7 @@ export default class Index extends BaseComponent {
 
     // save NFT data on DB
     const [contentError, contentRes] = await Utils.parseResponse(
-      ContentService.createNftContent(
+      getCollection.createNftContent(
         this.getRequestDataForSaveNftContent(
           tokenId,
           data,
@@ -121,8 +118,9 @@ export default class Index extends BaseComponent {
     // history.push("/nft-details/" + contentRes._id);
   };
 
-
   render() {
+    // alert("in 122 line")
+
     return (
       <>
         <CreateSingleNFT
@@ -134,4 +132,3 @@ export default class Index extends BaseComponent {
     );
   }
 }
-

@@ -2,44 +2,41 @@ import React, { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import image from "../../assets/images/icon.png";
 import { ethers } from "ethers";
-import { useDispatch } from "react-redux";
-import { updateUserDetail } from "../../reducers/Action";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {
+  AddWalletDetails,
+  ManageWalletSideBar,
+  addUserData,
+} from "../../reducers/Action";
 import "react-toastify/dist/ReactToastify.css";
-
+import { CheckUserByWalletAddress } from "../../services/UserMicroService";
+import { WEB_APP_USER_WALLET_ADDRESS } from "../../reducers/Constants";
 function Create() {
+  const history = useNavigate();
   const [humburger, setHumburger] = useState(false);
   const ethereum = window.ethereum;
   const [errorMssg, setErrorMssg] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
   console.log("ethereum ", ethereum && ethereum);
+  const { user, sideBar } = useSelector((state) => state);
   const [checkClick, setcheckClick] = useState(false);
   const [getBalance, setGetBalance] = useState(null);
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   // if(ethereum){
-  //   //   toast.success('Conneted Metamask ');
-  //   // }
-  //   if (window.ethereum) {
-  //     window.ethereum
-  //       .request({ method: "eth_requestAccounts" })
-  //       .then((result) => {
-  //         accountChangeHandler(result[0]); //accounts can be a array we just wanna grab first one
-  //         console.log(result[0]);
+  const { userDetails, loggedInUser } = user;
+  const { isOpenWallet } = sideBar;
+  const [toggleEffect, setToggleEffect] = useState(false);
+  useEffect(() => {
+    if (loggedInUser != null) {
+      alert("toggle called");
+      toast.success("Wallet connected");
+      dispatch(ManageWalletSideBar(!isOpenWallet));
+      history("/");
+    } else {
+      toast.error("Choose the wallet");
+    }
+  }, [toggleEffect]);
 
-  //         dispatch(
-  //           updateUserDetail({ address: defaultAccount, balance: getBalance })
-  //         );
-  //         window.location.pathname = "/wallet";
-  //       })
-  //       .catch((e) => {
-  //         console.log(e, "<<< error ");
-  //       });
-  //   } else {
-  //     alert("Install MEtamask");
-  //     setErrorMssg("Install Metamask ");
-  //     toast.success("Connect Wallet");
-  //   }
-  // }, [window.ethereum, checkClick]);
   const connectMetamask = () => {
     if (window.ethereum) {
       window.ethereum
@@ -49,15 +46,28 @@ function Create() {
           console.log(result[0]);
 
           dispatch(
-            updateUserDetail({ address: defaultAccount, balance: getBalance })
+            AddWalletDetails({ address: defaultAccount, balance: getBalance })
           );
-          window.location.pathname = "/wallet";
+          CheckUserByWalletAddress(defaultAccount, (res) => {
+            dispatch(addUserData(res));
+            setToggleEffect(!toggleEffect);
+          });
+          // localStorage.setItem(
+          //   WEB_APP_USER_WALLET_ADDRESS,
+          //   `${defaultAccount}`
+          // );
+
+          // window.location.pathname = "/wallet";
         })
         .catch((e) => {
+          // alert("Connect Your Wallet");
+          toast.error(" Connect Your Metamask Wallet");
           console.log(e, "<<< error ");
         });
     } else {
-      setErrorMssg("Install Metamask ");
+      // setErrorMssg("Install Metamask ");
+      // alert("Install Metamask ");
+
       toast.error("Install Metamak and Connect Wallet");
     }
   };
@@ -75,7 +85,7 @@ function Create() {
   };
 
   window.ethereum?.on("accountsChanged", accountChangeHandler);
-
+  console.log(loggedInUser, "<<<<<this iser user detail");
   return (
     <>
       <div className="d-flex justify-content-between">

@@ -9,16 +9,110 @@ import { BidApi, OfferApi } from "../../constants/Nft_Info_Api";
 import PricingHistoryComponentTable from "../../common/components/PricingHistoryComponentTable";
 import PricingHistoryComponentGraph from "../../common/components/PricingHistoryComponentGraph";
 // import BidsComponent from "./BidsComponent";
-import { useParams } from 'react-router-dom';
-import { getNft } from "../../services/webappMicroservice";
+import { useParams, Link } from "react-router-dom";
 
-export default function NftInformation() {
+import { Button } from "@mui/material";
+import { getNft, addNftReport } from "../../services/webappMicroservice";
+import { useSelector } from "react-redux";
+import {
+  put_NftOpenForSale,
+  RemoveNftFromSale,
+} from "../../services/contentServices";
+import { toast } from "react-toastify";
+import { getUser } from "../../services/UserMicroService";
+
+export default function NftInformation(props) {
+  console.log(props?.responseData, "<<<response");
+
   const [activeInActive, setActiveInActive] = useState("active");
-  const nftId = useParams();
-  const [nft, setNft] = useState([])
-  useEffect(() => {
-    getNft(nftId.id).then(response=>setNft(response))
-  })
+  const { user } = useSelector((state) => state);
+  const [isCurrUserNft, setIsCurrUserNft] = useState(null);
+  const [isOpenForSell, setisOpenForSell] = useState(null);
+  const { loggedInUser } = user;
+  const { id } = useParams();
+  const [nft, setNft] = useState(props?.responseData);
+  const [userDetails, setUserDetails] = useState([]);
+  const [report, setReport] = useState({
+    content: id,
+    // addedBy: user.addUserData._id,
+    reason: "",
+  });
+  console.log(
+    loggedInUser?._id,
+    props?.responseData,
+    "<<<< this is data to match"
+  );
+  // alert(loggedInUser?._id == props?.responseData?.createdBy);
+  // useEffect(() => {
+  //   alert(`${loggedInUser?._id}`);
+  //   console.log(
+  //     props.responseData,
+  //     "<<<<response data at nft information << page"
+  //   );
+  // }, []);
+
+  // setIsCurrUserNft(props.responseData.createdBy === loggedInUser?._id);
+  // setisOpenForSell(props.responseData.salesInfo?.isOpenForSale);
+  // alert(`${isCurrUserNft}, ${isOpenForSell}`);
+  // useEffect(() => {
+  //     // alert("data")
+
+  //     // setNft();
+  //     // setIsCurrUserNft(props.responseData.createdBy == loggedInUser._id);
+
+  // }, []);
+  // alert(`${isCurrUserNft},${loggedInUser._id},${isOpenForSell}`);
+  // console.log("===",isCurrUserNft)
+  // console.log("===",isOpenForSell)
+
+  const demoHandleSell = async () => {
+    props?.sellNowNft({
+      // sellerId:loggedInUser._id,
+      // buyerId:loggedInUser._id,
+      // saleData:response.salesInfo,
+      // tokenId:response.tokenId,
+      // nftId:response._id,
+    });
+  };
+
+  const removeNFTFromSell = async () => {
+    props?.removeNftFromSale({
+      // sellerId:loggedInUser._id,
+      // buyerId:loggedInUser._id,
+      // saleData:response.salesInfo,
+      // tokenId:response.tokenId,
+      // nftId:response._id,
+    });
+  };
+  const buyNft = async () => {
+    props?.BuyNowNft({});
+
+    const response = await put_NftOpenForSale(nft._id);
+    if (response.success) {
+      toast.success(response.message);
+      window.location.reload(false);
+    } else toast.error(response.message);
+  };
+
+  const handleRemoveSell = async () => {
+    const response = await RemoveNftFromSale(nft._id);
+    if (response.success) {
+      toast.success(response.message);
+      window.location.reload(false);
+    } else toast.error(response.message);
+  };
+
+  const handleChange = (e) =>
+    setReport({
+      ...report,
+      reason: e.target.value,
+    });
+
+  const makeReport = () => {
+    console.log("report", report);
+    addNftReport(report);
+  };
+
   return (
     <>
       <div className="container">
@@ -39,11 +133,85 @@ export default function NftInformation() {
               />
             </div>
           </div>
+          {/* <button
+                className="btn btn-primary mt-3"
+                // data-bs-toggle="modal"
+                // data-bs-target="#myModalShare"
+                style={{
+                  height: "40px",
+                  width: "180px",
+                  padding: "0px",
+                  marginLeft: "1em",
+                }}
+                onClick={demoHandleSell}
+
+              >
+                Put on sell
+              </button> */}
+
           <div className="col-lg-5 col-sm-12 col-md-6">
             <div className="row">
+              <span className="nftsell">
+                <Button
+                  style={{
+                    display:
+                      props?.responseData?.createdBy == loggedInUser?._id &&
+                      !props?.responseData?.salesInfo?.isOpenForSale
+                        ? "block"
+                        : "none",
+                  }}
+                >
+                  <Link
+                    to="/edit-items"
+                    style={{
+                      textDecoration: "none",
+                      textTransform: "none",
+                    }}
+                  >
+                    Edit
+                  </Link>
+                </Button>
+
+                <Button
+                  // className="btn btn-primary mt-3"
+                  // data-bs-toggle="modal"
+                  // data-bs-target="#myModalShare"
+                  style={{
+                    display:
+                      props?.responseData?.createdBy == loggedInUser?._id &&
+                      !props?.responseData?.salesInfo?.isOpenForSale
+                        ? "block"
+                        : "none",
+                    color: "white",
+                    backgroundColor: "#366eff",
+                    marginLeft: "1rem",
+                    textTransform: "none",
+                  }}
+                  onClick={demoHandleSell}
+                >
+                  Put on sell
+                </Button>
+                <Button
+                  style={{
+                    display:
+                      props?.responseData?.createdBy == loggedInUser?._id &&
+                      props?.responseData?.salesInfo?.isOpenForSale
+                        ? "block"
+                        : "none",
+                    marginLeft: "1rem",
+                    color: "white",
+                    backgroundColor: "#366eff",
+                    textTransform: "none",
+                  }}
+                  onClick={removeNFTFromSell}
+                >
+                  Remove From Sell
+                </Button>
+              </span>
+
               <div className="" id="share_info">
                 <span className="text-dark font-22 font-weight-900">
-                  {nft.name}
+                  {props?.responseData?.name}
                 </span>
                 <span className="icon-img" style={{ marginLeft: "16.5em" }}>
                   <img
@@ -209,11 +377,22 @@ export default function NftInformation() {
                             <select
                               className="form-select"
                               id="inputGroupSelect02"
+                              onChange={(e) => handleChange(e)}
                             >
-                              <option selected>Choose...</option>
-                              <option value="1">One</option>
-                              <option value="2">Two</option>
-                              <option value="3">Three</option>
+                              <option
+                                value="Fake collection or possible scam"
+                                selected
+                              >
+                                Fake collection or possible scam
+                              </option>
+                              <option value="Explicit and sensitive content">
+                                Explicit and sensitive content
+                              </option>
+                              <option value="Spam">Spam</option>
+                              <option value="Might be stolen">
+                                Might be stolen
+                              </option>
+                              <option value="Other">Other</option>
                             </select>
                           </div>
                         </div>
@@ -225,6 +404,7 @@ export default function NftInformation() {
                             className="btn btn-primary w-100"
                             data-bs-dismiss="modal"
                             style={{ marginLeft: "1.1em" }}
+                            onClick={makeReport}
                           >
                             Make Offer
                           </button>
@@ -264,7 +444,7 @@ export default function NftInformation() {
                   <span className="font-13 text-dark">
                     Owned by:
                     <span className="font-13 font-weight-900 text-dark">
-                      Beeple
+                      {props?.responseData?.ownerAddress}
                     </span>
                   </span>
                 </div>
@@ -272,7 +452,7 @@ export default function NftInformation() {
                   <span className="font-13 text-dark">
                     Created by:
                     <span className="font-13 font-weight-900 text-dark">
-                      Beeple
+                      {userDetails.firstName}
                     </span>
                   </span>
                 </div>
@@ -287,7 +467,7 @@ export default function NftInformation() {
                       className="font-13 font-weight-900 text-dark"
                       style={{ marginLeft: "0.5em" }}
                     >
-                      {nft.viewsCount}
+                      {props?.responseData?.viewsCount}
                     </span>
                   </span>
                 </div>
@@ -303,7 +483,7 @@ export default function NftInformation() {
                       className="font-13 font-weight-900 text-dark"
                       style={{ marginLeft: "0.5em" }}
                     >
-                      {nft.likesCount}
+                      {props?.responseData?.likesCount}
                     </span>
                   </span>
                 </div>
@@ -313,9 +493,51 @@ export default function NftInformation() {
               </div>
               <div className="row">
                 <h4 className="font-13 ">
-                  {nft.description}
+                  {props?.responseDatat?.description}e
                 </h4>
               </div>
+
+              {/*  IF nft is not created by logged in user these buttons will be shown */}
+              <span className="nftsell">
+                <Button
+                  // className="btn btn-primary mt-3"
+                  // data-bs-toggle="modal"
+                  // data-bs-target="#myModalShare"
+                  style={{
+                    display:
+                      props?.responseData?.createdBy != loggedInUser?._id &&
+                      !props?.responseData?.salesInfo?.isOpenForSale
+                        ? "block"
+                        : "none",
+                    color: "white",
+                    backgroundColor: "#366eff",
+                    // marginLeft: "1rem",
+                    textTransform: "none",
+                  }}
+                  onClick={buyNft}
+                >
+                  Buy Now
+                </Button>
+                <Button
+                  data-bs-toggle="modal"
+                  data-bs-target="#myModalShare"
+                  style={{
+                    display:
+                      props?.responseData?.createdBy != loggedInUser?._id &&
+                      !props?.responseData?.salesInfo?.isOpenForSale
+                        ? "block"
+                        : "none",
+                    marginLeft: "1rem",
+                    color: "white",
+                    backgroundColor: "#366eff",
+                    textTransform: "none",
+                  }}
+                  onClick={removeNFTFromSell}
+                >
+                  Make Offer
+                </Button>
+              </span>
+
               <div className="row border-bottom pb-2 mt-3">
                 {/* <div className="col-1">
                   <a
@@ -354,7 +576,14 @@ export default function NftInformation() {
               {activeInActive == "active" ? (
                 <button
                   className="btn btn-primary mt-3"
+                  data-bs-toggle="modal"
+                  data-bs-target="#myModalShare"
                   style={{
+                    display:
+                      props?.responseData?.createdBy &&
+                      props?.responseData?.salesInfo?.isOpenForSale
+                        ? "block"
+                        : "none",
                     height: "40px",
                     width: "180px",
                     padding: "0px",
@@ -456,7 +685,7 @@ export default function NftInformation() {
             <PricingHistoryComponentTable />
           </div>
           <div className="col-lg-5 col-sm-12">
-            <PricingHistoryComponentGraph />
+            <PricingHistoryComponentGraph id={id} />
           </div>
           <div className="col-1"></div>
         </div>

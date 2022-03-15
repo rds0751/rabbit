@@ -79,7 +79,7 @@ function Notification() {
           <Drawer
           
             anchor={anchor}
-            open={state[anchor]}
+            open={state[anchor] }
             onClose={toggleDrawer(anchor, false)}
           >
             {list(anchor)}

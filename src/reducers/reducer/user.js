@@ -1,4 +1,12 @@
-import { ADD_USER, ALL_USERS, USER_DETAILS } from '../Constants';
+import {
+  ADD_WALLET,
+  ALL_USERS,
+  USER_DETAILS,
+  LOGGED_IN_UER_DETAILS,
+} from "../Constants";
+
+//  userDetails  has only address and wallet amount
+// loggedInUser has Full User details
 
 let initialState = {
   // isLoggedIn: false,
@@ -7,21 +15,24 @@ let initialState = {
   // sessionToken: null,
   // loading: false,
   // isForgotPasswordSuccess: false
-  addUserData: {},
-  allUserData: '',
-  userDetails: null,
+  loggedInUser: null,
+  allUserData: "",
+  walletAddress: null,
 };
 export const UserReducer = (state = initialState, action) => {
   switch (action.type) {
-    case USER_DETAILS: {
-      console.log(action.payload, '<<< this is in user.js reducer');
-      return { ...state, userDetails: action.payload };
-    }
-    case ADD_USER:
+    case ADD_WALLET:
+      {
+        return { ...state, walletAddress: action.payload };
+      }
+      break;
+    case LOGGED_IN_UER_DETAILS:
+      console.log(action, "<<< this is in user.js reducer");
       return {
         ...state,
-        addUserData: action.payload,
+        loggedInUser: action.payload,
       };
+      break;
     case ALL_USERS:
       return {
         ...state,

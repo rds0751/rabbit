@@ -12,7 +12,25 @@ export const createSingleNft = async data => {
     });
     const result = res.json();
     console.log(result);
+    return result;
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const createCollection = async data => {
+  try {
+    const res = await fetch(`${BASE_URL2}/api/v1/collections`, {
+      method: httpConstants.METHOD_TYPE.POST,
+      headers: {
+        'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON,
+      },
+      body: JSON.stringify(data),
+    });
+    const result = await res.json();
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.log(err);
   }
 };
