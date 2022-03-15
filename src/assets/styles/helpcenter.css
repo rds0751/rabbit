@@ -26,6 +26,7 @@
   margin-top: 10.31px;
   font-weight: 600;
   font-size: 16px;
+  line-height: 25px;
   letter-spacing: 0px;
   color: #191919;
   text-decoration: none;
@@ -35,6 +36,7 @@
   text-align: left;
   font-weight: 600;
   font-size: 22px;
+  line-height: 33px;
   font-family: Poppins;
   letter-spacing: 0px;
   color: #191919;
@@ -43,6 +45,7 @@
 .content {
   margin-top: 13px;
   font-size: 14px;
+  line-height: 21px;
   font-family: Poppins;
   color: #191919;
   opacity: 1;

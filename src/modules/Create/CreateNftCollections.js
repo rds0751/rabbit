@@ -167,7 +167,7 @@ function CreateNftCollections(props) {
         "<<<"
       );
       console.log("require");
-      //alert("154");
+      // alert("154");
       setloaderState(false);
 
       toast.error("Fill the required field");
