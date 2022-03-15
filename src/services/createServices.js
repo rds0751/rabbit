@@ -37,3 +37,20 @@ export const createCollection = async data => {
     console.log(err);
   }
 };
+export const collectionStatus = async data => {
+  try {
+    const res = await fetch(`${BASE_URL2}/api/v1/collections/${data._id}/status`, {
+      method: httpConstants.METHOD_TYPE.POST,
+      // headers: {
+      //   'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON,
+      // },
+      headers:AuthToken,
+      body: JSON.stringify(data),
+    });
+    const result = await res.json();
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
