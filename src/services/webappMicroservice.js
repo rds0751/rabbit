@@ -50,7 +50,7 @@ export const getNft = async (requestData, successCallBack) => {
   // alert("clled getNft")
   // console.log(req)
   let url =
-    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft/" + requestData;
+    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v2/nfts/" + requestData;
   const { data } = await axios.get(url, { headers: AuthToken });
   if (data.success) {
     successCallBack(data.responseData);
@@ -288,6 +288,30 @@ export function getPricingHistory(requestData) {
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    requestData,
+    url
+  )
+    .then((response) => {
+      if (
+        !response.success ||
+        response.responseCode !== 200 ||
+        !response.responseData ||
+        response.responseData.length === 0
+      )
+        return Promise.reject();
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+export function updateCollectionTxStatus(requestData,_id) {
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/collections/"+_id+"/status";
+  console.log("urllllllllllllll",url)
+  return httpService(
+    httpConstants.METHOD_TYPE.PUT,
+    // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    AuthToken,
     requestData,
     url
   )

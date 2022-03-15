@@ -156,6 +156,8 @@ function Collections_tile() {
                       <p className="collectionCardEachTotalitems">
                         <span className=" font-14 text-dark">
                           Total Items:
+                          {/* {alert(nfts)} */}
+                          {/* {console.log("jjjjjjjjjjjjjjjj",collection)} */}
                           <span className="text-primary">{nfts.length}</span>
                         </span>
                       </p>

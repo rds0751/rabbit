@@ -106,7 +106,7 @@ export default function PricingHistoryComponentTable() {
 
   useEffect(() => {
     getPricingHistory()
-  })
+  }, [])
 
   return (
     <MainContainer className="pricing-history">

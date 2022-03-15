@@ -20,7 +20,7 @@ export default function PricingHistoryComponent(props) {
     pricingHistoryGraphOfNft(reqObject).then((response) => 
       setNftPricingHistory(response)
     );
-  });
+  }, []);
 
   let prices = nftPricingHistory.map((each) => each.total);
   let dates = nftPricingHistory.map((each) => moment(new Date(each._id.addedOn)).format('D MMM YY'));

@@ -64,7 +64,6 @@ body.active-modal{
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-image: url(../images/drop\ down.png);
   background-repeat: no-repeat; 
   background-position:97% center;
 }
