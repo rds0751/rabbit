@@ -224,15 +224,11 @@ console.log("kkkkkkkkkkddddddddddddd",Nfts)
 
               <SplitWalletAdd address={loggedInUser?.wallet_address} />
             </div>
-            <img
-              style={{
-                width: "21.47px",
-                height: "21.47px",
-                marginLeft: "20px",
-              }}
+            <img              
               src={copy}
-              alt=""
+              alt="copy"
               onClick={handleCopyToClipboard}
+              className="copy-img"
             />
           </div>
 
