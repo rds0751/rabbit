@@ -38,7 +38,7 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
         if (err || !ipfsRes.ipfsUrl) {
           toast.error("File is not acceptable");
         } else {
-          alert("banner");
+          //alert("banner");
           console.log(ipfsRes, "<<<<ipfs Res");
 
           setbannerIpfs(ipfsRes.ipfsUrl);
