@@ -205,7 +205,7 @@ export function getCollectionOwnedByUser(requestData) {
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
     "api/v1/users/" +
-    "6210ce09e9384c0035598c31" + "/collections";
+    "622707233c31610035bff542" + "/collections";
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -214,7 +214,7 @@ export function getCollectionOwnedByUser(requestData) {
     url
   )
     .then((response) => {
-      console.log(response, "sri collections")
+      console.log(response, "collections owned by a user")
       if (
         !response.success ||
         response.responseCode !== 200 ||

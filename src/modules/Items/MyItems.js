@@ -10,6 +10,8 @@ import { getCollectionOwnedByUser } from "../../services/contentMicroservice";
 import { useSelector } from "react-redux";
 
 function MyItems() {
+
+
   const [activeInActive, setActiveInActive] = useState("active");
   const [toggleSelect, setToggleSelect] = useState(true);
   const item = localStorage.setItem('keyValue', 'dataToPersist')
@@ -21,6 +23,15 @@ function MyItems() {
     await getNftOwnedByUser().then((response) => setownedNft(response));
   }, []);
   console.log("Nft Owned by user", ownedNft);
+
+
+
+
+  const [ownedCollection, setownedCollection] = useState([]);
+  useEffect(async () => {
+    await getCollectionOwnedByUser().then((response) => setownedCollection(response));
+  }, []);
+  console.log("Srinivas Collections Owned by user", ownedCollection);
 
 
 
@@ -121,19 +132,21 @@ function MyItems() {
         {toggleSelect && (
           <div style={{ marginTop: "40.12px", marginLeft: 'auto', rowGap: "50px" }} className="row">
             {ownedNft.map((curElem) => {
-              const { cdnUrl, name } =
+              const { cdnUrl, name, _id } =
                 curElem;
+              const route = "/nft-information/" + _id;
               return (
 
                 <div className=" col-md-6 col-lg-3  col-sm-12 nft_card my-item-card p-0" >
                   <div className="card nft-card-radius border-radius cardmob">
-
-                    <img
-                      className="nftTileEachImage img-fluid border-radius card_imgmob"
-                      src={cdnUrl}
-                      alt="nft-img"
-                      style={{ height: "187px", borderTopLeftRadius: '13px', borderTopRightRadius: '13px' }}
-                    />
+                    <Link to={route} style={{ textDecoration: "none" }}>
+                      <img
+                        className="nftTileEachImage img-fluid border-radius card_imgmob"
+                        src={cdnUrl}
+                        alt="nft-img"
+                        style={{ height: "187px", borderTopLeftRadius: '13px', borderTopRightRadius: '13px' }}
+                      />
+                    </Link>
                     <div
                       className="nftTileEachDetails card-lower"
                       style={{
@@ -161,41 +174,52 @@ function MyItems() {
           </div>
         )}
         {!toggleSelect && (
-          <div className="collectionCardEach col-md-6 col-lg-3 col-sm-12 mt-5">
-            {/* <Link to={route}> */}
-            <div
-              className=" nft-card-radius collection-card border-radius pt-4 cardmob"
-              style={{ backgroundColor: "#F8F8F8" }}
-            // style={{ marginLeft: "1em", backgroundColor: "#F8F8F8" }}
-            >
-              <div className="text-center">
-                <img
-                  className="img-fluid border-radius collection-img-card-radius collection_imgmob"
-                  src={Image}
-                  style={{
-                    width: "100px",
-                    height: "100px",
-                    textDecoration: "none",
-                  }}
-                />
-              </div>
-              <div className="text-center pt-3">
-                <p
-                  className="collectionCardEachName text-center font-weight-900"
-                  style={{ color: "#191919" }}
-                >
-                  Name
-                </p>
-                <p className="collectionCardEachTotalitems">
-                  <span className=" font-14 text-dark">
-                    Total Items:2
-                    <span className="text-primary"></span>
-                  </span>
-                </p>
-              </div>
-            </div>
-            {/* </Link> */}
+          <div style={{ marginLeft: 'auto', rowGap: "50px" }} className="row">
+            {ownedCollection.map((curElem) => {
+              const { imageUrl, name, _id } =
+                curElem;
+              const collection = "/collection-details/" + _id;
+              return (
+                <div className="col-md-6 col-lg-3 col-sm-12 mt-5 my-item-card p-0">
+                  < div
+                    className=" nft-card-radius collection-card border-radius pt-4 cardmob"
+                    style={{ backgroundColor: "#F8F8F8" }
+                    }
+                  >
+                    <div className="text-center">
+                      <Link to={collection} style={{ textDecoration: "none" }}>
+                        <img
+                          className="img-fluid border-radius collection-img-card-radius collection_imgmob"
+                          src={imageUrl}
+                          alt="nft"
+                          style={{
+                            width: "100px",
+                            height: "100px",
+                            textDecoration: "none",
+                          }}
+                        />
+                      </Link>
+                    </div>
+                    <div className="text-center pt-3">
+                      <p
+                        className="collectionCardEachName text-center font-weight-900"
+                        style={{ color: "#191919" }}
+                      >
+                        {name}
+                      </p>
+                      <p className="collectionCardEachTotalitems">
+                        <span className=" font-14 text-dark">
+                          Total Items:
+                          <span className="text-primary">2</span>
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
+
         )}
       </div>
     </>
