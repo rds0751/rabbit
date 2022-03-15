@@ -31,9 +31,12 @@ export function getNfts(requestData) {
 
 // --------------------get nfts -----
 export const getNFtsData = async (filterObj, successCallBack) => {
+  console.log("dddddddddddddddd",{ params: filterObj })
   try {
     const url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts";
     const { data } = await axios.get(url, { params: filterObj });
+    console.log("kssssssssssss",(url))
+    console.log("nnnnnnsss",data)
     successCallBack(data);
   } catch (e) {
     console.log(e);

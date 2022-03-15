@@ -26,8 +26,13 @@
 }
 .price-range-dropdown select {
   border: none !important;
-  width: 90% !important;
+  width: 240px;
 }
+@media only screen and (min-width:300px) and (max-width:1000px) {
+  .price-range-dropdown select{
+    width: 95%;
+  }
+  }
 /* css for NFt cards */
 .nftTileEachImage {
   box-sizing: border-box;
@@ -87,13 +92,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 55%;
+  width: 40%;
   padding: 0% 1%;
   position: relative;
 }
 .ntf_div .filter-drop .text{
   display: flex;
-  font-size: 14px;
+  font-size: 16px;
   font-family: "poppins-medium";
   align-items: center;
   color: #858585;

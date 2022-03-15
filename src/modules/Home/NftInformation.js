@@ -145,6 +145,7 @@ export default function NftInformation(props) {
 
   return (
     <>
+    {props?.refreshPage ? window.location.reload(true):""}
       {props?.loaderState ? (
         <div className="center">
           {" "}

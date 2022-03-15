@@ -446,7 +446,7 @@ height: 47px;
   /* .navbar-width {
     margin: 0px 60px !important;
   } */
-  .fa-facebook:before {
+  /* .fa-facebook:before {
     color: #818181;
   }
   .fa-facebook:hover {
@@ -464,7 +464,7 @@ height: 47px;
   }
   .fa-instagram:hover {
     color: #000;
-  }
+  } */
   /* .footerfix {
     margin-top: -130px;
     margin-left: -60px;
@@ -496,7 +496,7 @@ height: 47px;
   }
 }
 
-@media only screen and (max-width: 1199px) {
+/* @media only screen and (max-width: 1199px) {
   .fa-facebook:before {
     color: #818181;
   }
@@ -520,7 +520,8 @@ height: 47px;
         margin-left: 160px;
         margin-top: -262px;
     } */
-}
+ 
+
 
 /* ------Footer------ */
 .footer > ul > a {
@@ -620,6 +621,7 @@ height: 47px;
 .nav-link:hover {
   color: #828282 !important;
 }
+
 .nav-link.navlink_active {
   font: normal normal 600 16px/25px Poppins;
   color: #191919 !important;
@@ -1030,7 +1032,7 @@ height: 47px;
 }
 
 .footer-main-cont{
-  margin-top: 40px;
+  /* margin-top: 40px; */
   /* padding-top: 40px;
   padding-bottom: 40px; */
   padding-top: 74px;
@@ -1153,7 +1155,14 @@ width: 87%;
   font-size: 24px;
   color: #818181 0% 0% no-repeat padding-box;
   cursor:pointer;
+  
 }
+.Icon:hover{
+  color: #366EEF;
+  opacity: 1;
+
+}
+
 
 .about{
 text-align: left;
@@ -1294,10 +1303,7 @@ margin:0px;
   .subscribe{
     white-space: normal;
   }
- }
-
-
-.submitbuttonfooter{
+ }.submitbuttonfooter{
   height:36px;
   fontWeight:400;
   width: 116px;
@@ -1315,6 +1321,8 @@ background-position: right;
     right: 10px;
    padding-left: 8px;;
     background-size: 15px;
+   
+    /* width:175px !important */
 }
 .sort-drop-down{
   appearance: none;

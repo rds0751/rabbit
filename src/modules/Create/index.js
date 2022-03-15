@@ -21,6 +21,7 @@ class Index extends BaseComponent {
       loaderState: false,
       isMintSuccess: false,
       isOpenMintModal:true,
+      mintedNftId:""
     };
   }
 
@@ -39,6 +40,7 @@ class Index extends BaseComponent {
       ipfsUrl: data?.ipfsUrl || "",
       cdnUrl: data?.cdnUrl || "",
       cid: data?.cid || "",
+      contractAddress:data.contractAddress || "",
       description: data?.description || "",
       blockchain: data?.blockchain || "",
       network: {
@@ -92,14 +94,14 @@ class Index extends BaseComponent {
 
     const tokenId = Utils.generateRandomNumber();
     // create NFT on blockchai
-    if(data.collection.length > 0 ){
+    if(data.contractAddress.length > 0 ){
      
     const [blockchainError, blockchainResult] = await Utils.parseResponse(
       BlockchainServices.mintNFT({
         tokenURI: data.ipfsUrl,
         price: data.price,
         tokenId,
-        contractAddress:data.collection
+        contractAddress:data.contractAddress
       })
     );
 
@@ -167,6 +169,7 @@ class Index extends BaseComponent {
       this.setState({ loaderState: false });
       this.setState({ isMintSuccess: true });
       this.setState({ isOpenMintModal: false });
+      this.setState({ mintedNftId: contentRes._id });
       Utils.apiSuccessToast("Your Nft has been created successfully.");
       this.setState({ isNftCreated: true });
     }
@@ -185,6 +188,8 @@ class Index extends BaseComponent {
           loaderState={this.state.loaderState}
           createNftHandler={this.createNftHandler.bind(this)}
           url
+          mintedNftId={this.state.mintedNftId}
+
           isMintSuccess={this.state.isMintSuccess}
           isOpenMintModal={this.state.isOpenMintModal}
         />

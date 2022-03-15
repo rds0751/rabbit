@@ -10,7 +10,7 @@ import {
   addLikeNft,
   getNFtsData,
 } from "../../services/webappMicroservice";
-function  NftCardsHome({ nft }) {
+function NftCardsHome({ nft }) {
   // let history = useHistory();
 
   const navigate = useNavigate();
@@ -79,24 +79,24 @@ function  NftCardsHome({ nft }) {
             >
               {name}
             </div>
-            {/* <span
+            <span
               className="nftTileEachDetailsFirstContainerValue"
             >
               {`${salesInfo?.price}  ${salesInfo?.currency} ETH`}
-            </span> */}
+            </span>
           </div>
           <div
             className="nftTileEachDetailsSecondContainerValueHighest"
-            // style={{ marginLeft: "1em" }}
+          // style={{ marginLeft: "1em" }}
           >
             <div>
               {" "}
-              {/* Highest bid:{" "}
-            <span className="font-weight-900">100</span>{" "} */}
+              Highest bid:{" "}
+              <span className="font-weight-900">100</span>{" "}
             </div>
             <div>
               <span className="" style={{ color: "#000", marginRight: "4px" }}>
-                <i className="far fa-clock" style={{ color: "#f54", fontSize:"13.36px", }}></i>
+                <i className="far fa-clock" style={{ color: "#f54", fontSize: "13.36px", }}></i>
               </span>
               <span className="poppins-normal blackish font-14">
                 {days} days left

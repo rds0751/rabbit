@@ -12,6 +12,7 @@ import {
   Accepted,
   Rejected,
 } from "../../constants/LeaderBoardApi";
+import { Oval } from "react-loader-spinner";
 import { getTopSellers } from "../../services/sellAndPurchaseMicroService";
 import { getTopCollections } from "../../services/sellAndPurchaseMicroService";
 import { getTopNftSales } from "../../services/webappMicroservice";
@@ -21,34 +22,35 @@ function LeaderBoard() {
 
   const [topSellers, setTopSellers] = useState([]);
 
-  useEffect(() => {
-    getTopSellers().then((response) => setTopSellers(response));
-  });
+  useEffect(async () => {
+    await getTopSellers().then((response) => setTopSellers(response));
+  },[]);
+  
   var limitSellers = topSellers.slice(0, 4)
   console.log("topSellers", topSellers);
 
   const [topCollections, setTopCollections] = useState([]);
 
-  useEffect(() => {
-    getTopCollections().then((response) => setTopCollections(response));
-  });
+  useEffect(async () => {
+   await getTopCollections().then((response) => setTopCollections(response));
+  },[]);
   var limitCollections = topCollections.slice(0, 4)
   console.log("topCollections", topCollections);
 
   const [topNftSales, setTopNftSales] = useState([]);
 
-  useEffect(() => {
-    getTopNftSales().then((response) => setTopNftSales(response));
-  });
+  useEffect(async () => {
+    await getTopNftSales().then((response) => setTopNftSales(response));
+  },[]);
   console.log("topNftSales", topNftSales);
-
-
 
 
   // const [state, setState] = useState(LeaderBoardApi);
   const [PendingAcceptedCreated, setPendingAcceptedCreated] =
     useState("pending");
   const [state, setState] = useState(LeaderBoardApi);
+
+ 
   return (
     <div className="container
      leader-container" >
@@ -111,10 +113,10 @@ function LeaderBoard() {
                         <div className="leaderboardTopDetailsRow">
                           <img src={Image} alt="" />
                           <div className="LeaderboardInsideDetails">
-                            <h2>{Heading}</h2>
-                            <p>
+                            <h2 className="sellerName">{Heading}</h2>
+                            <p className="volumeData">
                               {SubHead1}
-                              <span>{SubHead2}</span>
+                              <span className="ethValue">{SubHead2}</span>
                             </p>
                           </div>
                         </div>
@@ -179,18 +181,38 @@ function LeaderBoard() {
                 </div>
                 <div className="leaderboardTopDetails">
                   {limitSellers.map((curElem) => {
-                    const { Image, sellerFirstName, sellerLastName, SubHead1, totalPurchasedValue } = curElem;
+                    const { Image, sellerFirstName, sellerLastName, SubHead1, totalPurchasedValue,volume,topSellers} = curElem;
+                    var precise = volume.toPrecision(4); 
+                    var result = parseFloat(precise);
                     return (
                       <>
                         <div className="leaderboardTopDetailsRow">
-                          <img className="top-img" src={Image} alt="" />
+                        {topSellers.coverPhoto == "" ?(
+                  <img
+                  className="top-img" style={{ width: '71px', height: '71px' }} src={require("../../assets/images/profile.png")}
+                  alt=""
+                />
+
+                ):(
+                  <img
+                  className="top-img" style={{ width: '71px', height: '71px' }} src={topSellers.coverPhoto}
+                  alt=""
+                />
+
+                )}
 
 
-                          <div className="LeaderboardInsideDetails">
-                            <h2>{sellerFirstName}{sellerLastName}</h2>
-                            <p style={{ display: 'flex' }}>
+                          <div className="descriptiontopSeller">
+                            
+               {topSellers.userName==""? (
+                 <h2 className="sellerName">no name</h2>
+               ):(
+                <h2 className="sellerName">{topSellers.userName}</h2>
+               )}
+            
+                            <p className="volumeData">
                               ETH
-                              <span className="purchaseValue">({totalPurchasedValue})</span>
+                              <span className="ethValue">({"$"+result})</span>
                             </p>
 
                           </div>
@@ -200,8 +222,9 @@ function LeaderBoard() {
                     );
                   })}
                 </div>
-                {topSellers.length === 0 && (<div>
-                  <h1>No Data Found</h1>
+                {topSellers.length === 0 && (
+                <div className="loader">
+                  
                 </div>)}
               </div>
               <div className="view-more">
@@ -294,9 +317,9 @@ function LeaderBoard() {
         <div className="card-small  mb-4 leadercolmob">
           <div
             className="card-header"
-            style={{ backgroundColor: "#f8f8f8", padding: "inherit", paddingTop: '30px', borderTopLeftRadius: '13px', borderTopRightRadius: '13px' }}
+            style={{ backgroundColor: "#f8f8f8", padding: "inherit", borderTopLeftRadius: '13px', borderTopRightRadius: '13px', border: 'none' }}
           >
-            <ul className="small-nav nav nav-pills" id="pills-tab" role="tablist">
+            <ul className="small-nav nav nav-pills" id="pills-tab" role="tablist" style={{ borderBottom: "1px solid #D8D8D8", paddingTop: "20px", height: '66px' }}>
               <li className="nav-item">
                 <a
                   className="nav-link active"
@@ -306,10 +329,11 @@ function LeaderBoard() {
                   role="tab"
                   aria-controls="pills-pending"
                   aria-selected="true"
-                  style={{ fontSize: "13px", borderRadius: 'inherit' }}
+                  style={{ fontSize: "13px", borderRadius: 'inherit', paddingLeft: '20px' }}
                   onClick={() => setPendingAcceptedCreated("pending")}
                 >
                   Top Buyers
+                  <hr style={{ width: "150%", marginLeft: '-22px', height: 'auto', opacity: 'inherit' }} />
                 </a>
               </li>
               <li className="nav-item">
@@ -325,6 +349,7 @@ function LeaderBoard() {
                   onClick={() => setPendingAcceptedCreated("accepted")}
                 >
                   Top Sellers
+                  <hr style={{ width: "173%", marginLeft: '-25px', height: 'auto', opacity: 'inherit' }} />
                 </a>
               </li>
               <li className="nav-item">
@@ -340,6 +365,7 @@ function LeaderBoard() {
                   onClick={() => setPendingAcceptedCreated("rejected")}
                 >
                   Top Collections
+                  <hr style={{ width: "125%", height: 'auto', opacity: 'inherit', marginLeft: "-14px" }} />
                 </a>
               </li>
             </ul>
@@ -385,6 +411,7 @@ function LeaderBoard() {
       <div className="topNft-section">
         <div className="filters-cont">
           <label for="topNft-sales" className="fs-20 fw-sb c-b pb-16 d-sm-block d-md-none">Top NFT sales</label>
+
           <div className="d-flex align-items-center">
             <label for="topNft-sales" className="fs-20 fw-sb c-b pr-12 d-none d-sm-none d-md-block">Top NFT sales</label>
             <select id="topNft-sales" name="topNfts" className="sales-selector fs-14 fw-m c-b">
@@ -405,11 +432,14 @@ function LeaderBoard() {
         <div className="nfts-cont row ntf_row">
           {/* <div className="col-md-3 col-lg-3 col-sm-6 col-11 images"> */}
           {topNftSales.map((curElem) => {
-            const { cdnUrl, name, ownedBy, maxPrice2, daysLeft,likesCount } =
+            const { cdnUrl, name, ownedBy, maxPrice2, daysLeft,likesCount,_id } =
               curElem;
+              const route = "/nft-information/" + _id;
             return (
               <div className="nftCard col-md-6 col-lg-3 col-sm-12 nft_card card-mar">
                 <div className="card nft-card-radius border-radius cardmob">
+
+                <Link to={route} style={{ textDecoration: "none" }}>
                   <img
                     // id="nft__photo"
                     className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
@@ -417,6 +447,7 @@ function LeaderBoard() {
                     alt="nft"
                     onError="this.onerror=null;this.src='/images/image.svg';"
                   />
+                  </Link>
                   {/* <img id='like_icon' src={require('../asset//images/')} /> */}
                   <div className="nftTileEachDetails card-lower"
                     style={{
@@ -434,23 +465,23 @@ function LeaderBoard() {
                           </span>
                           &nbsp;for<span className="ethCurrency">&nbsp; {(curElem.salesInfo.price)}&nbsp;{(curElem.biddingDetails.currency).toUpperCase()}</span>
                         </h6>
-                        <div style={{display: "flex", height: "auto",marginTop:"3px"}}>
-                        <h6 className="value__k">
-                          {/* {daysLeft}{" "} */}
-                          {likesCount}{" "}
-                          {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
-                                                
-                          
-                        </h6>
-                        <div style={{background: "#FFFFFF 0% 0% no-repeat padding-box",border:"1px solid #FFFFFF",borderRadius:"5px",width:"19px",height:"19px",display:"flex",justifyContent:"center",alignItems:"center",marginLeft:"8.38px"}}>
-                          <i
-                            className="fa-solid fa-heart"
-                            style={{ color: "#ef3643"}}
-                          ></i>
-                            </div>  
+                        <div style={{ display: "flex", height: "auto", marginTop: "3px" }}>
+                          <h6 className="value__k">
+                            {/* {daysLeft}{" "} */}
+                            {likesCount}{" "}
+                            {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
+
+
+                          </h6>
+                          <div style={{ background: "#FFFFFF 0% 0% no-repeat padding-box", border: "1px solid #FFFFFF", borderRadius: "5px", width: "19px", height: "19px", display: "flex", justifyContent: "center", alignItems: "center", marginLeft: "8.38px" }}>
+                            <i
+                              className="fa-solid fa-heart"
+                              style={{ color: "#ef3643" }}
+                            ></i>
+                          </div>
 
                         </div>
-                        
+
                       </div>
                     </div>
                   </div>
@@ -478,10 +509,10 @@ const BuildPendingAcceptedRejectedBlock = ({ apiData }) => {
               <div className="leaderboardTopDetailsRow">
                 <img src={Image} alt="" />
                 <div className="LeaderboardInsideDetails">
-                  <h2>{Heading}</h2>
-                  <p>
-                    {SubHead1}
-                    <span>{SubHead2}</span>
+                <h2 className="sellerName">{Heading}</h2>
+                <p className="volumeData">
+                  {SubHead1}
+                <span className="ethValue">{SubHead2}</span>
                   </p>
                 </div>
               </div>
@@ -504,18 +535,43 @@ const BuildAcceptedBlock = ({ apiData }) => {
     <div>
       <div className="leaderboardTopDetails">
         {apiData.map((curElem) => {
-          const { Image, sellerFirstName, sellerLastName, SubHead2, totalPurchasedValue } = curElem;
+          const { Image, sellerFirstName, sellerLastName, SubHead2, totalPurchasedValue,volume,topSellers} = curElem;
+          var precise = volume.toPrecision(4); 
+          var result = parseFloat(precise);
           return (
             <>
               <div className="leaderboardTopDetailsRow">
-                <img className="top-img" src={Image} alt="" />
-                <div className="LeaderboardInsideDetails">
-                  <h2>{sellerFirstName}{sellerLastName}</h2>
-                  <p style={{ display: 'flex' }}>
-                    ETH
-                    <span>{totalPurchasedValue}</span>
-                  </p>
-                </div>
+
+
+                {topSellers.coverPhoto == "" ?(
+                  <img
+                  className="top-img" style={{ width: '71px', height: '71px' }} src={require("../../assets/images/profile.png")}
+                  alt=""
+                />
+
+                ):(
+                  <img
+                  className="top-img" style={{ width: '71px', height: '71px' }} src={topSellers.coverPhoto}
+                  alt=""
+                />
+
+                )}
+
+
+                          <div className="descriptiontopSeller">
+                            
+               {topSellers.userName==""? (
+                 <h2 className="sellerName">no name</h2>
+               ):(
+                <h2 className="sellerName">{topSellers.userName}</h2>
+               )}
+            
+                            <p className="volumeData">
+                              ETH
+                              <span className="ethValue">({"$"+result})</span>
+                            </p>
+
+                          </div>
               </div>
               <hr className="hr" />
             </>
