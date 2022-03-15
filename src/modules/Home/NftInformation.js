@@ -3,7 +3,7 @@ import image from "../../assets/images/1.jpg";
 import share from "../../assets/images/share.svg";
 import info from "../../assets/images/report.svg";
 import copyIcon from "../../assets/images/copy.png";
-import facebookIcon from "../../assets/images/Facebook.png";
+import facebookIcon from "../../assets/images/facebook.png";
 import twitterIcon from "../../assets/images/Twitter.png";
 import "../../assets/styles/nftReportModal.css";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -43,7 +43,8 @@ export default function NftInformation(props) {
   const [isOpenForSell, setisOpenForSell] = useState(null);
   const { loggedInUser, walletAddress } = user;
   const { id } = useParams();
-  const [nft, setNft] = useState(props?.responseData);
+  const nft = props?.responseData;
+  const { owner, creator, salesInfo } = nft;
   const [openReportModal, setOpenReportModal] = useState(false);
   const [userDetails, setUserDetails] = useState([]);
   const [tab, setTab] = useState(1);
@@ -142,12 +143,6 @@ export default function NftInformation(props) {
     addNftReport(report);
   };
 
-  useEffect(() => {
-    getUser(props?.responseData?.ownedBy).then((response) =>
-      setUserDetails(response)
-    );
-  });
-
   return (
     <>
       {props?.loaderState ? (
@@ -229,7 +224,7 @@ export default function NftInformation(props) {
                     </Button>
                   </div>
                   <span className="nft-name">
-                    {props?.responseData?.name}
+                    {nft.name}
                   </span>
                 </div>
                 <div className="col-xl-2 col-lg-2 col-md-3 col-sm-3 d-flex align-items-center">
@@ -288,7 +283,7 @@ export default function NftInformation(props) {
             <div className="col-xl-5 col-lg-5 col-md-12">
               <div className="nftdetail-img">
                 <img
-                  src={props?.responseData?.ipfsUrl}
+                  src={nft.ipfsUrl}
                   alt="nft"
                   className="border-radius imginfo_mob"
                   style={{
@@ -362,7 +357,7 @@ export default function NftInformation(props) {
                         Remove From Sell
                       </Button>
                     </div>
-                    <span className="nft-name">{props?.responseData?.name}</span>
+                    <span className="nft-name">{nft.name}</span>
                   </div>
                   <div className="col-xl-2 col-lg-2 col-md-3 col-sm-3 d-flex align-items-center">
                     <div>
@@ -498,7 +493,7 @@ export default function NftInformation(props) {
                 <span className="text">
                   Current Price:&nbsp;
                   <span className="nft-value" style={{ color: "#16AB6E" }}>
-                    {props?.responseData?.salesInfo?.price}
+                    {salesInfo?.price}
                   </span>
                 </span>
                 <span className="align-row">
@@ -510,13 +505,15 @@ export default function NftInformation(props) {
                 <div className="col-lg-6 col-sm-12">
                   <span className="text">
                     Owned by:&nbsp;
-                    <span className="text-name fw-b">{props?.responseData?.ownedBy}</span>
+                    <span className="text-name fw-b">
+                      {owner?.firstName ? owner?.firstName : owner?._id}</span>
                   </span>
                 </div>
                 <div className="col-lg-6 col-sm-12">
                   <span className="text">
                     Created by:&nbsp;
-                    <span className="text-name fw-b">{props?.responseData?.createdBy}</span>
+                    <span className="text-name fw-b">
+                      {creator?.firstName ? creator?.firstName : creator?._id}</span>
                     <span className="text-name fw-b"></span>
                   </span>
                 </div>
@@ -527,13 +524,13 @@ export default function NftInformation(props) {
                     style={{ fontSize: "21px", color: "#366EEF" }}
                   />
                   <span className="text fw-b" style={{ marginLeft: "0.5em" }}>
-                    {props?.responseData?.viewsCount}
+                    {nft.viewsCount}
                   </span>
                 </div>
                 <div>
                   <FavoriteIcon style={{ fontSize: "17px", color: "#EF3643" }} />
                   <span className="text fw-b" style={{ marginLeft: "0.5em" }}>
-                    {props?.responseData?.likesCount}
+                    {nft.likesCount}
                   </span>
                 </div>
               </div>
@@ -541,7 +538,7 @@ export default function NftInformation(props) {
                 className=""
               >
                 <h4 className="title">Description</h4>
-                <p className="description">{props?.responseData?.description}</p>
+                <p className="description">{nft.description}</p>
               </div>
 
               {/*  IF nft is not created by logged in user these buttons will be shown */}

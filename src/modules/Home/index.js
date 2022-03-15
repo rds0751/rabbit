@@ -38,10 +38,10 @@ export default class NftDetail extends BaseComponent {
         console.log(id, "<<<pathname");
 
         // getNft("620e7b4107515b002ab23afe", (response) => {
-        getNft(id, (response) => {
+        await getNft(id, (response) => {
             console.log(response, "<<<< response of nft");
             this.setState({
-                responseData: response,
+                responseData: response[0],
                 createdBy: response?.createdBy,
                 salesInfo: response?.salesInfo,
                 // createdBy: "61de9sf37905a9s3863300611d",
