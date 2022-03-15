@@ -19,6 +19,8 @@ import { BASE_URL2 } from "../../reducers/Constants";
 import { createCollection } from "../../services/createServices";
 import "../../assets/styles/collection.css";
 import Bannerdrop from "./Bannerdrop";
+import { updateCollectionTxStatus } from "../../services/webappMicroservice";
+
 import { getCategories } from "../../services/clientConfigMicroService";
 
 const Button = styled.button``;
@@ -183,30 +185,10 @@ function CreateNftCollections(props) {
     //   // categoryId:categoryId.current,
     // };
     //---------------------
-    const [blockchainError, blockchainRes] = await Utils.parseResponse(
-      BlockchainServices.createCollections({
-        name: name,
-        symbol: 'WL'
 
-        // tokenURI: data.ipfsUrl,
-        // price: data.price,
-        // tokenId,
-      })
-    );
-    // alert('kkkkk')
-
-    console.log("colllectionnnnnnnnnnnnnnnnnnnnssssss", blockchainRes.contract_address)
-    if (blockchainError || !blockchainRes) {
-      // this.setState({ loaderState: false });
-      setloaderState(false);
-
-      return Utils.apiFailureToast(
-        blockchainError.message || "Unable to Create Collection on blockchain"
-      );
-    }
     const data = {
       coverUrl: bannerCdn,
-      contractAddress: blockchainRes.contract_address,
+      // contractAddress: blockchainRes.contract_address,
       imageUrl: logoCdn,
       name: name.current,
       description: description.current,
@@ -218,14 +200,61 @@ function CreateNftCollections(props) {
     //-----------------------
     const result = await createCollection(data);
     if (result.success) {
+      const [blockchainError, blockchainRes] = await Utils.parseResponse(
+        BlockchainServices.createCollections({
+          name: name.current,
+          symbol: 'WL'
+  
+        })
+      );
+  
+      if (blockchainError || !blockchainRes) {
+        const [txError, txStatusRes] = await Utils.parseResponse(
+          updateCollectionTxStatus({
+            contractAddress:"0x",
+            status: "failed"
+          }, result.responseData._id)
+        )
+        console.log("eroor in blockchain side",txStatusRes)
+        setloaderState(false);
+  
+        return Utils.apiFailureToast(
+          blockchainError.message || "Unable to Create Collection on blockchain"
+        );
+      }
+      else {
+        const [txErr, txStatus] = await Utils.parseResponse(
+          updateCollectionTxStatus({
+            contractAddress: blockchainRes.contract_address,
+            status: "success"
+          }, result.responseData._id)
+        )
+        console.log("no error blockchain side",txStatus)
+  
+        setloaderState(false);
+        navigate("/collections-tile");
+        return Utils.apiSuccessToast(
+         "Collection created"
+        );
+        // toast.success("Collection created");
+        
+  
+      }
+  
+      // setloaderState(false);
+      // console.log("odddddddddddd",result)
+      // console.log("odddddddddddd",result.responseData._id)
+
+      // toast.success("Collection created");
+      // navigate("/collections-tile");
+    } else {
+      toast.error(result.message);
       setloaderState(false);
+    }
+    
 
-      toast.success("Collection created");
-      navigate("/collections-tile");
-    } else toast.error(result.message);
-    setloaderState(false);
 
-    console.log(result, ">>> submit nftCollection");
+    // console.log(result, ">>> submit nftCollection");
   };
   const checkReqFieldFun = () => {
     const currname = name.current;
