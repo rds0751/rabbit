@@ -1,12 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.701b98b6.css",
-    "main.js": "/static/js/main.13e28659.js",
+    "main.css": "/static/css/main.a34e0417.css",
+    "main.js": "/static/js/main.30b73a2f.js",
+    "static/media/Banner.png": "/static/media/Banner.112c32a6f604149b0d83.png",
     "static/media/Abstraction.png": "/static/media/Abstraction.010c4cc892910d63a5b1.png",
+    "static/media/Image4.png": "/static/media/Image4.df4b7c34e33bba4bcabb.png",
+    "static/media/Image1.png": "/static/media/Image1.33b7b1bed02e56d50b86.png",
     "static/media/Poppins-Regular.ttf": "/static/media/Poppins-Regular.35d26b781dc5fda684cc.ttf",
+    "static/media/Image2.png": "/static/media/Image2.0b8c79b4992ecf0f888a.png",
     "static/media/Poppins-Medium.ttf": "/static/media/Poppins-Medium.673ed42382ab264e0bf5.ttf",
     "static/media/Poppins-SemiBold.ttf": "/static/media/Poppins-SemiBold.ac8d04b620e54be9b0f0.ttf",
     "static/media/Poppins-Bold.ttf": "/static/media/Poppins-Bold.cdb29a5d7ccf57ff05a3.ttf",
+    "static/media/Image3.png": "/static/media/Image3.bdcff4d8a0295b0306d6.png",
     "static/media/whiskeygirls.ttf": "/static/media/whiskeygirls.25a2ff6b76bdeaa92a61.ttf",
     "static/media/circle.png": "/static/media/circle.9fb3b5100187c815d775.png",
     "static/media/Metamask.svg": "/static/media/Metamask.63471e2c05df922fbacc92001413910d.svg",
@@ -25,11 +30,11 @@
     "static/media/dropdown.svg": "/static/media/dropdown.73688ebbc528ac22cac9bcc17fcc5ccc.svg",
     "static/media/Check.svg": "/static/media/Check.59ebaa89743347bcc9c7dd8d49da2249.svg",
     "static/media/drop-down-arrow.svg": "/static/media/drop-down-arrow.f0141349a934d7b0f28f.svg",
-    "main.701b98b6.css.map": "/static/css/main.701b98b6.css.map",
-    "main.13e28659.js.map": "/static/js/main.13e28659.js.map"
+    "main.a34e0417.css.map": "/static/css/main.a34e0417.css.map",
+    "main.30b73a2f.js.map": "/static/js/main.30b73a2f.js.map"
   },
   "entrypoints": [
-    "static/css/main.701b98b6.css",
-    "static/js/main.13e28659.js"
+    "static/css/main.a34e0417.css",
+    "static/js/main.30b73a2f.js"
   ]
 }

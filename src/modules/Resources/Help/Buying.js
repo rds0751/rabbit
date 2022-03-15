@@ -16,7 +16,7 @@ function Buying() {
   const [isActive3, setIsActive3] = useState(false);
   return (
     <>
-      <nav aria-label="breadcrumb">
+      <nav aria-label="breadcrumb" className="headerbuying">
         <ol className="breadcrumb mt-4 offset-1">
           <li className="breadcrumb-item">
             <Link
@@ -37,18 +37,20 @@ function Buying() {
       </nav>
       <div className="buyingContainer">
         <div className="buyingContainerHeader">
-          <div className="font-22 font-weight-700">Buying</div>
+          <div className="font-22 font-weight-700 buyingTop">
+            <img src={require("../../../assets/images/leftarrowbuying.png")} style={{marginRight:"16px",width:"26px",height:"23px"}} className="backbuying" />
+            Buying</div>
           <div className="input-group buyingHeaderSearch">
             <input
               type="text"
-              className="form-control border-input input-box-border"
+              className="form-control border-input input-box-border inputbuying"
               placeholder="Search"
               aria-label="Recipient's username"
               aria-describedby="button-addon2"
             />
             <div className="input-group-append w-25">
               <button
-                className="btn btn-search-secondary border border-search"
+                className="btn btn-search-secondary border border-search buyersearchbutton"
                 type="button"
                 id="button-addon2"
                 style={{ borderRadius: "0px 5px 5px 0px" }}

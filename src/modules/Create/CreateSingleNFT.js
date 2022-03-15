@@ -194,6 +194,10 @@ function CreateSingleNFT(props) {
   };
   console.log("00000000000000000000000000000000", props?.isNftCreated)
   console.log(selectFile, "<<<s");
+
+  // File uploading loader
+
+
   return (
     <>
 
@@ -312,6 +316,7 @@ function CreateSingleNFT(props) {
                   type="email"
                   className="form-control-1"
                   name="email"
+                  autoComplete="off"
                   onChange={(e) => {
                     name.current = e.target.value;
                     checkChanges();
@@ -326,6 +331,7 @@ function CreateSingleNFT(props) {
                   className="form-control-1"
                   min="0"
                   type="number"
+                  autoComplete="off"
                   onChange={(e) => {
                     price.current = e.target.value;
                     checkChanges();
@@ -476,7 +482,7 @@ function CreateSingleNFT(props) {
                     className="completelistin"
                     onClick={() => setOpenMintodal(false)}
                   >
-                    Complete your listing
+                    Complete your minting
                   </div>
                   {/* <div
                     onClick={() => setOpenMintodal(false)}
@@ -504,23 +510,44 @@ function CreateSingleNFT(props) {
                       <div className="checkvalue checkvaluetext">1</div>
                     )}
                     <div className="checkposttext">
-                      <div className="heading">Uploading</div>
+                      <div className="heading">
+                        {props.isFileSelected === 'true' ? (
+                          'Uploading'
+                        ) : (
+                          'Upload'
+                        )}  
+                      </div>
                       <div className="description">
                         Uploading all media assets and metadata to IPFS
                       </div>
                     </div>
                   </div>
                   <div className="checkpost">
-                    {props.isMintSuccess && (
+                    {props.isMintSuccess === true ? (
                       <img src={success} className="checkimg" />
+                    ) : (
+                      <div className="checkimg">
+                        <Oval
+                          vertical="top"
+                          horizontal="center"
+                          color="#00BFFF"
+                          height={30}
+                          width={30} />
+                      </div>
                     )}
-                    {!props.isMintSuccess && (
-                      <div className="checkvalue checkvaluetext">2</div>
-                    )}
-                    <div className="checkposttext">
-                      <div className="heading">Mint</div>
-                      <div className="description">Send Transaction to Create your NFT</div>
-                    </div>
+                     {/* {!props.isMintSuccess && (
+                         <div className="checkvalue checkvaluetext">2</div>
+                       )} */}
+                      <div className="checkposttext">
+                        <div className="heading">
+                          {props.isMintSuccess === 'true' ? (
+                            'Mint'
+                          ) : (
+                            'Minting'
+                          )}
+                        </div>
+                        <div className="description">Send Transaction to Create your NFT</div>
+                      </div>
                   </div>
                   {/* <div className="checkpost">
                     {props.isMintSuccess && (
