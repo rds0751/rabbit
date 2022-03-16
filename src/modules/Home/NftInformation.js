@@ -697,7 +697,7 @@ const openSaleModal =async()=>{
                     <option value="Other">Other</option>
                   </select>
               </div>
-              <button className="report-btn" onClick={sendReport}>Report</button>
+              <button className="btn btn-primary report-btn" onClick={sendReport}>Report</button>
             </div>
           </div>
         </div>
@@ -763,7 +763,7 @@ const openSaleModal =async()=>{
                     <option value="Other">Other</option>
                   </select> */}
               </div>
-              <button className="report-btn" onClick={demoHandleSell}>Sale</button>
+              <button className="btn btn-primary report-btn" onClick={demoHandleSell}>Sale</button>
             </div>
           </div>
         </div>
