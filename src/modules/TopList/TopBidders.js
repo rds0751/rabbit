@@ -9,6 +9,7 @@ import {
   LeaderBoardApi4,
   LeaderBoardApi5,
 } from "../../constants/LeaderBoardApi";
+import "../../assets/styles/topbidder.css"
 
 const Container = styled.div`
   display: flex;
@@ -18,8 +19,13 @@ const Container = styled.div`
   color: #191919;
   margin-top: 29px;
   @media only screen and (min-width:425px) and  (max-width:769px) {
-    margin-left: 41px;
-    margin-right: 42px;
+    margin-left: 6%;
+    margin-right: 6%;
+  }
+  @media only screen and (max-width:426px) {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 52px;
   }
 `;
 const Header = styled.div`
@@ -29,6 +35,9 @@ const Header = styled.div`
 const Title = styled.h3`
   font-size: 20px;
   font-weight: 600;
+  @media screen and (max-width:426px){
+    font-size: 18px;
+  }
 `;
 const Select = styled.select`
   width: 118px;
@@ -45,12 +54,19 @@ const Select = styled.select`
   background-image: url(${dropdown});
   background-repeat: no-repeat;
   background-position: 90% center;
+  @media screen and (max-width:426px){
+    display: none;
+    
+  }
 `;
 const Body = styled.div`
   margin-top: 58px;
   margin-bottom: 16px;
   @media only screen and (min-width:425px) and  (max-width:769px) {
     margin-top: 39px;
+  }
+  @media only screen  and (max-width:769px) {
+    margin-top: 22px;
   }
 `;
 const Column = styled.div`
@@ -87,6 +103,7 @@ const Name = styled.p`
 const VolumeColumn = styled.div`
   /* padding-left: 40px; */
   margin:auto 0;
+  width:100%;
 `;
 const Span = styled.p`
   color: #366eef;
@@ -96,6 +113,10 @@ const Span = styled.p`
 const Text = styled.div`
   font-size: 16px;
   font-weight: 500;
+  @media screen and (max-width:426px){
+    display: none;
+    
+  }
 `;
 const Volume=styled.span`
 font:normal normal normal 16px/25px Poppins;
@@ -122,7 +143,7 @@ function Top_collection() {
             Name
           </Column>
           <Column className="col">Volume</Column>
-          <Column className="col">ItemsBought</Column>
+          <Column className="col itembought">ItemsBought</Column>
         </div>
       </Body>
       {LeaderBoardApi4.map((curElem) => {

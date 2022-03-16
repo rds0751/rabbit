@@ -1,0 +1,6 @@
+.itembought{}
+@media only screen and (max-width:426px) {
+.itembought{
+    display:none;
+}    
+}
