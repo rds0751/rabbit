@@ -209,7 +209,26 @@
   margin-bottom: 24px;
   color: #828282;
 }
-
+.single-form .input-price input{
+  margin-bottom: 28px;
+  padding: 4px 2px;
+  border: 1px solid #C8C8C8;
+  border-radius: 7px;
+  height: 42px;
+  font-family: 'poppins-medium';
+  font-size: 16px;
+  line-height: 25px;
+  color: #191919;
+}
+.single-form .input-price .input-group-text{
+  border: 1px solid #C8C8C8;
+  border-radius: 7px;
+  height: 42px;
+  font-family: 'poppins-medium';
+  font-size: 16px;
+  line-height: 25px;
+  color: #191919; 
+}
 /* ---- */
 @media screen and (min-width: 1600px) {
   .create-single-nft-outer {
