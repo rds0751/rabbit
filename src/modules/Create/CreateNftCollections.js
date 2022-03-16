@@ -50,7 +50,7 @@ function CreateNftCollections(props) {
   const [Categories, setCategories] = useState([]);
   useEffect(() => {
     getCategories().then((response) => setCategories(response));
-  });
+  }, []);
   console.log("categories list", Categories);
 
 
@@ -384,7 +384,14 @@ function CreateNftCollections(props) {
             </div>
             <div>
               <div className="fs-16 fw-b c-b pt-3 pb-3">Blockchain*</div>
-              <div className="block-chain-container">
+              <div>
+                <input
+                  type="text"
+                  className="edit-form-input"
+                  name="blockchain"
+                />
+                </div>
+              {/* <div className="block-chain-container">
                 <div>
                   <img src={ethereum} height="32px" />
                 </div>
@@ -402,7 +409,7 @@ function CreateNftCollections(props) {
                     </option>
                   </select>
                 </div>
-              </div>
+              </div> */}
             </div>
             <button
               type="submit"
