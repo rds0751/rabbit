@@ -684,7 +684,7 @@ export default function NftInformation(props) {
           </div>
         </div>
       </div>
-      {/* remove sale dialog */}
+      {/* --------remove sale dialog ---------------*/}
 
       <div
         className="report-outer"

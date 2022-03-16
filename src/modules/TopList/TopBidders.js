@@ -26,17 +26,23 @@ const Container = styled.div`
     margin-left: 16px;
     margin-right: 16px;
     margin-top: 52px;
+    overflow-y: scroll;
   }
 `;
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
+  @media screen and (max-width:426px) {
+    overflow: scroll;
+    width: 557px;
+  }
 `;
 const Title = styled.h3`
   font-size: 20px;
   font-weight: 600;
   @media screen and (max-width:426px){
     font-size: 18px;
+    margin: auto 0;
   }
 `;
 const Select = styled.select`
@@ -54,10 +60,6 @@ const Select = styled.select`
   background-image: url(${dropdown});
   background-repeat: no-repeat;
   background-position: 90% center;
-  @media screen and (max-width:426px){
-    display: none;
-    
-  }
 `;
 const Body = styled.div`
   margin-top: 58px;
@@ -67,6 +69,10 @@ const Body = styled.div`
   }
   @media only screen  and (max-width:769px) {
     margin-top: 22px;
+  }
+  @media only screen  and (max-width:426px) {
+    overflow: scroll;
+    width: 557px;
   }
 `;
 const Column = styled.div`
@@ -81,6 +87,10 @@ const Collection = styled.div`
   height: 68px;
   border: 1px solid #FCFCFC;
   border-radius: 13px;
+  @media screen and (max-width:426px){
+    overflow: scroll;
+    width: 557px;
+  }
 `;
 const Image = styled.img`
   width: 42px;
@@ -113,11 +123,7 @@ const Span = styled.p`
 const Text = styled.div`
   font-size: 16px;
   font-weight: 500;
-  @media screen and (max-width:426px){
-    display: none;
-    
-  }
-`;
+  `;
 const Volume=styled.span`
 font:normal normal normal 16px/25px Poppins;
 color: #818181;
