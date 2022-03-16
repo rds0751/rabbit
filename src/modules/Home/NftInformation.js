@@ -33,9 +33,6 @@ import ListingsTable from "../../common/components/ListingTable";
 
 export default function NftInformation(props) {
 
-
-
-  console.log(props?.responseData, "<<<response");
   const navigate = useNavigate();
   const [activeInActive, setActiveInActive] = useState("active");
   const { user } = useSelector((state) => state);
@@ -51,8 +48,8 @@ export default function NftInformation(props) {
   const [toShow, settoShow] = useState(true);
 
   const [report, setReport] = useState({
-    content: id,
-    // addedBy: user.addUserData._id,
+    contentId: id,
+    addedBy: loggedInUser?._id,
     reason: "",
   });
 
@@ -61,12 +58,6 @@ export default function NftInformation(props) {
   } else {
     document.body.classList.remove('active-modal')
   }
-  console.log(
-    loggedInUser?._id,
-    props?.responseData,
-    props?.loaderState,
-    "<<<< this is data toooooooooooooooooooooooooooooooo match"
-  );
   // alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
 
   // useEffect(() => {
@@ -152,26 +143,33 @@ export default function NftInformation(props) {
     return daysDifference;
   };
 
-  const currDate = new Date();
-  const stamp2 = Date.now(currDate);
+  let showDateSection = true;
 
-  const date = `${currDate.getDate()}/${currDate.getMonth() + 1}/${currDate.getFullYear()}`;
+  let message = '';
 
-  const stamp1 = nft?.biddingDetails?.endDate;
+  if(nft?.biddingDetails?.endDate){
+    const currDate = new Date();
+  
+    const currentDate = Date.now(currDate);
+  
+    const endDate = nft?.biddingDetails?.endDate;
 
-  const expire = Math.floor(new Date(stamp1).getTime() / 1000);
-  console.log(expire, "final date")
+    let endDateTimeStamp = Math.floor(new Date(endDate).getTime());
+    
+    const days = (endDateTimeStamp == currentDate) ? 1 : difftime(endDateTimeStamp, currentDate);
+    
+    message = (endDateTimeStamp < currentDate) ? "Expired" : `End in ${days} days`; 
+     
+  }else{
+    showDateSection = false;
+  }
+  
 
-  // const days = difftime(stamp1, stamp2);
-  const days = (stamp1 == stamp2) ? 1 : difftime(stamp2, stamp2);
-
-  console.log(nft?.biddingDetails?.endDate, "expiry")
-  console.log(stamp1, "end date")
-  console.log(stamp2, "todays date")
-  console.log(date, "todays date")
-
-
-
+  const sendReport = () => {
+    addNftReport(report);
+    setOpenReportModal(false)
+  }
+  
   return (
     <>
       {props?.refreshPage ? window.location.reload(true) : ""}
@@ -526,13 +524,9 @@ export default function NftInformation(props) {
                     {salesInfo?.price}
                   </span>
                 </span>
-                {(stamp1 !== 0 || stamp1 !== "") ? <span className="align-row">
+                {(showDateSection) ? <span className="align-row">
                   <i className="far fa-clock clock-icon"></i>
-                  <span className="time">Ends in {days} days </span>
-                </span> : ""}
-                {(stamp1 < stamp2) ? <span className="align-row">
-                  <i className="far fa-clock clock-icon"></i>
-                  <span className="time">Expired </span>
+                  <span className="time">{message} </span>
                 </span> : ""}
               </div>
               <div className="row third-text">
@@ -687,15 +681,15 @@ export default function NftInformation(props) {
               </div>
               <div className="singlerowmodal">
                 <h3 className="reason-text"> Reason</h3>
-                <select className="select-box">
-                  <option>Select reason</option>
-                  <option value="Fake collection or possible scam">Fake collection or possible scam</option>
-                  <option value="Explicit and sensitive content">Explicit and sensitive content</option>
-                  <option value="Might be stolen">Might be stolen</option>
-                  <option value="Other">Other</option>
-                </select>
+                  <select className="select-box" onChange={(e) => handleChange(e)}>
+                    <option>Select reason</option>
+                    <option value="Fake collection or possible scam">Fake collection or possible scam</option>
+                    <option value="Explicit and sensitive content">Explicit and sensitive content</option>
+                    <option value="Might be stolen">Might be stolen</option>
+                    <option value="Other">Other</option>
+                  </select>
               </div>
-              <button className="report-btn" onClick={() => setOpenReportModal(false)}>Report</button>
+              <button className="report-btn" onClick={sendReport}>Report</button>
             </div>
           </div>
         </div>

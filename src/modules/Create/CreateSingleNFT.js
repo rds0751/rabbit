@@ -428,7 +428,7 @@ function CreateSingleNFT(props) {
                 <option value="">Select Blockchain</option>
                 <option value="Ethereum">Ehtereum</option>
               </select> */}
-                <div className="d-flex block-chain-container">
+                {/* <div className="d-flex block-chain-container">
                   <div>
                     <img src={ethereum} height="32px" />
                   </div>
@@ -445,7 +445,14 @@ function CreateSingleNFT(props) {
                       </option>
                     </select>
                   </div>
-                </div>
+                </div> */}
+                <div>
+              <input
+                type="text"
+                className="edit-form-input"
+                name="blockchain"
+              />
+            </div>
               </div>
               <button
                 type="submit"
