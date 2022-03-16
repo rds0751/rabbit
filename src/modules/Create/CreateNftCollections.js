@@ -204,20 +204,20 @@ function CreateNftCollections(props) {
         BlockchainServices.createCollections({
           name: name.current,
           symbol: 'WL'
-  
+
         })
       );
-  
+
       if (blockchainError || !blockchainRes) {
         const [txError, txStatusRes] = await Utils.parseResponse(
           updateCollectionTxStatus({
-            contractAddress:"0x",
+            contractAddress: "0x",
             status: "failed"
           }, result.responseData._id)
         )
-        console.log("eroor in blockchain side",txStatusRes)
+        console.log("eroor in blockchain side", txStatusRes)
         setloaderState(false);
-  
+
         return Utils.apiFailureToast(
           blockchainError.message || "Unable to Create Collection on blockchain"
         );
@@ -229,18 +229,18 @@ function CreateNftCollections(props) {
             status: "success"
           }, result.responseData._id)
         )
-        console.log("no error blockchain side",txStatus)
-  
+        console.log("no error blockchain side", txStatus)
+
         setloaderState(false);
         navigate("/collections-tile");
         return Utils.apiSuccessToast(
-         "Collection created"
+          "Collection created"
         );
         // toast.success("Collection created");
-        
-  
+
+
       }
-  
+
       // setloaderState(false);
       // console.log("odddddddddddd",result)
       // console.log("odddddddddddd",result.responseData._id)
@@ -251,7 +251,7 @@ function CreateNftCollections(props) {
       toast.error(result.message);
       setloaderState(false);
     }
-    
+
 
 
     // console.log(result, ">>> submit nftCollection");
