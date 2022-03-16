@@ -22,7 +22,7 @@ export default class NftDetail extends BaseComponent {
             salesInfo: null,
             nftDetails: null,
             loaderState: false,
-            refreshPage:false
+            refreshPage: false
 
 
         };
@@ -94,106 +94,106 @@ export default class NftDetail extends BaseComponent {
 
         if (this.state?.responseData?.contractAddress > 0) {
 
-        //-------------------------------------------------------
-        const [blockchainError, blockchainResult] = await Utils.parseResponse(
-            BlockchainService.buyNFT({
-                //TO do
-                tokenId: this.state.responseData?.tokenId,
-                price: this.state?.responseData?.salesInfo?.price,
-                contractAddress: this.state?.responseData?.contractAddress
+            //-------------------------------------------------------
+            const [blockchainError, blockchainResult] = await Utils.parseResponse(
+                BlockchainService.buyNFT({
+                    //TO do
+                    tokenId: this.state.responseData?.tokenId,
+                    price: this.state?.responseData?.salesInfo?.price,
+                    contractAddress: this.state?.responseData?.contractAddress
 
-            })
-        );
-        console.log("blockchainError====", blockchainError)
-        console.log("blockchainRes====", blockchainResult)
-        if (blockchainError || !blockchainResult) {
-            this.setState({ loaderState: false })
-            if (!this.state.responseData._id) return;
-            let [txFailErr, txFailResult] = await Utils.parseResponse(
-                updateTxStatus({ status: "failed" }, result._id)
+                })
             );
-            return Utils.apiFailureToast(
-                blockchainError?.data?.message || "Unable to buy NFT on blockchain"
-            );
+            console.log("blockchainError====", blockchainError)
+            console.log("blockchainRes====", blockchainResult)
+            if (blockchainError || !blockchainResult) {
+                this.setState({ loaderState: false })
+                if (!this.state.responseData._id) return;
+                let [txFailErr, txFailResult] = await Utils.parseResponse(
+                    updateTxStatus({ status: "failed" }, result._id)
+                );
+                return Utils.apiFailureToast(
+                    blockchainError?.data?.message || "Unable to buy NFT on blockchain"
+                );
+            }
+            blockchainRes = blockchainResult
         }
-        blockchainRes= blockchainResult
-    }
-    else{
-        const [blockchainError, blockchainResult] = await Utils.parseResponse(
-            BlockchainService.buyNFT({
-                //TO do
-                tokenId: this.state.responseData?.tokenId,
-                price: this.state?.responseData?.salesInfo?.price,
-                contractAddress: contractAddress
+        else {
+            const [blockchainError, blockchainResult] = await Utils.parseResponse(
+                BlockchainService.buyNFT({
+                    //TO do
+                    tokenId: this.state.responseData?.tokenId,
+                    price: this.state?.responseData?.salesInfo?.price,
+                    contractAddress: contractAddress
 
-            })
-        );
-        console.log("blockchainError====", blockchainError)
-        console.log("blockchainRes====", blockchainResult)
-        if (blockchainError || !blockchainResult) {
-            this.setState({ loaderState: false })
-            if (!this.state.responseData._id) return;
-            let [txFailErr, txFailResult] = await Utils.parseResponse(
-                updateTxStatus({ status: "failed" }, result._id)
+                })
             );
-            return Utils.apiFailureToast(
-                blockchainError?.data?.message || "Unable to sell NFT on blockchain"
-            );
+            console.log("blockchainError====", blockchainError)
+            console.log("blockchainRes====", blockchainResult)
+            if (blockchainError || !blockchainResult) {
+                this.setState({ loaderState: false })
+                if (!this.state.responseData._id) return;
+                let [txFailErr, txFailResult] = await Utils.parseResponse(
+                    updateTxStatus({ status: "failed" }, result._id)
+                );
+                return Utils.apiFailureToast(
+                    blockchainError?.data?.message || "Unable to sell NFT on blockchain"
+                );
+            }
+            blockchainRes = blockchainResult
         }
-        blockchainRes=blockchainResult
-    }
-        
+
 
 
 
 
 
         //------------------------------------
-            if (!this.state.responseData._id) return;
-            let [txUpdateResultErr, txUpdateResult] = await Utils.parseResponse(
-                updateTxStatus({ status: "success" }, result._id)
+        if (!this.state.responseData._id) return;
+        let [txUpdateResultErr, txUpdateResult] = await Utils.parseResponse(
+            updateTxStatus({ status: "success" }, result._id)
 
-            );
-            // console.log("----sssssssss----",txUpdateResult)
-            if (txUpdateResultErr || !txUpdateResult) {
-                this.setState({ loaderState: false })
+        );
+        // console.log("----sssssssss----",txUpdateResult)
+        if (txUpdateResultErr || !txUpdateResult) {
+            this.setState({ loaderState: false })
 
-                return Utils.apiFailureToast(txUpdateResultErr || "Unable to update status of tx");
-            }
+            return Utils.apiFailureToast(txUpdateResultErr || "Unable to update status of tx");
+        }
 
-            let requestData = {
-                transactionHash: blockchainRes.transactionHash || '',
-                ownedBy: data?.buyerId || '',
-                ownerAddress: data?.newOwnerAddress || '',
-                updatedBy: data?.buyerId || '',
-                // _id: this.state?.responseData?._id || '',
-                salesInfo: {
-                    ...this.state?.responseData?.salesInfo,
-                    isOpenForSale: false
-                },
-            }
-            if (!this.state.responseData._id) return;
-            let [err, res] = await Utils.parseResponse(
-                ContentService.ownershipTransfer(requestData, this.state?.responseData?._id)
-            );
-            console.log("--buy nFT ressssssi;t-", res);
-            if (err || !res) {
-                this.setState({ loaderState: false })
+        let requestData = {
+            transactionHash: blockchainRes.transactionHash || '',
+            ownedBy: data?.buyerId || '',
+            ownerAddress: data?.newOwnerAddress || '',
+            updatedBy: data?.buyerId || '',
+            // _id: this.state?.responseData?._id || '',
+            salesInfo: {
+                ...this.state?.responseData?.salesInfo,
+                isOpenForSale: false
+            },
+        }
+        if (!this.state.responseData._id) return;
+        let [err, res] = await Utils.parseResponse(
+            ContentService.ownershipTransfer(requestData, this.state?.responseData?._id)
+        );
+        console.log("--buy nFT ressssssi;t-", res);
+        if (err || !res) {
+            this.setState({ loaderState: false })
 
-                return Utils.apiFailureToast(err || "Unable to update Nft ownership transfer.");
-            }
-            else {
-                this.setState({ loaderState: false })
-                this.setState({ refreshPage: true })
+            return Utils.apiFailureToast(err || "Unable to update Nft ownership transfer.");
+        }
+        else {
+            this.setState({ loaderState: false })
+            this.setState({ refreshPage: true })
 
-                this.setState({ nftDetails: res });
-                Utils.apiSuccessToast("This nft has been buy successfully.");
-            }
-        
+            this.setState({ nftDetails: res });
+            Utils.apiSuccessToast("This nft has been buy successfully.");
+        }
+
     };
 
     sellNowNft = async () => {
-        console.log("daaaaaaaaaa",this.state?.responseData?.contractAddress)
+        console.log("daaaaaaaaaa", this.state?.responseData?.contractAddress)
         this.setState({ loaderState: true })
         const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS
 
@@ -266,36 +266,36 @@ export default class NftDetail extends BaseComponent {
 
         console.log("removeNftFromSale");
         if (this.state?.responseData?.contractAddress > 0) {
-        const [blockchainError, blockchainRes] = await Utils.parseResponse(
-            BlockchainService.removeFromSaleNft({
-                tokenId: this.state.responseData?.tokenId,
-                contractAddress :this.state?.responseData?.contractAddress,
-            })
-        );
-        if (blockchainError || !blockchainRes) {
-            this.setState({ loaderState: false })
-
-            return Utils.apiFailureToast(
-                blockchainError?.data?.message || "Unable to remove NFT from sale"
+            const [blockchainError, blockchainRes] = await Utils.parseResponse(
+                BlockchainService.removeFromSaleNft({
+                    tokenId: this.state.responseData?.tokenId,
+                    contractAddress: this.state?.responseData?.contractAddress,
+                })
             );
-        }
-    }
-    else{
-        const [blockchainError, blockchainRes] = await Utils.parseResponse(
-            BlockchainService.removeFromSaleNft({
-                tokenId: this.state.responseData?.tokenId,
-                contractAddress :contractAddress,
-            })
-        );
-        if (blockchainError || !blockchainRes) {
-            this.setState({ loaderState: false })
+            if (blockchainError || !blockchainRes) {
+                this.setState({ loaderState: false })
 
-            return Utils.apiFailureToast(
-                blockchainError?.data?.message || "Unable to remove NFT from sale"
+                return Utils.apiFailureToast(
+                    blockchainError?.data?.message || "Unable to remove NFT from sale"
+                );
+            }
+        }
+        else {
+            const [blockchainError, blockchainRes] = await Utils.parseResponse(
+                BlockchainService.removeFromSaleNft({
+                    tokenId: this.state.responseData?.tokenId,
+                    contractAddress: contractAddress,
+                })
             );
-        }
+            if (blockchainError || !blockchainRes) {
+                this.setState({ loaderState: false })
 
-    }
+                return Utils.apiFailureToast(
+                    blockchainError?.data?.message || "Unable to remove NFT from sale"
+                );
+            }
+
+        }
         let requestData = {
             _id: this.state?.responseData?._id,
         };
