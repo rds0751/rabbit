@@ -323,20 +323,23 @@ function CreateSingleNFT(props) {
                   }}
                 />
               </div>
-              <div className="">
-                <label htmlFor="email" className=" input-label">
+              <div className="input-price">
+                <label htmlFor="price" className=" input-label">
                   Price*
-                </label>
-                <input
-                  className="form-control-1"
-                  min="0"
-                  type="number"
-                  autoComplete="off"
-                  onChange={(e) => {
-                    price.current = e.target.value;
-                    checkChanges();
-                  }}
-                />
+                </label>                
+                <div class="input-group">
+                  <input
+                    className="form-control"
+                    min="0"
+                    type="number"
+                    autoComplete="off"
+                    onChange={(e) => {
+                      price.current = e.target.value;
+                      checkChanges();
+                    }}
+                  />
+                  <span class="input-group-text">ETH</span>
+                </div>
               </div>
               <div className="">
                 <label htmlFor="comment" className="input-label pb-2">
