@@ -50,7 +50,7 @@ function CreateNftCollections(props) {
   const [Categories, setCategories] = useState([]);
   useEffect(() => {
     getCategories().then((response) => setCategories(response));
-  });
+  }, []);
   console.log("categories list", Categories);
 
 
@@ -204,20 +204,20 @@ function CreateNftCollections(props) {
         BlockchainServices.createCollections({
           name: name.current,
           symbol: 'WL'
-  
+
         })
       );
-  
+
       if (blockchainError || !blockchainRes) {
         const [txError, txStatusRes] = await Utils.parseResponse(
           updateCollectionTxStatus({
-            contractAddress:"0x",
+            contractAddress: "0x",
             status: "failed"
           }, result.responseData._id)
         )
-        console.log("eroor in blockchain side",txStatusRes)
+        console.log("eroor in blockchain side", txStatusRes)
         setloaderState(false);
-  
+
         return Utils.apiFailureToast(
           blockchainError.message || "Unable to Create Collection on blockchain"
         );
@@ -229,18 +229,18 @@ function CreateNftCollections(props) {
             status: "success"
           }, result.responseData._id)
         )
-        console.log("no error blockchain side",txStatus)
-  
+        console.log("no error blockchain side", txStatus)
+
         setloaderState(false);
         navigate("/collections-tile");
         return Utils.apiSuccessToast(
-         "Collection created"
+          "Collection created"
         );
         // toast.success("Collection created");
-        
-  
+
+
       }
-  
+
       // setloaderState(false);
       // console.log("odddddddddddd",result)
       // console.log("odddddddddddd",result.responseData._id)
@@ -251,7 +251,7 @@ function CreateNftCollections(props) {
       toast.error(result.message);
       setloaderState(false);
     }
-    
+
 
 
     // console.log(result, ">>> submit nftCollection");
@@ -384,7 +384,14 @@ function CreateNftCollections(props) {
             </div>
             <div>
               <div className="fs-16 fw-b c-b pt-3 pb-3">Blockchain*</div>
-              <div className="block-chain-container">
+              <div>
+                <input
+                  type="text"
+                  className="edit-form-input"
+                  name="blockchain"
+                />
+                </div>
+              {/* <div className="block-chain-container">
                 <div>
                   <img src={ethereum} height="32px" />
                 </div>
@@ -402,7 +409,7 @@ function CreateNftCollections(props) {
                     </option>
                   </select>
                 </div>
-              </div>
+              </div> */}
             </div>
             <button
               type="submit"

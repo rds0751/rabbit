@@ -46,11 +46,13 @@ export default function NftInformation(props) {
   const nft = props?.responseData;
   const { owner, creator, salesInfo } = nft;
   const [openReportModal, setOpenReportModal] = useState(false);
+  const [saleModal, setsaleModal] = useState(false);
+
   const [userDetails, setUserDetails] = useState([]);
   const [tab, setTab] = useState(1);
   const [report, setReport] = useState({
-    content: id,
-    // addedBy: user.addUserData._id,
+    contentId: id,
+    addedBy: loggedInUser?._id,
     reason: "",
   });
 
@@ -88,8 +90,31 @@ export default function NftInformation(props) {
   // alert(`${isCurrUserNft},${loggedInUser._id},${isOpenForSell}`);
   // console.log("===",isCurrUserNft)
   // console.log("===",isOpenForSell)
-  
+
+  const facebook = async()=>{
+    window.open('https://www.facebook.com/', '_blank');
+
+  }
+  const twitter = async()=>{
+    window.open('https://twitter.com/i/flow/login', '_blank');
+
+  }
+  const handleCopyToClipboard = () => {
+    // alert(window.location.href);
+    // console.log("kkkkkkkkkkdddddd",window.location.href);     //yields: "https://stacksnippets.net/js"
+
+    // const { wallet_address } = loggedInUser;
+    navigator.clipboard.writeText(window.location.href);
+    // navigator.clipboard.writeText(walletAddressUnquoted);
+    // setCopiedText(true);
+    // toast.success("Text Copied");
+    // setTimeout(() => {
+    // setCopiedText(false);
+    // }, 1000);
+  };  
   const demoHandleSell = async () => {
+    setsaleModal(false)
+
     props?.sellNowNft({
       // sellerId:loggedInUser._id,
       // buyerId:loggedInUser._id,
@@ -126,7 +151,10 @@ export default function NftInformation(props) {
     //     window.location.reload(false);
     //   } else toast.error(response.message);
   };
-
+const openSaleModal =async()=>{
+  // alert("kkkk")
+  setsaleModal(true)
+}
   const handleRemoveSell = async () => {
     const response = await RemoveNftFromSale(nft._id);
     if (response.success) {
@@ -145,6 +173,11 @@ export default function NftInformation(props) {
     addNftReport(report);
   };
 
+  const sendReport = () => {
+    addNftReport(report);
+    setOpenReportModal(false)
+  }
+  
   return (
     <>
     {props?.refreshPage ? window.location.reload(true):""}
@@ -206,7 +239,7 @@ export default function NftInformation(props) {
                         marginRight: "1rem",
                         textTransform: "none",
                       }}
-                      onClick={demoHandleSell}
+                      onClick={openSaleModal}
                     >
                       sale
                     </Button>
@@ -340,7 +373,7 @@ export default function NftInformation(props) {
                           marginRight: "1rem",
                           textTransform: "none",
                         }}
-                        onClick={demoHandleSell}
+                        onClick={openSaleModal}
                       >
                         Sale
                       </Button>
@@ -391,15 +424,15 @@ export default function NftInformation(props) {
                           background: "#FFFFFF",                        
                         }}
                       >
-                      <li className="list-item">
+                      <li className="list-item" onClick={handleCopyToClipboard}>
                         <img src={copyIcon} alt="icon" className="icon" />
                         <span className="icon-text">Copy link</span>
                       </li>
-                      <li className="list-item">
+                      <li className="list-item" onClick={facebook}>
                         <img src={facebookIcon} alt="icon" className="icon" />
                         <span className="icon-text">Share on Facebook</span>
                       </li>
-                      <li className="list-item">
+                      <li className="list-item" onClick={twitter}>
                         <img src={twitterIcon} alt="icon" className="icon"/>
                         <span className="icon-text">Share on Twitter</span>
                       </li>
@@ -656,7 +689,7 @@ export default function NftInformation(props) {
               </div>
               <div className="singlerowmodal">
                 <h3 className="reason-text"> Reason</h3>
-                  <select className="select-box">
+                  <select className="select-box" onChange={(e) => handleChange(e)}>
                     <option>Select reason</option>
                     <option value="Fake collection or possible scam">Fake collection or possible scam</option>
                     <option value="Explicit and sensitive content">Explicit and sensitive content</option>
@@ -664,7 +697,73 @@ export default function NftInformation(props) {
                     <option value="Other">Other</option>
                   </select>
               </div>
-              <button className="report-btn" onClick={() => setOpenReportModal(false)}>Report</button>
+              <button className="report-btn" onClick={sendReport}>Report</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* --------------------this modal for sale button NFT----------- */}
+      <div
+        className="report-outer"
+        style={{ display: saleModal ? "block" : "none" }}
+      >
+        <div className="report-abs-modal">
+          <div className="report-modal">
+            <div className="report-inner" style={{ opacity: "1" }}>
+              <div className="reportthisitem">
+                <h3 className="report-text poppins-normal">
+                  SELL NFT
+                </h3>                
+                <i className="fa-solid fa-xmark cross-icon"
+                  onClick={() => setsaleModal(false)}>
+                </i>
+              </div>
+              <div className="singlerowmodal">
+                <h3 className="reason-text"> Price*</h3>
+                <input
+                  className="form-control-1"
+                  min="0"
+                  type="number"
+                  autoComplete="off"
+                  value = {salesInfo?.price}
+                  readonly
+                  // onChange={(e) => {
+                  //   price.current = e.target.value;
+                  //   checkChanges();
+                  // }}
+                />
+                <h3 className="reason-text"> Schedule for Future time</h3>
+                <input
+                  className="form-control-1"
+                  min="0"
+                  type="date"
+                  autoComplete="off"
+                  value ="23"
+                  // onChange={(e) => {
+                  //   price.current = e.target.value;
+                  //   checkChanges();
+                  // }}
+                />
+                 <input
+                  className="form-control-1"
+                  min="0"
+                  type="time"
+                  autoComplete="off"
+                  value ="23"
+                  // onChange={(e) => {
+                  //   price.current = e.target.value;
+                  //   checkChanges();
+                  // }}
+                />
+                  {/* <select className="select-box" onChange={(e) => handleChange(e)}>
+                    <option>Select reason</option>
+                    <option value="Fake collection or possible scam">Fake collection or possible scam</option>
+                    <option value="Explicit and sensitive content">Explicit and sensitive content</option>
+                    <option value="Might be stolen">Might be stolen</option>
+                    <option value="Other">Other</option>
+                  </select> */}
+              </div>
+              <button className="report-btn" onClick={demoHandleSell}>Sale</button>
             </div>
           </div>
         </div>
