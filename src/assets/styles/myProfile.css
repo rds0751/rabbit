@@ -102,6 +102,15 @@
   /* border: 1px solid red; */
   justify-content: center;
 }
+.add-cover .copy-img{
+  width: 21.47px;
+  height: 21.47px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+.add-cover .copy-img:hover{
+  box-shadow: 0 2px 2px #e2e2e2;
+}
 .profilecover {
   height: 280px;
   width: 100%;

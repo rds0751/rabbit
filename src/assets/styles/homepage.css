@@ -68,6 +68,7 @@
   line-height: 22px;
   color: #585858;
   margin-bottom: 2px;
+  text-align: left;
 }
 .homepage .right-slider .card .description{
   font-family: 'poppins-semibold';
@@ -275,11 +276,21 @@
   }
 }
 @media only screen and (max-width: 480px) {
+  .homepage .banner .inner-width {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .homepage .left-text .heading {
+    font-size: 28px;
+  }
   .homepage .left-text .btn-custom{
     margin-right: 10px;
   }
 }
 @media only screen and (max-width: 320px) {
+  .homepage .left-text .heading {
+    font-size: 24px;
+  }
   .homepage .left-text .btn-custom{
     margin-right: 0px;
     margin-bottom: 10px;
