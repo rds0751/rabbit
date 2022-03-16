@@ -125,7 +125,7 @@ function Collections_tile() {
             })()}
           </div>
           {collections.map((collection) => {
-            const { _id, imageUrl, name, nfts } = collection;
+            const { _id, imageUrl, name, nftCount } = collection;
             const route = "/collection-details/" + _id;
             return (
               <div className="collectionCardEach col-md-6 col-lg-3 col-sm-12 mt-5 nft_card">
@@ -158,7 +158,7 @@ function Collections_tile() {
                           Total Items:
                           {/* {alert(nfts)} */}
                           {/* {console.log("jjjjjjjjjjjjjjjj",collection)} */}
-                          <span className="text-primary">{nfts.length}</span>
+                          <span className="text-primary">{nftCount}</span>
                         </span>
                       </p>
                     </div>
