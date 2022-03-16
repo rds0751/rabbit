@@ -49,8 +49,8 @@ export default function NftInformation(props) {
   const [userDetails, setUserDetails] = useState([]);
   const [tab, setTab] = useState(1);
   const [report, setReport] = useState({
-    content: id,
-    // addedBy: user.addUserData._id,
+    contentId: id,
+    addedBy: loggedInUser?._id,
     reason: "",
   });
 
@@ -143,6 +143,11 @@ export default function NftInformation(props) {
     addNftReport(report);
   };
 
+  const sendReport = () => {
+    addNftReport(report);
+    setOpenReportModal(false)
+  }
+  
   return (
     <>
     {props?.refreshPage ? window.location.reload(true):""}
@@ -654,7 +659,7 @@ export default function NftInformation(props) {
               </div>
               <div className="singlerowmodal">
                 <h3 className="reason-text"> Reason</h3>
-                  <select className="select-box">
+                  <select className="select-box" onChange={(e) => handleChange(e)}>
                     <option>Select reason</option>
                     <option value="Fake collection or possible scam">Fake collection or possible scam</option>
                     <option value="Explicit and sensitive content">Explicit and sensitive content</option>
@@ -662,7 +667,7 @@ export default function NftInformation(props) {
                     <option value="Other">Other</option>
                   </select>
               </div>
-              <button className="report-btn" onClick={() => setOpenReportModal(false)}>Report</button>
+              <button className="report-btn" onClick={sendReport}>Report</button>
             </div>
           </div>
         </div>

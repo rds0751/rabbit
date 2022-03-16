@@ -30,6 +30,8 @@ import { Button } from "react-bootstrap"
 
 const queryString = require("query-string");
 function NftPage() {
+  const search = useLocation().search;
+  const name = new URLSearchParams(search).get("searchByName");
   const defaultReq = {
     // type: "fix price",
     // searchByName: name ? name : "",
@@ -39,8 +41,8 @@ function NftPage() {
     // --------------------------
     // sort: 0,
     // type: "allprice",
-    // searchByName: name ? name : "",
-    searchByName: "",
+    searchByName: name ? name : "",
+    // searchByName: "",
     // minPrice: 0,
     // maxPrice: "",
     sort: -1
@@ -55,8 +57,7 @@ function NftPage() {
   const [filterType, setFilterType] = useState(defaultReq);
   const [isloading, setIsloading] = useState(false);
   const [type, setType] = useState("");
-  const search = useLocation().search;
-  const name = new URLSearchParams(search).get("searchByName");
+  
 
   const [data, setData] = useState(defaultReq);
 

@@ -195,6 +195,7 @@ function Navbar() {
                   style={{ width: "60px" }}
                 />
               </Link>
+              <form action="/nfts" method="get">
               <input
                 className="form-control form-controlmob inputbox search-input-mob"
                 type="search"
@@ -221,7 +222,7 @@ function Navbar() {
                   aria-hidden="true"
                 ></i>
               </button>
-              {/* </form> */}
+              </form>
             </div>
 
             <div className="search_box order-2">

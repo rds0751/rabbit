@@ -223,7 +223,7 @@ export function getNotificationListById(requestData) {
 }
 
 export function addNftReport(requestData) {
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/add-nft-report";
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/reports/nfts";
   return httpService(
     httpConstants.METHOD_TYPE.POST,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
