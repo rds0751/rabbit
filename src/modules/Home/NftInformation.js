@@ -33,9 +33,6 @@ import ListingsTable from "../../common/components/ListingTable";
 
 export default function NftInformation(props) {
 
-
-
-  console.log(props?.responseData, "<<<response");
   const navigate = useNavigate();
   const [activeInActive, setActiveInActive] = useState("active");
   const { user } = useSelector((state) => state);
@@ -48,8 +45,11 @@ export default function NftInformation(props) {
   const [openReportModal, setOpenReportModal] = useState(false);
   const [saleModal, setsaleModal] = useState(false);
 
+  const [openRemoveSale, setOpenRemoveSale] = useState(false);
   const [userDetails, setUserDetails] = useState([]);
   const [tab, setTab] = useState(1);
+  const [toShow, settoShow] = useState(true);
+
   const [report, setReport] = useState({
     contentId: id,
     addedBy: loggedInUser?._id,
@@ -57,6 +57,13 @@ export default function NftInformation(props) {
   });
 
   if (openReportModal) {
+    document.body.classList.add('active-modal')
+  } else {
+    document.body.classList.remove('active-modal')
+  }
+
+  
+  if (openRemoveSale) {
     document.body.classList.add('active-modal')
   } else {
     document.body.classList.remove('active-modal')
@@ -172,15 +179,48 @@ const openSaleModal =async()=>{
   const makeReport = () => {
     addNftReport(report);
   };
+  const sendButton=()=>{
+    removeNFTFromSell();
+    setOpenRemoveSale(false);
+  }
+
+  const difftime = (timestamp1, timestamp2) => {
+    var difference = timestamp1 - timestamp2;
+    var daysDifference = Math.floor(difference / 1000 / 60 / 60 / 24);
+
+    return daysDifference;
+  };
+
+  let showDateSection = true;
+
+  let message = '';
+
+  if (nft?.biddingDetails?.endDate) {
+    const currDate = new Date();
+
+    const currentDate = Date.now(currDate);
+
+    const endDate = nft?.biddingDetails?.endDate;
+
+    let endDateTimeStamp = Math.floor(new Date(endDate).getTime());
+
+    const days = (endDateTimeStamp == currentDate) ? 1 : difftime(endDateTimeStamp, currentDate);
+
+    message = (endDateTimeStamp < currentDate) ? "Expired" : `End in ${days} days`;
+
+  } else {
+    showDateSection = false;
+  }
+
 
   const sendReport = () => {
     addNftReport(report);
     setOpenReportModal(false)
   }
-  
+
   return (
     <>
-    {props?.refreshPage ? window.location.reload(true):""}
+      {props?.refreshPage ? window.location.reload(true) : ""}
       {props?.loaderState ? (
         <div className="center">
           {" "}
@@ -254,7 +294,7 @@ const openSaleModal =async()=>{
                         backgroundColor: "#366eff",
                         textTransform: "none",
                       }}
-                      onClick={removeNFTFromSell}
+                      onClick={()=>setOpenRemoveSale(true)}
                     >
                       Remove From Sale
                     </Button>
@@ -264,34 +304,34 @@ const openSaleModal =async()=>{
                   </span>
                 </div>
                 <div className="col-xl-2 col-lg-2 col-md-3 col-sm-3 d-flex align-items-center">
-                    <div>
-                      <a
-                        className="nav-link dropdown"
-                        href="#"
-                        id="navbarDropdown"
-                        role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
+                  <div>
+                    <a
+                      className="nav-link dropdown"
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
                       <img
-                          alt="share"
-                          src={share}
-                          style={{ width: "31px", height: "31px", marginRight: "20px", }}
-                        />
-                      </a>
-                      <ul
-                        className="dropdown-menu profilemenu"
-                        aria-labelledby="navbarDropdown"
-                        style={{
-                          width:"220px",
-                          position: "absolute",
-                          marginLeft:"30px",
-                          boxShadow: "0px 3px 6px #00000012",
-                          border: "1px solid #F4F4F4",
-                          borderRadius: "6px",
-                          background: "#FFFFFF",                        
-                        }}
-                      >
+                        alt="share"
+                        src={share}
+                        style={{ width: "31px", height: "31px", marginRight: "20px", }}
+                      />
+                    </a>
+                    <ul
+                      className="dropdown-menu profilemenu"
+                      aria-labelledby="navbarDropdown"
+                      style={{
+                        width: "220px",
+                        position: "absolute",
+                        marginLeft: "30px",
+                        boxShadow: "0px 3px 6px #00000012",
+                        border: "1px solid #F4F4F4",
+                        borderRadius: "6px",
+                        background: "#FFFFFF",
+                      }}
+                    >
                       <li className="list-item">
                         <img src={copyIcon} alt="icon" className="icon" />
                         <span className="icon-text">Copy link</span>
@@ -301,18 +341,18 @@ const openSaleModal =async()=>{
                         <span className="icon-text">Share on Facebook</span>
                       </li>
                       <li className="list-item">
-                        <img src={twitterIcon} alt="icon" className="icon"/>
+                        <img src={twitterIcon} alt="icon" className="icon" />
                         <span className="icon-text">Share on Twitter</span>
                       </li>
-                    </ul>                        
-                    </div>                  
-                    <img
-                      src={info}
-                      alt="info"
-                      style={{ width: "31px", height: "31px" }}
-                      // data-bs-toggle="modal"
-                      onClick={() => setOpenReportModal(true)}
-                    />
+                    </ul>
+                  </div>
+                  <img
+                    src={info}
+                    alt="info"
+                    style={{ width: "31px", height: "31px" }}
+                    // data-bs-toggle="modal"
+                    onClick={() => setOpenReportModal(true)}
+                  />
                 </div>
               </div>
             </div>
@@ -388,7 +428,7 @@ const openSaleModal =async()=>{
                           backgroundColor: "#366eff",
                           textTransform: "none",
                         }}
-                        onClick={removeNFTFromSell}
+                        onClick={()=>setOpenRemoveSale(true)}
                       >
                         Remove From Sell
                       </Button>
@@ -405,7 +445,7 @@ const openSaleModal =async()=>{
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
                       >
-                      <img
+                        <img
                           alt="share"
                           src={share}
                           style={{ width: "31px", height: "31px", marginRight: "20px", }}
@@ -415,13 +455,13 @@ const openSaleModal =async()=>{
                         className="dropdown-menu profilemenu"
                         aria-labelledby="navbarDropdown"
                         style={{
-                          width:"220px",
+                          width: "220px",
                           position: "absolute",
-                          marginLeft:"30px",
+                          marginLeft: "30px",
                           boxShadow: "0px 3px 6px #00000012",
                           border: "1px solid #F4F4F4",
                           borderRadius: "6px",
-                          background: "#FFFFFF",                        
+                          background: "#FFFFFF",
                         }}
                       >
                       <li className="list-item" onClick={handleCopyToClipboard}>
@@ -438,90 +478,90 @@ const openSaleModal =async()=>{
                       </li>
                     </ul>                        
                     </div>
-                      <img
-                        src={info}
-                        alt="info"
-                        style={{ width: "31px", height: "31px" }}
-                        // data-bs-toggle="modal"
-                        // data-bs-target="#myModalReport"
-                        onClick={() => {
-                          setOpenReportModal(true);
-                        }}
-                      />
-                      {/* <!-- The Modal --> */}
-                      <div className="modal" id="myModalReport">
-                        <div className="modal-dialog">
-                          <div
-                            className="modal-content"
-                            style={{ borderRadius: "10px", paddingRight: "10px" }}
-                          >
-                            {/* <!-- Modal Header --> */}
-                            <div className="modal-header">
-                              <h4 className="modal-title font-15 font-weight-700 text-dark">
-                                Report this item
-                              </h4>
-                              <button
-                                type="button"
-                                className="btn-close"
-                                data-bs-dismiss="modal"
-                                style={{
-                                  width: "10px",
-                                  height: "10px",
-                                  boxShadow: "none",
-                                }}
-                              ></button>
-                            </div>
+                    <img
+                      src={info}
+                      alt="info"
+                      style={{ width: "31px", height: "31px" }}
+                      // data-bs-toggle="modal"
+                      // data-bs-target="#myModalReport"
+                      onClick={() => {
+                        setOpenReportModal(true);
+                      }}
+                    />
+                    {/* <!-- The Modal --> */}
+                    <div className="modal" id="myModalReport">
+                      <div className="modal-dialog">
+                        <div
+                          className="modal-content"
+                          style={{ borderRadius: "10px", paddingRight: "10px" }}
+                        >
+                          {/* <!-- Modal Header --> */}
+                          <div className="modal-header">
+                            <h4 className="modal-title font-15 font-weight-700 text-dark">
+                              Report this item
+                            </h4>
+                            <button
+                              type="button"
+                              className="btn-close"
+                              data-bs-dismiss="modal"
+                              style={{
+                                width: "10px",
+                                height: "10px",
+                                boxShadow: "none",
+                              }}
+                            ></button>
+                          </div>
 
-                            {/* <!-- Modal body --> */}
-                            <div className="modal-body">
-                              <h5
-                                className="font-14 font-weight-700 text-dark"
-                                style={{ marginLeft: "-0.6em" }}
+                          {/* <!-- Modal body --> */}
+                          <div className="modal-body">
+                            <h5
+                              className="font-14 font-weight-700 text-dark"
+                              style={{ marginLeft: "-0.6em" }}
+                            >
+                              Reason
+                            </h5>
+                            <div
+                              className="input-group mt-3"
+                              style={{ marginLeft: "-0.6em" }}
+                            >
+                              <select
+                                className="form-select"
+                                id="inputGroupSelect02"
+                                onChange={(e) => handleChange(e)}
                               >
-                                Reason
-                              </h5>
-                              <div
-                                className="input-group mt-3"
-                                style={{ marginLeft: "-0.6em" }}
-                              >
-                                <select
-                                  className="form-select"
-                                  id="inputGroupSelect02"
-                                  onChange={(e) => handleChange(e)}
+                                <option
+                                  value="Fake collection or possible scam"
+                                  selected
                                 >
-                                  <option
-                                    value="Fake collection or possible scam"
-                                    selected
-                                  >
-                                    Fake collection or possible scam
-                                  </option>
-                                  <option value="Explicit and sensitive content">
-                                    Explicit and sensitive content
-                                  </option>
-                                  <option value="Spam">Spam</option>
-                                  <option value="Might be stolen">
-                                    Might be stolen
-                                  </option>
-                                  <option value="Other">Other</option>
-                                </select>
-                              </div>
+                                  Fake collection or possible scam
+                                </option>
+                                <option value="Explicit and sensitive content">
+                                  Explicit and sensitive content
+                                </option>
+                                <option value="Spam">Spam</option>
+                                <option value="Might be stolen">
+                                  Might be stolen
+                                </option>
+                                <option value="Other">Other</option>
+                              </select>
                             </div>
+                          </div>
 
-                            {/* <!-- Modal footer --> */}
-                            <div className="modal-footer mb-4">
-                              <button
-                                type="button"
-                                className="btn btn-primary w-100"
-                                data-bs-dismiss="modal"
-                                style={{ marginLeft: "1.1em" }}
-                                onClick={makeReport}
-                              >
-                                Make Offer
-                              </button>
-                            </div>
+                          {/* <!-- Modal footer --> */}
+                          <div className="modal-footer mb-4">
+                            <button
+                              type="button"
+                              className="btn btn-primary w-100"
+                              data-bs-dismiss="modal"
+                              style={{ marginLeft: "1.1em" }}
+                              onClick={makeReport}
+                            >
+                              Make Offer
+                            </button>
                           </div>
                         </div>
                       </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -532,10 +572,10 @@ const openSaleModal =async()=>{
                     {salesInfo?.price}
                   </span>
                 </span>
-                <span className="align-row">
+                {(showDateSection) ? <span className="align-row">
                   <i className="far fa-clock clock-icon"></i>
-                  <span className="time">Ends in 5 days </span>
-                </span>
+                  <span className="time">{message} </span>
+                </span> : ""}
               </div>
               <div className="row third-text">
                 <div className="col-lg-6 col-sm-12">
@@ -682,20 +722,20 @@ const openSaleModal =async()=>{
               <div className="reportthisitem">
                 <h3 className="report-text poppins-normal">
                   Report this item
-                </h3>                
+                </h3>
                 <i className="fa-solid fa-xmark cross-icon"
                   onClick={() => setOpenReportModal(false)}>
                 </i>
               </div>
               <div className="singlerowmodal">
                 <h3 className="reason-text"> Reason</h3>
-                  <select className="select-box" onChange={(e) => handleChange(e)}>
-                    <option>Select reason</option>
-                    <option value="Fake collection or possible scam">Fake collection or possible scam</option>
-                    <option value="Explicit and sensitive content">Explicit and sensitive content</option>
-                    <option value="Might be stolen">Might be stolen</option>
-                    <option value="Other">Other</option>
-                  </select>
+                <select className="select-box" onChange={(e) => handleChange(e)}>
+                  <option>Select reason</option>
+                  <option value="Fake collection or possible scam">Fake collection or possible scam</option>
+                  <option value="Explicit and sensitive content">Explicit and sensitive content</option>
+                  <option value="Might be stolen">Might be stolen</option>
+                  <option value="Other">Other</option>
+                </select>
               </div>
               <button className="btn btn-primary report-btn" onClick={sendReport}>Report</button>
             </div>
@@ -831,6 +871,35 @@ const openSaleModal =async()=>{
         </div>
       </div>
       {/* Buying loading modal end */}
+      {/* --------remove sale dialog ---------------*/}
+
+      <div
+        className="report-outer"
+        style={{ display: openRemoveSale ? "block" : "none" }}
+      >
+        <div className="report-abs-modal">
+          <div className="report-modal">
+            <div className="report-inner" style={{ opacity: "1" }}>
+              <div className="reportthisitem">
+                <p className="MainHeadingText">
+                  Remove From Sell
+                </p>                
+              </div>
+              <div className="singlerowmodal">
+                <h3 className="HeadingText"> Are you sure you want to remove this item from sale?</h3>
+                <div className="removeSaleButton">
+                <button className="CancelButton" onClick={()=>setOpenRemoveSale(false)}>Cancel</button>
+                <button className="RemoveButton" onClick={sendButton}>Remove</button>
+               </div>
+
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     </>
   );
 }

@@ -77,7 +77,46 @@ body.active-modal{
   color: #ffffff;
   height: 42px;
 }
-
+.removeSaleButton{
+  float: right;
+  padding-top: 31px;
+  padding-Bottom: 31px;
+}
+.RemoveButton{
+background: #366EEF 0% 0% no-repeat padding-box;
+border-radius: 6px;
+opacity: 1;
+padding: 10px;
+color: #FFFFFF;
+font-size: 16px;
+line-height: 25px;
+height: 42px;
+border: none;
+}
+.CancelButton{
+background: #FFFFFF 0% 0% no-repeat padding-box;
+border: 1px solid #366EEF;
+border-radius: 6px;
+opacity: 1;
+color: #366EEF;
+height: 42px;
+padding: 8px;
+margin-right: 14px;
+}
+.HeadingText{
+  font-size: 16px;
+  line-height:25px;
+  font-weight: normal;
+  font-style: normal;
+  color: #191919;
+  opacity: 1;
+}
+.MainHeadingText{
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: bold;
+  color: #191919;
+}
 /* mobile-view */
 @media screen and (max-width:426px){
   .report-modal{
