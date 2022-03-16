@@ -38,7 +38,14 @@ function MyProfile() {
   const [Nfts, setNfts] = useState([]);
   const [createdNft, setcreatedNft] = useState([]);
   const [isloading, setIsloading] = useState(false);
+
   const [ownedNft, setownedNft] = useState([]);
+  useEffect(async () => {
+    await NftOwnedByUser().then((response) => setownedNft(response));
+  }, []);
+  console.log("Nft Owned by user", ownedNft);
+
+
   const [onSaleNft, setonSaleNft] = useState([]);
   const [likedNft, setlikedNft] = useState([]);
   const [userId, setUserId] = useState("");
@@ -60,7 +67,7 @@ function MyProfile() {
   useEffect(() => {
     setUserId(loggedInUser._id)
     // console.log()
-        console.log("logiiiiiiiii user",loggedInUser._id)
+    console.log("logiiiiiiiii user", loggedInUser._id)
 
     if (loggedInUser == null) {
       navigate("/my-profile");
@@ -74,12 +81,12 @@ function MyProfile() {
 
       setIsloading(false);
     }
-    
-      // setNfts(onSaleNft);
-      // setTypeofProfilePost("on-sale");
-    
+
+    // setNfts(onSaleNft);
+    // setTypeofProfilePost("on-sale");
+
   }, [window.ethereum, checkClick]);
-  
+
 
   // ------------------------------- Calling apis --------------------- to get user data
 
@@ -102,9 +109,9 @@ function MyProfile() {
       } else {
         toast.error(response.msg);
       }
-    },loggedInUser._id);
+    }, loggedInUser._id);
   };
-console.log("kkkkkkkkkkddddddddddddd",Nfts)
+  console.log("kkkkkkkkkkddddddddddddd", Nfts)
   const getOwnedByNft = () => {
     NftOwnedByUser((response) => {
       console.log(response, "myprofile");
@@ -113,7 +120,7 @@ console.log("kkkkkkkkkkddddddddddddd",Nfts)
       } else {
         toast.error(response.msg);
       }
-    },loggedInUser._id);
+    }, loggedInUser._id);
   };
   const getOnSaleNft = () => {
     NftSellByUser((response) => {
@@ -125,7 +132,7 @@ console.log("kkkkkkkkkkddddddddddddd",Nfts)
       } else {
         toast.error(response.msg);
       }
-    },loggedInUser._id);
+    }, loggedInUser._id);
     // setonSaleNft([]);
   };
   const getLikedNft = () => {
@@ -136,7 +143,7 @@ console.log("kkkkkkkkkkddddddddddddd",Nfts)
       } else {
         toast.error(response.msg);
       }
-    },loggedInUser._id);
+    }, loggedInUser._id);
     // setlikedNft([]);
   };
 
@@ -253,9 +260,8 @@ console.log("kkkkkkkkkkddddddddddddd",Nfts)
         <div className="profileItemContainer">
           <div className="postTypeProfileContainer collectionsales MyProfilesales">
             <div
-              className={`postTypeProfile ${
-                typeofProfilePost === "on-sale" && "postTypeProfile--active"
-              }`}
+              className={`postTypeProfile ${typeofProfilePost === "on-sale" && "postTypeProfile--active"
+                }`}
               // onClick={() => setTypeofProfilePost("on-sale")}
               onClick={() => {
                 setNfts(onSaleNft);
@@ -265,9 +271,8 @@ console.log("kkkkkkkkkkddddddddddddd",Nfts)
               On sale
             </div>
             <div
-              className={`postTypeProfile ${
-                typeofProfilePost === "owned" && "postTypeProfile--active"
-              }`}
+              className={`postTypeProfile ${typeofProfilePost === "owned" && "postTypeProfile--active"
+                }`}
               // onClick={() => setTypeofProfilePost("owned")}
               onClick={() => {
                 setNfts(ownedNft);
@@ -277,9 +282,8 @@ console.log("kkkkkkkkkkddddddddddddd",Nfts)
               Owned
             </div>
             <div
-              className={`postTypeProfile ${
-                typeofProfilePost === "created" && "postTypeProfile--active"
-              }`}
+              className={`postTypeProfile ${typeofProfilePost === "created" && "postTypeProfile--active"
+                }`}
               // onClick={() => setTypeofProfilePost("created")}
               onClick={() => {
                 setNfts(createdNft);
@@ -289,9 +293,8 @@ console.log("kkkkkkkkkkddddddddddddd",Nfts)
               Created
             </div>
             <div
-              className={`postTypeProfile ${
-                typeofProfilePost === "liked" && "postTypeProfile--active"
-              }`}
+              className={`postTypeProfile ${typeofProfilePost === "liked" && "postTypeProfile--active"
+                }`}
               // onClick={() => setTypeofProfilePost("liked")}
               onClick={() => {
                 setNfts(likedNft);
@@ -303,7 +306,7 @@ console.log("kkkkkkkkkkddddddddddddd",Nfts)
           </div>
           {/* <hr /> */}
           {/* <div className="profileNftContainer row mx-0 text-center p-0 cards-gap image1"> */}
-          <div className="nftTileContainer row ntf_row" style={{justifyContent : "start",}}>
+          <div className="nftTileContainer row ntf_row" style={{ justifyContent: "start", }}>
             {/* <div class="spinner-border text-primary" role="status">
               <span class="sr-only">Loading...</span>
             </div> */}
