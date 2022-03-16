@@ -147,29 +147,29 @@ export default function NftInformation(props) {
 
   let message = '';
 
-  if(nft?.biddingDetails?.endDate){
+  if (nft?.biddingDetails?.endDate) {
     const currDate = new Date();
-  
+
     const currentDate = Date.now(currDate);
-  
+
     const endDate = nft?.biddingDetails?.endDate;
 
     let endDateTimeStamp = Math.floor(new Date(endDate).getTime());
-    
+
     const days = (endDateTimeStamp == currentDate) ? 1 : difftime(endDateTimeStamp, currentDate);
-    
-    message = (endDateTimeStamp < currentDate) ? "Expired" : `End in ${days} days`; 
-     
-  }else{
+
+    message = (endDateTimeStamp < currentDate) ? "Expired" : `End in ${days} days`;
+
+  } else {
     showDateSection = false;
   }
-  
+
 
   const sendReport = () => {
     addNftReport(report);
     setOpenReportModal(false)
   }
-  
+
   return (
     <>
       {props?.refreshPage ? window.location.reload(true) : ""}
@@ -681,13 +681,13 @@ export default function NftInformation(props) {
               </div>
               <div className="singlerowmodal">
                 <h3 className="reason-text"> Reason</h3>
-                  <select className="select-box" onChange={(e) => handleChange(e)}>
-                    <option>Select reason</option>
-                    <option value="Fake collection or possible scam">Fake collection or possible scam</option>
-                    <option value="Explicit and sensitive content">Explicit and sensitive content</option>
-                    <option value="Might be stolen">Might be stolen</option>
-                    <option value="Other">Other</option>
-                  </select>
+                <select className="select-box" onChange={(e) => handleChange(e)}>
+                  <option>Select reason</option>
+                  <option value="Fake collection or possible scam">Fake collection or possible scam</option>
+                  <option value="Explicit and sensitive content">Explicit and sensitive content</option>
+                  <option value="Might be stolen">Might be stolen</option>
+                  <option value="Other">Other</option>
+                </select>
               </div>
               <button className="report-btn" onClick={sendReport}>Report</button>
             </div>
