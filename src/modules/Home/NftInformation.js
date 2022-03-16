@@ -16,7 +16,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import "../../assets/styles/createSingleNft.css";
 import dropdowmImage from "../../assets/images/drop down.png";
 import Close from "../../assets/images/close.png";
-
+import success from "../../assets/images/Check.svg";
 import { Button } from "@mui/material";
 import { getNft, addNftReport } from "../../services/webappMicroservice";
 import { useSelector } from "react-redux";
@@ -73,9 +73,9 @@ export default function NftInformation(props) {
     props?.responseData,
     props?.loaderState,
     "<<<< this is data toooooooooooooooooooooooooooooooo match"
-  );
-  // alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
-
+    );
+    // alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
+    
   // useEffect(() => {
   //   alert(`${loggedInUser?._id}`);
   //   console.log(
@@ -130,7 +130,7 @@ export default function NftInformation(props) {
       // nftId:response._id,
     });
   };
-
+  
   const removeNFTFromSell = async () => {
     props?.removeNftFromSale({
       // sellerId:loggedInUser._id,
@@ -140,12 +140,14 @@ export default function NftInformation(props) {
       // nftId:response._id,
     });
   };
+  const [openLoadingModal, setOpenLoadingModal] = useState(false);
   const buyNft = async () => {
     if (user.loggedInUser != null) {
       props?.BuyNowNft({
         buyerId: loggedInUser?._id,
         newOwnerAddress: walletAddress?.address,
       });
+      setOpenLoadingModal(true);
     } else {
       navigate("/add-wallet");
     }
@@ -735,7 +737,7 @@ const openSaleModal =async()=>{
                   <option value="Other">Other</option>
                 </select>
               </div>
-              <button className="report-btn" onClick={sendReport}>Report</button>
+              <button className="btn btn-primary report-btn" onClick={sendReport}>Report</button>
             </div>
           </div>
         </div>
@@ -801,12 +803,74 @@ const openSaleModal =async()=>{
                     <option value="Other">Other</option>
                   </select> */}
               </div>
-              <button className="report-btn" onClick={demoHandleSell}>Sale</button>
+              <button className="btn btn-primary report-btn" onClick={demoHandleSell}>Sale</button>
             </div>
           </div>
         </div>
       </div>
-      {/* ------------------------------- */}
+
+      {/* Buying loading modal start */}
+      <div
+        className="mint-mod-outer"
+        style={{
+          display: openLoadingModal ? "block" : "none",
+        }}
+      >
+        <div className="mint-abs">
+          <div className="">
+            <div className="mint-outer" style={{ opacity: "1" }}>
+              <div className="mintbody">
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <div className="completelistin">
+                    Complete your Buying
+                  </div>
+                </div>
+                <div className="abstractillusion">
+                  <img src={nft.ipfsUrl} />
+                  <div className="abstractillusioncontent">
+                    <div className="abstracttitle"></div>
+                    <div className="abstractposter"> {nft.name}</div>
+                    <div className="ethprice">{salesInfo?.price}ETH</div>
+                  </div>
+                </div>
+                <div className="checkpostcontainer">
+                  <div className="checkpost">
+                      <img src={success} className="checkimg" />
+                      <div className="checkimg">
+                      <Oval
+                        vertical="top"
+                        horizontal="center"
+                        color="#00BFFF"
+                        height={30}
+                        width={30} />
+                      </div>
+                    <div className="checkposttext">
+                      <div className="heading">Approve</div>
+                      <div className="description"></div>
+                    </div>
+                  </div>
+                  <div className="checkpost">
+                      <img src={success} className="checkimg" />
+                      <div className="checkimg">
+                        <Oval
+                          vertical="top"
+                          horizontal="center"
+                          color="#00BFFF"
+                          height={30}
+                          width={30} />
+                      </div>
+                    <div className="checkposttext">
+                      <div className="heading">Transfer</div>
+                      <div className="description"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Buying loading modal end */}
       {/* --------remove sale dialog ---------------*/}
 
       <div

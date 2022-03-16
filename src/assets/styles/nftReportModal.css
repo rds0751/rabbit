@@ -69,7 +69,7 @@ body.active-modal{
 }
 .report-btn {
   width: 100%;
-  background-color: #9ab6f7;
+  background-color: #366EEF;
   margin-top: 34px;
   margin-bottom: 41px;
   border: none;
@@ -136,7 +136,9 @@ margin-right: 14px;
 /* windows-view */
 @media screen and (min-width:769px){
   .report-modal{
-    width: 32.8%;
-    left: 35.6%;
+    /* width: 32.8%;
+    left: 35.6%; */
+    width: 50%;
+    left: 25%;
   }
 }

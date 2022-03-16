@@ -154,6 +154,11 @@
   color: #191919;
 }
 
+@media only screen and (max-width:1600px) {
+  .abstractillusion > img{
+    margin-right: 20px;
+  }
+}
 @media only screen and (max-width:1440px) {
   .mint-outer{
     width: 40%;
@@ -169,9 +174,9 @@
   }
 }
 @media only screen and (max-width:1024px) {
-  .abstractillusioncontent {
+  /* .abstractillusioncontent {
     width: 65%;
-  }
+  } */
   .checkimg{
     left: -3.7%;
   }
@@ -184,8 +189,12 @@
   .checkimg {
     left: -4%;
   }
-  .abstractillusioncontent {
+  /* .abstractillusioncontent {
     width: 60%;
+  } */
+  .abstractillusion > img {
+    width: 120px;
+    height: 120px;
   }
 }
 @media only screen and (max-width:480px) {
@@ -193,17 +202,21 @@
     left: 5%;
     width: 90%;
   }
-  .abstractillusioncontent {
+  /* .abstractillusioncontent {
     width: 52%;
-  }
+  } */
   .checkimg {
     left: -5%;
   }
+  .abstractillusion > img {
+    width: 100px;
+    height: 100px;
+  }
 }
 @media only screen and (max-width:375px) {
-  .abstractillusioncontent {
+  /* .abstractillusioncontent {
     width: 48%;
-  }
+  } */
   .checkimg {
     left: -6%;
   }
