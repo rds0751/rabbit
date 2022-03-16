@@ -43,6 +43,7 @@ export default function NftInformation(props) {
   const nft = props?.responseData;
   const { owner, creator, salesInfo } = nft;
   const [openReportModal, setOpenReportModal] = useState(false);
+  const [openRemoveSale, setOpenRemoveSale] = useState(false);
   const [userDetails, setUserDetails] = useState([]);
   const [tab, setTab] = useState(1);
   const [toShow, settoShow] = useState(true);
@@ -58,6 +59,19 @@ export default function NftInformation(props) {
   } else {
     document.body.classList.remove('active-modal')
   }
+
+  
+  if (openRemoveSale) {
+    document.body.classList.add('active-modal')
+  } else {
+    document.body.classList.remove('active-modal')
+  }
+  console.log(
+    loggedInUser?._id,
+    props?.responseData,
+    props?.loaderState,
+    "<<<< this is data toooooooooooooooooooooooooooooooo match"
+  );
   // alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
 
   // useEffect(() => {
@@ -135,6 +149,10 @@ export default function NftInformation(props) {
   const makeReport = () => {
     addNftReport(report);
   };
+  const sendButton=()=>{
+    removeNFTFromSell();
+    setOpenRemoveSale(false);
+  }
 
   const difftime = (timestamp1, timestamp2) => {
     var difference = timestamp1 - timestamp2;
@@ -246,7 +264,7 @@ export default function NftInformation(props) {
                         backgroundColor: "#366eff",
                         textTransform: "none",
                       }}
-                      onClick={removeNFTFromSell}
+                      onClick={()=>setOpenRemoveSale(true)}
                     >
                       Remove From Sale
                     </Button>
@@ -380,7 +398,7 @@ export default function NftInformation(props) {
                           backgroundColor: "#366eff",
                           textTransform: "none",
                         }}
-                        onClick={removeNFTFromSell}
+                        onClick={()=>setOpenRemoveSale(true)}
                       >
                         Remove From Sell
                       </Button>
@@ -694,6 +712,35 @@ export default function NftInformation(props) {
           </div>
         </div>
       </div>
+      {/* --------remove sale dialog ---------------*/}
+
+      <div
+        className="report-outer"
+        style={{ display: openRemoveSale ? "block" : "none" }}
+      >
+        <div className="report-abs-modal">
+          <div className="report-modal">
+            <div className="report-inner" style={{ opacity: "1" }}>
+              <div className="reportthisitem">
+                <p className="MainHeadingText">
+                  Remove From Sell
+                </p>                
+              </div>
+              <div className="singlerowmodal">
+                <h3 className="HeadingText"> Are you sure you want to remove this item from sale?</h3>
+                <div className="removeSaleButton">
+                <button className="CancelButton" onClick={()=>setOpenRemoveSale(false)}>Cancel</button>
+                <button className="RemoveButton" onClick={sendButton}>Remove</button>
+               </div>
+
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     </>
   );
 }
