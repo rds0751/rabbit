@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Image from "../../assets/images/img-format.png";
+import Image from "../../assets/images/img-format.svg";
 import success from "../../assets/images/Check.svg";
 import ethereum from "../../assets/images/ethereum.svg";
 // import { FaCloudUploadAlt } from "react-icons/fa";
