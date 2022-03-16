@@ -89,11 +89,11 @@ function NftCardsHome({ nft }) {
             className="nftTileEachDetailsSecondContainerValueHighest"
           // style={{ marginLeft: "1em" }}
           >
-            <div>
+            {/* <div>
               {" "}
               Highest bid:{" "}
               <span className="font-weight-900">100</span>{" "}
-            </div>
+            </div> */}
             <div>
               <span className="" style={{ color: "#000", marginRight: "4px" }}>
                 <i className="far fa-clock" style={{ color: "#f54", fontSize: "13.36px", }}></i>

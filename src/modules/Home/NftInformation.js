@@ -48,6 +48,8 @@ export default function NftInformation(props) {
   const [openReportModal, setOpenReportModal] = useState(false);
   const [userDetails, setUserDetails] = useState([]);
   const [tab, setTab] = useState(1);
+  const [toShow, settoShow] = useState(true);
+
   const [report, setReport] = useState({
     content: id,
     // addedBy: user.addUserData._id,
@@ -143,9 +145,36 @@ export default function NftInformation(props) {
     addNftReport(report);
   };
 
+  const difftime = (timestamp1, timestamp2) => {
+    var difference = timestamp1 - timestamp2;
+    var daysDifference = Math.floor(difference / 1000 / 60 / 60 / 24);
+
+    return daysDifference;
+  };
+
+  const currDate = new Date();
+  const stamp2 = Date.now(currDate);
+
+  const date = `${currDate.getDate()}/${currDate.getMonth() + 1}/${currDate.getFullYear()}`;
+
+  const stamp1 = nft?.biddingDetails?.endDate;
+
+  const expire = Math.floor(new Date(stamp1).getTime() / 1000);
+  console.log(expire, "final date")
+
+  // const days = difftime(stamp1, stamp2);
+  const days = (stamp1 == stamp2) ? 1 : difftime(stamp2, stamp2);
+
+  console.log(nft?.biddingDetails?.endDate, "expiry")
+  console.log(stamp1, "end date")
+  console.log(stamp2, "todays date")
+  console.log(date, "todays date")
+
+
+
   return (
     <>
-    {props?.refreshPage ? window.location.reload(true):""}
+      {props?.refreshPage ? window.location.reload(true) : ""}
       {props?.loaderState ? (
         <div className="center">
           {" "}
@@ -497,10 +526,14 @@ export default function NftInformation(props) {
                     {salesInfo?.price}
                   </span>
                 </span>
-                <span className="align-row">
+                {(stamp1 !== 0 || stamp1 !== "") ? <span className="align-row">
                   <i className="far fa-clock clock-icon"></i>
-                  <span className="time">Ends in 5 days </span>
-                </span>
+                  <span className="time">Ends in {days} days </span>
+                </span> : ""}
+                {(stamp1 < stamp2) ? <span className="align-row">
+                  <i className="far fa-clock clock-icon"></i>
+                  <span className="time">Expired </span>
+                </span> : ""}
               </div>
               <div className="row third-text">
                 <div className="col-lg-6 col-sm-12">
