@@ -39,7 +39,7 @@ function Home() {
                     <OwlCarousel className='owl-theme' margin={10} items={1}>
                       <div className='item'>
                         <div className="d-flex flex-wrap">
-                          <Card style={{ width: '18rem' }}>
+                          <Card>
                             <Card.Img variant="top" src={Image1} />
                             <Card.Body>
                               <div className="d-flex align-items-start media">
