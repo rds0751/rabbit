@@ -17,6 +17,10 @@ const Container = styled.div`
   margin-right: 130px;
   color: #191919;
   margin-top: 29px;
+  @media only screen and (min-width:425px) and  (max-width:769px) {
+    margin-left: 41px;
+    margin-right: 42px;
+  }
 `;
 const Header = styled.div`
   display: flex;
@@ -43,8 +47,11 @@ const Select = styled.select`
   background-position: 90% center;
 `;
 const Body = styled.div`
-  margin-top: 51px;
+  margin-top: 58px;
   margin-bottom: 16px;
+  @media only screen and (min-width:425px) and  (max-width:769px) {
+    margin-top: 39px;
+  }
 `;
 const Column = styled.div`
   font-size: 16px;
@@ -65,11 +72,12 @@ const Image = styled.img`
   /* padding-left: 31px;
   padding-right: 14px; */
   border-radius: 10px;
-  margin-left: 31px;
   margin: auto 0;
 `;
 const NameColumn = styled.div`
   display: flex;
+  margin-left: 31px;
+ 
 `;
 const Name = styled.p`
   font-size: 16px;
@@ -77,7 +85,7 @@ const Name = styled.p`
   margin: 24px 0 21px 14px;
 `;
 const VolumeColumn = styled.div`
-  padding-left: 40px;
+  /* padding-left: 40px; */
   margin:auto 0;
 `;
 const Span = styled.p`
