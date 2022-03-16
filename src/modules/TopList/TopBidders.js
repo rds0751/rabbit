@@ -56,6 +56,8 @@ const Collection = styled.div`
   background-color: #f8f8f8;
   margin-bottom: 42px;
   height: 68px;
+  border: 1px solid #FCFCFC;
+  border-radius: 13px;
 `;
 const Image = styled.img`
   width: 42px;
