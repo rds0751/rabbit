@@ -30,6 +30,7 @@ import { getUser } from "../../services/UserMicroService";
 import { Oval } from "react-loader-spinner";
 
 import ListingsTable from "../../common/components/ListingTable";
+toast.configure()
 
 export default function NftInformation(props) {
 
@@ -65,6 +66,8 @@ export default function NftInformation(props) {
   setRemoveFromSale(false)
   setOpenLoadingModal(false)
  }
+  const [reason, setReason] = useState("");
+
   if (openReportModal) {
     document.body.classList.add('active-modal')
   } else {
@@ -181,14 +184,18 @@ export default function NftInformation(props) {
   };
 
   const handleChange = (e) =>
-    setReport({
-      ...report,
+    setReason({
       reason: e.target.value,
     });
 
   const makeReport = () => {
     addNftReport(report);
   };
+  // const makeReport = () => {
+  //   addNftReport(report);
+  // };
+
+
   const sendButton = () => {
     removeNFTFromSell();
     setOpenRemoveSale(false);
@@ -223,10 +230,24 @@ export default function NftInformation(props) {
   }
 
 
-  const sendReport = () => {
-    addNftReport(report);
-    setOpenReportModal(false)
+  const sendReport = async () => {
+    let report = {
+      contentId: id,
+      addedBy: loggedInUser?._id,
+      reason: `${reason}`,
+    }
+    await addNftReport(report, (response) => {
+      if (response.success) {
+        toast.success(response.message);
+      } else {
+        toast.error("This Nft is already reported");
+      }
+      setOpenReportModal(false)
+    });
   }
+
+  let ownedBy = owner?.firstName ? owner?.firstName : loggedInUser?.wallet_address
+  let createdBy = creator?.firstName ? creator?.firstName : loggedInUser?.wallet_address
 
   return (
     <>
@@ -566,7 +587,7 @@ export default function NftInformation(props) {
                               className="btn btn-primary w-100"
                               data-bs-dismiss="modal"
                               style={{ marginLeft: "1.1em" }}
-                              onClick={makeReport}
+                            // onClick={makeReport}
                             >
                               Make Offer
                             </button>
@@ -594,14 +615,14 @@ export default function NftInformation(props) {
                   <span className="text">
                     Owned by:&nbsp;
                     <span className="text-name fw-b">
-                      {owner?.firstName ? owner?.firstName : owner?._id}</span>
+                      {(String(ownedBy).length >= 7) ? (!ownedBy ? " " : (String(ownedBy).substring(0, 8) + "...")) : (String(ownedBy) === undefined ? "" : ownedBy)}                    </span>
                   </span>
                 </div>
                 <div className="col-lg-6 col-sm-12">
                   <span className="text">
                     Created by:&nbsp;
                     <span className="text-name fw-b">
-                      {creator?.firstName ? creator?.firstName : creator?._id}</span>
+                      {(String(createdBy).length >= 7) ? (!createdBy ? " " : (String(createdBy).substring(0, 8) + "...")) : (String(createdBy) === undefined ? "" : createdBy)}                    </span>
                     <span className="text-name fw-b"></span>
                   </span>
                 </div>

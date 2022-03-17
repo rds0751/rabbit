@@ -11,67 +11,26 @@ import { useSelector } from "react-redux";
 
 function MyItems() {
 
-
   const [activeInActive, setActiveInActive] = useState("active");
   const [toggleSelect, setToggleSelect] = useState(true);
   const item = localStorage.setItem('keyValue', 'dataToPersist')
   const Item = localStorage.getItem('keyValue')
 
   const [ownedNft, setownedNft] = useState([]);
+  const { user } = useSelector((state) => state);
+  const { loggedInUser } = user;
+  if(loggedInUser){ localStorage.setItem('userId', loggedInUser._id); }
+  let userId = (loggedInUser) ? loggedInUser._id : localStorage.userId;
 
-  useEffect(async () => {
-    await getNftOwnedByUser().then((response) => setownedNft(response));
+  useEffect( async () => {
+    await getNftOwnedByUser(userId).then(res => setownedNft(res));
   }, []);
-  console.log("Nft Owned by user", ownedNft);
-
-
 
 
   const [ownedCollection, setownedCollection] = useState([]);
   useEffect(async () => {
-    await getCollectionOwnedByUser().then((response) => setownedCollection(response));
+    await getCollectionOwnedByUser(userId).then(res => setownedCollection(res));
   }, []);
-  console.log("Srinivas Collections Owned by user", ownedCollection);
-
-
-
-  // const [userId, setUserId] = useState("");
-
-
-  // const [checkClick, setcheckClick] = useState(false);
-  // const { user } = useSelector((state) => state);
-  // const navigate = useNavigate();
-  // const [isloading, setIsloading] = useState(false);
-
-  // const { loggedInUser } = user;
-  // useEffect(() => {
-  //   setUserId(loggedInUser._id)
-  //   // console.log()
-  //   console.log("logged user", loggedInUser._id)
-
-  //   if (loggedInUser == null) {
-  //     navigate("/my-profile");
-  //     navigate("/add-wallet");
-  //   } else {
-  //     setIsloading(true);
-  //     getOwnedByNft();
-
-  //     setIsloading(false);
-  //   }
-
-  // }, []);
-
-  // const getOwnedByNft = () => {
-  //   NftOwnedByUser((response) => {
-  //     console.log(response, "myprofile");
-  //     if (response.success) {
-  //       setownedNft(response.responseData);
-  //     } else {
-  //       toast.error(response.msg);
-  //     }
-  //   }, loggedInUser._id);
-  // };
-
 
 
   return (
