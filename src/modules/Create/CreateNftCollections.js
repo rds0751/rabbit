@@ -13,7 +13,7 @@ import styled from "styled-components";
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import Image from "../../assets/images/img-format.png";
 import ethereum from "../../assets/images/ethereum.svg";
-import success from "../../assets/images/Check.svg";
+
 import { httpConstants } from "../../constants";
 import { BASE_URL2 } from "../../reducers/Constants";
 import { createCollection } from "../../services/createServices";
@@ -277,45 +277,15 @@ function CreateNftCollections(props) {
   return (
     <>
       {loaderState ? (
-        <div className="mint-mod-outer">
-          <div className="mint-abs">
-            <div className="">
-              <div className="mint-outer" style={{ opacity: "1" }}>
-                <div className="mintbody">
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <div className="completelistin">
-                      Create your collection
-                    </div>
-                  </div>
-                  <div className="abstractillusion">
-                    <img src={logoCdn} />
-                    <div className="abstractillusioncontent">
-                      <div className="abstracttitle">{name.current}</div>
-                      <div className="abstractposter">{blockchain.current}</div>
-                      <div className="ethprice"></div>
-                    </div>
-                  </div>
-                  <div className="checkpostcontainer">
-                    <div className="checkpost">
-                        <img src={success} className="checkimg" />
-                        <div className="checkimg">
-                        <Oval
-                          vertical="top"
-                          horizontal="center"
-                          color="#00BFFF"
-                          height={30}
-                          width={30} />
-                        </div>
-                      <div className="checkposttext">
-                        <div className="heading">Pending</div>
-                        <div className="description"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="center">
+          {" "}
+          <Oval
+            vertical="top"
+            horizontal="center"
+            color="#00BFFF"
+            height={30}
+            width={30}
+          />
         </div>
       ) : (
         ""
@@ -414,7 +384,14 @@ function CreateNftCollections(props) {
             </div>
             <div>
               <div className="fs-16 fw-b c-b pt-3 pb-3">Blockchain*</div>
-              <div className="block-chain-container">
+              <div>
+                <input
+                  type="text"
+                  className="edit-form-input"
+                  name="blockchain"
+                />
+                </div>
+              {/* <div className="block-chain-container">
                 <div>
                   <img src={ethereum} height="32px" />
                 </div>
@@ -426,12 +403,13 @@ function CreateNftCollections(props) {
                       checkReqFieldFun();
                     }}
                   >
-                    <option selected value="eth">
+                    <option value="">Select Category</option>
+                    <option selected value="Ethereum">
                       Ethereum
                     </option>
                   </select>
                 </div>
-              </div>
+              </div> */}
             </div>
             <button
               type="submit"
