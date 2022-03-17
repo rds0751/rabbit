@@ -428,11 +428,11 @@ function CreateSingleNFT(props) {
 
                   <div>
                     <Link
-                      to="/create-nft"
-                      style={{
-                        textDecoration: "none",
-                      }}
-                    >
+                      to={"/create-nft-collection"}
+                        // pathname:"/create-nft-collection",
+                        state={{
+                          data:true}}>
+                    
                       <span className="color36 font-16 poppins-normal create-text">
                         {" "}
                         Create
