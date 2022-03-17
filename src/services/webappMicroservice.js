@@ -222,29 +222,16 @@ export function getNotificationListById(requestData) {
     });
 }
 
-export function addNftReport(requestData) {
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/reports/nfts";
-  return httpService(
-    httpConstants.METHOD_TYPE.POST,
-    // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
-    AuthToken,
-    requestData,
-    url
-  )
-    .then((response) => {
-      if (
-        !response.success ||
-        response.responseCode !== 200 ||
-        !response.responseData ||
-        response.responseData.length === 0
-      )
-        return Promise.reject();
-      return Promise.resolve(response.responseData);
-    })
-    .catch(function (err) {
-      return Promise.reject(err);
-    });
-}
+export const addNftReport = async (requestData, successCallBack) => {
+  try {
+    const url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/reports/nfts";
+    const { data } = await axios.post(url, { ...requestData });
+    successCallBack(data);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 // export const getNotificationListById = async () => {
 //   try {
 //     const res = await fetch(
