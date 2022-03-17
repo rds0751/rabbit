@@ -316,7 +316,7 @@ function CreateNftCollections(props) {
                   </div>
                   {/* <div className="checkpostcontainer"> */}
                     <div className="checkpost">
-                      <img src={success} className="checkimg" />
+                      {/* <img src={success} className="checkimg" /> */}
                       <div className="checkimg">
                         <Oval
                           vertical="top"
