@@ -235,7 +235,7 @@ export const NftLikedByUser = async (successCallBack, _id) => {
   try {
     const url =
       process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/" + _id + "/liked";
-    const { data } = await axios.post(url);
+    const { data } = await axios.get(url);
     if (data.success) {
       successCallBack(data);
     } else {
