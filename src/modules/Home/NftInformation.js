@@ -45,12 +45,27 @@ export default function NftInformation(props) {
   const { owner, creator, salesInfo } = nft;
   const [openReportModal, setOpenReportModal] = useState(false);
   const [saleModal, setsaleModal] = useState(false);
+  const [putOnSaleModal, setPutOnSaleModal] = useState(false);
+  const [removeFromSale, setRemoveFromSale] = useState(false);
+  const [openLoadingModal, setOpenLoadingModal] = useState(false);
+
 
   const [openRemoveSale, setOpenRemoveSale] = useState(false);
   const [userDetails, setUserDetails] = useState([]);
   const [tab, setTab] = useState(1);
   const [toShow, settoShow] = useState(true);
 
+  const [report, setReport] = useState({
+    contentId: id,
+    addedBy: loggedInUser?._id,
+    reason: "",
+  });
+ if(!props.loaderState)
+ {
+  setPutOnSaleModal(false)
+  setRemoveFromSale(false)
+  setOpenLoadingModal(false)
+ }
   const [reason, setReason] = useState("");
 
   if (openReportModal) {
@@ -118,6 +133,7 @@ export default function NftInformation(props) {
   };
   const demoHandleSell = async () => {
     setsaleModal(false)
+    setPutOnSaleModal(true)
 
     props?.sellNowNft({
       // sellerId:loggedInUser._id,
@@ -129,6 +145,7 @@ export default function NftInformation(props) {
   };
 
   const removeNFTFromSell = async () => {
+    setRemoveFromSale(true)
     props?.removeNftFromSale({
       // sellerId:loggedInUser._id,
       // buyerId:loggedInUser._id,
@@ -137,7 +154,6 @@ export default function NftInformation(props) {
       // nftId:response._id,
     });
   };
-  const [openLoadingModal, setOpenLoadingModal] = useState(false);
   const buyNft = async () => {
     if (user.loggedInUser != null) {
       props?.BuyNowNft({
@@ -172,6 +188,9 @@ export default function NftInformation(props) {
       reason: e.target.value,
     });
 
+  const makeReport = () => {
+    addNftReport(report);
+  };
   // const makeReport = () => {
   //   addNftReport(report);
   // };
@@ -232,8 +251,10 @@ export default function NftInformation(props) {
 
   return (
     <>
-      {props?.refreshPage ? window.location.reload(true) : ""}
-      {props?.loaderState ? (
+      {/* {props?.refreshPage ? window.location.reload(true) : ""} */}
+      {props?.loaderState ? "" : window.location.reload(true)}
+
+      {/* {props?.loaderState ? (
         <div className="center">
           {" "}
           <Oval
@@ -246,7 +267,7 @@ export default function NftInformation(props) {
         </div>
       ) : (
         ""
-      )}
+      )} */}
       <div className="nft-detail">
         <div className="container">
           <div className="row" style={{ marginTop: "5rem" }}>
@@ -764,7 +785,7 @@ export default function NftInformation(props) {
             <div className="report-inner" style={{ opacity: "1" }}>
               <div className="reportthisitem">
                 <h3 className="report-text poppins-normal">
-                  SELL NFT
+                  SALE NFT
                 </h3>
                 <i className="fa-solid fa-xmark cross-icon"
                   onClick={() => setsaleModal(false)}>
@@ -820,7 +841,136 @@ export default function NftInformation(props) {
           </div>
         </div>
       </div>
+      {/* remove from sale modal start from here */}
+      <div
+        className="mint-mod-outer"
+        style={{
+          display: removeFromSale ? "block" : "none",
+        }}
+      >
+        <div className="mint-abs">
+          <div className="">
+            <div className="mint-outer" style={{ opacity: "1" }}>
+              <div className="mintbody">
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <div className="completelistin">
+                    Remove From Sale
+                  </div>
+                </div>
+                <div className="abstractillusion">
+                  <img src={nft.ipfsUrl} />
+                  <div className="abstractillusioncontent">
+                    <div className="abstracttitle"></div>
+                    <div className="abstractposter"> {nft.name}</div>
+                    <div className="ethprice">{salesInfo?.price}ETH</div>
+                  </div>
+                </div>
+                <div className="checkpostcontainer">
+                  <div className="checkpost">
+                    <img src={success} className="checkimg" />
+                    <div className="checkimg">
+                      {/* <Oval
+                        vertical="top"
+                        horizontal="center"
+                        color="#00BFFF"
+                        height={30}
+                        width={30} /> */}
+                    </div>
+                    <div className="checkposttext">
+                      <div className="heading">initializing</div>
+                      <div className="description"></div>
+                    </div>
+                  </div>
+                  <div className="checkpost">
+                    {/* <img src={success} className="checkimg" /> */}
+                    <div className="checkimg">
+                      {props?.removeSuccess ?
 
+                        <img src={success} className="checkimg" /> :
+                        <Oval
+                          vertical="top"
+                          horizontal="center"
+                          color="#00BFFF"
+                          height={30}
+                          width={30} />}
+                    </div>
+                    <div className="checkposttext">
+                      <div className="heading">Remove From Sale</div>
+                      <div className="description"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* remove from sale modal end is here */}
+      {/* Put from sale modal start from here */}
+      <div
+        className="mint-mod-outer"
+        style={{
+          display: putOnSaleModal ? "block" : "none",
+        }}
+      >
+        <div className="mint-abs">
+          <div className="">
+            <div className="mint-outer" style={{ opacity: "1" }}>
+              <div className="mintbody">
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <div className="completelistin">
+                    Put On Sale This NFT
+                  </div>
+                </div>
+                <div className="abstractillusion">
+                  <img src={nft.ipfsUrl} />
+                  <div className="abstractillusioncontent">
+                    <div className="abstracttitle"></div>
+                    <div className="abstractposter"> {nft.name}</div>
+                    <div className="ethprice">{salesInfo?.price}ETH</div>
+                  </div>
+                </div>
+                <div className="checkpostcontainer">
+                  <div className="checkpost">
+                    <img src={success} className="checkimg" />
+                    <div className="checkimg">
+                      {/* <Oval
+                        vertical="top"
+                        horizontal="center"
+                        color="#00BFFF"
+                        height={30}
+                        width={30} /> */}
+                    </div>
+                    <div className="checkposttext">
+                      <div className="heading">initializing</div>
+                      <div className="description"></div>
+                    </div>
+                  </div>
+                  <div className="checkpost">
+                    {/* <img src={success} className="checkimg" /> */}
+                    <div className="checkimg">
+                      {props?.saleSuccess ?
+
+                        <img src={success} className="checkimg" /> :
+                        <Oval
+                          vertical="top"
+                          horizontal="center"
+                          color="#00BFFF"
+                          height={30}
+                          width={30} />}
+                    </div>
+                    <div className="checkposttext">
+                      <div className="heading">On Sale</div>
+                      <div className="description"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Put from sale modal end from here */}
       {/* Buying loading modal start */}
       <div
         className="mint-mod-outer"
@@ -849,12 +999,12 @@ export default function NftInformation(props) {
                   <div className="checkpost">
                     <img src={success} className="checkimg" />
                     <div className="checkimg">
-                      <Oval
+                      {/* <Oval
                         vertical="top"
                         horizontal="center"
                         color="#00BFFF"
                         height={30}
-                        width={30} />
+                        width={30} /> */}
                     </div>
                     <div className="checkposttext">
                       <div className="heading">Approve</div>
@@ -862,14 +1012,17 @@ export default function NftInformation(props) {
                     </div>
                   </div>
                   <div className="checkpost">
-                    <img src={success} className="checkimg" />
+                    {/* <img src={success} className="checkimg" /> */}
                     <div className="checkimg">
-                      <Oval
-                        vertical="top"
-                        horizontal="center"
-                        color="#00BFFF"
-                        height={30}
-                        width={30} />
+                      {props?.buySuccess ?
+
+                        <img src={success} className="checkimg" /> :
+                        <Oval
+                          vertical="top"
+                          horizontal="center"
+                          color="#00BFFF"
+                          height={30}
+                          width={30} />}
                     </div>
                     <div className="checkposttext">
                       <div className="heading">Transfer</div>
