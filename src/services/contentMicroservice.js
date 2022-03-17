@@ -177,7 +177,7 @@ export function getNftOwnedByUser(requestData) {
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
     "api/v1/nfts/" +
-    "6210ce09e9384c0035598c31" + "/owned";
+    requestData + "/owned";
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -205,7 +205,7 @@ export function getCollectionOwnedByUser(requestData) {
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
     "api/v1/users/" +
-    "622707233c31610035bff542" + "/collections";
+    requestData + "/collections";
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },

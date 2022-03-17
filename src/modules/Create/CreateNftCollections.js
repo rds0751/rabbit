@@ -384,14 +384,7 @@ function CreateNftCollections(props) {
             </div>
             <div>
               <div className="fs-16 fw-b c-b pt-3 pb-3">Blockchain*</div>
-              <div>
-                <input
-                  type="text"
-                  className="edit-form-input"
-                  name="blockchain"
-                />
-                </div>
-              {/* <div className="block-chain-container">
+              <div className="block-chain-container">
                 <div>
                   <img src={ethereum} height="32px" />
                 </div>
@@ -403,13 +396,12 @@ function CreateNftCollections(props) {
                       checkReqFieldFun();
                     }}
                   >
-                    <option value="">Select Category</option>
-                    <option selected value="Ethereum">
+                    <option selected value="eth">
                       Ethereum
                     </option>
                   </select>
                 </div>
-              </div> */}
+              </div>
             </div>
             <button
               type="submit"
