@@ -27,6 +27,7 @@ import "../../assets/styles/MintModal.css";
 import UploadSingleNft from "./CreateSingleUploadFile";
 import Close from "../../assets/images/close.png";
 
+
 // import "../../assets/styles/Leader.css"
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 const Button = styled.button``;
@@ -53,6 +54,7 @@ function CreateSingleNFT(props) {
   const { loggedInUser, walletAddress } = user;
   const [checkDisable, setcheckDisable] = useState(true);
   const [isFileSelected, setIsFileSelected] = useState(false);
+  const[isloader,setisLoader]=useState(false);
   // console.log(user.addUserData._id, "<<<< user data");
   // -------------------------------
   const name = useRef("");
@@ -98,6 +100,7 @@ function CreateSingleNFT(props) {
       );
       // const [err, ipfsRes] = addIPFS(formData)
       (async () => {
+        setisLoader(true);
         const [err, ipfsRes] = await Utils.parseResponse(
           getCollection.addIpfs(formData)
         );
@@ -108,6 +111,7 @@ function CreateSingleNFT(props) {
 
           setIpfsUrl(ipfsRes.ipfsUrl);
           setcdnUrl(ipfsRes.cdnUrl);
+          setisLoader(false);
           setIsFileSelected(true);
         }
       })();
@@ -258,7 +262,9 @@ function CreateSingleNFT(props) {
               {!isFileSelected && (
                 <div className="draganddropbox" {...getRootProps()}>
                   <input {...getInputProps()} />
-                  <div className="draganddropboxinnerdiv">
+
+                  {!isloader ? (
+                    <div className="draganddropboxinnerdiv">
                     <img
                       src={cdnUrl != "" ? cdnUrl : Image}
                       style={{
@@ -276,13 +282,27 @@ function CreateSingleNFT(props) {
                       </span>
                     </span>
                   </div>
+                  ):(
+                    <div className="">
+                       {" "}
+                        <Oval
+                       vertical="center"
+                      horizontal="center"
+                      color="#00BFFF"
+                      height={30}
+                      width={30}
+              />
+            </div>
+                  )}
+                  
                 </div>
               )}
 
               {isFileSelected && (
                 <div className="draganddropbox" {...getRootProps()}>
                   <input {...getInputProps()} />
-                  <div className="draganddropboxinnerdiv">
+
+                  {!isloader?(<div className="draganddropboxinnerdiv">
                     <img
                       src={cdnUrl != "" ? cdnUrl : Image}
                       style={{
@@ -299,7 +319,19 @@ function CreateSingleNFT(props) {
                       Browse
                     </span>
                   </span> */}
-                  </div>
+                  </div>):(
+                    <div className="">
+                    {" "}
+                     <Oval
+                    vertical="center"
+                   horizontal="center"
+                   color="#00BFFF"
+                   height={30}
+                   width={30}
+           />
+         </div>
+                  )}
+                  
                 </div>
               )}
               {/* ----------------- */}
