@@ -172,9 +172,9 @@ export default function NftInformation(props) {
       reason: e.target.value,
     });
 
-  const makeReport = () => {
-    addNftReport(report);
-  };
+  // const makeReport = () => {
+  //   addNftReport(report);
+  // };
 
 
   const sendButton = () => {
