@@ -313,8 +313,6 @@ function CreateNftCollections(props) {
                         <div className="description"></div>
                       </div>
                     </div>
-                  </div>
-                  {/* <div className="checkpostcontainer"> */}
                     <div className="checkpost">
                       {/* <img src={success} className="checkimg" /> */}
                       <div className="checkimg">
@@ -330,8 +328,9 @@ function CreateNftCollections(props) {
                         <div className="heading">Creating Collection</div>
                         <div className="description"></div>
                       </div>
-                    {/* </div> */}
-                  </div>                  
+                    </div> 
+                  </div>
+
 
                   
                 </div>
