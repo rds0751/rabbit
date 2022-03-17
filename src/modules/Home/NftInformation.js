@@ -62,9 +62,8 @@ export default function NftInformation(props) {
   });
  if(!props.loaderState)
  {
-  setPutOnSaleModal(false)
-  setRemoveFromSale(false)
-  setOpenLoadingModal(false)
+  // setRemoveFromSale(false)
+  // setOpenLoadingModal(false)
  }
   const [reason, setReason] = useState("");
 
@@ -131,8 +130,8 @@ export default function NftInformation(props) {
     // setCopiedText(false);
     // }, 1000);
   };
-  const demoHandleSell = async () => {
-    setsaleModal(false)
+  const demoHandleSell = async () => { 
+     setsaleModal(false)
     setPutOnSaleModal(true)
 
     props?.sellNowNft({
@@ -142,6 +141,8 @@ export default function NftInformation(props) {
       // tokenId:response.tokenId,
       // nftId:response._id,
     });
+    // setPutOnSaleModal(false)
+
   };
 
   const removeNFTFromSell = async () => {
@@ -153,6 +154,8 @@ export default function NftInformation(props) {
       // tokenId:response.tokenId,
       // nftId:response._id,
     });
+      // setRemoveFromSale(false)
+
   };
   const buyNft = async () => {
     if (user.loggedInUser != null) {
@@ -252,7 +255,7 @@ export default function NftInformation(props) {
   return (
     <>
       {/* {props?.refreshPage ? window.location.reload(true) : ""} */}
-      {props?.loaderState ? "" : window.location.reload(true)}
+      {props?.loaderState ? "" : setTimeout(() => {window.location.reload(true)}, 1000)}
 
       {/* {props?.loaderState ? (
         <div className="center">
@@ -639,7 +642,7 @@ export default function NftInformation(props) {
                 <div>
                   <FavoriteIcon style={{ fontSize: "17px", color: "#EF3643" }} />
                   <span className="text fw-b" style={{ marginLeft: "0.5em" }}>
-                    {nft.likesCount}
+                    {nft?.likes?.length}
                   </span>
                 </div>
               </div>
@@ -668,7 +671,7 @@ export default function NftInformation(props) {
                 >
                   Buy Now
                 </Button>
-                <Button
+                {/* <Button
                   data-bs-toggle="modal"
                   data-bs-target="#myModalShare"
                   style={{
@@ -685,7 +688,7 @@ export default function NftInformation(props) {
                   onClick={removeNFTFromSell}
                 >
                   Make Offer
-                </Button>
+                </Button> */}
               </div>
 
               <div className="grap-area">
