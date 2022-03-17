@@ -24,14 +24,20 @@ import { useDispatch } from "react-redux";
 
 
 function Notification() {
+
   const { sideBar, user } = useSelector((state) => state);
   const { isOpenNoti } = sideBar;
   const [notifications, setNotifications] = useState([]);
+
+  const { loggedInUser } = user;
+  if (loggedInUser) { localStorage.setItem('userId', loggedInUser._id); }
+  let userId = (loggedInUser) ? loggedInUser._id : localStorage.userId;
+
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     console.log(user, "srinivas")
-    getNotificationListById(user?.loggedInUser?._id).then((response) =>
+    getNotificationListById(userId).then((response) =>
       setNotifications(response)
     );
   }, []);
@@ -43,6 +49,8 @@ function Notification() {
     bottom: false,
     right: false,
   });
+
+
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -56,47 +64,51 @@ function Notification() {
   };
 
   const handleChange = (e) => {
-      dispatch(ManageNotiSideBar(!isOpenNoti));
-      dispatch(ManageWalletSideBar(false));
-      document.body.style.overflow = !isOpenNoti ? "hidden" : "visible";
+    dispatch(ManageNotiSideBar(!isOpenNoti));
+    dispatch(ManageWalletSideBar(false));
+    document.body.style.overflow = !isOpenNoti ? "hidden" : "visible";
   }
 
- 
+
   return (
     <div style={{ display: isOpenNoti ? null : "none" }} className="main-cont">
       {/* ------------ */}
-      <div className="empty_div" onClick = {() => handleChange()}></div>
+      <div className="empty_div" onClick={() => handleChange()}></div>
       <div className="noti-outer">
         <h3 className="notification-text">Notification</h3>
-          <div className="all-noti">
-            {notifications.map((curElem) => {
-              const { addedOn, type, userId } = curElem;
-              return (
-                <div className="single-noti">
-                  <div className="single-noti-inner ">
-                    <img
-                      src={profile}
-                      width="24px"
-                      height="24px"
-                      className="noti-image"
-                    />
-                    <div className="noti-text">
-                      <span>
-                        {(String(userId).length >= 7) ? (!userId ? " " : (String(userId).substring(0, 8) + "...")) : (String(userId) === undefined ? "" : userId)}
-                      </span>&nbsp;{type}&nbsp;your item.
-                    </div>
-                  </div>
+        <div className="all-noti">
+          {notifications.map((curElem) => {
+            const { addedOn, type, userId } = curElem;
 
-                  <div className="time">{addedOn}</div>
+
+
+
+            return (
+              <div className="single-noti">
+                <div className="single-noti-inner ">
+                  <img
+                    src={profile}
+                    width="24px"
+                    height="24px"
+                    className="noti-image"
+                  />
+                  <div className="noti-text">
+                    <span>
+                      {(String(userId).length >= 7) ? (!userId ? " " : (String(userId).substring(0, 8) + "...")) : (String(userId) === undefined ? "" : userId)}
+                    </span>&nbsp;{type}&nbsp;your item.
+                  </div>
                 </div>
-              );
-            })}
-          </div>
+
+                <div className="time">{addedOn}</div>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* ------------------ */}
 
-    
+
     </div>
   );
 }
