@@ -23,6 +23,7 @@ import NftCardsHome from "../../common/components/NftCardsHome";
 import styled from "styled-components";
 import dropdown from "../../assets/images/dropdown.svg";
 import { Button } from "react-bootstrap"
+import NoItem from "../../assets/images/Noitems.svg"
 // const Select = styled.select`
 // appearance:none;
 // background-image:url(/images/Fixed.png)
@@ -179,6 +180,12 @@ function NftPage() {
 
   const [statusDrop, setStatusDrop] = useState(false);
 
+  const buttonfilter=(e)=>{
+     handlePriceFilter(e);
+     setStatusDrop(false);
+
+  }
+
   return (
     <>
       {/* <div className="container ntf_div"> */}
@@ -236,7 +243,7 @@ function NftPage() {
                       <Button type="submit" onClick={(e) => clearPriceFilter(e)} variant="outline-primary">Clear</Button>
                     </div>
                     <div className="col-6">
-                      <Button onClick={(e) => handlePriceFilter(e)} variant="outline-primary">Apply</Button>
+                      <Button onClick={(e)=>buttonfilter(e)} variant="outline-primary">Apply</Button>
                     </div>
                   </div>
                   {/* </form> */}
@@ -301,7 +308,10 @@ function NftPage() {
           })}
         </div>
         {nfts.length === 0 && (<div>
-          <h1>No Match Found</h1>
+          <div className="Noitemdiv">
+            <img src={NoItem}/>
+             <p className="textitem">No items available</p>
+           </div>
         </div>)}
       </div >
       <ToastContainer

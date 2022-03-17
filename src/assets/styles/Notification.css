@@ -1347,3 +1347,6 @@ background-position: right;
     margin-right: 15px !important;
   }
 }
+.mobilenftTilePageSecondSelect{
+  cursor: pointer;
+}

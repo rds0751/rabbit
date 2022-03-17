@@ -30,6 +30,7 @@ import Spinner from "../../common/components/Spinner";
 import NonftText from "../../common/components/NonftText";
 import { updateBannerByUserId } from "../../services/UserMicroService";
 import SplitWalletAdd from "../../common/components/SplitWalletAdd";
+import NoItem from "../../assets/images/Noitems.svg"
 function MyProfile() {
   const defaultCoverpic =
     "https://png.pngtree.com/background/20210714/original/pngtree-blood-drop-halloween-blood-background-black-background-picture-image_1220404.jpg";
@@ -61,6 +62,7 @@ function MyProfile() {
   const [checkClick, setcheckClick] = useState(false);
   const [getBalance, setGetBalance] = useState("");
   const dispatch = useDispatch();
+  
 
   const [typeofProfilePost, setTypeofProfilePost] = useState("on-sale");
 
@@ -314,7 +316,12 @@ function MyProfile() {
             {isloading && <Spinner />}
             {(() => {
               if (!isloading && Nfts.length < 1) {
-                return <NonftText text="No Nft" />;
+                return <div>
+                  <div className="Noitemdiv">
+                    <img src={NoItem}/>
+                    <p className="textitem">No items available</p>
+                    </div>
+                  </div>
               }
             })()}
 

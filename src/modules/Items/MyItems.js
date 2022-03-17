@@ -8,7 +8,7 @@ import UpperMyItems from "../../common/components/UpperMyItems";
 import { getNftOwnedByUser } from "../../services/contentMicroservice";
 import { getCollectionOwnedByUser } from "../../services/contentMicroservice";
 import { useSelector } from "react-redux";
-
+import NoItem from "../../assets/images/Noitems.svg"
 function MyItems() {
 
   const [activeInActive, setActiveInActive] = useState("active");
@@ -92,6 +92,13 @@ function MyItems() {
 
         {toggleSelect && (
           <div style={{ marginTop: "40.12px", marginLeft: 'auto', rowGap: "50px" }} className="row">
+
+              {ownedNft.length === 0 && (<div>
+                  <div className="Noitemdiv">
+                    <img src={NoItem}/>
+                    <p className="textitem">No items available</p>
+                    </div>
+                  </div>)}
             {ownedNft.map((curElem) => {
               const { cdnUrl, name, _id } =
                 curElem;
@@ -129,6 +136,7 @@ function MyItems() {
                     </div>
                   </div>
                 </div>
+                
 
               );
             })}
@@ -136,6 +144,14 @@ function MyItems() {
         )}
         {!toggleSelect && (
           <div style={{ marginLeft: 'auto', rowGap: "50px" }} className="row">
+
+             {ownedCollection.length === 0 && (<div>
+              <div className="Noitemdiv">
+                <img src={NoItem}/>
+                <p className="textitem">No items available</p>
+                </div>
+              </div>)}
+              
             {ownedCollection.map((curElem) => {
               const { imageUrl, name, _id } =
                 curElem;
