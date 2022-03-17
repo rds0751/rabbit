@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Image from "../../assets/images/img-format.png";
+import Image from "../../assets/images/img-format.svg";
 import success from "../../assets/images/Check.svg";
 import ethereum from "../../assets/images/ethereum.svg";
 // import { FaCloudUploadAlt } from "react-icons/fa";
@@ -36,6 +36,7 @@ function CreateSingleNFT(props) {
   console.log("ppppppppppppp", props?.loaderState);
   // console.log("ppppppppppppp", props?.isNftCreated);
   const [collectionData, setCollectionData] = useState([]);
+  console.log("collection data", collectionData)
   const [selectFile, setSelectFile] = useState("");
   const [collectionId, setCollectionId] = useState("");
   const [contractAddress, setContractAddress] = useState("");
@@ -323,20 +324,23 @@ function CreateSingleNFT(props) {
                   }}
                 />
               </div>
-              <div className="">
-                <label htmlFor="email" className=" input-label">
+              <div className="input-price">
+                <label htmlFor="price" className=" input-label">
                   Price*
                 </label>
-                <input
-                  className="form-control-1"
-                  min="0"
-                  type="number"
-                  autoComplete="off"
-                  onChange={(e) => {
-                    price.current = e.target.value;
-                    checkChanges();
-                  }}
-                />
+                <div class="input-group">
+                  <input
+                    className="form-control"
+                    min="0"
+                    type="number"
+                    autoComplete="off"
+                    onChange={(e) => {
+                      price.current = e.target.value;
+                      checkChanges();
+                    }}
+                  />
+                  <span class="input-group-text">ETH</span>
+                </div>
               </div>
               <div className="">
                 <label htmlFor="comment" className="input-label pb-2">
@@ -428,7 +432,7 @@ function CreateSingleNFT(props) {
                 <option value="">Select Blockchain</option>
                 <option value="Ethereum">Ehtereum</option>
               </select> */}
-                <div className="d-flex block-chain-container">
+                {/* <div className="d-flex block-chain-container">
                   <div>
                     <img src={ethereum} height="32px" />
                   </div>
@@ -445,6 +449,13 @@ function CreateSingleNFT(props) {
                       </option>
                     </select>
                   </div>
+                </div> */}
+                <div>
+                  <input
+                    type="text"
+                    className="edit-form-input"
+                    name="blockchain"
+                  />
                 </div>
               </div>
               <button
@@ -515,7 +526,7 @@ function CreateSingleNFT(props) {
                           'Uploading'
                         ) : (
                           'Upload'
-                        )}  
+                        )}
                       </div>
                       <div className="description">
                         Uploading all media assets and metadata to IPFS
@@ -535,19 +546,19 @@ function CreateSingleNFT(props) {
                           width={30} />
                       </div>
                     )}
-                     {/* {!props.isMintSuccess && (
+                    {/* {!props.isMintSuccess && (
                          <div className="checkvalue checkvaluetext">2</div>
                        )} */}
-                      <div className="checkposttext">
-                        <div className="heading">
-                          {props.isMintSuccess === 'true' ? (
-                            'Mint'
-                          ) : (
-                            'Minting'
-                          )}
-                        </div>
-                        <div className="description">Send Transaction to Create your NFT</div>
+                    <div className="checkposttext">
+                      <div className="heading">
+                        {props.isMintSuccess === 'true' ? (
+                          'Mint'
+                        ) : (
+                          'Minting'
+                        )}
                       </div>
+                      <div className="description">Send Transaction to Create your NFT</div>
+                    </div>
                   </div>
                   {/* <div className="checkpost">
                     {props.isMintSuccess && (

@@ -90,8 +90,8 @@ function Collections_tile() {
             </div>
           </div>
           <div className="filter">
-            <div className="mobilenftTilePageThirdSelect dropdown sort-drop ">
-              <p className="mb-0">Sort By </p>
+            <div className="dropdown sort-drop" style={{ width: "260px" }}>
+              <p className="mb-0">Sort By</p>
               <select
                 name="sort"
                 value={filterData.sort}
@@ -99,6 +99,7 @@ function Collections_tile() {
                 // className="first_select ml_auto"
                 onChange={(e) => handleFilter(e)}
                 className="priceRangeDropDown dropdown-toggle-ellipsis"
+                style={{ width: "180px" }}
               >
                 <option value="all">All</option>
                 <option value="recently added">Recently Added</option>
@@ -125,7 +126,7 @@ function Collections_tile() {
             })()}
           </div>
           {collections.map((collection) => {
-            const { _id, imageUrl, name, nfts } = collection;
+            const { _id, imageUrl, name, nftCount } = collection;
             const route = "/collection-details/" + _id;
             return (
               <div className="collectionCardEach col-md-6 col-lg-3 col-sm-12 mt-5 nft_card">
@@ -158,7 +159,7 @@ function Collections_tile() {
                           Total Items:
                           {/* {alert(nfts)} */}
                           {/* {console.log("jjjjjjjjjjjjjjjj",collection)} */}
-                          <span className="text-primary">{nfts.length}</span>
+                          <span className="text-primary">{nftCount}</span>
                         </span>
                       </p>
                     </div>

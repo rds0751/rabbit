@@ -16,7 +16,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import "../../assets/styles/createSingleNft.css";
 import dropdowmImage from "../../assets/images/drop down.png";
 import Close from "../../assets/images/close.png";
-
+import success from "../../assets/images/Check.svg";
 import { Button } from "@mui/material";
 import { getNft, addNftReport } from "../../services/webappMicroservice";
 import { useSelector } from "react-redux";
@@ -33,9 +33,6 @@ import ListingsTable from "../../common/components/ListingTable";
 
 export default function NftInformation(props) {
 
-
-
-  console.log(props?.responseData, "<<<response");
   const navigate = useNavigate();
   const [activeInActive, setActiveInActive] = useState("active");
   const { user } = useSelector((state) => state);
@@ -46,15 +43,27 @@ export default function NftInformation(props) {
   const nft = props?.responseData;
   const { owner, creator, salesInfo } = nft;
   const [openReportModal, setOpenReportModal] = useState(false);
+  const [saleModal, setsaleModal] = useState(false);
+
+  const [openRemoveSale, setOpenRemoveSale] = useState(false);
   const [userDetails, setUserDetails] = useState([]);
   const [tab, setTab] = useState(1);
+  const [toShow, settoShow] = useState(true);
+
   const [report, setReport] = useState({
-    content: id,
-    // addedBy: user.addUserData._id,
+    contentId: id,
+    addedBy: loggedInUser?._id,
     reason: "",
   });
 
   if (openReportModal) {
+    document.body.classList.add('active-modal')
+  } else {
+    document.body.classList.remove('active-modal')
+  }
+
+
+  if (openRemoveSale) {
     document.body.classList.add('active-modal')
   } else {
     document.body.classList.remove('active-modal')
@@ -89,7 +98,30 @@ export default function NftInformation(props) {
   // console.log("===",isCurrUserNft)
   // console.log("===",isOpenForSell)
 
+  const facebook = async () => {
+    window.open('https://www.facebook.com/', '_blank');
+
+  }
+  const twitter = async () => {
+    window.open('https://twitter.com/i/flow/login', '_blank');
+
+  }
+  const handleCopyToClipboard = () => {
+    // alert(window.location.href);
+    // console.log("kkkkkkkkkkdddddd",window.location.href);     //yields: "https://stacksnippets.net/js"
+
+    // const { wallet_address } = loggedInUser;
+    navigator.clipboard.writeText(window.location.href);
+    // navigator.clipboard.writeText(walletAddressUnquoted);
+    // setCopiedText(true);
+    // toast.success("Text Copied");
+    // setTimeout(() => {
+    // setCopiedText(false);
+    // }, 1000);
+  };
   const demoHandleSell = async () => {
+    setsaleModal(false)
+
     props?.sellNowNft({
       // sellerId:loggedInUser._id,
       // buyerId:loggedInUser._id,
@@ -108,12 +140,14 @@ export default function NftInformation(props) {
       // nftId:response._id,
     });
   };
+  const [openLoadingModal, setOpenLoadingModal] = useState(false);
   const buyNft = async () => {
     if (user.loggedInUser != null) {
       props?.BuyNowNft({
         buyerId: loggedInUser?._id,
         newOwnerAddress: walletAddress?.address,
       });
+      setOpenLoadingModal(true);
     } else {
       navigate("/add-wallet");
     }
@@ -124,7 +158,10 @@ export default function NftInformation(props) {
     //     window.location.reload(false);
     //   } else toast.error(response.message);
   };
-
+  const openSaleModal = async () => {
+    // alert("kkkk")
+    setsaleModal(true)
+  }
   const handleRemoveSell = async () => {
     const response = await RemoveNftFromSale(nft._id);
     if (response.success) {
@@ -142,6 +179,44 @@ export default function NftInformation(props) {
   const makeReport = () => {
     addNftReport(report);
   };
+  const sendButton = () => {
+    removeNFTFromSell();
+    setOpenRemoveSale(false);
+  }
+
+  const difftime = (timestamp1, timestamp2) => {
+    var difference = timestamp1 - timestamp2;
+    var daysDifference = Math.floor(difference / 1000 / 60 / 60 / 24);
+
+    return daysDifference;
+  };
+
+  let showDateSection = true;
+
+  let message = '';
+
+  if (nft?.biddingDetails?.endDate) {
+    const currDate = new Date();
+
+    const currentDate = Date.now(currDate);
+
+    const endDate = nft?.biddingDetails?.endDate;
+
+    let endDateTimeStamp = Math.floor(new Date(endDate).getTime());
+
+    const days = (endDateTimeStamp == currentDate) ? 1 : difftime(endDateTimeStamp, currentDate);
+
+    message = (endDateTimeStamp < currentDate) ? "Expired" : `End in ${days} days`;
+
+  } else {
+    showDateSection = false;
+  }
+
+
+  const sendReport = () => {
+    addNftReport(report);
+    setOpenReportModal(false)
+  }
 
   return (
     <>
@@ -204,7 +279,7 @@ export default function NftInformation(props) {
                         marginRight: "1rem",
                         textTransform: "none",
                       }}
-                      onClick={demoHandleSell}
+                      onClick={openSaleModal}
                     >
                       sale
                     </Button>
@@ -219,7 +294,7 @@ export default function NftInformation(props) {
                         backgroundColor: "#366eff",
                         textTransform: "none",
                       }}
-                      onClick={removeNFTFromSell}
+                      onClick={() => setOpenRemoveSale(true)}
                     >
                       Remove From Sale
                     </Button>
@@ -338,7 +413,7 @@ export default function NftInformation(props) {
                           marginRight: "1rem",
                           textTransform: "none",
                         }}
-                        onClick={demoHandleSell}
+                        onClick={openSaleModal}
                       >
                         Sale
                       </Button>
@@ -353,7 +428,7 @@ export default function NftInformation(props) {
                           backgroundColor: "#366eff",
                           textTransform: "none",
                         }}
-                        onClick={removeNFTFromSell}
+                        onClick={() => setOpenRemoveSale(true)}
                       >
                         Remove From Sell
                       </Button>
@@ -497,10 +572,10 @@ export default function NftInformation(props) {
                     {salesInfo?.price}
                   </span>
                 </span>
-                <span className="align-row">
+                {(showDateSection) ? <span className="align-row">
                   <i className="far fa-clock clock-icon"></i>
-                  <span className="time">Ends in 0 days </span>
-                </span>
+                  <span className="time">{message} </span>
+                </span> : ""}
               </div>
               <div className="row third-text">
                 <div className="col-lg-6 col-sm-12">
@@ -654,7 +729,7 @@ export default function NftInformation(props) {
               </div>
               <div className="singlerowmodal">
                 <h3 className="reason-text"> Reason</h3>
-                <select className="select-box">
+                <select className="select-box" onChange={(e) => handleChange(e)}>
                   <option>Select reason</option>
                   <option value="Fake collection or possible scam">Fake collection or possible scam</option>
                   <option value="Explicit and sensitive content">Explicit and sensitive content</option>
@@ -662,11 +737,169 @@ export default function NftInformation(props) {
                   <option value="Other">Other</option>
                 </select>
               </div>
-              <button className="report-btn" onClick={() => setOpenReportModal(false)}>Report</button>
+              <button className="btn btn-primary report-btn" onClick={sendReport}>Report</button>
             </div>
           </div>
         </div>
       </div>
+      {/* --------------------this modal for sale button NFT----------- */}
+      <div
+        className="report-outer"
+        style={{ display: saleModal ? "block" : "none" }}
+      >
+        <div className="report-abs-modal">
+          <div className="report-modal">
+            <div className="report-inner" style={{ opacity: "1" }}>
+              <div className="reportthisitem">
+                <h3 className="report-text poppins-normal">
+                  SELL NFT
+                </h3>
+                <i className="fa-solid fa-xmark cross-icon"
+                  onClick={() => setsaleModal(false)}>
+                </i>
+              </div>
+              <div className="singlerowmodal">
+                <h3 className="reason-text"> Price*</h3>
+                <input
+                  className="form-control-1"
+                  min="0"
+                  type="number"
+                  autoComplete="off"
+                  value={salesInfo?.price}
+                  readonly
+                // onChange={(e) => {
+                //   price.current = e.target.value;
+                //   checkChanges();
+                // }}
+                />
+                <h3 className="reason-text"> Schedule for Future time</h3>
+                <input
+                  className="form-control-1"
+                  min="0"
+                  type="date"
+                  autoComplete="off"
+                  value="23"
+                // onChange={(e) => {
+                //   price.current = e.target.value;
+                //   checkChanges();
+                // }}
+                />
+                <input
+                  className="form-control-1"
+                  min="0"
+                  type="time"
+                  autoComplete="off"
+                  value="23"
+                // onChange={(e) => {
+                //   price.current = e.target.value;
+                //   checkChanges();
+                // }}
+                />
+                {/* <select className="select-box" onChange={(e) => handleChange(e)}>
+                    <option>Select reason</option>
+                    <option value="Fake collection or possible scam">Fake collection or possible scam</option>
+                    <option value="Explicit and sensitive content">Explicit and sensitive content</option>
+                    <option value="Might be stolen">Might be stolen</option>
+                    <option value="Other">Other</option>
+                  </select> */}
+              </div>
+              <button className="btn btn-primary report-btn" onClick={demoHandleSell}>Sale</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Buying loading modal start */}
+      <div
+        className="mint-mod-outer"
+        style={{
+          display: openLoadingModal ? "block" : "none",
+        }}
+      >
+        <div className="mint-abs">
+          <div className="">
+            <div className="mint-outer" style={{ opacity: "1" }}>
+              <div className="mintbody">
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <div className="completelistin">
+                    Complete your Buying
+                  </div>
+                </div>
+                <div className="abstractillusion">
+                  <img src={nft.ipfsUrl} />
+                  <div className="abstractillusioncontent">
+                    <div className="abstracttitle"></div>
+                    <div className="abstractposter"> {nft.name}</div>
+                    <div className="ethprice">{salesInfo?.price}ETH</div>
+                  </div>
+                </div>
+                <div className="checkpostcontainer">
+                  <div className="checkpost">
+                    <img src={success} className="checkimg" />
+                    <div className="checkimg">
+                      <Oval
+                        vertical="top"
+                        horizontal="center"
+                        color="#00BFFF"
+                        height={30}
+                        width={30} />
+                    </div>
+                    <div className="checkposttext">
+                      <div className="heading">Approve</div>
+                      <div className="description"></div>
+                    </div>
+                  </div>
+                  <div className="checkpost">
+                    <img src={success} className="checkimg" />
+                    <div className="checkimg">
+                      <Oval
+                        vertical="top"
+                        horizontal="center"
+                        color="#00BFFF"
+                        height={30}
+                        width={30} />
+                    </div>
+                    <div className="checkposttext">
+                      <div className="heading">Transfer</div>
+                      <div className="description"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Buying loading modal end */}
+      {/* --------remove sale dialog ---------------*/}
+
+      <div
+        className="report-outer"
+        style={{ display: openRemoveSale ? "block" : "none" }}
+      >
+        <div className="report-abs-modal">
+          <div className="report-modal">
+            <div className="report-inner" style={{ opacity: "1" }}>
+              <div className="reportthisitem">
+                <p className="MainHeadingText">
+                  Remove From Sell
+                </p>
+              </div>
+              <div className="singlerowmodal">
+                <h3 className="HeadingText"> Are you sure you want to remove this item from sale?</h3>
+                <div className="removeSaleButton">
+                  <button className="CancelButton" onClick={() => setOpenRemoveSale(false)}>Cancel</button>
+                  <button className="RemoveButton" onClick={sendButton}>Remove</button>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     </>
   );
 }

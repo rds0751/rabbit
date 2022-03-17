@@ -35,17 +35,46 @@ function NftCardsHome({ nft }) {
     addLikeNft(data);
     setHandleLike(!handleLike);
   };
+  // const difftime = (timestamp1, timestamp2) => {
+  //   var difference = timestamp1 - timestamp2;
+  //   var daysDifference = Math.floor(difference / 1000 / 60 / 60 / 24);
+
+  //   return daysDifference;
+  // };
+  // const currDate = new Date();
+  // const stamp2 = Date.now(currDate);
+  // const stamp1 = Date.now(nft.biddingDetails.endDate);
+  // const days = difftime(stamp1, stamp2);
+  // console.log(difftime(stamp1, stamp2),"<<<days");
+
+
   const difftime = (timestamp1, timestamp2) => {
     var difference = timestamp1 - timestamp2;
     var daysDifference = Math.floor(difference / 1000 / 60 / 60 / 24);
 
     return daysDifference;
   };
-  const currDate = new Date();
-  const stamp2 = Date.now(currDate);
-  const stamp1 = Date.now(nft.biddingDetails.endDate);
-  const days = difftime(stamp1, stamp2);
-  // console.log(difftime(stamp1, stamp2),"<<<days");
+
+  let showDateSection = true;
+
+  let message = '';
+
+  if (nft?.biddingDetails?.endDate) {
+    const currDate = new Date();
+
+    const currentDate = Date.now(currDate);
+
+    const endDate = nft?.biddingDetails?.endDate;
+
+    let endDateTimeStamp = Math.floor(new Date(endDate).getTime());
+
+    const days = (endDateTimeStamp == currentDate) ? 1 : difftime(endDateTimeStamp, currentDate);
+
+    message = (endDateTimeStamp < currentDate) ? "Expired" : `${days} days left`;
+
+  } else {
+    showDateSection = false;
+  }
 
   return (
     <div className="nftCardEach col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
@@ -95,12 +124,13 @@ function NftCardsHome({ nft }) {
               <span className="font-weight-900">100</span>{" "}
             </div> */}
             <div>
-              <span className="" style={{ color: "#000", marginRight: "4px" }}>
+              {(showDateSection) ? <span className="" style={{ color: "#000", marginRight: "4px" }}>
                 <i className="far fa-clock" style={{ color: "#f54", fontSize: "13.36px", }}></i>
-              </span>
-              <span className="poppins-normal blackish font-14">
-                {days} days left
-              </span>
+
+                <span className="poppins-normal blackish font-14">
+                  &nbsp;{message}
+                </span>
+              </span> : ""}
             </div>
           </div>
         </div>

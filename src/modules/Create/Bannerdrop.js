@@ -3,7 +3,7 @@ import { toast, ToastContainer } from "react-toastify";
 // const [bannerCdn, setbannerCdn] = useState("");
 // const [bannerIpfs, setbannerIpfs] = useState("");
 import { useDropzone } from "react-dropzone";
-import Image from "../../assets/images/img-format.png";
+import Image from "../../assets/images/img-format.svg";
 
 import Utils from "../../utility";
 import BlockchainServices from "../../services/blockchainService";

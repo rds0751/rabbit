@@ -62,7 +62,7 @@
   color: #16AB6E;
   font-family: "poppins-semibold";
   background-color: #FFFFFF00;
-  min-width: 78px;
+  min-width: 82px;
   /* margin-right: 1em; */
 }
 .nftTileEachDetailsSecondContainerValueHighest {
@@ -70,7 +70,7 @@
   font-size: 0.9vw;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: end;
   width: 100%;
   /* margin: 4% 0px; */
   margin-top: 16px;
@@ -92,7 +92,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 40%;
+  width: 52%;
   padding: 0% 1%;
   position: relative;
 }
