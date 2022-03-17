@@ -671,7 +671,7 @@ export default function NftInformation(props) {
                 >
                   Buy Now
                 </Button>
-                <Button
+                {/* <Button
                   data-bs-toggle="modal"
                   data-bs-target="#myModalShare"
                   style={{
@@ -688,7 +688,7 @@ export default function NftInformation(props) {
                   onClick={removeNFTFromSell}
                 >
                   Make Offer
-                </Button>
+                </Button> */}
               </div>
 
               <div className="grap-area">
