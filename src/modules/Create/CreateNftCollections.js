@@ -232,7 +232,8 @@ function CreateNftCollections(props) {
         console.log("no error blockchain side", txStatus)
 
         setloaderState(false);
-        navigate("/collections-tile");
+        navigate("/collection-details/"+result.responseData._id);
+        // navigate("/collections-tile");
         return Utils.apiSuccessToast(
           "Collection created"
         );
