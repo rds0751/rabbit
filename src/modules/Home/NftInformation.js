@@ -59,7 +59,7 @@ export default function NftInformation(props) {
     document.body.classList.remove('active-modal')
   }
 
-  
+
   if (openRemoveSale) {
     document.body.classList.add('active-modal')
   } else {
@@ -70,9 +70,9 @@ export default function NftInformation(props) {
     props?.responseData,
     props?.loaderState,
     "<<<< this is data toooooooooooooooooooooooooooooooo match"
-    );
-    // alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
-    
+  );
+  // alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
+
   // useEffect(() => {
   //   alert(`${loggedInUser?._id}`);
   //   console.log(
@@ -95,11 +95,11 @@ export default function NftInformation(props) {
   // console.log("===",isCurrUserNft)
   // console.log("===",isOpenForSell)
 
-  const facebook = async()=>{
+  const facebook = async () => {
     window.open('https://www.facebook.com/', '_blank');
 
   }
-  const twitter = async()=>{
+  const twitter = async () => {
     window.open('https://twitter.com/i/flow/login', '_blank');
 
   }
@@ -115,7 +115,7 @@ export default function NftInformation(props) {
     // setTimeout(() => {
     // setCopiedText(false);
     // }, 1000);
-  };  
+  };
   const demoHandleSell = async () => {
     setsaleModal(false)
 
@@ -127,7 +127,7 @@ export default function NftInformation(props) {
       // nftId:response._id,
     });
   };
-  
+
   const removeNFTFromSell = async () => {
     props?.removeNftFromSale({
       // sellerId:loggedInUser._id,
@@ -155,10 +155,10 @@ export default function NftInformation(props) {
     //     window.location.reload(false);
     //   } else toast.error(response.message);
   };
-const openSaleModal =async()=>{
-  // alert("kkkk")
-  setsaleModal(true)
-}
+  const openSaleModal = async () => {
+    // alert("kkkk")
+    setsaleModal(true)
+  }
   const handleRemoveSell = async () => {
     const response = await RemoveNftFromSale(nft._id);
     if (response.success) {
@@ -172,10 +172,12 @@ const openSaleModal =async()=>{
       reason: e.target.value,
     });
 
-  // const makeReport = () => {
-  //   addNftReport(report);
-  // };
-  const sendButton=()=>{
+  const makeReport = () => {
+    addNftReport(report);
+  };
+
+
+  const sendButton = () => {
     removeNFTFromSell();
     setOpenRemoveSale(false);
   }
@@ -218,7 +220,7 @@ const openSaleModal =async()=>{
     await addNftReport(report, (response) => {
       if (response.success) {
         toast.success(response.message);
-      } else{
+      } else {
         toast.error("This Nft is already reported");
       }
       setOpenReportModal(false)
@@ -304,7 +306,7 @@ const openSaleModal =async()=>{
                         backgroundColor: "#366eff",
                         textTransform: "none",
                       }}
-                      onClick={()=>setOpenRemoveSale(true)}
+                      onClick={() => setOpenRemoveSale(true)}
                     >
                       Remove From Sale
                     </Button>
@@ -438,7 +440,7 @@ const openSaleModal =async()=>{
                           backgroundColor: "#366eff",
                           textTransform: "none",
                         }}
-                        onClick={()=>setOpenRemoveSale(true)}
+                        onClick={() => setOpenRemoveSale(true)}
                       >
                         Remove From Sell
                       </Button>
@@ -474,19 +476,19 @@ const openSaleModal =async()=>{
                           background: "#FFFFFF",
                         }}
                       >
-                      <li className="list-item" onClick={handleCopyToClipboard}>
-                        <img src={copyIcon} alt="icon" className="icon" />
-                        <span className="icon-text">Copy link</span>
-                      </li>
-                      <li className="list-item" onClick={facebook}>
-                        <img src={facebookIcon} alt="icon" className="icon" />
-                        <span className="icon-text">Share on Facebook</span>
-                      </li>
-                      <li className="list-item" onClick={twitter}>
-                        <img src={twitterIcon} alt="icon" className="icon"/>
-                        <span className="icon-text">Share on Twitter</span>
-                      </li>
-                    </ul>                        
+                        <li className="list-item" onClick={handleCopyToClipboard}>
+                          <img src={copyIcon} alt="icon" className="icon" />
+                          <span className="icon-text">Copy link</span>
+                        </li>
+                        <li className="list-item" onClick={facebook}>
+                          <img src={facebookIcon} alt="icon" className="icon" />
+                          <span className="icon-text">Share on Facebook</span>
+                        </li>
+                        <li className="list-item" onClick={twitter}>
+                          <img src={twitterIcon} alt="icon" className="icon" />
+                          <span className="icon-text">Share on Twitter</span>
+                        </li>
+                      </ul>
                     </div>
                     <img
                       src={info}
@@ -564,7 +566,7 @@ const openSaleModal =async()=>{
                               className="btn btn-primary w-100"
                               data-bs-dismiss="modal"
                               style={{ marginLeft: "1.1em" }}
-                              // onClick={makeReport}
+                            // onClick={makeReport}
                             >
                               Make Offer
                             </button>
@@ -593,7 +595,7 @@ const openSaleModal =async()=>{
                     Owned by:&nbsp;
                     <span className="text-name fw-b">
                       {(String(ownedBy).length >= 7) ? (!ownedBy ? " " : (String(ownedBy).substring(0, 8) + "...")) : (String(ownedBy) === undefined ? "" : ownedBy)}                    </span>
-                    </span>
+                  </span>
                 </div>
                 <div className="col-lg-6 col-sm-12">
                   <span className="text">
@@ -763,7 +765,7 @@ const openSaleModal =async()=>{
               <div className="reportthisitem">
                 <h3 className="report-text poppins-normal">
                   SELL NFT
-                </h3>                
+                </h3>
                 <i className="fa-solid fa-xmark cross-icon"
                   onClick={() => setsaleModal(false)}>
                 </i>
@@ -775,12 +777,12 @@ const openSaleModal =async()=>{
                   min="0"
                   type="number"
                   autoComplete="off"
-                  value = {salesInfo?.price}
+                  value={salesInfo?.price}
                   readonly
-                  // onChange={(e) => {
-                  //   price.current = e.target.value;
-                  //   checkChanges();
-                  // }}
+                // onChange={(e) => {
+                //   price.current = e.target.value;
+                //   checkChanges();
+                // }}
                 />
                 <h3 className="reason-text"> Schedule for Future time</h3>
                 <input
@@ -788,24 +790,24 @@ const openSaleModal =async()=>{
                   min="0"
                   type="date"
                   autoComplete="off"
-                  value ="23"
-                  // onChange={(e) => {
-                  //   price.current = e.target.value;
-                  //   checkChanges();
-                  // }}
+                  value="23"
+                // onChange={(e) => {
+                //   price.current = e.target.value;
+                //   checkChanges();
+                // }}
                 />
-                 <input
+                <input
                   className="form-control-1"
                   min="0"
                   type="time"
                   autoComplete="off"
-                  value ="23"
-                  // onChange={(e) => {
-                  //   price.current = e.target.value;
-                  //   checkChanges();
-                  // }}
+                  value="23"
+                // onChange={(e) => {
+                //   price.current = e.target.value;
+                //   checkChanges();
+                // }}
                 />
-                  {/* <select className="select-box" onChange={(e) => handleChange(e)}>
+                {/* <select className="select-box" onChange={(e) => handleChange(e)}>
                     <option>Select reason</option>
                     <option value="Fake collection or possible scam">Fake collection or possible scam</option>
                     <option value="Explicit and sensitive content">Explicit and sensitive content</option>
@@ -845,30 +847,30 @@ const openSaleModal =async()=>{
                 </div>
                 <div className="checkpostcontainer">
                   <div className="checkpost">
-                      <img src={success} className="checkimg" />
-                      <div className="checkimg">
+                    <img src={success} className="checkimg" />
+                    <div className="checkimg">
                       <Oval
                         vertical="top"
                         horizontal="center"
                         color="#00BFFF"
                         height={30}
                         width={30} />
-                      </div>
+                    </div>
                     <div className="checkposttext">
                       <div className="heading">Approve</div>
                       <div className="description"></div>
                     </div>
                   </div>
                   <div className="checkpost">
-                      <img src={success} className="checkimg" />
-                      <div className="checkimg">
-                        <Oval
-                          vertical="top"
-                          horizontal="center"
-                          color="#00BFFF"
-                          height={30}
-                          width={30} />
-                      </div>
+                    <img src={success} className="checkimg" />
+                    <div className="checkimg">
+                      <Oval
+                        vertical="top"
+                        horizontal="center"
+                        color="#00BFFF"
+                        height={30}
+                        width={30} />
+                    </div>
                     <div className="checkposttext">
                       <div className="heading">Transfer</div>
                       <div className="description"></div>
@@ -893,16 +895,16 @@ const openSaleModal =async()=>{
               <div className="reportthisitem">
                 <p className="MainHeadingText">
                   Remove From Sell
-                </p>                
+                </p>
               </div>
               <div className="singlerowmodal">
                 <h3 className="HeadingText"> Are you sure you want to remove this item from sale?</h3>
                 <div className="removeSaleButton">
-                <button className="CancelButton" onClick={()=>setOpenRemoveSale(false)}>Cancel</button>
-                <button className="RemoveButton" onClick={sendButton}>Remove</button>
-               </div>
+                  <button className="CancelButton" onClick={() => setOpenRemoveSale(false)}>Cancel</button>
+                  <button className="RemoveButton" onClick={sendButton}>Remove</button>
+                </div>
 
-                  
+
               </div>
             </div>
           </div>
