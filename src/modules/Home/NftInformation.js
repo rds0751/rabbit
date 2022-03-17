@@ -62,9 +62,8 @@ export default function NftInformation(props) {
   });
  if(!props.loaderState)
  {
-  setPutOnSaleModal(false)
-  setRemoveFromSale(false)
-  setOpenLoadingModal(false)
+  // setRemoveFromSale(false)
+  // setOpenLoadingModal(false)
  }
   const [reason, setReason] = useState("");
 
@@ -131,8 +130,8 @@ export default function NftInformation(props) {
     // setCopiedText(false);
     // }, 1000);
   };
-  const demoHandleSell = async () => {
-    setsaleModal(false)
+  const demoHandleSell = async () => { 
+     setsaleModal(false)
     setPutOnSaleModal(true)
 
     props?.sellNowNft({
@@ -142,6 +141,8 @@ export default function NftInformation(props) {
       // tokenId:response.tokenId,
       // nftId:response._id,
     });
+    // setPutOnSaleModal(false)
+
   };
 
   const removeNFTFromSell = async () => {
@@ -153,6 +154,8 @@ export default function NftInformation(props) {
       // tokenId:response.tokenId,
       // nftId:response._id,
     });
+      // setRemoveFromSale(false)
+
   };
   const buyNft = async () => {
     if (user.loggedInUser != null) {
@@ -252,7 +255,7 @@ export default function NftInformation(props) {
   return (
     <>
       {/* {props?.refreshPage ? window.location.reload(true) : ""} */}
-      {props?.loaderState ? "" : window.location.reload(true)}
+      {props?.loaderState ? "" : setTimeout(() => {window.location.reload(true)}, 1000)}
 
       {/* {props?.loaderState ? (
         <div className="center">
@@ -448,7 +451,7 @@ export default function NftInformation(props) {
                         }}
                         onClick={openSaleModal}
                       >
-                        Sale
+                        Put it on sale
                       </Button>
                       <Button
                         style={{
@@ -463,7 +466,7 @@ export default function NftInformation(props) {
                         }}
                         onClick={() => setOpenRemoveSale(true)}
                       >
-                        Remove From Sell
+                        Remove from Sale
                       </Button>
                     </div>
                     <span className="nft-name">{nft.name}</span>
@@ -615,14 +618,18 @@ export default function NftInformation(props) {
                   <span className="text">
                     Owned by:&nbsp;
                     <span className="text-name fw-b">
-                      {(String(ownedBy).length >= 7) ? (!ownedBy ? " " : (String(ownedBy).substring(0, 8) + "...")) : (String(ownedBy) === undefined ? "" : ownedBy)}                    </span>
+                      {ownedBy}
+                      {/* {(String(ownedBy).length >= 7) ? (!ownedBy ? " " : (String(ownedBy).substring(0, 8) + "...")) : (String(ownedBy) === undefined ? "" : ownedBy)}                     */}
+                      </span>
                   </span>
                 </div>
                 <div className="col-lg-6 col-sm-12">
                   <span className="text">
                     Created by:&nbsp;
                     <span className="text-name fw-b">
-                      {(String(createdBy).length >= 7) ? (!createdBy ? " " : (String(createdBy).substring(0, 8) + "...")) : (String(createdBy) === undefined ? "" : createdBy)}                    </span>
+                      {createdBy}
+                      {/* {(String(createdBy).length >= 7) ? (!createdBy ? " " : (String(createdBy).substring(0, 8) + "...")) : (String(createdBy) === undefined ? "" : createdBy)}                     */}
+                      </span>
                     <span className="text-name fw-b"></span>
                   </span>
                 </div>
@@ -639,7 +646,7 @@ export default function NftInformation(props) {
                 <div>
                   <FavoriteIcon style={{ fontSize: "17px", color: "#EF3643" }} />
                   <span className="text fw-b" style={{ marginLeft: "0.5em" }}>
-                    {nft.likesCount}
+                    {nft?.likes?.length}
                   </span>
                 </div>
               </div>
@@ -668,7 +675,7 @@ export default function NftInformation(props) {
                 >
                   Buy Now
                 </Button>
-                <Button
+                {/* <Button
                   data-bs-toggle="modal"
                   data-bs-target="#myModalShare"
                   style={{
@@ -685,7 +692,7 @@ export default function NftInformation(props) {
                   onClick={removeNFTFromSell}
                 >
                   Make Offer
-                </Button>
+                </Button> */}
               </div>
 
               <div className="grap-area">
@@ -718,7 +725,7 @@ export default function NftInformation(props) {
                   >
                     Listings
                   </li>
-                  <li
+                  {/* <li
                     onClick={() => {
                       setTab(3);
                     }}
@@ -730,7 +737,7 @@ export default function NftInformation(props) {
                     }}
                   >
                     Offers
-                  </li>
+                  </li> */}
                 </ul>
                 {tab === 1 ? <PricingHistoryComponentGraph id={id} /> : ""}
                 {tab === 2 ? <ListingsTable /> : ""}
@@ -785,7 +792,7 @@ export default function NftInformation(props) {
             <div className="report-inner" style={{ opacity: "1" }}>
               <div className="reportthisitem">
                 <h3 className="report-text poppins-normal">
-                  SALE NFT
+                Put it on sale
                 </h3>
                 <i className="fa-solid fa-xmark cross-icon"
                   onClick={() => setsaleModal(false)}>
@@ -805,13 +812,14 @@ export default function NftInformation(props) {
                 //   checkChanges();
                 // }}
                 />
-                <h3 className="reason-text"> Schedule for Future time</h3>
+                <h3 className="reason-text"> Keep it on sale until :</h3>
                 <input
+                 type="date"
                   className="form-control-1"
-                  min="0"
-                  type="date"
+                  // min="0"
+                  // type="date"
                   autoComplete="off"
-                  value="23"
+                  // value="23"
                 // onChange={(e) => {
                 //   price.current = e.target.value;
                 //   checkChanges();
@@ -819,10 +827,10 @@ export default function NftInformation(props) {
                 />
                 <input
                   className="form-control-1"
-                  min="0"
+                  // min="0"
                   type="time"
                   autoComplete="off"
-                  value="23"
+                  // value="23"
                 // onChange={(e) => {
                 //   price.current = e.target.value;
                 //   checkChanges();
@@ -919,7 +927,7 @@ export default function NftInformation(props) {
               <div className="mintbody">
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                   <div className="completelistin">
-                    Put On Sale This NFT
+                  Putting your NFT on sale
                   </div>
                 </div>
                 <div className="abstractillusion">
@@ -960,7 +968,7 @@ export default function NftInformation(props) {
                           width={30} />}
                     </div>
                     <div className="checkposttext">
-                      <div className="heading">On Sale</div>
+                      <div className="heading">Going live</div>
                       <div className="description"></div>
                     </div>
                   </div>
@@ -1047,7 +1055,7 @@ export default function NftInformation(props) {
             <div className="report-inner" style={{ opacity: "1" }}>
               <div className="reportthisitem">
                 <p className="MainHeadingText">
-                  Remove From Sell
+                  Remove from sale
                 </p>
               </div>
               <div className="singlerowmodal">
