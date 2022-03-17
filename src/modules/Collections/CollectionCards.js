@@ -90,8 +90,8 @@ function Collections_tile() {
             </div>
           </div>
           <div className="filter">
-            <div className="mobilenftTilePageThirdSelect dropdown sort-drop ">
-              <p className="mb-0">Sort By </p>
+            <div className="dropdown sort-drop" style={{ width: "260px" }}>
+              <p className="mb-0">Sort By</p>
               <select
                 name="sort"
                 value={filterData.sort}
@@ -99,6 +99,7 @@ function Collections_tile() {
                 // className="first_select ml_auto"
                 onChange={(e) => handleFilter(e)}
                 className="priceRangeDropDown dropdown-toggle-ellipsis"
+                style={{ width: "180px" }}
               >
                 <option value="all">All</option>
                 <option value="recently added">Recently Added</option>
@@ -167,6 +168,9 @@ function Collections_tile() {
               </div>
             );
           })}
+          {collections.length === 0 && (<div>
+            <h1>No Match Found</h1>
+          </div>)}
         </div>
       </div>
       <ToastContainer
