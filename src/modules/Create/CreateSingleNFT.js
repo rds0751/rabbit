@@ -55,7 +55,7 @@ function CreateSingleNFT(props) {
   const { loggedInUser, walletAddress } = user;
   const [checkDisable, setcheckDisable] = useState(true);
   const [isFileSelected, setIsFileSelected] = useState(false);
-  const[isloader,setisLoader]=useState(false);
+  const [isloader, setisLoader] = useState(false);
   // console.log(user.addUserData._id, "<<<< user data");
   // -------------------------------
   const name = useRef("");
@@ -207,15 +207,90 @@ function CreateSingleNFT(props) {
     <>
 
       {props?.loaderState ? (
-        <div className="center">
-          {" "}
-          <Oval
-            vertical="top"
-            horizontal="center"
-            color="#00BFFF"
-            height={30}
-            width={30}
-          />
+        <div className="mint-mod-outer">
+          <div className="mint-abs">
+            <div className="">
+              <div className="mint-outer" style={{ opacity: "1" }}>
+                <div className="mintbody">
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <div
+                      className="completelistin"
+                      onClick={() => setOpenMintodal(false)}
+                    >
+                      Complete your minting
+                    </div>
+                    {/* <div
+                      onClick={() => setOpenMintodal(false)}
+                      className="completelistin"
+                    >
+                      <img src={Close} width="12px" height="12px" />
+                    </div> */}
+                  </div>
+
+                  <div className="abstractillusion">
+                    <img src={cdnUrl != "" ? cdnUrl : Image} />
+                    <div className="abstractillusioncontent">
+                      <div className="abstracttitle">Abstract illusion</div>
+                      <div className="abstractposter"> {name.current}</div>
+                      <div className="ethprice">{price.current}ETH</div>
+                      {/* <div className="ethprice">$162.09</div> */}
+                    </div>
+                  </div>
+                  <div className="checkpostcontainer">
+                    <div className="checkpost">
+                      {isFileSelected && (
+                        <img src={success} className="checkimg" />
+                      )}
+                      {!isFileSelected && (
+                        <div className="checkvalue checkvaluetext">1</div>
+                      )}
+                      <div className="checkposttext">
+                        <div className="heading">
+                          {props.isFileSelected === 'true' ? (
+                            'Uploading'
+                          ) : (
+                            'Upload'
+                          )}
+                        </div>
+                        <div className="description">
+                          Uploading all media assets and metadata to IPFS
+                        </div>
+                      </div>
+                    </div>
+                    <div className="checkpost">
+                      {props.isMintSuccess === true ? (
+                        <img src={success} className="checkimg" />
+                      ) : (
+                        <div className="checkimg">
+                          <Oval
+                            vertical="top"
+                            horizontal="center"
+                            color="#00BFFF"
+                            height={30}
+                            width={30} />
+                        </div>
+                      )}
+                      {/* {!props.isMintSuccess && (
+                          <div className="checkvalue checkvaluetext">2</div>
+                        )} */}
+                      <div className="checkposttext">
+                        <div className="heading">
+                          {props.isMintSuccess === 'true' ? (
+                            'Mint'
+                          ) : (
+                            'Minting'
+                          )}
+                        </div>
+                        <div className="description">Send Transaction to Create your NFT</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       ) : (
         ""
@@ -266,37 +341,37 @@ function CreateSingleNFT(props) {
 
                   {!isloader ? (
                     <div className="draganddropboxinnerdiv">
-                    <img
-                      src={cdnUrl != "" ? cdnUrl : Image}
-                      style={{
-                        // maxWidth: "100px",
-                        // width: "70%",
-                        // marginTop: "3em",
-                        color: "#366EEF",
-                      }}
-                    />
-                    <span className="draganddropboxinnerdivtextspan">
-                      Drag and Drop or
-                      <span className="draganddropboxinnerdivtextspanbrowse">
-                        {" "}
-                        Browse
+                      <img
+                        src={cdnUrl != "" ? cdnUrl : Image}
+                        style={{
+                          // maxWidth: "100px",
+                          // width: "70%",
+                          // marginTop: "3em",
+                          color: "#366EEF",
+                        }}
+                      />
+                      <span className="draganddropboxinnerdivtextspan">
+                        Drag and Drop or
+                        <span className="draganddropboxinnerdivtextspanbrowse">
+                          {" "}
+                          Browse
+                        </span>
                       </span>
-                    </span>
-                  </div>
-                  ):(
-                    <div className="" style={{margin:"auto 0"}} >
-                       {" "}
-                        <Oval
-                       vertical="top"
-                      horizontal="center"
-                      color="#00BFFF"
-                      height={30}
-                      width={30}
-                      
-              />
-            </div>
+                    </div>
+                  ) : (
+                    <div className="" style={{ margin: "auto 0" }} >
+                      {" "}
+                      <Oval
+                        vertical="top"
+                        horizontal="center"
+                        color="#00BFFF"
+                        height={30}
+                        width={30}
+
+                      />
+                    </div>
                   )}
-                  
+
                 </div>
               )}
 
@@ -304,7 +379,7 @@ function CreateSingleNFT(props) {
                 <div className="draganddropbox" {...getRootProps()}>
                   <input {...getInputProps()} />
 
-                  {!isloader?(<div className="draganddropboxinnerdiv">
+                  {!isloader ? (<div className="draganddropboxinnerdiv">
                     <img
                       src={cdnUrl != "" ? cdnUrl : Image}
                       style={{
@@ -321,19 +396,19 @@ function CreateSingleNFT(props) {
                       Browse
                     </span>
                   </span> */}
-                  </div>):(
-                    <div className="" style={{margin:"auto 0"}}>
-                    {" "}
-                     <Oval
-                    vertical="top"
-                   horizontal="center"
-                   color="#00BFFF"
-                   height={30}
-                   width={30}
-           />
-         </div>
+                  </div>) : (
+                    <div className="" style={{ margin: "auto 0" }}>
+                      {" "}
+                      <Oval
+                        vertical="top"
+                        horizontal="center"
+                        color="#00BFFF"
+                        height={30}
+                        width={30}
+                      />
+                    </div>
                   )}
-                  
+
                 </div>
               )}
               {/* ----------------- */}
@@ -496,120 +571,7 @@ function CreateSingleNFT(props) {
       </div>
       {/* ---------------- */}
       {/* <div className="mint-mod-outer"> */}
-      <div
-        className="mint-mod-outer"
-        style={{
-          display: openMintodal ? "block" : "none",
-        }}
-      >
-        {/* <div className=""> */}
-        <div className="mint-abs">
-          {/* <div className=""> */}
-          {/* <div className="mint-modal-rp"> */}
-          <div className="">
-            <div className="mint-outer" style={{ opacity: "1" }}>
-              <div className="mintbody">
-                <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
-                  <div
-                    className="completelistin"
-                    onClick={() => setOpenMintodal(false)}
-                  >
-                    Complete your minting
-                  </div>
-                  {/* <div
-                    onClick={() => setOpenMintodal(false)}
-                    className="completelistin"
-                  >
-                    <img src={Close} width="12px" height="12px" />
-                  </div> */}
-                </div>
 
-                <div className="abstractillusion">
-                  <img src={cdnUrl != "" ? cdnUrl : Image} />
-                  <div className="abstractillusioncontent">
-                    <div className="abstracttitle">Abstract illusion</div>
-                    <div className="abstractposter"> {name.current}</div>
-                    <div className="ethprice">{price.current}ETH</div>
-                    {/* <div className="ethprice">$162.09</div> */}
-                  </div>
-                </div>
-                <div className="checkpostcontainer">
-                  <div className="checkpost">
-                    {isFileSelected && (
-                      <img src={success} className="checkimg" />
-                    )}
-                    {!isFileSelected && (
-                      <div className="checkvalue checkvaluetext">1</div>
-                    )}
-                    <div className="checkposttext">
-                      <div className="heading">
-                        {props.isFileSelected === 'true' ? (
-                          'Uploading'
-                        ) : (
-                          'Upload'
-                        )}
-                      </div>
-                      <div className="description">
-                        Uploading all media assets and metadata to IPFS
-                      </div>
-                    </div>
-                  </div>
-                  <div className="checkpost">
-                    {props.isMintSuccess === true ? (
-                      <img src={success} className="checkimg" />
-                    ) : (
-                      <div className="checkimg">
-                        <Oval
-                          vertical="top"
-                          horizontal="center"
-                          color="#00BFFF"
-                          height={30}
-                          width={30} />
-                      </div>
-                    )}
-                    {/* {!props.isMintSuccess && (
-                         <div className="checkvalue checkvaluetext">2</div>
-                       )} */}
-                    <div className="checkposttext">
-                      <div className="heading">
-                        {props.isMintSuccess === 'true' ? (
-                          'Mint'
-                        ) : (
-                          'Minting'
-                        )}
-                      </div>
-                      <div className="description">Send Transaction to Create your NFT</div>
-                    </div>
-                  </div>
-                  {/* <div className="checkpost">
-                    {props.isMintSuccess && (
-                      <img src={success} className="checkimg" />
-                    )}
-                    {!props.isMintSuccess && (
-                      <div className="checkvalue checkvaluetext">3</div>
-                    )}
-                    <div className="checkposttext">
-                      <div className="heading">Approve</div>
-                      <div className="description">
-                        This transaction conducted only once per collection
-                      </div>
-                    </div>
-                  </div> */}
-                  {/* <div className="checkpost">
-              <div className="checkvalue checkvaluetext noborder">4</div>
-              <div className="checkposttext">
-                <div className="heading">Put on sale</div>
-                <div className="description">Sign message to set fixed price</div>
-              </div>
-            </div> */}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </>
   );
 }
