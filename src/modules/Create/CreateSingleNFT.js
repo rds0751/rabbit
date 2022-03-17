@@ -270,7 +270,7 @@ function CreateSingleNFT(props) {
                       src={cdnUrl != "" ? cdnUrl : Image}
                       style={{
                         // maxWidth: "100px",
-                        width: "70%",
+                        // width: "70%",
                         // marginTop: "3em",
                         color: "#366EEF",
                       }}
@@ -284,14 +284,15 @@ function CreateSingleNFT(props) {
                     </span>
                   </div>
                   ):(
-                    <div className="">
+                    <div className="" style={{margin:"auto 0"}} >
                        {" "}
                         <Oval
-                       vertical="center"
+                       vertical="top"
                       horizontal="center"
                       color="#00BFFF"
                       height={30}
                       width={30}
+                      
               />
             </div>
                   )}
@@ -321,10 +322,10 @@ function CreateSingleNFT(props) {
                     </span>
                   </span> */}
                   </div>):(
-                    <div className="">
+                    <div className="" style={{margin:"auto 0"}}>
                     {" "}
                      <Oval
-                    vertical="center"
+                    vertical="top"
                    horizontal="center"
                    color="#00BFFF"
                    height={30}
