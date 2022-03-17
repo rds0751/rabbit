@@ -464,15 +464,15 @@ export default function NftInformation(props) {
                           background: "#FFFFFF",
                         }}
                       >
-                        <li className="list-item">
+                        <li className="list-item" onClick={handleCopyToClipboard}>
                           <img src={copyIcon} alt="icon" className="icon" />
                           <span className="icon-text">Copy link</span>
                         </li>
-                        <li className="list-item">
+                        <li className="list-item" onClick={facebook}>
                           <img src={facebookIcon} alt="icon" className="icon" />
                           <span className="icon-text">Share on Facebook</span>
                         </li>
-                        <li className="list-item">
+                        <li className="list-item" onClick={twitter}>
                           <img src={twitterIcon} alt="icon" className="icon" />
                           <span className="icon-text">Share on Twitter</span>
                         </li>
