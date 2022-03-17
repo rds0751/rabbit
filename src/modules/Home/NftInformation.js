@@ -466,7 +466,7 @@ export default function NftInformation(props) {
                         }}
                         onClick={() => setOpenRemoveSale(true)}
                       >
-                        Remove From Sell
+                        Remove from Sale
                       </Button>
                     </div>
                     <span className="nft-name">{nft.name}</span>
@@ -792,7 +792,7 @@ export default function NftInformation(props) {
             <div className="report-inner" style={{ opacity: "1" }}>
               <div className="reportthisitem">
                 <h3 className="report-text poppins-normal">
-                Keep it on sale
+                Put it on sale
                 </h3>
                 <i className="fa-solid fa-xmark cross-icon"
                   onClick={() => setsaleModal(false)}>
@@ -812,7 +812,7 @@ export default function NftInformation(props) {
                 //   checkChanges();
                 // }}
                 />
-                <h3 className="reason-text"> Schedule for Future time</h3>
+                <h3 className="reason-text"> Keep it on sale until :</h3>
                 <input
                  type="date"
                   className="form-control-1"
@@ -927,7 +927,7 @@ export default function NftInformation(props) {
               <div className="mintbody">
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                   <div className="completelistin">
-                  Putting your nft on sale
+                  Putting your NFT on sale
                   </div>
                 </div>
                 <div className="abstractillusion">
@@ -968,7 +968,7 @@ export default function NftInformation(props) {
                           width={30} />}
                     </div>
                     <div className="checkposttext">
-                      <div className="heading">On Sale</div>
+                      <div className="heading">Going live</div>
                       <div className="description"></div>
                     </div>
                   </div>
