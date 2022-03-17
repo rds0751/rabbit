@@ -80,7 +80,7 @@ export const getNft = async (requestData, successCallBack) => {
 };
 
 export function getCollections(requestData) {
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/collections";
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/collections?" + requestData;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
