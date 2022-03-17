@@ -437,4 +437,5 @@ function CreateNftCollections(props) {
   );
 }
 
+
 export default CreateNftCollections;
