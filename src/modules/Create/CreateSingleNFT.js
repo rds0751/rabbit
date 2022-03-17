@@ -37,6 +37,7 @@ function CreateSingleNFT(props) {
   console.log("ppppppppppppp", props?.loaderState);
   // console.log("ppppppppppppp", props?.isNftCreated);
   const [collectionData, setCollectionData] = useState([]);
+  console.log("collection data", collectionData)
   const [selectFile, setSelectFile] = useState("");
   const [collectionId, setCollectionId] = useState("");
   const [contractAddress, setContractAddress] = useState("");
@@ -358,7 +359,7 @@ function CreateSingleNFT(props) {
               <div className="input-price">
                 <label htmlFor="price" className=" input-label">
                   Price*
-                </label>                
+                </label>
                 <div class="input-group">
                   <input
                     className="form-control"
@@ -482,12 +483,12 @@ function CreateSingleNFT(props) {
                   </div>
                 </div> */}
                 <div>
-              <input
-                type="text"
-                className="edit-form-input"
-                name="blockchain"
-              />
-            </div>
+                  <input
+                    type="text"
+                    className="edit-form-input"
+                    name="blockchain"
+                  />
+                </div>
               </div>
               <button
                 type="submit"
@@ -557,7 +558,7 @@ function CreateSingleNFT(props) {
                           'Uploading'
                         ) : (
                           'Upload'
-                        )}  
+                        )}
                       </div>
                       <div className="description">
                         Uploading all media assets and metadata to IPFS
@@ -577,19 +578,19 @@ function CreateSingleNFT(props) {
                           width={30} />
                       </div>
                     )}
-                     {/* {!props.isMintSuccess && (
+                    {/* {!props.isMintSuccess && (
                          <div className="checkvalue checkvaluetext">2</div>
                        )} */}
-                      <div className="checkposttext">
-                        <div className="heading">
-                          {props.isMintSuccess === 'true' ? (
-                            'Mint'
-                          ) : (
-                            'Minting'
-                          )}
-                        </div>
-                        <div className="description">Send Transaction to Create your NFT</div>
+                    <div className="checkposttext">
+                      <div className="heading">
+                        {props.isMintSuccess === 'true' ? (
+                          'Mint'
+                        ) : (
+                          'Minting'
+                        )}
                       </div>
+                      <div className="description">Send Transaction to Create your NFT</div>
+                    </div>
                   </div>
                   {/* <div className="checkpost">
                     {props.isMintSuccess && (
