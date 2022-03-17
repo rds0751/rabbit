@@ -167,6 +167,9 @@ function Collections_tile() {
               </div>
             );
           })}
+          {collections.length === 0 && (<div>
+            <h1>No Match Found</h1>
+          </div>)}
         </div>
       </div>
       <ToastContainer
