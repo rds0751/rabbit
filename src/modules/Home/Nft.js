@@ -57,7 +57,7 @@ function NftPage() {
   const [isloading, setIsloading] = useState(false);
   const [type, setType] = useState("");
   const search = useLocation().search;
-  const name = new URLSearchParams(search).get("searchByName");  
+  const name = new URLSearchParams(search).get("searchByName");
 
   const [data, setData] = useState(defaultReq);
 
@@ -300,6 +300,9 @@ function NftPage() {
             );
           })}
         </div>
+        {nfts.length === 0 && (<div>
+          <h1>No Match Found</h1>
+        </div>)}
       </div >
       <ToastContainer
         position="top-center"
