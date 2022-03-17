@@ -9,7 +9,7 @@ import {
   LeaderBoardApi4,
   LeaderBoardApi5,
 } from "../../constants/LeaderBoardApi";
-import "../../assets/styles/topbidder.css"
+
 
 const Container = styled.div`
   display: flex;

@@ -52,6 +52,7 @@ function MyItems() {
 
                 color: toggleSelect ? "#191919" : "#828282",
                 borderBottom: toggleSelect ? "3px solid #366EEF" : "none",
+                cursor: "pointer",
               }}
             >
               Single
@@ -63,6 +64,7 @@ function MyItems() {
                 marginLeft: "18px",
                 color: !toggleSelect ? "#191919" : "#828282",
                 borderBottom: !toggleSelect ? "3px solid #366EEF" : "none",
+                cursor:"pointer",
               }}
             >
               Collections

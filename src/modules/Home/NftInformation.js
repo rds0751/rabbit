@@ -361,7 +361,7 @@ export default function NftInformation(props) {
                   <img
                     src={info}
                     alt="info"
-                    style={{ width: "31px", height: "31px" }}
+                    style={{ width: "31px", height: "31px",cursor:"pointer" }}
                     // data-bs-toggle="modal"
                     onClick={() => setOpenReportModal(true)}
                   />
@@ -493,7 +493,7 @@ export default function NftInformation(props) {
                     <img
                       src={info}
                       alt="info"
-                      style={{ width: "31px", height: "31px" }}
+                      style={{ width: "31px", height: "31px",cursor:"pointer" }}
                       // data-bs-toggle="modal"
                       // data-bs-target="#myModalReport"
                       onClick={() => {
@@ -735,7 +735,7 @@ export default function NftInformation(props) {
                 <h3 className="report-text poppins-normal">
                   Report this item
                 </h3>
-                <i className="fa-solid fa-xmark cross-icon"
+                <i className="fa-solid fa-xmark cross-icon icrossicon"
                   onClick={() => setOpenReportModal(false)}>
                 </i>
               </div>
@@ -890,7 +890,7 @@ export default function NftInformation(props) {
         style={{ display: openRemoveSale ? "block" : "none" }}
       >
         <div className="report-abs-modal">
-          <div className="report-modal">
+          <div className="report-modal main-model">
             <div className="report-inner" style={{ opacity: "1" }}>
               <div className="reportthisitem">
                 <p className="MainHeadingText">
@@ -899,6 +899,7 @@ export default function NftInformation(props) {
               </div>
               <div className="singlerowmodal">
                 <h3 className="HeadingText"> Are you sure you want to remove this item from sale?</h3>
+                
                 <div className="removeSaleButton">
                   <button className="CancelButton" onClick={() => setOpenRemoveSale(false)}>Cancel</button>
                   <button className="RemoveButton" onClick={sendButton}>Remove</button>
