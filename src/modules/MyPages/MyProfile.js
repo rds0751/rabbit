@@ -313,7 +313,7 @@ function MyProfile() {
             {/* {[...AbstractApi, , ...AbstractApi].map((curElem) => { */}
             {isloading && <Spinner />}
             {(() => {
-              if (!isloading && Nfts.length < 1) {
+              if (!isloading && Nfts?.length < 1) {
                 return <NonftText text="No Nft" />;
               }
             })()}

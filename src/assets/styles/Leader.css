@@ -1201,7 +1201,7 @@ margin-top: 20px;
   height: 52px;
   margin-bottom: 50px;
   font-family: 'poppins-medium';
-  font-size: 18px;
+  font-size: 16px;
   line-height: 27px;
 }
 .nft-detail .second-text, .nft-detail .third-text{
@@ -1237,6 +1237,8 @@ margin-top: 20px;
 }
 .nft-detail .text .text-name{
   font-family: 'poppins-bold';
+  word-break: break-all;
+  word-wrap: break-word;
 }
 .nft-detail .title{
   font-family: 'poppins-bold';

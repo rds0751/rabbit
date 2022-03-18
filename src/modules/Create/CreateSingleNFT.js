@@ -417,6 +417,56 @@ function CreateSingleNFT(props) {
               </div>
             </div>
             <div className="single-form">
+            <div className="">
+                <div className="create-collection">
+                  <div
+                    htmlFor="collection"
+                    className="input-label collection-label"
+                  >
+                    Collection
+                  </div>
+
+                  <div>
+                    <Link
+                      to={"/create-nft-collection"}
+                        // pathname:"/create-nft-collection",
+                        state={{
+                          data:true}}>
+                    
+                      <span className="color36 font-16 poppins-normal create-text">
+                        {" "}
+                        Create
+                      </span>
+                    </Link>
+                  </div>
+                </div>
+                {/* <Link>Create</Link> */}
+                <select
+                  onChange={(e) => {
+                    // setCollectionId(e.target.value);
+                    const addressId = e.target.value.split(",")
+                    setCollectionId(addressId[0]);
+                    // alert(contractAddress);
+                    setContractAddress(addressId[1]);
+                    // alert(collectionId);
+                    // alert(contractAddress);
+
+                    checkChanges();
+
+
+                  }}
+                  className="form-control-1 category-select"
+                >
+                  <option className="color82">Select collection</option>
+                  {collectionData.map((item, index) => (
+                    <option className="option color82" value={[item._id, item.contractAddress]} >
+                      {item?.name}
+                    </option>
+                  ))}
+                </select>
+
+              </div>
+
               <div className="">
                 <label htmlFor="email" className=" input-label">
                   Name*
@@ -477,56 +527,8 @@ function CreateSingleNFT(props) {
                   {desLength} of 1000 characters used
                 </span>
               </div>
-              <div className="">
-                <div className="create-collection">
-                  <div
-                    htmlFor="collection"
-                    className="input-label collection-label"
-                  >
-                    Collection
-                  </div>
-
-                  <div>
-                    <Link
-                      to="/create-nft"
-                      style={{
-                        textDecoration: "none",
-                      }}
-                    >
-                      <span className="color36 font-16 poppins-normal create-text">
-                        {" "}
-                        Create
-                      </span>
-                    </Link>
-                  </div>
-                </div>
-                {/* <Link>Create</Link> */}
-                <select
-                  onChange={(e) => {
-                    // setCollectionId(e.target.value);
-                    const addressId = e.target.value.split(",")
-                    setCollectionId(addressId[0]);
-                    // alert(contractAddress);
-                    setContractAddress(addressId[1]);
-                    // alert(collectionId);
-                    // alert(contractAddress);
-
-                    checkChanges();
-
-
-                  }}
-                  className="form-control-1 category-select"
-                >
-                  <option className="color82">Select collection</option>
-                  {collectionData.map((item, index) => (
-                    <option className="option color82" value={[item._id, item.contractAddress]} >
-                      {item?.name}
-                    </option>
-                  ))}
-                </select>
-
-              </div>
-              <div className="">
+              
+              <div className="mt-3">
                 <label htmlFor="email" className="input-label">
                   Blockchain*
                 </label>
@@ -546,11 +548,11 @@ function CreateSingleNFT(props) {
                   </div>
                   <div className="block-chain-right">
                     <select
-                      className="input-box-1 rm-border"
+                      className="input-box-1 rm-border blockchainSelect"
                       onChange={(e) => (blockchain.current = e.target.value)}
                     >
                       <option selected value="eth" className="color82">
-                        Ethereum
+                         Ethereum
                       </option>
                     </select>
                   </div>
