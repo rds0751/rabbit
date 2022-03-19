@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import "../../assets/styles/editItem.css";
 // import { Button } from "@mui/material";
 import "../../assets/styles/Leader.css";
@@ -27,9 +27,9 @@ import { EditNft } from "../../services/contentMicroservice";
 const Button = styled.button``;
 
 function EditItem(Collection) {
+  const navigate = useNavigate();
   const { id } = useParams();
   const { user } = useSelector((state) => state);
-  // const [, set] = useState(second)
   const [Categories, setCategories] = useState([]);
   const [CollectionData, setCollectionData] = useState([]);
   const [desLength, setDesLength] = useState(0);
@@ -45,32 +45,50 @@ function EditItem(Collection) {
   const handleClick = (event) => {
     hiddenFileInput.current.click();
   };
-  // yasah
 
   // const [first, setfirst] = useState(second);
-  useEffect(async () => {
-    console.log(id, "<<<<<params");
-    getNft(id, (response) => {
-      // const { responseData } = response;
-      console.log(response, "<<<< response of nft");
-
-      setEditForm({
-        name: response.name,
-        blockchain: response.blockchain,
-        description: response.description,
-        collectionId: response.collectionId,
-        files: response.cdnUrl,
-        _id: response._id,
-        contentType: "content",
+  useEffect(() => {
+    async function fetchData() {
+        await getNft(id, (response) => {
+          let data = response[0]
+        setEditForm({
+          name: data.name,
+          blockchain: data.blockchain,
+          description: data.description,
+          collectionId: data.collectionId,
+          files: data.ipfsUrl,
+          _id: data._id,
+          contentType: "content",
+        });
       });
-      // console.log("----------", this.state.responseData);
-    });
-    // getCategories((res) => {
-    //   setCategories(res.responseData);
-    // });
-    const collections = await getCollectionBySingleUser();
-    setCollectionData(collections);
+    }
+    fetchData();
   }, []);
+
+  // console.log("editItem.js", editForm)
+  // useEffect(async () => {
+  //   console.log(id, "<<<<<params");
+  //   getNft(id, (response) => {
+  //     // const { responseData } = response;
+  //     console.log(response, "<<<< response of nft");
+
+  //     setEditForm({
+  //       name: response.name,
+  //       blockchain: response.blockchain,
+  //       description: response.description,
+  //       collectionId: response.collectionId,
+  //       files: response.cdnUrl,
+  //       _id: response._id,
+  //       contentType: "content",
+  //     });
+  //     // console.log("----------", this.state.responseData);
+  //   });
+  //   // getCategories((res) => {
+  //   //   setCategories(res.responseData);
+  //   // });
+  //   const collections = await getCollectionBySingleUser();
+  //   setCollectionData(collections);
+  // }, []);
 
   const handleChange = (event) => {
     const fileUploaded = event.target.files[0];
@@ -97,16 +115,16 @@ function EditItem(Collection) {
   const onSubmit = async () => {
     const { blockchain, description, files, _id, name } = editForm;
     console.log(editForm, "<<<<formData");
-    if (
-      name?.trim() == "" ||
-      blockchain?.trim() == "" ||
-      description.trim() == "" ||
-      files.trim() == ""
-    ) {
-      toast.error("Fill Required Field");
-      return null;
-    }
-    EditNft(user.loggedInUser?._id, editForm, (res) => {
+    // if (
+    //   name?.trim() == "" ||
+    //   blockchain?.trim() == "" ||
+    //   description.trim() == "" ||
+    //   files.trim() == ""
+    // ) {
+    //   toast.error("Fill Required Field");
+    //   return null;
+    // }
+    EditNft(id, editForm, (res) => {
       if (res.success) {
         toast.success("NFt Updated");
       } else {
@@ -119,7 +137,7 @@ function EditItem(Collection) {
     <>
       <div className="editItem">
         <h3 className="blackish bold-bold font-32" style={{marginLeft:"-8px"}}>
-          <img src={leftArrow} alt="" />
+          <img src={leftArrow} alt="" onClick={() => navigate(-1)} style={{cursor:"pointer"}}/>
           Edit Item
         </h3>
 
@@ -143,6 +161,7 @@ function EditItem(Collection) {
           >
             <img
               src={editForm.files}
+              alt="nft"
               style={{
                 border: "none",
                 width: "244px",
@@ -287,7 +306,7 @@ function EditItem(Collection) {
   <label for="comment">Comment:</label>
   <textarea className="form-control" rows="5" id="comment"></textarea>
 </div> */}
-          <div>
+          {/* <div>
             <label
               for="fname"
               className=" control-label"
@@ -301,9 +320,9 @@ function EditItem(Collection) {
               Collection
             </label>
             <div className="block-chain-container">
-              {/* <div>
+              <div>
               <img src={ethereum} height="32px" />
-            </div> */}
+            </div>
               <div className="block-chain-right background-f3">
                 <select
                   name="collectionId"
@@ -312,15 +331,15 @@ function EditItem(Collection) {
                   onChange={(e) => editForm(e)}
                 >
                   <option value="">Select Collection</option>
-                  {/* {CollectionData?.map((item) => (
+                  {CollectionData?.map((item) => (
                   <option className="option" value={item._id}>
                     {item.name}
                   </option>
-                ))} */}
+                ))}
                 </select>
               </div>
             </div>
-          </div>
+          </div> */}
           {/* {CollectionData.map((item) => (
                 <option className="option" value={item._id}>
                   {item.name}
@@ -333,6 +352,7 @@ function EditItem(Collection) {
                 type="text"
                 className="edit-form-input"
                 name="blockchain"
+                value={editForm?.blockchain}
                 onChange={changeBlockchain}
               />
             </div>
