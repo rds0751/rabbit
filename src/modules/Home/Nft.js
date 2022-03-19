@@ -307,7 +307,7 @@ function NftPage() {
             );
           })}
         </div>
-        {nfts.length === 0 && (<div>
+        {nfts.length<1 && (<div>
           <div className="Noitemdiv">
             <img src={NoItem}/>
              <p className="textitem">No items available</p>

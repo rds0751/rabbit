@@ -147,6 +147,7 @@ function CollectionDetails() {
             </div>
           </div>
           <div className="nftTileContainer row cards-gap ntf_row">
+           
             {[...nfts].map((nft) => {
               const { ipfsUrl, name, salesInfo } = nft;
               return <CollDetailCard nft={nft} />;
