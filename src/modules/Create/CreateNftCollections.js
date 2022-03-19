@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate,useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import { useDropzone } from "react-dropzone";
@@ -232,7 +232,12 @@ function CreateNftCollections(props) {
         console.log("no error blockchain side", txStatus)
 
         setloaderState(false);
+        if(location?.state?.data){
+          navigate("/create-single-nft");  
+        }
+        else{
         navigate("/collection-details/"+result.responseData._id);
+        }
         // navigate("/collections-tile");
         return Utils.apiSuccessToast(
           "Collection created"
@@ -274,9 +279,16 @@ function CreateNftCollections(props) {
       setCheckReqField(true);
     }
   };
+  // let data = useLocation();
+  let location = useLocation();
 
+  
+    // console.log("kkkkkkkkkkkkkkkkkkkkk",location?.state?.data);
+    // { id: '...', images: [...], price: { ... } }
+  
   return (
     <>
+    
       {loaderState ? (
         <div className="mint-mod-outer">
           <div className="mint-abs">
@@ -313,8 +325,6 @@ function CreateNftCollections(props) {
                         <div className="description"></div>
                       </div>
                     </div>
-                  </div>
-                  {/* <div className="checkpostcontainer"> */}
                     <div className="checkpost">
                       {/* <img src={success} className="checkimg" /> */}
                       <div className="checkimg">
@@ -330,8 +340,9 @@ function CreateNftCollections(props) {
                         <div className="heading">Creating Collection</div>
                         <div className="description"></div>
                       </div>
-                    {/* </div> */}
-                  </div>                  
+                    </div> 
+                  </div>
+
 
                   
                 </div>
