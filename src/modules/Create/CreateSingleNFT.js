@@ -457,7 +457,7 @@ function CreateSingleNFT(props) {
                   }}
                   className="form-control-1 category-select"
                 >
-                  <option className="color82">Select collection</option>
+                  <option className="color82">ANAFTO Collection</option>
                   {collectionData.map((item, index) => (
                     <option className="option color82" value={[item._id, item.contractAddress]} >
                       {item?.name}

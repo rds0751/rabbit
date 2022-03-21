@@ -186,7 +186,8 @@ function MyItems() {
                       <p className="collectionCardEachTotalitems">
                         <span className=" font-14 text-dark">
                           Total Items:
-                          <span className="text-primary">2</span>
+                          <span className="text-primary">0</span>
+                          {console.log("kkkkkkkkkkkkkk",curElem)}
                         </span>
                       </p>
                     </div>
