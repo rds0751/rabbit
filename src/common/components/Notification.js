@@ -21,6 +21,7 @@ import { getNotificationListById } from "../../services/webappMicroservice";
 import { useSelector } from "react-redux";
 import { ManageNotiSideBar, ManageWalletSideBar } from "../../reducers/Action";
 import { useDispatch } from "react-redux";
+import moment from "moment";
 
 
 function Notification() {
@@ -52,6 +53,7 @@ function Notification() {
 
 
 
+
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -79,8 +81,7 @@ function Notification() {
         <div className="all-noti">
           {notifications.map((curElem) => {
             const { addedOn, type, userId } = curElem;
-
-
+            let addedOnTimeStamp = moment(addedOn).format('LT')
 
 
             return (
@@ -99,7 +100,7 @@ function Notification() {
                   </div>
                 </div>
 
-                <div className="time">{addedOn}</div>
+                <div className="time">{addedOnTimeStamp}</div>
               </div>
             );
           })}
