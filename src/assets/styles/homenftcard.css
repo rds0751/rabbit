@@ -37,7 +37,8 @@
 .nftTileEachImage {
   box-sizing: border-box;
   /* height: 9.81vw; */
-  height: 187.19;
+  height: 187.19px;
+  min-height: 187.19px;
   object-fit: cover;
   width: 100%;
 }
@@ -52,6 +53,12 @@
 }
 .nftTileEachDetailsFirstContainerName {
   font-family: "poppins-bold";
+  min-height: 48px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
 }
 .nftTileEachDetailsFirstContainerValue {
   border: 1px solid #16AB6E;
@@ -93,7 +100,7 @@
   justify-content: space-between;
   align-items: center;
   width: 52%;
-  padding: 0% 1%;
+  padding: 0% 1% 0% 5%;
   position: relative;
 }
 .ntf_div .filter-drop .text{

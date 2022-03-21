@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Container, Row, Col, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
@@ -19,6 +21,8 @@ import Image3 from '../../assets/images/Image3.png';
 import Image4 from '../../assets/images/Image4.png';
 
 function Home() {
+  const { user, sideBar } = useSelector((state) => state);
+  const { userDetails, loggedInUser, walletAddress } = user;
   return (
     <>
       <div className="homepage">
@@ -30,8 +34,12 @@ function Home() {
                   <div className="left-text">
                     <h1 className="heading">Buy, Trade and Sell your <br></br>NFTs</h1>
                     <p className="text">One stop solution for all types of NFTs</p>
-                    <Button variant="custom">Explore</Button>
-                    <Button variant="custom">Create</Button>
+                    <Button href="/nfts" variant="custom">
+                      Explore
+                    </Button>
+                    <Button href={walletAddress == null ? "/add-wallet" : "/create-nft"} variant="custom">
+                          Create
+                    </Button>
                   </div>
                 </Col>
                 <Col lg={6}>

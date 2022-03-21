@@ -137,7 +137,7 @@ function MyProfile() {
   };
   const getLikedNft = () => {
     NftLikedByUser((response) => {
-      console.log(response, "myprofile");
+      console.log(response, "Liked NFT");
       if (response.success) {
         setlikedNft(response.responseData);
       } else {
@@ -306,8 +306,8 @@ function MyProfile() {
           {/* <hr /> */}
           {/* <div className="profileNftContainer row mx-0 text-center p-0 cards-gap image1"> */}
           <div className="nftTileContainer row ntf_row" style={{ justifyContent: "start", }}>
-            {/* <div class="spinner-border text-primary" role="status">
-              <span class="sr-only">Loading...</span>
+            {/* <div className="spinner-border text-primary" role="status">
+              <span className="sr-only">Loading...</span>
             </div> */}
             {/* {[...AbstractApi, , ...AbstractApi].map((curElem) => { */}
             {isloading && <Spinner />}
