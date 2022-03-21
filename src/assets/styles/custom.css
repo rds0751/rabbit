@@ -786,7 +786,7 @@ input::-webkit-input-placeholder {
 }
 .filter .dropdown .first_select {
   color: #858585;
-  width: 110px;
+  width: 52%;
   font-family: 'poppins-medium';
   line-height: 21px;
   /* margin-left: 32px; */
