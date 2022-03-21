@@ -30,6 +30,7 @@ import Spinner from "../../common/components/Spinner";
 import NonftText from "../../common/components/NonftText";
 import { updateBannerByUserId } from "../../services/UserMicroService";
 import SplitWalletAdd from "../../common/components/SplitWalletAdd";
+import NoItem from "../../assets/images/Noitems.svg"
 function MyProfile() {
   let { user } = useSelector((state) => state);
   let { loggedInUser } = user;
@@ -64,6 +65,7 @@ function MyProfile() {
   const [checkClick, setcheckClick] = useState(false);
   const [getBalance, setGetBalance] = useState("");
   const dispatch = useDispatch();
+  
 
   const [typeofProfilePost, setTypeofProfilePost] = useState("on-sale");
 
@@ -310,8 +312,13 @@ function MyProfile() {
             {/* {[...AbstractApi, , ...AbstractApi].map((curElem) => { */}
             {isloading && <Spinner />}
             {(() => {
-              if (!isloading && Nfts?.length < 1) {
-                return <NonftText text="No Nft" />;
+              if (!isloading && Nfts.length < 1) {
+                return <div>
+                  <div className="Noitemdiv">
+                    <img src={NoItem}/>
+                    <p className="textitem">No items available</p>
+                    </div>
+                  </div>
               }
             })()}
 

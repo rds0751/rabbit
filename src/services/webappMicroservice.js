@@ -31,12 +31,12 @@ export function getNfts(requestData) {
 
 // --------------------get nfts -----
 export const getNFtsData = async (filterObj, successCallBack) => {
-  console.log("dddddddddddddddd",{ params: filterObj })
+  console.log("dddddddddddddddd", { params: filterObj })
   try {
     const url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts";
     const { data } = await axios.get(url, { params: filterObj });
-    console.log("kssssssssssss",(url))
-    console.log("nnnnnnsss",data)
+    console.log("kssssssssssss", (url))
+    console.log("nnnnnnsss", data)
     successCallBack(data);
   } catch (e) {
     console.log(e);
@@ -198,7 +198,7 @@ export function getNotificationListById(requestData) {
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
     "api/v1/notification/" +
-    "6210ce09e9384c0035598c31";
+    requestData;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -292,9 +292,9 @@ export function getPricingHistory(requestData) {
       return Promise.reject(err);
     });
 }
-export function updateCollectionTxStatus(requestData,_id) {
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/collections/"+_id+"/status";
-  console.log("urllllllllllllll",url)
+export function updateCollectionTxStatus(requestData, _id) {
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/collections/" + _id + "/status";
+  console.log("urllllllllllllll", url)
   return httpService(
     httpConstants.METHOD_TYPE.PUT,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
