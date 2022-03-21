@@ -105,6 +105,9 @@ function Notification() {
             );
           })}
         </div>
+        {notifications.length === 0 && (<div>
+          <h1>No Notifications Found</h1>
+        </div>)}
       </div>
 
       {/* ------------------ */}

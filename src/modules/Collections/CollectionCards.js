@@ -13,7 +13,8 @@ import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import Spinner from "../../common/components/Spinner";
 import { Link } from "react-router-dom";
-
+import NoItem from "../../assets/images/Noitems.svg"
+const queryString = require('query-string');
 function Collections_tile() {
   const initialFilterData = {
     sort: 1,
@@ -32,16 +33,16 @@ function Collections_tile() {
 
   useEffect(() => {
     setIsLoading(true);
-    getCollections().then((response) => {
+    const reqObj = queryString.stringify(filterData);
+    getCollections(reqObj).then((response) => {
       setCollections(response);
-
       setIsLoading(false);
     });
     getCategories((res) => {
       setCategories(res.responseData);
       console.log(res, "<<<<<<categories");
     });
-  }, []);
+  }, [filterData]);
 
   const handleFilter = (e) => {
     const { name, value } = e.target;
@@ -81,6 +82,7 @@ function Collections_tile() {
                 onChange={(e) => getCollectionById(e.target.value)}
                 value={filterData.categoryName}
                 className="first_select ml_auto dropdown-toggle-ellipsis"
+                style={{paddingLeft:"8px"}}
               >
                 <option value="">All</option>
                 {Categories.map((item, key) => {
@@ -102,8 +104,8 @@ function Collections_tile() {
                 style={{ width: "180px" }}
               >
                 <option value="all">All</option>
-                <option value="recently added">Recently Added</option>
-                <option value="recently sold">Recently Sold</option>
+                <option value="1">Ascending Order</option>
+                <option value="-1">Descending Order</option>
               </select>
             </div>
           </div>
@@ -169,7 +171,10 @@ function Collections_tile() {
             );
           })}
           {collections.length === 0 && (<div>
-            <h1>No Match Found</h1>
+            <div className="Noitemdiv">
+            <img src={NoItem}/>
+             <p className="textitem">No items available</p>
+           </div>
           </div>)}
         </div>
       </div>

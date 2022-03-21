@@ -232,8 +232,8 @@ function CreateSingleNFT(props) {
                   <div className="abstractillusion">
                     <img src={cdnUrl != "" ? cdnUrl : Image} />
                     <div className="abstractillusioncontent">
-                      <div className="abstracttitle">Abstract illusion</div>
-                      <div className="abstractposter"> {name.current}</div>
+                      <div className="abstracttitle">{name.current}</div>
+                      {/* <div className="abstractposter"> </div> */}
                       <div className="ethprice">{price.current}ETH</div>
                       {/* <div className="ethprice">$162.09</div> */}
                     </div>
@@ -457,7 +457,7 @@ function CreateSingleNFT(props) {
                   }}
                   className="form-control-1 category-select"
                 >
-                  <option className="color82">Select collection</option>
+                  <option className="color82">ANAFTO Collection</option>
                   {collectionData.map((item, index) => (
                     <option className="option color82" value={[item._id, item.contractAddress]} >
                       {item?.name}

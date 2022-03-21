@@ -23,6 +23,7 @@ import NftCardsHome from "../../common/components/NftCardsHome";
 import styled from "styled-components";
 import dropdown from "../../assets/images/dropdown.svg";
 import { Button } from "react-bootstrap"
+import NoItem from "../../assets/images/Noitems.svg"
 // const Select = styled.select`
 // appearance:none;
 // background-image:url(/images/Fixed.png)
@@ -179,6 +180,12 @@ function NftPage() {
 
   const [statusDrop, setStatusDrop] = useState(false);
 
+  const buttonfilter=(e)=>{
+     handlePriceFilter(e);
+     setStatusDrop(false);
+
+  }
+
   return (
     <>
       {/* <div className="container ntf_div"> */}
@@ -187,7 +194,7 @@ function NftPage() {
         {/* <Lower__homepage /> */}
         <div className="lower__homepage" style={{ width: "100%" }}>
           <div id="filters filter-large" className="filter" style={{ gap: '30px' }}>
-            <div className="mobilenftTilePageFirstSelect dropdown">
+            {/* <div className="mobilenftTilePageFirstSelect dropdown">
               <p className="mb-0 sale-type">Sale type</p>
               <select
                 name="type"
@@ -203,7 +210,7 @@ function NftPage() {
                 <option value="fix price">Fix Price</option>
                 <option value="on auction">On auction</option>
               </select>
-            </div>
+            </div> */}
 
             <div className="mobilenftTilePageSecondSelect dropdown">
               <p className="mb-0 sale-type">Price range</p>
@@ -236,7 +243,7 @@ function NftPage() {
                       <Button type="submit" onClick={(e) => clearPriceFilter(e)} variant="outline-primary">Clear</Button>
                     </div>
                     <div className="col-6">
-                      <Button onClick={(e) => handlePriceFilter(e)} variant="outline-primary">Apply</Button>
+                      <Button onClick={(e)=>buttonfilter(e)} variant="outline-primary">Apply</Button>
                     </div>
                   </div>
                   {/* </form> */}
@@ -286,23 +293,35 @@ function NftPage() {
           // className="nftTileContainer gird-container  ntf_row"
           style={{ justifyContent: "start" }}
         >
+
+        
           <div className="spinnerloader">{isloading && <Spinner />}</div>
 
-          {nfts.map((nft) => {
-            const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
-            // console.log("[[[[[[[",biddingDetails.minPrice)
-            const route = "nft-information/" + _id;
+          {nfts.length > 1 ? (
+            nfts.map((nft) => {
+              const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
+              // console.log("[[[[[[[",biddingDetails.minPrice)
+              const route = "nft-information/" + _id;
+  
+              return (
+                <>
+                  <NftCardsHome nft={nft} />
+                </>
+              );
+            })
 
-            return (
-              <>
-                <NftCardsHome nft={nft} />
-              </>
-            );
-          })}
+
+          ):(
+            <div>
+          <div className="Noitemdiv">
+            <img src={NoItem}/>
+             <p className="textitem">No items available</p>
+           </div>
         </div>
-        {nfts.length === 0 && (<div>
-          <h1>No Match Found</h1>
-        </div>)}
+
+          )}
+
+        </div>
       </div >
       <ToastContainer
         position="top-center"
