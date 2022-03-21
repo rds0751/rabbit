@@ -15,8 +15,6 @@ import Spinner from "../../common/components/Spinner";
 import { Link } from "react-router-dom";
 import NoItem from "../../assets/images/Noitems.svg"
 const queryString = require('query-string');
-
-
 function Collections_tile() {
   const initialFilterData = {
     sort: 1,
