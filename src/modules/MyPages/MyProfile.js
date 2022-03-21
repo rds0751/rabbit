@@ -324,7 +324,7 @@ function MyProfile() {
 
             {Nfts.map((curElem) => {
               const {
-                ipfsUrl,
+                cdnUrl,
                 name,
                 price,
                 salesInfo,
@@ -339,7 +339,7 @@ function MyProfile() {
                   {/* <div className="col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
                     <img
                       className="nftTileEachImage"
-                      src={ipfsUrl}
+                      src={cdnUrl}
                       alt="nft"
                     />
                     <div className="tile__details">

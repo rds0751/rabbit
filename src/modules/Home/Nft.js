@@ -194,7 +194,7 @@ function NftPage() {
         {/* <Lower__homepage /> */}
         <div className="lower__homepage" style={{ width: "100%" }}>
           <div id="filters filter-large" className="filter" style={{ gap: '30px' }}>
-            <div className="mobilenftTilePageFirstSelect dropdown">
+            {/* <div className="mobilenftTilePageFirstSelect dropdown">
               <p className="mb-0 sale-type">Sale type</p>
               <select
                 name="type"
@@ -210,7 +210,7 @@ function NftPage() {
                 <option value="fix price">Fix Price</option>
                 <option value="on auction">On auction</option>
               </select>
-            </div>
+            </div> */}
 
             <div className="mobilenftTilePageSecondSelect dropdown">
               <p className="mb-0 sale-type">Price range</p>
