@@ -13,6 +13,7 @@ import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import Spinner from "../../common/components/Spinner";
 import { Link } from "react-router-dom";
+const queryString = require('query-string');
 import NoItem from "../../assets/images/Noitems.svg"
 
 function Collections_tile() {
@@ -33,16 +34,16 @@ function Collections_tile() {
 
   useEffect(() => {
     setIsLoading(true);
-    getCollections().then((response) => {
+    const reqObj = queryString.stringify(filterData);
+    getCollections(reqObj).then((response) => {
       setCollections(response);
-
       setIsLoading(false);
     });
     getCategories((res) => {
       setCategories(res.responseData);
       console.log(res, "<<<<<<categories");
     });
-  }, []);
+  }, [filterData]);
 
   const handleFilter = (e) => {
     const { name, value } = e.target;
@@ -103,8 +104,8 @@ function Collections_tile() {
                 style={{ width: "180px" }}
               >
                 <option value="all">All</option>
-                <option value="recently added">Recently Added</option>
-                <option value="recently sold">Recently Sold</option>
+                <option value="1">Ascending Order</option>
+                <option value="-1">Descending Order</option>
               </select>
             </div>
           </div>
