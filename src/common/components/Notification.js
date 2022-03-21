@@ -80,7 +80,7 @@ function Notification() {
         <h3 className="notification-text">Notification</h3>
         <div className="all-noti">
           {notifications.map((curElem) => {
-            const { addedOn, type, userId } = curElem;
+            const { addedOn, type, owner } = curElem;
             let addedOnTimeStamp = moment(addedOn).format('LT')
 
 
@@ -88,16 +88,33 @@ function Notification() {
               <div className="single-noti">
                 <div className="single-noti-inner ">
                   <img
-                    src={profile}
+                    src={owner.photo}
                     width="24px"
                     height="24px"
                     className="noti-image"
                   />
-                  <div className="noti-text">
-                    <span>
-                      {(String(userId).length >= 7) ? (!userId ? " " : (String(userId).substring(0, 8) + "...")) : (String(userId) === undefined ? "" : userId)}
-                    </span>&nbsp;{type}&nbsp;your item.
-                  </div>
+                  {type == "like" ? (
+                    <div className="noti-text">
+                      <span style={{ color: "#366EEF" }}>
+                        {(String(owner.userName).length >= 7) ? (!owner.userName ? " " : (String(owner.userName).substring(0, 8) + "...")) : (String(owner.userName) === "" ? "No_Name" : owner.userName)}
+                      </span>&nbsp;{type}d&nbsp;your item.
+                    </div>
+                  ) : type == "bid" ? (
+                    <div className="noti-text">
+                      <span>
+                        You got new {type} from <span style={{ color: "#366EEF" }}>
+                          {(String(owner.userName).length >= 7) ? (!owner.userName ? " " : (String(owner.userName).substring(0, 8) + "...")) : (String(owner.userName) === "" ? "No_Name" : owner.userName)}
+                        </span>
+                      </span>
+                    </div>
+                  ) :
+                    (
+                      <div>
+                        <span>
+                          you got new{type} from srinivas
+                        </span>
+                      </div>
+                    )}
                 </div>
 
                 <div className="time">{addedOnTimeStamp}</div>
@@ -113,7 +130,7 @@ function Notification() {
       {/* ------------------ */}
 
 
-    </div>
+    </div >
   );
 }
 export default Notification;
