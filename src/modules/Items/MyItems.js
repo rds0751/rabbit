@@ -13,16 +13,15 @@ function MyItems() {
 
   const [activeInActive, setActiveInActive] = useState("active");
   const [toggleSelect, setToggleSelect] = useState(true);
-  const item = localStorage.setItem('keyValue', 'dataToPersist')
-  const Item = localStorage.getItem('keyValue')
+
 
   const [ownedNft, setownedNft] = useState([]);
   const { user } = useSelector((state) => state);
   const { loggedInUser } = user;
-  if(loggedInUser){ localStorage.setItem('userId', loggedInUser._id); }
+  if (loggedInUser) { localStorage.setItem('userId', loggedInUser._id); }
   let userId = (loggedInUser) ? loggedInUser._id : localStorage.userId;
 
-  useEffect( async () => {
+  useEffect(async () => {
     await getNftOwnedByUser(userId).then(res => setownedNft(res));
   }, []);
 
@@ -64,7 +63,7 @@ function MyItems() {
                 marginLeft: "18px",
                 color: !toggleSelect ? "#191919" : "#828282",
                 borderBottom: !toggleSelect ? "3px solid #366EEF" : "none",
-                cursor:"pointer",
+                cursor: "pointer",
               }}
             >
               Collections

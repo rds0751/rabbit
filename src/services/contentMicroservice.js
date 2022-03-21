@@ -337,10 +337,10 @@ export const getAboutData = async (id, successCallBack) => {
 };
 
 // ---Edit nft
-export const EditNft = async (userId, reqData, successCallBack) => {
+export const EditNft = async (id, reqData, successCallBack) => {
   try {
     const url =
-      process.env.REACT_APP_WEBAPP_MICROSERVICE + `api/v1/nfts/${userId}`;
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + `api/v1/nfts/${id}`;
     const { data } = await axios.put(url, reqData, { headers: AuthToken });
     console.log(data, "<<<<data while updating nft");
     successCallBack(data);

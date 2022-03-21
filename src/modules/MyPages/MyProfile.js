@@ -32,28 +32,31 @@ import { updateBannerByUserId } from "../../services/UserMicroService";
 import SplitWalletAdd from "../../common/components/SplitWalletAdd";
 import NoItem from "../../assets/images/Noitems.svg"
 function MyProfile() {
+  let { user } = useSelector((state) => state);
+  let { loggedInUser } = user;
+
+  if(loggedInUser){ localStorage.setItem('userId', loggedInUser._id); }
+  let userId = (loggedInUser) ? loggedInUser._id : localStorage.userId;
+
+  if(user){ localStorage.setItem('loggedInDetails', user.loggedInUser); }
+  if (loggedInUser == null){
+    loggedInUser = localStorage.getItem('loggedInDetails')
+  }
+
   const defaultCoverpic =
     "https://png.pngtree.com/background/20210714/original/pngtree-blood-drop-halloween-blood-background-black-background-picture-image_1220404.jpg";
   const defaultPic =
     "https://th.bing.com/th/id/R.e1189efa9cd3aee29c0e1f7dbed689bf?rik=YRidGY7NPM2n3A&riu=http%3a%2f%2fwww.clipartbest.com%2fcliparts%2f7ca%2fpeo%2f7capeoboi.png&ehk=MwVRL6ome8bAroWEn5dLYQgaXLxrafgcwcIQX7N48CM%3d&risl=&pid=ImgRaw&r=0";
+  
   const [Nfts, setNfts] = useState([]);
   const [createdNft, setcreatedNft] = useState([]);
   const [isloading, setIsloading] = useState(false);
-
   const [ownedNft, setownedNft] = useState([]);
-  useEffect(async () => {
-    await NftOwnedByUser().then((response) => setownedNft(response));
-  }, []);
-  console.log("Nft Owned by user", ownedNft);
-
-
   const [onSaleNft, setonSaleNft] = useState([]);
   const [likedNft, setlikedNft] = useState([]);
-  const [userId, setUserId] = useState("");
 
-  const { user } = useSelector((state) => state);
   const navigate = useNavigate();
-  const { walletAddress, loggedInUser } = user;
+  const { walletAddress } = user;
   const [humburger, setHumburger] = useState(false);
   const ethereum = window.ethereum;
   const [errorMssg, setErrorMssg] = useState(null);
@@ -67,10 +70,6 @@ function MyProfile() {
   const [typeofProfilePost, setTypeofProfilePost] = useState("on-sale");
 
   useEffect(() => {
-    setUserId(loggedInUser._id)
-    // console.log()
-    console.log("logiiiiiiiii user", loggedInUser._id)
-
     if (loggedInUser == null) {
       navigate("/my-profile");
       navigate("/add-wallet");
@@ -111,9 +110,8 @@ function MyProfile() {
       } else {
         toast.error(response.msg);
       }
-    }, loggedInUser._id);
+    }, userId);
   };
-  console.log("kkkkkkkkkkddddddddddddd", Nfts)
   const getOwnedByNft = () => {
     NftOwnedByUser((response) => {
       console.log(response, "myprofile");
@@ -122,7 +120,7 @@ function MyProfile() {
       } else {
         toast.error(response.msg);
       }
-    }, loggedInUser._id);
+    }, userId);
   };
   const getOnSaleNft = () => {
     NftSellByUser((response) => {
@@ -134,7 +132,7 @@ function MyProfile() {
       } else {
         toast.error(response.msg);
       }
-    }, loggedInUser._id);
+    }, userId);
     // setonSaleNft([]);
   };
   const getLikedNft = () => {
@@ -145,13 +143,12 @@ function MyProfile() {
       } else {
         toast.error(response.msg);
       }
-    }, loggedInUser._id);
+    }, userId);
     // setlikedNft([]);
   };
 
   // -----------------------
 
-  console.log(Nfts, "myprofilenft");
   const accountChangeHandler = (newAccount) => {
     // getUserBalance(newAccount);
   };
