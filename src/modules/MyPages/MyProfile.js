@@ -310,6 +310,7 @@ function MyProfile() {
               <span class="sr-only">Loading...</span>
             </div> */}
             {/* {[...AbstractApi, , ...AbstractApi].map((curElem) => { */}
+
             {isloading && <Spinner />}
             {(() => {
               if (!isloading && Nfts.length < 1) {
@@ -321,7 +322,7 @@ function MyProfile() {
                   </div>
               }
             })()}
-
+            
             {Nfts.map((curElem) => {
               const {
                 ipfsUrl,

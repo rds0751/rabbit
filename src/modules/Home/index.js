@@ -264,6 +264,7 @@ export default class NftDetail extends BaseComponent {
             this.setState({ saleSuccess: true });
 
             this.setState({ nftDetails: result });
+
             Utils.apiSuccessToast("Your nft has been updated for put on sell successfully.");
         }
     };
