@@ -57,6 +57,7 @@ import { CheckUserByWalletAddress } from "./services/UserMicroService";
 import FAQsPage from "./modules/Faqs/index";
 import Home from "./modules/Home/Home";
 import BuyPage from "./modules/Buying/index";
+import ScrollToTop from "./ScrollToTop";
 
 function App() {
   useEffect(() => {
@@ -76,7 +77,9 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
+
         <Router>
+        <ScrollToTop />
           <Navbar />
           {/* <Tile__homepage /> */}
           {/* <Switch> */}
