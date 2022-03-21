@@ -72,7 +72,6 @@ function Suggestion() {
                   onChange={(e) => handleChange(e.target.name, e.target.value)}
                   className="sugg-input"
                   placeholder="Write your email address"
-                  name="email"
                 />
               </div>
               <div className="">

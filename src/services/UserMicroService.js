@@ -56,7 +56,18 @@ export const CheckUserByWalletAddress = async (
   //     return Promise.reject(err);
   //   });
 };
-
+export const addEmail = async (bodyData, successCallback) => {
+  try {
+    const url =
+      process.env.REACT_APP_WEBAPP_USER_MICROSERVICE + "api/v1/email";
+    const { data } = await axios.post(url, bodyData, { headers: AuthToken });
+    if (data.success) {
+      successCallback(data.responseData);
+    }
+  } catch (e) {
+    console.log("add Email");
+  }
+};
 export function getUser(requestData) {
   let url =
     process.env.REACT_APP_USER_MICROSERVICE + "api/v1/user/" + requestData;
