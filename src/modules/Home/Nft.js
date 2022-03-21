@@ -194,7 +194,7 @@ function NftPage() {
         {/* <Lower__homepage /> */}
         <div className="lower__homepage" style={{ width: "100%" }}>
           <div id="filters filter-large" className="filter" style={{ gap: '30px' }}>
-            <div className="mobilenftTilePageFirstSelect dropdown">
+            {/* <div className="mobilenftTilePageFirstSelect dropdown">
               <p className="mb-0 sale-type">Sale type</p>
               <select
                 name="type"
@@ -210,7 +210,7 @@ function NftPage() {
                 <option value="fix price">Fix Price</option>
                 <option value="on auction">On auction</option>
               </select>
-            </div>
+            </div> */}
 
             <div className="mobilenftTilePageSecondSelect dropdown">
               <p className="mb-0 sale-type">Price range</p>
@@ -293,26 +293,35 @@ function NftPage() {
           // className="nftTileContainer gird-container  ntf_row"
           style={{ justifyContent: "start" }}
         >
+
+        
           <div className="spinnerloader">{isloading && <Spinner />}</div>
 
-          {nfts.map((nft) => {
-            const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
-            // console.log("[[[[[[[",biddingDetails.minPrice)
-            const route = "nft-information/" + _id;
+          {nfts.length > 1 ? (
+            nfts.map((nft) => {
+              const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
+              // console.log("[[[[[[[",biddingDetails.minPrice)
+              const route = "nft-information/" + _id;
+  
+              return (
+                <>
+                  <NftCardsHome nft={nft} />
+                </>
+              );
+            })
 
-            return (
-              <>
-                <NftCardsHome nft={nft} />
-              </>
-            );
-          })}
-        </div>
-        {nfts.length<1 && (<div>
+
+          ):(
+            <div>
           <div className="Noitemdiv">
             <img src={NoItem}/>
              <p className="textitem">No items available</p>
            </div>
-        </div>)}
+        </div>
+
+          )}
+
+        </div>
       </div >
       <ToastContainer
         position="top-center"

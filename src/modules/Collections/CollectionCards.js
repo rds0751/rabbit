@@ -82,6 +82,7 @@ function Collections_tile() {
                 onChange={(e) => getCollectionById(e.target.value)}
                 value={filterData.categoryName}
                 className="first_select ml_auto dropdown-toggle-ellipsis"
+                style={{paddingLeft:"8px"}}
               >
                 <option value="">All</option>
                 {Categories.map((item, key) => {

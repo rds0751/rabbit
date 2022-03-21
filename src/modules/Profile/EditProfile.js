@@ -133,9 +133,9 @@ function EditProfile(props) {
             </h3>
           </div>
 
-          <h3 className=" input-heading generalsettingl">
+          {/* <h3 className=" input-heading generalsettingl">
             General Setting
-          </h3>
+          </h3> */}
         </div>
         <div className="chooseProfilePicContainer">
           <div className="chooseProfilePicInnerContainer ">

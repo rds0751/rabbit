@@ -49,14 +49,34 @@ function Footer() {
           <div className="footer-top">
             <p className="fs-18">Join our community</p>
             <div className="allicon">
+              <a href="https://www.instagram.com/" target="_blank" className="footerAnchor">
               <i className="fa-brands fa-instagram Icon"></i>
+              </a>
+              <a href="https://twitter.com/" target="_blank" className="footerAnchor">
               <i className="fab fa-twitter  Icon twittericon"></i>
+              </a>
+              <a href="https://www.reddit.com/" target="_blank" className="footerAnchor">
               <i className="fab fa-reddit  Icon hideicon "></i>
-              <i className="fab fa-telegram  Icon hideicon"></i>
-              <i class="fa-brands fa-facebook-f Icon"></i>
-              <i className="fab fa-linkedin  Icon hideicon"></i>
-              <i className="fab fa-twitter  Icon hideicon" ></i>
-              <i className="fab fa-youtube  Icon hideicon"></i>
+              </a>
+             <a href="https://telegram.org/" target="_blank" className="footerAnchor">
+             <i className="fab fa-telegram  Icon hideicon"></i>
+             </a>
+             <a href="https://www.facebook.com/" target="_blank" className="footerAnchor">
+             <i class="fa-brands fa-facebook-f Icon"></i>
+
+             </a>
+             <a href="https://www.linkedin.com/feed/" target="_blank" className="footerAnchor"><i className="fab fa-linkedin  Icon hideicon"></i></a>
+             <a href="https://discord.com/" target="_blank" className="footerAnchor">
+               <i className="fab fa-discord  Icon hideicon" ></i></a>
+             <a href="https://www.youtube.com/" target="_blank" className="footerAnchor"><i className="fab fa-youtube  Icon hideicon"></i></a>
+
+
+             
+              
+             
+              
+             
+              
             </div>
             <p className="subscribe">Subscribe to our newsletter for the latest NFTs</p>
             <div className="input-group-lg input-group  footerinputbox">
@@ -101,25 +121,25 @@ function Footer() {
             <div>
               <div className="fs-18 d-flex flex-column" style={{ color: "#8F8F8F" }}>
 
-                <a className="footertitle" href="/">Marketplace</a>
-                <a href="/" className="footersubtitle">NFT</a>
+                <a className="footertitle">Marketplace</a>
+                <a href="/nfts" className="footersubtitle">NFT</a>
                 <a href="/collections-tile" style={{ textDecoration: "none", color: "#8F8F8F", paddingBottom: "19px" }}>Collections</a>
               </div>
               <div className="fs-18 d-flex flex-column">
-                <a className="footertitle" href="/leader-board" >Leaderboard</a>
+                <a className="footertitle" >Leaderboard</a>
                 <p><a href="/top-seller" className="footersubtitle">Top Seller</a></p>
-                <p><a href="/top-bidder" className="footersubtitle">Top Bidder</a></p>
+                <p><a href="/top-bidder" className="footersubtitle">Top Buyer</a></p>
                 <p><a href="/top-collection" style={{ textDecoration: "none", color: "#8F8F8F" }} >Top Collections</a></p>
               </div>
             </div>
             <div className="fs-18 d-flex flex-column">
-              <a className="footertitle" href="/community">Community</a>
+              <a className="footertitle">Community</a>
               <p><a href="/help-center" className="footersubtitle">Help Centers</a></p>
               <p><a href="/FAQs" className="footersubtitle">FAQs</a></p>
               <p><a href="/suggestion" style={{ textDecoration: "none", color: "#8F8F8F" }} >Suggestions</a></p>
             </div>
             <div className="fs-18 d-flex flex-column">
-              <a href="/about" className="footertitle">Company</a>
+              <a className="footertitle">Company</a>
               <p><a href="/about" style={{ textDecoration: "none", color: "#8F8F8F" }}>About</a></p>
             </div>
           </div>
@@ -127,26 +147,26 @@ function Footer() {
           <div className="row footer-bottom-sm">
             <div className="col-7">
               <h3 className="fs-18 fw-b">
-                <a href="/" style={{ textDecoration: "none", color: "#8F8F8F" }}>Marketplace</a></h3>
-              <p><a href="/" style={{ textDecoration: "none", color: "#8F8F8F" }}>Nft</a></p>
+                <a  style={{ textDecoration: "none", color: "#8F8F8F",cursor:"default" }}>Marketplace</a></h3>
+              <p><a href="/nfts" style={{ textDecoration: "none", color: "#8F8F8F" }}>Nft</a></p>
               <p><a href="/collections-tile" style={{ textDecoration: "none", color: "#8F8F8F" }}>Collections</a></p>
             </div>
             <div className="col-5">
               <h3 className="fs-18 fw-b">
-                <a href="/leader-board" style={{ textDecoration: "none", color: "#8F8F8F" }}>Leaderboard</a></h3>
+                <a style={{ textDecoration: "none", color: "#8F8F8F",cursor:"default" }}>Leaderboard</a></h3>
               <p><a href="/top-seller" style={{ textDecoration: "none", color: "#8F8F8F" }}>Top Seller</a></p>
               <p><a href="/top-bidder" style={{ textDecoration: "none", color: "#8F8F8F" }}>Top Bidder</a></p>
               <p><a href="/top-collection" style={{ textDecoration: "none", color: "#8F8F8F" }}>Top Collections</a></p>
             </div>
             <div className="col-7 mt-3">
-              <h3 className="fs-18 fw-b">Community</h3>
+              <h3 className="fs-18 fw-b">ComImunity</h3>
               <p><a href="/help-center" style={{ textDecoration: "none", color: "#8F8F8F" }}>Help Centers</a></p>
               <p><a href="/FAQs" style={{ textDecoration: "none", color: "#8F8F8F" }}>FAQs</a></p>
               <p><a href="/suggestion" style={{ textDecoration: "none", color: "#8F8F8F" }}>Suggestions</a></p>
             </div>
             <div className="col-5 mt-3">
               <h3 className="fs-18 fw-b">
-                <a href="/about" style={{ textDecoration: "none", color: "#8F8F8F" }}>Company</a></h3>
+                <a style={{ textDecoration: "none", color: "#8F8F8F",cursor:"pointer" }}>Company</a></h3>
               <p><a href="/about" style={{ textDecoration: "none", color: "#8F8F8F" }}>About</a></p>
             </div>
           </div>

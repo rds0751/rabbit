@@ -178,10 +178,11 @@ var precise = volume.toPrecision(4);
 
               )}
 
-  {topSellers.firstName==""? (
+        {topSellers.firstName==""? (
                <Name>No Name</Name>
              ):(
              <Name>{topSellers.firstName}</Name>
+
              )}
 
              

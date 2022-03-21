@@ -1211,6 +1211,7 @@ font: normal normal bold 18px/27px Poppins;
 letter-spacing: 0px;
 color: #8F8F8F;
 opacity: 1;
+cursor: default;
 text-decoration: none;
 text-decoration: none;
 padding-bottom: 16px;
@@ -1223,6 +1224,14 @@ color: #8F8F8F;
 opacity: 1;
 padding-bottom: 16px;
 text-decoration: none;
+
+}
+.footertitle:hover{
+  color:#8F8F8F
+
+}
+.footersubtitle:hover{
+  color:#8F8F8F;
 }
  .dropdown-menu[data-bs-popper] {
   margin-top: 1px;
@@ -1319,7 +1328,7 @@ order: 0;
 background-position: right;
     position: absolute;
     right: 10px;
-   padding-left: 8px;;
+   /* padding-left: 8px;; */
     background-size: 15px;
    
     /* width:175px !important */
@@ -1349,4 +1358,7 @@ background-position: right;
 }
 .mobilenftTilePageSecondSelect{
   cursor: pointer;
+}
+.footerAnchor{
+  color: #818181;
 }

@@ -232,8 +232,8 @@ function CreateSingleNFT(props) {
                   <div className="abstractillusion">
                     <img src={cdnUrl != "" ? cdnUrl : Image} />
                     <div className="abstractillusioncontent">
-                      <div className="abstracttitle">Abstract illusion</div>
-                      <div className="abstractposter"> {name.current}</div>
+                      <div className="abstracttitle">{name.current}</div>
+                      {/* <div className="abstractposter"> </div> */}
                       <div className="ethprice">{price.current}ETH</div>
                       {/* <div className="ethprice">$162.09</div> */}
                     </div>
