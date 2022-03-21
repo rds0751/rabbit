@@ -129,7 +129,7 @@ font:normal normal normal 16px/25px Poppins;
 color: #818181;
 `;
 
-function Top_collection() {
+function TopBidders() {
   const [topCollections, setTopCollections] = useState([]);
 
 
@@ -175,4 +175,4 @@ function Top_collection() {
   );
 }
 
-export default Top_collection;
+export default TopBidders;

@@ -13,6 +13,7 @@ import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import Spinner from "../../common/components/Spinner";
 import { Link } from "react-router-dom";
+import NoItem from "../../assets/images/Noitems.svg"
 
 function Collections_tile() {
   const initialFilterData = {
@@ -169,7 +170,10 @@ function Collections_tile() {
             );
           })}
           {collections.length === 0 && (<div>
-            <h1>No Match Found</h1>
+            <div className="Noitemdiv">
+            <img src={NoItem}/>
+             <p className="textitem">No items available</p>
+           </div>
           </div>)}
         </div>
       </div>
