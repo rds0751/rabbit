@@ -278,7 +278,7 @@ export default function NftInformation(props) {
               <div className="row" id="share_info">
                 <div className="col-xl-10 col-lg-10 col-md-9 col-sm-9">
                   <div className="edit-sell-button">
-                    <Button
+                    {/* <Button
                       style={{
                         display:
                           props?.responseData?.ownerAddress == loggedInUser?.wallet_address
@@ -299,7 +299,7 @@ export default function NftInformation(props) {
                       >
                         Edit
                       </Link>
-                    </Button>
+                    </Button> */}
                     <Button
                       // className="btn btn-primary mt-3"
                       // data-bs-toggle="modal"
@@ -395,7 +395,7 @@ export default function NftInformation(props) {
             <div className="col-xl-5 col-lg-5 col-md-12">
               <div className="nftdetail-img">
                 <img
-                  src={nft.ipfsUrl}
+                  src={nft.cdnUrl}
                   alt="nft"
                   className="border-radius imginfo_mob"
                   style={{
@@ -412,7 +412,7 @@ export default function NftInformation(props) {
                 <div className="row" id="share_info">
                   <div className="col-xl-10 col-lg-10 col-md-9 col-sm-9">
                     <div className="edit-sell-button">
-                      <Button
+                      {/* <Button
                         style={{
                           display:
                             props?.responseData?.ownerAddress == loggedInUser?.wallet_address
@@ -433,7 +433,7 @@ export default function NftInformation(props) {
                         >
                           Edit
                         </Link>
-                      </Button>
+                      </Button> */}
                       <Button
                         // className="btn btn-primary mt-3"
                         // data-bs-toggle="modal"
@@ -866,7 +866,7 @@ export default function NftInformation(props) {
                   </div>
                 </div>
                 <div className="abstractillusion">
-                  <img src={nft.ipfsUrl} />
+                  <img src={nft.cdnUrl} />
                   <div className="abstractillusioncontent">
                     <div className="abstracttitle"></div>
                     <div className="abstractposter"> {nft.name}</div>
@@ -931,7 +931,7 @@ export default function NftInformation(props) {
                   </div>
                 </div>
                 <div className="abstractillusion">
-                  <img src={nft.ipfsUrl} />
+                  <img src={nft.cdnUrl} />
                   <div className="abstractillusioncontent">
                     <div className="abstracttitle"></div>
                     <div className="abstractposter"> {nft.name}</div>
@@ -996,7 +996,7 @@ export default function NftInformation(props) {
                   </div>
                 </div>
                 <div className="abstractillusion">
-                  <img src={nft.ipfsUrl} />
+                  <img src={nft.cdnUrl} />
                   <div className="abstractillusioncontent">
                     <div className="abstracttitle"></div>
                     <div className="abstractposter"> {nft.name}</div>
