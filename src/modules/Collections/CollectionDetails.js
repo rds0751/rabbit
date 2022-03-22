@@ -15,6 +15,7 @@ import search from "../../assets/images/search.svg";
 import dropdown from "../../assets/images/dropdown.svg";
 import NftCardsHome from "../../common/components/NftCardsHome";
 import CollDetailCard from "../../common/components/CollDetailCard";
+import NoItem from "../../assets/images/Noitems.svg"
 
 function CollectionDetails() {
   const collectionId = useParams();
@@ -147,12 +148,25 @@ function CollectionDetails() {
             </div>
           </div>
           <div className="nftTileContainer row cards-gap ntf_row">
-           
-            {[...nfts].map((nft) => {
-              const { ipfsUrl, name, salesInfo } = nft;
-              return <CollDetailCard nft={nft} />;
 
-            })}
+            {nfts.lenght>1 ? (
+              [...nfts].map((nft) => {
+                const { ipfsUrl, name, salesInfo } = nft;
+                return <CollDetailCard nft={nft} />;
+  
+              })
+
+            ):(
+              <div>
+              <div className="Noitemdiv">
+                <img src={NoItem}/>
+                <p className="textitem">No items available</p>
+                </div>
+              </div>
+
+            )}
+           
+            {}
           </div>
         </div>
       </div>

@@ -293,26 +293,35 @@ function NftPage() {
           // className="nftTileContainer gird-container  ntf_row"
           style={{ justifyContent: "start" }}
         >
+
+        
           <div className="spinnerloader">{isloading && <Spinner />}</div>
 
-          {nfts.map((nft) => {
-            const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
-            // console.log("[[[[[[[",biddingDetails.minPrice)
-            const route = "nft-information/" + _id;
+          {nfts.length > 1 ? (
+            nfts.map((nft) => {
+              const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
+              // console.log("[[[[[[[",biddingDetails.minPrice)
+              const route = "nft-information/" + _id;
+  
+              return (
+                <>
+                  <NftCardsHome nft={nft} />
+                </>
+              );
+            })
 
-            return (
-              <>
-                <NftCardsHome nft={nft} />
-              </>
-            );
-          })}
-        </div>
-        {nfts.length<1 && (<div>
+
+          ):(
+            <div>
           <div className="Noitemdiv">
             <img src={NoItem}/>
              <p className="textitem">No items available</p>
            </div>
-        </div>)}
+        </div>
+
+          )}
+
+        </div>
       </div >
       <ToastContainer
         position="top-center"

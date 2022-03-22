@@ -170,7 +170,7 @@ class Index extends BaseComponent {
       this.setState({ isMintSuccess: true });
       this.setState({ isOpenMintModal: false });
       this.setState({ mintedNftId: contentRes._id });
-      Utils.apiSuccessToast("Your Nft has been created successfully.");
+      Utils.apiSuccessToast("Nft has been created successfully.");
       this.setState({ isNftCreated: true });
     }
 

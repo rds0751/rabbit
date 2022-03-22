@@ -91,67 +91,117 @@ function MyItems() {
 
         {toggleSelect && (
           <div style={{ marginTop: "40.12px", marginLeft: 'auto', rowGap: "50px" }} className="row">
-
-              {ownedNft.length === 0 && (<div>
-                  <div className="Noitemdiv">
-                    <img src={NoItem}/>
-                    <p className="textitem">No items available</p>
-                    </div>
-                  </div>)}
-            {ownedNft.map((curElem) => {
-              const { cdnUrl, name, _id } =
-                curElem;
-              const route = "/nft-information/" + _id;
-              return (
-
-                <div className=" col-md-6 col-lg-3  col-sm-12 nft_card my-item-card p-0" >
-                  <div className="card nft-card-radius border-radius cardmob">
-                    <Link to={route} style={{ textDecoration: "none" }}>
-                      <img
-                        className="nftTileEachImage img-fluid border-radius card_imgmob"
-                        src={cdnUrl}
-                        alt="nft-img"
-                        style={{ height: "187px", borderTopLeftRadius: '13px', borderTopRightRadius: '13px' }}
-                      />
-                    </Link>
-                    <div
-                      className="nftTileEachDetails card-lower"
-                      style={{
-                        padding: "0px 14px 0px 12px",
-                      }}
-                    >
-                      <div className="nftTileEachDetailsFirstContainer container__up">
-                        <div
-                          className="nftTileEachDetailsFirstContainerName"
-                          style={{
-                            color: "#191919",
-                            // height: "20px",
-                            overflow: "hidden",
-                          }}
-                        >
-                          {name}
+            
+            {ownedNft.length > 1 ?(
+              ownedNft.map((curElem) => {
+                const { cdnUrl, name, _id } =
+                  curElem;
+                const route = "/nft-information/" + _id;
+                return (
+  
+                  <div className=" col-md-6 col-lg-3  col-sm-12 nft_card my-item-card p-0" >
+                    <div className="card nft-card-radius border-radius cardmob">
+                      <Link to={route} style={{ textDecoration: "none" }}>
+                        <img
+                          className="nftTileEachImage img-fluid border-radius card_imgmob"
+                          src={cdnUrl}
+                          alt="nft-img"
+                          style={{ height: "187px", borderTopLeftRadius: '13px', borderTopRightRadius: '13px' }}
+                        />
+                      </Link>
+                      <div
+                        className="nftTileEachDetails card-lower"
+                        style={{
+                          padding: "0px 14px 0px 12px",
+                        }}
+                      >
+                        <div className="nftTileEachDetailsFirstContainer container__up">
+                          <div
+                            className="nftTileEachDetailsFirstContainerName"
+                            style={{
+                              color: "#191919",
+                              // height: "20px",
+                              overflow: "hidden",
+                            }}
+                          >
+                            {name}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                
+                  
+  
+                );
+              })
 
-              );
-            })}
+            ):(<div>
+              <div className="Noitemdiv">
+                <img src={NoItem}/>
+                <p className="textitem">No items available</p>
+                </div>
+              </div>) }
+            
+
+           
           </div>
         )}
         {!toggleSelect && (
           <div style={{ marginLeft: 'auto', rowGap: "50px" }} className="row">
+            {ownedCollection.length > 1 ? (
+              ownedCollection.map((curElem) => {
+                const { imageUrl, name, _id } =
+                  curElem;
+                const collection = "/collection-details/" + _id;
+                return (
+                  <div className="col-md-6 col-lg-3 col-sm-12 mt-5 my-item-card p-0">
+                    < div
+                      className=" nft-card-radius collection-card border-radius pt-4 cardmob"
+                      style={{ backgroundColor: "#F8F8F8" }
+                      }
+                    >
+                      <div className="text-center">
+                        <Link to={collection} style={{ textDecoration: "none" }}>
+                          <img
+                            className="img-fluid border-radius collection-img-card-radius collection_imgmob"
+                            src={imageUrl}
+                            alt="nft"
+                            style={{
+                              width: "100px",
+                              height: "100px",
+                              textDecoration: "none",
+                            }}
+                          />
+                        </Link>
+                      </div>
+                      <div className="text-center pt-3">
+                        <p
+                          className="collectionCardEachName text-center font-weight-900"
+                          style={{ color: "#191919" }}
+                        >
+                          {name}
+                        </p>
+                        <p className="collectionCardEachTotalitems">
+                          <span className=" font-14 text-dark">
+                            Total Items:
+                            <span className="text-primary">2</span>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
 
-             {ownedCollection.length === 0 && (<div>
+            ):(
+              <div>
               <div className="Noitemdiv">
                 <img src={NoItem}/>
                 <p className="textitem">No items available</p>
                 </div>
               </div>)}
               
-            {ownedCollection.map((curElem) => {
+            {/* {ownedCollection.map((curElem) => {
               const { imageUrl, name, _id } =
                 curElem;
               const collection = "/collection-details/" + _id;
@@ -186,14 +236,15 @@ function MyItems() {
                       <p className="collectionCardEachTotalitems">
                         <span className=" font-14 text-dark">
                           Total Items:
-                          <span className="text-primary">2</span>
+                          <span className="text-primary">0</span>
+                          {console.log("kkkkkkkkkkkkkk",curElem)}
                         </span>
                       </p>
                     </div>
                   </div>
                 </div>
               );
-            })}
+            })} */}
           </div>
 
         )}
