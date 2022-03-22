@@ -32,6 +32,8 @@ import { Oval } from "react-loader-spinner";
 import ListingsTable from "../../common/components/ListingTable";
 toast.configure()
 
+
+
 export default function NftInformation(props) {
 
   const navigate = useNavigate();
@@ -249,8 +251,10 @@ export default function NftInformation(props) {
     });
   }
 
-  let ownedBy = owner?.firstName ? owner?.firstName : loggedInUser?.wallet_address
-  let createdBy = creator?.firstName ? creator?.firstName : loggedInUser?.wallet_address
+  let ownedBy = owner?.userName ? owner?.userName : owner?.wallet_address
+  let createdBy = creator?.userName ? creator?.userName : creator?.wallet_address
+
+  console.log(creator,"ownedby")
 
   return (
     <>
@@ -400,7 +404,7 @@ export default function NftInformation(props) {
                   className="border-radius imginfo_mob"
                   style={{
                     maxWidth: "100%",
-                    height: "810px",
+                    height: "837px",
                     borderRadius: "8px",
                   }}
                 />
@@ -604,7 +608,7 @@ export default function NftInformation(props) {
               <div className="second-text align-row">
                 <span className="text">
                   Current Price:&nbsp;
-                  <span className="nft-value" style={{ color: "#16AB6E" }}>
+                  <span className="nft-value" >
                     {salesInfo?.price}
                   </span>
                 </span>

@@ -998,3 +998,6 @@ letter-spacing: 0px;
 color: #191919;
 }
 /* add wallet screen css end*/
+.z-carousel{
+  z-index: 0 !important;
+}
