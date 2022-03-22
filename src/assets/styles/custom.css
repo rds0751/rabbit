@@ -1001,3 +1001,20 @@ color: #191919;
 .z-carousel{
   z-index: 0 !important;
 }
+
+/* Blockchain select css start*/
+.css-1pahdxg-control{
+  border-color: #C8C8C8!important;
+  box-shadow: none;
+}
+.css-1pahdxg-control:hover{
+  border-color: #C8C8C8!important;
+  box-shadow: none;
+}
+.css-1okebmr-indicatorSeparator{
+  display: none
+}
+.css-1s2u09g-control{
+  background-color: #f3f3f3;
+}
+/* Blockchain select css end*/

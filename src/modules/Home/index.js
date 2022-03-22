@@ -118,7 +118,7 @@ export default class NftDetail extends BaseComponent {
                     updateTxStatus({ status: "failed" }, result._id)
                 );
                 return Utils.apiFailureToast(
-                    blockchainError?.data?.message || "Unable to buy NFT on blockchain"
+                    blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to Buy NFT on blockchain"
                 );
             }
             blockchainRes = blockchainResult
@@ -142,7 +142,7 @@ export default class NftDetail extends BaseComponent {
                     updateTxStatus({ status: "failed" }, result._id)
                 );
                 return Utils.apiFailureToast(
-                    blockchainError?.data?.message || "Unable to sell NFT on blockchain"
+                    blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to Buy NFT on blockchain"
                 );
             }
             blockchainRes = blockchainResult
@@ -194,7 +194,7 @@ export default class NftDetail extends BaseComponent {
             this.setState({ nftDetails: res });
             this.setState({ buySuccess: true });
 
-            Utils.apiSuccessToast("This nft has been buy successfully.");
+            Utils.apiSuccessToast("NFT has been buy successfully");
         }
 
     };
@@ -212,13 +212,13 @@ export default class NftDetail extends BaseComponent {
                     contractAddress: this.state?.responseData?.contractAddress
                 })
             );
-            console.log("blockchainError=sellNowNft=", blockchainError);
+            console.log("blockchainEsssssrror=sellNowNft=", blockchainError);
             console.log("blockchainRes==sellNowNft=", blockchainRes);
             if (blockchainError || !blockchainRes) {
                 this.setState({ loaderState: false })
 
                 return Utils.apiFailureToast(
-                    blockchainError?.data?.message || "Unable to sell NFT on blockchain"
+                    blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to sell NFT on blockchain"
                 );
             }
         }
@@ -233,13 +233,14 @@ export default class NftDetail extends BaseComponent {
                     contractAddress: contractAddress,
                 })
             );
-            console.log("blockchainError=sellNowNft=", blockchainError);
+            console.log("blockchainwwwwwwwError=sellNowNft=", blockchainError);
             console.log("blockchainRes==sellNowNft=", blockchainRes);
             if (blockchainError || !blockchainRes) {
+                // alert(blockchainError?.data?.message)
                 this.setState({ loaderState: false })
 
                 return Utils.apiFailureToast(
-                    blockchainError?.data?.message || "Unable to sell NFT on blockchain"
+                    blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to sell NFT on blockchain"
                 );
             }
         }
@@ -264,7 +265,7 @@ export default class NftDetail extends BaseComponent {
             this.setState({ saleSuccess: true });
 
             this.setState({ nftDetails: result });
-            Utils.apiSuccessToast("nft has been put on sell");
+            Utils.apiSuccessToast("NFT has been put on sell");
         }
     };
 
@@ -284,7 +285,7 @@ export default class NftDetail extends BaseComponent {
                 this.setState({ loaderState: false })
 
                 return Utils.apiFailureToast(
-                    blockchainError?.data?.message || "Unable to remove NFT from sale"
+                    blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to remove NFT on blockchain"
                 );
             }
         }
@@ -299,7 +300,7 @@ export default class NftDetail extends BaseComponent {
                 this.setState({ loaderState: false })
 
                 return Utils.apiFailureToast(
-                    blockchainError?.data?.message || "Unable to remove NFT from sale"
+                    blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to remove NFT on blockchain"
                 );
             }
 
@@ -323,7 +324,7 @@ export default class NftDetail extends BaseComponent {
             this.setState({ removeSuccess: true });
 
             this.setState({ nftDetails: result });
-            Utils.apiSuccessToast("nft has been removed for sell.");
+            Utils.apiSuccessToast("NFT has been removed for sell.");
         }
     };
 

@@ -199,6 +199,7 @@ export default function NftInformation(props) {
   // const makeReport = () => {
   //   addNftReport(report);
   // };
+  // console.log(window.ethereum.networkVersion, 'window.ethereum.networkVersion');
 
 
   const sendButton = () => {
@@ -488,7 +489,7 @@ export default function NftInformation(props) {
                         <img
                           alt="share"
                           src={share}
-                          style={{ width: "31px", height: "31px", marginRight: "20px", }}
+                          style={{ width: "31px", height: "31px", marginRight: "0px", }}
                         />
                       </a>
                       <ul

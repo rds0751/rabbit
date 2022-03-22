@@ -14,7 +14,7 @@ import {
 } from "../../constants/LeaderBoardApi";
 import { Oval } from "react-loader-spinner";
 import { getTopSellers } from "../../services/sellAndPurchaseMicroService";
-import { getTopCollections } from "../../services/sellAndPurchaseMicroService";
+import { getTopCollections, getTopBuyers } from "../../services/sellAndPurchaseMicroService";
 import { getTopNftSales } from "../../services/webappMicroservice";
 //import { borderRadius } from "@mui/system";
 
@@ -24,16 +24,24 @@ function LeaderBoard() {
 
   useEffect(async () => {
     await getTopSellers().then((response) => setTopSellers(response));
-  },[]);
-  
+  }, []);
+
   var limitSellers = topSellers.slice(0, 4)
   console.log("topSellers", topSellers);
+  const [topBuyers, setTopBuyers] = useState([]);
+
+  useEffect(async () => {
+    await getTopBuyers().then((response) => setTopBuyers(response));
+  }, []);
+
+  var limitBuyers = topBuyers.slice(0, 4)
+  console.log("topBuyers", topBuyers);
 
   const [topCollections, setTopCollections] = useState([]);
 
   useEffect(async () => {
-   await getTopCollections().then((response) => setTopCollections(response));
-  },[]);
+    await getTopCollections().then((response) => setTopCollections(response));
+  }, []);
   var limitCollections = topCollections.slice(0, 4)
   console.log("topCollections", topCollections);
 
@@ -41,7 +49,7 @@ function LeaderBoard() {
 
   useEffect(async () => {
     await getTopNftSales().then((response) => setTopNftSales(response));
-  },[]);
+  }, []);
   console.log("topNftSales", topNftSales);
 
 
@@ -50,7 +58,7 @@ function LeaderBoard() {
     useState("pending");
   const [state, setState] = useState(LeaderBoardApi);
 
- 
+
   return (
     <div className="container
      leader-container" >
@@ -106,18 +114,44 @@ function LeaderBoard() {
                   </div> */}
                 </div>
                 <div className="leaderboardTopDetails">
-                  {LeaderBoardApi.map((curElem) => {
-                    const { Image, Heading, SubHead1, SubHead2 } = curElem;
+                  {limitBuyers.map((curElem) => {
+                    { console.log("jjjjjjjjjjjjjjjj", curElem.buyer) }
+                    const { cdnUrl, firstName, SubHead1, SubHead2, buyer, volume } = curElem;
+                    // var result = parseFloat(precise);
+                    var precise = volume.toPrecision(4);
+                    var result = parseFloat(precise);
+
                     return (
                       <>
                         <div className="leaderboardTopDetailsRow">
-                          <img src={Image} alt="" />
-                          <div className="LeaderboardInsideDetails">
-                            <h2 className="sellerName">{Heading}</h2>
+                          {buyer.photo == "" || !buyer.photo ? (
+                            <img
+                              className="top-img" style={{ width: '71px', height: '71px' }} src={require("../../assets/images/profile.png")}
+                              alt=""
+                            />
+
+                          ) : (
+                            <img
+                              className="top-img" style={{ width: '71px', height: '71px' }} src={buyer.photo}
+                              alt=""
+                            />
+
+                          )}
+
+
+                          <div className="descriptiontopSeller">
+
+                            {buyer.userName == "" ? (
+                              <h2 className="sellerName">no name</h2>
+                            ) : (
+                              <h2 className="sellerName">{buyer.userName}</h2>
+                            )}
+
                             <p className="volumeData">
-                              {SubHead1}
-                              <span className="ethValue">{SubHead2}</span>
+                              {result} ETH
+                              <span className="ethValue">({"$"})</span>
                             </p>
+
                           </div>
                         </div>
                         <hr className="hr" />
@@ -125,6 +159,10 @@ function LeaderBoard() {
                     );
                   })}
                 </div>
+                {topBuyers.length === 0 && (
+                  <div className="loader">
+
+                  </div>)}
               </div>
               <div className="view-more">
                 <Link className="view" to="/top-bidder">
@@ -181,38 +219,39 @@ function LeaderBoard() {
                 </div>
                 <div className="leaderboardTopDetails">
                   {limitSellers.map((curElem) => {
-                    const { Image, sellerFirstName, sellerLastName, SubHead1, totalPurchasedValue,volume,topSellers} = curElem;
-                    var precise = volume.toPrecision(4); 
+                    // {console.log("jjjjjjjjjjjjjjjj",curElem.)}
+                    const { cdnUrl, sellerFirstName, sellerLastName, SubHead1, totalPurchasedValue, volume, topSellers } = curElem;
+                    var precise = volume.toPrecision(4);
                     var result = parseFloat(precise);
                     return (
                       <>
                         <div className="leaderboardTopDetailsRow">
-                        {topSellers.coverPhoto == "" ?(
-                  <img
-                  className="top-img" style={{ width: '71px', height: '71px' }} src={require("../../assets/images/profile.png")}
-                  alt=""
-                />
+                          {topSellers.photo == "" || !topSellers.photo ? (
+                            <img
+                              className="top-img" style={{ width: '71px', height: '71px' }} src={require("../../assets/images/profile.png")}
+                              alt=""
+                            />
 
-                ):(
-                  <img
-                  className="top-img" style={{ width: '71px', height: '71px' }} src={topSellers.coverPhoto}
-                  alt=""
-                />
+                          ) : (
+                            <img
+                              className="top-img" style={{ width: '71px', height: '71px' }} src={topSellers.photo}
+                              alt=""
+                            />
 
-                )}
+                          )}
 
 
                           <div className="descriptiontopSeller">
-                            
-               {topSellers.userName==""? (
-                 <h2 className="sellerName">no name</h2>
-               ):(
-                <h2 className="sellerName">{topSellers.userName}</h2>
-               )}
-            
+
+                            {topSellers.userName == "" ? (
+                              <h2 className="sellerName">no name</h2>
+                            ) : (
+                              <h2 className="sellerName">{topSellers.userName}</h2>
+                            )}
+
                             <p className="volumeData">
-                              ETH
-                              <span className="ethValue">({"$"+result})</span>
+                               {result} ETH
+                              <span className="ethValue">({"$" })</span>
                             </p>
 
                           </div>
@@ -223,9 +262,9 @@ function LeaderBoard() {
                   })}
                 </div>
                 {topSellers.length === 0 && (
-                <div className="loader">
-                  
-                </div>)}
+                  <div className="loader">
+
+                  </div>)}
               </div>
               <div className="view-more">
                 <Link className="view" to="/top-seller">
@@ -424,29 +463,29 @@ function LeaderBoard() {
           <div>
             <select name="sortBy" className="sort-selector fs-14 c-b">
               <option>Sort by All</option>
-              <option value="">option1</option>
-              <option value="">option2</option>
+              <option value="">Ascending</option>
+              <option value="">Descending </option>
             </select>
           </div>
         </div>
         <div className="nfts-cont row ntf_row">
           {/* <div className="col-md-3 col-lg-3 col-sm-6 col-11 images"> */}
           {topNftSales.map((curElem) => {
-            const { cdnUrl, name, ownedBy, maxPrice2, daysLeft,likesCount,_id } =
+            const { cdnUrl, name, ownedBy, maxPrice2, daysLeft, likesCount, _id } =
               curElem;
-              const route = "/nft-information/" + _id;
+            const route = "/nft-information/" + _id;
             return (
               <div className="nftCard col-md-6 col-lg-3 col-sm-12 nft_card card-mar">
                 <div className="card nft-card-radius border-radius cardmob">
 
-                <Link to={route} style={{ textDecoration: "none" }}>
-                  <img
-                    // id="nft__photo"
-                    className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
-                    src={cdnUrl}
-                    alt="nft"
-                    onError="this.onerror=null;this.src='/images/image.svg';"
-                  />
+                  <Link to={route} style={{ textDecoration: "none" }}>
+                    <img
+                      // id="nft__photo"
+                      className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
+                      src={cdnUrl}
+                      alt="nft"
+                      onError="this.onerror=null;this.src='/images/image.svg';"
+                    />
                   </Link>
                   {/* <img id='like_icon' src={require('../asset//images/')} /> */}
                   <div className="nftTileEachDetails card-lower"
@@ -509,10 +548,10 @@ const BuildPendingAcceptedRejectedBlock = ({ apiData }) => {
               <div className="leaderboardTopDetailsRow">
                 <img src={Image} alt="" />
                 <div className="LeaderboardInsideDetails">
-                <h2 className="sellerName">{Heading}</h2>
-                <p className="volumeData">
-                  {SubHead1}
-                <span className="ethValue">{SubHead2}</span>
+                  <h2 className="sellerName">{Heading}</h2>
+                  <p className="volumeData">
+                    {SubHead1}
+                    <span className="ethValue">{SubHead2}</span>
                   </p>
                 </div>
               </div>
@@ -535,43 +574,43 @@ const BuildAcceptedBlock = ({ apiData }) => {
     <div>
       <div className="leaderboardTopDetails">
         {apiData.map((curElem) => {
-          const { Image, sellerFirstName, sellerLastName, SubHead2, totalPurchasedValue,volume,topSellers} = curElem;
-          var precise = volume.toPrecision(4); 
+          const { Image, sellerFirstName, sellerLastName, SubHead2, totalPurchasedValue, volume, topSellers } = curElem;
+          var precise = volume.toPrecision(4);
           var result = parseFloat(precise);
           return (
             <>
               <div className="leaderboardTopDetailsRow">
 
 
-                {topSellers.coverPhoto == "" ?(
+                {topSellers.coverPhoto == "" ? (
                   <img
-                  className="top-img" style={{ width: '71px', height: '71px' }} src={require("../../assets/images/profile.png")}
-                  alt=""
-                />
+                    className="top-img" style={{ width: '71px', height: '71px' }} src={require("../../assets/images/profile.png")}
+                    alt=""
+                  />
 
-                ):(
+                ) : (
                   <img
-                  className="top-img" style={{ width: '71px', height: '71px' }} src={topSellers.coverPhoto}
-                  alt=""
-                />
+                    className="top-img" style={{ width: '71px', height: '71px' }} src={topSellers.coverPhoto}
+                    alt=""
+                  />
 
                 )}
 
 
-                          <div className="descriptiontopSeller">
-                            
-               {topSellers.userName==""? (
-                 <h2 className="sellerName">no name</h2>
-               ):(
-                <h2 className="sellerName">{topSellers.userName}</h2>
-               )}
-            
-                            <p className="volumeData">
-                              ETH
-                              <span className="ethValue">({"$"+result})</span>
-                            </p>
+                <div className="descriptiontopSeller">
 
-                          </div>
+                  {topSellers.userName == "" ? (
+                    <h2 className="sellerName">no name</h2>
+                  ) : (
+                    <h2 className="sellerName">{topSellers.userName}</h2>
+                  )}
+
+                  <p className="volumeData">
+                    ETH
+                    <span className="ethValue">({"$" + result})</span>
+                  </p>
+
+                </div>
               </div>
               <hr className="hr" />
             </>
