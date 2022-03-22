@@ -552,7 +552,7 @@ function CreateSingleNFT(props) {
                       onChange={(e) => (blockchain.current = e.target.value)}
                     >
                       <option selected value="eth" className="color82">
-                         Ethereum
+                        Ethereum
                       </option>
                     </select>
                   </div>
