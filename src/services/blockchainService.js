@@ -32,8 +32,12 @@ const BlockchainServices = {
 export default BlockchainServices;
 
 async function mintNFT({ tokenURI, price, tokenId, contractAddress }) {
+
     if (!window.ethereum)
         return Promise.reject("Please install metamask")
+    if (window.ethereum.networkVersion != 4)
+        // console.log("kkkkkkkkkkkkkkkkkkkkkk network swutch")
+        return Promise.reject("Switch this network into Rinkeby")
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contractData = new ethers.Contract(contractAddress, contractABI, signer);
@@ -51,9 +55,12 @@ async function mintNFT({ tokenURI, price, tokenId, contractAddress }) {
 }
 
 //price should be in wei
-async function changeListedPrice({ tokenId, price,contractAddress}) {
+async function changeListedPrice({ tokenId, price, contractAddress }) {
     if (!window.ethereum)
         return Promise.reject("Please install metamask")
+    if (window.ethereum.networkVersion != 4)
+        // console.log("kkkkkkkkkkkkkkkkkkkkkk network swutch")
+        return Promise.reject("Switch this network into Rinkeby")
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contractData = new ethers.Contract(
@@ -74,9 +81,12 @@ async function changeListedPrice({ tokenId, price,contractAddress}) {
     };
 }
 
-async function removeFromSaleNft({ tokenId ,contractAddress }) {
+async function removeFromSaleNft({ tokenId, contractAddress }) {
     if (!window.ethereum)
         return Promise.reject("Please install metamask")
+    if (window.ethereum.networkVersion != 4)
+        // console.log("kkkkkkkkkkkkkkkkkkkkkk network swutch")
+        return Promise.reject("Switch this network into Rinkeby")
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contractData = new ethers.Contract(
@@ -108,9 +118,12 @@ async function removeFromSaleNft({ tokenId ,contractAddress }) {
 // }
 
 //1bnb=0.136ether
-async function buyNFT({ tokenId, price ,contractAddress}) {
+async function buyNFT({ tokenId, price, contractAddress }) {
     if (!window.ethereum)
         return Promise.reject("Please install metamask")
+    if (window.ethereum.networkVersion != 4)
+        // console.log("kkkkkkkkkkkkkkkkkkkkkk network swutch")
+        return Promise.reject("Switch this network into Rinkeby")
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contractData = new ethers.Contract(
@@ -130,9 +143,12 @@ async function buyNFT({ tokenId, price ,contractAddress}) {
     };
 }
 
-async function putOnSaleNft({ tokenId ,contractAddress}) {
+async function putOnSaleNft({ tokenId, contractAddress }) {
     if (!window.ethereum)
         return Promise.reject("Please install metamask")
+    if (window.ethereum.networkVersion != 4)
+        // console.log("kkkkkkkkkkkkkkkkkkkkkk network swutch")
+        return Promise.reject("Switch this network into Rinkeby")
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contractData = new ethers.Contract(
@@ -153,6 +169,9 @@ async function putOnSaleNft({ tokenId ,contractAddress}) {
 async function createCollections({ name, symbol }) {
     if (!window.ethereum)
         return Promise.reject("Please install metamask")
+    if (window.ethereum.networkVersion != 4)
+        // console.log("kkkkkkkkkkkkkkkkkkkkkk network swutch")
+        return Promise.reject("Switch this network into Rinkeby")
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contractData = new ethers.Contract(
