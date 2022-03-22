@@ -146,6 +146,12 @@
 
 /* nft page filter css end */
 
+@media only screen and (min-width:1215px) and (max-width: 1240px) {
+  .nftTileEachDetailsFirstContainerValue{
+    margin-left: 4px;
+  }
+}
+
 @media only screen and (max-width: 1024px) {
   .nftTilePageSecondSelect {
     font-size: 1.9vw;

@@ -22,6 +22,7 @@ import Bannerdrop from "./Bannerdrop";
 import { updateCollectionTxStatus } from "../../services/webappMicroservice";
 
 import { getCategories } from "../../services/clientConfigMicroService";
+import Select from 'react-select';
 
 const Button = styled.button``;
 
@@ -293,6 +294,12 @@ function CreateNftCollections(props) {
     // console.log("kkkkkkkkkkkkkkkkkkkkk",location?.state?.data);
     // { id: '...', images: [...], price: { ... } }
   
+    // Blockchain option
+    const [selectedOption, setSelectedOption] = useState(null);
+    const blockchainOption = [
+      { value: 'eth', label: <div><img src={ethereum} height="32px" /> Ethereum</div> },
+    ];
+    
   return (
     <>
     
@@ -460,7 +467,7 @@ function CreateNftCollections(props) {
             </div>
             <div>
               <div className="fs-16 fw-b c-b pt-3 pb-3">Blockchain*</div>
-              <div className="block-chain-container">
+              {/* <div className="block-chain-container">
                 <div>
                   <img src={ethereum} height="32px" />
                 </div>
@@ -477,7 +484,18 @@ function CreateNftCollections(props) {
                     </option>
                   </select>
                 </div>
-              </div>
+              </div> */}
+                <div className="block-chain-right">
+                  <Select
+                    className="input-box-1 rm-border blockchainSelect"
+                    defaultValue={blockchainOption[0]}
+                    onChange={setSelectedOption}
+                    options={blockchainOption}
+                    placeholder="Select Blockchain"
+                    value={selectedOption}
+                  >
+                  </Select>
+                </div>
             </div>
             <button
               type="submit"

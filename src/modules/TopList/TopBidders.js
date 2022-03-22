@@ -9,7 +9,10 @@ import {
   LeaderBoardApi4,
   LeaderBoardApi5,
 } from "../../constants/LeaderBoardApi";
+import profileImage from "../../assets/images/profile.png";
 
+
+import { getTopBuyers } from "../../services/sellAndPurchaseMicroService";
 
 const Container = styled.div`
   display: flex;
@@ -124,14 +127,19 @@ const Text = styled.div`
   font-size: 16px;
   font-weight: 500;
   `;
-const Volume=styled.span`
+const Volume = styled.span`
 font:normal normal normal 16px/25px Poppins;
 color: #818181;
 `;
 
 function TopBidders() {
-  const [topCollections, setTopCollections] = useState([]);
 
+  const [topBuyers, setTopBuyers] = useState([]);
+
+  useEffect(async () => {
+    await getTopBuyers().then((response) => setTopBuyers(response));
+  }, []);
+  console.log("topBuyers", topBuyers);
 
   return (
     <Container>
@@ -149,24 +157,43 @@ function TopBidders() {
             Name
           </Column>
           <Column className="col">Volume</Column>
-          <Column className="col itembought">ItemsBought</Column>
+          <Column className="col itembought">Items Bought</Column>
         </div>
       </Body>
-      {LeaderBoardApi4.map((curElem) => {
-        const { img,name, volume, itemsbought} =
+      {topBuyers.map((curElem) => {
+        const { img, name, volume, itemsbought,itemsSold, buyer } =
           curElem;
+        var precise = volume.toPrecision(4);
+        var result = parseFloat(precise);
         return (
           <div className="container-fluid">
             <Collection className="row">
               <NameColumn className="col">
-                <Image src={img} alt="pic" />
-                <Name>{name}</Name>
+
+                {buyer.photo == "" || !buyer.photo ? (
+                  <Image src={profileImage} alt="pic" />
+
+
+                ) : (
+                  <Image src={buyer.photo} alt="pic" />
+
+                )}
+
+                {buyer.userName == "" ? (
+                  <Name>No Name</Name>
+                ) : (
+                  <Name>{buyer.userName}</Name>
+
+                )}
+
+
+
               </NameColumn>
               <VolumeColumn className="col">
-                <Span>34 ETH  <Volume>{volume}</Volume> </Span>
-               
+                <Span>{result} ETH   <Volume>({"$"})</Volume> </Span>
+
               </VolumeColumn>
-              <Text className="col">{itemsbought}</Text>
+              <Text className="col">{itemsSold}</Text>
             </Collection>
           </div>
         );
