@@ -41,7 +41,7 @@ function CreateNftCollections(props) {
   const [loaderState, setloaderState] = useState(false);
 
   // -------
-
+  const [specialchar,setSpecialChar]=useState("")
 
 
 
@@ -107,7 +107,7 @@ function CreateNftCollections(props) {
   });
   // -------------
   const [desLEngth, setDesLEngth] = useState(0);
-
+  const [nameError,SetNameError]=useState("");
   const handleChangeImage = async (event) => {
     const fileUploaded = event.target.files[0];
     // alert("onchage");
@@ -149,6 +149,7 @@ function CreateNftCollections(props) {
   };
 
   const handleSubmit = async (e) => {
+    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
     setloaderState(true);
     e.preventDefault();
     // e.preventDefault();
@@ -173,6 +174,12 @@ function CreateNftCollections(props) {
       toast.error("Fill the required field");
       return null;
     }
+    if(format.test(name.current)){
+      toast.error("UserName should be not contain special character");
+      setloaderState(false);
+      return null;
+    }
+
     // alert("here");
     console.log("here");
     // const data = {
@@ -399,13 +406,19 @@ function CreateNftCollections(props) {
         <div>
           <form onSubmit={(e) => handleSubmit(e)}>
             <div>
-              <p className="fs-16 fw-b c-b pt-4">Name*</p>
+              <p className="fs-16 fw-b c-b pt-4">Name*<span style={{color:"Red" ,fontSize:"13px"}}>{nameError}</span></p>
               <input
                 type="name"
                 name="name"
                 className="input-box-1"
                 placeholder="Write your name"
                 onChange={(e) => {
+                  var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                  if(format.test(e.target.value)){
+                    SetNameError("(No Special Character Allowed)");
+                  } else {
+                  SetNameError("");
+                  }
                   name.current = e.target.value;
                   checkReqFieldFun();
                 }}
