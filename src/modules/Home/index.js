@@ -185,7 +185,7 @@ export default class NftDetail extends BaseComponent {
         if (err || !res) {
             this.setState({ loaderState: false })
 
-            return Utils.apiFailureToast(err || "Unable to update Nft ownership transfer.");
+            return Utils.apiFailureToast(err || "Unable to update Nft ownership.");
         }
         else {
             this.setState({ loaderState: false })
@@ -264,8 +264,7 @@ export default class NftDetail extends BaseComponent {
             this.setState({ saleSuccess: true });
 
             this.setState({ nftDetails: result });
-
-            Utils.apiSuccessToast("Your nft has been updated for put on sell successfully.");
+            Utils.apiSuccessToast("nft has been put on sell");
         }
     };
 
@@ -324,7 +323,7 @@ export default class NftDetail extends BaseComponent {
             this.setState({ removeSuccess: true });
 
             this.setState({ nftDetails: result });
-            Utils.apiSuccessToast("Your nft has been removed for sell successfully.");
+            Utils.apiSuccessToast("nft has been removed for sell.");
         }
     };
 

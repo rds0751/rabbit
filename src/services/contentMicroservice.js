@@ -149,7 +149,7 @@ export const NftCreatedByUser = async (successCallBack, _id) => {
     if (data.success) {
       successCallBack(data);
     } else {
-      successCallBack({ success: false, msg: "Unable To Fetch Data" });
+      successCallBack({ success: false}) //msg: "Unable To Fetch Data" });
     }
     console.log(data, "<<<<myprofile");
   } catch (e) {
@@ -165,7 +165,7 @@ export const NftOwnedByUser = async (successCallBack, _id) => {
     if (data.success) {
       successCallBack(data);
     } else {
-      successCallBack({ success: false, msg: "Unable To Fetch Data" });
+      successCallBack({ success: false}) //msg: "Unable To Fetch Data" });
     }
     console.log(data, "<<<<myprofile");
   } catch (e) {
@@ -239,7 +239,7 @@ export const NftLikedByUser = async (successCallBack, _id) => {
     if (data.success) {
       successCallBack(data);
     } else {
-      successCallBack({ success: false, msg: "Unable To Fetch Data" });
+      successCallBack({ success: false})// msg: "Unable To Fetch Data" });
     }
     console.log(data, "<<<<myprofile");
   } catch (e) {
@@ -256,7 +256,7 @@ export const NftSellByUser = async (successCallBack, userId) => {
     if (data.success) {
       successCallBack(data);
     } else {
-      successCallBack({ success: false, msg: "Unable To Fetch Data" });
+      successCallBack({ success: false}) //msg: "Unable To Fetch Data" });
     }
     console.log(data, "<<<<myprofile");
   } catch (e) {

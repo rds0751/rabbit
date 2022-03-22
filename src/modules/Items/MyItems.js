@@ -199,9 +199,52 @@ function MyItems() {
                 <img src={NoItem}/>
                 <p className="textitem">No items available</p>
                 </div>
-              </div>
-
-            )}
+              </div>)}
+              
+            {/* {ownedCollection.map((curElem) => {
+              const { imageUrl, name, _id } =
+                curElem;
+              const collection = "/collection-details/" + _id;
+              return (
+                <div className="col-md-6 col-lg-3 col-sm-12 mt-5 my-item-card p-0">
+                  < div
+                    className=" nft-card-radius collection-card border-radius pt-4 cardmob"
+                    style={{ backgroundColor: "#F8F8F8" }
+                    }
+                  >
+                    <div className="text-center">
+                      <Link to={collection} style={{ textDecoration: "none" }}>
+                        <img
+                          className="img-fluid border-radius collection-img-card-radius collection_imgmob"
+                          src={imageUrl}
+                          alt="nft"
+                          style={{
+                            width: "100px",
+                            height: "100px",
+                            textDecoration: "none",
+                          }}
+                        />
+                      </Link>
+                    </div>
+                    <div className="text-center pt-3">
+                      <p
+                        className="collectionCardEachName text-center font-weight-900"
+                        style={{ color: "#191919" }}
+                      >
+                        {name}
+                      </p>
+                      <p className="collectionCardEachTotalitems">
+                        <span className=" font-14 text-dark">
+                          Total Items:
+                          <span className="text-primary">0</span>
+                          {console.log("kkkkkkkkkkkkkk",curElem)}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })} */}
           </div>
 
         )}
