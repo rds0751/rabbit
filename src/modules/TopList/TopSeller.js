@@ -127,7 +127,7 @@ const Text = styled.div`
   font-size: 16px;
   font-weight: 500;
   `;
-const Volume=styled.span`
+const Volume = styled.span`
 font:normal normal normal 16px/25px Poppins;
 color: #818181;
 `;
@@ -136,68 +136,69 @@ function TopSeller() {
   const [topSellers, setTopSellers] = useState([]);
 
   useEffect(async () => {
-   await getTopSellers().then((response) => setTopSellers(response));
-  },[]);
+    await getTopSellers().then((response) => setTopSellers(response));
+  }, []);
   console.log("topSellers", topSellers);
 
 
   return (
     <Container>
-    <Header>
-      <Title>Top Sellers</Title>
-      <Select>
-        <option value="weekly">Weekly</option>
-        <option value="monthly">Monthly</option>
-        <option value="yearly">Yearly</option>
-      </Select>
-    </Header>
-    <Body className="container-fluid">
-      <div className="row">
-        <Column className="col" style={{ paddingLeft: "42px" }}>
-          Name
-        </Column>
-        <Column className="col">Volume</Column>
-        <Column className="col">Items sold</Column>
-      </div>
-    </Body>
-    {topSellers.map((curElem) => {
-      const {image, sellerFirstName, sellerLastName, itemsSold, totalPurchasedValue,topSellers,volume } = curElem;
-var precise = volume.toPrecision(4); 
-      var result = parseFloat(precise);
-      return (
-        <div className="container-fluid">
-          <Collection className="row">
-            <NameColumn className="col">
-
-  {topSellers.coverPhoto == "" ?(
-                 <Image src={profileImage} alt="pic" />
-                
-
-              ):(
-                 <Image src={topSellers.coverPhoto} alt="pic" />
-
-              )}
-
-        {topSellers.firstName==""? (
-               <Name>No Name</Name>
-             ):(
-             <Name>{topSellers.firstName}</Name>
-
-             )}
-
-             
-              
-            </NameColumn>
-            <VolumeColumn className="col">
-              <Span>ETH  <Volume>{"$"+result}</Volume> </Span>
-             
-            </VolumeColumn>
-            <Text className="col">{itemsSold}</Text>
-          </Collection>
+      <Header>
+        <Title>Top Sellers</Title>
+        <Select>
+          <option value="weekly">Weekly</option>
+          <option value="monthly">Monthly</option>
+          <option value="yearly">Yearly</option>
+        </Select>
+      </Header>
+      <Body className="container-fluid">
+        <div className="row">
+          <Column className="col" style={{ paddingLeft: "42px" }}>
+            Name
+          </Column>
+          <Column className="col">Volume</Column>
+          <Column className="col">Items sold</Column>
         </div>
-      );
-    })}
-  </Container>
+      </Body>
+      {topSellers.map((curElem) => {
+        const { image, sellerFirstName, sellerLastName, itemsSold, totalPurchasedValue, topSellers, volume } = curElem;
+        // console.log("fffffff",curElem.topSellers)
+        var precise = volume.toPrecision(4);
+        var result = parseFloat(precise);
+        return (
+          <div className="container-fluid">
+            <Collection className="row">
+              <NameColumn className="col">
+
+                {topSellers.photo == "" || !topSellers.photo? (
+                  <Image src={profileImage} alt="pic" />
+
+
+                ) : (
+                  <Image src={topSellers.photo} alt="pic" />
+
+                )}
+
+                {topSellers.userName == "" ? (
+                  <Name>No Name</Name>
+                ) : (
+                  <Name>{topSellers.userName}</Name>
+
+                )}
+
+
+
+              </NameColumn>
+              <VolumeColumn className="col">
+                <Span>{result} ETH  <Volume>({"$"})</Volume> </Span>
+
+              </VolumeColumn>
+              <Text className="col">{itemsSold}</Text>
+            </Collection>
+          </div>
+        );
+      })}
+    </Container>
   );
 }
 export default TopSeller;
