@@ -3,7 +3,7 @@ import { httpConstants } from "../constants";
 import { AuthToken } from "./UserAuthToken";
 
 export function getTopSellers(requestData) {
-    let url = process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/top-sellers";
+    let url = process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/top-sellers?"+requestData;
     return httpService(
         httpConstants.METHOD_TYPE.GET,
         // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -50,7 +50,7 @@ export function getTopBuyers(requestData) {
 }
 
 export function getTopCollections(requestData) {
-    let url = process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/top-collections";
+    let url = process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/top-collections?"+requestData;
     return httpService(
         httpConstants.METHOD_TYPE.GET,
         // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },

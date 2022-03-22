@@ -81,6 +81,7 @@ function EditProfile(props) {
     return str.match(/^\s+$/) !== null;
   }
   const handleSubmit = async (e) => {
+    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
     e.preventDefault();
     console.log(user.loggedInUser, "<<user");
     const userName = formData.userName;
@@ -93,6 +94,11 @@ function EditProfile(props) {
       toast.error("Username should not have space");
       return null;
     }
+    if(format.test(userName)){
+      toast.error("UserName should be not contain special character");
+      return null;
+    }
+
 
     const result = await updateUserProfile(formData, user?.loggedInUser?._id);
     console.log(result, "<<<<<< profile updated value");
@@ -111,6 +117,9 @@ function EditProfile(props) {
     }
     setFormData({ ...formData, [name]: value });
   };
+ const [nameError,SetNameError]=useState('');
+  
+  
 
   return (
     <>
@@ -173,7 +182,7 @@ function EditProfile(props) {
                 htmlFor="username"
                 className=" label-heading"
               >
-                username
+                username<span style={{color:"red",fontSize:"13px"}}>{nameError}</span>
               </label>
               <input
                 type="text"
@@ -181,7 +190,16 @@ function EditProfile(props) {
                 name="userName"
                 value={formData.userName}
                 // value={userName.current}
-                onChange={(e) => handleForm(e)}
+                onChange={(e) => {
+                  var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                  if(format.test(e.target.value)){
+                    SetNameError("(No Special Character Allowed)");
+                  } else {
+                  SetNameError("");
+                  }
+                  handleForm(e);
+                  
+                }}
               />
             </div>
             <div className="" style={{marginBottom:"28px"}}>
