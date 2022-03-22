@@ -16,6 +16,7 @@ import { Oval } from "react-loader-spinner";
 import { getTopSellers } from "../../services/sellAndPurchaseMicroService";
 import { getTopCollections, getTopBuyers } from "../../services/sellAndPurchaseMicroService";
 import { getTopNftSales } from "../../services/webappMicroservice";
+const queryString = require("query-string");
 //import { borderRadius } from "@mui/system";
 
 function LeaderBoard() {
@@ -38,10 +39,28 @@ function LeaderBoard() {
   console.log("topBuyers", topBuyers);
 
   const [topCollections, setTopCollections] = useState([]);
+  const queryString = require("query-string");
+  const [buyerDuration, setBuyerDuration] = useState({
+    duration: "all",
+  });
+  const [sellerDuration, setSellerDuration] = useState({
+    duration: "all",
+  });
+  const [collectionDuration, setCollectionDuration] = useState({
+    duration: "all",
+  });
+  const buyerReqObj = queryString.stringify(buyerDuration);
+  const sellerReqObj = queryString.stringify(sellerDuration);
+  const collectionReqObj = queryString.stringify(collectionDuration);
 
   useEffect(async () => {
-    await getTopCollections().then((response) => setTopCollections(response));
-  }, []);
+    await getTopSellers(sellerReqObj).then((response) => setTopSellers(response));
+  },[sellerDuration]);
+  
+
+  useEffect(async () => {
+   await getTopCollections(collectionReqObj).then((response) => setTopCollections(response));
+  },[collectionDuration]);
   var limitCollections = topCollections.slice(0, 4)
   console.log("topCollections", topCollections);
 
@@ -58,7 +77,17 @@ function LeaderBoard() {
     useState("pending");
   const [state, setState] = useState(LeaderBoardApi);
 
-
+  const ChangeCollectionDuration=(e)=>{
+  setCollectionDuration(
+    {...collectionDuration, [e.target.name] : e.target.value}
+  );
+  }
+  const ChangeSellerDuration=(e)=>{
+    setSellerDuration(
+      {...sellerDuration, [e.target.name] : e.target.value}
+    );
+    }
+ 
   return (
     <div className="container
      leader-container" >
@@ -179,11 +208,11 @@ function LeaderBoard() {
                   <div className="col" style={{ fontSize: "16px" }}>
                     Top Sellers
                   </div>
-                  <select className="top-dropdown">
-                    <option>All</option>
-                    <option>Weekly</option>
-                    <option>Monthly</option>
-                    <option>Yearly</option>
+                  <select className="top-dropdown" value={sellerDuration}  name="duration" onChange={(e) => ChangeSellerDuration(e)}>
+                    <option value="all">All</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="Monthly">Monthly</option>
+                    <option value="Yearly">Yearly</option>
                   </select>
                   {/* <div className="dropdown col leaderboardDropdown">
                     <button
@@ -281,12 +310,13 @@ function LeaderBoard() {
                   <div className="col" style={{ fontSize: "16px" }}>
                     Top Collections
                   </div>
-                  <select className="top-dropdown">
-                    <option>All</option>
-                    <option>Weekly</option>
-                    <option>Monthly</option>
-                    <option>Yearly</option>
+                  <select className="top-dropdown" value={collectionDuration}  name="duration" onChange={(e) => ChangeCollectionDuration(e)}>
+                    <option value='all'>All</option>
+                    <option value='weekly'>Weekly</option>
+                    <option value='monthly'>Monthly</option>
+                    <option value='yearly'>Yearly</option>
                   </select>
+                
                   {/* <div className="dropdown col leaderboardDropdown">
                     <button
                       className="btn border dropdown-toggle"
@@ -411,11 +441,11 @@ function LeaderBoard() {
             {/* <!-- <input type="text" id="search_criteria" className="form-control" onkeyup="hashtagsearch_criteria(this.value)"
     placeholder="Search for hashtag.."> --> */}
           </div>
-          <select className="small-leaderboard-dropdown">
-            <option>All</option>
-            <option>Weekly</option>
-            <option>Monthly</option>
-            <option>Yearly</option>
+          <select className="small-leaderboard-dropdown"  name="duration" onChange={(e) => ChangeCollectionDuration(e)} >
+            <option value='All'>All</option>
+            <option value='Weekly'>Weekly</option>
+            <option value='Monthly'>Monthly</option>
+            <option value='Yearly'>Yearly</option>
           </select>
           <div className="small-leaderboard-body" style={{ padding: 'none !important' }}>
             <div>

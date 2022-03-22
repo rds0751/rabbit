@@ -42,10 +42,10 @@ export default function PricingHistoryComponent(props) {
 
   const object = {
     series: [
-      {
-        name: "pricingHistory",
-        data: prices,
-      },
+      // {
+      //   name: "pricingHistory",
+      //   data: prices ,
+      // },
     ],
     options: {
       chart: {
@@ -82,7 +82,7 @@ export default function PricingHistoryComponent(props) {
             </h5>
             <select name="filter"
               onChange={(e) => handleChange(e)}
-              className="chart-filter"
+              className="chart-filter selectfixing4"
             >
               <option className="font-15" value="all">All time</option>
               <option className="font-15" value="month">Month</option>
@@ -90,13 +90,20 @@ export default function PricingHistoryComponent(props) {
               <option className="font-15" value="days">Days</option>
             </select>
         </div>
-        <ReactApexChart
+        {object.series && object.series.length > 0 ?  <ReactApexChart
           options={object.options}
           series={object.series}
           type="area"
           height={197}
           width="100%"
         />
+        :
+        
+          <div className="no-data">
+          <p>No information available</p>
+          </div>
+          
+      } 
       </div>
     </div>
   );

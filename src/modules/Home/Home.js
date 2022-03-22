@@ -44,7 +44,7 @@ function Home() {
                 </Col>
                 <Col lg={6}>
                   <div className="right-slider">
-                    <OwlCarousel className='owl-theme' margin={10} items={1}>
+                    <OwlCarousel className='owl-theme z-carousel' margin={10} items={1}>
                       <div className='item'>
                         <div className="d-flex flex-wrap">
                           <Card>
