@@ -82,7 +82,7 @@ function Notification() {
           {notifications.map((curElem) => {
             const { addedOn, type, owner } = curElem;
             let addedOnTimeStamp = moment(addedOn).format('LT')
-
+{console.log(owner,"1111111111111")}
 
             return (
               <div className="single-noti">
@@ -96,14 +96,14 @@ function Notification() {
                   {type == "like" ? (
                     <div className="noti-text">
                       <span style={{ color: "#366EEF" }}>
-                        {(String(owner.userName).length >= 7) ? (!owner.userName ? " " : (String(owner.userName).substring(0, 8) + "...")) : (String(owner.userName) === "" ? "No_Name" : owner.userName)}
+                        {(String(owner.userName).length >= 7) ? (!owner.userName ? " " : (String(owner.userName).substring(0, 8) + "...")) : (String(owner.userName) === "" ? owner.wallet_address : owner.userName)}
                       </span>&nbsp;{type}d&nbsp;your item.
                     </div>
                   ) : type == "bid" ? (
                     <div className="noti-text">
                       <span>
                         You got new {type} from <span style={{ color: "#366EEF" }}>
-                          {(String(owner.userName).length >= 7) ? (!owner.userName ? " " : (String(owner.userName).substring(0, 8) + "...")) : (String(owner.userName) === "" ? "No_Name" : owner.userName)}
+                          {(String(owner.userName).length >= 7) ? (!owner.userName ? " " : (String(owner.userName).substring(0, 8) + "...")) : (String(owner.userName) === "" ? owner.wallet_address : owner.userName)}
                         </span>
                       </span>
                     </div>
