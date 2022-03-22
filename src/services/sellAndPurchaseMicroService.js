@@ -25,6 +25,30 @@ export function getTopSellers(requestData) {
             return Promise.reject(err);
         });
 }
+export function getTopBuyers(requestData) {
+  let url = process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/top-buyers?duration=weekly&limit=40&skip=0";
+  return httpService(
+      httpConstants.METHOD_TYPE.GET,
+      // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+      AuthToken,
+      requestData,
+      url
+  )
+      .then((response) => {
+          if (
+              !response.success ||
+              response.responseCode !== 200 ||
+              !response.responseData ||
+              response.responseData.length === 0
+          )
+              return Promise.reject();
+          return Promise.resolve(response.responseData);
+      })
+      .catch(function (err) {
+          return Promise.reject(err);
+      });
+}
+
 export function getTopCollections(requestData) {
     let url = process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/top-collections";
     return httpService(
