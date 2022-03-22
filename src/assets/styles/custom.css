@@ -149,9 +149,9 @@ ul {
   border-top-right-radius: 0.6em;
   object-fit: cover;
 }
-.images {
-  /* margin-left: 50px; */
-}
+/* .images {
+  margin-left: 50px;
+} */
 .col1 {
   margin-left: 1rem;
 }
@@ -524,9 +524,9 @@ input::-webkit-input-placeholder {
 .collection-img-card-radius {
   border-radius: 50%;
 }
-.collection-card {
-  /* height: 260px; */
-}
+/* .collection-card {
+  height: 260px;
+} */
 /* -----------------Collections hompage css end------------ */
 
 /* -----------------Nft Info hompage css------------ */
@@ -823,10 +823,10 @@ select:focus-visible {
   .ntf_div{
     margin: 0 20px;
   }
-  .filter .dropdown .first_select {
-    /* margin-left: 10px; */
-    /* width: 90%; */
-  }
+  /* .filter .dropdown .first_select {
+    margin-left: 10px;
+    width: 90%;
+  } */
   .filter .second_select {
     margin-left: 0px;
   }

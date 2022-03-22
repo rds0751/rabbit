@@ -19,12 +19,7 @@
   margin-right: 12px;
 }
 .leaderboardTop {
-  /* background-color: #f8f8f8; */
-  /* border: 0px;
-  border-radius: 0.7rem; */
-  font-weight: bold;
-  /* margin-top: 10px; */
-  background: #F8F8F8 0% 0% no-repeat padding-box;
+  background: #F8F8F8;
   border: 1px solid #FCFCFC;
   border-radius: 13px;
   opacity: 1;
@@ -33,7 +28,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 1rem 1rem;
+  margin: 25px 32px 24px 32px;
+}
+.leaderboardTitle .col{
+  font-family: 'poppins-bold';
+  font-size: 18px;
+  line-height: 27px;
+  color: #000000;
 }
 .leaderboardDropdown {
   display: flex;
@@ -44,8 +45,8 @@
   flex-direction: column;
 }
 .leaderboardTopDetailsRow > img {
-  height: 4.5rem;
-  width: 4.5rem;
+  height: 71px;
+  width: 71px;
 }
 .leaderboardTopDetailsRow {
   display: flex;
@@ -59,11 +60,11 @@
   margin-top: auto;
 }
 
-.LeaderboardInsideDetails > h2 {
-  /* font-size: 0.9rem;
-  font-weight: bold; */
-  /* margin-left: 0.5rem; */
-}
+/* .LeaderboardInsideDetails > h2 {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-left: 0.5rem;
+} */
 .LeaderboardInsideDetails > p {
   font-size: 0.8rem;
   color: #366eef;
@@ -78,15 +79,19 @@
   margin-left: auto;
   margin-right: auto;
   margin: 0rem;
+  border: 1px solid #E3E3E3;
+  background-color: #E3E3E3;
 }
 .view {
-  padding-bottom: 20px;
-  padding-top: 25px;
-  font: 16px Poppins;
+  padding-bottom: 24px;
+  padding-top: 30.35px;
   text-decoration: none;
   color: #191919;
   display: flex;
   justify-content: center;
+  font-family: 'poppins';
+  font-size: 16px;
+  line-height: 25px;
 }
 .view-button {
   bottom: 0px;
@@ -489,10 +494,10 @@ thead {
 .leadercolmob {
   display: none;
 }
-.filter {
-  /* width: 400px; */
-  /* border: 5px solid red; */
-}
+/* .filter {
+  width: 400px;
+  border: 5px solid red;
+} */
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #fff;
@@ -611,10 +616,10 @@ width: 170%;
   /* .lower__homepage {
     flex-direction: column;
   } */
-  #filters {
-    /* flex-direction: column; */
-    /* border: "5px solid green"; */
-  }
+  /* #filters {
+    flex-direction: column;
+    border: "5px solid green";
+  } */
 
   /* .menuphone {
     display: block;
@@ -1025,10 +1030,10 @@ width: 170%;
   }
 }
 /* create nft card css end */
-@media (min-width: 1400px){
-.leader-container{
-  max-width: 88%;
-}
+@media (min-width: 1366px){
+  .leader-container{
+    max-width: 88%;
+  }
 }
 
 @media only screen and (max-width: 1000px){
@@ -1051,11 +1056,15 @@ width: 170%;
     padding-left: var(--bs-gutter-x,.75rem);
 }
 .top-dropdown{
-width: 118px;
-height: 42px;
-background: #FFFFFF00 0% 0% no-repeat padding-box;
-border: 1px solid #707070;
-border-radius: 6px;
+  width: 118px;
+  height: 42px;
+  background: #FFFFFF00 0% 0% no-repeat padding-box;
+  border: 1px solid #707070;
+  border-radius: 6px;
+  font-family: 'poppins-medium';
+  font-size: 14px;
+  line-height: 21px;
+  color: #000000;
 }
 .small-leaderboard-dropdown{
 width: 90%;
@@ -1333,6 +1342,9 @@ margin-top: 20px;
   .nft-detail{
     margin: 0 5%;
   }
+  .leaderboardTitle {
+    margin: 16px;
+  }
 }
 @media only screen and (max-width:768) {
   .nft-detail #share_info{
@@ -1377,26 +1389,30 @@ margin-top: 20px;
   margin: auto auto auto 31px;
 }
 .sellerName{
-text-align: left;
-font: normal normal bold 18px/27px Poppins;
-letter-spacing: 0px;
-color: #000000;
-opacity: 1;
+  text-align: left;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+  font-family: 'poppins-bold';
+  font-size: 18px;
+  line-height: 27px;
 }
 .volumeData{
   display:flex;
   text-align: left;
-  font: normal normal medium 16px/25px Poppins;
   letter-spacing: 0px;
   color: #366EEF;
-
-
+  font-family: 'poppins-medium';
+  font-size: 16px;
+  line-height: 25px;
 }
 .ethValue{
-text-align: left;
-font: normal normal normal 16px/25px Poppins;
-letter-spacing: 0px;
-color: #818181;
+  text-align: left;
+  letter-spacing: 0px;
+  color: #818181;
+  font-family: 'poppins-regular';
+  font-size: 16px;
+  line-height: 25px;
 }
 .descriptiontopSeller{
   margin-left: 7px;
