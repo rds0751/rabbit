@@ -197,6 +197,7 @@ export default function NftInformation(props) {
   // const makeReport = () => {
   //   addNftReport(report);
   // };
+  // console.log(window.ethereum.networkVersion, 'window.ethereum.networkVersion');
 
 
   const sendButton = () => {

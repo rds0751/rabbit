@@ -104,13 +104,15 @@ class Index extends BaseComponent {
         contractAddress:data.contractAddress
       })
     );
+    console.log("blockchainError",blockchainError)
+    console.log("blockchainResult",blockchainResult)
 
     if (blockchainError || !blockchainResult) {
       this.setState({ loaderState: false });
 
       return Utils.apiFailureToast(
-        blockchainError.message || "Unable to mint NFT on blockchain"
-      );
+        blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to Mint NFT on blockchain"
+        );
     }
     blockchainRes = blockchainResult
   }
@@ -127,13 +129,15 @@ class Index extends BaseComponent {
         contractAddress:contractAddress
       })
     );
-
+    console.log("blockchainError",blockchainError)
+    console.log("blockchainResult",blockchainResult)
     if (blockchainError || !blockchainResult) {
+      console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
       this.setState({ loaderState: false });
 
       return Utils.apiFailureToast(
-        blockchainError.message || "Unable to mint NFT on blockchain"
-      );
+        blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to Mint NFT on blockchain"
+        );
     }
     blockchainRes = blockchainResult
   }
@@ -170,7 +174,7 @@ class Index extends BaseComponent {
       this.setState({ isMintSuccess: true });
       this.setState({ isOpenMintModal: false });
       this.setState({ mintedNftId: contentRes._id });
-      Utils.apiSuccessToast("Nft has been created successfully.");
+      Utils.apiSuccessToast("Your NFT has been created");
       this.setState({ isNftCreated: true });
     }
 
