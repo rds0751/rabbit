@@ -998,3 +998,17 @@ letter-spacing: 0px;
 color: #191919;
 }
 /* add wallet screen css end*/
+
+/* Blockchain select css start*/
+.css-1pahdxg-control{
+  border-color: #C8C8C8!important;
+  box-shadow: none;
+}
+.css-1pahdxg-control:hover{
+  border-color: #C8C8C8!important;
+  box-shadow: none;
+}
+.css-1okebmr-indicatorSeparator{
+  display: none
+}
+/* Blockchain select css end*/

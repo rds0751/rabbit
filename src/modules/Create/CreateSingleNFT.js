@@ -26,7 +26,7 @@ import "../../assets/styles/createSingleNft.css";
 import "../../assets/styles/MintModal.css";
 import UploadSingleNft from "./CreateSingleUploadFile";
 import Close from "../../assets/images/close.png";
-
+import Select from 'react-select';
 
 // import "../../assets/styles/Leader.css"
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
@@ -202,6 +202,11 @@ function CreateSingleNFT(props) {
 
   // File uploading loader
 
+  // Blockchain option
+  const [selectedOption, setSelectedOption] = useState(null);
+  const blockchainOption = [
+    { value: 'eth', label: <div><img src={ethereum} height="32px" /> Ethereum</div> },
+  ];
 
   return (
     <>
@@ -542,7 +547,7 @@ function CreateSingleNFT(props) {
                 <option value="">Select Blockchain</option>
                 <option value="Ethereum">Ehtereum</option>
               </select> */}
-                <div className="d-flex block-chain-container">
+                {/* <div className="d-flex block-chain-container">
                   <div>
                     <img src={ethereum} height="32px" />
                   </div>
@@ -556,6 +561,17 @@ function CreateSingleNFT(props) {
                       </option>
                     </select>
                   </div>
+                </div> */}
+                <div className="block-chain-right">
+                  <Select
+                    className="input-box-1 rm-border blockchainSelect"
+                    defaultValue={blockchainOption[0]}
+                    onChange={setSelectedOption}
+                    options={blockchainOption}
+                    placeholder="Select Blockchain"
+                    value={selectedOption}
+                  >
+                  </Select>
                 </div>
               </div>
               <button
