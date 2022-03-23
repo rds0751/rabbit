@@ -6,7 +6,7 @@ import NftToggle from "../../common/components/NftToggle";
 import { getCollections } from "../../services/webappMicroservice";
 import "../../assets/styles/homeCollectionCards.css";
 import "../../assets/styles/collectiondetail.css";
-import { getCategories } from "../../services/UserMicroService";
+import { getCategories } from "../../services/clientConfigMicroService";
 import { getALLCollectionById } from "../../services/contentMicroservice";
 
 import { ToastContainer } from "react-toastify";
@@ -32,15 +32,20 @@ function Collections_tile() {
   const [toggleNft, setToggleNft] = useState(false);
 
   useEffect(() => {
+    async function fetchData() {
+      await getCategories().then((res) => {
+        setCategories(res);
+      });
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
     setIsLoading(true);
     const reqObj = queryString.stringify(filterData);
     getCollections(reqObj).then((response) => {
       setCollections(response);
       setIsLoading(false);
-    });
-    getCategories((res) => {
-      setCategories(res.responseData);
-      console.log(res, "<<<<<<categories");
     });
   }, [filterData]);
 
