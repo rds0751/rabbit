@@ -738,13 +738,10 @@ function LeaderBoard() {
                         <div className="leaderboardTopDetailsRow">
 
                           <img className="top-img" src={collectionPhoto} alt="" />
-
-                          <div className="LeaderboardInsideDetails">
-
-                            <h2>{collectionName}</h2>
-
-                            <p style={{ display: 'flex' }}>
-
+                          <div className="descriptiontopSeller">
+                            <h2 className="sellerName">{collectionName}</h2>
+                            <p className="volumeData" 
+                              style={{ display: 'flex' }}>
                               {curElem.nftCount}
 
                               &nbsp;items
@@ -822,17 +819,13 @@ function LeaderBoard() {
                   aria-controls="pills-pending"
 
                   aria-selected="true"
-
-                  style={{ fontSize: "13px", borderRadius: 'inherit', paddingLeft: '20px' }}
-
+                  style={{borderRadius: 'inherit', paddingLeft: '20px' }}
                   onClick={() => setPendingAcceptedCreated("pending")}
 
                 >
 
                   Top Buyers
-
-                  <hr style={{ width: "150%", marginLeft: '-22px', height: 'auto', opacity: 'inherit' }} />
-
+                  <hr style={{ width: "150%", marginLeft: '-20px', height: 'auto', opacity: 'inherit' }} />
                 </a>
 
               </li>
@@ -854,9 +847,7 @@ function LeaderBoard() {
                   aria-controls="pills-accepted"
 
                   aria-selected="false"
-
-                  style={{ fontSize: "13px", borderRadius: 'inherit' }}
-
+                  style={{borderRadius: 'inherit' }}
                   onClick={() => setPendingAcceptedCreated("accepted")}
 
                 >
@@ -886,9 +877,7 @@ function LeaderBoard() {
                   aria-controls="pills-rejected"
 
                   aria-selected="false"
-
-                  style={{ fontSize: "13px", borderRadius: 'inherit' }}
-
+                  style={{borderRadius: 'inherit' }}
                   onClick={() => setPendingAcceptedCreated("rejected")}
 
                 >
@@ -993,7 +982,7 @@ function LeaderBoard() {
 
             <label for="topNft-sales" className="fs-20 fw-sb c-b pr-12 d-none d-sm-none d-md-block">Top NFT sales</label>
 
-            <select id="topNft-sales" className="sales-selector fs-14 fw-m c-b" onChange={(e) => ChangeNFTDuration(e)} name="duration">
+            <select id="topNft-sales" className="sales-selector fs-14 fw-m" onChange={(e) => ChangeNFTDuration(e)} name="duration">
 
               <option>All</option>
 

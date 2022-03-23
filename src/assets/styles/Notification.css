@@ -1355,6 +1355,14 @@ background-position: right;
   .left_section_nav {
     margin-right: 15px !important;
   }
+  .left_section_nav li{
+    margin-left: 0px;
+  }
+  .dropdown .profileimg{
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
 }
 .mobilenftTilePageSecondSelect{
   cursor: pointer;

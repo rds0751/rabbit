@@ -75,7 +75,7 @@ export default class NftDetail extends BaseComponent {
             currency: this.state?.responseData?.salesInfo?.currency || 'eth',
             addedBy: data?.buyerId || '',
             loyality: 5, // to do
-            collectionId: this.state?.responseData?.contractAddress || ''
+            collectionId: this.state?.responseData?.collectionId || ''
             //   ownedBy: this.props?.user?.userDetails?._id || '',
             //   ownerAddress: this.props?.user?.userDetails?.userId || '',
             //   updatedBy: this.props?.user?.userDetails?._id || '',
