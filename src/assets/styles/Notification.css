@@ -1325,14 +1325,13 @@ margin:0px;
   background: url("../images/drop-down-arrow.svg");
   background-size: contain;
   background-repeat: no-repeat;
-order: 0;
-background-position: right;
-    position: absolute;
-    right: 10px;
-   /* padding-left: 8px;; */
-    background-size: 15px;
-   
-    /* width:175px !important */
+  order: 0;
+  background-position: 95% center;
+  position: absolute;
+  right: 10px;
+  /* padding-left: 8px;; */
+  background-size: 15px;  
+  /* width:175px !important */
 }
 .sort-drop-down{
   appearance: none;
@@ -1356,6 +1355,14 @@ background-position: right;
   .left_section_nav {
     margin-right: 15px !important;
   }
+  .left_section_nav li{
+    margin-left: 0px;
+  }
+  .dropdown .profileimg{
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
 }
 .mobilenftTilePageSecondSelect{
   cursor: pointer;

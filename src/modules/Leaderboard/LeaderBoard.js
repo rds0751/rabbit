@@ -135,7 +135,7 @@ function LeaderBoard() {
 
   var limitCollections = topCollections.slice(0, 4)
 
-  console.log("topCollections", topCollections);
+  console.log("topCollesssssssssssssssctions", topCollections);
 
 
 
@@ -450,9 +450,9 @@ function LeaderBoard() {
 
                     <option value="weekly">Weekly</option>
 
-                    <option value="Monthly">Monthly</option>
+                    <option value="monthly">Monthly</option>
 
-                    <option value="Yearly">Yearly</option>
+                    <option value="yearly">Yearly</option>
 
                   </select>
 
@@ -647,7 +647,7 @@ function LeaderBoard() {
 
                   </div>
 
-                  <select className="top-dropdown" value={collectionDuration} name="duration" onChange={(e) => ChangeCollectionDuration(e)}>
+                  <select className="top-dropdown" name="duration" onChange={(e) => ChangeCollectionDuration(e)}>
 
                     <option value='all'>All</option>
 
@@ -727,35 +727,74 @@ function LeaderBoard() {
 
                 <div className="leaderboardTopDetails">
 
-                  {limitCollections.map((curElem) => {
+                  {limitCollections.map((curElem, index) => {
+                    // console.log("ddddddddddddddd", curElem.collection[index].name)
+                    const { collection, items, collectionPhoto } = curElem;
+                    // var precise = totalVolume.toPrecision(4);
 
-                    const { collectionPhoto, collectionName, nftCount } = curElem.items;
-
+                    // var result = parseFloat(precise);
                     return (
 
                       <>
 
+
                         <div className="leaderboardTopDetailsRow">
 
-                          <img className="top-img" src={collectionPhoto} alt="" />
+                          {collection[0].imageUrl == "" || !collection[0].imageUrl ? (
 
-                          <div className="LeaderboardInsideDetails">
+                            <img
 
-                            <h2>{collectionName}</h2>
+                              className="top-img" style={{ width: '71px', height: '71px' }} src={require("../../assets/images/profile.png")}
 
-                            <p style={{ display: 'flex' }}>
+                              alt=""
 
-                              {curElem.nftCount}
+                            />
 
-                              &nbsp;items
 
-                            </p>
+
+                          ) : (
+
+                            <img
+
+                              className="top-img" style={{ width: '71px', height: '71px' }} src={collection[0].imageUrl}
+
+                              alt=""
+
+                            />
+
+
+
+                          )}
+
+
+
+
+                          <div className="descriptiontopSeller">
+
+
+
+                            {collection[0].name == "" ? (
+
+                              <h2 className="sellerName"> {collection[0].contractAddress.substring(0, 4)}...{collection[0].contractAddress.slice(collection[0].contractAddress.length - 4)}</h2>
+
+                            ) : (
+
+                              <h2 className="sellerName">{collection[0].name}</h2>
+
+                            )}
+
+
+
+
+
+
 
                           </div>
 
                         </div>
 
                         <hr className="hr" />
+
 
                       </>
 
@@ -765,9 +804,13 @@ function LeaderBoard() {
 
                 </div>
 
-                {topCollections.length === 0 && (<div>
+                {limitCollections.length === 0 && (<div>
 
-                  <h1>No Data Found</h1>
+                  <div className="loader">
+
+
+
+                  </div>
 
                 </div>)}
 
@@ -822,17 +865,13 @@ function LeaderBoard() {
                   aria-controls="pills-pending"
 
                   aria-selected="true"
-
-                  style={{ fontSize: "13px", borderRadius: 'inherit', paddingLeft: '20px' }}
-
+                  style={{borderRadius: 'inherit', paddingLeft: '20px' }}
                   onClick={() => setPendingAcceptedCreated("pending")}
 
                 >
 
                   Top Buyers
-
-                  <hr style={{ width: "150%", marginLeft: '-22px', height: 'auto', opacity: 'inherit' }} />
-
+                  <hr style={{ width: "150%", marginLeft: '-20px', height: 'auto', opacity: 'inherit' }} />
                 </a>
 
               </li>
@@ -854,9 +893,7 @@ function LeaderBoard() {
                   aria-controls="pills-accepted"
 
                   aria-selected="false"
-
-                  style={{ fontSize: "13px", borderRadius: 'inherit' }}
-
+                  style={{borderRadius: 'inherit' }}
                   onClick={() => setPendingAcceptedCreated("accepted")}
 
                 >
@@ -886,9 +923,7 @@ function LeaderBoard() {
                   aria-controls="pills-rejected"
 
                   aria-selected="false"
-
-                  style={{ fontSize: "13px", borderRadius: 'inherit' }}
-
+                  style={{borderRadius: 'inherit' }}
                   onClick={() => setPendingAcceptedCreated("rejected")}
 
                 >
@@ -911,13 +946,13 @@ function LeaderBoard() {
 
           <select className="small-leaderboard-dropdown" name="duration" onChange={(e) => ChangeCollectionDuration(e)} >
 
-            <option value='All'>All</option>
+            <option value='all'>All</option>
 
-            <option value='Weekly'>Weekly</option>
+            <option value='weekly'>Weekly</option>
 
-            <option value='Monthly'>Monthly</option>
+            <option value='monthly'>Monthly</option>
 
-            <option value='Yearly'>Yearly</option>
+            <option value='yearly'>Yearly</option>
 
           </select>
 
@@ -993,9 +1028,9 @@ function LeaderBoard() {
 
             <label for="topNft-sales" className="fs-20 fw-sb c-b pr-12 d-none d-sm-none d-md-block">Top NFT sales</label>
 
-            <select id="topNft-sales" className="sales-selector fs-14 fw-m c-b" onChange={(e) => ChangeNFTDuration(e)} name="duration">
+            <select id="topNft-sales" className="sales-selector fs-14 fw-m" onChange={(e) => ChangeNFTDuration(e)} name="duration">
 
-              <option>All</option>
+              <option value="all">All</option>
 
               <option value="weekly">Weekly</option>
 

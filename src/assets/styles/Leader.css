@@ -19,12 +19,7 @@
   margin-right: 12px;
 }
 .leaderboardTop {
-  /* background-color: #f8f8f8; */
-  /* border: 0px;
-  border-radius: 0.7rem; */
-  font-weight: bold;
-  /* margin-top: 10px; */
-  background: #F8F8F8 0% 0% no-repeat padding-box;
+  background: #F8F8F8;
   border: 1px solid #FCFCFC;
   border-radius: 13px;
   opacity: 1;
@@ -33,7 +28,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 1rem 1rem;
+  padding: 25px 32px 24px 32px;
+}
+.leaderboardTitle .col{
+  font-family: 'poppins-bold';
+  font-size: 18px;
+  line-height: 27px;
+  color: #000000;
 }
 .leaderboardDropdown {
   display: flex;
@@ -44,26 +45,26 @@
   flex-direction: column;
 }
 .leaderboardTopDetailsRow > img {
-  height: 4.5rem;
-  width: 4.5rem;
+  height: 71px;
+  width: 71px;
 }
 .leaderboardTopDetailsRow {
   display: flex;
   align-items: center;
   text-align: center;
   justify-content: start;
-  padding: 22px;
+  padding: 24.88px 22px 19.65px 31px;
 }
 .LeaderboardInsideDetails {
   margin-left: 7px;
   margin-top: auto;
 }
 
-.LeaderboardInsideDetails > h2 {
-  /* font-size: 0.9rem;
-  font-weight: bold; */
-  /* margin-left: 0.5rem; */
-}
+/* .LeaderboardInsideDetails > h2 {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-left: 0.5rem;
+} */
 .LeaderboardInsideDetails > p {
   font-size: 0.8rem;
   color: #366eef;
@@ -78,15 +79,19 @@
   margin-left: auto;
   margin-right: auto;
   margin: 0rem;
+  border: 1px solid #E3E3E3;
+  background-color: #E3E3E3;
 }
 .view {
-  padding-bottom: 20px;
-  padding-top: 25px;
-  font: 16px Poppins;
+  padding-bottom: 24px;
+  padding-top: 30.35px;
   text-decoration: none;
   color: #191919;
   display: flex;
   justify-content: center;
+  font-family: 'poppins';
+  font-size: 16px;
+  line-height: 25px;
 }
 .view-button {
   bottom: 0px;
@@ -490,10 +495,10 @@ thead {
 .leadercolmob {
   display: none;
 }
-.filter {
-  /* width: 400px; */
-  /* border: 5px solid red; */
-}
+/* .filter {
+  width: 400px;
+  border: 5px solid red;
+} */
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #fff;
@@ -521,7 +526,7 @@ thead {
     border-bottom: 1px solid #c7c7c7;
     height: 46px;
     margin-left: -20px;
-    width: 120%;
+    width: 110%;
   }
   .upper__homepage {
     text-align: center;
@@ -575,8 +580,9 @@ thead {
   .nav-pills .nav-link.active,
   .nav-pills .show > .nav-link {
     color: black !important;
-    font-size: 14px;
-    font-weight: bold;
+    font-family: 'poppins-bold';
+    font-size: 18px;
+    line-height: 27px;
   }
   .nav-pills .nav-link.active hr {
     height: 4px !important;
@@ -584,11 +590,12 @@ thead {
     border-radius: 10px;
     width: 170%;
   }
-  .nav-link {
-    color: #828282;
-    font-weight: bold;
-    font-size: 14px;
-    padding: 0.5rem 0.6rem;
+  .leadercolmob .nav-link {
+    color: #969696;
+    padding: 0rem 0.6rem;
+    font-family: 'poppins';
+    font-size: 18px;
+    line-height: 27px;
   }
   .shadow {
     box-shadow: none !important;
@@ -611,10 +618,10 @@ thead {
   /* .lower__homepage {
     flex-direction: column;
   } */
-  #filters {
-    /* flex-direction: column; */
-    /* border: "5px solid green"; */
-  }
+  /* #filters {
+    flex-direction: column;
+    border: "5px solid green";
+  } */
 
   /* .menuphone {
     display: block;
@@ -732,7 +739,7 @@ thead {
   }
   .leader {
     display: flex;
-    justify-content: center;
+    justify-content: left;
   }
   .CollectionItem > div > h2 {
     font-size: 10px;
@@ -1024,8 +1031,8 @@ thead {
   }
 }
 /* create nft card css end */
-@media (min-width: 1400px) {
-  .leader-container {
+@media (min-width: 1366px){
+  .leader-container{
     max-width: 88%;
   }
 }
@@ -1046,6 +1053,21 @@ thead {
     left: -100px;
   }
 }
+.leader-container{
+  padding-right: var(--bs-gutter-x,.75rem);
+    padding-left: var(--bs-gutter-x,.75rem);
+}
+.top-dropdown{
+  width: 118px;
+  height: 42px;
+  background: #FFFFFF00 0% 0% no-repeat padding-box;
+  border: 1px solid #707070;
+  border-radius: 6px;
+  font-family: 'poppins-medium';
+  font-size: 14px;
+  line-height: 21px;
+  color: #000000;
+}
 .leader-container {
   padding-right: var(--bs-gutter-x, 0.75rem);
   padding-left: var(--bs-gutter-x, 0.75rem);
@@ -1057,14 +1079,18 @@ thead {
   border: 1px solid #707070;
   border-radius: 6px;
 }
-.small-leaderboard-dropdown {
-  width: 90%;
-  height: 42px;
-  background: #ffffff00 0% 0% no-repeat padding-box;
-  border: 1px solid #707070;
-  border-radius: 6px;
-  margin-left: 20px;
-  margin-top: 20px;
+  .small-leaderboard-dropdown {
+    width: 90%;
+    height: 42px;
+    background: #ffffff00 0% 0% no-repeat padding-box;
+    border: 1px solid #707070;
+    border-radius: 6px;
+    margin-left: 20px;
+    margin-top: 20px;
+    font-family: 'poppins-medium';
+    font-size: 14px;
+    line-height: 21px;
+    color: #000000;
 }
 .small-leaderboard-body {
   padding: none !important;
@@ -1093,13 +1119,23 @@ thead {
   justify-content: space-between;
   align-items: center;
 }
+.filters-cont label{
+  font-family: 'poppins-semibold';
+  font-size: 20px;
+  line-height: 30px;
+  color: #191919;
+}
 .sales-selector {
   width: 118px;
   height: 42px;
   border: 1px solid #707070;
   border-radius: 6px;
   background-color: #fff;
-  padding: 11px 8px 11px 8px;
+  padding: 11px 8px 8px 8px;
+  font-family: 'poppins-medium';
+  font-size: 14px;
+  line-height: 21px;
+  color: #000000;
 }
 .sort-selector {
   width: 163px;
@@ -1107,7 +1143,11 @@ thead {
   border: 1px solid #707070;
   border-radius: 4px;
   background-color: #fff;
-  padding: 11px 12px 11px 12px;
+  padding: 11px 12px 8px 12px;
+  font-family: 'poppins-medium';
+  font-size: 14px;
+  line-height: 21px;
+  color: #191919;
 }
 .nfts-cont {
   display: flex;
@@ -1142,17 +1182,15 @@ thead {
     padding-top: 39px;
   }
   .filters-cont {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    display: block;
   }
   .sales-selector {
-    width: 350px;
+    width: 100%;
     font-weight: 500;
     margin-bottom: 16px;
   }
   .sort-selector {
-    width: 350px;
+    width: 100%;
     font-weight: 500;
     border-radius: 6px;
   }
@@ -1341,22 +1379,60 @@ thead {
   color: #818181;
 }
 
-@media only screen and (max-width: 1440) {
+@media only screen and (max-width: 1440px) {
   .nft-detail {
     margin: 0 5%;
   }
+  .leaderboardTitle {
+    padding: 16px;
+  }
+  .leaderboardTopDetailsRow{
+    padding: 16px;
+  }
 }
-@media only screen and (max-width: 768) {
+@media screen and (min-width: 720px) and (max-width: 991px){
+  .nfts-cont{
+    justify-content: unset;    
+  }
+  .nft_card {
+    width: 47%;
+  }
+}
+@media only screen and (max-width: 768px) {
   .nft-detail #share_info {
     margin-bottom: 39px;
   }
 }
-@media only screen and (max-width: 767) {
+@media only screen and (max-width: 767px) {
   .nft-detail #share_info {
     margin-bottom: 22px;
   }
+  .leader-container{
+    max-width: 95%;
+  }
 }
-@media only screen and (max-width: 480) {
+@media only screen and (max-width: 480px) {
+  .leader-container{
+    max-width: 100%;
+  }
+  .nftCard{
+    margin-right: 0px;
+  }
+  .nfts-cont{
+    justify-content: unset;
+  }
+  .leadercolmob .nav-link, .leadercolmob .nav-pills .nav-link.active, .leadercolmob .nav-pills .show > .nav-link{
+    font-size: 14px;
+    line-height: 21px;
+  }
+  .leadercolmob .nav-link{
+    padding: 6px 0.6rem;
+  }
+}
+@media only screen and (max-width:334px){
+  .leadercolmob .nav-link, .leadercolmob .nav-pills .nav-link.active, .leadercolmob .nav-pills .show > .nav-link{
+    font-size: 12px;
+  }
 }
 /* nft-information nft detail page css end*/
 
@@ -1387,25 +1463,43 @@ thead {
 .namediv {
   margin: auto auto auto 31px;
 }
-.sellerName {
+.sellerName{
   text-align: left;
-  font: normal normal bold 18px/27px Poppins;
   letter-spacing: 0px;
   color: #000000;
   opacity: 1;
+  font-family: 'poppins-bold';
+  font-size: 18px;
+  line-height: 27px;
+  margin-bottom: 15px;
+}
+.sellerName a{
+  text-align: left;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+  font-family: 'poppins-bold';
+  font-size: 18px;
+  line-height: 27px;
+  margin-bottom: 15px;
+  text-decoration: none;
 }
 .volumeData {
   display: flex;
   text-align: left;
-  font: normal normal medium 16px/25px Poppins;
   letter-spacing: 0px;
-  color: #366eef;
+  color: #366EEF;
+  font-family: 'poppins-medium';
+  font-size: 16px;
+  line-height: 25px;
 }
-.ethValue {
+.ethValue{
   text-align: left;
-  font: normal normal normal 16px/25px Poppins;
   letter-spacing: 0px;
   color: #818181;
+  font-family: 'poppins';
+  font-size: 16px;
+  line-height: 25px;
 }
 .descriptiontopSeller {
   margin-left: 7px;
@@ -1457,6 +1551,15 @@ thead {
     width: 23%;
     height: 42px;
     margin-left: 70%;
+  }
+  .leadercolmob .nav-link{
+    padding-left: 31px!important;
+  }
+  .nav-pills .nav-link.active hr{
+    margin-left: -31px!important;
+  }
+  .leaderboardTopDetailsRow{
+    padding: 24.88px 22px 19.65px 31px;
   }
 }
 .no-data {
