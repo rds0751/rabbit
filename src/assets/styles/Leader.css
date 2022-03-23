@@ -28,7 +28,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 25px 32px 24px 32px;
+  padding: 25px 32px 24px 32px;
 }
 .leaderboardTitle .col{
   font-family: 'poppins-bold';
@@ -53,7 +53,7 @@
   align-items: center;
   text-align: center;
   justify-content: start;
-  padding: 22px;
+  padding: 24.88px 22px 19.65px 31px;
 }
 .LeaderboardInsideDetails {
   margin-left: 7px;
@@ -580,8 +580,9 @@ thead {
   .nav-pills .nav-link.active,
   .nav-pills .show > .nav-link {
     color: black !important;
-    font-size: 14px;
-    font-weight: bold;
+    font-family: 'poppins-bold';
+    font-size: 18px;
+    line-height: 27px;
   }
   .nav-pills .nav-link.active hr {
     height: 4px !important;
@@ -589,11 +590,12 @@ thead {
     border-radius: 10px;
     width: 170%;
   }
-  .nav-link {
-    color: #828282;
-    font-weight: bold;
-    font-size: 14px;
-    padding: 0.5rem 0.6rem;
+  .leadercolmob .nav-link {
+    color: #969696;
+    padding: 0rem 0.6rem;
+    font-family: 'poppins';
+    font-size: 18px;
+    line-height: 27px;
   }
   .shadow {
     box-shadow: none !important;
@@ -737,7 +739,7 @@ thead {
   }
   .leader {
     display: flex;
-    justify-content: center;
+    justify-content: left;
   }
   .CollectionItem > div > h2 {
     font-size: 10px;
@@ -1077,14 +1079,18 @@ thead {
   border: 1px solid #707070;
   border-radius: 6px;
 }
-.small-leaderboard-dropdown {
-  width: 90%;
-  height: 42px;
-  background: #ffffff00 0% 0% no-repeat padding-box;
-  border: 1px solid #707070;
-  border-radius: 6px;
-  margin-left: 20px;
-  margin-top: 20px;
+  .small-leaderboard-dropdown {
+    width: 90%;
+    height: 42px;
+    background: #ffffff00 0% 0% no-repeat padding-box;
+    border: 1px solid #707070;
+    border-radius: 6px;
+    margin-left: 20px;
+    margin-top: 20px;
+    font-family: 'poppins-medium';
+    font-size: 14px;
+    line-height: 21px;
+    color: #000000;
 }
 .small-leaderboard-body {
   padding: none !important;
@@ -1113,13 +1119,23 @@ thead {
   justify-content: space-between;
   align-items: center;
 }
+.filters-cont label{
+  font-family: 'poppins-semibold';
+  font-size: 20px;
+  line-height: 30px;
+  color: #191919;
+}
 .sales-selector {
   width: 118px;
   height: 42px;
   border: 1px solid #707070;
   border-radius: 6px;
   background-color: #fff;
-  padding: 11px 8px 11px 8px;
+  padding: 11px 8px 8px 8px;
+  font-family: 'poppins-medium';
+  font-size: 14px;
+  line-height: 21px;
+  color: #000000;
 }
 .sort-selector {
   width: 163px;
@@ -1127,7 +1143,11 @@ thead {
   border: 1px solid #707070;
   border-radius: 4px;
   background-color: #fff;
-  padding: 11px 12px 11px 12px;
+  padding: 11px 12px 8px 12px;
+  font-family: 'poppins-medium';
+  font-size: 14px;
+  line-height: 21px;
+  color: #191919;
 }
 .nfts-cont {
   display: flex;
@@ -1162,17 +1182,15 @@ thead {
     padding-top: 39px;
   }
   .filters-cont {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    display: block;
   }
   .sales-selector {
-    width: 350px;
+    width: 100%;
     font-weight: 500;
     margin-bottom: 16px;
   }
   .sort-selector {
-    width: 350px;
+    width: 100%;
     font-weight: 500;
     border-radius: 6px;
   }
@@ -1361,25 +1379,60 @@ thead {
   color: #818181;
 }
 
-@media only screen and (max-width: 1440) {
+@media only screen and (max-width: 1440px) {
   .nft-detail {
     margin: 0 5%;
   }
   .leaderboardTitle {
-    margin: 16px;
+    padding: 16px;
+  }
+  .leaderboardTopDetailsRow{
+    padding: 16px;
   }
 }
-@media only screen and (max-width: 768) {
+@media screen and (min-width: 720px) and (max-width: 991px){
+  .nfts-cont{
+    justify-content: unset;    
+  }
+  .nft_card {
+    width: 47%;
+  }
+}
+@media only screen and (max-width: 768px) {
   .nft-detail #share_info {
     margin-bottom: 39px;
   }
 }
-@media only screen and (max-width: 767) {
+@media only screen and (max-width: 767px) {
   .nft-detail #share_info {
     margin-bottom: 22px;
   }
+  .leader-container{
+    max-width: 95%;
+  }
 }
-@media only screen and (max-width: 480) {
+@media only screen and (max-width: 480px) {
+  .leader-container{
+    max-width: 100%;
+  }
+  .nftCard{
+    margin-right: 0px;
+  }
+  .nfts-cont{
+    justify-content: unset;
+  }
+  .leadercolmob .nav-link, .leadercolmob .nav-pills .nav-link.active, .leadercolmob .nav-pills .show > .nav-link{
+    font-size: 14px;
+    line-height: 21px;
+  }
+  .leadercolmob .nav-link{
+    padding: 6px 0.6rem;
+  }
+}
+@media only screen and (max-width:334px){
+  .leadercolmob .nav-link, .leadercolmob .nav-pills .nav-link.active, .leadercolmob .nav-pills .show > .nav-link{
+    font-size: 12px;
+  }
 }
 /* nft-information nft detail page css end*/
 
@@ -1418,6 +1471,7 @@ thead {
   font-family: 'poppins-bold';
   font-size: 18px;
   line-height: 27px;
+  margin-bottom: 15px;
 }
 .volumeData {
   display: flex;
@@ -1432,7 +1486,7 @@ thead {
   text-align: left;
   letter-spacing: 0px;
   color: #818181;
-  font-family: 'poppins-regular';
+  font-family: 'poppins';
   font-size: 16px;
   line-height: 25px;
 }
@@ -1486,6 +1540,15 @@ thead {
     width: 23%;
     height: 42px;
     margin-left: 70%;
+  }
+  .leadercolmob .nav-link{
+    padding-left: 31px!important;
+  }
+  .nav-pills .nav-link.active hr{
+    margin-left: -31px!important;
+  }
+  .leaderboardTopDetailsRow{
+    padding: 24.88px 22px 19.65px 31px;
   }
 }
 .no-data {
