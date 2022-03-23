@@ -135,7 +135,7 @@ function LeaderBoard() {
 
   var limitCollections = topCollections.slice(0, 4)
 
-  console.log("topCollections", topCollections);
+  console.log("topCollesssssssssssssssctions", topCollections);
 
 
 
@@ -450,9 +450,9 @@ function LeaderBoard() {
 
                     <option value="weekly">Weekly</option>
 
-                    <option value="Monthly">Monthly</option>
+                    <option value="monthly">Monthly</option>
 
-                    <option value="Yearly">Yearly</option>
+                    <option value="yearly">Yearly</option>
 
                   </select>
 
@@ -647,7 +647,7 @@ function LeaderBoard() {
 
                   </div>
 
-                  <select className="top-dropdown" value={collectionDuration} name="duration" onChange={(e) => ChangeCollectionDuration(e)}>
+                  <select className="top-dropdown" name="duration" onChange={(e) => ChangeCollectionDuration(e)}>
 
                     <option value='all'>All</option>
 
@@ -727,32 +727,74 @@ function LeaderBoard() {
 
                 <div className="leaderboardTopDetails">
 
-                  {limitCollections.map((curElem) => {
+                  {limitCollections.map((curElem, index) => {
+                    // console.log("ddddddddddddddd", curElem.collection[index].name)
+                    const { collection, items, collectionPhoto } = curElem;
+                    // var precise = totalVolume.toPrecision(4);
 
-                    const { collectionPhoto, collectionName, nftCount } = curElem.items;
-
+                    // var result = parseFloat(precise);
                     return (
 
                       <>
 
+
                         <div className="leaderboardTopDetailsRow">
 
-                          <img className="top-img" src={collectionPhoto} alt="" />
+                          {collection[0].imageUrl == "" || !collection[0].imageUrl ? (
+
+                            <img
+
+                              className="top-img" style={{ width: '71px', height: '71px' }} src={require("../../assets/images/profile.png")}
+
+                              alt=""
+
+                            />
+
+
+
+                          ) : (
+
+                            <img
+
+                              className="top-img" style={{ width: '71px', height: '71px' }} src={collection[0].imageUrl}
+
+                              alt=""
+
+                            />
+
+
+
+                          )}
+
+
+
+
                           <div className="descriptiontopSeller">
-                            <h2 className="sellerName">{collectionName}</h2>
-                            <p className="volumeData" 
-                              style={{ display: 'flex' }}>
-                              {curElem.nftCount}
 
-                              &nbsp;items
 
-                            </p>
+
+                            {collection[0].name == "" ? (
+
+                              <h2 className="sellerName"> {collection[0].contractAddress.substring(0, 4)}...{collection[0].contractAddress.slice(collection[0].contractAddress.length - 4)}</h2>
+
+                            ) : (
+
+                              <h2 className="sellerName">{collection[0].name}</h2>
+
+                            )}
+
+
+
+
+
+
 
                           </div>
 
                         </div>
 
                         <hr className="hr" />
+
 
                       </>
 
@@ -762,9 +804,13 @@ function LeaderBoard() {
 
                 </div>
 
-                {topCollections.length === 0 && (<div>
+                {limitCollections.length === 0 && (<div>
 
-                  <h1>No Data Found</h1>
+                  <div className="loader">
+
+
+
+                  </div>
 
                 </div>)}
 
@@ -900,13 +946,13 @@ function LeaderBoard() {
 
           <select className="small-leaderboard-dropdown" name="duration" onChange={(e) => ChangeCollectionDuration(e)} >
 
-            <option value='All'>All</option>
+            <option value='all'>All</option>
 
-            <option value='Weekly'>Weekly</option>
+            <option value='weekly'>Weekly</option>
 
-            <option value='Monthly'>Monthly</option>
+            <option value='monthly'>Monthly</option>
 
-            <option value='Yearly'>Yearly</option>
+            <option value='yearly'>Yearly</option>
 
           </select>
 
@@ -984,7 +1030,7 @@ function LeaderBoard() {
 
             <select id="topNft-sales" className="sales-selector fs-14 fw-m" onChange={(e) => ChangeNFTDuration(e)} name="duration">
 
-              <option>All</option>
+              <option value="all">All</option>
 
               <option value="weekly">Weekly</option>
 
