@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getTopCollections } from "../../services/sellAndPurchaseMicroService";
 import styled from "styled-components";
 import dropdown from "../../assets/images/drop down.png";
+const queryString = require("query-string");
 
 
 const Container = styled.div`
@@ -123,16 +124,30 @@ color: #818181;
 `;
 function Top_collection() {
   const [topCollections, setTopCollections] = useState([]);
+  const [collectionDuration, setCollectionDuration] = useState({
+
+    duration: "weekly",
+
+  });
+  const collectionReqObj = queryString.stringify(collectionDuration);
 
   useEffect(() => {
-    getTopCollections().then((response) => setTopCollections(response));
-  });
+    getTopCollections(collectionReqObj).then((response) => setTopCollections(response));
+  },[collectionDuration]);
+  const ChangeCollectionDuration = (e) => {
 
+    setCollectionDuration(
+
+      { ...collectionDuration, [e.target.name]: e.target.value }
+
+    );
+
+  }
   return (
     <Container>
       <Header>
         <Title>Top Collections</Title>
-        <Select>
+        <Select onChange={(e) => ChangeCollectionDuration(e)} name="duration">
           <option value="weekly">Weekly</option>
           <option value="monthly">Monthly</option>
           <option value="yearly">Yearly</option>
@@ -148,22 +163,24 @@ function Top_collection() {
           <Column className="col">Items</Column>
         </div>
       </Body>
-      {topCollections.map((curElem) => {
-        const { collectionPhoto, collectionName, volume, owners } =
-          curElem.items;
+      {topCollections.map((curElem,index) => {
+        const { collectionPhoto, collection, totalVolume, items } =
+          curElem;
+          var precise = totalVolume.toPrecision(4);
+          var result = parseFloat(precise);
         return (
           <div className="container-fluid">
             <Collection className="row">
               <NameColumn className="col">
-                <Image src={collectionPhoto} alt="pic" />
-                <Name>{collectionName}</Name>
+                <Image src={collection[0].imageUrl} alt="pic" />
+                <Name>{collection[0].name}</Name>
               </NameColumn>
               <VolumeColumn className="col">
-                <Span>34 ETH</Span>
-                {volume}
+                <Span>{result} ETH <Volume>({"$"})</Volume></Span>
+                
               </VolumeColumn>
-              <Text className="col">{owners}</Text>
-              <Text className="col">{curElem.nftCount}</Text>
+              <Text className="col">{collection[0].owner.length}</Text>
+              <Text className="col">{items}</Text>
             </Collection>
           </div>
         );

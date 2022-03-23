@@ -50,8 +50,8 @@ export function getTopBuyers(duration, requestData) {
     });
 }
 
-export function getTopCollections(requestData) {
-  let url = process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/top-collections?" + requestData;
+export function getTopCollections(duration,requestData) {
+  let url = process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/top-collections?limit=40&skip=0&" + duration;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
