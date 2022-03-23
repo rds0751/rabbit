@@ -775,7 +775,7 @@ function LeaderBoard() {
 
                             {collection[0].name == "" ? (
 
-                              <h2 className="sellerName"> {collection[index].contractAddress.substring(0, 4)}...{collection[index].contractAddress.slice(collection[index].contractAddress.length - 4)}</h2>
+                              <h2 className="sellerName"> {collection[0].contractAddress.substring(0, 4)}...{collection[0].contractAddress.slice(collection[0].contractAddress.length - 4)}</h2>
 
                             ) : (
 
