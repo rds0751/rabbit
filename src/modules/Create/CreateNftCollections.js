@@ -22,6 +22,7 @@ import Bannerdrop from "./Bannerdrop";
 import { updateCollectionTxStatus } from "../../services/webappMicroservice";
 
 import { getCategories } from "../../services/clientConfigMicroService";
+import Select from 'react-select';
 
 const Button = styled.button``;
 
@@ -41,7 +42,7 @@ function CreateNftCollections(props) {
   const [loaderState, setloaderState] = useState(false);
 
   // -------
-
+  const [specialchar,setSpecialChar]=useState("")
 
 
 
@@ -107,7 +108,7 @@ function CreateNftCollections(props) {
   });
   // -------------
   const [desLEngth, setDesLEngth] = useState(0);
-
+  const [nameError,SetNameError]=useState("");
   const handleChangeImage = async (event) => {
     const fileUploaded = event.target.files[0];
     // alert("onchage");
@@ -149,6 +150,7 @@ function CreateNftCollections(props) {
   };
 
   const handleSubmit = async (e) => {
+    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
     setloaderState(true);
     e.preventDefault();
     // e.preventDefault();
@@ -173,6 +175,12 @@ function CreateNftCollections(props) {
       toast.error("Fill the required field");
       return null;
     }
+    if(format.test(name.current)){
+      toast.error("UserName should be not contain special character");
+      setloaderState(false);
+      return null;
+    }
+
     // alert("here");
     console.log("here");
     // const data = {
@@ -286,6 +294,12 @@ function CreateNftCollections(props) {
     // console.log("kkkkkkkkkkkkkkkkkkkkk",location?.state?.data);
     // { id: '...', images: [...], price: { ... } }
   
+    // Blockchain option
+    const [selectedOption, setSelectedOption] = useState(null);
+    const blockchainOption = [
+      { value: 'eth', label: <div><img src={ethereum} height="32px" /> Ethereum</div> },
+    ];
+    
   return (
     <>
     
@@ -399,13 +413,19 @@ function CreateNftCollections(props) {
         <div>
           <form onSubmit={(e) => handleSubmit(e)}>
             <div>
-              <p className="fs-16 fw-b c-b pt-4">Name*</p>
+              <p className="fs-16 fw-b c-b pt-4">Name*<span style={{color:"Red" ,fontSize:"13px"}}>{nameError}</span></p>
               <input
                 type="name"
                 name="name"
                 className="input-box-1"
                 placeholder="Write your name"
                 onChange={(e) => {
+                  var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                  if(format.test(e.target.value)){
+                    SetNameError("(No Special Character Allowed)");
+                  } else {
+                  SetNameError("");
+                  }
                   name.current = e.target.value;
                   checkReqFieldFun();
                 }}
@@ -447,7 +467,7 @@ function CreateNftCollections(props) {
             </div>
             <div>
               <div className="fs-16 fw-b c-b pt-3 pb-3">Blockchain*</div>
-              <div className="block-chain-container">
+              {/* <div className="block-chain-container">
                 <div>
                   <img src={ethereum} height="32px" />
                 </div>
@@ -464,7 +484,18 @@ function CreateNftCollections(props) {
                     </option>
                   </select>
                 </div>
-              </div>
+              </div> */}
+                <div className="block-chain-right">
+                  <Select
+                    className="input-box-1 rm-border blockchainSelect"
+                    defaultValue={blockchainOption[0]}
+                    onChange={setSelectedOption}
+                    options={blockchainOption}
+                    placeholder="Select Blockchain"
+                    value={selectedOption}
+                  >
+                  </Select>
+                </div>
             </div>
             <button
               type="submit"

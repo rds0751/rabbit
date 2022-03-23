@@ -40,6 +40,7 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
         );
         if (err || !ipfsRes.ipfsUrl) {
           toast.error("File is not acceptable");
+          setisLoader(false);
         } else {
           
           // alert("banner");
@@ -103,7 +104,8 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
               <img
               style={{
                 width: "100%",
-                height: "100%"
+                height: "100%",
+                objectFit:"cover"
               }}
               src={bannerCdn != "" ? bannerCdn : Image}
               alt="upload-icon"

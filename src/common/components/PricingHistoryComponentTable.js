@@ -15,28 +15,28 @@ const MainContainer = styled.div`
   flex-direction: column;
 `;
 const Title = styled.h1`
-  font-family: 'poppins-bold';
+  font-family: "poppins-bold";
   font-size: 16px;
   line-height: 25px;
   color: #000000;
-  margin-bottom:23px;
+  margin-bottom: 23px;
 `;
 const FilterContainer = styled.div`
   display: flex;
   align-items: baseline;
-  margin-bottom:20px;
+  margin-bottom: 20px;
 `;
 const Select = styled.select`
   border: 1px solid #d2d2d2;
   border-radius: 4px;
   width: 108px;
-  height:42px;
+  height: 42px;
   padding: 5px;
-  font-family: 'poppins-medium';
+  font-family: "poppins-medium";
   font-size: 14px;
   line-height: 21px;
   color: #191919;
-  background-color:#fff;
+  background-color: #fff;
 `;
 const Option = styled.option`
   font-size: 14px;
@@ -52,9 +52,9 @@ const Filter = styled.div`
   font-size: 14px;
   margin-left: 16px;
   padding: 0px 5px 0px 5px;
-  width:108px;
-  height:42px;
-  font-family: 'poppins-medium';
+  width: 108px;
+  height: 42px;
+  font-family: "poppins-medium";
   font-size: 14px;
   line-height: 21px;
 `;
@@ -63,15 +63,28 @@ const Button = styled.button`
   border: none;
   color: #366eef;
 `;
-
+const TableDown = styled(Table)`
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 1px solid #c8c8c8;
+  border-radius: 0px 0px 3px 3px;
+  opacity: 1;
+  table-layout: auto;
+  width: 100%;
+`;
+const TableUp = styled(Table)`
+  height: 0px;
+  table-layout: auto;
+  width: 100%;
+  margin-bottom: 8px;
+`;
 function createData(Event, Price, From, To, Date) {
   return { Event, Price, From, To, Date };
 }
 
 const rows = [
-  createData("List", "0.32ETH", "Ravi", "John", "25Feb"),
-  createData("Buy", "0.32ETH", "Ravi", "John", "25Feb"),
-  createData("price", "0.32ETH", "Ravi", "John", "25Feb"),
+  // createData("List", "0.32ETH", "Ravi", "John", "25Feb"),
+  // createData("Buy", "0.32ETH", "Ravi", "John", "25Feb"),
+  // createData("price", "0.32ETH", "Ravi", "John", "25Feb"),
 ];
 
 export default function PricingHistoryComponentTable() {
@@ -88,7 +101,7 @@ export default function PricingHistoryComponentTable() {
     } else if (e.target.value === "buy") {
       setBuy(!buy);
     } else if (e.target.value === "minted") {
-      setMinted(!minted)
+      setMinted(!minted);
     }
   };
 
@@ -105,14 +118,14 @@ export default function PricingHistoryComponentTable() {
   };
 
   useEffect(() => {
-    getPricingHistory()
-  }, [])
+    getPricingHistory();
+  }, []);
 
   return (
     <MainContainer className="pricing-history">
       <Title>Activities</Title>
       <FilterContainer>
-        <Select name="filter" onChange={(e) => handleChange(e)}>
+        <Select className="selectfixing4" name="filter" onChange={(e) => handleChange(e)}>
           <Option>Filter</Option>
           <Option value="list">List</Option>
           <Option value="price">Price</Option>
@@ -160,56 +173,42 @@ export default function PricingHistoryComponentTable() {
           ""
         )}
       </FilterContainer>
-      <TableContainer component={Paper}>
-        <Table aria-label="simple table" style={{tableLayout:"auto", width:"100%"}}>
-          <TableHead>
-            <TableRow>
-              <TableCell style={{ color: "#191919", fontWeight: "bold" }}>
-                Event
-              </TableCell>
-              <TableCell
-                align="center"
-                style={{ color: "#191919", fontWeight: "bold" }}
-              >
-                Price
-              </TableCell>
-              <TableCell
-                align="center"
-                style={{ color: "#191919", fontWeight: "bold" }}
-              >
-                From
-              </TableCell>
-              <TableCell
-                align="center"
-                style={{ color: "#191919", fontWeight: "bold" }}
-              >
-                To
-              </TableCell>
-              <TableCell
-                align="right"
-                style={{ color: "#191919", fontWeight: "bold" }}
-              >
-                Date
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
+      <TableContainer component={Paper} elevation={0}>
+        <TableUp aria-label="simple table">
+          <thead>
+            <tr>
+              <th style={{ color: "#191919", fontWeight: "bold" }}>Event</th>
+              <th style={{ color: "#191919", fontWeight: "bold" }}>Price</th>
+              <th style={{ color: "#191919", fontWeight: "bold" }}>From</th>
+              <th style={{ color: "#191919", fontWeight: "bold" }}>To</th>
+              <th style={{ color: "#191919", fontWeight: "bold" }}>Date</th>
+            </tr>
+          </thead>
+        </TableUp>
+        <TableDown aria-label="simple table">
+          {rows.length > 0 ? 
+          <tbody className="table-bodymousec">
             {rows.map((row) => (
-              <TableRow
+              <tr
+              style={{height:"0px !important"}}
                 key={row.name}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                className="table-row"
               >
-                <TableCell component="td" scope="row">
+                <td component="td" scope="row">
                   {row.Event}
-                </TableCell>
-                <TableCell align="center">{row.Price}</TableCell>
-                <TableCell align="center">{row.From}</TableCell>
-                <TableCell align="center">{row.To}</TableCell>
-                <TableCell align="right">{row.Date}</TableCell>
-              </TableRow>
+                </td>
+                <td>{row.Price}</td>
+                <td>{row.From}</td>
+                <td>{row.To}</td>
+                <td>{row.Date}</td>
+              </tr>
             ))}
-          </TableBody>
-        </Table>
+          </tbody>
+          :           <div className="no-data no-data-found ">
+          <p>No information available</p>
+          </div>}
+        </TableDown>
       </TableContainer>
     </MainContainer>
   );

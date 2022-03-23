@@ -10,9 +10,13 @@ import {
   LeaderBoardApi5,
 } from "../../constants/LeaderBoardApi";
 import profileImage from "../../assets/images/profile.png";
+import { Link } from "react-router-dom";
+
+
 
 
 import { getTopBuyers } from "../../services/sellAndPurchaseMicroService";
+const queryString = require("query-string");
 
 const Container = styled.div`
   display: flex;
@@ -135,17 +139,33 @@ color: #818181;
 function TopBidders() {
 
   const [topBuyers, setTopBuyers] = useState([]);
+  const [buyerDuration, setBuyerDuration] = useState({
+
+    duration: "weekly",
+
+  });
+
+  const buyerReqObj = queryString.stringify(buyerDuration);
 
   useEffect(async () => {
-    await getTopBuyers().then((response) => setTopBuyers(response));
-  }, []);
+    await getTopBuyers(buyerReqObj).then((response) => setTopBuyers(response));
+  }, [buyerDuration]);
   console.log("topBuyers", topBuyers);
+  const ChangeBuyerDuration = (e) => {
+
+    setBuyerDuration(
+
+      { ...buyerDuration, [e.target.name]: e.target.value }
+
+    );
+
+  }
 
   return (
     <Container>
       <Header>
         <Title>Top Buyers</Title>
-        <Select>
+        <Select onChange={(e) => ChangeBuyerDuration(e)} name="duration">
           <option value="weekly">Weekly</option>
           <option value="monthly">Monthly</option>
           <option value="yearly">Yearly</option>
@@ -161,7 +181,7 @@ function TopBidders() {
         </div>
       </Body>
       {topBuyers.map((curElem) => {
-        const { img, name, volume, itemsbought,itemsSold, buyer } =
+        const { img, name, volume, itemsbought, itemsSold, buyer } =
           curElem;
         var precise = volume.toPrecision(4);
         var result = parseFloat(precise);
@@ -180,7 +200,8 @@ function TopBidders() {
                 )}
 
                 {buyer.userName == "" ? (
-                  <Name>No Name</Name>
+                  <h2 className="sellerName"> <Link style={{ textDecoration: "null" }} to={"/my-profile"}>{buyer.wallet_address.substring(0, 4)}...{buyer.wallet_address.slice(buyer.wallet_address.length - 4)}</Link></h2>
+
                 ) : (
                   <Name>{buyer.userName}</Name>
 

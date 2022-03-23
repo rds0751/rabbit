@@ -3,6 +3,7 @@ import { httpConstants } from "../constants";
 import { BASE_URL } from "../reducers/Constants";
 import axios from "axios";
 import { AuthToken } from "./UserAuthToken";
+import { duration } from "moment";
 
 export function getNfts(requestData) {
   let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts?" + requestData;
@@ -157,8 +158,8 @@ export function getNftsByCollectionId(requestData) {
       return Promise.reject(err);
     });
 }
-export function getTopNftSales(requestData) {
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/get-top-nfts";
+export function getTopNftSales(duration,requestData) {
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/get-top-nfts?"+duration;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },

@@ -26,7 +26,7 @@ import "../../assets/styles/createSingleNft.css";
 import "../../assets/styles/MintModal.css";
 import UploadSingleNft from "./CreateSingleUploadFile";
 import Close from "../../assets/images/close.png";
-
+import Select from 'react-select';
 
 // import "../../assets/styles/Leader.css"
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
@@ -56,6 +56,7 @@ function CreateSingleNFT(props) {
   const [checkDisable, setcheckDisable] = useState(true);
   const [isFileSelected, setIsFileSelected] = useState(false);
   const [isloader, setisLoader] = useState(false);
+  const[specialChar,setSpecialChar]=useState("");
   // console.log(user.addUserData._id, "<<<< user data");
   // -------------------------------
   const name = useRef("");
@@ -66,6 +67,8 @@ function CreateSingleNFT(props) {
   const createdBy = loggedInUser?._id;
 
   const [desLength, setDesLength] = useState(0);
+  const[error,setError]=useState('');
+  const [nameError,SetNameError]=useState('');
 
   // ----------------------------------------------states end-------------
   console.log(props, "<<<<< fromindexfile");
@@ -107,6 +110,7 @@ function CreateSingleNFT(props) {
         );
         if (err || !ipfsRes.ipfsUrl) {
           toast.error("Unable to add file to IPFS");
+          setisLoader(false);
         } else {
           console.log(ipfsRes, "<<<<ipfs Res");
 
@@ -157,6 +161,9 @@ function CreateSingleNFT(props) {
   };
 
   const handleSubmit = async (e) => {
+    let x=price.current;
+    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
     console.log(selectFile, "<<<selected file");
     if (
       name.current == "" ||
@@ -165,6 +172,14 @@ function CreateSingleNFT(props) {
       selectFile == ""
     ) {
       toast.error("Enter The Required Field");
+      return null;
+    }
+    if(x.slice(0,2)!="0."){
+      toast.error("Price should be like '0.12'");
+      return null;
+    }
+    if(format.test(name.current)){
+      toast.error("UserName should be not contain special character");
       return null;
     }
 
@@ -202,6 +217,11 @@ function CreateSingleNFT(props) {
 
   // File uploading loader
 
+  // Blockchain option
+  const [selectedOption, setSelectedOption] = useState(null);
+  const blockchainOption = [
+    { value: 'eth', label: <div><img src={ethereum} height="32px" /> Ethereum</div> },
+  ];
 
   return (
     <>
@@ -348,6 +368,7 @@ function CreateSingleNFT(props) {
                           // width: "70%",
                           // marginTop: "3em",
                           color: "#366EEF",
+                          objectFit:"cover",
                         }}
                       />
                       <span className="draganddropboxinnerdivtextspan">
@@ -387,6 +408,8 @@ function CreateSingleNFT(props) {
                         // marginTop: "3em",
                         height: "100%",
                         color: "#366EEF",
+                        objectFit:"cover",
+                       
                       }}
                     />
                     {/* <span className="draganddropboxinnerdivtextspan">
@@ -469,36 +492,55 @@ function CreateSingleNFT(props) {
 
               <div className="">
                 <label htmlFor="email" className=" input-label">
-                  Name*
+                  Name*<span style={{color:"red",fontSize:"13px"}}>{nameError}</span>
                 </label>
                 <input
                   type="email"
                   className="form-control-1"
                   name="email"
                   autoComplete="off"
+                  
                   onChange={(e) => {
+                    //let x=e.target.value.replace(/[^a-zA-Z ]/g, "")
+                    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                    if(format.test(e.target.value)){
+                      SetNameError("(No Special Character Allowed)");
+                    } else {
+                    SetNameError("");
+                    }
+                    //setSpecialChar(x);
                     name.current = e.target.value;
                     checkChanges();
                   }}
                 />
+               
               </div>
               <div className="input-price">
                 <label htmlFor="price" className=" input-label">
-                  Price*
+                  Price*<span style={{color:"red",fontSize:"13px"}}>{error}</span>
                 </label>
                 <div class="input-group">
+             
                   <input
                     className="form-control"
-                    min="0"
                     type="number"
                     autoComplete="off"
                     onChange={(e) => {
+                      if(e.target.value.slice(0,2)!="0."){
+                        setError("(Price Should be Like '0.12')")
+                      }else {
+                        setError("")
+                      }
+                      if(e.target.value == 0)
+                      setError("")
                       price.current = e.target.value;
                       checkChanges();
                     }}
                   />
                   <span class="input-group-text">ETH</span>
+                 
                 </div>
+                
               </div>
               <div className="">
                 <label htmlFor="comment" className="input-label pb-2">
@@ -507,16 +549,20 @@ function CreateSingleNFT(props) {
                 <textarea
                   className="form-control-1 text-area-input"
                   rows="4"
+                  id="test"
                   style={{
                     height: "8rem",
                     maxHeight: "8rem",
                     minHeight: "8rem",
+                    resize: "none",
                   }}
+                  maxLength="1000"
                   name="text"
                   placeholder="Write description"
                   value={description.current}
                   onChange={(e) => {
                     if (desLength < 1000) {
+                      let x=e.target.value.replace(/\s+/g, '').length
                       description.current = e.target.value;
                       setDesLength(description.current.length);
                       checkChanges();
@@ -542,7 +588,7 @@ function CreateSingleNFT(props) {
                 <option value="">Select Blockchain</option>
                 <option value="Ethereum">Ehtereum</option>
               </select> */}
-                <div className="d-flex block-chain-container">
+                {/* <div className="d-flex block-chain-container">
                   <div>
                     <img src={ethereum} height="32px" />
                   </div>
@@ -552,10 +598,21 @@ function CreateSingleNFT(props) {
                       onChange={(e) => (blockchain.current = e.target.value)}
                     >
                       <option selected value="eth" className="color82">
-                         Ethereum
+                        Ethereum
                       </option>
                     </select>
                   </div>
+                </div> */}
+                <div className="block-chain-right">
+                  <Select
+                    className="input-box-1 rm-border blockchainSelect"
+                    defaultValue={blockchainOption[0]}
+                    onChange={setSelectedOption}
+                    options={blockchainOption}
+                    placeholder="Select Blockchain"
+                    value={selectedOption}
+                  >
+                  </Select>
                 </div>
               </div>
               <button
