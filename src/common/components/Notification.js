@@ -22,6 +22,7 @@ import { useSelector } from "react-redux";
 import { ManageNotiSideBar, ManageWalletSideBar } from "../../reducers/Action";
 import { useDispatch } from "react-redux";
 import moment from "moment";
+import NotificationIcon from "../../assets/images/Notification.svg"
 
 
 function Notification() {
@@ -122,8 +123,9 @@ function Notification() {
             );
           })}
         </div>
-        {notifications.length === 0 && (<div>
-          <h1>No Notifications Found</h1>
+        {notifications.length === 0 && (<div className="no-notification">
+          <img src={NotificationIcon}></img>
+          <p >No notification found</p>
         </div>)}
       </div>
 
