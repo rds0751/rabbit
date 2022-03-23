@@ -326,7 +326,7 @@ function MyProfile() {
 
             {Nfts.map((curElem) => {
               const {
-                ipfsUrl,
+                cdnUrl,
                 name,
                 price,
                 salesInfo,
