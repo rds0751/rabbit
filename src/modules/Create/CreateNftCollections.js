@@ -180,6 +180,12 @@ function CreateNftCollections(props) {
       setloaderState(false);
       return null;
     }
+    if(name.current.length < 3){
+      toast.error("UserName Length must be 3 character");
+      setloaderState(false);
+      return null;
+    }
+
 
     // alert("here");
     console.log("here");
@@ -417,15 +423,20 @@ function CreateNftCollections(props) {
               <input
                 type="name"
                 name="name"
+                maxLength="400"
                 className="input-box-1"
                 placeholder="Write your name"
                 onChange={(e) => {
                   var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
                   if(format.test(e.target.value)){
                     SetNameError("(No Special Character Allowed)");
-                  } else {
+                  } else if(+e.target.value.length < 3){
+                    SetNameError("(UserName must be 3 character)")
+
+                  }else {
                   SetNameError("");
                   }
+                  
                   name.current = e.target.value;
                   checkReqFieldFun();
                 }}
