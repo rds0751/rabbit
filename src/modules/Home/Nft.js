@@ -212,7 +212,7 @@ function NftPage() {
               </select>
             </div> */}
 
-            <div className="mobilenftTilePageSecondSelect dropdown">
+            <div className="mobilenftTilePageSecondSelect dropdown" style={{border:'1px solid #d2d2d2'}}>
               <p className="mb-0 sale-type">Price range</p>
               <div className="filter-drop">
                 <div onClick={() => setStatusDrop(!statusDrop)} className="d-flex justify-content-between w-100">
@@ -271,18 +271,18 @@ function NftPage() {
             <option>Option 1</option>
             <option>Option 2</option>
           </select> */}
-          <div className="mobilenftTilePageThirdSelect dropdown sort-drop price-range-dropdown">
+          <div className="mobilenftTilePageThirdSelect dropdown price-range-dropdown">
             <select
               name="sort"
               id="sale"
               // className="first_select ml_auto"
-              className="priceRangeDropDown dropdown-toggle-ellipsis"
+              className="priceRangeDropDown dropdown-toggle-ellipsis sort-drop"
               placeholder="Sort By"
               style={{ backgroundColor: "white" }}
               onChange={(e) => handlefilter(e)}
               value={filterType.sort}
             >
-              <option value="all">Sort By</option>
+              <option value="all">Sort By All</option>
               <option value="-1">Ascending Order</option>
               <option value="1">Descending Order</option>
             </select>

@@ -169,7 +169,7 @@ function Create() {
             <div className="eachWalletTypeBox d-flex justify-content-start flex-wrap">
               <div
                 onClick={connectMetamask}
-                className="card"
+                className="card card-effect1"
                 style={{ cursor: "pointer" }}
               >
                 <img

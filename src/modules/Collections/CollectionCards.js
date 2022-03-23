@@ -75,16 +75,16 @@ function Collections_tile() {
         <div className="lower__homepage" style={{ width: "100%" }}>
           <div id="filters filter-large" className="filter">
             <div className="mobilenftTilePageFirstSelect dropdown">
-              <p className="mb-0">Categories </p>
+              {/* <p className="mb-0">Categories </p> */}
               <select
                 name="categoryName "
                 id="sale"
                 onChange={(e) => getCollectionById(e.target.value)}
                 value={filterData.categoryName}
-                className="first_select ml_auto dropdown-toggle-ellipsis"
-                style={{paddingLeft:"8px"}}
+                className="first_select ml_auto dropdown-toggle-ellipsis sort-drop"
+                style={{width:'240px'}}
               >
-                <option value="">All</option>
+                <option value="">Categories All</option>
                 {Categories.map((item, key) => {
                   return <option value={item._id}>{item.name}</option>;
                 })}
@@ -92,18 +92,18 @@ function Collections_tile() {
             </div>
           </div>
           <div className="filter">
-            <div className="dropdown sort-drop" style={{ width: "260px" }}>
-              <p className="mb-0">Sort By</p>
+            <div className="dropdown" style={{ width: "260px" }}>
+              {/* <p className="mb-0">Sort By</p> */}
               <select
                 name="sort"
                 value={filterData.sort}
                 id="sale"
                 // className="first_select ml_auto"
                 onChange={(e) => handleFilter(e)}
-                className="priceRangeDropDown dropdown-toggle-ellipsis"
-                style={{ width: "180px" }}
+                className="priceRangeDropDown dropdown-toggle-ellipsis sort-drop"
+                style={{ width: "260px" }}
               >
-                <option value="all">All</option>
+                <option value="all">Sort By All</option>
                 <option value="1">Ascending Order</option>
                 <option value="-1">Descending Order</option>
               </select>
