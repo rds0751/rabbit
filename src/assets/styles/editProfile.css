@@ -102,6 +102,7 @@
   font-size: 16px;
   line-height: 25px;
   margin-bottom: 28px;
+  resize: none;
 }
 .poppins-normal {
   font-family: "poppins";

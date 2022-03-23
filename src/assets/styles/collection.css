@@ -87,6 +87,7 @@
   font-size: 16px;
   line-height: 25px;
   color: #191919;
+  resize: none;
 }
 .block-chain-container {
   /* border: 1px solid rgb(139, 7, 7) !important; */

@@ -22,6 +22,7 @@ function CreateNFT() {
 
   const [getBalance, setGetBalance] = useState(null);
   const dispatch = useDispatch();
+ 
 
   return (
     <div>
