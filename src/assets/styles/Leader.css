@@ -1473,6 +1473,17 @@ thead {
   line-height: 27px;
   margin-bottom: 15px;
 }
+.sellerName a{
+  text-align: left;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+  font-family: 'poppins-bold';
+  font-size: 18px;
+  line-height: 27px;
+  margin-bottom: 15px;
+  text-decoration: none;
+}
 .volumeData {
   display: flex;
   text-align: left;
