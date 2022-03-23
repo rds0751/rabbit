@@ -573,7 +573,7 @@ function LeaderBoard() {
 
                             {topSellers.userName == "" ? (
 
-                              <h2 className="sellerName"> <Link style={{ textDecoration: "null" }} to={"/my-profile"}>{topSellers.wallet_address.substring(0, 4)}...{topSellers.wallet_address.slice(topSellers.wallet_address.length - 4)}</Link></h2>
+                              <h2 className="sellerName"> <Link to={"/my-profile"}>{topSellers.wallet_address.substring(0, 4)}...{topSellers.wallet_address.slice(topSellers.wallet_address.length - 4)}</Link></h2>
 
                             ) : (
 
