@@ -25,8 +25,9 @@ export function getTopSellers(requestData) {
             return Promise.reject(err);
         });
 }
-export function getTopBuyers(requestData) {
-  let url = process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/top-buyers?duration=weekly&limit=40&skip=0";
+export function getTopBuyers(duration,requestData) {
+  console.log("jjjjjjjjjjjsssssjjjj",duration)
+  let url = process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/top-buyers?duration="+duration+"&limit=40&skip=0";
   return httpService(
       httpConstants.METHOD_TYPE.GET,
       // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },

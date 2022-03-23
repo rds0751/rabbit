@@ -19,6 +19,10 @@ import { getTopNftSales } from "../../services/webappMicroservice";
 //import { borderRadius } from "@mui/system";
 
 function LeaderBoard() {
+  // const defaultReq = {
+  //   // duration: "weekly"
+  // }
+  const [filterType, setFilterType] = useState("");
 
   const [topSellers, setTopSellers] = useState([]);
 
@@ -31,7 +35,7 @@ function LeaderBoard() {
   const [topBuyers, setTopBuyers] = useState([]);
 
   useEffect(async () => {
-    await getTopBuyers().then((response) => setTopBuyers(response));
+    await getTopBuyers( filterType).then((response) => setTopBuyers(response));
   }, []);
 
   var limitBuyers = topBuyers.slice(0, 4)
@@ -57,7 +61,21 @@ function LeaderBoard() {
   const [PendingAcceptedCreated, setPendingAcceptedCreated] =
     useState("pending");
   const [state, setState] = useState(LeaderBoardApi);
+  const handleFilter = (e) => {
+    // alert(evt.target)
+    // alert(maxPrice)
+    // setFilterType({ ...filterType, [name]: value });
+    const { value } = e.target;
+    setFilterType(value);
+    console.log("jfjfjfjfjjfjfjjf",filterType)
 
+    getTopBuyers( filterType).then((response) => setTopBuyers(response));
+    var limitBuyers = topBuyers.slice(0, 4)
+
+    
+    
+
+  }
 
   return (
     <div className="container
@@ -75,11 +93,13 @@ function LeaderBoard() {
                   <div className="col" style={{ fontSize: "16px" }}>
                     Top Buyers
                   </div>
-                  <select className="top-dropdown">
-                    <option>All</option>
-                    <option>Weekly</option>
-                    <option>Monthly</option>
-                    <option>Yearly</option>
+                  <select className="top-dropdown" onChange={(e) => handleFilter(e)}
+                    // value={}
+                    >
+                    <option  value="">All</option>
+                    <option  value="weekly">Weekly</option>
+                    <option  value="monthly">Monthly</option>
+                    <option  value="yearly">Yearly</option>
                   </select>
                   {/* <div className="dropdown col leaderboardDropdown">
                     <button
@@ -250,8 +270,8 @@ function LeaderBoard() {
                             )}
 
                             <p className="volumeData">
-                               {result} ETH
-                              <span className="ethValue">({"$" })</span>
+                              {result} ETH
+                              <span className="ethValue">({"$"})</span>
                             </p>
 
                           </div>
