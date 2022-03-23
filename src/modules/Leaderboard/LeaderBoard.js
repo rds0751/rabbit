@@ -211,8 +211,8 @@ function LeaderBoard() {
                   <select className="top-dropdown" value={sellerDuration}  name="duration" onChange={(e) => ChangeSellerDuration(e)}>
                     <option value="all">All</option>
                     <option value="weekly">Weekly</option>
-                    <option value="Monthly">Monthly</option>
-                    <option value="Yearly">Yearly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="yearly">Yearly</option>
                   </select>
                   {/* <div className="dropdown col leaderboardDropdown">
                     <button

@@ -182,7 +182,7 @@ function TopSeller() {
                 {topSellers.userName == "" ? (
                   <Name>No Name</Name>
                 ) : (
-                  <Name>{topSellers.userName}</Name>
+                  <Name>{topSellers.firstName}</Name>
 
                 )}
 
