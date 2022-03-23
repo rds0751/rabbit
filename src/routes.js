@@ -16,6 +16,8 @@ import TopBidders from "./modules/TopList/TopBidders";
 import TopSeller from "./modules/TopList/TopSeller";
 import Create from "./modules/Create/Create";
 import MyProfile from "./modules/MyPages/MyProfile";
+import UserProfilePage from "./modules/MyPages/UserProfilePage";
+
 // import Home_2 from "./components/Home_2";
 // import Home_3 from "./components/Home_3";
 import "./assets/styles/custom.css";
@@ -157,6 +159,8 @@ function App() {
             />
             <Route exact path="/add-wallet" element={<Create />} />
             <Route eaxct path="/my-profile" element={<MyProfile />} />
+            <Route eaxct path="/user-profile/:id" element={<UserProfilePage />} />
+
             <Route exact path="/edit-profile" element={<EditProfile />} />
             <Route exact path="/about" element={<About />} />
             <Route exact path="/wallet" element={<Wallet />} />
