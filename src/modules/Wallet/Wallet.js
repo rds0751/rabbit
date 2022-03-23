@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import image from "../../assets/images/1.jpg";
 import copy from "../../assets/images/copy.svg";
 import "../../assets/styles/Notification.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
 import "../../assets/styles/wallet.css";
 import SplitWalletAdd from "../../common/components/SplitWalletAdd";
+import { ManageNotiSideBar, ManageWalletSideBar } from "../../reducers/Action";
 
 function Wallet() {
   const [humburger, setHumburger] = useState(false);
@@ -69,6 +70,14 @@ function Wallet() {
       setCopiedText(false);
     }, 1000);
   };
+
+  const dispatch = useDispatch();
+  const handleChange = (e) => {
+    dispatch(ManageWalletSideBar(!isOpenWallet));
+    dispatch(ManageNotiSideBar(false));
+    document.body.style.overflow = !isOpenWallet ? "hidden" : "visible";
+  }
+
   return (
     <div
       className="wallet"
@@ -77,7 +86,7 @@ function Wallet() {
       }}
       id="wallet"
     >
-      <div className="empty_div"></div>
+      <div className="empty_div" onClick={() => handleChange()}></div>
       <div className="wallet_div">
         <div className="imgwallet">
           <img src={image} alt="" />

@@ -63,7 +63,7 @@ height: 47px;
   height: 100%;
 }
 .wallet_div {
-  width: 27%;
+  width: 516px;
   background: #ffffff;
   margin-left: auto;
   height: 100%;
@@ -83,7 +83,7 @@ height: 47px;
 .balancewallet {
   border: 1px solid gray;
   /* width: 100%; */
-  width: 90%;
+  width: 405px;
   height: 121px;
   /* margin: 9px; */
   /* padding: 5px; */
@@ -95,7 +95,8 @@ height: 47px;
   background-color: #366eff;
   border: 1px solid;
   border-radius: 5px;
-  width: 90%;
+  width: 405px;
+  height: 42px;
   padding: 7px;
   /* margin-bottom: -6px; */
   /* margin-left: -6px; */
@@ -1324,14 +1325,13 @@ margin:0px;
   background: url("../images/drop-down-arrow.svg");
   background-size: contain;
   background-repeat: no-repeat;
-order: 0;
-background-position: right;
-    position: absolute;
-    right: 10px;
-   /* padding-left: 8px;; */
-    background-size: 15px;
-   
-    /* width:175px !important */
+  order: 0;
+  background-position: 95% center;
+  position: absolute;
+  right: 10px;
+  /* padding-left: 8px;; */
+  background-size: 15px;  
+  /* width:175px !important */
 }
 .sort-drop-down{
   appearance: none;
