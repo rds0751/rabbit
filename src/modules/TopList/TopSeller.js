@@ -13,6 +13,10 @@ import {
   LeaderBoardApi5,
 } from "../../constants/LeaderBoardApi";
 import { getTopSellers } from "../../services/sellAndPurchaseMicroService";
+import { Link } from "react-router-dom";
+
+const queryString = require("query-string");
+
 
 const Container = styled.div`
   display: flex;
@@ -134,18 +138,34 @@ color: #818181;
 function TopSeller() {
 
   const [topSellers, setTopSellers] = useState([]);
+  const [sellerDuration, setSellerDuration] = useState({
+
+    duration: "weekly",
+
+  });
+  const sellerReqObj = queryString.stringify(sellerDuration);
+
 
   useEffect(async () => {
-    await getTopSellers().then((response) => setTopSellers(response));
-  }, []);
+    await getTopSellers(sellerReqObj).then((response) => setTopSellers(response));
+  }, [sellerDuration]);
   console.log("topSellers", topSellers);
 
+  const ChangeSellerDuration = (e) => {
+
+    setSellerDuration(
+
+      { ...sellerDuration, [e.target.name]: e.target.value }
+
+    );
+
+  }
 
   return (
     <Container>
       <Header>
         <Title>Top Sellers</Title>
-        <Select>
+        <Select name="duration" onChange={(e) => ChangeSellerDuration(e)}>
           <option value="weekly">Weekly</option>
           <option value="monthly">Monthly</option>
           <option value="yearly">Yearly</option>
@@ -170,7 +190,7 @@ function TopSeller() {
             <Collection className="row">
               <NameColumn className="col">
 
-                {topSellers.photo == "" || !topSellers.photo? (
+                {topSellers.photo == "" || !topSellers.photo ? (
                   <Image src={profileImage} alt="pic" />
 
 
@@ -180,7 +200,8 @@ function TopSeller() {
                 )}
 
                 {topSellers.userName == "" ? (
-                  <Name>No Name</Name>
+                  <h2 className="sellerName"> <Link style={{ textDecoration: "null" }} to={"/my-profile"}>{topSellers.wallet_address.substring(0, 4)}...{topSellers.wallet_address.slice(topSellers.wallet_address.length - 4)}</Link></h2>
+
                 ) : (
                   <Name>{topSellers.firstName}</Name>
 
