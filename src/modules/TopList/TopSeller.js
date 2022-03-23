@@ -203,7 +203,7 @@ function TopSeller() {
                   <h2 className="sellerName"> <Link style={{ textDecoration: "null" }} to={"/my-profile"}>{topSellers.wallet_address.substring(0, 4)}...{topSellers.wallet_address.slice(topSellers.wallet_address.length - 4)}</Link></h2>
 
                 ) : (
-                  <Name>{topSellers.firstName}</Name>
+                  <Name>{topSellers.userName}</Name>
 
                 )}
 

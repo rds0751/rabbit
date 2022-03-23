@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../../assets/styles/Notification.css";
 import { addEmail } from "../../services/UserMicroService";
 import { ToastContainer } from "react-toastify";
-
+import discordIcon from "../../assets/images/discord.svg"
 import { toast } from "react-toastify";
 
 function Footer() {
@@ -67,7 +67,8 @@ function Footer() {
              </a>
              <a href="https://www.linkedin.com/feed/" target="_blank" className="footerAnchor"><i className="fab fa-linkedin  Icon hideicon"></i></a>
              <a href="https://discord.com/" target="_blank" className="footerAnchor">
-               <i className="fab fa-discord  Icon hideicon" ></i></a>
+               <img src={discordIcon} className="Icon hideicon discordIcon"></img>
+               </a>
              <a href="https://www.youtube.com/" target="_blank" className="footerAnchor"><i className="fab fa-youtube  Icon hideicon"></i></a>
 
 

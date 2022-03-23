@@ -141,6 +141,7 @@ function CreateSingleNFT(props) {
     console.log(event, "<<<<file uploaded");
     setUploadFileObj(event);
   };
+  
   const checkChanges = () => {
     console.log(
       name.current,
@@ -156,7 +157,11 @@ function CreateSingleNFT(props) {
       selectFile != ""
     ) {
       setcheckDisable(false);
-    } else {
+    } else if(selectFile=='') {
+      setcheckDisable(true)
+     
+    }
+    else{
       setcheckDisable(true);
     }
   };
