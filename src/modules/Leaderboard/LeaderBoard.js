@@ -7,6 +7,7 @@ import "../../assets/styles/Notification.css";
 import "../../assets/styles/custom.css";
 
 import "../../assets/styles/homenftcard.css";
+import NoProfile from "../../assets/images/NoProfile.svg";
 
 
 import { Link } from "react-router-dom";
@@ -34,8 +35,10 @@ import { getTopSellers } from "../../services/sellAndPurchaseMicroService";
 import { getTopCollections, getTopBuyers } from "../../services/sellAndPurchaseMicroService";
 
 import { getTopNftSales } from "../../services/webappMicroservice";
+import Spinner from "../../common/components/Spinner";
 
 const queryString = require("query-string");
+
 
 //import { borderRadius } from "@mui/system";
 
@@ -338,7 +341,7 @@ function LeaderBoard() {
 
                             <img
 
-                              className="top-img" style={{ width: '71px', height: '71px' }} src={require("../../assets/images/profile.png")}
+                              className="top-img" style={{ width: '71px', height: '71px' }} src={NoProfile}
 
                               alt=""
 
@@ -374,7 +377,7 @@ function LeaderBoard() {
 
                             ) : (
 
-                              <h2 className="sellerName">{buyer.userName}</h2>
+                              <h2 className="sellerName"> <Link style={{ textDecoration: "null" }} to={"/my-profile"}>{buyer.userName}</Link> </h2>
 
                             )}
 
@@ -406,7 +409,7 @@ function LeaderBoard() {
 
                 {topBuyers.length === 0 && (
 
-                  <div className="loader">
+                  <div className="spinnerloader">{<Spinner />}
 
 
 
@@ -542,7 +545,7 @@ function LeaderBoard() {
 
                             <img
 
-                              className="top-img" style={{ width: '71px', height: '71px' }} src={require("../../assets/images/profile.png")}
+                              className="top-img" style={{ width: '71px', height: '71px' }} src={NoProfile}
 
                               alt=""
 
@@ -573,11 +576,11 @@ function LeaderBoard() {
 
                             {topSellers.userName == "" ? (
 
-                              <h2 className="sellerName"> <Link style={{ textDecoration: "null" }} to={"/my-profile"}>{topSellers.wallet_address.substring(0, 4)}...{topSellers.wallet_address.slice(topSellers.wallet_address.length - 4)}</Link></h2>
+                              <h2 className="sellerName"> <Link to={"/my-profile"}>{topSellers.wallet_address.substring(0, 4)}...{topSellers.wallet_address.slice(topSellers.wallet_address.length - 4)}</Link></h2>
 
                             ) : (
 
-                              <h2 className="sellerName">{topSellers.userName}</h2>
+                              <h2 className="sellerName"><Link to={"/my-profile"}>{topSellers.userName}</Link></h2>
 
                             )}
 
@@ -609,8 +612,7 @@ function LeaderBoard() {
 
                 {topSellers.length === 0 && (
 
-                  <div className="loader">
-
+                  <div className="spinnerloader">{<Spinner />}
 
 
                   </div>)}
@@ -744,7 +746,7 @@ function LeaderBoard() {
 
                             <img
 
-                              className="top-img" style={{ width: '71px', height: '71px' }} src={require("../../assets/images/profile.png")}
+                              className="top-img" style={{ width: '71px', height: '71px' }} src={NoProfile}
 
                               alt=""
 
@@ -773,17 +775,23 @@ function LeaderBoard() {
 
 
 
-                            {collection[0].name == "" ? (
+                            {collection[0].name == ""|| !collection[0].name ? (
 
-                              <h2 className="sellerName"> {collection[0].contractAddress.substring(0, 4)}...{collection[0].contractAddress.slice(collection[0].contractAddress.length - 4)}</h2>
+                              <h2 className="sellerName"> <Link style={{ textDecoration: "null" }} to={"/collection-details/"+collection[0]._id}>{collection[0].contractAddress.substring(0, 4)}...{collection[0].contractAddress.slice(collection[0].contractAddress.length - 4)}</Link></h2>
 
                             ) : (
 
-                              <h2 className="sellerName">{collection[0].name}</h2>
+                              <h2 className="sellerName"><Link style={{ textDecoration: "null" }} to={"/collection-details/"+collection[0]._id}>{collection[0].name}</Link></h2>
 
                             )}
 
+                            <p className="volumeData">
 
+                              {items} items
+
+                              {/* <span className="ethValue">({"$"})</span> */}
+
+                            </p>
 
 
 
@@ -806,8 +814,7 @@ function LeaderBoard() {
 
                 {limitCollections.length === 0 && (<div>
 
-                  <div className="loader">
-
+                  <div className="spinnerloader">{<Spinner />}
 
 
                   </div>
@@ -865,7 +872,7 @@ function LeaderBoard() {
                   aria-controls="pills-pending"
 
                   aria-selected="true"
-                  style={{borderRadius: 'inherit', paddingLeft: '20px' }}
+                  style={{ borderRadius: 'inherit', paddingLeft: '20px' }}
                   onClick={() => setPendingAcceptedCreated("pending")}
 
                 >
@@ -893,7 +900,7 @@ function LeaderBoard() {
                   aria-controls="pills-accepted"
 
                   aria-selected="false"
-                  style={{borderRadius: 'inherit' }}
+                  style={{ borderRadius: 'inherit' }}
                   onClick={() => setPendingAcceptedCreated("accepted")}
 
                 >
@@ -923,7 +930,7 @@ function LeaderBoard() {
                   aria-controls="pills-rejected"
 
                   aria-selected="false"
-                  style={{borderRadius: 'inherit' }}
+                  style={{ borderRadius: 'inherit' }}
                   onClick={() => setPendingAcceptedCreated("rejected")}
 
                 >
@@ -1042,20 +1049,6 @@ function LeaderBoard() {
 
           </div>
 
-          <div>
-
-            <select name="sortBy" className="sort-selector fs-14 c-b">
-
-              <option>Sort by All</option>
-
-              <option value="">Ascending</option>
-
-              <option value="">Descending </option>
-
-            </select>
-
-          </div>
-
         </div>
 
         <div className="nfts-cont row ntf_row">
@@ -1063,12 +1056,13 @@ function LeaderBoard() {
           {/* <div className="col-md-3 col-lg-3 col-sm-6 col-11 images"> */}
 
           {topNftSales.map((curElem) => {
+            console.log("kggggggggggggggggggg",curElem._id.content.name)
 
             const { cdnUrl, name, ownedBy, maxPrice2, daysLeft, likesCount, _id } =
 
               curElem;
 
-            const route = "/nft-information/" + _id;
+            const route = "/nft-information/" + _id.id;
 
             return (
 
@@ -1086,7 +1080,7 @@ function LeaderBoard() {
 
                       className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
 
-                      src={cdnUrl}
+                      src={_id.content.cdnUrl}
 
                       alt="nft"
 
@@ -1110,7 +1104,7 @@ function LeaderBoard() {
 
                       <div className="container__up" style={{ paddingTop: '10px' }}>
 
-                        <h6 className="title">{name}</h6>
+                        <h6 className="sellerName"><Link style={{ textDecoration: "null" }} to={"/nft-information/"+_id.id}>{_id.content.name}</Link></h6>
 
                       </div>
 
@@ -1126,7 +1120,7 @@ function LeaderBoard() {
 
                           </span>
 
-                          &nbsp;for<span className="ethCurrency">&nbsp; {(curElem.salesInfo.price)}&nbsp;{(curElem.biddingDetails.currency).toUpperCase()}</span>
+                          &nbsp;for<span className="ethCurrency">&nbsp; {(curElem._id.content.salesInfo.price)}&nbsp;{(curElem._id.content.salesInfo.currency).toUpperCase()}</span>
 
                         </h6>
 
@@ -1171,7 +1165,9 @@ function LeaderBoard() {
 
                 </div>
 
+
               </div>
+
 
             );
 
@@ -1180,7 +1176,14 @@ function LeaderBoard() {
           {/* My Commit */}
 
         </div>
+        {topNftSales.length === 0 && (<div>
 
+          <div className="spinnerloader">{<Spinner />}
+
+
+          </div>
+
+        </div>)}
       </div>
 
       {/* </div> */}
@@ -1288,7 +1291,7 @@ const BuildAcceptedBlock = ({ apiData }) => {
 
                   <img
 
-                    className="top-img" style={{ width: '71px', height: '71px' }} src={require("../../assets/images/profile.png")}
+                    className="top-img" style={{ width: '71px', height: '71px' }} src={NoProfile}
 
                     alt=""
 

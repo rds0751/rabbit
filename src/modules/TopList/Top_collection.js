@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import { getTopCollections } from "../../services/sellAndPurchaseMicroService";
 import styled from "styled-components";
 import dropdown from "../../assets/images/drop down.png";
+import profileImage from "../../assets/images/NoProfile.svg";
+import { Link } from "react-router-dom";
+import Spinner from "../../common/components/Spinner";
+
+
+
 const queryString = require("query-string");
 
 
@@ -123,7 +129,7 @@ const Text = styled.div`
   font-size: 16px;
   font-weight: 500;
   `;
-const Volume=styled.span`
+const Volume = styled.span`
 font:normal normal normal 16px/25px Poppins;
 color: #818181;
 `;
@@ -138,7 +144,7 @@ function Top_collection() {
 
   useEffect(() => {
     getTopCollections(collectionReqObj).then((response) => setTopCollections(response));
-  },[collectionDuration]);
+  }, [collectionDuration]);
   const ChangeCollectionDuration = (e) => {
 
     setCollectionDuration(
@@ -168,30 +174,62 @@ function Top_collection() {
           <Column className="col">Items</Column>
         </div>
       </Body>
-      {topCollections.map((curElem,index) => {
+      {topCollections.map((curElem, index) => {
         const { collectionPhoto, collection, totalVolume, items } =
           curElem;
-          var precise = totalVolume.toPrecision(4);
-          var result = parseFloat(precise);
+        var precise = totalVolume.toPrecision(4);
+        var result = parseFloat(precise);
         return (
+
           <div className="container-fluid">
             <Collection className="row">
               <NameColumn className="col">
-                <Image src={collection[0].imageUrl} alt="pic" />
-                <Name>{collection[0].name}</Name>
+                {collection[0].imageUrl == "" || !collection[0].imageUrl ? (
+                  <Image src={profileImage} alt="pic" />
+
+
+                ) : (
+                  <Image src={collection[0].imageUrl} alt="pic" />
+
+                )}
+                {/* <Image src={collection[0].imageUrl} alt="pic" /> */}
+                {collection[0].name == "" || !collection[0].name ? (
+
+                  <h2 className="sellerName"> <Link style={{ textDecoration: "null" }} to={"/collection-details/" + collection[0]._id}>{collection[0].contractAddress.substring(0, 4)}...{collection[0].contractAddress.slice(collection[0].contractAddress.length - 4)}</Link></h2>
+
+                ) : (
+
+                  <h2 className="sellerName"><Link style={{ textDecoration: "null" }} to={"/collection-details/" + collection[0]._id}>{collection[0].name}</Link></h2>
+
+                )}
+
+                {/* <Name>{collection[0].name}</Name> */}
               </NameColumn>
               <VolumeColumn className="col">
                 <Span>{result} ETH <Volume>({"$"})</Volume></Span>
-                
+
               </VolumeColumn>
               <Text className="col">{collection[0].owner.length}</Text>
               <Text className="col">{items}</Text>
+
             </Collection>
+
           </div>
+
+
+
         );
+
       })}
+      {topCollections.length === 0 && (
+
+        <div className="spinnerloader">{<Spinner />}
+
+
+        </div>)}
     </Container>
   );
+
 }
 
 export default Top_collection;
