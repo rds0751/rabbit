@@ -117,6 +117,7 @@ function Navbar() {
       if (walletAddress == null) {
         dispatch(RedirectTo("myitems"));
         navigate("/add-wallet");
+        toast.error("Connect your wallet");
       } else {
         navigate("/my-items");
       }
@@ -127,6 +128,7 @@ function Navbar() {
       if (walletAddress == null) {
         dispatch(RedirectTo("create"));
         navigate("/add-wallet");
+        toast.error("Connect your wallet");
       } else {
         navigate("/create-nft");
       }
@@ -137,7 +139,7 @@ function Navbar() {
       if (walletAddress == null) {
         dispatch(RedirectTo("profile"));
         navigate("/add-wallet");
-
+        toast.error("Connect your wallet");
         // navigate("/my-profile");
       } else {
         navigate("/my-profile");
@@ -154,6 +156,7 @@ function Navbar() {
   const handleWalletClick = () => {
     if (walletAddress == null) {
       navigate("/add-wallet");
+      toast.error("Connect your wallet");
     } else {
       dispatch(ManageWalletSideBar(!isOpenWallet));
       dispatch(ManageNotiSideBar(false));
@@ -164,6 +167,7 @@ function Navbar() {
     console.log(isOpenNoti, "<<<isopen noti");
     if (loggedInUser == null) {
       navigate("/add-wallet");
+      toast.error("Connect your wallet");
     } else {
       dispatch(ManageNotiSideBar(!isOpenNoti));
       dispatch(ManageWalletSideBar(false));

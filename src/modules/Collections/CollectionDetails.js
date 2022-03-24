@@ -128,24 +128,25 @@ function CollectionDetails() {
                   <div className="dropsingleitem">status 1</div>
                 </div>
               </div>
-            </div>
-            <div
-              className="colldrop sortbydrop"
-              onClick={() => setsortDrop(!sortDrop)}
-            >
-              <div className="statusText">Sort By</div>
-              <div>
-                <img src={dropdown} />
-              </div>
               <div
-                className="dropitems "
-                style={{ display: sortDrop ? "block" : "none" }}
+                className="colldrop ms-auto"
+                onClick={() => setsortDrop(!sortDrop)}
               >
-                <div className="dropsingleitem">All</div>
-                <div className="dropsingleitem">status 1</div>
-                <div className="dropsingleitem">status 1</div>
+                <div className="statusText">Sort By</div>
+                <div>
+                  <img src={dropdown} />
+                </div>
+                <div
+                  className="dropitems "
+                  style={{ display: sortDrop ? "block" : "none" }}
+                >
+                  <div className="dropsingleitem">All</div>
+                  <div className="dropsingleitem">status 1</div>
+                  <div className="dropsingleitem">status 1</div>
+                </div>
               </div>
             </div>
+            
           </div>
           <div className="nftTileContainer row cards-gap ntf_row">
 
@@ -167,6 +168,7 @@ function CollectionDetails() {
             )}
            
             {}
+            
           </div>
         </div>
       </div>

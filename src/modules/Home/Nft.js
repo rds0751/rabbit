@@ -37,6 +37,7 @@ function NftPage() {
     // searchByName: name ? name : "",
     // searchByName: "puneet",
     // minPrice: 0,
+    
     // maxPrice: "",
     // --------------------------
     // sort: 0,
@@ -51,6 +52,14 @@ function NftPage() {
   const { user, sideBar } = useSelector((state) => state);
   const [toggleNft, setToggleNft] = useState(true);
   const [minPrice, setminPrice] = useState("");
+  const [visibleBlogs, setVisibleBlogs] = useState(8)
+
+  // const [skipItem, setSkipItem] = useState("");
+  // const [itemLimit, setItemLimit] = useState(10);
+
+  // const [prevskipItem, setPrevskipItem] = useState(0);
+
+
 
   const [maxPrice, setmaxPrice] = useState("");
 
@@ -73,8 +82,10 @@ function NftPage() {
       // console.log(res, "filterResponse");
       setIsloading(true);
       if (res.success) {
-
+        
+        // prevArray => [...prevArray, newValue]
         setNfts(res.responseData.nftContent);
+        // setNfts([nfts,res.responseData.nftContent]);
         setIsloading(false);
       } else {
         toast.error("Error While fetching Nfts");
@@ -180,9 +191,14 @@ function NftPage() {
 
   const [statusDrop, setStatusDrop] = useState(false);
 
-  const buttonfilter=(e)=>{
-     handlePriceFilter(e);
-     setStatusDrop(false);
+  const buttonfilter = (e) => {
+    handlePriceFilter(e);
+    setStatusDrop(false);
+
+  }
+  const loadMoreHandler = () => {
+    <div className="spinnerloader">{isloading && <Spinner />}</div>
+    setVisibleBlogs(prevVisibleBlogs => prevVisibleBlogs + 4)
 
   }
 
@@ -212,7 +228,7 @@ function NftPage() {
               </select>
             </div> */}
 
-            <div className="mobilenftTilePageSecondSelect dropdown" style={{border:'1px solid #d2d2d2'}}>
+            <div className="mobilenftTilePageSecondSelect dropdown" style={{ border: '1px solid #d2d2d2' }}>
               <p className="mb-0 sale-type">Price range</p>
               <div className="filter-drop">
                 <div onClick={() => setStatusDrop(!statusDrop)} className="d-flex justify-content-between w-100">
@@ -243,7 +259,7 @@ function NftPage() {
                       <Button type="submit" onClick={(e) => clearPriceFilter(e)} variant="outline-primary">Clear</Button>
                     </div>
                     <div className="col-6">
-                      <Button onClick={(e)=>buttonfilter(e)} variant="outline-primary">Apply</Button>
+                      <Button onClick={(e) => buttonfilter(e)} variant="outline-primary">Apply</Button>
                     </div>
                   </div>
                   {/* </form> */}
@@ -294,15 +310,16 @@ function NftPage() {
           style={{ justifyContent: "start" }}
         >
 
-        
+
           <div className="spinnerloader">{isloading && <Spinner />}</div>
 
           {nfts.length > 1 ? (
-            nfts.map((nft) => {
+            //  const cardComponent = blogs.slice(0, visibleBlogs).map((blog, i) => 
+            nfts.slice(0, visibleBlogs).map((nft) => {
               const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
               // console.log("[[[[[[[",biddingDetails.minPrice)
-              const route = "nft-information/" + _id;
-  
+              // const route = "/nft-information/" + _id;
+              // console.log("nfyyyyyyyyyyyyyyyyyyyy",nft)
               return (
                 <>
                   <NftCardsHome nft={nft} />
@@ -311,15 +328,16 @@ function NftPage() {
             })
 
 
-          ):(
+          ) : (
             <div>
-          <div className="Noitemdiv">
-            <img src={NoItem}/>
-             <p className="textitem">No items available</p>
-           </div>
-        </div>
+              <div className="Noitemdiv">
+                <img src={NoItem} />
+                <p className="textitem">No items available</p>
+              </div>
+            </div>
 
           )}
+          <button className="load-more" onClick={loadMoreHandler}>Load More</button>
 
         </div>
       </div >
