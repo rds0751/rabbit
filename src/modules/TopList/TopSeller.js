@@ -3,7 +3,9 @@ import React, { Component, useState, useEffect } from "react";
 import "../../assets/styles/Leader.css";
 import styled from "styled-components";
 import dropdown from "../../assets/images/drop down.png";
-import profileImage from "../../assets/images/profile.png";
+import Spinner from "../../common/components/Spinner";
+
+import profileImage from "../../assets/images/NoProfile.svg";
 // import './Top_collection.css'
 import {
   LeaderBoardApi,
@@ -203,7 +205,7 @@ function TopSeller() {
                   <h2 className="sellerName"> <Link style={{ textDecoration: "null" }} to={"/my-profile"}>{topSellers.wallet_address.substring(0, 4)}...{topSellers.wallet_address.slice(topSellers.wallet_address.length - 4)}</Link></h2>
 
                 ) : (
-                  <Name>{topSellers.userName}</Name>
+                  <h2 className="sellerName"><Link style={{ textDecoration: "null" }} to={"/my-profile"}>{topSellers.userName}</Link></h2>
 
                 )}
 
@@ -219,6 +221,12 @@ function TopSeller() {
           </div>
         );
       })}
+      {topSellers.length === 0 && (
+
+        <div className="spinnerloader">{<Spinner />}
+
+
+        </div>)}
     </Container>
   );
 }
