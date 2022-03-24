@@ -42,10 +42,10 @@ export default function PricingHistoryComponent(props) {
 
   const object = {
     series: [
-      // {
-      //   name: "pricingHistory",
-      //   data: prices ,
-      // },
+      {
+        name: "pricingHistory",
+        data: prices ,
+      },
     ],
     options: {
       chart: {

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { FacebookShareButton } from "react-share";
+import { TwitterShareButton } from "react-share";
 import image from "../../assets/images/1.jpg";
 import share from "../../assets/images/share.svg";
 import info from "../../assets/images/report.svg";
@@ -30,12 +32,9 @@ import { getUser } from "../../services/UserMicroService";
 import { Oval } from "react-loader-spinner";
 
 import ListingsTable from "../../common/components/ListingTable";
-toast.configure()
-
-
+toast.configure();
 
 export default function NftInformation(props) {
-
   const navigate = useNavigate();
   const [activeInActive, setActiveInActive] = useState("active");
   const { user } = useSelector((state) => state);
@@ -51,7 +50,6 @@ export default function NftInformation(props) {
   const [removeFromSale, setRemoveFromSale] = useState(false);
   const [openLoadingModal, setOpenLoadingModal] = useState(false);
 
-
   const [openRemoveSale, setOpenRemoveSale] = useState(false);
   const [userDetails, setUserDetails] = useState([]);
   const [tab, setTab] = useState(1);
@@ -62,24 +60,22 @@ export default function NftInformation(props) {
     addedBy: loggedInUser?._id,
     reason: "",
   });
- if(!props.loaderState)
- {
-  // setRemoveFromSale(false)
-  // setOpenLoadingModal(false)
- }
+  if (!props.loaderState) {
+    // setRemoveFromSale(false)
+    // setOpenLoadingModal(false)
+  }
   const [reason, setReason] = useState("");
 
   if (openReportModal) {
-    document.body.classList.add('active-modal')
+    document.body.classList.add("active-modal");
   } else {
-    document.body.classList.remove('active-modal')
+    document.body.classList.remove("active-modal");
   }
 
-
   if (openRemoveSale) {
-    document.body.classList.add('active-modal')
+    document.body.classList.add("active-modal");
   } else {
-    document.body.classList.remove('active-modal')
+    document.body.classList.remove("active-modal");
   }
   console.log(
     loggedInUser?._id,
@@ -112,13 +108,11 @@ export default function NftInformation(props) {
   // console.log("===",isOpenForSell)
 
   const facebook = async () => {
-    window.open('https://www.facebook.com/', '_blank');
-
-  }
+    window.open("https://www.facebook.com/", "_blank");
+  };
   const twitter = async () => {
-    window.open('https://twitter.com/i/flow/login', '_blank');
-
-  }
+    window.open("https://twitter.com/i/flow/login", "_blank");
+  };
   const handleCopyToClipboard = () => {
     // alert(window.location.href);
     // console.log("kkkkkkkkkkdddddd",window.location.href);     //yields: "https://stacksnippets.net/js"
@@ -132,9 +126,9 @@ export default function NftInformation(props) {
     // setCopiedText(false);
     // }, 1000);
   };
-  const demoHandleSell = async () => { 
-     setsaleModal(false)
-    setPutOnSaleModal(true)
+  const demoHandleSell = async () => {
+    setsaleModal(false);
+    setPutOnSaleModal(true);
 
     props?.sellNowNft({
       // sellerId:loggedInUser._id,
@@ -144,11 +138,10 @@ export default function NftInformation(props) {
       // nftId:response._id,
     });
     // setPutOnSaleModal(false)
-
   };
 
   const removeNFTFromSell = async () => {
-    setRemoveFromSale(true)
+    setRemoveFromSale(true);
     props?.removeNftFromSale({
       // sellerId:loggedInUser._id,
       // buyerId:loggedInUser._id,
@@ -156,8 +149,7 @@ export default function NftInformation(props) {
       // tokenId:response.tokenId,
       // nftId:response._id,
     });
-      // setRemoveFromSale(false)
-
+    // setRemoveFromSale(false)
   };
   const buyNft = async () => {
     if (user.loggedInUser != null) {
@@ -178,8 +170,8 @@ export default function NftInformation(props) {
   };
   const openSaleModal = async () => {
     // alert("kkkk")
-    setsaleModal(true)
-  }
+    setsaleModal(true);
+  };
   const handleRemoveSell = async () => {
     const response = await RemoveNftFromSale(nft._id);
     if (response.success) {
@@ -201,11 +193,10 @@ export default function NftInformation(props) {
   // };
   // console.log(window.ethereum.networkVersion, 'window.ethereum.networkVersion');
 
-
   const sendButton = () => {
     removeNFTFromSell();
     setOpenRemoveSale(false);
-  }
+  };
 
   const difftime = (timestamp1, timestamp2) => {
     var difference = timestamp1 - timestamp2;
@@ -216,7 +207,7 @@ export default function NftInformation(props) {
 
   let showDateSection = true;
 
-  let message = '';
+  let message = "";
 
   if (nft?.biddingDetails?.endDate) {
     const currDate = new Date();
@@ -227,40 +218,48 @@ export default function NftInformation(props) {
 
     let endDateTimeStamp = Math.floor(new Date(endDate).getTime());
 
-    const days = (endDateTimeStamp == currentDate) ? 1 : difftime(endDateTimeStamp, currentDate);
+    const days =
+      endDateTimeStamp == currentDate
+        ? 1
+        : difftime(endDateTimeStamp, currentDate);
 
-    message = (endDateTimeStamp < currentDate) ? "Expired" : `End in ${days} days`;
-
+    message =
+      endDateTimeStamp < currentDate ? "Expired" : `End in ${days} days`;
   } else {
     showDateSection = false;
   }
-
 
   const sendReport = async () => {
     let report = {
       contentId: id,
       addedBy: loggedInUser?._id,
       reason: `${reason}`,
-    }
+    };
     await addNftReport(report, (response) => {
       if (response.success) {
         toast.success(response.message);
       } else {
         toast.error("This Nft is already reported");
       }
-      setOpenReportModal(false)
+      setOpenReportModal(false);
     });
-  }
+  };
 
-  let ownedBy = owner?.userName ? owner?.userName : owner?.wallet_address
-  let createdBy = creator?.userName ? creator?.userName : creator?.wallet_address
+  let ownedBy = owner?.userName ? owner?.userName : owner?.wallet_address;
+  let createdBy = creator?.userName
+    ? creator?.userName
+    : creator?.wallet_address;
 
-  console.log(creator,"ownedby")
-
+  const url = window.location.href;
+  console.log(typeof window.location.href);
   return (
     <>
       {/* {props?.refreshPage ? window.location.reload(true) : ""} */}
-      {props?.loaderState ? "" : setTimeout(() => {window.location.reload(true)}, 1000)}
+      {props?.loaderState
+        ? ""
+        : setTimeout(() => {
+            window.location.reload(true);
+          }, 1000)}
 
       {/* {props?.loaderState ? (
         <div className="center">
@@ -311,8 +310,9 @@ export default function NftInformation(props) {
                       // data-bs-target="#myModalShare"
                       style={{
                         display:
-                          props?.responseData?.ownerAddress == loggedInUser?.wallet_address &&
-                            !props?.responseData?.salesInfo?.isOpenForSale
+                          props?.responseData?.ownerAddress ==
+                            loggedInUser?.wallet_address &&
+                          !props?.responseData?.salesInfo?.isOpenForSale
                             ? "block"
                             : "none",
                         color: "white",
@@ -327,8 +327,9 @@ export default function NftInformation(props) {
                     <Button
                       style={{
                         display:
-                          props?.responseData?.ownerAddress == loggedInUser?.wallet_address &&
-                            props?.responseData?.salesInfo?.isOpenForSale
+                          props?.responseData?.ownerAddress ==
+                            loggedInUser?.wallet_address &&
+                          props?.responseData?.salesInfo?.isOpenForSale
                             ? "block"
                             : "none",
                         color: "white",
@@ -340,9 +341,7 @@ export default function NftInformation(props) {
                       Remove From Sale
                     </Button>
                   </div>
-                  <span className="nft-name">
-                    {nft.name}
-                  </span>
+                  <span className="nft-name">{nft.name}</span>
                 </div>
                 <div className="col-xl-2 col-lg-2 col-md-3 col-sm-3 d-flex align-items-center">
                   <div>
@@ -357,7 +356,11 @@ export default function NftInformation(props) {
                       <img
                         alt="share"
                         src={share}
-                        style={{ width: "31px", height: "31px", marginRight: "20px", }}
+                        style={{
+                          width: "31px",
+                          height: "31px",
+                          marginRight: "20px",
+                        }}
                       />
                     </a>
                     <ul
@@ -378,19 +381,29 @@ export default function NftInformation(props) {
                         <span className="icon-text">Copy link</span>
                       </li>
                       <li className="list-item">
-                        <img src={facebookIcon} alt="icon" className="icon" />
-                        <span className="icon-text">Share on Facebook</span>
+                        {/* <img src={facebookIcon} alt="icon" className="icon" />
+                        <span className="icon-text">Share on Facebook</span> */}
+                        <FacebookShareButton>
+                          <img src={facebookIcon} alt="icon" className="icon" />
+                          <span className="icon-text">Share on Facebook</span>
+                        </FacebookShareButton>
                       </li>
                       <li className="list-item">
-                        <img src={twitterIcon} alt="icon" className="icon" />
-                        <span className="icon-text">Share on Twitter</span>
+                        {/* <img src={twitterIcon} alt="icon" className="icon" />
+                        <span className="icon-text">Share on Twitter</span> */}
+                        <TwitterShareButton url={url}>
+                          <img src={twitterIcon} alt="icon" className="icon" />
+                          <span className="icon-text">
+                            Share on Twitter
+                          </span>{" "}
+                        </TwitterShareButton>
                       </li>
                     </ul>
                   </div>
                   <img
                     src={info}
                     alt="info"
-                    style={{ width: "31px", height: "31px",cursor:"pointer" }}
+                    style={{ width: "31px", height: "31px", cursor: "pointer" }}
                     // data-bs-toggle="modal"
                     onClick={() => setOpenReportModal(true)}
                   />
@@ -410,7 +423,6 @@ export default function NftInformation(props) {
                   }}
                 />
               </div>
-
             </div>
             <div className="col-xl-7 col-lg-7 col-md-12 details-section">
               <div className="d-none d-sm-none d-md-none d-lg-block">
@@ -445,8 +457,9 @@ export default function NftInformation(props) {
                         // data-bs-target="#myModalShare"
                         style={{
                           display:
-                            props?.responseData?.ownerAddress == loggedInUser?.wallet_address &&
-                              !props?.responseData?.salesInfo?.isOpenForSale
+                            props?.responseData?.ownerAddress ==
+                              loggedInUser?.wallet_address &&
+                            !props?.responseData?.salesInfo?.isOpenForSale
                               ? "block"
                               : "none",
                           color: "white",
@@ -461,8 +474,9 @@ export default function NftInformation(props) {
                       <Button
                         style={{
                           display:
-                            props?.responseData?.ownerAddress == loggedInUser?.wallet_address &&
-                              props?.responseData?.salesInfo?.isOpenForSale
+                            props?.responseData?.ownerAddress ==
+                              loggedInUser?.wallet_address &&
+                            props?.responseData?.salesInfo?.isOpenForSale
                               ? "block"
                               : "none",
                           color: "white",
@@ -489,7 +503,11 @@ export default function NftInformation(props) {
                         <img
                           alt="share"
                           src={share}
-                          style={{ width: "31px", height: "31px", marginRight: "0px", }}
+                          style={{
+                            width: "31px",
+                            height: "31px",
+                            marginRight: "0px",
+                          }}
                         />
                       </a>
                       <ul
@@ -505,24 +523,43 @@ export default function NftInformation(props) {
                           background: "#FFFFFF",
                         }}
                       >
-                        <li className="list-item" onClick={handleCopyToClipboard}>
+                        <li
+                          className="list-item"
+                          onClick={handleCopyToClipboard}
+                        >
                           <img src={copyIcon} alt="icon" className="icon" />
                           <span className="icon-text">Copy link</span>
                         </li>
-                        <li className="list-item" onClick={facebook}>
-                          <img src={facebookIcon} alt="icon" className="icon" />
-                          <span className="icon-text">Share on Facebook</span>
+                        <li className="list-item" >
+                          {/* <img src={facebookIcon} alt="icon" className="icon" />
+                          <span className="icon-text">Share on Facebook</span> */}
+                          <FacebookShareButton url={url}>
+                            <img
+                              src={facebookIcon}
+                              alt="icon"
+                              className="icon"
+                            />
+                            <span className="icon-text">Share on Facebook</span>
+                          </FacebookShareButton>
                         </li>
-                        <li className="list-item" onClick={twitter}>
+                        <li className="list-item" >
+                        <TwitterShareButton url={url}>
                           <img src={twitterIcon} alt="icon" className="icon" />
-                          <span className="icon-text">Share on Twitter</span>
+                          <span className="icon-text">
+                            Share on Twitter
+                          </span>{" "}
+                        </TwitterShareButton>
                         </li>
                       </ul>
                     </div>
                     <img
                       src={info}
                       alt="info"
-                      style={{ width: "31px", height: "31px",cursor:"pointer" }}
+                      style={{
+                        width: "31px",
+                        height: "31px",
+                        cursor: "pointer",
+                      }}
                       // data-bs-toggle="modal"
                       // data-bs-target="#myModalReport"
                       onClick={() => {
@@ -595,7 +632,7 @@ export default function NftInformation(props) {
                               className="btn btn-primary w-100"
                               data-bs-dismiss="modal"
                               style={{ marginLeft: "1.1em" }}
-                            // onClick={makeReport}
+                              // onClick={makeReport}
                             >
                               Make Offer
                             </button>
@@ -609,14 +646,16 @@ export default function NftInformation(props) {
               <div className="second-text align-row">
                 <span className="text">
                   Current Price:&nbsp;
-                  <span className="nft-value" >
-                    {salesInfo?.price}
-                  </span>
+                  <span className="nft-value">{salesInfo?.price}</span>
                 </span>
-                {(showDateSection) ? <span className="align-row">
-                  <i className="far fa-clock clock-icon"></i>
-                  <span className="time">{message} </span>
-                </span> : ""}
+                {showDateSection ? (
+                  <span className="align-row">
+                    <i className="far fa-clock clock-icon"></i>
+                    <span className="time">{message} </span>
+                  </span>
+                ) : (
+                  ""
+                )}
               </div>
               <div className="row third-text">
                 <div className="col-lg-6 col-sm-12">
@@ -625,7 +664,7 @@ export default function NftInformation(props) {
                     <span className="text-name fw-b">
                       {ownedBy}
                       {/* {(String(ownedBy).length >= 7) ? (!ownedBy ? " " : (String(ownedBy).substring(0, 8) + "...")) : (String(ownedBy) === undefined ? "" : ownedBy)}                     */}
-                      </span>
+                    </span>
                   </span>
                 </div>
                 <div className="col-lg-6 col-sm-12">
@@ -634,7 +673,7 @@ export default function NftInformation(props) {
                     <span className="text-name fw-b">
                       {createdBy}
                       {/* {(String(createdBy).length >= 7) ? (!createdBy ? " " : (String(createdBy).substring(0, 8) + "...")) : (String(createdBy) === undefined ? "" : createdBy)}                     */}
-                      </span>
+                    </span>
                     <span className="text-name fw-b"></span>
                   </span>
                 </div>
@@ -649,15 +688,15 @@ export default function NftInformation(props) {
                   </span>
                 </div>
                 <div>
-                  <FavoriteIcon style={{ fontSize: "17px", color: "#EF3643" }} />
+                  <FavoriteIcon
+                    style={{ fontSize: "17px", color: "#EF3643" }}
+                  />
                   <span className="text fw-b" style={{ marginLeft: "0.5em" }}>
                     {nft?.likes?.length}
                   </span>
                 </div>
               </div>
-              <div
-                className=""
-              >
+              <div className="">
                 <h4 className="title">Description</h4>
                 <p className="description">{nft.description}</p>
               </div>
@@ -668,7 +707,7 @@ export default function NftInformation(props) {
                   style={{
                     display:
                       props?.responseData?.ownedBy != loggedInUser?._id &&
-                        props?.responseData?.salesInfo?.isOpenForSale
+                      props?.responseData?.salesInfo?.isOpenForSale
                         ? "block"
                         : "none",
                     color: "white",
@@ -765,24 +804,35 @@ export default function NftInformation(props) {
           <div className="report-modal">
             <div className="report-inner" style={{ opacity: "1" }}>
               <div className="reportthisitem">
-                <h3 className="report-text poppins-normal">
-                  Report this item
-                </h3>
-                <i className="fa-solid fa-xmark cross-icon icrossicon"
-                  onClick={() => setOpenReportModal(false)}>
-                </i>
+                <h3 className="report-text poppins-normal">Report this item</h3>
+                <i
+                  className="fa-solid fa-xmark cross-icon icrossicon"
+                  onClick={() => setOpenReportModal(false)}
+                ></i>
               </div>
               <div className="singlerowmodal">
                 <h3 className="reason-text"> Reason</h3>
-                <select className="select-box" onChange={(e) => handleChange(e)}>
+                <select
+                  className="select-box"
+                  onChange={(e) => handleChange(e)}
+                >
                   <option>Select reason</option>
-                  <option value="Fake collection or possible scam">Fake collection or possible scam</option>
-                  <option value="Explicit and sensitive content">Explicit and sensitive content</option>
+                  <option value="Fake collection or possible scam">
+                    Fake collection or possible scam
+                  </option>
+                  <option value="Explicit and sensitive content">
+                    Explicit and sensitive content
+                  </option>
                   <option value="Might be stolen">Might be stolen</option>
                   <option value="Other">Other</option>
                 </select>
               </div>
-              <button className="btn btn-primary report-btn" onClick={sendReport}>Report</button>
+              <button
+                className="btn btn-primary report-btn"
+                onClick={sendReport}
+              >
+                Report
+              </button>
             </div>
           </div>
         </div>
@@ -796,12 +846,11 @@ export default function NftInformation(props) {
           <div className="report-modal">
             <div className="report-inner" style={{ opacity: "1" }}>
               <div className="reportthisitem">
-                <h3 className="report-text poppins-normal">
-                Put it on sale
-                </h3>
-                <i className="fa-solid fa-xmark cross-icon"
-                  onClick={() => setsaleModal(false)}>
-                </i>
+                <h3 className="report-text poppins-normal">Put it on sale</h3>
+                <i
+                  className="fa-solid fa-xmark cross-icon"
+                  onClick={() => setsaleModal(false)}
+                ></i>
               </div>
               <div className="singlerowmodal">
                 <h3 className="reason-text"> Price*</h3>
@@ -812,23 +861,23 @@ export default function NftInformation(props) {
                   autoComplete="off"
                   value={salesInfo?.price}
                   readonly
-                // onChange={(e) => {
-                //   price.current = e.target.value;
-                //   checkChanges();
-                // }}
+                  // onChange={(e) => {
+                  //   price.current = e.target.value;
+                  //   checkChanges();
+                  // }}
                 />
                 <h3 className="reason-text"> Keep it on sale until :</h3>
                 <input
-                 type="date"
+                  type="date"
                   className="form-control-1"
                   // min="0"
                   // type="date"
                   autoComplete="off"
                   // value="23"
-                // onChange={(e) => {
-                //   price.current = e.target.value;
-                //   checkChanges();
-                // }}
+                  // onChange={(e) => {
+                  //   price.current = e.target.value;
+                  //   checkChanges();
+                  // }}
                 />
                 <input
                   className="form-control-1"
@@ -836,10 +885,10 @@ export default function NftInformation(props) {
                   type="time"
                   autoComplete="off"
                   // value="23"
-                // onChange={(e) => {
-                //   price.current = e.target.value;
-                //   checkChanges();
-                // }}
+                  // onChange={(e) => {
+                  //   price.current = e.target.value;
+                  //   checkChanges();
+                  // }}
                 />
                 {/* <select className="select-box" onChange={(e) => handleChange(e)}>
                     <option>Select reason</option>
@@ -849,7 +898,12 @@ export default function NftInformation(props) {
                     <option value="Other">Other</option>
                   </select> */}
               </div>
-              <button className="btn btn-primary report-btn" onClick={demoHandleSell}>Sale</button>
+              <button
+                className="btn btn-primary report-btn"
+                onClick={demoHandleSell}
+              >
+                Sale
+              </button>
             </div>
           </div>
         </div>
@@ -865,10 +919,10 @@ export default function NftInformation(props) {
           <div className="">
             <div className="mint-outer" style={{ opacity: "1" }}>
               <div className="mintbody">
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <div className="completelistin">
-                    Remove From Sale
-                  </div>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <div className="completelistin">Remove From Sale</div>
                 </div>
                 <div className="abstractillusion">
                   <img src={nft.cdnUrl} />
@@ -897,15 +951,17 @@ export default function NftInformation(props) {
                   <div className="checkpost">
                     {/* <img src={success} className="checkimg" /> */}
                     <div className="checkimg">
-                      {props?.removeSuccess ?
-
-                        <img src={success} className="checkimg" /> :
+                      {props?.removeSuccess ? (
+                        <img src={success} className="checkimg" />
+                      ) : (
                         <Oval
                           vertical="top"
                           horizontal="center"
                           color="#00BFFF"
                           height={30}
-                          width={30} />}
+                          width={30}
+                        />
+                      )}
                     </div>
                     <div className="checkposttext">
                       <div className="heading">Remove From Sale</div>
@@ -930,10 +986,10 @@ export default function NftInformation(props) {
           <div className="">
             <div className="mint-outer" style={{ opacity: "1" }}>
               <div className="mintbody">
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <div className="completelistin">
-                  Putting your NFT on sale
-                  </div>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <div className="completelistin">Putting your NFT on sale</div>
                 </div>
                 <div className="abstractillusion">
                   <img src={nft.cdnUrl} />
@@ -962,15 +1018,17 @@ export default function NftInformation(props) {
                   <div className="checkpost">
                     {/* <img src={success} className="checkimg" /> */}
                     <div className="checkimg">
-                      {props?.saleSuccess ?
-
-                        <img src={success} className="checkimg" /> :
+                      {props?.saleSuccess ? (
+                        <img src={success} className="checkimg" />
+                      ) : (
                         <Oval
                           vertical="top"
                           horizontal="center"
                           color="#00BFFF"
                           height={30}
-                          width={30} />}
+                          width={30}
+                        />
+                      )}
                     </div>
                     <div className="checkposttext">
                       <div className="heading">Going live</div>
@@ -995,10 +1053,10 @@ export default function NftInformation(props) {
           <div className="">
             <div className="mint-outer" style={{ opacity: "1" }}>
               <div className="mintbody">
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <div className="completelistin">
-                    Complete your Buying
-                  </div>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <div className="completelistin">Complete your Buying</div>
                 </div>
                 <div className="abstractillusion">
                   <img src={nft.cdnUrl} />
@@ -1027,15 +1085,17 @@ export default function NftInformation(props) {
                   <div className="checkpost">
                     {/* <img src={success} className="checkimg" /> */}
                     <div className="checkimg">
-                      {props?.buySuccess ?
-
-                        <img src={success} className="checkimg" /> :
+                      {props?.buySuccess ? (
+                        <img src={success} className="checkimg" />
+                      ) : (
                         <Oval
                           vertical="top"
                           horizontal="center"
                           color="#00BFFF"
                           height={30}
-                          width={30} />}
+                          width={30}
+                        />
+                      )}
                     </div>
                     <div className="checkposttext">
                       <div className="heading">Transfer</div>
@@ -1059,26 +1119,30 @@ export default function NftInformation(props) {
           <div className="report-modal main-model">
             <div className="report-inner" style={{ opacity: "1" }}>
               <div className="reportthisitem">
-                <p className="MainHeadingText">
-                  Remove from sale
-                </p>
+                <p className="MainHeadingText">Remove from sale</p>
               </div>
               <div className="singlerowmodal">
-                <h3 className="HeadingText"> Are you sure you want to remove this item from sale?</h3>
-                
+                <h3 className="HeadingText">
+                  {" "}
+                  Are you sure you want to remove this item from sale?
+                </h3>
+
                 <div className="removeSaleButton">
-                  <button className="CancelButton" onClick={() => setOpenRemoveSale(false)}>Cancel</button>
-                  <button className="RemoveButton" onClick={sendButton}>Remove</button>
+                  <button
+                    className="CancelButton"
+                    onClick={() => setOpenRemoveSale(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button className="RemoveButton" onClick={sendButton}>
+                    Remove
+                  </button>
                 </div>
-
-
               </div>
             </div>
           </div>
         </div>
       </div>
-
-
     </>
   );
 }
