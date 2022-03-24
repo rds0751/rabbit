@@ -231,7 +231,7 @@ function CreateNftCollections(props) {
       description: description.current,
       blockchain: blockchain.current,
       addedBy: user.loggedInUser._id,
-      // categoryId:categoryId.current,
+      categoryId:categoryId.current,
     };
 
     //-----------------------
