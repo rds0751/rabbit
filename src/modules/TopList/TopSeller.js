@@ -21,8 +21,8 @@ const queryString = require("query-string");
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 140px;
-  margin-right: 130px;
+  margin-left: 7%;
+  margin-right: 7%px;
   color: #191919;
   margin-top: 29px;
   @media only screen and (min-width:425px) and  (max-width:769px) {
@@ -39,6 +39,7 @@ const Container = styled.div`
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items:center;
   @media screen and (max-width:426px) {
     overflow: scroll;
     width: 557px;
@@ -46,7 +47,9 @@ const Header = styled.div`
 `;
 const Title = styled.h3`
   font-size: 20px;
-  font-weight: 600;
+  line-height:30px;
+  font-family: 'poppins-bold';
+  margin-bottom: 0px;
   @media screen and (max-width:426px){
     font-size: 18px;
     margin: auto 0;
@@ -67,6 +70,8 @@ const Select = styled.select`
   background-image: url(${dropdown});
   background-repeat: no-repeat;
   background-position: 90% center;
+  color: #000000;
+  font-family: 'poppins-medium';
 `;
 const Body = styled.div`
   margin-top: 58px;
@@ -104,7 +109,7 @@ const Image = styled.img`
   height: 42px;
   /* padding-left: 31px;
   padding-right: 14px; */
-  border-radius: 10px;
+  border-radius: 22px;
   margin: auto 0;
 `;
 const NameColumn = styled.div`
