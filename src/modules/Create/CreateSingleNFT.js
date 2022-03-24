@@ -28,6 +28,7 @@ import UploadSingleNft from "./CreateSingleUploadFile";
 import Close from "../../assets/images/close.png";
 import Select from 'react-select';
 import { PrintDisabled } from "@mui/icons-material";
+import $ from 'jquery';
 
 // import "../../assets/styles/Leader.css"
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
@@ -94,6 +95,7 @@ function CreateSingleNFT(props) {
           })
         )
       );
+
       let formData = new FormData();
       formData.append(
         "attachment",
@@ -119,6 +121,18 @@ function CreateSingleNFT(props) {
           setcdnUrl(ipfsRes.cdnUrl);
           setisLoader(false);
           setIsFileSelected(true);
+          if (
+            name.current != ""  &&
+            price.current != "" &&
+            description.current !=""
+            // cdnUrl != "" 
+            // selectFile !="" 
+          ) {
+            setcheckDisable(false);
+          } 
+          else{
+            setcheckDisable(true);
+          }
         }
       })();
 
@@ -143,6 +157,8 @@ function CreateSingleNFT(props) {
   };
   
   const checkChanges = () => {
+    
+    
     console.log(
       name.current,
       price.current,
@@ -151,24 +167,50 @@ function CreateSingleNFT(props) {
       "<<<<formdata"
     );
     if (
-      name.current != "" &&
+      name.current != ""  &&
       price.current != "" &&
-      description.current != "" &&
-      selectFile != ""
+      description.current !="" &&
+      selectFile !=""
+     
     ) {
       setcheckDisable(false);
-    } else if(selectFile=='') {
-      setcheckDisable(true)
-     
-    }
+    } 
     else{
       setcheckDisable(true);
     }
   };
 
+  useEffect(()=>{
+    $(document).ready(function(){
+
+      var lines = 20;
+      var linesUsed = $('#linesUsed');
+  
+      $('#test').keydown(function(e) {
+  
+          let newLines = $(this).val().split("\n").length;
+          linesUsed.text(newLines);
+  
+          if(e.keyCode == 13 && newLines >= lines) {
+              
+              return false;
+          }
+          
+      });
+  });
+  },[])
+
   const handleSubmit = async (e) => {
-    let x=price.current;
-    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+    var priceValue=price.current;
+    var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
+
+    if(priceValue.slice(0,1)=="."){
+     priceValue="0"+priceValue;
+     price.current=priceValue;
+    console.log(priceValue,"hello-world");
+    }
+   
+   
 
     console.log(selectFile, "<<<selected file");
     if (
@@ -179,20 +221,25 @@ function CreateSingleNFT(props) {
     ) {
       toast.error("Enter The Required Field");
       return null;
+    }else{
+      setcheckDisable(false);
     }
-    if((x < "0.004") || (x =="0") ){
-      toast.error("Minimum listing price for an NFT should be more than 1 dollar");
-      return null;
-    }
+
+    
     if(format.test(name.current)){
-      toast.error("UserName should be not contain special character");
+      toast.error("Name should be not contain special character");
       return null;
     }
     if(name.current.length < 3){
-      toast.error("UserName  should be atleast 3 character");
+      toast.error("Name  should be atleast 3 character");
+      return null;
+    }
+    if(error!=""){
+      toast.error("Minimum listing price for an NFT should be more than 1 dollar");
       return null;
     }
 
+    
 
     console.log(
       price.current,
@@ -234,7 +281,7 @@ function CreateSingleNFT(props) {
   const blockchainOption = [
     { value: 'eth', label: <div><img src={ethereum} height="32px" /> Ethereum</div> },
   ];
-
+let pricevalue;
   return (
     <>
 
@@ -478,6 +525,7 @@ function CreateSingleNFT(props) {
                 {/* <Link>Create</Link> */}
                 <select
                   onChange={(e) => {
+                    checkChanges();
                     // setCollectionId(e.target.value);
                     const addressId = e.target.value.split(",")
                     setCollectionId(addressId[0]);
@@ -486,7 +534,7 @@ function CreateSingleNFT(props) {
                     // alert(collectionId);
                     // alert(contractAddress);
 
-                    checkChanges();
+                  
 
 
                   }}
@@ -511,22 +559,23 @@ function CreateSingleNFT(props) {
                   className="form-control-1"
                   name="email"
                   autoComplete="off"
-                  maxLength="200"
+                  maxLength="100"
                   
                   onChange={(e) => {
+                    checkChanges();
                     //let x=e.target.value.replace(/[^a-zA-Z ]/g, "")
-                    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                    var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
                     if(format.test(e.target.value)){
                       SetNameError("(No Special Character Allowed)");
                     }else if(e.target.value.length < 3){
-                      SetNameError("(UserName  should be atleast 3 character)")
+                      SetNameError("(Name should be atleast 3 character)")
                     } else {
                     SetNameError("");
                     }
                     
                     //setSpecialChar(x);
                     name.current = e.target.value;
-                    checkChanges();
+                    
                   }}
                 />
                
@@ -543,13 +592,14 @@ function CreateSingleNFT(props) {
                     autoComplete="off"
                     onWheel={(e)=>e.target.blur()}
                     onChange={(e) => {
+                      checkChanges();
                       if(+e.target.value < "0.004" || +e.target.value=="0"){
                         setError("(Minimum listing price for an NFT should be more than 1 dollar)")
                       }else{
                         setError("")
                       }
                       price.current = e.target.value;
-                      checkChanges();
+                     
                     }}
                   />
                   <span class="input-group-text">ETH</span>
@@ -578,15 +628,17 @@ function CreateSingleNFT(props) {
                   value={description.current}
                   onChange={(e) => {
                     if (desLength < 1000) {
+                      checkChanges();
                       let x=e.target.value.replace(/\s+/g, '').length
                       description.current = e.target.value;
                       setDesLength(description.current.length);
-                      checkChanges();
+                      
                     }
                   }}
                 ></textarea>
                 <span className="color82">
                   {desLength} of 1000 characters used.
+                  <div><span id="linesUsed">0</span> of 20 Lines Used.</div>
                 </span>
               </div>
               

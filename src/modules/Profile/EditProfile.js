@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "../../assets/styles/editProfile.css";
 import { AuthToken } from "../../services/UserAuthToken";
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
+import $ from 'jquery';
 
 const Button = styled.button``;
 
@@ -118,7 +119,26 @@ function EditProfile(props) {
     setFormData({ ...formData, [name]: value });
   };
  const [nameError,SetNameError]=useState('');
-  
+ useEffect(()=>{
+  $(document).ready(function(){
+
+    var lines = 20;
+    var linesUsed = $('#linesUsed');
+
+    $('#test').keydown(function(e) {
+
+        let newLines = $(this).val().split("\n").length;
+        linesUsed.text(newLines);
+
+        if(e.keyCode == 13 && newLines >= lines) {
+            
+            return false;
+        }
+        
+    });
+});
+},[])
+
   
 
   return (
@@ -209,6 +229,7 @@ function EditProfile(props) {
               <textarea
                 className="editProfileFormContainerEachInput mb-0"
                 rows="4"
+                id="test"
                 // name="text"
                 name="bio"
                 value={formData.bio}
@@ -224,6 +245,7 @@ function EditProfile(props) {
               <div className="clearfix"></div>
               <span className="input-down-text">
                 {desLength} of 1000 characters used
+                <div><span id="linesUsed">0</span> of 20 Lines Used.</div>
               </span>
             </div>
             <div className="">
