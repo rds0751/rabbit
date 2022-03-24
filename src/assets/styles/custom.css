@@ -103,7 +103,7 @@ ul {
 }
 .card-lower {
   background: #f8f8f8 0% 0% no-repeat padding-box;
-  height: 122px;
+  min-height: 122px;
   border-radius: 0px 0px 13px 13px;
 }
 
@@ -1002,6 +1002,9 @@ select:focus-visible {
   .connect-wallet {
     padding-left: 6%;
     padding-right: 6%;
+  }
+  .card-lower{
+    min-height: 110px;
   }
 }
 @media only screen and (max-width:767px){  
