@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { CollectionTile_Api } from "../API/CollectionTile_Api";
 import { CollectionTile_Api } from "../../constants/CollectionTile_Api";
 import CollectionNftFilter from "../../common/components/CollectionNFtFilter";
 import NftToggle from "../../common/components/NftToggle";
@@ -8,7 +7,6 @@ import "../../assets/styles/homeCollectionCards.css";
 import "../../assets/styles/collectiondetail.css";
 import { getCategories } from "../../services/clientConfigMicroService";
 import { getALLCollectionById } from "../../services/contentMicroservice";
-
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import Spinner from "../../common/components/Spinner";
@@ -17,15 +15,12 @@ import NoItem from "../../assets/images/Noitems.svg"
 const queryString = require('query-string');
 function Collections_tile() {
   const initialFilterData = {
-    sort: 1,
+    sort: "",
     categoryId: "",
     searchByName: "",
   };
 
   const [collections, setCollections] = useState([]);
-  console.log("<<<<<<<<collections", collections);
-
-
   const [Categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [filterData, setFilterData] = useState(initialFilterData);
@@ -41,33 +36,20 @@ function Collections_tile() {
   }, []);
 
   useEffect(() => {
-    setIsLoading(true);
-    const reqObj = queryString.stringify(filterData);
-    getCollections(reqObj).then((response) => {
-      setCollections(response);
-      setIsLoading(false);
-    });
+    async function fetchData() {
+      setIsLoading(true);
+      const reqObj = queryString.stringify(filterData);
+      await getCollections(reqObj).then((res) => {
+        setCollections(res);
+        setIsLoading(false);
+      });
+    }
+    fetchData();
   }, [filterData]);
 
   const handleFilter = (e) => {
     const { name, value } = e.target;
     setFilterData({ ...filterData, [name]: value });
-  };
-
-  const getCollectionById = (collectionId) => {
-    // alert("called");
-    setIsLoading(true);
-    // ----get all nfts by collection--------
-    getALLCollectionById(collectionId, (res) => {
-      if (res.success) {
-        setCollections(res.responseData);
-        console.log(res, "<<<<<<<<collections", collections);
-        setIsLoading(false);
-      } else {
-        toast.error("Error While Fetching Data");
-        setIsLoading(false);
-      }
-    });
   };
 
   return (
@@ -82,9 +64,9 @@ function Collections_tile() {
             <div className="mobilenftTilePageFirstSelect dropdown">
               {/* <p className="mb-0">Categories </p> */}
               <select
-                name="categoryName "
+                name="categoryId"
                 id="sale"
-                onChange={(e) => getCollectionById(e.target.value)}
+                onChange={(e) => handleFilter(e)}
                 value={filterData.categoryName}
                 className="first_select ml_auto dropdown-toggle-ellipsis sort-drop"
                 style={{width:'240px'}}
@@ -108,9 +90,10 @@ function Collections_tile() {
                 className="priceRangeDropDown dropdown-toggle-ellipsis sort-drop"
                 style={{ width: "260px" }}
               >
-                <option value="all">Sort By All</option>
-                <option value="1">Ascending Order</option>
-                <option value="-1">Descending Order</option>
+                <option value="">Sort By All</option>
+                <option value="-1">Recently added</option>
+                <option value="3">Items low to high</option>
+                <option value="2">Items high to low</option>
               </select>
             </div>
           </div>
@@ -164,8 +147,6 @@ function Collections_tile() {
                       <p className="collectionCardEachTotalitems">
                         <span className=" font-14 text-dark">
                           Total Items:
-                          {/* {alert(nfts)} */}
-                          {/* {console.log("jjjjjjjjjjjjjjjj",collection)} */}
                           <span className="text-primary">{nftCount}</span>
                         </span>
                       </p>
