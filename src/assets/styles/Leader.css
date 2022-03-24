@@ -79,8 +79,9 @@
   margin-left: auto;
   margin-right: auto;
   margin: 0rem;
-  border: 1px solid #E3E3E3;
+  border-bottom: 1px solid #E3E3E3;
   background-color: #E3E3E3;
+  opacity: 1;
 }
 .view {
   padding-bottom: 24px;
@@ -101,7 +102,7 @@
   margin: 0rem;
 }
 .container__down {
-  margin-bottom: 25px;
+  margin-bottom: 5px;
 }
 /* .images
       {
@@ -855,7 +856,7 @@ thead {
   border-radius: 50%;
 }
 .card {
-  /* background-color: transparent !important; */
+  background-color: transparent !important;
   border: none !important;
 }
 
@@ -1471,17 +1472,52 @@ thead {
   font-family: 'poppins-bold';
   font-size: 18px;
   line-height: 27px;
-  margin-bottom: 15px;
+  margin-bottom: 8px;
 }
 .sellerName a{
   text-align: left;
   letter-spacing: 0px;
-  color: #000000;
+  color: #191919;
   opacity: 1;
   font-family: 'poppins-bold';
-  font-size: 18px;
-  line-height: 27px;
-  margin-bottom: 15px;
+  font-size: 16px;
+  line-height: 25px;
+  margin-bottom: 19px;
+  text-decoration: none;
+}
+.sellerName1{
+  text-align: left;
+  color: #000000;
+  font-family: 'poppins-bold';
+  font-size: 16px;
+  line-height: 25px;
+  margin-bottom: 16px;
+}
+.sellerName1 a{
+  text-align: left;
+  letter-spacing: 0px;
+  color: #191919;
+  opacity: 1;
+  font-family: 'poppins-bold';
+  font-size: 16px;
+  line-height: 25px;
+  text-decoration: none;
+}
+.leader-viewmore .seller-name{
+  text-align: left;
+  color: #000000;
+  font-family: 'poppins-medium';
+  font-size: 16px;
+  line-height: 25px;
+  margin-bottom: 0px;
+  margin-left: 14px;
+}
+.leader-viewmore .seller-name a{
+  text-align: left;
+  color: #000000;
+  font-family: 'poppins-medium';
+  font-size: 16px;
+  line-height: 25px;
   text-decoration: none;
 }
 .volumeData {
@@ -1492,6 +1528,7 @@ thead {
   font-family: 'poppins-medium';
   font-size: 16px;
   line-height: 25px;
+  margin-bottom: 0px;
 }
 .ethValue{
   text-align: left;
@@ -1535,9 +1572,26 @@ thead {
 }
 .view-more {
   position: relative;
+  padding: 0;
+  background-color: transparent;
+  border-top: 1px solid #E3E3E3;
 }
 .small-nav {
   justify-content: space-between;
+}
+
+@media only screen and (max-width:1366px) {
+  .sellerName a{
+    font-size: 16px;
+    line-height: 25px;
+  }
+  .volumeData{
+    font-size: 14px;
+    line-height: 23px;
+  }
+  .sellerName1{
+    margin-bottom: 8px;
+  }
 }
 
 @media only screen and (min-width: 500px) and (max-width: 1150px) {

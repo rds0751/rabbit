@@ -227,7 +227,7 @@ function LeaderBoard() {
 
           <div className="col leaderboardTop" style={{ backgroundColor: '#F8F8F8 !important' }}>
 
-            <div className=" h-100">
+            <div className="card h-100">
 
               <div className="card-body p-0">
 
@@ -417,7 +417,7 @@ function LeaderBoard() {
 
               </div>
 
-              <div className="view-more">
+              <div className="card-footer view-more">
 
                 <Link className="view" to="/top-bidder">
 
@@ -435,7 +435,7 @@ function LeaderBoard() {
 
           <div className="col leaderboardTop">
 
-            <div className="h-100">
+            <div className="card h-100">
 
               <div className="card-body p-0">
 
@@ -619,7 +619,7 @@ function LeaderBoard() {
 
               </div>
 
-              <div className="view-more">
+              <div className="card-footer view-more">
 
                 <Link className="view" to="/top-seller">
 
@@ -637,7 +637,7 @@ function LeaderBoard() {
 
           <div className="col leaderboardTop">
 
-            <div className="h-100">
+            <div className="card h-100">
 
               <div className="card-body p-0">
 
@@ -823,7 +823,7 @@ function LeaderBoard() {
 
               </div>
 
-              <div className="view-more">
+              <div className="card-footer view-more">
 
                 <Link className="view" to="/top-collection">
 
@@ -1102,9 +1102,9 @@ function LeaderBoard() {
 
                     <div className="tile__details">
 
-                      <div className="container__up" style={{ paddingTop: '10px' }}>
+                      <div className="container__up" style={{ paddingTop: '4px' }}>
 
-                        <h6 className="sellerName"><Link style={{ textDecoration: "null" }} to={route}>{content.name}</Link></h6>
+                        <h6 className="sellerName1"><Link style={{ textDecoration: "null" }} to={route}>{content.name}</Link></h6>
 
                       </div>
 
@@ -1140,7 +1140,7 @@ function LeaderBoard() {
 
                           </h6>
 
-                          <div style={{ background: "#FFFFFF 0% 0% no-repeat padding-box", border: "1px solid #FFFFFF", borderRadius: "5px", width: "19px", height: "19px", display: "flex", justifyContent: "center", alignItems: "center", marginLeft: "8.38px" }}>
+                          <div style={{ background: "#FFFFFF 0% 0% no-repeat padding-box", border: "1px solid #FFFFFF", borderRadius: "22px", width: "19px", height: "19px", display: "flex", justifyContent: "center", alignItems: "center", marginLeft: "8.38px" }}>
 
                             <i
 
@@ -1245,7 +1245,7 @@ const BuildPendingAcceptedRejectedBlock = ({ apiData }) => {
 
       </div>
 
-      <div className="view-more">
+      <div className="card-footer view-more">
 
         <Link className="view" to="/top-bidder">
 
@@ -1363,7 +1363,7 @@ const BuildAcceptedBlock = ({ apiData }) => {
 
       </div>)}
 
-      <div className="view-more">
+      <div className="card-footer view-more">
 
         <Link className="view" to="/top-seller">
 
@@ -1431,7 +1431,7 @@ const BuildRejectedBlock = ({ apiData }) => {
 
       </div>)}
 
-      <div className="view-more">
+      <div className="card-footer view-more">
 
         <Link className="view" to="/top-collection">
 
