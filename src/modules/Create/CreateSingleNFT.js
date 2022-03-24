@@ -27,6 +27,7 @@ import "../../assets/styles/MintModal.css";
 import UploadSingleNft from "./CreateSingleUploadFile";
 import Close from "../../assets/images/close.png";
 import Select from 'react-select';
+import { PrintDisabled } from "@mui/icons-material";
 
 // import "../../assets/styles/Leader.css"
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
@@ -140,6 +141,7 @@ function CreateSingleNFT(props) {
     console.log(event, "<<<<file uploaded");
     setUploadFileObj(event);
   };
+  
   const checkChanges = () => {
     console.log(
       name.current,
@@ -155,7 +157,11 @@ function CreateSingleNFT(props) {
       selectFile != ""
     ) {
       setcheckDisable(false);
-    } else {
+    } else if(selectFile=='') {
+      setcheckDisable(true)
+     
+    }
+    else{
       setcheckDisable(true);
     }
   };
@@ -174,14 +180,19 @@ function CreateSingleNFT(props) {
       toast.error("Enter The Required Field");
       return null;
     }
-    if(x.slice(0,2)!="0."){
-      toast.error("Price should be like '0.12'");
+    if((x < "0.004") || (x =="0") ){
+      toast.error("Minimum listing price for an NFT should be more than 1 dollar");
       return null;
     }
     if(format.test(name.current)){
       toast.error("UserName should be not contain special character");
       return null;
     }
+    if(name.current.length < 3){
+      toast.error("UserName  should be atleast 3 character");
+      return null;
+    }
+
 
     console.log(
       price.current,
@@ -189,6 +200,7 @@ function CreateSingleNFT(props) {
       description.current,
       "<<<<price current "
     );
+    
     const addIPFS = async () => {
       console.log(selectFile, "<<<selectedFile");
       // alert(contractAddress)
@@ -499,15 +511,19 @@ function CreateSingleNFT(props) {
                   className="form-control-1"
                   name="email"
                   autoComplete="off"
+                  maxLength="200"
                   
                   onChange={(e) => {
                     //let x=e.target.value.replace(/[^a-zA-Z ]/g, "")
                     var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
                     if(format.test(e.target.value)){
                       SetNameError("(No Special Character Allowed)");
+                    }else if(e.target.value.length < 3){
+                      SetNameError("(UserName  should be atleast 3 character)")
                     } else {
                     SetNameError("");
                     }
+                    
                     //setSpecialChar(x);
                     name.current = e.target.value;
                     checkChanges();
@@ -525,14 +541,13 @@ function CreateSingleNFT(props) {
                     className="form-control"
                     type="number"
                     autoComplete="off"
+                    onWheel={(e)=>e.target.blur()}
                     onChange={(e) => {
-                      if(e.target.value.slice(0,2)!="0."){
-                        setError("(Price Should be Like '0.12')")
-                      }else {
+                      if(+e.target.value < "0.004" || +e.target.value=="0"){
+                        setError("(Minimum listing price for an NFT should be more than 1 dollar)")
+                      }else{
                         setError("")
                       }
-                      if(e.target.value == 0)
-                      setError("")
                       price.current = e.target.value;
                       checkChanges();
                     }}
@@ -546,6 +561,7 @@ function CreateSingleNFT(props) {
                 <label htmlFor="comment" className="input-label pb-2">
                   Description*
                 </label>
+               
                 <textarea
                   className="form-control-1 text-area-input"
                   rows="4"
@@ -570,7 +586,7 @@ function CreateSingleNFT(props) {
                   }}
                 ></textarea>
                 <span className="color82">
-                  {desLength} of 1000 characters used
+                  {desLength} of 1000 characters used.
                 </span>
               </div>
               

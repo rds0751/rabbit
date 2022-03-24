@@ -114,3 +114,12 @@
     box-shadow: 0px 3px 12px #00000014;
   }
 }
+.no-notification {
+  text-align: center;
+  font-family: Poppins;
+  font-size: 14px;
+  letter-spacing: 0px;
+  color: #BBCEF9;
+  opacity: 1;
+  margin-top: 21px;
+}
