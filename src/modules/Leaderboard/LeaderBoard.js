@@ -1056,13 +1056,13 @@ function LeaderBoard() {
           {/* <div className="col-md-3 col-lg-3 col-sm-6 col-11 images"> */}
 
           {topNftSales.map((curElem) => {
-            console.log("kggggggggggggggggggg",curElem._id.content.name)
+            // console.log("kggggggggggggggggggg",curElem.owner[0].wallet_address)
 
-            const { cdnUrl, name, ownedBy, maxPrice2, daysLeft, likesCount, _id } =
+            const { cdnUrl, name, owner, maxPrice2, daysLeft, likesCount, _id,content } =
 
               curElem;
 
-            const route = "/nft-information/" + _id.id;
+            const route = "/nft-information/" + _id;
 
             return (
 
@@ -1080,7 +1080,7 @@ function LeaderBoard() {
 
                       className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
 
-                      src={_id.content.cdnUrl}
+                      src={content.cdnUrl}
 
                       alt="nft"
 
@@ -1104,7 +1104,7 @@ function LeaderBoard() {
 
                       <div className="container__up" style={{ paddingTop: '10px' }}>
 
-                        <h6 className="sellerName"><Link style={{ textDecoration: "null" }} to={"/nft-information/"+_id.id}>{_id.content.name}</Link></h6>
+                        <h6 className="sellerName"><Link style={{ textDecoration: "null" }} to={route}>{content.name}</Link></h6>
 
                       </div>
 
@@ -1115,12 +1115,13 @@ function LeaderBoard() {
                           Sold to&nbsp;
 
                           <span className="namesold"  >
+                          {/* {buyer.wallet_address.slice(buyer.wallet_address.length - 4)} */}
 
-                            {(String(ownedBy).length >= 7) ? (!ownedBy ? " " : (String(ownedBy).substring(0, 8) + "...")) : (String(ownedBy) === undefined ? "" : ownedBy)}
+                            {(String(owner[0].wallet_address).length >= 7) ? (!owner[0].wallet_address ? " " : (String(owner[0].wallet_address).substring(0, 4) + "..."+String(owner[0].wallet_address).slice(String(owner[0].wallet_address).length - 4))) : (String(owner[0].wallet_address) === undefined ? "" : owner[0].wallet_address)}
 
                           </span>
 
-                          &nbsp;for<span className="ethCurrency">&nbsp; {(curElem._id.content.salesInfo.price)}&nbsp;{(curElem._id.content.salesInfo.currency).toUpperCase()}</span>
+                          &nbsp;for<span className="ethCurrency">&nbsp; {(content.salesInfo.price)}&nbsp;{(content.salesInfo.currency).toUpperCase()}</span>
 
                         </h6>
 
