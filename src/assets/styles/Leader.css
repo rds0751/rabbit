@@ -1484,6 +1484,23 @@ thead {
   margin-bottom: 15px;
   text-decoration: none;
 }
+.leader-viewmore .seller-name{
+  text-align: left;
+  color: #000000;
+  font-family: 'poppins-medium';
+  font-size: 16px;
+  line-height: 25px;
+  margin-bottom: 0px;
+  margin-left: 14px;
+}
+.leader-viewmore .seller-name a{
+  text-align: left;
+  color: #000000;
+  font-family: 'poppins-medium';
+  font-size: 16px;
+  line-height: 25px;
+  text-decoration: none;
+}
 .volumeData {
   display: flex;
   text-align: left;

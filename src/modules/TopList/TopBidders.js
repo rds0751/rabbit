@@ -90,7 +90,9 @@ const Body = styled.div`
 `;
 const Column = styled.div`
   font-size: 16px;
-  font-weight: 600;
+  line-height:25px;
+  font-family:'poppins-semibold';
+  color:#191919;
 `;
 const Collection = styled.div`
   display: flex;
@@ -116,7 +118,7 @@ const Image = styled.img`
 const NameColumn = styled.div`
   display: flex;
   margin-left: 31px;
- 
+  align-items: center;
 `;
 const Name = styled.p`
   font-size: 16px;
@@ -124,22 +126,26 @@ const Name = styled.p`
   margin: 24px 0 21px 14px;
 `;
 const VolumeColumn = styled.div`
-  /* padding-left: 40px; */
-  margin:auto 0;
   width:100%;
 `;
 const Span = styled.p`
   color: #366eef;
   font-size: 16px;
-  font-weight: 500;
+  line-height: 25px;
+  font-family: poppins-medium;
+  margin-bottom:0px;
 `;
 const Text = styled.div`
   font-size: 16px;
-  font-weight: 500;
-  `;
+  line-height: 25px;
+  font-family: 'poppins-medium';
+  color: #191919;
+`;
 const Volume = styled.span`
-font:normal normal normal 16px/25px Poppins;
-color: #818181;
+  font-family: 'poppins';
+  font-size: 16px;
+  line-height: 25px;
+  color: #818181;
 `;
 
 function TopBidders() {
@@ -168,7 +174,7 @@ function TopBidders() {
   }
 
   return (
-    <Container>
+    <Container className="leader-viewmore">
       <Header>
         <Title>Top Buyers</Title>
         <Select onChange={(e) => ChangeBuyerDuration(e)} name="duration">
@@ -206,10 +212,10 @@ function TopBidders() {
                 )}
 
                 {buyer.userName == "" ? (
-                  <h2 className="sellerName"> <Link style={{ textDecoration: "null" }} to={"/my-profile"}>{buyer.wallet_address.substring(0, 4)}...{buyer.wallet_address.slice(buyer.wallet_address.length - 4)}</Link></h2>
+                  <h2 className="seller-name"> <Link style={{ textDecoration: "null" }} to={"/my-profile"}>{buyer.wallet_address.substring(0, 4)}...{buyer.wallet_address.slice(buyer.wallet_address.length - 4)}</Link></h2>
 
                 ) : (
-                  <h2 className="sellerName"><Link style={{ textDecoration: "null" }} to={"/my-profile"}> {buyer.userName} </Link></h2>
+                  <h2 className="seller-name"><Link style={{ textDecoration: "null" }} to={"/my-profile"}> {buyer.userName} </Link></h2>
 
                 )}
 
