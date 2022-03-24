@@ -24,6 +24,8 @@ function Collections_tile() {
   const [Categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [filterData, setFilterData] = useState(initialFilterData);
+  const [visibleBlogs, setVisibleBlogs] = useState(8)
+
   const [toggleNft, setToggleNft] = useState(false);
 
   useEffect(() => {
@@ -52,6 +54,26 @@ function Collections_tile() {
     setFilterData({ ...filterData, [name]: value });
   };
 
+  const getCollectionById = (collectionId) => {
+    // alert("called");
+    setIsLoading(true);
+    // ----get all nfts by collection--------
+    getALLCollectionById(collectionId, (res) => {
+      if (res.success) {
+        setCollections(res.responseData);
+        console.log(res, "<<<<<<<<collections", collections);
+        setIsLoading(false);
+      } else {
+        toast.error("Error While Fetching Data");
+        setIsLoading(false);
+      }
+    });
+  };
+  const loadMoreHandler = () => {
+    // <div className="spinnerloader">{isloading && <Spinner />}</div>
+    setVisibleBlogs(prevVisibleBlogs => prevVisibleBlogs + 4)
+
+  }
   return (
     <>
       <div className="ntf_div">
@@ -115,7 +137,9 @@ function Collections_tile() {
               }
             })()}
           </div>
-          {collections.map((collection) => {
+          {/* nfts.slice(0, visibleBlogs).map((nft) =>  */}
+          
+          {collections.slice(0, visibleBlogs).map((collection) => {
             const { _id, imageUrl, name, nftCount } = collection;
             const route = "/collection-details/" + _id;
             return (
@@ -162,6 +186,8 @@ function Collections_tile() {
              <p className="textitem">No items available</p>
            </div>
           </div>)}
+          <button className="load-more" onClick={loadMoreHandler}>Load More</button>
+
         </div>
       </div>
       <ToastContainer

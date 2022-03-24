@@ -9,8 +9,9 @@ import {
   LeaderBoardApi4,
   LeaderBoardApi5,
 } from "../../constants/LeaderBoardApi";
-import profileImage from "../../assets/images/profile.png";
+import profileImage from "../../assets/images/NoProfile.svg";
 import { Link } from "react-router-dom";
+import Spinner from "../../common/components/Spinner";
 
 
 
@@ -177,7 +178,7 @@ function TopBidders() {
             Name
           </Column>
           <Column className="col">Volume</Column>
-          <Column className="col itembought">Items Bought</Column>
+          <Column className="col itembought">Items bought</Column>
         </div>
       </Body>
       {topBuyers.map((curElem) => {
@@ -203,7 +204,7 @@ function TopBidders() {
                   <h2 className="sellerName"> <Link style={{ textDecoration: "null" }} to={"/my-profile"}>{buyer.wallet_address.substring(0, 4)}...{buyer.wallet_address.slice(buyer.wallet_address.length - 4)}</Link></h2>
 
                 ) : (
-                  <Name>{buyer.userName}</Name>
+                  <h2 className="sellerName"><Link style={{ textDecoration: "null" }} to={"/my-profile"}> {buyer.userName} </Link></h2>
 
                 )}
 
@@ -219,6 +220,12 @@ function TopBidders() {
           </div>
         );
       })}
+      {topBuyers.length === 0 && (
+
+        <div className="spinnerloader">{<Spinner />}
+
+
+        </div>)}
     </Container>
   );
 }

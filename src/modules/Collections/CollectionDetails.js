@@ -164,6 +164,7 @@ function CollectionDetails() {
             )}
            
             {}
+            
           </div>
         </div>
       </div>
