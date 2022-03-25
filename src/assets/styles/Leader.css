@@ -578,6 +578,11 @@ thead {
   .leadercolmob {
     display: block;
   }
+  .leadercolmob .mobFilterButton{
+    margin-top: 10px;
+    margin-right: 32px;
+    float: right;
+  }
   .nav-pills .nav-link.active,
   .nav-pills .show > .nav-link {
     color: black !important;
@@ -1410,6 +1415,11 @@ thead {
   }
   .leader-container{
     max-width: 95%;
+  }
+  .leadercolmob .mobFilterButton{
+    margin-top: 19.49px;
+    margin-right: 0px;
+    float: none;
   }
 }
 @media only screen and (max-width: 480px) {
