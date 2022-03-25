@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import image from "../../assets/images/1.jpg";
+import image from "../../assets/images/profile.png";
 import copy from "../../assets/images/copy.svg";
 import "../../assets/styles/Notification.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -7,6 +7,7 @@ import { ethers } from "ethers";
 import { toast } from "react-toastify";
 import "../../assets/styles/wallet.css";
 import SplitWalletAdd from "../../common/components/SplitWalletAdd";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { ManageNotiSideBar, ManageWalletSideBar } from "../../reducers/Action";
 
 function Wallet() {
@@ -15,13 +16,15 @@ function Wallet() {
   const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
   const [checkClick, setcheckClick] = useState(false);
   const [getBalance, setGetBalance] = useState(null);
+ 
 
   // const ethereum = window.ethereum;
   // console.log("ethereum : ", ethereum);
   const { user, sideBar } = useSelector((state) => state);
+
   // console.log(data);
   const { userDetails, walletAddress } = user;
-  console.log(sideBar, "<<<<sidebar");
+  let { loggedInUser } = user;
   const { isOpenWallet } = sideBar;
   useEffect(() => {
     // if(ethereum){
@@ -61,15 +64,18 @@ function Wallet() {
   const [copiedText, setCopiedText] = useState(false);
 
   const handleCopyToClipboard = () => {
-    // const temp = walletAddress?.walletAddress;
-    const walletAddressQuoted = JSON.stringify(walletAddress);
-    const walletAddressUnquoted = walletAddressQuoted.replace(/\"/g, "");
-    navigator.clipboard.writeText(walletAddressUnquoted);
-    setCopiedText(true);
-    setTimeout(() => {
-      setCopiedText(false);
-    }, 1000);
+    // const walletAddressQuoted = JSON.stringify(walletAddress);
+    // const walletAddressUnquoted = walletAddressQuoted.replace(/\"/g, "");
+    navigator.clipboard.writeText( walletAddress?.address);
+    toast.success("Text Copied");
+    // setCopiedText(true);
+    // setTimeout(() => {
+    //   setCopiedText(false);
+    // }, 1000);
   };
+
+
+
 
   const dispatch = useDispatch();
   const handleChange = (e) => {
@@ -89,7 +95,7 @@ function Wallet() {
       <div className="empty_div" onClick={() => handleChange()}></div>
       <div className="wallet_div">
         <div className="imgwallet">
-          <img src={image} alt="" />
+          <img src={loggedInUser?.photo ? loggedInUser?.photo : image} alt="" />
         </div>
         <div className="walletAddressContainer walleth2">
           <div className="walletAddress fontwallet">
@@ -98,7 +104,7 @@ function Wallet() {
           </div>
        
           <img
-            style={{ width: "21.47px", height: "21.47px" }}
+            style={{ width: "21.47px", height: "21.47px", cursor: "pointer" }}
             src={copy}
             alt=""
             onClick={handleCopyToClipboard}
@@ -110,7 +116,7 @@ function Wallet() {
             <h4>{walletAddress?.balance}</h4>
           </div>
         </div>
-        <button className="btnwallet">Add Balance</button>
+        {/* <button className="btnwallet">Add Balance</button> */}
       </div>
     </div>
   );
