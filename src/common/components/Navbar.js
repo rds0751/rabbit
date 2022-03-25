@@ -176,14 +176,38 @@ function Navbar() {
       document.body.style.overflow = !isOpenNoti ? "hidden" : "visible";
     }
   };
-
+  //------------------------------------------------------------
 
   useEffect(() => {
+    // checkapi();
     const reqObj = queryString.stringify(searchInput);
-    getNFtsData(reqObj).then((response) => 
-    setData(response)
-    );
+
+    setIsloading(true);
+    // getNfts(defaultReq).then((response) => {
+    getNFtsData(reqObj, (res) => {
+      // console.log(res, "filterResponse");
+      setIsloading(true);
+      if (res.success) {
+        setData(res.responseData.nftContent);
+        setIsloading(false);
+      } else {
+        toast.error("Error While fetching Nfts");
+        setIsloading(false);
+      }
+    });
   }, [searchInput]);
+
+
+
+
+  //-----------------------------------------------------------------
+  // useEffect(() => {
+  //   const reqObj = queryString.stringify(searchInput);
+  //   console.log("jffffffffffffffffff",reqObj)
+  //   getNFtsData(reqObj).then((response) => 
+  //   setData(response.responseData.nftContent)
+  //   );
+  // }, [searchInput]);
 
   const handleSearch = () => {
     if (searchInput.trim() != "") dispatch(searchNav(searchInput));
@@ -209,7 +233,7 @@ function Navbar() {
 
 
 
-
+console.log("kkkkkkkkkkkkkkkkkk",data)
 
 
   const closeWalletAndNoti = () => {
