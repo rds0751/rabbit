@@ -418,11 +418,16 @@ export default function NftInformation(props) {
                   className="border-radius imginfo_mob"
                   style={{
                     maxWidth: "100%",
-                    height: "837px",
+                    // height: "837px",
                     borderRadius: "8px",
                   }}
                 />
               </div>
+              <div className="row mt-4">
+           
+              <PricingHistoryComponentTable id={id} />
+           
+          </div>
             </div>
             <div className="col-xl-7 col-lg-7 col-md-12 details-section">
               <div className="d-none d-sm-none d-md-none d-lg-block">
@@ -646,7 +651,7 @@ export default function NftInformation(props) {
               <div className="second-text align-row">
                 <span className="text">
                   Current Price:&nbsp;
-                  <span className="nft-value">{salesInfo?.price}</span>
+                  <span className="nft-value">{salesInfo?.price}&nbsp;ETH</span>
                 </span>
                 {showDateSection ? (
                   <span className="align-row">
@@ -784,16 +789,16 @@ export default function NftInformation(props) {
                   </li> */}
                 </ul>
                 {tab === 1 ? <PricingHistoryComponentGraph id={id} /> : ""}
-                {tab === 2 ? <ListingsTable /> : ""}
-                {tab === 3 ? <ListingsTable /> : ""}
+                {tab === 2 ? <ListingsTable id={id}/> : ""}
+                {tab === 3 ? <ListingsTable id={id}/> : ""}
               </div>
             </div>
           </div>
-          <div className="row mt-4">
+          {/* <div className="row mt-4">
             <div className="col-xl-5 col-lg-5 col-md-12 col-sm-12">
               <PricingHistoryComponentTable id={id} />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div

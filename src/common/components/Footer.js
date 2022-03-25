@@ -112,7 +112,7 @@ function Footer() {
             </div>
             <h3 className="about">About DLT NFT marketplace</h3>
             <div className="d-none d-sm-none d-md-block d-lg-block fs-16 aboutdes">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+              <p style={{marginBottom:"0"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
             </div>
             <div className="d-sm-block d-md-none d-lg-none fs-16">
               <p className=" footerdes">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>

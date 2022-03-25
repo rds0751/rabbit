@@ -162,8 +162,8 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
 // `;
 
 const queryString = require("query-string");
-function NftPage() {
-
+function NftPage(props) {
+  console.log(props, "sachin");
   const defaultReq = {
     // type: "fix price",
     // searchByName: name ? name : "",
@@ -178,7 +178,7 @@ function NftPage() {
     searchByName: "",
     // minPrice: 0,
     // maxPrice: "",
-    sort: -1
+    sort: -1,
   };
   const [nfts, setNfts] = useState([]);
   const { user, sideBar } = useSelector((state) => state);
@@ -236,7 +236,6 @@ function NftPage() {
           // console.log(res, "filterResponse");
           setIsloading(true);
           if (res.success) {
-
             setNfts(res.responseData.nftContent);
             setIsloading(false);
           } else {
@@ -264,19 +263,18 @@ function NftPage() {
     // alert(maxPrice)
     // setFilterType({ ...filterType, [name]: value });
     // console.log("kkkkkkkkkkkk",{ })
-    setFilterType({ ...filterType, "minPrice": minPrice, "maxPrice": maxPrice });
-
-  }
+    setFilterType({ ...filterType, minPrice: minPrice, maxPrice: maxPrice });
+  };
   const clearPriceFilter = (e) => {
     // alert(evt.target)
     // alert(maxPrice)
     // setFilterType({ ...filterType, [name]: value });
-    setmaxPrice("")
-    setminPrice("")
-    setFilterType({ ...filterType, "minPrice": "", "maxPrice": "" });
+    setmaxPrice("");
+    setminPrice("");
+    setFilterType({ ...filterType, minPrice: "", maxPrice: "" });
 
     // console.log("kkkkkkkkkkkk",{ ...filterType, "minPrice": "","maxPrice": "" })
-  }
+  };
   const handlefilter = (e) => {
     // const { name, value } = e;
     // alert(name)
@@ -345,7 +343,11 @@ function NftPage() {
         <NftToggle toggleNft={toggleNft} />
         {/* <Lower__homepage /> */}
         <div className="lower__homepage" style={{ width: "100%" }}>
-          <div id="filters filter-large" className="filter" style={{ gap: '30px' }}>
+          <div
+            id="filters filter-large"
+            className="filter"
+            style={{ gap: "30px" }}
+          >
             {/* <div className="mobilenftTilePageFirstSelect dropdown">
               <p className="mb-0 sale-type">Sale type</p>
               <select
@@ -367,32 +369,55 @@ function NftPage() {
             <div className="mobilenftTilePageSecondSelect dropdown" style={{ border: '1px solid #d2d2d2', padding: '9px 12px 9px 12px' }}>
               <p className="mb-0 sale-type">Price range</p>
               <div className="filter-drop">
-                <div onClick={() => setStatusDrop(!statusDrop)} className="d-flex justify-content-between w-100">
+                <div
+                  onClick={() => setStatusDrop(!statusDrop)}
+                  className="d-flex justify-content-between w-100"
+                >
                   <div className="text">All</div>
                   <div>
-                    <img src={dropdown} style={{ height: "17px", marginLeft: '8px' }} />
+                    <img
+                      src={dropdown}
+                      style={{ height: "17px", marginLeft: "8px" }}
+                    />
                   </div>
                 </div>
                 <div
                   className="filter-item"
                   style={{ display: statusDrop ? "block" : "none" }}
                 >
-
                   {/* <form onSubmit={handleSubmit}> */}
                   <div className="row mb-3 align-items-center">
                     <div className="col-5">
-                      <input type="number" className="form-control" placeholder="Min" value={minPrice} onChange={e => setminPrice(e.target.value)} />
+                      <input
+                        type="number"
+                        className="form-control"
+                        placeholder="Min"
+                        value={minPrice}
+                        onChange={(e) => setminPrice(e.target.value)}
+                      />
                     </div>
                     <div className="col-2 text-center">
                       <span className="to">to</span>
                     </div>
                     <div className="col-5">
-                      <input type="number" className="form-control" placeholder="Max" value={maxPrice} onChange={e => setmaxPrice(e.target.value)} />
+                      <input
+                        type="number"
+                        className="form-control"
+                        placeholder="Max"
+                        value={maxPrice}
+                        onChange={(e) => setmaxPrice(e.target.value)}
+                      />
                     </div>
                   </div>
                   <div className="row">
                     <div className="col-6">
-                      <Button type="submit" onClick={(e) => clearPriceFilter(e)} variant="outline-primary">Clear</Button>
+                      <Button
+                        type="submit"
+                        onClick={(e) => clearPriceFilter(e)}
+                        variant="outline-primary"
+                      >
+                        Clear
+                      </Button>
                     </div>
                     <div className="col-6">
                       <Button onClick={(e) => buttonfilter(e)} variant="outline-primary">Apply</Button>
@@ -451,7 +476,7 @@ function NftPage() {
               <StyledOption value="1">Descending Order</StyledOption>
             </CustomSelect>
           </div>
-        </div >
+        </div>
         <div
           className="nftTileContainer row   ntf_row"
           // className="nftTileContainer gird-container  ntf_row"
@@ -491,7 +516,7 @@ function NftPage() {
                 <div style={{ textAlignLast: "center" }}><button className="load-more" onClick={loadMoreHandler}>Load More</button></div>)
           }
         </div>
-      </div >
+      </div>
       <ToastContainer
         position="top-center"
         autoClose={2000}

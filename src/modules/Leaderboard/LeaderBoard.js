@@ -1032,18 +1032,10 @@ function LeaderBoard() {
           {/* <div className="col-md-3 col-lg-3 col-sm-6 col-11 images"> */}
 
           {topNftSales.map((curElem) => {
-            console.log('kggggggggggggggggggg', curElem)
+            console.log("kggggggggggggggggggg",curElem)
 
-            const {
-              cdnUrl,
-              name,
-              owner,
-              maxPrice2,
-              daysLeft,
-              likesCount,
-              _id,
-              content,
-            } = curElem
+            const { cdnUrl, name, owner, maxPrice2, daysLeft, likes, _id, content } = curElem
+
 
             const route = '/nft-information/' + _id
 
