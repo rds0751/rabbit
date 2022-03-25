@@ -519,11 +519,11 @@ function LeaderBoard() {
                             {buyer.userName == "" ? (
 
 
-                              <h2 className="sellerName"> <Link style={{ textDecoration: "null" }} to={"/my-profile"}>{buyer.wallet_address.substring(0, 4)}...{buyer.wallet_address.slice(buyer.wallet_address.length - 4)}</Link></h2>
+                              <h2 className="sellerName"> <Link style={{ textDecoration: "null" }} to={"/user-profile/"+buyer._id}>{buyer.wallet_address.substring(0, 4)}...{buyer.wallet_address.slice(buyer.wallet_address.length - 4)}</Link></h2>
 
                             ) : (
 
-                              <h2 className="sellerName"> <Link style={{ textDecoration: "null" }} to={"/my-profile"}>{buyer.userName}</Link> </h2>
+                              <h2 className="sellerName"> <Link style={{ textDecoration: "null" }} to={"/user-profile/"+buyer._id}>{buyer.userName}</Link> </h2>
 
                             )}
 
@@ -533,7 +533,7 @@ function LeaderBoard() {
 
                               {result} ETH
 
-                              <span className="ethValue">({"$"})</span>
+                              {/* <span className="ethValue">({"$"})</span> */}
 
                             </p>
 
@@ -733,11 +733,11 @@ function LeaderBoard() {
 
                             {topSellers.userName == "" ? (
 
-                              <h2 className="sellerName"> <Link to={"/my-profile"}>{topSellers.wallet_address.substring(0, 4)}...{topSellers.wallet_address.slice(topSellers.wallet_address.length - 4)}</Link></h2>
+                              <h2 className="sellerName"> <Link to={"/user-profile/"+topSellers._id}>{topSellers.wallet_address.substring(0, 4)}...{topSellers.wallet_address.slice(topSellers.wallet_address.length - 4)}</Link></h2>
 
                             ) : (
 
-                              <h2 className="sellerName"><Link to={"/my-profile"}>{topSellers.userName}</Link></h2>
+                              <h2 className="sellerName"><Link to={"/user-profile/"+topSellers._id}>{topSellers.userName}</Link></h2>
 
                             )}
 
@@ -747,7 +747,7 @@ function LeaderBoard() {
 
                               {result} ETH
 
-                              <span className="ethValue">({"$"})</span>
+                              {/* <span className="ethValue">({"$"})</span> */}
 
                             </p>
 
@@ -943,13 +943,13 @@ function LeaderBoard() {
 
 
 
-                            {collection[0].name == ""|| !collection[0].name ? (
+                            {collection[0].name == "" || !collection[0].name ? (
 
-                              <h2 className="sellerName"> <Link style={{ textDecoration: "null" }} to={"/collection-details/"+collection[0]._id}>{collection[0].contractAddress.substring(0, 4)}...{collection[0].contractAddress.slice(collection[0].contractAddress.length - 4)}</Link></h2>
+                              <h2 className="sellerName"> <Link style={{ textDecoration: "null" }} to={"/collection-details/" + collection[0]._id}>{collection[0].contractAddress.substring(0, 4)}...{collection[0].contractAddress.slice(collection[0].contractAddress.length - 4)}</Link></h2>
 
                             ) : (
 
-                              <h2 className="sellerName"><Link style={{ textDecoration: "null" }} to={"/collection-details/"+collection[0]._id}>{collection[0].name}</Link></h2>
+                              <h2 className="sellerName"><Link style={{ textDecoration: "null" }} to={"/collection-details/" + collection[0]._id}>{collection[0].name}</Link></h2>
 
                             )}
 
@@ -1137,7 +1137,7 @@ function LeaderBoard() {
 
               {PendingAcceptedCreated === "pending" ? (
 
-                <BuildPendingAcceptedRejectedBlock apiData={Pending} />
+                <BuildPendingAcceptedRejectedBlock apiData={limitBuyers} />
 
               ) : (
 
@@ -1235,9 +1235,9 @@ function LeaderBoard() {
           {/* <div className="col-md-3 col-lg-3 col-sm-6 col-11 images"> */}
 
           {topNftSales.map((curElem) => {
-            // console.log("kggggggggggggggggggg",curElem.owner[0].wallet_address)
+            console.log("kggggggggggggggggggg",curElem)
 
-            const { cdnUrl, name, owner, maxPrice2, daysLeft, likesCount, _id,content } =
+            const { cdnUrl, name, owner, maxPrice2, daysLeft, likesCount, _id, content } =
 
               curElem;
 
@@ -1294,9 +1294,9 @@ function LeaderBoard() {
                           Sold to&nbsp;
 
                           <span className="namesold"  >
-                          {/* {buyer.wallet_address.slice(buyer.wallet_address.length - 4)} */}
+                            {/* {buyer.wallet_address.slice(buyer.wallet_address.length - 4)} */}
 
-                            {(String(owner[0].wallet_address).length >= 7) ? (!owner[0].wallet_address ? " " : (String(owner[0].wallet_address).substring(0, 4) + "..."+String(owner[0].wallet_address).slice(String(owner[0].wallet_address).length - 4))) : (String(owner[0].wallet_address) === undefined ? "" : owner[0].wallet_address)}
+                            {(String(owner[0].wallet_address).length >= 7) ? (!owner[0].wallet_address ? " " : (String(owner[0].wallet_address).substring(0, 4) + "..." + String(owner[0].wallet_address).slice(String(owner[0].wallet_address).length - 4))) : (String(owner[0].wallet_address) === undefined ? "" : owner[0].wallet_address)}
 
                           </span>
 
@@ -1379,7 +1379,7 @@ function LeaderBoard() {
 }
 
 const BuildPendingAcceptedRejectedBlock = ({ apiData }) => {
-
+  // console.log("ppppppppppppppppppp", apiData)
   return (
 
     <div>
@@ -1388,23 +1388,63 @@ const BuildPendingAcceptedRejectedBlock = ({ apiData }) => {
 
         {apiData.map((curElem) => {
 
-          const { Image, Heading, SubHead1, SubHead2 } = curElem;
+          const { cdnUrl, firstName, SubHead1, SubHead2, buyer, volume } = curElem;
+          var precise = volume.toPrecision(4);
 
+          var result = parseFloat(precise);
           return (
 
             <>
 
               <div className="leaderboardTopDetailsRow">
 
-                <img src={Image} alt="" />
+                {buyer.photo == "" || !buyer.photo ? (
+
+                  <img
+
+                    className="top-img" style={{ width: '71px', height: '71px' }} src={NoProfile}
+
+                    alt=""
+
+                  />
+
+
+
+                ) : (
+
+                  <img
+
+                    className="top-img" style={{ width: '71px', height: '71px' }} src={buyer.photo}
+
+                    alt=""
+
+                  />
+
+
+
+                )}
+
 
                 <div className="LeaderboardInsideDetails">
 
-                  <h2 className="sellerName">{Heading}</h2>
+
+                  {buyer.userName == "" ? (
+
+
+                    <h2 className="sellerName"> <Link style={{ textDecoration: "null" }} to={"/user-profile/"+buyer._id}>{buyer.wallet_address.substring(0, 4)}...{buyer.wallet_address.slice(buyer.wallet_address.length - 4)}</Link></h2>
+
+                  ) : (
+
+                    <h2 className="sellerName"> <Link style={{ textDecoration: "null" }} to={"/user-profile/"+buyer._id}>{buyer.userName}</Link> </h2>
+
+                  )}
+
 
                   <p className="volumeData">
+                    {/* zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz */}
+                    {result} ETH
 
-                    {SubHead1}
+                    {/* <span className="ethValue">({"$"})</span> */}
 
                     <span className="ethValue">{SubHead2}</span>
 
@@ -1423,6 +1463,13 @@ const BuildPendingAcceptedRejectedBlock = ({ apiData }) => {
         })}
 
       </div>
+      {apiData.length === 0 && (
+
+        <div className="spinnerloader">{<Spinner />}
+
+
+
+        </div>)}
 
       <div className="card-footer view-more">
 
@@ -1467,7 +1514,7 @@ const BuildAcceptedBlock = ({ apiData }) => {
 
 
 
-                {topSellers.coverPhoto == "" ? (
+                {topSellers.photo == "" || !topSellers.photo ? (
 
                   <img
 
@@ -1483,7 +1530,7 @@ const BuildAcceptedBlock = ({ apiData }) => {
 
                   <img
 
-                    className="top-img" style={{ width: '71px', height: '71px' }} src={topSellers.coverPhoto}
+                    className="top-img" style={{ width: '71px', height: '71px' }} src={topSellers.photo}
 
                     alt=""
 
@@ -1494,19 +1541,17 @@ const BuildAcceptedBlock = ({ apiData }) => {
                 )}
 
 
-
-
                 <div className="descriptiontopSeller">
 
 
 
                   {topSellers.userName == "" ? (
 
-                    <h2 className="sellerName">no name</h2>
+                    <h2 className="sellerName"> <Link to={"/user-profile/"+topSellers._id}>{topSellers.wallet_address.substring(0, 4)}...{topSellers.wallet_address.slice(topSellers.wallet_address.length - 4)}</Link></h2>
 
                   ) : (
 
-                    <h2 className="sellerName">{topSellers.userName}</h2>
+                    <h2 className="sellerName"><Link to={"/user-profile/"+topSellers._id}>{topSellers.userName}</Link></h2>
 
                   )}
 
@@ -1514,9 +1559,9 @@ const BuildAcceptedBlock = ({ apiData }) => {
 
                   <p className="volumeData">
 
-                    ETH
+                    {result} ETH
 
-                    <span className="ethValue">({"$" + result})</span>
+                    {/* <span className="ethValue">({"$"})</span> */}
 
                   </p>
 
@@ -1536,11 +1581,12 @@ const BuildAcceptedBlock = ({ apiData }) => {
 
       </div>
 
-      {apiData.length === 0 && (<div>
+      {apiData.length === 0 && (
 
-        <h1>No Data Found</h1>
+        <div className="spinnerloader">{<Spinner />}
 
-      </div>)}
+
+        </div>)}
 
       <div className="card-footer view-more">
 
@@ -1570,7 +1616,7 @@ const BuildRejectedBlock = ({ apiData }) => {
 
         {apiData.map((curElem) => {
 
-          const { collectionPhoto, collectionName, nftCount } = curElem;
+          const { collection, items, collectionPhoto } = curElem;
 
           return (
 
@@ -1578,15 +1624,48 @@ const BuildRejectedBlock = ({ apiData }) => {
 
               <div className="leaderboardTopDetailsRow">
 
-                <img className="top-img" src={collectionPhoto} alt="" />
+                {collection[0].imageUrl == "" || !collection[0].imageUrl ? (
+
+                  <img
+
+                    className="top-img" style={{ width: '71px', height: '71px' }} src={NoProfile}
+
+                    alt=""
+
+                  />
+
+
+
+                ) : (
+
+                  <img
+
+                    className="top-img" style={{ width: '71px', height: '71px' }} src={collection[0].imageUrl}
+
+                    alt=""
+
+                  />
+
+
+
+                )}
+
 
                 <div className="LeaderboardInsideDetails">
 
-                  <h2>{collectionName}</h2>
+                  {collection[0].name == "" || !collection[0].name ? (
+
+                    <h2 className="sellerName"> <Link style={{ textDecoration: "null" }} to={"/collection-details/" + collection[0]._id}>{collection[0].contractAddress.substring(0, 4)}...{collection[0].contractAddress.slice(collection[0].contractAddress.length - 4)}</Link></h2>
+
+                  ) : (
+
+                    <h2 className="sellerName"><Link style={{ textDecoration: "null" }} to={"/collection-details/" + collection[0]._id}>{collection[0].name}</Link></h2>
+
+                  )}
 
                   <p style={{ display: 'flex' }}>
 
-                    {curElem.nftCount}&nbsp;items
+                    {items} items
 
                   </p>
 
@@ -1604,11 +1683,10 @@ const BuildRejectedBlock = ({ apiData }) => {
 
       </div>
 
-      {apiData.length === 0 && (<div>
+      {apiData.length === 0 && (
 
-        <h1>No Data Found</h1>
-
-      </div>)}
+        <div className="spinnerloader">{<Spinner />}
+        </div>)}
 
       <div className="card-footer view-more">
 

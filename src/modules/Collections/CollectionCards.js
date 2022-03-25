@@ -228,7 +228,7 @@ function Collections_tile() {
                 onChange={(e) => handleFilter(e)}
                 value={filterData.categoryName}
                 className="first_select ml_auto dropdown-toggle-ellipsis sort-drop"
-                style={{width:'240px'}}
+                style={{ width: '240px' }}
               >
                 <option value="">Categories All</option>
                 {Categories.map((item, key) => {
@@ -300,7 +300,7 @@ function Collections_tile() {
             })()}
           </div>
           {/* nfts.slice(0, visibleBlogs).map((nft) =>  */}
-          
+
           {collections.slice(0, visibleBlogs).map((collection) => {
             const { _id, imageUrl, name, nftCount } = collection;
             const route = "/collection-details/" + _id;
@@ -344,11 +344,15 @@ function Collections_tile() {
           })}
           {collections.length === 0 && (<div>
             <div className="Noitemdiv">
-            <img src={NoItem}/>
-             <p className="textitem">No items available</p>
-           </div>
+              <img src={NoItem} />
+              <p className="textitem">No items available</p>
+            </div>
           </div>)}
-          <button className="load-more" onClick={loadMoreHandler}>Load More</button>
+          {
+            visibleBlogs >= collections.length ? "" :
+              ( <div style={{textAlignLast: "center"}}><button className="load-more" onClick={loadMoreHandler}>Load More</button></div>
+                )
+          }
 
         </div>
       </div>

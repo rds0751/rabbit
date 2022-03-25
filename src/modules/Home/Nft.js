@@ -169,7 +169,7 @@ function NftPage() {
     // searchByName: name ? name : "",
     // searchByName: "puneet",
     // minPrice: 0,
-    
+
     // maxPrice: "",
     // --------------------------
     // sort: 0,
@@ -216,7 +216,7 @@ function NftPage() {
       // console.log(res, "filterResponse");
       setIsloading(true);
       if (res.success) {
-        
+
         // prevArray => [...prevArray, newValue]
         setNfts(res.responseData.nftContent);
         // setNfts([nfts,res.responseData.nftContent]);
@@ -485,8 +485,11 @@ function NftPage() {
             </div>
 
           )}
-          <button className="load-more" onClick={loadMoreHandler}>Load More</button>
-
+          {
+            visibleBlogs >= nfts.length ? "" :
+              (
+                <div style={{ textAlignLast: "center" }}><button className="load-more" onClick={loadMoreHandler}>Load More</button></div>)
+          }
         </div>
       </div >
       <ToastContainer
