@@ -103,7 +103,7 @@ ul {
 }
 .card-lower {
   background: #f8f8f8 0% 0% no-repeat padding-box;
-  height: 122px;
+  min-height: 122px;
   border-radius: 0px 0px 13px 13px;
 }
 
@@ -123,13 +123,15 @@ ul {
 }
 .value__high {
   font-size: 14px;
-  display: flex;
-  justify-content: space-between;
+  /* display: flex;
+  justify-content: space-between; */
   margin-top: 20px;
-  font: normal normal normal 14px/21px Poppins;
   text-align: left;
   letter-spacing: 0px;
   color: #191919;
+  font-family: 'poppins';
+  font-size: 14px;
+  line-height: 21px;
   /* margin-left: 14px;
   margin-right: 12px; */
 }
@@ -149,9 +151,9 @@ ul {
   border-top-right-radius: 0.6em;
   object-fit: cover;
 }
-.images {
-  /* margin-left: 50px; */
-}
+/* .images {
+  margin-left: 50px;
+} */
 .col1 {
   margin-left: 1rem;
 }
@@ -524,9 +526,9 @@ input::-webkit-input-placeholder {
 .collection-img-card-radius {
   border-radius: 50%;
 }
-.collection-card {
-  /* height: 260px; */
-}
+/* .collection-card {
+  height: 260px;
+} */
 /* -----------------Collections hompage css end------------ */
 
 /* -----------------Nft Info hompage css------------ */
@@ -764,10 +766,10 @@ input::-webkit-input-placeholder {
 .filter .dropdown {
   display: flex;
   align-items: center;
-  border: 1px solid #d2d2d2;
+  /* border: 1px solid #d2d2d2; */
   border-radius: 4px;
-  padding: 9px 12px 13px 12px;
-  width: 222px;
+  padding: 9px 12px 9px 12px;
+  width: 250px;
 }
 .filter .dropdown p {
   font-family: 'poppins-medium';
@@ -775,9 +777,10 @@ input::-webkit-input-placeholder {
   color: #191919;
 }
 .filter .dropdown select {
-  border: none;
-  width: 143px;
-  color: #858585;
+  /* border: none; */
+  /* width: 143px; */
+  /* color: #858585; */
+  color: #191919;
   font-family: 'poppins-medium';
   line-height: 21px;
 }
@@ -785,7 +788,8 @@ input::-webkit-input-placeholder {
   margin-left: 32px;
 }
 .filter .dropdown .first_select {
-  color: #858585;
+  /* color: #858585; */
+  color: #191919;
   width: 52%;
   font-family: 'poppins-medium';
   line-height: 21px;
@@ -799,12 +803,13 @@ input::-webkit-input-placeholder {
   align-items: center;
   border: 1px solid #d2d2d2;
   border-radius: 4px;
-  padding: 9px 12px 13px 12px;
+  padding: 9px 12px 9px 12px;
   width: 260px;
   font-family: 'poppins-medium';
   line-height: 21px;
   font-size: 16px;
   height: 42px;
+  cursor: pointer;
 }
 /* .sort-drop > select {
   border: none;
@@ -823,10 +828,10 @@ select:focus-visible {
   .ntf_div{
     margin: 0 20px;
   }
-  .filter .dropdown .first_select {
-    /* margin-left: 10px; */
-    /* width: 90%; */
-  }
+  /* .filter .dropdown .first_select {
+    margin-left: 10px;
+    width: 90%;
+  } */
   .filter .second_select {
     margin-left: 0px;
   }
@@ -877,16 +882,17 @@ select:focus-visible {
   }
   .filter {
     flex-direction: column;
+    margin-bottom: 16px;
   }
   .sort-drop {
     width: 100%;
   }
   .filter .dropdown select{
-    border: none;
-    width: 180px;
+    /* border: none; */
+    width: 100%!important;
   }
   .filter .dropdown {
-    width: initial;
+    width: 100%!important;
     margin-bottom: 16px;
   }
 }
@@ -919,7 +925,7 @@ select:focus-visible {
   color: #8b8b8b;
 }
 .connect-wallet .eachWalletTypeBox .card {
-  background: #ffffff !important;
+  background: #ffffff;
   border: 2px solid #f1f1f1 !important;
   border-radius: 13px;
   width: 289px;
@@ -933,6 +939,8 @@ select:focus-visible {
 }
 .connect-wallet .eachWalletTypeBox .card:hover {
   border: 2px solid #8b8b8b !important;
+  animation-play-state: paused;
+  background-color: #ffffff!important;
 }
 .connect-wallet .eachWalletTypeBox .card-title {
   font-family: "poppins-semibold";
@@ -951,6 +959,39 @@ select:focus-visible {
 .connect-wallet .eachWalletTypeBox .card-body {
   padding: 0px;
 }
+.connect-wallet .eachWalletTypeBox .card-effect{
+  background-image: linear-gradient(266deg, #e6e6e6 0%, #c0bfbb 49%, #efebeb 80%, #dfdfdf 100%);;
+  animation:slidebg 5s linear infinite;
+}
+@keyframes slidebg {
+  to {
+    background-position:20vw;
+  }
+}
+.connect-wallet .eachWalletTypeBox .card-effect1{
+  animation: glow 0.5s ease-in-out infinite alternate;
+}
+@keyframes glow {
+  from {
+    background-color: #f2f2f2;
+  }
+  
+  to {
+    background-color: #c0bebe;
+  }
+}
+/* @keyframes glow {
+  from {
+    box-shadow: 0 0 10px #fff, 0 0 15px #f2f2f2, 0 0 20px #8f8e8e, 0 0 25px #696969, 0 0 30px #696969, 0 0 35px #696969;
+  }
+  
+  to {
+    box-shadow: 0 0 10px #fff, 0 0 15px #f2f2f2, 0 0 20px #8f8e8e, 0 0 25px #696969, 0 0 30px #696969, 0 0 35px #696969;
+  }
+} */
+
+
+
 @media only screen and (max-width: 1600px) {
   .connect-wallet {
     padding-left: 8.5%;
@@ -962,6 +1003,9 @@ select:focus-visible {
     padding-left: 6%;
     padding-right: 6%;
   }
+  .card-lower{
+    min-height: 110px;
+  }
 }
 @media only screen and (max-width:767px){  
   .lower__homepage{
@@ -970,7 +1014,7 @@ select:focus-visible {
   .filter .dropdown {
     width: initial;
     margin-bottom: 16px;
-    margin-left: 0px;
+    margin-left: 2%;
     display: flex;
     justify-content: space-between;
   }
@@ -986,16 +1030,20 @@ select:focus-visible {
 }
 
 .ethCurrency{
-font: normal normal bold 14px/21px Poppins;
-letter-spacing: 0px;
-color: #366EEF;
+  letter-spacing: 0px;
+  color: #366EEF;
+  font-family: 'poppins-bold';
+  font-size: 14px;
+  line-height: 21px;
 }
 
 .namesold{
-text-align: left;
-font: normal normal 600 14px/21px Poppins;
-letter-spacing: 0px;
-color: #191919;
+  text-align: left;
+  letter-spacing: 0px;
+  color: #191919;
+  font-family: 'poppins-semibold';
+  font-size: 14px;
+  line-height: 21px;
 }
 /* add wallet screen css end*/
 .z-carousel{

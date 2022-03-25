@@ -3,7 +3,9 @@ import React, { Component, useState, useEffect } from "react";
 import "../../assets/styles/Leader.css";
 import styled from "styled-components";
 import dropdown from "../../assets/images/drop down.png";
-import profileImage from "../../assets/images/profile.png";
+import Spinner from "../../common/components/Spinner";
+
+import profileImage from "../../assets/images/NoProfile.svg";
 // import './Top_collection.css'
 import {
   LeaderBoardApi,
@@ -21,8 +23,8 @@ const queryString = require("query-string");
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 140px;
-  margin-right: 130px;
+  margin-left: 7%;
+  margin-right: 7%;
   color: #191919;
   margin-top: 29px;
   @media only screen and (min-width:425px) and  (max-width:769px) {
@@ -39,6 +41,7 @@ const Container = styled.div`
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items:center;
   @media screen and (max-width:426px) {
     overflow: scroll;
     width: 557px;
@@ -46,7 +49,9 @@ const Header = styled.div`
 `;
 const Title = styled.h3`
   font-size: 20px;
-  font-weight: 600;
+  line-height:30px;
+  font-family: 'poppins-bold';
+  margin-bottom: 0px;
   @media screen and (max-width:426px){
     font-size: 18px;
     margin: auto 0;
@@ -67,6 +72,8 @@ const Select = styled.select`
   background-image: url(${dropdown});
   background-repeat: no-repeat;
   background-position: 90% center;
+  color: #000000;
+  font-family: 'poppins-medium';
 `;
 const Body = styled.div`
   margin-top: 58px;
@@ -84,7 +91,9 @@ const Body = styled.div`
 `;
 const Column = styled.div`
   font-size: 16px;
-  font-weight: 600;
+  line-height:25px;
+  font-family:'poppins-semibold';
+  color:#191919;
 `;
 const Collection = styled.div`
   display: flex;
@@ -104,13 +113,13 @@ const Image = styled.img`
   height: 42px;
   /* padding-left: 31px;
   padding-right: 14px; */
-  border-radius: 10px;
+  border-radius: 22px;
   margin: auto 0;
 `;
 const NameColumn = styled.div`
   display: flex;
   margin-left: 31px;
- 
+  align-items: center;
 `;
 const Name = styled.p`
   font-size: 16px;
@@ -118,22 +127,26 @@ const Name = styled.p`
   margin: 24px 0 21px 14px;
 `;
 const VolumeColumn = styled.div`
-  /* padding-left: 40px; */
-  margin:auto 0;
   width:100%;
 `;
 const Span = styled.p`
   color: #366eef;
   font-size: 16px;
-  font-weight: 500;
+  line-height: 25px;
+  font-family: poppins-medium;
+  margin-bottom:0px;
 `;
 const Text = styled.div`
   font-size: 16px;
-  font-weight: 500;
-  `;
+  line-height: 25px;
+  font-family: 'poppins-medium';
+  color: #191919;
+`;
 const Volume = styled.span`
-font:normal normal normal 16px/25px Poppins;
-color: #818181;
+  font-family: 'poppins';
+  font-size: 16px;
+  line-height: 25px;
+  color: #818181;
 `;
 function TopSeller() {
 
@@ -162,7 +175,7 @@ function TopSeller() {
   }
 
   return (
-    <Container>
+    <Container className="leader-viewmore">
       <Header>
         <Title>Top Sellers</Title>
         <Select name="duration" onChange={(e) => ChangeSellerDuration(e)}>
@@ -200,10 +213,10 @@ function TopSeller() {
                 )}
 
                 {topSellers.userName == "" ? (
-                  <h2 className="sellerName"> <Link style={{ textDecoration: "null" }} to={"/my-profile"}>{topSellers.wallet_address.substring(0, 4)}...{topSellers.wallet_address.slice(topSellers.wallet_address.length - 4)}</Link></h2>
+                  <h2 className="seller-name"> <Link style={{ textDecoration: "null" }} to={"/my-profile"}>{topSellers.wallet_address.substring(0, 4)}...{topSellers.wallet_address.slice(topSellers.wallet_address.length - 4)}</Link></h2>
 
                 ) : (
-                  <Name>{topSellers.userName}</Name>
+                  <h2 className="seller-name"><Link style={{ textDecoration: "null" }} to={"/my-profile"}>{topSellers.userName}</Link></h2>
 
                 )}
 
@@ -219,6 +232,12 @@ function TopSeller() {
           </div>
         );
       })}
+      {topSellers.length === 0 && (
+
+        <div className="spinnerloader">{<Spinner />}
+
+
+        </div>)}
     </Container>
   );
 }

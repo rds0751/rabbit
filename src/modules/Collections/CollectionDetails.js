@@ -23,22 +23,22 @@ function CollectionDetails() {
   const [statusDrop, setStatusDrop] = useState(false);
   const [priceDrop, setpriceDrop] = useState(false);
   const [sortDrop, setsortDrop] = useState(false);
-
   const [nfts, setNfts] = useState([]);
   const [checkLike, setcheckLike] = useState(false);
+
   useEffect(() => {
-    // console.log("000000000dddddddd",collectionId)
-    getCollection(collectionId.id).then((response) => {
-      setCollection(response);
-      console.log(response, "<<<<response");
-    });
-    getNftsByCollectionId(collectionId.id).then((response) => {
-      setNfts(response);
-      console.log(response, "<<<<< collectionresponse");
-    });
+    async function fetchData() {
+      await getCollection(collectionId.id).then((res) => {
+        setCollection(res);
+      });
+      await getNftsByCollectionId(collectionId.id).then((res) => {
+        setNfts(res);
+      });
+    }
+    fetchData();
   }, []);
+
   const { imageUrl, coverUrl, name, description } = collection;
-  // const [checkLike, setCheckLike] = useState(false);
   const handleLike = () => {
     setcheckLike(!checkLike);
   };
@@ -128,34 +128,32 @@ function CollectionDetails() {
                   <div className="dropsingleitem">status 1</div>
                 </div>
               </div>
-            </div>
-            <div
-              className="colldrop sortbydrop"
-              onClick={() => setsortDrop(!sortDrop)}
-            >
-              <div className="statusText">Sort By</div>
-              <div>
-                <img src={dropdown} />
-              </div>
               <div
-                className="dropitems "
-                style={{ display: sortDrop ? "block" : "none" }}
+                className="colldrop ms-auto"
+                onClick={() => setsortDrop(!sortDrop)}
               >
-                <div className="dropsingleitem">All</div>
-                <div className="dropsingleitem">status 1</div>
-                <div className="dropsingleitem">status 1</div>
+                <div className="statusText">Sort By</div>
+                <div>
+                  <img src={dropdown} />
+                </div>
+                <div
+                  className="dropitems "
+                  style={{ display: sortDrop ? "block" : "none" }}
+                >
+                  <div className="dropsingleitem">All</div>
+                  <div className="dropsingleitem">status 1</div>
+                  <div className="dropsingleitem">status 1</div>
+                </div>
               </div>
             </div>
+            
           </div>
           <div className="nftTileContainer row cards-gap ntf_row">
 
-            {nfts.lenght>1 ? (
-              [...nfts].map((nft) => {
-                const { ipfsUrl, name, salesInfo } = nft;
-                return <CollDetailCard nft={nft} />;
-  
+            {nfts.length > 0 ? (
+              nfts.map((nft) => {
+                return <CollDetailCard nft={nft} />;  
               })
-
             ):(
               <div>
               <div className="Noitemdiv">
@@ -167,6 +165,7 @@ function CollectionDetails() {
             )}
            
             {}
+            
           </div>
         </div>
       </div>

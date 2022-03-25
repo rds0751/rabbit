@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-// import { CollectionTile_Api } from "../API/CollectionTile_Api";
 import { CollectionTile_Api } from "../../constants/CollectionTile_Api";
 import CollectionNftFilter from "../../common/components/CollectionNFtFilter";
 import NftToggle from "../../common/components/NftToggle";
 import { getCollections } from "../../services/webappMicroservice";
 import "../../assets/styles/homeCollectionCards.css";
 import "../../assets/styles/collectiondetail.css";
-import { getCategories } from "../../services/UserMicroService";
+import { getCategories } from "../../services/clientConfigMicroService";
 import { getALLCollectionById } from "../../services/contentMicroservice";
-
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import Spinner from "../../common/components/Spinner";
@@ -17,31 +15,38 @@ import NoItem from "../../assets/images/Noitems.svg"
 const queryString = require('query-string');
 function Collections_tile() {
   const initialFilterData = {
-    sort: 1,
+    sort: "",
     categoryId: "",
     searchByName: "",
   };
 
   const [collections, setCollections] = useState([]);
-  console.log("<<<<<<<<collections", collections);
-
-
   const [Categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [filterData, setFilterData] = useState(initialFilterData);
+  const [visibleBlogs, setVisibleBlogs] = useState(8)
+
   const [toggleNft, setToggleNft] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
-    const reqObj = queryString.stringify(filterData);
-    getCollections(reqObj).then((response) => {
-      setCollections(response);
-      setIsLoading(false);
-    });
-    getCategories((res) => {
-      setCategories(res.responseData);
-      console.log(res, "<<<<<<categories");
-    });
+    async function fetchData() {
+      await getCategories().then((res) => {
+        setCategories(res);
+      });
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      setIsLoading(true);
+      const reqObj = queryString.stringify(filterData);
+      await getCollections(reqObj).then((res) => {
+        setCollections(res);
+        setIsLoading(false);
+      });
+    }
+    fetchData();
   }, [filterData]);
 
   const handleFilter = (e) => {
@@ -64,7 +69,11 @@ function Collections_tile() {
       }
     });
   };
+  const loadMoreHandler = () => {
+    // <div className="spinnerloader">{isloading && <Spinner />}</div>
+    setVisibleBlogs(prevVisibleBlogs => prevVisibleBlogs + 4)
 
+  }
   return (
     <>
       <div className="ntf_div">
@@ -75,16 +84,16 @@ function Collections_tile() {
         <div className="lower__homepage" style={{ width: "100%" }}>
           <div id="filters filter-large" className="filter">
             <div className="mobilenftTilePageFirstSelect dropdown">
-              <p className="mb-0">Categories </p>
+              {/* <p className="mb-0">Categories </p> */}
               <select
-                name="categoryName "
+                name="categoryId"
                 id="sale"
-                onChange={(e) => getCollectionById(e.target.value)}
+                onChange={(e) => handleFilter(e)}
                 value={filterData.categoryName}
-                className="first_select ml_auto dropdown-toggle-ellipsis"
-                style={{paddingLeft:"8px"}}
+                className="first_select ml_auto dropdown-toggle-ellipsis sort-drop"
+                style={{width:'240px'}}
               >
-                <option value="">All</option>
+                <option value="">Categories All</option>
                 {Categories.map((item, key) => {
                   return <option value={item._id}>{item.name}</option>;
                 })}
@@ -92,20 +101,21 @@ function Collections_tile() {
             </div>
           </div>
           <div className="filter">
-            <div className="dropdown sort-drop" style={{ width: "260px" }}>
-              <p className="mb-0">Sort By</p>
+            <div className="dropdown" style={{ width: "260px" }}>
+              {/* <p className="mb-0">Sort By</p> */}
               <select
                 name="sort"
                 value={filterData.sort}
                 id="sale"
                 // className="first_select ml_auto"
                 onChange={(e) => handleFilter(e)}
-                className="priceRangeDropDown dropdown-toggle-ellipsis"
-                style={{ width: "180px" }}
+                className="priceRangeDropDown dropdown-toggle-ellipsis sort-drop"
+                style={{ width: "260px" }}
               >
-                <option value="all">All</option>
-                <option value="1">Ascending Order</option>
-                <option value="-1">Descending Order</option>
+                <option value="">Sort By All</option>
+                <option value="-1">Recently added</option>
+                <option value="3">Items low to high</option>
+                <option value="2">Items high to low</option>
               </select>
             </div>
           </div>
@@ -127,7 +137,9 @@ function Collections_tile() {
               }
             })()}
           </div>
-          {collections.map((collection) => {
+          {/* nfts.slice(0, visibleBlogs).map((nft) =>  */}
+          
+          {collections.slice(0, visibleBlogs).map((collection) => {
             const { _id, imageUrl, name, nftCount } = collection;
             const route = "/collection-details/" + _id;
             return (
@@ -159,8 +171,6 @@ function Collections_tile() {
                       <p className="collectionCardEachTotalitems">
                         <span className=" font-14 text-dark">
                           Total Items:
-                          {/* {alert(nfts)} */}
-                          {/* {console.log("jjjjjjjjjjjjjjjj",collection)} */}
                           <span className="text-primary">{nftCount}</span>
                         </span>
                       </p>
@@ -176,6 +186,8 @@ function Collections_tile() {
              <p className="textitem">No items available</p>
            </div>
           </div>)}
+          <button className="load-more" onClick={loadMoreHandler}>Load More</button>
+
         </div>
       </div>
       <ToastContainer

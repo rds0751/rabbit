@@ -27,7 +27,7 @@ function Navbar() {
   const navigate = useNavigate();
   const [humburger, setHumburger] = useState(false);
   const [searchInput, setSearchInput] = useState({
-    searchByName : "monkey"
+    searchByName : ""
   });
   const [toggleEffect, setToggleEffect] = useState(false);
   const [errorMssg, setErrorMssg] = useState(null);
@@ -123,6 +123,7 @@ function Navbar() {
       if (walletAddress == null) {
         dispatch(RedirectTo("myitems"));
         navigate("/add-wallet");
+        toast.error("Connect your wallet");
       } else {
         navigate("/my-items");
       }
@@ -133,6 +134,7 @@ function Navbar() {
       if (walletAddress == null) {
         dispatch(RedirectTo("create"));
         navigate("/add-wallet");
+        toast.error("Connect your wallet");
       } else {
         navigate("/create-nft");
       }
@@ -143,7 +145,7 @@ function Navbar() {
       if (walletAddress == null) {
         dispatch(RedirectTo("profile"));
         navigate("/add-wallet");
-
+        toast.error("Connect your wallet");
         // navigate("/my-profile");
       } else {
         navigate("/my-profile");
@@ -160,6 +162,7 @@ function Navbar() {
   const handleWalletClick = () => {
     if (walletAddress == null) {
       navigate("/add-wallet");
+      toast.error("Connect your wallet");
     } else {
       dispatch(ManageWalletSideBar(!isOpenWallet));
       dispatch(ManageNotiSideBar(false));
@@ -170,6 +173,7 @@ function Navbar() {
     console.log(isOpenNoti, "<<<isopen noti");
     if (loggedInUser == null) {
       navigate("/add-wallet");
+      toast.error("Connect your wallet");
     } else {
       dispatch(ManageNotiSideBar(!isOpenNoti));
       dispatch(ManageWalletSideBar(false));
@@ -180,11 +184,11 @@ function Navbar() {
 
   useEffect(() => {
     // checkapi();
-    const reqObj = queryString.stringify(searchInput);
+    // const reqObj = queryString.stringify(searchInput);
 
     setIsloading(true);
     // getNfts(defaultReq).then((response) => {
-    getNFtsData(reqObj, (res) => {
+    getNFtsData(searchInput, (res) => {
       // console.log(res, "filterResponse");
       setIsloading(true);
       if (res.success) {
@@ -266,7 +270,8 @@ console.log("kkkkkkkkkkkkkkkkkk",data)
                 placeholder="Search"
                 aria-label="Search"
                 // value={searchInput}
-                onChange={() => setSearchInput()}
+                onChange={(e) => setSearchInput({...searchInput, [e.target.name]:e.target.value})}
+                // onChange={() => setSearchInput()}
               />
               <button
                 className="search-icon-mob"

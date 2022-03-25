@@ -37,6 +37,7 @@ function NftPage(props) {
     // searchByName: name ? name : "",
     // searchByName: "puneet",
     // minPrice: 0,
+    
     // maxPrice: "",
     // --------------------------
     // sort: 0,
@@ -51,6 +52,14 @@ function NftPage(props) {
   const { user, sideBar } = useSelector((state) => state);
   const [toggleNft, setToggleNft] = useState(true);
   const [minPrice, setminPrice] = useState("");
+  const [visibleBlogs, setVisibleBlogs] = useState(8)
+
+  // const [skipItem, setSkipItem] = useState("");
+  // const [itemLimit, setItemLimit] = useState(10);
+
+  // const [prevskipItem, setPrevskipItem] = useState(0);
+
+
 
   const [maxPrice, setmaxPrice] = useState("");
 
@@ -73,7 +82,10 @@ function NftPage(props) {
       // console.log(res, "filterResponse");
       setIsloading(true);
       if (res.success) {
+        
+        // prevArray => [...prevArray, newValue]
         setNfts(res.responseData.nftContent);
+        // setNfts([nfts,res.responseData.nftContent]);
         setIsloading(false);
       } else {
         toast.error("Error While fetching Nfts");
@@ -180,7 +192,13 @@ function NftPage(props) {
   const buttonfilter = (e) => {
     handlePriceFilter(e);
     setStatusDrop(false);
-  };
+
+  }
+  const loadMoreHandler = () => {
+    <div className="spinnerloader">{isloading && <Spinner />}</div>
+    setVisibleBlogs(prevVisibleBlogs => prevVisibleBlogs + 4)
+
+  }
 
   return (
     <>
@@ -212,7 +230,7 @@ function NftPage(props) {
               </select>
             </div> */}
 
-            <div className="mobilenftTilePageSecondSelect dropdown">
+            <div className="mobilenftTilePageSecondSelect dropdown" style={{ border: '1px solid #d2d2d2' }}>
               <p className="mb-0 sale-type">Price range</p>
               <div className="filter-drop">
                 <div
@@ -266,12 +284,7 @@ function NftPage(props) {
                       </Button>
                     </div>
                     <div className="col-6">
-                      <Button
-                        onClick={(e) => buttonfilter(e)}
-                        variant="outline-primary"
-                      >
-                        Apply
-                      </Button>
+                      <Button onClick={(e) => buttonfilter(e)} variant="outline-primary">Apply</Button>
                     </div>
                   </div>
                   {/* </form> */}
@@ -299,18 +312,18 @@ function NftPage(props) {
             <option>Option 1</option>
             <option>Option 2</option>
           </select> */}
-          <div className="mobilenftTilePageThirdSelect dropdown sort-drop price-range-dropdown">
+          <div className="mobilenftTilePageThirdSelect dropdown price-range-dropdown">
             <select
               name="sort"
               id="sale"
               // className="first_select ml_auto"
-              className="priceRangeDropDown dropdown-toggle-ellipsis"
+              className="priceRangeDropDown dropdown-toggle-ellipsis sort-drop"
               placeholder="Sort By"
               style={{ backgroundColor: "white" }}
               onChange={(e) => handlefilter(e)}
               value={filterType.sort}
             >
-              <option value="all">Sort By</option>
+              <option value="all">Sort By All</option>
               <option value="-1">Ascending Order</option>
               <option value="1">Descending Order</option>
             </select>
@@ -321,20 +334,25 @@ function NftPage(props) {
           // className="nftTileContainer gird-container  ntf_row"
           style={{ justifyContent: "start" }}
         >
+
+
           <div className="spinnerloader">{isloading && <Spinner />}</div>
 
           {nfts.length > 1 ? (
-            nfts.map((nft) => {
+            //  const cardComponent = blogs.slice(0, visibleBlogs).map((blog, i) => 
+            nfts.slice(0, visibleBlogs).map((nft) => {
               const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
               // console.log("[[[[[[[",biddingDetails.minPrice)
-              const route = "nft-information/" + _id;
-
+              // const route = "/nft-information/" + _id;
+              // console.log("nfyyyyyyyyyyyyyyyyyyyy",nft)
               return (
                 <>
                   <NftCardsHome nft={nft} />
                 </>
               );
             })
+
+
           ) : (
             <div>
               <div className="Noitemdiv">
@@ -342,7 +360,10 @@ function NftPage(props) {
                 <p className="textitem">No items available</p>
               </div>
             </div>
+
           )}
+          <button className="load-more" onClick={loadMoreHandler}>Load More</button>
+
         </div>
       </div>
       <ToastContainer

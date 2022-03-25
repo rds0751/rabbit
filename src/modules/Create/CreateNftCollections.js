@@ -23,6 +23,7 @@ import { updateCollectionTxStatus } from "../../services/webappMicroservice";
 
 import { getCategories } from "../../services/clientConfigMicroService";
 import Select from 'react-select';
+import $ from 'jquery';
 
 const Button = styled.button``;
 
@@ -43,6 +44,7 @@ function CreateNftCollections(props) {
 
   // -------
   const [specialchar,setSpecialChar]=useState("")
+  
 
 
 
@@ -75,6 +77,27 @@ function CreateNftCollections(props) {
       setCategories(res.responseData);
     });
   }, []);
+
+  useEffect(()=>{
+    $(document).ready(function(){
+
+      var lines = 20;
+      var linesUsed = $('#linesUsed');
+  
+      $('#test').keydown(function(e) {
+  
+          let newLines = $(this).val().split("\n").length;
+          linesUsed.text(newLines);
+  
+          if(e.keyCode == 13 && newLines >= lines) {
+              
+              return false;
+          }
+          
+      });
+  });
+  },[])
+  
 
   // ------------------drag and drop
   const { getRootProps, getInputProps } = useDropzone({
@@ -150,7 +173,7 @@ function CreateNftCollections(props) {
   };
 
   const handleSubmit = async (e) => {
-    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+    var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
     setloaderState(true);
     e.preventDefault();
     // e.preventDefault();
@@ -176,10 +199,16 @@ function CreateNftCollections(props) {
       return null;
     }
     if(format.test(name.current)){
-      toast.error("UserName should be not contain special character");
+      toast.error("Name should be not contain special character");
       setloaderState(false);
       return null;
     }
+    if(name.current.length < 3){
+      toast.error("Name Length must be 3 character");
+      setloaderState(false);
+      return null;
+    }
+
 
     // alert("here");
     console.log("here");
@@ -202,7 +231,7 @@ function CreateNftCollections(props) {
       description: description.current,
       blockchain: blockchain.current,
       addedBy: user.loggedInUser._id,
-      // categoryId:categoryId.current,
+      categoryId:categoryId.current,
     };
 
     //-----------------------
@@ -265,6 +294,7 @@ function CreateNftCollections(props) {
       toast.error(result.message);
       setloaderState(false);
     }
+
 
 
 
@@ -417,15 +447,20 @@ function CreateNftCollections(props) {
               <input
                 type="name"
                 name="name"
+                maxLength="400"
                 className="input-box-1"
                 placeholder="Write your name"
                 onChange={(e) => {
-                  var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                  var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
                   if(format.test(e.target.value)){
                     SetNameError("(No Special Character Allowed)");
-                  } else {
+                  } else if(+e.target.value.length < 3){
+                    SetNameError("(UserName must be 3 character)")
+
+                  }else {
                   SetNameError("");
                   }
+                  
                   name.current = e.target.value;
                   checkReqFieldFun();
                 }}
@@ -435,6 +470,7 @@ function CreateNftCollections(props) {
               <p className="fs-16 fw-b c-b pt-3">Description*</p>
               <textarea
                 rows="4"
+                id="test"
                 name="Description"
                 placeholder="Write description"
                 className="input-box-1 mb-0"
@@ -448,6 +484,7 @@ function CreateNftCollections(props) {
                 }}
               ></textarea>
               <span className="fs-14" style={{ color: "#707070" }}>{DesLength} of 1000 characters used</span>
+              <div style={{ color: "#707070" }}  className="fs-14"><span id="linesUsed">0</span> of 20 Lines used</div>
             </div>
             <div>
               <div className="fs-16 fw-b c-b pt-3 pb-3">Category</div>

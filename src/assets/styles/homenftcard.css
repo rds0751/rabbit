@@ -22,15 +22,16 @@
   margin-left: 3%;
   font-family: "poppins-medium";
   font-size: 0.9vw;
-  width: 100%;
+  width: 260px;
 }
 .price-range-dropdown select {
-  border: none !important;
-  width: 240px;
+  /* border: none !important; */
+  width: 260px;
+  cursor: pointer;
 }
 @media only screen and (min-width:300px) and (max-width:1000px) {
   .price-range-dropdown select{
-    width: 95%;
+    width: 100%;
   }
   }
 /* css for NFt cards */
@@ -200,8 +201,9 @@
 }
 @media only screen and (max-width:767px){
   .mobilenftTilePageThirdSelect {
-    margin-left: 0px !important;
+    /* margin-left: 0px !important; */
     /* margin-top: 3% !important; */
+    margin-bottom: 3% !important;
     width: 100% !important;
   }
 }
