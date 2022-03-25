@@ -1121,7 +1121,9 @@ function LeaderBoard() {
                         >
                           <h6 className="value__k">
                             {/* {daysLeft}{" "} */}
-                            {likesCount}{' '}
+
+                            {likes.length}{" "}
+
                             {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
                           </h6>
 
