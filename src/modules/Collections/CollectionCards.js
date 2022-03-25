@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { CollectionTile_Api } from "../API/CollectionTile_Api";
 import { CollectionTile_Api } from "../../constants/CollectionTile_Api";
 import CollectionNftFilter from "../../common/components/CollectionNFtFilter";
 import NftToggle from "../../common/components/NftToggle";
@@ -8,7 +7,6 @@ import "../../assets/styles/homeCollectionCards.css";
 import "../../assets/styles/collectiondetail.css";
 import { getCategories } from "../../services/clientConfigMicroService";
 import { getALLCollectionById } from "../../services/contentMicroservice";
-
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import Spinner from "../../common/components/Spinner";
@@ -17,15 +15,12 @@ import NoItem from "../../assets/images/Noitems.svg"
 const queryString = require('query-string');
 function Collections_tile() {
   const initialFilterData = {
-    sort: 1,
+    sort: "",
     categoryId: "",
     searchByName: "",
   };
 
   const [collections, setCollections] = useState([]);
-  console.log("<<<<<<<<collections", collections);
-
-
   const [Categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [filterData, setFilterData] = useState(initialFilterData);
@@ -43,12 +38,15 @@ function Collections_tile() {
   }, []);
 
   useEffect(() => {
-    setIsLoading(true);
-    const reqObj = queryString.stringify(filterData);
-    getCollections(reqObj).then((response) => {
-      setCollections(response);
-      setIsLoading(false);
-    });
+    async function fetchData() {
+      setIsLoading(true);
+      const reqObj = queryString.stringify(filterData);
+      await getCollections(reqObj).then((res) => {
+        setCollections(res);
+        setIsLoading(false);
+      });
+    }
+    fetchData();
   }, [filterData]);
 
   const handleFilter = (e) => {
@@ -88,12 +86,12 @@ function Collections_tile() {
             <div className="mobilenftTilePageFirstSelect dropdown">
               {/* <p className="mb-0">Categories </p> */}
               <select
-                name="categoryName "
+                name="categoryId"
                 id="sale"
-                onChange={(e) => getCollectionById(e.target.value)}
+                onChange={(e) => handleFilter(e)}
                 value={filterData.categoryName}
                 className="first_select ml_auto dropdown-toggle-ellipsis sort-drop"
-                style={{width:'240px'}}
+                style={{ width: '240px' }}
               >
                 <option value="">Categories All</option>
                 {Categories.map((item, key) => {
@@ -114,9 +112,10 @@ function Collections_tile() {
                 className="priceRangeDropDown dropdown-toggle-ellipsis sort-drop"
                 style={{ width: "260px" }}
               >
-                <option value="all">Sort By All</option>
-                <option value="1">Ascending Order</option>
-                <option value="-1">Descending Order</option>
+                <option value="">Sort By All</option>
+                <option value="-1">Recently added</option>
+                <option value="3">Items low to high</option>
+                <option value="2">Items high to low</option>
               </select>
             </div>
           </div>
@@ -139,7 +138,7 @@ function Collections_tile() {
             })()}
           </div>
           {/* nfts.slice(0, visibleBlogs).map((nft) =>  */}
-          
+
           {collections.slice(0, visibleBlogs).map((collection) => {
             const { _id, imageUrl, name, nftCount } = collection;
             const route = "/collection-details/" + _id;
@@ -172,8 +171,6 @@ function Collections_tile() {
                       <p className="collectionCardEachTotalitems">
                         <span className=" font-14 text-dark">
                           Total Items:
-                          {/* {alert(nfts)} */}
-                          {/* {console.log("jjjjjjjjjjjjjjjj",collection)} */}
                           <span className="text-primary">{nftCount}</span>
                         </span>
                       </p>
@@ -185,11 +182,15 @@ function Collections_tile() {
           })}
           {collections.length === 0 && (<div>
             <div className="Noitemdiv">
-            <img src={NoItem}/>
-             <p className="textitem">No items available</p>
-           </div>
+              <img src={NoItem} />
+              <p className="textitem">No items available</p>
+            </div>
           </div>)}
-          <button className="load-more" onClick={loadMoreHandler}>Load More</button>
+          {
+            visibleBlogs >= collections.length ? "" :
+              ( <div style={{textAlignLast: "center"}}><button className="load-more" onClick={loadMoreHandler}>Load More</button></div>
+                )
+          }
 
         </div>
       </div>
