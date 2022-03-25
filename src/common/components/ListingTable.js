@@ -1,12 +1,14 @@
-import * as React from 'react';
+import React, { useState, useEffect } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
+import Information from "../../assets/images/Information.svg";
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import styled from "styled-components";
+import { getList } from "../../services/webappMicroservice";
 
 function createData(Price, Expiration, From) {
   return { Price, Expiration, From };
@@ -31,7 +33,21 @@ const rows = [
   // createData("0.32 Eth", "in 5 days", "Ravi"),  
 ];
 
-export default function ListingsTable() {
+export default function ListingsTable(props) {
+  const id = props.id
+  const[activities,setActivities] = useState("")
+  const reqType = {
+    // type: "list"
+  };
+  
+  
+  useEffect(() => {
+    getList(reqType, id).then((response) => 
+    setActivities(response)
+    );
+  }, []);
+  console.log(activities,"2222")
+
   return (
     <TableContainer component={Paper} elevation={0}>
       <TableUp aria-label="simple table" >
@@ -44,15 +60,15 @@ export default function ListingsTable() {
         </thead>
         </TableUp>
         <TableDown aria-label="simple table">
-        {rows.length > 0 ? 
+        {activities.type === 'list' || activities.length > 0 ? 
         <tbody>
-          {rows.map((row) => (
+          {activities.map((row) => (
             <tr
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <td component="td" scope="row">
-                {row.Price}
+              {row.type}
               </td>
               <td >{row.Expiration}</td>
               <td  style={{color:"#366EEF"}}>{row.From}</td>
@@ -60,6 +76,7 @@ export default function ListingsTable() {
           ))}
         </tbody>
                   :           <div className="no-data m33 ">
+                    <img src={Information}></img>
                   <p>No information available</p>
                   </div>}
       </TableDown>

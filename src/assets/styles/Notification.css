@@ -652,6 +652,7 @@ height: 47px;
   background: #ffffff 0% 0% no-repeat padding-box;
   padding-bottom: 20px;
   padding-top: 20px;
+  font: normal normal 700 16px/25px Poppins;
   /* margin-right: 15px;
   margin-left: 15px; */
 }
@@ -1033,10 +1034,12 @@ height: 47px;
 }
 
 .footer-main-cont{
-  margin-top: 40px;
+  /* margin-top: 40px; */
+  margin-top: 79px;
   /* padding-top: 40px;
   padding-bottom: 40px; */
-  padding-top: 74px;
+  /* padding-top: 74px; */
+  padding-top: 67px;
   padding-bottom: 109px;
 }
 .fs-16{

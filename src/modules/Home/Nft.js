@@ -20,24 +20,156 @@ import { useSelector } from "react-redux";
 import Spinner from "../../common/components/Spinner";
 import axios from "axios";
 import NftCardsHome from "../../common/components/NftCardsHome";
-import styled from "styled-components";
+// import styled from "styled-components";
 import dropdown from "../../assets/images/dropdown.svg";
-import { Button } from "react-bootstrap"
-import NoItem from "../../assets/images/Noitems.svg"
+import { Button } from "react-bootstrap";
+import NoItem from "../../assets/images/Noitems.svg";
+// MUI select code
+import SelectUnstyled, { selectUnstyledClasses } from '@mui/base/SelectUnstyled';
+import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled';
+import PopperUnstyled from '@mui/base/PopperUnstyled';
+import { styled } from '@mui/system';
+const blue = {
+  100: '#DAECFF',
+  200: '#99CCF3',
+  400: '#3399FF',
+  500: '#007FFF',
+  600: '#0072E5',
+  900: '#003A75',
+};
+
+const grey = {
+  100: '#E7EBF0',
+  200: '#E0E3E7',
+  300: '#CDD2D7',
+  400: '#B2BAC2',
+  500: '#A0AAB4',
+  600: '#6F7E8C',
+  700: '#3E5060',
+  800: '#2D3843',
+  900: '#1A2027',
+};
+
+const StyledButton = styled('button')(
+  ({ theme }) => `
+  font-family: poppins-medium;
+  font-size: 14px;
+  box-sizing: border-box;
+  min-height: calc(1.5em + 22px);
+  min-width: 260px;
+  background: url(${dropdown});
+  background-position: 95%;
+  background-repeat: no-repeat;
+  border: 1px solid ${theme.palette.mode === 'dark' ? grey[800] : grey[300]};
+  border-radius: 0.25rem;
+  padding: 10px;
+  text-align: left;
+  line-height: 1.5;
+  color: #191919;
+
+  &.${selectUnstyledClasses.focusVisible} {
+    outline: 3px solid ${theme.palette.mode === 'dark' ? blue[600] : blue[100]};
+  }
+
+  @media only screen and (max-width:767px) {
+    width:100%;
+  }
+  `,
+);
+
+const StyledListbox = styled('ul')(
+  ({ theme }) => `
+  font-family: poppins-medium;
+  font-size: 14px;
+  box-sizing: border-box;
+  padding: 5px;
+  margin: 10px 0;
+  min-width: 260px;
+  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+  border: 1px solid #F4F4F4;
+  border-radius: 0.25em;
+  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  overflow: auto;
+  outline: 0px;
+
+  @media only screen and (max-width:767px) {
+    width:100%;
+  }
+  `,
+);
+
+const StyledOption = styled(OptionUnstyled)(
+  ({ theme }) => `
+  list-style: none;
+  padding: 8px;
+  border-radius: 0.25em;
+  cursor: pointer;
+  font-family: poppins-medium;
+  font-size: 14px;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  &.${optionUnstyledClasses.selected} {
+    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
+    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
+  }
+
+  &.${optionUnstyledClasses.highlighted} {
+    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
+    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  }
+
+  &.${optionUnstyledClasses.highlighted}.${optionUnstyledClasses.selected} {
+    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
+    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
+  }
+
+  &.${optionUnstyledClasses.disabled} {
+    color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
+  }
+
+  &:hover:not(.${optionUnstyledClasses.disabled}) {
+    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
+    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  }
+  `,
+);
+
+const StyledPopper = styled(PopperUnstyled)`
+  z-index: 1;
+  @media only screen and (max-width:767px) {
+    width: 100%;
+  }
+`;
+
+const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
+  const components = {
+    Root: StyledButton,
+    Listbox: StyledListbox,
+    Popper: StyledPopper,
+    ...props.components,
+  };
+
+  return <SelectUnstyled {...props} ref={ref} components={components} />;
+});
+
+
 // const Select = styled.select`
 // appearance:none;
 // background-image:url(/images/Fixed.png)
 // `;
 
 const queryString = require("query-string");
-function NftPage() {
-
+function NftPage(props) {
+  console.log(props, "sachin");
   const defaultReq = {
     // type: "fix price",
     // searchByName: name ? name : "",
     // searchByName: "puneet",
     // minPrice: 0,
-    
+
     // maxPrice: "",
     // --------------------------
     // sort: 0,
@@ -46,7 +178,7 @@ function NftPage() {
     searchByName: "",
     // minPrice: 0,
     // maxPrice: "",
-    sort: -1
+    sort: -1,
   };
   const [nfts, setNfts] = useState([]);
   const { user, sideBar } = useSelector((state) => state);
@@ -63,7 +195,9 @@ function NftPage() {
 
   const [maxPrice, setmaxPrice] = useState("");
 
-  const [filterType, setFilterType] = useState(defaultReq);
+  const [filterType, setFilterType] = useState({
+    sort : 'all',
+  });
   const [isloading, setIsloading] = useState(false);
   const [type, setType] = useState("");
   const search = useLocation().search;
@@ -82,7 +216,7 @@ function NftPage() {
       // console.log(res, "filterResponse");
       setIsloading(true);
       if (res.success) {
-        
+
         // prevArray => [...prevArray, newValue]
         setNfts(res.responseData.nftContent);
         // setNfts([nfts,res.responseData.nftContent]);
@@ -102,7 +236,6 @@ function NftPage() {
           // console.log(res, "filterResponse");
           setIsloading(true);
           if (res.success) {
-
             setNfts(res.responseData.nftContent);
             setIsloading(false);
           } else {
@@ -130,24 +263,25 @@ function NftPage() {
     // alert(maxPrice)
     // setFilterType({ ...filterType, [name]: value });
     // console.log("kkkkkkkkkkkk",{ })
-    setFilterType({ ...filterType, "minPrice": minPrice, "maxPrice": maxPrice });
-
-  }
+    setFilterType({ ...filterType, minPrice: minPrice, maxPrice: maxPrice });
+  };
   const clearPriceFilter = (e) => {
     // alert(evt.target)
     // alert(maxPrice)
     // setFilterType({ ...filterType, [name]: value });
-    setmaxPrice("")
-    setminPrice("")
-    setFilterType({ ...filterType, "minPrice": "", "maxPrice": "" });
+    setmaxPrice("");
+    setminPrice("");
+    setFilterType({ ...filterType, minPrice: "", maxPrice: "" });
 
     // console.log("kkkkkkkkkkkk",{ ...filterType, "minPrice": "","maxPrice": "" })
-  }
+  };
   const handlefilter = (e) => {
-    const { name, value } = e.target;
+    // const { name, value } = e;
     // alert(name)
     // alert(value)
-    setFilterType({ ...filterType, [name]: value });
+    //setFilterType({ ...filterType, [name]: value });
+    setFilterType({ ...filterType, 'sort': e });
+    //console.log(e, 'sorting.......');
   };
   // console.log("mfmmfmfmfmfm",nfts)
   // ------------------
@@ -209,7 +343,11 @@ function NftPage() {
         <NftToggle toggleNft={toggleNft} />
         {/* <Lower__homepage /> */}
         <div className="lower__homepage" style={{ width: "100%" }}>
-          <div id="filters filter-large" className="filter" style={{ gap: '30px' }}>
+          <div
+            id="filters filter-large"
+            className="filter"
+            style={{ gap: "30px" }}
+          >
             {/* <div className="mobilenftTilePageFirstSelect dropdown">
               <p className="mb-0 sale-type">Sale type</p>
               <select
@@ -228,35 +366,58 @@ function NftPage() {
               </select>
             </div> */}
 
-            <div className="mobilenftTilePageSecondSelect dropdown" style={{ border: '1px solid #d2d2d2' }}>
+            <div className="mobilenftTilePageSecondSelect dropdown" style={{ border: '1px solid #d2d2d2', padding: '9px 12px 9px 12px' }}>
               <p className="mb-0 sale-type">Price range</p>
               <div className="filter-drop">
-                <div onClick={() => setStatusDrop(!statusDrop)} className="d-flex justify-content-between w-100">
+                <div
+                  onClick={() => setStatusDrop(!statusDrop)}
+                  className="d-flex justify-content-between w-100"
+                >
                   <div className="text">All</div>
                   <div>
-                    <img src={dropdown} style={{ height: "17px", marginLeft: '8px' }} />
+                    <img
+                      src={dropdown}
+                      style={{ height: "17px", marginLeft: "8px" }}
+                    />
                   </div>
                 </div>
                 <div
                   className="filter-item"
                   style={{ display: statusDrop ? "block" : "none" }}
                 >
-
                   {/* <form onSubmit={handleSubmit}> */}
                   <div className="row mb-3 align-items-center">
                     <div className="col-5">
-                      <input type="number" className="form-control" placeholder="Min" value={minPrice} onChange={e => setminPrice(e.target.value)} />
+                      <input
+                        type="number"
+                        className="form-control"
+                        placeholder="Min"
+                        value={minPrice}
+                        onChange={(e) => setminPrice(e.target.value)}
+                      />
                     </div>
                     <div className="col-2 text-center">
                       <span className="to">to</span>
                     </div>
                     <div className="col-5">
-                      <input type="number" className="form-control" placeholder="Max" value={maxPrice} onChange={e => setmaxPrice(e.target.value)} />
+                      <input
+                        type="number"
+                        className="form-control"
+                        placeholder="Max"
+                        value={maxPrice}
+                        onChange={(e) => setmaxPrice(e.target.value)}
+                      />
                     </div>
                   </div>
                   <div className="row">
                     <div className="col-6">
-                      <Button type="submit" onClick={(e) => clearPriceFilter(e)} variant="outline-primary">Clear</Button>
+                      <Button
+                        type="submit"
+                        onClick={(e) => clearPriceFilter(e)}
+                        variant="outline-primary"
+                      >
+                        Clear
+                      </Button>
                     </div>
                     <div className="col-6">
                       <Button onClick={(e) => buttonfilter(e)} variant="outline-primary">Apply</Button>
@@ -288,7 +449,7 @@ function NftPage() {
             <option>Option 2</option>
           </select> */}
           <div className="mobilenftTilePageThirdSelect dropdown price-range-dropdown">
-            <select
+            {/* <select
               name="sort"
               id="sale"
               // className="first_select ml_auto"
@@ -301,9 +462,21 @@ function NftPage() {
               <option value="all">Sort By All</option>
               <option value="-1">Ascending Order</option>
               <option value="1">Descending Order</option>
-            </select>
+            </select> */}
+
+            <CustomSelect
+              name="sort"
+              id="sale"
+              onChange={(e) => handlefilter(e)}
+              value={filterType.sort}
+              defaultValue="all"
+              >
+              <StyledOption value="all">Sort By All</StyledOption>
+              <StyledOption value="-1">Ascending Order</StyledOption>
+              <StyledOption value="1">Descending Order</StyledOption>
+            </CustomSelect>
           </div>
-        </div >
+        </div>
         <div
           className="nftTileContainer row   ntf_row"
           // className="nftTileContainer gird-container  ntf_row"
@@ -337,10 +510,13 @@ function NftPage() {
             </div>
 
           )}
-          <button className="load-more" onClick={loadMoreHandler}>Load More</button>
-
+          {
+            visibleBlogs >= nfts.length ? "" :
+              (
+                <div style={{ textAlignLast: "center" }}><button className="load-more" onClick={loadMoreHandler}>Load More</button></div>)
+          }
         </div>
-      </div >
+      </div>
       <ToastContainer
         position="top-center"
         autoClose={2000}

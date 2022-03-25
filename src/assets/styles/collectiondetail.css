@@ -64,6 +64,7 @@
 .collfilters {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 53px;
 }
 .colleftfilter {
   display: flex;
@@ -99,6 +100,7 @@
   align-items: center;
   border: 1px solid #d2d2d2;
   width: 163px;
+  height: 42px;
   padding: 0% 1%;
   position: relative;
   margin-left: 32px;
@@ -107,6 +109,7 @@
   font-size: 14px;
   color: #191919;
   z-index: 1;
+  cursor: pointer;
 }
 .sortbydrop {
   width: 10% !important;
@@ -125,6 +128,7 @@
   border-radius: 4px;
   padding: 12px;
   background-color: #ffffff;
+  z-index: 1;
 }
 .dropsingleitem {
   font-size: 14px;
@@ -167,15 +171,25 @@
   } */
 }
 
-@media screen and (max-width: 764px) {
-  .collfilters {
-    display: flex;
-    flex-direction: column;
+@media screen and (max-width: 768px) {
+  .colleftfilter{
+    flex-wrap: wrap;
   }
+  .searchboxcol{
+    width: 100%;
+    margin-bottom: 48px;
+  }
+  .colldrop{
+    margin-left: 0px;
+    margin-right: 32px;
+  }
+  .colldrop:last-child{
+    margin-right: 0px;
+  }
+}
+@media screen and (max-width: 636px) {
   .colleftfilter {
     display: flex;
-    /* justify-content: center; */
-    /* justify-content: ; */
     flex-direction: column;
     width: 100%;
   }
@@ -186,22 +200,28 @@
     border-radius: 4px;
     box-sizing: border-box;
     height: 42px;
-    padding: 0% 2%;
+    padding: 0% 3%;
     width: 100%;
+    margin-bottom: 0px;
   }
 
   .colldrop {
     border: 1px solid #d2d2d2;
     width: 100%;
-    padding: 0% 1%;
+    padding: 0% 2%;
     position: relative;
     height: 42px;
+    margin-right: 0px;
     margin-top: 16px;
     z-index: 1;
     user-select: none;
   }
   .sortbydrop {
     width: 100% !important;
+  }
+  .dropitems{
+    width: 100%;
+    z-index: 1;
   }
 }
 .Noitemdiv{

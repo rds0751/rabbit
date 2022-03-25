@@ -637,8 +637,8 @@ let pricevalue;
                   }}
                 ></textarea>
                 <span className="color82">
-                  {desLength} of 1000 characters used.
-                  <div><span id="linesUsed">0</span> of 20 Lines Used.</div>
+                  {desLength} of 1000 characters and 
+                  <span> <span id="linesUsed">0</span> of 20 Lines.</span>
                 </span>
               </div>
               

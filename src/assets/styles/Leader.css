@@ -578,6 +578,11 @@ thead {
   .leadercolmob {
     display: block;
   }
+  .leadercolmob .mobFilterButton{
+    margin-top: 10px;
+    margin-right: 32px;
+    float: right;
+  }
   .nav-pills .nav-link.active,
   .nav-pills .show > .nav-link {
     color: black !important;
@@ -856,7 +861,7 @@ thead {
   border-radius: 50%;
 }
 .card {
-  background-color: transparent !important;
+  background-color: transparent;
   border: none !important;
 }
 
@@ -1411,6 +1416,11 @@ thead {
   .leader-container{
     max-width: 95%;
   }
+  .leadercolmob .mobFilterButton{
+    margin-top: 19.49px;
+    margin-right: 0px;
+    float: none;
+  }
 }
 @media only screen and (max-width: 480px) {
   .leader-container{
@@ -1616,32 +1626,37 @@ thead {
     padding: 24.88px 22px 19.65px 31px;
   }
 }
+@media only screen and (min-width: 770px) and (max-width: 991px) {
+  .leader-container{
+    max-width: 100%;
+  }
+  .nftCard:nth-child(2n) {
+    margin-right: 0px;
+  }
+}
+
 .no-data {
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #c8c8c8;
-  border-radius: 8px;
-  opacity: 1;
+
   text-align: center;
-  margin: 20px 0 0 33%;
   padding: 39px 0 0 0;
-  width: 240px;
-  height: 110px;
+
 }
 .no-data > p {
   font-family: Poppins;
   letter-spacing: 0px;
-  color: #000000;
+  color: #BBCEF9;
   opacity: 1;
   font-size: 16px;
 }
 .no-data-found {
-  margin: 51px 0 0 27% !important;
+  margin: 0 0 0 0 !important;
 }
 .m33 {
-  margin: 51px 0 0 33% !important;
+  margin: 0 0 0 0 !important;
 }
+  
 .load-more{
-  width: 1664px;
+  width: 187px;
 height: 42px;
 /* UI Properties */
 background: #EDF2FD 0% 0% no-repeat padding-box;

@@ -212,10 +212,10 @@ function TopBidders() {
                 )}
 
                 {buyer.userName == "" ? (
-                  <h2 className="seller-name"> <Link style={{ textDecoration: "null" }} to={"/my-profile"}>{buyer.wallet_address.substring(0, 4)}...{buyer.wallet_address.slice(buyer.wallet_address.length - 4)}</Link></h2>
+                  <h2 className="seller-name"> <Link style={{ textDecoration: "null" }} to={"/user-profile/"+buyer._id}>{buyer.wallet_address.substring(0, 4)}...{buyer.wallet_address.slice(buyer.wallet_address.length - 4)}</Link></h2>
 
                 ) : (
-                  <h2 className="seller-name"><Link style={{ textDecoration: "null" }} to={"/my-profile"}> {buyer.userName} </Link></h2>
+                  <h2 className="seller-name"><Link style={{ textDecoration: "null" }} to={"/user-profile/"+buyer._id}> {buyer.userName} </Link></h2>
 
                 )}
 
@@ -223,7 +223,9 @@ function TopBidders() {
 
               </NameColumn>
               <VolumeColumn className="col">
-                <Span>{result} ETH   <Volume>({"$"})</Volume> </Span>
+                <Span>{result} ETH  
+                 {/* <Volume>({"$"})</Volume>  */}
+                 </Span>
 
               </VolumeColumn>
               <Text className="col">{itemsSold}</Text>

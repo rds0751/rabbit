@@ -32,10 +32,10 @@ export function getNfts(requestData) {
 
 // --------------------get nfts -----
 export const getNFtsData = async (filterObj, successCallBack) => {
-  console.log("dddddddddddddddd", { params: filterObj })
+  console.log("dddddddddddddddd", { params: filterObj } )
   try {
-    const url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts";
-    const { data } = await axios.get(url, { params: filterObj });
+    const url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts?";
+    const { data } = await axios.get(url,{params:filterObj});
     console.log("kssssssssssss", (url))
     console.log("nnnnnnsss", data)
     successCallBack(data);
@@ -301,6 +301,60 @@ export function updateCollectionTxStatus(requestData, _id) {
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
     AuthToken,
     requestData,
+    url
+  )
+    .then((response) => {
+      if (
+        !response.success ||
+        response.responseCode !== 200 ||
+        !response.responseData ||
+        response.responseData.length === 0
+      )
+        return Promise.reject();
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+
+export function getActivities(reqObj, id) {
+  console.log("mohit",id)
+  let url =
+    process.env.REACT_APP_WEBAPP_MICROSERVICE +
+    `api/v1/activities/${id}?` + reqObj
+  return httpService(
+    httpConstants.METHOD_TYPE.GET,
+    // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    AuthToken,
+    reqObj,
+    url
+  )
+    .then((response) => {
+      if (
+        !response.success ||
+        response.responseCode !== 200 ||
+        !response.responseData ||
+        response.responseData.length === 0
+      )
+        return Promise.reject();
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+
+
+export function getList(reqType, id) {
+  let url =
+    process.env.REACT_APP_WEBAPP_MICROSERVICE +
+    "api/v1/activities/" + id + "type=" + "list"
+  return httpService(
+    httpConstants.METHOD_TYPE.GET,
+    // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    AuthToken,
+    reqType,
     url
   )
     .then((response) => {

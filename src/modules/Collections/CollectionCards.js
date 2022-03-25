@@ -12,6 +12,138 @@ import { toast } from "react-toastify";
 import Spinner from "../../common/components/Spinner";
 import { Link } from "react-router-dom";
 import NoItem from "../../assets/images/Noitems.svg"
+import dropdown from "../../assets/images/dropdown.svg";
+// MUI select code
+import SelectUnstyled, { selectUnstyledClasses } from '@mui/base/SelectUnstyled';
+import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled';
+import PopperUnstyled from '@mui/base/PopperUnstyled';
+import { styled } from '@mui/system';
+const blue = {
+  100: '#DAECFF',
+  200: '#99CCF3',
+  400: '#3399FF',
+  500: '#007FFF',
+  600: '#0072E5',
+  900: '#003A75',
+};
+
+const grey = {
+  100: '#E7EBF0',
+  200: '#E0E3E7',
+  300: '#CDD2D7',
+  400: '#B2BAC2',
+  500: '#A0AAB4',
+  600: '#6F7E8C',
+  700: '#3E5060',
+  800: '#2D3843',
+  900: '#1A2027',
+};
+
+const StyledButton = styled('button')(
+  ({ theme }) => `
+  font-family: poppins-medium;
+  font-size: 14px;
+  box-sizing: border-box;
+  min-height: calc(1.5em + 22px);
+  min-width: 260px;
+  background: url(${dropdown});
+  background-position: 95%;
+  background-repeat: no-repeat;
+  border: 1px solid ${theme.palette.mode === 'dark' ? grey[800] : grey[300]};
+  border-radius: 0.25rem;
+  padding: 10px;
+  text-align: left;
+  line-height: 1.5;
+  color: #191919;
+
+  &.${selectUnstyledClasses.focusVisible} {
+    outline: 3px solid ${theme.palette.mode === 'dark' ? blue[600] : blue[100]};
+  }
+
+  @media only screen and (max-width:767px) {
+    width:100%;
+  }
+  `,
+);
+
+const StyledListbox = styled('ul')(
+  ({ theme }) => `
+  font-family: poppins-medium;
+  font-size: 14px;
+  box-sizing: border-box;
+  padding: 5px;
+  margin: 10px 0;
+  min-width: 260px;
+  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+  border: 1px solid #F4F4F4;
+  border-radius: 0.25em;
+  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  overflow: auto;
+  outline: 0px;
+
+  @media only screen and (max-width:767px) {
+    width:100%;
+  }
+  `,
+);
+
+const StyledOption = styled(OptionUnstyled)(
+  ({ theme }) => `
+  list-style: none;
+  padding: 8px;
+  border-radius: 0.25em;
+  cursor: pointer;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  &.${optionUnstyledClasses.selected} {
+    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
+    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
+  }
+
+  &.${optionUnstyledClasses.highlighted} {
+    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
+    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  }
+
+  &.${optionUnstyledClasses.highlighted}.${optionUnstyledClasses.selected} {
+    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
+    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
+  }
+
+  &.${optionUnstyledClasses.disabled} {
+    color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
+  }
+
+  &:hover:not(.${optionUnstyledClasses.disabled}) {
+    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
+    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  }
+  `,
+);
+
+const StyledPopper = styled(PopperUnstyled)`
+  z-index: 1;
+  @media only screen and (max-width:767px) {
+    width:100%;
+  }
+`;
+
+const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
+  const components = {
+    Root: StyledButton,
+    Listbox: StyledListbox,
+    Popper: StyledPopper,
+    ...props.components,
+  };
+
+  return <SelectUnstyled {...props} ref={ref} components={components} />;
+});
+
+
+
 const queryString = require('query-string');
 function Collections_tile() {
   const initialFilterData = {
@@ -50,8 +182,13 @@ function Collections_tile() {
   }, [filterData]);
 
   const handleFilter = (e) => {
-    const { name, value } = e.target;
-    setFilterData({ ...filterData, [name]: value });
+    //const { name, value } = e.target;
+    setFilterData({ ...filterData, 'categoryId' : e });
+  };
+ 
+  const handlefilter = (e) => {
+    //const { name, value } = e.target;
+    setFilterData({ ...filterData, 'sort' : e });
   };
 
   const getCollectionById = (collectionId) => {
@@ -85,25 +222,37 @@ function Collections_tile() {
           <div id="filters filter-large" className="filter">
             <div className="mobilenftTilePageFirstSelect dropdown">
               {/* <p className="mb-0">Categories </p> */}
-              <select
+              {/* <select
                 name="categoryId"
                 id="sale"
                 onChange={(e) => handleFilter(e)}
                 value={filterData.categoryName}
                 className="first_select ml_auto dropdown-toggle-ellipsis sort-drop"
-                style={{width:'240px'}}
+                style={{ width: '240px' }}
               >
                 <option value="">Categories All</option>
                 {Categories.map((item, key) => {
                   return <option value={item._id}>{item.name}</option>;
                 })}
-              </select>
+              </select> */}
+              <CustomSelect
+                name="categoryId"
+                id="sale"
+                onChange={(e) => handleFilter(e)}
+                value={filterData.categoryName}
+                defaultValue=""
+                >
+                  <StyledOption value="">Categories All</StyledOption>
+                  {Categories.map((item, key) => {
+                    return <StyledOption value={item._id}>{item.name}</StyledOption>;
+                  })}
+              </CustomSelect>
             </div>
           </div>
           <div className="filter">
             <div className="dropdown" style={{ width: "260px" }}>
               {/* <p className="mb-0">Sort By</p> */}
-              <select
+              {/* <select
                 name="sort"
                 value={filterData.sort}
                 id="sale"
@@ -116,7 +265,20 @@ function Collections_tile() {
                 <option value="-1">Recently added</option>
                 <option value="3">Items low to high</option>
                 <option value="2">Items high to low</option>
-              </select>
+              </select> */}
+
+              <CustomSelect
+                name="sort"
+                id="sale"
+                onChange={(e) => handlefilter(e)}
+                value={filterData.sort}
+                defaultValue=""
+                >
+                <StyledOption value="">Sort By All</StyledOption>
+                <StyledOption value="-1">Recently added</StyledOption>
+                <StyledOption value="3">Items low to high</StyledOption>
+                <StyledOption value="2">Items high to low</StyledOption>
+              </CustomSelect>
             </div>
           </div>
         </div>
@@ -138,7 +300,7 @@ function Collections_tile() {
             })()}
           </div>
           {/* nfts.slice(0, visibleBlogs).map((nft) =>  */}
-          
+
           {collections.slice(0, visibleBlogs).map((collection) => {
             const { _id, imageUrl, name, nftCount } = collection;
             const route = "/collection-details/" + _id;
@@ -182,11 +344,15 @@ function Collections_tile() {
           })}
           {collections.length === 0 && (<div>
             <div className="Noitemdiv">
-            <img src={NoItem}/>
-             <p className="textitem">No items available</p>
-           </div>
+              <img src={NoItem} />
+              <p className="textitem">No items available</p>
+            </div>
           </div>)}
-          <button className="load-more" onClick={loadMoreHandler}>Load More</button>
+          {
+            visibleBlogs >= collections.length ? "" :
+              ( <div style={{textAlignLast: "center"}}><button className="load-more" onClick={loadMoreHandler}>Load More</button></div>
+                )
+          }
 
         </div>
       </div>
