@@ -900,7 +900,8 @@ select:focus-visible {
 /* add wallet screen css */
 .connect-wallet {
   margin-top: 97px;
-  margin-bottom: 206px;
+  /* margin-bottom: 206px; */
+  margin-bottom: 287px; 
   padding-left: 7%;
   padding-right: 7%;
 }
