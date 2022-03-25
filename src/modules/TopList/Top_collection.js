@@ -212,7 +212,9 @@ function Top_collection() {
                 {/* <Name>{collection[0].name}</Name> */}
               </NameColumn>
               <VolumeColumn className="col">
-                <Span>{result} ETH <Volume>({"$"})</Volume></Span>
+                <Span>{result} ETH
+                  {/* <Volume>({"$"})</Volume> */}
+                </Span>
 
               </VolumeColumn>
               <Text className="col">{collection[0].owner.length}</Text>
