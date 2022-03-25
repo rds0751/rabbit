@@ -1460,26 +1460,21 @@ thead {
   }
 }
 .no-data {
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #c8c8c8;
-  border-radius: 8px;
-  opacity: 1;
+
   text-align: center;
-  margin: 20px 0 0 33%;
   padding: 39px 0 0 0;
-  width: 240px;
-  height: 110px;
+
 }
 .no-data > p {
   font-family: Poppins;
   letter-spacing: 0px;
-  color: #000000;
+  color: #BBCEF9;
   opacity: 1;
   font-size: 16px;
 }
 .no-data-found {
-  margin: 51px 0 0 27% !important;
+  margin: 0 0 0 0 !important;
 }
 .m33 {
-  margin: 51px 0 0 33% !important;
+  margin: 0 0 0 0 !important;
 }

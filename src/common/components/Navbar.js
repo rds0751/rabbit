@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import { getNFtsData } from "../../services/webappMicroservice";
 import { NavDropdown } from "react-bootstrap";
 // import './Navbar.css'
 import { Link } from "react-router-dom";
@@ -20,12 +20,15 @@ import "../../assets/styles/topNavBar.css";
 
 import Menu from "./Menu";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
-
+import NftPage  from "../../modules/Home/Nft"
 // import "../../assets/st.css";
+const queryString = require('query-string');
 function Navbar() {
   const navigate = useNavigate();
   const [humburger, setHumburger] = useState(false);
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState({
+    searchByName : "monkey"
+  });
   const [toggleEffect, setToggleEffect] = useState(false);
   const [errorMssg, setErrorMssg] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
@@ -35,7 +38,10 @@ function Navbar() {
   const { user, sideBar } = useSelector((state) => state);
   const { userDetails, loggedInUser, walletAddress } = user;
   const { isOpenNoti, isOpenWallet } = sideBar;
-
+  const [isloading, setIsloading] = useState(false);
+  // const [filterType, setFilterType] = useState(defaultReq);
+  const [showResults, setShowResults] = useState(false)
+  const [data, setData] = useState()
   useEffect(() => {
     if (loggedInUser == null) {
       connectMetamask();
@@ -171,14 +177,48 @@ function Navbar() {
     }
   };
 
+
+  useEffect(() => {
+    const reqObj = queryString.stringify(searchInput);
+    getNFtsData(reqObj).then((response) => 
+    setData(response)
+    );
+  }, [searchInput]);
+
   const handleSearch = () => {
     if (searchInput.trim() != "") dispatch(searchNav(searchInput));
   };
+  // useEffect(() => {
+  //   // checkapi();
+  //   const reqObj = queryString.stringify(type);
+  //   setIsloading(true);
+  //   // getNfts(defaultReq).then((response) => {
+  //   getNFtsData( (searchBy , r) => {
+  //     // console.log(res, "filterResponse");
+  //     setIsloading(true);
+  //     if (res.success) {
+
+  //       setNfts(res.responseData.nftContent);
+  //       setIsloading(false);
+  //     } else {
+  //       toast.error("Error While fetching Nfts");
+  //       setIsloading(false);
+  //     }
+  //   });
+  // });
+
+
+
+
+
 
   const closeWalletAndNoti = () => {
     dispatch(ManageNotiSideBar(false));
     dispatch(ManageWalletSideBar(false));
   };
+
+  const walletHandler = () => setShowResults(true)
+
   return (
     <>
       <div className="navbar-width">
@@ -201,8 +241,8 @@ function Navbar() {
                 name="searchByName"
                 placeholder="Search"
                 aria-label="Search"
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
+                // value={searchInput}
+                onChange={() => setSearchInput()}
               />
               <button
                 className="search-icon-mob"
@@ -429,7 +469,7 @@ function Navbar() {
                   </li>
                   <li>
                     <img
-                      onClick={handleWalletClick}
+                      onClick={() => {handleWalletClick(); walletHandler();}}
                       className="wallet-icon"
                       src={require("../../assets/images/wallet.png")}
                       alt="wallet"

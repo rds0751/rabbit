@@ -4,11 +4,12 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
+import Information from "../../assets/images/Information.svg";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import styled from "styled-components";
-import { getPricingHistory } from "../../services/webappMicroservice";
-import { useParams } from "react-router-dom";
+import { getActivities, getPricingHistory } from "../../services/webappMicroservice";
+import moment from "moment";
 
 const MainContainer = styled.div`
   display: flex;
@@ -86,24 +87,43 @@ const rows = [
   // createData("Buy", "0.32ETH", "Ravi", "John", "25Feb"),
   // createData("price", "0.32ETH", "Ravi", "John", "25Feb"),
 ];
-
-export default function PricingHistoryComponentTable() {
+const queryString = require('query-string');
+export default function PricingHistoryComponentTable(props) {
+  const id = props.id
+  const defaultReq = {
+    type: ""
+  };
   const [list, setEvent] = useState(false);
   const [price, setPrice] = useState(false);
   const [buy, setBuy] = useState(false);
   const [minted, setMinted] = useState(false);
+const[activities,setActivities] = useState("")
+const [type, setType] = useState(defaultReq)
 
-  const handleChange = (e) => {
-    if (e.target.value === "list") {
-      setEvent(!list);
-    } else if (e.target.value === "price") {
-      setPrice(!price);
-    } else if (e.target.value === "buy") {
-      setBuy(!buy);
-    } else if (e.target.value === "minted") {
-      setMinted(!minted);
-    }
-  };
+useEffect(() => {
+  const reqObj = queryString.stringify(type);
+  getActivities(reqObj, id).then((response) => 
+  setActivities(response)
+  );
+}, [type]);
+console.log(activities,"11111")
+
+const handleChange = (e) => {
+
+  setType({ ...type, [e.target.name] : e.target.value  });
+
+} 
+  // const handleChange = (e) => {
+  //   if (e.target.value === "list") {
+  //     setEvent(!list);
+  //   } else if (e.target.value === "price") {
+  //     setPrice(!price);
+  //   } else if (e.target.value === "buy") {
+  //     setBuy(!buy);
+  //   } else if (e.target.value === "minted") {
+  //     setMinted(!minted);
+  //   }
+  // };
 
   const closeFilter = (key) => {
     if (key === "list") {
@@ -120,12 +140,11 @@ export default function PricingHistoryComponentTable() {
   useEffect(() => {
     getPricingHistory();
   }, []);
-
   return (
     <MainContainer className="pricing-history">
       <Title>Activities</Title>
       <FilterContainer>
-        <Select className="selectfixing4" name="filter" onChange={(e) => handleChange(e)}>
+        <Select className="selectfixing4" name="type" onChange={(e) => handleChange(e)}>
           <Option>Filter</Option>
           <Option value="list">List</Option>
           <Option value="price">Price</Option>
@@ -186,9 +205,9 @@ export default function PricingHistoryComponentTable() {
           </thead>
         </TableUp>
         <TableDown aria-label="simple table">
-          {rows.length > 0 ? 
+          {activities.length > 0 ? 
           <tbody className="table-bodymousec">
-            {rows.map((row) => (
+            {activities.map((row) => (
               <tr
               style={{height:"0px !important"}}
                 key={row.name}
@@ -196,16 +215,17 @@ export default function PricingHistoryComponentTable() {
                 className="table-row"
               >
                 <td component="td" scope="row">
-                  {row.Event}
+                  {row.type}
                 </td>
-                <td>{row.Price}</td>
-                <td>{row.From}</td>
-                <td>{row.To}</td>
-                <td>{row.Date}</td>
+                <td>{row.Price ? row.price : 1000}</td>
+                <td>{row.userName}</td>
+                <td>{row.to ? row.to : ""}</td>
+                <td>{moment(row.createdAt).format('DD MMM')}</td>
               </tr>
             ))}
           </tbody>
           :           <div className="no-data no-data-found ">
+            <img src={Information}></img>
           <p>No information available</p>
           </div>}
         </TableDown>
