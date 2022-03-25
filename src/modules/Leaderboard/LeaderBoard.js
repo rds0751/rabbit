@@ -36,6 +36,139 @@ import { getTopCollections, getTopBuyers } from "../../services/sellAndPurchaseM
 
 import { getTopNftSales } from "../../services/webappMicroservice";
 import Spinner from "../../common/components/Spinner";
+import dropdown from "../../assets/images/dropdown.svg";
+// MUI select code
+import SelectUnstyled, { selectUnstyledClasses } from '@mui/base/SelectUnstyled';
+import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled';
+import PopperUnstyled from '@mui/base/PopperUnstyled';
+import { styled } from '@mui/system';
+const blue = {
+  100: '#DAECFF',
+  200: '#99CCF3',
+  400: '#3399FF',
+  500: '#007FFF',
+  600: '#0072E5',
+  900: '#003A75',
+};
+
+const grey = {
+  100: '#E7EBF0',
+  200: '#E0E3E7',
+  300: '#CDD2D7',
+  400: '#B2BAC2',
+  500: '#A0AAB4',
+  600: '#6F7E8C',
+  700: '#3E5060',
+  800: '#2D3843',
+  900: '#1A2027',
+};
+
+const StyledButton = styled('button')(
+  ({ theme }) => `
+  font-family: poppins-medium;
+  font-size: 14px;
+  box-sizing: border-box;
+  min-height: calc(1.5em + 22px);
+  min-width: 118px;
+  background: url(${dropdown});
+  background-position: 95%;
+  background-repeat: no-repeat;
+  border: 1px solid #707070;
+  border-radius: 6px;
+  padding: 10px;
+  text-align: left;
+  line-height: 1.5;
+  color: #000000;
+
+  &.${selectUnstyledClasses.focusVisible} {
+    outline: 3px solid ${theme.palette.mode === 'dark' ? blue[600] : blue[100]};
+  }
+
+  @media only screen and (max-width:767px) {
+    width:100%;
+  }
+  `,
+);
+
+const StyledListbox = styled('ul')(
+  ({ theme }) => `
+  font-family: poppins-medium;
+  font-size: 14px;
+  box-sizing: border-box;
+  padding: 5px;
+  margin: 10px 0;
+  min-width: 118px;
+  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+  border: 1px solid #707070;
+  border-radius: 0.25em;
+  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  overflow: auto;
+  outline: 0px;
+
+  @media only screen and (max-width:767px) {
+    width:100%;
+  }
+
+  `,
+);
+
+const StyledOption = styled(OptionUnstyled)(
+  ({ theme }) => `
+  list-style: none;
+  padding: 8px;
+  border-radius: 0.25em;
+  cursor: pointer;
+  font-family: poppins-medium;
+  font-size: 14px;
+  color: #000;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  &.${optionUnstyledClasses.selected} {
+    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
+    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
+  }
+
+  &.${optionUnstyledClasses.highlighted} {
+    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
+    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  }
+
+  &.${optionUnstyledClasses.highlighted}.${optionUnstyledClasses.selected} {
+    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
+    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
+  }
+
+  &.${optionUnstyledClasses.disabled} {
+    color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
+  }
+
+  &:hover:not(.${optionUnstyledClasses.disabled}) {
+    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
+    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  }
+  `,
+);
+
+const StyledPopper = styled(PopperUnstyled)`
+  z-index: 1;
+  @media only screen and (max-width:426px) {
+    width:94%;
+  }
+`;
+
+const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
+  const components = {
+    Root: StyledButton,
+    Listbox: StyledListbox,
+    Popper: StyledPopper,
+    ...props.components,
+  };
+
+  return <SelectUnstyled {...props} ref={ref} components={components} />;
+});
 
 const queryString = require("query-string");
 
@@ -171,17 +304,18 @@ function LeaderBoard() {
 
     setCollectionDuration(
 
-      { ...collectionDuration, [e.target.name]: e.target.value }
+      { ...collectionDuration, 'duration': e }
 
     );
 
   }
 
   const ChangeSellerDuration = (e) => {
+    //setSellerDuration({ ...sellerDuration, [e.target.name]: e.target.value });
 
     setSellerDuration(
 
-      { ...sellerDuration, [e.target.name]: e.target.value }
+      { ...sellerDuration, 'duration': e }
 
     );
 
@@ -190,7 +324,7 @@ function LeaderBoard() {
 
     setBuyerDuration(
 
-      { ...buyerDuration, [e.target.name]: e.target.value }
+      { ...buyerDuration, 'duration': e }
 
     );
 
@@ -199,7 +333,7 @@ function LeaderBoard() {
 
     setNFTDuration(
 
-      { ...buyerDuration, [e.target.name]: e.target.value }
+      { ...buyerDuration, 'duration' : e }
 
     );
 
@@ -239,7 +373,7 @@ function LeaderBoard() {
 
                   </div>
 
-                  <select className="top-dropdown" onChange={(e) => ChangeBuyerDuration(e)} name="duration">
+                  {/* <select className="top-dropdown" onChange={(e) => ChangeBuyerDuration(e)} name="duration">
 
                     <option value="all" >All</option>
 
@@ -249,7 +383,19 @@ function LeaderBoard() {
 
                     <option value="yearly">Yearly</option>
 
-                  </select>
+                  </select> */}
+
+                  <CustomSelect
+                    name="duration"
+                    onChange={(e) => ChangeBuyerDuration(e)}
+                    value={buyerDuration.duration}
+                    defaultValue="all"
+                    >
+                    <StyledOption value="all">All</StyledOption>
+                    <StyledOption value="weekly">Weekly</StyledOption>
+                    <StyledOption value="monthly">Monthly</StyledOption>
+                    <StyledOption value="yearly">Yearly</StyledOption>
+                  </CustomSelect>
 
                   {/* <div className="dropdown col leaderboardDropdown">
 
@@ -447,7 +593,7 @@ function LeaderBoard() {
 
                   </div>
 
-                  <select className="top-dropdown" name="duration" onChange={(e) => ChangeSellerDuration(e)}>
+                  {/* <select className="top-dropdown" name="duration" onChange={(e) => ChangeSellerDuration(e)}>
 
                     <option value="all">All</option>
 
@@ -457,7 +603,18 @@ function LeaderBoard() {
 
                     <option value="yearly">Yearly</option>
 
-                  </select>
+                  </select> */}
+                  <CustomSelect
+                    name="duration"
+                    onChange={(e) => ChangeSellerDuration(e)}
+                    value={sellerDuration.duration}
+                    defaultValue="all"
+                    >
+                    <StyledOption value="all">All</StyledOption>
+                    <StyledOption value="weekly">Weekly</StyledOption>
+                    <StyledOption value="monthly">Monthly</StyledOption>
+                    <StyledOption value="yearly">Yearly</StyledOption>
+                  </CustomSelect>
 
                   {/* <div className="dropdown col leaderboardDropdown">
 
@@ -649,7 +806,7 @@ function LeaderBoard() {
 
                   </div>
 
-                  <select className="top-dropdown" name="duration" onChange={(e) => ChangeCollectionDuration(e)}>
+                  {/* <select className="top-dropdown" name="duration" onChange={(e) => ChangeCollectionDuration(e)}>
 
                     <option value='all'>All</option>
 
@@ -659,7 +816,18 @@ function LeaderBoard() {
 
                     <option value='yearly'>Yearly</option>
 
-                  </select>
+                  </select> */}
+                  <CustomSelect
+                    name="duration"
+                    onChange={(e) => ChangeCollectionDuration(e)}
+                    value={collectionDuration.duration}
+                    defaultValue="all"
+                    >
+                    <StyledOption value="all">All</StyledOption>
+                    <StyledOption value="weekly">Weekly</StyledOption>
+                    <StyledOption value="monthly">Monthly</StyledOption>
+                    <StyledOption value="yearly">Yearly</StyledOption>
+                  </CustomSelect>
 
 
 
@@ -1035,7 +1203,7 @@ function LeaderBoard() {
 
             <label for="topNft-sales" className="fs-20 fw-sb c-b pr-12 d-none d-sm-none d-md-block">Top NFT sales</label>
 
-            <select id="topNft-sales" className="sales-selector fs-14 fw-m" onChange={(e) => ChangeNFTDuration(e)} name="duration">
+            {/* <select id="topNft-sales" className="sales-selector fs-14 fw-m" onChange={(e) => ChangeNFTDuration(e)} name="duration">
 
               <option value="all">All</option>
 
@@ -1045,7 +1213,18 @@ function LeaderBoard() {
 
               <option value="yearly">yearly</option>
 
-            </select>
+            </select> */}
+            <CustomSelect
+              name="duration"
+              onChange={(e) => ChangeNFTDuration(e)}
+              value={NFTDuration.duration}
+              defaultValue="all"
+              >
+              <StyledOption value="all">All</StyledOption>
+              <StyledOption value="weekly">Weekly</StyledOption>
+              <StyledOption value="monthly">Monthly</StyledOption>
+              <StyledOption value="yearly">Yearly</StyledOption>
+            </CustomSelect>
 
           </div>
 

@@ -856,7 +856,7 @@ thead {
   border-radius: 50%;
 }
 .card {
-  background-color: transparent !important;
+  background-color: transparent;
   border: none !important;
 }
 
@@ -1616,6 +1616,15 @@ thead {
     padding: 24.88px 22px 19.65px 31px;
   }
 }
+@media only screen and (min-width: 770px) and (max-width: 991px) {
+  .leader-container{
+    max-width: 100%;
+  }
+  .nftCard:nth-child(2n) {
+    margin-right: 0px;
+  }
+}
+
 .no-data {
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #c8c8c8;

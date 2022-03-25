@@ -20,10 +20,142 @@ import { useSelector } from "react-redux";
 import Spinner from "../../common/components/Spinner";
 import axios from "axios";
 import NftCardsHome from "../../common/components/NftCardsHome";
-import styled from "styled-components";
+// import styled from "styled-components";
 import dropdown from "../../assets/images/dropdown.svg";
-import { Button } from "react-bootstrap"
-import NoItem from "../../assets/images/Noitems.svg"
+import { Button } from "react-bootstrap";
+import NoItem from "../../assets/images/Noitems.svg";
+// MUI select code
+import SelectUnstyled, { selectUnstyledClasses } from '@mui/base/SelectUnstyled';
+import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled';
+import PopperUnstyled from '@mui/base/PopperUnstyled';
+import { styled } from '@mui/system';
+const blue = {
+  100: '#DAECFF',
+  200: '#99CCF3',
+  400: '#3399FF',
+  500: '#007FFF',
+  600: '#0072E5',
+  900: '#003A75',
+};
+
+const grey = {
+  100: '#E7EBF0',
+  200: '#E0E3E7',
+  300: '#CDD2D7',
+  400: '#B2BAC2',
+  500: '#A0AAB4',
+  600: '#6F7E8C',
+  700: '#3E5060',
+  800: '#2D3843',
+  900: '#1A2027',
+};
+
+const StyledButton = styled('button')(
+  ({ theme }) => `
+  font-family: poppins-medium;
+  font-size: 14px;
+  box-sizing: border-box;
+  min-height: calc(1.5em + 22px);
+  min-width: 260px;
+  background: url(${dropdown});
+  background-position: 95%;
+  background-repeat: no-repeat;
+  border: 1px solid ${theme.palette.mode === 'dark' ? grey[800] : grey[300]};
+  border-radius: 0.25rem;
+  padding: 10px;
+  text-align: left;
+  line-height: 1.5;
+  color: #191919;
+
+  &.${selectUnstyledClasses.focusVisible} {
+    outline: 3px solid ${theme.palette.mode === 'dark' ? blue[600] : blue[100]};
+  }
+
+  @media only screen and (max-width:767px) {
+    width:100%;
+  }
+  `,
+);
+
+const StyledListbox = styled('ul')(
+  ({ theme }) => `
+  font-family: poppins-medium;
+  font-size: 14px;
+  box-sizing: border-box;
+  padding: 5px;
+  margin: 10px 0;
+  min-width: 260px;
+  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+  border: 1px solid #F4F4F4;
+  border-radius: 0.25em;
+  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  overflow: auto;
+  outline: 0px;
+
+  @media only screen and (max-width:767px) {
+    width:100%;
+  }
+  `,
+);
+
+const StyledOption = styled(OptionUnstyled)(
+  ({ theme }) => `
+  list-style: none;
+  padding: 8px;
+  border-radius: 0.25em;
+  cursor: pointer;
+  font-family: poppins-medium;
+  font-size: 14px;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  &.${optionUnstyledClasses.selected} {
+    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
+    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
+  }
+
+  &.${optionUnstyledClasses.highlighted} {
+    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
+    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  }
+
+  &.${optionUnstyledClasses.highlighted}.${optionUnstyledClasses.selected} {
+    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
+    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
+  }
+
+  &.${optionUnstyledClasses.disabled} {
+    color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
+  }
+
+  &:hover:not(.${optionUnstyledClasses.disabled}) {
+    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
+    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  }
+  `,
+);
+
+const StyledPopper = styled(PopperUnstyled)`
+  z-index: 1;
+  @media only screen and (max-width:767px) {
+    width: 100%;
+  }
+`;
+
+const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
+  const components = {
+    Root: StyledButton,
+    Listbox: StyledListbox,
+    Popper: StyledPopper,
+    ...props.components,
+  };
+
+  return <SelectUnstyled {...props} ref={ref} components={components} />;
+});
+
+
 // const Select = styled.select`
 // appearance:none;
 // background-image:url(/images/Fixed.png)
@@ -63,7 +195,9 @@ function NftPage() {
 
   const [maxPrice, setmaxPrice] = useState("");
 
-  const [filterType, setFilterType] = useState(defaultReq);
+  const [filterType, setFilterType] = useState({
+    sort : 'all',
+  });
   const [isloading, setIsloading] = useState(false);
   const [type, setType] = useState("");
   const search = useLocation().search;
@@ -144,10 +278,12 @@ function NftPage() {
     // console.log("kkkkkkkkkkkk",{ ...filterType, "minPrice": "","maxPrice": "" })
   }
   const handlefilter = (e) => {
-    const { name, value } = e.target;
+    // const { name, value } = e;
     // alert(name)
     // alert(value)
-    setFilterType({ ...filterType, [name]: value });
+    //setFilterType({ ...filterType, [name]: value });
+    setFilterType({ ...filterType, 'sort': e });
+    //console.log(e, 'sorting.......');
   };
   // console.log("mfmmfmfmfmfm",nfts)
   // ------------------
@@ -228,7 +364,7 @@ function NftPage() {
               </select>
             </div> */}
 
-            <div className="mobilenftTilePageSecondSelect dropdown" style={{ border: '1px solid #d2d2d2' }}>
+            <div className="mobilenftTilePageSecondSelect dropdown" style={{ border: '1px solid #d2d2d2', padding: '9px 12px 9px 12px' }}>
               <p className="mb-0 sale-type">Price range</p>
               <div className="filter-drop">
                 <div onClick={() => setStatusDrop(!statusDrop)} className="d-flex justify-content-between w-100">
@@ -288,7 +424,7 @@ function NftPage() {
             <option>Option 2</option>
           </select> */}
           <div className="mobilenftTilePageThirdSelect dropdown price-range-dropdown">
-            <select
+            {/* <select
               name="sort"
               id="sale"
               // className="first_select ml_auto"
@@ -301,7 +437,19 @@ function NftPage() {
               <option value="all">Sort By All</option>
               <option value="-1">Ascending Order</option>
               <option value="1">Descending Order</option>
-            </select>
+            </select> */}
+
+            <CustomSelect
+              name="sort"
+              id="sale"
+              onChange={(e) => handlefilter(e)}
+              value={filterType.sort}
+              defaultValue="all"
+              >
+              <StyledOption value="all">Sort By All</StyledOption>
+              <StyledOption value="-1">Ascending Order</StyledOption>
+              <StyledOption value="1">Descending Order</StyledOption>
+            </CustomSelect>
           </div>
         </div >
         <div

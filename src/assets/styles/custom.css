@@ -768,7 +768,7 @@ input::-webkit-input-placeholder {
   align-items: center;
   /* border: 1px solid #d2d2d2; */
   border-radius: 4px;
-  padding: 9px 12px 9px 12px;
+  /* padding: 9px 12px 9px 12px; */
   width: 250px;
 }
 .filter .dropdown p {
@@ -969,9 +969,18 @@ select:focus-visible {
   }
 }
 .connect-wallet .eachWalletTypeBox .card-effect1{
-  animation: glow 0.5s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
 }
 @keyframes glow {
+  from {
+    background-color: #f2f2f2;
+  }
+  
+  to {
+    background-color: #c0bebe;
+  }
+}
+@-webkit-keyframes glow {
   from {
     background-color: #f2f2f2;
   }
@@ -1014,7 +1023,7 @@ select:focus-visible {
   .filter .dropdown {
     width: initial;
     margin-bottom: 16px;
-    margin-left: 2%;
+    /* margin-left: 2%; */
     display: flex;
     justify-content: space-between;
   }
