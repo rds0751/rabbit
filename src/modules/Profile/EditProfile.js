@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import Image from "../../assets/images/img-format.png";
 import styled from "styled-components";
 import { connect } from "react-redux";
@@ -14,10 +14,12 @@ import "../../assets/styles/editProfile.css";
 import { AuthToken } from "../../services/UserAuthToken";
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import $ from 'jquery';
+import noProfile from '../../assets/images/NoProfile.svg'
 
 const Button = styled.button``;
 
 function EditProfile(props) {
+  const navigate = useNavigate();
   const hiddenFileInput = useRef(null);
   const [desLength, setDesLength] = useState(0);
   const { user } = useSelector((state) => state);
@@ -78,21 +80,15 @@ function EditProfile(props) {
     // userName.current = user?.loggedInUser?.userName;
     // portfolio.current = user?.loggedInUser?.portfolio;
   }, []);
-  function hasBlankSpaces(str) {
-    return str.match(/^\s+$/) !== null;
-  }
+  
   const handleSubmit = async (e) => {
     var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
     e.preventDefault();
     console.log(user.loggedInUser, "<<user");
     const userName = formData.userName;
+    console.log("userName",formData.userName);
     if (userName.trim() == "") {
       toast.error("Username is required");
-      return null;
-    }
-    if (/\s/.test(formData.userName)) {
-      // It has any kind of whitespace
-      toast.error("Username should not have space");
       return null;
     }
     if(format.test(userName)){
@@ -106,6 +102,7 @@ function EditProfile(props) {
     if (result.success) {
       toast.success("Profile Updated");
       window.location.reload(true);
+       navigate(-1);
     } else {
       toast.error("Error While updating ");
     }
@@ -157,9 +154,9 @@ function EditProfile(props) {
       <div className="editProfileContainer container">
         <div className="editProfileTopHeading top-heading">
           <div className="editProfileHeadingTitle">
-            <h3 className="title">
+            <p className="title">
               Edit Profile
-            </h3>
+            </p>
           </div>
 
           {/* <h3 className=" input-heading generalsettingl">
@@ -180,7 +177,7 @@ function EditProfile(props) {
                 // style={{ marginTop: "4em" }}
                 // onChange={(e) => handleChange(e)}
               >
-                <span className="poppins-normal font-14">Choose File</span>
+                <span className="choosefile">Choose File</span>
               </Button>
             </div>
 
@@ -200,9 +197,9 @@ function EditProfile(props) {
             <div className="">
               <label
                 htmlFor="username"
-                className=" label-heading"
+                className=" label-heading userheading"
               >
-                username<span style={{color:"red",fontSize:"13px"}}>{nameError}</span>
+                Username<span style={{color:"red",fontSize:"13px"}}>{nameError}</span>
               </label>
               <input
                 type="text"
@@ -211,7 +208,7 @@ function EditProfile(props) {
                 value={formData.userName}
                 // value={userName.current}
                 onChange={(e) => {
-                  var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                  var format = /[!@$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]+/;
                   if(format.test(e.target.value)){
                     SetNameError("(No Special Character Allowed)");
                   } else {
@@ -244,11 +241,11 @@ function EditProfile(props) {
               ></textarea>
               <div className="clearfix"></div>
               <span className="input-down-text">
-                {desLength} of 1000 characters used
-                <div><span id="linesUsed">0</span> of 20 Lines Used.</div>
+              {desLength} of 1000 characters and
+              <span> <span id="linesUsed">0</span> of 20 Lines.</span>
               </span>
             </div>
-            <div className="">
+            <div className="portfilodiv">
               <label htmlFor="email" className="label-heading">
                 Personal site or Portfolio
               </label>
@@ -262,9 +259,16 @@ function EditProfile(props) {
                 onChange={(e) => handleForm(e)}
               />
             </div>
-            <button type="submit" className=" editprofileSubmitButton ">
-              <span className=" font-14 text-white">Update Profile</span>
+            <div className="buttonGroup">
+            <button  className="editprofileCancelButton" onClick={() => navigate(-1)}>
+              <span className="cancelbutton" >Cancel</span>
             </button>
+            <button type="submit" className="editprofileSubmitButton ">
+              <span className="updateProfile">Update Profile</span>
+            </button>
+
+            </div>
+            
           </form>
         </div>
       </div>

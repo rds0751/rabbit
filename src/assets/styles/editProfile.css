@@ -1,5 +1,6 @@
 .editProfileContainer {
-  width: 39%;
+  /* width: 39%; */
+  width: 37%;
   margin: 0px auto;
   margin-top: 90px;
   margin-bottom: 431px;
@@ -13,7 +14,8 @@
 .editprofile-image {
   width: 151px;
   height: 151px;
-  margin-right: 10px;
+  /* margin-right: 10px; */
+  margin-right: 21px;
 }
 .input-heading {
   font-size: 14px;
@@ -24,9 +26,10 @@
   margin-bottom: 27px;
 }
 .label-heading {
-  font-size: 16px;
-  line-height: 25px;
+  /* font-size: 16px;
   font-family: "poppins-bold";
+   line-height: 25px; */
+  font: normal normal bold 16px/25px Poppins;
   color: #000000;
   margin-bottom: 13px;
 }
@@ -71,7 +74,7 @@
 .chooseProfilePicInnerContainer {
   border: none !important;
   width: 100% !important;
-  display: flex !important;
+  display: flex;
   flex-direction: row !important;
   align-items: center !important;
   margin-top: 25px;
@@ -133,6 +136,37 @@
   height: 151px;
   object-fit: cover;
 }
+.choosefile{
+  font: normal normal normal 14px/21px Poppins;
+letter-spacing: 0px;
+color: #366EEF;
+opacity: 1;
+}
+.updateProfile{
+letter-spacing: 0px;
+color: #FFFFFF;
+opacity: 1;
+}
+.userheading{
+  margin-top: 3px;
+}
+.title{
+font: normal normal bold 32px/48px Poppins;
+letter-spacing: 0px;
+color: #191919;
+opacity: 1;
+}
+.editprofileCancelButton{
+display: none;
+}
+ textarea::-webkit-input-placeholder {
+  color: #828282;
+  font: normal normal medium 16px/25px Poppins;
+}
+.portfilodiv input::-webkit-input-placeholder{
+ color: #828282;
+ font: normal normal medium 16px/25px Poppins;
+}
 
 @media only screen and (max-width: 1440px) {
   .editProfileContainer{
@@ -144,16 +178,74 @@
     width: 87%;
   }
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 769px) {
+  .editProfileHeadingTitle .title{
+    font: normal normal 600 20px/30px Poppins;
+    letter-spacing: 0px;
+    color: #191919;
+    opacity: 1;
+  }
+
+  .buttonGroup{
+    display: flex;
+    flex-direction:row;
+    float: right;
+    }
+    .editprofileCancelButton{
+      display: block;
+      margin-right: 18.09;
+      background: #FFFFFF 0% 0% no-repeat padding-box;
+      border: 1px solid #366EEF;
+      color: #366EEF;
+      opacity: 1;
+      margin-right: 18.09px;
+      padding: 11px 66px 8px 67px;
+      border-radius: 5px;
+    }
+    .editprofileSubmitButton{
+      padding: 11px 31px 8px 46px;
+
+    }
+    
   .editProfileContainer {
-    width: 93%;
+    width: 84%;
     margin-top: 40px;
     margin-bottom: 70px;
   }
+  .title{
+    font: normal normal 600 20px/30px Poppins;
+  }
+  .editprofile-image{
+    margin-right:52px;
+  }
+  .userheading{
+    margin-top: 34px;
+  }
 }
 @media only screen and (max-width: 480px) {
+  .chooseProfilePicInnerContainer{
+    display:block;
+    
+  }
   .editProfileContainer {
     width: 93%;
-    margin-bottom: 52px;
+  
+  }
+  .btn-choose-file{
+    padding:11px 8px 11px 9px;
+  }
+  .editprofile-image {
+    width: 42%;
+  }
+  .editprofileCancelButton{
+    display: none;
+  }
+  .buttonGroup{
+    float: none;
+  }
+  .editprofile-button-outer{
+    width: 42%;
+    text-align: center;
+    margin-top: 17px;
   }
 }
