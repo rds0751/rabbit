@@ -1058,7 +1058,7 @@ function LeaderBoard() {
           {topNftSales.map((curElem) => {
             console.log("kggggggggggggggggggg",curElem)
 
-            const { cdnUrl, name, owner, maxPrice2, daysLeft, likesCount, _id, content } =
+            const { cdnUrl, name, owner, maxPrice2, daysLeft, likes, _id, content } =
 
               curElem;
 
@@ -1131,7 +1131,7 @@ function LeaderBoard() {
 
                             {/* {daysLeft}{" "} */}
 
-                            {likesCount}{" "}
+                            {likes.length}{" "}
 
                             {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
 
