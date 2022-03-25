@@ -46,6 +46,7 @@
   border-radius: 12px;
   margin-right: 23px;
   margin-bottom: 42px;
+  background-color: #FFFFFF!important;
 }
 .homepage .right-slider .card:nth-child(even){
   margin-right: 0px;
