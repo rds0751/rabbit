@@ -132,3 +132,23 @@ export const updateBannerByUserId = async (
     console.log(e);
   }
 };
+
+// for public user-profile
+
+export const userPublicProfile = async (successCallBack, userId) => {
+  // console.log("kjggggggggggggggggggg",url)
+  try {
+    const url =
+      process.env.REACT_APP_WEBAPP_USER_MICROSERVICE+"api/v1/users/"+userId;
+      console.log("kjggggggggggggggggggg",url)
+    const { data } = await axios.get(url);
+    if (data.success) {
+      successCallBack(data);
+    } else {
+      successCallBack({ success: false }) //msg: "Unable To Fetch Data" });
+    }
+    console.log(data, "<<<<myprofile");
+  } catch (e) {
+    console.log(e);
+  }
+};

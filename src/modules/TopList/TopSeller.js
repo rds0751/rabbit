@@ -213,10 +213,10 @@ function TopSeller() {
                 )}
 
                 {topSellers.userName == "" ? (
-                  <h2 className="seller-name"> <Link style={{ textDecoration: "null" }} to={"/my-profile"}>{topSellers.wallet_address.substring(0, 4)}...{topSellers.wallet_address.slice(topSellers.wallet_address.length - 4)}</Link></h2>
+                  <h2 className="seller-name"> <Link style={{ textDecoration: "null" }} to={"/user-profile/"+topSellers._id}>{topSellers.wallet_address.substring(0, 4)}...{topSellers.wallet_address.slice(topSellers.wallet_address.length - 4)}</Link></h2>
 
                 ) : (
-                  <h2 className="seller-name"><Link style={{ textDecoration: "null" }} to={"/my-profile"}>{topSellers.userName}</Link></h2>
+                  <h2 className="seller-name"><Link style={{ textDecoration: "null" }} to={"/user-profile/"+topSellers._id}>{topSellers.userName}</Link></h2>
 
                 )}
 
@@ -224,7 +224,9 @@ function TopSeller() {
 
               </NameColumn>
               <VolumeColumn className="col">
-                <Span>{result} ETH  <Volume>({"$"})</Volume> </Span>
+                <Span>{result} ETH
+                  {/* <Volume>({"$"})</Volume> */}
+                </Span>
 
               </VolumeColumn>
               <Text className="col">{itemsSold}</Text>
