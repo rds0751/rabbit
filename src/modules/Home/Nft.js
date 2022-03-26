@@ -183,7 +183,7 @@ function NftPage(props) {
   const [nfts, setNfts] = useState([]);
   const { user, sideBar } = useSelector((state) => state);
   const [toggleNft, setToggleNft] = useState(true);
-  const [minPrice, setminPrice] = useState("");
+  const [minPrice, setminPrice] = useState();
   const [visibleBlogs, setVisibleBlogs] = useState(8)
 
   // const [skipItem, setSkipItem] = useState("");
@@ -193,7 +193,7 @@ function NftPage(props) {
 
 
 
-  const [maxPrice, setmaxPrice] = useState("");
+  const [maxPrice, setmaxPrice] = useState();
 
   const [filterType, setFilterType] = useState({
     sort : 'all',
