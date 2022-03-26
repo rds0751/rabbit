@@ -198,7 +198,7 @@ function NftPage(props) {
   const [filterType, setFilterType] = useState({
     sort : 'all',
   });
-  const [isloading, setIsloading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [type, setType] = useState("");
   const search = useLocation().search;
   const name = new URLSearchParams(search).get("searchByName");
@@ -210,20 +210,20 @@ function NftPage(props) {
   useEffect(() => {
     // checkapi();
 
-    setIsloading(true);
+    setIsLoading(true);
     // getNfts(defaultReq).then((response) => {
     getNFtsData(filterType, (res) => {
       // console.log(res, "filterResponse");
-      setIsloading(true);
+      setIsLoading(true);
       if (res.success) {
 
         // prevArray => [...prevArray, newValue]
         setNfts(res.responseData.nftContent);
         // setNfts([nfts,res.responseData.nftContent]);
-        setIsloading(false);
+        setIsLoading(false);
       } else {
         toast.error("Error While fetching Nfts");
-        setIsloading(false);
+        setIsLoading(false);
       }
     });
   }, [filterType]);
@@ -234,13 +234,13 @@ function NftPage(props) {
         { ...defaultReq, searchByName: sideBar.navSearchValue },
         (res) => {
           // console.log(res, "filterResponse");
-          setIsloading(true);
+          setIsLoading(true);
           if (res.success) {
             setNfts(res.responseData.nftContent);
-            setIsloading(false);
+            setIsLoading(false);
           } else {
             toast.error("Error While fetching Nfts");
-            setIsloading(false);
+            setIsLoading(false);
           }
         }
       );
@@ -331,7 +331,7 @@ function NftPage(props) {
 
   }
   const loadMoreHandler = () => {
-    <div className="spinnerloader">{isloading && <Spinner />}</div>
+    <div className="spinnerloader">{isLoading && <Spinner />}</div>
     setVisibleBlogs(prevVisibleBlogs => prevVisibleBlogs + 4)
 
   }
@@ -484,31 +484,25 @@ function NftPage(props) {
         >
 
 
-          <div className="spinnerloader">{isloading && <Spinner />}</div>
+          <div className="spinnerloader">
+            {isLoading ? <Spinner /> :
+              (nfts.length === 0 && (
+                <div className="Noitemdiv">
+                  <img src={NoItem} />
+                  <p className="textitem">No items available</p>
+                </div>
+            ))}
+          </div>
 
-          {nfts.length > 1 ? (
+          {nfts.length > 0 && (
             //  const cardComponent = blogs.slice(0, visibleBlogs).map((blog, i) => 
             nfts.slice(0, visibleBlogs).map((nft) => {
-              const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
-              // console.log("[[[[[[[",biddingDetails.minPrice)
-              // const route = "/nft-information/" + _id;
-              // console.log("nfyyyyyyyyyyyyyyyyyyyy",nft)
               return (
                 <>
                   <NftCardsHome nft={nft} />
                 </>
               );
             })
-
-
-          ) : (
-            <div>
-              <div className="Noitemdiv">
-                <img src={NoItem} />
-                <p className="textitem">No items available</p>
-              </div>
-            </div>
-
           )}
           {
             visibleBlogs >= nfts.length ? "" :

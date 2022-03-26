@@ -12,8 +12,26 @@ import {
 function CollDetailCard({ nft }) {
   const navigate = useNavigate();
   const { user, sideBar } = useSelector((state) => state);
-  const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
+  const { _id, cdnUrl, name, biddingDetails, salesInfo } = nft;
   const [handleLike, setHandleLike] = useState(true);
+
+  const diffTime = (timestamp1, timestamp2) => {
+    var difference = timestamp1 - timestamp2;
+    var daysDifference = Math.floor(difference / 1000 / 60 / 60 / 24);
+    return daysDifference;
+  };
+  let showDateSection = true;
+  let message = '';
+  if (biddingDetails) {
+    const currDate = new Date();
+    const currentDate = Date.now(currDate);
+    const endDate = biddingDetails.endDate;
+    let endDateTimeStamp = Math.floor(new Date(endDate).getTime());
+    const days = (endDateTimeStamp == currentDate) ? 1 : diffTime(endDateTimeStamp, currentDate);
+    message = (endDateTimeStamp < currentDate) ? "Expired" : `${days} days left`;
+  } else {
+    showDateSection = false;
+  }
 
   const route = "/nft-information/" + _id;
   const likeNft = (id) => {
@@ -38,13 +56,14 @@ function CollDetailCard({ nft }) {
         <Link to={route} style={{ textDecoration: "none" }}>
           <img
             className="nftTileEachImage img-fluid border-radius nft-img-radius card_imgmob"
-            src={ipfsUrl}
+            src={cdnUrl}
+            alt="Nft"
           />
         </Link>
         <img
           id="like_icon"
-          onClick={() => likeNft(_id)}
-        
+          alt="like"
+          onClick={() => likeNft(_id)}        
           src={handleLike ? Like : likes}
         />
         <div
@@ -83,10 +102,12 @@ function CollDetailCard({ nft }) {
         
             </div>
             <div>
-              <span className="" style={{ color: "#000" }}>
-                <i className="far fa-clock" style={{ color: "#f54" }}></i>5 days
-                left
-              </span>
+            {(showDateSection) ? <span className="" style={{ color: "#000", marginRight: "4px" }}>
+                <i className="far fa-clock" style={{ color: "#f54", fontSize: "13.36px", }}></i>
+                <span className="poppins-normal blackish font-14">
+                  &nbsp;{message}
+                </span>
+              </span> : ""}
             </div>
           </div>
         </div>

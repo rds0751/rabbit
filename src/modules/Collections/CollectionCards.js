@@ -287,17 +287,14 @@ function Collections_tile() {
           className="nftTileContainer row  ntf_row mob_row"
           style={{ justifyContent: "start" }}
         >
-          <div
-            style={{ width: "100%", display: "flex", justifyContent: "center" }}
-          >
-            {isLoading && <Spinner />}
-            {(() => {
-              if (!isLoading && collections.length == 0) {
-                return (
-                  <span style={{ fontWeight: "bold" }}>No Collections</span>
-                );
-              }
-            })()}
+          <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+            {isLoading ? <Spinner /> :
+            (collections.length === 0 && (<div>
+            <div className="Noitemdiv">
+              <img src={NoItem} />
+              <p className="textitem">No items available</p>
+            </div>
+            </div>))}
           </div>
           {/* nfts.slice(0, visibleBlogs).map((nft) =>  */}
 
@@ -316,6 +313,7 @@ function Collections_tile() {
                       <img
                         className="img-fluid border-radius collection-img-card-radius collection_imgmob"
                         src={imageUrl}
+                        alt=""
                         style={{
                           width: "100px",
                           height: "100px",
@@ -342,12 +340,7 @@ function Collections_tile() {
               </div>
             );
           })}
-          {collections.length === 0 && (<div>
-            <div className="Noitemdiv">
-              <img src={NoItem} />
-              <p className="textitem">No items available</p>
-            </div>
-          </div>)}
+          
           {
             visibleBlogs >= collections.length ? "" :
               ( <div style={{textAlignLast: "center"}}><button className="load-more" onClick={loadMoreHandler}>Load More</button></div>

@@ -17,6 +17,8 @@ import NftCardsHome from "../../common/components/NftCardsHome";
 import CollDetailCard from "../../common/components/CollDetailCard";
 import NoItem from "../../assets/images/Noitems.svg";
 import { Button } from "react-bootstrap";
+import Spinner from "../../common/components/Spinner";
+
 const queryString = require('query-string');
 
 function CollectionDetails() {
@@ -41,6 +43,7 @@ function CollectionDetails() {
   const [filter, setFilter] = useState(defaultFilter);
   const sortOptions = ["Recently added", "Price high to low", "Price low to high"]
   const statusOptions = ["Open for sale", "New"]
+  const [isLoading, setIsLoading] = useState(false);
   
   useEffect(() => {
     async function fetchData() {
@@ -53,9 +56,11 @@ function CollectionDetails() {
 
   useEffect(() => {
     async function fetchData() {
+      setIsLoading(true);
       const reqObj = queryString.stringify(filter);
       await getNftsByCollectionId(collectionId.id, reqObj).then((res) => {
         setNfts(res.nftContent);
+        setIsLoading(false);
       });
     }
     fetchData();
@@ -220,23 +225,22 @@ function CollectionDetails() {
               </div>        
           </div>
           <div className="nftTileContainer row cards-gap ntf_row">
+            <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+              {isLoading ? <Spinner /> :
+                (nfts.length === 0 && (
+                <div className="Noitemdiv">
+                  <img src={NoItem} />
+                  <p className="textitem">No items available</p>
+                </div>
+              ))}
+            </div>
 
-            {nfts.length > 0 ? (
+            {nfts.length > 0 && (
               nfts.map((nft) => {
                 return <CollDetailCard nft={nft} />;  
               })
-            ):(
-              <div>
-              <div className="Noitemdiv">
-                <img src={NoItem}/>
-                <p className="textitem">No items available</p>
-                </div>
-              </div>
-
             )}
-           
-            {}
-            
+
           </div>
         </div>
       </div>
