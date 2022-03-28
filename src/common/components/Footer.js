@@ -44,7 +44,7 @@ function Footer() {
   return (
     <>
 
-      <div className="container-fluid footer-main-cont" style={{ color: "#8F8F8F", backgroundColor: "#FBFBFB", width: "100%", paddingLeft: "8%", paddingRight: "8%" }}>
+      <div className="container-fluid footer-main-cont" style={{ color: "#8F8F8F", backgroundColor: "#FBFBFB", width: "100%", paddingLeft: "6.7%", paddingRight: "6.7%" }}>
         <div className="row footer-cont">
           <div className="footer-top">
             <p className="fs-18">Join our community</p>

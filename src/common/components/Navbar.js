@@ -253,7 +253,7 @@ console.log("kkkkkkkkkkkkkkkkkk",data)
         <nav className="navbarborder navbar navbar-expand-lg">
           <div
             // className="container container-fluid"
-            className="container-fluid"
+            className="container-fluid mainContainer"
             style={{ backgroundColor: "white" }}
           >
             <div className="left_navbar d-flex align-items-center LeftNavBar">
