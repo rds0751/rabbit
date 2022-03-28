@@ -251,7 +251,7 @@ export default function NftInformation(props) {
     : creator?.wallet_address;
 
   const url = window.location.href;
-  console.log(typeof window.location.href);
+  console.log();
   return (
     <>
       {/* {props?.refreshPage ? window.location.reload(true) : ""} */}
@@ -424,10 +424,8 @@ export default function NftInformation(props) {
                 />
               </div>
               <div className="row mt-4">
-           
-              <PricingHistoryComponentTable id={id} />
-           
-          </div>
+                <PricingHistoryComponentTable id={id} />
+              </div>
             </div>
             <div className="col-xl-7 col-lg-7 col-md-12 details-section">
               <div className="d-none d-sm-none d-md-none d-lg-block">
@@ -535,7 +533,7 @@ export default function NftInformation(props) {
                           <img src={copyIcon} alt="icon" className="icon" />
                           <span className="icon-text">Copy link</span>
                         </li>
-                        <li className="list-item" >
+                        <li className="list-item">
                           {/* <img src={facebookIcon} alt="icon" className="icon" />
                           <span className="icon-text">Share on Facebook</span> */}
                           <FacebookShareButton url={url}>
@@ -547,13 +545,15 @@ export default function NftInformation(props) {
                             <span className="icon-text">Share on Facebook</span>
                           </FacebookShareButton>
                         </li>
-                        <li className="list-item" >
-                        <TwitterShareButton url={url}>
-                          <img src={twitterIcon} alt="icon" className="icon" />
-                          <span className="icon-text">
-                            Share on Twitter
-                          </span>{" "}
-                        </TwitterShareButton>
+                        <li className="list-item">
+                          <TwitterShareButton url={url}>
+                            <img
+                              src={twitterIcon}
+                              alt="icon"
+                              className="icon"
+                            />
+                            <span className="icon-text">Share on Twitter</span>{" "}
+                          </TwitterShareButton>
                         </li>
                       </ul>
                     </div>
@@ -666,19 +666,23 @@ export default function NftInformation(props) {
                 <div className="col-lg-6 col-sm-12">
                   <span className="text">
                     Owned by:&nbsp;
-                    <span className="text-name fw-b">
-                      {ownedBy}
-                      {/* {(String(ownedBy).length >= 7) ? (!ownedBy ? " " : (String(ownedBy).substring(0, 8) + "...")) : (String(ownedBy) === undefined ? "" : ownedBy)}                     */}
-                    </span>
+                    <Link to={"/user-profile/" + owner?._id} style={{textDecoration:"none"}} >
+                      <span className="text-name fw-b">
+                        {ownedBy}
+                        {/* {(String(ownedBy).length >= 7) ? (!ownedBy ? " " : (String(ownedBy).substring(0, 8) + "...")) : (String(ownedBy) === undefined ? "" : ownedBy)}                     */}
+                      </span>
+                    </Link>
                   </span>
                 </div>
                 <div className="col-lg-6 col-sm-12">
                   <span className="text">
                     Created by:&nbsp;
+                    <Link to={"/user-profile/" + owner?._id} style={{textDecoration:"none"}}>
                     <span className="text-name fw-b">
                       {createdBy}
                       {/* {(String(createdBy).length >= 7) ? (!createdBy ? " " : (String(createdBy).substring(0, 8) + "...")) : (String(createdBy) === undefined ? "" : createdBy)}                     */}
                     </span>
+                    </Link>
                     <span className="text-name fw-b"></span>
                   </span>
                 </div>
@@ -789,8 +793,8 @@ export default function NftInformation(props) {
                   </li> */}
                 </ul>
                 {tab === 1 ? <PricingHistoryComponentGraph id={id} /> : ""}
-                {tab === 2 ? <ListingsTable id={id}/> : ""}
-                {tab === 3 ? <ListingsTable id={id}/> : ""}
+                {tab === 2 ? <ListingsTable id={id} /> : ""}
+                {tab === 3 ? <ListingsTable id={id} /> : ""}
               </div>
             </div>
           </div>
