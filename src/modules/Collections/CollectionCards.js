@@ -242,7 +242,8 @@ function Collections_tile() {
                 value={filterData.categoryName}
                 defaultValue=""
                 >
-                  <StyledOption value="">Categories All</StyledOption>
+                  <StyledOption value="" hidden>Categories All</StyledOption>
+                  <StyledOption value="" >All</StyledOption>
                   {Categories.map((item, key) => {
                     return <StyledOption value={item._id}>{item.name}</StyledOption>;
                   })}
@@ -274,7 +275,8 @@ function Collections_tile() {
                 value={filterData.sort}
                 defaultValue=""
                 >
-                <StyledOption value="">Sort By All</StyledOption>
+                  <StyledOption value="" hidden>Sort By All</StyledOption>
+                <StyledOption value="" >All</StyledOption>
                 <StyledOption value="-1">Recently added</StyledOption>
                 <StyledOption value="3">Items low to high</StyledOption>
                 <StyledOption value="2">Items high to low</StyledOption>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useRef} from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Nfts_Tile_Api } from "../../constants/Nfts_Tile_Api";
 // import "../../assets/styles/custom.css";
@@ -183,8 +183,10 @@ function NftPage(props) {
   const [nfts, setNfts] = useState([]);
   const { user, sideBar } = useSelector((state) => state);
   const [toggleNft, setToggleNft] = useState(true);
-  const [minPrice, setminPrice] = useState();
+  const [minPrice, setminPrice] = useState("0");
   const [visibleBlogs, setVisibleBlogs] = useState(8)
+  const ref = useRef()
+
 
   // const [skipItem, setSkipItem] = useState("");
   // const [itemLimit, setItemLimit] = useState(10);
@@ -198,7 +200,9 @@ function NftPage(props) {
   const [filterType, setFilterType] = useState({
     sort : 'all',
   });
-  const [isLoading, setIsLoading] = useState(false);
+  const [isloading, setIsloading] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
   const [type, setType] = useState("");
   const search = useLocation().search;
   const name = new URLSearchParams(search).get("searchByName");
@@ -209,24 +213,27 @@ function NftPage(props) {
 
   useEffect(() => {
     // checkapi();
-
-    setIsLoading(true);
+if(minPrice.length > 0){
+    setIsloading(true);
     // getNfts(defaultReq).then((response) => {
     getNFtsData(filterType, (res) => {
       // console.log(res, "filterResponse");
-      setIsLoading(true);
+      setIsloading(true);
       if (res.success) {
 
         // prevArray => [...prevArray, newValue]
         setNfts(res.responseData.nftContent);
         // setNfts([nfts,res.responseData.nftContent]);
-        setIsLoading(false);
+        setIsloading(false);
       } else {
-        toast.error("Error While fetching Nfts");
-        setIsLoading(false);
+        toast.error(res.message);
+        setIsloading(false);
       }
     });
-  }, [filterType]);
+  }
+  else{
+    toast.error("min price should'nt be incorrect or empty");
+  }}, [filterType]);
 
   useEffect(() => {
     if (sideBar.navSearchValue != "") {
@@ -234,18 +241,36 @@ function NftPage(props) {
         { ...defaultReq, searchByName: sideBar.navSearchValue },
         (res) => {
           // console.log(res, "filterResponse");
-          setIsLoading(true);
+          setIsloading(true);
           if (res.success) {
             setNfts(res.responseData.nftContent);
-            setIsLoading(false);
+            setIsloading(false);
           } else {
             toast.error("Error While fetching Nfts");
-            setIsLoading(false);
+            setIsloading(false);
           }
         }
       );
     }
   }, [sideBar.navSearchValue]);
+  // -----------------------------
+  useEffect(() => {
+    const checkIfClickedOutside = e => {
+      // If the menu is open and the clicked target is not within the menu,
+      // then close the menu
+      if (isMenuOpen && ref.current && !ref.current.contains(e.target)) {
+        setIsMenuOpen(false)
+      }
+    }
+
+    document.addEventListener("mousedown", checkIfClickedOutside)
+
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener("mousedown", checkIfClickedOutside)
+    }
+  }, [isMenuOpen])
+  //---------------------------------------------------------------------------------------------------
 
   const handleChange = (e) => {
     setType(e.target.value);
@@ -261,6 +286,8 @@ function NftPage(props) {
   const handlePriceFilter = (e) => {
     // alert(evt.target)
     // alert(maxPrice)
+    // if(minPrice.length<=0)
+    // setminPrice("0")
     // setFilterType({ ...filterType, [name]: value });
     // console.log("kkkkkkkkkkkk",{ })
     setFilterType({ ...filterType, minPrice: minPrice, maxPrice: maxPrice });
@@ -270,7 +297,7 @@ function NftPage(props) {
     // alert(maxPrice)
     // setFilterType({ ...filterType, [name]: value });
     setmaxPrice("");
-    setminPrice("");
+    setminPrice("0");
     setFilterType({ ...filterType, minPrice: "", maxPrice: "" });
 
     // console.log("kkkkkkkkkkkk",{ ...filterType, "minPrice": "","maxPrice": "" })
@@ -331,7 +358,7 @@ function NftPage(props) {
 
   }
   const loadMoreHandler = () => {
-    <div className="spinnerloader">{isLoading && <Spinner />}</div>
+    <div className="spinnerloader">{isloading && <Spinner />}</div>
     setVisibleBlogs(prevVisibleBlogs => prevVisibleBlogs + 4)
 
   }
@@ -366,11 +393,11 @@ function NftPage(props) {
               </select>
             </div> */}
 
-            <div className="mobilenftTilePageSecondSelect dropdown" style={{ border: '1px solid #d2d2d2', padding: '9px 12px 9px 12px' }}>
+            <div className="mobilenftTilePageSecondSelect dropdown"  ref={ref} style={{ border: '1px solid #d2d2d2', padding: '9px 12px 9px 12px' }}>
               <p className="mb-0 sale-type">Price range</p>
               <div className="filter-drop">
                 <div
-                  onClick={() => setStatusDrop(!statusDrop)}
+                  onClick={() => setIsMenuOpen(oldState => !oldState)}
                   className="d-flex justify-content-between w-100"
                 >
                   <div className="text">All</div>
@@ -383,7 +410,7 @@ function NftPage(props) {
                 </div>
                 <div
                   className="filter-item"
-                  style={{ display: statusDrop ? "block" : "none" }}
+                  style={{ display: isMenuOpen  ? "block" : "none" }}
                 >
                   {/* <form onSubmit={handleSubmit}> */}
                   <div className="row mb-3 align-items-center">
@@ -471,7 +498,8 @@ function NftPage(props) {
               value={filterType.sort}
               defaultValue="all"
               >
-              <StyledOption value="all">Sort By All</StyledOption>
+              <StyledOption value="all" hidden>Sort By All</StyledOption>
+              <StyledOption value="all" >All</StyledOption>
               <StyledOption value="-1">Ascending Order</StyledOption>
               <StyledOption value="1">Descending Order</StyledOption>
             </CustomSelect>
@@ -485,7 +513,7 @@ function NftPage(props) {
 
 
           <div className="spinnerloader">
-            {isLoading ? <Spinner /> :
+            {isloading ? <Spinner /> :
               (nfts.length === 0 && (
                 <div className="Noitemdiv">
                   <img src={NoItem} />

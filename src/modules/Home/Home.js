@@ -18,11 +18,47 @@ import Stats from '../../assets/images/Stats.png';
 import Image1 from '../../assets/images/Image1.png';
 import Image2 from '../../assets/images/Image2.png';
 import Image3 from '../../assets/images/Image3.png';
+// import { Link, useLocation } from "react-router-dom";
+
+import {
+  getNfts,
+  addLikeNft,
+  getNFtsData,
+} from "../../services/webappMicroservice";
 import Image4 from '../../assets/images/Image4.png';
+import { toast } from "react-toastify";
 
 function Home() {
   const { user, sideBar } = useSelector((state) => state);
   const { userDetails, loggedInUser, walletAddress } = user;
+  const [nfts, setNfts] = useState([]);
+  const [filterType, setFilterType] = useState({
+    sort : '-1',
+  });
+
+  useEffect(async () => {
+    // checkapi();
+
+    // setIsloading(true);
+    // getNfts(defaultReq).then((response) => {
+    await getNFtsData({ "sort": -1 }, (res) => {
+      console.log("fkfffkf")
+
+      // console.log(res, "filterResponse");
+      // setIsloading(true);
+      if (res.success) {
+        // prevArray => [...prevArray, newValue]
+        setNfts(res.responseData.nftContent);
+        // setNfts([nfts,res.responseData.nftContent]);
+        // setIsloading(false);
+      } else {
+        toast.error("Error While fetching Nfts");
+        // setIsloading(false);
+      }
+    });
+  }, [filterType]);
+
+
   return (
     <>
       <div className="homepage">
@@ -38,7 +74,7 @@ function Home() {
                       Explore
                     </Button>
                     <Button href={walletAddress == null ? "/add-wallet" : "/create-nft"} variant="custom">
-                          Create
+                      Create
                     </Button>
                   </div>
                 </Col>
@@ -46,22 +82,34 @@ function Home() {
                   <div className="right-slider">
                     <OwlCarousel className='owl-theme z-carousel' margin={10} items={1}>
                       <div className='item'>
+                        {/* {console.log("kkkkkkkkkkkkkkkkkkkkk",nfts)} */}
+
                         <div className="d-flex flex-wrap">
-                          <Card>
-                            <Card.Img variant="top" src={Image1} />
-                            <Card.Body>
-                              <div className="d-flex align-items-start media">
-                                <div className="flex-shrink-0">
-                                  <img src={Image1} alt="Image1" width="38px" height="38px" className="profile-img" />
-                                </div>
-                                <div className="flex-grow-1 ms-2">
-                                  <h3 className="title">Swoard Art online</h3>
-                                  <p className="description">Xwarrior</p>
-                                </div>
-                              </div>
-                            </Card.Body>
-                          </Card>
-                          <Card>
+                          {nfts.slice(0, 4).map((nft) => {
+                            // const { _id, cdnUrl, name, biddingDetails, salesInfo } = nft;
+
+                            return (
+                              <>
+                                {/* {console.log("sssssssqqqqqqsqsqqwswwwwwwwww",nft.createdBy)} */}
+                                {/* <img src={nft?.cdnUrl}></img> */}
+                                <Card>
+                                  <Link to={"/nft-information/" + nft?._id} style={{ textDecoration: 'none' }}>
+                                    <Card.Img variant="top" src={nft?.cdnUrl} />
+                                  </Link>
+                                  <Card.Body>
+                                    <div className="d-flex align-items-start media">
+                                      <div className="flex-shrink-0">
+                                        <img src={nft?.cdnUrl} alt="Image1" width="38px" height="38px" className="profile-img" />
+                                      </div>
+                                      <div className="flex-grow-1 ms-2">
+                                        <h3 className="title"><Link to={"/nft-information/" + nft?._id} style={{ textDecoration: 'none' }}>{nft?.name}</Link></h3>
+                                        <p className="description">{nft?.description}</p>
+                                      </div>
+                                    </div>
+                                  </Card.Body>
+                                </Card>
+
+                                {/* <Card>
                             <Card.Img variant="top" src={Image2} />
                             <Card.Body>
                               <div className="d-flex align-items-start media">
@@ -102,13 +150,42 @@ function Home() {
                                 </div>
                               </div>
                             </Card.Body>
-                          </Card>
+                          </Card> */}
+
+
+                              </>
+                            );
+                          })
+                          }
 
                         </div>
                       </div>
                       <div className='item'>
                         <div className="d-flex flex-wrap">
-                          <Card>
+                          {nfts.slice(4, 8).map((nft) => {
+                            return (
+                              <>
+                                {console.log("kkak")}
+                                <Card>
+                                  <Link to={"/nft-information/" + nft?._id} style={{ textDecoration: 'none' }}>
+                                    <Card.Img variant="top" src={nft?.cdnUrl} />
+                                  </Link>
+                                  <Card.Body>
+                                    <div className="d-flex align-items-start media">
+                                      <div className="flex-shrink-0">
+                                        <div>
+
+                                          <img src={nft?.cdnUrl} alt="Image1" width="38px" height="38px" className="profile-img" />
+                                        </div>
+                                        <div className="flex-grow-1 ms-2">
+                                          <h3 className="title"><Link to={"/nft-information/" + nft?._id}>{nft?.name}</Link></h3>
+                                        </div>
+                                        <p className="description">{nft?.description}</p>
+                                      </div>
+                                    </div>
+                                  </Card.Body>
+                                </Card>
+                                {/* <Card>
                             <Card.Img variant="top" src={Image1} />
                             <Card.Body>
                               <div className="d-flex align-items-start media">
@@ -121,8 +198,8 @@ function Home() {
                                 </div>
                               </div>
                             </Card.Body>
-                          </Card>
-                          <Card>
+                          </Card> */}
+                                {/* <Card>
                             <Card.Img variant="top" src={Image2} />
                             <Card.Body>
                               <div className="d-flex align-items-start media">
@@ -163,7 +240,11 @@ function Home() {
                                 </div>
                               </div>
                             </Card.Body>
-                          </Card>
+                          </Card> */}
+                              </>
+                            );
+                          })
+                          }
 
                         </div>
                       </div>
