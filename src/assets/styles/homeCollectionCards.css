@@ -24,6 +24,12 @@
 }
 
 /* nft and collection mediaquery start */
+@media only screen and (min-width: 1790px){
+  .collectionCardEach, .nftCardEach{
+    width: 19.5931%;
+    margin-right: 7.2%;
+  }
+}
 /* @media only screen and (max-width: 1600px) {
   .collectionCardEach, .nftCardEach {
     margin-right: 70px;
@@ -46,7 +52,7 @@
     height: 41vw; */
   }
   .collectionCardEach, .nftCardEach {
-    margin-right: 5%;
+    margin-right: 5.3%;
   }
 }
 @media only screen and (width: 991px){

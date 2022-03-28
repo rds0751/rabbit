@@ -137,10 +137,10 @@ height: 47px;
 }
 .submitbuttonfooter{
   height:36px;
-  fontWeight:400;
+  font-Weight:400;
   width: 116px;
-  borderTopLeftRadius:0em;
-  borderBottomLeftRadius: 0em;
+  border-top-left-radius:0em;
+  border-bottom-left-radius: 0em;
 }
 @media only screen and (max-width: 1170px) {
   .fa-caret-down {
@@ -149,10 +149,10 @@ height: 47px;
   /* .navbar {
     margin-left: 36px;
   } */
-  .mobfooter {
-    /* margin-left: 0px !important;
-    margin-right: -20px !important; */
-  }
+  /* .mobfooter {
+    margin-left: 0px !important;
+    margin-right: -20px !important;
+  } */
   .suggestionmob {
     margin-left: 10px;
   }
@@ -198,9 +198,9 @@ height: 47px;
     text-align: start;
   }
 
-  .mob_row {
-    /* margin-left: 17px; */
-  }
+  /* .mob_row {
+    margin-left: 17px;
+  } */
   .btmleaderboard {
     margin-top: 6px;
     margin-left: 10px;
@@ -370,13 +370,13 @@ height: 47px;
   .offset-2mob {
     margin-left: -50px;
   }
-  .cardmob {
-    /* margin-left: -2em !important; */
-    /* width: 110% !important; */
-  }
-  .card_imgmob {
-    /* width: 370px !important; */
-  }
+  /* .cardmob {
+    margin-left: -2em !important;
+    width: 110% !important;
+  } */
+  /* .card_imgmob {
+    width: 370px !important;
+  } */
   .dayleft_mob {
     margin-left: 10em !important;
   }
@@ -900,7 +900,7 @@ height: 47px;
 
   .ntf_div {
     padding: 0px !important;
-    width: 85%;
+    width: 86.66%;
     box-sizing: border-box;
     margin: 0px auto;
     /* width: 1664px !important; */
@@ -969,9 +969,9 @@ height: 47px;
 }
 
 @media screen and (max-width: 764px) {
-  .balancewallet {
-    /* width: 100% !important; */
-  }
+  /* .balancewallet {
+    width: 100% !important;
+  } */
 }
 
 @media only screen and (max-width: 480px){
@@ -1007,21 +1007,17 @@ height: 47px;
   padding: 20px;
 }
 .LeftNavBar{
-  margin-left: 5%;
+  margin-left: 5.5%;
+}
+.RightNavBar{
+  margin-right: 5.5%;
 }
 @media only screen and (min-width:1600px) {
   .LeftNavBar{
-    margin-left: 126px;
+    margin-left: 5.5%;
   }
- 
-}
-
-.RightNavBar{
-  margin-right: 6%;
-}
-@media only screen and (min-width:1600px) {
   .RightNavBar{
-    margin-left: 127.56px;
+    margin-right: 5.5%;
   }
 }
 
@@ -1318,10 +1314,10 @@ margin:0px;
   }
  }.submitbuttonfooter{
   height:36px;
-  fontWeight:400;
+  font-weight:400;
   width: 116px;
-  borderTopLeftRadius:0em;
-  borderBottomLeftRadius: 0em;
+  border-top-left-radius:0em;
+  border-bottom-left-radius: 0em;
 }
 .dropdown-toggle-ellipsis{
   appearance: none;
@@ -1347,6 +1343,7 @@ margin:0px;
 
 .toggle-line{
   border-radius: 10px;
+  margin: 12px 0px;
 }
 .toggle-container{
   display: flex;
