@@ -207,6 +207,7 @@ function MyProfile() {
             type="file"
             className="pencilicon"
             onChange={updateBanner}
+            title=" "
             style={{ border: "5px solid white", zIndex: "99", opacity: "0" }}
           />
           <img className="pencilicon" width="16px" height="16px" src={pencil} />

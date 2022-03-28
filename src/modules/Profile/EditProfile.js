@@ -50,6 +50,7 @@ function EditProfile(props) {
   const handleClick = (event) => {
     hiddenFileInput.current.click();
   };
+  console.log(localStorage.getItem(WHITE_LABEL_TOKEN), "<<<this is token");
 
   const handleChange = async (event) => {
    
@@ -127,7 +128,7 @@ function EditProfile(props) {
       window.location.href = '/my-profile';
       // navigate(-1);
     } else {
-      toast.error("Error While updating ");
+      toast.error("invalid request");
     }
   };
 

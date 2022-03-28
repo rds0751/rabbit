@@ -32,7 +32,7 @@ export const addWalletAddress = async (wallet_address) => {
 
 export const updateUserProfile = async (data, userId) => {
   try {
-    console.log(AuthToken,"Auth");
+    console.log(AuthToken,"<<<Auth");
     const res = await fetch(`${BASE_URL}/api/v1/user/${userId}`, {
       method: httpConstants.METHOD_TYPE.PUT,
       headers: AuthToken,

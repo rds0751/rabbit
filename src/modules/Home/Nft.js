@@ -471,7 +471,8 @@ function NftPage(props) {
               value={filterType.sort}
               defaultValue="all"
               >
-              <StyledOption value="all">Sort By All</StyledOption>
+              <StyledOption value="all" hidden>Sort By All</StyledOption>
+              <StyledOption value="all" >All</StyledOption>
               <StyledOption value="-1">Ascending Order</StyledOption>
               <StyledOption value="1">Descending Order</StyledOption>
             </CustomSelect>

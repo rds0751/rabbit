@@ -132,6 +132,7 @@ function CreateNftCollections(props) {
   // -------------
   const [desLEngth, setDesLEngth] = useState(0);
   const [nameError,SetNameError]=useState("");
+  const [DesError,SetDesError]=useState("");
   const handleChangeImage = async (event) => {
     const fileUploaded = event.target.files[0];
     // alert("onchage");
@@ -329,7 +330,8 @@ function CreateNftCollections(props) {
     const blockchainOption = [
       { value: 'eth', label: <div><img src={ethereum} height="32px" /> Ethereum</div> },
     ];
-    
+
+    const enabled=name.current.length > 0 && description.current.length > 0 && categoryId.current.length >0 && nameError=="" && bannerCdn!="" && logoCdn!="" && DesError==""; 
   return (
     <>
     
@@ -454,10 +456,13 @@ function CreateNftCollections(props) {
                   var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
                   if(format.test(e.target.value)){
                     SetNameError("(No Special Character Allowed)");
+                  }
+                  else if(e.target.value.length == 0){
+                    SetNameError("(Name is required field.)")
                   } else if(+e.target.value.length < 3){
-                    SetNameError("(UserName must be 3 character)")
-
-                  }else {
+                    SetNameError("(Name should be atleast 3 character)")
+                  }
+                  else {
                   SetNameError("");
                   }
                   
@@ -467,7 +472,7 @@ function CreateNftCollections(props) {
               />
             </div>
             <div>
-              <p className="fs-16 fw-b c-b pt-3">Description*</p>
+              <p className="fs-16 fw-b c-b pt-3">Description*<span style={{color:"Red" ,fontSize:"13px"}}>{DesError}</span></p>
               <textarea
                 rows="4"
                 id="test"
@@ -476,6 +481,11 @@ function CreateNftCollections(props) {
                 className="input-box-1 mb-0"
                 value={description.current}
                 onChange={(e) => {
+                  if(e.target.value.length==0){
+                    SetDesError("(Description are required field)")
+                  }else
+                  SetDesError("")
+
                   if (DesLength < 1000) {
                     description.current = e.target.value;
                     onChangeDes();
@@ -536,9 +546,9 @@ function CreateNftCollections(props) {
             </div>
             <button
               type="submit"
-              disabled={checkReqField ? false : true}
+              disabled={!enabled}
               className="submit-button"
-              style={{ opacity: checkReqField ? "1" : "0.5" }}
+              style={{ opacity: enabled ? "1" : "0.5" }}
             >
               Create
             </button>

@@ -282,7 +282,7 @@ function CreateSingleNFT(props) {
   const blockchainOption = [
     { value: 'eth', label: <div><img src={ethereum} height="32px" /> Ethereum</div> },
   ];
-const enabled=name.current.length > 0 && price.current.length > 0 && description.current.length >0 && selectFile!="" && nameError=="" && error=="";
+const enabled=name.current.length > 0 && price.current.length>0 && description.current.length >0 && selectFile!="" && nameError=="" && error=="";
   return (
     <>
 
@@ -563,6 +563,7 @@ const enabled=name.current.length > 0 && price.current.length > 0 && description
                   maxLength="100"
                   
                   onChange={(e) => {
+                    name.current = e.target.value;
                     // checkChanges();
                     //let x=e.target.value.replace(/[^a-zA-Z ]/g, "")
                     var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
@@ -575,7 +576,7 @@ const enabled=name.current.length > 0 && price.current.length > 0 && description
                     }
                     
                     //setSpecialChar(x);
-                    name.current = e.target.value;
+                  
                     
                   }}
                 />
@@ -591,15 +592,17 @@ const enabled=name.current.length > 0 && price.current.length > 0 && description
                     className="form-control"
                     type="number"
                     autoComplete="off"
+                    value={price.current}
                     onWheel={(e)=>e.target.blur()}
                     onChange={(e) => {
+                      price.current = e.target.value;
                       // checkChanges();
                       if(+e.target.value < "0.004" || +e.target.value=="0"){
                         setError("(Minimum listing price for an NFT should be more than 1 dollar)")
                       }else{
                         setError("")
                       }
-                      price.current = e.target.value;
+                    
                      
                     }}
                   />
