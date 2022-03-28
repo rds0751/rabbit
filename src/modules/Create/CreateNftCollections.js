@@ -483,8 +483,8 @@ function CreateNftCollections(props) {
                   }
                 }}
               ></textarea>
-              <span className="fs-14" style={{ color: "#707070" }}>{DesLength} of 1000 characters used</span>
-              <div style={{ color: "#707070" }}  className="fs-14"><span id="linesUsed">0</span> of 20 Lines used</div>
+              <span className="fs-14" style={{ color: "#707070" }}>{DesLength} of 1000 characters and 
+              <span> <span id="linesUsed">0</span> of 20 Lines.</span></span>
             </div>
             <div>
               <div className="fs-16 fw-b c-b pt-3 pb-3">Category</div>

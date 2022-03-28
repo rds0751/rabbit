@@ -578,6 +578,11 @@ thead {
   .leadercolmob {
     display: block;
   }
+  .leadercolmob .mobFilterButton{
+    margin-top: 10px;
+    margin-right: 32px;
+    float: right;
+  }
   .nav-pills .nav-link.active,
   .nav-pills .show > .nav-link {
     color: black !important;
@@ -856,7 +861,7 @@ thead {
   border-radius: 50%;
 }
 .card {
-  background-color: transparent !important;
+  background-color: transparent;
   border: none !important;
 }
 
@@ -1411,6 +1416,11 @@ thead {
   .leader-container{
     max-width: 95%;
   }
+  .leadercolmob .mobFilterButton{
+    margin-top: 19.49px;
+    margin-right: 0px;
+    float: none;
+  }
 }
 @media only screen and (max-width: 480px) {
   .leader-container{
@@ -1616,6 +1626,15 @@ thead {
     padding: 24.88px 22px 19.65px 31px;
   }
 }
+@media only screen and (min-width: 770px) and (max-width: 991px) {
+  .leader-container{
+    max-width: 100%;
+  }
+  .nftCard:nth-child(2n) {
+    margin-right: 0px;
+  }
+}
+
 .no-data {
 
   text-align: center;
