@@ -20,14 +20,14 @@ import "../../assets/styles/topNavBar.css";
 
 import Menu from "./Menu";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
-import NftPage  from "../../modules/Home/Nft"
+import Search from "./searchResult";
 // import "../../assets/st.css";
-const queryString = require('query-string');
+const queryString = require("query-string");
 function Navbar() {
   const navigate = useNavigate();
   const [humburger, setHumburger] = useState(false);
   const [searchInput, setSearchInput] = useState({
-    searchByName : ""
+    searchByName: "",
   });
   const [toggleEffect, setToggleEffect] = useState(false);
   const [errorMssg, setErrorMssg] = useState(null);
@@ -40,8 +40,8 @@ function Navbar() {
   const { isOpenNoti, isOpenWallet } = sideBar;
   const [isloading, setIsloading] = useState(false);
   // const [filterType, setFilterType] = useState(defaultReq);
-  const [showResults, setShowResults] = useState(false)
-  const [data, setData] = useState()
+  const [showResults, setShowResults] = useState(false);
+  const [data, setData] = useState();
   useEffect(() => {
     if (loggedInUser == null) {
       connectMetamask();
@@ -115,7 +115,7 @@ function Navbar() {
 
   window.ethereum?.on("accountsChanged", accountChangeHandler);
   let location = useLocation();
-  
+
   const manageNavigation = (name) => {
     if (name == "myitems") {
       dispatch(ManageNotiSideBar(false));
@@ -183,7 +183,8 @@ function Navbar() {
   //------------------------------------------------------------
 
   useEffect(() => {
-    // checkapi();
+
+      // checkapi();
     // const reqObj = queryString.stringify(searchInput);
 
     setIsloading(true);
@@ -201,20 +202,19 @@ function Navbar() {
     });
   }, [searchInput]);
 
-
-
-
   //-----------------------------------------------------------------
   // useEffect(() => {
   //   const reqObj = queryString.stringify(searchInput);
   //   console.log("jffffffffffffffffff",reqObj)
-  //   getNFtsData(reqObj).then((response) => 
+  //   getNFtsData(reqObj).then((response) =>
   //   setData(response.responseData.nftContent)
   //   );
   // }, [searchInput]);
 
   const handleSearch = () => {
-    if (searchInput.trim() != "") dispatch(searchNav(searchInput));
+    // if (searchInput.trim() != "") dispatch(searchNav(searchInput));
+    let path = `search-result`;
+    navigate(path);
   };
   // useEffect(() => {
   //   // checkapi();
@@ -235,20 +235,20 @@ function Navbar() {
   //   });
   // });
 
-
-
-console.log("kkkkkkkkkkkkkkkkkk",data)
-
+  console.log("kkkkkkkkkkkkkkkkkk", data);
 
   const closeWalletAndNoti = () => {
     dispatch(ManageNotiSideBar(false));
     dispatch(ManageWalletSideBar(false));
   };
 
-  const walletHandler = () => setShowResults(true)
+  const walletHandler = () => setShowResults(true);
 
   return (
     <>
+      <div style={{ display: "none" }}>
+        <Search data={data} />
+      </div>
       <div className="navbar-width">
         <nav className="navbarborder navbar navbar-expand-lg">
           <div
@@ -257,7 +257,12 @@ console.log("kkkkkkkkkkkkkkkkkk",data)
             style={{ backgroundColor: "white" }}
           >
             <div className="left_navbar d-flex align-items-center LeftNavBar">
-              <Link className="navbrand" to="/" style={{ marginRight: "20px" }}  onClick={isOpenWallet}>
+              <Link
+                className="navbrand"
+                to="/"
+                style={{ marginRight: "20px" }}
+                onClick={isOpenWallet}
+              >
                 <img
                   src={require("../../assets/images/logo.png")}
                   style={{ width: "100px" }}
@@ -270,7 +275,12 @@ console.log("kkkkkkkkkkkkkkkkkk",data)
                 placeholder="Search"
                 aria-label="Search"
                 // value={searchInput}
-                onChange={(e) => setSearchInput({...searchInput, [e.target.name]:e.target.value})}
+                onChange={(e) =>
+                  setSearchInput({
+                    ...searchInput,
+                    [e.target.name]: e.target.value,
+                  })
+                }
                 // onChange={() => setSearchInput()}
               />
               <button
@@ -324,8 +334,8 @@ console.log("kkkkkkkkkkkkkkkkkk",data)
                       location.pathname.includes("/nfts") &&
                       !location.pathname.includes("leader-board") &&
                       !location.pathname.includes("resource") &&
-                      !location.pathname.includes("create-nft") && 
-                      !location.pathname.includes("help-center") && 
+                      !location.pathname.includes("create-nft") &&
+                      !location.pathname.includes("help-center") &&
                       !location.pathname.includes("suggestion")
                         ? "nav-items li_underline marketplace"
                         : "nav-items marketplace"
@@ -337,9 +347,9 @@ console.log("kkkkkkkkkkkkkkkkkk",data)
                         location.pathname.includes("/nfts") &&
                         !location.pathname.includes("leader-board") &&
                         !location.pathname.includes("resource") &&
-                        !location.pathname.includes("create-nft")&& 
-                        !location.pathname.includes("help-center") && 
-                        !location.pathname.includes("suggestion") 
+                        !location.pathname.includes("create-nft") &&
+                        !location.pathname.includes("help-center") &&
+                        !location.pathname.includes("suggestion")
                           ? "nav-link navlink_active"
                           : "nav-link"
                       }
@@ -355,7 +365,7 @@ console.log("kkkkkkkkkkkkkkkkkk",data)
                         ? "nav-items li_underline leaderboard"
                         : "nav-items leaderboard"
                     }
-                    onClick={closeWalletAndNoti}  
+                    onClick={closeWalletAndNoti}
                   >
                     <Link
                       className={
@@ -374,18 +384,18 @@ console.log("kkkkkkkkkkkkkkkkkk",data)
                     onClick={closeWalletAndNoti}
                     title="Resource"
                     id="navbarScrollingDropdown"
-                    style={{padding:"0"}}
+                    style={{ padding: "0" }}
                     className={
-                      location.pathname.includes("help-center") || 
-                      location.pathname.includes("suggestion") 
+                      location.pathname.includes("help-center") ||
+                      location.pathname.includes("suggestion")
                         ? "nav-items dropdown li_underline resource nav-link navlink_active resource"
                         : "nav-items dropdown resource"
                     }
                   >
-                    <NavDropdown.Item onClick={()=>navigate('/help-center')}>
+                    <NavDropdown.Item onClick={() => navigate("/help-center")}>
                       Help Center
                     </NavDropdown.Item>
-                    <NavDropdown.Item onClick={()=>navigate('/suggestion')}>
+                    <NavDropdown.Item onClick={() => navigate("/suggestion")}>
                       Suggestions
                     </NavDropdown.Item>
                   </NavDropdown>
@@ -467,38 +477,45 @@ console.log("kkkkkkkkkkkkkkkkkk",data)
                         className="btnnav_mob1 profileimg profile-icon"
                         src={require("../../assets/images/profile.png")}
                         alt="profile"
-                        style={{
-                          
-                        }}
+                        style={{}}
                       ></img>
                     </a>
                     <ul
                       className="dropdown-menu profilemenu"
                       aria-labelledby="navbarDropdown"
-                      style={{borderRadius: "0px 0px 6px 6px",
-                      boxShadow: "0px 3px 6px #0000001A",
-                      borderTop:"none",
-                      border: "1px solid #ECECEC",
-                      marginTop:"-0.5px",
-                      padding:"0px",
-                    }}
+                      style={{
+                        borderRadius: "0px 0px 6px 6px",
+                        boxShadow: "0px 3px 6px #0000001A",
+                        borderTop: "none",
+                        border: "1px solid #ECECEC",
+                        marginTop: "-0.5px",
+                        padding: "0px",
+                      }}
                     >
-                      <li className="profileitem" onClick={() => manageNavigation("profile")}>
+                      <li
+                        className="profileitem"
+                        onClick={() => manageNavigation("profile")}
+                      >
                         Profile
                       </li>
-                      
-                        <hr className="dropdown-divider" />
-                      
-                      <li className="profileitem"
-                        style={{padding: "13.25px 89px 7px 13px"}}
-                       onClick={() => manageNavigation("myitems")}>
+
+                      <hr className="dropdown-divider" />
+
+                      <li
+                        className="profileitem"
+                        style={{ padding: "13.25px 89px 7px 13px" }}
+                        onClick={() => manageNavigation("myitems")}
+                      >
                         My Items
                       </li>
                     </ul>
                   </li>
                   <li>
                     <img
-                      onClick={() => {handleWalletClick(); walletHandler();}}
+                      onClick={() => {
+                        handleWalletClick();
+                        walletHandler();
+                      }}
                       className="wallet-icon"
                       src={require("../../assets/images/wallet.png")}
                       alt="wallet"
