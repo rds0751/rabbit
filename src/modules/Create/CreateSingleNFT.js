@@ -29,6 +29,7 @@ import Close from "../../assets/images/close.png";
 import Select from 'react-select';
 import { PrintDisabled } from "@mui/icons-material";
 import $ from 'jquery';
+import { errors } from "ethers";
 
 // import "../../assets/styles/Leader.css"
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
@@ -121,18 +122,18 @@ function CreateSingleNFT(props) {
           setcdnUrl(ipfsRes.cdnUrl);
           setisLoader(false);
           setIsFileSelected(true);
-          if (
-            name.current != ""  &&
-            price.current != "" &&
-            description.current !=""
-            // cdnUrl != "" 
-            // selectFile !="" 
-          ) {
-            setcheckDisable(false);
-          } 
-          else{
-            setcheckDisable(true);
-          }
+          // if (
+          //   name.current != ""  &&
+          //   price.current != "" &&
+          //   description.current !=""
+          //   // cdnUrl != "" 
+          //   // selectFile !="" 
+          // ) {
+          //   setcheckDisable(false);
+          // } 
+          // else{
+          //   setcheckDisable(true);
+          // }
         }
       })();
 
@@ -156,29 +157,29 @@ function CreateSingleNFT(props) {
     setUploadFileObj(event);
   };
   
-  const checkChanges = () => {
+  // const checkChanges = () => {
     
     
-    console.log(
-      name.current,
-      price.current,
-      description.current,
-      selectFile,
-      "<<<<formdata"
-    );
-    if (
-      name.current != ""  &&
-      price.current != "" &&
-      description.current !="" &&
-      selectFile !=""
+  //   console.log(
+  //     name.current,
+  //     price.current,
+  //     description.current,
+  //     selectFile,
+  //     "<<<<formdata"
+  //   );
+  //   if (
+  //     name.current != ""  &&
+  //     price.current != "" &&
+  //     description.current !="" &&
+  //     selectFile !=""
      
-    ) {
-      setcheckDisable(false);
-    } 
-    else{
-      setcheckDisable(true);
-    }
-  };
+  //   ) {
+  //     setcheckDisable(false);
+  //   } 
+  //   else{
+  //     setcheckDisable(true);
+  //   }
+  // };
 
   useEffect(()=>{
     $(document).ready(function(){
@@ -281,7 +282,7 @@ function CreateSingleNFT(props) {
   const blockchainOption = [
     { value: 'eth', label: <div><img src={ethereum} height="32px" /> Ethereum</div> },
   ];
-let pricevalue;
+const enabled=name.current.length > 0 && price.current.length > 0 && description.current.length >0 && selectFile!="" && nameError=="" && error=="";
   return (
     <>
 
@@ -525,7 +526,7 @@ let pricevalue;
                 {/* <Link>Create</Link> */}
                 <select
                   onChange={(e) => {
-                    checkChanges();
+                    // checkChanges();
                     // setCollectionId(e.target.value);
                     const addressId = e.target.value.split(",")
                     setCollectionId(addressId[0]);
@@ -562,7 +563,7 @@ let pricevalue;
                   maxLength="100"
                   
                   onChange={(e) => {
-                    checkChanges();
+                    // checkChanges();
                     //let x=e.target.value.replace(/[^a-zA-Z ]/g, "")
                     var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
                     if(format.test(e.target.value)){
@@ -592,7 +593,7 @@ let pricevalue;
                     autoComplete="off"
                     onWheel={(e)=>e.target.blur()}
                     onChange={(e) => {
-                      checkChanges();
+                      // checkChanges();
                       if(+e.target.value < "0.004" || +e.target.value=="0"){
                         setError("(Minimum listing price for an NFT should be more than 1 dollar)")
                       }else{
@@ -628,7 +629,7 @@ let pricevalue;
                   value={description.current}
                   onChange={(e) => {
                     if (desLength < 1000) {
-                      checkChanges();
+                      // checkChanges();
                       let x=e.target.value.replace(/\s+/g, '').length
                       description.current = e.target.value;
                       setDesLength(description.current.length);
@@ -687,8 +688,8 @@ let pricevalue;
                 type="submit"
                 onClick={handleSubmit}
                 className="submit-button"
-                style={{ opacity: checkDisable ? 0.6 : 1 }}
-                disabled={checkDisable}
+                style={{ opacity: !enabled ? 0.6 : 1 }}
+                disabled={!enabled}
               >
                 Create
               </button>

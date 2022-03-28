@@ -1373,3 +1373,7 @@ margin:0px;
 .footerAnchor{
   color: #818181;
 }
+.mainContainer{
+  padding-left: 0;
+  padding-right: 0;
+}
