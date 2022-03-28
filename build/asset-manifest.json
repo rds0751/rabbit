@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.17d770bf.css",
-    "main.js": "/static/js/main.91304a9b.js",
+    "main.css": "/static/css/main.dccb3a16.css",
+    "main.js": "/static/js/main.24c4822a.js",
     "static/media/Banner.png": "/static/media/Banner.112c32a6f604149b0d83.png",
     "static/media/Abstraction.png": "/static/media/Abstraction.010c4cc892910d63a5b1.png",
     "static/media/Image4.png": "/static/media/Image4.df4b7c34e33bba4bcabb.png",
@@ -17,6 +17,7 @@
     "static/media/Metamask.svg": "/static/media/Metamask.3737b9d1e6ec19bde908675ba3c35281.svg",
     "index.html": "/index.html",
     "static/media/ethereum.svg": "/static/media/ethereum.3477dbf799668d2ee5c41b4e1ee69385.svg",
+    "static/media/Information.svg": "/static/media/Information.12a27a8d3d59081dcee1b7939e23325b.svg",
     "static/media/collection.svg": "/static/media/collection.3423e7a57f035a0f01cb89b807e260e3.svg",
     "static/media/img-format.svg": "/static/media/img-format.e0028a70dd56d053e13de7dd2ef9c9ea.svg",
     "static/media/discord.svg": "/static/media/discord.7f6995b70d1d9c062c1771b4a09979ab.svg",
@@ -35,11 +36,11 @@
     "static/media/Check.svg": "/static/media/Check.c25a912c324dd4a360fa878d88b1e699.svg",
     "static/media/NoProfile.svg": "/static/media/NoProfile.ed2d677be0deeeb4c5fffeaec93d5975.svg",
     "static/media/drop-down-arrow.svg": "/static/media/drop-down-arrow.252c67d09c66c766f99a.svg",
-    "main.17d770bf.css.map": "/static/css/main.17d770bf.css.map",
-    "main.91304a9b.js.map": "/static/js/main.91304a9b.js.map"
+    "main.dccb3a16.css.map": "/static/css/main.dccb3a16.css.map",
+    "main.24c4822a.js.map": "/static/js/main.24c4822a.js.map"
   },
   "entrypoints": [
-    "static/css/main.17d770bf.css",
-    "static/js/main.91304a9b.js"
+    "static/css/main.dccb3a16.css",
+    "static/js/main.24c4822a.js"
   ]
 }
