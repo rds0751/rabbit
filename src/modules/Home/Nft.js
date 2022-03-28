@@ -195,7 +195,7 @@ function NftPage(props) {
 
 
 
-  const [maxPrice, setmaxPrice] = useState("");
+  const [maxPrice, setmaxPrice] = useState();
 
   const [filterType, setFilterType] = useState({
     sort : 'all',
@@ -512,31 +512,25 @@ if(minPrice.length > 0){
         >
 
 
-          <div className="spinnerloader">{isloading && <Spinner />}</div>
+          <div className="spinnerloader">
+            {isloading ? <Spinner /> :
+              (nfts.length === 0 && (
+                <div className="Noitemdiv">
+                  <img src={NoItem} />
+                  <p className="textitem">No items available</p>
+                </div>
+            ))}
+          </div>
 
-          {nfts.length > 1 ? (
+          {nfts.length > 0 && (
             //  const cardComponent = blogs.slice(0, visibleBlogs).map((blog, i) => 
             nfts.slice(0, visibleBlogs).map((nft) => {
-              const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
-              // console.log("[[[[[[[",biddingDetails.minPrice)
-              // const route = "/nft-information/" + _id;
-              // console.log("nfyyyyyyyyyyyyyyyyyyyy",nft)
               return (
                 <>
                   <NftCardsHome nft={nft} />
                 </>
               );
             })
-
-
-          ) : (
-            <div>
-              <div className="Noitemdiv">
-                <img src={NoItem} />
-                <p className="textitem">No items available</p>
-              </div>
-            </div>
-
           )}
           {
             visibleBlogs >= nfts.length ? "" :
