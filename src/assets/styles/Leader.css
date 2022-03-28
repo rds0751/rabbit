@@ -525,7 +525,7 @@ thead {
   .middle__homepage {
     justify-content: center;
     border-bottom: 1px solid #c7c7c7;
-    height: 46px;
+    height: 42px;
     margin-left: -20px;
     width: 110%;
   }
@@ -1422,6 +1422,13 @@ thead {
     float: none;
   }
 }
+@media only screen and (max-width: 573px) {
+  .leadercolmob .nav-link, .leadercolmob .nav-pills .nav-link.active, .leadercolmob .nav-pills .show > .nav-link{
+    font-size: 14px;
+    line-height: 21px;
+  }
+}
+
 @media only screen and (max-width: 480px) {
   .leader-container{
     max-width: 100%;
@@ -1440,9 +1447,15 @@ thead {
     padding: 6px 0.6rem;
   }
 }
-@media only screen and (max-width:334px){
+@media only screen and (max-width:353px){
   .leadercolmob .nav-link, .leadercolmob .nav-pills .nav-link.active, .leadercolmob .nav-pills .show > .nav-link{
     font-size: 12px;
+  }
+}
+
+@media only screen and (max-width:317px){
+  .leadercolmob .nav-link, .leadercolmob .nav-pills .nav-link.active, .leadercolmob .nav-pills .show > .nav-link{
+    font-size: 10px;
   }
 }
 /* nft-information nft detail page css end*/
