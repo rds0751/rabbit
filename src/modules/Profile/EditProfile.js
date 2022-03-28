@@ -15,23 +15,45 @@ import { AuthToken } from "../../services/UserAuthToken";
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import $ from 'jquery';
 import noProfile from '../../assets/images/NoProfile.svg'
+import { format } from "util";
 
 const Button = styled.button``;
 
 function EditProfile(props) {
+  let { user } = useSelector((state) => state);
+  let { loggedInUser } = user;
+
+  if(loggedInUser){ localStorage.setItem('userId', loggedInUser._id); }
+  let userId = (loggedInUser) ? loggedInUser._id : localStorage.userId;
+
+  if(user){ localStorage.setItem('loggedInDetails', user.loggedInUser); }
+  if (loggedInUser == null){
+    loggedInUser = localStorage.getItem('loggedInDetails')
+  }
+  console.log("oooooooooooooooooo",loggedInUser.userName)
   const navigate = useNavigate();
   const hiddenFileInput = useRef(null);
   const [desLength, setDesLength] = useState(0);
-  const { user } = useSelector((state) => state);
+  const [userData, setUserData] = useState(loggedInUser);
+
+  // const { user } = useSelector((state) => state);
   const [formData, setFormData] = useState({
-    photo: user?.loggedInUser?.photo,
-    userName: user?.loggedInUser?.userName,
-    bio: user?.loggedInUser?.bio,
-    portfolio: user?.loggedInUser?.portfolio,
+    photo: loggedInUser?.photo,
+    userName: loggedInUser?.userName,
+    bio: loggedInUser?.bio,
+    portfolio: loggedInUser?.portfolio,
   });
   const tempUrl =
     "https://earncashto.com/wp-content/uploads/2021/06/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png";
   const [imageUrl, setImageUrl] = useState(tempUrl);
+  const [useruserName, setUserName] = useState("");
+  const [bio, setBio] = useState("");
+  const [portfilo, setPortfilo] = useState("");
+
+  const [nameError,SetNameError]=useState('');
+  const [descriptionError,SetDesError]=useState('');
+  const [portfiloError,SetPortfiloError]=useState('');
+  const [disabledButton,setDisabledButton]=useState(false);
   console.log(user.loggedInUser, "<<<loggedin");
   // const photo = useRef(user?.loggedInUser?.photo);
   // const bio = useRef(user?.loggedInUser?.bio);
@@ -41,8 +63,10 @@ function EditProfile(props) {
   const handleClick = (event) => {
     hiddenFileInput.current.click();
   };
+  console.log(localStorage.getItem(WHITE_LABEL_TOKEN), "<<<this is token");
 
   const handleChange = async (event) => {
+   
     const fileUploaded = event.target.files[0];
     console.log(fileUploaded);
     let formData = new FormData();
@@ -74,6 +98,17 @@ function EditProfile(props) {
     if (user.loggedInUser?.photo != "") {
       setImageUrl(user?.loggedInUser?.photo);
     }
+    if (user.loggedInUser?.userName != "") {
+      setUserName(user?.loggedInUser?.userName);
+    }
+    if (user.loggedInUser?.bio != "") {
+      setBio(user?.loggedInUser?.bio);
+    }
+    if (user.loggedInUser?.portfilo != "") {
+      setPortfilo(user?.loggedInUser?.portfolio);
+    }
+   
+   
     // setImageUrl()
     // photo.current = user?.loggedInUser?.photo;
     // bio.current = user?.loggedInUser?.bio;
@@ -82,15 +117,16 @@ function EditProfile(props) {
   }, []);
   
   const handleSubmit = async (e) => {
-    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+    formData.userName=useruserName;
+    formData.bio=bio;
+    formData.portfolio=portfilo;
+
+    console.log(formData,"<<<formData");
+    var format = /[!@$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]+/;
     e.preventDefault();
     console.log(user.loggedInUser, "<<user");
     const userName = formData.userName;
-    console.log("userName",formData.userName);
-    if (userName.trim() == "") {
-      toast.error("Username is required");
-      return null;
-    }
+    console.log("userName",formData.userName.length);
     if(format.test(userName)){
       toast.error("UserName should be not contain special character");
       return null;
@@ -101,21 +137,23 @@ function EditProfile(props) {
     console.log(result, "<<<<<< profile updated value");
     if (result.success) {
       toast.success("Profile Updated");
-      window.location.reload(true);
-       navigate(-1);
+      // window.location.reload(true);
+      window.location.href = '/my-profile';
+      // navigate(-1);
     } else {
-      toast.error("Error While updating ");
+      toast.error("invalid request");
     }
   };
 
   const handleForm = (e) => {
+ 
     const { name, value } = e.target;
     if (name == "bio") {
       setDesLength(value.length);
     }
     setFormData({ ...formData, [name]: value });
   };
- const [nameError,SetNameError]=useState('');
+
  useEffect(()=>{
   $(document).ready(function(){
 
@@ -137,7 +175,7 @@ function EditProfile(props) {
 },[])
 
   
-
+const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 && nameError=="";
   return (
     <>
       <ToastContainer
@@ -193,7 +231,7 @@ function EditProfile(props) {
           </div>
         </div>
         <div className="editProfileFormContainer singlenft-form-box">
-          <form className="suggestion-form " onSubmit={(e) => handleSubmit(e)}>
+         
             <div className="">
               <label
                 htmlFor="username"
@@ -205,15 +243,23 @@ function EditProfile(props) {
                 type="text"
                 className="editProfileFormContainerEachInput "
                 name="userName"
+                id="userName"
                 value={formData.userName}
                 // value={userName.current}
                 onChange={(e) => {
+                  setUserName(e.target.value);
+                 
                   var format = /[!@$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]+/;
                   if(format.test(e.target.value)){
                     SetNameError("(No Special Character Allowed)");
-                  } else {
+                    
+                  }  else if(e.target.value.length==0){
+                  SetNameError("(Name Field required)");
+                }
+                  else{
                   SetNameError("");
-                  }
+                  
+                }
                   handleForm(e);
                   
                 }}
@@ -221,17 +267,20 @@ function EditProfile(props) {
             </div>
             <div className="" style={{marginBottom:"28px"}}>
               <label htmlFor="comment" className="label-heading">
-                Bio
+                Bio<span style={{color:"red",fontSize:"13px"}}>{descriptionError}</span>
               </label>
               <textarea
                 className="editProfileFormContainerEachInput mb-0"
                 rows="4"
                 id="test"
+            
                 // name="text"
                 name="bio"
                 value={formData.bio}
                 // value={userName.current}
                 onChange={(e) => {
+                  setBio(e.target.value);
+                  let bioval=(e.target.value.length==0)?(SetDesError("(Description Field required)")):(SetDesError(""));
                   if (desLength < 1000) {
                     handleForm(e);
                   }
@@ -247,29 +296,39 @@ function EditProfile(props) {
             </div>
             <div className="portfilodiv">
               <label htmlFor="email" className="label-heading">
-                Personal site or Portfolio
+                Personal site or Portfolio<span style={{color:"red",fontSize:"13px"}}>{portfiloError}</span>
               </label>
               <input
                 type="name"
+                id="portfilo"
                 className="editProfileFormContainerEachInput form-control"
                 placeholder="www.example.com"
                 name="portfolio"
                 value={formData.portfolio}
                 // value={userName.current}
-                onChange={(e) => handleForm(e)}
+                onChange={(e) => {
+                  setPortfilo(e.target.value);
+                  (e.target.value.length==0)?SetPortfiloError("(Portifilo Field required)"):SetPortfiloError("");
+                  handleForm(e);
+                 }}
               />
+              {console.log("kffffffffffffffffffggggggggg",formData.portfolio)}
+              {console.log("kffffffffffffffffffggggggggg",user)}
             </div>
             <div className="buttonGroup">
             <button  className="editprofileCancelButton" onClick={() => navigate(-1)}>
               <span className="cancelbutton" >Cancel</span>
             </button>
-            <button type="submit" className="editprofileSubmitButton ">
+            <button type="submit" className="editprofileSubmitButton" 
+            disabled={!enabled} 
+            style={{ opacity: !enabled ? 0.6 : 1 }}
+            onClick={(e) => handleSubmit(e)}>
               <span className="updateProfile">Update Profile</span>
             </button>
 
             </div>
             
-          </form>
+         
         </div>
       </div>
     </>

@@ -131,12 +131,12 @@ export function getCollection(requestData) {
     });
 }
 
-export function getNftsByCollectionId(requestData) {
+export function getNftsByCollectionId(id, requestData) {
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
     "api/v1/collection/" +
-    requestData +
-    "/nfts";
+    id +
+    "/nfts?" + requestData;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },

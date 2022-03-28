@@ -108,6 +108,7 @@
   font-family: 'poppins-medium';
   font-size: 14px;
   color: #191919;
+  z-index: 1;
   cursor: pointer;
 }
 .sortbydrop {
@@ -205,9 +206,6 @@
   }
 
   .colldrop {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     border: 1px solid #d2d2d2;
     width: 100%;
     padding: 0% 2%;
@@ -215,6 +213,8 @@
     height: 42px;
     margin-right: 0px;
     margin-top: 16px;
+    z-index: 1;
+    user-select: none;
   }
   .sortbydrop {
     width: 100% !important;
