@@ -62,13 +62,13 @@
 .nftTileEachDetailsFirstContainerValue {
   border: 1px solid #16AB6E;
   border-radius: 6px;
-  padding: 6px 5px 5px 5px;
+  padding: 6px 5px 2px 5px;
   font-size: 14px;
   line-height: 21px;
   color: #16AB6E;
   font-family: "poppins-semibold";
   background-color: #FFFFFF00;
-  min-width: 82px;
+  min-width: 68px;
   /* margin-right: 1em; */
 }
 .nftTileEachDetailsSecondContainerValueHighest {
