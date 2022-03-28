@@ -1347,6 +1347,7 @@ margin:0px;
 
 .toggle-line{
   border-radius: 10px;
+  margin: 12px 0px;
 }
 .toggle-container{
   display: flex;

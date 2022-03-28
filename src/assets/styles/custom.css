@@ -770,11 +770,13 @@ input::-webkit-input-placeholder {
   border-radius: 4px;
   /* padding: 9px 12px 9px 12px; */
   width: 250px;
+  font-size: 14px;
 }
 .filter .dropdown p {
   font-family: 'poppins-medium';
   line-height: 21px;
   color: #191919;
+  font-size: 14px;
 }
 .filter .dropdown select {
   /* border: none; */
