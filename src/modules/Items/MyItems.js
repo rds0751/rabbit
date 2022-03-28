@@ -91,7 +91,7 @@ function MyItems() {
 
         {toggleSelect && (
           <div style={{ marginTop: "40.12px", marginLeft: 'auto', rowGap: "50px" }} className="row">
-            
+
             {ownedNft.length > 1 ?(
               ownedNft.map((curElem) => {
                 const { cdnUrl, name, _id } =
