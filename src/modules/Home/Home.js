@@ -32,32 +32,52 @@ function Home() {
   const { user, sideBar } = useSelector((state) => state);
   const { userDetails, loggedInUser, walletAddress } = user;
   const [nfts, setNfts] = useState([]);
+  const [changeState, setChangeState] = useState(0);
+
   const [filterType, setFilterType] = useState({
-    sort : '-1',
+    sort: '-1',
   });
 
   useEffect(async () => {
     // checkapi();
+    // setTimeout(6000);
 
     // setIsloading(true);
     // getNfts(defaultReq).then((response) => {
-    await getNFtsData({ "sort": -1 }, (res) => {
-      console.log("fkfffkf")
+    // if(nfts.length==0){
+    // const myTimeout = setTimeout(100000);
+    console.log("API data")
+    try {
+      if (changeState === 0) {
+        getNFtsData({}, (res) => {
 
-      // console.log(res, "filterResponse");
-      // setIsloading(true);
-      if (res.success) {
-        // prevArray => [...prevArray, newValue]
-        setNfts(res.responseData.nftContent);
-        // setNfts([nfts,res.responseData.nftContent]);
-        // setIsloading(false);
-      } else {
-        toast.error("Error While fetching Nfts");
-        // setIsloading(false);
+          // console.log(res, "filterResponse");
+          console.log("fkfsffksfsw", res)
+          if (res.success) {
+            console.log("data check", res?.responseData?.nftContent)
+            // prevArray => [...prevArray, newValue]
+            setNfts(res?.responseData?.nftContent);
+            setChangeState(1);
+
+            // setNfts([nfts,res.responseData.nftContent]);
+            // setIsloading(false);
+          } else {
+            toast.error(res.message);
+            // setIsloading(false);
+          }
+
+        });
       }
-    });
-  }, [filterType]);
-
+    }
+    catch (error) { console.log("error message", error) }
+    // }
+    // else{
+    //   console.log("its else statement")
+    // }
+  }, [nfts]);
+  // setInterval(() => {
+  console.log("ffffffffffffffffssssssssssssssss", nfts)
+  // }, 5000);
 
   return (
     <>
@@ -85,12 +105,13 @@ function Home() {
                         {/* {console.log("kkkkkkkkkkkkkkkkkkkkk",nfts)} */}
 
                         <div className="d-flex flex-wrap">
-                          {nfts.slice(0, 4).map((nft) => {
+
+                          {nfts.length && nfts.slice(0, 4).map((nft) => {
                             // const { _id, cdnUrl, name, biddingDetails, salesInfo } = nft;
 
                             return (
                               <>
-                                {/* {console.log("sssssssqqqqqqsqsqqwswwwwwwwww",nft.createdBy)} */}
+                                {console.log("sssssssqqqqsqqsqsqqwswwwwwwwww", nft.createdBy)}
                                 {/* <img src={nft?.cdnUrl}></img> */}
                                 <Card>
                                   <Link to={"/nft-information/" + nft?._id} style={{ textDecoration: 'none' }}>
@@ -103,7 +124,10 @@ function Home() {
                                       </div>
                                       <div className="flex-grow-1 ms-2">
                                         <h3 className="title"><Link to={"/nft-information/" + nft?._id} style={{ textDecoration: 'none' }}>{nft?.name}</Link></h3>
-                                        <p className="description">{nft?.description}</p>
+                                        {/* {let n = nft?.description.split(' ')} */}
+                                        <p className="description">{nft?.description.slice(0, 100)}....</p>
+                                        {/* <p className="description">{nft?.description}</p> */}
+
                                       </div>
                                     </div>
                                   </Card.Body>
@@ -162,10 +186,10 @@ function Home() {
                       </div>
                       <div className='item'>
                         <div className="d-flex flex-wrap">
-                          {nfts.slice(4, 8).map((nft) => {
+                          {nfts.length && nfts.slice(4, 8).map((nft) => {
                             return (
                               <>
-                                {console.log("kkak")}
+                                {console.log("kdkdkddkkdkkkkkkkkkkk", nft)}
                                 <Card>
                                   <Link to={"/nft-information/" + nft?._id} style={{ textDecoration: 'none' }}>
                                     <Card.Img variant="top" src={nft?.cdnUrl} />
@@ -180,7 +204,8 @@ function Home() {
                                         <div className="flex-grow-1 ms-2">
                                           <h3 className="title"><Link to={"/nft-information/" + nft?._id}>{nft?.name}</Link></h3>
                                         </div>
-                                        <p className="description">{nft?.description}</p>
+
+                                        <p className="description">{nft?.description.slice(0, 100)}....</p>
                                       </div>
                                     </div>
                                   </Card.Body>

@@ -106,7 +106,7 @@ function EditProfile(props) {
                 Username
               </label>
               <input
-                type="name"
+                type="text"
                 className="editProfileFormContainerEachInput form-control"
                 name="email"
                 onChange={(e) => (username.current = e.target.value)}
@@ -132,7 +132,7 @@ function EditProfile(props) {
                 Personal site or Portfolio
               </label>
               <input
-                type="name"
+                type="text"
                 className="editProfileFormContainerEachInput form-control bg-light"
                 placeholder="www.example.com"
                 onChange={(e) => (personalSite.current = e.target.value)}

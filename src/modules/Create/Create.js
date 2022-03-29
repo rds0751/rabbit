@@ -90,11 +90,16 @@ function Create() {
             });
                })
         .catch((e) => {
-          toast.error(" Connect Your Metamask Wallet");
-          console.log(e, "<<< error ");
+          toast.error("Install Metamask and Connect Wallet", {
+            position: toast.POSITION.TOP_RIGHT
+          });
         });
     } else {
-      toast.error("Install Metamak and Connect Wallet");
+      
+      toast.error("Install Metamask and Connect Wallet", {
+        position: toast.POSITION.TOP_RIGHT
+      });
+      // toast.error("Install Metamask and Connect Wallet");
     }
   };
   const accountChangeHandler = (newAccount) => {
