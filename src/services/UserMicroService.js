@@ -136,7 +136,7 @@ export const updateBannerByUserId = async (
 // for public user-profile
 
 export const userPublicProfile = async (successCallBack, userId) => {
-  // console.log("kjggggggggggggggggggg",url)
+  console.log("kjggggggggggggggggggg",userId)
   try {
     const url =
       process.env.REACT_APP_WEBAPP_USER_MICROSERVICE+"api/v1/users/"+userId;

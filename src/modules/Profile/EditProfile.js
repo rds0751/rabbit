@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Image from "../../assets/images/img-format.png";
 import styled from "styled-components";
 import { connect } from "react-redux";
@@ -9,6 +9,7 @@ import { updateUserProfile } from "../../services";
 import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
+import { userPublicProfile } from "../../services/UserMicroService";
 import "react-toastify/dist/ReactToastify.css";
 import "../../assets/styles/editProfile.css";
 import { AuthToken } from "../../services/UserAuthToken";
@@ -23,18 +24,18 @@ function EditProfile(props) {
   let { user } = useSelector((state) => state);
   let { loggedInUser } = user;
 
-  if(loggedInUser){ localStorage.setItem('userId', loggedInUser._id); }
+  if (loggedInUser) { localStorage.setItem('userId', loggedInUser._id); }
   let userId = (loggedInUser) ? loggedInUser._id : localStorage.userId;
 
-  if(user){ localStorage.setItem('loggedInDetails', user.loggedInUser); }
-  if (loggedInUser == null){
+  if (user) { localStorage.setItem('loggedInDetails', user.loggedInUser); }
+  if (loggedInUser == null) {
     loggedInUser = localStorage.getItem('loggedInDetails')
   }
-  console.log("oooooooooooooooooo",loggedInUser.userName)
+  console.log("ooooooosooooooooooo", loggedInUser._id)
   const navigate = useNavigate();
   const hiddenFileInput = useRef(null);
   const [desLength, setDesLength] = useState(0);
-  const [userData, setUserData] = useState(loggedInUser);
+  const [checkClick, setcheckClick] = useState(false);
 
   // const { user } = useSelector((state) => state);
   const [formData, setFormData] = useState({
@@ -50,10 +51,13 @@ function EditProfile(props) {
   const [bio, setBio] = useState("");
   const [portfilo, setPortfilo] = useState("");
 
-  const [nameError,SetNameError]=useState('');
-  const [descriptionError,SetDesError]=useState('');
-  const [portfiloError,SetPortfiloError]=useState('');
-  const [disabledButton,setDisabledButton]=useState(false);
+  const [nameError, SetNameError] = useState('');
+  const [descriptionError, SetDesError] = useState('');
+  const [userData, setUserData] = useState('');
+
+
+  const [portfiloError, SetPortfiloError] = useState('');
+  const [disabledButton, setDisabledButton] = useState(false);
   console.log(user.loggedInUser, "<<<loggedin");
   // const photo = useRef(user?.loggedInUser?.photo);
   // const bio = useRef(user?.loggedInUser?.bio);
@@ -66,7 +70,7 @@ function EditProfile(props) {
   console.log(localStorage.getItem(WHITE_LABEL_TOKEN), "<<<this is token");
 
   const handleChange = async (event) => {
-   
+
     const fileUploaded = event.target.files[0];
     console.log(fileUploaded);
     let formData = new FormData();
@@ -85,7 +89,11 @@ function EditProfile(props) {
     if (result.success) {
       setFormData({ ...formData, photo: result.responseData });
     } else {
-      toast.error("Unable to change image");
+      toast.error("Unable to change image", {
+        position: toast.POSITION.TOP_RIGHT
+      });
+
+      // toast.error("Unable to change image");
     }
 
     // else toast.error("")
@@ -93,6 +101,43 @@ function EditProfile(props) {
     setImageUrl(result.responseData);
     // Edit.handleFile(fileUploaded);
   };
+  //------------------------------------------------------------------------
+  useEffect((async) => {
+    // checkapi();
+    // setTimeout(6000);
+
+    // setIsloading(true);
+    // getNfts(defaultReq).then((response) => {
+    // if(nfts.length==0){
+    // const myTimeout = setTimeout(100000);
+    if (loggedInUser._id) {
+      console.log("ddddddddddddddddddd", loggedInUser._id)
+      userPublicProfile((res) => {
+        // console.log("jjjjjjjjjjjjjj")
+        // console.log(res, "filterResponse");
+        // setIsloading(true);
+        if (res.success) {
+          console.log("fkfsffksfsw", res.responseData)
+
+          // prevArray => [...prevArray, newValue]
+          setUserData(res.responseData);
+
+          // setNfts([nfts,res.responseData.nftContent]);
+          // setIsloading(false);
+        } else {
+          toast.error(res.message);
+          // setIsloading(false);
+        }
+
+      }, loggedInUser._id);
+    }
+    // }
+    // else{
+    //   console.log("its else statement")
+    // }
+  }, [loggedInUser._id]);
+
+  //-----------------------------------------------------------------------
   useEffect(() => {
     console.log(localStorage.getItem(WHITE_LABEL_TOKEN), "<<<this is token");
     if (user.loggedInUser?.photo != "") {
@@ -107,27 +152,27 @@ function EditProfile(props) {
     if (user.loggedInUser?.portfilo != "") {
       setPortfilo(user?.loggedInUser?.portfolio);
     }
-   
-   
+
+
     // setImageUrl()
     // photo.current = user?.loggedInUser?.photo;
     // bio.current = user?.loggedInUser?.bio;
     // userName.current = user?.loggedInUser?.userName;
     // portfolio.current = user?.loggedInUser?.portfolio;
   }, []);
-  
-  const handleSubmit = async (e) => {
-    formData.userName=useruserName;
-    formData.bio=bio;
-    formData.portfolio=portfilo;
 
-    console.log(formData,"<<<formData");
+  const handleSubmit = async (e) => {
+    formData.userName = useruserName;
+    formData.bio = bio;
+    formData.portfolio = portfilo;
+
+    console.log(formData, "<<<formData");
     var format = /[!@$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]+/;
     e.preventDefault();
     console.log(user.loggedInUser, "<<user");
     const userName = formData.userName;
-    console.log("userName",formData.userName.length);
-    if(format.test(userName)){
+    console.log("userName", formData.userName.length);
+    if (format.test(userName)) {
       toast.error("UserName should be not contain special character");
       return null;
     }
@@ -136,17 +181,26 @@ function EditProfile(props) {
     const result = await updateUserProfile(formData, user?.loggedInUser?._id);
     console.log(result, "<<<<<< profile updated value");
     if (result.success) {
-      toast.success("Profile Updated");
+      // toast.success("Profile Updated");
+      toast.success(result.message, {
+        position: toast.POSITION.TOP_RIGHT
+      });
       // window.location.reload(true);
-      window.location.href = '/my-profile';
+      // console.log("jsgg")
+      // window.location.href = '/my-profile';
       // navigate(-1);
     } else {
-      toast.error("invalid request");
+      console.log("ddddddddddddddddddddd",result.message)
+      // toast.error("invalid request");
+      toast.error(result.message, {
+        position: toast.POSITION.TOP_RIGHT
+      });
+
     }
   };
 
   const handleForm = (e) => {
- 
+
     const { name, value } = e.target;
     if (name == "bio") {
       setDesLength(value.length);
@@ -154,28 +208,28 @@ function EditProfile(props) {
     setFormData({ ...formData, [name]: value });
   };
 
- useEffect(()=>{
-  $(document).ready(function(){
+  useEffect(() => {
+    $(document).ready(function () {
 
-    var lines = 20;
-    var linesUsed = $('#linesUsed');
+      var lines = 20;
+      var linesUsed = $('#linesUsed');
 
-    $('#test').keydown(function(e) {
+      $('#test').keydown(function (e) {
 
         let newLines = $(this).val().split("\n").length;
         linesUsed.text(newLines);
 
-        if(e.keyCode == 13 && newLines >= lines) {
-            
-            return false;
-        }
-        
-    });
-});
-},[])
+        if (e.keyCode == 13 && newLines >= lines) {
 
-  
-const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 && nameError=="";
+          return false;
+        }
+
+      });
+    });
+  }, [])
+
+  console.log("aaaaaaaaaaaaaaa", userData)
+  // const enabled = ((useruserName.length) > 0 && (bio.length) > 0 && (portfilo.length) > 0 && nameError == "");
   return (
     <>
       <ToastContainer
@@ -205,15 +259,15 @@ const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 
           <div className="chooseProfilePicInnerContainer ">
             <div className="editprofile-image">
               <img
-                src={imageUrl}
+                src={userData.photo}
               />
             </div>
             <div className="editprofile-button-outer">
               <Button
                 onClick={handleClick}
                 className=" btn-choose-file"
-                // style={{ marginTop: "4em" }}
-                // onChange={(e) => handleChange(e)}
+              // style={{ marginTop: "4em" }}
+              // onChange={(e) => handleChange(e)}
               >
                 <span className="choosefile">Choose File</span>
               </Button>
@@ -231,104 +285,104 @@ const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 
           </div>
         </div>
         <div className="editProfileFormContainer singlenft-form-box">
-         
-            <div className="">
-              <label
-                htmlFor="username"
-                className=" label-heading userheading"
-              >
-                Username<span style={{color:"red",fontSize:"13px"}}>{nameError}</span>
-              </label>
-              <input
-                type="text"
-                className="editProfileFormContainerEachInput "
-                name="userName"
-                id="userName"
-                value={formData.userName}
-                // value={userName.current}
-                onChange={(e) => {
-                  setUserName(e.target.value);
-                 
-                  var format = /[!@$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]+/;
-                  if(format.test(e.target.value)){
-                    SetNameError("(No Special Character Allowed)");
-                    
-                  }  else if(e.target.value.length==0){
+
+          <div className="">
+            <label
+              htmlFor="username"
+              className=" label-heading userheading"
+            >
+              Username<span style={{ color: "red", fontSize: "13px" }}>{nameError}</span>
+            </label>
+            <input
+              type="text"
+              className="editProfileFormContainerEachInput "
+              name="userName"
+              id="userName"
+              value={userData.userName}
+              // value={userName.current}
+              onChange={(e) => {
+                setUserName(e.target.value);
+
+                var format = /[!@$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]+/;
+                if (format.test(e.target.value)) {
+                  SetNameError("(No Special Character Allowed)");
+
+                } else if (e.target.value.length == 0) {
                   SetNameError("(Name Field required)");
                 }
-                  else{
+                else {
                   SetNameError("");
-                  
+
                 }
+                handleForm(e);
+
+              }}
+            />
+          </div>
+          <div className="" style={{ marginBottom: "28px" }}>
+            <label htmlFor="comment" className="label-heading">
+              Bio<span style={{ color: "red", fontSize: "13px" }}>{descriptionError}</span>
+            </label>
+            <textarea
+              className="editProfileFormContainerEachInput mb-0"
+              rows="4"
+              id="test"
+
+              // name="text"
+              name="bio"
+              value={userData.bio}
+              // value={userName.current}
+              onChange={(e) => {
+                setBio(e.target.value);
+                let bioval = (e.target.value.length == 0) ? (SetDesError("(Description Field required)")) : (SetDesError(""));
+                if (desLength < 1000) {
                   handleForm(e);
-                  
-                }}
-              />
-            </div>
-            <div className="" style={{marginBottom:"28px"}}>
-              <label htmlFor="comment" className="label-heading">
-                Bio<span style={{color:"red",fontSize:"13px"}}>{descriptionError}</span>
-              </label>
-              <textarea
-                className="editProfileFormContainerEachInput mb-0"
-                rows="4"
-                id="test"
-            
-                // name="text"
-                name="bio"
-                value={formData.bio}
-                // value={userName.current}
-                onChange={(e) => {
-                  setBio(e.target.value);
-                  let bioval=(e.target.value.length==0)?(SetDesError("(Description Field required)")):(SetDesError(""));
-                  if (desLength < 1000) {
-                    handleForm(e);
-                  }
-                }}
-                placeholder="Write description"
-                // onChange={(e) => (bio.current = e.target.value)}
-              ></textarea>
-              <div className="clearfix"></div>
-              <span className="input-down-text">
+                }
+              }}
+              placeholder="Write description"
+            // onChange={(e) => (bio.current = e.target.value)}
+            ></textarea>
+            <div className="clearfix"></div>
+            <span className="input-down-text">
               {desLength} of 1000 characters and
               <span> <span id="linesUsed">0</span> of 20 Lines.</span>
-              </span>
-            </div>
-            <div className="portfilodiv">
-              <label htmlFor="email" className="label-heading">
-                Personal site or Portfolio<span style={{color:"red",fontSize:"13px"}}>{portfiloError}</span>
-              </label>
-              <input
-                type="name"
-                id="portfilo"
-                className="editProfileFormContainerEachInput form-control"
-                placeholder="www.example.com"
-                name="portfolio"
-                value={formData.portfolio}
-                // value={userName.current}
-                onChange={(e) => {
-                  setPortfilo(e.target.value);
-                  (e.target.value.length==0)?SetPortfiloError("(Portifilo Field required)"):SetPortfiloError("");
-                  handleForm(e);
-                 }}
-              />
-              {console.log("kffffffffffffffffffggggggggg",formData.portfolio)}
-              {console.log("kffffffffffffffffffggggggggg",user)}
-            </div>
-            <div className="buttonGroup">
-            <button  className="editprofileCancelButton" onClick={() => navigate(-1)}>
+            </span>
+          </div>
+          <div className="portfilodiv">
+            <label htmlFor="email" className="label-heading">
+              Personal site or Portfolio<span style={{ color: "red", fontSize: "13px" }}>{portfiloError}</span>
+            </label>
+            <input
+              type="name"
+              id="portfilo"
+              className="editProfileFormContainerEachInput form-control"
+              placeholder="www.example.com"
+              name="portfolio"
+              value={userData.portfolio}
+              // value={userName.current}
+              onChange={(e) => {
+                setPortfilo(e.target.value);
+                (e.target.value.length == 0) ? SetPortfiloError("(Portifilo Field required)") : SetPortfiloError("");
+                handleForm(e);
+              }}
+            />
+            {console.log("kffffffffffffffffffggggggggg", formData.portfolio)}
+            {console.log("kffffffffffffffffffggsssssggggggg", userData)}
+          </div>
+          <div className="buttonGroup">
+            <button className="editprofileCancelButton" onClick={() => navigate(-1)}>
               <span className="cancelbutton" >Cancel</span>
             </button>
-            <button type="submit" className="editprofileSubmitButton" 
-            disabled={!enabled} 
-            style={{ opacity: !enabled ? 0.6 : 1 }}
-            onClick={(e) => handleSubmit(e)}>
+            <button type="submit" className="editprofileSubmitButton"
+              // disabled={!enabled}
+              // style={{ opacity: !enabled ? 0.6 : 1 }}
+              onClick={(e) => handleSubmit(e)}>
               <span className="updateProfile">Update Profile</span>
             </button>
 
-            </div>
-            
-         
+          </div>
+
+
         </div>
       </div>
     </>
