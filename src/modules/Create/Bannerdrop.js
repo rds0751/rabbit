@@ -19,8 +19,25 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     maxSize: "10485760",
-    onDrop: (acceptedFiles) => {
-
+    onDrop: (acceptedFiles,fileRejections) => {
+      setisLoader(true);
+      fileRejections.forEach((file)=>{
+        file.errors.forEach((err)=>{
+          if(err.code === "file-too-large"){
+            toast.error("Image file size should be less than 10 mb")
+            setisLoader(false);
+          }
+          else if(err.code === "file-invalid-type"){
+            toast.error("File type not acceptable. Please use……… file");
+            setisLoader(false);
+          }
+          else{
+            toast.error("Image file size should be greater than ……. pxl");
+            setisLoader(false);
+            
+          }
+        })
+      })
       console.log(getInputProps, "<<<<<<", getRootProps, "<<<props");
       let formData = new FormData();
       formData.append(
@@ -34,16 +51,17 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
       // const [err, ipfsRes] = addIPFS(formData)
 
       (async () => {
-        setisLoader(true);
+       
         const [err, ipfsRes] = await Utils.parseResponse(
           getCollection.addIpfs(formData)
         );
-        if (err || !ipfsRes.ipfsUrl) {
-          toast.error("File is not acceptable");
+        if ( !ipfsRes.ipfsUrl) {
+          toast.error("unable to add image on network try differnet one");
           setisLoader(false);
         } else {
           
           // alert("banner");
+          
           console.log(ipfsRes, "<<<<ipfs Res");
 
           setbannerIpfs(ipfsRes.ipfsUrl);
@@ -98,7 +116,7 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
         )}
         {isBannerSelected && (
           <div className="img-sec-div" {...getRootProps()}>
-            <input {...getInputProps()} name="banner"
+            <input {...getInputProps()} name="banner" 
             />
             {!isloader?(
               <img

@@ -3,7 +3,7 @@ import React, { Component, useEffect, useState } from "react";
 // import { AbstractApi } from "../../constants/LeaderBoardApi";
 import copy from "../../assets/images/copy.svg";
 import globe from "../../assets/images/web.svg";
-import pencil from "../../assets/images/pencil.png";
+import pencil from "../../assets/images/Edit.svg";
 import randomimage from "../../assets/images/1.jpg";
 import "../../assets/styles/Leader.css";
 import { Link } from "react-router-dom";
@@ -137,7 +137,7 @@ function MyProfile() {
   };
   const getLikedNft = () => {
     NftLikedByUser((response) => {
-      console.log(response, "myprofile");
+      console.log(response, "likednft");
       if (response.success) {
         setlikedNft(response.responseData);
       } else {
@@ -190,6 +190,7 @@ function MyProfile() {
   };
   splitAddress("akshay");
 
+  let array=[];
   return (
     <>
       <div>
@@ -207,7 +208,7 @@ function MyProfile() {
             type="file"
             className="pencilicon"
             onChange={updateBanner}
-            title=" "
+            title=" " 
             style={{ border: "5px solid white", zIndex: "99", opacity: "0" }}
           />
           <img className="pencilicon" width="16px" height="16px" src={pencil} />
@@ -276,6 +277,7 @@ function MyProfile() {
               // onClick={() => setTypeofProfilePost("owned")}
               onClick={() => {
                 setNfts(ownedNft);
+                console.log(ownedNft,"<<<<<<ownedNft")
                 setTypeofProfilePost("owned");
               }}
             >
@@ -297,7 +299,16 @@ function MyProfile() {
                 }`}
               // onClick={() => setTypeofProfilePost("liked")}
               onClick={() => {
-                setNfts(likedNft);
+               for(let i = 0;i<likedNft.length;i++){
+                 if(likedNft[i].userLikedNfts[0]!=undefined)
+                 array.push(likedNft[i].userLikedNfts[0]);
+                
+               }    
+               setNfts(array);
+                //setNfts(likedNft[1].userLikedNfts);
+                //setNfts(likedNft.map((nft)=>nft.userLikedNfts))
+                console.log(array,"<<<<<<likedNft");
+                console.log(likedNft[0].userLikedNfts,"<<<<<<likedNft")
                 setTypeofProfilePost("liked");
               }}
             >
@@ -324,8 +335,10 @@ function MyProfile() {
                   </div>
               }
             })()}
-
+           
             {Nfts.map((curElem) => {
+               console.log("<<<nfts",Nfts);
+
               const {
                 cdnUrl,
                 name,

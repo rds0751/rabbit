@@ -132,8 +132,8 @@ const Buy = (props) => {
           </SearchBox>
         </Header>
         <ul>
-          {BuyList.map((eachFaq) => (
-            <BuyItem key={eachFaq.id} faqDetails={eachFaq} />
+          {BuyList.map((eachBuy) => (
+            <BuyItem key={eachBuy.id} faqDetails={eachBuy} />
           ))}
         </ul>
       </div>
