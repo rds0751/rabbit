@@ -20,15 +20,28 @@ import { format } from "util";
 const Button = styled.button``;
 
 function EditProfile(props) {
+  let { user } = useSelector((state) => state);
+  let { loggedInUser } = user;
+
+  if(loggedInUser){ localStorage.setItem('userId', loggedInUser._id); }
+  let userId = (loggedInUser) ? loggedInUser._id : localStorage.userId;
+
+  if(user){ localStorage.setItem('loggedInDetails', user.loggedInUser); }
+  if (loggedInUser == null){
+    loggedInUser = localStorage.getItem('loggedInDetails')
+  }
+  console.log("oooooooooooooooooo",loggedInUser.userName)
   const navigate = useNavigate();
   const hiddenFileInput = useRef(null);
   const [desLength, setDesLength] = useState(0);
-  const { user } = useSelector((state) => state);
+  const [userData, setUserData] = useState(loggedInUser);
+
+  // const { user } = useSelector((state) => state);
   const [formData, setFormData] = useState({
-    photo: user?.loggedInUser?.photo,
-    userName: user?.loggedInUser?.userName,
-    bio: user?.loggedInUser?.bio,
-    portfolio: user?.loggedInUser?.portfolio,
+    photo: loggedInUser?.photo,
+    userName: loggedInUser?.userName,
+    bio: loggedInUser?.bio,
+    portfolio: loggedInUser?.portfolio,
   });
   const tempUrl =
     "https://earncashto.com/wp-content/uploads/2021/06/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png";
@@ -338,6 +351,8 @@ const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 
                   handleForm(e);
                  }}
               />
+              {console.log("kffffffffffffffffffggggggggg",formData.portfolio)}
+              {console.log("kffffffffffffffffffggggggggg",user)}
             </div>
             <div className="buttonGroup">
             <button  className="editprofileCancelButton" onClick={() => navigate(-1)}>

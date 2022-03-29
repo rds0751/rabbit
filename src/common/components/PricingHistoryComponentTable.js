@@ -111,6 +111,15 @@ console.log(activities,"11111")
 const handleChange = (e) => {
 
   setType({ ...type, [e.target.name] : e.target.value  });
+  if (e.target.value === "list") {
+    setEvent(!list);
+  } else if (e.target.value === "price") {
+    setPrice(!price);
+  } else if (e.target.value === "buy") {
+    setBuy(!buy);
+  } else if (e.target.value === "minted") {
+    setMinted(!minted);
+  }
 
 } 
   // const handleChange = (e) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useRef} from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Nfts_Tile_Api } from "../../constants/Nfts_Tile_Api";
 // import "../../assets/styles/custom.css";
@@ -183,8 +183,10 @@ function NftPage(props) {
   const [nfts, setNfts] = useState([]);
   const { user, sideBar } = useSelector((state) => state);
   const [toggleNft, setToggleNft] = useState(true);
-  const [minPrice, setminPrice] = useState("");
+  const [minPrice, setminPrice] = useState("0");
   const [visibleBlogs, setVisibleBlogs] = useState(8)
+  const ref = useRef()
+
 
   // const [skipItem, setSkipItem] = useState("");
   // const [itemLimit, setItemLimit] = useState(10);
@@ -193,12 +195,14 @@ function NftPage(props) {
 
 
 
-  const [maxPrice, setmaxPrice] = useState("");
+  const [maxPrice, setmaxPrice] = useState();
 
   const [filterType, setFilterType] = useState({
     sort : 'all',
   });
   const [isloading, setIsloading] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
   const [type, setType] = useState("");
   const search = useLocation().search;
   const name = new URLSearchParams(search).get("searchByName");
@@ -209,7 +213,7 @@ function NftPage(props) {
 
   useEffect(() => {
     // checkapi();
-
+if(minPrice.length > 0){
     setIsloading(true);
     // getNfts(defaultReq).then((response) => {
     getNFtsData(filterType, (res) => {
@@ -222,11 +226,14 @@ function NftPage(props) {
         // setNfts([nfts,res.responseData.nftContent]);
         setIsloading(false);
       } else {
-        toast.error("Error While fetching Nfts");
+        toast.error(res.message);
         setIsloading(false);
       }
     });
-  }, [filterType]);
+  }
+  else{
+    toast.error("min price should'nt be incorrect or empty");
+  }}, [filterType]);
 
   useEffect(() => {
     if (sideBar.navSearchValue != "") {
@@ -246,6 +253,24 @@ function NftPage(props) {
       );
     }
   }, [sideBar.navSearchValue]);
+  // -----------------------------
+  useEffect(() => {
+    const checkIfClickedOutside = e => {
+      // If the menu is open and the clicked target is not within the menu,
+      // then close the menu
+      if (isMenuOpen && ref.current && !ref.current.contains(e.target)) {
+        setIsMenuOpen(false)
+      }
+    }
+
+    document.addEventListener("mousedown", checkIfClickedOutside)
+
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener("mousedown", checkIfClickedOutside)
+    }
+  }, [isMenuOpen])
+  //---------------------------------------------------------------------------------------------------
 
   const handleChange = (e) => {
     setType(e.target.value);
@@ -261,6 +286,8 @@ function NftPage(props) {
   const handlePriceFilter = (e) => {
     // alert(evt.target)
     // alert(maxPrice)
+    // if(minPrice.length<=0)
+    // setminPrice("0")
     // setFilterType({ ...filterType, [name]: value });
     // console.log("kkkkkkkkkkkk",{ })
     setFilterType({ ...filterType, minPrice: minPrice, maxPrice: maxPrice });
@@ -270,7 +297,7 @@ function NftPage(props) {
     // alert(maxPrice)
     // setFilterType({ ...filterType, [name]: value });
     setmaxPrice("");
-    setminPrice("");
+    setminPrice("0");
     setFilterType({ ...filterType, minPrice: "", maxPrice: "" });
 
     // console.log("kkkkkkkkkkkk",{ ...filterType, "minPrice": "","maxPrice": "" })
@@ -366,11 +393,11 @@ function NftPage(props) {
               </select>
             </div> */}
 
-            <div className="mobilenftTilePageSecondSelect dropdown" style={{ border: '1px solid #d2d2d2', padding: '9px 12px 9px 12px' }}>
+            <div className="mobilenftTilePageSecondSelect dropdown"  ref={ref} style={{ border: '1px solid #d2d2d2', padding: '9px 12px 9px 12px' }}>
               <p className="mb-0 sale-type">Price range</p>
               <div className="filter-drop">
                 <div
-                  onClick={() => setStatusDrop(!statusDrop)}
+                  onClick={() => setIsMenuOpen(oldState => !oldState)}
                   className="d-flex justify-content-between w-100"
                 >
                   <div className="text">All</div>
@@ -383,7 +410,7 @@ function NftPage(props) {
                 </div>
                 <div
                   className="filter-item"
-                  style={{ display: statusDrop ? "block" : "none" }}
+                  style={{ display: isMenuOpen  ? "block" : "none" }}
                 >
                   {/* <form onSubmit={handleSubmit}> */}
                   <div className="row mb-3 align-items-center">
@@ -485,31 +512,25 @@ function NftPage(props) {
         >
 
 
-          <div className="spinnerloader">{isloading && <Spinner />}</div>
+          <div className="spinnerloader">
+            {isloading ? <Spinner /> :
+              (nfts.length === 0 && (
+                <div className="Noitemdiv">
+                  <img src={NoItem} />
+                  <p className="textitem">No items available</p>
+                </div>
+            ))}
+          </div>
 
-          {nfts.length > 1 ? (
+          {nfts.length > 0 && (
             //  const cardComponent = blogs.slice(0, visibleBlogs).map((blog, i) => 
             nfts.slice(0, visibleBlogs).map((nft) => {
-              const { _id, ipfsUrl, name, biddingDetails, salesInfo } = nft;
-              // console.log("[[[[[[[",biddingDetails.minPrice)
-              // const route = "/nft-information/" + _id;
-              // console.log("nfyyyyyyyyyyyyyyyyyyyy",nft)
               return (
                 <>
                   <NftCardsHome nft={nft} />
                 </>
               );
             })
-
-
-          ) : (
-            <div>
-              <div className="Noitemdiv">
-                <img src={NoItem} />
-                <p className="textitem">No items available</p>
-              </div>
-            </div>
-
           )}
           {
             visibleBlogs >= nfts.length ? "" :

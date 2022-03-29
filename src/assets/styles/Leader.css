@@ -1284,6 +1284,7 @@ thead {
   font-family: "poppins-bold";
   word-break: break-all;
   word-wrap: break-word;
+  color: #191919 !important;
 }
 .nft-detail .title {
   font-family: "poppins-bold";
