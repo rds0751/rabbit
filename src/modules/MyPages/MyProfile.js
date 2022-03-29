@@ -300,8 +300,8 @@ function MyProfile() {
               // onClick={() => setTypeofProfilePost("liked")}
               onClick={() => {
                for(let i = 0;i<likedNft.length;i++){
-                 if(likedNft[i].userLikedNfts[0]!=undefined)
-                 array.push(likedNft[i].userLikedNfts[0]);
+               
+                 array.push(likedNft[i].userLikedNfts);
                 
                }    
                setNfts(array);
