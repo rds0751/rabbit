@@ -301,23 +301,23 @@ function CreateNftCollections(props) {
 
     // console.log(result, ">>> submit nftCollection");
   };
-  const checkReqFieldFun = () => {
-    const currname = name.current;
-    const currdes = description.current;
-    const currblock = blockchain.current;
+  // const checkReqFieldFun = () => {
+  //   const currname = name.current;
+  //   const currdes = description.current;
+  //   const currblock = blockchain.current;
 
-    if (
-      currname.trim() == "" ||
-      currdes.trim() == "" ||
-      currblock.trim() == "" ||
-      logoCdn == "" ||
-      bannerCdn == ""
-    ) {
-      setCheckReqField(false);
-    } else {
-      setCheckReqField(true);
-    }
-  };
+  //   if (
+  //     currname.trim() == "" ||
+  //     currdes.trim() == "" ||
+  //     currblock.trim() == "" ||
+  //     logoCdn == "" ||
+  //     bannerCdn == ""
+  //   ) {
+  //     setCheckReqField(false);
+  //   } else {
+  //     setCheckReqField(true);
+  //   }
+  // };
   // let data = useLocation();
   let location = useLocation();
 
@@ -458,7 +458,7 @@ function CreateNftCollections(props) {
                     SetNameError("(No Special Character Allowed)");
                   }
                   else if(e.target.value.length == 0){
-                    SetNameError("(Name is required field.)")
+                    SetNameError("(Name is required)")
                   } else if(+e.target.value.length < 3){
                     SetNameError("(Name should be atleast 3 character)")
                   }
@@ -467,7 +467,7 @@ function CreateNftCollections(props) {
                   }
                   
                   name.current = e.target.value;
-                  checkReqFieldFun();
+                  //checkReqFieldFun();
                 }}
               />
             </div>
@@ -482,14 +482,14 @@ function CreateNftCollections(props) {
                 value={description.current}
                 onChange={(e) => {
                   if(e.target.value.length==0){
-                    SetDesError("(Description are required field)")
+                    SetDesError("(Description is required)")
                   }else
                   SetDesError("")
 
                   if (DesLength < 1000) {
                     description.current = e.target.value;
                     onChangeDes();
-                    checkReqFieldFun();
+                   // checkReqFieldFun();
                   }
                 }}
               ></textarea>
@@ -546,7 +546,8 @@ function CreateNftCollections(props) {
             </div>
             <button
               type="submit"
-              disabled={!enabled}
+              disabled={//checkReqField
+                !enabled}
               className="submit-button"
               style={{ opacity: enabled ? "1" : "0.5" }}
             >

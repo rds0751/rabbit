@@ -70,35 +70,71 @@ function EditProfile(props) {
   console.log(localStorage.getItem(WHITE_LABEL_TOKEN), "<<<this is token");
 
   const handleChange = async (event) => {
+    try{
+      var filesize=event.target.files[0].size;
+      const filename=event.target.files[0].name;
+      const fileextenstion=filename.split('.').pop().toLowerCase();
+      const originalfileSize=Math.round(filesize/1024);
+      const extensionArray=['jpeg','png' ,'svg','jpg'];
+      let flag=false;
+      if(event.target.value.length ==0 ){
+        toast.error("No File is Selected Please Select a File.");
+      }
+      else{
+        for(let i=0;i<extensionArray.length;i++){
+          if(fileextenstion.localeCompare(extensionArray[i])==0){
+            flag=true;
+          }
+        }
+        if(flag == false)
+           toast.error("File type not acceptable. Please use……… file");
+        else if(originalfileSize > 10000)  {
+          toast.error("Image file size should be less than ……. mb")
+        }
+        
+        if(flag){
+        extensionArray.map(async (data)=>{
+          if((originalfileSize < 10000) && (fileextenstion == data 
+            )){
+              const fileUploaded = event.target.files[0];
+              console.log(fileUploaded);
+              let formData = new FormData();
+              formData.append("folderName", "collections");
+          
+              formData.append("createdBy", `${user?.loggedInUser?._id}`);
+              formData.append("attachment", fileUploaded);
+          
+              const res = await fetch(`${BASE_URL2}/api/v1/upload-documents`, {
+                method: httpConstants.METHOD_TYPE.POST,
+                body: formData,
+                // headers: AuthToken,
+              });
+              console.log(res, "<<<< res");
+              const result = await res.json();
+              if (result.success) {
+                setFormData({ ...formData, photo: result.responseData });
+              } else {
+                toast.error("Unable to change image", {
+                  position: toast.POSITION.TOP_RIGHT
+                });
+              }
+          
+              // else toast.error("")
+              console.log(result);
+              setImageUrl(result.responseData);
 
-    const fileUploaded = event.target.files[0];
-    console.log(fileUploaded);
-    let formData = new FormData();
-    formData.append("folderName", "collections");
-
-    formData.append("createdBy", `${user?.loggedInUser?._id}`);
-    formData.append("attachment", fileUploaded);
-
-    const res = await fetch(`${BASE_URL2}/api/v1/upload-documents`, {
-      method: httpConstants.METHOD_TYPE.POST,
-      body: formData,
-      // headers: AuthToken,
-    });
-    console.log(res, "<<<< res");
-    const result = await res.json();
-    if (result.success) {
-      setFormData({ ...formData, photo: result.responseData });
-    } else {
-      toast.error("Unable to change image", {
-        position: toast.POSITION.TOP_RIGHT
-      });
-
-      // toast.error("Unable to change image");
+            
+             flag=false;
+            }
+        }
+        
+        )}
+      }
+    }catch(e){
+      console.log(e);
     }
-
-    // else toast.error("")
-    console.log(result);
-    setImageUrl(result.responseData);
+   
+   
     // Edit.handleFile(fileUploaded);
   };
   //------------------------------------------------------------------------
@@ -210,26 +246,21 @@ function EditProfile(props) {
 
   useEffect(() => {
     $(document).ready(function () {
-
       var lines = 20;
       var linesUsed = $('#linesUsed');
-
       $('#test').keydown(function (e) {
-
         let newLines = $(this).val().split("\n").length;
         linesUsed.text(newLines);
-
         if (e.keyCode == 13 && newLines >= lines) {
-
           return false;
         }
-
       });
     });
   }, [])
 
-  console.log("aaaaaaaaaaaaaaa", userData)
-  // const enabled = ((useruserName.length) > 0 && (bio.length) > 0 && (portfilo.length) > 0 && nameError == "");
+
+  
+const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 && nameError=="";
   return (
     <>
       <ToastContainer
@@ -276,7 +307,7 @@ function EditProfile(props) {
             <input
               type="file"
               className="edit-input-box"
-              placeholder="Write your name"
+              placeholder="Write your name"             
               // name=""
               style={{ display: "none" }}
               ref={hiddenFileInput}
@@ -285,30 +316,30 @@ function EditProfile(props) {
           </div>
         </div>
         <div className="editProfileFormContainer singlenft-form-box">
-
-          <div className="">
-            <label
-              htmlFor="username"
-              className=" label-heading userheading"
-            >
-              Username<span style={{ color: "red", fontSize: "13px" }}>{nameError}</span>
-            </label>
-            <input
-              type="text"
-              className="editProfileFormContainerEachInput "
-              name="userName"
-              id="userName"
-              value={userData.userName}
-              // value={userName.current}
-              onChange={(e) => {
-                setUserName(e.target.value);
-
-                var format = /[!@$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]+/;
-                if (format.test(e.target.value)) {
-                  SetNameError("(No Special Character Allowed)");
-
-                } else if (e.target.value.length == 0) {
-                  SetNameError("(Name Field required)");
+         
+            <div className="">
+              <label
+                htmlFor="username"
+                className=" label-heading userheading"
+              >
+                Username<span style={{color:"red",fontSize:"13px"}}>{nameError}</span>
+              </label>
+              <input
+                type="text"
+                className="editProfileFormContainerEachInput "
+                name="userName"
+                id="userName"
+                value={formData.userName}
+                // value={userName.current}
+                onChange={(e) => {
+                  setUserName(e.target.value);
+                 
+                  var format = /[!@$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]+/;
+                  if(format.test(e.target.value)){
+                    SetNameError("(No Special Character Allowed)");
+                    
+                  }  else if(e.target.value.length==0){
+                  SetNameError("(Name is required)");
                 }
                 else {
                   SetNameError("");
@@ -319,63 +350,63 @@ function EditProfile(props) {
               }}
             />
           </div>
-          <div className="" style={{ marginBottom: "28px" }}>
-            <label htmlFor="comment" className="label-heading">
-              Bio<span style={{ color: "red", fontSize: "13px" }}>{descriptionError}</span>
-            </label>
-            <textarea
-              className="editProfileFormContainerEachInput mb-0"
-              rows="4"
-              id="test"
-
-              // name="text"
-              name="bio"
-              value={userData.bio}
-              // value={userName.current}
-              onChange={(e) => {
-                setBio(e.target.value);
-                let bioval = (e.target.value.length == 0) ? (SetDesError("(Description Field required)")) : (SetDesError(""));
-                if (desLength < 1000) {
-                  handleForm(e);
-                }
-              }}
-              placeholder="Write description"
-            // onChange={(e) => (bio.current = e.target.value)}
-            ></textarea>
-            <div className="clearfix"></div>
-            <span className="input-down-text">
+            <div className="" style={{marginBottom:"28px"}}>
+              <label htmlFor="comment" className="label-heading">
+                Bio<span style={{color:"red",fontSize:"13px"}}>{descriptionError}</span>
+              </label>
+              <textarea
+                className="editProfileFormContainerEachInput mb-0"
+                rows="4"
+                id="test"
+            
+                // name="text"
+                name="bio"
+                value={formData.bio}
+                // value={userName.current}
+                onChange={(e) => {
+                  setBio(e.target.value);
+                  let bioval=(e.target.value.length==0)?(SetDesError("(Description is required)")):(SetDesError(""));
+                  if (desLength < 1000) {
+                    handleForm(e);
+                  }
+                }}
+                placeholder="Write description"
+                // onChange={(e) => (bio.current = e.target.value)}
+              ></textarea>
+              <div className="clearfix"></div>
+              <span className="input-down-text">
               {desLength} of 1000 characters and
               <span> <span id="linesUsed">0</span> of 20 Lines.</span>
-            </span>
-          </div>
-          <div className="portfilodiv">
-            <label htmlFor="email" className="label-heading">
-              Personal site or Portfolio<span style={{ color: "red", fontSize: "13px" }}>{portfiloError}</span>
-            </label>
-            <input
-              type="name"
-              id="portfilo"
-              className="editProfileFormContainerEachInput form-control"
-              placeholder="www.example.com"
-              name="portfolio"
-              value={userData.portfolio}
-              // value={userName.current}
-              onChange={(e) => {
-                setPortfilo(e.target.value);
-                (e.target.value.length == 0) ? SetPortfiloError("(Portifilo Field required)") : SetPortfiloError("");
-                handleForm(e);
-              }}
-            />
-            {console.log("kffffffffffffffffffggggggggg", formData.portfolio)}
-            {console.log("kffffffffffffffffffggsssssggggggg", userData)}
-          </div>
-          <div className="buttonGroup">
-            <button className="editprofileCancelButton" onClick={() => navigate(-1)}>
+              </span>
+            </div>
+            <div className="portfilodiv">
+              <label htmlFor="email" className="label-heading">
+                Personal site or Portfolio<span style={{color:"red",fontSize:"13px"}}>{portfiloError}</span>
+              </label>
+              <input
+                type="name"
+                id="portfilo"
+                className="editProfileFormContainerEachInput form-control"
+                placeholder="www.example.com"
+                name="portfolio"
+                value={formData.portfolio}
+                // value={userName.current}
+                onChange={(e) => {
+                  setPortfilo(e.target.value);
+                  (e.target.value.length==0)?SetPortfiloError("(Portifilo is required)"):SetPortfiloError("");
+                  handleForm(e);
+                 }}
+              />
+              {console.log("kffffffffffffffffffggggggggg",formData.portfolio)}
+              {console.log("kffffffffffffffffffggggggggg",user)}
+            </div>
+            <div className="buttonGroup">
+            <button  className="editprofileCancelButton" onClick={() => navigate(-1)}>
               <span className="cancelbutton" >Cancel</span>
             </button>
             <button type="submit" className="editprofileSubmitButton"
-              // disabled={!enabled}
-              // style={{ opacity: !enabled ? 0.6 : 1 }}
+              disabled={!enabled}
+               style={{ opacity: !enabled ? 0.6 : 1 }}
               onClick={(e) => handleSubmit(e)}>
               <span className="updateProfile">Update Profile</span>
             </button>
@@ -397,4 +428,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(EditProfile);
-// yash
