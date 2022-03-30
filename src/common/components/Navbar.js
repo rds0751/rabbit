@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getNFtsData } from "../../services/webappMicroservice";
+import { getNfts, getCollections } from "../../services/webappMicroservice";
 import { NavDropdown } from "react-bootstrap";
-// import './Navbar.css'
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../../assets/styles/Notification.css";
@@ -17,18 +16,15 @@ import {
 } from "../../reducers/Action";
 import { ethers } from "ethers";
 import "../../assets/styles/topNavBar.css";
+import searchIcon from "../../assets/images/search.svg";
 
 import Menu from "./Menu";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
-import Search from "./searchResult";
-// import "../../assets/st.css";
+
 const queryString = require("query-string");
 function Navbar() {
   const navigate = useNavigate();
   const [humburger, setHumburger] = useState(false);
-  const [searchInput, setSearchInput] = useState({
-    searchByName: "",
-  });
   const [toggleEffect, setToggleEffect] = useState(false);
   const [errorMssg, setErrorMssg] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
@@ -39,9 +35,18 @@ function Navbar() {
   const { userDetails, loggedInUser, walletAddress } = user;
   const { isOpenNoti, isOpenWallet } = sideBar;
   const [isloading, setIsloading] = useState(false);
-  // const [filterType, setFilterType] = useState(defaultReq);
   const [showResults, setShowResults] = useState(false);
-  const [data, setData] = useState();
+  const [searchNft, setSearchNft] = useState({
+    searchByName: "",
+    limit:4,
+  });
+  const [searchCollection, setSearchCollection] = useState({
+    searchByName: "",
+    limit:4,
+  });
+  const [nfts, setNfts] = useState([]);
+  const [collections, setCollections] = useState([]);
+
   useEffect(() => {
     if (loggedInUser == null) {
       connectMetamask();
@@ -181,61 +186,31 @@ function Navbar() {
     }
   };
   //------------------------------------------------------------
-
   useEffect(() => {
-
-      // checkapi();
-    // const reqObj = queryString.stringify(searchInput);
-
-    setIsloading(true);
-    // getNfts(defaultReq).then((response) => {
-    getNFtsData(searchInput, (res) => {
-      // console.log(res, "filterResponse");
-      setIsloading(true);
-      if (res.success) {
-        setData(res.responseData.nftContent);
-        setIsloading(false);
-      } else {
-        toast.error("Error While fetching Nfts");
-        setIsloading(false);
-      }
-    });
-  }, [searchInput]);
+    async function fetchData() {
+      if (searchCollection.searchByName.length > 2){
+        const reqObj = queryString.stringify(searchNft)
+        const reqObj1 = queryString.stringify(searchCollection)
+        await getNfts(reqObj).then((res) => setNfts(res.nftContent))
+        await getCollections(reqObj1).then((res) => setCollections(res))
+      }      
+    }
+    fetchData();
+  }, [searchNft, searchCollection]);
 
   //-----------------------------------------------------------------
-  // useEffect(() => {
-  //   const reqObj = queryString.stringify(searchInput);
-  //   console.log("jffffffffffffffffff",reqObj)
-  //   getNFtsData(reqObj).then((response) =>
-  //   setData(response.responseData.nftContent)
-  //   );
-  // }, [searchInput]);
+  // const getData = async() => {
+  //     const reqObj = queryString.stringify(searchNft)
+  //     await getNfts(reqObj).then((res) => setNfts(res.nftContent))
+  //     const reqObj1 = queryString.stringify(searchCollection)
+  //     await getCollections(reqObj1).then((res) => setCollections(res))
+  // }
 
-  const handleSearch = () => {
-    // if (searchInput.trim() != "") dispatch(searchNav(searchInput));
-    let path = `search-result`;
-    navigate(path);
+  const handleSearch = async (e) => {
+    setSearchNft({...searchNft, [e.target.name] : e.target.value})
+    setSearchCollection({...searchNft, [e.target.name] : e.target.value})
+    // getData()
   };
-  // useEffect(() => {
-  //   // checkapi();
-  //   const reqObj = queryString.stringify(type);
-  //   setIsloading(true);
-  //   // getNfts(defaultReq).then((response) => {
-  //   getNFtsData( (searchBy , r) => {
-  //     // console.log(res, "filterResponse");
-  //     setIsloading(true);
-  //     if (res.success) {
-
-  //       setNfts(res.responseData.nftContent);
-  //       setIsloading(false);
-  //     } else {
-  //       toast.error("Error While fetching Nfts");
-  //       setIsloading(false);
-  //     }
-  //   });
-  // });
-
-  console.log("kkkkkkkkkkkkkkkkkk", data);
 
   const closeWalletAndNoti = () => {
     dispatch(ManageNotiSideBar(false));
@@ -246,13 +221,9 @@ function Navbar() {
 
   return (
     <>
-      <div style={{ display: "none" }}>
-        <Search data={data} />
-      </div>
       <div className="navbar-width">
         <nav className="navbarborder navbar navbar-expand-lg">
           <div
-            // className="container container-fluid"
             className="container-fluid mainContainer"
             style={{ backgroundColor: "white" }}
           >
@@ -266,42 +237,70 @@ function Navbar() {
                 <img
                   src={require("../../assets/images/logo.png")}
                   style={{ width: "100px" }}
+                  alt=""
                 />
               </Link>
-              <input
-                className="form-control form-controlmob inputbox search-input-mob"
-                type="search"
-                name="searchByName"
-                placeholder="Search"
-                aria-label="Search"
-                // value={searchInput}
-                onChange={(e) =>
-                  setSearchInput({
-                    ...searchInput,
-                    [e.target.name]: e.target.value,
-                  })
-                }
-                // onChange={() => setSearchInput()}
-              />
-              <button
-                className="search-icon-mob"
-                onClick={handleSearch}
-                style={{
-                  border: "0",
-                  width: "50px",
-                  height: "42px",
-                  backgroundColor: "#f8f8f8",
-                  marginLeft: "5px",
-                }}
-              >
-                <i
-                  className="fa fa-search"
-                  style={{ fontSize: "14px" }}
-                  aria-hidden="true"
-                ></i>
-              </button>
-              {/* </form> */}
+              <div>
+                <div className="search-div" style={{display:"flex"}}>
+                  <div>
+                  <img src={searchIcon} alt="" className="search-icon" />
+                  </div>
+                  <div>
+                  <input
+                    type="search"
+                    name="searchByName"
+                    placeholder="Search items and collections"
+                    onChange={(e) => handleSearch(e)}
+                    autoComplete="off"
+                    className="search-input"
+                  />
+                  </div>
+                </div>
+                {((nfts.length > 0 || collections.length > 0) && (searchNft.searchByName.length > 2)) && (
+                  <div className="search-results-box">
+                    {collections.length > 0 && (
+                      <div>
+                      <p className="coll-title">Collections</p>
+                      {collections.map((collection) => {
+                        const route = "/collection-details/" + collection._id;
+                        return(
+                          <Link to={route} style={{ textDecoration: "none" }}>
+                            <div className="item-div d-flex" >
+                              <img src={collection.imageUrl} alt="" className="coll-img"/>
+                              <p className="coll-name">
+                                {collection.name}
+                                <span className="item-count">{collection.nftCount} items</span>                         
+                              </p>
+                            </div>
+                          </Link>
+                        )
+                      })}
+                    </div>
+                    )}
+                    {nfts.length > 0 && (
+                      <div>
+                      <p className="coll-title">NFTs</p>
+                      {nfts.map((nft) => {
+                        const route = "/nft-information/" + nft._id;
+                        return(
+                          <Link to={route} style={{ textDecoration: "none" }}>
+                            <div className="item-div d-flex">
+                              <img src={nft.cdnUrl} alt="" className="coll-img"/>
+                              <p className="coll-name">{nft.name}</p>
+                            </div>
+                          </Link>
+                        )
+                      })}
+                    </div>
+                    )}                  
+                    <div className="btn-div d-flex">
+                      <button className="show-more-btn">show more</button>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
+            
 
             <div className="search_box order-2">
               <form className="p-0 m-0 ">

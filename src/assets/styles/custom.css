@@ -1078,3 +1078,121 @@ select:focus-visible {
   background-color: #f3f3f3;
 }
 /* Blockchain select css end*/
+
+.search-div{
+  position: relative;
+  align-items: center;
+  height: 42px;
+  background-color: #F8F8F8;
+  border-radius: 4px;
+  opacity: 1;
+  padding: 8px;
+  width: 300px;
+}
+.search-icon{
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  background-color: transparent;
+}
+.search-input{
+  border: none;
+  width: 250px;
+  background-color: transparent;
+}
+.search-input::placeholder{
+  font-weight: bold;
+}
+.search-results-box{
+  z-index: 9999;
+  visibility: visible;
+  position: absolute;
+  margin-top: 20px;
+  background-color: #fff;
+  box-shadow: 0px 3px 6px #0000000F;
+  border-radius: 6px;
+  opacity: 1;
+  width: 300px;
+}
+.item-div{
+  display:"flex";
+  padding-top: 16px;
+  padding-left: 17px;
+  border-bottom: 1px solid #E0E0E0;
+}
+.coll-title{
+  padding: 27px 0px 0px 17px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.coll-img{
+  width:24px;
+  height: 24px;
+  border-radius:12px;
+  margin-right: 16px;
+}
+.coll-name{
+  font-size: 14px;
+  font-weight: 500px;
+  color:#191919;
+}
+.item-count{
+  color:#366EEF;
+  font-weight: 600;
+  font-size: 14px;
+  margin-left:10px;
+}
+.btn-div{
+  justify-content: center;
+  align-items: center;
+}
+.show-more-btn{
+  color:#366EEF;
+  font-weight: 700;
+  border: none;
+  margin-bottom: 24px;
+  margin-top: 24px;
+  background-color: transparent;
+}
+
+/* Mobile-view */
+@media only screen and (max-width: 700px) {
+  .search-div{
+    display: none !important;
+  }
+  .search-results-box{
+    display: none !important;
+  }
+}
+
+/* Tab-view */
+@media only screen and (min-width: 768px) {
+}
+
+/* Desktop-view */
+@media only screen and (min-width: 992px) {
+  .search-div{
+    width: 200px;
+  }
+  .search-input{
+    width:150px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .search-div{
+    width: 200px;
+  }
+  .search-input{
+    width:150px;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .search-div{
+    width: 300px;
+  }
+  .search-input{
+    width:250px;
+  }
+}
