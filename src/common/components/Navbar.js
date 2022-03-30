@@ -283,54 +283,55 @@ function Navbar() {
                 </div>
                 {((nfts.length > 0 || collections.length > 0) && (searchNft.searchByName.length > 2)) && (
                   <>
-                  {/* <div className="search-results-background">                    
-                  </div> */}
-                  <div className="search-results-box">
-                  {collections.length > 0 && (
-                    <div>
-                    <p className="coll-title">Collections</p>
-                    {collections.map((collection) => {
-                      const route = "/collection-details/" + collection._id;
-                      return(
-                        <Link to={route} style={{ textDecoration: "none" }}>
-                          <div className="item-div d-flex" >
-                            <img src={collection.imageUrl} alt="" className="coll-img"/>
-                            <p className="coll-name">
-                              {collection.name}
-                              <span className="item-count">{collection.nftCount} items</span>                         
-                            </p>
-                          </div>
-                        </Link>
-                      )
-                    })}
+                  <div className="search-results-background">    
+                    <div className="search-results-box">
+                    {collections.length > 0 && (
+                      <div>
+                      <p className="coll-title">Collections</p>
+                      {collections.map((collection) => {
+                        const route = "/collection-details/" + collection._id;
+                        return(
+                          <Link to={route} style={{ textDecoration: "none" }}>
+                            <div className="item-div d-flex" >
+                              <img src={collection.imageUrl} alt="" className="coll-img"/>
+                              <p className="coll-name">
+                                {collection.name}
+                                <span className="item-count">{collection.nftCount} items</span>                         
+                              </p>
+                            </div>
+                          </Link>
+                        )
+                      })}
+                    </div>
+                    )}
+                    {nfts.length > 0 && (
+                      <div>
+                      <p className="coll-title">NFTs</p>
+                      {nfts.map((nft) => {
+                        const route = "/nft-information/" + nft._id;
+                        return(
+                          <Link to={route} style={{ textDecoration: "none" }}>
+                            <div className="item-div d-flex">
+                              <img src={nft.cdnUrl} alt="" className="coll-img"/>
+                              <p className="coll-name">{nft.name}</p>
+                            </div>
+                          </Link>
+                        )
+                      })}
+                    </div>
+                    )}              
+                    <div className="btn-div d-flex">
+                      <Link to='/search-results'
+                        state= {{
+                          value: searchNft.searchByName
+                        }}
+                      >
+                      <button className="show-more-btn">show more</button>
+                      </Link>
+                    </div>
+                    </div>                
                   </div>
-                  )}
-                  {nfts.length > 0 && (
-                    <div>
-                    <p className="coll-title">NFTs</p>
-                    {nfts.map((nft) => {
-                      const route = "/nft-information/" + nft._id;
-                      return(
-                        <Link to={route} style={{ textDecoration: "none" }}>
-                          <div className="item-div d-flex">
-                            <img src={nft.cdnUrl} alt="" className="coll-img"/>
-                            <p className="coll-name">{nft.name}</p>
-                          </div>
-                        </Link>
-                      )
-                    })}
-                  </div>
-                  )}              
-                  <div className="btn-div d-flex">
-                    <Link to='/search-results'
-                      state= {{
-                        value: searchNft.searchByName
-                      }}
-                    >
-                    <button className="show-more-btn">show more</button>
-                    </Link>
-                  </div>
-                  </div>
+                  
                   </>
                 )}
               </div>
