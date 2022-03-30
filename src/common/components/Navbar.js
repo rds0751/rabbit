@@ -283,8 +283,7 @@ function Navbar() {
                 </div>
                 {((nfts.length > 0 || collections.length > 0) && (searchNft.searchByName.length > 2)) && (
                   <>
-                  {/* <div className="search-results-background">                    
-                  </div> */}
+                  <div className="search-results-background">      
                   <div className="search-results-box">
                   {collections.length > 0 && (
                     <div>
@@ -330,7 +329,9 @@ function Navbar() {
                     <button className="show-more-btn">show more</button>
                     </Link>
                   </div>
+                  </div>              
                   </div>
+                
                   </>
                 )}
               </div>

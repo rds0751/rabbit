@@ -59,6 +59,7 @@ import { CheckUserByWalletAddress } from "./services/UserMicroService";
 import FAQsPage from "./modules/Faqs/index";
 import Home from "./modules/Home/Home";
 import BuyPage from "./modules/Buying/index";
+import SellPage from "./modules/Selling/index";
 import ScrollToTop from "./ScrollToTop";
 import SearchResults from "./common/components/searchResults";
 function App() {
@@ -119,6 +120,7 @@ function App() {
             />
             <Route exact path="/help-center" element={<HelpCenter />} />
             <Route exact path="/suggestion" element={<Suggestion />} />
+             <Route exact path="/selling" element={<SellPage />} /> 
             {/* ------------------ */}
             <Route exact path="/top-collection" element={<Top_collection />} />
             <Route exact path="/top-bidder" element={<TopBidders />} />
