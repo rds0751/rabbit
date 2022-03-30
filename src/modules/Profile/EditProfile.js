@@ -260,7 +260,7 @@ function EditProfile(props) {
 
 
   
-const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 && nameError=="";
+const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 && nameError=="" && descriptionError=="" && portfiloError=="";
   return (
     <>
       <ToastContainer

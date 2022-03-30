@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import BuyItem from "./BuyItem";
 import { Link } from "react-router-dom";
 import "../../assets/styles/buying.css";
+import { post } from "jquery";
 
 const MainContainer = styled.div`
   display: flex;
@@ -69,6 +70,7 @@ const Input = styled.input`
 `;
 
 const Buy = (props) => {
+  const [query ,setQuery]=useState("")
   const BuyList = [
     {
       id: 0,
@@ -87,14 +89,14 @@ const Buy = (props) => {
     {
       id: 2,
       questionText:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
+        "part ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
       answerText:
         "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
     },
     {
       id: 3,
       questionText:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
+        "search ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
       answerText:
         "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
     },
@@ -127,14 +129,22 @@ const Buy = (props) => {
         <img src={require("../../assets/images/leftarrowbuying.png")} style={{marginRight:"16px",width:"26px",height:"23px"}} className="backbuying" />
           <Title>Buying</Title>
           <SearchBox>
-            <Input type="search" placeholder="Search" />
+            <Input type="search" placeholder="Search" value={query} onChange={(e)=>setQuery(e.target.value)} />
             <i class="fa-solid fa-magnifying-glass"></i>
           </SearchBox>
         </Header>
         <ul>
-          {BuyList.map((eachBuy) => (
+          {BuyList.filter((eachBuy)=>{
+            if(query==""){
+              return eachBuy;
+            }else if(eachBuy.questionText.toLowerCase().includes(query.toLowerCase())){
+              return eachBuy;
+            }
+          }).map((eachBuy) => {
+            return(
             <BuyItem key={eachBuy.id} faqDetails={eachBuy} />
-          ))}
+            )
+        })}
         </ul>
       </div>
     </MainContainer>
