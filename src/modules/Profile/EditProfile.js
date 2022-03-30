@@ -405,8 +405,8 @@ const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 
               <span className="cancelbutton" >Cancel</span>
             </button>
             <button type="submit" className="editprofileSubmitButton"
-              // disabled={!enabled}
-              // style={{ opacity: !enabled ? 0.6 : 1 }}
+              disabled={!enabled}
+               style={{ opacity: !enabled ? 0.6 : 1 }}
               onClick={(e) => handleSubmit(e)}>
               <span className="updateProfile">Update Profile</span>
             </button>
