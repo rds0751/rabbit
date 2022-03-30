@@ -60,7 +60,7 @@ import FAQsPage from "./modules/Faqs/index";
 import Home from "./modules/Home/Home";
 import BuyPage from "./modules/Buying/index";
 import ScrollToTop from "./ScrollToTop";
-import Search from "./common/components/searchResult"
+import SearchResults from "./common/components/searchResults";
 function App() {
   useEffect(() => {
     const checkWalletAddress = localStorage.getItem(
@@ -196,7 +196,7 @@ function App() {
             /> */}
             <Route path="/menu" element={<Menu />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/search-result" element={<Search/>} />
+            <Route path="/search-results" element={<SearchResults />} />
           </Routes>
           {/* </Switch> */}
         </Router>
