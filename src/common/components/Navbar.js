@@ -128,7 +128,9 @@ function Navbar() {
       if (walletAddress == null) {
         dispatch(RedirectTo("myitems"));
         navigate("/add-wallet");
-        toast.error("Connect your wallet");
+        toast.error("Connect your wallet", {
+          position: toast.POSITION.TOP_RIGHT
+        });
       } else {
         navigate("/my-items");
       }
@@ -139,7 +141,9 @@ function Navbar() {
       if (walletAddress == null) {
         dispatch(RedirectTo("create"));
         navigate("/add-wallet");
-        toast.error("Connect your wallet");
+        toast.error("Connect your wallet", {
+          position: toast.POSITION.TOP_RIGHT
+        });
       } else {
         navigate("/create-nft");
       }
@@ -150,7 +154,10 @@ function Navbar() {
       if (walletAddress == null) {
         dispatch(RedirectTo("profile"));
         navigate("/add-wallet");
-        toast.error("Connect your wallet");
+        toast.error("Connect your wallet", {
+          position: toast.POSITION.TOP_RIGHT
+        });
+        // toast.error("Connect your wallet");
         // navigate("/my-profile");
       } else {
         navigate("/my-profile");
@@ -167,7 +174,9 @@ function Navbar() {
   const handleWalletClick = () => {
     if (walletAddress == null) {
       navigate("/add-wallet");
-      toast.error("Connect your wallet");
+      toast.error("Connect your wallet", {
+        position: toast.POSITION.TOP_RIGHT
+      });
     } else {
       dispatch(ManageWalletSideBar(!isOpenWallet));
       dispatch(ManageNotiSideBar(false));
@@ -178,7 +187,9 @@ function Navbar() {
     console.log(isOpenNoti, "<<<isopen noti");
     if (loggedInUser == null) {
       navigate("/add-wallet");
-      toast.error("Connect your wallet");
+      toast.error("Connect your wallet", {
+        position: toast.POSITION.TOP_RIGHT
+      });
     } else {
       dispatch(ManageNotiSideBar(!isOpenNoti));
       dispatch(ManageWalletSideBar(false));
@@ -331,11 +342,11 @@ function Navbar() {
                   <li
                     className={
                       location.pathname.includes("/nfts") &&
-                      !location.pathname.includes("leader-board") &&
-                      !location.pathname.includes("resource") &&
-                      !location.pathname.includes("create-nft") &&
-                      !location.pathname.includes("help-center") &&
-                      !location.pathname.includes("suggestion")
+                        !location.pathname.includes("leader-board") &&
+                        !location.pathname.includes("resource") &&
+                        !location.pathname.includes("create-nft") &&
+                        !location.pathname.includes("help-center") &&
+                        !location.pathname.includes("suggestion")
                         ? "nav-items li_underline marketplace"
                         : "nav-items marketplace"
                     }
@@ -344,11 +355,11 @@ function Navbar() {
                     <Link
                       className={
                         location.pathname.includes("/nfts") &&
-                        !location.pathname.includes("leader-board") &&
-                        !location.pathname.includes("resource") &&
-                        !location.pathname.includes("create-nft") &&
-                        !location.pathname.includes("help-center") &&
-                        !location.pathname.includes("suggestion")
+                          !location.pathname.includes("leader-board") &&
+                          !location.pathname.includes("resource") &&
+                          !location.pathname.includes("create-nft") &&
+                          !location.pathname.includes("help-center") &&
+                          !location.pathname.includes("suggestion")
                           ? "nav-link navlink_active"
                           : "nav-link"
                       }
@@ -386,7 +397,7 @@ function Navbar() {
                     style={{ padding: "0" }}
                     className={
                       location.pathname.includes("help-center") ||
-                      location.pathname.includes("suggestion")
+                        location.pathname.includes("suggestion")
                         ? "nav-items dropdown li_underline resource nav-link navlink_active resource"
                         : "nav-items dropdown resource"
                     }
@@ -439,16 +450,16 @@ function Navbar() {
                     style={{ marginRight: "28px" }}
                     onClick={() => manageNavigation("create")}
                   >
-                    <Link
+                    {/* <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}
+                    > */}
+                    <button
+                      className="create-btn"
+                      style={{ color: "#ffffff", backgroundColor: "#366EEF" }}
                     >
-                      <button
-                        className="create-btn"
-                        style={{ color: "#ffffff", backgroundColor: "#366EEF" }}
-                      >
-                        Create
-                      </button>
-                    </Link>
+                      Create
+                    </button>
+                    {/* </Link> */}
                   </li>
                   <li className="removeinmob"></li>
                 </ul>

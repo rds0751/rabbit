@@ -47,6 +47,7 @@ function CreateSingleNFT(props) {
 
   const [ipfsUrl, setIpfsUrl] = useState("");
   const [myProfileUrl, setmyProfileUrl] = useState("");
+  const [DesError,SetDesError]=useState("");
 
   const [cdnUrl, setcdnUrl] = useState("");
   const [uploadFileObj, setUploadFileObj] = useState("");
@@ -88,7 +89,26 @@ function CreateSingleNFT(props) {
   // --------------------------------React Drop Zone---------------------
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
-    onDrop: (acceptedFiles) => {
+    maxSize: "40485760",
+    onDrop: (acceptedFiles,fileRejections) => {
+      setisLoader(true);
+      fileRejections.forEach((file)=>{
+        file.errors.forEach((err)=>{
+          if(err.code === "file-too-large"){
+            toast.error("Image file size should be less than 40 mb")
+            setisLoader(false);
+          }
+          else if(err.code === "file-invalid-type"){
+            toast.error("File type not acceptable. Please use……… file");
+            setisLoader(false);
+          }
+          else{
+            toast.error("Image file size should be greater than ……. pxl");
+            setisLoader(false);
+            
+          }
+        })
+      })
       setSelectFile(
         acceptedFiles.map((file) =>
           Object.assign(file, {
@@ -108,12 +128,11 @@ function CreateSingleNFT(props) {
       );
       // const [err, ipfsRes] = addIPFS(formData)
       (async () => {
-        setisLoader(true);
         const [err, ipfsRes] = await Utils.parseResponse(
           getCollection.addIpfs(formData)
         );
-        if (err || !ipfsRes.ipfsUrl) {
-          toast.error("Unable to add file to IPFS");
+        if ( !ipfsRes.ipfsUrl) {
+          toast.error("unable to add image on network try differnet one");
           setisLoader(false);
         } else {
           console.log(ipfsRes, "<<<<ipfs Res");
@@ -566,10 +585,14 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
                     name.current = e.target.value;
                     // checkChanges();
                     //let x=e.target.value.replace(/[^a-zA-Z ]/g, "")
+
                     var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
                     if(format.test(e.target.value)){
                       SetNameError("(No Special Character Allowed)");
-                    }else if(e.target.value.length < 3){
+                    }else if(e.target.value.length == 0){
+                      SetNameError("(Name is required)")
+                    }
+                    else if(e.target.value.length < 3){
                       SetNameError("(Name should be atleast 3 character)")
                     } else {
                     SetNameError("");
@@ -592,13 +615,14 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
                     className="form-control"
                     type="number"
                     autoComplete="off"
-                    value={price.current}
                     onWheel={(e)=>e.target.blur()}
                     onChange={(e) => {
                       price.current = e.target.value;
                       // checkChanges();
                       if(+e.target.value < "0.004" || +e.target.value=="0"){
                         setError("(Minimum listing price for an NFT should be more than 1 dollar)")
+                      }else if(e.target.value.length == 0){
+                        setError("(price is required)")
                       }else{
                         setError("")
                       }
@@ -613,7 +637,7 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
               </div>
               <div className="">
                 <label htmlFor="comment" className="input-label pb-2">
-                  Description*
+                  Description*<span style={{color:"Red" ,fontSize:"13px"}}>{DesError}</span>
                 </label>
                
                 <textarea
@@ -631,7 +655,12 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
                   placeholder="Write description"
                   value={description.current}
                   onChange={(e) => {
+                    if(e.target.value.length==0){
+                      SetDesError("(Description is required)")
+                    }else
+                    SetDesError("")
                     if (desLength < 1000) {
+                      
                       // checkChanges();
                       let x=e.target.value.replace(/\s+/g, '').length
                       description.current = e.target.value;
