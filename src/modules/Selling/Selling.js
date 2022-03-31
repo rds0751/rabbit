@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React,{useState} from 'react'
 import styled from "styled-components";
-import BuyItem from "./BuyItem";
 import { Link } from "react-router-dom";
+import SellItem from "./SellItem";
 import "../../assets/styles/buying.css";
-import { post } from "jquery";
-
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -71,14 +69,6 @@ const Input = styled.input`
 
 
 
-
-
-
-
-
-
-
-
 const ListItem = styled.li`
   width: 941px;
   text-align: center;
@@ -97,12 +87,7 @@ const ListItem = styled.li`
     
   }
 `;
-const QuestionDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  text-align: center;
-`;
+
 const Question = styled.h1`
   font-size: 16px;
   font-weight: 600;
@@ -120,42 +105,40 @@ const Question = styled.h1`
   }
 `;
 
-
-
-const Buy = (props) => {
-  const [query ,setQuery]=useState("")
-  const BuyList = [
-    {
-      id: 0,
-      questionText:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
-      answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
-    },
-    {
-      id: 1,
-      questionText:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
-      answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
-    },
-    {
-      id: 2,
-      questionText:
-        "part  dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
-      answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
-    },
-    {
-      id: 3,
-      questionText:
-        "search  dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
-      answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
-    },
-  ];
-const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(query));
-
+export default function Selling() {
+    const [query ,setQuery]=useState("")
+    const BuyList = [
+      {
+        id: 0,
+        questionText:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
+        answerText:
+          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
+      },
+      {
+        id: 1,
+        questionText:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
+        answerText:
+          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
+      },
+      {
+        id: 2,
+        questionText:
+          "part ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
+        answerText:
+          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
+      },
+      {
+        id: 3,
+        questionText:
+          "search ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
+        answerText:
+          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
+      },
+    ];
+    const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(query));
+  
   return (
     <>
     <nav aria-label="breadcrumb" className="headerbuying">
@@ -173,23 +156,22 @@ const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(
             className="breadcrumb-item active text-primary"
             aria-current="page"
           >
-            Buying
+            Selling
           </li>
         </ol>
       </nav>
     <MainContainer>
       <div>
-        
         <Header>
         <img src={require("../../assets/images/leftarrowbuying.png")} style={{marginRight:"16px",width:"26px",height:"23px"}} className="backbuying" />
-          <Title>Buying</Title>
+          <Title>Selling</Title>
           <SearchBox>
             <Input type="search" placeholder="Search" value={query} onChange={(e)=>setQuery(e.target.value)} />
             <i class="fa-solid fa-magnifying-glass"></i>
           </SearchBox>
         </Header>
         <ul>
-          {match.length==0 ? (
+        {match.length==0 ? (
          
          <ListItem>
          
@@ -198,9 +180,9 @@ const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(
        </ListItem>
             
         ):(
-          match.map((eachBuy) => {
+          match.map((sell) => {
             return(
-            <BuyItem key={eachBuy.id} faqDetails={eachBuy} />
+            <SellItem key={sell.id} faqDetails={sell} />
             )
         })
           
@@ -210,7 +192,5 @@ const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(
       </div>
     </MainContainer>
     </>
-  );
-};
-
-export default Buy;
+  )
+}

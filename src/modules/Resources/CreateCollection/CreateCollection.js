@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import BuyItem from "./BuyItem";
+import CollectionItem from "./CollectionItem";
 import { Link } from "react-router-dom";
-import "../../assets/styles/buying.css";
+import "../../../assets/styles/buying.css"
 import { post } from "jquery";
 
 const MainContainer = styled.div`
@@ -122,7 +122,7 @@ const Question = styled.h1`
 
 
 
-const Buy = (props) => {
+const CreateCollection = (props) => {
   const [query ,setQuery]=useState("")
   const BuyList = [
     {
@@ -173,7 +173,7 @@ const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(
             className="breadcrumb-item active text-primary"
             aria-current="page"
           >
-            Buying
+            Create collection
           </li>
         </ol>
       </nav>
@@ -181,8 +181,8 @@ const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(
       <div>
         
         <Header>
-        <img src={require("../../assets/images/leftarrowbuying.png")} style={{marginRight:"16px",width:"26px",height:"23px"}} className="backbuying" />
-          <Title>Buying</Title>
+        <img src={require("../../../assets/images/leftarrowbuying.png")} style={{marginRight:"16px",width:"26px",height:"23px"}} className="backbuying" />
+          <Title>Creating Collection</Title>
           <SearchBox>
             <Input type="search" placeholder="Search" value={query} onChange={(e)=>setQuery(e.target.value)} />
             <i class="fa-solid fa-magnifying-glass"></i>
@@ -198,9 +198,9 @@ const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(
        </ListItem>
             
         ):(
-          match.map((eachBuy) => {
+          match.map((eachCollection) => {
             return(
-            <BuyItem key={eachBuy.id} faqDetails={eachBuy} />
+            <CollectionItem key={eachCollection.id} faqDetails={eachCollection} />
             )
         })
           
@@ -213,4 +213,4 @@ const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(
   );
 };
 
-export default Buy;
+export default CreateCollection;

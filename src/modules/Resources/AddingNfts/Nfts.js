@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import BuyItem from "./BuyItem";
+import NftsItem from "./NftsItem";
 import { Link } from "react-router-dom";
-import "../../assets/styles/buying.css";
-import { post } from "jquery";
+import "../../../assets/styles/buying.css"
 
 const MainContainer = styled.div`
   display: flex;
@@ -97,12 +96,7 @@ const ListItem = styled.li`
     
   }
 `;
-const QuestionDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  text-align: center;
-`;
+
 const Question = styled.h1`
   font-size: 16px;
   font-weight: 600;
@@ -122,7 +116,7 @@ const Question = styled.h1`
 
 
 
-const Buy = (props) => {
+const Nfts = (props) => {
   const [query ,setQuery]=useState("")
   const BuyList = [
     {
@@ -173,7 +167,7 @@ const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(
             className="breadcrumb-item active text-primary"
             aria-current="page"
           >
-            Buying
+            Adding Nft
           </li>
         </ol>
       </nav>
@@ -181,8 +175,8 @@ const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(
       <div>
         
         <Header>
-        <img src={require("../../assets/images/leftarrowbuying.png")} style={{marginRight:"16px",width:"26px",height:"23px"}} className="backbuying" />
-          <Title>Buying</Title>
+        <img src={require("../../../assets/images/leftarrowbuying.png")} style={{marginRight:"16px",width:"26px",height:"23px"}} className="backbuying" />
+          <Title>Adding Nft</Title>
           <SearchBox>
             <Input type="search" placeholder="Search" value={query} onChange={(e)=>setQuery(e.target.value)} />
             <i class="fa-solid fa-magnifying-glass"></i>
@@ -198,9 +192,9 @@ const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(
        </ListItem>
             
         ):(
-          match.map((eachBuy) => {
+          match.map((nfts) => {
             return(
-            <BuyItem key={eachBuy.id} faqDetails={eachBuy} />
+            <NftsItem key={nfts.id} faqDetails={nfts} />
             )
         })
           
@@ -213,4 +207,4 @@ const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(
   );
 };
 
-export default Buy;
+export default Nfts;

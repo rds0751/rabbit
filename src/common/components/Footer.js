@@ -110,12 +110,12 @@ function Footer() {
                 </button>
               </div>
             </div>
-            <h3 className="about">About DLT NFT marketplace</h3>
+            <h3 className="about">About Anafto's Marketplace</h3>
             <div className="d-none d-sm-none d-md-block d-lg-block fs-16 aboutdes">
-              <p style={{marginBottom:"0"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+              <p style={{marginBottom:"0"}}>Anafto is an NFT Marketplace for the new age decentralised world. The Anafto tribe can create NFTs on this dedicated marketplace to showcase their Art or they can choose to sell their NFTs. So, what are you waiting for .... Go Mint,Sell, Buy and Explore... Happy NFTing. </p>
             </div>
             <div className="d-sm-block d-md-none d-lg-none fs-16">
-              <p className=" footerdes">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+              <p className=" footerdes">Anafto is an NFT Marketplace for the new age decentralised world. The Anafto tribe can create NFTs on this dedicated marketplace to showcase their Art or they can choose to sell their NFTs. So, what are you waiting for .... Go Mint,Sell, Buy and Explore... Happy NFTing.</p>
             </div>
           </div>
           <div className="footer-bottom">
