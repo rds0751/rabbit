@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import { userPublicProfile } from "../../services/UserMicroService";
 import "react-toastify/dist/ReactToastify.css";
 import "../../assets/styles/editProfile.css";
+import profileImage from "../../assets/images/ProfileReplace.svg";
 import { AuthToken } from "../../services/UserAuthToken";
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import $ from 'jquery';
@@ -31,7 +32,7 @@ function EditProfile(props) {
   if (loggedInUser == null) {
     loggedInUser = localStorage.getItem('loggedInDetails')
   }
-  console.log("ooooooosooooooooooo", loggedInUser._id)
+  console.log("ooooooosooooooooooo", loggedInUser)
   const navigate = useNavigate();
   const hiddenFileInput = useRef(null);
   const [desLength, setDesLength] = useState(0);
@@ -44,9 +45,9 @@ function EditProfile(props) {
     bio: loggedInUser?.bio,
     portfolio: loggedInUser?.portfolio,
   });
-  const tempUrl =
-    "https://earncashto.com/wp-content/uploads/2021/06/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png";
-  const [imageUrl, setImageUrl] = useState(tempUrl);
+  // const tempUrl =
+  //   "https://earncashto.com/wp-content/uploads/2021/06/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png";
+  const [imageUrl, setImageUrl] = useState(profileImage);
   const [useruserName, setUserName] = useState("");
   const [bio, setBio] = useState("");
   const [portfilo, setPortfilo] = useState("");
@@ -66,6 +67,7 @@ function EditProfile(props) {
 
   const handleClick = (event) => {
     hiddenFileInput.current.click();
+    // console.log("hidden file input",hiddenFileInput)
   };
   console.log(localStorage.getItem(WHITE_LABEL_TOKEN), "<<<this is token");
 
@@ -147,7 +149,12 @@ function EditProfile(props) {
     // if(nfts.length==0){
     // const myTimeout = setTimeout(100000);
     if (loggedInUser._id) {
-      console.log("ddddddddddddddddddd", loggedInUser._id)
+      setUserName(loggedInUser.userName)
+      setBio(loggedInUser.bio)
+      setPortfilo(loggedInUser.portfolio)
+      setImageUrl(loggedInUser.photo)
+
+      console.log("ddddddddddddddddddd", imageUrl)
       userPublicProfile((res) => {
         // console.log("jjjjjjjjjjjjjj")
         // console.log(res, "filterResponse");
@@ -157,6 +164,7 @@ function EditProfile(props) {
 
           // prevArray => [...prevArray, newValue]
           setUserData(res.responseData);
+
 
           // setNfts([nfts,res.responseData.nftContent]);
           // setIsloading(false);
@@ -174,33 +182,35 @@ function EditProfile(props) {
   }, [loggedInUser._id]);
 
   //-----------------------------------------------------------------------
-  useEffect(() => {
-    console.log(localStorage.getItem(WHITE_LABEL_TOKEN), "<<<this is token");
-    if (user.loggedInUser?.photo != "") {
-      setImageUrl(user?.loggedInUser?.photo);
-    }
-    if (user.loggedInUser?.userName != "") {
-      setUserName(user?.loggedInUser?.userName);
-    }
-    if (user.loggedInUser?.bio != "") {
-      setBio(user?.loggedInUser?.bio);
-    }
-    if (user.loggedInUser?.portfilo != "") {
-      setPortfilo(user?.loggedInUser?.portfolio);
-    }
+  // useEffect(() => {
+  //   console.log(localStorage.getItem(WHITE_LABEL_TOKEN), "<<<this is token");
+  //   if (user.loggedInUser?.photo != "") {
+  //     setImageUrl(user?.loggedInUser?.photo);
+  //   }
+  //   if (user.loggedInUser?.userName != "") {
+  //     setUserName(user?.loggedInUser?.userName);
+  //   }
+  //   if (user.loggedInUser?.bio != "") {
+  //     setBio(user?.loggedInUser?.bio);
+  //   }
+  //   if (user.loggedInUser?.portfilo != "") {
+  //     setPortfilo(user?.loggedInUser?.portfolio);
+  //   }
 
 
-    // setImageUrl()
-    // photo.current = user?.loggedInUser?.photo;
-    // bio.current = user?.loggedInUser?.bio;
-    // userName.current = user?.loggedInUser?.userName;
-    // portfolio.current = user?.loggedInUser?.portfolio;
-  }, []);
+  //   // setImageUrl()
+  //   // photo.current = user?.loggedInUser?.photo;
+  //   // bio.current = user?.loggedInUser?.bio;
+  //   // userName.current = user?.loggedInUser?.userName;
+  //   // portfolio.current = user?.loggedInUser?.portfolio;
+  // }, []);
 
   const handleSubmit = async (e) => {
     formData.userName = useruserName;
     formData.bio = bio;
     formData.portfolio = portfilo;
+    formData.photo = imageUrl;
+
 
     console.log(formData, "<<<formData");
     var format = /[!@$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]+/;
@@ -223,6 +233,10 @@ function EditProfile(props) {
       });
       // window.location.reload(true);
       // console.log("jsgg")
+      setTimeout(() => {
+        window.location.href = '/my-profile';
+      }, 2000)
+      // setTimeout(window.location.href = '/my-profile',9000)
       // window.location.href = '/my-profile';
       // navigate(-1);
     } else {
@@ -260,7 +274,7 @@ function EditProfile(props) {
 
 
   
-const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 && nameError=="";
+const enabled=useruserName?.length > 0 && bio?.length > 0 &&  portfilo?.length > 0 && nameError=="";
   return (
     <>
       <ToastContainer
@@ -281,6 +295,7 @@ const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 
               Edit Profile
             </p>
           </div>
+          {console.log("namedddddddddddddddd",useruserName)}
 
           {/* <h3 className=" input-heading generalsettingl">
             General Setting
@@ -290,9 +305,10 @@ const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 
           <div className="chooseProfilePicInnerContainer ">
             <div className="editprofile-image">
               <img
-                src={userData.photo}
+                src={imageUrl}
               />
             </div>
+            {console.log("image urlllll",imageUrl)}
             <div className="editprofile-button-outer">
               <Button
                 onClick={handleClick}
@@ -329,7 +345,7 @@ const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 
                 className="editProfileFormContainerEachInput "
                 name="userName"
                 id="userName"
-                value={formData.userName}
+                value={useruserName}
                 // value={userName.current}
                 onChange={(e) => {
                   setUserName(e.target.value);
@@ -361,7 +377,7 @@ const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 
             
                 // name="text"
                 name="bio"
-                value={formData.bio}
+                value={bio}
                 // value={userName.current}
                 onChange={(e) => {
                   setBio(e.target.value);
@@ -389,7 +405,7 @@ const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 
                 className="editProfileFormContainerEachInput form-control"
                 placeholder="www.example.com"
                 name="portfolio"
-                value={formData.portfolio}
+                value={portfilo}
                 // value={userName.current}
                 onChange={(e) => {
                   setPortfilo(e.target.value);

@@ -3,6 +3,8 @@ import React, { Component, useState, useEffect } from "react";
 import "../../assets/styles/Leader.css";
 import styled from "styled-components";
 import dropdown from "../../assets/images/drop down.png";
+import NoItem from "../../assets/images/Noitems.svg";
+
 import Spinner from "../../common/components/Spinner";
 
 import profileImage from "../../assets/images/NoProfile.svg";
@@ -156,11 +158,19 @@ function TopSeller() {
     duration: "weekly",
 
   });
+  const [isloading, setIsloading] = useState(true);
+
   const sellerReqObj = queryString.stringify(sellerDuration);
 
 
   useEffect(async () => {
+    setIsloading(true)
+    setTopSellers([])
+
+
     await getTopSellers(sellerReqObj).then((response) => setTopSellers(response));
+    setIsloading(false)
+
   }, [sellerDuration]);
   console.log("topSellers", topSellers);
 
@@ -213,10 +223,10 @@ function TopSeller() {
                 )}
 
                 {topSellers.userName == "" ? (
-                  <h2 className="seller-name"> <Link style={{ textDecoration: "null" }} to={"/user-profile/"+topSellers._id}>{topSellers.wallet_address.substring(0, 4)}...{topSellers.wallet_address.slice(topSellers.wallet_address.length - 4)}</Link></h2>
+                  <h2 className="seller-name"> <Link style={{ textDecoration: "null" }} to={"/user-profile/" + topSellers._id}>{topSellers.wallet_address.substring(0, 4)}...{topSellers.wallet_address.slice(topSellers.wallet_address.length - 4)}</Link></h2>
 
                 ) : (
-                  <h2 className="seller-name"><Link style={{ textDecoration: "null" }} to={"/user-profile/"+topSellers._id}>{topSellers.userName}</Link></h2>
+                  <h2 className="seller-name"><Link style={{ textDecoration: "null" }} to={"/user-profile/" + topSellers._id}>{topSellers.userName}</Link></h2>
 
                 )}
 
@@ -234,12 +244,22 @@ function TopSeller() {
           </div>
         );
       })}
-      {topSellers.length === 0 && (
+      <div className="spinnerloader">
+        {isloading ? <Spinner /> :
+          (topSellers.length === 0 && (
+            <div className="Noitemdiv">
+              <img src={NoItem} />
+              <p className="textitem">No items available</p>
+            </div>
+          ))}
+      </div>
+
+      {/* {topSellers.length === 0 && (
 
         <div className="spinnerloader">{<Spinner />}
 
 
-        </div>)}
+        </div>)} */}
     </Container>
   );
 }
