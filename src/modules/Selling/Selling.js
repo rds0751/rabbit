@@ -67,6 +67,44 @@ const Input = styled.input`
   font-size: 16px;
 `;
 
+
+
+const ListItem = styled.li`
+  width: 941px;
+  text-align: center;
+  background-color: #ffffff;
+  box-shadow: 0px 3px 12px #0000000f;
+  border: 1px solid #d5d5d5;
+  border-radius: 12px;
+  padding: 30px 24px 13px 16px;
+  margin-bottom: 32px;
+  @media screen and (min-width: 426px) and (max-width: 769px) {
+    padding: 30px 14px 13px 16px;
+    
+  }
+  @media screen and (max-width: 426px) {
+    padding: 32px 8px 24px 16px;
+    
+  }
+`;
+
+const Question = styled.h1`
+  font-size: 16px;
+  font-weight: 600;
+  padding-bottom: 28px;
+  padding-right: 60px;
+  margin-bottom: 0px;
+  @media screen and (min-width: 426px) and (max-width: 769px) {
+    font-size: 12px;
+    padding-right: 16px;
+  }
+  @media screen and (max-width: 426px) {
+    font-size: 14px;
+    padding-bottom: 12px;
+    padding-right:0px;
+  }
+`;
+
 export default function Selling() {
     const [query ,setQuery]=useState("")
     const BuyList = [
@@ -99,6 +137,7 @@ export default function Selling() {
           "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
       },
     ];
+    const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(query));
   
   return (
     <>
@@ -132,17 +171,23 @@ export default function Selling() {
           </SearchBox>
         </Header>
         <ul>
-          {BuyList.filter((eachBuy)=>{
-            if(query==""){
-              return eachBuy;
-            }else if(eachBuy.questionText.toLowerCase().includes(query.toLowerCase())){
-              return eachBuy;
-            }
-          }).map((eachBuy) => {
+        {match.length==0 ? (
+         
+         <ListItem>
+         
+           <Question className="question">"No Data Found"</Question>
+         
+       </ListItem>
+            
+        ):(
+          match.map((sell) => {
             return(
-            <SellItem key={eachBuy.id} faqDetails={eachBuy} />
+            <SellItem key={sell.id} faqDetails={sell} />
             )
-        })}
+        })
+          
+        )
+      }
         </ul>
       </div>
     </MainContainer>

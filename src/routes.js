@@ -58,6 +58,8 @@ import { addUseraction, addUserData } from "./reducers/Action";
 import { CheckUserByWalletAddress } from "./services/UserMicroService";
 import FAQsPage from "./modules/Faqs/index";
 import Home from "./modules/Home/Home";
+import CollectionPage from "./modules/Resources/CreateCollection/index";
+import NftsPage from "./modules/Resources/AddingNfts/index";
 import BuyPage from "./modules/Buying/index";
 import SellPage from "./modules/Selling/index";
 import ScrollToTop from "./ScrollToTop";
@@ -121,6 +123,8 @@ function App() {
             <Route exact path="/help-center" element={<HelpCenter />} />
             <Route exact path="/suggestion" element={<Suggestion />} />
              <Route exact path="/selling" element={<SellPage />} /> 
+             <Route exact path="/resource-collection" element={<CollectionPage />} /> 
+             <Route exact path="/adding-nfts" element={<NftsPage />} /> 
             {/* ------------------ */}
             <Route exact path="/top-collection" element={<Top_collection />} />
             <Route exact path="/top-bidder" element={<TopBidders />} />

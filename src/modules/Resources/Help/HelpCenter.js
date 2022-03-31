@@ -22,14 +22,14 @@ function HelpCenter() {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
     },
     {
-      link:"/buying",
+      link:"/resource-collection",
       image: creating,
       title: "Creating Collection",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
     },
     {
-      link:"/buying",
+      link:"/adding-Nfts",
       image: adding,
       title: "Adding Nfts",
       description:

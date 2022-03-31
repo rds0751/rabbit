@@ -225,13 +225,34 @@ function Navbar() {
   //     const reqObj1 = queryString.stringify(searchCollection)
   //     await getCollections(reqObj1).then((res) => setCollections(res))
   // }
+  const [display,setDisplay]=useState(true);
+  if (display) {
+    document.body.style.position = '';
+    document.body.style.top = '';
+  
+  } else if(showModal){
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${window.scrollY}px`
+  }
+  else{
+    document.body.style.position = '';
+    document.body.style.top = '';
+
+  }
 
   const handleSearch = async (e) => {
-    if (searchNft.searchByName.length > 2) {
+   
+    if (searchNft.searchByName.length >2) {
       setShowModal(true)
-    } else {
+     
+    } else if(e.target.value.length == 0){
+      setShowModal(false);
+    }else {
       setShowModal(false)
+      
     }
+    showModal? setDisplay(false):setDisplay(true);
+
     setSearchNft({...searchNft, [e.target.name] : e.target.value})
     setSearchCollection({...searchCollection, [e.target.name] : e.target.value})
     // getData()
@@ -244,6 +265,7 @@ function Navbar() {
 
   const walletHandler = () => setShowResults(true);
 
+ 
   return (
     <>
       <div className="navbar-width">
@@ -272,7 +294,7 @@ function Navbar() {
                   </div>
                   <div>
                     <input
-                      type="search"
+                      type="name"
                       name="searchByName"
                       placeholder="Search items and collections"
                       onChange={(e) => handleSearch(e)}
@@ -283,8 +305,8 @@ function Navbar() {
                 </div>
                 {((nfts.length > 0 || collections.length > 0) && (searchNft.searchByName.length > 2)) && (
                   <>
-                  <div className="search-results-background">      
-                  <div className="search-results-box">
+                  <div className="search-results-background" onClick={(e)=>setDisplay(true)} style={{display:display?"none":"block"}}>      
+                  <div className="search-results-box" style={{display:display?"none":"block"}}>
                   {collections.length > 0 && (
                     <div>
                     <p className="coll-title">Collections</p>
