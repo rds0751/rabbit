@@ -155,25 +155,25 @@ function EditProfile(props) {
       setImageUrl(loggedInUser.photo)
 
       console.log("ddddddddddddddddddd", imageUrl)
-      userPublicProfile((res) => {
+      // userPublicProfile((res) => {
         // console.log("jjjjjjjjjjjjjj")
         // console.log(res, "filterResponse");
         // setIsloading(true);
-        if (res.success) {
-          console.log("fkfsffksfsw", res.responseData)
+        // if (res.success) {
+        //   console.log("fkfsffksfsw", res.responseData)
 
-          // prevArray => [...prevArray, newValue]
-          setUserData(res.responseData);
+        //   // prevArray => [...prevArray, newValue]
+        //   setUserData(res.responseData);
 
 
           // setNfts([nfts,res.responseData.nftContent]);
           // setIsloading(false);
-        } else {
-          toast.error(res.message);
-          // setIsloading(false);
-        }
+        // } else {
+        //   toast.error(res.message);
+        //   // setIsloading(false);
+        // }
 
-      }, loggedInUser._id);
+      // }, loggedInUser._id);
     }
     // }
     // else{
