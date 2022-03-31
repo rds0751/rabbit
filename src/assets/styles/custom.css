@@ -1114,6 +1114,7 @@ select:focus-visible {
   width: 100vw;
   height: 100vh;
 }
+
 .search-results-box{
   z-index: 999;
   visibility: visible;
@@ -1124,6 +1125,7 @@ select:focus-visible {
   border-radius: 6px;
   width: 300px;
   left: 200px;
+
 }
 .search-results-background > * {
   opacity: .3;
