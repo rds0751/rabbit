@@ -290,7 +290,7 @@ function Home() {
                 <Card.Body>
                   <Card.Title>Create Wallet</Card.Title>
                   <Card.Text>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  Create your wallet on the platform to buy-sell NFTs.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -299,7 +299,7 @@ function Home() {
                 <Card.Body>
                   <Card.Title>Create Collection</Card.Title>
                   <Card.Text>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  Create on-chain personalised collections to mint NFTs in those collections.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -308,7 +308,7 @@ function Home() {
                 <Card.Body>
                   <Card.Title>Add NFTs</Card.Title>
                   <Card.Text>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  Create on-chain NFTs to showcase your Art to the world or Sell to the community.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -317,7 +317,7 @@ function Home() {
                 <Card.Body>
                   <Card.Title>List them for sale</Card.Title>
                   <Card.Text>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  List your NFTs for sale or as collectibles.
                   </Card.Text>
                 </Card.Body>
               </Card>
