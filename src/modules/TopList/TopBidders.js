@@ -163,12 +163,12 @@ function TopBidders() {
   useEffect(() => {
     const buyerReqObj = queryString.stringify(buyerDuration);
 
-    async function fetchData() {
+     function fetchData() {
       setIsloading(true)
       setTopBuyers([])
 
 
-      await getTopBuyers(buyerReqObj).then((response) => setTopBuyers(response));
+       getTopBuyers(buyerReqObj).then((response) => setTopBuyers(response));
       setIsloading(false)
 
 
