@@ -5,6 +5,8 @@ import dropdown from "../../assets/images/drop down.png";
 import profileImage from "../../assets/images/NoProfile.svg";
 import { Link } from "react-router-dom";
 import Spinner from "../../common/components/Spinner";
+import NoItem from "../../assets/images/Noitems.svg";
+
 
 
 
@@ -146,20 +148,37 @@ function Top_collection() {
     duration: "weekly",
 
   });
+  const [isloading, setIsloading] = useState(true);
+
   const collectionReqObj = queryString.stringify(collectionDuration);
 
   useEffect(() => {
+
+    setTopCollections([])
+    setIsloading(true)
+
     getTopCollections(collectionReqObj).then((response) => setTopCollections(response));
+    
+    setIsloading(false)
+
   }, [collectionDuration]);
+  
   const ChangeCollectionDuration = (e) => {
+    // setIsloading(true)
+
 
     setCollectionDuration(
 
       { ...collectionDuration, [e.target.name]: e.target.value }
+      
 
     );
 
+
   }
+  console.log("cccccccccccccccccccccccc",isloading,topCollections)
+
+
   return (
     <Container className="leader-viewmore">
       <Header>
@@ -180,6 +199,7 @@ function Top_collection() {
           <Column className="col">Items</Column>
         </div>
       </Body>
+      {console.log("collectiionssss",topCollections)}
       {topCollections.map((curElem, index) => {
         const { collectionPhoto, collection, totalVolume, items } =
           curElem;
@@ -229,12 +249,26 @@ function Top_collection() {
         );
 
       })}
-      {topCollections.length === 0 && (
+
+
+<div className="spinnerloader">
+            {isloading ? <Spinner /> :
+              (topCollections.length === 0 && (
+                <div className="Noitemdiv">
+                  <img src={NoItem} />
+                  <p className="textitem">No items available</p>
+                </div>
+            ))}
+          </div>
+
+
+
+      {/* {topCollections.length === 0 && (
 
         <div className="spinnerloader">{<Spinner />}
 
 
-        </div>)}
+        </div>)} */}
     </Container>
   );
 
