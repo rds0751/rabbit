@@ -63,16 +63,25 @@ function Wallet() {
   // window.ethereum?.on("accountsChanged", accountChangeHandler);
   const [copiedText, setCopiedText] = useState(false);
 
-  const handleCopyToClipboard = () => {
-    // const walletAddressQuoted = JSON.stringify(walletAddress);
-    // const walletAddressUnquoted = walletAddressQuoted.replace(/\"/g, "");
-    navigator.clipboard.writeText( walletAddress?.address);
+  // const handleCopyToClipboard = () => {
+  //   // const walletAddressQuoted = JSON.stringify(walletAddress);
+  //   // const walletAddressUnquoted = walletAddressQuoted.replace(/\"/g, "");
+  //   navigator.clipboard.writeText( walletAddress?.address);
+  //   toast.success("Text Copied");
+  //   // setCopiedText(true);
+  //   // setTimeout(() => {
+  //   //   setCopiedText(false);
+  //   // }, 1000);
+  // };
+
+  const isDataCopied = () => {
+
+    // walletTogglePopup(false);
+
     toast.success("Text Copied");
-    // setCopiedText(true);
-    // setTimeout(() => {
-    //   setCopiedText(false);
-    // }, 1000);
+
   };
+
 
 
 
@@ -102,13 +111,26 @@ function Wallet() {
          
             <SplitWalletAdd address={walletAddress?.address} />
           </div>
-       
-          <img
+       <CopyToClipboard text={walletAddress?.address}>
+
+                      
+
+                        <img
+            style={{ width: "21.47px", height: "21.47px", cursor: "pointer" }}
+            src={copy}
+            alt=""
+            onClick={isDataCopied}
+          />
+
+                       
+
+                      </CopyToClipboard>
+          {/* <img
             style={{ width: "21.47px", height: "21.47px", cursor: "pointer" }}
             src={copy}
             alt=""
             onClick={handleCopyToClipboard}
-          />
+          /> */}
         </div>
         <div className="balancewallet textVerticalCenter">
           <div className="WalletContent">

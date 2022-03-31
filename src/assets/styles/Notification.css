@@ -749,11 +749,7 @@ height: 47px;
 }
 
 @media only screen and (max-width: 900px) {
-  .container {
-    padding-left: 30px;
-    padding-right: 30px;
-    /* width: auto; */
-  }
+
 }
 
 @media only screen and (max-width: 1200px) {
@@ -790,6 +786,8 @@ height: 47px;
     width: 100%;
     margin-top: 31px;
     display: inline-block;
+    margin-left: 2.5%;
+    margin-right: 3%;
   }
   .search_box form {
     display: flex;
@@ -1010,7 +1008,7 @@ height: 47px;
   margin-left: 5.5%;
 }
 .RightNavBar{
-  margin-right: 5.5%;
+  margin-right: 2.5%;
 }
 @media only screen and (min-width:1600px) {
   .LeftNavBar{
@@ -1350,7 +1348,7 @@ margin:0px;
 }
 @media only screen and (max-width:1024px) {
   .LeftNavBar{
-    margin-left: 2%;
+    margin-left: 2.5%;
   }
   .left_section_nav {
     margin-right: 15px !important;

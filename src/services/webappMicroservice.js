@@ -349,7 +349,7 @@ export function getActivities(reqObj, id) {
 export function getList(reqType, id) {
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
-    "api/v1/activities/" + id + "type=" + "list"
+    `api/v1/activities/${id}?` + "type=" + "list"
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
