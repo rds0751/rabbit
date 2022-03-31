@@ -31,7 +31,7 @@ function EditProfile(props) {
   if (loggedInUser == null) {
     loggedInUser = localStorage.getItem('loggedInDetails')
   }
-  console.log("ooooooosooooooooooo", loggedInUser._id)
+  console.log("ooooooosooooooooooo", loggedInUser)
   const navigate = useNavigate();
   const hiddenFileInput = useRef(null);
   const [desLength, setDesLength] = useState(0);
@@ -66,6 +66,7 @@ function EditProfile(props) {
 
   const handleClick = (event) => {
     hiddenFileInput.current.click();
+    // console.log("hidden file input",hiddenFileInput)
   };
   console.log(localStorage.getItem(WHITE_LABEL_TOKEN), "<<<this is token");
 
@@ -147,6 +148,10 @@ function EditProfile(props) {
     // if(nfts.length==0){
     // const myTimeout = setTimeout(100000);
     if (loggedInUser._id) {
+      setUserName(loggedInUser.userName)
+      setBio(loggedInUser.bio)
+      setPortfilo(loggedInUser.portfolio)
+
       console.log("ddddddddddddddddddd", loggedInUser._id)
       userPublicProfile((res) => {
         // console.log("jjjjjjjjjjjjjj")
@@ -157,6 +162,7 @@ function EditProfile(props) {
 
           // prevArray => [...prevArray, newValue]
           setUserData(res.responseData);
+
 
           // setNfts([nfts,res.responseData.nftContent]);
           // setIsloading(false);
@@ -260,7 +266,7 @@ function EditProfile(props) {
 
 
   
-const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 && nameError=="";
+const enabled=useruserName?.length > 0 && bio?.length > 0 &&  portfilo?.length > 0 && nameError=="";
   return (
     <>
       <ToastContainer
@@ -281,6 +287,7 @@ const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 
               Edit Profile
             </p>
           </div>
+          {console.log("namedddddddddddddddd",useruserName)}
 
           {/* <h3 className=" input-heading generalsettingl">
             General Setting
@@ -329,7 +336,7 @@ const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 
                 className="editProfileFormContainerEachInput "
                 name="userName"
                 id="userName"
-                value={formData.userName}
+                value={useruserName}
                 // value={userName.current}
                 onChange={(e) => {
                   setUserName(e.target.value);
@@ -361,7 +368,7 @@ const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 
             
                 // name="text"
                 name="bio"
-                value={formData.bio}
+                value={bio}
                 // value={userName.current}
                 onChange={(e) => {
                   setBio(e.target.value);
@@ -389,7 +396,7 @@ const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 
                 className="editProfileFormContainerEachInput form-control"
                 placeholder="www.example.com"
                 name="portfolio"
-                value={formData.portfolio}
+                value={portfilo}
                 // value={userName.current}
                 onChange={(e) => {
                   setPortfilo(e.target.value);
