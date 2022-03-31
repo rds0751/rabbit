@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import { userPublicProfile } from "../../services/UserMicroService";
 import "react-toastify/dist/ReactToastify.css";
 import "../../assets/styles/editProfile.css";
+import profileImage from "../../assets/images/ProfileReplace.svg";
 import { AuthToken } from "../../services/UserAuthToken";
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import $ from 'jquery';
@@ -44,9 +45,9 @@ function EditProfile(props) {
     bio: loggedInUser?.bio,
     portfolio: loggedInUser?.portfolio,
   });
-  const tempUrl =
-    "https://earncashto.com/wp-content/uploads/2021/06/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png";
-  const [imageUrl, setImageUrl] = useState(tempUrl);
+  // const tempUrl =
+  //   "https://earncashto.com/wp-content/uploads/2021/06/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png";
+  const [imageUrl, setImageUrl] = useState(profileImage);
   const [useruserName, setUserName] = useState("");
   const [bio, setBio] = useState("");
   const [portfilo, setPortfilo] = useState("");
@@ -151,8 +152,9 @@ function EditProfile(props) {
       setUserName(loggedInUser.userName)
       setBio(loggedInUser.bio)
       setPortfilo(loggedInUser.portfolio)
+      setImageUrl(loggedInUser.photo)
 
-      console.log("ddddddddddddddddddd", loggedInUser._id)
+      console.log("ddddddddddddddddddd", imageUrl)
       userPublicProfile((res) => {
         // console.log("jjjjjjjjjjjjjj")
         // console.log(res, "filterResponse");
@@ -180,33 +182,35 @@ function EditProfile(props) {
   }, [loggedInUser._id]);
 
   //-----------------------------------------------------------------------
-  useEffect(() => {
-    console.log(localStorage.getItem(WHITE_LABEL_TOKEN), "<<<this is token");
-    if (user.loggedInUser?.photo != "") {
-      setImageUrl(user?.loggedInUser?.photo);
-    }
-    if (user.loggedInUser?.userName != "") {
-      setUserName(user?.loggedInUser?.userName);
-    }
-    if (user.loggedInUser?.bio != "") {
-      setBio(user?.loggedInUser?.bio);
-    }
-    if (user.loggedInUser?.portfilo != "") {
-      setPortfilo(user?.loggedInUser?.portfolio);
-    }
+  // useEffect(() => {
+  //   console.log(localStorage.getItem(WHITE_LABEL_TOKEN), "<<<this is token");
+  //   if (user.loggedInUser?.photo != "") {
+  //     setImageUrl(user?.loggedInUser?.photo);
+  //   }
+  //   if (user.loggedInUser?.userName != "") {
+  //     setUserName(user?.loggedInUser?.userName);
+  //   }
+  //   if (user.loggedInUser?.bio != "") {
+  //     setBio(user?.loggedInUser?.bio);
+  //   }
+  //   if (user.loggedInUser?.portfilo != "") {
+  //     setPortfilo(user?.loggedInUser?.portfolio);
+  //   }
 
 
-    // setImageUrl()
-    // photo.current = user?.loggedInUser?.photo;
-    // bio.current = user?.loggedInUser?.bio;
-    // userName.current = user?.loggedInUser?.userName;
-    // portfolio.current = user?.loggedInUser?.portfolio;
-  }, []);
+  //   // setImageUrl()
+  //   // photo.current = user?.loggedInUser?.photo;
+  //   // bio.current = user?.loggedInUser?.bio;
+  //   // userName.current = user?.loggedInUser?.userName;
+  //   // portfolio.current = user?.loggedInUser?.portfolio;
+  // }, []);
 
   const handleSubmit = async (e) => {
     formData.userName = useruserName;
     formData.bio = bio;
     formData.portfolio = portfilo;
+    formData.photo = imageUrl;
+
 
     console.log(formData, "<<<formData");
     var format = /[!@$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]+/;
@@ -229,6 +233,10 @@ function EditProfile(props) {
       });
       // window.location.reload(true);
       // console.log("jsgg")
+      setTimeout(() => {
+        window.location.href = '/my-profile';
+      }, 2000)
+      // setTimeout(window.location.href = '/my-profile',9000)
       // window.location.href = '/my-profile';
       // navigate(-1);
     } else {
@@ -297,9 +305,10 @@ const enabled=useruserName?.length > 0 && bio?.length > 0 &&  portfilo?.length >
           <div className="chooseProfilePicInnerContainer ">
             <div className="editprofile-image">
               <img
-                src={userData.photo}
+                src={imageUrl}
               />
             </div>
+            {console.log("image urlllll",imageUrl)}
             <div className="editprofile-button-outer">
               <Button
                 onClick={handleClick}

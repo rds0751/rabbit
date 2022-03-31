@@ -362,7 +362,7 @@ if(minPrice.length > 0){
     setVisibleBlogs(prevVisibleBlogs => prevVisibleBlogs + 4)
 
   }
-
+console.log("jjjjjjjjjjjjjjjjjj",isloading)
   return (
     <>
       {/* <div className="container ntf_div"> */}
