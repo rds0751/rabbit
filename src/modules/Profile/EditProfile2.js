@@ -7,6 +7,8 @@ import { BASE_URL2 } from "../../reducers/Constants";
 import { httpConstants } from "../../constants";
 import { updateUserProfile } from "../../services";
 import "../../assets/styles/editProfile.css";
+import profileImage from "../../assets/images/NoProfile.svg";
+
 
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 
@@ -106,7 +108,7 @@ function EditProfile(props) {
                 Username
               </label>
               <input
-                type="text"
+                type="name"
                 className="editProfileFormContainerEachInput form-control"
                 name="email"
                 onChange={(e) => (username.current = e.target.value)}
@@ -132,7 +134,7 @@ function EditProfile(props) {
                 Personal site or Portfolio
               </label>
               <input
-                type="text"
+                type="name"
                 className="editProfileFormContainerEachInput form-control bg-light"
                 placeholder="www.example.com"
                 onChange={(e) => (personalSite.current = e.target.value)}

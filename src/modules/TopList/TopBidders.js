@@ -12,6 +12,8 @@ import {
 import profileImage from "../../assets/images/NoProfile.svg";
 import { Link } from "react-router-dom";
 import Spinner from "../../common/components/Spinner";
+import NoItem from "../../assets/images/Noitems.svg";
+
 
 
 
@@ -156,12 +158,37 @@ function TopBidders() {
     duration: "weekly",
 
   });
+  const [isloading, setIsloading] = useState(false);
 
-  const buyerReqObj = queryString.stringify(buyerDuration);
+  useEffect(() => {
+    const buyerReqObj = queryString.stringify(buyerDuration);
 
-  useEffect(async () => {
-    await getTopBuyers(buyerReqObj).then((response) => setTopBuyers(response));
+     function fetchData() {
+      setIsloading(true)
+      setTopBuyers([])
+
+
+       getTopBuyers(buyerReqObj).then((response) => setTopBuyers(response));
+      setIsloading(false)
+
+
+    }
+
+    fetchData();
+
   }, [buyerDuration]);
+  // useEffect(async() => {
+  //   async function fetchData() {
+
+
+  //   setIsloading(true)
+  //   setTopBuyers([])
+
+  //  await getTopBuyers(buyerReqObj).then((response) => setTopBuyers(response));
+  //   setIsloading(false)
+
+
+  // }, [buyerDuration,isloading]);
   console.log("topBuyers", topBuyers);
   const ChangeBuyerDuration = (e) => {
 
@@ -172,6 +199,8 @@ function TopBidders() {
     );
 
   }
+  console.log("checkinggggggggggggg", isloading)
+
 
   return (
     <Container className="leader-viewmore">
@@ -212,10 +241,10 @@ function TopBidders() {
                 )}
 
                 {buyer.userName == "" ? (
-                  <h2 className="seller-name"> <Link style={{ textDecoration: "null" }} to={"/user-profile/"+buyer._id}>{buyer.wallet_address.substring(0, 4)}...{buyer.wallet_address.slice(buyer.wallet_address.length - 4)}</Link></h2>
+                  <h2 className="seller-name"> <Link style={{ textDecoration: "null" }} to={"/user-profile/" + buyer._id}>{buyer.wallet_address.substring(0, 4)}...{buyer.wallet_address.slice(buyer.wallet_address.length - 4)}</Link></h2>
 
                 ) : (
-                  <h2 className="seller-name"><Link style={{ textDecoration: "null" }} to={"/user-profile/"+buyer._id}> {buyer.userName} </Link></h2>
+                  <h2 className="seller-name"><Link style={{ textDecoration: "null" }} to={"/user-profile/" + buyer._id}> {buyer.userName} </Link></h2>
 
                 )}
 
@@ -223,9 +252,9 @@ function TopBidders() {
 
               </NameColumn>
               <VolumeColumn className="col">
-                <Span>{result} ETH  
-                 {/* <Volume>({"$"})</Volume>  */}
-                 </Span>
+                <Span>{result} ETH
+                  {/* <Volume>({"$"})</Volume>  */}
+                </Span>
 
               </VolumeColumn>
               <Text className="col">{itemsSold}</Text>
@@ -233,12 +262,21 @@ function TopBidders() {
           </div>
         );
       })}
-      {topBuyers.length === 0 && (
+      <div className="spinnerloader">
+        {isloading ? <Spinner /> :
+          (topBuyers.length === 0 && (
+            <div className="Noitemdiv">
+              <img src={NoItem} />
+              <p className="textitem">No items available</p>
+            </div>
+          ))}
+      </div>
+      {/* {topBuyers.length === 0 && (
 
         <div className="spinnerloader">{<Spinner />}
 
 
-        </div>)}
+        </div>)} */}
     </Container>
   );
 }

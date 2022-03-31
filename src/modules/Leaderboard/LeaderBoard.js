@@ -213,6 +213,7 @@ function LeaderBoard() {
   const collectionReqObj = queryString.stringify(collectionDuration)
 
   useEffect(async () => {
+    setTopBuyers([])
     await getTopBuyers(buyerReqObj).then((response) => setTopBuyers(response))
   }, [buyerDuration])
 
@@ -221,12 +222,14 @@ function LeaderBoard() {
   console.log('topBuyers', topBuyers)
 
   useEffect(async () => {
+    setTopSellers([])
     await getTopSellers(sellerReqObj).then((response) =>
       setTopSellers(response),
     )
   }, [sellerDuration])
 
   useEffect(async () => {
+    setTopCollections([])
     await getTopCollections(collectionReqObj).then((response) =>
       setTopCollections(response),
     )
@@ -239,6 +242,7 @@ function LeaderBoard() {
   // const [topNftSales, setTopNftSales] = useState([]);
 
   useEffect(async () => {
+    setTopNftSales([])
     await getTopNftSales(NFTReqObj).then((response) => setTopNftSales(response))
   }, [NFTDuration])
 
@@ -376,6 +380,7 @@ function LeaderBoard() {
                     </select>
 
                   </div> */}
+{console.log("ddddddddddd",topBuyers)}
                 </div>
 
                 <div className="leaderboardTopDetails">

@@ -20,7 +20,7 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
     accept: "image/*",
     maxSize: "10485760",
     onDrop: (acceptedFiles,fileRejections) => {
-      setisLoader(true);
+       setisLoader(true);
       fileRejections.forEach((file)=>{
         file.errors.forEach((err)=>{
           if(err.code === "file-too-large"){
@@ -55,7 +55,7 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
         const [err, ipfsRes] = await Utils.parseResponse(
           getCollection.addIpfs(formData)
         );
-        if ( !ipfsRes.ipfsUrl) {
+        if ( err|| !ipfsRes.ipfsUrl) {
           toast.error("unable to add image on network try differnet one");
           setisLoader(false);
         } else {
@@ -79,7 +79,9 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
       <div >
         {!isBannerSelected && (
           <div className="img-sec-div" {...getRootProps()}>
-            <input {...getInputProps()} name="banner" />
+            <input  onChange={(e)=>{
+              
+            }} {...getInputProps()} name="banner" />
 
             {!isloader ? (
               <div style={{display:"flex",flexDirection:"column",alignItems:"center"}}>

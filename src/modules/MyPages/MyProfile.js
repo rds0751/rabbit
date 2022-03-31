@@ -7,6 +7,8 @@ import pencil from "../../assets/images/Edit.svg";
 import randomimage from "../../assets/images/1.jpg";
 import "../../assets/styles/Leader.css";
 import { Link } from "react-router-dom";
+import profileImage from "../../assets/images/ProfileReplace.svg";
+
 
 import { useNavigate } from "react-router-dom";
 import { ethers } from "ethers";
@@ -46,8 +48,8 @@ function MyProfile() {
 
   const defaultCoverpic =
     "https://png.pngtree.com/background/20210714/original/pngtree-blood-drop-halloween-blood-background-black-background-picture-image_1220404.jpg";
-  const defaultPic =
-    "https://th.bing.com/th/id/R.e1189efa9cd3aee29c0e1f7dbed689bf?rik=YRidGY7NPM2n3A&riu=http%3a%2f%2fwww.clipartbest.com%2fcliparts%2f7ca%2fpeo%2f7capeoboi.png&ehk=MwVRL6ome8bAroWEn5dLYQgaXLxrafgcwcIQX7N48CM%3d&risl=&pid=ImgRaw&r=0";
+  // const defaultPic =
+  //   "https://th.bing.com/th/id/R.e1189efa9cd3aee29c0e1f7dbed689bf?rik=YRidGY7NPM2n3A&riu=http%3a%2f%2fwww.clipartbest.com%2fcliparts%2f7ca%2fpeo%2f7capeoboi.png&ehk=MwVRL6ome8bAroWEn5dLYQgaXLxrafgcwcIQX7N48CM%3d&risl=&pid=ImgRaw&r=0";
   
   const [Nfts, setNfts] = useState([]);
   const [createdNft, setcreatedNft] = useState([]);
@@ -227,7 +229,7 @@ function MyProfile() {
         </div>
         <div className="profileavatar  absolute">
           <img
-            src={loggedInUser?.photo != "" ? loggedInUser?.photo : defaultPic}
+            src={loggedInUser?.photo != "" ? loggedInUser?.photo : profileImage}
             alt=""
             className="user-img"
           />
