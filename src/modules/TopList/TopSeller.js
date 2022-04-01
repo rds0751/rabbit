@@ -158,7 +158,7 @@ function TopSeller() {
     duration: "weekly",
 
   });
-  const [isloading, setIsloading] = useState(true);
+  const [isloading, setIsloading] = useState(false);
 
   const sellerReqObj = queryString.stringify(sellerDuration);
 
@@ -168,10 +168,15 @@ function TopSeller() {
     setTopSellers([])
 
 
-    await getTopSellers(sellerReqObj).then((response) => setTopSellers(response));
-    setIsloading(false)
+    await getTopSellers(sellerReqObj).then((response) => {
+      console.log("responsessssss",response)
+      setTopSellers(response);
+      setIsloading(false)
+    }
+    )
+   
 
-  }, [sellerDuration]);
+  }, [sellerReqObj]);
   console.log("topSellers", topSellers);
 
   const ChangeSellerDuration = (e) => {

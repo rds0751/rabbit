@@ -29,7 +29,9 @@ function Create() {
   const { userDetails, loggedInUser, redirectUrl } = user;
   const { isOpenWallet } = sideBar;
   const [toggleEffect, setToggleEffect] = useState(false);
+  console.log("ttttttttttttttttttttttttttttt",toggleEffect)
   useEffect(() => {
+    console.log("sssssssssssssssss")
     if (loggedInUser != null) {
       toast.success("Wallet connected");
       // dispatch(ManageWalletSideBar(!isOpenWallet));
@@ -42,6 +44,7 @@ function Create() {
           history("/my-profile");
         }
         if (redirectUrl == "create") {
+          console.log("dddddddddddddddddddddddddd")
           history("/create-nft");
         }
         if (redirectUrl == "wallet") {
@@ -84,9 +87,11 @@ function Create() {
                 console.log(res, "<<<< Account changed");
                 dispatch(addUserData(res));
                 localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
-                setToggleEffect(!toggleEffect);
               });
               // -------------
+              setToggleEffect(!toggleEffect);
+              console.log("mffffffmmmmmmmmmmffffffff",toggleEffect)
+
             });
                })
         .catch((e) => {
