@@ -9,19 +9,17 @@ import "../../assets/styles/Leader.css";
 import { Link } from "react-router-dom";
 import profileImage from "../../assets/images/ProfileReplace.svg";
 
-
+import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { ethers } from "ethers";
 import { AbstractApi } from "../../constants/LeaderBoardApi copy";
-import { ToastContainer } from "react-toastify";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { addUserData, AddWalletDetails } from "../../reducers/Action";
 import { useDispatch } from "react-redux";
 import { addWalletAddress } from "../../services";
 import NftCardHome from "../../common/components/NftCardsHome";
 import { useSelector } from "react-redux";
-import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import "../../assets/styles/myProfile.css";
 import {
   NftCreatedByUser,
@@ -33,24 +31,28 @@ import Spinner from "../../common/components/Spinner";
 import NonftText from "../../common/components/NonftText";
 import { updateBannerByUserId } from "../../services/UserMicroService";
 import SplitWalletAdd from "../../common/components/SplitWalletAdd";
-import NoItem from "../../assets/images/Noitems.svg"
+import NoItem from "../../assets/images/Noitems.svg";
 function MyProfile() {
   let { user } = useSelector((state) => state);
   let { loggedInUser } = user;
 
-  if(loggedInUser){ localStorage.setItem('userId', loggedInUser._id); }
-  let userId = (loggedInUser) ? loggedInUser._id : localStorage.userId;
+  if (loggedInUser) {
+    localStorage.setItem("userId", loggedInUser._id);
+  }
+  let userId = loggedInUser ? loggedInUser._id : localStorage.userId;
 
-  if(user){ localStorage.setItem('loggedInDetails', user.loggedInUser); }
-  if (loggedInUser == null){
-    loggedInUser = localStorage.getItem('loggedInDetails')
+  if (user) {
+    localStorage.setItem("loggedInDetails", user.loggedInUser);
+  }
+  if (loggedInUser == null) {
+    loggedInUser = localStorage.getItem("loggedInDetails");
   }
 
   const defaultCoverpic =
     "https://png.pngtree.com/background/20210714/original/pngtree-blood-drop-halloween-blood-background-black-background-picture-image_1220404.jpg";
   // const defaultPic =
   //   "https://th.bing.com/th/id/R.e1189efa9cd3aee29c0e1f7dbed689bf?rik=YRidGY7NPM2n3A&riu=http%3a%2f%2fwww.clipartbest.com%2fcliparts%2f7ca%2fpeo%2f7capeoboi.png&ehk=MwVRL6ome8bAroWEn5dLYQgaXLxrafgcwcIQX7N48CM%3d&risl=&pid=ImgRaw&r=0";
-  
+
   const [Nfts, setNfts] = useState([]);
   const [createdNft, setcreatedNft] = useState([]);
   const [isloading, setIsloading] = useState(false);
@@ -68,7 +70,6 @@ function MyProfile() {
   const [checkClick, setcheckClick] = useState(false);
   const [getBalance, setGetBalance] = useState("");
   const dispatch = useDispatch();
-  
 
   const [typeofProfilePost, setTypeofProfilePost] = useState("on-sale");
 
@@ -88,9 +89,7 @@ function MyProfile() {
 
     // setNfts(onSaleNft);
     // setTypeofProfilePost("on-sale");
-
   }, [window.ethereum, checkClick]);
-
 
   // ------------------------------- Calling apis --------------------- to get user data
 
@@ -104,13 +103,11 @@ function MyProfile() {
   //   // setCopiedText(false);
   //   // }, 1000);
   // };
-  
-  const isDataCopied = () => {
 
+  const isDataCopied = () => {
     // walletTogglePopup(false);
 
-    toast.success("Text Copied");
-
+    toast.success("Copied");
   };
   const getCreatedByNft = () => {
     NftCreatedByUser((response) => {
@@ -201,7 +198,7 @@ function MyProfile() {
   };
   splitAddress("akshay");
 
-  let array=[];
+  let array = [];
   return (
     <>
       <div>
@@ -219,7 +216,7 @@ function MyProfile() {
             type="file"
             className="pencilicon"
             onChange={updateBanner}
-            title=" " 
+            title=" "
             style={{ border: "5px solid white", zIndex: "99", opacity: "0" }}
           />
           <img className="pencilicon" width="16px" height="16px" src={pencil} />
@@ -244,24 +241,27 @@ function MyProfile() {
               <SplitWalletAdd address={loggedInUser?.wallet_address} />
             </div>
             <CopyToClipboard text={walletAddress?.address}>
-
-                      
-
-<img
-style={{ width: "21.47px", height: "21.47px", cursor: "pointer" }}
-src={copy}
-alt=""
-onClick={isDataCopied}
-/>
-
-
-
-</CopyToClipboard>
+              <img
+                style={{
+                  width: "21.47px",
+                  height: "21.47px",
+                  cursor: "pointer",
+                }}
+                src={copy}
+                alt=""
+                onClick={isDataCopied}
+              />
+            </CopyToClipboard>
+            <ToastContainer
+              style={{
+                marginTop: "100px",
+                width: "142px",
+                marginRight: "55px",
+              }}
+            />
           </div>
 
-          <p className="profile-description">
-            {loggedInUser?.bio}
-          </p>
+          <p className="profile-description">{loggedInUser?.bio}</p>
           {/* <p style={{ marginBottom: "0px" }}>
             main focus in art is to make digital abstract painting
           </p> */}
@@ -280,8 +280,9 @@ onClick={isDataCopied}
         <div className="profileItemContainer">
           <div className="postTypeProfileContainer collectionsales MyProfilesales">
             <div
-              className={`postTypeProfile ${typeofProfilePost === "on-sale" && "postTypeProfile--active"
-                }`}
+              className={`postTypeProfile ${
+                typeofProfilePost === "on-sale" && "postTypeProfile--active"
+              }`}
               // onClick={() => setTypeofProfilePost("on-sale")}
               onClick={() => {
                 setNfts(onSaleNft);
@@ -291,20 +292,22 @@ onClick={isDataCopied}
               On sale
             </div>
             <div
-              className={`postTypeProfile ${typeofProfilePost === "owned" && "postTypeProfile--active"
-                }`}
+              className={`postTypeProfile ${
+                typeofProfilePost === "owned" && "postTypeProfile--active"
+              }`}
               // onClick={() => setTypeofProfilePost("owned")}
               onClick={() => {
                 setNfts(ownedNft);
-                console.log(ownedNft,"<<<<<<ownedNft")
+                console.log(ownedNft, "<<<<<<ownedNft");
                 setTypeofProfilePost("owned");
               }}
             >
               Owned
             </div>
             <div
-              className={`postTypeProfile ${typeofProfilePost === "created" && "postTypeProfile--active"
-                }`}
+              className={`postTypeProfile ${
+                typeofProfilePost === "created" && "postTypeProfile--active"
+              }`}
               // onClick={() => setTypeofProfilePost("created")}
               onClick={() => {
                 setNfts(createdNft);
@@ -314,20 +317,19 @@ onClick={isDataCopied}
               Created
             </div>
             <div
-              className={`postTypeProfile ${typeofProfilePost === "liked" && "postTypeProfile--active"
-                }`}
+              className={`postTypeProfile ${
+                typeofProfilePost === "liked" && "postTypeProfile--active"
+              }`}
               // onClick={() => setTypeofProfilePost("liked")}
               onClick={() => {
-               for(let i = 0;i<likedNft.length;i++){
-               
-                 array.push(likedNft[i].userLikedNfts);
-                
-               }    
-               setNfts(array);
+                for (let i = 0; i < likedNft.length; i++) {
+                  array.push(likedNft[i].userLikedNfts);
+                }
+                setNfts(array);
                 //setNfts(likedNft[1].userLikedNfts);
                 //setNfts(likedNft.map((nft)=>nft.userLikedNfts))
-                console.log(array,"<<<<<<likedNft");
-                console.log(likedNft[0].userLikedNfts,"<<<<<<likedNft")
+                console.log(array, "<<<<<<likedNft");
+                console.log(likedNft[0].userLikedNfts, "<<<<<<likedNft");
                 setTypeofProfilePost("liked");
               }}
             >
@@ -336,27 +338,31 @@ onClick={isDataCopied}
           </div>
           {/* <hr /> */}
           {/* <div className="profileNftContainer row mx-0 text-center p-0 cards-gap image1"> */}
-          <div className="nftTileContainer row ntf_row" style={{ justifyContent: "start", }}>
+          <div
+            className="nftTileContainer row ntf_row"
+            style={{ justifyContent: "start" }}
+          >
             {/* <div class="spinner-border text-primary" role="status">
               <span class="sr-only">Loading...</span>
             </div> */}
             {/* {[...AbstractApi, , ...AbstractApi].map((curElem) => { */}
 
-
             {isloading && <Spinner />}
             {(() => {
               if (!isloading && Nfts.length < 1) {
-                return <div>
-                  <div className="Noitemdiv">
-                    <img src={NoItem}/>
-                    <p className="textitem">No items available</p>
+                return (
+                  <div>
+                    <div className="Noitemdiv">
+                      <img src={NoItem} />
+                      <p className="textitem">No items available</p>
                     </div>
                   </div>
+                );
               }
             })()}
-           
+
             {Nfts.map((curElem) => {
-               console.log("<<<nfts",Nfts);
+              console.log("<<<nfts", Nfts);
 
               const {
                 cdnUrl,
@@ -409,17 +415,6 @@ onClick={isDataCopied}
           </div>
         </div>
       </div>
-      <ToastContainer
-        position="top-center"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
     </>
   );
 }

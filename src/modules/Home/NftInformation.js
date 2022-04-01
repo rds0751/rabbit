@@ -276,11 +276,11 @@ export default function NftInformation(props) {
         ""
       )} */}
       <div className="nft-detail">
-        <div className="container">
-          <div className="row" style={{ marginTop: "5rem" }}>
+        <div className="container info-container">
+          <div className="row" style={{ marginTop: "44px" }}>
             <div className="d-sm-block d-md-block d-lg-none mb-2">
-              <div className="row" id="share_info">
-                <div className="col-xl-10 col-lg-10 col-md-9 col-sm-9">
+              <div id="share_info">
+                <div className="">
                   <div className="edit-sell-button">
                     {/* <Button
                       style={{
@@ -343,63 +343,60 @@ export default function NftInformation(props) {
                   </div>
                   <span className="nft-name">{nft.name}</span>
                 </div>
-                <div className="col-xl-2 col-lg-2 col-md-3 col-sm-3 d-flex align-items-center">
-                  <div>
-                    <a
-                      className="nav-link dropdown"
-                      href="#"
-                      id="navbarDropdown"
-                      role="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      <img
-                        alt="share"
-                        src={share}
-                        style={{
-                          width: "31px",
-                          height: "31px",
-                          marginRight: "20px",
-                        }}
-                      />
-                    </a>
-                    <ul
-                      className="dropdown-menu profilemenu"
-                      aria-labelledby="navbarDropdown"
+                <div className=" d-flex align-items-center">
+                  <a
+                    className="nav-link dropdown"
+                    href="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <img
+                      alt="share"
+                      src={share}
                       style={{
-                        width: "220px",
-                        position: "absolute",
-                        marginLeft: "30px",
-                        boxShadow: "0px 3px 6px #00000012",
-                        border: "1px solid #F4F4F4",
-                        borderRadius: "6px",
-                        background: "#FFFFFF",
+                        width: "31px",
+                        height: "31px",
+                        marginRight: "20px",
                       }}
-                    >
-                      <li className="list-item">
-                        <img src={copyIcon} alt="icon" className="icon" />
-                        <span className="icon-text">Copy link</span>
-                      </li>
-                      <li className="list-item">
-                        {/* <img src={facebookIcon} alt="icon" className="icon" />
+                    />
+                  </a>
+                  <ul
+                    className="dropdown-menu profilemenu"
+                    aria-labelledby="navbarDropdown"
+                    style={{
+                      width: "220px",
+                      position: "absolute",
+                      marginLeft: "30px",
+                      boxShadow: "0px 3px 6px #00000012",
+                      border: "1px solid #F4F4F4",
+                      borderRadius: "6px",
+                      background: "#FFFFFF",
+                    }}
+                  >
+                    <li className="list-item" onClick={handleCopyToClipboard}>
+                      <img src={copyIcon} alt="icon" className="icon" />
+                      <span className="icon-text">Copy link</span>
+                    </li>
+                    <li className="list-item">
+                      {/* <img src={facebookIcon} alt="icon" className="icon" />
                         <span className="icon-text">Share on Facebook</span> */}
-                        <FacebookShareButton>
-                          <img src={facebookIcon} alt="icon" className="icon" />
-                          <span className="icon-text">Share on Facebook</span>
-                        </FacebookShareButton>
-                      </li>
-                      <li className="list-item">
-                        {/* <img src={twitterIcon} alt="icon" className="icon" />
+                      <FacebookShareButton url={url}>
+                        <img src={facebookIcon} alt="icon" className="icon" />
+                        <span className="icon-text">Share on Facebook</span>
+                      </FacebookShareButton>
+                    </li>
+                    <li className="list-item">
+                      {/* <img src={twitterIcon} alt="icon" className="icon" />
                         <span className="icon-text">Share on Twitter</span> */}
-                        <TwitterShareButton url={url}>
-                          <img src={twitterIcon} alt="icon" className="icon" />
-                          <span className="icon-text">
-                            Share on Twitter
-                          </span>{" "}
-                        </TwitterShareButton>
-                      </li>
-                    </ul>
-                  </div>
+                      <TwitterShareButton url={url}>
+                        <img src={twitterIcon} alt="icon" className="icon" />
+                        <span className="icon-text">Share on Twitter</span>{" "}
+                      </TwitterShareButton>
+                    </li>
+                  </ul>
+
                   <img
                     src={info}
                     alt="info"
@@ -423,7 +420,7 @@ export default function NftInformation(props) {
                   }}
                 />
               </div>
-              <div className="row mt-4">
+              <div className="row mt-4 desktop-acti">
                 <PricingHistoryComponentTable id={id} />
               </div>
             </div>
@@ -666,7 +663,10 @@ export default function NftInformation(props) {
                 <div className="col-lg-6 col-sm-12">
                   <span className="text">
                     Owned by:&nbsp;
-                    <Link to={"/user-profile/" + owner?._id} style={{textDecoration:"none"}} >
+                    <Link
+                      to={"/user-profile/" + owner?._id}
+                      style={{ textDecoration: "none" }}
+                    >
                       <span className="text-name fw-b">
                         {ownedBy}
                         {/* {(String(ownedBy).length >= 7) ? (!ownedBy ? " " : (String(ownedBy).substring(0, 8) + "...")) : (String(ownedBy) === undefined ? "" : ownedBy)}                     */}
@@ -677,11 +677,14 @@ export default function NftInformation(props) {
                 <div className="col-lg-6 col-sm-12">
                   <span className="text">
                     Created by:&nbsp;
-                    <Link to={"/user-profile/" + owner?._id} style={{textDecoration:"none"}}>
-                    <span className="text-name fw-b">
-                      {createdBy}
-                      {/* {(String(createdBy).length >= 7) ? (!createdBy ? " " : (String(createdBy).substring(0, 8) + "...")) : (String(createdBy) === undefined ? "" : createdBy)}                     */}
-                    </span>
+                    <Link
+                      to={"/user-profile/" + owner?._id}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <span className="text-name fw-b">
+                        {createdBy}
+                        {/* {(String(createdBy).length >= 7) ? (!createdBy ? " " : (String(createdBy).substring(0, 8) + "...")) : (String(createdBy) === undefined ? "" : createdBy)}                     */}
+                      </span>
                     </Link>
                     <span className="text-name fw-b"></span>
                   </span>
@@ -798,11 +801,15 @@ export default function NftInformation(props) {
               </div>
             </div>
           </div>
-          {/* <div className="row mt-4">
+          <div className="row mt-4 activities">
             <div className="col-xl-5 col-lg-5 col-md-12 col-sm-12">
               <PricingHistoryComponentTable id={id} />
             </div>
-          </div> */}
+          </div>
+
+          {/* <div className="row mt-4">
+                <PricingHistoryComponentTable id={id} />
+              </div> */}
         </div>
       </div>
       <div
