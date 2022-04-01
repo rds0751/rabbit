@@ -168,9 +168,11 @@ function TopBidders() {
       setTopBuyers([])
 
 
-       getTopBuyers(buyerReqObj).then((response) => setTopBuyers(response));
-      setIsloading(false)
-
+       getTopBuyers(buyerReqObj).then((response) => {
+         setTopBuyers(response);
+         setIsloading(false);
+        });
+      
 
     }
 
