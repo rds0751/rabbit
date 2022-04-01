@@ -244,7 +244,7 @@ function Navbar() {
    
     if (searchNft.searchByName.length >2) {
       setShowModal(true)
-     
+
     } else if(e.target.value.length == 0){
       setShowModal(false);
     }else {
@@ -259,6 +259,7 @@ function Navbar() {
   };
 
   const closeWalletAndNoti = () => {
+    setDisplay(true);
     dispatch(ManageNotiSideBar(false));
     dispatch(ManageWalletSideBar(false));
   };
