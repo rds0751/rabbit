@@ -786,8 +786,8 @@ height: 47px;
     width: 100%;
     margin-top: 31px;
     display: inline-block;
-    margin-left: 2.5%;
-    margin-right: 3%;
+    margin-left: 4.5%;
+    margin-right: 4.5%;
   }
   .search_box form {
     display: flex;
@@ -1282,7 +1282,7 @@ margin:0px;
 
 @media only screen and (min-width:375px) and (max-width:769px){
   .footerinputbox{
-    width: 107%;
+    width: 100%;
   }
 }
 
@@ -1348,7 +1348,7 @@ margin:0px;
 }
 @media only screen and (max-width:1024px) {
   .LeftNavBar{
-    margin-left: 2.5%;
+    margin-left: 4.5%;
   }
   .left_section_nav {
     margin-right: 15px !important;

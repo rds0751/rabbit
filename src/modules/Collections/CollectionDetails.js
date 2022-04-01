@@ -167,7 +167,7 @@ function CollectionDetails() {
                 )}
 
               </div>
-              <div className="colldrop" style={{width:"200px"}}>
+              <div className="colldrop" >
                 <div className="statusText">
                   Price range All
                 </div>

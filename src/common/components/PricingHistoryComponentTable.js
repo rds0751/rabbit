@@ -245,7 +245,7 @@ export default function PricingHistoryComponentTable(props) {
                     <td
                       style={{
                         textAlign: "left",
-                        borderBottom: "1px solid #C8C8C8",
+                        borderBottom: "1px solid #C8C8C8",width: "55px"
                       }}
                       component="td"
                       scope="row"
@@ -286,7 +286,7 @@ export default function PricingHistoryComponentTable(props) {
                         width: "109px",
                       }}
                     >
-                      {moment(row.createdAt).format("DD MMM")}
+                      {moment(row.createdAt).format("DD MMM ")}
                     </td>
                   </tr>
                 ))}

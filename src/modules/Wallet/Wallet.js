@@ -4,7 +4,7 @@ import copy from "../../assets/images/copy.svg";
 import "../../assets/styles/Notification.css";
 import { useSelector, useDispatch } from "react-redux";
 import { ethers } from "ethers";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from 'react-toastify';
 import "../../assets/styles/wallet.css";
 import SplitWalletAdd from "../../common/components/SplitWalletAdd";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
@@ -78,7 +78,7 @@ function Wallet() {
 
     // walletTogglePopup(false);
 
-    toast.success("Text Copied");
+    toast.success("Copied");
 
   };
 
@@ -125,6 +125,7 @@ function Wallet() {
                        
 
                       </CopyToClipboard>
+                      <ToastContainer style={{marginTop:"100px" , width: "142px", marginRight: "55px"}}/>
           {/* <img
             style={{ width: "21.47px", height: "21.47px", cursor: "pointer" }}
             src={copy}
