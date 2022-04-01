@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.1c94b354.css",
-    "main.js": "/static/js/main.312d519c.js",
+    "main.css": "/static/css/main.90c81beb.css",
+    "main.js": "/static/js/main.4b5553c6.js",
     "static/media/Banner.png": "/static/media/Banner.112c32a6f604149b0d83.png",
     "static/media/Abstraction.png": "/static/media/Abstraction.010c4cc892910d63a5b1.png",
     "static/media/Image4.png": "/static/media/Image4.df4b7c34e33bba4bcabb.png",
@@ -18,6 +18,7 @@
     "index.html": "/index.html",
     "static/media/ethereum.svg": "/static/media/ethereum.3477dbf799668d2ee5c41b4e1ee69385.svg",
     "static/media/Information.svg": "/static/media/Information.12a27a8d3d59081dcee1b7939e23325b.svg",
+    "static/media/No-Info-Icon.svg": "/static/media/No-Info-Icon.be287affad004c922843bd02b43153be.svg",
     "static/media/collection.svg": "/static/media/collection.3423e7a57f035a0f01cb89b807e260e3.svg",
     "static/media/img-format.svg": "/static/media/img-format.e0028a70dd56d053e13de7dd2ef9c9ea.svg",
     "static/media/discord.svg": "/static/media/discord.7f6995b70d1d9c062c1771b4a09979ab.svg",
@@ -38,11 +39,11 @@
     "static/media/NoProfile.svg": "/static/media/NoProfile.ed2d677be0deeeb4c5fffeaec93d5975.svg",
     "static/media/drop-down-arrow.svg": "/static/media/drop-down-arrow.252c67d09c66c766f99a.svg",
     "static/media/Edit.svg": "/static/media/Edit.adfd6c934476ae588248e2026354da45.svg",
-    "main.1c94b354.css.map": "/static/css/main.1c94b354.css.map",
-    "main.312d519c.js.map": "/static/js/main.312d519c.js.map"
+    "main.90c81beb.css.map": "/static/css/main.90c81beb.css.map",
+    "main.4b5553c6.js.map": "/static/js/main.4b5553c6.js.map"
   },
   "entrypoints": [
-    "static/css/main.1c94b354.css",
-    "static/js/main.312d519c.js"
+    "static/css/main.90c81beb.css",
+    "static/js/main.4b5553c6.js"
   ]
 }
