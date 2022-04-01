@@ -31,11 +31,12 @@ function Create() {
   const [toggleEffect, setToggleEffect] = useState(false);
   console.log("ttttttttttttttttttttttttttttt",toggleEffect)
   useEffect(() => {
-    console.log("sssssssssssssssss")
     if (loggedInUser != null) {
       toast.success("Wallet connected");
       // dispatch(ManageWalletSideBar(!isOpenWallet));
       if (redirectUrl != "") {
+        console.log("sssssssssssssssss")
+
         // history(redirectUrl);
         if (redirectUrl == "myitems") {
           history("/my-items");
@@ -44,7 +45,7 @@ function Create() {
           history("/my-profile");
         }
         if (redirectUrl == "create") {
-          console.log("dddddddddddddddddddddddddd")
+          console.log("s")
           history("/create-nft");
         }
         if (redirectUrl == "wallet") {
@@ -87,10 +88,12 @@ function Create() {
                 console.log(res, "<<<< Account changed");
                 dispatch(addUserData(res));
                 localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
+                // console.log("dmmmmmmmmmmmmmmm")
+                setToggleEffect(!toggleEffect);
+
               });
               // -------------
-              setToggleEffect(!toggleEffect);
-              console.log("mffffffmmmmmmmmmmffffffff",toggleEffect)
+              // console.log("mffffffmmmmmsmmmmmffffffff",toggleEffect)
 
             });
                })
@@ -142,6 +145,8 @@ function Create() {
 
   window.ethereum?.on("accountsChanged", accountChangeHandler);
   console.log(loggedInUser, "<<<<<this iser user detail");
+  console.log("mffffffmmmmmsmmmmmffffffff",toggleEffect)
+
   return (
     <>
       <div className="d-flex justify-content-between">
