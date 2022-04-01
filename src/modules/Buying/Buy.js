@@ -97,12 +97,6 @@ const ListItem = styled.li`
     
   }
 `;
-const QuestionDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  text-align: center;
-`;
 const Question = styled.h1`
   font-size: 16px;
   font-weight: 600;

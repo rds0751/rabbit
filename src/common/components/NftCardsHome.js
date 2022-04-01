@@ -4,7 +4,7 @@ import Like from "../../assets/images/Like.svg";
 import likes from "../../assets/images/likes.svg";
 import { useSelector } from "react-redux";
 // import { useHistory } from "react-router-dom";
-
+import "../../assets/styles/common.css"
 import {
   getNfts,
   addLikeNft,
@@ -86,12 +86,23 @@ function NftCardsHome({ nft }) {
             alt="nft-img"
           />
         </Link>
-        <img
-          id="like_icon"
-          onClick={() => likeNft(_id)}
-          src={handleLike ? Like : likes}
-          alt="like"
-        />
+        <span onClick={() => likeNft(_id)}>
+          {handleLike?(
+                  <img
+                  id="unlike_icon"
+                  src={Like}
+                  alt="like"
+                />
+
+          ):(
+            <img
+            id="like_icon"
+            src={likes}
+            alt="like"
+          />
+
+          )}
+        </span>
         <div
           className="nftTileEachDetails card-lower"
           style={{

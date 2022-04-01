@@ -56,6 +56,7 @@
   height: 273px;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
+  object-fit: cover;
 }
 .homepage .right-slider .card .profile-img{
   width: 38px;
@@ -287,6 +288,9 @@
   .homepage .left-text .btn-custom{
     margin-right: 10px;
   }
+  .homepage .right-slider .card {
+    width: 93%;
+}
 }
 @media only screen and (max-width: 320px) {
   .homepage .left-text .heading {

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import styled from "styled-components";
 import FaqItem from "./FaqItem";
 
@@ -61,37 +61,83 @@ const Input = styled.input`
   font-size: 16px;
 `;
 
+
+const ListItem = styled.li`
+  width: 941px;
+  text-align: center;
+  background-color: #ffffff;
+  box-shadow: 0px 3px 12px #0000000f;
+  border: 1px solid #d5d5d5;
+  border-radius: 12px;
+  padding: 30px 24px 13px 16px;
+  margin-bottom: 32px;
+  @media screen and (min-width: 426px) and (max-width: 769px) {
+    padding: 30px 14px 13px 16px;
+    
+  }
+  @media screen and (max-width: 426px) {
+    padding: 32px 8px 24px 16px;
+    
+  }
+`;
+const Question = styled.h1`
+  font-size: 16px;
+  font-weight: 600;
+  padding-bottom: 28px;
+  padding-right: 60px;
+  margin-bottom: 0px;
+  @media screen and (min-width: 426px) and (max-width: 769px) {
+    font-size: 12px;
+    padding-right: 16px;
+  }
+  @media screen and (max-width: 426px) {
+    font-size: 14px;
+    padding-bottom: 12px;
+    padding-right:0px;
+  }
+`;
+
+
 const Faqs = (props) => {
+  const [query ,setQuery]=useState("")
   const faqsList = [
     {
       id: 0,
       questionText:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
+        "How do I use ANAFTO?",
       answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
+        "ANAFTO is one single stop for all NFT trading. You can explore the marketplace, add your NFTs for sale, and buy any NFT of your choice. The Explore button will take you to the recently added NFT collectibles. Create your profile, connect your wallet and start trading NFTs.",
     },
     {
       id: 1,
       questionText:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
+        "How do I sign up on the marketplace?",
       answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
+        "Go to the Profile button on the top menu, connect your wallet and create your profile.",
     },
     {
       id: 2,
       questionText:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
+        "How do I buy an NFT?",
       answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
+        "To buy an NFT, you must be a registered marketplace user, and your digital wallet balance must be positive. Click on the NFT that you want to buy and then click on Buy now button. It will navigate you to your wallet through which you can make your purchase.",
     },
     {
       id: 3,
       questionText:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
+        "How do I sell my NFT?",
       answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
+        "Before creating an NFT, you must connect your wallet to ANAFTO. Click on Create button to add your NFT. While creating the NFT, you will get the option to put it on a fixed price sale or open auction. Select your choice and make your NFT available for purchase.",
+    },
+    {
+      id: 4,
+      questionText:
+        "What type of tokens are supported on ANAFTO?",
+      answerText:
+        "Currently, ANAFTO supports ERC721 tokens.",
     },
   ];
+  const match=faqsList.filter(val => val.questionText.toLocaleLowerCase().includes(query));
 
   return (
     <MainContainer>
@@ -99,14 +145,28 @@ const Faqs = (props) => {
         <Header>
           <Title>FAQs</Title>
           <SearchBox>
-            <Input type="search" placeholder="Search" />
+            <Input type="search" placeholder="Search"  value={query} onChange={(e)=>setQuery(e.target.value)}/>
             <i class="fa-solid fa-magnifying-glass"></i>
           </SearchBox>
         </Header>
         <ul>
-          {faqsList.map((eachFaq) => (
-            <FaqItem key={eachFaq.id} faqDetails={eachFaq} />
-          ))}
+        {match.length==0 ? (
+         
+         <ListItem>
+         
+           <Question className="question">"No Data Found"</Question>
+         
+       </ListItem>
+            
+        ):(
+          match.map((eachfaq) => {
+            return(
+            <FaqItem key={eachfaq.id} faqDetails={eachfaq} />
+            )
+        })
+          
+        )
+      }
         </ul>
       </div>
     </MainContainer>

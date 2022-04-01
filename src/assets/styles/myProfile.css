@@ -322,3 +322,8 @@
     font-family: "poppins-semibold";
   }
 }
+
+.profileeditbutton:hover{
+  font-size: 17px;
+  transition: all .4s;
+}
