@@ -8,24 +8,28 @@ import adding from "../../../assets/images/adding.png";
 function HelpCenter() {
   const data = [
     {
+      link:"/buying",
       image: buying,
       title: "Buying",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
     },
     {
+      link:"/selling",
       image: selling,
       title: "Selling",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
     },
     {
+      link:"/resource-collection",
       image: creating,
       title: "Creating Collection",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
     },
     {
+      link:"/adding-Nfts",
       image: adding,
       title: "Adding Nfts",
       description:
@@ -41,7 +45,7 @@ function HelpCenter() {
           {data.map((item, key) => {
             return (
               <>
-                <Link to="/buying" className="link">
+                <Link to={item.link} className="link">
                   <div className="single-card">
                     <div className="">
                       <div className="">

@@ -38,7 +38,7 @@ function Menu() {
   };
   return (
     <>
-      <div className="container menuphone">
+      <div className="container new-container menuphone">
 
         <div className="menuin" style={{ display:"flex",cursor:"pointer",
                 justifyContent:"space-between"}} onClick={()=>navigate('/')}>

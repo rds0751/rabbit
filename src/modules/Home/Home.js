@@ -105,13 +105,13 @@ function Home() {
                         {/* {console.log("kkkkkkkkkkkkkkkkkkkkk",nfts)} */}
 
                         <div className="d-flex flex-wrap">
+                        {console.log("sssssssqqqqsqqsqsqqwswwwwwwwww", nfts)}
 
                           {nfts.length && nfts.slice(0, 4).map((nft) => {
                             // const { _id, cdnUrl, name, biddingDetails, salesInfo } = nft;
 
                             return (
                               <>
-                                {console.log("sssssssqqqqsqqsqsqqwswwwwwwwww", nft.createdBy)}
                                 {/* <img src={nft?.cdnUrl}></img> */}
                                 <Card>
                                   <Link to={"/nft-information/" + nft?._id} style={{ textDecoration: 'none' }}>
@@ -125,7 +125,7 @@ function Home() {
                                       <div className="flex-grow-1 ms-2">
                                         <h3 className="title"><Link to={"/nft-information/" + nft?._id} style={{ textDecoration: 'none' }}>{nft?.name}</Link></h3>
                                         {/* {let n = nft?.description.split(' ')} */}
-                                        <p className="description">{nft?.description.slice(0, 100)}....</p>
+                                        <p className="description">{nft?.salesInfo.price} ETH</p>
                                         {/* <p className="description">{nft?.description}</p> */}
 
                                       </div>
@@ -202,10 +202,10 @@ function Home() {
                                           <img src={nft?.cdnUrl} alt="Image1" width="38px" height="38px" className="profile-img" />
                                         </div>
                                         <div className="flex-grow-1 ms-2">
-                                          <h3 className="title"><Link to={"/nft-information/" + nft?._id}>{nft?.name}</Link></h3>
+                                        <h3 className="title"><Link to={"/nft-information/" + nft?._id} style={{ textDecoration: 'none' }}>{nft?.name}</Link></h3>
                                         </div>
 
-                                        <p className="description">{nft?.description.slice(0, 100)}....</p>
+                                        <p className="description">{nft?.salesInfo.price} ETH</p>
                                       </div>
                                     </div>
                                   </Card.Body>
@@ -290,7 +290,7 @@ function Home() {
                 <Card.Body>
                   <Card.Title>Create Wallet</Card.Title>
                   <Card.Text>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  Create your wallet on the platform to buy-sell NFTs.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -299,7 +299,7 @@ function Home() {
                 <Card.Body>
                   <Card.Title>Create Collection</Card.Title>
                   <Card.Text>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  Create on-chain personalised collections to mint NFTs in those collections.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -308,7 +308,7 @@ function Home() {
                 <Card.Body>
                   <Card.Title>Add NFTs</Card.Title>
                   <Card.Text>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  Create on-chain NFTs to showcase your Art to the world or Sell to the community.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -317,7 +317,7 @@ function Home() {
                 <Card.Body>
                   <Card.Title>List them for sale</Card.Title>
                   <Card.Text>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  List your NFTs for sale or as collectibles.
                   </Card.Text>
                 </Card.Body>
               </Card>

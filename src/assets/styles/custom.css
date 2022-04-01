@@ -1105,7 +1105,7 @@ select:focus-visible {
 }
 .search-results-background{
   z-index: 999;
-  position: absolute;
+  position: absolute; 
   margin-top: 10px;
   left: 0;
   /* background: #191919 0% 0% no-repeat padding-box; */
@@ -1126,6 +1126,14 @@ select:focus-visible {
   width: 300px;
   left: 200px;
 
+}
+.search-results-background > * {
+  opacity: .3;
+  display: block;
+}
+
+.search-results-background > .search-results-box {
+  opacity: 1;
 }
 .item-div{
   display:"flex";
