@@ -3,6 +3,7 @@ import { httpConstants } from "../constants";
 import { AuthToken } from "./UserAuthToken";
 
 export function getTopSellers(duration, requestData) {
+  console.log("APIcall")
   let url = process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/top-sellers?" + duration + "&limit=40&skip=0";
   return httpService(
     httpConstants.METHOD_TYPE.GET,
@@ -12,11 +13,12 @@ export function getTopSellers(duration, requestData) {
     url
   )
     .then((response) => {
+      console.log("returnresponse",response)
       if (
         !response.success ||
         response.responseCode !== 200 ||
-        !response.responseData ||
-        response.responseData.length === 0
+        !response.responseData 
+        // response.responseData.length === 0
       )
         return Promise.reject();
       return Promise.resolve(response.responseData);
@@ -39,8 +41,8 @@ export function getTopBuyers(duration, requestData) {
       if (
         !response.success ||
         response.responseCode !== 200 ||
-        !response.responseData ||
-        response.responseData.length === 0
+        !response.responseData 
+        // response.responseData.length === 0
       )
         return Promise.reject();
       return Promise.resolve(response.responseData);
@@ -63,8 +65,8 @@ export function getTopCollections(duration,requestData) {
       if (
         !response.success ||
         response.responseCode !== 200 ||
-        !response.responseData ||
-        response.responseData.length === 0
+        !response.responseData 
+        // response.responseData.length === 0
       )
         return Promise.reject();
       return Promise.resolve(response.responseData);

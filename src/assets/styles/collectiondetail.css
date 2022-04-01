@@ -64,7 +64,7 @@
 .collfilters {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 53px;
+  margin-bottom: 0px;
 }
 .colleftfilter {
   display: flex;

@@ -122,7 +122,7 @@ function NftCardsHome({ nft }) {
             <span
               className="nftTileEachDetailsFirstContainerValue"
             >
-              {`${salesInfo?.price}  ${salesInfo?.currency} ETH`}
+              {`${salesInfo?.price}  ${salesInfo?.currency}`}
             </span>
           </div>
           <div
