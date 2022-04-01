@@ -21,6 +21,7 @@ import { useDispatch } from "react-redux";
 import { addWalletAddress } from "../../services";
 import NftCardHome from "../../common/components/NftCardsHome";
 import { useSelector } from "react-redux";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import "../../assets/styles/myProfile.css";
 import {
   NftCreatedByUser,
@@ -93,15 +94,23 @@ function MyProfile() {
 
   // ------------------------------- Calling apis --------------------- to get user data
 
-  const handleCopyToClipboard = () => {
-    const { wallet_address } = loggedInUser;
-    navigator.clipboard.writeText(`${wallet_address}`);
-    // navigator.clipboard.writeText(walletAddressUnquoted);
-    // setCopiedText(true);
+  // const handleCopyToClipboard = () => {
+  //   const { wallet_address } = loggedInUser;
+  //   navigator.clipboard.writeText(`${wallet_address}`);
+  //   // navigator.clipboard.writeText(walletAddressUnquoted);
+  //   // setCopiedText(true);
+  //   toast.success("Text Copied");
+  //   // setTimeout(() => {
+  //   // setCopiedText(false);
+  //   // }, 1000);
+  // };
+  
+  const isDataCopied = () => {
+
+    // walletTogglePopup(false);
+
     toast.success("Text Copied");
-    // setTimeout(() => {
-    // setCopiedText(false);
-    // }, 1000);
+
   };
   const getCreatedByNft = () => {
     NftCreatedByUser((response) => {
@@ -234,12 +243,20 @@ function MyProfile() {
 
               <SplitWalletAdd address={loggedInUser?.wallet_address} />
             </div>
-            <img              
-              src={copy}
-              alt="copy"
-              onClick={handleCopyToClipboard}
-              className="copy-img"
-            />
+            <CopyToClipboard text={walletAddress?.address}>
+
+                      
+
+<img
+style={{ width: "21.47px", height: "21.47px", cursor: "pointer" }}
+src={copy}
+alt=""
+onClick={isDataCopied}
+/>
+
+
+
+</CopyToClipboard>
           </div>
 
           <p className="profile-description">

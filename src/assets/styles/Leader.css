@@ -1652,10 +1652,23 @@ thead {
 .no-data {
 
   text-align: center;
-  padding: 39px 0 0 0;
+  padding: 67px 0 0 0;
+
+}
+.no-data-second {
+
+  text-align: center;
+  padding: 100px 0 0 0;
 
 }
 .no-data > p {
+  font-family: Poppins;
+  letter-spacing: 0px;
+  color: #BBCEF9;
+  opacity: 1;
+  font-size: 16px;
+}
+.no-data-second > p {
   font-family: Poppins;
   letter-spacing: 0px;
   color: #BBCEF9;
@@ -1687,4 +1700,7 @@ font-weight: 600;
 letter-spacing: 0px;
 color: #366EEF;
 opacity: 1;
+}
+td {
+ height: 35px;
 }
