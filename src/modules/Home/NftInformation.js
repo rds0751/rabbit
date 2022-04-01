@@ -651,7 +651,7 @@ export default function NftInformation(props) {
               <div className="second-text align-row">
                 <span className="text">
                   Current Price:&nbsp;
-                  <span className="nft-value">{salesInfo?.price}&nbsp;ETH</span>
+                  <span className="nft-value">{salesInfo?.price}&nbsp;{salesInfo?.currency}</span>
                 </span>
                 {showDateSection ? (
                   <span className="align-row">
