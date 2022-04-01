@@ -148,7 +148,7 @@ function Top_collection() {
     duration: "weekly",
 
   });
-  const [isloading, setIsloading] = useState(true);
+  const [isloading, setIsloading] = useState(false);
 
   const collectionReqObj = queryString.stringify(collectionDuration);
 
@@ -157,9 +157,12 @@ function Top_collection() {
     setTopCollections([])
     setIsloading(true)
 
-    getTopCollections(collectionReqObj).then((response) => setTopCollections(response));
+    getTopCollections(collectionReqObj).then((response) => {
+      
+      setTopCollections(response)
+      setIsloading(false)
+    });
     
-    setIsloading(false)
 
   }, [collectionDuration]);
   

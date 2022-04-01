@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import '../../assets/styles/Leader.css'
 
 import '../../assets/styles/Notification.css'
+import NoItem from "../../assets/images/Noitems.svg";
 
 import '../../assets/styles/custom.css'
 
@@ -185,6 +186,11 @@ function LeaderBoard() {
   console.log('topSellers', topSellers)
 
   const [topBuyers, setTopBuyers] = useState([])
+  const [state, setState] = useState(LeaderBoardApi);
+  const [isloadingForBuyers, setIsloadingForBuyers] = useState(false);
+  const [isloadingForSeller, setIsloadingForSeller] = useState(false);
+  const [isloadingForCollection, setIsloadingForCollection] = useState(false);
+  const [isloadingForNfts, setIsloadingForNfts] = useState(false);
 
   const [topCollections, setTopCollections] = useState([])
 
@@ -214,7 +220,11 @@ function LeaderBoard() {
 
   useEffect(async () => {
     setTopBuyers([])
-    await getTopBuyers(buyerReqObj).then((response) => setTopBuyers(response))
+    setIsloadingForBuyers(true)
+    await getTopBuyers(buyerReqObj).then((response) => {
+      setTopBuyers(response);
+      setIsloadingForBuyers(false);
+    })
   }, [buyerDuration])
 
   var limitBuyers = topBuyers.slice(0, 4)
@@ -223,15 +233,21 @@ function LeaderBoard() {
 
   useEffect(async () => {
     setTopSellers([])
-    await getTopSellers(sellerReqObj).then((response) =>
-      setTopSellers(response),
-    )
+    setIsloadingForSeller(true)
+    await getTopSellers(sellerReqObj).then((response) =>{
+      setTopSellers(response);
+      setIsloadingForSeller(false);
+
+    })
   }, [sellerDuration])
 
   useEffect(async () => {
     setTopCollections([])
-    await getTopCollections(collectionReqObj).then((response) =>
-      setTopCollections(response),
+    setIsloadingForCollection(true)
+    await getTopCollections(collectionReqObj).then((response) =>{
+      setTopCollections(response);
+      setIsloadingForCollection(false)
+    }
     )
   }, [collectionDuration])
 
@@ -243,7 +259,11 @@ function LeaderBoard() {
 
   useEffect(async () => {
     setTopNftSales([])
-    await getTopNftSales(NFTReqObj).then((response) => setTopNftSales(response))
+    setIsloadingForNfts(true)
+    await getTopNftSales(NFTReqObj).then((response) => {
+      setTopNftSales(response);
+      setIsloadingForNfts(false);
+    })
   }, [NFTDuration])
 
   console.log('topNftSales', topNftSales)
@@ -254,7 +274,9 @@ function LeaderBoard() {
     'pending',
   )
 
-  const [state, setState] = useState(LeaderBoardApi)
+ 
+
+
 
   const ChangeCollectionDuration = (e) => {
     setCollectionDuration({ ...collectionDuration, duration: e })
@@ -380,7 +402,7 @@ function LeaderBoard() {
                     </select>
 
                   </div> */}
-{console.log("ddddddddddd",topBuyers)}
+                  {console.log("ddddddddddd", topBuyers)}
                 </div>
 
                 <div className="leaderboardTopDetails">
@@ -462,9 +484,15 @@ function LeaderBoard() {
                   })}
                 </div>
 
-                {topBuyers.length === 0 && (
-                  <div className="spinnerloader">{<Spinner />}</div>
-                )}
+                <div className="spinnerloader">
+                  {isloadingForBuyers ? <Spinner /> :
+                    (topBuyers.length === 0 && (
+                      <div className="Noitemdiv">
+                        <img src={NoItem} />
+                        <p className="textitem">No items available</p>
+                      </div>
+                    ))}
+                </div>
               </div>
 
               <div className="card-footer view-more">
@@ -639,9 +667,15 @@ function LeaderBoard() {
                   })}
                 </div>
 
-                {topSellers.length === 0 && (
-                  <div className="spinnerloader">{<Spinner />}</div>
-                )}
+                <div className="spinnerloader">
+                  {isloadingForSeller ? <Spinner /> :
+                    (topSellers.length === 0 && (
+                      <div className="Noitemdiv">
+                        <img src={NoItem} />
+                        <p className="textitem">No items available</p>
+                      </div>
+                    ))}
+                </div>
               </div>
 
               <div className="card-footer view-more">
@@ -758,7 +792,7 @@ function LeaderBoard() {
                       <>
                         <div className="leaderboardTopDetailsRow">
                           {collection[0].imageUrl == '' ||
-                          !collection[0].imageUrl ? (
+                            !collection[0].imageUrl ? (
                             <img
                               className="top-img"
                               style={{ width: '71px', height: '71px' }}
@@ -820,11 +854,15 @@ function LeaderBoard() {
                   })}
                 </div>
 
-                {limitCollections.length === 0 && (
-                  <div>
-                    <div className="spinnerloader">{<Spinner />}</div>
-                  </div>
-                )}
+                <div className="spinnerloader">
+                  {isloadingForCollection ? <Spinner /> :
+                    (limitCollections.length === 0 && (
+                      <div className="Noitemdiv">
+                        <img src={NoItem} />
+                        <p className="textitem">No items available</p>
+                      </div>
+                    ))}
+                </div>
               </div>
 
               <div className="card-footer view-more">
@@ -966,7 +1004,7 @@ function LeaderBoard() {
           >
             <div>
               {PendingAcceptedCreated === 'pending' ? (
-                <BuildPendingAcceptedRejectedBlock apiData={limitBuyers} />
+                <BuildPendingAcceptedRejectedBlock apiData={limitBuyers} isloading ={isloadingForBuyers}  />
               ) : (
                 <></>
               )}
@@ -974,7 +1012,7 @@ function LeaderBoard() {
 
             <div>
               {PendingAcceptedCreated === 'accepted' ? (
-                <BuildAcceptedBlock apiData={limitSellers} />
+                <BuildAcceptedBlock apiData={limitSellers} isloading ={isloadingForSeller} />
               ) : (
                 <></>
               )}
@@ -982,7 +1020,7 @@ function LeaderBoard() {
 
             <div>
               {PendingAcceptedCreated === 'rejected' ? (
-                <BuildRejectedBlock apiData={limitCollections} />
+                <BuildRejectedBlock apiData={limitCollections} isloading ={isloadingForCollection} />
               ) : (
                 <></>
               )}
@@ -1037,7 +1075,7 @@ function LeaderBoard() {
           {/* <div className="col-md-3 col-lg-3 col-sm-6 col-11 images"> */}
 
           {topNftSales.map((curElem) => {
-            console.log("kggggggggggggggggggg",curElem)
+            console.log("kggggggggggggggggggg", curElem)
 
             const { cdnUrl, name, owner, maxPrice2, daysLeft, likes, _id, content } = curElem
 
@@ -1091,16 +1129,16 @@ function LeaderBoard() {
                               ? !owner[0].wallet_address
                                 ? ' '
                                 : String(owner[0].wallet_address).substring(
-                                    0,
-                                    4,
-                                  ) +
-                                  '...' +
-                                  String(owner[0].wallet_address).slice(
-                                    String(owner[0].wallet_address).length - 4,
-                                  )
+                                  0,
+                                  4,
+                                ) +
+                                '...' +
+                                String(owner[0].wallet_address).slice(
+                                  String(owner[0].wallet_address).length - 4,
+                                )
                               : String(owner[0].wallet_address) === undefined
-                              ? ''
-                              : owner[0].wallet_address}
+                                ? ''
+                                : owner[0].wallet_address}
                           </span>
                           &nbsp;for
                           <span className="ethCurrency">
@@ -1153,11 +1191,15 @@ function LeaderBoard() {
 
           {/* My Commit */}
         </div>
-        {topNftSales.length === 0 && (
-          <div>
-            <div className="spinnerloader">{<Spinner />}</div>
-          </div>
-        )}
+        <div className="spinnerloader">
+          {isloadingForNfts ? <Spinner /> :
+            (topNftSales.length === 0 && (
+              <div className="Noitemdiv">
+                <img src={NoItem} />
+                <p className="textitem">No items available</p>
+              </div>
+            ))}
+        </div>
       </div>
 
       {/* </div> */}
@@ -1167,8 +1209,8 @@ function LeaderBoard() {
   )
 }
 
-const BuildPendingAcceptedRejectedBlock = ({ apiData }) => {
-  // console.log("ppppppppppppppppppp", apiData)
+const BuildPendingAcceptedRejectedBlock = ({ apiData ,isloading}) => {
+  console.log("ppppppppppppppppppp", isloading)
   return (
     <div>
       <div className="leaderboardTopDetails">
@@ -1243,9 +1285,15 @@ const BuildPendingAcceptedRejectedBlock = ({ apiData }) => {
           )
         })}
       </div>
-      {apiData.length === 0 && (
-        <div className="spinnerloader">{<Spinner />}</div>
-      )}
+      <div className="spinnerloader">
+        {isloading ? <Spinner /> :
+          (apiData.length === 0 && (
+            <div className="Noitemdiv">
+              <img src={NoItem} />
+              <p className="textitem">No items available</p>
+            </div>
+          ))}
+      </div>
 
       <div className="card-footer view-more">
         <Link className="view" to="/top-bidder">
@@ -1257,7 +1305,7 @@ const BuildPendingAcceptedRejectedBlock = ({ apiData }) => {
   )
 }
 
-const BuildAcceptedBlock = ({ apiData }) => {
+const BuildAcceptedBlock = ({ apiData , isloading }) => {
   return (
     <div>
       <div className="leaderboardTopDetails">
@@ -1327,9 +1375,15 @@ const BuildAcceptedBlock = ({ apiData }) => {
         })}
       </div>
 
-      {apiData.length === 0 && (
-        <div className="spinnerloader">{<Spinner />}</div>
-      )}
+      <div className="spinnerloader">
+        {isloading ? <Spinner /> :
+          (apiData.length === 0 && (
+            <div className="Noitemdiv">
+              <img src={NoItem} />
+              <p className="textitem">No items available</p>
+            </div>
+          ))}
+      </div>
 
       <div className="card-footer view-more">
         <Link className="view" to="/top-seller">
@@ -1341,7 +1395,7 @@ const BuildAcceptedBlock = ({ apiData }) => {
   )
 }
 
-const BuildRejectedBlock = ({ apiData }) => {
+const BuildRejectedBlock = ({ apiData ,isloading}) => {
   return (
     <div>
       <div className="leaderboardTopDetails">
@@ -1402,9 +1456,15 @@ const BuildRejectedBlock = ({ apiData }) => {
         })}
       </div>
 
-      {apiData.length === 0 && (
-        <div className="spinnerloader">{<Spinner />}</div>
-      )}
+      <div className="spinnerloader">
+        {isloading ? <Spinner /> :
+          (apiData.length === 0 && (
+            <div className="Noitemdiv">
+              <img src={NoItem} />
+              <p className="textitem">No items available</p>
+            </div>
+          ))}
+      </div>
 
       <div className="card-footer view-more">
         <Link className="view" to="/top-collection">

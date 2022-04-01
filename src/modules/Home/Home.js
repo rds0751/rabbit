@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Container, Row, Col, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
@@ -18,6 +18,9 @@ import Stats from '../../assets/images/Stats.png';
 import Image1 from '../../assets/images/Image1.png';
 import Image2 from '../../assets/images/Image2.png';
 import Image3 from '../../assets/images/Image3.png';
+import {
+  RedirectTo
+} from "../../reducers/Action";
 // import { Link, useLocation } from "react-router-dom";
 
 import {
@@ -32,6 +35,10 @@ function Home() {
   const { user, sideBar } = useSelector((state) => state);
   const { userDetails, loggedInUser, walletAddress } = user;
   const [nfts, setNfts] = useState([]);
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
   const [changeState, setChangeState] = useState(0);
 
   const [filterType, setFilterType] = useState({
@@ -78,7 +85,17 @@ function Home() {
   // setInterval(() => {
   console.log("ffffffffffffffffssssssssssssssss", nfts)
   // }, 5000);
-
+  const createHandle = () => {
+    if (walletAddress == null) {
+      dispatch(RedirectTo("create"));
+      navigate("/add-wallet");
+      toast.error("Connect your wallet", {
+        position: toast.POSITION.TOP_RIGHT
+      });
+    } else {
+      navigate("/create-nft");
+    }
+  }
   return (
     <>
       <div className="homepage">
@@ -93,7 +110,7 @@ function Home() {
                     <Button href="/nfts" variant="custom">
                       Explore
                     </Button>
-                    <Button href={walletAddress == null ? "/add-wallet" : "/create-nft"} variant="custom">
+                    <Button onClick={createHandle} variant="custom">
                       Create
                     </Button>
                   </div>
@@ -105,7 +122,7 @@ function Home() {
                         {/* {console.log("kkkkkkkkkkkkkkkkkkkkk",nfts)} */}
 
                         <div className="d-flex flex-wrap">
-                        {console.log("sssssssqqqqsqqsqsqqwswwwwwwwww", nfts)}
+                          {console.log("sssssssqqqqsqqsqsqqwswwwwwwwww", nfts)}
 
                           {nfts.length && nfts.slice(0, 4).map((nft) => {
                             // const { _id, cdnUrl, name, biddingDetails, salesInfo } = nft;
@@ -125,7 +142,11 @@ function Home() {
                                       <div className="flex-grow-1 ms-2">
                                         <h3 className="title"><Link to={"/nft-information/" + nft?._id} style={{ textDecoration: 'none' }}>{nft?.name}</Link></h3>
                                         {/* {let n = nft?.description.split(' ')} */}
-                                        <p className="description">{nft?.salesInfo.price} ETH</p>
+                                        <span
+                                          className="nftTileEachDetailsFirstContainerValue"
+                                        >
+                                          {`${nft?.salesInfo?.price}  ${nft?.salesInfo?.currency}`}
+                                        </span>
                                         {/* <p className="description">{nft?.description}</p> */}
 
                                       </div>
@@ -202,10 +223,14 @@ function Home() {
                                           <img src={nft?.cdnUrl} alt="Image1" width="38px" height="38px" className="profile-img" />
                                         </div>
                                         <div className="flex-grow-1 ms-2">
-                                        <h3 className="title"><Link to={"/nft-information/" + nft?._id} style={{ textDecoration: 'none' }}>{nft?.name}</Link></h3>
+                                          <h3 className="title"><Link to={"/nft-information/" + nft?._id} style={{ textDecoration: 'none' }}>{nft?.name}</Link></h3>
                                         </div>
-
-                                        <p className="description">{nft?.salesInfo.price} ETH</p>
+                                        <span
+                                          className="nftTileEachDetailsFirstContainerValue"
+                                        >
+                                          {`${nft?.salesInfo?.price}  ${nft?.salesInfo?.currency}`}
+                                        </span>
+                                        {/* <p className="description">{nft?.salesInfo.price} </p> */}
                                       </div>
                                     </div>
                                   </Card.Body>
@@ -290,7 +315,7 @@ function Home() {
                 <Card.Body>
                   <Card.Title>Create Wallet</Card.Title>
                   <Card.Text>
-                  Create your wallet on the platform to buy-sell NFTs.
+                    Create your wallet on the platform to buy-sell NFTs.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -299,7 +324,7 @@ function Home() {
                 <Card.Body>
                   <Card.Title>Create Collection</Card.Title>
                   <Card.Text>
-                  Create on-chain personalised collections to mint NFTs in those collections.
+                    Create on-chain personalised collections to mint NFTs in those collections.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -308,7 +333,7 @@ function Home() {
                 <Card.Body>
                   <Card.Title>Add NFTs</Card.Title>
                   <Card.Text>
-                  Create on-chain NFTs to showcase your Art to the world or Sell to the community.
+                    Create on-chain NFTs to showcase your Art to the world or Sell to the community.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -317,7 +342,7 @@ function Home() {
                 <Card.Body>
                   <Card.Title>List them for sale</Card.Title>
                   <Card.Text>
-                  List your NFTs for sale or as collectibles.
+                    List your NFTs for sale or as collectibles.
                   </Card.Text>
                 </Card.Body>
               </Card>
