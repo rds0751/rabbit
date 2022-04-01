@@ -48,7 +48,6 @@ function Navbar() {
   });
   const [nfts, setNfts] = useState([]);
   const [collections, setCollections] = useState([]);
-const[display,setDisplay]=useState(false);
   useEffect(() => {
     if (loggedInUser == null) {
       connectMetamask();
@@ -213,13 +212,27 @@ const[display,setDisplay]=useState(false);
   }, [searchNft, searchCollection]);
 
   //-----------------------------------------------------------------
+  const [display,setDisplay]=useState(true);
+  if (display) {
+    document.body.style.position = '';
+    document.body.style.top = '';
+  
+  } else if(showModal){
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${window.scrollY}px`
+  }
+  else{
+    document.body.style.position = '';
+    document.body.style.top = '';
 
+  }
   const handleSearch = async (e) => {
     if (searchNft.searchByName.length > 0) {
       setShowModal(true)
     } else {
       setShowModal(false)
     }
+    showModal? setDisplay(false):setDisplay(true);
     setSearchNft({...searchNft, [e.target.name] : e.target.value})
     setSearchCollection({...searchCollection, [e.target.name] : e.target.value})
   };
@@ -284,8 +297,8 @@ const[display,setDisplay]=useState(false);
                       </>
                     ):(
                       <>
-                        <div className="search-results-background">    
-                          <div className="search-results-box">
+                        <div className="search-results-background" onClick={(e)=>setDisplay(true)} style={{display:display?"none":"block"}}>    
+                          <div className="search-results-box" style={{display:display?"none":"block"}}>
                           {collections.length > 0 && (
                             <div>
                             <p className="coll-title">Collections</p>
