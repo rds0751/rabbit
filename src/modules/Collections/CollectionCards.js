@@ -183,12 +183,12 @@ function Collections_tile() {
 
   const handleFilter = (e) => {
     //const { name, value } = e.target;
-    setFilterData({ ...filterData, 'categoryId' : e });
+    setFilterData({ ...filterData, 'categoryId': e });
   };
- 
+
   const handlefilter = (e) => {
     //const { name, value } = e.target;
-    setFilterData({ ...filterData, 'sort' : e });
+    setFilterData({ ...filterData, 'sort': e });
   };
 
   const getCollectionById = (collectionId) => {
@@ -241,12 +241,12 @@ function Collections_tile() {
                 onChange={(e) => handleFilter(e)}
                 value={filterData.categoryName}
                 defaultValue=""
-                >
-                  <StyledOption value="" hidden>Categories All</StyledOption>
-                  <StyledOption value="" >All</StyledOption>
-                  {Categories.map((item, key) => {
-                    return <StyledOption value={item._id}>{item.name}</StyledOption>;
-                  })}
+              >
+                <StyledOption value="" hidden>Categories All</StyledOption>
+                <StyledOption value="" >All</StyledOption>
+                {Categories.map((item, key) => {
+                  return <StyledOption value={item._id}>{item.name}</StyledOption>;
+                })}
               </CustomSelect>
             </div>
           </div>
@@ -274,8 +274,8 @@ function Collections_tile() {
                 onChange={(e) => handlefilter(e)}
                 value={filterData.sort}
                 defaultValue=""
-                >
-                  <StyledOption value="" hidden>Sort By All</StyledOption>
+              >
+                <StyledOption value="" hidden>Sort By All</StyledOption>
                 <StyledOption value="" >All</StyledOption>
                 <StyledOption value="-1">Recently added</StyledOption>
                 <StyledOption value="3">Items low to high</StyledOption>
@@ -291,12 +291,12 @@ function Collections_tile() {
         >
           <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
             {isLoading ? <Spinner /> :
-            (collections.length === 0 && (<div>
-            <div className="Noitemdiv">
-              <img src={NoItem} />
-              <p className="textitem">No items available</p>
-            </div>
-            </div>))}
+              (collections.length === 0 && (<div>
+                <div className="Noitemdiv">
+                  <img src={NoItem} />
+                  <p className="textitem">No items available</p>
+                </div>
+              </div>))}
           </div>
           {/* nfts.slice(0, visibleBlogs).map((nft) =>  */}
 
@@ -342,13 +342,17 @@ function Collections_tile() {
               </div>
             );
           })}
-          
-          {
+
+          {/* {
             visibleBlogs >= collections.length ? "" :
               ( <div style={{textAlignLast: "center"}}><button className="load-more" onClick={loadMoreHandler}>Load More</button></div>
                 )
+          } */}
+          {
+            visibleBlogs >= collections.length ? (visibleBlogs >= collections.length) ? <div style={{ textAlignLast: "center" }}><button className="endButton"> End </button></div> : "" :
+              (
+                <div style={{ textAlignLast: "center" }}><button className="load-more" onClick={loadMoreHandler}>Load More</button></div>)
           }
-
         </div>
       </div>
       <ToastContainer

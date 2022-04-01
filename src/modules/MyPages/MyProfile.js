@@ -8,6 +8,7 @@ import randomimage from "../../assets/images/1.jpg";
 import "../../assets/styles/Leader.css";
 import { Link } from "react-router-dom";
 import profileImage from "../../assets/images/ProfileReplace.svg";
+import coverImage from "../../assets/images/Component.svg";
 
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -48,8 +49,8 @@ function MyProfile() {
     loggedInUser = localStorage.getItem("loggedInDetails");
   }
 
-  const defaultCoverpic =
-    "https://png.pngtree.com/background/20210714/original/pngtree-blood-drop-halloween-blood-background-black-background-picture-image_1220404.jpg";
+  // const defaultCoverpic =
+  //   "https://png.pngtree.com/background/20210714/original/pngtree-blood-drop-halloween-blood-background-black-background-picture-image_1220404.jpg";
   // const defaultPic =
   //   "https://th.bing.com/th/id/R.e1189efa9cd3aee29c0e1f7dbed689bf?rik=YRidGY7NPM2n3A&riu=http%3a%2f%2fwww.clipartbest.com%2fcliparts%2f7ca%2fpeo%2f7capeoboi.png&ehk=MwVRL6ome8bAroWEn5dLYQgaXLxrafgcwcIQX7N48CM%3d&risl=&pid=ImgRaw&r=0";
 
@@ -208,7 +209,7 @@ function MyProfile() {
             src={
               loggedInUser?.coverPhoto != ""
                 ? loggedInUser?.coverPhoto
-                : defaultCoverpic
+                : coverImage
             }
             alt=""
           />
