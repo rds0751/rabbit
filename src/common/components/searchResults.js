@@ -7,6 +7,8 @@ import dropdown from "../../assets/images/dropdown.svg";
 import Carousel from "react-elastic-carousel";
 import { Button } from "react-bootstrap";
 import CollDetailCard from "../../common/components/CollDetailCard";
+import Spinner from "../../common/components/Spinner";
+import NoItem from "../../assets/images/Noitems.svg";
 
 // MUI select code
 import SelectUnstyled, {
@@ -135,10 +137,16 @@ padding: 12px;
 const NftsDiv = style.div`
 display: flex;
 justify-content: start;
+flex-wrap: wrap;
 margin-bottom: 50px;
 margin-left: 0px;
 margin-right: 0px;
 gap: calc(16% / 3.02022);
+`;
+const SpinnerDiv = style.div`
+display: flex;
+justify-content: center;
+align-items: center;
 `;
 
 const blue = {
@@ -290,6 +298,8 @@ function SearchResults() {
   const [minPrice, setMinPrice] = useState();
   const [maxPrice, setMaxPrice] = useState();
   const [statusDrop, setStatusDrop] = useState(false);
+  const [isCollectionsLoading, setIsCollectionsLoading] = useState(false);
+  const [isNftsLoading, setIsNftsLoading] = useState(false);
 
   const handleCategoryId = (e) => {
     setCollectionsReq({ ...collectionsReq, categoryId: e });
@@ -300,18 +310,15 @@ function SearchResults() {
   const handleNftSort = (e) => {
     setNftsReq({ ...nftsReq, sort: e });
   };
-
   const handlePriceFilter = (e) => {
     setNftsReq({ ...nftsReq, minPrice: minPrice, maxPrice: maxPrice });
     setStatusDrop(false);
   };
-
   const clearPriceFilter = (e) => {
     setMaxPrice("");
     setMinPrice("");
     setNftsReq({ ...nftsReq, minPrice: "", maxPrice: "" });
   };
-
   const handleDropdown = () => {
     setStatusDrop(!statusDrop);
   };
@@ -325,21 +332,25 @@ function SearchResults() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    async function fetchData() {
-      const reqObj = queryString.stringify(collectionsReq);
-      await getCollections(reqObj).then((res) => setCollections(res));
-    }
-    fetchData();
-  }, [collectionsReq]);
+  const reqObj = queryString.stringify(collectionsReq);
 
-  useEffect(() => {
-    async function fetchData() {
-      const reqObj = queryString.stringify(nftsReq);
-      await getNfts(reqObj).then((res) => setNfts(res.nftContent));
-    }
-    fetchData();
-  }, [nftsReq]);
+  useEffect(async () => {
+    setCollections([]);
+    setIsCollectionsLoading(true);
+    const result = await getCollections(reqObj);
+    setCollections(result);
+    setIsCollectionsLoading(false);
+  }, [reqObj]);
+
+  const reqObj1 = queryString.stringify(nftsReq);
+
+  useEffect(async () => {
+    setNfts([]);
+    setIsNftsLoading(true);
+    const result = await getNfts(reqObj1);
+    setNfts(result.nftContent);
+    setIsNftsLoading(false);
+  }, [reqObj1]);
 
   return (
     <MainContainer>
@@ -347,6 +358,92 @@ function SearchResults() {
         Search Results for &nbsp;
         <SpanText>{location.state.value}</SpanText>
       </Heading>
+      {isCollectionsLoading ? (
+        <>
+          <CollTitle>Collections</CollTitle>
+          <FiltersDiv>
+            <CustomSelect
+              name="categoryId"
+              onChange={(e) => handleCategoryId(e)}
+              value={collectionsReq.categoryId}
+              defaultValue=""
+            >
+              <StyledOption value="" hidden>
+                Categories All
+              </StyledOption>
+              <StyledOption value="">All</StyledOption>
+              {Categories.map((item, index) => {
+                return (
+                  <StyledOption value={item._id} key={index}>
+                    {item.name}
+                  </StyledOption>
+                );
+              })}
+            </CustomSelect>
+            <CustomSelect
+              name="sort"
+              onChange={(e) => handleCollectionSort(e)}
+              value={collectionsReq.sort}
+              defaultValue=""
+            >
+              <StyledOption value="" hidden>
+                Sort By All
+              </StyledOption>
+              <StyledOption value="">All</StyledOption>
+              <StyledOption value="-1">Recently added</StyledOption>
+              <StyledOption value="3">Items low to high</StyledOption>
+              <StyledOption value="2">Items high to low</StyledOption>
+            </CustomSelect>
+          </FiltersDiv>
+          <SpinnerDiv>
+            <Spinner />
+          </SpinnerDiv>
+        </>
+      ) : (
+        collections.length === 0 && (
+          <>
+            <CollTitle>Collections</CollTitle>
+            <FiltersDiv>
+              <CustomSelect
+                name="categoryId"
+                onChange={(e) => handleCategoryId(e)}
+                value={collectionsReq.categoryId}
+                defaultValue=""
+              >
+                <StyledOption value="" hidden>
+                  Categories All
+                </StyledOption>
+                <StyledOption value="">All</StyledOption>
+                {Categories.map((item, index) => {
+                  return (
+                    <StyledOption value={item._id} key={index}>
+                      {item.name}
+                    </StyledOption>
+                  );
+                })}
+              </CustomSelect>
+              <CustomSelect
+                name="sort"
+                onChange={(e) => handleCollectionSort(e)}
+                value={collectionsReq.sort}
+                defaultValue=""
+              >
+                <StyledOption value="" hidden>
+                  Sort By All
+                </StyledOption>
+                <StyledOption value="">All</StyledOption>
+                <StyledOption value="-1">Recently added</StyledOption>
+                <StyledOption value="3">Items low to high</StyledOption>
+                <StyledOption value="2">Items high to low</StyledOption>
+              </CustomSelect>
+            </FiltersDiv>
+            <div className="Noitemdiv">
+              <img src={NoItem} alt="" />
+              <p className="textitem">No items available</p>
+            </div>
+          </>
+        )
+      )}
       {collections.length > 0 && (
         <>
           <CollTitle>Collections</CollTitle>
@@ -361,9 +458,11 @@ function SearchResults() {
                 Categories All
               </StyledOption>
               <StyledOption value="">All</StyledOption>
-              {Categories.map((item, key) => {
+              {Categories.map((item, index) => {
                 return (
-                  <StyledOption value={item._id}>{item.name}</StyledOption>
+                  <StyledOption value={item._id} key={index}>
+                    {item.name}
+                  </StyledOption>
                 );
               })}
             </CustomSelect>
@@ -388,22 +487,22 @@ function SearchResults() {
                 const { _id, imageUrl, name, nftCount } = collection;
                 const route = "/collection-details/" + _id;
                 return (
-                  <Link to={route} style={{textDecoration: "none"}}>
-                  <Item>
-                    <img
-                      src={imageUrl}
-                      alt=""
-                      style={{
-                        width: "138px",
-                        height: "138px",
-                        borderRadius: "171px",
-                      }}
-                    />
-                    <CollName>{name}</CollName>
-                    <ItemsText>
-                      Total Items:&nbsp;<Count>{nftCount}</Count>
-                    </ItemsText>
-                  </Item>
+                  <Link to={route} key={_id} style={{ textDecoration: "none" }}>
+                    <Item>
+                      <img
+                        src={imageUrl}
+                        alt=""
+                        style={{
+                          width: "138px",
+                          height: "138px",
+                          borderRadius: "171px",
+                        }}
+                      />
+                      <CollName>{name}</CollName>
+                      <ItemsText>
+                        Total Items:&nbsp;<Count>{nftCount}</Count>
+                      </ItemsText>
+                    </Item>
                   </Link>
                 );
               })}
@@ -411,6 +510,169 @@ function SearchResults() {
           </CarouselDiv>
         </>
       )}
+
+      {isNftsLoading ? (
+        <>
+          <CollTitle>Nfts</CollTitle>
+          <FiltersDiv>
+            <Div>
+              <PriceFilter>
+                <PriceText>Price range</PriceText>
+                <PriceDropdown>
+                  <DropdownDiv onClick={handleDropdown}>
+                    <AllText>All</AllText>
+                    <Div>
+                      <DropDownIcon src={dropdown} alt="" />
+                    </Div>
+                  </DropdownDiv>
+                  <InputDiv style={{ display: statusDrop ? "block" : "none" }}>
+                    <div className="row mb-3 align-items-center">
+                      <div className="col-5">
+                        <input
+                          type="number"
+                          className="form-control"
+                          placeholder="Min"
+                          value={minPrice}
+                          onChange={(e) => setMinPrice(e.target.value)}
+                        />
+                      </div>
+                      <div className="col-2 text-center">
+                        <span className="to">to</span>
+                      </div>
+                      <div className="col-5">
+                        <input
+                          type="number"
+                          className="form-control"
+                          placeholder="Max"
+                          value={maxPrice}
+                          onChange={(e) => setMaxPrice(e.target.value)}
+                        />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-6">
+                        <Button
+                          type="submit"
+                          onClick={(e) => clearPriceFilter(e)}
+                          variant="outline-primary"
+                        >
+                          Clear
+                        </Button>
+                      </div>
+                      <div className="col-6">
+                        <Button
+                          onClick={(e) => handlePriceFilter(e)}
+                          variant="outline-primary"
+                        >
+                          Apply
+                        </Button>
+                      </div>
+                    </div>
+                  </InputDiv>
+                </PriceDropdown>
+              </PriceFilter>
+            </Div>
+            <CustomSelect
+              name="sort"
+              onChange={(e) => handleNftSort(e)}
+              value={nftsReq.sort}
+              defaultValue=""
+            >
+              <StyledOption value="" hidden>
+                Sort By All
+              </StyledOption>
+              <StyledOption value="all">All</StyledOption>
+              <StyledOption value="-1">Ascending Order</StyledOption>
+              <StyledOption value="1">Descending Order</StyledOption>
+            </CustomSelect>
+          </FiltersDiv>
+          <SpinnerDiv>
+            <Spinner/>
+          </SpinnerDiv>
+        </>
+      ) : (
+        nfts.length === 0 && (
+          <>
+            <CollTitle>Nfts</CollTitle>
+            <FiltersDiv>
+              <Div>
+                <PriceFilter>
+                  <PriceText>Price range</PriceText>
+                  <PriceDropdown>
+                    <DropdownDiv onClick={handleDropdown}>
+                      <AllText>All</AllText>
+                      <Div>
+                        <DropDownIcon src={dropdown} alt="" />
+                      </Div>
+                    </DropdownDiv>
+                    <InputDiv style={{ display: statusDrop ? "block" : "none" }}>
+                      <div className="row mb-3 align-items-center">
+                        <div className="col-5">
+                          <input
+                            type="number"
+                            className="form-control"
+                            placeholder="Min"
+                            value={minPrice}
+                            onChange={(e) => setMinPrice(e.target.value)}
+                          />
+                        </div>
+                        <div className="col-2 text-center">
+                          <span className="to">to</span>
+                        </div>
+                        <div className="col-5">
+                          <input
+                            type="number"
+                            className="form-control"
+                            placeholder="Max"
+                            value={maxPrice}
+                            onChange={(e) => setMaxPrice(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-6">
+                          <Button
+                            type="submit"
+                            onClick={(e) => clearPriceFilter(e)}
+                            variant="outline-primary"
+                          >
+                            Clear
+                          </Button>
+                        </div>
+                        <div className="col-6">
+                          <Button
+                            onClick={(e) => handlePriceFilter(e)}
+                            variant="outline-primary"
+                          >
+                            Apply
+                          </Button>
+                        </div>
+                      </div>
+                    </InputDiv>
+                  </PriceDropdown>
+                </PriceFilter>
+              </Div>
+              <CustomSelect
+                name="sort"
+                onChange={(e) => handleNftSort(e)}
+                value={nftsReq.sort}
+                defaultValue=""
+              >
+                <StyledOption value="" hidden>
+                  Sort By All
+                </StyledOption>
+                <StyledOption value="all">All</StyledOption>
+                <StyledOption value="-1">Ascending Order</StyledOption>
+                <StyledOption value="1">Descending Order</StyledOption>
+              </CustomSelect>
+            </FiltersDiv>
+            <div className="Noitemdiv">
+              <img src={NoItem} alt="" />
+              <p className="textitem">No items available</p>
+            </div>
+          </>
+        ))
+      }
 
       {nfts.length > 0 && (
         <>
@@ -489,13 +751,13 @@ function SearchResults() {
           </FiltersDiv>
           <NftsDiv>
             {nfts.length > 0 &&
-                nfts.map((nft) => {
-                  return (
-                    <>
-                      <CollDetailCard nft={nft} />
-                    </>
-                  );
-                })}
+              nfts.map((nft, index) => {
+                return (
+                  <>
+                    <CollDetailCard nft={nft} key={index} />
+                  </>
+                );
+              })}
           </NftsDiv>
         </>
       )}
