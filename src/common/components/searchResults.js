@@ -300,18 +300,15 @@ function SearchResults() {
   const handleNftSort = (e) => {
     setNftsReq({ ...nftsReq, sort: e });
   };
-
   const handlePriceFilter = (e) => {
     setNftsReq({ ...nftsReq, minPrice: minPrice, maxPrice: maxPrice });
     setStatusDrop(false);
   };
-
   const clearPriceFilter = (e) => {
     setMaxPrice("");
     setMinPrice("");
     setNftsReq({ ...nftsReq, minPrice: "", maxPrice: "" });
   };
-
   const handleDropdown = () => {
     setStatusDrop(!statusDrop);
   };
@@ -326,11 +323,19 @@ function SearchResults() {
   }, []);
 
   useEffect(() => {
+    let isFetched = true;
     async function fetchData() {
+      console.log("before", collections)
       const reqObj = queryString.stringify(collectionsReq);
-      await getCollections(reqObj).then((res) => setCollections(res));
+      const result = await getCollections(reqObj);
+      if (isFetched) {
+        console.log("Entered")
+        setCollections(result);
+      }
+      console.log("after", collections)
     }
-    fetchData();
+    fetchData().catch(console.error);
+    return () => isFetched = false;
   }, [collectionsReq]);
 
   useEffect(() => {
@@ -361,9 +366,9 @@ function SearchResults() {
                 Categories All
               </StyledOption>
               <StyledOption value="">All</StyledOption>
-              {Categories.map((item, key) => {
+              {Categories.map((item, index) => {
                 return (
-                  <StyledOption value={item._id}>{item.name}</StyledOption>
+                  <StyledOption value={item._id} key={index}>{item.name}</StyledOption>
                 );
               })}
             </CustomSelect>
@@ -388,22 +393,22 @@ function SearchResults() {
                 const { _id, imageUrl, name, nftCount } = collection;
                 const route = "/collection-details/" + _id;
                 return (
-                  <Link to={route} style={{textDecoration: "none"}}>
-                  <Item>
-                    <img
-                      src={imageUrl}
-                      alt=""
-                      style={{
-                        width: "138px",
-                        height: "138px",
-                        borderRadius: "171px",
-                      }}
-                    />
-                    <CollName>{name}</CollName>
-                    <ItemsText>
-                      Total Items:&nbsp;<Count>{nftCount}</Count>
-                    </ItemsText>
-                  </Item>
+                  <Link to={route} key={_id} style={{ textDecoration: "none" }}>
+                    <Item>
+                      <img
+                        src={imageUrl}
+                        alt=""
+                        style={{
+                          width: "138px",
+                          height: "138px",
+                          borderRadius: "171px",
+                        }}
+                      />
+                      <CollName>{name}</CollName>
+                      <ItemsText>
+                        Total Items:&nbsp;<Count>{nftCount}</Count>
+                      </ItemsText>
+                    </Item>
                   </Link>
                 );
               })}
@@ -489,13 +494,13 @@ function SearchResults() {
           </FiltersDiv>
           <NftsDiv>
             {nfts.length > 0 &&
-                nfts.map((nft) => {
-                  return (
-                    <>
-                      <CollDetailCard nft={nft} />
-                    </>
-                  );
-                })}
+              nfts.map((nft, index) => {
+                return (
+                  <>
+                    <CollDetailCard nft={nft} key={index} />
+                  </>
+                );
+              })}
           </NftsDiv>
         </>
       )}
