@@ -213,7 +213,9 @@
     font-size: 4vw !important;
   }
   .nftTileEachDetailsFirstContainerValue {
-    font-size: 3.87vw;
+    font-size: 10px;
+    width: 31%;
+    height: 33px;
   }
   .nftTileEachDetailsSecondContainerValueHighest {
     font-size: 3.9vw;
