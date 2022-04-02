@@ -41,7 +41,7 @@ function Menu() {
       <div className="container new-container menuphone">
 
         <div className="menuin" style={{ display:"flex",cursor:"pointer",
-                justifyContent:"space-between"}} onClick={()=>navigate('/')}>
+                justifyContent:"space-between"}} onClick={()=>navigate('/nfts')}>
           <h2 style={{
                 textDecoration: "none",
                 color: "black",
