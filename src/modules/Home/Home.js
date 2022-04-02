@@ -338,7 +338,7 @@ function Home() {
                               <Card.Img
                                 variant="top"
                                 src={nft?.cdnUrl}
-                                style={{ height: "243px", width: "365px" }}
+                                style={{ height: "253px", width: "345px" }}
                               />
                             </Link>
                             <Card.Body style={{margin:"0 0 0 12%"}}>
