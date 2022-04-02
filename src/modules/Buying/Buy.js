@@ -130,30 +130,23 @@ const Buy = (props) => {
     {
       id: 0,
       questionText:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
+        "How do I purchase NFT?",
       answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
+        "To buy an NFT, you must be a registered marketplace user, and your digital wallet balance must be positive. Click on the NFT that you want to buy and then click on Buy now button. It will navigate you to your wallet through which you can make your purchase.",
     },
     {
       id: 1,
       questionText:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
+        "How do I make an offer on NFT?",
       answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
+        "Select \"Make Offer\" on the item page. If the item is part of an unsafelisted collection, you'll be prompted to review collection details and confirm that this collection is the correct one. Select the currency you'd like to make your offer in.",
     },
     {
       id: 2,
       questionText:
-        "part  dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
+        "Is there a minimum bid requirement?",
       answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
-    },
-    {
-      id: 3,
-      questionText:
-        "search  dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
-      answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
+        "Bids must be at least 5% higher than the previous bid. Only bids in the same payment token as the auction will be counted towards the winning bid.",
     },
   ];
 const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(query));

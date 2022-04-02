@@ -129,30 +129,16 @@ const Nfts = (props) => {
     {
       id: 0,
       questionText:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
+        "How can I add NFT to my collection?",
       answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
+        "Create a new collection and add all your preferred NFTs to the list.",
     },
     {
       id: 1,
       questionText:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
+        "How do I search for NFTs?",
       answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
-    },
-    {
-      id: 2,
-      questionText:
-        "part  dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
-      answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
-    },
-    {
-      id: 3,
-      questionText:
-        "search  dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
-      answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
+        "Searching for NFTs on ANAFTO is an easy task, you have to just click on Explore and browse through all the NFTs available on the marketplace.",
     },
   ];
 const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(query));

@@ -122,30 +122,23 @@ export default function Selling() {
       {
         id: 0,
         questionText:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
+          "How do I sell NFT?",
         answerText:
-          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
+          "Select the NFT you would like to sell from your wallet. Select Sell on the top right to be taken to the listing page. You'll be taken to the listing page, where you can choose the price and type of sale.",
       },
       {
         id: 1,
         questionText:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
+          "How do Epired NFTs work?",
         answerText:
-          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
+          "You need to select the date while posting the NFTs for sale. And after that Date the NFTs will expire and will not be shown on Sale but will be available in your collection.",
       },
       {
         id: 2,
         questionText:
-          "part ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
+          "What file formats can I use to make NFTs?",
         answerText:
-          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
-      },
-      {
-        id: 3,
-        questionText:
-          "search ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
-        answerText:
-          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
+          "You can use a variety of file formats for images to make your NFT.",
       },
     ];
     const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(query));
