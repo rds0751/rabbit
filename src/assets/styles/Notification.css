@@ -647,12 +647,12 @@ height: 47px;
   width: 100%;
   align-items: inherit;
 }
-@media screen and (min-width:701px){
+/* @media screen and (min-width:701px){
   .navbar{
     z-index: 99;
     position: fixed;
   }
-}
+} */
 .navbar-expand-lg .navbar-nav .nav-link {
   padding: 0px;
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -732,7 +732,7 @@ height: 47px;
   }
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1168px) {
   .right_section_nav .ham_burger {
     display: flex;
   }

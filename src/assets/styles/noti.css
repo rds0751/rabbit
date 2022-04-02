@@ -100,6 +100,12 @@
   color: #c4c4c4;
 }
 @media screen and (max-width: 764px) {
+  .main-cont{
+    z-index: 100;
+  }
+  .empty_div{
+    background: none;
+  }
   .noti-outer {
     width: 100%;
     height: 100%;
@@ -107,7 +113,7 @@
     flex-direction: column;
     justify-content: flex-start;
     position: fixed;
-    position: absolute;
+    /* position: absolute; */
     top: 70px;
     /* border: 5px solid red;  */
     right: 0px;

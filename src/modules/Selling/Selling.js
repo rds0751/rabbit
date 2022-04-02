@@ -80,10 +80,12 @@ const ListItem = styled.li`
   margin-bottom: 32px;
   @media screen and (min-width: 426px) and (max-width: 769px) {
     padding: 30px 14px 13px 16px;
+    width: 100%;
     
   }
   @media screen and (max-width: 426px) {
     padding: 32px 8px 24px 16px;
+    width: 100%;
     
   }
 `;
@@ -94,6 +96,10 @@ const Question = styled.h1`
   padding-bottom: 28px;
   padding-right: 60px;
   margin-bottom: 0px;
+  @media screen and (min-width: 426px) and (max-width: 769px) {
+    font-size: 12px;
+    padding-right: 16px;
+  }
   @media screen and (min-width: 426px) and (max-width: 769px) {
     font-size: 12px;
     padding-right: 16px;

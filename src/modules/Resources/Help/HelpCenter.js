@@ -12,28 +12,28 @@ function HelpCenter() {
       image: buying,
       title: "Buying",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+        "Set up your wallet, connect it to ANAFTO and make purchases for your favourite NFTs.",
     },
     {
       link:"/selling",
       image: selling,
       title: "Selling",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+        "Make your NFTs available for sale either by auction or fixed price listings.",
     },
     {
       link:"/resource-collection",
       image: creating,
       title: "Creating Collection",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+        "Create your personalized on-chain collections. Add description, profile and banner images.",
     },
     {
       link:"/adding-Nfts",
       image: adding,
       title: "Adding Nfts",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+        "Showcase your art by adding your NFTs to the marketplace and making them available for sale.",
     },
   ];
 
@@ -52,7 +52,7 @@ function HelpCenter() {
                         <img src={item.image} />
                         <div className="title-help">{item.title}</div>
                         <div style={{width:"101.4%"}}>
-                        <p className="content">{item.description}</p>
+                        <p title={item.description} className="content">{item.description.slice(0,73)+"..."}</p>
 
                         </div>
                      

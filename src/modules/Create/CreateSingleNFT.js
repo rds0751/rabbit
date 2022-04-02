@@ -99,7 +99,7 @@ function CreateSingleNFT(props) {
             setisLoader(false);
           }
           else if(err.code === "file-invalid-type"){
-            toast.error("File type not acceptable. Please use……… file");
+            toast.error("File type not acceptable. Please use JPG,JPEG, PNG, GIF file");
             setisLoader(false);
           }
           else{
@@ -515,7 +515,7 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
               )}
               {/* ----------------- */}
               <div className="draganddropboxmsg">
-                Supported(JPG, PNG, GIF, SVG, MP4, WEBM, WAV) <br></br>Max size: 40 mb
+                Supported(JPG,JPEG, PNG, GIF) <br></br>Max size: 40 mb
               </div>
             </div>
             <div className="single-form">

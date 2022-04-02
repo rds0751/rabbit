@@ -30,6 +30,12 @@ import {
 } from "../../services/webappMicroservice";
 import Image4 from '../../assets/images/Image4.png';
 import { toast } from "react-toastify";
+import AwesomeSlider from "react-awesome-slider";
+import "react-awesome-slider/dist/styles.css";
+
+
+
+
 
 function Home() {
   const { user, sideBar } = useSelector((state) => state);
@@ -106,16 +112,21 @@ function Home() {
                 <Col lg={6}>
                   <div className="left-text">
                     <h1 className="heading">Buy, Trade and Sell your <br></br>NFTs</h1>
+                    <p className="mob-heading">Buy, Trade and Sell your NFTs</p>
+
                     <p className="text">One stop solution for all types of NFTs</p>
-                    <Button href="/nfts" variant="custom">
+                    <div style={{display:"flex"}}>
+                    <Button href="/nfts" variant="custom" className="button-hide">
                       Explore
                     </Button>
-                    <Button onClick={createHandle} variant="custom">
+                    <Button onClick={createHandle} variant="custom"   className="button-hide">
                       Create
                     </Button>
+                    </div>
+
                   </div>
                 </Col>
-                <Col lg={6}>
+                <Col lg={6} className="carousel-hide">
                   <div className="right-slider">
                     <OwlCarousel className='owl-theme z-carousel' margin={10} items={1}>
                       <div className='item'>
@@ -300,8 +311,86 @@ function Home() {
                       </div>
                     </OwlCarousel>
                   </div>
+                {/* mob carousel */}
+
                 </Col>
+
+
               </Row>
+              <div className=" carousel-show">
+                {/* <Slider {...settings}>
+            {nfts.length && nfts.slice(4, 8).map((Sdata) => {
+              return <img src={Sdata.cdnUrl} alt={Sdata.name}  />;
+            })}
+          </Slider> */}
+
+                <AwesomeSlider organicArrows={false}>
+                  {nfts.length &&
+                    nfts.slice(0, 8).map((nft) => {
+                      return (
+                        <div>
+                          {" "}
+                          <Card>
+                            <Link
+                              to={"/nft-information/" + nft?._id}
+                              style={{ textDecoration: "none" }}
+                            >
+                              <Card.Img
+                                variant="top"
+                                src={nft?.cdnUrl}
+                                style={{ height: "253px", width: "345px" }}
+                              />
+                            </Link>
+                            <Card.Body style={{margin:"0 0 0 12%"}}>
+                              <div className="d-flex align-items-start media">
+                                <div
+                                  className="flex-shrink-0"
+                                  style={{ width: "253px", display: "flex" }}
+                                >
+                                  <div>
+                                    <img
+                                      style={{ borderRadius: "20px" }}
+                                      src={nft?.cdnUrl}
+                                      alt="Image1"
+                                      width="38px"
+                                      height="38px"
+                                      className="profile-img"
+                                    />
+                                  </div>
+                                  <div className="flex-grow-1 ms-2">
+                                    <h3 className="title">
+                                      <Link
+                                        to={"/nft-information/" + nft?._id}
+                                        style={{ textDecoration: "none" }}
+                                      >
+                                        {nft?.name}
+                                      </Link>
+                                    </h3>
+                                  </div>
+                                  <span className="nftTileEachDetailsFirstContainerValue">
+                                    {`${nft?.salesInfo?.price}  ${nft?.salesInfo?.currency}`}
+                                  </span>
+                                  {/* <p className="description">{nft?.salesInfo.price} </p> */}
+                                </div>
+                              </div>
+                            </Card.Body>
+                          </Card>
+                        </div>
+                      );
+                    })}
+                </AwesomeSlider>
+              </div>
+              <Col lg={6} className="button-show">
+                  <div className="left-text">
+                  
+                    <Button href="/nfts" variant="custom">
+                      Explore
+                    </Button>
+                    <Button onClick={createHandle} variant="custom">
+                      Create
+                    </Button>
+                  </div>
+                </Col>
             </Container>
           </div>
         </div>
@@ -359,12 +448,12 @@ function Home() {
                   <img src={Category} alt="Category" width="60px" height="60px" />
                 </div>
                 <div className="flex-grow-0 ms-3">
-                  Browse by Category
+                &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Browse by Category
                 </div>
               </div>
               <div className="d-flex align-items-center justify-content-center media">
                 <div className="flex-shrink-0">
-                  <img src={Stats} alt="Stats" width="60px" height="60px" />
+                &nbsp;&nbsp; <img src={Stats} alt="Stats" width="60px" height="60px" />
                 </div>
                 <div className="flex-grow-0 ms-3">
                   Stats to show pricing history
@@ -375,7 +464,7 @@ function Home() {
                   <img src={Easy} alt="Easy" width="60px" height="60px" />
                 </div>
                 <div className="flex-grow-0 ms-3">
-                  Easy to sell and buy NFT
+                 &nbsp; &nbsp;&nbsp;Easy to sell and buy NFT
                 </div>
               </div>
               <div className="d-flex align-items-center justify-content-center media">
@@ -383,12 +472,12 @@ function Home() {
                   <img src={Offers} alt="Offers" width="60px" height="60px" />
                 </div>
                 <div className="flex-grow-0 ms-3">
-                  Make offers on NFTs
+                &nbsp;&nbsp;  &nbsp; &nbsp;&nbsp;&nbsp; Make offers on NFTs
                 </div>
               </div>
               <div className="d-flex align-items-center justify-content-center media">
                 <div className="flex-shrink-0">
-                  <img src={Activity} alt="Activity" width="60px" height="60px" />
+                &nbsp;&nbsp;&nbsp;&nbsp;<img src={Activity} alt="Activity" width="60px" height="60px" />
                 </div>
                 <div className="flex-grow-0 ms-3">
                   See all the activities on NFT

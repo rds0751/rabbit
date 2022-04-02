@@ -51,8 +51,8 @@
 /* mobile-view */
 @media screen and (max-width:426px){
   .notification-icon{
-    width: 15px;
-    height: 18px;
+    width: 26px;
+    height: 26px;
   }
   .profile-icon{
     width: 26px;
