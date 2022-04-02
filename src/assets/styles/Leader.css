@@ -1405,6 +1405,7 @@ thead {
     width: 47%;
   }
 }
+
 @media only screen and (max-width: 1023px) {
   .nft-detail #share_info {
     margin-bottom: 39px;
