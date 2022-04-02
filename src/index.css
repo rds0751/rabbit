@@ -5,6 +5,10 @@
     box-sizing: content-box;
     font-family: "poppins";
   }
+  html, body {
+    margin: 0 auto;
+    overflow-x: hidden;
+  }
   body{
     font-family: "poppins";  
   }
