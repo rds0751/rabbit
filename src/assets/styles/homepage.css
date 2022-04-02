@@ -426,3 +426,8 @@ opacity: 1;
   transition: transform 0.225s cubic-bezier(0.8, 1.35, 0.75, 1.45), background-color 0.175s ease-out;
   background: #D5D5D500 0% 0% no-repeat padding-box !important;
 }
+.card1{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

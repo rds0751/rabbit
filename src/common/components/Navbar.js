@@ -212,27 +212,29 @@ function Navbar() {
   }, [searchNft, searchCollection]);
 
   //-----------------------------------------------------------------
-  const [display,setDisplay]=useState(true);
-  if (display) {
-    document.body.style.position = '';
-    document.body.style.top = '';
+  const [display,setDisplay]=useState(false);
+  // if (display) {
+  //   document.body.style.position = '';
+  //   document.body.style.top = '';
   
-  } else if(showModal){
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${window.scrollY}px`
-  }
-  else{
-    document.body.style.position = '';
-    document.body.style.top = '';
+  // } else if(showModal){
+  //   document.body.style.position = 'fixed';
+  //   document.body.style.top = `-${window.scrollY}px`
+  // }
+  // else{
+  //   document.body.style.position = '';
+  //   document.body.style.top = '';
 
-  }
+  // }
   const handleSearch = async (e) => {
     if (searchNft.searchByName.length > 0) {
       setShowModal(true)
+      setDisplay(false);
     } else {
       setShowModal(false)
+      setDisplay(true);
     }
-    showModal? setDisplay(false):setDisplay(true);
+    // showModal? setDisplay(false):setDisplay(true);
     setSearchNft({...searchNft, [e.target.name] : e.target.value})
     setSearchCollection({...searchCollection, [e.target.name] : e.target.value})
   };
