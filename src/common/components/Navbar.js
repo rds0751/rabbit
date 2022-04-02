@@ -286,8 +286,8 @@ function Navbar() {
                   <>
                     {(nfts.length === 0 && collections.length === 0) ? (
                       <>
-                        <div className="search-results-background">    
-                          <div className="search-results-box">
+                        <div className="search-results-background" onClick={(e)=>setDisplay(true)} style={{display:display?"none":"block"}}>    
+                          <div className="search-results-box" style={{display:display?"none":"block"}}>
                             <div className="Noitemdiv">
                               <img src={NoItem} alt="" />
                               <p className="textitem">No items available</p>
