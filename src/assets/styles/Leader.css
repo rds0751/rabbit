@@ -156,6 +156,7 @@ table {
 tbody,
 thead {
   border-style: none !important;
+  text-transform: capitalize;
 }
 
 .CollectionItem {
@@ -1262,12 +1263,14 @@ thead {
   font-size: 32px;
   line-height: 48px;
   color: #191919;
+  text-transform: capitalize;
 }
 .nft-detail .text {
   font-family: "poppins-medium";
   font-size: 16px;
   line-height: 25px;
   color: #191919;
+  text-transform: capitalize;
 }
 .nft-detail .nft-value {
   font-family: "poppins-bold";
@@ -1470,6 +1473,8 @@ width: 59px;
     margin-top: 19.49px;
     margin-right: 0px;
     float: none;
+    width: 93.5% !important;
+    margin-left: 3%;
   }
 }
 @media only screen and (max-width: 573px) {
@@ -1697,6 +1702,23 @@ width: 59px;
     margin-right: 0px;
   }
 }
+@media screen and (min-width: 0px) and (max-width: 1170px){
+.nav-link{
+  width: 100%;
+  font-size: 11px;
+}
+}
+@media screen and (min-width: 0px) and (max-width: 767px){
+  .small-nav {
+    justify-content: space-between;
+}
+  }
+  @media screen and (min-width: 0px) and (max-width: 324px){
+    .nav-link{
+      width: 100%;
+      font-size: 11px !important;
+    }
+    }
 
 .no-data {
 
