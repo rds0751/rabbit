@@ -8,6 +8,7 @@ class HomePage extends BaseComponent {
     super(props);
     this.state = {};
   }
+  
 
   componentDidMount() {}
   render() {
