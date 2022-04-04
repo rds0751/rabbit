@@ -93,9 +93,10 @@ const ListItem = styled.li`
     width: 100%;
     
   }
-  @media screen and (min-width: 426px) and (max-width: 769px) {
-    font-size: 12px;
-    padding-right: 16px;
+  @media screen and (min-width: 770px) and (max-width: 955px) {
+    padding: 30px 14px 13px 16px;
+    width: 100%;
+    
   }
   @media screen and (max-width: 426px) {
     padding: 32px 8px 24px 16px;
@@ -129,30 +130,23 @@ const CreateCollection = (props) => {
     {
       id: 0,
       questionText:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
+        "How do I create an NFT?",
       answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
+        "Click \"Create\" in the top right corner. You'll be taken to the NFT item creation page. This page will allow you to upload your NFT file, name it and add a description.",
     },
     {
       id: 1,
       questionText:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
+        "How do I change the properties of my NFT?",
       answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
+        "It’s easy - if you’ve minted your item on ANAFTO, you can simply click on the Edit button on your NFT. As a note, you won’t be able to edit an NFT after it’s been sold.",
     },
     {
       id: 2,
       questionText:
-        "part  dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
+        "How do I add a collection collaborator?",
       answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
-    },
-    {
-      id: 3,
-      questionText:
-        "search  dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
-      answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
+        "To get started, navigate to the My Collections view, and click on a collection you'd like to Edit. This will take you to the Edit My Collection view. Please note that you can only add a collaborator to an existing collection.",
     },
   ];
 const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(query));

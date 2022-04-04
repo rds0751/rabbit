@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React,{useState} from 'react'
 import styled from "styled-components";
-import BuyItem from "./BuyItem";
 import { Link } from "react-router-dom";
-import "../../assets/styles/buying.css";
-import { post } from "jquery";
-
+import SellItem from "./SellItem";
+import "../../../assets/styles/buying.css";
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -71,14 +69,6 @@ const Input = styled.input`
 
 
 
-
-
-
-
-
-
-
-
 const ListItem = styled.li`
   width: 941px;
   text-align: center;
@@ -93,7 +83,7 @@ const ListItem = styled.li`
     width: 100%;
     
   }
-  @media screen and (min-width: 770px) and (max-width: 908px) {
+  @media screen and (min-width: 770px) and (max-width: 955px) {
     padding: 30px 14px 13px 16px;
     width: 100%;
     
@@ -104,6 +94,7 @@ const ListItem = styled.li`
     
   }
 `;
+
 const Question = styled.h1`
   font-size: 16px;
   font-weight: 600;
@@ -114,7 +105,10 @@ const Question = styled.h1`
     font-size: 12px;
     padding-right: 16px;
   }
- 
+  @media screen and (min-width: 426px) and (max-width: 769px) {
+    font-size: 12px;
+    padding-right: 16px;
+  }
   @media screen and (max-width: 426px) {
     font-size: 14px;
     padding-bottom: 12px;
@@ -122,42 +116,33 @@ const Question = styled.h1`
   }
 `;
 
-
-
-const Buy = (props) => {
-  const [query ,setQuery]=useState("")
-  const BuyList = [
-    {
-      id: 0,
-      questionText:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
-      answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
-    },
-    {
-      id: 1,
-      questionText:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
-      answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
-    },
-    {
-      id: 2,
-      questionText:
-        "part  dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
-      answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
-    },
-    {
-      id: 3,
-      questionText:
-        "search  dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
-      answerText:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
-    },
-  ];
-const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(query));
-
+export default function Selling() {
+    const [query ,setQuery]=useState("")
+    const BuyList = [
+      {
+        id: 0,
+        questionText:
+          "How do I sell NFT?",
+        answerText:
+          "Select the NFT you would like to sell from your wallet. Select Sell on the top right to be taken to the listing page. You'll be taken to the listing page, where you can choose the price and type of sale.",
+      },
+      {
+        id: 1,
+        questionText:
+          "How do Epired NFTs work?",
+        answerText:
+          "You need to select the date while posting the NFTs for sale. And after that Date the NFTs will expire and will not be shown on Sale but will be available in your collection.",
+      },
+      {
+        id: 2,
+        questionText:
+          "What file formats can I use to make NFTs?",
+        answerText:
+          "You can use a variety of file formats for images to make your NFT.",
+      },
+    ];
+    const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(query));
+  
   return (
     <>
     <nav aria-label="breadcrumb" className="headerbuying">
@@ -175,23 +160,22 @@ const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(
             className="breadcrumb-item active text-primary"
             aria-current="page"
           >
-            Buying
+            Selling
           </li>
         </ol>
       </nav>
     <MainContainer>
       <div>
-        
         <Header>
-        <img src={require("../../assets/images/leftarrowbuying.png")} style={{marginRight:"16px",width:"26px",height:"23px"}} className="backbuying" />
-          <Title>Buying</Title>
+        <img src={require("../../../assets/images/leftarrowbuying.png")} style={{marginRight:"16px",width:"26px",height:"23px"}} className="backbuying" />
+          <Title>Selling</Title>
           <SearchBox>
             <Input type="search" placeholder="Search" value={query} onChange={(e)=>setQuery(e.target.value)} />
             <i class="fa-solid fa-magnifying-glass"></i>
           </SearchBox>
         </Header>
         <ul>
-          {match.length==0 ? (
+        {match.length==0 ? (
          
          <ListItem>
          
@@ -200,9 +184,9 @@ const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(
        </ListItem>
             
         ):(
-          match.map((eachBuy) => {
+          match.map((sell) => {
             return(
-            <BuyItem key={eachBuy.id} faqDetails={eachBuy} />
+            <SellItem key={sell.id} faqDetails={sell} />
             )
         })
           
@@ -212,7 +196,5 @@ const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(
       </div>
     </MainContainer>
     </>
-  );
-};
-
-export default Buy;
+  )
+}

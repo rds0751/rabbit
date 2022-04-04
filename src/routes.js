@@ -60,8 +60,8 @@ import FAQsPage from "./modules/Faqs/index";
 import Home from "./modules/Home/Home";
 import CollectionPage from "./modules/Resources/CreateCollection/index";
 import NftsPage from "./modules/Resources/AddingNfts/index";
-import BuyPage from "./modules/Buying/index";
-import SellPage from "./modules/Selling/index";
+import BuyPage from "./modules/Resources/Buying/index";
+import SellPage from "./modules/Resources/Selling/index";
 import ScrollToTop from "./ScrollToTop";
 import SearchResults from "./common/components/searchResults";
 function App() {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 const ListItem = styled.li`
-  width: 100%;
+  width: 941px;
   background-color: #ffffff;
   box-shadow: 0px 3px 12px #0000000f;
   border: 1px solid #d5d5d5;
@@ -11,9 +11,16 @@ const ListItem = styled.li`
   margin-bottom: 32px;
   @media screen and (min-width: 426px) and (max-width: 769px) {
     padding: 30px 14px 13px 16px;
+    width: 100%;
+  }
+  @media screen and (min-width: 770px) and (max-width: 955px) {
+    padding: 30px 14px 13px 16px;
+    width: 100%;
+    
   }
   @media screen and (max-width: 426px) {
     padding: 32px 8px 24px 16px;
+    width: 100%;
   }
 `;
 const QuestionDiv = styled.div`
