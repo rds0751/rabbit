@@ -1,9 +1,9 @@
 /* Marketplace page top height */
-#upper__home{
+#upper__home {
   margin-top: 36px;
 }
-#upper__home h1{
-  font-family: 'poppins-semibold';
+#upper__home h1 {
+  font-family: "poppins-semibold";
 }
 /* css for filters */
 .nftTilePageSecondSelect {
@@ -29,11 +29,11 @@
   width: 260px;
   cursor: pointer;
 }
-@media only screen and (min-width:300px) and (max-width:1000px) {
-  .price-range-dropdown select{
+@media only screen and (min-width: 300px) and (max-width: 1000px) {
+  .price-range-dropdown select {
     width: 100%;
   }
-  }
+}
 /* css for NFt cards */
 .nftTileEachImage {
   box-sizing: border-box;
@@ -60,14 +60,14 @@
   -webkit-box-orient: vertical;
 }
 .nftTileEachDetailsFirstContainerValue {
-  border: 1px solid #16AB6E;
+  border: 1px solid #16ab6e;
   border-radius: 6px;
   padding: 6px 5px 2px 5px;
   font-size: 14px;
   line-height: 21px;
-  color: #16AB6E;
+  color: #16ab6e;
   font-family: "poppins-semibold";
-  background-color: #FFFFFF00;
+  background-color: #ffffff00;
   min-width: 68px;
   /* margin-right: 1em; */
 }
@@ -94,46 +94,65 @@
 }
 
 /* nft page filter css start */
-.ntf_div .filter-drop{
+.ntf_div .filter-drop {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 52%;
+  width: 64%;
   padding: 0% 1% 0% 5%;
   position: relative;
 }
-.ntf_div .filter-drop .text{
+@media only screen and (min-width: 425px) and (max-width: 767px) {
+  .ntf_div .filter-drop {
+    width: 76%;
+    padding: 0% 1% 0% 0%;
+  }
+}
+@media only screen and (min-width: 375px) and (max-width: 424px) {
+  .ntf_div .filter-drop {
+    width: 72%;
+    padding: 0% 1% 0% 0%;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 374px) {
+  .ntf_div .filter-drop {
+    width: 66%;
+    padding: 0% 1% 0% 0%;
+  }
+}
+
+.ntf_div .filter-drop .text {
   display: flex;
   font-size: 14px;
   font-family: "poppins-medium";
   align-items: center;
-  color: #858585;
+  color: #191919;
 }
-.ntf_div .filter-drop .filter-item{
+.ntf_div .filter-drop .filter-item {
   position: absolute;
   top: 45px;
   left: -94px;
   border-top: none;
   width: 279px;
   z-index: 1;
-  background: #FFFFFF;
-  box-shadow: 0px 3px 6px #0000001F;
-  border: 1px solid #F4F4F4;
+  background: #ffffff;
+  box-shadow: 0px 3px 6px #0000001f;
+  border: 1px solid #f4f4f4;
   border-radius: 4px;
   padding: 12px;
 }
-.ntf_div .filter-drop .filter-item .to{
-  font-family: 'poppins-medium';
+.ntf_div .filter-drop .filter-item .to {
+  font-family: "poppins-medium";
   font-size: 14px;
   line-height: 21px;
   color: #191919;
 }
 .ntf_div .filter-drop .filter-item .btn-outline-primary {
-  font-family: 'poppins-medium';
+  font-family: "poppins-medium";
   font-size: 16px;
   line-height: 25px;
-  color: #366EEF;
-  border: 1px solid #366EEF;
+  color: #366eef;
+  border: 1px solid #366eef;
   border-radius: 4px;
   width: 100%;
 }
@@ -145,12 +164,11 @@
 
 /* nft page filter css end */
 
-@media only screen and (min-width:1215px) and (max-width: 1240px) {
-  .nftTileEachDetailsFirstContainerValue{
+@media only screen and (min-width: 1215px) and (max-width: 1240px) {
+  .nftTileEachDetailsFirstContainerValue {
     margin-left: 4px;
   }
 }
-
 @media only screen and (max-width: 1024px) {
   .nftTilePageSecondSelect {
     font-size: 1.9vw;
@@ -182,22 +200,22 @@
     margin-top: 3% !important;
     width: 100% !important;
   } */
-  .ntf_div .filter-drop .filter-item .form-control{
+  .ntf_div .filter-drop .filter-item .form-control {
     width: 100%;
   }
   .ntf_div .filter-drop .filter-item .row {
     --bs-gutter-x: 16px;
   }
 }
-@media only screen and (width:768px){
-  .nftTilePageSecondSelect{
+@media only screen and (width: 768px) {
+  .nftTilePageSecondSelect {
     margin-left: 7%;
   }
-  #upper__home{
+  #upper__home {
     margin-top: 41px;
   }
 }
-@media only screen and (max-width:767px){
+@media only screen and (max-width: 767px) {
   .mobilenftTilePageThirdSelect {
     margin-left: 0px !important;
     /* margin-top: 3% !important; */
@@ -233,11 +251,10 @@
     margin-left: 0px !important;
     margin-top: -1% !important;
   }
-  #upper__home{
+  #upper__home {
     margin-top: 52px;
   }
 }
 /* .dropdown-img{
   background-image: url("/whitelablenft-webapp/src/assets/images/drop-down-arrow.svg") no-repeat right #ffffff;
 } */
-
