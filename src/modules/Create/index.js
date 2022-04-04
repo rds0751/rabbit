@@ -20,8 +20,8 @@ class Index extends BaseComponent {
       url: "",
       loaderState: false,
       isMintSuccess: false,
-      isOpenMintModal:true,
-      mintedNftId:""
+      isOpenMintModal: true,
+      mintedNftId: ""
     };
   }
 
@@ -36,11 +36,11 @@ class Index extends BaseComponent {
       transactionHash: blockchainRes?.transactionHash || "",
       name: data?.nftName || "",
       //TO DO  need to pass collection _id
-      collectionId: data.collection , // to do
+      collectionId: data.collection, // to do
       ipfsUrl: data?.ipfsUrl || "",
       cdnUrl: data?.cdnUrl || "",
       cid: data?.cid || "",
-      contractAddress:data.contractAddress || "",
+      contractAddress: data.contractAddress || "",
       description: data?.description || "",
       blockchain: data?.blockchain || "",
       network: {
@@ -49,7 +49,7 @@ class Index extends BaseComponent {
       },
       salesInfo: {
         price: data?.price || 0,
-        currency:"ETH"
+        currency: "ETH"
       },
       //TO do need to pass user (owner) _id
       ownedBy: data?.createdBy,
@@ -74,8 +74,10 @@ class Index extends BaseComponent {
     // let formData = new FormData();
     // formData.append("attachment", data.nftFile);
 
-    if (!data?.ownerAddress)
-      return Utils.apiFailureToast("Please connect your wallet");
+    // if (!data?.ownerAddress) {
+    //   this.setState({ loaderState: true });
+    //   return Utils.apiFailureToast("Please connect your wallet");
+    // }
     // if(!this.props.user?.userDetails)
     //   return Utils.apiFailureToast("Please connect your wallet");
 
@@ -95,53 +97,53 @@ class Index extends BaseComponent {
 
     const tokenId = Utils.generateRandomNumber();
     // create NFT on blockchai
-    if(data.contractAddress.length > 0 ){
-     
-    const [blockchainError, blockchainResult] = await Utils.parseResponse(
-      BlockchainServices.mintNFT({
-        tokenURI: data.ipfsUrl,
-        price: data.price,
-        tokenId,
-        contractAddress:data.contractAddress
-      })
-    );
-    console.log("blockchainError",blockchainError)
-    console.log("blockchainResult",blockchainResult)
+    if (data.contractAddress.length > 0) {
 
-    if (blockchainError || !blockchainResult) {
-      this.setState({ loaderState: false });
+      const [blockchainError, blockchainResult] = await Utils.parseResponse(
+        BlockchainServices.mintNFT({
+          tokenURI: data.ipfsUrl,
+          price: data.price,
+          tokenId,
+          contractAddress: data.contractAddress
+        })
+      );
+      console.log("blockchainError", blockchainError)
+      console.log("blockchainResult", blockchainResult)
 
-      return Utils.apiFailureToast(
-        blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to Mint NFT on blockchain"
+      if (blockchainError || !blockchainResult) {
+        this.setState({ loaderState: false });
+
+        return Utils.apiFailureToast(
+          blockchainError?.data?.message || blockchainError?.message || blockchainError || "Unable to Mint NFT on blockchain"
         );
+      }
+      blockchainRes = blockchainResult
     }
-    blockchainRes = blockchainResult
-  }
 
 
-  else{
-    const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS
+    else {
+      const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS
 
-    const [blockchainError, blockchainResult] = await Utils.parseResponse(
-      BlockchainServices.mintNFT({
-        tokenURI: data.ipfsUrl,
-        price: data.price,
-        tokenId,
-        contractAddress:contractAddress
-      })
-    );
-    console.log("blockchainError",blockchainError)
-    console.log("blockchainResult",blockchainResult)
-    if (blockchainError || !blockchainResult) {
-      console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
-      this.setState({ loaderState: false });
+      const [blockchainError, blockchainResult] = await Utils.parseResponse(
+        BlockchainServices.mintNFT({
+          tokenURI: data.ipfsUrl,
+          price: data.price,
+          tokenId,
+          contractAddress: contractAddress
+        })
+      );
+      console.log("blockchainError", blockchainError)
+      console.log("blockchainResult", blockchainResult)
+      if (blockchainError || !blockchainResult) {
+        console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
+        this.setState({ loaderState: false });
 
-      return Utils.apiFailureToast(
-        blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to Mint NFT on blockchain"
+        return Utils.apiFailureToast(
+          blockchainError?.data?.message || blockchainError?.message || blockchainError || "Unable to Mint NFT on blockchain"
         );
+      }
+      blockchainRes = blockchainResult
     }
-    blockchainRes = blockchainResult
-  }
 
 
 
@@ -151,7 +153,7 @@ class Index extends BaseComponent {
 
     // save NFT data on DB
     const [contentError, contentRes] = await Utils.parseResponse(
-  
+
       getCollection.createNftContent(
         this.getRequestDataForSaveNftContent(tokenId, data, blockchainRes)
       )
