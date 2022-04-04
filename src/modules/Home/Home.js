@@ -341,7 +341,7 @@ function Home() {
                                 style={{ height: "253px", width: "345px" }}
                               />
                             </Link>
-                            <Card.Body style={{margin:"0 0 0 12%"}}>
+                            <Card.Body style={{margin:"0 0 0 5%"}}>
                               <div className="d-flex align-items-start media">
                                 <div
                                   className="flex-shrink-0"

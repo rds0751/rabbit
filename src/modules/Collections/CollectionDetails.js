@@ -19,6 +19,136 @@ import NoItem from "../../assets/images/Noitems.svg";
 import { Button } from "react-bootstrap";
 import Spinner from "../../common/components/Spinner";
 
+// MUI select code
+import SelectUnstyled, { selectUnstyledClasses } from '@mui/base/SelectUnstyled';
+import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled';
+import PopperUnstyled from '@mui/base/PopperUnstyled';
+import { styled } from '@mui/system';
+const blue = {
+  100: '#DAECFF',
+  200: '#99CCF3',
+  400: '#3399FF',
+  500: '#007FFF',
+  600: '#0072E5',
+  900: '#003A75',
+};
+
+const grey = {
+  100: '#E7EBF0',
+  200: '#E0E3E7',
+  300: '#CDD2D7',
+  400: '#B2BAC2',
+  500: '#A0AAB4',
+  600: '#6F7E8C',
+  700: '#3E5060',
+  800: '#2D3843',
+  900: '#1A2027',
+};
+
+const StyledButton = styled('button')(
+  ({ theme }) => `
+  font-family: poppins-medium;
+  font-size: 14px;
+  box-sizing: border-box;
+  min-height: calc(1.5em + 22px);
+  min-width: 200px;
+  background: url(${dropdown});
+  background-position: 95%;
+  background-repeat: no-repeat;
+  border: 1px solid ${theme.palette.mode === 'dark' ? grey[800] : grey[300]};
+  border-radius: 0.25rem;
+  padding: 10px;
+  text-align: left;
+  line-height: 1.5;
+  color: #191919;
+
+  &.${selectUnstyledClasses.focusVisible} {
+    outline: 3px solid ${theme.palette.mode === 'dark' ? blue[600] : blue[100]};
+  }
+
+  @media only screen and (max-width:767px) {
+    width:100%;
+    margin-top:16px;
+  }
+  `,
+);
+
+const StyledListbox = styled('ul')(
+  ({ theme }) => `
+  font-family: poppins-medium;
+  font-size: 14px;
+  box-sizing: border-box;
+  padding: 5px;
+  margin: 10px 0;
+  min-width: 200px;
+  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+  border: 1px solid #F4F4F4;
+  border-radius: 0.25em;
+  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  overflow: auto;
+  outline: 0px;
+
+  @media only screen and (max-width:767px) {
+    width:100%;
+  }
+  `,
+);
+
+const StyledOption = styled(OptionUnstyled)(
+  ({ theme }) => `
+  list-style: none;
+  padding: 8px;
+  border-radius: 0.25em;
+  cursor: pointer;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  &.${optionUnstyledClasses.selected} {
+    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
+    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
+  }
+
+  &.${optionUnstyledClasses.highlighted} {
+    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
+    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  }
+
+  &.${optionUnstyledClasses.highlighted}.${optionUnstyledClasses.selected} {
+    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
+    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
+  }
+
+  &.${optionUnstyledClasses.disabled} {
+    color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
+  }
+
+  &:hover:not(.${optionUnstyledClasses.disabled}) {
+    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
+    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  }
+  `,
+);
+
+const StyledPopper = styled(PopperUnstyled)`
+  z-index: 1;
+  @media only screen and (max-width:767px) {
+    width:100%;
+  }
+`;
+
+const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
+  const components = {
+    Root: StyledButton,
+    Listbox: StyledListbox,
+    Popper: StyledPopper,
+    ...props.components,
+  };
+
+  return <SelectUnstyled {...props} ref={ref} components={components} />;
+});
+
 const queryString = require('query-string');
 
 function CollectionDetails() {
@@ -41,8 +171,6 @@ function CollectionDetails() {
   const [status, setStatus] = useState("");
   const [sort, setSort] = useState("");
   const [filter, setFilter] = useState(defaultFilter);
-  const sortOptions = ["Recently added", "Price high to low", "Price low to high"]
-  const statusOptions = ["Open for sale", "New"]
   const [isLoading, setIsLoading] = useState(false);
   
   useEffect(() => {
@@ -71,25 +199,6 @@ function CollectionDetails() {
     setcheckLike(!checkLike);
   };
 
-  const onSortHandle = (e) => {
-    setSort(e.target.textContent)
-    if (e.target.textContent === "Recently added") {
-      setFilter({...filter, "sort": 1})
-    } else if (e.target.textContent === "Price high to low"){
-      setFilter({...filter, "sort": 2})
-    } else {
-      setFilter({...filter, "sort": 3})
-    }
-  }
-  const onStatusHandle = (e) => {
-    setStatus(e.target.textContent)
-    if (e.target.textContent === "New") {
-      setFilter({...filter, "status": "new"})
-    } else {
-      setFilter({...filter, "status": "onsale"})
-    }
-  }
-
   const setPrice = () => {
     setFilter({...filter, "minPrice": minPrice, "maxPrice": maxPrice})
     setPriceDrop(!priceDrop)
@@ -99,6 +208,15 @@ function CollectionDetails() {
     setMinPrice("")
     setMaxPrice("")
   }
+
+  const handleStatus = (e) => {
+    setFilter({ ...filter, 'status': e });
+  };
+
+  const handleSort = (e) => {
+    setFilter({ ...filter, 'sort': e });
+  };
+
 
   return (
     <>
@@ -153,19 +271,18 @@ function CollectionDetails() {
                   {/* </button> */}
                 </div>
               </div>
-              <div className="colldrop"  onClick= {e => setStatusDrop(!statusDrop)}>
-                <div className="statusText">
-                  {status? status : "Status"}
-                </div>
-                <div><img src={dropdown} /></div>                
-                {statusDrop && (
-                  <div className="dropitems">
-                    {statusOptions.map((option) => (
-                      <div className="dropsingleitem" onClick={e => {onStatusHandle(e)}} >{option}</div>
-                    ))}
-                </div>
-                )}
-
+              <div>
+                <CustomSelect
+                  name="status"
+                  onChange={(e) => handleStatus(e)}
+                  value={filter.status}
+                  defaultValue=""
+                >
+                  <StyledOption value="" hidden>Status</StyledOption>
+                  <StyledOption value="" >All</StyledOption>
+                  <StyledOption value="onsale" >Open for sale</StyledOption>
+                  <StyledOption value="new">New</StyledOption>
+                </CustomSelect>
               </div>
               <div className="colldrop" >
                 <div className="statusText">
@@ -207,22 +324,22 @@ function CollectionDetails() {
                 </div>
                 )}
 
-              </div>            
-              <div className="colldrop ms-auto"  onClick= {e => setSortDrop(!sortDrop)}>
-                <div className="statusText">
-                  {sort? sort : "Sort By"}
-                </div>
-                <div><img src={dropdown} /></div>                
-                {sortDrop && (
-                  <div className="dropitems">
-                    {sortOptions.map((option) => (
-                      <div className="dropsingleitem" onClick={e => {onSortHandle(e)}} >{option}</div>
-                    ))}
-                </div>
-                )}
-
-              </div>  
-              </div>        
+              </div>
+              <div className="ms-md-auto">
+                <CustomSelect
+                  name="sort"
+                  onChange={(e) => handleSort(e)}
+                  value={filter.sort}
+                  defaultValue=""
+                >
+                  <StyledOption value="" hidden>Sort By All</StyledOption>
+                  <StyledOption value="" >All</StyledOption>
+                  <StyledOption value="1">Recently added</StyledOption>
+                  <StyledOption value="2">Price: High to Low</StyledOption>
+                  <StyledOption value="3">Price: Low to High</StyledOption>                
+                </CustomSelect>
+              </div>
+            </div>        
           </div>
           <div className="nftTileContainer row cards-gap ntf_row">
             <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>

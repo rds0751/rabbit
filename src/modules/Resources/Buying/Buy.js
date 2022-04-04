@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import BuyItem from "./BuyItem";
 import { Link } from "react-router-dom";
-import "../../assets/styles/buying.css";
+import "../../../assets/styles/buying.css";
 import { post } from "jquery";
 
 const MainContainer = styled.div`
@@ -176,7 +176,7 @@ const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(
       <div>
         
         <Header>
-        <img src={require("../../assets/images/leftarrowbuying.png")} style={{marginRight:"16px",width:"26px",height:"23px"}} className="backbuying" />
+        <img src={require("../../../assets/images/leftarrowbuying.png")} style={{marginRight:"16px",width:"26px",height:"23px"}} className="backbuying" />
           <Title>Buying</Title>
           <SearchBox>
             <Input type="search" placeholder="Search" value={query} onChange={(e)=>setQuery(e.target.value)} />

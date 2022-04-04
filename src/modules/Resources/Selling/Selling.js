@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import SellItem from "./SellItem";
-import "../../assets/styles/buying.css";
+import "../../../assets/styles/buying.css";
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -167,7 +167,7 @@ export default function Selling() {
     <MainContainer>
       <div>
         <Header>
-        <img src={require("../../assets/images/leftarrowbuying.png")} style={{marginRight:"16px",width:"26px",height:"23px"}} className="backbuying" />
+        <img src={require("../../../assets/images/leftarrowbuying.png")} style={{marginRight:"16px",width:"26px",height:"23px"}} className="backbuying" />
           <Title>Selling</Title>
           <SearchBox>
             <Input type="search" placeholder="Search" value={query} onChange={(e)=>setQuery(e.target.value)} />

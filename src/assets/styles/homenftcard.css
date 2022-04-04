@@ -216,6 +216,7 @@
     font-size: 10px;
     width: 31%;
     height: 33px;
+    text-align-last: center;
   }
   .nftTileEachDetailsSecondContainerValueHighest {
     font-size: 3.9vw;

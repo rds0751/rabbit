@@ -1,6 +1,6 @@
 import React from "react";
-import BaseComponent from "../baseComponent";
-import SellComponent from "./Selling";
+import BaseComponent from "../../baseComponent";
+import BuyComponent from "./Buy";
 
 
 class HomePage extends BaseComponent {
@@ -13,7 +13,7 @@ class HomePage extends BaseComponent {
   render() {
     return (
       <>
-        <SellComponent />
+        <BuyComponent />
       </>
     );
   }
