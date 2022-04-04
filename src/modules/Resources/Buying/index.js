@@ -1,5 +1,5 @@
 import React from "react";
-import BaseComponent from "../baseComponent";
+import BaseComponent from "../../baseComponent";
 import BuyComponent from "./Buy";
 
 

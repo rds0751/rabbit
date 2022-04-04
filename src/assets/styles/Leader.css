@@ -809,7 +809,8 @@ thead {
 }
 @media screen and (max-width: 989px) {
   .cards-gap {
-    gap: 10%;
+    /* gap: 10%; */
+    gap: calc(16% / 3.01);
   }
 }
 @media screen and (max-width: 480px) {

@@ -1,5 +1,5 @@
 import React from "react";
-import BaseComponent from "../baseComponent";
+import BaseComponent from "../../baseComponent";
 import SellComponent from "./Selling";
 
 
@@ -8,6 +8,7 @@ class HomePage extends BaseComponent {
     super(props);
     this.state = {};
   }
+  
 
   componentDidMount() {}
   render() {

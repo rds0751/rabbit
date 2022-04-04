@@ -1,8 +1,10 @@
-import React,{useState} from 'react'
+import React, { useState } from "react";
 import styled from "styled-components";
+import BuyItem from "./BuyItem";
 import { Link } from "react-router-dom";
-import SellItem from "./SellItem";
-import "../../assets/styles/buying.css";
+import "../../../assets/styles/buying.css";
+import { post } from "jquery";
+
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -69,6 +71,14 @@ const Input = styled.input`
 
 
 
+
+
+
+
+
+
+
+
 const ListItem = styled.li`
   width: 941px;
   text-align: center;
@@ -83,13 +93,17 @@ const ListItem = styled.li`
     width: 100%;
     
   }
+  @media screen and (min-width: 770px) and (max-width: 955px) {
+    padding: 30px 14px 13px 16px;
+    width: 100%;
+    
+  }
   @media screen and (max-width: 426px) {
     padding: 32px 8px 24px 16px;
     width: 100%;
     
   }
 `;
-
 const Question = styled.h1`
   font-size: 16px;
   font-weight: 600;
@@ -100,10 +114,7 @@ const Question = styled.h1`
     font-size: 12px;
     padding-right: 16px;
   }
-  @media screen and (min-width: 426px) and (max-width: 769px) {
-    font-size: 12px;
-    padding-right: 16px;
-  }
+ 
   @media screen and (max-width: 426px) {
     font-size: 14px;
     padding-bottom: 12px;
@@ -111,40 +122,35 @@ const Question = styled.h1`
   }
 `;
 
-export default function Selling() {
-    const [query ,setQuery]=useState("")
-    const BuyList = [
-      {
-        id: 0,
-        questionText:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
-        answerText:
-          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
-      },
-      {
-        id: 1,
-        questionText:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
-        answerText:
-          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
-      },
-      {
-        id: 2,
-        questionText:
-          "part ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
-        answerText:
-          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
-      },
-      {
-        id: 3,
-        questionText:
-          "search ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ?",
-        answerText:
-          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
-      },
-    ];
-    const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(query));
-  
+
+
+const Buy = (props) => {
+  const [query ,setQuery]=useState("")
+  const BuyList = [
+    {
+      id: 0,
+      questionText:
+        "How do I purchase NFT?",
+      answerText:
+        "To buy an NFT, you must be a registered marketplace user, and your digital wallet balance must be positive. Click on the NFT that you want to buy and then click on Buy now button. It will navigate you to your wallet through which you can make your purchase.",
+    },
+    {
+      id: 1,
+      questionText:
+        "How do I make an offer on NFT?",
+      answerText:
+        "Select \"Make Offer\" on the item page. If the item is part of an unsafelisted collection, you'll be prompted to review collection details and confirm that this collection is the correct one. Select the currency you'd like to make your offer in.",
+    },
+    {
+      id: 2,
+      questionText:
+        "Is there a minimum bid requirement?",
+      answerText:
+        "Bids must be at least 5% higher than the previous bid. Only bids in the same payment token as the auction will be counted towards the winning bid.",
+    },
+  ];
+const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(query));
+
   return (
     <>
     <nav aria-label="breadcrumb" className="headerbuying">
@@ -162,22 +168,23 @@ export default function Selling() {
             className="breadcrumb-item active text-primary"
             aria-current="page"
           >
-            Selling
+            Buying
           </li>
         </ol>
       </nav>
     <MainContainer>
       <div>
+        
         <Header>
-        <img src={require("../../assets/images/leftarrowbuying.png")} style={{marginRight:"16px",width:"26px",height:"23px"}} className="backbuying" />
-          <Title>Selling</Title>
+        <img src={require("../../../assets/images/leftarrowbuying.png")} style={{marginRight:"16px",width:"26px",height:"23px"}} className="backbuying" />
+          <Title>Buying</Title>
           <SearchBox>
             <Input type="search" placeholder="Search" value={query} onChange={(e)=>setQuery(e.target.value)} />
             <i class="fa-solid fa-magnifying-glass"></i>
           </SearchBox>
         </Header>
         <ul>
-        {match.length==0 ? (
+          {match.length==0 ? (
          
          <ListItem>
          
@@ -186,9 +193,9 @@ export default function Selling() {
        </ListItem>
             
         ):(
-          match.map((sell) => {
+          match.map((eachBuy) => {
             return(
-            <SellItem key={sell.id} faqDetails={sell} />
+            <BuyItem key={eachBuy.id} faqDetails={eachBuy} />
             )
         })
           
@@ -198,5 +205,7 @@ export default function Selling() {
       </div>
     </MainContainer>
     </>
-  )
-}
+  );
+};
+
+export default Buy;

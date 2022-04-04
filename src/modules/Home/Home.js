@@ -200,7 +200,7 @@ function Home() {
                                   </Card>
 
                                   {/* <Card>
-                            <Card.Img variant="top" src={Image2} />
+                            <Card.Img variant="top" src={Image2} /> 
                             <Card.Body>
                               <div className="d-flex align-items-start media">
                                 <div className="flex-shrink-0">

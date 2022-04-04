@@ -1,0 +1,168 @@
+.mainDiv {
+  max-width: 100%;
+  text-align: center;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+.HeadingTag {
+  max-width: 100%;
+  width: 49%;
+  margin: 0 auto;
+  margin-top: 90px;
+}
+.HeadingTag h2 {
+  font: "normal normal bold 32px/48px Poppins";
+}
+
+.marketplaceText {
+  margin-top: 42px;
+  font: normal normal bold 18px/27px Poppins;
+}
+.cardmob {
+  border-radius: 7px;
+}
+.maincard {
+  margin: 0 auto;
+  border: 1px solid #d5d5d5;
+  border-radius: 7px;
+  width: 27.3%;
+}
+.descriptionTag {
+  display: flex;
+  justify-content: space-between;
+  width: 40.3%;
+  flex-direction: row;
+  margin: 0 auto;
+  margin-top: 32px;
+}
+.titleAbout {
+  width: 52.1%;
+  font: normal normal normal 16px/25px Poppins;
+  letter-spacing: 0px;
+  color: #000000;
+  margin: 0 auto;
+}
+.valueText {
+  text-align: center;
+  font: normal normal medium 22px/33px Poppins;
+  letter-spacing: 0px;
+  color: #366eef;
+  opacity: 1;
+}
+.TitleText{
+text-align: center;
+font: normal normal normal 16px/25px Poppins;
+letter-spacing: 0px;
+color: #000000;
+opacity: 1;
+
+}
+ @media screen and (max-width:426px) {
+  .maincard {
+    width: 91.7%;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border: 1px solid #d5d5d5;
+    border-radius: 12px;
+  }
+  .HeadingTag {
+    width: 57%;
+  }
+  .HeadingTag h2 {
+    font: normal normal 600 18px/27px Poppins;
+    letter-spacing: 0px;
+    color: #191919;
+  }
+  .marketplaceText {
+    margin-top: 116px;
+  }
+  .titleAbout {
+    width: 91.5%;
+    font: normal normal medium 14px/21px Poppins;
+    margin: 0 auto;
+  }
+  .valueText{
+    font: normal normal normal 14px/21px Poppins;
+   
+  }
+  .TitleText{
+    font: normal normal normal 14px/21px Poppins;
+  }
+  .descriptionTag{
+      width: 101.7%;
+  }
+
+
+}
+@media only screen and (min-width: 426px) and (max-width: 516px) {
+    .maincard {
+        width: 68%;
+      }
+      .marketplaceText {
+        margin-top: 66px;
+      }
+      .HeadingTag h2 {
+        font: normal normal 600 20px/30px Poppins;
+        color: #191919;
+      }
+      .descriptionTag {
+        width: 81.2%;
+        margin-top: 32px;
+      }
+    
+      .titleAbout {
+        width: 83.8%;
+        font: normal normal normal 16px/25px Poppins;
+        color: #191919;
+        margin: 0 auto;
+      }
+      .valueText{
+        font: normal normal medium 22px/33px Poppins;
+    
+      }
+      .TitleText{
+        font: normal normal normal 16px/25px Poppins;
+    
+      }
+}
+
+@media only screen and (min-width: 515px) and (max-width: 769px) {
+  .maincard {
+    width: 56%;
+  }
+  .marketplaceText {
+    margin-top: 66px;
+  }
+  .HeadingTag h2 {
+    font: normal normal 600 20px/30px Poppins;
+    color: #191919;
+  }
+  .descriptionTag {
+    width: 81.2%;
+    margin-top: 32px;
+  }
+
+  .titleAbout {
+    width: 83.8%;
+    font: normal normal normal 16px/25px Poppins;
+    color: #191919;
+    margin: 0 auto;
+  }
+  .valueText{
+    font: normal normal medium 22px/33px Poppins;
+
+  }
+  .TitleText{
+    font: normal normal normal 16px/25px Poppins;
+
+  }
+}
+@media screen and (min-width:769px) and (max-width:1252px) {
+    .maincard{
+        width: 343px;
+    }
+    .descriptionTag{
+        width: 522px;  
+    }
+    
+}

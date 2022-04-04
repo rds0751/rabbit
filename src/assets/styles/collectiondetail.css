@@ -81,7 +81,11 @@
   padding: 0% 1.5%;
   width: 303px;
 }
-
+@media screen and (min-width:769px){
+  .searchboxcol{
+    margin-right:32px;
+  }
+}
 .searchicon {
   height: 20.31px;
   width: 20.31px;
