@@ -7,6 +7,7 @@ import dropdown from "../../assets/images/dropdown.svg";
 import Carousel from "react-elastic-carousel";
 import { Button } from "react-bootstrap";
 import CollDetailCard from "../../common/components/CollDetailCard";
+import NftCardsHome from "../../common/components/NftCardsHome";
 import Spinner from "../../common/components/Spinner";
 import NoItem from "../../assets/images/Noitems.svg";
 
@@ -33,30 +34,52 @@ box-sizing: border-box;
 margin: 0px auto;
 `;
 const Heading = style.h3`
-  padding-top: 36px;
   font-size: 20px;
   font-weight: 600;
+  @media screen and (max-width:600px){
+    padding-top:19px;
+    font-size: 14px;
+  }
+  @media screen and (min-width:600px){
+    padding-top:41px;
+  }
+  @media only screen and (min-width: 992px) {
+    padding-top: 36px;
+  }
 `;
 const SpanText = style.span`
   color: #366eef;
   font-weight: 600;
 `;
 const CollTitle = style.h3`
-  padding-top: 46px;
   font-size: 18px;
   font-weight: 600;
+  @media screen and (max-width:600px){
+    padding-top:17px;
+    font-size: 14px;
+  }
+  @media screen and (min-width:600px){
+    padding-top:26px;
+  }
+  @media only screen and (min-width: 992px) {
+    padding-top: 46px;
+  }  
 `;
 const FiltersDiv = style.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top:34px;
-  @media screen and (max-width:700px){
+  @media screen and (max-width:600px){
     flex-direction:column;
+    margin-top:24px;
   }
 `;
 const CarouselDiv = style.div`
   margin-top:42px;
+  @media screen and (max-width:769px){
+    margin-top:32px;
+  }
 `;
 const Item = style.div`
 background-color:#F8F8F8;
@@ -92,6 +115,9 @@ padding: 9px 12px;
 cursor: pointer;
 position: relative;
 height:42px;
+@media screen and (max-width:600px){
+  margin-bottom: 16px;
+}
 `;
 const PriceText = style.p`
 font-size: 14px;
@@ -133,15 +159,6 @@ box-shadow: 0px 3px 6px #0000001f;
 border: 1px solid #F4F4F4;
 border-radius: 4px;
 padding: 12px;
-`;
-const NftsDiv = style.div`
-display: flex;
-justify-content: start;
-flex-wrap: wrap;
-margin-bottom: 50px;
-margin-left: 0px;
-margin-right: 0px;
-gap: calc(16% / 3.02022);
 `;
 const SpinnerDiv = style.div`
 display: flex;
@@ -193,6 +210,9 @@ const StyledButton = styled("button")(
 
   @media only screen and (max-width:767px) {
     width:100%;
+  }
+  @media screen and (max-width:600px){
+    margin-bottom:16px;
   }
   `
 );
@@ -387,9 +407,8 @@ function SearchResults() {
               defaultValue=""
             >
               <StyledOption value="" hidden>
-                Sort By All
+                Sort By
               </StyledOption>
-              <StyledOption value="">All</StyledOption>
               <StyledOption value="-1">Recently added</StyledOption>
               <StyledOption value="3">Items low to high</StyledOption>
               <StyledOption value="2">Items high to low</StyledOption>
@@ -429,9 +448,8 @@ function SearchResults() {
                 defaultValue=""
               >
                 <StyledOption value="" hidden>
-                  Sort By All
+                  Sort By
                 </StyledOption>
-                <StyledOption value="">All</StyledOption>
                 <StyledOption value="-1">Recently added</StyledOption>
                 <StyledOption value="3">Items low to high</StyledOption>
                 <StyledOption value="2">Items high to low</StyledOption>
@@ -473,9 +491,8 @@ function SearchResults() {
               defaultValue=""
             >
               <StyledOption value="" hidden>
-                Sort By All
+                Sort By
               </StyledOption>
-              <StyledOption value="">All</StyledOption>
               <StyledOption value="-1">Recently added</StyledOption>
               <StyledOption value="3">Items low to high</StyledOption>
               <StyledOption value="2">Items high to low</StyledOption>
@@ -595,8 +612,7 @@ function SearchResults() {
           <>
             <CollTitle>Nfts</CollTitle>
             <FiltersDiv>
-              <Div>
-                <PriceFilter>
+              <PriceFilter>
                   <PriceText>Price range</PriceText>
                   <PriceDropdown>
                     <DropdownDiv onClick={handleDropdown}>
@@ -650,8 +666,7 @@ function SearchResults() {
                       </div>
                     </InputDiv>
                   </PriceDropdown>
-                </PriceFilter>
-              </Div>
+              </PriceFilter>
               <CustomSelect
                 name="sort"
                 onChange={(e) => handleNftSort(e)}
@@ -749,7 +764,7 @@ function SearchResults() {
               <StyledOption value="1">Descending Order</StyledOption>
             </CustomSelect>
           </FiltersDiv>
-          <NftsDiv>
+          <div className="nftTileContainer row cards-gap ntf_row">
             {nfts.length > 0 &&
               nfts.map((nft, index) => {
                 return (
@@ -758,7 +773,7 @@ function SearchResults() {
                   </>
                 );
               })}
-          </NftsDiv>
+          </div>
         </>
       )}
     </MainContainer>
