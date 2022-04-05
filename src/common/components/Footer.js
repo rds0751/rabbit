@@ -157,7 +157,7 @@ function Footer() {
               <h3 className="fs-18 fw-b">
                 <a style={{ textDecoration: "none", color: "#8F8F8F",cursor:"default" }}>Leaderboard</a></h3>
               <p><a href="/top-seller" style={{ textDecoration: "none", color: "#8F8F8F" }}>Top Seller</a></p>
-              <p><a href="/top-bidder" style={{ textDecoration: "none", color: "#8F8F8F" }}>Top Bidder</a></p>
+              <p><a href="/top-bidder" style={{ textDecoration: "none", color: "#8F8F8F" }}>Top Buyer</a></p>
               <p><a href="/top-collection" style={{ textDecoration: "none", color: "#8F8F8F" }}>Top Collections</a></p>
             </div>
             <div className="col-7 mt-3">
