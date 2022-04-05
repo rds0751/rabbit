@@ -77,7 +77,7 @@ function CreateSingleNFT(props) {
   // ----------------------------------------------states end-------------
   console.log(props, "<<<<< fromindexfile");
   useEffect(async () => {
-    if (loggedInUser == null) {
+    if (user.loggedInUser._id == null) {
       navigation("/add-wallet");
     }
 
