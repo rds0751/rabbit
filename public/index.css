@@ -1,0 +1,7 @@
+.overflow{
+    overflow: hidden !important;
+    position: fixed;
+}
+.overflow-auto{
+    overflow: auto;
+}
