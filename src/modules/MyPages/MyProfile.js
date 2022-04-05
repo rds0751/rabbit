@@ -203,7 +203,7 @@ function MyProfile() {
   return (
     <>
       <div>
-        <div className="position-relative relative">
+        <div className="position-relative relative hover-cls">
           <img
             className="profilecover"
             src={

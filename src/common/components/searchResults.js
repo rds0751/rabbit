@@ -104,8 +104,15 @@ font-size:14px;
 const Count = style.span`
 color:#366EEF;
 `;
+const PriceFilterDiv = style.div`
+width:250px;
+@media screen and (max-width:600px){
+  width:100%;
+}
+`;
 const PriceFilter = style.div`
 display: flex;
+justify-content: space-between;
 align-items: baseline;
 border-radius: 4px;
 width: 250px;
@@ -117,42 +124,23 @@ position: relative;
 height:42px;
 @media screen and (max-width:600px){
   margin-bottom: 16px;
+  width:100%;
 }
 `;
 const PriceText = style.p`
 font-size: 14px;
-font-weight: 600;
 `;
 const PriceDropdown = style.div`
-display: flex;
-justify-content: space-between;
-align-items: center;
-width: 52%;
-padding: 0% 1% 0% 5%;
-position: relative;
-`;
-const DropdownDiv = style.div`
-display: flex !important;
-justify-content: space-between!important;
-width: 100%!important;
-`;
-const AllText = style.p`
-font-size: 14px;
-color: #858585;
+position: absolute;
+z-index:999;
+width:250px;
+@media screen and (max-width:600px){
+  width:87%;
+}
 `;
 const DropDownIcon = style.img`
-height: 17px;
-margin-left: 8px;
-`;
-const Div = style.div`
-display: flex;
 `;
 const InputDiv = style.div`
-position: absolute;
-top: 45px;
-left: -94px;
-border-top: none;
-width: 279px;
 z-index: 1;
 background: #FFFFFF;
 box-shadow: 0px 3px 6px #0000001f;
@@ -532,52 +520,52 @@ function SearchResults() {
         <>
           <CollTitle>Nfts</CollTitle>
           <FiltersDiv>
-            <Div>
+            <PriceFilterDiv>
               <PriceFilter>
                 <PriceText>Price range</PriceText>
-                <PriceDropdown>
-                  <DropdownDiv onClick={handleDropdown}>
-                    <AllText>All</AllText>
-                    <Div>
-                      <DropDownIcon src={dropdown} alt="" />
-                    </Div>
-                  </DropdownDiv>
-                  <InputDiv style={{ display: statusDrop ? "block" : "none" }}>
+                <DropDownIcon src={dropdown} alt="" onClick={handleDropdown}/>                
+              </PriceFilter>
+              <PriceDropdown style={{ display: statusDrop ? "block" : "none" }}>
+                  <InputDiv >
                     <div className="row mb-3 align-items-center">
-                      <div className="col-5">
+                      <div className="col-4">
                         <input
                           type="number"
                           className="form-control"
+                          style={{width:"100%"}}
                           placeholder="Min"
                           value={minPrice}
                           onChange={(e) => setMinPrice(e.target.value)}
                         />
                       </div>
-                      <div className="col-2 text-center">
+                      <div className="col-4 text-center">
                         <span className="to">to</span>
                       </div>
-                      <div className="col-5">
+                      <div className="col-4">
                         <input
                           type="number"
                           className="form-control"
+                          style={{width:"100%"}}
                           placeholder="Max"
                           value={maxPrice}
                           onChange={(e) => setMaxPrice(e.target.value)}
                         />
                       </div>
                     </div>
-                    <div className="row">
-                      <div className="col-6">
+                    <div style={{display: "flex", justifyContent: "space-between" }}>
+                      <div>
                         <Button
                           type="submit"
+                          style={{width:"100px"}}
                           onClick={(e) => clearPriceFilter(e)}
                           variant="outline-primary"
                         >
                           Clear
                         </Button>
                       </div>
-                      <div className="col-6">
+                      <div>
                         <Button
+                          style={{width:"100px"}}
                           onClick={(e) => handlePriceFilter(e)}
                           variant="outline-primary"
                         >
@@ -586,9 +574,8 @@ function SearchResults() {
                       </div>
                     </div>
                   </InputDiv>
-                </PriceDropdown>
-              </PriceFilter>
-            </Div>
+              </PriceDropdown>
+            </PriceFilterDiv>
             <CustomSelect
               name="sort"
               onChange={(e) => handleNftSort(e)}
@@ -596,9 +583,8 @@ function SearchResults() {
               defaultValue=""
             >
               <StyledOption value="" hidden>
-                Sort By All
+                Sort By
               </StyledOption>
-              <StyledOption value="all">All</StyledOption>
               <StyledOption value="-1">Ascending Order</StyledOption>
               <StyledOption value="1">Descending Order</StyledOption>
             </CustomSelect>
@@ -612,51 +598,52 @@ function SearchResults() {
           <>
             <CollTitle>Nfts</CollTitle>
             <FiltersDiv>
-              <PriceFilter>
+              <PriceFilterDiv>
+                <PriceFilter>
                   <PriceText>Price range</PriceText>
-                  <PriceDropdown>
-                    <DropdownDiv onClick={handleDropdown}>
-                      <AllText>All</AllText>
-                      <Div>
-                        <DropDownIcon src={dropdown} alt="" />
-                      </Div>
-                    </DropdownDiv>
-                    <InputDiv style={{ display: statusDrop ? "block" : "none" }}>
+                  <DropDownIcon src={dropdown} alt="" onClick={handleDropdown}/>                
+                </PriceFilter>
+                <PriceDropdown style={{ display: statusDrop ? "block" : "none" }}>
+                    <InputDiv >
                       <div className="row mb-3 align-items-center">
-                        <div className="col-5">
+                        <div className="col-4">
                           <input
                             type="number"
                             className="form-control"
+                            style={{width:"100%"}}
                             placeholder="Min"
                             value={minPrice}
                             onChange={(e) => setMinPrice(e.target.value)}
                           />
                         </div>
-                        <div className="col-2 text-center">
+                        <div className="col-4 text-center">
                           <span className="to">to</span>
                         </div>
-                        <div className="col-5">
+                        <div className="col-4">
                           <input
                             type="number"
                             className="form-control"
+                            style={{width:"100%"}}
                             placeholder="Max"
                             value={maxPrice}
                             onChange={(e) => setMaxPrice(e.target.value)}
                           />
                         </div>
                       </div>
-                      <div className="row">
-                        <div className="col-6">
+                      <div style={{display: "flex", justifyContent: "space-between" }}>
+                        <div>
                           <Button
                             type="submit"
+                            style={{width:"100px"}}
                             onClick={(e) => clearPriceFilter(e)}
                             variant="outline-primary"
                           >
                             Clear
                           </Button>
                         </div>
-                        <div className="col-6">
+                        <div>
                           <Button
+                            style={{width:"100px"}}
                             onClick={(e) => handlePriceFilter(e)}
                             variant="outline-primary"
                           >
@@ -665,8 +652,8 @@ function SearchResults() {
                         </div>
                       </div>
                     </InputDiv>
-                  </PriceDropdown>
-              </PriceFilter>
+                </PriceDropdown>
+              </PriceFilterDiv>
               <CustomSelect
                 name="sort"
                 onChange={(e) => handleNftSort(e)}
@@ -674,9 +661,8 @@ function SearchResults() {
                 defaultValue=""
               >
                 <StyledOption value="" hidden>
-                  Sort By All
+                  Sort By
                 </StyledOption>
-                <StyledOption value="all">All</StyledOption>
                 <StyledOption value="-1">Ascending Order</StyledOption>
                 <StyledOption value="1">Descending Order</StyledOption>
               </CustomSelect>
@@ -693,52 +679,52 @@ function SearchResults() {
         <>
           <CollTitle>Nfts</CollTitle>
           <FiltersDiv>
-            <Div>
+            <PriceFilterDiv>
               <PriceFilter>
                 <PriceText>Price range</PriceText>
-                <PriceDropdown>
-                  <DropdownDiv onClick={handleDropdown}>
-                    <AllText>All</AllText>
-                    <Div>
-                      <DropDownIcon src={dropdown} alt="" />
-                    </Div>
-                  </DropdownDiv>
-                  <InputDiv style={{ display: statusDrop ? "block" : "none" }}>
+                <DropDownIcon src={dropdown} alt="" onClick={handleDropdown}/>                
+              </PriceFilter>
+              <PriceDropdown style={{ display: statusDrop ? "block" : "none" }}>
+                  <InputDiv >
                     <div className="row mb-3 align-items-center">
-                      <div className="col-5">
+                      <div className="col-4">
                         <input
                           type="number"
                           className="form-control"
+                          style={{width:"100%"}}
                           placeholder="Min"
                           value={minPrice}
                           onChange={(e) => setMinPrice(e.target.value)}
                         />
                       </div>
-                      <div className="col-2 text-center">
+                      <div className="col-4 text-center">
                         <span className="to">to</span>
                       </div>
-                      <div className="col-5">
+                      <div className="col-4">
                         <input
                           type="number"
                           className="form-control"
+                          style={{width:"100%"}}
                           placeholder="Max"
                           value={maxPrice}
                           onChange={(e) => setMaxPrice(e.target.value)}
                         />
                       </div>
                     </div>
-                    <div className="row">
-                      <div className="col-6">
+                    <div style={{display: "flex", justifyContent: "space-between" }}>
+                      <div>
                         <Button
                           type="submit"
+                          style={{width:"100px"}}
                           onClick={(e) => clearPriceFilter(e)}
                           variant="outline-primary"
                         >
                           Clear
                         </Button>
                       </div>
-                      <div className="col-6">
+                      <div>
                         <Button
+                          style={{width:"100px"}}
                           onClick={(e) => handlePriceFilter(e)}
                           variant="outline-primary"
                         >
@@ -747,9 +733,8 @@ function SearchResults() {
                       </div>
                     </div>
                   </InputDiv>
-                </PriceDropdown>
-              </PriceFilter>
-            </Div>
+              </PriceDropdown>
+            </PriceFilterDiv>
             <CustomSelect
               name="sort"
               onChange={(e) => handleNftSort(e)}
@@ -757,9 +742,8 @@ function SearchResults() {
               defaultValue=""
             >
               <StyledOption value="" hidden>
-                Sort By All
+                Sort By
               </StyledOption>
-              <StyledOption value="all">All</StyledOption>
               <StyledOption value="-1">Ascending Order</StyledOption>
               <StyledOption value="1">Descending Order</StyledOption>
             </CustomSelect>
