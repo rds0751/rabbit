@@ -178,7 +178,7 @@ function Home() {
                                             className="profile-img"
                                           />
                                         </div>
-                                        <div className="flex-grow-1 ms-2">
+                                        <div className="flex-grow-1 ms-2 card1">
                                           <h3 className="title">
                                             <Link
                                               to={
@@ -266,7 +266,7 @@ function Home() {
                                     <Card.Body>
                                       <div className="d-flex align-items-start media">
                                         <div className="flex-shrink-0">
-                                          <div>
+                                         
                                             <img
                                               src={nft?.cdnUrl}
                                               alt="Image1"
@@ -274,8 +274,8 @@ function Home() {
                                               height="38px"
                                               className="profile-img"
                                             />
-                                          </div>
-                                          <div className="flex-grow-1 ms-2">
+                                          
+                                          <div className="flex-grow-1 ms-2 card1">
                                             <h3 className="title">
                                               <Link
                                                 to={
@@ -288,10 +288,11 @@ function Home() {
                                                 {nft?.name}
                                               </Link>
                                             </h3>
-                                          </div>
+                                          
                                           <span className="nftTileEachDetailsFirstContainerValue">
                                             {`${nft?.salesInfo?.price}  ${nft?.salesInfo?.currency}`}
                                           </span>
+                                          </div>
                                           {/* <p className="description">{nft?.salesInfo.price} </p> */}
                                         </div>
                                       </div>
