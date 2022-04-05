@@ -182,7 +182,7 @@ function Navbar() {
     } else {
       dispatch(ManageWalletSideBar(!isOpenWallet));
       dispatch(ManageNotiSideBar(false));
-      document.body.style.overflow = !isOpenWallet ? "hidden" : "visible";
+      document.body.className = !isOpenWallet ? "overflow" : "overflow-hidden";
     }
   };
   const handleNotiSideBar = () => {
@@ -195,7 +195,7 @@ function Navbar() {
     } else {
       dispatch(ManageNotiSideBar(!isOpenNoti));
       dispatch(ManageWalletSideBar(false));
-      document.body.style.overflow = !isOpenNoti ? "hidden" : "visible";
+      document.body.className = !isOpenNoti ? "overflow" : "overflow-hidden";
     }
   };
 
@@ -300,7 +300,7 @@ function Navbar() {
                                 <Spinner />
                               </div>
                             ):(
-                              <div className="Noitemdiv">
+                              <div className="Noitemdiv"  style={{display:display?"none":"flex"}}>
                                 <img src={NoItem} alt="" />
                                 <p className="textitem">No items available</p>
                               </div>

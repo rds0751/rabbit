@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import SellItem from "./SellItem";
 import "../../../assets/styles/buying.css";
 const MainContainer = styled.div`
@@ -118,6 +118,7 @@ const Question = styled.h1`
 
 export default function Selling() {
     const [query ,setQuery]=useState("")
+    const navigate=useNavigate();
     const BuyList = [
       {
         id: 0,
@@ -167,7 +168,7 @@ export default function Selling() {
     <MainContainer>
       <div>
         <Header>
-        <img src={require("../../../assets/images/leftarrowbuying.png")} style={{marginRight:"16px",width:"26px",height:"23px"}} className="backbuying" />
+        <img src={require("../../../assets/images/leftarrowbuying.png")} onClick={()=>navigate(-1)} style={{marginRight:"16px",width:"26px",height:"23px"}} className="backbuying" />
           <Title>Selling</Title>
           <SearchBox>
             <Input type="search" placeholder="Search" value={query} onChange={(e)=>setQuery(e.target.value)} />
