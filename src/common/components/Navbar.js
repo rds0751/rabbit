@@ -22,6 +22,7 @@ import Menu from "./Menu";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
 import NoItem from "../../assets/images/Noitems.svg";
 import Spinner from "../../common/components/Spinner";
+import Form from 'react-bootstrap/Form'
 
 const queryString = require("query-string");
 function Navbar() {
@@ -366,11 +367,17 @@ function Navbar() {
             </div>
             
             <div className="search_box order-2">
-              <div style={{display: 'flex', position:"relative"}}>
-                <div>
-                  <img src={searchIcon} alt="" className="search-icon" />
-                </div>
-                <div>
+              
+            <Form.Control
+    type="search"
+    name="searchByName"
+   
+    onChange={(e) => handleSearch(e)}
+    autoComplete="off"
+    className="search-input"
+    placeholder="Search items and collections"
+  />
+                {/* <div>
                   <input
                     type="search"
                     name="searchByName"
@@ -379,8 +386,11 @@ function Navbar() {
                     autoComplete="off"
                     className="search-input"
                   />
+                </div> */}
+                <div className="searchimg">
+                  <img src={searchIcon} alt="" className="search-icon" />
                 </div>
-              </div>
+              
               {(searchNft.searchByName.length > 0) && (
                   <>
                     {(nfts.length === 0 && collections.length === 0) ? (
