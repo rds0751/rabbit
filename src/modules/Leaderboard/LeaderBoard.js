@@ -432,14 +432,14 @@ function LeaderBoard() {
                           {buyer.photo == '' || !buyer.photo ? (
                             <img
                               className="top-img"
-                              style={{ width: '71px', height: '71px' }}
+                              style={{ width: '52px', height: '52px' }}
                               src={NoProfile}
                               alt=""
                             />
                           ) : (
                             <img
                               className="top-img"
-                              style={{ width: '71px', height: '71px' }}
+                              style={{ width: '52px', height: '52px' }}
                               src={buyer.photo}
                               alt=""
                             />
@@ -622,14 +622,14 @@ function LeaderBoard() {
                           {topSellers.photo == '' || !topSellers.photo ? (
                             <img
                               className="top-img"
-                              style={{ width: '71px', height: '71px' }}
+                              style={{ width: '52px', height: '52px' }}
                               src={NoProfile}
                               alt=""
                             />
                           ) : (
                             <img
                               className="top-img"
-                              style={{ width: '71px', height: '71px' }}
+                              style={{ width: '52px', height: '52px' }}
                               src={topSellers.photo}
                               alt=""
                             />
@@ -795,14 +795,14 @@ function LeaderBoard() {
                             !collection[0].imageUrl ? (
                             <img
                               className="top-img"
-                              style={{ width: '71px', height: '71px' }}
+                              style={{ width: '52px', height: '52px' }}
                               src={NoProfile}
                               alt=""
                             />
                           ) : (
                             <img
                               className="top-img"
-                              style={{ width: '71px', height: '71px' }}
+                              style={{ width: '52px', height: '52px' }}
                               src={collection[0].imageUrl}
                               alt=""
                             />
@@ -1232,14 +1232,14 @@ const BuildPendingAcceptedRejectedBlock = ({ apiData ,isloading}) => {
                 {buyer.photo == '' || !buyer.photo ? (
                   <img
                     className="top-img"
-                    style={{ width: '71px', height: '71px' }}
+                    style={{ width: '52px', height: '52px' }}
                     src={NoProfile}
                     alt=""
                   />
                 ) : (
                   <img
                     className="top-img"
-                    style={{ width: '71px', height: '71px' }}
+                    style={{ width: '52px', height: '52px' }}
                     src={buyer.photo}
                     alt=""
                   />
@@ -1330,14 +1330,14 @@ const BuildAcceptedBlock = ({ apiData , isloading }) => {
                 {topSellers.photo == '' || !topSellers.photo ? (
                   <img
                     className="top-img"
-                    style={{ width: '71px', height: '71px' }}
+                    style={{ width: '52px', height: '52px' }}
                     src={NoProfile}
                     alt=""
                   />
                 ) : (
                   <img
                     className="top-img"
-                    style={{ width: '71px', height: '71px' }}
+                    style={{ width: '52px', height: '52px' }}
                     src={topSellers.photo}
                     alt=""
                   />
@@ -1408,14 +1408,14 @@ const BuildRejectedBlock = ({ apiData ,isloading}) => {
                 {collection[0].imageUrl == '' || !collection[0].imageUrl ? (
                   <img
                     className="top-img"
-                    style={{ width: '71px', height: '71px' }}
+                    style={{ width: '52px', height: '52px' }}
                     src={NoProfile}
                     alt=""
                   />
                 ) : (
                   <img
                     className="top-img"
-                    style={{ width: '71px', height: '71px' }}
+                    style={{ width: '52px', height: '52px' }}
                     src={collection[0].imageUrl}
                     alt=""
                   />
