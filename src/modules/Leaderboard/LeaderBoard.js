@@ -985,18 +985,7 @@ function LeaderBoard() {
             <option value='yearly'>Yearly</option>
 
           </select> */}
-          <CustomSelect
-            name="duration"
-            onChange={(e) => ChangeCollectionDuration(e)}
-            value={collectionDuration.duration}
-            defaultValue="all"
-            className="mobFilterButton"
-          >
-            <StyledOption value="all">All</StyledOption>
-            <StyledOption value="weekly">Weekly</StyledOption>
-            <StyledOption value="monthly">Monthly</StyledOption>
-            <StyledOption value="yearly">Yearly</StyledOption>
-          </CustomSelect>
+          
           <div className='clearfix'></div>
           <div
             className="small-leaderboard-body"
@@ -1004,7 +993,21 @@ function LeaderBoard() {
           >
             <div>
               {PendingAcceptedCreated === 'pending' ? (
+              <>
+                <CustomSelect
+                  name="duration"
+                  onChange={(e) => ChangeBuyerDuration(e)}
+                  value={buyerDuration.duration}
+                  defaultValue="all"
+                  className="mobFilterButton"
+                >
+                  <StyledOption value="all">All</StyledOption>
+                  <StyledOption value="weekly">Weekly</StyledOption>
+                  <StyledOption value="monthly">Monthly</StyledOption>
+                  <StyledOption value="yearly">Yearly</StyledOption>
+                </CustomSelect>
                 <BuildPendingAcceptedRejectedBlock apiData={limitBuyers} isloading ={isloadingForBuyers}  />
+              </>
               ) : (
                 <></>
               )}
@@ -1012,7 +1015,21 @@ function LeaderBoard() {
 
             <div>
               {PendingAcceptedCreated === 'accepted' ? (
-                <BuildAcceptedBlock apiData={limitSellers} isloading ={isloadingForSeller} />
+                <>
+                  <CustomSelect
+                    name="duration"
+                    onChange={(e) => ChangeSellerDuration(e)}
+                    value={sellerDuration.duration}
+                    defaultValue="all"
+                    className="mobFilterButton"
+                  >
+                    <StyledOption value="all">All</StyledOption>
+                    <StyledOption value="weekly">Weekly</StyledOption>
+                    <StyledOption value="monthly">Monthly</StyledOption>
+                    <StyledOption value="yearly">Yearly</StyledOption>
+                  </CustomSelect>
+                  <BuildAcceptedBlock apiData={limitSellers} isloading ={isloadingForSeller} />
+                </>
               ) : (
                 <></>
               )}
@@ -1020,7 +1037,21 @@ function LeaderBoard() {
 
             <div>
               {PendingAcceptedCreated === 'rejected' ? (
-                <BuildRejectedBlock apiData={limitCollections} isloading ={isloadingForCollection} />
+                <>
+                  <CustomSelect
+                    name="duration"
+                    onChange={(e) => ChangeCollectionDuration(e)}
+                    value={collectionDuration.duration}
+                    defaultValue="all"
+                    className="mobFilterButton"
+                  >
+                    <StyledOption value="all">All</StyledOption>
+                    <StyledOption value="weekly">Weekly</StyledOption>
+                    <StyledOption value="monthly">Monthly</StyledOption>
+                    <StyledOption value="yearly">Yearly</StyledOption>
+                  </CustomSelect>
+                  <BuildRejectedBlock apiData={limitCollections} isloading ={isloadingForCollection} />
+                </>
               ) : (
                 <></>
               )}

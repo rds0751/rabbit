@@ -301,7 +301,7 @@ function Navbar() {
                                 <Spinner />
                               </div>
                             ):(
-                              <div className="Noitemdiv">
+                              <div className="Noitemdiv"  style={{display:display?"none":"flex"}}>
                                 <img src={NoItem} alt="" />
                                 <p className="textitem">No items available</p>
                               </div>

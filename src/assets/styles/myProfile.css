@@ -61,9 +61,10 @@
   box-sizing: border-box;
   align-items: center;
   cursor: pointer;
-  font-family: 'poppins';
+  /* font-family: 'poppins';
   font-size: 14px;
-  line-height: 21px;
+  line-height: 21px; */
+  font: normal normal normal 14px/21px Poppins;
   color: #707070;
   padding: 0px 4px 11px 4px;
   justify-content: center;
@@ -76,14 +77,20 @@
 }
 .wallet-address-text {
   /* width: 101px; */
-  background-color: #f3f3f3;
+  background: #F3F3F3 0% 0% no-repeat padding-box;
   border-radius: 6px;
   /* width: 10%; */
   /* display: flex; */
   /* margin-top: 5px; */
   /* overflow: hidden; */
   /* text-overflow: ellipsis; */
-  padding: 4px;
+   padding: 4px 4px 3px 4px; 
+}
+.addressText{
+  margin-bottom: 0;
+  font: normal normal normal 16px/25px Poppins;
+  color: #191919;
+
 }
 .profile-user {
   font-family: 'poppins-bold';
@@ -95,7 +102,7 @@
 
 .add-cover {
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 21px;
   text-align: center;
   align-items: center;
   width: 10%;
@@ -111,19 +118,27 @@
 .add-cover .copy-img:hover{
   box-shadow: 0 2px 2px #e2e2e2;
 }
+.hover-cls:hover .pencilicon{
+  display: block;
+}
 .profilecover {
   height: 280px;
   width: 100%;
   /* object-fit: cover; */
   object-fit: fill; 
 }
+.profilecover:hover{
+  opacity:0.8;
+}
 .pencilicon {
+  display:none;
   position: absolute;
-  right: 1%;
+  right: 50%;
   height: 16px;
   width: 16px;
-  bottom: 8%;
+  bottom: 50%;
   cursor: pointer;
+  color:red;
 }
 .profileavatar {
   border-radius: 50%;
@@ -168,11 +183,15 @@
   border: 4px solid #fff;
 }
 .profile-description{
-  font-family: 'poppins';
+  /* font-family: 'poppins';
   font-size: 16px;
   line-height: 25px;
-  color: #000000;
-  margin-bottom: 19px;
+  color: #000000; */
+  text-align: center;
+font: normal normal normal 16px/25px Poppins;
+letter-spacing: 0px;
+color: #000000;
+  margin-bottom: 18px;
   width: 27%;
 }
 .profile-portfolio{
@@ -188,6 +207,15 @@
 .profileItemContainer .nftTileContainer .nftCardEach:nth-child(4n+4) {
   margin-right: 0px;
 }
+.copyButton{
+  width:21.47px;
+  height:21.47px;
+  cursor:pointer;
+}
+.editTextAnchor{
+  display: none;
+}
+
 
 @media only screen and (max-width: 1024px) {
   .editProfileButton {
@@ -319,8 +347,77 @@
   .postTypeProfile--active {
     border-bottom: 2px solid #000000;
     height: 100% !important;
-    font-family: "poppins-semibold";
+    /* font-family: "poppins-semibold"; */
+    font: normal normal 600 14px/21px Poppins;
   }
+  .profile-user{
+    font: normal normal 600 18px/27px Poppins;
+    letter-spacing: 0px;
+    color: #191919;
+    margin-bottom: 16px;
+  }
+  .copyButton{
+    width:21px;
+    height:21px;
+    margin-left: 11.6px;
+    cursor:pointer;
+  }
+  .addressText{
+    margin-bottom: 0;
+    font: normal normal normal 14px/21px Poppins;
+  }
+  .wallet-address-text{
+    padding: 6px 10px 4px 4px; 
+  }
+  .profile-description{
+    font: normal normal bold 14px/21px Poppins;
+    letter-spacing: 0px;
+    color: #191919;
+    opacity: 1;
+  }
+  .profile-portfolio{
+  font: normal normal normal 14px/21px Poppins;
+  letter-spacing: 0px;
+  color: #707070;
+
+  }
+  .globalImg{
+    width: 15px;
+    height: 15px;
+    margin-right: 12px;
+  }
+  .edit-text{
+    position: absolute;
+    color: #366EEF;
+    margin-top: 16px;
+    margin-right: 18px;
+    font-size: 12px;
+    left: 92%;
+    line-height: 18px;
+    font-family: Poppins;
+    font-weight: 600;
+  }
+  .editTextAnchor{
+    display: block;
+  }
+  .textdecornone{
+    display: none;
+  }
+  .user-img{
+    width: 100px !important;
+    height: 100px !important;
+    margin-top: 54px;
+    border: 3px solid #FFFFFF !important;
+    border-radius: 171px !important;
+    object-fit: cover;
+  }
+  .profile-portfolio{
+    margin-bottom: 26px;
+  }
+  .profilecover{
+    height: 195px;
+  }
+
 }
 
 .profileeditbutton:hover{

@@ -203,7 +203,7 @@ function MyProfile() {
   return (
     <>
       <div>
-        <div className="position-relative relative">
+        <div className="position-relative relative hover-cls">
           <img
             className="profilecover"
             src={
@@ -225,12 +225,16 @@ function MyProfile() {
             <button className="profileeditbutton">Edit Profile</button>
           </Link>
         </div>
+        <Link to="/edit-profile" className="editTextAnchor">
+        <span className="edit-text">Edit</span>
+        </Link>
         <div className="profileavatar  absolute">
           <img
             src={loggedInUser?.photo != "" ? loggedInUser?.photo : profileImage}
             alt=""
             className="user-img"
           />
+         
           {/* <h2>{ethereum && ethereum.selectedAddress}</h2> */}
           {/* <h2>{window.ethereum && defaultAccount}</h2> */}
           {/* {defaultAccount} */}
@@ -239,16 +243,12 @@ function MyProfile() {
             <div className="wallet-address-text">
               {/* {loggedInUser?.wallet_address} */}
 
-              <SplitWalletAdd address={loggedInUser?.wallet_address} />
+              <p className="addressText"><SplitWalletAdd address={loggedInUser?.wallet_address} /></p>
             </div>
             <CopyToClipboard text={walletAddress?.address}>
               <img
-                style={{
-                  width: "21.47px",
-                  height: "21.47px",
-                  cursor: "pointer",
-                }}
                 src={copy}
+                className="copyButton"
                 alt=""
                 onClick={isDataCopied}
               />
@@ -267,7 +267,7 @@ function MyProfile() {
             main focus in art is to make digital abstract painting
           </p> */}
           <h6 className="profile-portfolio">
-            <img style={{ height: "30px" }} src={globe} alt="" />
+            <img className="globalImg" src={globe} alt="" />
             {loggedInUser?.portfolio}
           </h6>
           <Link to="/edit-profile" className="textdecornone">

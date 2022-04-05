@@ -1,6 +1,8 @@
 import React,{useState} from "react";
 import styled from "styled-components";
 import FaqItem from "./FaqItem";
+import {Link,useNavigate} from "react-router-dom";
+import "../../assets/styles/buying.css";
 
 const MainContainer = styled.div`
   display: flex;
@@ -107,6 +109,7 @@ const Question = styled.h1`
 
 const Faqs = (props) => {
   const [query ,setQuery]=useState("")
+  const navigate=useNavigate();
   const faqsList = [
     {
       id: 0,
@@ -147,9 +150,32 @@ const Faqs = (props) => {
   const match=faqsList.filter(val => val.questionText.toLocaleLowerCase().includes(query));
 
   return (
+    <>
+     <nav aria-label="breadcrumb" className="headerbuying">
+        <ol className="breadcrumb mt-4 offset-1">
+          <li className="breadcrumb-item">
+            <Link
+              to="/help-center"
+              style={{ textDecoration: "none" }}
+              className="text-dark"
+            >
+              Help Center
+            </Link>
+          </li>
+          <li
+            className="breadcrumb-item active text-primary"
+            aria-current="page"
+          >
+            FAQs
+          </li>
+        </ol>
+      </nav>
+    
+ 
     <MainContainer>
       <div>
         <Header>
+        <img src={require("../../assets/images/leftarrowbuying.png")} onClick={() => navigate(-1)} style={{marginRight:"16px",width:"26px",height:"23px"}} className="backbuying" />
           <Title>FAQs</Title>
           <SearchBox>
             <Input type="search" placeholder="Search"  value={query} onChange={(e)=>setQuery(e.target.value)}/>
@@ -177,6 +203,7 @@ const Faqs = (props) => {
         </ul>
       </div>
     </MainContainer>
+    </>
   );
 };
 
