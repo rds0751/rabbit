@@ -182,7 +182,7 @@ function Navbar() {
     } else {
       dispatch(ManageWalletSideBar(!isOpenWallet));
       dispatch(ManageNotiSideBar(false));
-      document.body.style.overflow = !isOpenWallet ? "hidden" : "visible";
+      document.body.className = !isOpenWallet ? "overflow" : "overflow-hidden";
     }
   };
   const handleNotiSideBar = () => {
@@ -195,7 +195,7 @@ function Navbar() {
     } else {
       dispatch(ManageNotiSideBar(!isOpenNoti));
       dispatch(ManageWalletSideBar(false));
-      document.body.style.overflow = !isOpenNoti ? "hidden" : "visible";
+      document.body.className = !isOpenNoti ? "overflow" : "overflow-hidden";
     }
   };
 
