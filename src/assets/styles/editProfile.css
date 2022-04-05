@@ -109,6 +109,7 @@
 }
 .poppins-normal {
   font-family: "poppins";
+  text-transform: capitalize;
 }
 .poppins-medium {
   font-family: "poppins-medium";
