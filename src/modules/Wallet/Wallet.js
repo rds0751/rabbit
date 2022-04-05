@@ -78,7 +78,7 @@ function Wallet() {
 
     // walletTogglePopup(false);
 
-    toast.success("Copied");
+    toast.success("Text Copied");
 
   };
 

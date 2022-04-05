@@ -790,7 +790,7 @@ height: 47px;
   }
   .search_box {
     width: 100%;
-    margin-top: 31px;
+    margin-top: 12px;
     display: flex;
     margin-left: 4.5%;
     margin-right: 4.5%;
@@ -1035,7 +1035,7 @@ height: 47px;
 
 .footer-main-cont{
   /* margin-top: 40px; */
-  margin-top: 79px;
+  margin-top: 23px;
   /* padding-top: 40px;
   padding-bottom: 40px; */
   /* padding-top: 74px; */
