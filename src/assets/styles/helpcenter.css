@@ -84,7 +84,7 @@
     padding: 20px 34px;
     width: 100%;
     /* width: 216px; */
-    margin-top: 66px;
+    /* margin-top: 66px; */
   }
   .help-outer {
     margin: 0% 6.6%;
@@ -117,7 +117,7 @@
     margin-bottom: 9%;
   }
 }
-@media only screen and (min-width: 426px) and (max-width: 980px) {
+@media only screen and (min-width: 427px) and (max-width: 980px) {
   .single-card {
     padding-left: 14px;
     padding-right: 9px;
@@ -137,4 +137,28 @@
   .help-outer{
     margin-top: 41px;
   }
+}
+@media only screen and (min-width:427px) and (max-width:512px) {
+  .single-card{
+    width: 182px;
+  }
+  
+}
+@media only screen and (min-width:512px) and (max-width:585px) {
+  .single-card{
+    width: 221px;
+  }
+  
+}
+@media only screen and (min-width:585px) and (max-width:720px) {
+  .single-card{
+    width: 254px;
+  }
+  
+}
+@media only screen and (min-width:723px) and (max-width:698px) {
+  .single-card{
+    width: 293px;
+  }
+  
 }

@@ -9,13 +9,23 @@ const ListItem = styled.li`
   border-radius: 12px;
   padding: 30px 24px 13px 16px;
   margin-bottom: 32px;
-  @media screen and (min-width: 426px) and (max-width: 769px) {
+  @media screen and (min-width: 426px) and (max-width: 701px) {
     padding: 30px 14px 13px 16px;
     width: 100%;
   }
-  @media screen and (min-width: 770px) and (max-width: 955px) {
+  @media screen and (min-width: 500px) and (max-width: 605px) {
     padding: 30px 14px 13px 16px;
-    width: 100%;
+    width: 485px;
+    
+  }
+  @media screen and (min-width: 605px) and (max-width: 700px) {
+    padding: 30px 14px 13px 16px;
+    width: 585px;
+    
+  }
+  @media screen and (min-width: 700px) and (max-width: 955px) {
+    padding: 30px 14px 13px 16px;
+    width: 683px;
     
   }
   @media screen and (max-width: 426px) {
