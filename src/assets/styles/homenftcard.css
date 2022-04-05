@@ -51,11 +51,11 @@
   /* padding-top: 4%; */
 }
 .nftTileEachDetailsFirstContainerName {
-  font-family: "poppins-bold";
   min-height: 48px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
+  font: normal normal bold 16px/25px Poppins;
   -webkit-line-clamp: 2; /* number of lines to show */
   -webkit-box-orient: vertical;
 }
