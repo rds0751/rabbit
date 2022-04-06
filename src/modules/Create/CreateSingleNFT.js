@@ -302,7 +302,7 @@ function CreateSingleNFT(props) {
   // Blockchain option
   const [selectedOption, setSelectedOption] = useState(null);
   const blockchainOption = [
-    { value: 'eth', label: <div><img src={ethereum} height="32px" alt=""/> Ethereum</div> },
+    { value: 'ETH', label: <div><img src={ethereum} height="32px" alt=""/> Ethereum</div> },
   ];
 const enabled=name.current.length > 0 && price.current.length>0 && description.current.length >0 && selectFile!="" && nameError=="" && error=="";
   return (
