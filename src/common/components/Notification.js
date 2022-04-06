@@ -83,7 +83,6 @@ function Notification() {
           {notifications.map((curElem) => {
             const { addedOn, type, owner } = curElem;
             let addedOnTimeStamp = moment(addedOn).format('LT')
-{console.log(owner,"1111111111111")}
 
             return (
               <div className="single-noti">
