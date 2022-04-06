@@ -1187,7 +1187,7 @@ opacity: 1;
 
 }
 @media screen and (max-width:991px){
-  . footer-top .hideicon{
+  .footer-top .hideicon{
     display: none;
   }
   .Icon{
