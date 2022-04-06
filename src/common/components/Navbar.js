@@ -643,7 +643,7 @@ function Navbar() {
 
                       <li
                         className="profileitem"
-                        style={{ padding: "13.25px 89px 7px 13px" }}
+                        style={{ padding: "13.25px 75px 7px 13px" }}
                         onClick={() => manageNavigation("myitems")}
                       >
                         My Items
