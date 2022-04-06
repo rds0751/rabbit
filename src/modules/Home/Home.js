@@ -265,7 +265,7 @@ function Home() {
                                     </Link>
                                     <Card.Body>
                                       <div className="d-flex align-items-start media">
-                                        <div className="flex-shrink-0">
+                                        <div className="flex-shrink-0 titleChar">
                                          
                                             <img
                                               src={nft?.cdnUrl}
