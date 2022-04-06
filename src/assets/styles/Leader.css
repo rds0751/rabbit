@@ -1798,3 +1798,39 @@ opacity: 1;
 td {
  height: 35px;
 }
+@media (min-width: 600px){
+.css-1arijsr-MuiSnackbar-root {
+    top: 192px !important;
+    right: 37px !important;
+    left: auto;
+}
+.css-1eqdgzv-MuiPaper-root-MuiSnackbarContent-root {
+  min-width: 112px !important;
+}
+}
+@media only screen and (min-width:0px) and  (max-width:599px){
+  .css-1arijsr-MuiSnackbar-root {
+      top: 153px !important;
+      left: auto !important;
+  }
+  .css-1eqdgzv-MuiPaper-root-MuiSnackbarContent-root {
+    min-width: 112px !important;
+  }
+  }
+.copy-button{
+  border: none;
+  background: transparent;
+}
+@media (min-width: 600px){
+.css-zzms1-MuiSnackbar-root {
+    top: 451px !important;
+    left: 58% !important;
+}}
+@media only screen and (min-width:0px) and  (max-width:599px){
+  .css-zzms1-MuiSnackbar-root {
+      top: 468px !important;
+      left: auto !important;
+      right: 55 !important;
+  }
+
+  }

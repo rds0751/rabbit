@@ -1,7 +1,7 @@
-.overflow{
+/* .overflow{
     overflow: hidden !important;
-    position: fixed;
+    position: fixed !important;
 }
-.overflow-auto{
+.overflow-hidden{
     overflow: auto;
-}
+} */

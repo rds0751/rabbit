@@ -681,7 +681,7 @@ function Navbar() {
         </nav>
 
         <div className={humburger ? "scroll_off" : <></>}>
-          {humburger ? <Menu /> : <></>}
+          {humburger ? <Menu handleHamburger={handleHamburger} /> : <></>}
         </div>
       </div>
     </>
