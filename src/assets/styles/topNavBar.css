@@ -63,3 +63,16 @@
     height: 26px;
   }
 }
+#hover-image{
+  background:lightgrey;
+}
+#hover-no{
+  background:none;
+}
+.overflow{
+  overflow: hidden !important;
+  position: fixed !important;
+}
+.overflow-hidden{
+  overflow: auto;
+}
