@@ -36,11 +36,7 @@ import { errors } from "ethers";
 const Button = styled.button``;
 function CreateSingleNFT(props) {
 
-  console.log("ppppppppdddddddddddppppp", props?.mintedNftId);
-  console.log("ppppppppppppp", props?.loaderState);
-  // console.log("ppppppppppppp", props?.isNftCreated);
   const [collectionData, setCollectionData] = useState([]);
-  console.log("collection data", collectionData)
   const [selectFile, setSelectFile] = useState("");
   const [collectionId, setCollectionId] = useState("");
   const [contractAddress, setContractAddress] = useState("");
@@ -74,15 +70,22 @@ function CreateSingleNFT(props) {
   const[error,setError]=useState('');
   const [nameError,SetNameError]=useState('');
 
+  if (loggedInUser) { localStorage.setItem('userId', loggedInUser._id); }
+  let userId = (loggedInUser) ? loggedInUser._id : localStorage.userId;
+
   // ----------------------------------------------states end-------------
-  console.log(props, "<<<<< fromindexfile");
   useEffect(async () => {
     if (user.loggedInUser._id == null) {
       navigation("/add-wallet");
     }
 
     setmyProfileUrl("/nft-information/")
-    const collections = await getCollectionBySingleUser(loggedInUser?._id);
+    // const collections = await getCollectionBySingleUser(userId);
+    // setCollectionData(collections);
+  }, []);
+
+  useEffect(async () => {
+    const collections = await getCollectionBySingleUser(userId);
     setCollectionData(collections);
   }, []);
 
@@ -299,7 +302,7 @@ function CreateSingleNFT(props) {
   // Blockchain option
   const [selectedOption, setSelectedOption] = useState(null);
   const blockchainOption = [
-    { value: 'eth', label: <div><img src={ethereum} height="32px" /> Ethereum</div> },
+    { value: 'ETH', label: <div><img src={ethereum} height="32px" alt=""/> Ethereum</div> },
   ];
 const enabled=name.current.length > 0 && price.current.length>0 && description.current.length >0 && selectFile!="" && nameError=="" && error=="";
   return (
