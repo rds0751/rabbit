@@ -9,7 +9,7 @@ import "../../assets/styles/Leader.css";
 import { Link } from "react-router-dom";
 import profileImage from "../../assets/images/ProfileReplace.svg";
 import coverImage from "../../assets/images/Component.svg";
-
+import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { ethers } from "ethers";
@@ -33,6 +33,13 @@ import NonftText from "../../common/components/NonftText";
 import { updateBannerByUserId } from "../../services/UserMicroService";
 import SplitWalletAdd from "../../common/components/SplitWalletAdd";
 import NoItem from "../../assets/images/Noitems.svg";
+import Snackbar from '@mui/material/Snackbar';
+
+
+
+
+
+
 function MyProfile() {
   let { user } = useSelector((state) => state);
   let { loggedInUser } = user;
@@ -108,8 +115,27 @@ function MyProfile() {
   const isDataCopied = () => {
     // walletTogglePopup(false);
 
-    toast.success("Copied");
+    // toast.success("Copied");
   };
+
+
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+  });
+
+  const { vertical, horizontal, open } = state;
+
+  const handleClick = (newState) => () => {
+    setState({ open: true, ...newState });
+  };
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
+
+
   const getCreatedByNft = () => {
     NftCreatedByUser((response) => {
       console.log(response, "myprofile");
@@ -246,20 +272,25 @@ function MyProfile() {
               <p className="addressText"><SplitWalletAdd address={loggedInUser?.wallet_address} /></p>
             </div>
             <CopyToClipboard text={walletAddress?.address}>
+            <button  className="copy-button"        onClick={handleClick({
+          vertical: 'top',
+          horizontal: 'center',
+        })}>
               <img
                 src={copy}
                 className="copyButton"
                 alt=""
                 onClick={isDataCopied}
-              />
+              /></button>
             </CopyToClipboard>
-            <ToastContainer
-              style={{
-                marginTop: "100px",
-                width: "142px",
-                marginRight: "55px",
-              }}
-            />
+            <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        onClose={handleClose}
+        message="Copied"
+        key={vertical + horizontal}
+        autoHideDuration={2000}
+      />
           </div>
 
           <p className="profile-description">{loggedInUser?.bio}</p>

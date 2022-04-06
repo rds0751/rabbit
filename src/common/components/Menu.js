@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 // import Upper_MyItems from "./Upper_MyItems";
 // import { Myitem_API } from "../API/MyItemApi";
 
-function Menu() {
+function Menu(props) {
   const { user, sideBar } = useSelector((state) => state);
   const { userDetails, loggedInUser, walletAddress } = user;
   const dispatch = useDispatch();
@@ -36,12 +36,13 @@ function Menu() {
       }
     }
   };
+  console.log(props.handleHamburger,"deepak")
   return (
     <>
       <div className="container new-container menuphone">
 
         <div className="menuin" style={{ display:"flex",cursor:"pointer",
-                justifyContent:"space-between"}} onClick={()=>navigate('/nfts')}>
+                justifyContent:"space-between"}} onClick={()=>{navigate('/nfts'); props.handleHamburger();}}>
           <h2 style={{
                 textDecoration: "none",
                 color: "black",
@@ -59,7 +60,7 @@ function Menu() {
         
         </div>
         <div className="menuin" style={{ display:"flex",cursor:"pointer",
-                justifyContent:"space-between"}} onClick={()=>navigate('/leader-board')}>
+                justifyContent:"space-between"}} onClick={()=>{navigate('/leader-board'); props.handleHamburger();}}>
           <h2 style={{
                 textDecoration: "none",
                 color: "black",
@@ -92,13 +93,13 @@ function Menu() {
               aria-labelledby="navbarDropdown"
               style={{ width: "450%" }}
             >
-              <li>
+              <li onClick={()=>{ props.handleHamburger();}}>
                 <Link className="dropdown-item" to="/help-center">
                   Help Center
                 </Link>
               </li>
-              <li>
-                <Link className="dropdown-item" to="/Suggestion">
+              <li onClick={()=>{ props.handleHamburger();}}>
+                <Link className="dropdown-item" to="/Suggestion" >
                   Suggestions
                 </Link>
               </li>
@@ -107,7 +108,7 @@ function Menu() {
           <i className="fas fa-chevron-right"></i>
         </div>
 
-        <button className="py-2" onClick={() => manageNavigation("create")}>
+        <button className="py-2" onClick={() => {manageNavigation("create"); props.handleHamburger();}}>
 
         <Link
          to={walletAddress == null ? "/add-wallet" : "/create-nft"}

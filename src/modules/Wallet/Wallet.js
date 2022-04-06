@@ -9,6 +9,7 @@ import "../../assets/styles/wallet.css";
 import SplitWalletAdd from "../../common/components/SplitWalletAdd";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { ManageNotiSideBar, ManageWalletSideBar } from "../../reducers/Action";
+import Snackbar from '@mui/material/Snackbar';
 
 function Wallet() {
   const [humburger, setHumburger] = useState(false);
@@ -16,7 +17,10 @@ function Wallet() {
   const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
   const [checkClick, setcheckClick] = useState(false);
   const [getBalance, setGetBalance] = useState(null);
- 
+  // const [state, setState] = React.useState({
+  //   open: false,
+  //   Transition: Fade,
+  // });
 
   // const ethereum = window.ethereum;
   // console.log("ethereum : ", ethereum);
@@ -78,10 +82,27 @@ function Wallet() {
 
     // walletTogglePopup(false);
 
-    toast.success("Text Copied");
+    // toast.success("Text Copied");
 
   };
 
+
+
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+  });
+
+  const { vertical, horizontal, open } = state;
+
+  const handleClick = (newState) => () => {
+    setState({ open: true, ...newState });
+  };
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
 
 
 
@@ -113,19 +134,33 @@ function Wallet() {
           </div>
        <CopyToClipboard text={walletAddress?.address}>
 
-                      
-
+                      <button  className="copy-button"        onClick={handleClick({
+          vertical: 'top',
+          horizontal: 'right',
+        })}>
                         <img
             style={{ width: "21.47px", height: "21.47px", cursor: "pointer" }}
             src={copy}
             alt=""
             onClick={isDataCopied}
-          />
+            // onClick={() => { handleClick(Fade);}}
+            // onClick={handleClick(Fade)}
+          /></button>
+
 
                        
 
                       </CopyToClipboard>
-                      <ToastContainer style={{marginTop:"100px" , width: "142px", marginRight: "55px"}}/>
+                      {/* <ToastContainer style={{marginTop:"100px" , width: "142px", marginRight: "55px"}}/> */}
+                      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        onClose={handleClose}
+        message="Copied"
+        key={vertical + horizontal}
+        autoHideDuration={2000}
+      />
+
           {/* <img
             style={{ width: "21.47px", height: "21.47px", cursor: "pointer" }}
             src={copy}

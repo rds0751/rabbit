@@ -80,6 +80,7 @@
 .all-noti {
   overflow-y: scroll;
   height: 100%;
+  margin-bottom: 88px;
 }
 
 .noti-text {
