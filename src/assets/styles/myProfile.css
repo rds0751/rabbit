@@ -439,6 +439,7 @@ color: #000000;
   }
   .profilecover{
     height: 195px;
+    object-fit: cover;
   }
 
 }
