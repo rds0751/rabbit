@@ -301,7 +301,7 @@ function MyProfile() {
             <img className="globalImg" src={globe} alt="" />
             {loggedInUser?.portfolio}
           </h6>
-          <Link to="/edit-profile" className="textdecornone">
+          <Link to="/edit-profile" className="bottombutton">
             <button className="profileeditbuttonatbottom">Edit Profile</button>
           </Link>
         </div>

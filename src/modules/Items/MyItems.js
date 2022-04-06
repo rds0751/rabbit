@@ -38,7 +38,7 @@ function MyItems() {
         {/* ----- Toggle Upper Part */}
         <div className="my-item-container">
           <div className="">
-            <h1 className="poppins-normal bold-600 font-20 blackish mb-0">
+            <h1 className="poppins-normal bold-600 font-20 blackish mb-0  headingtag">
               My Items
             </h1>
           </div>
@@ -46,24 +46,26 @@ function MyItems() {
           <div className="toggle-items">
             <div
               onClick={() => setToggleSelect(true)}
-              className="font-16 bold-bold poppins-normal"
+              className="font-16 bold-bold poppins-normal singleheading"
               style={{
 
                 color: toggleSelect ? "#191919" : "#828282",
                 borderBottom: toggleSelect ? "3px solid #366EEF" : "none",
                 cursor: "pointer",
+                borderRadius: "2px",
               }}
             >
               Single
             </div>
             <div
               onClick={() => setToggleSelect(false)}
-              className="font-16 bold-bold poppins-normal"
+              className="font-16 bold-bold poppins-normal collectionHeading"
               style={{
                 marginLeft: "18px",
                 color: !toggleSelect ? "#191919" : "#828282",
                 borderBottom: !toggleSelect ? "3px solid #366EEF" : "none",
                 cursor: "pointer",
+                borderRadius:"3px",
               }}
             >
               Collections
@@ -94,7 +96,7 @@ function MyItems() {
 
             {ownedNft.length > 1 ?(
               ownedNft.map((curElem) => {
-                const { cdnUrl, name, _id } =
+                const { cdnUrl, name, _id,salesInfo } =
                   curElem;
                 const route = "/nft-information/" + _id;
                 return (
@@ -126,6 +128,7 @@ function MyItems() {
                           >
                             {name}
                           </div>
+                         <span className="priceTag"> {`${salesInfo?.price}  ${salesInfo?.currency}`}</span>
                         </div>
                       </div>
                     </div>
@@ -154,7 +157,7 @@ function MyItems() {
                   curElem;
                 const collection = "/collection-details/" + _id;
                 return (
-                  <div className="col-md-6 col-lg-3 col-sm-12 mt-5 my-item-card p-0">
+                  <div className="col-md-6 col-lg-3 col-sm-12 mt-5 my-item-card p-0 collectioncard">
                     < div
                       className=" nft-card-radius collection-card border-radius pt-4 cardmob"
                       style={{ backgroundColor: "#F8F8F8" }

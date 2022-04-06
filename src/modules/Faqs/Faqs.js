@@ -151,27 +151,6 @@ const Faqs = (props) => {
 
   return (
     <>
-     <nav aria-label="breadcrumb" className="headerbuying">
-        <ol className="breadcrumb mt-4 offset-1">
-          <li className="breadcrumb-item">
-            <Link
-              to="/help-center"
-              style={{ textDecoration: "none" }}
-              className="text-dark"
-            >
-              Help Center
-            </Link>
-          </li>
-          <li
-            className="breadcrumb-item active text-primary"
-            aria-current="page"
-          >
-            FAQs
-          </li>
-        </ol>
-      </nav>
-    
- 
     <MainContainer>
       <div>
         <Header>
