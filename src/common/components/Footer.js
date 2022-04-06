@@ -171,11 +171,9 @@ function Footer() {
                 <a style={{ textDecoration: "none", color: "#8F8F8F",cursor:"pointer" }}>Company</a></h3>
               <p><a href="/about" style={{ textDecoration: "none", color: "#8F8F8F" }}>About</a></p>
             </div>
-            
+            <div style={{textAlign:"center",borderTop:"1px solid #cecdce",width:"100%"}}><span style={{padding:"12px",fontSize:"12px"}}>Copyright ©2022 Anafto Marketplace</span></div>
           </div>
-          
         </div>
-        <div style={{textAlign:"center",borderTop:"1px solid #cecdce",width:"100%"}}><span style={{padding:"12px",fontSize:"12px"}}>Copyright ©2022 Anafto Marketplace</span></div>
       </div>
     </>
   );
