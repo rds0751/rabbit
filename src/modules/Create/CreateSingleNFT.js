@@ -227,7 +227,12 @@ function CreateSingleNFT(props) {
     if(priceValue.slice(0,1)=="."){
      priceValue="0"+priceValue;
      price.current=priceValue;
-    console.log(priceValue,"hello-world");
+    console.log(priceValue,"<hello-world");
+    }
+    else{
+      price.current=+priceValue;
+      console.log(price.current,"<<<hello-world");
+
     }
    
    
