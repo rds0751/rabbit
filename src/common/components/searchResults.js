@@ -70,7 +70,7 @@ const FiltersDiv = style.div`
   align-items: center;
   justify-content: space-between;
   margin-top:34px;
-  @media screen and (max-width:600px){
+  @media screen and (max-width:720px){
     flex-direction:column;
     margin-top:24px;
   }
@@ -106,7 +106,7 @@ color:#366EEF;
 `;
 const PriceFilterDiv = style.div`
 width:250px;
-@media screen and (max-width:600px){
+@media screen and (max-width:720px){
   width:100%;
 }
 `;
@@ -122,7 +122,7 @@ padding: 9px 12px;
 cursor: pointer;
 position: relative;
 height:42px;
-@media screen and (max-width:600px){
+@media screen and (max-width:720px){
   margin-bottom: 16px;
   width:100%;
 }
@@ -199,8 +199,11 @@ const StyledButton = styled("button")(
   @media only screen and (max-width:767px) {
     width:100%;
   }
-  @media screen and (max-width:600px){
+  @media screen and (max-width:720px){
     margin-bottom:16px;
+  }
+  @media screen and (min-width:720px) and (max-width:769px){
+    width:200px;
   }
   `
 );

@@ -118,27 +118,26 @@
 .add-cover .copy-img:hover{
   box-shadow: 0 2px 2px #e2e2e2;
 }
-.hover-cls:hover .pencilicon{
+/* .hover-cls:hover .pencilicon{
   display: block;
-}
+} */
 .profilecover {
   height: 280px;
   width: 100%;
   /* object-fit: cover; */
   object-fit: fill; 
 }
-.profilecover:hover{
+/* .profilecover:hover{
   opacity:0.8;
-}
+} */
 .pencilicon {
-  display:none;
+  /* display:none; */
   position: absolute;
-  right: 50%;
+  right: 1%;
   height: 16px;
   width: 16px;
-  bottom: 50%;
+  bottom: 8%;
   cursor: pointer;
-  color:red;
 }
 .profileavatar {
   border-radius: 50%;
