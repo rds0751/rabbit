@@ -10,6 +10,30 @@ import SplitWalletAdd from "../../common/components/SplitWalletAdd";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { ManageNotiSideBar, ManageWalletSideBar } from "../../reducers/Action";
 import Snackbar from '@mui/material/Snackbar';
+import styled from "styled-components";
+
+
+
+const CustomSnack = styled(Snackbar)`
+@media (min-width: 969px){
+      top: 192px !important;
+      right: 37px !important;
+      left: auto;
+
+
+    min-width: 112px !important;
+
+  }
+  @media only screen and (min-width:0px) and  (max-width:968px){
+
+        top: 153px !important;
+        left: auto !important;
+ 
+  
+      min-width: 112px !important;
+
+    }`
+
 
 function Wallet() {
   const [humburger, setHumburger] = useState(false);
@@ -152,13 +176,14 @@ function Wallet() {
 
                       </CopyToClipboard>
                       {/* <ToastContainer style={{marginTop:"100px" , width: "142px", marginRight: "55px"}}/> */}
-                      <Snackbar
+                      <CustomSnack
         anchorOrigin={{ vertical, horizontal }}
         open={open}
         onClose={handleClose}
         message="Copied"
         key={vertical + horizontal}
         autoHideDuration={2000}
+        className="custom-snack"
       />
 
           {/* <img

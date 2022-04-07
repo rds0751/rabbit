@@ -187,7 +187,7 @@ function Navbar() {
     }
   };
   const handleNotiSideBar = () => {
-    console.log(isOpenNoti, "<<<isopen noti");
+  
     if (loggedInUser == null) {
       navigate("/add-wallet");
       toast.error("Connect your wallet", {
@@ -199,7 +199,9 @@ function Navbar() {
       document.body.className = !isOpenNoti ? "overflow" : "overflow-hidden";
     }
   };
-
+  console.log(isOpenNoti, "<<<isopen noti");
+ 
+  // document.body.overflow = !isOpenWallet === false ?  "auto": "hidden";
   //------------------------------------------------------------
   const reqObj = queryString.stringify(searchNft)
   const reqObj1 = queryString.stringify(searchCollection)
@@ -249,6 +251,7 @@ function Navbar() {
     setDisplay(true);
     dispatch(ManageNotiSideBar(false));
     dispatch(ManageWalletSideBar(false));
+    // document.body.overflow = !isOpenNoti === false ?  "auto": "hidden";
   };
 
   const walletHandler = () => setShowResults(true);
@@ -598,7 +601,7 @@ function Navbar() {
                   <li>
                     <img
                       onClick={handleNotiSideBar}
-                      className="notification-icon"
+                      className={!isOpenNoti ?  "notification-icon" :   "hover-icon"}
                       src={require("../../assets/images/notification.png")}
                       alt="notification"
                     ></img>
@@ -614,10 +617,10 @@ function Navbar() {
                       aria-expanded="false"
                     >
                       <img
+                       onClick={closeWalletAndNoti}
                         className="btnnav_mob1 profileimg profile-icon"
                         src={require("../../assets/images/profile.png")}
                         alt="profile"
-                        style={{}}
                       ></img>
                     </a>
                     <ul
@@ -656,7 +659,7 @@ function Navbar() {
                         handleWalletClick();
                         walletHandler();
                       }}
-                      className="wallet-icon"
+                      className={!isOpenWallet ?  "wallet-icon" :   "hover-icon"}
                       src={require("../../assets/images/wallet.png")}
                       alt="wallet"
                       style={{

@@ -34,10 +34,32 @@ import { updateBannerByUserId } from "../../services/UserMicroService";
 import SplitWalletAdd from "../../common/components/SplitWalletAdd";
 import NoItem from "../../assets/images/Noitems.svg";
 import Snackbar from '@mui/material/Snackbar';
+import Styled from "styled-components";
 
 
+const CustomSnack = styled(Snackbar)`
+// @media only screen and (min-width:0px) and  (max-width:599px){
+
+//       top: 153px !important;
+//       left: auto !important;
 
 
+//   }
+
+
+@media (min-width: 969px){
+
+    top: 451px !important;
+    left: 58% !important;
+}
+@media only screen and (min-width:0px) and  (max-width:968px){
+
+      top: 468px !important;
+      left: auto !important;
+      right: 55 !important;
+  
+
+  }`
 
 
 function MyProfile() {
@@ -283,13 +305,14 @@ function MyProfile() {
                 onClick={isDataCopied}
               /></button>
             </CopyToClipboard>
-            <Snackbar
+            <CustomSnack
         anchorOrigin={{ vertical, horizontal }}
         open={open}
         onClose={handleClose}
         message="Copied"
         key={vertical + horizontal}
         autoHideDuration={2000}
+        className="custom-snack"
       />
           </div>
 
