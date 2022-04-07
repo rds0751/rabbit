@@ -226,10 +226,11 @@ function CreateSingleNFT(props) {
   const handleSubmit = async (e) => {
     var priceValue=price.current;
     var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
-    console.log(typeof( price.current),"<hello-world");
-    if(price.current?.slice(0,1)==="."){ 
-      price.current="0"+price.current;
-     console.log(typeof( price.current),"<hello-world");
+
+    if(priceValue.slice(0,1)=="."){
+     priceValue="0"+priceValue;
+     price.current=priceValue;
+    console.log(priceValue,"<hello-world");
     }
     else{
       price.current=+priceValue;
@@ -237,7 +238,7 @@ function CreateSingleNFT(props) {
 
     }
    
-   console.log(price.current,"<<<hello-world");
+   
 
     console.log(selectFile, "<<<selected file");
     if (
@@ -728,7 +729,7 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
                 onClick={handleSubmit}
                 className="submit-button"
                 style={{ opacity: !enabled ? 0.6 : 1 }}
-                // disabled={!enabled}
+                disabled={!enabled}
               >
                 Create
               </button>
