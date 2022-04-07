@@ -72,6 +72,17 @@ function Footer() {
                </a>
              <a href="https://www.youtube.com/" target="_blank" className="footerAnchor"><i className="fab fa-youtube  Icon hideicon"></i></a>
             </div>
+            <div className="mobicon">
+            <a href="https://www.facebook.com/" target="_blank" className="footerAnchor">
+             <i class="fa-brands fa-facebook-f Icon"></i>
+             </a>
+             <a href="https://twitter.com/" target="_blank" className="footerAnchor">
+              <i className="fab fa-twitter  Icon twittericon"></i>
+              </a>
+              <a href="https://www.instagram.com/" target="_blank" className="footerAnchor">
+              <i className="fa-brands fa-instagram Icon"></i>
+              </a>
+            </div>
             <p className="subscribe">Subscribe to our newsletter for the latest NFTs</p>
             <div className="input-group-lg input-group  footerinputbox">
               <input

@@ -1066,6 +1066,7 @@ height: 47px;
   }
   .footer-main-cont{
     padding: 20px;
+    padding-bottom: 36px
   }
   .fs-14{
     font-size:14px;
@@ -1189,7 +1190,14 @@ opacity: 1;
 
 
 }
+.mobicon{
+  display: none;
+}
 @media screen and (max-width:991px){
+  .mobicon{
+    display: block;
+  }
+
   .footer-top .hideicon{
     display: none;
   }
@@ -1205,7 +1213,7 @@ opacity: 1;
     margin-right: 13.36px;
   }
   .allicon{
-    display: flex;
+    display: none;
     flex-direction: row-reverse;
     justify-content: start;
    
@@ -1393,11 +1401,10 @@ margin:0px;
 }
 .copyrightDivMob{
   text-align:center;
-  width:100%;
   backgroundColor:rgb(251, 251, 251);
-  margin-top: 30px;
+  margin-top: 39px;
 }
 .textCopyrightMob{
   color: #191919;
-  font: normal normal normal 11px/70px Poppins;
+  font: normal normal normal 12px/18px Poppins;
 }
