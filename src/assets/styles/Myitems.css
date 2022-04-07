@@ -66,6 +66,9 @@
 .collectionHeading {
   font: normal normal normal 16px/25px Poppins;
 }
+.likeCount{
+  float: right;
+}
 @media only screen and (max-width: 426px) {
   .headingtag {
     text-align: center;

@@ -71,14 +71,6 @@ function Footer() {
                {/* <i className="fab fa-discord  Icon hideicon"></i> */}
                </a>
              <a href="https://www.youtube.com/" target="_blank" className="footerAnchor"><i className="fab fa-youtube  Icon hideicon"></i></a>
-
-
-             
-              
-             
-              
-             
-              
             </div>
             <p className="subscribe">Subscribe to our newsletter for the latest NFTs</p>
             <div className="input-group-lg input-group  footerinputbox">
@@ -145,7 +137,9 @@ function Footer() {
               <p><a href="/about" style={{ textDecoration: "none", color: "#8F8F8F" }}>About</a></p>
             </div>
           </div>
-
+          <div className="copyrightDiv">
+            <span className="textCopyright">&copy;2022 Anafto Marketplace. All Rights Reserved.</span>
+            </div>
           <div className="row footer-bottom-sm">
             <div className="col-7">
               <h3 className="fs-18 fw-b">
@@ -161,7 +155,7 @@ function Footer() {
               <p><a href="/top-collection" style={{ textDecoration: "none", color: "#8F8F8F" }}>Top Collections</a></p>
             </div>
             <div className="col-7 mt-3">
-              <h3 className="fs-18 fw-b">ComImunity</h3>
+              <h3 className="fs-18 fw-b">Community</h3>
               <p><a href="/help-center" style={{ textDecoration: "none", color: "#8F8F8F" }}>Help Centers</a></p>
               <p><a href="/FAQs" style={{ textDecoration: "none", color: "#8F8F8F" }}>FAQs</a></p>
               <p><a href="/suggestion" style={{ textDecoration: "none", color: "#8F8F8F" }}>Suggestions</a></p>
@@ -171,7 +165,7 @@ function Footer() {
                 <a style={{ textDecoration: "none", color: "#8F8F8F",cursor:"pointer" }}>Company</a></h3>
               <p><a href="/about" style={{ textDecoration: "none", color: "#8F8F8F" }}>About</a></p>
             </div>
-            <div style={{textAlign:"center",borderTop:"1px solid #cecdce",width:"100%"}}><span style={{padding:"12px",fontSize:"12px"}}>Copyright ©2022 Anafto Marketplace</span></div>
+            <div className="copyrightDivMob"><span className="textCopyrightMob">&copy;2022 Anafto Marketplace. All Rights Reserved.</span></div>
           </div>
         </div>
       </div>

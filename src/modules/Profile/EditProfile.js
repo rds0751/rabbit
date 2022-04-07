@@ -91,7 +91,7 @@ function EditProfile(props) {
         if(flag == false)
            toast.error("File type not acceptable. Please use……… file");
         else if(originalfileSize > 10000)  {
-          toast.error("Image file size should be less than ……. mb")
+          toast.error("Image file size should be less than 10 mb")
         }
         
         if(flag){

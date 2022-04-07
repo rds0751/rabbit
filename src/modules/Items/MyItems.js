@@ -96,7 +96,7 @@ function MyItems() {
 
             {ownedNft.length > 1 ?(
               ownedNft.map((curElem) => {
-                const { cdnUrl, name, _id,salesInfo } =
+                const { cdnUrl, name, _id,salesInfo,likes} =
                   curElem;
                 const route = "/nft-information/" + _id;
                 return (
@@ -129,7 +129,15 @@ function MyItems() {
                             {name}
                           </div>
                          <span className="priceTag"> {`${salesInfo?.price}  ${salesInfo?.currency}`}</span>
+                         
                         </div>
+                        <div className="likeCount" title="Like Count">
+                        {likes.length}
+                        <i
+                          className="fa-solid fa-heart"
+                          style={{ color: "#ef3643",marginLeft:"8.5px"}}
+                        />
+                          </div>
                       </div>
                     </div>
                   </div>
