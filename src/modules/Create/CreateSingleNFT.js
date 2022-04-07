@@ -135,7 +135,7 @@ function CreateSingleNFT(props) {
           getCollection.addIpfs(formData)
         );
         if (err || !ipfsRes.ipfsUrl) {
-          toast.error("unable to add image on network try differnet one");
+          toast.error("unable to add image");
           setisLoader(false);
         } else {
           console.log(ipfsRes, "<<<<ipfs Res");
