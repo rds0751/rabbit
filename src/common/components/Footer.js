@@ -155,7 +155,7 @@ function Footer() {
               <p><a href="/top-collection" style={{ textDecoration: "none", color: "#8F8F8F" }}>Top Collections</a></p>
             </div>
             <div className="col-7 mt-3">
-              <h3 className="fs-18 fw-b">ComImunity</h3>
+              <h3 className="fs-18 fw-b">Community</h3>
               <p><a href="/help-center" style={{ textDecoration: "none", color: "#8F8F8F" }}>Help Centers</a></p>
               <p><a href="/FAQs" style={{ textDecoration: "none", color: "#8F8F8F" }}>FAQs</a></p>
               <p><a href="/suggestion" style={{ textDecoration: "none", color: "#8F8F8F" }}>Suggestions</a></p>
