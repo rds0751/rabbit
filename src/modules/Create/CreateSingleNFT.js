@@ -135,7 +135,7 @@ function CreateSingleNFT(props) {
           getCollection.addIpfs(formData)
         );
         if (err || !ipfsRes.ipfsUrl) {
-          toast.error("unable to add image");
+          toast.error("unable to upload image");
           setisLoader(false);
         } else {
           console.log(ipfsRes, "<<<<ipfs Res");
@@ -227,7 +227,7 @@ function CreateSingleNFT(props) {
     var priceValue=price.current;
     var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
 
-    if(priceValue.slice(0,1)=="."){
+    if(priceValue.toString().slice(0,1)=="."){
      priceValue="0"+priceValue;
      price.current=priceValue;
     console.log(priceValue,"<hello-world");
