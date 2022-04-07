@@ -76,7 +76,7 @@ function Notification() {
       <div className="empty_div" onClick={() => handleChange()}></div>
       <div className="noti-outer">
         <h3 className="notification-text">Notification</h3>
-        <div className="all-noti">
+        <div className="all-noti"    style={{ display: notifications.length === 0 ? "none" : "block" }}>
           {notifications.map((curElem) => {
             const { addedOn, type, owner, content } = curElem;
             let addedOnTimeStamp = moment(addedOn).format("LT");
@@ -144,13 +144,18 @@ function Notification() {
               </div>
             );
           })}
+          <br /> 
+          {notifications.length > 0 ? <footer style={{display:"flex", justifyContent:"center"}}><p className="end-noti">End of Notification</p></footer> : null }
         </div>
         {notifications.length === 0 && (
-          <div className="no-notification">
+          <div className="no-notification"
+          style={{ display: notifications.length === 0 ? "block" : "none" }}
+          >
             <img src={NotificationIcon}></img>
             <p>No notification found</p>
           </div>
         )}
+        
       </div>
 
       {/* ------------------ */}

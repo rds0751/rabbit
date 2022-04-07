@@ -76,3 +76,22 @@
 .overflow-hidden{
   overflow: auto;
 }
+.hover-icon{
+  width: 28px;
+  height: 30px;
+  background:lightgrey;
+  cursor: pointer;
+}
+.end-noti{
+  text-align-last: center;
+  font-family: "poppins";
+  font-size: 16px;
+  font-weight: 400;
+letter-spacing: 0px;
+color: #191919;
+opacity: 1;
+width: 187px;
+    height: 24px;
+    background: #EDF2FD 0% 0% no-repeat padding-box;
+    border-radius: 6px;
+}

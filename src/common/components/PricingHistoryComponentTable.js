@@ -268,7 +268,7 @@ export default function PricingHistoryComponentTable(props) {
                         width: "85px",
                       }}
                     >
-                      {row.userName}
+                      {row.userName.substr(0, 6)}
                     </td>
                     <td
                       style={{
