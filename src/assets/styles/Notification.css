@@ -1040,7 +1040,8 @@ height: 47px;
   padding-bottom: 40px; */
   /* padding-top: 74px; */
   padding-top: 67px;
-  padding-bottom: 109px;
+  /* padding-bottom: 109px; */
+  padding-bottom: 58px;
 }
 .fs-16{
   font-size:16px;
@@ -1081,7 +1082,9 @@ height: 47px;
   .fs-24{
     font-size:22px;
   }
-  
+  .copyrightDiv{
+    display: none;
+  }
 }
 
 /* tab-view */
@@ -1377,4 +1380,24 @@ margin:0px;
 .mainContainer{
   padding-left: 0;
   padding-right: 0;
+}
+.copyrightDiv{
+  text-align:center;
+  width:100%;
+  backgroundColor:rgb(251, 251, 251);
+  margin-top: 84px;
+}
+.textCopyright{
+  color: #191919;
+  font: normal normal normal 12px/70px Poppins;
+}
+.copyrightDivMob{
+  text-align:center;
+  width:100%;
+  backgroundColor:rgb(251, 251, 251);
+  margin-top: 30px;
+}
+.textCopyrightMob{
+  color: #191919;
+  font: normal normal normal 12px/70px Poppins;
 }
