@@ -750,7 +750,7 @@ height: 47px;
     width: auto;
   }
   .form-control {
-    width: 50%;
+    /* width: 50%; */
   }
 }
 
