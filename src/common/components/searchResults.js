@@ -270,6 +270,8 @@ const StyledPopper = styled(PopperUnstyled)`
   z-index: 1;
   @media only screen and (max-width: 767px) {
     width: 100%;
+    padding-left: 7%;
+    padding-right: 7%;
   }
 `;
 
