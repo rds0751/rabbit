@@ -243,19 +243,3 @@
   color: #80A6FA;
   opacity: 1;
 }
-
-.filters-div{
-  display: flex;
-  justify-content: space-between;
-}
-.filters-left{
-  display: flex;
-}
-@media screen and (max-width:767px){
-  .filters-div{
-    flex-direction: column;
-  }
-  .filters-left{
-    flex-direction: column;
-  }
-}
