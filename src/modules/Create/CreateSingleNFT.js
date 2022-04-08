@@ -236,6 +236,7 @@ function CreateSingleNFT(props) {
     }
     else{
       price.current=+priceValue;
+      price.current = price.current.toString();
       console.log(price.current,"<<<hello-world");
 
     }
