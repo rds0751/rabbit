@@ -65,6 +65,7 @@ import SellPage from "./modules/Resources/Selling/index";
 import ScrollToTop from "./ScrollToTop";
 import SearchResults from "./common/components/searchResults";
 function App() {
+
   useEffect(() => {
     const checkWalletAddress = localStorage.getItem(
       WEB_APP_USER_WALLET_ADDRESS
@@ -80,8 +81,8 @@ function App() {
   }, []);
 
   return (
-    <Provider store={store}>
-      <div className="App">
+    <Provider store={store} >
+      <div className="App" >
 
         <Router>
         <ScrollToTop />

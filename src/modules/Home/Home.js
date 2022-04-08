@@ -39,6 +39,7 @@ import AwesomeSlider from "react-awesome-slider";
 import "react-awesome-slider/dist/styles.css";
 
 function Home() {
+ 
   const { user, sideBar } = useSelector((state) => state);
   const { userDetails, loggedInUser, walletAddress } = user;
   const [nfts, setNfts] = useState([]);
@@ -102,9 +103,10 @@ function Home() {
       navigate("/create-nft");
     }
   };
+
   return (
     <>
-      <div className="homepage">
+      <div className="homepage" >
         <div className="banner">
           <div className="inner-width">
             <Container fluid>

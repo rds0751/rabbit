@@ -405,7 +405,7 @@
 }
 
 .awssld__wrapper {
-  border-radius: 20px;
+  border-radius: 20px !important;
   height: 294px !important;
   width: 100%;
 }
