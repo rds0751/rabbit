@@ -125,6 +125,7 @@ function Navbar() {
   let location = useLocation();
 
   const manageNavigation = (name) => {
+    setDisplay(true);
     if (name == "myitems") {
       dispatch(ManageNotiSideBar(false));
       dispatch(ManageWalletSideBar(false));
@@ -168,13 +169,20 @@ function Navbar() {
     }
   };
   const handleHamburger = () => {
+    setDisplay(true);
     if (!humburger) {
       setHumburger(true);
     } else {
       setHumburger(false);
     }
   };
+  const handleDisplay = () => {
+   
+      setDisplay(!display);
+    
+  };
   const handleWalletClick = () => {
+    setDisplay(true);
     if (walletAddress == null) {
       navigate("/add-wallet");
       toast.error("Connect your wallet", {
@@ -187,6 +195,7 @@ function Navbar() {
     }
   };
   const handleNotiSideBar = () => {
+    setDisplay(true);
     console.log(isOpenNoti, "<<<isopen noti");
     if (loggedInUser == null) {
       navigate("/add-wallet");
@@ -251,7 +260,9 @@ function Navbar() {
     dispatch(ManageWalletSideBar(false));
   };
 
-  const walletHandler = () => setShowResults(true);
+  const walletHandler = () => {
+    setDisplay(true);
+    setShowResults(true)};
 
   return (
     <>
@@ -395,7 +406,8 @@ function Navbar() {
                   <>
                     {(nfts.length === 0 && collections.length === 0) ? (
                       <>
-                          <div className="search-results-box-small">
+                          <div className="search-results-box-small" onClick={(e)=>setDisplay(true)} style={{display:display?"none":"block"}}>
+                            <div className="small-search-result" style={{display:display?"none":"block"}}>
                             {isLoading ? (
                               <div className="d-flex justify-content-center mt-3 mb-3">
                                 <Spinner />
@@ -405,12 +417,14 @@ function Navbar() {
                                 <img src={NoItem} alt="" />
                                 <p className="textitem">No items available</p>
                               </div>
-                            )}                            
+                            )}   
+                            </div>                         
                           </div>
                       </>
                     ):(
                       <>
-                          <div className="search-results-box-small" onClick={(e)=>setDisplay(true)} style={{display:display?"none":"block"}}>
+                      <div className="search-results-box-small"  onClick={(e)=>setDisplay(true)} style={{display:display?"none":"block"}}>
+                          <div className="small-search-result" style={{display:display?"none":"block"}}>
                           {collections.length > 0 && (
                             <div>
                             <p className="coll-title">Collections</p>
@@ -455,7 +469,8 @@ function Navbar() {
                             <button className="show-more-btn">show more</button>
                             </Link>
                           </div>
-                          </div>               
+                          </div>   
+                          </div>            
                       </>
                     )}
                   </>                  
@@ -618,6 +633,7 @@ function Navbar() {
                         src={require("../../assets/images/profile.png")}
                         alt="profile"
                         style={{}}
+                        onClick={(e)=>setDisplay(true)}
                       ></img>
                     </a>
                     <ul
@@ -681,7 +697,7 @@ function Navbar() {
         </nav>
 
         <div className={humburger ? "scroll_off" : <></>}>
-          {humburger ? <Menu handleHamburger={handleHamburger} /> : <></>}
+          {humburger ? <Menu handleHamburger={handleHamburger} Navdisplay={handleDisplay} /> : <></>}
         </div>
       </div>
     </>
