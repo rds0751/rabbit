@@ -266,31 +266,16 @@ function CollectionDetails() {
                   onChange = {(e) => setFilter({...filter, "searchByName":e.target.value })}
                 />
                 <div>
-                  {/* <button type="button" id="button-addon2"> */}
                   <img src={search} className="searchicon" />
-                  {/* </button> */}
                 </div>
-              </div>
-              <div>
-                <CustomSelect
-                  name="status"
-                  onChange={(e) => handleStatus(e)}
-                  value={filter.status}
-                  defaultValue=""
-                >
-                  <StyledOption value="" hidden>Status</StyledOption>
-                  <StyledOption value="" >All</StyledOption>
-                  <StyledOption value="onsale" >Open for sale</StyledOption>
-                  <StyledOption value="new">New</StyledOption>
-                </CustomSelect>
               </div>
               <div className="colldrop" >
                 <div className="statusText">
-                  Price range All
+                  Price range
                 </div>
                 <div><img src={dropdown} alt="arrow" onClick= {e => setPriceDrop(!priceDrop)}/></div>                
                 {priceDrop && (
-                  <div className="dropitems" style={{width:"200px"}}>
+                  <div className="dropitems">
                     <div className="row mb-3 align-items-center">
                       <div className="col-5">
                         <input type="number"
@@ -314,17 +299,31 @@ function CollectionDetails() {
                       </div>
                   </div>
                   <div className="row">
-                    <div className="col-6">
-                      <Button variant="outline-primary" onClick={clearValues}>Clear</Button>
+                    <div className="col-5">
+                      <Button variant="outline-primary" onClick={clearValues} style={{width:"100%"}}>Clear</Button>
                     </div>
-                    <div className="col-6">
-                      <Button variant="outline-primary" onClick={setPrice}>Apply</Button>
+                    <div className="col-2"></div>
+                    <div className="col-5">
+                      <Button variant="outline-primary" onClick={setPrice} style={{width:"100%"}}>Apply</Button>
                     </div>
                   </div>
                 </div>
                 )}
 
               </div>
+              <div>
+                <CustomSelect
+                  name="status"
+                  onChange={(e) => handleStatus(e)}
+                  value={filter.status}
+                  defaultValue=""
+                >
+                  <StyledOption value="" hidden>Status</StyledOption>
+                  <StyledOption value="" >All</StyledOption>
+                  <StyledOption value="onsale" >Open for sale</StyledOption>
+                  <StyledOption value="new">New</StyledOption>
+                </CustomSelect>
+              </div>              
               <div className="ms-md-auto">
                 <CustomSelect
                   name="sort"
