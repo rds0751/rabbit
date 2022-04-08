@@ -655,7 +655,7 @@ height: 47px;
 } */
 .navbar-expand-lg .navbar-nav .nav-link {
   padding: 0px;
-  background: #ffffff 0% 0% no-repeat padding-box;
+  /* background: #ffffff 0% 0% no-repeat padding-box; */
   padding-bottom: 20px;
   padding-top: 20px;
   font: normal normal 700 16px/25px Poppins;
@@ -1066,6 +1066,7 @@ height: 47px;
   }
   .footer-main-cont{
     padding: 20px;
+    padding-bottom: 36px
   }
   .fs-14{
     font-size:14px;
@@ -1108,6 +1109,26 @@ height: 47px;
     display: none;
   }
 }
+.copyrightDivMob{
+  text-align:center;
+  backgroundColor:rgb(251, 251, 251);
+  margin-top: 39px;
+}
+.textCopyrightMob{
+  color: #191919;
+  font: normal normal normal 12px/18px Poppins;
+}
+
+.copyrightDiv{
+  text-align:center;
+  width:100%;
+  backgroundColor:rgb(251, 251, 251);
+  margin-top: 49px;
+}
+.textCopyright{
+  color: #191919;
+  font: normal normal normal 12px/70px Poppins;
+}
 
 /* laptop-view */
 @media screen and (min-width:769px){
@@ -1130,6 +1151,7 @@ height: 47px;
   .footer-bottom-sm{
     display: none;
   }
+
 }
 .footerinputbox {
   width: 88.7%;
@@ -1169,8 +1191,6 @@ width: 87%;
   opacity: 1;
 
 }
-
-
 .about{
 text-align: left;
 font: normal normal normal 18px/27px Poppins;
@@ -1186,10 +1206,15 @@ opacity: 1;
   letter-spacing: 0px;
   color: #8F8F8F;
   opacity: 1;
-
-
+}
+.mobicon{
+  display: none;
 }
 @media screen and (max-width:991px){
+  .mobicon{
+    display: block;
+  }
+
   .footer-top .hideicon{
     display: none;
   }
@@ -1205,10 +1230,16 @@ opacity: 1;
     margin-right: 13.36px;
   }
   .allicon{
-    display: flex;
+    display: none;
     flex-direction: row-reverse;
     justify-content: start;
    
+  }
+  .copyrightDiv{
+    margin-top: 44px;
+  }
+  .textCopyright{
+    font: normal normal normal 12px/18px Poppins;
   }
 }
 
@@ -1380,24 +1411,4 @@ margin:0px;
 .mainContainer{
   padding-left: 0;
   padding-right: 0;
-}
-.copyrightDiv{
-  text-align:center;
-  width:100%;
-  backgroundColor:rgb(251, 251, 251);
-  margin-top: 84px;
-}
-.textCopyright{
-  color: #191919;
-  font: normal normal normal 12px/70px Poppins;
-}
-.copyrightDivMob{
-  text-align:center;
-  width:100%;
-  backgroundColor:rgb(251, 251, 251);
-  margin-top: 30px;
-}
-.textCopyrightMob{
-  color: #191919;
-  font: normal normal normal 11px/70px Poppins;
 }

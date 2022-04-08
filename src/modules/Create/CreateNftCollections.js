@@ -117,7 +117,7 @@ function CreateNftCollections(props) {
         const [err, ipfsRes] = await Utils.parseResponse(
           getCollection.addIpfs(formData)
         );
-        if (err || !ipfsRes.ipfsUrl) {
+        if (!ipfsRes.ipfsUrl) {
           toast.error("Unable to upload this image");
         } else {
           setlogoipfs(ipfsRes.ipfsUrl);

@@ -72,6 +72,17 @@ function Footer() {
                </a>
              <a href="https://www.youtube.com/" target="_blank" className="footerAnchor"><i className="fab fa-youtube  Icon hideicon"></i></a>
             </div>
+            <div className="mobicon">
+            <a href="https://www.facebook.com/" target="_blank" className="footerAnchor">
+             <i class="fa-brands fa-facebook-f Icon"></i>
+             </a>
+             <a href="https://twitter.com/" target="_blank" className="footerAnchor">
+              <i className="fab fa-twitter  Icon twittericon"></i>
+              </a>
+              <a href="https://www.instagram.com/" target="_blank" className="footerAnchor">
+              <i className="fa-brands fa-instagram Icon"></i>
+              </a>
+            </div>
             <p className="subscribe">Subscribe to our newsletter for the latest NFTs</p>
             <div className="input-group-lg input-group  footerinputbox">
               <input
@@ -143,7 +154,7 @@ function Footer() {
           <div className="row footer-bottom-sm">
             <div className="col-7">
               <h3 className="fs-18 fw-b">
-                <a  style={{ textDecoration: "none", color: "#8F8F8F",cursor:"default" }}>Marketplace</a></h3>
+                <a  href="/nfts" style={{ textDecoration: "none", color: "#8F8F8F",cursor:"default" }}>Marketplace</a></h3>
               <p><a href="/nfts" style={{ textDecoration: "none", color: "#8F8F8F" }}>Nft</a></p>
               <p><a href="/collections-tile" style={{ textDecoration: "none", color: "#8F8F8F" }}>Collections</a></p>
             </div>

@@ -100,15 +100,17 @@ function CreateSingleNFT(props) {
           if(err.code === "file-too-large"){
             toast.error("Image file size should be less than 40 mb")
             setisLoader(false);
+            return ;
           }
           else if(err.code === "file-invalid-type"){
             toast.error("File type not acceptable. Please use JPG,JPEG, PNG, GIF file");
             setisLoader(false);
+            return ;
           }
           else{
             toast.error("Image file size should be greater than ……. pxl");
             setisLoader(false);
-            
+            return ;
           }
         })
       })
@@ -134,8 +136,8 @@ function CreateSingleNFT(props) {
         const [err, ipfsRes] = await Utils.parseResponse(
           getCollection.addIpfs(formData)
         );
-        if (err || !ipfsRes.ipfsUrl) {
-          toast.error("unable to add image");
+        if (!ipfsRes.ipfsUrl) {
+          toast.error("unable to upload image");
           setisLoader(false);
         } else {
           console.log(ipfsRes, "<<<<ipfs Res");
@@ -227,13 +229,14 @@ function CreateSingleNFT(props) {
     var priceValue=price.current;
     var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
 
-    if(priceValue.slice(0,1)=="."){
+    if(priceValue.toString().slice(0,1)=="."){
      priceValue="0"+priceValue;
      price.current=priceValue;
     console.log(priceValue,"<hello-world");
     }
     else{
       price.current=+priceValue;
+      price.current = price.current.toString();
       console.log(price.current,"<<<hello-world");
 
     }
