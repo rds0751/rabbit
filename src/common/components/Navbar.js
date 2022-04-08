@@ -637,7 +637,6 @@ function Navbar() {
                         src={require("../../assets/images/profile.png")}
                         alt="profile"
                         style={{}}
-                        onClick={(e)=>setDisplay(true)}
                       ></img>
                     </a>
                     <ul
