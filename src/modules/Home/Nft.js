@@ -353,6 +353,7 @@ if(minPrice.length > 0){
   const [statusDrop, setStatusDrop] = useState(false);
 
   const buttonfilter = (e) => {
+    setIsMenuOpen(false);
     handlePriceFilter(e);
     setStatusDrop(false);
 

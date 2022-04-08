@@ -100,15 +100,17 @@ function CreateSingleNFT(props) {
           if(err.code === "file-too-large"){
             toast.error("Image file size should be less than 40 mb")
             setisLoader(false);
+            return ;
           }
           else if(err.code === "file-invalid-type"){
             toast.error("File type not acceptable. Please use JPG,JPEG, PNG, GIF file");
             setisLoader(false);
+            return ;
           }
           else{
             toast.error("Image file size should be greater than ……. pxl");
             setisLoader(false);
-            
+            return ;
           }
         })
       })
@@ -134,7 +136,7 @@ function CreateSingleNFT(props) {
         const [err, ipfsRes] = await Utils.parseResponse(
           getCollection.addIpfs(formData)
         );
-        if (err || !ipfsRes.ipfsUrl) {
+        if (!ipfsRes.ipfsUrl) {
           toast.error("unable to upload image");
           setisLoader(false);
         } else {

@@ -154,7 +154,7 @@ function Footer() {
           <div className="row footer-bottom-sm">
             <div className="col-7">
               <h3 className="fs-18 fw-b">
-                <a  style={{ textDecoration: "none", color: "#8F8F8F",cursor:"default" }}>Marketplace</a></h3>
+                <a  href="/nfts" style={{ textDecoration: "none", color: "#8F8F8F",cursor:"default" }}>Marketplace</a></h3>
               <p><a href="/nfts" style={{ textDecoration: "none", color: "#8F8F8F" }}>Nft</a></p>
               <p><a href="/collections-tile" style={{ textDecoration: "none", color: "#8F8F8F" }}>Collections</a></p>
             </div>

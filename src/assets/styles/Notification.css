@@ -655,7 +655,7 @@ height: 47px;
 } */
 .navbar-expand-lg .navbar-nav .nav-link {
   padding: 0px;
-  background: #ffffff 0% 0% no-repeat padding-box;
+  /* background: #ffffff 0% 0% no-repeat padding-box; */
   padding-bottom: 20px;
   padding-top: 20px;
   font: normal normal 700 16px/25px Poppins;
@@ -1123,7 +1123,7 @@ height: 47px;
   text-align:center;
   width:100%;
   backgroundColor:rgb(251, 251, 251);
-  margin-top: 84px;
+  margin-top: 49px;
 }
 .textCopyright{
   color: #191919;

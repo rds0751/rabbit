@@ -26,14 +26,17 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
           if(err.code === "file-too-large"){
             toast.error("Image file size should be less than 10 mb")
             setisLoader(false);
+            return ;
           }
           else if(err.code === "file-invalid-type"){
-            toast.error("File type not acceptable. Please use……… file");
+            toast.error("File type not acceptable. Please use JPG,JPEG, PNG, GIF file");
             setisLoader(false);
+            return ;
           }
           else{
             toast.error("Image file size should be greater than ……. pxl");
             setisLoader(false);
+            return ;
             
           }
         })
@@ -55,9 +58,10 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
         const [err, ipfsRes] = await Utils.parseResponse(
           getCollection.addIpfs(formData)
         );
-        if ( err|| !ipfsRes.ipfsUrl) {
-          toast.error("unable to add image on network try differnet one");
+        if (!ipfsRes.ipfsUrl) {
+          toast.error("unable to upload image");
           setisLoader(false);
+          return ;
         } else {
           
           // alert("banner");
