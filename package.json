@@ -37,6 +37,7 @@
     "react-elastic-carousel": "^0.11.5",
     "react-icons": "^4.3.1",
     "react-images-upload": "^1.2.8",
+    "react-is": "^18.0.0",
     "react-loader-spinner": "^5.1.4",
     "react-material-toast": "^16.1.7",
     "react-owl-carousel": "^2.3.3",

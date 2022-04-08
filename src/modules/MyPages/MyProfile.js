@@ -49,17 +49,38 @@ const CustomSnack = styled(Snackbar)`
 
 @media (min-width: 969px){
 
-    top: 451px !important;
+    top: 458px !important;
     left: 58% !important;
 }
-@media only screen and (min-width:0px) and  (max-width:968px){
 
-      top: 468px !important;
-      left: auto !important;
-      right: 55 !important;
-  
+  @media only screen and (min-width:770px) and  (max-width:968px){
 
-  }`
+    top: 454px !important;
+    left: auto !important;
+    right: 226px !important;
+
+
+}
+@media only screen and (min-width:521px) and  (max-width:769px){
+
+  top: 423px !important;
+  left: auto !important;
+  right: 140px !important;
+
+
+
+}
+@media only screen and (min-width:0px) and  (max-width:520px){
+
+  top: 313px !important;
+    left: auto !important;
+    right: 88px !important;
+
+
+
+}
+  `
+
 
 
 function MyProfile() {
