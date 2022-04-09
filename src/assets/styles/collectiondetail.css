@@ -108,6 +108,7 @@
   padding: 0% 1%;
   position: relative;
   margin-left: 32px;
+  margin-right:32px;
   border-radius: 4px;
   font-family: 'poppins-medium';
   font-size: 14px;
@@ -128,7 +129,7 @@
   top: 45px;
   border: 1px solid #d2d2d2;
   left: 0px;
-  width: 163px;
+  width: 200px;
   border-radius: 4px;
   padding: 12px;
   background-color: #ffffff;
@@ -191,7 +192,7 @@
     margin-right: 0px;
   }
 }
-@media screen and (max-width: 636px) {
+@media screen and (max-width: 767px) {
   .colleftfilter {
     display: flex;
     flex-direction: column;

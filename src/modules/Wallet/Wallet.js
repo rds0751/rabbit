@@ -16,7 +16,7 @@ import styled from "styled-components";
 
 const CustomSnack = styled(Snackbar)`
 @media (min-width: 969px){
-      top: 192px !important;
+      top: 154px !important;
       right: 37px !important;
       left: auto;
 

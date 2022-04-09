@@ -230,6 +230,7 @@ function Navbar() {
 
   //-----------------------------------------------------------------
   const [display,setDisplay]=useState(false);
+ 
   // if (display) {
   //   document.body.style.position = '';
   //   document.body.style.top = '';
@@ -280,7 +281,7 @@ function Navbar() {
                 className="navbrand"
                 to="/"
                 style={{ marginRight: "20px" }}
-                onClick={isOpenWallet}
+                onClick={() => {closeWalletAndNoti();}}
               >
                 <img
                   src={require("../../assets/images/logo.png")}
@@ -687,7 +688,7 @@ function Navbar() {
                   <button
                     type="button"
                     className="navbar_toggle ham_burger"
-                    onClick={handleHamburger}
+                    onClick={() =>{handleHamburger();  closeWalletAndNoti();}}
                   >
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
@@ -699,8 +700,10 @@ function Navbar() {
           </div>
         </nav>
 
-        <div className={humburger ? "scroll_off" : <></>}>
-          {humburger ? <Menu handleHamburger={handleHamburger} Navdisplay={handleDisplay} /> : <></>}
+        <div className="hamburger" onClick={handleHamburger} style={{display:!humburger?"none":"block"}}>
+        <div  className={humburger ? "scroll_off" : <></>} style={{display:!humburger?"none":"block",background:"white"}}  >
+          {humburger ? <Menu handleHamburger={handleHamburger} /> : <></>}
+        </div>
         </div>
       </div>
     </>

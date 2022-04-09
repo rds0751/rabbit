@@ -938,7 +938,7 @@ export default function NftInformation(props) {
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
-                  <div className="completelistin">Remove From Sale</div>
+                  <div className="completelistin">Removing From Sale</div>
                 </div>
                 <div className="abstractillusion">
                   <img src={nft.cdnUrl} />
@@ -980,7 +980,7 @@ export default function NftInformation(props) {
                       )}
                     </div>
                     <div className="checkposttext">
-                      <div className="heading">Remove From Sale</div>
+                      <div className="heading">Removing From Sale</div>
                       <div className="description"></div>
                     </div>
                   </div>
