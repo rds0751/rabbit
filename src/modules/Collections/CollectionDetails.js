@@ -300,11 +300,11 @@ function CollectionDetails() {
                   </div>
                   <div className="row">
                     <div className="col-5">
-                      <Button variant="outline-primary" onClick={clearValues} style={{width:"100%"}}>Clear</Button>
+                      <Button variant="outline-primary" onClick={clearValues} className="clear-btn">Clear</Button>
                     </div>
                     <div className="col-2"></div>
                     <div className="col-5">
-                      <Button variant="outline-primary" onClick={setPrice} style={{width:"100%"}}>Apply</Button>
+                      <Button variant="outline-primary" onClick={setPrice} className="clear-btn">Apply</Button>
                     </div>
                   </div>
                 </div>
