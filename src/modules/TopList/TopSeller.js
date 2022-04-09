@@ -341,10 +341,19 @@ function TopSeller() {
                 )}
 
                 {topSellers.userName == "" ? (
-                  <h2 className="seller-name"> <Link style={{ textDecoration: "null" }} to={"/user-profile/" + topSellers._id}>{topSellers.wallet_address.substring(0, 4)}...{topSellers.wallet_address.slice(topSellers.wallet_address.length - 4)}</Link></h2>
+                  <h2 className="seller-name" title={topSellers.wallet_address}> <Link style={{ textDecoration: "null" }} to={"/user-profile/" + topSellers._id}>{topSellers.wallet_address.substring(0, 4)}...{topSellers.wallet_address.slice(topSellers.wallet_address.length - 4)}</Link></h2>
 
                 ) : (
-                  <h2 className="seller-name"><Link style={{ textDecoration: "null" }} to={"/user-profile/" + topSellers._id}>{topSellers.userName}</Link></h2>
+                  <h2 className="seller-name" title={topSellers.userName}><Link style={{ textDecoration: "null" }} to={"/user-profile/" + topSellers._id}>
+                
+                {topSellers.userName.length >13 ?(
+   
+                   topSellers.userName.substring(0,8)+"..."
+                    ):(
+                        topSellers.userName
+                    )}
+                    
+                    </Link></h2>
 
                 )}
 
