@@ -48,13 +48,13 @@ const CustomSnack = styled(Snackbar)`
 
 
 @media (min-width: 969px){
-
+position: absolute !important;
     top: 458px !important;
     left: 58% !important;
 }
 
   @media only screen and (min-width:770px) and  (max-width:968px){
-
+    position: absolute !important;
     top: 454px !important;
     left: auto !important;
     right: 226px !important;
@@ -62,7 +62,7 @@ const CustomSnack = styled(Snackbar)`
 
 }
 @media only screen and (min-width:521px) and  (max-width:769px){
-
+  position: absolute !important;
   top: 423px !important;
   left: auto !important;
   right: 140px !important;
@@ -71,10 +71,10 @@ const CustomSnack = styled(Snackbar)`
 
 }
 @media only screen and (min-width:0px) and  (max-width:520px){
-
-  top: 313px !important;
+  position: absolute !important;
+  top: 388px !important;
     left: auto !important;
-    right: 88px !important;
+    right: 46px !important;
 
 
 
