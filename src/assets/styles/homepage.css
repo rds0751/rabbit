@@ -402,6 +402,7 @@
   background-color: #ffffff !important;
   height: 294px !important;
   display: block !important;
+  border-radius: 20px !important;
 }
 
 .awssld__wrapper {
