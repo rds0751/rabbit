@@ -34,6 +34,7 @@ import { Oval } from "react-loader-spinner";
 import ListingsTable from "../../common/components/ListingTable";
 toast.configure();
 
+const queryString = require('query-string');
 export default function NftInformation(props) {
   const navigate = useNavigate();
   const [activeInActive, setActiveInActive] = useState("active");
@@ -181,9 +182,7 @@ export default function NftInformation(props) {
   };
 
   const handleChange = (e) =>
-    setReason({
-      reason: e.target.value,
-    });
+    setReason(e.target.value);
 
   const makeReport = () => {
     addNftReport(report);
@@ -235,7 +234,8 @@ export default function NftInformation(props) {
       addedBy: loggedInUser?._id,
       reason: `${reason}`,
     };
-    await addNftReport(report, (response) => {
+    const reportObj = queryString.stringify(report);
+    await addNftReport(reportObj, (response) => {
       if (response.success) {
         toast.success(response.message);
       } else {
@@ -938,7 +938,7 @@ export default function NftInformation(props) {
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
-                  <div className="completelistin">Remove From Sale</div>
+                  <div className="completelistin">Removing From Sale</div>
                 </div>
                 <div className="abstractillusion">
                   <img src={nft.cdnUrl} />
@@ -980,7 +980,7 @@ export default function NftInformation(props) {
                       )}
                     </div>
                     <div className="checkposttext">
-                      <div className="heading">Remove From Sale</div>
+                      <div className="heading">Removing From Sale</div>
                       <div className="description"></div>
                     </div>
                   </div>

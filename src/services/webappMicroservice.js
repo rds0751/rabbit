@@ -225,7 +225,7 @@ export function getNotificationListById(requestData) {
 export const addNftReport = async (requestData, successCallBack) => {
   try {
     const url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/reports/nfts";
-    const { data } = await axios.post(url, { ...requestData });
+    const { data } = await axios.post(url, requestData );
     successCallBack(data);
   } catch (e) {
     console.log(e);

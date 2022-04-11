@@ -22,7 +22,7 @@ function CollDetailCard({ nft }) {
   };
   let showDateSection = true;
   let message = '';
-  if (biddingDetails) {
+  if (biddingDetails.endDate) {
     const currDate = new Date();
     const currentDate = Date.now(currDate);
     const endDate = biddingDetails.endDate;

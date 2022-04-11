@@ -338,6 +338,18 @@ function TopBidders() {
           curElem;
         var precise = volume.toPrecision(4);
         var result = parseFloat(precise);
+        function hasWhiteSpace(s) 
+        {
+        var reWhiteSpace = new RegExp("/^\s+$/");
+
+    // Check for white space
+          if (reWhiteSpace.test(s)) {
+        //alert("Please Check Your Fields For Spaces");
+            return false;
+          }
+
+    return true;
+}
         return (
           <div className="container-fluid">
             <Collection className="row">
@@ -353,10 +365,25 @@ function TopBidders() {
                 )}
 
                 {buyer.userName == "" ? (
-                  <h2 className="seller-name"> <Link style={{ textDecoration: "null" }} to={"/user-profile/" + buyer._id}>{buyer.wallet_address.substring(0, 4)}...{buyer.wallet_address.slice(buyer.wallet_address.length - 4)}</Link></h2>
+                  <h2 className="seller-name" title={buyer.wallet_address}> <Link style={{ textDecoration: "null" }} to={"/user-profile/" + buyer._id}>{buyer.wallet_address.substring(0, 4)}...{buyer.wallet_address.slice(buyer.wallet_address.length - 4)}</Link></h2>
 
                 ) : (
-                  <h2 className="seller-name"><Link style={{ textDecoration: "null" }} to={"/user-profile/" + buyer._id}> {buyer.userName} </Link></h2>
+                  <h2 className="seller-name" title={buyer.userName}><Link style={{ textDecoration: "null" }} to={"/user-profile/" + buyer._id}>
+
+                    
+
+                    {buyer.userName.length >13 ?(
+
+                      
+                      buyer.userName.substring(0,8)+"..."
+
+                    ):(
+                      buyer.userName
+
+                    )}
+                      </Link>
+                     
+                     </h2>
 
                 )}
 

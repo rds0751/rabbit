@@ -330,11 +330,20 @@ function Top_collection() {
                 {/* <Image src={collection[0].imageUrl} alt="pic" /> */}
                 {collection[0].name == "" || !collection[0].name ? (
 
-                  <h2 className="seller-name"> <Link style={{ textDecoration: "null" }} to={"/collection-details/" + collection[0]._id}>{collection[0].contractAddress.substring(0, 4)}...{collection[0].contractAddress.slice(collection[0].contractAddress.length - 4)}</Link></h2>
+                  <h2 className="seller-name" title={collection[0].contractAddress}> <Link style={{ textDecoration: "null" }} to={"/collection-details/" + collection[0]._id}>{collection[0].contractAddress.substring(0, 4)}...{collection[0].contractAddress.slice(collection[0].contractAddress.length - 4)}</Link></h2>
 
                 ) : (
 
-                  <h2 className="seller-name"><Link style={{ textDecoration: "null" }} to={"/collection-details/" + collection[0]._id}>{collection[0].name}</Link></h2>
+                  <h2 className="seller-name" title={collection[0].name}><Link style={{ textDecoration: "null" }} to={"/collection-details/" + collection[0]._id}>
+                     
+                {collection[0].name.length >13 ?(
+                    collection[0].name.substring(0,12)+"..."
+                      ):(
+                  collection[0].name
+                   )}
+    
+                    
+                    </Link></h2>
 
                 )}
 
