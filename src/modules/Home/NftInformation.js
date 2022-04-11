@@ -35,8 +35,6 @@ import ListingsTable from "../../common/components/ListingTable";
 toast.configure();
 
 const queryString = require('query-string');
-
-
 export default function NftInformation(props) {
   const navigate = useNavigate();
   const [activeInActive, setActiveInActive] = useState("active");
@@ -237,8 +235,6 @@ export default function NftInformation(props) {
       reason: `${reason}`,
     };
     const reportObj = queryString.stringify(report);
-
-    console.log("test", reportObj)
     await addNftReport(reportObj, (response) => {
       if (response.success) {
         toast.success(response.message);
