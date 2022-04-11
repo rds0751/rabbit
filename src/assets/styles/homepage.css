@@ -405,8 +405,7 @@
 }
 
 .awssld__wrapper {
-  /* border-radius: 20px !important; */
-  border-radius: 20pt;
+  border-radius: 20px !important;
   height: 294px !important;
   width: 100%;
 }
@@ -508,17 +507,3 @@ margin-left: 10px;
   width: 100%;
   display: flex;
 }
-@supports (-webkit-touch-callout: none) {
-  /* CSS specific to iOS devices */ 
-  .awssld__wrapper{
-    border-radius: 20pt;
-  }
-}
-
-@media only screen and (max-device-width: 667px) 
-    and (-webkit-device-pixel-ratio: 2) {
-      .awssld__wrapper{
-        border-radius: 20pt;
-      }
-      
-    }

@@ -366,7 +366,6 @@ function Home() {
                   {/* mob carousel */}
                 </Col>
               </Row>
-
               <div className=" carousel-show">
                 <AwesomeSlider organicArrows={false}>
                   {nfts.length &&
