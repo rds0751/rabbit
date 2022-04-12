@@ -93,7 +93,7 @@ export default function ListingsTable(props) {
                     component="td"
                     scope="row"
                   >
-                    {row.type}
+                    {row.price}
                   </td>
                   <td
                     style={{

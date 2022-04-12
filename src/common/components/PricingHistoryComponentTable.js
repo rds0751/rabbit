@@ -259,7 +259,7 @@ export default function PricingHistoryComponentTable(props) {
                         width: "149px",
                       }}
                     >
-                      {row.Price ? row.price : 1000}
+                      {row.price}
                     </td>
                     <td
                       style={{
