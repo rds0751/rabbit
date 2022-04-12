@@ -48,6 +48,7 @@ const CustomSnack = styled(Snackbar)`
 
 
 @media (min-width: 969px){
+<<<<<<< HEAD
   position: absolute !important;
       top: 458px !important;
       left: 58% !important;
@@ -80,6 +81,40 @@ const CustomSnack = styled(Snackbar)`
   
   }
     `
+=======
+position: absolute !important;
+    top: 458px !important;
+    left: 58% !important;
+}
+
+  @media only screen and (min-width:770px) and  (max-width:968px){
+    position: absolute !important;
+    top: 454px !important;
+    left: auto !important;
+    right: 226px !important;
+
+
+}
+@media only screen and (min-width:521px) and  (max-width:769px){
+  position: absolute !important;
+  top: 423px !important;
+  left: auto !important;
+  right: 140px !important;
+
+
+
+}
+@media only screen and (min-width:0px) and  (max-width:520px){
+  position: absolute !important;
+  top: 388px !important;
+    left: auto !important;
+    right: 46px !important;
+
+
+
+}
+  `
+>>>>>>> 42031488a54ed3566869a301e49796942615b39a
 
 
 
