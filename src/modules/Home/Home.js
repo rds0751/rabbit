@@ -430,7 +430,7 @@ function Home() {
           <div className="inner-width">
             <div className="d-flex justify-content-center flex-wrap">
               <Card>
-                <Card.Img variant="top" src={Wallet} />
+                <Card.Img className="icon-hover" variant="top" src={Wallet} />
                 <Card.Body>
                   <Card.Title>Create Wallet</Card.Title>
                   <Card.Text>
@@ -439,7 +439,7 @@ function Home() {
                 </Card.Body>
               </Card>
               <Card>
-                <Card.Img variant="top" src={Collection} />
+                <Card.Img className="icon-hover" variant="top" src={Collection} />
                 <Card.Body>
                   <Card.Title>Create Collection</Card.Title>
                   <Card.Text>
@@ -449,7 +449,7 @@ function Home() {
                 </Card.Body>
               </Card>
               <Card>
-                <Card.Img variant="top" src={NFTs} />
+                <Card.Img className="icon-hover" variant="top" src={NFTs} />
                 <Card.Body>
                   <Card.Title>Add NFTs</Card.Title>
                   <Card.Text>
@@ -459,7 +459,7 @@ function Home() {
                 </Card.Body>
               </Card>
               <Card>
-                <Card.Img variant="top" src={Sale} />
+                <Card.Img className="icon-hover" variant="top" src={Sale} />
                 <Card.Body>
                   <Card.Title>List them for sale</Card.Title>
                   <Card.Text>
