@@ -34,7 +34,7 @@ import { updateBannerByUserId } from "../../services/UserMicroService";
 import SplitWalletAdd from "../../common/components/SplitWalletAdd";
 import NoItem from "../../assets/images/Noitems.svg";
 import Snackbar from '@mui/material/Snackbar';
-import Styled from "styled-components";
+
 
 
 const CustomSnack = styled(Snackbar)`
