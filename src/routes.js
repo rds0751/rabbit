@@ -64,6 +64,7 @@ import BuyPage from "./modules/Resources/Buying/index";
 import SellPage from "./modules/Resources/Selling/index";
 import ScrollToTop from "./ScrollToTop";
 import SearchResults from "./common/components/searchResults";
+import Blog from "./modules/blogs/blog";
 function App() {
 
   useEffect(() => {
@@ -204,6 +205,7 @@ function App() {
             <Route path="/menu" element={<Menu />} />
             <Route path="/home" element={<Home />} />
             <Route path="/search-results" element={<SearchResults />} />
+            <Route path="/blogs" element={<Blog />} />
           </Routes>
           {/* </Switch> */}
         </Router>

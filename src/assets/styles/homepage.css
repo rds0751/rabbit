@@ -120,6 +120,20 @@
   height: 89px;
   margin-bottom: 20px;
   margin: 0 auto;
+
+}
+
+.homepage .create-sell-nft .card .icon-hover {
+  width: 89px;
+  height: 89px;
+  margin-bottom: 20px;
+  margin: 0 auto;
+  transition: transform .2s !important; /* Animation */
+}
+.homepage .create-sell-nft .card .icon-hover :hover {
+  -ms-transform: scale(1.5) !important; /* IE 9 */
+  -webkit-transform: scale(1.5) !important; /* Safari 3-8 */
+  transform: scale(1.5) !important; 
 }
 .homepage .create-sell-nft .card-title {
   font-family: "poppins-semibold";
@@ -458,8 +472,13 @@
 }
 .browse-img {
   margin: 0 0 0 26px;
+  transition: transform .2s; /* Animation */
 }
-
+.browse-img:hover {
+  -ms-transform: scale(1.5); /* IE 9 */
+  -webkit-transform: scale(1.5); /* Safari 3-8 */
+  transform: scale(1.5); 
+}
 
 
 .nft-img{

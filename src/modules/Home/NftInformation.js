@@ -119,6 +119,7 @@ export default function NftInformation(props) {
     // console.log("kkkkkkkkkkdddddd",window.location.href);     //yields: "https://stacksnippets.net/js"
 
     // const { wallet_address } = loggedInUser;
+    toast.success("Website URL Copied");
     navigator.clipboard.writeText(window.location.href);
     // navigator.clipboard.writeText(walletAddressUnquoted);
     // setCopiedText(true);
