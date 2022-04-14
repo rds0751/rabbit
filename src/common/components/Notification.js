@@ -67,7 +67,8 @@ function Notification() {
   const handleChange = (e) => {
     dispatch(ManageNotiSideBar(!isOpenNoti));
     dispatch(ManageWalletSideBar(false));
-    document.body.style.overflow = !isOpenNoti ? "hidden" : "visible";
+    document.body.className = !isOpenNoti ? "overflow" : "overflow-hidden";
+    // document.body.style.overflow = !isOpenNoti ? "hidden" : "visible";
   };
 
   return (

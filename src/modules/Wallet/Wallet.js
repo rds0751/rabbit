@@ -4,36 +4,29 @@ import copy from "../../assets/images/copy.svg";
 import "../../assets/styles/Notification.css";
 import { useSelector, useDispatch } from "react-redux";
 import { ethers } from "ethers";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 import "../../assets/styles/wallet.css";
 import SplitWalletAdd from "../../common/components/SplitWalletAdd";
-import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import { ManageNotiSideBar, ManageWalletSideBar } from "../../reducers/Action";
-import Snackbar from '@mui/material/Snackbar';
+import Snackbar from "@mui/material/Snackbar";
 import styled from "styled-components";
 
-
-
 const CustomSnack = styled(Snackbar)`
-@media (min-width: 969px){
-      top: 154px !important;
-      right: 37px !important;
-      left: auto;
-
+  @media (min-width: 969px) {
+    top: 154px !important;
+    right: 37px !important;
+    left: auto;
 
     min-width: 112px !important;
-
   }
-  @media only screen and (min-width:0px) and  (max-width:968px){
+  @media only screen and (min-width: 0px) and (max-width: 968px) {
+    top: 153px !important;
+    left: auto !important;
 
-        top: 153px !important;
-        left: auto !important;
- 
-  
-      min-width: 112px !important;
-
-    }`
-
+    min-width: 112px !important;
+  }
+`;
 
 function Wallet() {
   const [humburger, setHumburger] = useState(false);
@@ -103,19 +96,14 @@ function Wallet() {
   // };
 
   const isDataCopied = () => {
-
     // walletTogglePopup(false);
-
     // toast.success("Text Copied");
-
   };
-
-
 
   const [state, setState] = React.useState({
     open: false,
-    vertical: 'top',
-    horizontal: 'center',
+    vertical: "top",
+    horizontal: "center",
   });
 
   const { vertical, horizontal, open } = state;
@@ -128,15 +116,13 @@ function Wallet() {
     setState({ ...state, open: false });
   };
 
-
-
-
   const dispatch = useDispatch();
   const handleChange = (e) => {
     dispatch(ManageWalletSideBar(!isOpenWallet));
     dispatch(ManageNotiSideBar(false));
-    document.body.style.overflow = !isOpenWallet ? "hidden" : "visible";
-  }
+    document.body.className = !isOpenWallet ? "overflow" : "overflow-hidden";
+    // document.body.style.overflow = !isOpenWallet ? "scroll" : "hidden";
+  };
 
   return (
     <div
@@ -153,38 +139,40 @@ function Wallet() {
         </div>
         <div className="walletAddressContainer walleth2">
           <div className="walletAddress fontwallet">
-         
             <SplitWalletAdd address={walletAddress?.address} />
           </div>
-       <CopyToClipboard text={walletAddress?.address}>
-
-                      <button  className="copy-button"        onClick={handleClick({
-          vertical: 'top',
-          horizontal: 'right',
-        })}>
-                        <img
-            style={{ width: "21.47px", height: "21.47px", cursor: "pointer" }}
-            src={copy}
-            alt=""
-            onClick={isDataCopied}
-            // onClick={() => { handleClick(Fade);}}
-            // onClick={handleClick(Fade)}
-          /></button>
-
-
-                       
-
-                      </CopyToClipboard>
-                      {/* <ToastContainer style={{marginTop:"100px" , width: "142px", marginRight: "55px"}}/> */}
-                      <CustomSnack
-        anchorOrigin={{ vertical, horizontal }}
-        open={open}
-        onClose={handleClose}
-        message="Copied"
-        key={vertical + horizontal}
-        autoHideDuration={2000}
-        className="custom-snack"
-      />
+          <CopyToClipboard text={walletAddress?.address}>
+            <button
+              className="copy-button"
+              onClick={handleClick({
+                vertical: "top",
+                horizontal: "right",
+              })}
+            >
+              <img
+                style={{
+                  width: "21.47px",
+                  height: "21.47px",
+                  cursor: "pointer",
+                }}
+                src={copy}
+                alt=""
+                onClick={isDataCopied}
+                // onClick={() => { handleClick(Fade);}}
+                // onClick={handleClick(Fade)}
+              />
+            </button>
+          </CopyToClipboard>
+          {/* <ToastContainer style={{marginTop:"100px" , width: "142px", marginRight: "55px"}}/> */}
+          <CustomSnack
+            anchorOrigin={{ vertical, horizontal }}
+            open={open}
+            onClose={handleClose}
+            message="Copied"
+            key={vertical + horizontal}
+            autoHideDuration={2000}
+            className="custom-snack"
+          />
 
           {/* <img
             style={{ width: "21.47px", height: "21.47px", cursor: "pointer" }}
