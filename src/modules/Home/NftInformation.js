@@ -30,9 +30,72 @@ import { toast } from "react-toastify";
 
 import { getUser } from "../../services/UserMicroService";
 import { Oval } from "react-loader-spinner";
-
+import Snackbar from "@mui/material/Snackbar";
+import styled from "styled-components";
 import ListingsTable from "../../common/components/ListingTable";
 toast.configure();
+const CustomSnack = styled(Snackbar)`
+
+
+
+@media (min-width: 992px){
+  position: absolute !important;
+      top: 69px !important;
+      left: 58% !important;
+      right: 159px !important;
+  }
+  
+    @media only screen and (min-width:0px) and  (max-width:991px){
+display: none !important;
+  
+  
+  }
+
+    `
+    const CustomSnack2 = styled(Snackbar)`
+  
+    @media only screen and (min-width:992px) and  (max-width:5000px){
+display: none !important;
+      }
+
+    @media only screen and (min-width:770px) and  (max-width:991px){
+      position: absolute !important;
+      top: 69px !important;
+      left: auto !important;
+      right: 0px !important;
+  
+  
+  }
+  @media only screen and (min-width:701px) and  (max-width:769px){
+    position: absolute !important;
+    top: 69px !important;
+    left: auto !important;
+    right: 140px !important;
+  
+  
+  
+  }
+  @media only screen and (min-width:504px) and  (max-width:700px){
+    width: 86px;
+    position: absolute !important;
+    top: 161px !important;
+      left: 402px !important;
+      right: 8px !important;
+  
+  
+  
+  }
+  @media only screen and (min-width:0px) and  (max-width:503px){
+    width: 86px;
+    position: absolute !important;
+    top: 161px !important;
+      left: 190px !important;
+      right: 8px !important;
+  
+  
+  
+  }
+    `
 
 const queryString = require('query-string');
 export default function NftInformation(props) {
@@ -55,6 +118,24 @@ export default function NftInformation(props) {
   const [userDetails, setUserDetails] = useState([]);
   const [tab, setTab] = useState(1);
   const [toShow, settoShow] = useState(true);
+
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+  });
+
+  const { vertical, horizontal, open } = state;
+
+  const handleClick = (newState) => () => {
+    setState({ open: true, ...newState });
+  };
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
+
+
 
   const [report, setReport] = useState({
     contentId: id,
@@ -119,7 +200,6 @@ export default function NftInformation(props) {
     // console.log("kkkkkkkkkkdddddd",window.location.href);     //yields: "https://stacksnippets.net/js"
 
     // const { wallet_address } = loggedInUser;
-    toast.success("Website URL Copied");
     navigator.clipboard.writeText(window.location.href);
     // navigator.clipboard.writeText(walletAddressUnquoted);
     // setCopiedText(true);
@@ -377,8 +457,16 @@ export default function NftInformation(props) {
                     }}
                   >
                     <li className="list-item" onClick={handleCopyToClipboard}>
-                      <img src={copyIcon} alt="icon" className="icon" />
-                      <span className="icon-text">Copy link</span>
+                    <button
+                        className="copy-button"
+                        onClick={handleClick({
+                          vertical: "top",
+                          horizontal: "right",
+                        })}
+                      >
+                          <img src={copyIcon} alt="icon" className="icon" />
+                          <span className="icon-text">Copy link</span>
+                          </button>
                     </li>
                     <li className="list-item">
                       {/* <img src={facebookIcon} alt="icon" className="icon" />
@@ -408,6 +496,15 @@ export default function NftInformation(props) {
                 </div>
               </div>
             </div>
+            <CustomSnack2
+            anchorOrigin={{ vertical, horizontal }}
+            open={open}
+            onClose={handleClose}
+            message="Copied"
+            key={vertical + horizontal}
+            autoHideDuration={2000}
+            className="custom-snack"
+          />
             <div className="col-xl-5 col-lg-5 col-md-12">
               <div className="nftdetail-img">
                 <img
@@ -527,9 +624,16 @@ export default function NftInformation(props) {
                         <li
                           className="list-item"
                           onClick={handleCopyToClipboard}
-                        >
+                        >            <button
+                        className="copy-button"
+                        onClick={handleClick({
+                          vertical: "top",
+                          horizontal: "right",
+                        })}
+                      >
                           <img src={copyIcon} alt="icon" className="icon" />
                           <span className="icon-text">Copy link</span>
+                          </button>
                         </li>
                         <li className="list-item">
                           {/* <img src={facebookIcon} alt="icon" className="icon" />
@@ -555,6 +659,15 @@ export default function NftInformation(props) {
                         </li>
                       </ul>
                     </div>
+                    <CustomSnack
+            anchorOrigin={{ vertical, horizontal }}
+            open={open}
+            onClose={handleClose}
+            message="Copied"
+            key={vertical + horizontal}
+            autoHideDuration={2000}
+            className="custom-snack"
+          />
                     <img
                       src={info}
                       alt="info"

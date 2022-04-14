@@ -1,7 +1,7 @@
 import * as React from "react";
 import Paper from "@mui/material/Paper";
 import "../../assets/styles/Leader.css";
-
+import banner from "../../assets/images/Banner.png";
 export default function ComplexGrid() {
   return (
     <div>
@@ -12,21 +12,41 @@ export default function ComplexGrid() {
       </div>
       <Paper
         sx={{
-          p: 2,
           margin: "auto",
           marginTop: "81px",
-          maxWidth: 800,
+          maxWidth: 960,
+          flexGrow: 1,
+          backgroundColor: (theme) =>
+            theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+        }}
+      >
+        <div>
+          <img
+            style={{
+              width: "-webkit-fill-available",
+              height: "240px",
+              objectFit: "fill",
+            }}
+            src={banner}
+          ></img>
+        </div>
+      </Paper>
+      <Paper
+        sx={{
+          p: 2,
+          margin: "auto",
+          maxWidth: 960,
           flexGrow: 1,
           backgroundColor: (theme) =>
             theme.palette.mode === "dark" ? "#1A2027" : "#fff",
         }}
       >
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <p>What is NFT?</p>
-          <p>2 March 2021</p>
+          <p className="blog-title">What is NFT?</p>
+          <p className="blog-date">2 March 2021</p>
         </div>
         <div>
-          <p>
+          <p className="blog-content">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididuntLorem ipsum dolor sit amet, consectetur
             adipiscing elit, sed do eiusmod tempor incididunt ut labore et
@@ -35,7 +55,7 @@ export default function ComplexGrid() {
             consequat. Duis aute irure dolor in
           </p>
         </div>
-        <button style={{ border: "none", background: "none" }}>
+        <button className="blog-read">
           Read more
         </button>
       </Paper>
