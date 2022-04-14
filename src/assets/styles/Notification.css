@@ -1412,3 +1412,9 @@ margin:0px;
   padding-left: 0;
   padding-right: 0;
 }
+@media screen and  (min-width:780px) and (max-width:980px) {
+  .submitbuttonfooter{
+    width:77px;
+  }
+  
+}
