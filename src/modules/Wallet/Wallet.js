@@ -120,7 +120,12 @@ function Wallet() {
   const handleChange = (e) => {
     dispatch(ManageWalletSideBar(!isOpenWallet));
     dispatch(ManageNotiSideBar(false));
+<<<<<<< HEAD
     document.body.style.overflow = !isOpenWallet ? "hidden" : "visible";
+=======
+    document.body.className = !isOpenWallet ? "overflow" : "overflow-hidden";
+    // document.body.style.overflow = !isOpenWallet ? "scroll" : "hidden";
+>>>>>>> 952faf51e757d470433c5d7ea5b54fb54cb471d0
   };
 
   return (
