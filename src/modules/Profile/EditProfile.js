@@ -77,7 +77,7 @@ function EditProfile(props) {
       const filename=event.target.files[0].name;
       const fileextenstion=filename.split('.').pop().toLowerCase();
       const originalfileSize=Math.round(filesize/1024);
-      const extensionArray=['jpeg','png' ,'svg','jpg','gif'];
+      const extensionArray=['jpeg','png','jpg','gif'];
       let flag=false;
       if(event.target.value.length ==0 ){
         toast.error("No File is Selected Please Select a File.");
@@ -89,7 +89,7 @@ function EditProfile(props) {
           }
         }
         if(flag == false)
-           toast.error("File type not acceptable. Please use……… file");
+           toast.error("File type not acceptable. Please use JPEG PNG JPG GIF file");
         else if(originalfileSize > 10000)  {
           toast.error("Image file size should be less than 10 mb")
         }
