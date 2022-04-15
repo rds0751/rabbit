@@ -586,7 +586,7 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
                   Name*<span style={{color:"red",fontSize:"13px"}}>{nameError}</span>
                 </label>
                 <input
-                  type="email"
+                  type="text"
                   className="form-control-1"
                   name="email"
                   autoComplete="off"
