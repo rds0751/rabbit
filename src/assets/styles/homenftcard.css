@@ -126,7 +126,8 @@
   font-size: 14px;
   font-family: "poppins-medium";
   align-items: center;
-  color: #191919;
+  line-height: 21px;
+  color: #858585;
 }
 .ntf_div .filter-drop .filter-item {
   position: absolute;

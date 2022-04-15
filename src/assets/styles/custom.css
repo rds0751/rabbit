@@ -785,8 +785,11 @@ input::-webkit-input-placeholder {
   /* border: 1px solid #d2d2d2; */
   border-radius: 4px;
   /* padding: 9px 12px 9px 12px; */
-  width: 250px;
+  /* width: 250px; */ 
+  width: 222px;
   font-size: 14px;
+  height: 42px;
+  white-space: nowrap;
 }
 .filter .dropdown p {
   font-family: 'poppins-medium';
