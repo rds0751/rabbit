@@ -869,6 +869,7 @@ select:focus-visible {
   padding: 10px;
   transform-origin: center;
 }
+
 /*  1920 */
 @media only screen and (max-width: 2000px) and (min-width: 1600px) {
   .nft-img-radius {

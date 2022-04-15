@@ -24,3 +24,7 @@
     transform: scale(1.3);
     transition: all .4s;
   }
+  .nft_card:hover {
+    transform: scale(1.15);
+    transition: transform .75s;
+  }
