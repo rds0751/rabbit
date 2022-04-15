@@ -941,7 +941,8 @@ thead {
 /* create nft card css start */
 .create-nft {
   margin-top: 90px;
-  margin-bottom: 151px;
+  /* margin-bottom: 151px; */
+  margin-bottom: 93px;
 }
 .create-nft .create-nft-font {
   font-family: "poppins-bold";
@@ -990,6 +991,7 @@ thead {
   .create-nft {
     margin-top: 41px;
     margin-bottom: 59px;
+    margin-bottom: 1px;
   }
   .create-nft .create-nft-font {
     font-family: "poppins-semibold";
@@ -1426,8 +1428,8 @@ thead {
   }
   .container {
     width: 100%;
-    padding-right: 5% !important;
-    padding-left: 5% !important;
+    /* padding-right: 5% !important;
+    padding-left: 5% !important; */
     margin-right: auto;
     margin-left: auto;
   }

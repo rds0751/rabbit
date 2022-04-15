@@ -591,7 +591,7 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
                   name="email"
                   autoComplete="off"
                   maxLength="100"
-                  
+                  title=" "
                   onChange={(e) => {
                     name.current = e.target.value;
                     // checkChanges();
@@ -625,6 +625,7 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
                   <input
                     className="form-control"
                     type="number"
+                    title=" "
                     autoComplete="off"
                     onWheel={(e)=>e.target.blur()}
                     onChange={(e) => {
