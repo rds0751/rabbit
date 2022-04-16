@@ -23,6 +23,9 @@ import { CheckUserByWalletAddress } from "../../services/UserMicroService";
 import NoItem from "../../assets/images/Noitems.svg";
 import Spinner from "../../common/components/Spinner";
 import Form from 'react-bootstrap/Form'
+import bellicon from '../../assets/images/bellicon.svg'
+import profileImg from '../../assets/images/profile.svg'
+import wallet from '../../assets/images/wallet.svg'
 
 const queryString = require("query-string");
 function Navbar() {
@@ -604,7 +607,7 @@ function Navbar() {
                     > */}
                     <button
                       className="create-btn"
-                      style={{ color: "#ffffff", backgroundColor: "#366EEF" }}
+                     
                     >
                       Create
                     </button>
@@ -618,7 +621,7 @@ function Navbar() {
                     <img
                       onClick={handleNotiSideBar}
                       className={!isOpenNoti ?  "notification-icon" :   "hover-icon"}
-                      src={require("../../assets/images/notification.png")}
+                      src={bellicon}
                       alt="notification"
                     ></img>
                   </li>
@@ -635,7 +638,7 @@ function Navbar() {
                       <img
                        onClick={closeWalletAndNoti}
                         className="btnnav_mob1 profileimg profile-icon"
-                        src={require("../../assets/images/profile.png")}
+                        src={profileImg}
                         alt="profile"
                         style={{}}
                       ></img>
@@ -677,7 +680,7 @@ function Navbar() {
                         walletHandler();
                       }}
                       className={!isOpenWallet ?  "wallet-icon" :   "hover-icon"}
-                      src={require("../../assets/images/wallet.png")}
+                      src={wallet}
                       alt="wallet"
                       style={{
                         color: "gray",

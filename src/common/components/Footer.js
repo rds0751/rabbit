@@ -114,9 +114,9 @@ function Footer() {
                 </button>
               </div>
             </div>
-            <h3 className="about">About Anafto's Marketplace</h3>
+            <h3 className="about"><a href="/about"></a>About Anafto's Marketplace</h3>
             <div className="d-none d-sm-none d-md-block d-lg-block fs-16 aboutdes">
-              <p style={{marginBottom:"0"}}>Anafto is an NFT Marketplace for the new age decentralised world. The Anafto tribe can create NFTs on this dedicated marketplace to showcase their Art or they can choose to sell their NFTs. So, what are you waiting for .... Go Mint,Sell, Buy and Explore... Happy NFTing. </p>
+              <p style={{marginBottom:"0",cursor:"default"}}>Anafto is an NFT Marketplace for the new age decentralised world. The Anafto tribe can create NFTs on this dedicated marketplace to showcase their Art or they can choose to sell their NFTs. So, what are you waiting for .... Go Mint,Sell, Buy and Explore... Happy NFTing. </p>
             </div>
             <div className="d-sm-block d-md-none d-lg-none fs-16">
               <p className=" footerdes">Anafto is an NFT Marketplace for the new age decentralised world. The Anafto tribe can create NFTs on this dedicated marketplace to showcase their Art or they can choose to sell their NFTs. So, what are you waiting for .... Go Mint,Sell, Buy and Explore... Happy NFTing.</p>
@@ -126,26 +126,26 @@ function Footer() {
             <div>
               <div className="fs-18 d-flex flex-column" style={{ color: "#8F8F8F" }}>
 
-                <a className="footertitle">Marketplace</a>
+                <a  href="/nfts" className="footertitle">Marketplace</a>
                 <a href="/nfts" className="footersubtitle">NFT</a>
-                <a href="/collections-tile" style={{ textDecoration: "none", color: "#8F8F8F", paddingBottom: "19px" }}>Collections</a>
+                <a href="/collections-tile" className="footersubtitle">Collections</a>
               </div>
               <div className="fs-18 d-flex flex-column">
-                <a className="footertitle" >Leaderboard</a>
+                <a href="/leader-board"className="footertitle" >Leaderboard</a>
                 <p><a href="/top-seller" className="footersubtitle">Top Seller</a></p>
                 <p><a href="/top-bidder" className="footersubtitle">Top Buyer</a></p>
-                <p><a href="/top-collection" style={{ textDecoration: "none", color: "#8F8F8F" }} >Top Collections</a></p>
+                <p><a href="/top-collection"  className="footersubtitle" >Top Collections</a></p>
               </div>
             </div>
             <div className="fs-18 d-flex flex-column">
-              <a className="footertitle">Community</a>
+              <a  href="/help-center"className="footertitle">Community</a>
               <p><a href="/help-center" className="footersubtitle">Help Centers</a></p>
               <p><a href="/FAQs" className="footersubtitle">FAQs</a></p>
-              <p><a href="/suggestion" style={{ textDecoration: "none", color: "#8F8F8F" }} >Suggestions</a></p>
+              <p><a href="/suggestion" className="footersubtitle" >Suggestions</a></p>
             </div>
             <div className="fs-18 d-flex flex-column">
-              <a className="footertitle">Company</a>
-              <p><a href="/about" style={{ textDecoration: "none", color: "#8F8F8F" }}>About</a></p>
+              <a  href="/about" className="footertitle">Company</a>
+              <p><a href="/about" className="footersubtitle">About</a></p>
             </div>
           </div>
           <div className="copyrightDiv">
@@ -154,27 +154,28 @@ function Footer() {
           <div className="row footer-bottom-sm">
             <div className="col-7">
               <h3 className="fs-18 fw-b">
-                <a  href="/nfts" style={{ textDecoration: "none", color: "#8F8F8F",cursor:"default" }}>Marketplace</a></h3>
-              <p><a href="/nfts" style={{ textDecoration: "none", color: "#8F8F8F" }}>Nft</a></p>
-              <p><a href="/collections-tile" style={{ textDecoration: "none", color: "#8F8F8F" }}>Collections</a></p>
+                <a  href="/nfts"className="footertitle">Marketplace</a></h3>
+              <p><a href="/nfts"className="footersubtitle">Nft</a></p>
+              <p><a href="/collections-tile" className="footersubtitle">Collections</a></p>
             </div>
             <div className="col-5">
               <h3 className="fs-18 fw-b">
-                <a style={{ textDecoration: "none", color: "#8F8F8F",cursor:"default" }}>Leaderboard</a></h3>
-              <p><a href="/top-seller" style={{ textDecoration: "none", color: "#8F8F8F" }}>Top Seller</a></p>
-              <p><a href="/top-bidder" style={{ textDecoration: "none", color: "#8F8F8F" }}>Top Buyer</a></p>
-              <p><a href="/top-collection" style={{ textDecoration: "none", color: "#8F8F8F" }}>Top Collections</a></p>
+                <a className="footertitle" href="/leader-board">Leaderboard</a></h3>
+              <p><a href="/top-seller" className="footersubtitle">Top Seller</a></p>
+              <p><a href="/top-bidder"className="footersubtitle">Top Buyer</a></p>
+              <p><a href="/top-collection"className="footersubtitle">Top Collections</a></p>
             </div>
             <div className="col-7 mt-3">
-              <h3 className="fs-18 fw-b">Community</h3>
-              <p><a href="/help-center" style={{ textDecoration: "none", color: "#8F8F8F" }}>Help Centers</a></p>
-              <p><a href="/FAQs" style={{ textDecoration: "none", color: "#8F8F8F" }}>FAQs</a></p>
-              <p><a href="/suggestion" style={{ textDecoration: "none", color: "#8F8F8F" }}>Suggestions</a></p>
+              <h3 className="fs-18 fw-b">
+              <a className="footertitle" href="/help-center">Community</a></h3>
+              <p><a href="/help-center"className="footersubtitle">Help Centers</a></p>
+              <p><a href="/FAQs" className="footersubtitle">FAQs</a></p>
+              <p><a href="/suggestion" className="footersubtitle">Suggestions</a></p>
             </div>
             <div className="col-5 mt-3">
               <h3 className="fs-18 fw-b">
-                <a style={{ textDecoration: "none", color: "#8F8F8F",cursor:"pointer" }}>Company</a></h3>
-              <p><a href="/about" style={{ textDecoration: "none", color: "#8F8F8F" }}>About</a></p>
+                <a href="/about" className="footertitle">Company</a></h3>
+              <p><a href="/about" className="footersubtitle">About</a></p>
             </div>
             <div className="copyrightDivMob"><span className="textCopyrightMob">&copy;2022 Anafto Marketplace. All Rights Reserved.</span></div>
           </div>

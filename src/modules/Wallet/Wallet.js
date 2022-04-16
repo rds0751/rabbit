@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import image from "../../assets/images/profile.png";
+import image from "../../assets/images/NoProfile.svg";
 import copy from "../../assets/images/copy.svg";
 import "../../assets/styles/Notification.css";
 import { useSelector, useDispatch } from "react-redux";
