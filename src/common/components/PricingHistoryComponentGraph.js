@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
 import "../../assets/styles/Leader.css";
-import Information from "../../assets/images/Information.svg";
+import Information from "../../assets/images/No-Info-Icon.svg";
 import { pricingHistoryGraphOfNft } from "../../services/sellAndPurchaseMicroService";
 import moment from "moment";
 
@@ -100,10 +100,10 @@ export default function PricingHistoryComponent(props) {
         />
         :
         
-          <div className="no-data">
-          <img src={Information}></img>
-          <p>No information available</p>
-          </div>
+        <div className="no-data no-data-found ">
+        <img src={Information}></img>
+        <p>No information available</p>
+      </div>
           
       } 
       </div>

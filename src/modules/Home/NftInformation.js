@@ -41,8 +41,8 @@ const CustomSnack = styled(Snackbar)`
 @media (min-width: 992px){
   position: absolute !important;
       top: 69px !important;
-      left: 58% !important;
-      right: 159px !important;
+      left: auto !important;
+      right: auto !important;
   }
   
     @media only screen and (min-width:0px) and  (max-width:991px){
@@ -502,7 +502,7 @@ export default function NftInformation(props) {
             onClose={handleClose}
             message="Copied"
             key={vertical + horizontal}
-            autoHideDuration={2000}
+            // autoHideDuration={2000}
             className="custom-snack"
           />
             <div className="col-xl-5 col-lg-5 col-md-12">
@@ -665,7 +665,7 @@ export default function NftInformation(props) {
             onClose={handleClose}
             message="Copied"
             key={vertical + horizontal}
-            autoHideDuration={2000}
+            // autoHideDuration={2000}
             className="custom-snack"
           />
                     <img
