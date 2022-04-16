@@ -5,6 +5,7 @@ import likes from "../../assets/images/likes.svg";
 import { useSelector } from "react-redux";
 // import { useHistory } from "react-router-dom";
 import "../../assets/styles/common.css"
+import Spinner from "../../common/components/Spinner";
 import {
   getNfts,
   addLikeNft,
@@ -76,16 +77,33 @@ function NftCardsHome({ nft }) {
     showDateSection = false;
   }
 
+  let [imageLoading,setImageLoading]=useState({src:cdnUrl,loaded:false })
+
+  const onImageLoad=()=>{
+    setImageLoading({...imageLoading,loaded:true});
+  }
+
   return (
     <div className="nftCardEach col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
       <div className="card nft-card-radius border-radius cardmob h-100">
         <Link to={route} style={{ textDecoration: "none" }}>
+          <div className="image-container">
           <img
             className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
             src={cdnUrl}
             alt="nft-img"
-          />
-        </Link>
+            onLoad={onImageLoad}  />
+
+        {!imageLoading.loaded && (
+            <div className="loaderNft "> 
+              <Spinner />
+              </div>
+          )}
+          
+          </div>
+         
+          
+        
         <span onClick={() => likeNft(_id)}>
           {handleLike?(
                   <img
@@ -145,6 +163,7 @@ function NftCardsHome({ nft }) {
             </div>
           </div>
         </div>
+        </Link>
       </div>
     </div>
   );

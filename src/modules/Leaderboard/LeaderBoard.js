@@ -1125,7 +1125,7 @@ function LeaderBoard() {
                       alt="nft"
                       onError="this.onerror=null;this.src='/images/image.svg';"
                     />
-                  </Link>
+              
 
                   {/* <img id='like_icon' src={require('../asset//images/')} /> */}
 
@@ -1215,6 +1215,7 @@ function LeaderBoard() {
                       </div>
                     </div>
                   </div>
+                  </Link>
                 </div>
               </div>
             )

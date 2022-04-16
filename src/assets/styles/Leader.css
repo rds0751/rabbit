@@ -1314,6 +1314,10 @@ thead {
   font-family: "poppins-medium";
   font-size: 24px;
   line-height: 35px;
+  color: white;
+  margin-right: 2rem;
+  background-color: #366eff;
+  textTransform: none;
 }
 .nft-detail .grap-area ul {
   display: flex;
@@ -1777,13 +1781,14 @@ thead {
   font-weight: 600;
   letter-spacing: 0px;
   color: #366eef;
+  cursor: pointer;
   opacity: 1;
 }
 .endButton {
   width: 117px;
   height: 42px;
   /* UI Properties */
-  background: #edf2fd 0% 0% no-repeat padding-box;
+  background: grey 0% 0% no-repeat padding-box;
   border-radius: 6px;
   opacity: 1;
   border: none;
@@ -1795,7 +1800,8 @@ thead {
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 0px;
-  color: #366eef;
+  color: white;
+  cursor: default;
   opacity: 1;
 }
 td {
@@ -1889,7 +1895,25 @@ td {
   background: none;
   border: none;
 }
-.nftdetail-img:hover{
+.imginfo_mob:hover{
   box-shadow: 7px 7px 7px 7px lightblue;
   transition: all .75s;
+}
+.sellerName a:hover{
+  color: blue;
+}
+.leader-viewmore .seller-name a:hover{
+  color: blue;
+}
+ .buy-offer-btn button:hover{
+  background-color: rgb(10, 74, 212);
+  color: rgb(253, 253, 253);
+  border:1px solid grey;
+  box-shadow: rgb(4 17 29 / 25%) 0px 0px 8px 0px;
+  transition: all 0.1s ease 0s;
+}
+.load-more:hover{
+  color: white;
+  background-color:#336eef;
+  
 }

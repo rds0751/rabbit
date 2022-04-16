@@ -4,8 +4,11 @@ import { addEmail } from "../../services/UserMicroService";
 import { ToastContainer } from "react-toastify";
 import discordIcon from "../../assets/images/discord.svg"
 import { toast } from "react-toastify";
+import { display } from "@mui/system";
 
 function Footer() {
+  let  [email ,setEmailError]=useState("");
+  let [displayTimeout ,setDisplayTimeout]=useState(false);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -18,12 +21,24 @@ function Footer() {
     const { email } = formData;
     console.log(formData, "<<<formData");
     if (email == "") {
-      toast.error("Fill The Field");
+      setEmailError("( Field is not blanked )")
+      setDisplayTimeout(true);
+      setTimeout(()=>{
+        setDisplayTimeout(false);
+      },4000)
+   
+     // toast.error("Fill The Field");
       return null;
     }
     const checkMail = validateEmail(email);
     if (!checkMail) {
-      toast.error("Invalid Email");
+      setEmailError(" ( Invalid Email please check)")
+      setDisplayTimeout(true);
+      setTimeout(()=>{
+        setDisplayTimeout(false);
+      },4000)
+   
+      //toast.error("Invalid Email");
       return null;
     }
     addEmail(formData, (res) => {
@@ -84,7 +99,7 @@ function Footer() {
               </a>
             </div>
             <p className="subscribe">Subscribe to our newsletter for the latest NFTs</p>
-            <div className="input-group-lg input-group  footerinputbox">
+            <div className="input-group-lg input-group  footerinputbox" style={{marginBottom:displayTimeout?"15px":"37px"}}>
               <input
                 type="email"
                 name="email"
@@ -114,6 +129,7 @@ function Footer() {
                 </button>
               </div>
             </div>
+            <div style={{fontsize:"10px" ,color:"red",display:displayTimeout?"block":"none",marginBottom:"15px"}}>{email}</div>
             <h3 className="about"><a href="/about"></a>About Anafto's Marketplace</h3>
             <div className="d-none d-sm-none d-md-block d-lg-block fs-16 aboutdes">
               <p style={{marginBottom:"0",cursor:"default"}}>Anafto is an NFT Marketplace for the new age decentralised world. The Anafto tribe can create NFTs on this dedicated marketplace to showcase their Art or they can choose to sell their NFTs. So, what are you waiting for .... Go Mint,Sell, Buy and Explore... Happy NFTing. </p>

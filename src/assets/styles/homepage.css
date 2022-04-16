@@ -140,7 +140,7 @@
   font-size: 18px;
   line-height: 27px;
   color: #191919;
-  margin-bottom: 23.59px;
+  margin-bottom: 13.59px;
 }
 .homepage .create-sell-nft .card-text {
   font-family: "poppins-medium";
@@ -526,4 +526,10 @@ margin-left: 10px;
 .titleChar{
   width: 100%;
   display: flex;
+}
+
+.card:hover{
+  transform:scale(1.02);
+  box-shadow: rgb(4 17 29 / 25%) 0px 0px 8px 0px;
+  transition: all 0.1s ease 0s;
 }
