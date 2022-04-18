@@ -24,7 +24,7 @@ function Footer() {
     const { email } = formData;
     console.log(formData, "<<<formData");
     if (email == "") {
-      setEmailError("( Field is not blanked )")
+      setEmailError("( Please Enter E-mail )")
       setDisplayTimeout(true);
       setTimeout(()=>{
         setDisplayTimeout(false);
@@ -52,9 +52,7 @@ function Footer() {
   };
   const handleChange = (name, value) => {
     setFormData({ ...formData, [name]: value });
-    if (formData.email != "" && formData.title != "" && formData.detail != "") {
 
-    }
   };
 
 

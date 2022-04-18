@@ -84,6 +84,7 @@
   height: 30px;
   background: lightgrey;
   cursor: pointer;
+  border-radius: 50%;
 }
 .end-noti {
   text-align-last: center;
