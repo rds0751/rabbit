@@ -246,3 +246,6 @@
   color: #80A6FA;
   opacity: 1;
 }
+.no-item-image{
+  filter: opacity(0.4) drop-shadow(0 0 0 grey);
+}

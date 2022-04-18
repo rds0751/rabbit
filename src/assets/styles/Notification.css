@@ -94,10 +94,10 @@ height: 47px;
   color: white;
   background-color: #366eff;
   border: 1px solid;
-  border-radius: 5px;
-  width: 405px;
+  border-radius: 6px;
+  /* width: 405px; */
   height: 42px;
-  padding: 7px;
+  padding: 10px;
   /* margin-bottom: -6px; */
   /* margin-left: -6px; */
 }
@@ -620,7 +620,7 @@ height: 47px;
 
 .nav-link:focus,
 .nav-link:hover {
-  color: #828282 !important;
+  color: #366EEF !important;
 }
 
 .nav-link.navlink_active {
@@ -1117,6 +1117,7 @@ height: 47px;
 .textCopyrightMob{
   color: #191919;
   font: normal normal normal 12px/18px Poppins;
+  cursor: default;
 }
 
 .copyrightDiv{
@@ -1128,6 +1129,7 @@ height: 47px;
 .textCopyright{
   color: #191919;
   font: normal normal normal 12px/70px Poppins;
+  cursor: default;
 }
 
 /* laptop-view */
@@ -1341,6 +1343,7 @@ margin:0px;
   letter-spacing: 0px;
   color: #8F8F8F;
   opacity: 1;
+  cursor: default;
  }
  .Icon{
    font-size: 20px;
@@ -1417,4 +1420,21 @@ margin:0px;
     width:77px;
   }
   
+}
+.about{
+  cursor: pointer;
+}
+.about:hover{
+  color: #366eef;
+}
+.footertitle:hover{
+  color: #366eef;
+  transition: all 0.1s ease 0s;
+}
+.footersubtitle:hover{
+  color: #366eef;
+  transition: all 0.1s ease 0s;
+}
+ .no-image{
+  filter: opacity(0.4) drop-shadow(0 0 0 grey);
 }

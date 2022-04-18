@@ -517,7 +517,7 @@ console.log("jjjjjjjjjjjjjjjjjj",isloading)
             {isloading ? <Spinner /> :
               (nfts.length === 0 && (
                 <div className="Noitemdiv">
-                  <img src={NoItem} />
+                  <img className="no-image" src={NoItem} />
                   <p className="textitem">No items available</p>
                 </div>
             ))}

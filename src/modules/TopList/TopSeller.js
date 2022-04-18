@@ -266,6 +266,9 @@ const Volume = style.span`
   line-height: 25px;
   color: #818181;
 `;
+const noItemImage=style.img`
+color:'filter: opacity(0.4) drop-shadow(0 0 0 grey)'
+`;
 function TopSeller() {
 
   const [topSellers, setTopSellers] = useState([]);
@@ -295,6 +298,7 @@ function TopSeller() {
   const ChangeSellerDuration = (e) => {
     setSellerDuration({ ...sellerDuration, duration: e })
   }
+ 
 
   return (
     <Container className="leader-viewmore">
@@ -375,7 +379,7 @@ function TopSeller() {
         {isloading ? <Spinner /> :
           (topSellers.length === 0 && (
             <div className="Noitemdiv">
-              <img src={NoItem} />
+               <img style={{filter:"opacity(0.4) drop-shadow(0 0 0 grey)"}} src={NoItem} />
               <p className="textitem">No items available</p>
             </div>
           ))}

@@ -229,8 +229,8 @@ function CollectionDetails() {
             <img className="col-avatar" src={imageUrl} alt="" />
           </div>
           <div className="colusername">{name}</div>
-          <div className="coluserdes">
-            {description}
+          <div className="coluserdes" title={description}>
+            {description.slice(0,512)+"..."}
           </div>
         </div>
 
@@ -345,7 +345,7 @@ function CollectionDetails() {
               {isLoading ? <Spinner /> :
                 (nfts.length === 0 && (
                 <div className="Noitemdiv">
-                  <img src={NoItem} />
+                  <img className="no-item-image" src={NoItem} />
                   <p className="textitem">No items available</p>
                 </div>
               ))}

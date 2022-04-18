@@ -785,8 +785,11 @@ input::-webkit-input-placeholder {
   /* border: 1px solid #d2d2d2; */
   border-radius: 4px;
   /* padding: 9px 12px 9px 12px; */
-  width: 250px;
+  /* width: 250px; */ 
+  width: 222px;
   font-size: 14px;
+  height: 42px;
+  white-space: nowrap;
 }
 .filter .dropdown p {
   font-family: 'poppins-medium';
@@ -866,6 +869,7 @@ select:focus-visible {
   padding: 10px;
   transform-origin: center;
 }
+
 /*  1920 */
 @media only screen and (max-width: 2000px) and (min-width: 1600px) {
   .nft-img-radius {
@@ -873,6 +877,8 @@ select:focus-visible {
     /* width: 326px; */
     height: 187.19px;
     object-fit: cover;
+    position: relative;
+    display: inline-block;
   }
   .nft_div {
     padding: 0px !important;
@@ -1285,4 +1291,23 @@ input[type="search"]::-webkit-search-cancel-button{
   /* border: 1px solid #707070; */
   width: 100vw;
   height: 100vh;
+}
+.search-div:hover{
+  box-shadow: rgb(4 17 29 / 25%) 0px 0px 8px 0px;
+   transition: all 0.1s ease 0s;
+}
+.leaderboardTop .card{
+  cursor: default;
+}
+.loaderNft{
+  width: 100%;
+  height: 187.19px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: lightgrey;
 }

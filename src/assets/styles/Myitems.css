@@ -42,7 +42,7 @@
   text-align: center;
   font: normal normal medium 16px/25px Poppins;
   letter-spacing: 0px;
-  color: #80a6fa;
+  color: grey;
   opacity: 1;
 }
 .priceTag {
@@ -68,6 +68,9 @@
 }
 .likeCount{
   float: right;
+}
+.Noitemdiv .no-image{
+  filter: opacity(0.4) drop-shadow(0 0 0 grey);
 }
 @media only screen and (max-width: 426px) {
   .headingtag {

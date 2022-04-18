@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import image from "../../assets/images/profile.png";
+import image from "../../assets/images/NoProfile.svg";
 import copy from "../../assets/images/copy.svg";
 import "../../assets/styles/Notification.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "../../assets/styles/wallet.css";
 import SplitWalletAdd from "../../common/components/SplitWalletAdd";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { ManageNotiSideBar, ManageWalletSideBar } from "../../reducers/Action";
+import { ManageNotiSideBar, ManageWalletSideBar, logOut } from "../../reducers/Action";
 import Snackbar from "@mui/material/Snackbar";
 import styled from "styled-components";
 
@@ -120,6 +120,7 @@ function Wallet() {
   const handleChange = (e) => {
     dispatch(ManageWalletSideBar(!isOpenWallet));
     dispatch(ManageNotiSideBar(false));
+    dispatch(logOut());
     document.body.className = !isOpenWallet ? "overflow" : "overflow-hidden";
     // document.body.style.overflow = !isOpenWallet ? "scroll" : "hidden";
   };
@@ -187,6 +188,7 @@ function Wallet() {
             <h4>{walletAddress?.balance}</h4>
           </div>
         </div>
+        <button className="btnwallet" onclick={() => handleChange()}>Log Out</button>
         {/* <button className="btnwallet">Add Balance</button> */}
       </div>
     </div>

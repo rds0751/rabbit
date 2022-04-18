@@ -18,6 +18,7 @@ import {
   USER_DETAILS,
   REDIRECT_URL,
   SEARCH_FROM_NAV,
+  LOG_OUT
 } from "./Constants";
 import { ADD_USER, GET_ERRORS, ALL_USERS } from "./Constants";
 import axios from "axios";
@@ -99,4 +100,8 @@ export const ManageWalletSideBar = (data) => (dispatch) => {
 
 export const searchNav = (data) => (dispatch) => {
   dispatch({ type: SEARCH_FROM_NAV, payload: data });
+};
+
+export const logOut = () => (dispatch) => {
+  dispatch({ type: LOG_OUT });
 };

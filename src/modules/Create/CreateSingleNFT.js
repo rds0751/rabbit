@@ -266,7 +266,7 @@ function CreateSingleNFT(props) {
       return null;
     }
     if(error!=""){
-      toast.error("Minimum listing price for an NFT should be more than 1 dollar");
+      toast.error("Minimum listing price for an NFT should be more than 0.004 ETH");
       return null;
     }
 
@@ -313,6 +313,7 @@ function CreateSingleNFT(props) {
     { value: 'ETH', label: <div><img src={ethereum} height="32px" alt=""/> Ethereum</div> },
   ];
 const enabled=name.current.length > 0 && price.current.length>0 && description.current.length >0 && selectFile!="" && nameError=="" && error=="";
+
   return (
     <>
 
@@ -586,7 +587,7 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
                   Name*<span style={{color:"red",fontSize:"13px"}}>{nameError}</span>
                 </label>
                 <input
-                  type="email"
+                  type="text"
                   className="form-control-1"
                   name="email"
                   autoComplete="off"
@@ -632,7 +633,7 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
                       price.current = e.target.value;
                       // checkChanges();
                       if(+e.target.value < "0.004" || +e.target.value=="0"){
-                        setError("(Minimum listing price for an NFT should be more than 1 dollar)")
+                        setError("( Minimum listing price for an NFT should be more than 0.004 ETH )")
                       }else if(e.target.value.length == 0){
                         setError("(price is required)")
                       }else{
@@ -668,7 +669,7 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
                   value={description.current}
                   onChange={(e) => {
                     if(e.target.value.length==0){
-                      SetDesError("(Description is required)")
+                      SetDesError("( Description is required )")
                     }else
                     SetDesError("")
                     if (desLength < 1000) {
