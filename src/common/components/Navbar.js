@@ -320,7 +320,7 @@ function Navbar() {
                               </div>
                             ):(
                               <div className="Noitemdiv"  style={{display:display?"none":"flex"}}>
-                                <img src={NoItem} alt="" />
+                                <img className="no-image" src={NoItem} alt="" />
                                 <p className="textitem">No items available</p>
                               </div>
                             )}                            

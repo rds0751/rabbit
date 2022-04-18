@@ -1435,3 +1435,6 @@ margin:0px;
   color: #366eef;
   transition: all 0.1s ease 0s;
 }
+ .no-image{
+  filter: opacity(0.4) drop-shadow(0 0 0 grey);
+}

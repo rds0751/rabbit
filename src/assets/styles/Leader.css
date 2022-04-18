@@ -1161,7 +1161,7 @@ thead {
 }
 .nfts-cont {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   margin-left: 0px;
   margin-right: 0px;
   padding-top: 34px;
@@ -1916,4 +1916,10 @@ td {
   color: white;
   background-color:#336eef;
   
+}
+.no-item-image{
+  filter: opacity(0.4) drop-shadow(0 0 0 grey);
+}
+.Noitemdiv .no-image{
+  filter: opacity(0.4) drop-shadow(0 0 0 grey);
 }

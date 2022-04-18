@@ -488,7 +488,7 @@ function LeaderBoard() {
                   {isloadingForBuyers ? <Spinner /> :
                     (topBuyers.length === 0 && (
                       <div className="Noitemdiv">
-                        <img src={NoItem} />
+                        <img className="no-image" src={NoItem} />
                         <p className="textitem">No items available</p>
                       </div>
                     ))}
@@ -671,7 +671,7 @@ function LeaderBoard() {
                   {isloadingForSeller ? <Spinner /> :
                     (topSellers.length === 0 && (
                       <div className="Noitemdiv">
-                        <img src={NoItem} />
+                        <img className="no-image" src={NoItem} />
                         <p className="textitem">No items available</p>
                       </div>
                     ))}
@@ -858,7 +858,7 @@ function LeaderBoard() {
                   {isloadingForCollection ? <Spinner /> :
                     (limitCollections.length === 0 && (
                       <div className="Noitemdiv">
-                        <img src={NoItem} />
+                        <img className="no-image" src={NoItem} />
                         <p className="textitem">No items available</p>
                       </div>
                     ))}
@@ -1227,7 +1227,7 @@ function LeaderBoard() {
           {isloadingForNfts ? <Spinner /> :
             (topNftSales.length === 0 && (
               <div className="Noitemdiv">
-                <img src={NoItem} />
+                <img  className="no-image" src={NoItem} />
                 <p className="textitem">No items available</p>
               </div>
             ))}
@@ -1321,7 +1321,7 @@ const BuildPendingAcceptedRejectedBlock = ({ apiData ,isloading}) => {
         {isloading ? <Spinner /> :
           (apiData.length === 0 && (
             <div className="Noitemdiv">
-              <img src={NoItem} />
+              <img className="no-image" src={NoItem} />
               <p className="textitem">No items available</p>
             </div>
           ))}
@@ -1411,7 +1411,7 @@ const BuildAcceptedBlock = ({ apiData , isloading }) => {
         {isloading ? <Spinner /> :
           (apiData.length === 0 && (
             <div className="Noitemdiv">
-              <img src={NoItem} />
+              <img className="no-image" src={NoItem} />
               <p className="textitem">No items available</p>
             </div>
           ))}
@@ -1492,7 +1492,7 @@ const BuildRejectedBlock = ({ apiData ,isloading}) => {
         {isloading ? <Spinner /> :
           (apiData.length === 0 && (
             <div className="Noitemdiv">
-              <img src={NoItem} />
+              <img className="no-image" src={NoItem} />
               <p className="textitem">No items available</p>
             </div>
           ))}

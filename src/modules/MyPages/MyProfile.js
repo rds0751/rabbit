@@ -429,7 +429,7 @@ function MyProfile() {
                 return (
                   <div>
                     <div className="Noitemdiv">
-                      <img src={NoItem} />
+                      <img className="no-item-image" src={NoItem} />
                       <p className="textitem">No items available</p>
                     </div>
                   </div>

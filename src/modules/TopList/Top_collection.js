@@ -250,12 +250,16 @@ const Text = style.div`
   font-family: 'poppins-medium';
   color: #191919;
 `;
+const noItemImage=style.img`
+  color:'filter: opacity(0.4) drop-shadow(0 0 0 grey)'
+  `;
 const Volume = style.span`
   font-family: 'poppins';
   font-size: 16px;
   line-height: 25px;
   color: #818181;
 `;
+
 function Top_collection() {
   const [topCollections, setTopCollections] = useState([]);
   const [collectionDuration, setCollectionDuration] = useState({
@@ -282,6 +286,7 @@ function Top_collection() {
   const ChangeCollectionDuration = (e) => {
     setCollectionDuration({ ...collectionDuration, duration: e })
   }
+
 
   return (
     <Container className="leader-viewmore">
@@ -373,7 +378,7 @@ function Top_collection() {
             {isloading ? <Spinner /> :
               (topCollections.length === 0 && (
                 <div className="Noitemdiv">
-                  <img src={NoItem} alt=""/>
+                   <img style={{filter:"opacity(0.4) drop-shadow(0 0 0 grey)"}} src={NoItem} />
                   <p className="textitem">No items available</p>
                 </div>
             ))}

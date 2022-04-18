@@ -20,6 +20,7 @@ import SelectUnstyled, { selectUnstyledClasses } from '@mui/base/SelectUnstyled'
 import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled'
 import PopperUnstyled from '@mui/base/PopperUnstyled'
 import { styled } from '@mui/system'
+import { makeStyles } from "@mui/material";
 
 const blue = {
   100: '#DAECFF',
@@ -262,9 +263,7 @@ const Volume = style.span`
   line-height: 25px;
   color: #818181;
 `;
-
 function TopBidders() {
-
   const [topBuyers, setTopBuyers] = useState([]);
   const [buyerDuration, setBuyerDuration] = useState({
     duration: "all",
@@ -338,18 +337,6 @@ function TopBidders() {
           curElem;
         var precise = volume.toPrecision(4);
         var result = parseFloat(precise);
-        function hasWhiteSpace(s) 
-        {
-        var reWhiteSpace = new RegExp("/^\s+$/");
-
-    // Check for white space
-          if (reWhiteSpace.test(s)) {
-        //alert("Please Check Your Fields For Spaces");
-            return false;
-          }
-
-    return true;
-}
         return (
           <div className="container-fluid">
             <Collection className="row">
@@ -369,20 +356,12 @@ function TopBidders() {
 
                 ) : (
                   <h2 className="seller-name" title={buyer.userName}><Link style={{ textDecoration: "null" }} to={"/user-profile/" + buyer._id}>
-
-                    
-
                     {buyer.userName.length >13 ?(
-
-                      
                       buyer.userName.substring(0,8)+"..."
-
                     ):(
                       buyer.userName
-
                     )}
                       </Link>
-                     
                      </h2>
 
                 )}
@@ -405,7 +384,7 @@ function TopBidders() {
         {isloading ? <Spinner /> :
           (topBuyers.length === 0 && (
             <div className="Noitemdiv">
-              <img src={NoItem} />
+              <img style={{filter: "opacity(0.4) drop-shadow(0 0 0 grey)"}} src={NoItem} />
               <p className="textitem">No items available</p>
             </div>
           ))}
