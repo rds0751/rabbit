@@ -281,6 +281,7 @@ function MyProfile() {
                 : coverImage
             }
             alt=""
+            onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
           />
           <input
             type="file"
@@ -302,6 +303,7 @@ function MyProfile() {
             src={loggedInUser?.photo != "" ? loggedInUser?.photo : profileImage}
             alt=""
             className="user-img"
+            onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
           />
          
           {/* <h2>{ethereum && ethereum.selectedAddress}</h2> */}

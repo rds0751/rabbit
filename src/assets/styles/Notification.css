@@ -94,10 +94,10 @@ height: 47px;
   color: white;
   background-color: #366eff;
   border: 1px solid;
-  border-radius: 5px;
-  width: 405px;
+  border-radius: 6px;
+  /* width: 405px; */
   height: 42px;
-  padding: 7px;
+  padding: 10px;
   /* margin-bottom: -6px; */
   /* margin-left: -6px; */
 }

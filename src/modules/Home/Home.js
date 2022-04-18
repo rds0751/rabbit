@@ -167,6 +167,7 @@ function Home() {
                                       <Card.Img
                                         variant="top"
                                         src={nft?.cdnUrl}
+                                        onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
                                       />
                                     </Link>
                                     <Card.Body>
@@ -178,6 +179,7 @@ function Home() {
                                             width="38px"
                                             height="38px"
                                             className="profile-img"
+                                            onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
                                           />
                                         </div>
                                         <div className="flex-grow-1 ms-2 card1">
@@ -263,6 +265,7 @@ function Home() {
                                       <Card.Img
                                         variant="top"
                                         src={nft?.cdnUrl}
+                                        onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
                                       />
                                     </Link>
                                     <Card.Body>
@@ -275,6 +278,7 @@ function Home() {
                                               width="38px"
                                               height="38px"
                                               className="profile-img"
+                                              onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
                                             />
                                           
                                           <div className="flex-grow-1 ms-2 card1">
@@ -380,7 +384,7 @@ function Home() {
                         to={"/nft-information/" + nft?._id}
                         style={{ textDecoration: "none" }}
                       >
-                            <img className="nft-img" src={nft?.cdnUrl}></img>
+                            <img className="nft-img" src={nft?.cdnUrl} onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}></img>
                             </Link>
                           </div>
                           <br />
@@ -398,7 +402,7 @@ function Home() {
                             
                           >
                             <div style={{ display: "flex" }}>
-                              <Avatar alt="Remy Sharp" src={nft?.cdnUrl} />
+                              <Avatar alt="Remy Sharp" src={nft?.cdnUrl} onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()} />
                               <p className="nft-carname">{nft?.name}</p>
                             </div>
 
