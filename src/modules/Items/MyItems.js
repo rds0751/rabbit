@@ -148,7 +148,7 @@ function MyItems() {
 
             ):(<div>
               <div className="Noitemdiv">
-                <img src={NoItem}/>
+                <img className="no-image" src={NoItem}/>
                 <p className="textitem">No items available</p>
                 </div>
               </div>) }
@@ -207,7 +207,7 @@ function MyItems() {
             ):(
               <div>
               <div className="Noitemdiv">
-                <img src={NoItem}/>
+                <img className="no-image" src={NoItem}/>
                 <p className="textitem">No items available</p>
                 </div>
               </div>)}

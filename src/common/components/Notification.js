@@ -152,8 +152,8 @@ function Notification() {
           <div className="no-notification"
           style={{ display: notifications.length === 0 ? "block" : "none" }}
           >
-            <img src={NotificationIcon}></img>
-            <p>No notification found</p>
+            <img className="no-image" src={NotificationIcon}></img>
+            <p className="no-notification">No notification found</p>
           </div>
         )}
         

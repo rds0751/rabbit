@@ -836,10 +836,7 @@ export default function NftInformation(props) {
                       props?.responseData?.salesInfo?.isOpenForSale
                         ? "block"
                         : "none",
-                    color: "white",
-                    marginRight: "2rem",
-                    backgroundColor: "#366eff",
-                    textTransform: "none",
+                
                   }}
                   onClick={buyNft}
                 >

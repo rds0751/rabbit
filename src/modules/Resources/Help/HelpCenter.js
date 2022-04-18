@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../../assets/styles/helpcenter.css";
-import buying from "../../../assets/images/buying.png";
-import selling from "../../../assets/images/selling.png";
-import creating from "../../../assets/images/creation.png";
-import adding from "../../../assets/images/adding.png";
+import buying from "../../../assets/images/buying.svg";
+import selling from "../../../assets/images/selling.svg";
+import creating from "../../../assets/images/createCollection.svg";
+import adding from "../../../assets/images/addingNfts.svg";
 function HelpCenter() {
   const data = [
     {
