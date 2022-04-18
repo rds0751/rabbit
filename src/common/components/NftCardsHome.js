@@ -101,6 +101,7 @@ function NftCardsHome({ nft }) {
           )}
           
           </div>
+          </Link>
          
           
         
@@ -163,7 +164,6 @@ function NftCardsHome({ nft }) {
             </div>
           </div>
         </div>
-        </Link>
       </div>
     </div>
   );

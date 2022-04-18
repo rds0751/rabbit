@@ -26,7 +26,7 @@ import Form from 'react-bootstrap/Form'
 import bellicon from '../../assets/images/bellicon.svg'
 import profileImg from '../../assets/images/profile.svg'
 import wallet from '../../assets/images/wallet.svg'
-
+import Anafto from '../../assets/images/ANAFTO.svg'
 const queryString = require("query-string");
 function Navbar() {
   const navigate = useNavigate();
@@ -287,7 +287,7 @@ function Navbar() {
                 onClick={() => {closeWalletAndNoti();}}
               >
                 <img
-                  src={require("../../assets/images/logo.png")}
+                  src={Anafto}
                   style={{ width: "100px" }}
                   alt=""
                 />

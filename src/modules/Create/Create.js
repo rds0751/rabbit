@@ -15,6 +15,7 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
 import { WEB_APP_USER_WALLET_ADDRESS } from "../../reducers/Constants";
+import Metamask from "../../assets/images/Metamask.svg"
 function Create() {
   const history = useNavigate();
   const [humburger, setHumburger] = useState(false);
@@ -189,7 +190,7 @@ function Create() {
               >
                 <img
                   id="create_logo"
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/800px-MetaMask_Fox.svg.png"
+                  src={Metamask}
                   alt="..."
                 />
                 <div className="card-body">

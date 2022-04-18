@@ -3,8 +3,11 @@ import "../../assets/styles/Notification.css";
 import { addEmail } from "../../services/UserMicroService";
 import { ToastContainer } from "react-toastify";
 import discordIcon from "../../assets/images/discord.svg"
+import hoverDiscord from "../../assets/images/hoverDiscord.svg"
+import instaIcon from "../../assets/images/insta.svg"
+import hoverInsta from "../../assets/images/hoverInsta.svg"
 import { toast } from "react-toastify";
-import { display } from "@mui/system";
+import HoverImage from "react-hover-image";
 
 function Footer() {
   let  [email ,setEmailError]=useState("");
@@ -65,7 +68,7 @@ function Footer() {
             <p className="fs-18">Join our community</p>
             <div className="allicon">
               <a href="https://www.instagram.com/" target="_blank" className="footerAnchor">
-              <i className="fa-brands fa-instagram Icon"></i>
+              <HoverImage src={instaIcon} hoverSrc={hoverInsta}  className="Icon"/>
               </a>
               <a href="https://twitter.com/" target="_blank" className="footerAnchor">
               <i className="fab fa-twitter  Icon twittericon"></i>
@@ -82,7 +85,7 @@ function Footer() {
              </a>
              <a href="https://www.linkedin.com/feed/" target="_blank" className="footerAnchor"><i className="fab fa-linkedin  Icon hideicon"></i></a>
              <a href="https://discord.com/" target="_blank" className="footerAnchor">
-               <img src={discordIcon} className="Icon hideicon discordIcon"></img>
+             <HoverImage src={discordIcon} hoverSrc={hoverDiscord}  className="Icon hideicon discordIcon"/>
                {/* <i className="fab fa-discord  Icon hideicon"></i> */}
                </a>
              <a href="https://www.youtube.com/" target="_blank" className="footerAnchor"><i className="fab fa-youtube  Icon hideicon"></i></a>
