@@ -50,7 +50,6 @@ export default function ListingsTable(props) {
   useEffect(() => {
     getList(reqType, id).then((response) => setActivities(response));
   }, []);
-  console.log(activities, "2222");
 
   return (
     <TableContainer component={Paper} elevation={0}>

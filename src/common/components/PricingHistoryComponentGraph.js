@@ -18,34 +18,39 @@ export default function PricingHistoryComponent(props) {
   };
 
   useEffect(() => {
-    pricingHistoryGraphOfNft(reqObject).then((response) => 
+    pricingHistoryGraphOfNft(reqObject).then((response) =>
       setNftPricingHistory(response)
     );
   }, []);
 
   let prices = nftPricingHistory.map((each) => each.total);
-  let dates = nftPricingHistory.map((each) => moment(new Date(each._id.addedOn)).format('D MMM YY'));
+  let dates = nftPricingHistory.map((each) =>
+    moment(new Date(each._id.addedOn)).format("D MMM YY")
+  );
 
   if (filter === "month") {
-    dates = nftPricingHistory.map((each) => moment(new Date(each._id.addedOn)).format('MMM YY'));
+    dates = nftPricingHistory.map((each) =>
+      moment(new Date(each._id.addedOn)).format("MMM YY")
+    );
   } else if (filter === "year") {
-    dates = nftPricingHistory.map((each) => moment(new Date(each._id.addedOn)).format('YYYY'));
+    dates = nftPricingHistory.map((each) =>
+      moment(new Date(each._id.addedOn)).format("YYYY")
+    );
   }
-
-  let total= 0;
+  let total = 0;
   let average = 0;
   nftPricingHistory.forEach((item) => {
-    total = total + item.total
-  })
-  if (total !== 0){
-    average = total/nftPricingHistory.length
+    total = total + item.total;
+  });
+  if (total !== 0) {
+    average = total / nftPricingHistory.length;
   }
 
   const object = {
     series: [
       {
         name: "pricingHistory",
-        data: prices ,
+        data: prices,
       },
     ],
     options: {
@@ -78,34 +83,42 @@ export default function PricingHistoryComponent(props) {
     <div id="chart">
       <div className="">
         <div className="d-flex justify-content-around align-items-center py-4">
-            <h5 className="avg-price">
-              Average Price: <span>{average}</span>
-            </h5>
-            <select name="filter"
-              onChange={(e) => handleChange(e)}
-              className="chart-filter selectfixing4"
-            >
-              <option className="font-15" value="all">All time</option>
-              <option className="font-15" value="month">Month</option>
-              <option className="font-15" value="year">Year</option>
-              <option className="font-15" value="days">Days</option>
-            </select>
+          <h5 className="avg-price">
+            Average Price: <span>{average}</span>
+          </h5>
+          <select
+            name="filter"
+            onChange={(e) => handleChange(e)}
+            className="chart-filter selectfixing4"
+          >
+            <option className="font-15" value="all">
+              All time
+            </option>
+            <option className="font-15" value="month">
+              Month
+            </option>
+            <option className="font-15" value="year">
+              Year
+            </option>
+            <option className="font-15" value="days">
+              Days
+            </option>
+          </select>
         </div>
-        {object.series && object.series.length > 0 ?  <ReactApexChart
-          options={object.options}
-          series={object.series}
-          type="area"
-          height={197}
-          width="100%"
-        />
-        :
-        
-        <div className="no-data no-data-found ">
-        <img src={Information}></img>
-        <p>No information available</p>
-      </div>
-          
-      } 
+        {object.series && nftPricingHistory.length > 0 ? (
+          <ReactApexChart
+            options={object.options}
+            series={object.series}
+            type="area"
+            height={197}
+            width="100%"
+          />
+        ) : (
+          <div className="no-data no-data-found ">
+            <img src={Information}></img>
+            <p>No information available</p>
+          </div>
+        )}
       </div>
     </div>
   );

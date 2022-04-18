@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { FacebookShareButton } from "react-share";
 import { TwitterShareButton } from "react-share";
-import image from "../../assets/images/1.jpg";
 import share from "../../assets/images/share.svg";
 import info from "../../assets/images/report.svg";
 import copyIcon from "../../assets/images/copy.png";
+import Imagep from "../../assets/images/imagep.svg"
 import facebookIcon from "../../assets/images/facebook.png";
 import twitterIcon from "../../assets/images/Twitter.png";
 import "../../assets/styles/nftReportModal.css";
@@ -16,8 +16,6 @@ import PricingHistoryComponentGraph from "../../common/components/PricingHistory
 // import BidsComponent from "./BidsComponent";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "../../assets/styles/createSingleNft.css";
-import dropdowmImage from "../../assets/images/drop down.png";
-import Close from "../../assets/images/close.png";
 import success from "../../assets/images/Check.svg";
 import { Button } from "@mui/material";
 import { getNft, addNftReport } from "../../services/webappMicroservice";
@@ -27,77 +25,57 @@ import {
   RemoveNftFromSale,
 } from "../../services/contentServices";
 import { toast } from "react-toastify";
-
-import { getUser } from "../../services/UserMicroService";
 import { Oval } from "react-loader-spinner";
 import Snackbar from "@mui/material/Snackbar";
 import styled from "styled-components";
 import ListingsTable from "../../common/components/ListingTable";
 toast.configure();
 const CustomSnack = styled(Snackbar)`
-
-
-
-@media (min-width: 992px){
-  position: absolute !important;
-      top: 69px !important;
-      left: auto !important;
-      right: auto !important;
-  }
-  
-    @media only screen and (min-width:0px) and  (max-width:991px){
-display: none !important;
-  
-  
+  @media (min-width: 992px) {
+    position: absolute !important;
+    top: 69px !important;
+    left: auto !important;
+    right: auto !important;
   }
 
-    `
-    const CustomSnack2 = styled(Snackbar)`
-  
-    @media only screen and (min-width:992px) and  (max-width:5000px){
-display: none !important;
-      }
-
-    @media only screen and (min-width:770px) and  (max-width:991px){
-      position: absolute !important;
-      top: 69px !important;
-      left: auto !important;
-      right: 0px !important;
-  
-  
+  @media only screen and (min-width: 0px) and (max-width: 991px) {
+    display: none !important;
   }
-  @media only screen and (min-width:701px) and  (max-width:769px){
+`;
+const CustomSnack2 = styled(Snackbar)`
+  @media only screen and (min-width: 992px) and (max-width: 5000px) {
+    display: none !important;
+  }
+
+  @media only screen and (min-width: 770px) and (max-width: 991px) {
+    position: absolute !important;
+    top: 69px !important;
+    left: auto !important;
+    right: 0px !important;
+  }
+  @media only screen and (min-width: 701px) and (max-width: 769px) {
     position: absolute !important;
     top: 69px !important;
     left: auto !important;
     right: 140px !important;
-  
-  
-  
   }
-  @media only screen and (min-width:504px) and  (max-width:700px){
+  @media only screen and (min-width: 504px) and (max-width: 700px) {
     width: 86px;
     position: absolute !important;
     top: 161px !important;
-      left: 402px !important;
-      right: 8px !important;
-  
-  
-  
+    left: 402px !important;
+    right: 8px !important;
   }
-  @media only screen and (min-width:0px) and  (max-width:503px){
+  @media only screen and (min-width: 0px) and (max-width: 503px) {
     width: 86px;
     position: absolute !important;
     top: 161px !important;
-      left: 190px !important;
-      right: 8px !important;
-  
-  
-  
+    left: 190px !important;
+    right: 8px !important;
   }
-    `
+`;
 
-const queryString = require('query-string');
+const queryString = require("query-string");
 export default function NftInformation(props) {
   const navigate = useNavigate();
   const [activeInActive, setActiveInActive] = useState("active");
@@ -135,8 +113,6 @@ export default function NftInformation(props) {
     setState({ ...state, open: false });
   };
 
-
-
   const [report, setReport] = useState({
     contentId: id,
     addedBy: loggedInUser?._id,
@@ -159,20 +135,12 @@ export default function NftInformation(props) {
   } else {
     document.body.classList.remove("active-modal");
   }
-  console.log(
-    loggedInUser?._id,
-    props?.responseData,
-    props?.loaderState,
-    "<<<< this is data toooooooooooooooooooooooooooooooo match"
-  );
+
   // alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
 
   // useEffect(() => {
   //   alert(`${loggedInUser?._id}`);
-  //   console.log(
-  //     props.responseData,
-  //     "<<<<response data at nft information << page"
-  //   );
+
   // }, []);
 
   // setIsCurrUserNft(props.responseData.createdBy === loggedInUser?._id);
@@ -186,8 +154,6 @@ export default function NftInformation(props) {
 
   // }, []);
   // alert(`${isCurrUserNft},${loggedInUser._id},${isOpenForSell}`);
-  // console.log("===",isCurrUserNft)
-  // console.log("===",isOpenForSell)
 
   const facebook = async () => {
     window.open("https://www.facebook.com/", "_blank");
@@ -197,7 +163,6 @@ export default function NftInformation(props) {
   };
   const handleCopyToClipboard = () => {
     // alert(window.location.href);
-    // console.log("kkkkkkkkkkdddddd",window.location.href);     //yields: "https://stacksnippets.net/js"
 
     // const { wallet_address } = loggedInUser;
     navigator.clipboard.writeText(window.location.href);
@@ -262,8 +227,7 @@ export default function NftInformation(props) {
     } else toast.error(response.message);
   };
 
-  const handleChange = (e) =>
-    setReason(e.target.value);
+  const handleChange = (e) => setReason(e.target.value);
 
   const makeReport = () => {
     addNftReport(report);
@@ -271,7 +235,6 @@ export default function NftInformation(props) {
   // const makeReport = () => {
   //   addNftReport(report);
   // };
-  // console.log(window.ethereum.networkVersion, 'window.ethereum.networkVersion');
 
   const sendButton = () => {
     removeNFTFromSell();
@@ -332,7 +295,7 @@ export default function NftInformation(props) {
     : creator?.wallet_address;
 
   const url = window.location.href;
-  console.log();
+
   return (
     <>
       {/* {props?.refreshPage ? window.location.reload(true) : ""} */}
@@ -457,16 +420,16 @@ export default function NftInformation(props) {
                     }}
                   >
                     <li className="list-item" onClick={handleCopyToClipboard}>
-                    <button
+                      <button
                         className="copy-button"
                         onClick={handleClick({
                           vertical: "top",
                           horizontal: "right",
                         })}
                       >
-                          <img src={copyIcon} alt="icon" className="icon" />
-                          <span className="icon-text">Copy link</span>
-                          </button>
+                        <img src={copyIcon} alt="icon" className="icon" />
+                        <span className="icon-text">Copy link</span>
+                      </button>
                     </li>
                     <li className="list-item">
                       {/* <img src={facebookIcon} alt="icon" className="icon" />
@@ -497,24 +460,28 @@ export default function NftInformation(props) {
               </div>
             </div>
             <CustomSnack2
-            anchorOrigin={{ vertical, horizontal }}
-            open={open}
-            onClose={handleClose}
-            message="Copied"
-            key={vertical + horizontal}
-            // autoHideDuration={2000}
-            className="custom-snack"
-          />
+              anchorOrigin={{ vertical, horizontal }}
+              open={open}
+              onClose={handleClose}
+              message="Copied"
+              key={vertical + horizontal}
+              // autoHideDuration={2000}
+              className="custom-snack"
+            />
             <div className="col-xl-5 col-lg-5 col-md-12">
               <div className="nftdetail-img">
                 <img
-                  src={nft.cdnUrl}
+               onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
+                  // src={nft.cdnUrl}
+                  src={nft.cdnUrl  ? nft.cdnUrl : Imagep }
+                  // src={Imagep}
                   alt="nft"
                   className="border-radius imginfo_mob"
                   style={{
                     maxWidth: "100%",
                     // height: "837px",
                     borderRadius: "8px",
+                
                   }}
                 />
               </div>
@@ -624,15 +591,17 @@ export default function NftInformation(props) {
                         <li
                           className="list-item"
                           onClick={handleCopyToClipboard}
-                        >            <button
-                        className="copy-button"
-                        onClick={handleClick({
-                          vertical: "top",
-                          horizontal: "right",
-                        })}
-                      >
-                          <img src={copyIcon} alt="icon" className="icon" />
-                          <span className="icon-text">Copy link</span>
+                        >
+                          {" "}
+                          <button
+                            className="copy-button"
+                            onClick={handleClick({
+                              vertical: "top",
+                              horizontal: "right",
+                            })}
+                          >
+                            <img src={copyIcon} alt="icon" className="icon" />
+                            <span className="icon-text">Copy link</span>
                           </button>
                         </li>
                         <li className="list-item">
@@ -660,14 +629,14 @@ export default function NftInformation(props) {
                       </ul>
                     </div>
                     <CustomSnack
-            anchorOrigin={{ vertical, horizontal }}
-            open={open}
-            onClose={handleClose}
-            message="Copied"
-            key={vertical + horizontal}
-            // autoHideDuration={2000}
-            className="custom-snack"
-          />
+                      anchorOrigin={{ vertical, horizontal }}
+                      open={open}
+                      onClose={handleClose}
+                      message="Copied"
+                      key={vertical + horizontal}
+                      // autoHideDuration={2000}
+                      className="custom-snack"
+                    />
                     <img
                       src={info}
                       alt="info"
@@ -762,7 +731,9 @@ export default function NftInformation(props) {
               <div className="second-text align-row">
                 <span className="text">
                   Current Price:&nbsp;
-                  <span className="nft-value">{salesInfo?.price}&nbsp;{salesInfo?.currency}</span>
+                  <span className="nft-value">
+                    {salesInfo?.price}&nbsp;{salesInfo?.currency}
+                  </span>
                 </span>
                 {showDateSection ? (
                   <span className="align-row">

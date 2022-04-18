@@ -84,6 +84,7 @@ function NftCardsHome({ nft }) {
             className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
             src={cdnUrl}
             alt="nft-img"
+            onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
           />
         </Link>
         <span onClick={() => likeNft(_id)}>

@@ -38,14 +38,10 @@ function Notification() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(user, "srinivas");
     getNotificationListById(userId).then((response) =>
       setNotifications(response)
     );
   }, []);
-
-  // console.log("notifications", notifications);
-  console.log(notifications, "<<<<notifications");
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -77,7 +73,11 @@ function Notification() {
       <div className="empty_div" onClick={() => handleChange()}></div>
       <div className="noti-outer">
         <h3 className="notification-text">Notification</h3>
-        <div className="all-noti"    style={{ display: notifications.length === 0 ? "none" : "block" }}>
+        <div
+          className="all-noti"
+          style={{ display: notifications.length === 0 ? "none" : "block" }}
+        >
+          {console.log(notifications,"noti")}
           {notifications.map((curElem) => {
             const { addedOn, type, owner, content } = curElem;
             let addedOnTimeStamp = moment(addedOn).format("LT");
@@ -111,8 +111,9 @@ function Notification() {
                       <a
                         style={{ textDecoration: "none" }}
                         href={"/nft-information/" + content?._id}
-                      > 
-                      <span style={{ color: "#366EEF" }}>{content.name}</span></a>
+                      >
+                        <span style={{ color: "#366EEF" }}>{content.name}</span>
+                      </a>
                     </div>
                   ) : type == "bid" ? (
                     <div className="noti-text">
@@ -145,18 +146,22 @@ function Notification() {
               </div>
             );
           })}
-          <br /> 
-          {notifications.length > 0 ? <footer style={{display:"flex", justifyContent:"center"}}><p className="end-noti">End of Notification</p></footer> : null }
+          <br />
+          {notifications.length > 0 ? (
+            <footer style={{ display: "flex", justifyContent: "center" }}>
+              <p className="end-noti">End of Notification</p>
+            </footer>
+          ) : null}
         </div>
         {notifications.length === 0 && (
-          <div className="no-notification"
-          style={{ display: notifications.length === 0 ? "block" : "none" }}
+          <div
+            className="no-notification"
+            style={{ display: notifications.length === 0 ? "block" : "none" }}
           >
             <img src={NotificationIcon}></img>
             <p>No notification found</p>
           </div>
         )}
-        
       </div>
 
       {/* ------------------ */}
