@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Like from "../../assets/images/Like.svg";
 import likes from "../../assets/images/likes.svg";
 import { useSelector } from "react-redux";
+import Spinner from "../../common/components/Spinner";
 
 import {
   getNfts,
@@ -47,6 +48,12 @@ function CollDetailCard({ nft }) {
     addLikeNft(data);
     setHandleLike(!handleLike);
   };
+  let [imageLoading,setImageLoading]=useState({src:cdnUrl,loaded:false })
+
+  const onImageLoad=()=>{
+    setImageLoading({...imageLoading,loaded:true});
+  }
+
 
   return (
     <div
@@ -54,11 +61,19 @@ function CollDetailCard({ nft }) {
     >
       <div className="card nft-card-radius border-radius cardmob">
         <Link to={route} style={{ textDecoration: "none" }}>
+        <div className="image-container">
           <img
             className="nftTileEachImage img-fluid border-radius nft-img-radius card_imgmob"
             src={cdnUrl}
             alt="Nft"
-          />
+            onLoad={onImageLoad}  />
+            
+        {!imageLoading.loaded && (
+            <div className="loaderNft "> 
+              <Spinner />
+              </div>
+          )}
+          </div>
         </Link>
         <img
           id="like_icon"

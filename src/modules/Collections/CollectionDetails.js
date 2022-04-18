@@ -229,8 +229,8 @@ function CollectionDetails() {
             <img className="col-avatar" src={imageUrl} alt="" />
           </div>
           <div className="colusername">{name}</div>
-          <div className="coluserdes">
-            {description}
+          <div className="coluserdes" title={description}>
+            {description.slice(0,512)+"..."}
           </div>
         </div>
 
