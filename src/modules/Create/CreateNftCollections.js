@@ -401,7 +401,7 @@ function CreateNftCollections(props) {
       )}
       <div className="main-container">
         <h1 className="fs-32 fw-b c-b title">Create your collection</h1>
-        <p className="fs-16 fw-600 c-b pt-50">Upload Logo*</p>
+        <p className="fs-16 fw-600 c-b pt-50">Upload Collection Image*</p>
         <div className="max-width-250">
           {/*{!isLogoSelected && (*/}
           {/*    <div*/}
@@ -431,7 +431,7 @@ function CreateNftCollections(props) {
         </div>
         <div>
           {/* ---------------------------OLD BANNER UPLOAD----------------- */}
-          <div className="fs-16 fw-600 c-b pt-20 pb-20">Upload Banner*</div>
+          <div className="fs-16 fw-600 c-b pt-20 pb-20">Upload Collection Banner*</div>
 
           <Bannerdrop
             bannerCdn={bannerCdn}
@@ -445,13 +445,13 @@ function CreateNftCollections(props) {
         <div>
           <form onSubmit={(e) => handleSubmit(e)}>
             <div>
-              <p className="fs-16 fw-b c-b pt-4">Name*<span style={{color:"Red" ,fontSize:"13px"}}>{nameError}</span></p>
+              <p className="fs-16 fw-b c-b pt-4">Collection Name*<span style={{color:"Red" ,fontSize:"13px"}}>{nameError}</span></p>
               <input
                 type="name"
                 name="name"
                 maxLength="400"
                 className="input-box-1"
-                placeholder="Write your name"
+                placeholder="Write your collection name"
                 onChange={(e) => {
                   var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
                   if(format.test(e.target.value)){

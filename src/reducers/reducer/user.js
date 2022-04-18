@@ -4,6 +4,7 @@ import {
   USER_DETAILS,
   LOGGED_IN_UER_DETAILS,
   REDIRECT_URL,
+  LOG_OUT,
 } from "../Constants";
 import { eventConstants} from "../../constants";
 
@@ -19,6 +20,15 @@ let initialState = {
 };
 export const UserReducer = (state = initialState, action) => {
   switch (action.type) {
+    case LOG_OUT:
+      {
+        return {...state,
+          loggedInUser: null,
+          allUserData: "",
+          walletAddress: null,
+          redirectUrl: "", }
+      }
+      break;
     case ADD_WALLET:
       {
         return { ...state, walletAddress: action.payload };
