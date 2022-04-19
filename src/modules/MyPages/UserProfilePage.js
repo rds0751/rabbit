@@ -222,6 +222,7 @@ console.log("userrrrrrrrrrrrrrrrdataa",userData)
                 : defaultCoverpic
             }
             alt=""
+            onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
           />
           {/* <input
             type="file"
@@ -239,6 +240,7 @@ console.log("userrrrrrrrrrrrrrrrdataa",userData)
             src={userData?.photo != "" ? userData?.photo : defaultPic}
             alt=""
             className="user-img"
+            onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
           />
           {/* <h2>{ethereum && ethereum.selectedAddress}</h2> */}
           {/* <h2>{window.ethereum && defaultAccount}</h2> */}
