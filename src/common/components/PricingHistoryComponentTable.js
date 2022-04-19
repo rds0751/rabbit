@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
+import Mint from "../../assets/images/Mint.svg";
+import Transfer from "../../assets/images/Transfer.svg";
+import Sale from "../../assets/images/Sale2.svg";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -13,6 +16,9 @@ import {
   getPricingHistory,
 } from "../../services/webappMicroservice";
 import moment from "moment";
+import { NoBackpackSharp } from "@mui/icons-material";
+import { Divider } from "@mui/material";
+import "../../assets/styles/Leader.css"
 
 const MainContainer = styled.div`
   display: flex;
@@ -67,13 +73,12 @@ const Button = styled.button`
   border: none;
   color: #366eef;
 `;
-const TableDown = styled(Table)`
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 0px 0px 3px 3px;
-  opacity: 1;
-  table-layout: auto;
-  width: 100%;
-  height: auto;
+const TableContainerCustom = styled(TableContainer)`
+height: 218px !important;
+::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+}
 `;
 const TableUp = styled(Table)`
   height: 0px;
@@ -81,8 +86,15 @@ const TableUp = styled(Table)`
   width: 100%;
   margin-bottom: 8px;
 `;
+const TableCustom = styled(Table)`
+display: table;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    min-width: 525px !important;
+`;
 const TableDiv = styled.div`
-  height: 218px;
+  height: 220px;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #c8c8c8;
   border-radius: 0px 0px 3px 3px;
@@ -114,7 +126,6 @@ export default function PricingHistoryComponentTable(props) {
     const reqObj = queryString.stringify(type);
     getActivities(reqObj, id).then((response) => setActivities(response));
   }, [type]);
-  console.log(activities, "11111");
 
   const handleChange = (e) => {
     setType({ ...type, [e.target.name]: e.target.value });
@@ -163,6 +174,7 @@ export default function PricingHistoryComponentTable(props) {
           className="selectfixing4"
           name="type"
           onChange={(e) => handleChange(e)}
+          placeholder="Filter"
         >
           <Option>Filter</Option>
           <Option value="list">List</Option>
@@ -210,96 +222,109 @@ export default function PricingHistoryComponentTable(props) {
         ) : (
           ""
         )}
-      </FilterContainer>
-      <TableContainer component={Paper} elevation={0}>
-        <TableUp aria-label="simple table">
-          <thead>
-            <tr>
-              <th style={{ color: "#191919", fontWeight: "bold" }}>Event</th>
-              <th style={{ color: "#191919", fontWeight: "bold" }}>Price</th>
-              <th style={{ color: "#191919", fontWeight: "bold" }}>From</th>
-              <th style={{ color: "#191919", fontWeight: "bold" }}>To</th>
-              <th
+      </FilterContainer> 
+      <TableDiv>
+      {activities.length > 0 ? 
+      <TableContainerCustom component={Paper} elevation={0} >
+        <TableCustom sx={{ minWidth: 650 }} size="small" aria-label="a dense table" stickyHeader>
+          <TableHead>
+            <TableRow>
+              <TableCell style={{ color: "#191919", fontWeight: "bold", background:"#FBFBFB " }}>
+                Event
+              </TableCell>
+              <TableCell style={{ color: "#191919", fontWeight: "bold",background:"#FBFBFB " }}>
+                Price
+              </TableCell>
+              <TableCell style={{ color: "#191919", fontWeight: "bold",background:"#FBFBFB " }}>
+                From
+              </TableCell>
+              <TableCell style={{ color: "#191919", fontWeight: "bold",background:"#FBFBFB " }}>
+                To
+              </TableCell>
+              <TableCell
                 style={{
                   color: "#191919",
                   fontWeight: "bold",
-                  textAlign: "center",
+                  // textAlign: "center",
                 }}
               >
                 Date
-              </th>
-            </tr>
-          </thead>
-        </TableUp>
-        <TableDiv>
-          <TableDown aria-label="simple table">
-            {activities.length > 0 ? (
-              <tbody className="table-bodymousec">
-                {activities.map((row) => (
-                  <tr
-                    style={{ height: "0px !important" }}
-                    key={row.name}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    className="table-row"
+              </TableCell>
+            </TableRow>
+          </TableHead>
+
+          {console.log(activities, "activities")}
+
+            <TableBody style={{border:"1px solid greeen !important"}}>
+              {activities.map((row) => (
+                <TableRow
+                  key={row.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell
+                    style={{
+                      textAlign: "left",
+                      borderBottom: "1px solid #C8C8C8",
+                    }}
+                    component="td"
+                    scope="row"
                   >
-                    <td
-                      style={{
-                        textAlign: "left",
-                        borderBottom: "1px solid #C8C8C8",width: "55px"
-                      }}
-                      component="td"
-                      scope="row"
-                    >
-                      {row.type}
-                    </td>
-                    <td
-                      style={{
-                        textAlign: "center",
-                        borderBottom: "1px solid #C8C8C8",
-                        width: "149px",
-                      }}
-                    >
-                      {row.price}
-                    </td>
-                    <td
-                      style={{
-                        textAlign: "center",
-                        borderBottom: "1px solid #C8C8C8",
-                        width: "85px",
-                      }}
-                    >
-                      {row.userName.substr(0, 6)}
-                    </td>
-                    <td
-                      style={{
-                        textAlign: "center",
-                        borderBottom: "1px solid #C8C8C8",
-                        width: "119px",
-                      }}
-                    >
-                      -
-                    </td>
-                    <td
-                      style={{
-                        textAlign: "center",
-                        borderBottom: "1px solid #C8C8C8",
-                        width: "109px",
-                      }}
-                    >
-                      {moment(row.createdAt).format("DD MMM ")}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            ) : (
-              <div className="no-data no-data-found ">
-                <img src={Information}></img>
-                <p>No information available</p>
-              </div>
-            )}
-          </TableDown>
-        </TableDiv>
-      </TableContainer>
+                    {row.type === "list" ? (
+                      <img className="table-icon" src={Sale}></img>
+                    ) : row.type == "minted" ? (
+                      <img className="table-icon" src={Mint}></img>
+                    ) : row.type == "transfer" ? (
+                      <img className="table-icon" src={Transfer}></img>
+                    ) : (
+                      ""
+                    )}
+                    {row.type}
+
+                    {console.log(row.type, "row.type")}
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      borderBottom: "1px solid #C8C8C8",
+                    }}
+                  >
+
+                    {row.price}
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      borderBottom: "1px solid #C8C8C8",
+                    }}
+                  >
+                    {row.userName.substr(0, 6)}
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      borderBottom: "1px solid #C8C8C8",
+                    }}
+                  >
+                    -
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      borderBottom: "1px solid #C8C8C8",
+                      // textAlign: "center"
+                    }}
+                  >
+                    {moment(row.createdAt).format("DD MMM ")}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+
+
+        </TableCustom>
+      </TableContainerCustom>
+      : 
+      <div className="no-data no-data-found ">
+              <img src={Information}></img>
+              <p>No information available</p>
+            </div>}
+      </TableDiv>
     </MainContainer>
   );
 }

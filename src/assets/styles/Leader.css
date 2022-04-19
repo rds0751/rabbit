@@ -23,6 +23,7 @@
   border: 1px solid #fcfcfc;
   border-radius: 13px;
   opacity: 1;
+  height: fit-content !important;
 }
 .leaderboardTitle {
   display: flex;
@@ -84,7 +85,7 @@
   opacity: 1;
 }
 .view {
-  padding-bottom: 16px;
+  padding-bottom: 20px;
   padding-top: 19.35px;
   text-decoration: none;
   color: #191919;
@@ -137,7 +138,7 @@
       } */
 table {
   border-collapse: separate;
-  height: 210px;
+  height: auto;
 }
 .table1 > td {
   /* display: inline-block; */
@@ -155,7 +156,7 @@ table {
 }
 tbody,
 thead {
-  border-style: none !important;
+  /* border-style: none !important; */
   text-transform: capitalize;
 }
 
@@ -1373,6 +1374,7 @@ thead {
   line-height: 21px;
   color: #191919;
   padding: 8px 11px;
+  border-bottom: none !important;
 }
 .nft-detail .grap-area table tbody td,
 .nft-detail .pricing-history table tbody td {
@@ -1380,7 +1382,7 @@ thead {
   font-size: 14px;
   line-height: 21px;
   color: #191919;
-  padding-left: 13px;
+  padding-left: 9px;
   border-bottom: 1px solid #c8c8c8;
 }
 .ethCurrencySeller {
@@ -1935,4 +1937,9 @@ td {
   align-items: center;
   justify-content: center;
   background-color:lightgray;
+}
+.table-icon{
+  height: 20px;
+  width: 20px;
+  margin-right: 5px;
 }

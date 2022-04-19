@@ -4,43 +4,47 @@ import "../../assets/styles/Leader.css";
 import Information from "../../assets/images/No-Info-Icon.svg";
 import { pricingHistoryGraphOfNft } from "../../services/sellAndPurchaseMicroService";
 import moment from "moment";
-
+const queryString = require("query-string");
 export default function PricingHistoryComponent(props) {
   const [nftPricingHistory, setNftPricingHistory] = useState([]);
-  const [filter, setFilter] = useState();
+  const [filter, setFilter] = useState({duration:""});
 
   const handleChange = (e) => {
-    setFilter(e.target.value);
+    setFilter({...filter,[e.target.name]:e.target.value});
   };
 
-  const reqObject = {
+  const reqId = {
     contentId: props.id,
   };
-
+  const reqObj = queryString.stringify(filter)
+// const reqObj = {
+//   duration: ""
+// }
+console.log(nftPricingHistory,"sachin")
   useEffect(() => {
-    pricingHistoryGraphOfNft(reqObject).then((response) =>
+    pricingHistoryGraphOfNft(reqId, reqObj ).then((response) =>
       setNftPricingHistory(response)
     );
-  }, []);
+  }, [reqObj]);
 
-  let prices = nftPricingHistory.map((each) => each.total);
+  let prices = nftPricingHistory.map((each) => each.totalVolume);
   let dates = nftPricingHistory.map((each) =>
-    moment(new Date(each._id.addedOn)).format("D MMM YY")
+    moment(new Date(each?.addedOn)).format("D MMM YY")
   );
 
   if (filter === "month") {
     dates = nftPricingHistory.map((each) =>
-      moment(new Date(each._id.addedOn)).format("MMM YY")
+      moment(new Date(each?.addedOn)).format("MMM YY")
     );
   } else if (filter === "year") {
     dates = nftPricingHistory.map((each) =>
-      moment(new Date(each._id.addedOn)).format("YYYY")
+      moment(new Date(each?.addedOn)).format("YYYY")
     );
   }
   let total = 0;
   let average = 0;
   nftPricingHistory.forEach((item) => {
-    total = total + item.total;
+    total = total + item.totalVolume;
   });
   if (total !== 0) {
     average = total / nftPricingHistory.length;
@@ -87,7 +91,7 @@ export default function PricingHistoryComponent(props) {
             Average Price: <span>{average}</span>
           </h5>
           <select
-            name="filter"
+            name="duration"
             onChange={(e) => handleChange(e)}
             className="chart-filter selectfixing4"
           >
