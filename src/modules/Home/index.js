@@ -12,6 +12,7 @@ import { getNft } from "../../services/webappMicroservice";
 import { useParams } from "react-router-dom";
 // import {connect} from "react-redux";
 import { eventConstants } from "../../constants";
+import { toast } from "react-toastify";
 
 export default class NftDetail extends BaseComponent {
     constructor(props) {
@@ -217,8 +218,8 @@ export default class NftDetail extends BaseComponent {
             if (blockchainError || !blockchainRes) {
                 this.setState({ loaderState: false })
 
-                return Utils.apiFailureToast(
-                    blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to sell NFT on blockchain"
+                return toast.error(
+                    blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to sell NFT on blockchain",{autoClose:5000}
                 );
             }
         }
@@ -239,8 +240,8 @@ export default class NftDetail extends BaseComponent {
                 // alert(blockchainError?.data?.message)
                 this.setState({ loaderState: false })
 
-                return Utils.apiFailureToast(
-                    blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to sell NFT on blockchain"
+                return toast.error(
+                    blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to sell NFT on blockchain",{autoClose:5000}
                 );
             }
         }
@@ -257,7 +258,7 @@ export default class NftDetail extends BaseComponent {
         if (error || !result) {
             this.setState({ loaderState: false })
 
-            return Utils.apiFailureToast(error || "Unable to update Nft content.");
+            return toast.error(error || "Unable to update Nft content.",{autoClose:5000});
         }
         else {
             this.setState({ loaderState: false })
@@ -284,9 +285,7 @@ export default class NftDetail extends BaseComponent {
             if (blockchainError || !blockchainRes) {
                 this.setState({ loaderState: false })
 
-                return Utils.apiFailureToast(
-                    blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to remove NFT on blockchain"
-                );
+                return toast.error( blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to remove NFT on blockchain",{autoClose:5000})
             }
         }
         else {
@@ -299,8 +298,8 @@ export default class NftDetail extends BaseComponent {
             if (blockchainError || !blockchainRes) {
                 this.setState({ loaderState: false })
 
-                return Utils.apiFailureToast(
-                    blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to remove NFT on blockchain"
+                return toast.error(
+                    blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to remove NFT on blockchain",{autoClose:5000}
                 );
             }
 
@@ -316,7 +315,7 @@ export default class NftDetail extends BaseComponent {
         if (error || !result) {
             this.setState({ loaderState: false })
 
-            return Utils.apiFailureToast(error || "Unable to update Nft content.");
+            return toast.error(error || "Unable to update Nft content.",{autoClose:5000});
         }
         else {
             this.setState({ loaderState: false })

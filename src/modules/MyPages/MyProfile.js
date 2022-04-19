@@ -4,11 +4,12 @@ import React, { Component, useEffect, useState } from "react";
 import copy from "../../assets/images/copy.svg";
 import globe from "../../assets/images/web.svg";
 import pencil from "../../assets/images/Edit.svg";
+
 import randomimage from "../../assets/images/1.jpg";
 import "../../assets/styles/Leader.css";
 import { Link } from "react-router-dom";
 import profileImage from "../../assets/images/ProfileReplace.svg";
-import coverImage from "../../assets/images/Component.svg";
+import coverImage from "../../assets/images/coverImage.svg";
 import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -269,6 +270,24 @@ function MyProfile() {
   splitAddress("akshay");
 
   let array = [];
+  const funcLikedNft=()=>{
+
+    if(likedNft.length > 0){
+    for (let i = 0; i < likedNft.length; i++) 
+      array.push(likedNft[i].userLikedNfts);
+      setTypeofProfilePost("liked");
+      setNfts(array);
+    }
+    else {
+      setTypeofProfilePost("liked");
+    }
+   // setNfts(array);
+    //setNfts(likedNft[1].userLikedNfts);
+    //setNfts(likedNft.map((nft)=>nft.userLikedNfts))
+    console.log(array, "<<<<<<likedNft");
+    console.log(likedNft[0].userLikedNfts, "<<<<<<likedNft");
+    //setTypeofProfilePost("liked");
+  }
   return (
     <>
       <div>
@@ -399,17 +418,7 @@ function MyProfile() {
                 typeofProfilePost === "liked" && "postTypeProfile--active"
               }`}
               // onClick={() => setTypeofProfilePost("liked")}
-              onClick={() => {
-                for (let i = 0; i < likedNft.length; i++) {
-                  array.push(likedNft[i].userLikedNfts);
-                }
-                setNfts(array);
-                //setNfts(likedNft[1].userLikedNfts);
-                //setNfts(likedNft.map((nft)=>nft.userLikedNfts))
-                console.log(array, "<<<<<<likedNft");
-                console.log(likedNft[0].userLikedNfts, "<<<<<<likedNft");
-                setTypeofProfilePost("liked");
-              }}
+              onClick={() => funcLikedNft()}
             >
               Liked
             </div>
