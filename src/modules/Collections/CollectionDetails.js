@@ -230,7 +230,7 @@ function CollectionDetails() {
           </div>
           <div className="colusername">{name}</div>
           <div className="coluserdes" title={description}>
-            {description.slice(0,512)+"..."}
+            {undefined !== description && description.length >512 ? description.slice(0,512)+"...":description}
           </div>
         </div>
 

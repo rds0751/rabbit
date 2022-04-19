@@ -133,8 +133,8 @@
   display: flex;
   /* align-items: center; */
   justify-content: center;
-  width: 17.2vw;
-  height: 17.2vw;
+  width: 17.73vw;
+  height: 17.73vw;
   border: 1px solid #C8C8C8;
   border-radius: 7px;
   margin-top: 1.2vh;
@@ -182,6 +182,7 @@
   color: #191919;
   font-size: 14px;
   line-height: 21px;
+  text-align: center;
   font-family: 'poppins';
   margin-top: 23.92px;
 }
@@ -233,9 +234,11 @@
 /* ---- */
 @media screen and (min-width: 1600px) {
   .create-single-nft-outer {
-    width: 1205px;
+    /* width: 1205px; */
+    width: 62.8%;
+    margin: auto;
     /* border: 5px solid red; */
-    margin: 0px 0px 48px 401px;
+    /* margin: 0px 0px 48px 401px; */
     /* display: flex; */
   }
   .create-nft-form {
@@ -286,11 +289,21 @@
   padding-left: 40px;
 }
 }
+.nft-image{
+  color: #366EEF;
+  object-fit:cover;
+  max-width: 100%;
+  width: 35%;
 
+}
 @media screen and (max-width: 768px) {
   .full-content-margin{
     margin-top: 41px;
     margin-bottom: 17px;
+  }
+  .nft-image{
+    max-width: 100%;
+    width: 28.1%;
   }
   .draganddropbox {
     width: 51.5%;
@@ -358,3 +371,9 @@ input[type=number]::-webkit-outer-spin-button {
   cursor: pointer;
 }
 
+@media only screen and (min-width:1921px){
+  .draganddropbox{
+    width: 341px;
+    height: 341px;
+  }
+}
