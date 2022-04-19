@@ -454,12 +454,12 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
                     <div className="draganddropboxinnerdiv">
                       <img
                         src={cdnUrl != "" ? cdnUrl : Image}
+                        className="nft-image"
                         style={{
                           // maxWidth: "100px",
                           // width: "70%",
                           // marginTop: "3em",
-                          color: "#366EEF",
-                          objectFit:"cover",
+                      
                         }}
                       />
                       <span className="draganddropboxinnerdivtextspan">
@@ -602,6 +602,7 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
                     if(format.test(e.target.value)){
                       SetNameError("(No Special Character Allowed)");
                     }else if(e.target.value.length == 0){
+                      setError("")
                       SetNameError("(Name is required)")
                     }
                     else if(e.target.value.length < 3){
@@ -633,14 +634,13 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
                       price.current = e.target.value;
                       // checkChanges();
                       if(+e.target.value < "0.004" || +e.target.value=="0"){
+                        SetNameError("")
                         setError("( Minimum listing price for an NFT should be more than 0.004 ETH )")
                       }else if(e.target.value.length == 0){
-                        setError("(price is required)")
+                        setError("( price is required)")
                       }else{
                         setError("")
                       }
-                    
-                     
                     }}
                   />
                   <span class="input-group-text">ETH</span>

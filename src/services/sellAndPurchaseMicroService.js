@@ -76,14 +76,16 @@ export function getTopCollections(duration,requestData) {
     });
 }
 
-export function pricingHistoryGraphOfNft(requestData) {
+export function pricingHistoryGraphOfNft(reqId, reqObj) {
   let url =
-    process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "sold-price-graphs-of-particular-nft";
+    // process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "sold-price-graphs-of-particular-nft";
+    process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + `api/v1/sold-price-graphs-of-particular-nft/${reqId?.contentId}?`+reqObj;
+    console.log(url,"1111")
   return httpService(
-    httpConstants.METHOD_TYPE.POST,
+    httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
     AuthToken,
-    requestData,
+    reqObj,
     url
   )
     .then((response) => {
