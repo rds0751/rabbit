@@ -120,10 +120,15 @@ function Wallet() {
   const handleChange = (e) => {
     dispatch(ManageWalletSideBar(!isOpenWallet));
     dispatch(ManageNotiSideBar(false));
-    dispatch(logOut());
     document.body.className = !isOpenWallet ? "overflow" : "overflow-hidden";
     // document.body.style.overflow = !isOpenWallet ? "scroll" : "hidden";
   };
+
+  const handleLogOut = async () => {
+    dispatch(logOut());
+    toast.success("Successfully Logged Out");
+    // window.location.href = "/add-wallet";
+  }
 
   return (
     <div
@@ -188,7 +193,7 @@ function Wallet() {
             <h4>{walletAddress?.balance}</h4>
           </div>
         </div>
-        <button className="btnwallet" onclick={() => handleChange()}>Log Out</button>
+        <button className="btnwallet" onClick={() => handleLogOut()}>Log Out</button>
         {/* <button className="btnwallet">Add Balance</button> */}
       </div>
     </div>

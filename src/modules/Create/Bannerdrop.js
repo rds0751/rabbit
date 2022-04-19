@@ -96,7 +96,7 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs }) {
  
              />
               <div>
-               <p className="fs-14 fw-b pt-20">Drag & Drop or <span style={{ color: "#366EEF" }}>Browse go</span></p>
+               <p className="fs-14 fw-b pt-20">Drag and Drop or <span style={{ color: "#366EEF" }}>Browse</span></p>
              </div>
 
             </div>

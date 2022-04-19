@@ -28,19 +28,15 @@ export const UserReducer = (state = initialState, action) => {
           walletAddress: null,
           redirectUrl: "", }
       }
-      break;
     case ADD_WALLET:
       {
         return { ...state, walletAddress: action.payload };
       }
-      break;
     case LOGGED_IN_UER_DETAILS:
-      console.log(action, "<<< this is in user.js reducer");
       return {
         ...state,
         loggedInUser: action.payload,
       };
-      break;
     case ALL_USERS:
       return {
         ...state,

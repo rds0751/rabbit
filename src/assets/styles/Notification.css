@@ -101,6 +101,13 @@ height: 47px;
   /* margin-bottom: -6px; */
   /* margin-left: -6px; */
 }
+.btnwallet:hover{
+  background-color: rgb(10, 74, 212);
+  color: rgb(253, 253, 253);
+  border:1px solid grey;
+  box-shadow: rgb(4 17 29 / 25%) 0px 0px 8px 0px;
+  transition: all 0.1s ease 0s;
+}
 .fontwallet {
   text-align: left;
   font: 16px;
