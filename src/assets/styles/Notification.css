@@ -1201,6 +1201,12 @@ color: #8F8F8F;
 text-decoration: none;
 opacity: 1;
 }
+.aboutText{
+  text-decoration: none;
+  opacity: 1;
+  color: #8F8F8F;
+  font: normal normal normal 18px/27px Poppins;
+}
 .aboutdes{
   width: 88.7%;
   margin-top: 22px;
