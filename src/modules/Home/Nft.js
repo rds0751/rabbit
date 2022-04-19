@@ -186,6 +186,11 @@ function NftPage(props) {
   const [minPrice, setminPrice] = useState("0");
   const [visibleBlogs, setVisibleBlogs] = useState(8)
   const ref = useRef()
+  const { loggedInUser } = user;
+  if (loggedInUser) {
+    localStorage.setItem("userId", loggedInUser._id);
+  }
+  let userId = loggedInUser ? loggedInUser._id : localStorage.userId;
 
 
   // const [skipItem, setSkipItem] = useState("");
@@ -199,6 +204,7 @@ function NftPage(props) {
 
   const [filterType, setFilterType] = useState({
     sort : 'all',
+    userId: `${userId}`,
   });
   const [isloading, setIsloading] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false)

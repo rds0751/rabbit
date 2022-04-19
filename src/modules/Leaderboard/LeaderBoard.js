@@ -266,8 +266,6 @@ function LeaderBoard() {
     })
   }, [NFTDuration])
 
-  console.log('topNftSales', topNftSales)
-
   // const [state, setState] = useState(LeaderBoardApi);
 
   const [PendingAcceptedCreated, setPendingAcceptedCreated] = useState(

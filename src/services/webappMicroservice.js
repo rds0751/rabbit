@@ -170,8 +170,8 @@ export function getTopNftSales(duration,requestData) {
       if (
         !response.success ||
         response.responseCode !== 200 ||
-        !response.responseData ||
-        response.responseData.length === 0
+        !response.responseData
+        // response.responseData.length === 0
       )
         return Promise.reject();
       return Promise.resolve(response.responseData);
