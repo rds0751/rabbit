@@ -124,12 +124,10 @@ function Wallet() {
     // document.body.style.overflow = !isOpenWallet ? "scroll" : "hidden";
   };
 
-  const handleLogOut = () => {
+  const handleLogOut = async () => {
     dispatch(logOut());
     toast.success("Successfully Logged Out");
-    setTimeout(() => {
-      window.location.href = "/add-wallet";
-    }, 500);
+    // window.location.href = "/add-wallet";
   }
 
   return (
