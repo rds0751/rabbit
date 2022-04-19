@@ -131,7 +131,7 @@ function Footer() {
               </div>
             </div>
             <div style={{fontsize:"10px" ,color:"red",display:displayTimeout?"block":"none",marginBottom:"15px"}}>{email}</div>
-            <h3 className="about"><a href="/about"></a>About Anafto's Marketplace</h3>
+            <h3 className="about"><a href="/about">About Anafto's Marketplace</a></h3>
             <div className="d-none d-sm-none d-md-block d-lg-block fs-16 aboutdes">
               <p style={{marginBottom:"0",cursor:"default"}}>Anafto is an NFT Marketplace for the new age decentralised world. The Anafto tribe can create NFTs on this dedicated marketplace to showcase their Art or they can choose to sell their NFTs. So, what are you waiting for .... Go Mint,Sell, Buy and Explore... Happy NFTing. </p>
             </div>
