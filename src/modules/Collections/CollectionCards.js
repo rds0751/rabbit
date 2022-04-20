@@ -349,7 +349,7 @@ function Collections_tile() {
                 )
           } */}
           {
-            visibleBlogs >= collections.length ? (visibleBlogs >= collections.length) ? <div style={{ textAlignLast: "center" }}><button className="endButton"> End </button></div> : "" :
+            visibleBlogs >= collections.length ? (visibleBlogs >= collections.length && !isLoading) ? <div style={{ textAlignLast: "center" }}><button className="endButton"> End </button></div> : "" :
               (
                 <div style={{ textAlignLast: "center" }}><button className="load-more" onClick={loadMoreHandler}>Load More</button></div>)
           }
