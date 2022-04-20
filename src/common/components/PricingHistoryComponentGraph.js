@@ -29,7 +29,7 @@ console.log(nftPricingHistory,"sachin")
 
   let prices = nftPricingHistory.map((each) => each.totalVolume);
   // let prices = [0.001, 0.9];
-  let dates = nftPricingHistory.map((each) => each?.addedOn)
+  let dates = nftPricingHistory.map((each) => each?.addedOn);
 //   let dates = nftPricingHistory.map((each) =>
 //     moment(new Date(each?.addedOn)).format("D MMM YY")
 //   );
