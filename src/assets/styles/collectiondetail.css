@@ -252,7 +252,7 @@
 .no-item-image{
   filter: opacity(0.4) drop-shadow(0 0 0 grey);
 }
-.loaderNft{
+.collectionDetailLoader{
   height: 198px;
   width: 198px;
   position: absolute;
@@ -265,7 +265,7 @@
   background-color: whitesmoke;
   border-radius: 50%;
 }
-.image-container {
+.collectionDetailContainer {
   overflow: hidden;
   position: relative;
   display: inline-block;
