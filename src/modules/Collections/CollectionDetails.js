@@ -238,11 +238,11 @@ function CollectionDetails() {
         </div>
         <div className="coldet-bio">
           <div className="coldet-avatar">
-          <div className="image-container">
+          <div className="collectionDetailContainer">
             
             <img className="col-avatar" src={imageUrl} onLoad={onImageLoad} alt="" />
             {!imageLoading.loaded && (
-            <div className="loaderNft "> 
+            <div className="collectionDetailLoader "> 
               <Spinner />
               </div>
           )}
