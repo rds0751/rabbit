@@ -133,7 +133,7 @@ function MyProfile() {
       setIsloading(true);
       getCreatedByNft();
       getOwnedByNft();
-      getLikedNft();
+     
       getOnSaleNft();
 
       setIsloading(false);
@@ -271,7 +271,6 @@ function MyProfile() {
 
   let array = [];
   const funcLikedNft=()=>{
-
     if(likedNft.length > 0){
     for (let i = 0; i < likedNft.length; i++) 
       array.push(likedNft[i].userLikedNfts);
@@ -281,12 +280,6 @@ function MyProfile() {
     else {
       setTypeofProfilePost("liked");
     }
-   // setNfts(array);
-    //setNfts(likedNft[1].userLikedNfts);
-    //setNfts(likedNft.map((nft)=>nft.userLikedNfts))
-    console.log(array, "<<<<<<likedNft");
-    console.log(likedNft[0].userLikedNfts, "<<<<<<likedNft");
-    //setTypeofProfilePost("liked");
   }
   return (
     <>
