@@ -141,7 +141,7 @@ async function buyNFT({ tokenId, price, contractAddress }) {
 
     const balance = await provider.getBalance(accounts[0])
     if (ethers.utils.formatUnits(balance, 18) < ethers.utils.formatUnits(amount, 18))
-        return Promise.reject("Insufficient balance")
+        return Promise.reject("Insufficient fund")
 
 
     const options = { value: ethers.utils.parseEther(price.toString()) };
