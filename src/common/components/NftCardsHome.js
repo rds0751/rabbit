@@ -16,7 +16,7 @@ function NftCardsHome({ nft }) {
 
   const navigate = useNavigate();
   const { user, sideBar } = useSelector((state) => state);
-  const { _id, cdnUrl, name, biddingDetails, salesInfo } = nft;
+  const { _id, cdnUrl, name, biddingDetails, salesInfo, isLiked } = nft;
   const [handleLike, setHandleLike] = useState(true);
   // const currDate = new Date();
   // const endDate = biddingDetails.endDate;
@@ -27,8 +27,6 @@ function NftCardsHome({ nft }) {
     if (user.loggedInUser == null) {
       navigate("/add-wallet");
     }
-    // alert("like");
-
     const data = {
       contentId: id,
       addedBy: user.loggedInUser._id,
@@ -106,19 +104,21 @@ function NftCardsHome({ nft }) {
          
           
         
-        <span onClick={() => likeNft(_id)}>
-          {handleLike?(
+        <span >
+          {isLiked?(
                   <img
                   id="unlike_icon"
-                  src={Like}
+                  src={handleLike ? likes : Like}
                   alt="like"
+                  onClick={() => likeNft(_id)}
                 />
 
           ):(
             <img
             id="like_icon"
-            src={likes}
+            src={handleLike ? Like : likes}
             alt="like"
+            onClick={() => likeNft(_id)}
           />
 
           )}

@@ -540,7 +540,7 @@ console.log("jjjjjjjjjjjjjjjjjj",isloading)
             })
           )}
           {
-            visibleBlogs >= nfts.length ? ( visibleBlogs >= nfts.length)?  <div style={{ textAlignLast: "center" }}><button  className="endButton"> End </button></div>:"":
+            visibleBlogs >= nfts.length ? ( visibleBlogs >= nfts.length && !isloading)?  <div style={{ textAlignLast: "center" }}><button  className="endButton"> End </button></div>:"":
               (
                 <div style={{ textAlignLast: "center" }}><button className="load-more" onClick={loadMoreHandler}>Load More</button></div>)
           }
