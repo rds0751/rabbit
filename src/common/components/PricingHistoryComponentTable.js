@@ -18,7 +18,7 @@ import {
 import moment from "moment";
 import { NoBackpackSharp } from "@mui/icons-material";
 import { Divider } from "@mui/material";
-import "../../assets/styles/Leader.css"
+import "../../assets/styles/Leader.css";
 
 const MainContainer = styled.div`
   display: flex;
@@ -74,11 +74,12 @@ const Button = styled.button`
   color: #366eef;
 `;
 const TableContainerCustom = styled(TableContainer)`
-height: 218px !important;
-::-webkit-scrollbar { /* WebKit */
+  height: 218px !important;
+  ::-webkit-scrollbar {
+    /* WebKit */
     width: 0;
     height: 0;
-}
+  }
 `;
 const TableUp = styled(Table)`
   height: 0px;
@@ -87,11 +88,11 @@ const TableUp = styled(Table)`
   margin-bottom: 8px;
 `;
 const TableCustom = styled(Table)`
-display: table;
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
-    min-width: 525px !important;
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  min-width: 525px !important;
 `;
 const TableDiv = styled.div`
   height: 220px;
@@ -222,108 +223,133 @@ export default function PricingHistoryComponentTable(props) {
         ) : (
           ""
         )}
-      </FilterContainer> 
+      </FilterContainer>
       <TableDiv>
-      {activities.length > 0 ? 
-      <TableContainerCustom component={Paper} elevation={0} >
-        <TableCustom sx={{ minWidth: 650 }} size="small" aria-label="a dense table" stickyHeader>
-          <TableHead>
-            <TableRow>
-              <TableCell style={{ color: "#191919", fontWeight: "bold", background:"#FBFBFB " }}>
-                Event
-              </TableCell>
-              <TableCell style={{ color: "#191919", fontWeight: "bold",background:"#FBFBFB " }}>
-                Price
-              </TableCell>
-              <TableCell style={{ color: "#191919", fontWeight: "bold",background:"#FBFBFB " }}>
-                From
-              </TableCell>
-              <TableCell style={{ color: "#191919", fontWeight: "bold",background:"#FBFBFB " }}>
-                To
-              </TableCell>
-              <TableCell
-                style={{
-                  color: "#191919",
-                  fontWeight: "bold",
-                  // textAlign: "center",
-                }}
-              >
-                Date
-              </TableCell>
-            </TableRow>
-          </TableHead>
-
-          {console.log(activities, "activities")}
-
-            <TableBody style={{border:"1px solid greeen !important"}}>
-              {activities.map((row) => (
-                <TableRow
-                  key={row.name}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
+        {activities.length > 0 ? (
+          <TableContainerCustom component={Paper} elevation={0}>
+            <TableCustom
+              sx={{ minWidth: 650 }}
+              size="small"
+              aria-label="a dense table"
+              stickyHeader
+            >
+              <TableHead>
+                <TableRow>
                   <TableCell
                     style={{
-                      textAlign: "left",
-                      borderBottom: "1px solid #C8C8C8",
+                      color: "#191919",
+                      fontWeight: "bold",
+                      background: "#FBFBFB ",
                     }}
-                    component="td"
-                    scope="row"
                   >
-                    {row.type === "list" ? (
-                      <img className="table-icon" src={Sale}></img>
-                    ) : row.type == "minted" ? (
-                      <img className="table-icon" src={Mint}></img>
-                    ) : row.type == "transfer" ? (
-                      <img className="table-icon" src={Transfer}></img>
-                    ) : (
-                      ""
-                    )}
-                    {row.type}
-
-                    {console.log(row.type, "row.type")}
+                    Event
                   </TableCell>
                   <TableCell
                     style={{
-                      borderBottom: "1px solid #C8C8C8",
+                      color: "#191919",
+                      fontWeight: "bold",
+                      background: "#FBFBFB ",
                     }}
                   >
-
-                    {row.price}
+                    Price
                   </TableCell>
                   <TableCell
                     style={{
-                      borderBottom: "1px solid #C8C8C8",
+                      color: "#191919",
+                      fontWeight: "bold",
+                      background: "#FBFBFB ",
                     }}
                   >
-                    {row.userName.substr(0, 6)}
+                    From
                   </TableCell>
                   <TableCell
                     style={{
-                      borderBottom: "1px solid #C8C8C8",
+                      color: "#191919",
+                      fontWeight: "bold",
+                      background: "#FBFBFB ",
                     }}
                   >
-                    -
+                    To
                   </TableCell>
                   <TableCell
                     style={{
-                      borderBottom: "1px solid #C8C8C8",
-                      // textAlign: "center"
+                      color: "#191919",
+                      fontWeight: "bold",
+                      // textAlign: "center",
                     }}
                   >
-                    {moment(row.createdAt).format("DD MMM ")}
+                    Date
                   </TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
+              </TableHead>
 
+              <TableBody style={{ border: "1px solid greeen !important" }}>
+                {activities.map((row) => (
+                  <TableRow
+                    key={row.name}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell
+                      style={{
+                        textAlign: "left",
+                        borderBottom: "1px solid #C8C8C8",
+                      }}
+                      component="td"
+                      scope="row"
+                    >
+                      {row.type === "list" ? (
+                        <img className="table-icon" src={Sale}></img>
+                      ) : row.type == "minted" ? (
+                        <img className="table-icon" src={Mint}></img>
+                      ) : row.type == "transfer" ? (
+                        <img className="table-icon" src={Transfer}></img>
+                      ) : (
+                        ""
+                      )}
+                      {row.type}
 
-        </TableCustom>
-      </TableContainerCustom>
-      : 
-      <div className="no-data no-data-found ">
-              <img src={Information}></img>
-              <p>No information available</p>
-            </div>}
+                      {console.log(row.type, "row.type")}
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        borderBottom: "1px solid #C8C8C8",
+                      }}
+                    >
+                      {row.price}
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        borderBottom: "1px solid #C8C8C8",
+                      }}
+                    >
+                      {row.userName.substr(0, 6)}
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        borderBottom: "1px solid #C8C8C8",
+                      }}
+                    >
+                      {row.to === [] ? row.to : "-"}
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        borderBottom: "1px solid #C8C8C8",
+                        // textAlign: "center"
+                      }}
+                    >
+                      {moment(row.createdAt).format("DD MMM ")}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </TableCustom>
+          </TableContainerCustom>
+        ) : (
+          <div className="no-data no-data-found ">
+            <img src={Information}></img>
+            <p>No information available</p>
+          </div>
+        )}
       </TableDiv>
     </MainContainer>
   );
