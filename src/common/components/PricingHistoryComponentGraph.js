@@ -28,19 +28,21 @@ console.log(nftPricingHistory,"sachin")
   }, [reqObj]);
 
   let prices = nftPricingHistory.map((each) => each.totalVolume);
-  let dates = nftPricingHistory.map((each) =>
-    moment(new Date(each?.addedOn)).format("D MMM YY")
-  );
-
-  if (filter === "month") {
-    dates = nftPricingHistory.map((each) =>
-      moment(new Date(each?.addedOn)).format("MMM YY")
-    );
-  } else if (filter === "year") {
-    dates = nftPricingHistory.map((each) =>
-      moment(new Date(each?.addedOn)).format("YYYY")
-    );
-  }
+  // let prices = [0.001, 0.9];
+  let dates = nftPricingHistory.map((each) => each?.addedOn)
+//   let dates = nftPricingHistory.map((each) =>
+//     moment(new Date(each?.addedOn)).format("D MMM YY")
+//   );
+// console.log(prices,"price")
+//   if (filter === "month") {
+//     dates = nftPricingHistory.map((each) =>
+//       moment(new Date(each?.addedOn)).format("MMM YY")
+//     );
+//   } else if (filter === "year") {
+//     dates = nftPricingHistory.map((each) =>
+//       moment(new Date(each?.addedOn)).format("YYYY")
+//     );
+//   }
   let total = 0;
   let average = 0;
   nftPricingHistory.forEach((item) => {

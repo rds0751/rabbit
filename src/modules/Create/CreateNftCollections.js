@@ -29,6 +29,8 @@ const Button = styled.button``;
 
 function CreateNftCollections(props) {
   const navigate = useNavigate();
+  // const navigate = useNavigate();
+
   const { user } = useSelector((state) => state);
   // -------
   const [logoCdn, setlogoCdn] = useState("");
@@ -41,8 +43,12 @@ function CreateNftCollections(props) {
   const [selectFile, setSelectFile] = useState("");
   const [checkReqField, setCheckReqField] = useState(false);
   const [loaderState, setloaderState] = useState(false);
+  const navigation = useNavigate();
+
 
   // -------
+  const { loggedInUser, walletAddress } = user;
+
   const [specialchar,setSpecialChar]=useState("")
   
 
@@ -72,6 +78,12 @@ function CreateNftCollections(props) {
   const handleClickBanner = (event) => {
     hiddenFileInputBanner.current.click();
   };
+  useEffect(async () => {
+    if (walletAddress == null) {
+      navigation("/add-wallet");
+    };
+  });
+
   useEffect(() => {
     getCategories((res) => {
       setCategories(res.responseData);

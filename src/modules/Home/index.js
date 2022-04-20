@@ -57,7 +57,7 @@ export default class NftDetail extends BaseComponent {
         });
     };
     BuyNowNft = async (data) => {
-
+console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.contractAddress)
         // this.setState({ loaderState: true })
         let blockchainRes;
 

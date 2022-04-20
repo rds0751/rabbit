@@ -120,21 +120,35 @@ async function removeFromSaleNft({ tokenId, contractAddress }) {
 
 //1bnb=0.136ether
 async function buyNFT({ tokenId, price, contractAddress }) {
+    console.log("kdkkkkkkkkkkkk",contractAddress)
     if (!window.ethereum)
         return Promise.reject("Please install metamask")
     if (window.ethereum.networkVersion == 4) { }
     else
         return Promise.reject("Switch this network into Rinkeby")
+    console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
     const provider = new ethers.providers.Web3Provider(window.ethereum);
+
     const signer = provider.getSigner();
     const contractData = new ethers.Contract(
         contractAddress,
         contractABI,
         signer
     );
+    const amount = ethers.utils.parseUnits(price.toString(), 18);
+    const accounts = await provider.send("eth_requestAccounts", []);
+
+
+    const balance = await provider.getBalance(accounts[0])
+    if (ethers.utils.formatUnits(balance, 18) < ethers.utils.formatUnits(amount, 18))
+        return Promise.reject("Insufficient fund")
+
+
     const options = { value: ethers.utils.parseEther(price.toString()) };
 
     const result = await contractData.buy(tokenId, options);
+    console.log("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",result)
+
     let res = await result.wait();
 
     return {
