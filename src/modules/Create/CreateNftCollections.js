@@ -328,7 +328,7 @@ function CreateNftCollections(props) {
     // Blockchain option
     const [selectedOption, setSelectedOption] = useState(null);
     const blockchainOption = [
-      { value: 'eth', label: <div><img src={ethereum} height="32px" /> Ethereum</div> },
+      { value: 'ETH', label: <div><img src={ethereum} height="32px" /> Ethereum</div> },
     ];
 
     const enabled=name.current.length > 0 && description.current.length > 0 && categoryId.current.length >0 && nameError=="" && bannerCdn!="" && logoCdn!="" && DesError==""; 
