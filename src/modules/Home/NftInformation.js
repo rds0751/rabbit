@@ -1027,7 +1027,7 @@ export default function NftInformation(props) {
                   <div className="abstractillusioncontent">
                     <div className="abstracttitle"></div>
                     <div className="abstractposter"> {nft.name}</div>
-                    <div className="ethprice">{salesInfo?.price}ETH</div>
+                    <div className="ethprice">{`${salesInfo?.price}  ${salesInfo?.currency}`}</div>
                   </div>
                 </div>
                 <div className="checkpostcontainer">
@@ -1094,7 +1094,7 @@ export default function NftInformation(props) {
                   <div className="abstractillusioncontent">
                     <div className="abstracttitle"></div>
                     <div className="abstractposter"> {nft.name}</div>
-                    <div className="ethprice">{salesInfo?.price}ETH</div>
+                    <div className="ethprice">{`${salesInfo?.price}  ${salesInfo?.currency}`}</div>
                   </div>
                 </div>
                 <div className="checkpostcontainer">
@@ -1161,7 +1161,7 @@ export default function NftInformation(props) {
                   <div className="abstractillusioncontent">
                     <div className="abstracttitle"></div>
                     <div className="abstractposter"> {nft.name}</div>
-                    <div className="ethprice">{salesInfo?.price}ETH</div>
+                    <div className="ethprice">{`${salesInfo?.price}  ${salesInfo?.currency}`}</div>
                   </div>
                 </div>
                 <div className="checkpostcontainer">
