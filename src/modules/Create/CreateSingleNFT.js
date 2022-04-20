@@ -69,16 +69,17 @@ function CreateSingleNFT(props) {
   const [desLength, setDesLength] = useState(0);
   const[error,setError]=useState('');
   const [nameError,SetNameError]=useState('');
+  // const { userDetails, loggedInUser, walletAddress } = user;
 
   if (loggedInUser) { localStorage.setItem('userId', loggedInUser._id); }
   let userId = (loggedInUser) ? loggedInUser._id : localStorage.userId;
 
   // ----------------------------------------------states end-------------
   useEffect(async () => {
-    if (user.loggedInUser._id == null) {
+    if (walletAddress == null) {
       navigation("/add-wallet");
-    }
-
+    };
+  
     setmyProfileUrl("/nft-information/")
     // const collections = await getCollectionBySingleUser(userId);
     // setCollectionData(collections);

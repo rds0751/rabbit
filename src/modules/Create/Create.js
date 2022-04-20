@@ -31,13 +31,13 @@ function Create() {
   const { isOpenWallet } = sideBar;
   const [toggleEffect, setToggleEffect] = useState(false);
   console.log("ttttttttttttttttttttttttttttt",toggleEffect)
+  console.log("redireurl-----",redirectUrl)
   useEffect(() => {
     if (loggedInUser != null) {
       toast.success("Wallet connected");
       // dispatch(ManageWalletSideBar(!isOpenWallet));
       if (redirectUrl != "") {
-        console.log("sssssssssssssssss")
-
+        history("/my-profile");
         // history(redirectUrl);
         if (redirectUrl == "myitems") {
           history("/my-items");
