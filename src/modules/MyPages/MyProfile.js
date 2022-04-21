@@ -35,6 +35,7 @@ import { updateBannerByUserId } from "../../services/UserMicroService";
 import SplitWalletAdd from "../../common/components/SplitWalletAdd";
 import NoItem from "../../assets/images/Noitems.svg";
 import Snackbar from '@mui/material/Snackbar';
+import LikedNfts from "./LikedNfts";
 
 
 
@@ -133,7 +134,7 @@ function MyProfile() {
       setIsloading(true);
       getCreatedByNft();
       getOwnedByNft();
-     
+      getLikedNft();
       getOnSaleNft();
 
       setIsloading(false);
@@ -422,11 +423,6 @@ function MyProfile() {
             className="nftTileContainer row ntf_row"
             style={{ justifyContent: "start" }}
           >
-            {/* <div class="spinner-border text-primary" role="status">
-              <span class="sr-only">Loading...</span>
-            </div> */}
-            {/* {[...AbstractApi, , ...AbstractApi].map((curElem) => { */}
-
             {isloading && <Spinner />}
             {(() => {
               if (!isloading && Nfts.length < 1) {
@@ -441,57 +437,29 @@ function MyProfile() {
               }
             })()}
 
-            {Nfts.map((curElem) => {
-              console.log("<<<nfts", Nfts);
+            {(typeofProfilePost !== "liked") ? (
+              <>
+                {Nfts.map((curElem) => {
+                  return (
+                    <>
+                      <NftCardHome nft={curElem} />                  
+                    </>
+                  );
+                })} 
+              </>
+            ) : (
+              <>
+                {Nfts.map((curElem) => {
+                  return (
+                    <>
+                      <LikedNfts nft={curElem} />                  
+                    </>
+                  );
+                })} 
+              </>
+            ) }
 
-              const {
-                cdnUrl,
-                name,
-                price,
-                salesInfo,
-                maxPrice,
-                maxPrice2,
-                daysLeft,
-                likesCount,
-              } = curElem;
-              return (
-                <>
-                  <NftCardHome nft={curElem} />
-                  {/* <div className="col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
-                    <img
-                      className="nftTileEachImage"
-                      src={ipfsUrl}
-                      alt="nft"
-                    />
-                    <div className="tile__details">
-                      <div className="profileNftDetailFirstContainer container__up">
-                        <div className="title">{name}</div>
-                        <div className="title1">{salesInfo?.price} ETH</div>
-                      </div>
-                      <div className="profileNftDetailSecondContainer container__down">
-                        <div className="">
-                          <span
-                            style={{
-                              color: "#366EEF",
-                              fontFamily: "poppins-bold",
-                            }}
-                          >
-                          
-                          </span>
-                        </div>
-                        <div className="">
-                          {likesCount}
-                        
-                          <i
-                            style={{ color: "#ef3643" }}
-                          ></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div> */}
-                </>
-              );
-            })}
+            
           </div>
         </div>
       </div>
