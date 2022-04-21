@@ -9,6 +9,8 @@ import { eventConstants } from "../../constants";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { Oval } from "react-loader-spinner";
+import { toast } from "react-toastify";
+import { red } from "@mui/material/colors";
 
 class Index extends BaseComponent {
   constructor(props) {
@@ -23,12 +25,32 @@ class Index extends BaseComponent {
       isOpenMintModal: true,
       mintedNftId: ""
     };
+    this.showToast=this.showToast.bind(this);
+    this.defaultPosition=toast.POSITION.TOP_RIGHT;
   }
 
   async componentDidMount() {
     const checkvalue = await this.getCollectionsForNft();
     console.log(checkvalue, "<<<<checkvalue");
   }
+   
+ showToast = ( type = "success", msg, autoClose = 7000, className = "primaryColor", position = this.defaultPosition ) => {
+    if (type === "success") {
+      toast.success(msg, {
+        autoClose: autoClose === null ? 7000 : autoClose,
+        className: className === null ? "primaryColor" : className,
+        position: position,
+        theme:'colored',
+      });
+    } else if (type === "error") {
+      toast.error(msg, {
+        autoClose: autoClose === null ? 7000 : autoClose,
+        className: className === null ? "primaryColor" : className,
+        position: position,
+        theme:'colored',
+      });
+    }
+  };
 
   getRequestDataForSaveNftContent = (tokenId, data, blockchainRes) => {
     return {
@@ -113,7 +135,7 @@ class Index extends BaseComponent {
       if (blockchainError || !blockchainResult) {
         this.setState({ loaderState: false });
 
-        return Utils.apiFailureToast(
+        return this.showToast('error',
           blockchainError?.data?.message || blockchainError?.message || blockchainError || "Unable to Mint NFT on blockchain"
         );
       }
@@ -138,7 +160,7 @@ class Index extends BaseComponent {
         console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
         this.setState({ loaderState: false });
 
-        return Utils.apiFailureToast(
+        return this.showToast('error',
           blockchainError?.data?.message || blockchainError?.message || blockchainError || "Unable to Mint NFT on blockchain"
         );
       }
@@ -163,7 +185,7 @@ class Index extends BaseComponent {
       this.setState({ loaderState: false });
       this.setState({ isMintSuccess: null });
       this.setState({ isOpenMintModal: false });
-      return Utils.apiFailureToast(
+      return this.showToast('error',
         contentError?.message || "Unable to save NFT content"
       );
     }
@@ -177,7 +199,7 @@ class Index extends BaseComponent {
       this.setState({ isMintSuccess: true });
       this.setState({ isOpenMintModal: false });
       this.setState({ mintedNftId: contentRes._id });
-      Utils.apiSuccessToast("Your NFT has been created");
+      this.showToast('success',"Your NFT has been created")
       this.setState({ isNftCreated: true });
     }
 
