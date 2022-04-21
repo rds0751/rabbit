@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Like from "../../assets/images/Like.svg";
 import likes from "../../assets/images/likes.svg";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 // import { useHistory } from "react-router-dom";
 import "../../assets/styles/common.css"
 import Spinner from "../../common/components/Spinner";
@@ -24,15 +25,17 @@ function NftCardsHome({ nft }) {
   // console.log(daysleft, "<<<daysleft");
   const route = "/nft-information/" + _id;
   const likeNft = (id) => {
-    if (user.loggedInUser == null) {
-      navigate("/add-wallet");
-    }
-    const data = {
-      contentId: id,
-      addedBy: user.loggedInUser._id,
-    };
-    addLikeNft(data);
-    setHandleLike(!handleLike);
+    if (user?.loggedInUser?._id) {
+      const data = {
+        contentId: id,
+        addedBy: user?.loggedInUser?._id,
+      };
+      addLikeNft(data);
+      setHandleLike(!handleLike);      
+    } else {
+      toast.error("Not logged in")
+      // navigate("/add-wallet");
+    }    
   };
   // const difftime = (timestamp1, timestamp2) => {
   //   var difference = timestamp1 - timestamp2;
