@@ -268,8 +268,8 @@ function CreateNftCollections(props) {
         console.log("eroor in blockchain side", txStatusRes)
         setloaderState(false);
 
-        return Utils.apiFailureToast(
-          blockchainError.message || "Unable to Create Collection on blockchain"
+        return toast.error(
+          blockchainError.message || "Unable to Create Collection on blockchain",{autoClose:7000,theme:"colored"}
         );
       }
       else {
@@ -289,8 +289,8 @@ function CreateNftCollections(props) {
         navigate("/collection-details/"+result.responseData._id);
         }
         // navigate("/collections-tile");
-        return Utils.apiSuccessToast(
-          "Collection created"
+        return toast.success(
+          "Collection created",{autoClose:7000,theme:"colored"}
         );
         // toast.success("Collection created");
 
@@ -304,7 +304,7 @@ function CreateNftCollections(props) {
       // toast.success("Collection created");
       // navigate("/collections-tile");
     } else {
-      toast.error(result.message);
+      toast.error(result.message,{autoClose:7000,theme:"colored"});
       setloaderState(false);
     }
 

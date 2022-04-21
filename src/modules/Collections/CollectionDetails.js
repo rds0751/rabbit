@@ -242,7 +242,7 @@ function CollectionDetails() {
             
             <img className="col-avatar" src={imageUrl} onLoad={onImageLoad} alt="" />
             {!imageLoading.loaded && (
-            <div className="collectionDetailLoader "> 
+            <div className="collectionDetailLoader"> 
               <Spinner />
               </div>
           )}
