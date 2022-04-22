@@ -1126,7 +1126,7 @@ export default function NftInformation(props) {
                   Price
                 </h3>
                 <div className="input-group-price">
-                  <span className="symbolText">ETH</span>
+                  <span className="symbolText"><p className="eth-value">ETH</p></span>
                   <span style={{border:"0.2px ridge #C8C8C8"}}></span>
                   <input
                     className="price-input-box"
