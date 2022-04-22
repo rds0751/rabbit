@@ -22,6 +22,13 @@ body.active-modal{
   top: 126px;
   border-radius: 13px;
 }
+.make-offer-modal {
+  position: absolute;
+  background-color: white;
+  opacity: 1 !important;
+  top: 126px;
+  border-radius: 13px;
+}
 .report-inner {
   width: 85.8%;
   opacity: 1;
@@ -116,11 +123,92 @@ margin-right: 14px;
   line-height: 27px;
   font-weight: bold;
   color: #191919;
+  margin: auto 0;
 }
-
+.offerHeading{
+  display: flex;
+  justify-content: space-between;
+  padding-top:34px;
+}
+.price-heading-text{
+  text-align: left;
+font: normal normal bold 16px/25px Poppins;
+letter-spacing: 0px;
+color: #191919;
+opacity: 1;
+}
+.input-group-price{
+  border: 1px solid #C8C8C8;
+  border-radius: 6px;
+  height: 42px;
+}
+.symbolText{
+  width: 52px; 
+  padding-left: 17px;
+  align-items: center;
+  text-align: center;
+  white-space: nowrap;
+  font-size: 16px;
+  line-height: 25px;
+  font-weight: normal;
+  font-size: medium;
+  font-style: normal;
+}
+.price-input-box{
+    padding: 0.475rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    border: none;
+}
+.heading-second-row{
+  text-align: left;
+  margin-top: 20px;
+ font: normal normal bold 16px/25px Poppins;
+ letter-spacing: 0px;
+ color: #191919;
+ opacity: 1;
+}
+.expiry-div{
+  height: 42px;
+  margin-top: 13px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: 1px solid #C8C8C8;
+  border-radius: 6px;
+  display: flex;
+}
+.filter-time{
+  border: none;
+  font-size: 16px;
+  line-height: 25px;
+  font-weight: normal;
+  font-size: medium;
+  font-style: normal;
+  margin-left: 17.09px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+input[type="time"]::-webkit-calendar-picker-indicator {
+  color:#828282;;
+}
+.offer-button{
+  width: 100%;
+  background-color: #366EEF;
+  border-radius: 6px;
+  color: #ffffff;
+  height: 42px;
+  margin-top: 28px;
+  margin-bottom: 48px;
+  border: none;
+}
 /* mobile-view */
 @media screen and (max-width:426px){
   .report-modal{
+    width:85%;
+    left:7.5%;
+  }
+  .make-offer-modal{
     width:85%;
     left:7.5%;
   }
@@ -131,6 +219,10 @@ margin-right: 14px;
   .report-modal{
     width:82%;
     left: 69px;
+  }
+  .make-offer-modal{
+    width:82%;
+    left: 52px;
   }
  
 }
@@ -147,4 +239,9 @@ margin-right: 14px;
     width: 36%;
     left: 37%;
     }
+
+  .main-model-makeoffer{
+     width: 32.82%;
+   left: 37%;
+   }
 }

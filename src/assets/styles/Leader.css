@@ -1897,10 +1897,6 @@ td {
   background: none;
   border: none;
 }
-.imginfo_mob:hover{
-  box-shadow: 7px 7px 7px 7px lightblue;
-  transition: all .75s;
-}
 .sellerName a:hover{
   color: blue;
 }

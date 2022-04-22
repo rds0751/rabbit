@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 // import { useHistory } from "react-router-dom";
 import "../../assets/styles/common.css"
 import Spinner from "../../common/components/Spinner";
+import { ShimmerThumbnail } from "react-shimmer-effects";
 import {
   getNfts,
   addLikeNft,
@@ -81,7 +82,7 @@ function NftCardsHome({ nft }) {
   let [imageLoading,setImageLoading]=useState({src:cdnUrl,loaded:false })
 
   const onImageLoad=()=>{
-    setImageLoading({...imageLoading,loaded:true});
+   setImageLoading({...imageLoading,loaded:true});
   }
 
   return (
@@ -98,7 +99,7 @@ function NftCardsHome({ nft }) {
 
         {!imageLoading.loaded && (
             <div className="loaderNft "> 
-              <Spinner />
+              <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />;
               </div>
           )}
           
