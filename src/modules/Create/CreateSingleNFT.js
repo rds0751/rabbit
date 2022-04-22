@@ -686,6 +686,23 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
                   <span> <span id="linesUsed">0</span> of 20 Lines.</span>
                 </span>
               </div>
+
+              <div className="input-name">
+                <label htmlFor="email" className=" input-label">
+                  Royalty
+                </label>
+                <p className="headingRoyality">Write down the percentage you want from this sale of this NFT</p>
+                <div style={{color:"red",fontSize:"15px"}}>{nameError}</div>
+                <input
+                  type="number"
+                  className="form-control-1"
+                  placeholder="Enter Royalty"
+                  autoComplete="off"
+                  maxLength="100"
+                  title=" "
+                />
+               
+              </div>
               
               <div className="mt-3">
                 <label htmlFor="email" className="input-label">
