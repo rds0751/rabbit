@@ -33,7 +33,7 @@ function CreateNFT() {
           </div>
         </div>
         <div className="row justify-content-center">
-          <div className="col-md-3 col-lg-3 col-sm-6 col-12">
+          <div className="col-md-3 col-lg-3 col-sm-6 col-12 main-card-box">
             <Link to="/create-single-nft">
               <div className="card card-border card-width">
                 <div className="card-body text-center">
@@ -45,7 +45,7 @@ function CreateNFT() {
               <h5 className="bottom-heading-font">Single</h5>
             </div>
           </div>
-          <div className="col-md-3 col-lg-3 col-sm-6 col-12">
+          <div className="col-md-3 col-lg-3 col-sm-6 col-12 main-card-box">
             <Link to="/create-nft-collection">
               <div className="card card-border card-width">
                 <div className="card-body text-center">

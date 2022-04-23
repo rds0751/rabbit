@@ -457,22 +457,24 @@ function CreateNftCollections(props) {
         <div>
           <form onSubmit={(e) => handleSubmit(e)}>
             <div>
-              <p className="fs-16 fw-b c-b pt-4">Collection Name*<span style={{color:"Red" ,fontSize:"13px"}}>{nameError}</span></p>
+              <p className="fs-16 fw-b c-b pt-4">Collection Name*</p>
+              <div style={{color:"Red" ,fontSize:"13px"}}>{nameError}</div>
               <input
                 type="name"
                 name="name"
                 maxLength="400"
                 className="input-box-1"
+                style={{border:nameError!=""?"1px solid red":"1px solid #C8C8C8"}}
                 placeholder="Write your collection name"
                 onChange={(e) => {
                   var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
                   if(format.test(e.target.value)){
-                    SetNameError("(No Special Character Allowed)");
+                    SetNameError("( No Special Character Allowed )");
                   }
                   else if(e.target.value.length == 0){
-                    SetNameError("(Name is required)")
+                    SetNameError("( Name is required )")
                   } else if(+e.target.value.length < 3){
-                    SetNameError("(Name should be atleast 3 character)")
+                    SetNameError("( Name should be atleast 3 character )")
                   }
                   else {
                   SetNameError("");
@@ -484,13 +486,15 @@ function CreateNftCollections(props) {
               />
             </div>
             <div>
-              <p className="fs-16 fw-b c-b pt-3">Description*<span style={{color:"Red" ,fontSize:"13px"}}>{DesError}</span></p>
+              <p className="fs-16 fw-b c-b pt-3">Description*</p>
+              <div style={{color:"Red" ,fontSize:"13px"}}>{DesError}</div>
               <textarea
                 rows="4"
                 id="test"
                 name="Description"
                 placeholder="Write description"
                 className="input-box-1 mb-0"
+                style={{border:DesError!=""?"1px solid red":"1px solid #C8C8C8"}}
                 value={description.current}
                 onChange={(e) => {
                   if(e.target.value.length==0){

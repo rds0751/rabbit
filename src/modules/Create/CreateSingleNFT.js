@@ -692,7 +692,7 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
                   Royalty
                 </label>
                 <p className="headingRoyality">Write down the percentage you want from this sale of this NFT</p>
-                <div style={{color:"red",fontSize:"15px"}}></div>
+                <div style={{color:"red",fontSize:"15px"}}></div> 
                 <input
                   type="number"
                   className="form-control-1"

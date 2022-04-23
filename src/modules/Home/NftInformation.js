@@ -86,6 +86,7 @@ const Select = styled.select`
   line-height: 21px;
   color: #191919;
   background-color: #fff;
+  cursor: pointer;
 `;
 const Option = styled.option`
   font-size: 14px;
@@ -1118,7 +1119,7 @@ export default function NftInformation(props) {
             <div className="report-inner" style={{ opacity: "1" }}>
               <div className="offerHeading">
                 <p className="MainHeadingText">make an offer</p>
-                <img src={closeIcon} onClick={()=>setMakeOfferModal(false)}/>
+                <img src={closeIcon}  className="closeIcon" onClick={()=>setMakeOfferModal(false)}/>
               </div>
               <div className="singlerowmodal">
                 <h3 className="price-heading-text">
