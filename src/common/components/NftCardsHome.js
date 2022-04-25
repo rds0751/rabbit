@@ -18,7 +18,7 @@ function NftCardsHome({ nft }) {
 
   const navigate = useNavigate();
   const { user, sideBar } = useSelector((state) => state);
-  const { _id, cdnUrl, name, biddingDetails, salesInfo, isLiked } = nft;
+  const { _id, cdnUrl, name, biddingDetails, salesInfo, isLiked,compressedURL } = nft;
   const [handleLike, setHandleLike] = useState(true);
   // const currDate = new Date();
   // const endDate = biddingDetails.endDate;
@@ -92,7 +92,7 @@ function NftCardsHome({ nft }) {
           <div className="image-container">
           <img
             className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
-            src={cdnUrl}
+            src={compressedURL}
             alt="nft-img"
             onLoad={onImageLoad} 
             onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()} />

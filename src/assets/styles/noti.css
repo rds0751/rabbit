@@ -17,7 +17,8 @@
 }
 .noti-outer {
   padding-left: 17px;
-  width: 367px;
+  /* width: 367px; */
+  width: 19.12%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -101,6 +102,15 @@
   font-family: "poppins";
   color: #c4c4c4;
 }
+.no-notification {
+  text-align: center;
+  font-family: Poppins;
+  font-size: 14px;
+  letter-spacing: 0px;
+  color: grey;
+  opacity: 1;
+  margin-top: 21px;
+}
 @media screen and (max-width: 764px) {
   .main-cont{
     z-index: 100;
@@ -122,12 +132,8 @@
     box-shadow: 0px 3px 12px #00000014;
   }
 }
-.no-notification {
-  text-align: center;
-  font-family: Poppins;
-  font-size: 14px;
-  letter-spacing: 0px;
-  color: grey;
-  opacity: 1;
-  margin-top: 21px;
+@media screen and (max-width:1600) {
+  .noti-outer{
+    width: 367px;
+  }  
 }

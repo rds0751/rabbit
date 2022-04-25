@@ -163,6 +163,8 @@ function Footer() {
             <div className="fs-18 d-flex flex-column">
               <a  href="/about" className="footertitle">Company</a>
               <p><a href="/about" className="footersubtitle">About</a></p>
+              <p><a href="/about" className="footersubtitle">Privacy Policy</a></p>
+              <p><a href="/about" className="footersubtitle">Terms and Conditon</a></p>
             </div>
           </div>
           <div className="copyrightDiv">
@@ -193,6 +195,8 @@ function Footer() {
               <h3 className="fs-18 fw-b">
                 <a href="/about" className="footertitle">Company</a></h3>
               <p><a href="/about" className="footersubtitle">About</a></p>
+              <p><a href="/about" className="footersubtitle">Privacy Policy</a></p>
+              <p><a href="/about" className="footersubtitle">Terms and Conditon</a></p>
             </div>
             <div className="copyrightDivMob"><span className="textCopyrightMob">&copy;2022 Anafto Marketplace. All Rights Reserved.</span></div>
           </div>
