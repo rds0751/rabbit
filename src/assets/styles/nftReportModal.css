@@ -167,7 +167,7 @@ color: #191919;
 .price-input-box{
   border: none;
   display: inline-block;
-  width: 100%;
+  width: 81%;
   padding-left:17.39px;
 }
 .input-group-price input::-webkit-input-placeholder {

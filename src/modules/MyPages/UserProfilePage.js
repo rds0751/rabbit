@@ -208,7 +208,19 @@ console.log("userrrrrrrrrrrrrrrrdataa",userData)
     console.log(sub, "<<<split address");
   };
   splitAddress("akshay");
-
+  let array=[];
+const likedNftModule=()=>{
+    if(likedNft.length > 0){
+      for (let i = 0; i < likedNft.length; i++) 
+        array.push(likedNft[i].userLikedNfts);
+        setTypeofProfilePost("liked");
+        setNfts(array);
+      }
+      else {
+        setTypeofProfilePost("liked");
+      }
+  
+}
   return (
     <>
     {(userData.length!=0)?
@@ -317,10 +329,7 @@ console.log("userrrrrrrrrrrrrrrrdataa",userData)
               className={`postTypeProfile ${typeofProfilePost === "liked" && "postTypeProfile--active"
                 }`}
               // onClick={() => setTypeofProfilePost("liked")}
-              onClick={() => {
-                setNfts(likedNft);
-                setTypeofProfilePost("liked");
-              }}
+              onClick={() => likedNftModule()}
             >
               Liked
             </div>

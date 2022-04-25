@@ -51,6 +51,7 @@ function Navbar() {
     searchByName: "",
     limit:4,
   });
+ 
   const [nfts, setNfts] = useState([]);
   const [collections, setCollections] = useState([]);
   useEffect(() => {

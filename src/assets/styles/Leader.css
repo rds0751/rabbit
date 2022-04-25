@@ -1940,7 +1940,7 @@ td {
   margin-right: 5px;
 }
 .main-card-box .card:hover{
-  box-shadow: rgb(4 17 29 / 25%) 0px 0px 5px 0px;
+  box-shadow: rgb(4 17 29 / 25%) 0px 0px 8px 0px;
   transition: all 0.1s ease 0s;
   border: none;
 }
