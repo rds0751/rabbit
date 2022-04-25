@@ -92,7 +92,7 @@ function CreateSingleNFT(props) {
 
   // --------------------------------React Drop Zone---------------------
   const { getRootProps, getInputProps } = useDropzone({
-    accept: "image/*",
+    accept: ".png,.jpg,.jpeg,.gif",
     maxSize: "40485760",
     onDrop: (acceptedFiles,fileRejections) => {
       setisLoader(true);
@@ -583,37 +583,34 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
 
               </div>
 
-              <div className="">
+              <div className="input-name">
                 <label htmlFor="email" className=" input-label">
-                  Name*<span style={{color:"red",fontSize:"13px"}}>{nameError}</span>
+                  Name*
                 </label>
+                <div style={{color:"red",fontSize:"15px"}}>{nameError}</div>
                 <input
                   type="text"
                   className="form-control-1"
+                  style={{border:nameError!=""?"1px solid red":"1px solid #C8C8C8"}}
                   name="email"
+                  placeholder="Enter name"
                   autoComplete="off"
                   maxLength="100"
                   title=" "
                   onChange={(e) => {
                     name.current = e.target.value;
-                    // checkChanges();
-                    //let x=e.target.value.replace(/[^a-zA-Z ]/g, "")
-
                     var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
                     if(format.test(e.target.value)){
                       SetNameError("(No Special Character Allowed)");
                     }else if(e.target.value.length == 0){
                       setError("")
-                      SetNameError("(Name is required)")
+                      SetNameError("( Name is required )")
                     }
                     else if(e.target.value.length < 3){
-                      SetNameError("(Name should be atleast 3 character)")
+                      SetNameError("( Name should be atleast 3 character )")
                     } else {
                     SetNameError("");
                     }
-                    
-                    //setSpecialChar(x);
-                  
                     
                   }}
                 />
@@ -621,21 +618,23 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
               </div>
               <div className="input-price">
                 <label htmlFor="price" className=" input-label">
-                  Price*<span style={{color:"red",fontSize:"13px"}}>{error}</span>
+                  Price*
                 </label>
+                <div style={{color:"red",fontSize:"15px"}}>{error}</div>
                 <div class="input-group">
              
                   <input
                     className="form-control"
                     type="number"
                     title=" "
+                    placeholder="0 ETH"
                     autoComplete="off"
+                    style={{border:error!=""?"1px solid red":"1px solid #C8C8C8"}}
                     onWheel={(e)=>e.target.blur()}
                     onChange={(e) => {
                       price.current = e.target.value;
                       // checkChanges();
                       if(+e.target.value < "0.004" || +e.target.value=="0"){
-                        SetNameError("")
                         setError("( Minimum listing price for an NFT should be more than 0.004 ETH )")
                       }else if(e.target.value.length == 0){
                         setError("( price is required)")
@@ -649,20 +648,19 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
                 </div>
                 
               </div>
-              <div className="">
+              <div className="input-description">
                 <label htmlFor="comment" className="input-label pb-2">
-                  Description*<span style={{color:"Red" ,fontSize:"13px"}}>{DesError}</span>
+                  Description*
                 </label>
+                <div style={{color:"Red" ,fontSize:"15px"}}>{DesError}</div>
                
                 <textarea
                   className="form-control-1 text-area-input"
                   rows="4"
                   id="test"
                   style={{
-                    height: "8rem",
-                    maxHeight: "8rem",
-                    minHeight: "8rem",
-                    resize: "none",
+                    
+                    border:DesError!=""?"1px solid red":"1px solid #C8C8C8"
                   }}
                   maxLength="1000"
                   name="text"
@@ -687,6 +685,23 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
                   {desLength} of 1000 characters and 
                   <span> <span id="linesUsed">0</span> of 20 Lines.</span>
                 </span>
+              </div>
+
+              <div className="input-name">
+                <label htmlFor="email" className=" input-label">
+                  Royalty
+                </label>
+                <p className="headingRoyality">Write down the percentage you want from this sale of this NFT</p>
+                <div style={{color:"red",fontSize:"15px"}}>{nameError}</div>
+                <input
+                  type="number"
+                  className="form-control-1"
+                  placeholder="Enter Royalty"
+                  autoComplete="off"
+                  maxLength="100"
+                  title=" "
+                />
+               
               </div>
               
               <div className="mt-3">

@@ -17,6 +17,7 @@ import PricingHistoryComponentGraph from "../../common/components/PricingHistory
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "../../assets/styles/createSingleNft.css";
 import success from "../../assets/images/Check.svg";
+import closeIcon from "../../assets/images/closeIcon.svg";
 import { Button } from "@mui/material";
 import { getNft, addNftReport } from "../../services/webappMicroservice";
 import { useSelector } from "react-redux";
@@ -74,7 +75,21 @@ const CustomSnack2 = styled(Snackbar)`
     right: 8px !important;
   }
 `;
-
+const Select = styled.select`
+  border: none;
+  border-radius: 4px;
+  width: 108px;
+  height: 40px;
+  padding-left: 13px;
+  font-family: "poppins-medium";
+  font-size: 14px;
+  line-height: 21px;
+  color: #191919;
+  background-color: #fff;
+`;
+const Option = styled.option`
+  font-size: 14px;
+`;
 const queryString = require("query-string");
 export default function NftInformation(props) {
   const navigate = useNavigate();
@@ -96,6 +111,7 @@ export default function NftInformation(props) {
   const [userDetails, setUserDetails] = useState([]);
   const [tab, setTab] = useState(1);
   const [toShow, settoShow] = useState(true);
+  const [makeOfferModal,setMakeOfferModal]=useState(false);
 
   const [state, setState] = React.useState({
     open: false,
@@ -135,6 +151,7 @@ export default function NftInformation(props) {
   } else {
     document.body.classList.remove("active-modal");
   }
+  
 
   // alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
 
@@ -215,6 +232,10 @@ export default function NftInformation(props) {
     //     window.location.reload(false);
     //   } else toast.error(response.message);
   };
+  const makeOffer=async ()=>{
+    setMakeOfferModal(true);
+
+  }
   const openSaleModal = async () => {
     // alert("kkkk")
     setsaleModal(true);
@@ -813,7 +834,7 @@ export default function NftInformation(props) {
                 >
                   Buy Now
                 </Button>
-                {/* <Button
+                <Button
                   data-bs-toggle="modal"
                   data-bs-target="#myModalShare"
                   style={{
@@ -827,10 +848,11 @@ export default function NftInformation(props) {
                     textTransform: "none",
                     border: "1px solid #366EEF",
                   }}
-                  onClick={removeNFTFromSell}
+                  onClick={makeOffer}
+                 
                 >
                   Make Offer
-                </Button> */}
+                </Button>
               </div>
 
               <div className="grap-area">
@@ -862,6 +884,20 @@ export default function NftInformation(props) {
                     }}
                   >
                     Listings
+                  </li>
+                  <li
+                    onClick={() => {
+                      setTab(3);
+                    }}
+                    style={{
+                      borderBottom: tab === 3? "2px solid #366EEF" : "",
+                      color: tab === 3 ? "#000000" : "#828282",
+                      fontWeight: tab === 3 ? 600 : "",
+                      marginRight: "16px",
+                      fontFamily: tab === 3 ? "poppins-bold" : "poppins",
+                    }}
+                  >
+                    Offers
                   </li>
                   {/* <li
                     onClick={() => {
@@ -1027,7 +1063,7 @@ export default function NftInformation(props) {
                   <div className="abstractillusioncontent">
                     <div className="abstracttitle"></div>
                     <div className="abstractposter"> {nft.name}</div>
-                    <div className="ethprice">{salesInfo?.price}ETH</div>
+                    <div className="ethprice">{`${salesInfo?.price}  ${salesInfo?.currency}`}</div>
                   </div>
                 </div>
                 <div className="checkpostcontainer">
@@ -1072,6 +1108,68 @@ export default function NftInformation(props) {
           </div>
         </div>
       </div>
+      {/* make offer modal starts here*/}
+      <div
+        className="report-outer"
+        style={{ display: makeOfferModal ? "block" : "none" }}
+      >
+        <div className="report-abs-modal">
+          <div className="make-offer-modal main-model-makeoffer">
+            <div className="report-inner" style={{ opacity: "1" }}>
+              <div className="offerHeading">
+                <p className="MainHeadingText">make an offer</p>
+                <img src={closeIcon} onClick={()=>setMakeOfferModal(false)}/>
+              </div>
+              <div className="singlerowmodal">
+                <h3 className="price-heading-text">
+                  {" "}
+                  Price
+                </h3>
+                <div className="input-group-price">
+                  <span className="symbolText">ETH</span>
+                  <span style={{border:"0.2px ridge #C8C8C8"}}></span>
+                  <input
+                    className="price-input-box"
+                    type="number"
+                    title=" "
+                    placeholder="0 ETH"
+                    autoComplete="off"
+                    onWheel={(e)=>e.target.blur()}
+                   
+                  />
+
+                </div>
+                <div className="second-row">
+                  <h3 className="heading-second-row">Expiration Date</h3> 
+                  <div className="expiry-div">
+                  <Select
+                 className="selectfixing4"
+                 name="type"
+                 onChange={(e) => handleChange(e)}
+                 placeholder="a month"
+                 >
+                 <Option>A month</Option>
+                   <Option value="list">A year</Option>
+                   </Select>
+                   <span style={{border:"0.2px ridge #C8C8C8"}}></span>
+
+                   <input type="time" className="filter-time"/>
+                  </div>
+                 
+
+                </div>
+
+                <div className="div-offer-button">
+                  <button className="offer-button" >
+                    make  offer
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       {/* remove from sale modal end is here */}
       {/* Put from sale modal start from here */}
       <div
@@ -1094,7 +1192,7 @@ export default function NftInformation(props) {
                   <div className="abstractillusioncontent">
                     <div className="abstracttitle"></div>
                     <div className="abstractposter"> {nft.name}</div>
-                    <div className="ethprice">{salesInfo?.price}ETH</div>
+                    <div className="ethprice">{`${salesInfo?.price}  ${salesInfo?.currency}`}</div>
                   </div>
                 </div>
                 <div className="checkpostcontainer">
@@ -1161,7 +1259,7 @@ export default function NftInformation(props) {
                   <div className="abstractillusioncontent">
                     <div className="abstracttitle"></div>
                     <div className="abstractposter"> {nft.name}</div>
-                    <div className="ethprice">{salesInfo?.price}ETH</div>
+                    <div className="ethprice">{`${salesInfo?.price}  ${salesInfo?.currency}`}</div>
                   </div>
                 </div>
                 <div className="checkpostcontainer">

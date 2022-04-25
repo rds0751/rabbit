@@ -18,7 +18,6 @@ import CollDetailCard from "../../common/components/CollDetailCard";
 import NoItem from "../../assets/images/Noitems.svg";
 import { Button } from "react-bootstrap";
 import Spinner from "../../common/components/Spinner";
-
 // MUI select code
 import SelectUnstyled, { selectUnstyledClasses } from '@mui/base/SelectUnstyled';
 import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled';
@@ -216,17 +215,38 @@ function CollectionDetails() {
   const handleSort = (e) => {
     setFilter({ ...filter, 'sort': e });
   };
+  let [imageLoading,setImageLoading]=useState({src:imageUrl,loaded:false })
+  let [bannerImage,BannerLoading]=useState({src:coverUrl,loaded:false })
 
+  const onImageLoad=()=>{
+    setImageLoading({...imageLoading,loaded:true});
+  }
+  const onBannerLoad=()=>{
+    setImageLoading({...bannerImage,loaded:true});
+  }
 
   return (
     <>
       <div>
         <div className="coldet-banner">
-          <img src={coverUrl} alt="" style={{ objectFit: "cover" }} />
+          <img src={coverUrl} alt="" style={{ objectFit: "cover" }} onLoad={onBannerLoad} />
+          {!imageLoading.loaded && (
+            <div className="bannerLoader"> 
+              <Spinner />
+              </div>
+          )}
         </div>
         <div className="coldet-bio">
           <div className="coldet-avatar">
-            <img className="col-avatar" src={imageUrl} alt="" />
+          <div className="collectionDetailContainer">
+            
+            <img className="col-avatar" src={imageUrl} onLoad={onImageLoad} alt="" />
+            {!imageLoading.loaded && (
+            <div className="collectionDetailLoader"> 
+              <Spinner />
+              </div>
+          )}
+            </div>
           </div>
           <div className="colusername">{name}</div>
           <div className="coluserdes" title={description}>

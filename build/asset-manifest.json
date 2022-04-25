@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.4207eef3.css",
-    "main.js": "/static/js/main.4e085eaa.js",
+    "main.css": "/static/css/main.14e9de42.css",
+    "main.js": "/static/js/main.4989e17c.js",
     "static/media/Banner.png": "/static/media/Banner.112c32a6f604149b0d83.png",
     "static/media/Abstraction.png": "/static/media/Abstraction.010c4cc892910d63a5b1.png",
     "static/media/Image4.png": "/static/media/Image4.df4b7c34e33bba4bcabb.png",
@@ -24,7 +24,7 @@
     "static/media/createCollection.svg": "/static/media/createCollection.5d1b3d38c380b862830217715bfd25f0.svg",
     "static/media/Easy.svg": "/static/media/Easy.1ed7c0d675c2eaa1cabdcf3dbe19ab91.svg",
     "static/media/Offers.svg": "/static/media/Offers.d8e534e224c9b4a271087d741295e713.svg",
-    "static/media/No-Info-Icon.svg": "/static/media/No-Info-Icon.2052b3a5ae411bccf0ae744b8ecc7c2f.svg",
+    "static/media/No-Info-Icon.svg": "/static/media/No-Info-Icon.be287affad004c922843bd02b43153be.svg",
     "static/media/hoverDiscord.svg": "/static/media/hoverDiscord.7167e13686793cfb219f8ebf482d1bf2.svg",
     "static/media/Sale.svg": "/static/media/Sale.208a897cbaadff40f591d8946f936cd2.svg",
     "static/media/collection.svg": "/static/media/collection.3423e7a57f035a0f01cb89b807e260e3.svg",
@@ -44,6 +44,7 @@
     "static/media/insta.svg": "/static/media/insta.42049cb78fa6b92d86f6b2a145a15bd4.svg",
     "static/media/Like.svg": "/static/media/Like.9f78fda02c7de4b68e6cbcabed84221c.svg",
     "static/media/NFTs.svg": "/static/media/NFTs.40d5818a50f603f3d66978dfd8235f62.svg",
+    "static/media/closeIcon.svg": "/static/media/closeIcon.866442c7c554104cb36d6ec283fb8c8e.svg",
     "static/media/Sale2.svg": "/static/media/Sale2.143c7099f49bb8e81292f2e6c572f95b.svg",
     "static/media/bellicon.svg": "/static/media/bellicon.5e595fac35dcb2e6090a08eaa7c52a08.svg",
     "static/media/Notification.svg": "/static/media/Notification.68852b5cd5ba5181f72469b3d16a7bfc.svg",
@@ -63,11 +64,11 @@
     "static/media/drop-down-arrow.svg": "/static/media/drop-down-arrow.252c67d09c66c766f99a.svg",
     "static/media/Edit.svg": "/static/media/Edit.adfd6c934476ae588248e2026354da45.svg",
     "static/media/coverImage.svg": "/static/media/coverImage.7cc8a61314efed2824b3ef2b04371775.svg",
-    "main.4207eef3.css.map": "/static/css/main.4207eef3.css.map",
-    "main.4e085eaa.js.map": "/static/js/main.4e085eaa.js.map"
+    "main.14e9de42.css.map": "/static/css/main.14e9de42.css.map",
+    "main.4989e17c.js.map": "/static/js/main.4989e17c.js.map"
   },
   "entrypoints": [
-    "static/css/main.4207eef3.css",
-    "static/js/main.4e085eaa.js"
+    "static/css/main.14e9de42.css",
+    "static/js/main.4989e17c.js"
   ]
 }

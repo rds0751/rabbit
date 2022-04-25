@@ -95,7 +95,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
         if (error || !result) {
             this.setState({ loaderState: false })
 
-            return Utils.apiFailureToast(error || "Unable to update Nft tx.");
+            return toast.error(error || "Unable to update Nft tx.",{autoClose:7000,theme:"colored"})
         }
 
         if (this.state?.responseData?.contractAddress > 0) {
@@ -118,8 +118,9 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
                 let [txFailErr, txFailResult] = await Utils.parseResponse(
                     updateTxStatus({ status: "failed" }, result._id)
                 );
-                return Utils.apiFailureToast(
+                return toast.error(
                     blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to Buy NFT on blockchain"
+                    ,{autoClose:7000,theme:"colored"}
                 );
             }
             blockchainRes = blockchainResult
@@ -142,8 +143,9 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
                 let [txFailErr, txFailResult] = await Utils.parseResponse(
                     updateTxStatus({ status: "failed" }, result._id)
                 );
-                return Utils.apiFailureToast(
+                return toast.error(
                     blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to Buy NFT on blockchain"
+                    ,{autoClose:7000,theme:"colored"}
                 );
             }
             blockchainRes = blockchainResult
@@ -164,7 +166,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
         if (txUpdateResultErr || !txUpdateResult) {
             this.setState({ loaderState: false })
 
-            return Utils.apiFailureToast(txUpdateResultErr || "Unable to update status of tx");
+            return toast.error(txUpdateResultErr || "Unable to update status of tx",{autoClose:7000,theme:"colored"});
         }
 
         let requestData = {
@@ -186,7 +188,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
         if (err || !res) {
             this.setState({ loaderState: false })
 
-            return Utils.apiFailureToast(err || "Unable to update Nft ownership.");
+            return toast.error(err || "Unable to update Nft ownership.",{autoClose:7000,theme:"colored"});
         }
         else {
             this.setState({ loaderState: false })
@@ -195,7 +197,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
             this.setState({ nftDetails: res });
             this.setState({ buySuccess: true });
 
-            Utils.apiSuccessToast("NFT has been buy successfully");
+            toast.success("NFT has been buy successfully",{autoClose:7000,theme:"colored"});
         }
 
     };
@@ -266,7 +268,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
             this.setState({ saleSuccess: true });
 
             this.setState({ nftDetails: result });
-            Utils.apiSuccessToast("NFT has been put on sell");
+            toast.success("NFT has been put on sell",{autoClose:7000,theme:"colored"});
         }
     };
 
@@ -323,7 +325,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
             this.setState({ removeSuccess: true });
 
             this.setState({ nftDetails: result });
-            Utils.apiSuccessToast("NFT has been removed for sell.");
+            toast.success("NFT has been removed for sell.",{autoClose:7000,theme:"colored"});
         }
     };
 

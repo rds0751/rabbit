@@ -3,9 +3,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Like from "../../assets/images/Like.svg";
 import likes from "../../assets/images/likes.svg";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 // import { useHistory } from "react-router-dom";
 import "../../assets/styles/common.css"
 import Spinner from "../../common/components/Spinner";
+import { ShimmerThumbnail } from "react-shimmer-effects";
 import {
   getNfts,
   addLikeNft,
@@ -16,7 +18,7 @@ function NftCardsHome({ nft }) {
 
   const navigate = useNavigate();
   const { user, sideBar } = useSelector((state) => state);
-  const { _id, cdnUrl, name, biddingDetails, salesInfo } = nft;
+  const { _id, cdnUrl, name, biddingDetails, salesInfo, isLiked } = nft;
   const [handleLike, setHandleLike] = useState(true);
   // const currDate = new Date();
   // const endDate = biddingDetails.endDate;
@@ -24,17 +26,17 @@ function NftCardsHome({ nft }) {
   // console.log(daysleft, "<<<daysleft");
   const route = "/nft-information/" + _id;
   const likeNft = (id) => {
-    if (user.loggedInUser == null) {
-      navigate("/add-wallet");
-    }
-    // alert("like");
-
-    const data = {
-      contentId: id,
-      addedBy: user.loggedInUser._id,
-    };
-    addLikeNft(data);
-    setHandleLike(!handleLike);
+    if (user?.loggedInUser?._id) {
+      const data = {
+        contentId: id,
+        addedBy: user?.loggedInUser?._id,
+      };
+      addLikeNft(data);
+      setHandleLike(!handleLike);      
+    } else {
+      toast.error("Not logged in")
+      // navigate("/add-wallet");
+    }    
   };
   // const difftime = (timestamp1, timestamp2) => {
   //   var difference = timestamp1 - timestamp2;
@@ -80,7 +82,7 @@ function NftCardsHome({ nft }) {
   let [imageLoading,setImageLoading]=useState({src:cdnUrl,loaded:false })
 
   const onImageLoad=()=>{
-    setImageLoading({...imageLoading,loaded:true});
+   setImageLoading({...imageLoading,loaded:true});
   }
 
   return (
@@ -97,7 +99,7 @@ function NftCardsHome({ nft }) {
 
         {!imageLoading.loaded && (
             <div className="loaderNft "> 
-              <Spinner />
+              <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />;
               </div>
           )}
           
@@ -106,19 +108,21 @@ function NftCardsHome({ nft }) {
          
           
         
-        <span onClick={() => likeNft(_id)}>
-          {handleLike?(
+        <span >
+          {isLiked?(
                   <img
                   id="unlike_icon"
-                  src={Like}
+                  src={handleLike ? likes : Like}
                   alt="like"
+                  onClick={() => likeNft(_id)}
                 />
 
           ):(
             <img
             id="like_icon"
-            src={likes}
+            src={handleLike ? Like : likes}
             alt="like"
+            onClick={() => likeNft(_id)}
           />
 
           )}

@@ -262,11 +262,14 @@ function Navbar() {
       [e.target.name]: e.target.value,
     });
   };
-
+  let [scroll,setScroll]=useState(true);
   const closeWalletAndNoti = () => {
+    document.body.className="overflow-hidden";
     setDisplay(true);
     dispatch(ManageNotiSideBar(false));
     dispatch(ManageWalletSideBar(false));
+   // document.body.className = !isOpenWallet ? "overflow" : "overflow-hidden";
+ 
     // document.body.overflow = !isOpenNoti === false ?  "auto": "hidden";
   };
 
@@ -692,7 +695,7 @@ console.log(Count,"count")
                   </li> */}
                   <li
                     style={{ marginRight: "28px" }}
-                    onClick={() => manageNavigation("create")}
+                    onClick={() =>{ closeWalletAndNoti(); manageNavigation("create") }}
                   >
                     {/* <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}

@@ -7,6 +7,9 @@
 .coldet-banner {
   width: 100%;
   height: 280px;
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
   /* border: 5px solid red; */
 }
 
@@ -248,4 +251,34 @@
 }
 .no-item-image{
   filter: opacity(0.4) drop-shadow(0 0 0 grey);
+}
+.collectionDetailLoader{
+  height: 198px;
+  width: 198px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: whitesmoke;
+  border: 4px solid #fff;
+  border-radius: 50%;
+}
+.collectionDetailContainer {
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+}
+.bannerLoader{
+  width: 100%;
+  height: 280px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: whitesmoke;
 }
