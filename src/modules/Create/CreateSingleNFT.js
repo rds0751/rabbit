@@ -44,6 +44,7 @@ function CreateSingleNFT(props) {
   const [ipfsUrl, setIpfsUrl] = useState("");
   const [myProfileUrl, setmyProfileUrl] = useState("");
   const [DesError,SetDesError]=useState("");
+  const [royalityError,setRoyalityError]=useState("");
 
   const [cdnUrl, setcdnUrl] = useState("");
   const [uploadFileObj, setUploadFileObj] = useState("");
@@ -89,7 +90,7 @@ function CreateSingleNFT(props) {
     const collections = await getCollectionBySingleUser(userId);
     setCollectionData(collections);
   }, []);
-
+const [compressedUrl,setCompressedUrl]=useState("");
   // --------------------------------React Drop Zone---------------------
   const { getRootProps, getInputProps } = useDropzone({
     accept: ".png,.jpg,.jpeg,.gif",
@@ -145,6 +146,7 @@ function CreateSingleNFT(props) {
 
           setIpfsUrl(ipfsRes.ipfsUrl);
           setcdnUrl(ipfsRes.cdnUrl);
+          setCompressedUrl(ipfsRes.compressedURL);
           setisLoader(false);
           setIsFileSelected(true);
           // if (
@@ -289,6 +291,7 @@ function CreateSingleNFT(props) {
         // nftFile: selectFile,
         ipfsUrl: ipfsUrl,
         cdnUrl: cdnUrl,
+        compressedURL:compressedUrl,
         nftName: name.current,
         price: price.current,
         description: description.current,
@@ -314,6 +317,8 @@ function CreateSingleNFT(props) {
     { value: 'ETH', label: <div><img src={ethereum} height="32px" alt=""/> Ethereum</div> },
   ];
 const enabled=name.current.length > 0 && price.current.length>0 && description.current.length >0 && selectFile!="" && nameError=="" && error=="";
+
+
 
   return (
     <>
@@ -692,14 +697,26 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
                   Royalty
                 </label>
                 <p className="headingRoyality">Write down the percentage you want from this sale of this NFT</p>
-                <div style={{color:"red",fontSize:"15px"}}>{nameError}</div>
+                <div style={{color:"red",fontSize:"15px"}}>{royalityError}</div> 
                 <input
                   type="number"
+                  id="royality"
                   className="form-control-1"
+                  onWheel={(e)=>e.target.blur()}
                   placeholder="Enter Royalty"
                   autoComplete="off"
                   maxLength="100"
+                  style={{
+                    border:royalityError!=""?"1px solid red":"1px solid #C8C8C8"
+                  }}
                   title=" "
+                  onChange={(e)=>{
+                    e.target.value = e.target.value.slice(0, 2);
+                    if(+e.target.value > 50)
+                    setRoyalityError("( Royalty can not be more than 50% )")
+                    else
+                    setRoyalityError("")
+                  }}
                 />
                
               </div>

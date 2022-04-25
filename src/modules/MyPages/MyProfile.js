@@ -282,6 +282,14 @@ function MyProfile() {
       setTypeofProfilePost("liked");
     }
   }
+  let [imageLoading,setImageLoading]=useState({src:loggedInUser?.photo,loaded:false })
+  let [bannerImage,BannerLoading]=useState({src:loggedInUser?.coverPhoto,loaded:false })
+  const onImageLoad=()=>{
+    setImageLoading({...imageLoading,loaded:true});
+  }
+  const onBannerLoad=()=>{
+    setImageLoading({...bannerImage,loaded:true});
+  }
   return (
     <>
       <div>
@@ -294,8 +302,14 @@ function MyProfile() {
                 : coverImage
             }
             alt=""
+            onLoad={onBannerLoad}
             onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
           />
+            {!imageLoading.loaded && (
+            <div className="bannerLoader"> 
+              <Spinner />
+              </div>
+          )}
           <input
             type="file"
             className="pencilicon"
@@ -312,12 +326,20 @@ function MyProfile() {
         <span className="edit-text">Edit</span>
         </Link>
         <div className="profileavatar  absolute">
+          <div className="profileImg-Container-myprofile">
           <img
             src={loggedInUser?.photo != "" ? loggedInUser?.photo : profileImage}
             alt=""
             className="user-img"
+            onLoad={onImageLoad} 
             onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
           />
+              {!imageLoading.loaded && (
+            <div className="profileImageLoader"> 
+              <Spinner />
+              </div>
+          )}
+          </div>
          
           {/* <h2>{ethereum && ethereum.selectedAddress}</h2> */}
           {/* <h2>{window.ethereum && defaultAccount}</h2> */}

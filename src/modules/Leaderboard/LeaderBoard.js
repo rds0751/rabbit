@@ -1106,7 +1106,7 @@ function LeaderBoard() {
           {topNftSales.map((curElem) => {
             console.log("kggggggggggggggggggg", curElem)
 
-            const { cdnUrl, name, owner, maxPrice2, daysLeft, likes, _id, content } = curElem
+            const { cdnUrl, name, owner, maxPrice2, daysLeft, likes, _id, content,compresedURL } = curElem
 
 
             const route = '/nft-information/' + _id
@@ -1119,7 +1119,7 @@ function LeaderBoard() {
                       // id="nft__photo"
 
                       className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
-                      src={content.cdnUrl}
+                      src={content.compresedURL}
                       alt="nft"
                       onError="this.onerror=null;this.src='/images/image.svg';"
                     />

@@ -1452,3 +1452,9 @@ margin:0px;
  .no-image{
   filter: opacity(0.4) drop-shadow(0 0 0 grey);
 }
+
+
+.dropdown[aria-expanded="true"] .profileimg {
+background-color:lightgrey;
+border-radius: 50%;
+}

@@ -61,6 +61,7 @@ class Index extends BaseComponent {
       collectionId: data.collection, // to do
       ipfsUrl: data?.ipfsUrl || "",
       cdnUrl: data?.cdnUrl || "",
+      compressedURL:data?.compressedURL|| "",
       cid: data?.cid || "",
       contractAddress: data.contractAddress || "",
       description: data?.description || "",
