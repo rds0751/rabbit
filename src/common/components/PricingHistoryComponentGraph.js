@@ -7,42 +7,42 @@ import moment from "moment";
 const queryString = require("query-string");
 export default function PricingHistoryComponent(props) {
   const [nftPricingHistory, setNftPricingHistory] = useState([]);
-  const [filter, setFilter] = useState({duration:""});
+  const [filter, setFilter] = useState({ duration: "" });
 
   const handleChange = (e) => {
-    setFilter({...filter,[e.target.name]:e.target.value});
+    setFilter({ ...filter, [e.target.name]: e.target.value });
   };
 
   const reqId = {
     contentId: props.id,
   };
-  const reqObj = queryString.stringify(filter)
-// const reqObj = {
-//   duration: ""
-// }
-console.log(nftPricingHistory,"sachin")
+  const reqObj = queryString.stringify(filter);
+  // const reqObj = {
+  //   duration: ""
+  // }
+  console.log(nftPricingHistory, "sachin");
   useEffect(() => {
-    pricingHistoryGraphOfNft(reqId, reqObj ).then((response) =>
+    pricingHistoryGraphOfNft(reqId, reqObj).then((response) =>
       setNftPricingHistory(response)
     );
   }, [reqObj]);
 
   let prices = nftPricingHistory.map((each) => each.totalVolume);
   // let prices = [0.001, 0.9];
-  let dates = nftPricingHistory.map((each) => each?.addedOn)
-//   let dates = nftPricingHistory.map((each) =>
-//     moment(new Date(each?.addedOn)).format("D MMM YY")
-//   );
-// console.log(prices,"price")
-//   if (filter === "month") {
-//     dates = nftPricingHistory.map((each) =>
-//       moment(new Date(each?.addedOn)).format("MMM YY")
-//     );
-//   } else if (filter === "year") {
-//     dates = nftPricingHistory.map((each) =>
-//       moment(new Date(each?.addedOn)).format("YYYY")
-//     );
-//   }
+  let dates = nftPricingHistory.map((each) => each?.addedOn);
+  //   let dates = nftPricingHistory.map((each) =>
+  //     moment(new Date(each?.addedOn)).format("D MMM YY")
+  //   );
+  // console.log(prices,"price")
+  //   if (filter === "month") {
+  //     dates = nftPricingHistory.map((each) =>
+  //       moment(new Date(each?.addedOn)).format("MMM YY")
+  //     );
+  //   } else if (filter === "year") {
+  //     dates = nftPricingHistory.map((each) =>
+  //       moment(new Date(each?.addedOn)).format("YYYY")
+  //     );
+  //   }
   let total = 0;
   let average = 0;
   nftPricingHistory.forEach((item) => {
@@ -100,14 +100,14 @@ console.log(nftPricingHistory,"sachin")
             <option className="font-15" value="all">
               All time
             </option>
+            <option className="font-15" value="7 days">
+              7 Days
+            </option>
             <option className="font-15" value="month">
               Month
             </option>
             <option className="font-15" value="year">
               Year
-            </option>
-            <option className="font-15" value="days">
-              Days
             </option>
           </select>
         </div>

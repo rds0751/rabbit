@@ -6,7 +6,8 @@ import { AuthToken } from "./UserAuthToken";
 import { duration } from "moment";
 
 export function getNfts(requestData) {
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts?" + requestData;
+  let url =
+    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts?" + requestData;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -32,16 +33,15 @@ export function getNfts(requestData) {
 
 // --------------------get nfts -----
 export const getNFtsData = async (filterObj, successCallBack) => {
-  console.log("dddddddddddddddd", { params: filterObj } )
+  console.log("dddddddddddddddd", { params: filterObj });
   try {
     const url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts?";
-    const { data } = await axios.get(url,{params:filterObj});
+    const { data } = await axios.get(url, { params: filterObj });
     successCallBack(data);
   } catch (e) {
     console.log(e);
   }
 };
-
 
 // --------
 
@@ -79,7 +79,10 @@ export const getNft = async (requestData, successCallBack) => {
 };
 
 export function getCollections(requestData) {
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/collections?" + requestData;
+  let url =
+    process.env.REACT_APP_WEBAPP_MICROSERVICE +
+    "api/v1/collections?" +
+    requestData;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -135,7 +138,8 @@ export function getNftsByCollectionId(id, requestData) {
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
     "api/v1/collection/" +
     id +
-    "/nfts?" + requestData;
+    "/nfts?" +
+    requestData;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -157,8 +161,11 @@ export function getNftsByCollectionId(id, requestData) {
       return Promise.reject(err);
     });
 }
-export function getTopNftSales(duration,requestData) {
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/get-top-nfts?"+duration;
+export function getTopNftSales(duration, requestData) {
+  let url =
+    process.env.REACT_APP_WEBAPP_MICROSERVICE +
+    "api/v1/get-top-nfts?" +
+    duration;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -207,7 +214,35 @@ export function getNotificationListById(requestData) {
     url
   )
     .then((response) => {
-      console.log(response, "sri")
+      console.log(response, "sri");
+      if (
+        !response.success ||
+        response.responseCode !== 200 ||
+        !response.responseData ||
+        response.responseData.length === 0
+      )
+        return Promise.reject();
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+
+export function getNotificationCountById(requestData) {
+  let url =
+    process.env.REACT_APP_WEBAPP_MICROSERVICE +
+    `api/v1/notification/ 
+    ${requestData}/read`;
+
+  return httpService(
+    httpConstants.METHOD_TYPE.POST,
+    // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    AuthToken,
+    requestData,
+    url
+  )
+    .then((response) => {
       if (
         !response.success ||
         response.responseCode !== 200 ||
@@ -224,8 +259,9 @@ export function getNotificationListById(requestData) {
 
 export const addNftReport = async (requestData, successCallBack) => {
   try {
-    const url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/reports/nfts";
-    const { data } = await axios.post(url, requestData );
+    const url =
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/reports/nfts";
+    const { data } = await axios.post(url, requestData);
     successCallBack(data);
   } catch (e) {
     console.log(e);
@@ -255,7 +291,7 @@ export function addLikeNft(requestData) {
     url
   )
     .then((response) => {
-      console.log("likeresponse", response, "<<<<")
+      console.log("likeresponse", response, "<<<<");
       if (
         !response.success ||
         response.responseCode !== 200 ||
@@ -271,7 +307,10 @@ export function addLikeNft(requestData) {
 }
 
 export function getPricingHistory(requestData) {
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/pricing-history?" + requestData;
+  let url =
+    process.env.REACT_APP_WEBAPP_MICROSERVICE +
+    "api/v1/pricing-history?" +
+    requestData;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -293,8 +332,12 @@ export function getPricingHistory(requestData) {
     });
 }
 export function updateCollectionTxStatus(requestData, _id) {
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/collections/" + _id + "/status";
-  console.log("urllllllllllllll", url)
+  let url =
+    process.env.REACT_APP_WEBAPP_MICROSERVICE +
+    "api/v1/collections/" +
+    _id +
+    "/status";
+  console.log("urllllllllllllll", url);
   return httpService(
     httpConstants.METHOD_TYPE.PUT,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -318,10 +361,10 @@ export function updateCollectionTxStatus(requestData, _id) {
 }
 
 export function getActivities(reqObj, id) {
-  console.log("mohit",id)
+  console.log("mohit", id);
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
-    `api/v1/activities/${id}?` + reqObj
+    `api/v1/activities/${id}?type=${reqObj}`;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -344,11 +387,12 @@ export function getActivities(reqObj, id) {
     });
 }
 
-
 export function getList(reqType, id) {
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
-    `api/v1/activities/${id}?` + "type=" + "list"
+    `api/v1/activities/${id}?` +
+    "type=" +
+    "list";
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
