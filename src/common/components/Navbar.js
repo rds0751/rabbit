@@ -17,16 +17,16 @@ import {
 import { ethers } from "ethers";
 import "../../assets/styles/topNavBar.css";
 import searchIcon from "../../assets/images/search.svg";
-
+import { getNotificationListById, getNotificationCountById } from "../../services/webappMicroservice";
 import Menu from "./Menu";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
 import NoItem from "../../assets/images/Noitems.svg";
 import Spinner from "../../common/components/Spinner";
-import Form from 'react-bootstrap/Form'
-import bellicon from '../../assets/images/bellicon.svg'
-import profileImg from '../../assets/images/profile.svg'
-import wallet from '../../assets/images/wallet.svg'
-import Anafto from '../../assets/images/ANAFTO.svg'
+import Form from "react-bootstrap/Form";
+import bellicon from "../../assets/images/bellicon.svg";
+import profileImg from "../../assets/images/profile.svg";
+import wallet from "../../assets/images/wallet.svg";
+import Anafto from "../../assets/images/ANAFTO.svg";
 const queryString = require("query-string");
 function Navbar() {
   const navigate = useNavigate();
@@ -43,13 +43,15 @@ function Navbar() {
   const [isLoading, setIsLoading] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+  const [Count, setCount] = useState([]);
   const [searchNft, setSearchNft] = useState({
     searchByName: "",
-    limit:4,
+    limit: 4,
   });
   const [searchCollection, setSearchCollection] = useState({
     searchByName: "",
-    limit:4,
+    limit: 4,
   });
   const [nfts, setNfts] = useState([]);
   const [collections, setCollections] = useState([]);
@@ -136,7 +138,7 @@ function Navbar() {
         dispatch(RedirectTo("myitems"));
         navigate("/add-wallet");
         toast.error("Connect your wallet", {
-          position: toast.POSITION.TOP_RIGHT
+          position: toast.POSITION.TOP_RIGHT,
         });
       } else {
         navigate("/my-items");
@@ -149,7 +151,7 @@ function Navbar() {
         dispatch(RedirectTo("create"));
         navigate("/add-wallet");
         toast.error("Connect your wallet", {
-          position: toast.POSITION.TOP_RIGHT
+          position: toast.POSITION.TOP_RIGHT,
         });
       } else {
         navigate("/create-nft");
@@ -162,7 +164,7 @@ function Navbar() {
         dispatch(RedirectTo("profile"));
         navigate("/add-wallet");
         toast.error("Connect your wallet", {
-          position: toast.POSITION.TOP_RIGHT
+          position: toast.POSITION.TOP_RIGHT,
         });
         // toast.error("Connect your wallet");
         // navigate("/my-profile");
@@ -180,16 +182,14 @@ function Navbar() {
     }
   };
   const handleDisplay = () => {
-   
-      setDisplay(!display);
-    
+    setDisplay(!display);
   };
   const handleWalletClick = () => {
     setDisplay(true);
     if (walletAddress == null) {
       navigate("/add-wallet");
       toast.error("Connect your wallet", {
-        position: toast.POSITION.TOP_RIGHT
+        position: toast.POSITION.TOP_RIGHT,
       });
     } else {
       dispatch(ManageWalletSideBar(!isOpenWallet));
@@ -203,7 +203,7 @@ function Navbar() {
     if (loggedInUser == null) {
       navigate("/add-wallet");
       toast.error("Connect your wallet", {
-        position: toast.POSITION.TOP_RIGHT
+        position: toast.POSITION.TOP_RIGHT,
       });
     } else {
       dispatch(ManageNotiSideBar(!isOpenNoti));
@@ -212,32 +212,32 @@ function Navbar() {
     }
   };
   console.log(isOpenNoti, "<<<isopen noti");
- 
+
   // document.body.overflow = !isOpenWallet === false ?  "auto": "hidden";
   //------------------------------------------------------------
-  const reqObj = queryString.stringify(searchNft)
-  const reqObj1 = queryString.stringify(searchCollection)
+  const reqObj = queryString.stringify(searchNft);
+  const reqObj1 = queryString.stringify(searchCollection);
   useEffect(() => {
-    setIsLoading(true)
-    setNfts([])
-    setCollections([])
+    setIsLoading(true);
+    setNfts([]);
+    setCollections([]);
     async function fetchData() {
-      if (searchCollection.searchByName.length > 0){        
-        await getNfts(reqObj).then((res) => setNfts(res.nftContent))
-        await getCollections(reqObj1).then((res) => setCollections(res))
+      if (searchCollection.searchByName.length > 0) {
+        await getNfts(reqObj).then((res) => setNfts(res.nftContent));
+        await getCollections(reqObj1).then((res) => setCollections(res));
       }
-      setIsLoading(false)
+      setIsLoading(false);
     }
     fetchData();
   }, [searchNft, searchCollection]);
 
   //-----------------------------------------------------------------
-  const [display,setDisplay]=useState(false);
- 
+  const [display, setDisplay] = useState(false);
+
   // if (display) {
   //   document.body.style.position = '';
   //   document.body.style.top = '';
-  
+
   // } else if(showModal){
   //   document.body.style.position = 'fixed';
   //   document.body.style.top = `-${window.scrollY}px`
@@ -249,15 +249,18 @@ function Navbar() {
   // }
   const handleSearch = async (e) => {
     if (searchNft.searchByName.length > 0) {
-      setShowModal(true)
+      setShowModal(true);
       setDisplay(false);
     } else {
-      setShowModal(false)
+      setShowModal(false);
       setDisplay(true);
     }
     // showModal? setDisplay(false):setDisplay(true);
-    setSearchNft({...searchNft, [e.target.name] : e.target.value})
-    setSearchCollection({...searchCollection, [e.target.name] : e.target.value})
+    setSearchNft({ ...searchNft, [e.target.name]: e.target.value });
+    setSearchCollection({
+      ...searchCollection,
+      [e.target.name]: e.target.value,
+    });
   };
   let [scroll,setScroll]=useState(true);
   const closeWalletAndNoti = () => {
@@ -272,7 +275,29 @@ function Navbar() {
 
   const walletHandler = () => {
     setDisplay(true);
-    setShowResults(true)};
+    setShowResults(true);
+  };
+
+  if (loggedInUser) {
+    localStorage.setItem("userId", loggedInUser._id);
+  }
+  let userId = loggedInUser ? loggedInUser._id : localStorage.userId;
+
+  useEffect(() => {
+    getNotificationListById(userId).then((response) =>
+      setNotifications(response)
+    );
+  }, []);
+  console.log(notifications,"notifications")
+const notificationId = notifications._id;
+  useEffect(() => {
+    getNotificationCountById(notificationId).then((response) =>
+      setCount(response)
+    );
+  }, []);
+console.log(Count,"count")
+
+
 
   return (
     <>
@@ -287,16 +312,14 @@ function Navbar() {
                 className="navbrand"
                 to="/"
                 style={{ marginRight: "20px" }}
-                onClick={() => {closeWalletAndNoti();}}
+                onClick={() => {
+                  closeWalletAndNoti();
+                }}
               >
-                <img
-                  src={Anafto}
-                  style={{ width: "100px" }}
-                  alt=""
-                />
+                <img src={Anafto} style={{ width: "100px" }} alt="" />
               </Link>
               <div>
-                <div className="search-div" style={{display:"flex"}}>
+                <div className="search-div" style={{ display: "flex" }}>
                   <div>
                     <img src={searchIcon} alt="" className="search-icon" />
                   </div>
@@ -311,94 +334,129 @@ function Navbar() {
                     />
                   </div>
                 </div>
-                {(searchNft.searchByName.length > 0) && (
+                {searchNft.searchByName.length > 0 && (
                   <>
-                    {(nfts.length === 0 && collections.length === 0) ? (
+                    {nfts.length === 0 && collections.length === 0 ? (
                       <>
-                        <div className="search-results-background" onClick={(e)=>setDisplay(true)} style={{display:display?"none":"block"}}>    
-                          <div className="search-results-box" style={{display:display?"none":"block"}}>
+                        <div
+                          className="search-results-background"
+                          onClick={(e) => setDisplay(true)}
+                          style={{ display: display ? "none" : "block" }}
+                        >
+                          <div
+                            className="search-results-box"
+                            style={{ display: display ? "none" : "block" }}
+                          >
                             {isLoading ? (
                               <div className="d-flex justify-content-center mt-3 mb-3">
                                 <Spinner />
                               </div>
-                            ):(
-                              <div className="Noitemdiv"  style={{display:display?"none":"flex"}}>
+                            ) : (
+                              <div
+                                className="Noitemdiv"
+                                style={{ display: display ? "none" : "flex" }}
+                              >
                                 <img className="no-image" src={NoItem} alt="" />
                                 <p className="textitem">No items available</p>
                               </div>
-                            )}                            
+                            )}
                           </div>
                         </div>
                       </>
-                    ):(
+                    ) : (
                       <>
-                        <div className="search-results-background" onClick={(e)=>setDisplay(true)} style={{display:display?"none":"block"}}>    
-                          <div className="search-results-box" style={{display:display?"none":"block"}}>
-                          {collections.length > 0 && (
-                            <div>
-                            <p className="coll-title">Collections</p>
-                            {collections.map((collection) => {
-                              const route = "/collection-details/" + collection._id;
-                              return(
-                                <Link to={route} style={{ textDecoration: "none" }}>
-                                  <div className="item-div d-flex" >
-                                    <img src={collection.imageUrl} alt="" className="coll-img"/>
-                                    <p className="coll-name">
-                                      {collection.name}
-                                      <span className="item-count">{collection.nftCount} items</span>                         
-                                    </p>
-                                  </div>
-                                </Link>
-                              )
-                            })}
+                        <div
+                          className="search-results-background"
+                          onClick={(e) => setDisplay(true)}
+                          style={{ display: display ? "none" : "block" }}
+                        >
+                          <div
+                            className="search-results-box"
+                            style={{ display: display ? "none" : "block" }}
+                          >
+                            {collections.length > 0 && (
+                              <div>
+                                <p className="coll-title">Collections</p>
+                                {collections.map((collection) => {
+                                  const route =
+                                    "/collection-details/" + collection._id;
+                                  return (
+                                    <Link
+                                      to={route}
+                                      style={{ textDecoration: "none" }}
+                                    >
+                                      <div className="item-div d-flex">
+                                        <img
+                                          src={collection.imageUrl}
+                                          alt=""
+                                          className="coll-img"
+                                        />
+                                        <p className="coll-name">
+                                          {collection.name}
+                                          <span className="item-count">
+                                            {collection.nftCount} items
+                                          </span>
+                                        </p>
+                                      </div>
+                                    </Link>
+                                  );
+                                })}
+                              </div>
+                            )}
+                            {nfts.length > 0 && (
+                              <div>
+                                <p className="coll-title">NFTs</p>
+                                {nfts.map((nft) => {
+                                  const route = "/nft-information/" + nft._id;
+                                  return (
+                                    <Link
+                                      to={route}
+                                      style={{ textDecoration: "none" }}
+                                    >
+                                      <div className="item-div d-flex">
+                                        <img
+                                          src={nft.cdnUrl}
+                                          alt=""
+                                          className="coll-img"
+                                        />
+                                        <p className="coll-name">{nft.name}</p>
+                                      </div>
+                                    </Link>
+                                  );
+                                })}
+                              </div>
+                            )}
+                            <div className="btn-div d-flex">
+                              <Link
+                                to="/search-results"
+                                state={{
+                                  value: searchNft.searchByName,
+                                }}
+                              >
+                                <button className="show-more-btn">
+                                  show more
+                                </button>
+                              </Link>
+                            </div>
                           </div>
-                          )}
-                          {nfts.length > 0 && (
-                            <div>
-                            <p className="coll-title">NFTs</p>
-                            {nfts.map((nft) => {
-                              const route = "/nft-information/" + nft._id;
-                              return(
-                                <Link to={route} style={{ textDecoration: "none" }}>
-                                  <div className="item-div d-flex">
-                                    <img src={nft.cdnUrl} alt="" className="coll-img"/>
-                                    <p className="coll-name">{nft.name}</p>
-                                  </div>
-                                </Link>
-                              )
-                            })}
-                          </div>
-                          )}              
-                          <div className="btn-div d-flex">
-                            <Link to='/search-results'
-                              state= {{
-                                value: searchNft.searchByName
-                              }}
-                            >
-                            <button className="show-more-btn">show more</button>
-                            </Link>
-                          </div>
-                          </div>                
-                        </div>                  
+                        </div>
                       </>
                     )}
-                  </>                  
+                  </>
                 )}
               </div>
             </div>
-            
+
             <div className="search_box order-2">
-              
-            <Form.Control
-    type="search"
-    name="searchByName"
-   
-    onChange={(e) => handleSearch(e)}
-    autoComplete="off"
-    className="search-input"
-    placeholder="Search items and collections"
-  />
-                {/* <div>
+              <Form.Control
+                type="search"
+                name="searchByName"
+                onChange={(e) => handleSearch(e)}
+                autoComplete="off"
+                className="search-input"
+                placeholder="Search items and collections"
+              />
+              {/* <div>
                   <input
                     type="search"
                     name="searchByName"
@@ -408,85 +466,119 @@ function Navbar() {
                     className="search-input"
                   />
                 </div> */}
-                <div className="searchimg">
-                  <img src={searchIcon} alt="" className="search-icon" />
-                </div>
-              
-              {(searchNft.searchByName.length > 0) && (
-                  <>
-                    {(nfts.length === 0 && collections.length === 0) ? (
-                      <>
-                          <div className="search-results-box-small" onClick={(e)=>setDisplay(true)} style={{display:display?"none":"block"}}>
-                            <div className="small-search-result" style={{display:display?"none":"block"}}>
-                            {isLoading ? (
-                              <div className="d-flex justify-content-center mt-3 mb-3">
-                                <Spinner />
-                              </div>
-                            ):(
-                              <div className="Noitemdiv">
-                                <img src={NoItem} alt="" />
-                                <p className="textitem">No items available</p>
-                              </div>
-                            )}   
-                            </div>                         
-                          </div>
-                      </>
-                    ):(
-                      <>
-                      <div className="search-results-box-small"  onClick={(e)=>setDisplay(true)} style={{display:display?"none":"block"}}>
-                          <div className="small-search-result" style={{display:display?"none":"block"}}>
+              <div className="searchimg">
+                <img src={searchIcon} alt="" className="search-icon" />
+              </div>
+
+              {searchNft.searchByName.length > 0 && (
+                <>
+                  {nfts.length === 0 && collections.length === 0 ? (
+                    <>
+                      <div
+                        className="search-results-box-small"
+                        onClick={(e) => setDisplay(true)}
+                        style={{ display: display ? "none" : "block" }}
+                      >
+                        <div
+                          className="small-search-result"
+                          style={{ display: display ? "none" : "block" }}
+                        >
+                          {isLoading ? (
+                            <div className="d-flex justify-content-center mt-3 mb-3">
+                              <Spinner />
+                            </div>
+                          ) : (
+                            <div className="Noitemdiv">
+                              <img src={NoItem} alt="" />
+                              <p className="textitem">No items available</p>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div
+                        className="search-results-box-small"
+                        onClick={(e) => setDisplay(true)}
+                        style={{ display: display ? "none" : "block" }}
+                      >
+                        <div
+                          className="small-search-result"
+                          style={{ display: display ? "none" : "block" }}
+                        >
                           {collections.length > 0 && (
                             <div>
-                            <p className="coll-title">Collections</p>
-                            {collections.map((collection) => {
-                              const route = "/collection-details/" + collection._id;
-                              return(
-                                <Link to={route} style={{ textDecoration: "none" }}>
-                                  <div className="item-div d-flex" >
-                                    <img src={collection.imageUrl} alt="" className="coll-img"/>
-                                    <p className="coll-name">
-                                      {collection.name}
-                                      <span className="item-count">{collection.nftCount} items</span>                         
-                                    </p>
-                                  </div>
-                                </Link>
-                              )
-                            })}
-                          </div>
+                              <p className="coll-title">Collections</p>
+                              {collections.map((collection) => {
+                                const route =
+                                  "/collection-details/" + collection._id;
+                                return (
+                                  <Link
+                                    to={route}
+                                    style={{ textDecoration: "none" }}
+                                  >
+                                    <div className="item-div d-flex">
+                                      <img
+                                        src={collection.imageUrl}
+                                        alt=""
+                                        className="coll-img"
+                                      />
+                                      <p className="coll-name">
+                                        {collection.name}
+                                        <span className="item-count">
+                                          {collection.nftCount} items
+                                        </span>
+                                      </p>
+                                    </div>
+                                  </Link>
+                                );
+                              })}
+                            </div>
                           )}
                           {nfts.length > 0 && (
                             <div>
-                            <p className="coll-title">NFTs</p>
-                            {nfts.map((nft) => {
-                              const route = "/nft-information/" + nft._id;
-                              return(
-                                <Link to={route} style={{ textDecoration: "none" }}>
-                                  <div className="item-div d-flex">
-                                    <img src={nft.cdnUrl} alt="" className="coll-img"/>
-                                    <p className="coll-name">{nft.name}</p>
-                                  </div>
-                                </Link>
-                              )
-                            })}
-                          </div>
-                          )}              
+                              <p className="coll-title">NFTs</p>
+                              {nfts.map((nft) => {
+                                const route = "/nft-information/" + nft._id;
+                                return (
+                                  <Link
+                                    to={route}
+                                    style={{ textDecoration: "none" }}
+                                  >
+                                    <div className="item-div d-flex">
+                                      <img
+                                        src={nft.cdnUrl}
+                                        alt=""
+                                        className="coll-img"
+                                      />
+                                      <p className="coll-name">{nft.name}</p>
+                                    </div>
+                                  </Link>
+                                );
+                              })}
+                            </div>
+                          )}
                           <div className="btn-div d-flex">
-                            <Link to='/search-results'
-                              state= {{
-                                value: searchNft.searchByName
+                            <Link
+                              to="/search-results"
+                              state={{
+                                value: searchNft.searchByName,
                               }}
                             >
-                            <button className="show-more-btn">show more</button>
+                              <button className="show-more-btn">
+                                show more
+                              </button>
                             </Link>
                           </div>
-                          </div>   
-                          </div>            
-                      </>
-                    )}
-                  </>                  
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </>
               )}
             </div>
-            
+
             <div className="right_navbar d-flex RightNavBar order-1">
               {/* <div
             className="collapse navbar-collapse mobcollapse"
@@ -497,11 +589,11 @@ function Navbar() {
                   <li
                     className={
                       location.pathname.includes("/nfts") &&
-                        !location.pathname.includes("leader-board") &&
-                        !location.pathname.includes("resource") &&
-                        !location.pathname.includes("create-nft") &&
-                        !location.pathname.includes("help-center") &&
-                        !location.pathname.includes("suggestion")
+                      !location.pathname.includes("leader-board") &&
+                      !location.pathname.includes("resource") &&
+                      !location.pathname.includes("create-nft") &&
+                      !location.pathname.includes("help-center") &&
+                      !location.pathname.includes("suggestion")
                         ? "nav-items li_underline marketplace"
                         : "nav-items marketplace"
                     }
@@ -510,11 +602,11 @@ function Navbar() {
                     <Link
                       className={
                         location.pathname.includes("/nfts") &&
-                          !location.pathname.includes("leader-board") &&
-                          !location.pathname.includes("resource") &&
-                          !location.pathname.includes("create-nft") &&
-                          !location.pathname.includes("help-center") &&
-                          !location.pathname.includes("suggestion")
+                        !location.pathname.includes("leader-board") &&
+                        !location.pathname.includes("resource") &&
+                        !location.pathname.includes("create-nft") &&
+                        !location.pathname.includes("help-center") &&
+                        !location.pathname.includes("suggestion")
                           ? "nav-link navlink_active"
                           : "nav-link"
                       }
@@ -552,7 +644,7 @@ function Navbar() {
                     style={{ padding: "0" }}
                     className={
                       location.pathname.includes("help-center") ||
-                        location.pathname.includes("suggestion")
+                      location.pathname.includes("suggestion")
                         ? "nav-items dropdown li_underline resource nav-link navlink_active resource"
                         : "nav-items dropdown resource"
                     }
@@ -608,12 +700,7 @@ function Navbar() {
                     {/* <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}
                     > */}
-                    <button
-                      className="create-btn"
-                     
-                    >
-                      Create
-                    </button>
+                    <button className="create-btn">Create</button>
                     {/* </Link> */}
                   </li>
                   <li className="removeinmob"></li>
@@ -623,7 +710,9 @@ function Navbar() {
                   <li>
                     <img
                       onClick={handleNotiSideBar}
-                      className={!isOpenNoti ?  "notification-icon" :   "hover-icon"}
+                      className={
+                        !isOpenNoti ? "notification-icon" : "hover-icon"
+                      }
                       src={bellicon}
                       alt="notification"
                     ></img>
@@ -639,7 +728,7 @@ function Navbar() {
                       aria-expanded="false"
                     >
                       <img
-                       onClick={closeWalletAndNoti}
+                        onClick={closeWalletAndNoti}
                         className="btnnav_mob1 profileimg profile-icon"
                         src={profileImg}
                         alt="profile"
@@ -682,7 +771,7 @@ function Navbar() {
                         handleWalletClick();
                         walletHandler();
                       }}
-                      className={!isOpenWallet ?  "wallet-icon" :   "hover-icon"}
+                      className={!isOpenWallet ? "wallet-icon" : "hover-icon"}
                       src={wallet}
                       alt="wallet"
                       style={{
@@ -694,7 +783,10 @@ function Navbar() {
                   <button
                     type="button"
                     className="navbar_toggle ham_burger"
-                    onClick={() =>{handleHamburger();  closeWalletAndNoti();}}
+                    onClick={() => {
+                      handleHamburger();
+                      closeWalletAndNoti();
+                    }}
                   >
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
@@ -706,10 +798,20 @@ function Navbar() {
           </div>
         </nav>
 
-        <div className="hamburger" onClick={handleHamburger} style={{display:!humburger?"none":"block"}}>
-        <div  className={humburger ? "scroll_off" : <></>} style={{display:!humburger?"none":"block",background:"white"}}  >
-          {humburger ? <Menu handleHamburger={handleHamburger} /> : <></>}
-        </div>
+        <div
+          className="hamburger"
+          onClick={handleHamburger}
+          style={{ display: !humburger ? "none" : "block" }}
+        >
+          <div
+            className={humburger ? "scroll_off" : <></>}
+            style={{
+              display: !humburger ? "none" : "block",
+              background: "white",
+            }}
+          >
+            {humburger ? <Menu handleHamburger={handleHamburger} /> : <></>}
+          </div>
         </div>
       </div>
     </>

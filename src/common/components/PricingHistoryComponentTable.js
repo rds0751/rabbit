@@ -10,7 +10,10 @@ import TableHead from "@mui/material/TableHead";
 import Information from "../../assets/images/No-Info-Icon.svg";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import MultiSelect from "react-multiple-select-dropdown-lite";
+import "react-multiple-select-dropdown-lite/dist/index.css";
 import styled from "styled-components";
+
 import {
   getActivities,
   getPricingHistory,
@@ -121,25 +124,36 @@ export default function PricingHistoryComponentTable(props) {
   const [buy, setBuy] = useState(false);
   const [minted, setMinted] = useState(false);
   const [activities, setActivities] = useState("");
-  const [type, setType] = useState(defaultReq);
+  // const [type, setType] = useState(defaultReq);
+  const [type, setType] = useState([]);
 
   useEffect(() => {
-    const reqObj = queryString.stringify(type);
-    getActivities(reqObj, id).then((response) => setActivities(response));
+    // const reqObj = queryString.stringify(type);
+
+    getActivities(type, id).then((response) => setActivities(response));
   }, [type]);
 
   const handleChange = (e) => {
-    setType({ ...type, [e.target.name]: e.target.value });
-    if (e.target.value === "list") {
-      setEvent(!list);
-    } else if (e.target.value === "price") {
-      setPrice(!price);
-    } else if (e.target.value === "buy") {
-      setBuy(!buy);
-    } else if (e.target.value === "minted") {
-      setMinted(!minted);
-    }
+    setType((oldArray) => [...type, `${e?.target?.value}`]);
+    console.log("testing", type);
   };
+
+  // const handleChange = (e) => {
+  // console.log(e,"eee")
+
+  //   setType({ ...type, [e.target.name]: e.target.value });
+  //   console.log(type,2222)
+  //   if (e.target.value === "list") {
+  //     setEvent(!list);
+  //   } else if (e.target.value === "price") {
+  //     setPrice(!price);
+  //   } else if (e.target.value === "buy") {
+  //     setBuy(!buy);
+  //   } else if (e.target.value === "minted") {
+  //     setMinted(!minted);
+  //   }
+  //   console.log(type,1111)
+  // };
   // const handleChange = (e) => {
   //   if (e.target.value === "list") {
   //     setEvent(!list);
@@ -167,62 +181,37 @@ export default function PricingHistoryComponentTable(props) {
   useEffect(() => {
     getPricingHistory();
   }, []);
+
+  const [value, setvalue] = useState("");
+  // useEffect(() => {
+
+  // }, [type]);
+  const handleOnchange = (val) => {
+    // setvalue(val)
+    setType((type) => [`${val}`]);
+  };
+  console.log(activities, "val");
+
+  const options = [
+    { label: "List", value: "list" },
+    { label: "Buy", value: "buy" },
+    { label: "Minted", value: "minted" },
+    // { label:  'Option 4', value:  'option_4'  },
+  ];
+
+  let toArray = [];
+
   return (
     <MainContainer className="pricing-history">
       <Title>Activities</Title>
       <FilterContainer>
-        <Select
-          className="selectfixing4"
+        <MultiSelect
           name="type"
-          onChange={(e) => handleChange(e)}
-          placeholder="Filter"
-        >
-          <Option>Filter</Option>
-          <Option value="list">List</Option>
-          <Option value="price">Price</Option>
-          <Option value="buy">Buy</Option>
-          <Option value="minted">Minted</Option>
-        </Select>
-        {list ? (
-          <Filter>
-            <span style={{ marginRight: "10px" }}>List</span>
-            <Button onClick={() => closeFilter("list")}>
-              <i class="fa-solid fa-xmark"></i>
-            </Button>
-          </Filter>
-        ) : (
-          ""
-        )}
-        {price ? (
-          <Filter>
-            <span style={{ marginRight: "10px" }}>Price</span>
-            <Button onClick={() => closeFilter("price")}>
-              <i class="fa-solid fa-xmark"></i>
-            </Button>
-          </Filter>
-        ) : (
-          ""
-        )}
-        {buy ? (
-          <Filter>
-            <span style={{ marginRight: "10px" }}>Buy</span>
-            <Button onClick={() => closeFilter("buy")}>
-              <i class="fa-solid fa-xmark"></i>
-            </Button>
-          </Filter>
-        ) : (
-          ""
-        )}
-        {minted ? (
-          <Filter>
-            <span style={{ marginRight: "10px" }}>Minted</span>
-            <Button onClick={() => closeFilter("minted")}>
-              <i class="fa-solid fa-xmark"></i>
-            </Button>
-          </Filter>
-        ) : (
-          ""
-        )}
+          onChange={handleOnchange}
+          // onChange={() =>  handleOnchange();}}
+          placeholder="filter"
+          options={options}
+        />
       </FilterContainer>
       <TableDiv>
         {activities.length > 0 ? (
@@ -284,63 +273,72 @@ export default function PricingHistoryComponentTable(props) {
               </TableHead>
 
               <TableBody style={{ border: "1px solid greeen !important" }}>
-                {activities.map((row) => (
-                  <TableRow
-                    key={row.name}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell
-                      style={{
-                        textAlign: "left",
-                        borderBottom: "1px solid #C8C8C8",
-                      }}
-                      component="td"
-                      scope="row"
-                    >
-                      {row.type === "list" ? (
-                        <img className="table-icon" src={Sale}></img>
-                      ) : row.type == "minted" ? (
-                        <img className="table-icon" src={Mint}></img>
-                      ) : row.type == "transfer" ? (
-                        <img className="table-icon" src={Transfer}></img>
-                      ) : (
-                        ""
-                      )}
-                      {row.type}
+                {activities.map((row) => {
+                  {
 
-                      {console.log(row.type, "row.type")}
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        borderBottom: "1px solid #C8C8C8",
-                      }}
+                    for (let i = 0; i < activities?.length; i++) {
+                      toArray.push(activities[i].to);
+                    }
+                    console.log(toArray, "toArray");
+                  }
+                  return (
+                    <TableRow
+                      key={row.name}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
-                      {row.price}
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        borderBottom: "1px solid #C8C8C8",
-                      }}
-                    >
-                      {row.userName.substr(0, 6)}
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        borderBottom: "1px solid #C8C8C8",
-                      }}
-                    >
-                      {row.to === [] ? row.to : "-"}
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        borderBottom: "1px solid #C8C8C8",
-                        // textAlign: "center"
-                      }}
-                    >
-                      {moment(row.createdAt).format("DD MMM ")}
-                    </TableCell>
-                  </TableRow>
-                ))}
+                      <TableCell
+                        style={{
+                          textAlign: "left",
+                          borderBottom: "1px solid #C8C8C8",
+                        }}
+                        component="td"
+                        scope="row"
+                      >
+                        {row.type === "list" ? (
+                          <img className="table-icon" src={Sale}></img>
+                        ) : row.type == "minted" ? (
+                          <img className="table-icon" src={Mint}></img>
+                        ) : row.type == "transfer" ? (
+                          <img className="table-icon" src={Transfer}></img>
+                        ) : (
+                          ""
+                        )}
+                        {row.type}
+
+                        {console.log(row.type, "row.type")}
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          borderBottom: "1px solid #C8C8C8",
+                        }}
+                      >
+                        {row.price}
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          borderBottom: "1px solid #C8C8C8",
+                        }}
+                      >
+                        {row.userName.substr(0, 6)}
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          borderBottom: "1px solid #C8C8C8",
+                        }}
+                      >
+                        {toArray === [] ? "-" : toArray.map((to) => to.userName) }
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          borderBottom: "1px solid #C8C8C8",
+                          // textAlign: "center"
+                        }}
+                      >
+                        {moment(row.createdAt).format("DD MMM ")}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
               </TableBody>
             </TableCustom>
           </TableContainerCustom>
