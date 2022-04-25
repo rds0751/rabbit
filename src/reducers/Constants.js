@@ -1,7 +1,9 @@
 //Base URL
 export const BASE_URL =
   "http://whitelabel-nft-lb-dev-1838936337.us-east-1.elb.amazonaws.com:3004";
-export const BASE_URL2 =
+export const BASE_URL1 =
+  "http://whitelabel-nft-lb-dev-1838936337.us-east-1.elb.amazonaws.com:3001";
+  export const BASE_URL2 =
   "http://whitelabel-nft-lb-dev-1838936337.us-east-1.elb.amazonaws.com:3002";
 
 export const WEB_APP_USER_WALLET_ADDRESS = "WEB_APP_USER_WALLET_ADDRESS";
