@@ -37,6 +37,7 @@ function CreateNftCollections(props) {
   const [bannerCdn, setbannerCdn] = useState("");
   const [logoipfs, setlogoipfs] = useState("");
   const [bannerIpfs, setbannerIpfs] = useState("");
+  const [compressedUrl,setCompressedUrl]=useState("");
   const [isLogoSelected, setisLogoSelected] = useState(false);
   const [isBannerSelected, setisBannerSelected] = useState(false);
   const [clickedOn, setClickedOn] = useState("");
