@@ -166,7 +166,7 @@ function Home() {
                                     >
                                       <Card.Img
                                         variant="top"
-                                        src={nft?.cdnUrl}
+                                        src={nft?.compressedURL.length !== 0 ? nft?.compressedURL :(nft?.cdnUrl.length !==0 ?nft?.cdnUrl:nft?.ipfsUrl)}
                                         onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
                                       />
                                     </Link>
@@ -174,7 +174,7 @@ function Home() {
                                       <div className="d-flex align-items-start media">
                                         <div className="flex-shrink-0">
                                           <img
-                                            src={nft?.cdnUrl}
+                                            src={nft?.compressedURL.length !== 0 ? nft?.compressedURL :(nft?.cdnUrl.length !==0 ?nft?.cdnUrl:nft?.ipfsUrl)}
                                             alt="Image1"
                                             width="38px"
                                             height="38px"
@@ -264,7 +264,7 @@ function Home() {
                                     >
                                       <Card.Img
                                         variant="top"
-                                        src={nft?.cdnUrl}
+                                        src={nft?.compressedURL.length !== 0 ? nft?.compressedURL :(nft?.cdnUrl.length !==0 ?nft?.cdnUrl:nft?.ipfsUrl)}
                                         onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
                                       />
                                     </Link>
@@ -273,7 +273,7 @@ function Home() {
                                         <div className="flex-shrink-0 titleChar">
                                          
                                             <img
-                                              src={nft?.cdnUrl}
+                                              src={nft?.compressedURL.length !== 0 ? nft?.compressedURL :(nft?.cdnUrl.length !==0 ?nft?.cdnUrl:nft?.ipfsUrl)}
                                               alt="Image1"
                                               width="38px"
                                               height="38px"
