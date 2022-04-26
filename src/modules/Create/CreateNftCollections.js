@@ -13,6 +13,8 @@ import styled from "styled-components";
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import Image from "../../assets/images/img-format.png";
 import ethereum from "../../assets/images/ethereum.svg";
+import polygon from "../../assets/images/polygon.png";
+import binance from "../../assets/images/binance.png";
 import success from "../../assets/images/Check.svg";
 import { httpConstants } from "../../constants";
 import { BASE_URL2 } from "../../reducers/Constants";
@@ -24,6 +26,7 @@ import { updateCollectionTxStatus } from "../../services/webappMicroservice";
 import { getCategories } from "../../services/clientConfigMicroService";
 import Select from 'react-select';
 import $ from 'jquery';
+import { getTenantData } from "../../services/clientConfigMicroService";
 
 const Button = styled.button``;
 
@@ -339,10 +342,27 @@ function CreateNftCollections(props) {
     // { id: '...', images: [...], price: { ... } }
   
     // Blockchain option
-    const [selectedOption, setSelectedOption] = useState(null);
-    const blockchainOption = [
-      { value: 'ETH', label: <div><img src={ethereum} height="32px" /> Ethereum</div> },
-    ];
+  const [selectedOption, setSelectedOption] = useState(null);
+  const blockchainOption = [];
+  const [blockchains, setBlockChains] = useState([])
+  
+  for (let eachItem of blockchains) {
+    if (eachItem === "Ethereum") {
+      blockchainOption.push({ value: 'ETH', label: <div><img src={ethereum} height="32px" alt=""/> Ethereum</div> })
+    } else if (eachItem === "Polygon") {
+      blockchainOption.push({ value: 'MATIC', label: <div><img src={polygon} height="32px" alt=""/> Polygon</div> })
+    } else if (eachItem === "Binance") {
+      blockchainOption.push({ value: 'BNB', label: <div><img src={binance} height="32px" alt=""/> Binance</div> })
+    }
+ }
+ 
+  useEffect(() => {
+    async function fetchData() {
+      await getTenantData().then(response => setBlockChains(response.blockchains));
+    }
+    fetchData();
+  }, []);
+
 
     const enabled=name.current.length > 0 && description.current.length > 0 && categoryId.current.length >0 && nameError=="" && bannerCdn!="" && logoCdn!="" && DesError==""; 
   return (
