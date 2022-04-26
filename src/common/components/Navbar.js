@@ -58,11 +58,9 @@ function Navbar() {
   const [nfts, setNfts] = useState([]);
   const [collections, setCollections] = useState([]);
   const [tenantData, setTenantData] = useState("");
-  console.log("tenant1", tenantData)
   useEffect(() => {
     async function fetchData() {
       getTenantData().then(response => setTenantData(response));
-      console.log("tenant", tenantData);
     }
     fetchData();
   }, []);
@@ -329,10 +327,10 @@ console.log(Count,"count")
               >
                 <img
                   src={tenantData?.companyLogo}
-                  className="store-logo"
+                  style={{ width: "100px" }}
                   alt=""
                 />
-                <span className="store-name">{tenantData?.storeName}</span>
+                {/* <span className="store-name">{tenantData?.storeName}</span> */}
               </Link>
               <div>
                 <div className="search-div" style={{ display: "flex" }}>

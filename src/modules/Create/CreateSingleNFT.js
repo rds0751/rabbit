@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Image from "../../assets/images/img-format.svg";
 import success from "../../assets/images/Check.svg";
 import ethereum from "../../assets/images/ethereum.svg";
+import polygon from "../../assets/images/polygon.png";
+import binance from "../../assets/images/binance.png";
 // import { FaCloudUploadAlt } from "react-icons/fa";
 import styled from "styled-components";
 import { connect } from "react-redux";
@@ -30,6 +32,7 @@ import Select from 'react-select';
 import { PrintDisabled } from "@mui/icons-material";
 import $ from 'jquery';
 import { errors } from "ethers";
+import { getTenantData } from "../../services/clientConfigMicroService";
 
 // import "../../assets/styles/Leader.css"
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
@@ -74,6 +77,26 @@ function CreateSingleNFT(props) {
 
   if (loggedInUser) { localStorage.setItem('userId', loggedInUser._id); }
   let userId = (loggedInUser) ? loggedInUser._id : localStorage.userId;
+  const [selectedOption, setSelectedOption] = useState(null);
+  const blockchainOption = [];
+  const [blockchains, setBlockChains] = useState([])
+  
+  for (let eachItem of blockchains) {
+    if (eachItem === "Ethereum") {
+      blockchainOption.push({ value: 'ETH', label: <div><img src={ethereum} height="32px" alt=""/> Ethereum</div> })
+    } else if (eachItem === "Polygon") {
+      blockchainOption.push({ value: 'MATIC', label: <div><img src={polygon} height="32px" alt=""/> Polygon</div> })
+    } else if (eachItem === "Binance") {
+      blockchainOption.push({ value: 'BNB', label: <div><img src={binance} height="32px" alt=""/> Binance</div> })
+    }
+ }
+ 
+  useEffect(() => {
+    async function fetchData() {
+      await getTenantData().then(response => setBlockChains(response.blockchains));
+    }
+    fetchData();
+  }, []);
 
   // ----------------------------------------------states end-------------
   useEffect(async () => {
@@ -167,7 +190,6 @@ const [compressedUrl,setCompressedUrl]=useState("");
       // setLogoPresent(true);
     },
   });
-  // });
   const onDrop = useCallback((acceptedFiles) => {
     console.log(acceptedFiles);
     console.log(acceptedFiles, "<<<< accepted files");
@@ -183,30 +205,6 @@ const [compressedUrl,setCompressedUrl]=useState("");
     console.log(event, "<<<<file uploaded");
     setUploadFileObj(event);
   };
-  
-  // const checkChanges = () => {
-    
-    
-  //   console.log(
-  //     name.current,
-  //     price.current,
-  //     description.current,
-  //     selectFile,
-  //     "<<<<formdata"
-  //   );
-  //   if (
-  //     name.current != ""  &&
-  //     price.current != "" &&
-  //     description.current !="" &&
-  //     selectFile !=""
-     
-  //   ) {
-  //     setcheckDisable(false);
-  //   } 
-  //   else{
-  //     setcheckDisable(true);
-  //   }
-  // };
 
   useEffect(()=>{
     $(document).ready(function(){
@@ -306,16 +304,8 @@ const [compressedUrl,setCompressedUrl]=useState("");
     };
     addIPFS();
   };
-  console.log("00000000000000000000000000000000", props?.isNftCreated)
-  console.log(selectFile, "<<<s");
-
-  // File uploading loader
-
-  // Blockchain option
-  const [selectedOption, setSelectedOption] = useState(null);
-  const blockchainOption = [
-    { value: 'ETH', label: <div><img src={ethereum} height="32px" alt=""/> Ethereum</div> },
-  ];
+  
+  
 const enabled=name.current.length > 0 && price.current.length>0 && description.current.length >0 && selectFile!="" && nameError=="" && error=="";
 
 

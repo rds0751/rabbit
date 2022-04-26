@@ -109,9 +109,9 @@
 }
 
 .store-logo{
-  width: 42px;
-  height:42px;
-  border-radius: 10px;
+  width: 100%;
+  /* height:42px; */
+  /* border-radius: 10px; */
 }
 .store-name{
   color:black;
