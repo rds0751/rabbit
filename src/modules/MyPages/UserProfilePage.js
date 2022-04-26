@@ -3,8 +3,6 @@ import React, { Component, useEffect, useState } from "react";
 // import { AbstractApi } from "../../constants/LeaderBoardApi";
 import copy from "../../assets/images/copy.svg";
 import globe from "../../assets/images/web.svg";
-import pencil from "../../assets/images/pencil.png";
-import randomimage from "../../assets/images/1.jpg";
 import "../../assets/styles/Leader.css";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -33,6 +31,12 @@ import NonftText from "../../common/components/NonftText";
 import { updateBannerByUserId } from "../../services/UserMicroService";
 import SplitWalletAdd from "../../common/components/SplitWalletAdd";
 import NoItem from "../../assets/images/Noitems.svg"
+import coverImage from "../../assets/images/coverImage.svg";
+import profileImage from "../../assets/images/ProfileReplace.svg";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import Snackbar from '@mui/material/Snackbar';
+import styled from "styled-components";
+import { ShimmerCircularImage, ShimmerThumbnail } from "react-shimmer-effects";
 function UserProfilePage() {
   let { user } = useSelector((state) => state);
   let { loggedInUser } = user;
@@ -74,6 +78,33 @@ function UserProfilePage() {
   
 
   const [typeofProfilePost, setTypeofProfilePost] = useState("on-sale");
+
+  const CustomSnack = styled(Snackbar)`
+   @media (min-width: 969px){
+    position: absolute !important;
+      top: 430px !important;
+      left: 58% !important;
+   }
+    @media only screen and (min-width:770px) and  (max-width:968px){
+      position: absolute !important;
+      top: 454px !important;
+      left: auto !important;
+      right: 226px !important;
+  }
+  @media only screen and (min-width:521px) and  (max-width:769px){
+    position: absolute !important;
+    top: 423px !important;
+    left: auto !important;
+    right: 140px !important;
+  
+  }
+  @media only screen and (min-width:0px) and  (max-width:520px){
+    position: absolute !important;
+    top: 388px !important;
+      left: auto !important;
+      right: 46px !important;
+  }
+  `
 
   useEffect(() => {
 
@@ -219,8 +250,28 @@ const likedNftModule=()=>{
       else {
         setTypeofProfilePost("liked");
       }
-  
 }
+const [state, setState] = React.useState({
+  open: false,
+  vertical: 'top',
+  horizontal: 'center',
+});
+const { vertical, horizontal, open } = state;
+const handleClick = (newState) => () => {
+  setState({ open: true, ...newState });
+};
+const handleClose = () => {
+  setState({ ...state, open: false });
+};
+let [imageLoading,setImageLoading]=useState({src:userData?.photo,loaded:false })
+let [bannerImage,setBannerLoading]=useState({src:userData?.coverPhoto,loaded:false })
+const onImageLoad=()=>{
+  setImageLoading({...imageLoading,loaded:true});
+}
+const onBannerLoad=()=>{
+  setBannerLoading({...bannerImage,loaded:true});
+}
+
   return (
     <>
     {(userData.length!=0)?
@@ -231,11 +282,18 @@ const likedNftModule=()=>{
             src={
               userData?.coverPhoto != ""
                 ? userData?.coverPhoto
-                : defaultCoverpic
+                : coverImage
             }
             alt=""
+            onLoad={onBannerLoad}
             onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
           />
+          {!imageLoading.loaded && (
+            <div className="bannerLoader"> 
+              <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
+              </div>
+          )}
+          
           {/* <input
             type="file"
             className="pencilicon"
@@ -248,12 +306,20 @@ const likedNftModule=()=>{
           </Link> */}
         </div>
         <div className="profileavatar  absolute">
+        <div className="profileImg-Container-userProfile">
           <img
-            src={userData?.photo != "" ? userData?.photo : defaultPic}
+            src={userData?.photo != "" ? userData?.photo : profileImage}
             alt=""
             className="user-img"
+            onLoad={onImageLoad} 
             onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
           />
+          {!imageLoading.loaded && (
+            <div className="profileImageLoader"> 
+               <ShimmerCircularImage className="thumbnailCirular" fitOnFrame={true} rounded />
+              </div>
+          )}
+          </div>
           {/* <h2>{ethereum && ethereum.selectedAddress}</h2> */}
           {/* <h2>{window.ethereum && defaultAccount}</h2> */}
           {/* {defaultAccount} */}
@@ -264,12 +330,27 @@ const likedNftModule=()=>{
 
               <SplitWalletAdd address={userData?.wallet_address} />
             </div>
-            <img              
-              src={copy}
-              alt="copy"
-              onClick={handleCopyToClipboard}
-              className="copy-img"
-            />
+            <CopyToClipboard text={walletAddress?.address}>
+            <button  className="copy-button"        onClick={handleClick({
+             vertical: 'top',
+             horizontal: 'center',
+            })}>
+              <img
+                src={copy}
+                className="copyButton"
+                alt=""
+                
+              /></button>
+            </CopyToClipboard>
+            <CustomSnack
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        onClose={handleClose}
+        message="Copied"
+        key={vertical + horizontal}
+        autoHideDuration={2000}
+        className="custom-snack"
+      />
           </div>
 
           <p className="profile-description">
