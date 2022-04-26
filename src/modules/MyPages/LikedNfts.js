@@ -5,11 +5,11 @@ import likes from "../../assets/images/likes.svg";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import "../../assets/styles/common.css";
-import Spinner from "../../common/components/Spinner";
+import { ShimmerThumbnail } from "react-shimmer-effects";
 import { addLikeNft } from "../../services/webappMicroservice";
 function LikedNfts({ nft }) {
   const { user } = useSelector((state) => state);
-  const { _id, cdnUrl, name, salesInfo } = nft;
+  const { _id, cdnUrl, name, salesInfo ,compresedURL} = nft;
   const [handleLike, setHandleLike] = useState(true);
   const route = "/nft-information/" + _id;
   const likeNft = (id) => {
@@ -65,7 +65,7 @@ function LikedNfts({ nft }) {
           <div className="image-container">
             <img
               className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
-              src={cdnUrl}
+              src={compresedURL}
               alt="nft-img"
               onLoad={onImageLoad}
               onMouseDown={(e) => e.preventDefault()}
@@ -74,7 +74,7 @@ function LikedNfts({ nft }) {
 
             {!imageLoading.loaded && (
               <div className="loaderNft ">
-                <Spinner />
+                <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />;
               </div>
             )}
           </div>

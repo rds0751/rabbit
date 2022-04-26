@@ -13,6 +13,8 @@ import styled from "styled-components";
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import Image from "../../assets/images/img-format.png";
 import ethereum from "../../assets/images/ethereum.svg";
+import polygon from "../../assets/images/polygon.png";
+import binance from "../../assets/images/binance.png";
 import success from "../../assets/images/Check.svg";
 import { httpConstants } from "../../constants";
 import { BASE_URL2 } from "../../reducers/Constants";
@@ -24,6 +26,7 @@ import { updateCollectionTxStatus } from "../../services/webappMicroservice";
 import { getCategories } from "../../services/clientConfigMicroService";
 import Select from 'react-select';
 import $ from 'jquery';
+import { getTenantData } from "../../services/clientConfigMicroService";
 
 const Button = styled.button``;
 
@@ -37,6 +40,7 @@ function CreateNftCollections(props) {
   const [bannerCdn, setbannerCdn] = useState("");
   const [logoipfs, setlogoipfs] = useState("");
   const [bannerIpfs, setbannerIpfs] = useState("");
+  const [compressedUrl,setCompressedUrl]=useState("");
   const [isLogoSelected, setisLogoSelected] = useState(false);
   const [isBannerSelected, setisBannerSelected] = useState(false);
   const [clickedOn, setClickedOn] = useState("");
@@ -338,10 +342,27 @@ function CreateNftCollections(props) {
     // { id: '...', images: [...], price: { ... } }
   
     // Blockchain option
-    const [selectedOption, setSelectedOption] = useState(null);
-    const blockchainOption = [
-      { value: 'ETH', label: <div><img src={ethereum} height="32px" /> Ethereum</div> },
-    ];
+  const [selectedOption, setSelectedOption] = useState(null);
+  const blockchainOption = [];
+  const [blockchains, setBlockChains] = useState([])
+  
+  for (let eachItem of blockchains) {
+    if (eachItem === "Ethereum") {
+      blockchainOption.push({ value: 'ETH', label: <div><img src={ethereum} height="32px" alt=""/> Ethereum</div> })
+    } else if (eachItem === "Polygon") {
+      blockchainOption.push({ value: 'MATIC', label: <div><img src={polygon} height="32px" alt=""/> Polygon</div> })
+    } else if (eachItem === "Binance") {
+      blockchainOption.push({ value: 'BNB', label: <div><img src={binance} height="32px" alt=""/> Binance</div> })
+    }
+ }
+ 
+  useEffect(() => {
+    async function fetchData() {
+      await getTenantData().then(response => setBlockChains(response.blockchains));
+    }
+    fetchData();
+  }, []);
+
 
     const enabled=name.current.length > 0 && description.current.length > 0 && categoryId.current.length >0 && nameError=="" && bannerCdn!="" && logoCdn!="" && DesError==""; 
   return (
@@ -457,22 +478,24 @@ function CreateNftCollections(props) {
         <div>
           <form onSubmit={(e) => handleSubmit(e)}>
             <div>
-              <p className="fs-16 fw-b c-b pt-4">Collection Name*<span style={{color:"Red" ,fontSize:"13px"}}>{nameError}</span></p>
+              <p className="fs-16 fw-b c-b pt-4">Collection Name*</p>
+              <div style={{color:"Red" ,fontSize:"13px"}}>{nameError}</div>
               <input
                 type="name"
                 name="name"
                 maxLength="400"
                 className="input-box-1"
+                style={{border:nameError!=""?"1px solid red":"1px solid #C8C8C8"}}
                 placeholder="Write your collection name"
                 onChange={(e) => {
                   var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
                   if(format.test(e.target.value)){
-                    SetNameError("(No Special Character Allowed)");
+                    SetNameError("( No Special Character Allowed )");
                   }
                   else if(e.target.value.length == 0){
-                    SetNameError("(Name is required)")
+                    SetNameError("( Name is required )")
                   } else if(+e.target.value.length < 3){
-                    SetNameError("(Name should be atleast 3 character)")
+                    SetNameError("( Name should be atleast 3 character )")
                   }
                   else {
                   SetNameError("");
@@ -484,13 +507,15 @@ function CreateNftCollections(props) {
               />
             </div>
             <div>
-              <p className="fs-16 fw-b c-b pt-3">Description*<span style={{color:"Red" ,fontSize:"13px"}}>{DesError}</span></p>
+              <p className="fs-16 fw-b c-b pt-3">Description*</p>
+              <div style={{color:"Red" ,fontSize:"13px"}}>{DesError}</div>
               <textarea
                 rows="4"
                 id="test"
                 name="Description"
                 placeholder="Write description"
                 className="input-box-1 mb-0"
+                style={{border:DesError!=""?"1px solid red":"1px solid #C8C8C8"}}
                 value={description.current}
                 onChange={(e) => {
                   if(e.target.value.length==0){

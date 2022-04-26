@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getNfts, getCollections } from "../../services/webappMicroservice";
+import { getTenantData } from "../../services/clientConfigMicroService";
 import { NavDropdown } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -53,8 +54,18 @@ function Navbar() {
     searchByName: "",
     limit: 4,
   });
+ 
   const [nfts, setNfts] = useState([]);
   const [collections, setCollections] = useState([]);
+  const [tenantData, setTenantData] = useState("");
+  useEffect(() => {
+    async function fetchData() {
+      getTenantData().then(response => setTenantData(response));
+    }
+    fetchData();
+  }, []);
+  
+  
   useEffect(() => {
     if (loggedInUser == null) {
       connectMetamask();
@@ -311,12 +322,15 @@ console.log(Count,"count")
               <Link
                 className="navbrand"
                 to="/"
-                style={{ marginRight: "20px" }}
-                onClick={() => {
-                  closeWalletAndNoti();
-                }}
+                style={{ marginRight: "20px", textDecoration: "none"}}
+                onClick={() => {closeWalletAndNoti();}}
               >
-                <img src={Anafto} style={{ width: "100px" }} alt="" />
+                <img
+                  src={tenantData?.companyLogo}
+                  style={{ width: "100px" }}
+                  alt=""
+                />
+                {/* <span className="store-name">{tenantData?.storeName}</span> */}
               </Link>
               <div>
                 <div className="search-div" style={{ display: "flex" }}>

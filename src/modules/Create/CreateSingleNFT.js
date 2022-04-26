@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Image from "../../assets/images/img-format.svg";
 import success from "../../assets/images/Check.svg";
 import ethereum from "../../assets/images/ethereum.svg";
+import polygon from "../../assets/images/polygon.png";
+import binance from "../../assets/images/binance.png";
 // import { FaCloudUploadAlt } from "react-icons/fa";
 import styled from "styled-components";
 import { connect } from "react-redux";
@@ -30,6 +32,7 @@ import Select from 'react-select';
 import { PrintDisabled } from "@mui/icons-material";
 import $ from 'jquery';
 import { errors } from "ethers";
+import { getTenantData } from "../../services/clientConfigMicroService";
 
 // import "../../assets/styles/Leader.css"
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
@@ -44,6 +47,7 @@ function CreateSingleNFT(props) {
   const [ipfsUrl, setIpfsUrl] = useState("");
   const [myProfileUrl, setmyProfileUrl] = useState("");
   const [DesError,SetDesError]=useState("");
+  const [royalityError,setRoyalityError]=useState("");
 
   const [cdnUrl, setcdnUrl] = useState("");
   const [uploadFileObj, setUploadFileObj] = useState("");
@@ -73,6 +77,26 @@ function CreateSingleNFT(props) {
 
   if (loggedInUser) { localStorage.setItem('userId', loggedInUser._id); }
   let userId = (loggedInUser) ? loggedInUser._id : localStorage.userId;
+  const [selectedOption, setSelectedOption] = useState(null);
+  const blockchainOption = [];
+  const [blockchains, setBlockChains] = useState([])
+  
+  for (let eachItem of blockchains) {
+    if (eachItem === "Ethereum") {
+      blockchainOption.push({ value: 'ETH', label: <div><img src={ethereum} height="32px" alt=""/> Ethereum</div> })
+    } else if (eachItem === "Polygon") {
+      blockchainOption.push({ value: 'MATIC', label: <div><img src={polygon} height="32px" alt=""/> Polygon</div> })
+    } else if (eachItem === "Binance") {
+      blockchainOption.push({ value: 'BNB', label: <div><img src={binance} height="32px" alt=""/> Binance</div> })
+    }
+ }
+ 
+  useEffect(() => {
+    async function fetchData() {
+      await getTenantData().then(response => setBlockChains(response.blockchains));
+    }
+    fetchData();
+  }, []);
 
   // ----------------------------------------------states end-------------
   useEffect(async () => {
@@ -89,7 +113,7 @@ function CreateSingleNFT(props) {
     const collections = await getCollectionBySingleUser(userId);
     setCollectionData(collections);
   }, []);
-
+const [compressedUrl,setCompressedUrl]=useState("");
   // --------------------------------React Drop Zone---------------------
   const { getRootProps, getInputProps } = useDropzone({
     accept: ".png,.jpg,.jpeg,.gif",
@@ -145,6 +169,7 @@ function CreateSingleNFT(props) {
 
           setIpfsUrl(ipfsRes.ipfsUrl);
           setcdnUrl(ipfsRes.cdnUrl);
+          setCompressedUrl(ipfsRes.compressedURL);
           setisLoader(false);
           setIsFileSelected(true);
           // if (
@@ -165,7 +190,6 @@ function CreateSingleNFT(props) {
       // setLogoPresent(true);
     },
   });
-  // });
   const onDrop = useCallback((acceptedFiles) => {
     console.log(acceptedFiles);
     console.log(acceptedFiles, "<<<< accepted files");
@@ -181,30 +205,6 @@ function CreateSingleNFT(props) {
     console.log(event, "<<<<file uploaded");
     setUploadFileObj(event);
   };
-  
-  // const checkChanges = () => {
-    
-    
-  //   console.log(
-  //     name.current,
-  //     price.current,
-  //     description.current,
-  //     selectFile,
-  //     "<<<<formdata"
-  //   );
-  //   if (
-  //     name.current != ""  &&
-  //     price.current != "" &&
-  //     description.current !="" &&
-  //     selectFile !=""
-     
-  //   ) {
-  //     setcheckDisable(false);
-  //   } 
-  //   else{
-  //     setcheckDisable(true);
-  //   }
-  // };
 
   useEffect(()=>{
     $(document).ready(function(){
@@ -289,6 +289,7 @@ function CreateSingleNFT(props) {
         // nftFile: selectFile,
         ipfsUrl: ipfsUrl,
         cdnUrl: cdnUrl,
+        compressedURL:compressedUrl,
         nftName: name.current,
         price: price.current,
         description: description.current,
@@ -303,17 +304,11 @@ function CreateSingleNFT(props) {
     };
     addIPFS();
   };
-  console.log("00000000000000000000000000000000", props?.isNftCreated)
-  console.log(selectFile, "<<<s");
-
-  // File uploading loader
-
-  // Blockchain option
-  const [selectedOption, setSelectedOption] = useState(null);
-  const blockchainOption = [
-    { value: 'ETH', label: <div><img src={ethereum} height="32px" alt=""/> Ethereum</div> },
-  ];
+  
+  
 const enabled=name.current.length > 0 && price.current.length>0 && description.current.length >0 && selectFile!="" && nameError=="" && error=="";
+
+
 
   return (
     <>
@@ -692,14 +687,26 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
                   Royalty
                 </label>
                 <p className="headingRoyality">Write down the percentage you want from this sale of this NFT</p>
-                <div style={{color:"red",fontSize:"15px"}}>{nameError}</div>
+                <div style={{color:"red",fontSize:"15px"}}>{royalityError}</div> 
                 <input
                   type="number"
+                  id="royality"
                   className="form-control-1"
+                  onWheel={(e)=>e.target.blur()}
                   placeholder="Enter Royalty"
                   autoComplete="off"
                   maxLength="100"
+                  style={{
+                    border:royalityError!=""?"1px solid red":"1px solid #C8C8C8"
+                  }}
                   title=" "
+                  onChange={(e)=>{
+                    e.target.value = e.target.value.slice(0, 2);
+                    if(+e.target.value > 50)
+                    setRoyalityError("( Royalty can not be more than 50% )")
+                    else
+                    setRoyalityError("")
+                  }}
                 />
                
               </div>

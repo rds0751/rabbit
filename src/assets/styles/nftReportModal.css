@@ -125,6 +125,9 @@ margin-right: 14px;
   color: #191919;
   margin: auto 0;
 }
+.closeIcon{
+  cursor: pointer;
+}
 .offerHeading{
   display: flex;
   justify-content: space-between;
@@ -141,26 +144,40 @@ opacity: 1;
   border: 1px solid #C8C8C8;
   border-radius: 6px;
   height: 42px;
+  display: flex;
+  justify-content: left;
+  
 }
 .symbolText{
-  width: 52px; 
-  padding-left: 17px;
-  align-items: center;
-  text-align: center;
-  white-space: nowrap;
-  font-size: 16px;
-  line-height: 25px;
-  font-weight: normal;
-  font-size: medium;
-  font-style: normal;
+padding: 1.9% 3.61% 3.62% 1.8%;
+display: flex;
+cursor: default;
+}
+.eth-value{
+letter-spacing: 0px;
+line-height: 25px;
+font-weight: normal;
+font-style: normal;
+font-family: Poppins;
+font-size: 16px;
+width: auto;
+height: auto;
+color: #191919;
 }
 .price-input-box{
-    padding: 0.475rem 0.75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    border: none;
+  border: none;
+  display: inline-block;
+  width: 81%;
+  padding-left:17.39px;
+}
+.input-group-price input::-webkit-input-placeholder {
+  /* WebKit browsers */
+  text-align: left;
+  font: normal normal medium 16px/25px Poppins;
+  letter-spacing: 0px;
+  color: #c3c3c3;
+  opacity: 1;
+  
 }
 .heading-second-row{
   text-align: left;
@@ -190,8 +207,10 @@ opacity: 1;
   flex-direction: row-reverse;
 }
 input[type="time"]::-webkit-calendar-picker-indicator {
-  color:#828282;;
+  color:#828282;
+  cursor: pointer;
 }
+
 .offer-button{
   width: 100%;
   background-color: #366EEF;

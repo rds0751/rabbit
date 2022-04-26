@@ -96,7 +96,7 @@ function MyItems() {
 
             {ownedNft.length > 1 ?(
               ownedNft.map((curElem) => {
-                const { cdnUrl, name, _id,salesInfo,likes} =
+                const { cdnUrl, name, _id,salesInfo,likes,compressedURL} =
                   curElem;
                 const route = "/nft-information/" + _id;
                 return (
@@ -106,7 +106,7 @@ function MyItems() {
                       <Link to={route} style={{ textDecoration: "none" }}>
                         <img
                           className="nftTileEachImage img-fluid border-radius card_imgmob"
-                          src={cdnUrl}
+                          src={compressedURL}
                           alt="nft-img"
                           style={{ height: "187px", borderTopLeftRadius: '13px', borderTopRightRadius: '13px' }}
                         />
