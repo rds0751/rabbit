@@ -305,7 +305,7 @@ function MyProfile() {
             onLoad={onBannerLoad}
             onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
           />
-            {!imageLoading.loaded && (
+            {!bannerImage.loaded && (
             <div className="bannerLoader"> 
               <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
               </div>
