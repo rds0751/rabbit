@@ -4,6 +4,7 @@ import "../../assets/styles/Leader.css";
 import Information from "../../assets/images/No-Info-Icon.svg";
 import { pricingHistoryGraphOfNft } from "../../services/sellAndPurchaseMicroService";
 import moment from "moment";
+import { data } from "jquery";
 const queryString = require("query-string");
 export default function PricingHistoryComponent(props) {
   const [nftPricingHistory, setNftPricingHistory] = useState([]);
@@ -28,7 +29,7 @@ export default function PricingHistoryComponent(props) {
   }, [reqObj]);
 
   let prices = nftPricingHistory.map((each) => each.totalVolume);
-  // let prices = [0.001, 0.9];
+  // let prices = [10, 100];
   let dates = nftPricingHistory.map((each) => each?.addedOn);
   //   let dates = nftPricingHistory.map((each) =>
   //     moment(new Date(each?.addedOn)).format("D MMM YY")
@@ -91,6 +92,12 @@ export default function PricingHistoryComponent(props) {
           colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
           opacity: 0.5,
         },
+      },
+      yaxis: {
+        
+       max: prices[0] + 0.007 ,
+      
+        
       },
       xaxis: {
         categories: dates,
