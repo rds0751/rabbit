@@ -22,6 +22,7 @@ import moment from "moment";
 import { NoBackpackSharp } from "@mui/icons-material";
 import { Divider } from "@mui/material";
 import "../../assets/styles/Leader.css";
+import { Tooltip } from "@material-ui/core";
 
 const MainContainer = styled.div`
   display: flex;
@@ -274,13 +275,6 @@ export default function PricingHistoryComponentTable(props) {
 
               <TableBody style={{ border: "1px solid greeen !important" }}>
                 {activities.map((row) => {
-                  {
-
-                    for (let i = 0; i < activities?.length; i++) {
-                      toArray.push(activities[i].to);
-                    }
-                    console.log(toArray, "toArray");
-                  }
                   return (
                     <TableRow
                       key={row.name}
@@ -298,7 +292,7 @@ export default function PricingHistoryComponentTable(props) {
                           <img className="table-icon" src={Sale}></img>
                         ) : row.type == "minted" ? (
                           <img className="table-icon" src={Mint}></img>
-                        ) : row.type == "transfer" ? (
+                        ) : row.type == "transfer" || "buy" ? (
                           <img className="table-icon" src={Transfer}></img>
                         ) : (
                           ""
@@ -314,27 +308,46 @@ export default function PricingHistoryComponentTable(props) {
                       >
                         {row.price}
                       </TableCell>
-                      <TableCell
-                        style={{
-                          borderBottom: "1px solid #C8C8C8",
-                        }}
+                      <Tooltip
+                        title={
+               row.walletAddress
+                        }
                       >
-                        {row.userName.substr(0, 6)}
-                      </TableCell>
-                      <TableCell
-                        style={{
-                          borderBottom: "1px solid #C8C8C8",
-                        }}
+                        <TableCell
+                          style={{
+                            borderBottom: "1px solid #C8C8C8",
+                          }}
+                        >
+                          {row.userName
+                            ? row.userName.substr(0, 6)
+                            : row.walletAddress.substr(0, 9)}
+                        </TableCell>
+                      </Tooltip>
+                      <Tooltip
+                        title={
+                          row?.to[0]?.wallet_address ? row?.to[0]?.wallet_address : "--"
+                        }
                       >
-                        {toArray === [] ? "-" : toArray.map((to) => to.userName) }
-                      </TableCell>
+                        <TableCell
+                          style={{
+                            borderBottom: "1px solid #C8C8C8",
+                          }}
+                        >
+                          {console.log(row, "username")}
+                          {row?.to.length > 0
+                            ? row?.to[0]?.userName
+                              ? row?.to[0]?.userName.substr(0, 7)
+                              : row?.to[0]?.wallet_address.substr(0, 9)
+                            : "---"}
+                        </TableCell>
+                      </Tooltip>
                       <TableCell
                         style={{
                           borderBottom: "1px solid #C8C8C8",
                           // textAlign: "center"
                         }}
                       >
-                        {moment(row.createdAt).format("DD MMM ")}
+                        {moment(row.createdAt).format("DD MMM YYYY")}
                       </TableCell>
                     </TableRow>
                   );
