@@ -475,3 +475,8 @@ color: #000000;
   border: 4px solid #fff;
   border-radius: 50%;
 }
+.thumbnailCirular{
+  width: 189px !important;
+  height: 177px !important;
+  margin-bottom: 0px !important;
+}

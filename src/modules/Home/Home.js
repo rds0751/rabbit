@@ -15,29 +15,20 @@ import Activity from "../../assets/images/Activity.svg";
 import Easy from "../../assets/images/Easy.svg";
 import Offers from "../../assets/images/Offers.svg";
 import Stats from "../../assets/images/Stats.svg";
-import Image1 from "../../assets/images/Image1.png";
-import Image2 from "../../assets/images/Image2.png";
-import Image3 from "../../assets/images/Image3.png";
 import { RedirectTo } from "../../reducers/Action";
 // import { Link, useLocation } from "react-router-dom";
 // import Card from '@mui/material/Card';
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 // import Button from '@mui/material/Button'
-
+import { ShimmerThumbnail } from "react-shimmer-effects";
 import {
   getNfts,
   addLikeNft,
   getNFtsData,
 } from "../../services/webappMicroservice";
-import Image4 from "../../assets/images/Image4.png";
 import { toast } from "react-toastify";
 import AwesomeSlider from "react-awesome-slider";
 import "react-awesome-slider/dist/styles.css";
-
 function Home() {
  
   const { user, sideBar } = useSelector((state) => state);
@@ -103,6 +94,10 @@ function Home() {
       navigate("/create-nft");
     }
   };
+  let [imageLoading,setImageLoading]=useState({src:nfts?.compressedURL,loaded:false })
+  const onImageLoad=()=>{
+   setImageLoading({...imageLoading,loaded:true});
+  }
 
   return (
     <>
@@ -164,18 +159,25 @@ function Home() {
                                       to={"/nft-information/" + nft?._id}
                                       style={{ textDecoration: "none" }}
                                     >
+                                      <div className="homePageContainer">
                                       <Card.Img
                                         variant="top"
-                                        src={nft?.compressedURL.length !== 0 ? nft?.compressedURL :(nft?.cdnUrl.length !==0 ?nft?.cdnUrl:nft?.ipfsUrl)}
+                                        src={nft.compressedURL}
+                                        onLoad={onImageLoad} 
                                         onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
                                       />
+                                      {!imageLoading.loaded && (
+                                        <div className="homeNftShimmer">
+                                        <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
+                                         </div>
+                                     )}
+                                     </div>
                                     </Link>
                                     <Card.Body>
                                       <div className="d-flex align-items-start media">
                                         <div className="flex-shrink-0">
                                           <img
-                                            src={nft?.compressedURL.length !== 0 ? nft?.compressedURL :(nft?.cdnUrl.length !==0 ?nft?.cdnUrl:nft?.ipfsUrl)}
-                                            alt="Image1"
+                                            src={nft?.compressedURL}
                                             width="38px"
                                             height="38px"
                                             className="profile-img"
@@ -262,19 +264,27 @@ function Home() {
                                       to={"/nft-information/" + nft?._id}
                                       style={{ textDecoration: "none" }}
                                     >
+                                   
                                       <Card.Img
                                         variant="top"
-                                        src={nft?.compressedURL.length !== 0 ? nft?.compressedURL :(nft?.cdnUrl.length !==0 ?nft?.cdnUrl:nft?.ipfsUrl)}
+                                        src={nft?.compressedURL}
+                                        onLoad={onImageLoad} 
                                         onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
                                       />
+                                        <div className="homePageContainer">
+                                      {!imageLoading.loaded && (
+                                        <div className="homeNftShimmer">
+                                        <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
+                                         </div>
+                                     )}
+                                     </div>
                                     </Link>
                                     <Card.Body>
                                       <div className="d-flex align-items-start media">
                                         <div className="flex-shrink-0 titleChar">
                                          
                                             <img
-                                              src={nft?.compressedURL.length !== 0 ? nft?.compressedURL :(nft?.cdnUrl.length !==0 ?nft?.cdnUrl:nft?.ipfsUrl)}
-                                              alt="Image1"
+                                              src={nft?.compressedURL}
                                               width="38px"
                                               height="38px"
                                               className="profile-img"
