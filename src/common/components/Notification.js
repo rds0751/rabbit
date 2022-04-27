@@ -80,7 +80,7 @@ const handleNotification = (_id) =>{
   getNotificationCountById(_id).then((response) =>
       setCount(response)
     );
-    console.log(_id,"_id")
+
 }
   return (
     <div style={{ display: isOpenNoti ? null : "none" }} className="main-cont">
