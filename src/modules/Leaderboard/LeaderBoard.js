@@ -1119,7 +1119,7 @@ function LeaderBoard() {
                       // id="nft__photo"
 
                       className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
-                      src={content.compresedURL}
+                      src={content.imageUrl}
                       alt="nft"
                       onError="this.onerror=null;this.src='/images/image.svg';"
                     />

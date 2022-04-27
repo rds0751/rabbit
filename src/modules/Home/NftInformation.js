@@ -495,7 +495,7 @@ export default function NftInformation(props) {
                 <img
                onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
                   // src={nft.cdnUrl}
-                  src={nft.cdnUrl  ? nft.cdnUrl : Imagep }
+                  src={nft.cdnUrl === "" ? nft.ipfsUrl :(nft.cdnUrl ? nft.cdnUrl:Imagep)}
                   // src={Imagep}
                   alt="nft"
                   className="border-radius imginfo_mob"

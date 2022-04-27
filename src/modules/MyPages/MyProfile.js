@@ -36,7 +36,7 @@ import SplitWalletAdd from "../../common/components/SplitWalletAdd";
 import NoItem from "../../assets/images/Noitems.svg";
 import Snackbar from '@mui/material/Snackbar';
 import LikedNfts from "./LikedNfts";
-
+import { ShimmerCircularImage, ShimmerThumbnail } from "react-shimmer-effects";
 
 
 const CustomSnack = styled(Snackbar)`
@@ -283,12 +283,12 @@ function MyProfile() {
     }
   }
   let [imageLoading,setImageLoading]=useState({src:loggedInUser?.photo,loaded:false })
-  let [bannerImage,BannerLoading]=useState({src:loggedInUser?.coverPhoto,loaded:false })
+  let [bannerImage,setBannerLoading]=useState({src:loggedInUser?.coverPhoto,loaded:false })
   const onImageLoad=()=>{
     setImageLoading({...imageLoading,loaded:true});
   }
   const onBannerLoad=()=>{
-    setImageLoading({...bannerImage,loaded:true});
+    setBannerLoading({...bannerImage,loaded:true});
   }
   return (
     <>
@@ -305,9 +305,9 @@ function MyProfile() {
             onLoad={onBannerLoad}
             onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
           />
-            {!imageLoading.loaded && (
+            {!bannerImage.loaded && (
             <div className="bannerLoader"> 
-              <Spinner />
+              <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
               </div>
           )}
           <input
@@ -336,7 +336,7 @@ function MyProfile() {
           />
               {!imageLoading.loaded && (
             <div className="profileImageLoader"> 
-              <Spinner />
+               <ShimmerCircularImage className="thumbnailCirular" fitOnFrame={true} rounded />
               </div>
           )}
           </div>

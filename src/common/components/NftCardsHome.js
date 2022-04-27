@@ -99,7 +99,7 @@ function NftCardsHome({ nft }) {
 
         {!imageLoading.loaded && (
             <div className="loaderNft "> 
-              <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />;
+              <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
               </div>
           )}
           
@@ -160,7 +160,7 @@ function NftCardsHome({ nft }) {
             </div> */}
             <div>
               {(showDateSection) ? <span className="" style={{ color: "#000", marginRight: "4px" }}>
-                <i className="far fa-clock" style={{ color: "#f54", fontSize: "13.36px", }}></i>
+                <i className="far fa-clock" style={{ color: "#f54", fontSize: "13.36px"}}></i>
 
                 <span className="poppins-normal blackish font-14">
                   &nbsp;{message}

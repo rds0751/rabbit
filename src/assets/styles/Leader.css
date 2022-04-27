@@ -1944,3 +1944,8 @@ td {
   transition: all 0.1s ease 0s;
   border: none;
 }
+.profileImg-Container-userProfile{
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+}

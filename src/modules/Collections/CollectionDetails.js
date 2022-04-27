@@ -23,6 +23,7 @@ import SelectUnstyled, { selectUnstyledClasses } from '@mui/base/SelectUnstyled'
 import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled';
 import PopperUnstyled from '@mui/base/PopperUnstyled';
 import { styled } from '@mui/system';
+import { ShimmerCircularImage, ShimmerThumbnail } from "react-shimmer-effects";
 const blue = {
   100: '#DAECFF',
   200: '#99CCF3',
@@ -232,7 +233,7 @@ function CollectionDetails() {
           <img src={coverUrl} alt="" style={{ objectFit: "cover" }} onLoad={onBannerLoad} />
           {!imageLoading.loaded && (
             <div className="bannerLoader"> 
-              <Spinner />
+             <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
               </div>
           )}
         </div>
@@ -243,7 +244,7 @@ function CollectionDetails() {
             <img className="col-avatar" src={imageUrl} onLoad={onImageLoad} alt="" />
             {!imageLoading.loaded && (
             <div className="collectionDetailLoader"> 
-              <Spinner />
+                <ShimmerCircularImage className="thumbnailCirular" fitOnFrame={true} rounded />
               </div>
           )}
             </div>
