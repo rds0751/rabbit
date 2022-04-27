@@ -67,6 +67,8 @@ function Notification() {
     // document.body.style.overflow = !isOpenNoti ? "hidden" : "visible";
   };
 
+  const notifyData = notifications?.notificationObj;
+
   return (
     <div style={{ display: isOpenNoti ? null : "none" }} className="main-cont">
       {/* ------------ */}
@@ -75,10 +77,10 @@ function Notification() {
         <h3 className="notification-text">Notification</h3>
         <div
           className="all-noti"
-          style={{ display: notifications.length === 0 ? "none" : "block" }}
+          style={{ display: notifyData?.length === 0 ? "none" : "block" }}
         >
-          {console.log(notifications,"noti")}
-          {notifications.map((curElem) => {
+          {console.log(notifications.notificationObj, "noti")}
+          {notifyData?.map((curElem) => {
             const { addedOn, type, owner, content } = curElem;
             let addedOnTimeStamp = moment(addedOn).format("LT");
 
@@ -101,8 +103,8 @@ function Notification() {
                           {String(owner.userName).length >= 7
                             ? !owner.userName
                               ? " "
-                              : String(owner.userName).substring(0, 8) + "..."
-                            : String(owner.userName) === ""
+                              : String(owner?.userName).substring(0, 8) + "..."
+                            : String(owner?.userName) === ""
                             ? owner.wallet_address
                             : owner.userName}
                         </span>
@@ -147,16 +149,16 @@ function Notification() {
             );
           })}
           <br />
-          {notifications.length > 0 ? (
+          {notifyData?.length > 0 ? (
             <footer style={{ display: "flex", justifyContent: "center" }}>
               <p className="end-noti">End of Notification</p>
             </footer>
           ) : null}
         </div>
-        {notifications.length === 0 && (
+        {notifyData?.length === 0 && (
           <div
             className="no-notification"
-            style={{ display: notifications.length === 0 ? "block" : "none" }}
+            style={{ display: notifyData?.length === 0 ? "block" : "none" }}
           >
             <img className="no-image" src={NotificationIcon}></img>
             <p className="no-notification">No notification found</p>

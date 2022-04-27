@@ -29,7 +29,7 @@ export default function PricingHistoryComponent(props) {
   }, [reqObj]);
 
   let prices = nftPricingHistory.map((each) => each.totalVolume);
-  // let prices = [10, 100];
+  // let prices = [20];
   let dates = nftPricingHistory.map((each) => each?.addedOn);
   //   let dates = nftPricingHistory.map((each) =>
   //     moment(new Date(each?.addedOn)).format("D MMM YY")
@@ -95,7 +95,7 @@ export default function PricingHistoryComponent(props) {
       },
       yaxis: {
         
-       max: prices[0] + 0.007 ,
+       max: prices[0] + 1 ,
       
         
       },
