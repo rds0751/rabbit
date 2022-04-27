@@ -82,7 +82,7 @@ function UserProfilePage() {
   const CustomSnack = styled(Snackbar)`
    @media (min-width: 969px){
     position: absolute !important;
-      top: 430px !important;
+      top: 451px !important;
       left: 58% !important;
    }
     @media only screen and (min-width:770px) and  (max-width:968px){
