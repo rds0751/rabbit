@@ -269,3 +269,9 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   transition: all .7s;
   cursor: pointer;
 }
+.makeOfferButton:hover span{
+  display: none;
+}
+.makeOfferButton:hover::before{
+  content: "Coming Soon";
+}

@@ -367,7 +367,7 @@ function CreateNftCollections(props) {
   }, []);
  
 
-    const enabled=name.current.length > 0 && description.current.length > 0 && categoryId.current.length >0 && nameError=="" && bannerCdn!="" && logoCdn!="" && DesError==""; 
+    const enabled=name?.current.length > 0 && description?.current.length > 0 && categoryId?.current.length >0 && nameError=="" && bannerCdn!="" && logoCdn!="" && DesError==""; 
   return (
     <>
     

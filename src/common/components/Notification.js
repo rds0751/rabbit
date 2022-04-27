@@ -75,10 +75,10 @@ function Notification() {
         <h3 className="notification-text">Notification</h3>
         <div
           className="all-noti"
-          style={{ display: notifications.length === 0 ? "none" : "block" }}
+          style={{ display: notifications?.length === 0 ? "none" : "block" }}
         >
           {console.log(notifications,"noti")}
-          {notifications.map((curElem) => {
+          {notifications?.length >0 && (notifications.map((curElem) => {
             const { addedOn, type, owner, content } = curElem;
             let addedOnTimeStamp = moment(addedOn).format("LT");
 
@@ -145,15 +145,15 @@ function Notification() {
                 <div className="time">{addedOnTimeStamp}</div>
               </div>
             );
-          })}
+          }))}
           <br />
-          {notifications.length > 0 ? (
+          {notifications?.length > 0 ? (
             <footer style={{ display: "flex", justifyContent: "center" }}>
               <p className="end-noti">End of Notification</p>
             </footer>
           ) : null}
         </div>
-        {notifications.length === 0 && (
+        {notifications?.length === 0 && (
           <div
             className="no-notification"
             style={{ display: notifications.length === 0 ? "block" : "none" }}

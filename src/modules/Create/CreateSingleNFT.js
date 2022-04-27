@@ -684,7 +684,7 @@ const enabled=name?.current.length > 0 && price?.current.length>0 && description
 
               <div className="input-name">
                 <label htmlFor="email" className=" input-label">
-                  Royalty
+                  Royalty <span style={{color:"blue",fontWeight:"bold"}}>( Coming Soon) </span>
                 </label>
                 <p className="headingRoyality">Write down the percentage you want from this sale of this NFT</p>
                 <div style={{color:"red",fontSize:"15px"}}>{royalityError}</div> 
@@ -700,6 +700,7 @@ const enabled=name?.current.length > 0 && price?.current.length>0 && description
                     border:royalityError!=""?"1px solid red":"1px solid #C8C8C8"
                   }}
                   title=" "
+                  disabled={true}
                   onChange={(e)=>{
                     if(+e.target.value > 50)
                     setRoyalityError("( Royalty can not be more than 50% )")
