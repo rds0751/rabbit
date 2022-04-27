@@ -234,7 +234,7 @@ export default function NftInformation(props) {
     //   } else toast.error(response.message);
   };
   const makeOffer=async ()=>{
-    setMakeOfferModal(true);
+    //setMakeOfferModal(true);
 
   }
   const openSaleModal = async () => {
@@ -835,6 +835,7 @@ export default function NftInformation(props) {
                 >
                   Buy Now
                 </Button>
+             
                 <Button
                   data-bs-toggle="modal"
                   data-bs-target="#myModalShare"
@@ -850,9 +851,10 @@ export default function NftInformation(props) {
                     border: "1px solid #366EEF",
                   }}
                   onClick={makeOffer}
+                  className="makeOfferButton"
                  
                 >
-                  Make Offer
+                     <span>Make Offer</span>
                 </Button>
               </div>
 
@@ -1118,7 +1120,7 @@ export default function NftInformation(props) {
           <div className="make-offer-modal main-model-makeoffer">
             <div className="report-inner" style={{ opacity: "1" }}>
               <div className="offerHeading">
-                <p className="MainHeadingText">make an offer</p>
+                <p className="MainHeadingText">Make an offer</p>
                 <img src={closeIcon}  className="closeIcon" onClick={()=>setMakeOfferModal(false)}/>
               </div>
               <div className="singlerowmodal">
@@ -1162,7 +1164,7 @@ export default function NftInformation(props) {
 
                 <div className="div-offer-button">
                   <button className="offer-button" >
-                    make  offer
+                    Make  Offer
                   </button>
                 </div>
               </div>
