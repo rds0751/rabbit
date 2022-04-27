@@ -1118,7 +1118,7 @@ export default function NftInformation(props) {
           <div className="make-offer-modal main-model-makeoffer">
             <div className="report-inner" style={{ opacity: "1" }}>
               <div className="offerHeading">
-                <p className="MainHeadingText">make an offer</p>
+                <p className="MainHeadingText">Make an offer</p>
                 <img src={closeIcon}  className="closeIcon" onClick={()=>setMakeOfferModal(false)}/>
               </div>
               <div className="singlerowmodal">
@@ -1162,7 +1162,7 @@ export default function NftInformation(props) {
 
                 <div className="div-offer-button">
                   <button className="offer-button" >
-                    make  offer
+                    Make  Offer
                   </button>
                 </div>
               </div>
