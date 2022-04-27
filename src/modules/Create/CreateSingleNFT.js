@@ -306,7 +306,7 @@ const [compressedUrl,setCompressedUrl]=useState("");
   };
   
   
-const enabled=name.current.length > 0 && price.current.length>0 && description.current.length >0 && selectFile!="" && nameError=="" && error=="";
+const enabled=name?.current.length > 0 && price?.current.length>0 && description?.current.length >0 && selectFile!="" && nameError=="" && error=="" && royalityError=="";
 
 
 
@@ -701,7 +701,6 @@ const enabled=name.current.length > 0 && price.current.length>0 && description.c
                   }}
                   title=" "
                   onChange={(e)=>{
-                    e.target.value = e.target.value.slice(0, 2);
                     if(+e.target.value > 50)
                     setRoyalityError("( Royalty can not be more than 50% )")
                     else

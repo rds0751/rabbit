@@ -132,7 +132,7 @@ function MyItems() {
                          
                         </div>
                         <div className="likeCount" title="Like Count">
-                        {likes.length}
+                        {likes?.length}
                         <i
                           className="fa-solid fa-heart"
                           style={{ color: "#ef3643",marginLeft:"8.5px"}}
