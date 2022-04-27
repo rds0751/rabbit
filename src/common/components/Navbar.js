@@ -19,7 +19,10 @@ import {
 import { ethers } from "ethers";
 import "../../assets/styles/topNavBar.css";
 import searchIcon from "../../assets/images/search.svg";
-import { getNotificationListById, getNotificationCountById } from "../../services/webappMicroservice";
+import {
+  getNotificationListById,
+  getNotificationCountById,
+} from "../../services/webappMicroservice";
 import Menu from "./Menu";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
 import NoItem from "../../assets/images/Noitems.svg";
@@ -55,18 +58,19 @@ function Navbar() {
     searchByName: "",
     limit: 4,
   });
- 
+
   const [nfts, setNfts] = useState([]);
   const [collections, setCollections] = useState([]);
   const [tenantData, setTenantData] = useState("");
+  const [permissionToUploadNft, setPermissionToUploadNft] = useState("");
   useEffect(() => {
     async function fetchData() {
-      getTenantData().then(response => setTenantData(response));
+      getTenantData().then(response => setTenantData(response))
+      setPermissionToUploadNft(tenantData.permissionToUploadNft)
     }
     fetchData();
   }, []);
-  
-  
+
   useEffect(() => {
     if (loggedInUser == null) {
       connectMetamask();
@@ -157,16 +161,20 @@ function Navbar() {
       }
     }
     if (name == "create") {
-      dispatch(ManageNotiSideBar(false));
-      dispatch(ManageWalletSideBar(false));
-      if (walletAddress == null) {
-        dispatch(RedirectTo("create"));
-        navigate("/add-wallet");
-        toast.error("Connect your wallet", {
-          position: toast.POSITION.TOP_RIGHT,
-        });
+      if (permissionToUploadNft === "Only me") {
+        toast.success("You have no permission to create a Nft");
       } else {
-        navigate("/create-nft");
+        dispatch(ManageNotiSideBar(false));
+        dispatch(ManageWalletSideBar(false));
+        if (walletAddress == null) {
+          dispatch(RedirectTo("create"));
+          navigate("/add-wallet");
+          toast.error("Connect your wallet", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        } else {
+          navigate("/create-nft");
+        }
       }
     }
     if (name == "profile") {
@@ -274,14 +282,14 @@ function Navbar() {
       [e.target.name]: e.target.value,
     });
   };
-  let [scroll,setScroll]=useState(true);
+  let [scroll, setScroll] = useState(true);
   const closeWalletAndNoti = () => {
-    document.body.className="overflow-hidden";
+    document.body.className = "overflow-hidden";
     setDisplay(true);
     dispatch(ManageNotiSideBar(false));
     dispatch(ManageWalletSideBar(false));
-   // document.body.className = !isOpenWallet ? "overflow" : "overflow-hidden";
- 
+    // document.body.className = !isOpenWallet ? "overflow" : "overflow-hidden";
+
     // document.body.overflow = !isOpenNoti === false ?  "auto": "hidden";
   };
 
@@ -323,8 +331,10 @@ function Navbar() {
               <Link
                 className="navbrand"
                 to="/"
-                style={{ marginRight: "20px", textDecoration: "none"}}
-                onClick={() => {closeWalletAndNoti();}}
+                style={{ marginRight: "20px", textDecoration: "none" }}
+                onClick={() => {
+                  closeWalletAndNoti();
+                }}
               >
                 <img
                   src={tenantData?.companyLogo}
@@ -710,7 +720,10 @@ function Navbar() {
                   </li> */}
                   <li
                     style={{ marginRight: "28px" }}
-                    onClick={() =>{ closeWalletAndNoti(); manageNavigation("create") }}
+                    onClick={() => {
+                      closeWalletAndNoti();
+                      manageNavigation("create");
+                    }}
                   >
                     {/* <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}

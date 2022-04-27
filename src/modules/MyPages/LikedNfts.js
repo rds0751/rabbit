@@ -9,7 +9,7 @@ import { ShimmerThumbnail } from "react-shimmer-effects";
 import { addLikeNft } from "../../services/webappMicroservice";
 function LikedNfts({ nft }) {
   const { user } = useSelector((state) => state);
-  const { _id, cdnUrl, name, salesInfo ,compresedURL} = nft;
+  const { _id, cdnUrl, name, salesInfo ,compressedURL} = nft;
   const [handleLike, setHandleLike] = useState(true);
   const route = "/nft-information/" + _id;
   const likeNft = (id) => {
@@ -65,7 +65,7 @@ function LikedNfts({ nft }) {
           <div className="image-container">
             <img
               className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
-              src={compresedURL}
+              src={compressedURL}
               alt="nft-img"
               onLoad={onImageLoad}
               onMouseDown={(e) => e.preventDefault()}

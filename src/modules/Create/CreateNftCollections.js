@@ -40,7 +40,8 @@ function CreateNftCollections(props) {
   const [bannerCdn, setbannerCdn] = useState("");
   const [logoipfs, setlogoipfs] = useState("");
   const [bannerIpfs, setbannerIpfs] = useState("");
-  const [compressedUrl,setCompressedUrl]=useState("");
+  const [compressedLogo,setCompressedLogo]=useState("")
+  const [compressedBanner,setcompressedBanner]=useState("")
   const [isLogoSelected, setisLogoSelected] = useState(false);
   const [isBannerSelected, setisBannerSelected] = useState(false);
   const [clickedOn, setClickedOn] = useState("");
@@ -244,6 +245,8 @@ function CreateNftCollections(props) {
       coverUrl: bannerCdn,
       // contractAddress: blockchainRes.contract_address,
       imageUrl: logoCdn,
+      // compressedLogo:compressedLogo,
+      // compressedBanner:compressedBanner,
       name: name.current,
       description: description.current,
       blockchain: blockchain.current,
@@ -362,9 +365,9 @@ function CreateNftCollections(props) {
     }
     fetchData();
   }, []);
+ 
 
-
-    const enabled=name.current.length > 0 && description.current.length > 0 && categoryId.current.length >0 && nameError=="" && bannerCdn!="" && logoCdn!="" && DesError==""; 
+    const enabled=name?.current.length > 0 && description?.current.length > 0 && categoryId?.current.length >0 && nameError=="" && bannerCdn!="" && logoCdn!="" && DesError==""; 
   return (
     <>
     
@@ -455,11 +458,14 @@ function CreateNftCollections(props) {
           {/*        <p className="fs-14 fw-b pt-20">Drag & Drop or <span style={{color:"#366EEF"}}>Browse</span></p>*/}
           {/*    </div>*/}
           {/*)}*/}
+         
           <Bannerdrop
             bannerCdn={logoCdn}
             setbannerCdn={setlogoCdn}
             bannerIpfs={logoipfs}
             setbannerIpfs={setlogoipfs}
+            // compressedUrl={compressedLogo}
+            // setCompressedUrl={setCompressedLogo}
           />
         </div>
         <div>
@@ -471,6 +477,8 @@ function CreateNftCollections(props) {
             setbannerCdn={setbannerCdn}
             bannerIpfs={bannerIpfs}
             setbannerIpfs={setbannerIpfs}
+            // compressedUrl={compressedBanner}
+            // setCompressedUrl={setcompressedBanner}
           />
 
           {/* ----------------------------- */}
