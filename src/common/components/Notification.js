@@ -17,7 +17,7 @@ import "../../assets/styles/noti.css";
 import profile from "../../assets/images/profile.png";
 
 import { Link } from "react-router-dom";
-import { getNotificationListById } from "../../services/webappMicroservice";
+import { getNotificationListById, getNotificationCountById  } from "../../services/webappMicroservice";
 import { useSelector } from "react-redux";
 import { ManageNotiSideBar, ManageWalletSideBar } from "../../reducers/Action";
 import { useDispatch } from "react-redux";
@@ -66,9 +66,22 @@ function Notification() {
     document.body.className = !isOpenNoti ? "overflow" : "overflow-hidden";
     // document.body.style.overflow = !isOpenNoti ? "hidden" : "visible";
   };
+  const [Count, setCount] = useState([]);
+  const _id = notifications?.notificationObj?._id;
+  // useEffect(() => {
+  //   getNotificationCountById(notificationId).then((response) =>
+  //     setCount(response)
+  //   );
+  // }, []);
 
   const notifyData = notifications?.notificationObj;
-
+  // console.log(notifications?.notificationObj?._id,"count")
+const handleNotification = (_id) =>{
+  getNotificationCountById(_id).then((response) =>
+      setCount(response)
+    );
+    console.log(_id,"_id")
+}
   return (
     <div style={{ display: isOpenNoti ? null : "none" }} className="main-cont">
       {/* ------------ */}
@@ -79,13 +92,16 @@ function Notification() {
           className="all-noti"
           style={{ display: notifyData?.length === 0 ? "none" : "block" }}
         >
-          {console.log(notifications.notificationObj, "noti")}
+          {console.log(notifications, "noti")}
           {notifyData?.map((curElem) => {
-            const { addedOn, type, owner, content } = curElem;
+            const { _id, addedOn, type, owner, content } = curElem;
             let addedOnTimeStamp = moment(addedOn).format("LT");
 
             return (
               <div className="single-noti">
+                
+                <div  className="noti-dynamic" onClick={() => handleNotification(_id)}>
+                {console.log(curElem?._id,"curle")}
                 <div className="single-noti-inner ">
                   <img
                     src={owner.photo}
@@ -145,6 +161,7 @@ function Notification() {
                 </div>
 
                 <div className="time">{addedOnTimeStamp}</div>
+                </div>
               </div>
             );
           })}

@@ -229,17 +229,18 @@ export function getNotificationListById(requestData) {
     });
 }
 
-export function getNotificationCountById(requestData) {
+export function getNotificationCountById(_id) {
+  // console.log(notificationId,"sachin1111")
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
-    `api/v1/notification/ 
-    ${requestData}/read`;
+    "api/v1/notification/" 
+    + _id + "/read";
 
   return httpService(
-    httpConstants.METHOD_TYPE.POST,
+    httpConstants.METHOD_TYPE.PUT,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
     AuthToken,
-    requestData,
+    _id,
     url
   )
     .then((response) => {

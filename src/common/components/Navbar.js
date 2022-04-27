@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { getNfts, getCollections } from "../../services/webappMicroservice";
 import { getTenantData } from "../../services/clientConfigMicroService";
 import { NavDropdown } from "react-bootstrap";
+import Badge from '@mui/material/Badge';
 import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../../assets/styles/Notification.css";
@@ -299,14 +300,14 @@ function Navbar() {
       setNotifications(response)
     );
   }, []);
-  console.log(notifications,"notifications")
-const notificationId = notifications._id;
-  useEffect(() => {
-    getNotificationCountById(notificationId).then((response) =>
-      setCount(response)
-    );
-  }, []);
-console.log(Count,"count")
+  console.log(notifications?.unreadCount,"notifications")
+// const notificationId = notifications._id;
+//   useEffect(() => {
+//     getNotificationCountById(notificationId).then((response) =>
+//       setCount(response)
+//     );
+//   }, []);
+// console.log(Count,"count")
 
 
 
@@ -722,6 +723,9 @@ console.log(Count,"count")
 
                 <ul className="right_section_nav mb-0">
                   <li>
+                  <Badge badgeContent={notifications?.unreadCount} color="primary">
+    
+    
                     <img
                       onClick={handleNotiSideBar}
                       className={
@@ -730,6 +734,7 @@ console.log(Count,"count")
                       src={bellicon}
                       alt="notification"
                     ></img>
+                    </Badge>
                   </li>
 
                   <li className="nav-item dropdown">
