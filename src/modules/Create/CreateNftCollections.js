@@ -49,6 +49,7 @@ function CreateNftCollections(props) {
   const { loggedInUser, walletAddress } = user;
   const [specialchar,setSpecialChar]=useState("")
   const [Categories, setCategories] = useState([]);
+  const [selectCategory,setSelectCategory]=useState("");
 
   useEffect(() => {
     getCategories().then((response) => setCategories(response));
@@ -71,9 +72,14 @@ function CreateNftCollections(props) {
     hiddenFileInputBanner.current.click();
   };
   useEffect(async () => {
-    if (walletAddress == null) {
+    // if (walletAddress == null) {
+    //   navigation("/add-wallet");
+    // };
+
+    // this code will check if user already connected wallet from localstorage
+    if(!localStorage.getItem('has_wallet')){
       navigation("/add-wallet");
-    };
+    }
   });
 
   useEffect(() => {
@@ -320,7 +326,7 @@ function CreateNftCollections(props) {
       await getTenantData().then(response => setBlockChains(response.blockchains));
     }
     fetchData();
-  }, []);
+  }, [selectCategory]);
 
   useEffect(() => {
     for (let eachItem of blockchains) {
@@ -334,8 +340,7 @@ function CreateNftCollections(props) {
    }
   }, [blockchains]) 
 
-  const enabled=name?.current.length > 0 && description?.current.length > 0 && categoryId?.current.length >0 && nameError=="" && bannerCdn!="" && logoCdn!="" && DesError=="";
-
+  let enabled=name?.current.length > 0 && description?.current.length > 0  && nameError=="" && bannerCdn!="" && logoCdn!="" && DesError=="" && selectCategory?.length >0; 
   return (
     <>
       {loaderState ? (
@@ -513,7 +518,7 @@ function CreateNftCollections(props) {
               {/* <Link>Create</Link> */}
               <select
                 className="input-box-1"
-                onChange={(e) => (categoryId.current = e.target.value)}
+                onChange={(e) => (categoryId.current = e.target.value,setSelectCategory(e.target.value))}
               >
                 <option style={{ color: "#707070" }}>Select Category</option>
                 {Categories.map((item, key) => {

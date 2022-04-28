@@ -4,7 +4,7 @@ import Like from "../../assets/images/Like.svg";
 import likes from "../../assets/images/likes.svg";
 import { useSelector } from "react-redux";
 import Spinner from "../../common/components/Spinner";
-
+import { ShimmerCircularImage, ShimmerThumbnail } from "react-shimmer-effects";
 import {
   getNfts,
   addLikeNft,
@@ -70,7 +70,7 @@ function CollDetailCard({ nft }) {
             
         {!imageLoading.loaded && (
             <div className="loaderNft "> 
-              <Spinner />
+             <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
               </div>
           )}
           </div>

@@ -102,9 +102,14 @@ function CreateSingleNFT(props) {
 
   // ----------------------------------------------states end-------------
   useEffect(async () => {
-    if (walletAddress == null) {
+    // if (walletAddress == null) {
+    //   navigation("/add-wallet");
+    // };
+
+    // this code will check if user already connected wallet from localstorage
+    if(!localStorage.getItem('has_wallet')){
       navigation("/add-wallet");
-    };
+    }
   
     setmyProfileUrl("/nft-information/")
     // const collections = await getCollectionBySingleUser(userId);
