@@ -363,16 +363,16 @@ function CreateNftCollections(props) {
       blockchainOption.push({ value: 'BNB', label: <div><img src={binance} height="32px" alt=""/> Binance</div> })
     }
  }
- 
+ let [selectCategory,setSelectCategory]=useState("");
   useEffect(() => {
     async function fetchData() {
       await getTenantData().then(response => setBlockChains(response.blockchains));
     }
     fetchData();
-  }, []);
+  }, [selectCategory]);
  
-
-    const enabled=name?.current.length > 0 && description?.current.length > 0 && categoryId?.current.length >0 && nameError=="" && bannerCdn!="" && logoCdn!="" && DesError==""; 
+  
+  var enabled=name?.current.length > 0 && description?.current.length > 0  && nameError=="" && bannerCdn!="" && logoCdn!="" && DesError=="" && selectCategory?.length >0; 
   return (
     <>
     
@@ -551,7 +551,7 @@ function CreateNftCollections(props) {
               {/* <Link>Create</Link> */}
               <select
                 className="input-box-1"
-                onChange={(e) => (categoryId.current = e.target.value)}
+                onChange={(e) => (categoryId.current = e.target.value,setSelectCategory(e.target.value))}
               >
                 <option style={{ color: "#707070" }}>Select Category</option>
                 {Categories.map((item, key) => {
