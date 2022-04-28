@@ -32,10 +32,7 @@ const Button = styled.button``;
 
 function CreateNftCollections(props) {
   const navigate = useNavigate();
-  // const navigate = useNavigate();
-
   const { user } = useSelector((state) => state);
-  // -------
   const [logoCdn, setlogoCdn] = useState("");
   const [bannerCdn, setbannerCdn] = useState("");
   const [logoipfs, setlogoipfs] = useState("");
@@ -49,23 +46,13 @@ function CreateNftCollections(props) {
   const [checkReqField, setCheckReqField] = useState(false);
   const [loaderState, setloaderState] = useState(false);
   const navigation = useNavigate();
-
-
-  // -------
   const { loggedInUser, walletAddress } = user;
-
   const [specialchar,setSpecialChar]=useState("")
-  
-
-
-
-
-
   const [Categories, setCategories] = useState([]);
+
   useEffect(() => {
     getCategories().then((response) => setCategories(response));
   }, []);
-  console.log("categories list", Categories);
 
 
   const [DesLength, setDesLength] = useState(0);
@@ -320,44 +307,13 @@ function CreateNftCollections(props) {
 
     // console.log(result, ">>> submit nftCollection");
   };
-  // const checkReqFieldFun = () => {
-  //   const currname = name.current;
-  //   const currdes = description.current;
-  //   const currblock = blockchain.current;
-
-  //   if (
-  //     currname.trim() == "" ||
-  //     currdes.trim() == "" ||
-  //     currblock.trim() == "" ||
-  //     logoCdn == "" ||
-  //     bannerCdn == ""
-  //   ) {
-  //     setCheckReqField(false);
-  //   } else {
-  //     setCheckReqField(true);
-  //   }
-  // };
-  // let data = useLocation();
+  
   let location = useLocation();
 
-  
-    // console.log("kkkkkkkkkkkkkkkkkkkkk",location?.state?.data);
-    // { id: '...', images: [...], price: { ... } }
-  
-    // Blockchain option
+  // Blockchain option
   const [selectedOption, setSelectedOption] = useState(null);
   const blockchainOption = [];
   const [blockchains, setBlockChains] = useState([])
-  
-  for (let eachItem of blockchains) {
-    if (eachItem === "Ethereum") {
-      blockchainOption.push({ value: 'ETH', label: <div><img src={ethereum} height="32px" alt=""/> Ethereum</div> })
-    } else if (eachItem === "Polygon") {
-      blockchainOption.push({ value: 'MATIC', label: <div><img src={polygon} height="32px" alt=""/> Polygon</div> })
-    } else if (eachItem === "Binance") {
-      blockchainOption.push({ value: 'BNB', label: <div><img src={binance} height="32px" alt=""/> Binance</div> })
-    }
- }
  
   useEffect(() => {
     async function fetchData() {
@@ -365,12 +321,23 @@ function CreateNftCollections(props) {
     }
     fetchData();
   }, []);
- 
 
-    const enabled=name?.current.length > 0 && description?.current.length > 0 && categoryId?.current.length >0 && nameError=="" && bannerCdn!="" && logoCdn!="" && DesError==""; 
+  useEffect(() => {
+    for (let eachItem of blockchains) {
+      if (eachItem === "Ethereum") {
+        blockchainOption.push({ value: 'ETH', label: <div><img src={ethereum} height="32px" alt=""/> Ethereum</div> })
+      } else if (eachItem === "Polygon") {
+        blockchainOption.push({ value: 'MATIC', label: <div><img src={polygon} height="32px" alt=""/> Polygon</div> })
+      } else if (eachItem === "Binance") {
+        blockchainOption.push({ value: 'BNB', label: <div><img src={binance} height="32px" alt=""/> Binance</div> })
+      }
+   }
+  }, [blockchains]) 
+
+  const enabled=name?.current.length > 0 && description?.current.length > 0 && categoryId?.current.length >0 && nameError=="" && bannerCdn!="" && logoCdn!="" && DesError=="";
+
   return (
     <>
-    
       {loaderState ? (
         <div className="mint-mod-outer">
           <div className="mint-abs">
