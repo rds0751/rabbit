@@ -29,6 +29,9 @@ export const CheckUserByWalletAddress = async (
     // return data.responseData;
     successCallBack(data.responseData);
 
+    if(walletAddress) localStorage.setItem('has_wallet',true)
+    else localStorage.setItem('has_wallet',false)
+
     // dispatch(addUserData(data.responseData));
   } else {
     console.log(data);

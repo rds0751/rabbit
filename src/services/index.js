@@ -11,6 +11,7 @@ import { AuthToken } from "./UserAuthToken";
 // export * from './user'
 
 export const addWalletAddress = async (wallet_address) => {
+  console.log('called wallet')
   try {
     const res = await fetch(`${BASE_URL}/api/v1/wallet-address`, {
       method: httpConstants.METHOD_TYPE.PUT,
