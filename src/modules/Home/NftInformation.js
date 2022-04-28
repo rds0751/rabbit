@@ -918,7 +918,7 @@ export default function NftInformation(props) {
                 </ul>
                 {tab === 1 ? <PricingHistoryComponentGraph id={id} /> : ""}
                 {tab === 2 ? <ListingsTable id={id} /> : ""}
-                {tab === 3 ? <ListingsTable id={id} /> : ""}
+                {tab === 3 ? <ListingsTable  /> : ""}
               </div>
             </div>
           </div>

@@ -1949,3 +1949,9 @@ td {
   position: relative;
   display: inline-block;
 }
+.shimmer {
+  background: linear-gradient(to right, white 8%, #f0f0f0 18%, lightgrey 33%);
+  background-size: 1000px 100%;
+  transition: all .4s;
+  animation: shimmer 2.2s linear infinite forwards;
+}
