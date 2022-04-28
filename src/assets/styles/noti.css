@@ -137,3 +137,15 @@
     width: 367px;
   }  
 }
+
+.noti-dynamic{
+  width: 100%;
+    height: 47px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    /* margin-left: 17px; */
+    /* padding: 0px 2% !important; */
+    align-items: center;
+    box-sizing: border-box;
+}
