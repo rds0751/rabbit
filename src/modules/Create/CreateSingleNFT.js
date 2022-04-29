@@ -602,17 +602,10 @@ const enabled=name?.current.length > 0 && price?.current.length>0 && description
                   onChange={(e) => {
                     name.current = e.target.value;
                     var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
-                    if(format.test(e.target.value)){
-                      SetNameError("(No Special Character Allowed)");
-                    }else if(e.target.value.length == 0){
-                      setError("")
-                      SetNameError("( Name is required )")
-                    }
-                    else if(e.target.value.length < 3){
-                      SetNameError("( Name should be atleast 3 character )")
-                    } else {
-                    SetNameError("");
-                    }
+                      if(!format.test(name.current)){
+                        SetNameError("");
+                      }
+                      
                     
                   }}
                 />
@@ -633,8 +626,24 @@ const enabled=name?.current.length > 0 && price?.current.length>0 && description
                     autoComplete="off"
                     style={{border:error!=""?"1px solid red":"1px solid #C8C8C8"}}
                     onWheel={(e)=>e.target.blur()}
+                    onFocus={(e)=>{
+                      var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
+                      if(format.test(name.current)){
+                        SetNameError("(No Special Character Allowed)");
+                      }else if(name.current.length == 0){
+                        setError("")
+                        SetNameError("( Name is required )")
+                      }
+                      else if(name.current.length < 3){
+                        SetNameError("( Name should be atleast 3 character )")
+                      } else {
+                      SetNameError("");
+                      }
+                    }}
                     onChange={(e) => {
                       price.current = e.target.value;
+
+                      
                       // checkChanges();
                       if(+e.target.value < "0.004" || +e.target.value=="0"){
                         setError("( Minimum listing price for an NFT should be more than 0.004 ETH )")

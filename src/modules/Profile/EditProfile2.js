@@ -36,7 +36,7 @@ function EditProfile(props) {
     formData.append("createdBy", `${props.user._id}`);
     formData.append("attachment", fileUploaded);
 
-    const res = await fetch(`${BASE_URL2}/api/v1/upload-documents`, {
+    const res = await fetch(`${BASE_URL2}/api/v2/upload-documents`, {
       method: httpConstants.METHOD_TYPE.POST,
       body: formData,
     });
