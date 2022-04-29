@@ -161,7 +161,7 @@ function MyItems() {
           <div style={{ marginLeft: 'auto', rowGap: "50px" }} className="row">
             {ownedCollection.length > 1 ? (
               ownedCollection.map((curElem) => {
-                const { imageUrl, name, _id } =
+                const { imageUrl, name, _id,nftCount } =
                   curElem;
                 const collection = "/collection-details/" + _id;
                 return (
@@ -195,7 +195,7 @@ function MyItems() {
                         <p className="collectionCardEachTotalitems">
                           <span className=" font-14 text-dark">
                             Total Items:
-                            <span className="text-primary">2</span>
+                            <span className="text-primary">{nftCount}</span>
                           </span>
                         </p>
                       </div>

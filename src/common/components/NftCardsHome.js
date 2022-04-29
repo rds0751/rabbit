@@ -139,7 +139,9 @@ function NftCardsHome({ nft }) {
               style={{
                 color: "#191919",
                 overflow: "hidden",
+                width: "58%",
               }}
+              title={name}
             >
               {name}
             </div>
