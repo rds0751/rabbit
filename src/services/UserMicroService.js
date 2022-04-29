@@ -29,6 +29,9 @@ export const CheckUserByWalletAddress = async (
     // return data.responseData;
     successCallBack(data.responseData);
 
+    if(walletAddress) localStorage.setItem('has_wallet',true)
+    else localStorage.setItem('has_wallet',false)
+
     // dispatch(addUserData(data.responseData));
   } else {
     console.log(data);
@@ -121,7 +124,6 @@ export const updateBannerByUserId = async (
   successCallBack
 ) => {
   try {
-    alert("ok");
     const url =
       process.env.REACT_APP_WEBAPP_USER_MICROSERVICE +
       `api/v1/edit-banner/${userId}`;

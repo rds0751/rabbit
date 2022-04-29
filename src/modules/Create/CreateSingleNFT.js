@@ -80,16 +80,6 @@ function CreateSingleNFT(props) {
   const [selectedOption, setSelectedOption] = useState(null);
   const blockchainOption = [];
   const [blockchains, setBlockChains] = useState([])
-  
-  for (let eachItem of blockchains) {
-    if (eachItem === "Ethereum") {
-      blockchainOption.push({ value: 'ETH', label: <div><img src={ethereum} height="32px" alt=""/> Ethereum</div> })
-    } else if (eachItem === "Polygon") {
-      blockchainOption.push({ value: 'MATIC', label: <div><img src={polygon} height="32px" alt=""/> Polygon</div> })
-    } else if (eachItem === "Binance") {
-      blockchainOption.push({ value: 'BNB', label: <div><img src={binance} height="32px" alt=""/> Binance</div> })
-    }
- }
  
   useEffect(() => {
     async function fetchData() {
@@ -98,11 +88,28 @@ function CreateSingleNFT(props) {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    for (let eachItem of blockchains) {
+      if (eachItem === "Ethereum") {
+        blockchainOption.push({ value: 'ETH', label: <div><img src={ethereum} height="32px" alt=""/> Ethereum</div> })
+      } else if (eachItem === "Polygon") {
+        blockchainOption.push({ value: 'MATIC', label: <div><img src={polygon} height="32px" alt=""/> Polygon</div> })
+      } else if (eachItem === "Binance") {
+        blockchainOption.push({ value: 'BNB', label: <div><img src={binance} height="32px" alt=""/> Binance</div> })
+      }
+   }
+  }, [blockchains])
+
   // ----------------------------------------------states end-------------
   useEffect(async () => {
-    if (walletAddress == null) {
+    // if (walletAddress == null) {
+    //   navigation("/add-wallet");
+    // };
+
+    // this code will check if user already connected wallet from localstorage
+    if(!localStorage.getItem('has_wallet')){
       navigation("/add-wallet");
-    };
+    }
   
     setmyProfileUrl("/nft-information/")
     // const collections = await getCollectionBySingleUser(userId);

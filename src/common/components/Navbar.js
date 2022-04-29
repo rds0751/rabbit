@@ -72,6 +72,10 @@ function Navbar() {
   }, []);
 
   useEffect(() => {
+    setPermissionToUploadNft(tenantData.permissionToUploadNft)
+  }, [tenantData]);
+
+  useEffect(() => {
     if (loggedInUser == null) {
       connectMetamask();
     }

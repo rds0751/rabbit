@@ -197,7 +197,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
             this.setState({ nftDetails: res });
             this.setState({ buySuccess: true });
 
-            toast.success("NFT has been buy successfully",{autoClose:7000,theme:"colored"});
+            toast.success("NFT has been bought successfully",{autoClose:7000,theme:"colored"});
         }
 
     };

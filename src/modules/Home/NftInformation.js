@@ -101,6 +101,9 @@ export default function NftInformation(props) {
   const { loggedInUser, walletAddress } = user;
   const { id } = useParams();
   const nft = props?.responseData;
+
+  console.log('nft data', nft)
+
   const { owner, creator, salesInfo } = nft;
   const [openReportModal, setOpenReportModal] = useState(false);
   const [saleModal, setsaleModal] = useState(false);
@@ -112,7 +115,7 @@ export default function NftInformation(props) {
   const [userDetails, setUserDetails] = useState([]);
   const [tab, setTab] = useState(1);
   const [toShow, settoShow] = useState(true);
-  const [makeOfferModal,setMakeOfferModal]=useState(false);
+  const [makeOfferModal, setMakeOfferModal] = useState(false);
 
   const [state, setState] = React.useState({
     open: false,
@@ -121,6 +124,8 @@ export default function NftInformation(props) {
   });
 
   const { vertical, horizontal, open } = state;
+
+  const userIdLocal = localStorage.getItem('userId');
 
   const handleClick = (newState) => () => {
     setState({ open: true, ...newState });
@@ -152,7 +157,7 @@ export default function NftInformation(props) {
   } else {
     document.body.classList.remove("active-modal");
   }
-  
+
 
   // alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
 
@@ -233,7 +238,7 @@ export default function NftInformation(props) {
     //     window.location.reload(false);
     //   } else toast.error(response.message);
   };
-  const makeOffer=async ()=>{
+  const makeOffer = async () => {
     //setMakeOfferModal(true);
 
   }
@@ -324,8 +329,8 @@ export default function NftInformation(props) {
       {props?.loaderState
         ? ""
         : setTimeout(() => {
-            window.location.reload(true);
-          }, 1000)}
+          window.location.reload(true);
+        }, 1000)}
 
       {/* {props?.loaderState ? (
         <div className="center">
@@ -378,7 +383,7 @@ export default function NftInformation(props) {
                         display:
                           props?.responseData?.ownerAddress ==
                             loggedInUser?.wallet_address &&
-                          !props?.responseData?.salesInfo?.isOpenForSale
+                            !props?.responseData?.salesInfo?.isOpenForSale
                             ? "block"
                             : "none",
                         color: "white",
@@ -395,7 +400,7 @@ export default function NftInformation(props) {
                         display:
                           props?.responseData?.ownerAddress ==
                             loggedInUser?.wallet_address &&
-                          props?.responseData?.salesInfo?.isOpenForSale
+                            props?.responseData?.salesInfo?.isOpenForSale
                             ? "block"
                             : "none",
                         color: "white",
@@ -493,9 +498,9 @@ export default function NftInformation(props) {
             <div className="col-xl-5 col-lg-5 col-md-12">
               <div className="nftdetail-img">
                 <img
-               onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
+                  onMouseDown={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()}
                   // src={nft.cdnUrl}
-                  src={nft.cdnUrl === "" ? nft.ipfsUrl :(nft.cdnUrl ? nft.cdnUrl:Imagep)}
+                  src={nft.cdnUrl === "" ? nft.ipfsUrl : (nft.cdnUrl ? nft.cdnUrl : Imagep)}
                   // src={Imagep}
                   alt="nft"
                   className="border-radius imginfo_mob"
@@ -503,7 +508,7 @@ export default function NftInformation(props) {
                     maxWidth: "100%",
                     // height: "837px",
                     borderRadius: "8px",
-                
+
                   }}
                 />
               </div>
@@ -538,32 +543,36 @@ export default function NftInformation(props) {
                           Edit
                         </Link>
                       </Button> */}
+                      {
+                        nft.length !== 0 ?
+                          <Button
+                            // className="btn btn-primary mt-3"
+                            // data-bs-toggle="modal"
+                            // data-bs-target="#myModalShare"
+                            style={{
+                              display:
+                                props?.responseData?.ownerAddress ==
+                                  loggedInUser?.wallet_address &&
+                                  !props?.responseData?.salesInfo?.isOpenForSale
+                                  ? "block"
+                                  : "none",
+                              color: "white",
+                              backgroundColor: "#366eff",
+                              marginRight: "1rem",
+                              textTransform: "none",
+                            }}
+                            onClick={openSaleModal}
+                          >
+                            Put it on sale
+                          </Button>
+                          : null
+                      }
                       <Button
-                        // className="btn btn-primary mt-3"
-                        // data-bs-toggle="modal"
-                        // data-bs-target="#myModalShare"
                         style={{
                           display:
                             props?.responseData?.ownerAddress ==
                               loggedInUser?.wallet_address &&
-                            !props?.responseData?.salesInfo?.isOpenForSale
-                              ? "block"
-                              : "none",
-                          color: "white",
-                          backgroundColor: "#366eff",
-                          marginRight: "1rem",
-                          textTransform: "none",
-                        }}
-                        onClick={openSaleModal}
-                      >
-                        Put it on sale
-                      </Button>
-                      <Button
-                        style={{
-                          display:
-                            props?.responseData?.ownerAddress ==
-                              loggedInUser?.wallet_address &&
-                            props?.responseData?.salesInfo?.isOpenForSale
+                              props?.responseData?.salesInfo?.isOpenForSale
                               ? "block"
                               : "none",
                           color: "white",
@@ -739,7 +748,7 @@ export default function NftInformation(props) {
                               className="btn btn-primary w-100"
                               data-bs-dismiss="modal"
                               style={{ marginLeft: "1.1em" }}
-                              // onClick={makeReport}
+                            // onClick={makeReport}
                             >
                               Make Offer
                             </button>
@@ -821,21 +830,29 @@ export default function NftInformation(props) {
               </div>
 
               {/*  IF nft is not created by logged in user these buttons will be shown */}
+              {
+                console.log(loggedInUser?._id, 'logged users')
+              }
+
+              
               <div className="buy-offer-btn">
+
+                
                 <Button
                   style={{
                     display:
-                      props?.responseData?.ownedBy != loggedInUser?._id &&
-                      props?.responseData?.salesInfo?.isOpenForSale
+                      props?.responseData?.ownedBy != userIdLocal &&
+                        props?.responseData?.salesInfo?.isOpenForSale
                         ? "block"
                         : "none",
-                
+
                   }}
                   onClick={buyNft}
                 >
                   Buy Now
                 </Button>
-             
+
+
                 <Button
                   data-bs-toggle="modal"
                   data-bs-target="#myModalShare"
@@ -852,9 +869,9 @@ export default function NftInformation(props) {
                   }}
                   onClick={makeOffer}
                   className="makeOfferButton"
-                 
+
                 >
-                     <span>Make Offer</span>
+                  <span>Make Offer</span>
                 </Button>
               </div>
 
@@ -893,7 +910,7 @@ export default function NftInformation(props) {
                       setTab(3);
                     }}
                     style={{
-                      borderBottom: tab === 3? "2px solid #366EEF" : "",
+                      borderBottom: tab === 3 ? "2px solid #366EEF" : "",
                       color: tab === 3 ? "#000000" : "#828282",
                       fontWeight: tab === 3 ? 600 : "",
                       marginRight: "16px",
@@ -918,7 +935,7 @@ export default function NftInformation(props) {
                 </ul>
                 {tab === 1 ? <PricingHistoryComponentGraph id={id} /> : ""}
                 {tab === 2 ? <ListingsTable id={id} /> : ""}
-                {tab === 3 ? <ListingsTable id={id} /> : ""}
+                {tab === 3 ? <ListingsTable  /> : ""}
               </div>
             </div>
           </div>
@@ -998,10 +1015,10 @@ export default function NftInformation(props) {
                   autoComplete="off"
                   value={salesInfo?.price}
                   readonly
-                  // onChange={(e) => {
-                  //   price.current = e.target.value;
-                  //   checkChanges();
-                  // }}
+                // onChange={(e) => {
+                //   price.current = e.target.value;
+                //   checkChanges();
+                // }}
                 />
                 <h3 className="reason-text"> Keep it on sale until :</h3>
                 <input
@@ -1010,22 +1027,22 @@ export default function NftInformation(props) {
                   // min="0"
                   // type="date"
                   autoComplete="off"
-                  // value="23"
-                  // onChange={(e) => {
-                  //   price.current = e.target.value;
-                  //   checkChanges();
-                  // }}
+                // value="23"
+                // onChange={(e) => {
+                //   price.current = e.target.value;
+                //   checkChanges();
+                // }}
                 />
                 <input
                   className="form-control-1"
                   // min="0"
                   type="time"
                   autoComplete="off"
-                  // value="23"
-                  // onChange={(e) => {
-                  //   price.current = e.target.value;
-                  //   checkChanges();
-                  // }}
+                // value="23"
+                // onChange={(e) => {
+                //   price.current = e.target.value;
+                //   checkChanges();
+                // }}
                 />
                 {/* <select className="select-box" onChange={(e) => handleChange(e)}>
                     <option>Select reason</option>
@@ -1121,7 +1138,7 @@ export default function NftInformation(props) {
             <div className="report-inner" style={{ opacity: "1" }}>
               <div className="offerHeading">
                 <p className="MainHeadingText">Make an offer</p>
-                <img src={closeIcon}  className="closeIcon" onClick={()=>setMakeOfferModal(false)}/>
+                <img src={closeIcon} className="closeIcon" onClick={() => setMakeOfferModal(false)} />
               </div>
               <div className="singlerowmodal">
                 <h3 className="price-heading-text">
@@ -1130,35 +1147,35 @@ export default function NftInformation(props) {
                 </h3>
                 <div className="input-group-price">
                   <span className="symbolText"><p className="eth-value">ETH</p></span>
-                  <span style={{border:"0.2px ridge #C8C8C8"}}></span>
+                  <span style={{ border: "0.2px ridge #C8C8C8" }}></span>
                   <input
                     className="price-input-box"
                     type="number"
                     title=" "
                     placeholder="0 ETH"
                     autoComplete="off"
-                    onWheel={(e)=>e.target.blur()}
-                   
+                    onWheel={(e) => e.target.blur()}
+
                   />
 
                 </div>
                 <div className="second-row">
-                  <h3 className="heading-second-row">Expiration Date</h3> 
+                  <h3 className="heading-second-row">Expiration Date</h3>
                   <div className="expiry-div">
-                  <Select
-                 className="selectfixing4"
-                 name="type"
-                 onChange={(e) => handleChange(e)}
-                 placeholder="a month"
-                 >
-                 <Option>A month</Option>
-                   <Option value="list">A year</Option>
-                   </Select>
-                   <span style={{border:"0.2px ridge #C8C8C8"}}></span>
+                    <Select
+                      className="selectfixing4"
+                      name="type"
+                      onChange={(e) => handleChange(e)}
+                      placeholder="a month"
+                    >
+                      <Option>A month</Option>
+                      <Option value="list">A year</Option>
+                    </Select>
+                    <span style={{ border: "0.2px ridge #C8C8C8" }}></span>
 
-                   <input type="time" className="filter-time"/>
+                    <input type="time" className="filter-time" />
                   </div>
-                 
+
 
                 </div>
 
@@ -1172,7 +1189,7 @@ export default function NftInformation(props) {
           </div>
         </div>
       </div>
-      
+
       {/* remove from sale modal end is here */}
       {/* Put from sale modal start from here */}
       <div
