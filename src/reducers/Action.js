@@ -18,7 +18,8 @@ import {
   USER_DETAILS,
   REDIRECT_URL,
   SEARCH_FROM_NAV,
-  LOG_OUT
+  LOG_OUT,
+  WHITE_LABEL_TOKEN
 } from "./Constants";
 import { ADD_USER, GET_ERRORS, ALL_USERS } from "./Constants";
 import axios from "axios";
@@ -55,8 +56,10 @@ export const addUseraction = (data) => (dispatch) => {
     });
 };
 export const AddWalletDetails = (data) => (dispatch) => {
-  console.log(data, "<<< data from update user detail");
-  dispatch({ type: ADD_WALLET, payload: data });
+  console.log(data, "<<< data from update user detail", localStorage.getItem('has_wallet'));
+  if (localStorage.getItem(WHITE_LABEL_TOKEN) !== null) {
+    dispatch({ type: ADD_WALLET, payload: data });
+  }
 };
 
 export const addUserData = (data) => (dispatch) => {
@@ -104,4 +107,7 @@ export const searchNav = (data) => (dispatch) => {
 
 export const logOut = () => (dispatch) => {
   dispatch({ type: LOG_OUT });
+  dispatch({ type: OPEN_WALLET, payload: false })
+  localStorage.removeItem(WHITE_LABEL_TOKEN);
+  localStorage.setItem('has_wallet', false)
 };
