@@ -10,15 +10,15 @@
   z-index: 9999;
 }
 .empty_div { 
-  width: calc(100% - 19.11%);
+  width: calc(100% - 13.11%);
   background: #191919;
   height: 100%;
   opacity: 0.5;
 }
 .noti-outer {
   padding-left: 17px;
-  /* width: 367px; */
-  width: 19.12%;
+  width: 367px;
+  /* width: 19.12%; */
   height: 100%;
   display: flex;
   flex-direction: column;
