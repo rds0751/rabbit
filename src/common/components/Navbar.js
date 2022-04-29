@@ -66,13 +66,12 @@ function Navbar() {
   useEffect(() => {
     async function fetchData() {
       getTenantData().then(response => setTenantData(response))
-      setPermissionToUploadNft(tenantData.permissionToUploadNft)
     }
     fetchData();
   }, []);
 
   useEffect(() => {
-    setPermissionToUploadNft(tenantData.permissionToUploadNft)
+    setPermissionToUploadNft(tenantData?.permissionToUploadNft)
   }, [tenantData]);
 
   useEffect(() => {
