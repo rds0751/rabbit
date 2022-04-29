@@ -232,15 +232,13 @@ export function getNotificationListById(requestData) {
 export function getNotificationCountById(_id) {
   // console.log(notificationId,"sachin1111")
   let url =
-    process.env.REACT_APP_WEBAPP_MICROSERVICE +
-    "api/v1/notification/" 
-    + _id + "/read";
-
+  process.env.REACT_APP_WEBAPP_MICROSERVICE + `api/v1/notification/${_id}/read`;
+console.log(url,"url")
   return httpService(
     httpConstants.METHOD_TYPE.POST,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
     AuthToken,
-    _id,
+    {id: _id},
     url
   )
     .then((response) => {

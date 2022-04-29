@@ -100,8 +100,8 @@ const handleNotification = (_id) =>{
             return (
               <div className="single-noti">
                 
-                <div  className="noti-dynamic" onClick={() => handleNotification(_id)}>
-                {console.log(curElem?._id,"curle")}
+                <div  className={curElem?.status === false ? "noti-dynamic" : "noti-color"} onClick={() => handleNotification(_id)}>
+                {console.log(curElem?.status,"curle")}
                 <div className="single-noti-inner ">
                   <img
                     src={owner.photo}
