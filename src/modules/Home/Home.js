@@ -38,7 +38,7 @@ function Home() {
 
   const dispatch = useDispatch();
 
-  const [changeState, setChangeState] = useState(0);
+  const [changeState, setChangeState] = useState(true);
 
   const [filterType, setFilterType] = useState({
     sort: "-1",
@@ -54,7 +54,7 @@ function Home() {
     // const myTimeout = setTimeout(100000);
     console.log("API data");
     try {
-      if (changeState === 0) {
+      if (changeState) {
         getNFtsData({}, (res) => {
           // console.log(res, "filterResponse");
           console.log("fkfsffksfsw", res);
@@ -62,7 +62,7 @@ function Home() {
             console.log("data check", res?.responseData?.nftContent);
             // prevArray => [...prevArray, newValue]
             setNfts(res?.responseData?.nftContent);
-            setChangeState(1);
+            setChangeState(false);
 
             // setNfts([nfts,res.responseData.nftContent]);
             // setIsloading(false);
@@ -173,7 +173,7 @@ function Home() {
                                      )}
                                      </div>
                                     </Link>
-                                    <Card.Body>
+                                    <Card.Body className="smallCard-details">
                                       <div className="d-flex align-items-start media">
                                         <div className="flex-shrink-0">
                                           <img
@@ -185,7 +185,7 @@ function Home() {
                                           />
                                         </div>
                                         <div className="flex-grow-1 ms-2 card1">
-                                          <h3 className="title">
+                                          <h3 className="title homePageNft">
                                             <Link
                                               to={
                                                 "/nft-information/" + nft?._id
@@ -279,7 +279,7 @@ function Home() {
                                      )}
                                      </div>
                                     </Link>
-                                    <Card.Body>
+                                    <Card.Body className="smallCard-details">
                                       <div className="d-flex align-items-start media">
                                         <div className="flex-shrink-0 titleChar">
                                          
@@ -292,7 +292,7 @@ function Home() {
                                             />
                                           
                                           <div className="flex-grow-1 ms-2 card1">
-                                            <h3 className="title">
+                                            <h3 className="title homePageNft">
                                               <Link
                                                 to={
                                                   "/nft-information/" + nft?._id

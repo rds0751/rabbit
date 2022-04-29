@@ -46,7 +46,7 @@
   border-radius: 12px;
   margin-right: 22px;
   margin-bottom: 42px;
-  background-color: #ffffff !important;
+  /* background-color: #ffffff !important; */
 }
 .homepage .right-slider .card:nth-child(even) {
   margin-right: 0px;
@@ -544,4 +544,12 @@ margin-left: 10px;
     display: inline-block; 
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
+}
+.card .smallCard-details{
+  background-color: #fff!important;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+.card1 .homePageNft{
+  width: 60%;
 }

@@ -119,12 +119,7 @@ function MyItems() {
                       >
                         <div className="nftTileEachDetailsFirstContainer container__up">
                           <div
-                            className="nftTileEachDetailsFirstContainerName"
-                            style={{
-                              color: "#191919",
-                              // height: "20px",
-                              overflow: "hidden",
-                            }}
+                            className="nftTileEachDetailsFirstContainerName myItemNFT"
                           >
                             {name}
                           </div>
@@ -195,7 +190,7 @@ function MyItems() {
                         <p className="collectionCardEachTotalitems">
                           <span className=" font-14 text-dark">
                             Total Items:
-                            <span className="text-primary">{nftCount}</span>
+                            <span className="text-primary total-nft-collection">{nftCount}</span>
                           </span>
                         </p>
                       </div>
