@@ -78,7 +78,7 @@ function CreateSingleNFT(props) {
   if (loggedInUser) { localStorage.setItem('userId', loggedInUser._id); }
   let userId = (loggedInUser) ? loggedInUser._id : localStorage.userId;
   const [selectedOption, setSelectedOption] = useState(null);
-  const blockchainOption = [];
+  const [blockchainOption, setBlockchainOption] = useState([]);
   const [blockchains, setBlockChains] = useState([])
  
   useEffect(() => {
