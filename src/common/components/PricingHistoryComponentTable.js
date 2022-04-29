@@ -13,7 +13,8 @@ import Paper from "@mui/material/Paper";
 import MultiSelect from "react-multiple-select-dropdown-lite";
 import "react-multiple-select-dropdown-lite/dist/index.css";
 import styled from "styled-components";
-
+import SplitFrom from "./splitFrom";
+import SplitTo from "./splitTo";
 import {
   getActivities,
   getPricingHistory,
@@ -202,6 +203,8 @@ export default function PricingHistoryComponentTable(props) {
 
   let toArray = [];
 
+
+
   return (
     <MainContainer className="pricing-history">
       <Title>Activities</Title>
@@ -320,7 +323,7 @@ export default function PricingHistoryComponentTable(props) {
                         >
                           {row.userName
                             ? row.userName.substr(0, 6)
-                            : row.walletAddress.substr(0, 9)}
+                            : <SplitFrom address = {row.walletAddress} />}
                         </TableCell>
                       </Tooltip>
                       <Tooltip
@@ -337,7 +340,7 @@ export default function PricingHistoryComponentTable(props) {
                           {row?.to.length > 0
                             ? row?.to[0]?.userName
                               ? row?.to[0]?.userName.substr(0, 7)
-                              : row?.to[0]?.wallet_address.substr(0, 9)
+                              : <SplitTo address={row?.to[0]?.wallet_address}/>
                             : "---"}
                         </TableCell>
                       </Tooltip>

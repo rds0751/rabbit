@@ -4,7 +4,7 @@ import "../../assets/styles/Leader.css";
 import Information from "../../assets/images/No-Info-Icon.svg";
 import { pricingHistoryGraphOfNft } from "../../services/sellAndPurchaseMicroService";
 import moment from "moment";
-import { data } from "jquery";
+import { data, each } from "jquery";
 const queryString = require("query-string");
 export default function PricingHistoryComponent(props) {
   const [nftPricingHistory, setNftPricingHistory] = useState([]);
@@ -29,8 +29,20 @@ export default function PricingHistoryComponent(props) {
   }, [reqObj]);
 
   let prices = nftPricingHistory.map((each) => each.totalVolume);
+ let number = prices
+
+if (number == Math.floor(number)) {
+let integer = number + 1
+console.log(integer, "iteger")
+} else {
+  let decimal = number + 0.01
+  console.log(decimal, "decimal")
+
+}
   // let prices = [20];
   let dates = nftPricingHistory.map((each) => each?.addedOn);
+    // let dates = nftPricingHistory.map((each) => each?.addedOn);
+  console.log(nftPricingHistory.addedOn,"addedon")
   //   let dates = nftPricingHistory.map((each) =>
   //     moment(new Date(each?.addedOn)).format("D MMM YY")
   //   );
@@ -44,19 +56,19 @@ export default function PricingHistoryComponent(props) {
   //       moment(new Date(each?.addedOn)).format("YYYY")
   //     );
   //   }
-//   let dates = nftPricingHistory.map((each) =>
-//     moment(new Date(each?.addedOn)).format("D MMM YY")
-//   );
-// console.log(prices,"price")
-//   if (filter === "month") {
-//     dates = nftPricingHistory.map((each) =>
-//       moment(new Date(each?.addedOn)).format("MMM YY")
-//     );
-//   } else if (filter === "year") {
-//     dates = nftPricingHistory.map((each) =>
-//       moment(new Date(each?.addedOn)).format("YYYY")
-//     );
-//   }
+  //   let dates = nftPricingHistory.map((each) =>
+  //     moment(new Date(each?.addedOn)).format("D MMM YY")
+  //   );
+  // console.log(prices,"price")
+  //   if (filter === "month") {
+  //     dates = nftPricingHistory.map((each) =>
+  //       moment(new Date(each?.addedOn)).format("MMM YY")
+  //     );
+  //   } else if (filter === "year") {
+  //     dates = nftPricingHistory.map((each) =>
+  //       moment(new Date(each?.addedOn)).format("YYYY")
+  //     );
+  //   }
   let total = 0;
   let average = 0;
   nftPricingHistory.forEach((item) => {
@@ -94,13 +106,15 @@ export default function PricingHistoryComponent(props) {
         },
       },
       yaxis: {
-        
-       max: prices[0] + 1 ,
-      
-        
+        tickAmount: 4,
+        // max: prices[0] + 0.01,
+        max: prices[0] + 1,
       },
       xaxis: {
+      
+
         categories: dates,
+
       },
     },
   };
