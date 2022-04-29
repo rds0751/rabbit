@@ -318,12 +318,12 @@ function CreateNftCollections(props) {
 
   // Blockchain option
   const [selectedOption, setSelectedOption] = useState(null);
-  const blockchainOption = [];
+  const [blockchainOption, setBlockchainOption] = useState([]);
   const [blockchains, setBlockChains] = useState([])
  
   useEffect(() => {
     async function fetchData() {
-      await getTenantData().then(response => setBlockChains(response.blockchains));
+      await getTenantData().then(response => setBlockChains(response?.blockchains));
     }
     fetchData();
   }, [selectCategory]);

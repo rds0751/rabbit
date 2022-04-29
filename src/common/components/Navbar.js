@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { getNfts, getCollections } from "../../services/webappMicroservice";
 import { getTenantData } from "../../services/clientConfigMicroService";
 import { NavDropdown } from "react-bootstrap";
-import Badge from '@mui/material/Badge';
+import Badge from "@mui/material/Badge";
 import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../../assets/styles/Notification.css";
@@ -32,6 +32,7 @@ import bellicon from "../../assets/images/bellicon.svg";
 import profileImg from "../../assets/images/profile.svg";
 import wallet from "../../assets/images/wallet.svg";
 import Anafto from "../../assets/images/ANAFTO.svg";
+import { WHITE_LABEL_TOKEN } from "../../reducers/Constants";
 const queryString = require("query-string");
 function Navbar() {
   const navigate = useNavigate();
@@ -65,14 +66,13 @@ function Navbar() {
   const [permissionToUploadNft, setPermissionToUploadNft] = useState("");
   useEffect(() => {
     async function fetchData() {
-      getTenantData().then(response => setTenantData(response))
-      setPermissionToUploadNft(tenantData.permissionToUploadNft)
+      getTenantData().then((response) => setTenantData(response));
     }
     fetchData();
   }, []);
 
   useEffect(() => {
-    setPermissionToUploadNft(tenantData.permissionToUploadNft)
+    setPermissionToUploadNft(tenantData?.permissionToUploadNft);
   }, [tenantData]);
 
   useEffect(() => {
@@ -110,16 +110,17 @@ function Navbar() {
                       balance,
                     })
                   );
-                  CheckUserByWalletAddress(address, (res) => {
-                    dispatch(addUserData(res));
-                    localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
-                    setToggleEffect(!toggleEffect);
-                  });
+
+                  if (localStorage.getItem(WHITE_LABEL_TOKEN) !== null) {
+                    CheckUserByWalletAddress(address, (res) => {
+                      dispatch(addUserData(res));
+                      localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
+                      setToggleEffect(!toggleEffect);
+                    });
+                  }
                 });
             })
-            .catch((e) => {
-              console.log(e, "<<< error ");
-            });
+            .catch((e) => {});
         } else {
           return null;
         }
@@ -142,7 +143,6 @@ function Navbar() {
       .request({ method: "eth_getBalance", params: [address, "latest"] })
       .then((balance) => {
         setGetBalance(ethers.utils.formatEther(balance));
-        console.log(getBalance, "<<< balance");
       });
   };
 
@@ -223,7 +223,7 @@ function Navbar() {
   };
   const handleNotiSideBar = () => {
     setDisplay(true);
-    console.log(isOpenNoti, "<<<isopen noti");
+
     if (loggedInUser == null) {
       navigate("/add-wallet");
       toast.error("Connect your wallet", {
@@ -235,7 +235,6 @@ function Navbar() {
       document.body.className = !isOpenNoti ? "overflow" : "overflow-hidden";
     }
   };
-  console.log(isOpenNoti, "<<<isopen noti");
 
   // document.body.overflow = !isOpenWallet === false ?  "auto": "hidden";
   //------------------------------------------------------------
@@ -311,17 +310,14 @@ function Navbar() {
     getNotificationListById(userId).then((response) =>
       setNotifications(response)
     );
-  }, []);
-  console.log(notifications?.unreadCount,"notifications")
-// const notificationId = notifications._id;
-//   useEffect(() => {
-//     getNotificationCountById(notificationId).then((response) =>
-//       setCount(response)
-//     );
-//   }, []);
-// console.log(Count,"count")
-
-
+  }, [notifications]);
+  // const notificationId = notifications._id;
+  //   useEffect(() => {
+  //     getNotificationCountById(notificationId).then((response) =>
+  //       setCount(response)
+  //     );
+  //   }, []);
+  // console.log(Count,"count")
 
   return (
     <>
@@ -740,17 +736,18 @@ function Navbar() {
 
                 <ul className="right_section_nav mb-0">
                   <li>
-                  <Badge badgeContent={notifications?.unreadCount} color="primary">
-    
-    
-                    <img
-                      onClick={handleNotiSideBar}
-                      className={
-                        !isOpenNoti ? "notification-icon" : "hover-icon"
-                      }
-                      src={bellicon}
-                      alt="notification"
-                    ></img>
+                    <Badge
+                      badgeContent={notifications?.unreadCount}
+                      color="primary"
+                    >
+                      <img
+                        onClick={handleNotiSideBar}
+                        className={
+                          !isOpenNoti ? "notification-icon" : "hover-icon"
+                        }
+                        src={bellicon}
+                        alt="notification"
+                      ></img>
                     </Badge>
                   </li>
 

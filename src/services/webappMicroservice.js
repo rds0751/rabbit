@@ -33,13 +33,12 @@ export function getNfts(requestData) {
 
 // --------------------get nfts -----
 export const getNFtsData = async (filterObj, successCallBack) => {
-  console.log("dddddddddddddddd", { params: filterObj });
   try {
     const url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts?";
     const { data } = await axios.get(url, { params: filterObj });
     successCallBack(data);
   } catch (e) {
-    console.log(e);
+
   }
 };
 
@@ -54,7 +53,7 @@ export const getNft = async (requestData, successCallBack) => {
   if (data.success) {
     successCallBack(data.responseData);
   } else {
-    console.log(data);
+
   }
   // return httpService(
   //   httpConstants.METHOD_TYPE.GET,
@@ -214,7 +213,7 @@ export function getNotificationListById(requestData) {
     url
   )
     .then((response) => {
-      console.log(response, "sri");
+
       if (
         !response.success ||
         response.responseCode !== 200 ||
@@ -232,15 +231,12 @@ export function getNotificationListById(requestData) {
 export function getNotificationCountById(_id) {
   // console.log(notificationId,"sachin1111")
   let url =
-    process.env.REACT_APP_WEBAPP_MICROSERVICE +
-    "api/v1/notification/" 
-    + _id + "/read";
-
+  process.env.REACT_APP_WEBAPP_MICROSERVICE + `api/v1/notification/${_id}/read`;
   return httpService(
-    httpConstants.METHOD_TYPE.PUT,
+    httpConstants.METHOD_TYPE.POST,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
     AuthToken,
-    _id,
+    {id: _id},
     url
   )
     .then((response) => {
@@ -265,7 +261,6 @@ export const addNftReport = async (requestData, successCallBack) => {
     const { data } = await axios.post(url, requestData);
     successCallBack(data);
   } catch (e) {
-    console.log(e);
   }
 };
 
@@ -292,7 +287,6 @@ export function addLikeNft(requestData) {
     url
   )
     .then((response) => {
-      console.log("likeresponse", response, "<<<<");
       if (
         !response.success ||
         response.responseCode !== 200 ||
@@ -338,7 +332,7 @@ export function updateCollectionTxStatus(requestData, _id) {
     "api/v1/collections/" +
     _id +
     "/status";
-  console.log("urllllllllllllll", url);
+
   return httpService(
     httpConstants.METHOD_TYPE.PUT,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -362,7 +356,7 @@ export function updateCollectionTxStatus(requestData, _id) {
 }
 
 export function getActivities(reqObj, id) {
-  console.log("mohit", id);
+
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
     `api/v1/activities/${id}?type=${reqObj}`;

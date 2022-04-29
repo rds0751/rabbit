@@ -41,7 +41,7 @@ function Notification() {
     getNotificationListById(userId).then((response) =>
       setNotifications(response)
     );
-  }, []);
+  }, [notifications]);
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -92,7 +92,6 @@ const handleNotification = (_id) =>{
           className="all-noti"
           style={{ display: notifyData?.length === 0 ? "none" : "block" }}
         >
-          {console.log(notifications, "noti")}
           {notifyData?.map((curElem) => {
             const { _id, addedOn, type, owner, content } = curElem;
             let addedOnTimeStamp = moment(addedOn).format("LT");
@@ -100,8 +99,7 @@ const handleNotification = (_id) =>{
             return (
               <div className="single-noti">
                 
-                <div  className="noti-dynamic" onClick={() => handleNotification(_id)}>
-                {console.log(curElem?._id,"curle")}
+                <div  className={curElem?.status === false ? "noti-dynamic" : "noti-color"} onClick={() => handleNotification(_id)}>
                 <div className="single-noti-inner ">
                   <img
                     src={owner.photo}
@@ -119,10 +117,10 @@ const handleNotification = (_id) =>{
                           {String(owner.userName).length >= 7
                             ? !owner.userName
                               ? " "
-                              : String(owner?.userName).substring(0, 8) + "..."
+                              : String(owner?.userName).substring(0, 6) + "..."
                             : String(owner?.userName) === ""
-                            ? owner.wallet_address
-                            : owner.userName}
+                            ? String(owner?.wallet_address).substring(0, 6)
+                            : String(owner?.userName).substring(0, 6)}
                         </span>
                       </a>
                       &nbsp;{type}d&nbsp;your&nbsp;
@@ -130,7 +128,7 @@ const handleNotification = (_id) =>{
                         style={{ textDecoration: "none" }}
                         href={"/nft-information/" + content?._id}
                       >
-                        <span style={{ color: "#366EEF" }}>{content.name}</span>
+                        <span style={{ color: "#366EEF" }}>{String(content.name).substring(0,8) + "..."}</span>
                       </a>
                     </div>
                   ) : type == "bid" ? (
@@ -145,10 +143,10 @@ const handleNotification = (_id) =>{
                             {String(owner.userName).length >= 7
                               ? !owner.userName
                                 ? " "
-                                : String(owner.userName).substring(0, 8) + "..."
-                              : String(owner.userName) === ""
-                              ? owner.wallet_address
-                              : owner.userName}
+                                : String(owner?.userName).substring(0, 6) + "..."
+                              : String(owner?.userName) === ""
+                              ? String(owner?.wallet_address).substring(0, 6)
+                              : String(owner?.userName).substring(0, 6)}
                           </span>
                         </a>
                       </span>

@@ -25,8 +25,7 @@ export const UserReducer = (state = initialState, action) => {
         return {...state,
           loggedInUser: null,
           allUserData: "",
-          walletAddress: null,
-          redirectUrl: "", }
+          walletAddress: null}
       }
     case ADD_WALLET:
       {
