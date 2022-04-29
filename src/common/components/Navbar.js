@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { getNfts, getCollections } from "../../services/webappMicroservice";
 import { getTenantData } from "../../services/clientConfigMicroService";
 import { NavDropdown } from "react-bootstrap";
-import Badge from '@mui/material/Badge';
+import Badge from "@mui/material/Badge";
 import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../../assets/styles/Notification.css";
@@ -60,20 +60,19 @@ function Navbar() {
     limit: 4,
   });
 
-
   const [nfts, setNfts] = useState([]);
   const [collections, setCollections] = useState([]);
   const [tenantData, setTenantData] = useState("");
   const [permissionToUploadNft, setPermissionToUploadNft] = useState("");
   useEffect(() => {
     async function fetchData() {
-      getTenantData().then(response => setTenantData(response))
+      getTenantData().then((response) => setTenantData(response));
     }
     fetchData();
   }, []);
 
   useEffect(() => {
-    setPermissionToUploadNft(tenantData?.permissionToUploadNft)
+    setPermissionToUploadNft(tenantData?.permissionToUploadNft);
   }, [tenantData]);
 
   useEffect(() => {
@@ -114,7 +113,6 @@ function Navbar() {
 
                   if (localStorage.getItem(WHITE_LABEL_TOKEN) !== null) {
                     CheckUserByWalletAddress(address, (res) => {
-                      console.log('called in Nav 1')
                       dispatch(addUserData(res));
                       localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
                       setToggleEffect(!toggleEffect);
@@ -122,9 +120,7 @@ function Navbar() {
                   }
                 });
             })
-            .catch((e) => {
-              console.log(e, "<<< error ");
-            });
+            .catch((e) => {});
         } else {
           return null;
         }
@@ -137,7 +133,6 @@ function Navbar() {
     getUserBalance(newAccount[0]);
     dispatch(AddWalletDetails({ address: newAccount[0], balance: getBalance }));
     CheckUserByWalletAddress(newAccount[0], (res) => {
-      console.log('called in nav 2')
       dispatch(addUserData(res));
       localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
       setToggleEffect(!toggleEffect);
@@ -148,7 +143,6 @@ function Navbar() {
       .request({ method: "eth_getBalance", params: [address, "latest"] })
       .then((balance) => {
         setGetBalance(ethers.utils.formatEther(balance));
-        console.log(getBalance, "<<< balance");
       });
   };
 
@@ -229,7 +223,7 @@ function Navbar() {
   };
   const handleNotiSideBar = () => {
     setDisplay(true);
-    console.log(isOpenNoti, "<<<isopen noti");
+
     if (loggedInUser == null) {
       navigate("/add-wallet");
       toast.error("Connect your wallet", {
@@ -241,7 +235,6 @@ function Navbar() {
       document.body.className = !isOpenNoti ? "overflow" : "overflow-hidden";
     }
   };
-  console.log(isOpenNoti, "<<<isopen noti");
 
   // document.body.overflow = !isOpenWallet === false ?  "auto": "hidden";
   //------------------------------------------------------------
@@ -317,8 +310,7 @@ function Navbar() {
     getNotificationListById(userId).then((response) =>
       setNotifications(response)
     );
-  }, []);
-  console.log(notifications?.unreadCount, "notifications")
+  }, [notifications]);
   // const notificationId = notifications._id;
   //   useEffect(() => {
   //     getNotificationCountById(notificationId).then((response) =>
@@ -326,8 +318,6 @@ function Navbar() {
   //     );
   //   }, []);
   // console.log(Count,"count")
-
-
 
   return (
     <>
@@ -624,11 +614,11 @@ function Navbar() {
                   <li
                     className={
                       location.pathname.includes("/nfts") &&
-                        !location.pathname.includes("leader-board") &&
-                        !location.pathname.includes("resource") &&
-                        !location.pathname.includes("create-nft") &&
-                        !location.pathname.includes("help-center") &&
-                        !location.pathname.includes("suggestion")
+                      !location.pathname.includes("leader-board") &&
+                      !location.pathname.includes("resource") &&
+                      !location.pathname.includes("create-nft") &&
+                      !location.pathname.includes("help-center") &&
+                      !location.pathname.includes("suggestion")
                         ? "nav-items li_underline marketplace"
                         : "nav-items marketplace"
                     }
@@ -637,11 +627,11 @@ function Navbar() {
                     <Link
                       className={
                         location.pathname.includes("/nfts") &&
-                          !location.pathname.includes("leader-board") &&
-                          !location.pathname.includes("resource") &&
-                          !location.pathname.includes("create-nft") &&
-                          !location.pathname.includes("help-center") &&
-                          !location.pathname.includes("suggestion")
+                        !location.pathname.includes("leader-board") &&
+                        !location.pathname.includes("resource") &&
+                        !location.pathname.includes("create-nft") &&
+                        !location.pathname.includes("help-center") &&
+                        !location.pathname.includes("suggestion")
                           ? "nav-link navlink_active"
                           : "nav-link"
                       }
@@ -679,7 +669,7 @@ function Navbar() {
                     style={{ padding: "0" }}
                     className={
                       location.pathname.includes("help-center") ||
-                        location.pathname.includes("suggestion")
+                      location.pathname.includes("suggestion")
                         ? "nav-items dropdown li_underline resource nav-link navlink_active resource"
                         : "nav-items dropdown resource"
                     }
@@ -746,9 +736,10 @@ function Navbar() {
 
                 <ul className="right_section_nav mb-0">
                   <li>
-                    <Badge badgeContent={notifications?.unreadCount} color="primary">
-
-
+                    <Badge
+                      badgeContent={notifications?.unreadCount}
+                      color="primary"
+                    >
                       <img
                         onClick={handleNotiSideBar}
                         className={

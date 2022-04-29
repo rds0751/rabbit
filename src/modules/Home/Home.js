@@ -30,7 +30,6 @@ import { toast } from "react-toastify";
 import AwesomeSlider from "react-awesome-slider";
 import "react-awesome-slider/dist/styles.css";
 function Home() {
- 
   const { user, sideBar } = useSelector((state) => state);
   const { userDetails, loggedInUser, walletAddress } = user;
   const [nfts, setNfts] = useState([]);
@@ -52,14 +51,13 @@ function Home() {
     // getNfts(defaultReq).then((response) => {
     // if(nfts.length==0){
     // const myTimeout = setTimeout(100000);
-    console.log("API data");
+
     try {
       if (changeState === 0) {
         getNFtsData({}, (res) => {
           // console.log(res, "filterResponse");
-          console.log("fkfsffksfsw", res);
+
           if (res.success) {
-            console.log("data check", res?.responseData?.nftContent);
             // prevArray => [...prevArray, newValue]
             setNfts(res?.responseData?.nftContent);
             setChangeState(1);
@@ -72,16 +70,14 @@ function Home() {
           }
         });
       }
-    } catch (error) {
-      console.log("error message", error);
-    }
+    } catch (error) {}
     // }
     // else{
     //   console.log("its else statement")
     // }
   }, [nfts]);
   // setInterval(() => {
-  console.log("ffffffffffffffffssssssssssssssss", nfts);
+
   // }, 5000);
   const createHandle = () => {
     if (walletAddress == null) {
@@ -94,14 +90,17 @@ function Home() {
       navigate("/create-nft");
     }
   };
-  let [imageLoading,setImageLoading]=useState({src:nfts?.compressedURL,loaded:false })
-  const onImageLoad=()=>{
-   setImageLoading({...imageLoading,loaded:true});
-  }
+  let [imageLoading, setImageLoading] = useState({
+    src: nfts?.compressedURL,
+    loaded: false,
+  });
+  const onImageLoad = () => {
+    setImageLoading({ ...imageLoading, loaded: true });
+  };
 
   return (
     <>
-      <div className="homepage" >
+      <div className="homepage">
         <div className="banner">
           <div className="inner-width">
             <Container fluid>
@@ -145,8 +144,6 @@ function Home() {
                         {/* {console.log("kkkkkkkkkkkkkkkkkkkkk",nfts)} */}
 
                         <div className="d-flex flex-wrap">
-                          {console.log("sssssssqqqqsqqsqsqqwswwwwwwwww", nfts)}
-
                           {nfts.length &&
                             nfts.slice(0, 4).map((nft) => {
                               // const { _id, cdnUrl, name, biddingDetails, salesInfo } = nft;
@@ -160,18 +157,27 @@ function Home() {
                                       style={{ textDecoration: "none" }}
                                     >
                                       <div className="homePageContainer">
-                                      <Card.Img
-                                        variant="top"
-                                        src={nft.compressedURL}
-                                        onLoad={onImageLoad} 
-                                        onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
-                                      />
-                                      {!imageLoading.loaded && (
-                                        <div className="homeNftShimmer">
-                                        <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
-                                         </div>
-                                     )}
-                                     </div>
+                                        <Card.Img
+                                          variant="top"
+                                          src={nft.compressedURL}
+                                          onLoad={onImageLoad}
+                                          onMouseDown={(e) =>
+                                            e.preventDefault()
+                                          }
+                                          onContextMenu={(e) =>
+                                            e.preventDefault()
+                                          }
+                                        />
+                                        {!imageLoading.loaded && (
+                                          <div className="homeNftShimmer">
+                                            <ShimmerThumbnail
+                                              className="thumbnail"
+                                              fitOnFrame={true}
+                                              rounded
+                                            />
+                                          </div>
+                                        )}
+                                      </div>
                                     </Link>
                                     <Card.Body>
                                       <div className="d-flex align-items-start media">
@@ -181,7 +187,12 @@ function Home() {
                                             width="38px"
                                             height="38px"
                                             className="profile-img"
-                                            onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
+                                            onMouseDown={(e) =>
+                                              e.preventDefault()
+                                            }
+                                            onContextMenu={(e) =>
+                                              e.preventDefault()
+                                            }
                                           />
                                         </div>
                                         <div className="flex-grow-1 ms-2 card1">
@@ -258,39 +269,48 @@ function Home() {
                             nfts.slice(4, 8).map((nft) => {
                               return (
                                 <>
-                                  {console.log("kdkdkddkkdkkkkkkkkkkk", nft)}
                                   <Card>
                                     <Link
                                       to={"/nft-information/" + nft?._id}
                                       style={{ textDecoration: "none" }}
                                     >
-                                   
                                       <Card.Img
                                         variant="top"
                                         src={nft?.compressedURL}
-                                        onLoad={onImageLoad} 
-                                        onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
+                                        onLoad={onImageLoad}
+                                        onMouseDown={(e) => e.preventDefault()}
+                                        onContextMenu={(e) =>
+                                          e.preventDefault()
+                                        }
                                       />
-                                        <div className="homePageContainer">
-                                      {!imageLoading.loaded && (
-                                        <div className="homeNftShimmer">
-                                        <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
-                                         </div>
-                                     )}
-                                     </div>
+                                      <div className="homePageContainer">
+                                        {!imageLoading.loaded && (
+                                          <div className="homeNftShimmer">
+                                            <ShimmerThumbnail
+                                              className="thumbnail"
+                                              fitOnFrame={true}
+                                              rounded
+                                            />
+                                          </div>
+                                        )}
+                                      </div>
                                     </Link>
                                     <Card.Body>
                                       <div className="d-flex align-items-start media">
                                         <div className="flex-shrink-0 titleChar">
-                                         
-                                            <img
-                                              src={nft?.compressedURL}
-                                              width="38px"
-                                              height="38px"
-                                              className="profile-img"
-                                              onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
-                                            />
-                                          
+                                          <img
+                                            src={nft?.compressedURL}
+                                            width="38px"
+                                            height="38px"
+                                            className="profile-img"
+                                            onMouseDown={(e) =>
+                                              e.preventDefault()
+                                            }
+                                            onContextMenu={(e) =>
+                                              e.preventDefault()
+                                            }
+                                          />
+
                                           <div className="flex-grow-1 ms-2 card1">
                                             <h3 className="title">
                                               <Link
@@ -304,10 +324,10 @@ function Home() {
                                                 {nft?.name}
                                               </Link>
                                             </h3>
-                                          
-                                          <span className="nftTileEachDetailsFirstContainerValue">
-                                            {`${nft?.salesInfo?.price}  ${nft?.salesInfo?.currency}`}
-                                          </span>
+
+                                            <span className="nftTileEachDetailsFirstContainerValue">
+                                              {`${nft?.salesInfo?.price}  ${nft?.salesInfo?.currency}`}
+                                            </span>
                                           </div>
                                           {/* <p className="description">{nft?.salesInfo.price} </p> */}
                                         </div>
@@ -385,16 +405,20 @@ function Home() {
                   {nfts.length &&
                     nfts.slice(0, 8).map((nft) => {
                       return (
-
                         <div>
                           {" "}
                           <div>
                             {" "}
                             <Link
-                        to={"/nft-information/" + nft?._id}
-                        style={{ textDecoration: "none" }}
-                      >
-                            <img className="nft-img" src={nft?.cdnUrl} onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}></img>
+                              to={"/nft-information/" + nft?._id}
+                              style={{ textDecoration: "none" }}
+                            >
+                              <img
+                                className="nft-img"
+                                src={nft?.cdnUrl}
+                                onMouseDown={(e) => e.preventDefault()}
+                                onContextMenu={(e) => e.preventDefault()}
+                              ></img>
                             </Link>
                           </div>
                           <br />
@@ -407,19 +431,20 @@ function Home() {
                           <br />
                           <br />
                           <br />
-                          <div
-                            className="three-items"
-                            
-                          >
+                          <div className="three-items">
                             <div style={{ display: "flex" }}>
-                              <Avatar alt="Remy Sharp" src={nft?.cdnUrl} onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()} />
+                              <Avatar
+                                alt="Remy Sharp"
+                                src={nft?.cdnUrl}
+                                onMouseDown={(e) => e.preventDefault()}
+                                onContextMenu={(e) => e.preventDefault()}
+                              />
                               <p className="nft-carname">{nft?.name}</p>
                             </div>
 
                             <button>{`${nft?.salesInfo?.price}  ${nft?.salesInfo?.currency}`}</button>
                           </div>
                         </div>
-                        
                       );
                     })}
                 </AwesomeSlider>
