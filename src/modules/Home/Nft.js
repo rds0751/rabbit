@@ -150,22 +150,11 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
 function NftPage(props) {
   const { user } = useSelector((state) => state);
 
-  let defaultReq = {
+  const [filterReq, setFilterReq] = useState({
     minPrice: "",
     maxPrice: "",
-    sort: "all",
-  };
-
-  if (user?.loggedInUser?._id) {
-    defaultReq = {
-      userId: `${user?.loggedInUser?._id}`,
-      minPrice: "",
-      maxPrice: "",
-      sort: "all",
-    };
-  }
-
-  const [filterReq, setFilterReq] = useState(defaultReq);
+    sort: "-1",
+  });
   const [nfts, setNfts] = useState([]);
   const [toggleNft, setToggleNft] = useState(true);
   const [minPrice, setMinPrice] = useState("0");
@@ -175,6 +164,15 @@ function NftPage(props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const ref = useRef();
 
+  // if (user?.loggedInUser) {
+  //   setFilterReq({...filterReq, userId: user?.loggedInUser?._id})
+  // }
+
+  useEffect(() => {
+    if (user?.loggedInUser !== null) {
+      setFilterReq({ ...filterReq, userId: user?.loggedInUser?._id });
+    }
+  }, [user?.loggedInUser]);
   useEffect(() => {
     setIsLoading(true);
     async function fetchData() {
@@ -318,10 +316,10 @@ function NftPage(props) {
               value={filterReq.sort}
               defaultValue="all"
             >
-              <StyledOption value="all" hidden>
-                Sort By All
+              <StyledOption value="-1" hidden>
+                Sort By
               </StyledOption>
-              <StyledOption value="all">All</StyledOption>
+              {/* <StyledOption value="all">All</StyledOption> */}
               <StyledOption value="1">Ascending Order</StyledOption>
               <StyledOption value="-1">Descending Order</StyledOption>
             </CustomSelect>
