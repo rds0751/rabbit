@@ -92,7 +92,7 @@ function MyItems() {
         {/* ----------- */}
 
         {toggleSelect && (
-          <div style={{ marginTop: "40.12px", marginLeft: 'auto', rowGap: "50px" }} className="row">
+          <div style={{ marginTop: "40.12px", marginLeft: 'auto', rowGap: "50px",marginBottom: "113px" }} className="row">
 
             {ownedNft.length > 1 ?(
               ownedNft.map((curElem) => {
@@ -158,7 +158,7 @@ function MyItems() {
           </div>
         )}
         {!toggleSelect && (
-          <div style={{ marginLeft: 'auto', rowGap: "50px" }} className="row">
+          <div style={{ marginLeft: 'auto', rowGap: "50px",marginBottom: "107px" }} className="row">
             {ownedCollection.length > 1 ? (
               ownedCollection.map((curElem) => {
                 const { imageUrl, name, _id,nftCount } =
