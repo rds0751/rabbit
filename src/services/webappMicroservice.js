@@ -237,7 +237,7 @@ export function getNotificationCountById(_id) {
     + _id + "/read";
 
   return httpService(
-    httpConstants.METHOD_TYPE.PUT,
+    httpConstants.METHOD_TYPE.POST,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
     AuthToken,
     _id,
