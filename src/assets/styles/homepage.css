@@ -553,8 +553,8 @@ margin-left: 10px;
 .card1 .homePageNft{
   width: 60%;
 }
-.shimmer {
+.thumbnail-homepage-shimmer{
   background: linear-gradient(to right, white 8%, #f0f0f0 18%, lightgray 33%);
   animation: shimmer 4.2s linear infinite forwards;
-  transition: all .4s !important;
+  transition: all .4s;
 }
