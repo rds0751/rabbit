@@ -95,7 +95,7 @@ function Home() {
     loaded: false,
   });
   const onImageLoad = () => {
-    //setImageLoading({ ...imageLoading, loaded: true });
+    setImageLoading({ ...imageLoading, loaded: true });
   };
 
   return (
