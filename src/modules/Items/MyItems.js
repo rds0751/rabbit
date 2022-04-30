@@ -187,12 +187,14 @@ function MyItems() {
                         >
                           {name}
                         </p>
+                        <div>
                         <p className="collectionCardEachTotalitems">
                           <span className=" font-14 text-dark">
                             Total Items:
                             <span className="text-primary total-nft-collection">{nftCount}</span>
                           </span>
                         </p>
+                        </div>
                       </div>
                     </div>
                   </div>

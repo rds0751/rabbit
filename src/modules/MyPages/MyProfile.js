@@ -328,7 +328,7 @@ function MyProfile() {
         <div className="profileavatar  absolute">
           <div className="profileImg-Container-myprofile">
           <img
-            src={loggedInUser?.photo?.compressedURL != "" ? loggedInUser?.photo?.compressedURL : profileImage}
+            src={typeof(loggedInUser?.photo) === "object" ? loggedInUser?.photo?.compressedURL : (typeof(loggedInUser?.photo) === "string" && loggedInUser?.photo !=""? loggedInUser.photo:profileImage)}
             alt=""
             className="user-img"
             onLoad={onImageLoad} 

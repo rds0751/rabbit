@@ -597,16 +597,18 @@ const enabled=name?.current.length > 0 && price?.current.length>0 && description
                   name="email"
                   placeholder="Enter name"
                   autoComplete="off"
-                  maxLength="100"
+                  maxLength="20"
                   title=" "
                   onChange={(e) => {
                     name.current = e.target.value;
                     var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
-                      if(!format.test(name.current)){
-                        SetNameError("");
-                      }
+                      if(!format.test(name.current))
+                      SetNameError("");
+                      else if(name.current.length!=0)
+                      SetNameError("")
+                      else if (!name.current.length < 3)
+                      SetNameError("")
                       
-                    
                   }}
                 />
                
@@ -631,7 +633,6 @@ const enabled=name?.current.length > 0 && price?.current.length>0 && description
                       if(format.test(name.current)){
                         SetNameError("(No Special Character Allowed)");
                       }else if(name.current.length == 0){
-                        setError("")
                         SetNameError("( Name is required )")
                       }
                       else if(name.current.length < 3){
@@ -642,16 +643,12 @@ const enabled=name?.current.length > 0 && price?.current.length>0 && description
                     }}
                     onChange={(e) => {
                       price.current = e.target.value;
-
-                      
+                      if(price.current.length != 0)
+                      setError("")
+                      else if(!price.current < "0.004" || !price.current=="0")
+                      setError("")
                       // checkChanges();
-                      if(+e.target.value < "0.004" || +e.target.value=="0"){
-                        setError("( Minimum listing price for an NFT should be more than 0.004 ETH )")
-                      }else if(e.target.value.length == 0){
-                        setError("( price is required)")
-                      }else{
-                        setError("")
-                      }
+                     
                     }}
                   />
                   <span class="input-group-text">ETH</span>
@@ -677,6 +674,26 @@ const enabled=name?.current.length > 0 && price?.current.length>0 && description
                   name="text"
                   placeholder="Write description"
                   value={description.current}
+                  onFocus={(e)=>{
+                    var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
+                    if(price.current.length == 0)
+                      setError("( price is required)")
+                    else if(price.current < "0.004" || price.current=="0")
+                      setError("( Minimum listing price for an NFT should be more than 0.004 ETH )")
+                    else if(price.current > "1000000000")
+                      setError("( Maximum listing price for an NFT should be less than 1,000,000,000 ETH )")
+                   if(format.test(name.current))
+                        SetNameError("(No Special Character Allowed)");
+                    else if(name.current.length == 0)
+                        SetNameError("( Name is required )")
+                    else if(name.current.length < 3)
+                        SetNameError("( Name should be atleast 3 character )")
+                    else{
+                      setError("") ;
+                      SetNameError("");
+                    }
+                    
+                  }}
                   onChange={(e) => {
                     if(e.target.value.length==0){
                       SetDesError("( Description is required )")
