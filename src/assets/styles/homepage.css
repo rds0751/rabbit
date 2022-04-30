@@ -519,7 +519,7 @@ margin-left: 10px;
 }
 .card1{
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: space-between;
 }
 
@@ -552,4 +552,9 @@ margin-left: 10px;
 }
 .card1 .homePageNft{
   width: 60%;
+}
+.shimmer {
+  background: linear-gradient(to right, white 8%, #f0f0f0 18%, lightgray 33%);
+  animation: shimmer 4.2s linear infinite forwards;
+  transition: all .4s !important;
 }

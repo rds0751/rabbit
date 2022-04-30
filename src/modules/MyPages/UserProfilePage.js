@@ -308,7 +308,7 @@ const onBannerLoad=()=>{
         <div className="profileavatar  absolute">
         <div className="profileImg-Container-userProfile">
           <img
-            src={userData?.photo != "" ? userData?.photo : profileImage}
+            src={typeof(userData.photo)=== "object" ? userData?.photo?.compressedURL : (typeof(userData?.photo)==="string" && userData?.photo != "" ? userData?.photo :profileImage)}
             alt=""
             className="user-img"
             onLoad={onImageLoad} 

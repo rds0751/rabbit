@@ -438,7 +438,7 @@ function LeaderBoard() {
                             <img
                               className="top-img"
                               style={{ width: '52px', height: '52px' }}
-                              src={buyer?.photo?.compressedURL? buyer?.photo?.compressedURL : buyer.photo}
+                              src={buyer?.photo?.compressedURL? buyer?.photo?.compressedURL : buyer?.photo}
                               alt=""
                             />
                           )}
@@ -464,7 +464,7 @@ function LeaderBoard() {
                                   style={{ textDecoration: 'null' }}
                                   to={'/user-profile/' + buyer._id}
                                 >
-                                  {buyer.userName}
+                                  {buyer?.userName}
                                 </Link>{' '}
                               </h2>
                             )}
@@ -1270,7 +1270,7 @@ const BuildPendingAcceptedRejectedBlock = ({ apiData ,isloading}) => {
                   <img
                     className="top-img"
                     style={{ width: '52px', height: '52px' }}
-                    src={buyer.photo.compressedURL ? buyer?.photo?.compressedURL :buyer.photo}
+                    src={buyer?.photo?.compressedURL ? buyer?.photo?.compressedURL :buyer?.photo}
                     alt=""
                   />
                 )}
@@ -1368,7 +1368,7 @@ const BuildAcceptedBlock = ({ apiData , isloading }) => {
                   <img
                     className="top-img"
                     style={{ width: '52px', height: '52px' }}
-                    src={topSellers?.photo?.compressedURL ? topSellers?.photo?.compressedURL : topSellers.photo}
+                    src={topSellers?.photo?.compressedURL ? topSellers?.photo?.compressedURL : topSellers?.photo}
                     alt=""
                   />
                 )}
