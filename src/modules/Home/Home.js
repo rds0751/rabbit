@@ -95,7 +95,7 @@ function Home() {
     loaded: false,
   });
   const onImageLoad = () => {
-    setImageLoading({ ...imageLoading, loaded: true });
+    //setImageLoading({ ...imageLoading, loaded: true });
   };
 
   return (
@@ -171,7 +171,7 @@ function Home() {
                                         {!imageLoading.loaded && (
                                           <div className="homeNftShimmer">
                                             <ShimmerThumbnail
-                                              className="thumbnail"
+                                              className="thumbnail-homepage-shimmer"
                                               fitOnFrame={true}
                                               rounded
                                             />
@@ -287,7 +287,7 @@ function Home() {
                                         {!imageLoading.loaded && (
                                           <div className="homeNftShimmer">
                                             <ShimmerThumbnail
-                                              className="thumbnail"
+                                              className="thumbnail-homepage-shimmer"
                                               fitOnFrame={true}
                                               rounded
                                             />
