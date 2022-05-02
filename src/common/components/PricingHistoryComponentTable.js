@@ -109,16 +109,17 @@ const TableDiv = styled.div`
   opacity: 1;
 `;
 const CustomSnack = styled(Snackbar)`
-  @media (min-width: 969px) {
+  @media (min-width: 992px) {
     position: absolute !important;
-    top: 1273px !important;
+    top: 1159px !important;
     right: auto !important;
     left: 372px !important;
 
     min-width: 112px !important;
   }
-  @media only screen and (min-width: 0px) and (max-width: 968px) {
-    top: 153px !important;
+  @media only screen and (min-width: 0px) and (max-width: 991px) {
+    position: absolute !important;
+    top: 1872px !important;
     left: auto !important;
 
     min-width: 112px !important;

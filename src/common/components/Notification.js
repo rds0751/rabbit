@@ -76,7 +76,6 @@ function Notification() {
   // }, []);
 
   const notifyData = notifications?.notificationObj;
-  // console.log(notifications?.notificationObj?._id,"count")
 const handleNotification = (_id) =>{
   getNotificationCountById(_id).then((response) =>
       setCount(response)
@@ -137,30 +136,59 @@ const handleNotification = (_id) =>{
                         <span style={{ color: "#366EEF" }}>{String(content.name).substring(0,8) + "..."}</span>
                       </a>
                     </div>
-                  ) : type == "bid" ? (
+                  ) : type == "buy" ? (
                     <div className="noti-text">
-                      <span>
-                        You got new {type} from{" "}
-                        <a
-                          style={{ textDecoration: "none" }}
-                          href={"/user-profile/" + owner?._id}
-                        >
-                          <span style={{ color: "#366EEF" }}>
-                            {String(owner.userName).length >= 7
-                              ? !owner.userName
-                                ? " "
-                                : String(owner?.userName).substring(0, 6) + "..."
-                              : String(owner?.userName) === ""
-                              ? String(owner?.wallet_address).substring(0, 6)
-                              : String(owner?.userName).substring(0, 6)}
-                          </span>
-                        </a>
+                    <a
+                      style={{ textDecoration: "none" }}
+                      href={"/user-profile/" + owner?._id}
+                    >
+                      <span style={{ color: "#366EEF" }}>
+                        {String(owner.userName).length >= 7
+                          ? !owner.userName
+                            ? " "
+                            : String(owner?.userName).substring(0, 6) + "..."
+                          : String(owner?.userName) === ""
+                          ? String(owner?.wallet_address).substring(0, 6)
+                          : String(owner?.userName).substring(0, 6)}
                       </span>
-                    </div>
+                    </a>
+                    &nbsp;bought&nbsp;your&nbsp;
+                    <a
+                      style={{ textDecoration: "none" }}
+                      href={"/nft-information/" + content?._id}
+                    >
+                      <span style={{ color: "#366EEF" }}>{String(content.name).substring(0,8) + "..."}</span>
+                    </a>
+                  </div>
+                  ) : type == "reportNFT" ? (
+                    <div className="noti-text">
+                    <a
+                      style={{ textDecoration: "none" }}
+                      href={"/user-profile/" + owner?._id}
+                    >
+                      <span style={{ color: "#366EEF" }}>
+                        {String(owner.userName).length >= 7
+                          ? !owner.userName
+                            ? " "
+                            : String(owner?.userName).substring(0, 5) + "..."
+                          : String(owner?.userName) === ""
+                          ? String(owner?.wallet_address).substring(0, 5)
+                          : String(owner?.userName).substring(0, 5)}
+                      </span>
+                    </a>
+                    &nbsp;reported&nbsp;your&nbsp;
+                    <a
+                      style={{ textDecoration: "none" }}
+                      href={"/nft-information/" + content?._id}
+                    >
+                      <span style={{ color: "#366EEF" }}>{String(content.name).substring(0,5) + "..."}</span>
+                    </a>
+                  </div>
                   ) : (
-                    <div>
-                      <span>you got new{type} from srinivas</span>
-                    </div>
+                    // <div>
+                    //   <span>you got new{type} from srinivas</span>
+                    // </div>
+                    ""
                   )}
                 </div>
 

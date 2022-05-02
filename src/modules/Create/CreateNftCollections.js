@@ -48,11 +48,13 @@ function CreateNftCollections(props) {
   const navigation = useNavigate();
   const { loggedInUser, walletAddress } = user;
   const [specialchar,setSpecialChar]=useState("")
+  const [defaultCategories, setDefaultCategories] = useState([]);
   const [Categories, setCategories] = useState([]);
+  const [tenantCategories, setTenantCategories] = useState([]);
   const [selectCategory,setSelectCategory]=useState("");
 
   useEffect(() => {
-    getCategories().then((response) => setCategories(response));
+    getCategories().then((response) => setDefaultCategories(response));
   }, []);
 
 
@@ -81,12 +83,6 @@ function CreateNftCollections(props) {
       navigation("/add-wallet");
     }
   });
-
-  useEffect(() => {
-    getCategories((res) => {
-      setCategories(res.responseData);
-    });
-  }, []);
 
   useEffect(()=>{
     $(document).ready(function(){
@@ -323,10 +319,25 @@ function CreateNftCollections(props) {
  
   useEffect(() => {
     async function fetchData() {
-      await getTenantData().then(response => setBlockChains(response?.blockchains));
+      const response = await getTenantData()
+      setBlockChains(response?.blockchains)
+      setTenantCategories(response?.categories)
+      // await getTenantData().then(response => setBlockChains(response?.blockchains));
     }
     fetchData();
-  }, [selectCategory]);
+  }, []);
+
+  useEffect(() => {}, [selectCategory]);
+
+
+  useEffect(() => {
+    const selectedCategories = defaultCategories.filter((item) => {
+      if (tenantCategories.find((item2) => item2 == item._id)) {
+        return item;
+      } else return;
+    });
+    setCategories(selectedCategories);
+  }, [tenantCategories, defaultCategories]);
 
   useEffect(() => {
     for (let eachItem of blockchains) {
