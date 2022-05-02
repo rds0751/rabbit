@@ -23,6 +23,7 @@ import { ManageNotiSideBar, ManageWalletSideBar } from "../../reducers/Action";
 import { useDispatch } from "react-redux";
 import moment from "moment";
 import NotificationIcon from "../../assets/images/Notification.svg";
+import profileImage from "../../assets/images/ProfileReplace.svg";
 
 function Notification() {
   const { sideBar, user } = useSelector((state) => state);
@@ -102,7 +103,12 @@ const handleNotification = (_id) =>{
                 <div  className={curElem?.status === false ? "noti-dynamic" : "noti-color"} onClick={() => handleNotification(_id)}>
                 <div className="single-noti-inner ">
                   <img
-                    src={owner.photo}
+                    src={typeof(owner.photo)=== "object" ? 
+                    owner?.photo?.compressedURL
+                     : 
+                     (typeof(owner?.photo)==="string" && owner?.photo != "" ?
+                      owner?.photo 
+                      :profileImage)}
                     width="24px"
                     height="24px"
                     className="noti-image"
