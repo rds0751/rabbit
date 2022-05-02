@@ -268,7 +268,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
             this.setState({ saleSuccess: true });
 
             this.setState({ nftDetails: result });
-            toast.success("NFT has been put on sell",{autoClose:7000,theme:"colored"});
+            toast.success("NFT has been put on sale",{autoClose:7000,theme:"colored"});
         }
     };
 
