@@ -65,6 +65,8 @@ import SellPage from "./modules/Resources/Selling/index";
 import ScrollToTop from "./ScrollToTop";
 import SearchResults from "./common/components/searchResults";
 import Blog from "./modules/blogs/blog";
+import Privacy from "./modules/company/privacy";
+import TermsAndCondition from "./modules/company/termsAndCondition";
 function App() {
 
   useEffect(() => {
@@ -206,6 +208,8 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/search-results" element={<SearchResults />} />
             <Route path="/blogs" element={<Blog />} />
+            <Route path="/privacy" element={<Privacy />} />.
+            <Route path="/Terms-Condition" element={<TermsAndCondition />} />
           </Routes>
           {/* </Switch> */}
         </Router>
