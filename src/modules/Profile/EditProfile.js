@@ -74,7 +74,7 @@ function EditProfile(props) {
   const handleChange = async (event) => {
     try{
       var filesize=event.target.files[0].size;
-      const filename=event.target.files[0].name;
+      const filename=event.target.files[0].name.replace(/[^a-zA-Z0-9.]/g,'');
       const fileextenstion=filename.split('.').pop().toLowerCase();
       const originalfileSize=Math.round(filesize/1024);
       const extensionArray=['jpeg','png','jpg','gif'];
@@ -106,15 +106,16 @@ function EditProfile(props) {
               formData.append("createdBy", `${user?.loggedInUser?._id}`);
               formData.append("attachment", fileUploaded);
           
-              const res = await fetch(`${BASE_URL2}/api/v1/upload-documents`, {
+              const res = await fetch(`${BASE_URL2}/api/v2/upload-documents`, {
                 method: httpConstants.METHOD_TYPE.POST,
                 body: formData,
                 // headers: AuthToken,
               });
-              console.log(res, "<<<< res");
+             
               const result = await res.json();
+              console.log(res,result, "<<<<edit profile response");
               if (result.success) {
-                setFormData({ ...formData, photo: result.responseData });
+                setFormData({ ...formData, photo: result.responseData.cdnUrl,compressedURL:result.responseData.compressedURL});
               } else {
                 toast.error("Unable to change image", {
                   position: toast.POSITION.TOP_RIGHT
@@ -305,7 +306,7 @@ const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 
           <div className="chooseProfilePicInnerContainer ">
             <div className="editprofile-image">
               <img
-                src={imageUrl!=""?imageUrl:profileImage}
+                src={imageUrl?.compressedURL!=""?imageUrl?.compressedURL:profileImage}
               />
             </div>
             {console.log("image urlllll",imageUrl)}
