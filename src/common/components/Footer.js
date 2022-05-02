@@ -295,12 +295,12 @@ function Footer() {
                 </a>
               </p>
               <p>
-                <a href="/about" className="footersubtitle">
+                <a href="/privacy" className="footersubtitle">
                   Privacy Policy
                 </a>
               </p>
               <p>
-                <a href="/about" className="footersubtitle">
+                <a href="/Terms-Condition" className="footersubtitle">
                   Terms and Conditon
                 </a>
               </p>

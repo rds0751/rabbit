@@ -306,7 +306,7 @@ const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 
           <div className="chooseProfilePicInnerContainer ">
             <div className="editprofile-image">
               <img
-                src={imageUrl?.compressedURL!=""?imageUrl?.compressedURL:profileImage}
+                src={imageUrl?.compressedURL!=""?imageUrl.compressedURL:profileImage}
               />
             </div>
             {console.log("image urlllll",imageUrl)}

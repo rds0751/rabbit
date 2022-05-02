@@ -1949,3 +1949,6 @@ td {
   position: relative;
   display: inline-block;
 }
+.DetailPage-Table-Data{
+  border: none;
+}

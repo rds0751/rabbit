@@ -30,6 +30,7 @@ import { Oval } from "react-loader-spinner";
 import Snackbar from "@mui/material/Snackbar";
 import styled from "styled-components";
 import ListingsTable from "../../common/components/ListingTable";
+import DetailPage from "../../common/components/DetailPage";
 toast.configure();
 const CustomSnack = styled(Snackbar)`
   @media (min-width: 992px) {
@@ -919,6 +920,20 @@ export default function NftInformation(props) {
                   >
                     Offers
                   </li>
+                  <li
+                    onClick={() => {
+                      setTab(4);
+                    }}
+                    style={{
+                      borderBottom: tab === 4 ? "2px solid #366EEF" : "",
+                      color: tab === 4 ? "#000000" : "#828282",
+                      fontWeight: tab === 4 ? 600 : "",
+                      marginRight: "16px",
+                      fontFamily: tab === 4 ? "poppins-bold" : "poppins",
+                    }}
+                  >
+                    Details
+                  </li>
                   {/* <li
                     onClick={() => {
                       setTab(3);
@@ -936,6 +951,7 @@ export default function NftInformation(props) {
                 {tab === 1 ? <PricingHistoryComponentGraph id={id} /> : ""}
                 {tab === 2 ? <ListingsTable id={id} /> : ""}
                 {tab === 3 ? <ListingsTable  /> : ""}
+                {tab === 4 ? <DetailPage nft={nft} /> : ""}
               </div>
             </div>
           </div>
