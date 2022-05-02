@@ -696,7 +696,7 @@ const enabled=name?.current.length > 0 && price?.current.length>0 && description
                     else if(price.current > "1000000000")
                       setError("( Maximum listing price for an NFT should be less than 1,000,000,000 ETH )")
                     else
-                      SetNameError("");
+                      setError("");
                     
                     
                   }}
