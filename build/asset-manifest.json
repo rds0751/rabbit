@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.cd936775.css",
-    "main.js": "/static/js/main.2bed1b72.js",
+    "main.css": "/static/css/main.caa7c007.css",
+    "main.js": "/static/js/main.5fc2ba6d.js",
     "static/media/Banner.png": "/static/media/Banner.112c32a6f604149b0d83.png",
     "static/media/Abstraction.png": "/static/media/Abstraction.010c4cc892910d63a5b1.png",
     "static/media/Poppins-Regular.ttf": "/static/media/Poppins-Regular.35d26b781dc5fda684cc.ttf",
@@ -15,8 +15,8 @@
     "static/media/Metamask.svg": "/static/media/Metamask.3737b9d1e6ec19bde908675ba3c35281.svg",
     "static/media/Collection-home.svg": "/static/media/Collection-home.6523b05f61ede5e0ae72e7777dda1554.svg",
     "static/media/ANAFTO.svg": "/static/media/ANAFTO.ae04af4efe1daa0c67cc5126431de892.svg",
-    "static/media/selling.svg": "/static/media/selling.46daf20c137fa83865b4b4d3f7e8ac91.svg",
     "index.html": "/index.html",
+    "static/media/selling.svg": "/static/media/selling.46daf20c137fa83865b4b4d3f7e8ac91.svg",
     "static/media/ethereum.svg": "/static/media/ethereum.3477dbf799668d2ee5c41b4e1ee69385.svg",
     "static/media/Wallet-home.svg": "/static/media/Wallet-home.52abb8929fd4d6ad03087a0c338db515.svg",
     "static/media/createCollection.svg": "/static/media/createCollection.5d1b3d38c380b862830217715bfd25f0.svg",
@@ -62,11 +62,11 @@
     "static/media/drop-down-arrow.svg": "/static/media/drop-down-arrow.252c67d09c66c766f99a.svg",
     "static/media/Edit.svg": "/static/media/Edit.adfd6c934476ae588248e2026354da45.svg",
     "static/media/coverImage.svg": "/static/media/coverImage.7cc8a61314efed2824b3ef2b04371775.svg",
-    "main.cd936775.css.map": "/static/css/main.cd936775.css.map",
-    "main.2bed1b72.js.map": "/static/js/main.2bed1b72.js.map"
+    "main.caa7c007.css.map": "/static/css/main.caa7c007.css.map",
+    "main.5fc2ba6d.js.map": "/static/js/main.5fc2ba6d.js.map"
   },
   "entrypoints": [
-    "static/css/main.cd936775.css",
-    "static/js/main.2bed1b72.js"
+    "static/css/main.caa7c007.css",
+    "static/js/main.5fc2ba6d.js"
   ]
 }

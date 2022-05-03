@@ -16,25 +16,23 @@ export const CheckUserByWalletAddress = async (
   walletAddress,
   successCallBack
 ) => {
-  console.log("<<< token by auth token");
   let url = BASE_URL + "/api/v1/wallet-address";
-  console.log(url, walletAddress, "<<<< wallet address");
+
   const { data } = await axios.put(
     url,
     { wallet_address: walletAddress }
     // { headers: AuthToken }
   );
-  console.log(data, "<<<<datawalletaddress");
+
   if (data.success) {
     // return data.responseData;
     successCallBack(data.responseData);
 
-    if(walletAddress) localStorage.setItem('has_wallet',true)
-    else localStorage.setItem('has_wallet',false)
+    if (walletAddress) localStorage.setItem("has_wallet", true);
+    else localStorage.setItem("has_wallet", false);
 
     // dispatch(addUserData(data.responseData));
   } else {
-    console.log(data);
     // return data;
   }
   // successCallback(data)
@@ -61,15 +59,12 @@ export const CheckUserByWalletAddress = async (
 };
 export const addEmail = async (bodyData, successCallback) => {
   try {
-    const url =
-      process.env.REACT_APP_WEBAPP_USER_MICROSERVICE + "api/v1/email";
+    const url = process.env.REACT_APP_WEBAPP_USER_MICROSERVICE + "api/v1/email";
     const { data } = await axios.post(url, bodyData, { headers: AuthToken });
     if (data.success) {
       successCallback(data.responseData);
     }
-  } catch (e) {
-    console.log("add Email");
-  }
+  } catch (e) {}
 };
 export function getUser(requestData) {
   let url =
@@ -98,12 +93,11 @@ export function getUser(requestData) {
 
 export const getCategories = async (successCallBack) => {
   const url = dev_url + "api/v1/categories";
-  console.log(url, "<<<url");
+
   const { data } = await axios.get(url, { headers: AuthToken });
   if (data.success && data.responseCode == 200) {
     successCallBack(data);
   } else {
-    console.log(data);
   }
 };
 
@@ -112,10 +106,7 @@ export const updateUser = async (userData, successCallBack) => {
     const url =
       process.env.REACT_APP_USER_MICROSERVICE + `api/v1/user/${userData._id}`;
     const { data } = await axios.put(url, { userData }, { headers: AuthToken });
-    console.log(data, "<<<<");
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) {}
 };
 
 export const updateBannerByUserId = async (
@@ -129,28 +120,21 @@ export const updateBannerByUserId = async (
       `api/v1/edit-banner/${userId}`;
     const { data } = await axios.post(url, formData);
     successCallBack(data);
-    console.log(data, "<<<<< REsponse after updating user profile");
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) {}
 };
 
 // for public user-profile
 
 export const userPublicProfile = async (successCallBack, userId) => {
-  console.log("kjggggggggggggggggggg",userId)
   try {
     const url =
-      process.env.REACT_APP_WEBAPP_USER_MICROSERVICE+"api/v1/users/"+userId;
-      console.log("kjggggggggggggggggggg",url)
+      process.env.REACT_APP_WEBAPP_USER_MICROSERVICE + "api/v1/users/" + userId;
+
     const { data } = await axios.get(url);
     if (data.success) {
       successCallBack(data);
     } else {
-      successCallBack({ success: false }) //msg: "Unable To Fetch Data" });
+      successCallBack({ success: false }); //msg: "Unable To Fetch Data" });
     }
-    console.log(data, "<<<<myprofile");
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) {}
 };

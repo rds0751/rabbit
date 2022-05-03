@@ -427,7 +427,7 @@ function LeaderBoard() {
                     return (
                       <>
                         <div className="leaderboardTopDetailsRow">
-                          {buyer.photo == '' || !buyer.photo ? (
+                          {buyer?.photo?.compressedURL?.length === 0 || !buyer?.photo || !buyer?.photo?.cdnUrl?.length===0? (
                             <img
                               className="top-img"
                               style={{ width: '52px', height: '52px' }}
@@ -438,7 +438,7 @@ function LeaderBoard() {
                             <img
                               className="top-img"
                               style={{ width: '52px', height: '52px' }}
-                              src={buyer.photo}
+                              src={buyer?.photo?.compressedURL? buyer?.photo?.compressedURL : buyer?.photo}
                               alt=""
                             />
                           )}
@@ -464,7 +464,7 @@ function LeaderBoard() {
                                   style={{ textDecoration: 'null' }}
                                   to={'/user-profile/' + buyer._id}
                                 >
-                                  {buyer.userName}
+                                  {buyer?.userName}
                                 </Link>{' '}
                               </h2>
                             )}
@@ -628,7 +628,7 @@ function LeaderBoard() {
                             <img
                               className="top-img"
                               style={{ width: '52px', height: '52px' }}
-                              src={topSellers.photo}
+                              src={topSellers?.photo?.compressedURL ? topSellers.photo.compressedURL : topSellers?.photo}
                               alt=""
                             />
                           )}
@@ -1106,7 +1106,7 @@ function LeaderBoard() {
           {topNftSales.map((curElem) => {
             console.log("kggggggggggggggggggg", curElem)
 
-            const { cdnUrl, name, owner, maxPrice2, daysLeft, likes, _id, content,compresedURL } = curElem
+            const { cdnUrl, name, owner, maxPrice2, daysLeft, likes, _id, content} = curElem
 
 
             const route = '/nft-information/' + _id
@@ -1119,7 +1119,7 @@ function LeaderBoard() {
                       // id="nft__photo"
 
                       className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
-                      src={content.imageUrl}
+                      src={content?.compressedURL}
                       alt="nft"
                       onError="this.onerror=null;this.src='/images/image.svg';"
                     />
@@ -1270,7 +1270,7 @@ const BuildPendingAcceptedRejectedBlock = ({ apiData ,isloading}) => {
                   <img
                     className="top-img"
                     style={{ width: '52px', height: '52px' }}
-                    src={buyer.photo}
+                    src={buyer?.photo?.compressedURL ? buyer?.photo?.compressedURL :buyer?.photo}
                     alt=""
                   />
                 )}
@@ -1368,7 +1368,7 @@ const BuildAcceptedBlock = ({ apiData , isloading }) => {
                   <img
                     className="top-img"
                     style={{ width: '52px', height: '52px' }}
-                    src={topSellers.photo}
+                    src={topSellers?.photo?.compressedURL ? topSellers?.photo?.compressedURL : topSellers?.photo}
                     alt=""
                   />
                 )}
