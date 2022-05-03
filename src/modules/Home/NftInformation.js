@@ -31,6 +31,7 @@ import Snackbar from "@mui/material/Snackbar";
 import styled from "styled-components";
 import ListingsTable from "../../common/components/ListingTable";
 import DetailPage from "../../common/components/DetailPage";
+import CopyToClipboard from "react-copy-to-clipboard";
 toast.configure();
 const CustomSnack = styled(Snackbar)`
   @media (min-width: 992px) {
@@ -189,7 +190,7 @@ export default function NftInformation(props) {
     // alert(window.location.href);
 
     // const { wallet_address } = loggedInUser;
-    navigator.clipboard.writeText(window.location.href);
+    // navigator.clipboard.writeText(window.location.href);
     // navigator.clipboard.writeText(walletAddressUnquoted);
     // setCopiedText(true);
     // toast.success("Text Copied");
@@ -447,7 +448,8 @@ export default function NftInformation(props) {
                       background: "#FFFFFF",
                     }}
                   >
-                    <li className="list-item" onClick={handleCopyToClipboard}>
+                    <li className="list-item" >
+                      <CopyToClipboard text={url}>
                       <button
                         className="copy-button"
                         onClick={handleClick({
@@ -455,9 +457,10 @@ export default function NftInformation(props) {
                           horizontal: "right",
                         })}
                       >
-                        <img src={copyIcon} alt="icon" className="icon" />
-                        <span className="icon-text">Copy link</span>
+                        <img  src={copyIcon} alt="icon" className="icon" />
+                        <span  className="icon-text">Copy link</span>
                       </button>
+                      </CopyToClipboard>
                     </li>
                     <li className="list-item">
                       {/* <img src={facebookIcon} alt="icon" className="icon" />
@@ -493,7 +496,7 @@ export default function NftInformation(props) {
               onClose={handleClose}
               message="Copied"
               key={vertical + horizontal}
-              // autoHideDuration={2000}
+              autoHideDuration={2000}
               className="custom-snack"
             />
             <div className="col-xl-5 col-lg-5 col-md-12">
@@ -622,9 +625,10 @@ export default function NftInformation(props) {
                       >
                         <li
                           className="list-item"
-                          onClick={handleCopyToClipboard}
+                         
                         >
                           {" "}
+                          <CopyToClipboard text={url}>
                           <button
                             className="copy-button"
                             onClick={handleClick({
@@ -635,6 +639,7 @@ export default function NftInformation(props) {
                             <img src={copyIcon} alt="icon" className="icon" />
                             <span className="icon-text">Copy link</span>
                           </button>
+                          </CopyToClipboard>
                         </li>
                         <li className="list-item">
                           {/* <img src={facebookIcon} alt="icon" className="icon" />
@@ -831,10 +836,6 @@ export default function NftInformation(props) {
               </div>
 
               {/*  IF nft is not created by logged in user these buttons will be shown */}
-              {
-                console.log(loggedInUser?._id, 'logged users')
-              }
-
               
               <div className="buy-offer-btn">
 
@@ -859,7 +860,7 @@ export default function NftInformation(props) {
                   data-bs-target="#myModalShare"
                   style={{
                     display:
-                      props?.responseData?.createdBy != loggedInUser?._id &&
+                      props?.responseData?.createdBy != userIdLocal &&
                         props?.responseData?.salesInfo?.isOpenForSale
                         ? "block"
                         : "none",
@@ -950,7 +951,7 @@ export default function NftInformation(props) {
                 </ul>
                 {tab === 1 ? <PricingHistoryComponentGraph id={id} /> : ""}
                 {tab === 2 ? <ListingsTable id={id} /> : ""}
-                {tab === 3 ? <ListingsTable  /> : ""}
+                {tab === 3 ? <ListingsTable id={id} /> : ""}
                 {tab === 4 ? <DetailPage nft={nft} /> : ""}
               </div>
             </div>
