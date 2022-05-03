@@ -73,6 +73,7 @@ function CreateSingleNFT(props) {
   const [desLength, setDesLength] = useState(0);
   const[error,setError]=useState('');
   const [nameError,SetNameError]=useState('');
+  const[fileError,setFileError]=useState('');
   // const { userDetails, loggedInUser, walletAddress } = user;
 
   if (loggedInUser) { localStorage.setItem('userId', loggedInUser._id); }
@@ -153,7 +154,7 @@ const [compressedUrl,setCompressedUrl]=useState("");
           })
         )
       );
-
+      setFileError("");
       let formData = new FormData();
       formData.append(
         "attachment",
@@ -233,51 +234,118 @@ const [compressedUrl,setCompressedUrl]=useState("");
   });
   },[])
 
-  const handleSubmit = async (e) => {
-    var priceValue=price.current;
+  const nameValidation=(nftName)=>{
     var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
+    if(format.test(nftName)){
+      SetNameError("(No Special Character Allowed)")
+      return false;
+    }
+    else if(nftName.length===0){
+      SetNameError("Name is required");
+      return false;
+    }
+    else if(nftName.length < 3){
+      SetNameError("Name  should be atleast 3 character");
+      return false;
+    }
+    else {
+      SetNameError("")
+      return true;
+  }
+  }
+
+
+ const priceValidation=(nftPrice)=>{
+  if(nftPrice.length == 0){
+    setError("( price is required)")
+    return false;
+  }
+  else if(nftPrice < 0.004 || nftPrice ==0){
+    setError("( Minimum listing price for an NFT should be more than 0.004 ETH )")
+    return false;
+  }
+  else if(nftPrice > 1000000000){
+    setError("( Maximum listing price for an NFT should be less than 1,000,000,000 ETH )")
+    return false;
+  }
+  else
+    setError("");
+    return true;
+  }
+
+  const descriptionValidation=(nftDes)=>{
+    if(nftDes.length==0){
+      SetDesError("( Description is required )")
+      return false;
+    }else{
+    SetDesError("")
+    return true;
+    }
+  }
+
+
+  const fileValidation=()=>{
+    if(selectFile!=""){
+      setFileError("")
+      return true;
+    }
+    else{
+      setFileError("( file is required )")
+      return false;
+    }
+  }
+
+  const myRef = useRef(null)
+  const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)   
+  const handleSubmit = async (e) => {
+    
+    var priceValue=price.current;
 
     if(priceValue.toString().slice(0,1)=="."){
      priceValue="0"+priceValue;
      price.current=priceValue;
-    console.log(priceValue,"<hello-world");
     }
     else{
       price.current=+priceValue;
       price.current = price.current.toString();
-      console.log(price.current,"<<<hello-world");
-
     }
    
-   
+    let x=nameValidation(name.current);
+    let y=priceValidation(price.current);
+    let z=descriptionValidation(description.current);
+    let p=fileValidation();
+ 
+    if(x && y && z && p){
 
-    console.log(selectFile, "<<<selected file");
-    if (
-      name.current == "" ||
-      price.current == "" ||
-      description.current == "" ||
-      selectFile == ""
-    ) {
-      toast.error("Enter The Required Field");
+      const addIPFS = async () => {
+        console.log(selectFile, "<<<selectedFile");
+        // alert(contractAddress)
+        // alert(collectionId)
+        // alert(contractAddress)
+        props.createNftHandler({
+          // nftFile: selectFile,
+          ipfsUrl: ipfsUrl,
+          cdnUrl: cdnUrl,
+          compressedURL:compressedUrl,
+          nftName: name.current,
+          price: price.current,
+          description: description.current,
+          blockchain: blockchain.current,
+          createdBy: loggedInUser._id,
+          collection: collectionId,
+          contractAddress: contractAddress,
+          ownerAddress: walletAddress.address,
+        });
+        // setloader(false)
+        setOpenMintodal(true);
+      };
+      addIPFS();
+  }
+    else {
+      scrollToRef(myRef) 
       return null;
-    }else{
-      setcheckDisable(false);
     }
-
     
-    if(format.test(name.current)){
-      toast.error("Name should be not contain special character");
-      return null;
-    }
-    if(name.current.length < 3){
-      toast.error("Name  should be atleast 3 character");
-      return null;
-    }
-    if(error!=""){
-      toast.error("Minimum listing price for an NFT should be more than 0.004 ETH");
-      return null;
-    }
-
     
 
     console.log(
@@ -287,33 +355,12 @@ const [compressedUrl,setCompressedUrl]=useState("");
       "<<<<price current "
     );
     
-    const addIPFS = async () => {
-      console.log(selectFile, "<<<selectedFile");
-      // alert(contractAddress)
-      // alert(collectionId)
-      // alert(contractAddress)
-      props.createNftHandler({
-        // nftFile: selectFile,
-        ipfsUrl: ipfsUrl,
-        cdnUrl: cdnUrl,
-        compressedURL:compressedUrl,
-        nftName: name.current,
-        price: price.current,
-        description: description.current,
-        blockchain: blockchain.current,
-        createdBy: loggedInUser._id,
-        collection: collectionId,
-        contractAddress: contractAddress,
-        ownerAddress: walletAddress.address,
-      });
-      // setloader(false)
-      setOpenMintodal(true);
-    };
-    addIPFS();
+    
+    
   };
   
   
-const enabled=name?.current.length > 0 && price?.current.length>0 && description?.current.length >0 && selectFile!="" && nameError=="" && error=="" && royalityError=="";
+const enabled= selectFile!="" && nameError=="" && error=="" && royalityError=="" && fileError=="";
 
 
 
@@ -440,10 +487,11 @@ const enabled=name?.current.length > 0 && price?.current.length>0 && description
               }
             }
           >
-            <div className="nft-file-upload">
+            <div className="nft-file-upload" >
               <label htmlFor="email" className="form-key">
-                Upload File*
+                Upload File* <span style={{color:"red",fontSize:"15px"}}>{fileError}</span>
               </label>
+              
 
               <div className="inpput-image-wrap"></div>
 
@@ -602,23 +650,41 @@ const enabled=name?.current.length > 0 && price?.current.length>0 && description
                   onChange={(e) => {
                     name.current = e.target.value;
                     var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
-                      if(!format.test(e.target.value))
-                      SetNameError("");
-                      else if(e.target.value.length!=0)
-                      SetNameError("")
-                      else if (!name.current.value.length < 3)
-                      SetNameError("")
-                      
+                     if(!format.test(e.target.value))
+                        SetNameError("")
+                     else if(e.target.value.length !=0)
+                        SetNameError("");
+                      else if(e.target.value.length > 3)
+                        SetNameError("");
+                      else 
+                        SetNameError("")
+                       
                   }}
                 />
                
+              </div>
+              <div className="mb-4" ref={myRef}>
+                <label htmlFor="email" className="input-label">
+                  Blockchain*
+                </label>
+                <div className="block-chain-right">
+                  <Select
+                    className="input-box-1 rm-border blockchainSelect"
+                    defaultValue={blockchainOption[0]}
+                    onChange={setSelectedOption}
+                    options={blockchainOption}
+                    placeholder="Select Blockchain"
+                    value={selectedOption}
+                  >
+                  </Select>
+                </div>
               </div>
               <div className="input-price">
                 <label htmlFor="price" className=" input-label">
                   Price*
                 </label>
                 <div style={{color:"red",fontSize:"15px"}}>{error}</div>
-                <div class="input-group">
+                <div class="input-group" >
              
                   <input
                     className="form-control"
@@ -628,24 +694,11 @@ const enabled=name?.current.length > 0 && price?.current.length>0 && description
                     autoComplete="off"
                     style={{border:error!=""?"1px solid red":"1px solid #C8C8C8"}}
                     onWheel={(e)=>e.target.blur()}
-                    onFocus={(e)=>{
-                      var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
-                      if(format.test(name.current)){
-                        SetNameError("(No Special Character Allowed)");
-                      }else if(name.current.length == 0){
-                        SetNameError("( Name is required )")
-                      }
-                      else if(name.current.length < 3){
-                        SetNameError("( Name should be atleast 3 character )")
-                      } else {
-                      SetNameError("");
-                      }
-                    }}
                     onChange={(e) => {
                       price.current = e.target.value;
-                      if(price.current.length != 0)
+                      if(e.target.value.length != 0)
                       setError("")
-                      else if(!price.current < "0.004" || !price.current=="0")
+                      else if(e.target.value > "0.004" || !e.target.value=="0")
                       setError("")
                       else if(!price.current > "1000000000")
                       setError("")
@@ -677,34 +730,10 @@ const enabled=name?.current.length > 0 && price?.current.length>0 && description
                   name="text"
                   placeholder="Write description"
                   value={description.current}
-                  onFocus={(e)=>{
-                    var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
-                      if(format.test(name.current)){
-                        SetNameError("(No Special Character Allowed)");
-                      }else if(name.current.length == 0){
-                        SetNameError("( Name is required )")
-                      }
-                      else if(name.current.length < 3){
-                        SetNameError("( Name should be atleast 3 character )")
-                      } else {
-                      SetNameError("");
-                      }
-                    if(price.current.length == 0)
-                      setError("( price is required)")
-                    else if(price.current < "0.004" || price.current==="0")
-                      setError("( Minimum listing price for an NFT should be more than 0.004 ETH )")
-                    else if(price.current > "1000000000")
-                      setError("( Maximum listing price for an NFT should be less than 1,000,000,000 ETH )")
-                    else
-                      setError("");
-                    
-                    
-                  }}
                   onChange={(e) => {
-                    if(e.target.value.length==0){
-                      SetDesError("( Description is required )")
-                    }else
+                    if(e.target.value!=0)
                     SetDesError("")
+                   
                     if (desLength < 1000) {
                       
                       // checkChanges();
@@ -750,53 +779,13 @@ const enabled=name?.current.length > 0 && price?.current.length>0 && description
                
               </div>
               
-              <div className="mt-3">
-                <label htmlFor="email" className="input-label">
-                  Blockchain*
-                </label>
-                {/* <select
-                onChange={(e) => {
-                  blockchain.current = e.target.value;
-                  checkChanges();
-                }}
-                className="form-control-1"
-              >
-                <option value="">Select Blockchain</option>
-                <option value="Ethereum">Ehtereum</option>
-              </select> */}
-                {/* <div className="d-flex block-chain-container">
-                  <div>
-                    <img src={ethereum} height="32px" />
-                  </div>
-                  <div className="block-chain-right">
-                    <select
-                      className="input-box-1 rm-border blockchainSelect"
-                      onChange={(e) => (blockchain.current = e.target.value)}
-                    >
-                      <option selected value="eth" className="color82">
-                        Ethereum
-                      </option>
-                    </select>
-                  </div>
-                </div> */}
-                <div className="block-chain-right">
-                  <Select
-                    className="input-box-1 rm-border blockchainSelect"
-                    defaultValue={blockchainOption[0]}
-                    onChange={setSelectedOption}
-                    options={blockchainOption}
-                    placeholder="Select Blockchain"
-                    value={selectedOption}
-                  >
-                  </Select>
-                </div>
-              </div>
+              
               <button
                 type="submit"
                 onClick={handleSubmit}
                 className="submit-button"
-                style={{ opacity: !enabled ? 0.6 : 1 }}
-                disabled={!enabled}
+                 style={{ opacity: !enabled ? 0.6 : 1 }}
+                 disabled={!enabled}
               >
                 Create
               </button>
