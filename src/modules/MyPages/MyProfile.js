@@ -158,12 +158,19 @@ function MyProfile() {
       getOwnedByNft();
       getLikedNft();
       getOnSaleNft();
+
+      setIsloading(false);
   }
 
 
   useEffect(()=>{
-    window.ethereum?.on("accountsChanged", handleUserDetails);
-  },[])
+    // window.ethereum?.on("accountsChanged", handleUserDetails);
+
+    if(userId){
+      handleUserDetails()
+    }
+
+  },[userId])
 
   // ------------------------------- Calling apis --------------------- to get user data
 
@@ -209,6 +216,7 @@ function MyProfile() {
         // setNfts(response.responseData);
         setcreatedNft(response.responseData);
       } else {
+        setcreatedNft([]);
         toast.error(response.msg);
       }
     }, userId);
@@ -219,6 +227,7 @@ function MyProfile() {
       if (response.success) {
         setownedNft(response.responseData);
       } else {
+        setownedNft([]);
         toast.error(response.msg);
       }
     }, userId);
@@ -231,6 +240,8 @@ function MyProfile() {
         setNfts(response.responseData);
         setTypeofProfilePost("on-sale");
       } else {
+        setonSaleNft([]);
+        setNfts([]);
         toast.error(response.msg);
       }
     }, userId);
@@ -242,6 +253,7 @@ function MyProfile() {
       if (response.success) {
         setlikedNft(response.responseData);
       } else {
+        setlikedNft([]);
         toast.error(response.msg);
       }
     }, userId);
