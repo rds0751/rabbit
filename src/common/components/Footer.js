@@ -290,6 +290,11 @@ function Footer() {
                 Company
               </a>
               <p>
+                <a href="/blogs" className="footersubtitle">
+                  Blogs
+                </a>
+              </p>
+              <p>
                 <a href="/about" className="footersubtitle">
                   About
                 </a>
@@ -384,6 +389,11 @@ function Footer() {
                   Company
                 </a>
               </h3>
+              <p>
+                <a href="/blogs" className="footersubtitle">
+                  Blogs
+                </a>
+              </p>
               <p>
                 <a href="/about" className="footersubtitle">
                   About
