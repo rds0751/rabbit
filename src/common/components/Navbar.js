@@ -35,6 +35,7 @@ import Anafto from "../../assets/images/ANAFTO.svg";
 import { WHITE_LABEL_TOKEN } from "../../reducers/Constants";
 const queryString = require("query-string");
 function Navbar() {
+  console.log('render nav')
   const navigate = useNavigate();
   const [humburger, setHumburger] = useState(false);
   const [toggleEffect, setToggleEffect] = useState(false);
@@ -152,7 +153,7 @@ function Navbar() {
       });
   };
 
-  window.ethereum?.on("accountsChanged", accountChangeHandler);
+  
   let location = useLocation();
 
   const manageNavigation = (name) => {
@@ -327,6 +328,10 @@ function Navbar() {
   //   }, []);
   // console.log(Count,"count")
 
+
+  useEffect(()=>{
+    window.ethereum?.on("accountsChanged", accountChangeHandler);
+  },[])
 
 
   return (
