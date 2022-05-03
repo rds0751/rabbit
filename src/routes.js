@@ -94,7 +94,7 @@ function App() {
           {/* <Switch> */}
           <Routes>
             <Route path="/FAQs" element={<FAQsPage />} />
-            <Route path="/nfts" element={<NftPage />} />
+            <Route exact path="/nfts" element={<NftPage />} />
             <Route path="/" element={<Home />} />
 
             {/* <Route
@@ -208,13 +208,14 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/search-results" element={<SearchResults />} />
             <Route path="/blogs" element={<Blog />} />
-            <Route path="/privacy" element={<Privacy />} />.
+            <Route path="/privacy" element={<Privacy />} />
             <Route path="/Terms-Condition" element={<TermsAndCondition />} />
           </Routes>
           {/* </Switch> */}
+          <Wallet />
         </Router>
         <Footer />
-        <Wallet />
+        
         <Notification />
       </div>
     </Provider>

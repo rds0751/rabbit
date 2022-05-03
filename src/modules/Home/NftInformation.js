@@ -831,10 +831,6 @@ export default function NftInformation(props) {
               </div>
 
               {/*  IF nft is not created by logged in user these buttons will be shown */}
-              {
-                console.log(loggedInUser?._id, 'logged users')
-              }
-
               
               <div className="buy-offer-btn">
 
@@ -859,7 +855,7 @@ export default function NftInformation(props) {
                   data-bs-target="#myModalShare"
                   style={{
                     display:
-                      props?.responseData?.createdBy != loggedInUser?._id &&
+                      props?.responseData?.createdBy != userIdLocal &&
                         props?.responseData?.salesInfo?.isOpenForSale
                         ? "block"
                         : "none",
@@ -950,8 +946,8 @@ export default function NftInformation(props) {
                 </ul>
                 {tab === 1 ? <PricingHistoryComponentGraph id={id} /> : ""}
                 {tab === 2 ? <ListingsTable id={id} /> : ""}
-                {tab === 3 ? <ListingsTable  /> : ""}
-                {tab === 4 ? <DetailPage nft={nft} /> : ""}
+                {tab === 3 ? <ListingsTable id={id} /> : ""}
+                {tab === 4 ? <DetailPage nft={nft} /> : ""}                
               </div>
             </div>
           </div>
