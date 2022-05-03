@@ -1,8 +1,19 @@
-import * as React from "react";
+import  React, { useState, useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import "../../assets/styles/Leader.css";
 import banner from "../../assets/images/Banner.png";
+import {getBlogs} from "../../services/clientConfigMicroService"
 export default function ComplexGrid() {
+  const [blogs, setBlogs] = useState([])
+
+  useEffect(() => {
+    async function fetchData() {
+      await getBlogs().then((res) => setBlogs(res));
+      console.log("test11", blogs)
+    }
+    fetchData();    
+  }, []);
+
   return (
     <div>
       <div className="hero-image">
