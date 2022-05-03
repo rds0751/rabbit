@@ -40,8 +40,8 @@ export default function DetailPage(props) {
                   border: "none",
                   width: "34%",
                   font: "normal normal 600 14px/21px Poppins",
-                  paddingTop:"19px",
-                  paddingLeft:"20px",
+                  paddingTop: "19px",
+                  paddingLeft: "20px",
                 }}
                 component="td"
                 scope="row"
@@ -58,8 +58,8 @@ export default function DetailPage(props) {
                   border: "none",
                   width: "34%",
                   font: "normal normal 600 14px/21px Poppins",
-                  paddingTop:"20px",
-                  paddingLeft:"20px",
+                  paddingTop: "20px",
+                  paddingLeft: "20px",
                 }}
               >
                 Token ID
@@ -74,8 +74,8 @@ export default function DetailPage(props) {
                   border: "none",
                   width: "34%",
                   font: "normal normal 600 14px/21px Poppins",
-                  paddingTop:"20px",
-                  paddingLeft:"20px",
+                  paddingTop: "20px",
+                  paddingLeft: "20px",
                 }}
               >
                 Token Standard
@@ -90,8 +90,8 @@ export default function DetailPage(props) {
                   border: "none",
                   width: "34%",
                   font: "normal normal 600 14px/21px Poppins",
-                  paddingTop:"20px",
-                  paddingLeft:"20px",
+                  paddingTop: "20px",
+                  paddingLeft: "20px",
                 }}
               >
                 Blockchain
