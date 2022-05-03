@@ -66,7 +66,7 @@ function CreateSingleNFT(props) {
   const name = useRef("");
   const price = useRef("");
   const description = useRef("");
-  const blockchain = useRef("Ethereum");
+  const blockchain = useRef("");
   // const ipfsUrl = useRef("");
   const createdBy = loggedInUser?._id;
 
@@ -74,6 +74,7 @@ function CreateSingleNFT(props) {
   const[error,setError]=useState('');
   const [nameError,SetNameError]=useState('');
   const[fileError,setFileError]=useState('');
+  const [blockchainError,setBlockChainError]=useState("");
   // const { userDetails, loggedInUser, walletAddress } = user;
 
   if (loggedInUser) { localStorage.setItem('userId', loggedInUser._id); }
@@ -81,6 +82,8 @@ function CreateSingleNFT(props) {
   const [selectedOption, setSelectedOption] = useState(null);
   const [blockchainOption, setBlockchainOption] = useState([]);
   const [blockchains, setBlockChains] = useState([])
+  const myRef = useRef(null)
+  const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)  
  
   useEffect(() => {
     async function fetchData() {
@@ -295,8 +298,19 @@ const [compressedUrl,setCompressedUrl]=useState("");
     }
   }
 
-  const myRef = useRef(null)
-  const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)   
+  const blockchainValidation=(blockchain)=>{
+
+    if(blockchain.length!=0){
+      setBlockChainError("");
+      return true;
+    }
+    else {
+      setBlockChainError("( BlockChain is required )")
+      return false;
+    }
+  }
+
+   
   const handleSubmit = async (e) => {
     
     var priceValue=price.current;
@@ -309,13 +323,25 @@ const [compressedUrl,setCompressedUrl]=useState("");
       price.current=+priceValue;
       price.current = price.current.toString();
     }
-   
-    let x=nameValidation(name.current);
-    let y=priceValidation(price.current);
-    let z=descriptionValidation(description.current);
-    let p=fileValidation();
+
+    if(selectedOption?.value==="ETH")
+    blockchain.current="ETHEREUM"
+    else if(selectedOption?.value === "MATIC")
+    blockchain.current = "POLYGON"
+    else if(selectedOption?.value==="BNB")
+    blockchain.current="BINANCE"
+    else
+    blockchain.current=""
+    
+    let nftNameValidation=nameValidation(name.current);
+    let nftPriceValidation=priceValidation(price.current);
+    let nftDescriptionValidation=descriptionValidation(description.current);
+    let nftFileValidation=fileValidation();
+    let nftBlockchain=blockchainValidation(blockchain.current);
+    console.log(blockchain.current,selectedOption,"<<<blockchain")
  
-    if(x && y && z && p){
+    if(nftNameValidation && nftPriceValidation && nftDescriptionValidation && nftFileValidation && nftBlockchain){
+     
 
       const addIPFS = async () => {
         console.log(selectFile, "<<<selectedFile");
@@ -360,7 +386,7 @@ const [compressedUrl,setCompressedUrl]=useState("");
   };
   
   
-const enabled= selectFile!="" && nameError=="" && error=="" && royalityError=="" && fileError=="";
+const enabled=  nameError=="" && error=="" && royalityError=="" && fileError=="";
 
 
 
@@ -665,7 +691,7 @@ const enabled= selectFile!="" && nameError=="" && error=="" && royalityError==""
               </div>
               <div className="mb-4" ref={myRef}>
                 <label htmlFor="email" className="input-label">
-                  Blockchain*
+                  Blockchain*  <span style={{color:"red",fontSize:"15px"}}>{blockchainError}</span>
                 </label>
                 <div className="block-chain-right">
                   <Select
@@ -707,7 +733,19 @@ const enabled= selectFile!="" && nameError=="" && error=="" && royalityError==""
                      
                     }}
                   />
-                  <span class="input-group-text">ETH</span>
+                  <span class="input-group-text">
+                    
+                     {selectedOption?.value === "ETH" && (
+                        <span>ETH</span>
+                      )}
+                       {selectedOption?.value === "MATIC" && (
+                        <span>MATIC</span>
+                      )}
+                       {selectedOption?.value === "BNB" && (
+                        <span>BNB</span>
+                      )}
+              
+                    </span>
                  
                 </div>
                 
