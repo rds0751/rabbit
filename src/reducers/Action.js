@@ -105,9 +105,11 @@ export const searchNav = (data) => (dispatch) => {
   dispatch({ type: SEARCH_FROM_NAV, payload: data });
 };
 
-export const logOut = () => (dispatch) => {
-  dispatch({ type: LOG_OUT });
-  dispatch({ type: OPEN_WALLET, payload: false })
-  localStorage.removeItem(WHITE_LABEL_TOKEN);
-  localStorage.setItem('has_wallet', false)
-};
+export const logOut = () => (dispatch) => new Promise((resolve, refect) => {
+    dispatch({ type: LOG_OUT });
+    dispatch({ type: OPEN_WALLET, payload: false })
+    localStorage.removeItem(WHITE_LABEL_TOKEN);
+    localStorage.setItem('has_wallet', false)
+
+    resolve(true);
+});

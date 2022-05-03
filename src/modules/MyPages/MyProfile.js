@@ -89,17 +89,19 @@ function MyProfile() {
   let { user } = useSelector((state) => state);
   let { loggedInUser } = user;
 
-  if (loggedInUser) {
-    localStorage.setItem("userId", loggedInUser._id);
-  }
-  let userId = loggedInUser ? loggedInUser._id : localStorage.userId;
+  const [userId, setUserId] = useState( loggedInUser ? loggedInUser._id : localStorage.userId)
 
-  if (user) {
-    localStorage.setItem("loggedInDetails", user.loggedInUser);
-  }
-  if (loggedInUser == null) {
-    loggedInUser = localStorage.getItem("loggedInDetails");
-  }
+  // if (loggedInUser) {
+  //   localStorage.setItem("userId", loggedInUser._id);
+  // }
+  // let userId = loggedInUser ? loggedInUser._id : localStorage.userId;
+
+  // if (user) {
+  //   localStorage.setItem("loggedInDetails", user.loggedInUser);
+  // }
+  // if (loggedInUser == null) {
+  //   loggedInUser = localStorage.getItem("loggedInDetails");
+  // }
 
   // const defaultCoverpic =
   //   "https://png.pngtree.com/background/20210714/original/pngtree-blood-drop-halloween-blood-background-black-background-picture-image_1220404.jpg";
@@ -126,6 +128,12 @@ function MyProfile() {
 
   const [typeofProfilePost, setTypeofProfilePost] = useState("on-sale");
 
+  useEffect(()=>{
+    if(loggedInUser!== null){
+      setUserId(loggedInUser._id)
+    }
+  },[loggedInUser])
+
   useEffect(() => {
     if (loggedInUser == null) {
       navigate("/my-profile");
@@ -143,6 +151,26 @@ function MyProfile() {
     // setNfts(onSaleNft);
     // setTypeofProfilePost("on-sale");
   }, [window.ethereum, checkClick]);
+
+  const handleUserDetails = () => {
+      setIsloading(true);
+      getCreatedByNft();
+      getOwnedByNft();
+      getLikedNft();
+      getOnSaleNft();
+
+      setIsloading(false);
+  }
+
+
+  useEffect(()=>{
+    // window.ethereum?.on("accountsChanged", handleUserDetails);
+
+    if(userId){
+      handleUserDetails()
+    }
+
+  },[userId])
 
   // ------------------------------- Calling apis --------------------- to get user data
 
@@ -188,6 +216,7 @@ function MyProfile() {
         // setNfts(response.responseData);
         setcreatedNft(response.responseData);
       } else {
+        setcreatedNft([]);
         toast.error(response.msg);
       }
     }, userId);
@@ -198,6 +227,7 @@ function MyProfile() {
       if (response.success) {
         setownedNft(response.responseData);
       } else {
+        setownedNft([]);
         toast.error(response.msg);
       }
     }, userId);
@@ -210,6 +240,8 @@ function MyProfile() {
         setNfts(response.responseData);
         setTypeofProfilePost("on-sale");
       } else {
+        setonSaleNft([]);
+        setNfts([]);
         toast.error(response.msg);
       }
     }, userId);
@@ -221,6 +253,7 @@ function MyProfile() {
       if (response.success) {
         setlikedNft(response.responseData);
       } else {
+        setlikedNft([]);
         toast.error(response.msg);
       }
     }, userId);
