@@ -48,7 +48,7 @@ export default function DetailPage(props) {
               >
                 Contract address
               </td>
-              <td style={{ border: "none" }}>-</td>
+              <td style={{ border: "none" }}>{nft?.contractAddress}</td>
             </tr>
             <tr sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
               <td
@@ -64,7 +64,7 @@ export default function DetailPage(props) {
               >
                 Token ID
               </td>
-              <td style={{ border: "none" }}>{nft.tokenId}</td>
+              <td style={{ border: "none" }}>{nft?.tokenId}</td>
             </tr>
             <tr sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
               <td
@@ -96,7 +96,7 @@ export default function DetailPage(props) {
               >
                 Blockchain
               </td>
-              <td style={{ border: "none" }}>{nft.blockchain}</td>
+              <td style={{ border: "none" }}>{nft?.blockchain}</td>
             </tr>
           </tbody>
         </TableDown>

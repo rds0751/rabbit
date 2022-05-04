@@ -305,7 +305,7 @@ const [compressedUrl,setCompressedUrl]=useState("");
       return true;
     }
     else {
-      setBlockChainError("( BlockChain is required )")
+      setBlockChainError("( Blockchain is required )")
       return false;
     }
   }
@@ -691,9 +691,10 @@ const enabled=  nameError=="" && error=="" && royalityError=="" && fileError==""
               </div>
               <div className="mb-4" ref={myRef}>
                 <label htmlFor="email" className="input-label">
-                  Blockchain*  <span style={{color:"red",fontSize:"15px"}}>{blockchainError}</span>
+                  Blockchain*  
                 </label>
-                <div className="block-chain-right">
+                <div style={{color:"red",fontSize:"15px"}}>{blockchainError}</div>
+                <div className="block-chain-right" >
                   <Select
                     className="input-box-1 rm-border blockchainSelect"
                     defaultValue={blockchainOption[0]}
@@ -716,7 +717,7 @@ const enabled=  nameError=="" && error=="" && royalityError=="" && fileError==""
                     className="form-control"
                     type="number"
                     title=" "
-                    placeholder="0 ETH"
+                    placeholder="0"
                     autoComplete="off"
                     style={{border:error!=""?"1px solid red":"1px solid #C8C8C8"}}
                     onWheel={(e)=>e.target.blur()}
