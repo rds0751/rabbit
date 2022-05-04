@@ -33,6 +33,9 @@ import { PrintDisabled } from "@mui/icons-material";
 import $ from 'jquery';
 import { errors } from "ethers";
 import { getTenantData } from "../../services/clientConfigMicroService";
+import Ethereum from "../../assets/images/ether.svg";
+import Polygon from "../../assets/images/ploygon.svg";
+import Binance from "../../assets/images/binance.svg";
 
 // import "../../assets/styles/Leader.css"
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
@@ -297,7 +300,20 @@ const [compressedUrl,setCompressedUrl]=useState("");
     }
   }
 
-   
+   function blockchainValue(value){
+     switch(value){
+       case 'ETH':
+        return 'Ethereum'
+        case 'MATIC':
+        return "Polygon"
+        case "BNB":
+        return "Binance"
+        default:
+        return ""
+     }
+
+
+   }
   const handleSubmit = async (e) => {
     
     var priceValue=price.current;
@@ -310,16 +326,9 @@ const [compressedUrl,setCompressedUrl]=useState("");
       price.current=+priceValue;
       price.current = price.current.toString();
     }
-//switch value
-    if(selectedOption?.value==="ETH")
-    blockchain.current="ETHEREUM"
-    else if(selectedOption?.value === "MATIC")
-    blockchain.current = "POLYGON"
-    else if(selectedOption?.value==="BNB")
-    blockchain.current="BINANCE"
-    else
-    blockchain.current=""
-    
+
+    blockchain.current=blockchainValue(selectedOption?.value);
+  
     let nftNameValidation=nameValidation(name.current);
     let nftPriceValidation=priceValidation(price.current);
     let nftDescriptionValidation=descriptionValidation(description.current);
@@ -354,6 +363,20 @@ const [compressedUrl,setCompressedUrl]=useState("");
       return null;
     }
   };
+
+  const priceWithCurrency=(blockchain)=>{
+    switch(blockchain){
+      case 'ETH':
+      return <span><img className="currency-sign-nftinformation" src={Ethereum}></img>ETH</span>
+      case 'MATIC':
+      return <span><img className="currency-sign-nftinformation" src={Polygon}></img>MATIC</span>
+      case 'BNB':
+      return <span><img className="currency-sign-nftinformation" src={Binance}></img>BNB</span>
+      default:
+        return '';
+    }
+    
+  }
   
   
 const enabled=  nameError=="" && error=="" && royalityError=="" && fileError=="";
@@ -686,15 +709,7 @@ const enabled=  nameError=="" && error=="" && royalityError=="" && fileError==""
                   />
                   <span class="input-group-text">
                     
-                     {selectedOption?.value === "ETH" && (
-                        <span>ETH</span>
-                      )}
-                       {selectedOption?.value === "MATIC" && (
-                        <span>MATIC</span>
-                      )}
-                       {selectedOption?.value === "BNB" && (
-                        <span>BNB</span>
-                      )}
+                  {priceWithCurrency(selectedOption?.value)}
               
                     </span>
                  
