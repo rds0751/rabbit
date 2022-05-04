@@ -32,6 +32,9 @@ import styled from "styled-components";
 import ListingsTable from "../../common/components/ListingTable";
 import DetailPage from "../../common/components/DetailPage";
 import CopyToClipboard from "react-copy-to-clipboard";
+import Ethereum from "../../assets/images/ether.svg";
+import Polygon from "../../assets/images/ploygon.svg";
+import Binance from "../../assets/images/binance.svg";
 toast.configure();
 const CustomSnack = styled(Snackbar)`
   @media (min-width: 992px) {
@@ -106,7 +109,7 @@ export default function NftInformation(props) {
 
   console.log('nft data', nft)
 
-  const { owner, creator, salesInfo } = nft;
+  const { owner, creator, salesInfo,blockchain } = nft;
   const [openReportModal, setOpenReportModal] = useState(false);
   const [saleModal, setsaleModal] = useState(false);
   const [putOnSaleModal, setPutOnSaleModal] = useState(false);
@@ -324,6 +327,20 @@ export default function NftInformation(props) {
     : creator?.wallet_address;
 
   const url = window.location.href;
+
+  const blockchainCheck=(blockchain)=>{
+    switch(blockchain){
+      case 'Ethereum':
+      return <img className="currency-sign-nftinformation" src={Ethereum}></img>
+      case 'Polygon':
+      return <img className="currency-sign-nftinformation" src={Polygon}></img>
+      case 'Binance':
+      return <img className="currency-sign-nftinformation" src={Binance}></img>
+      default:
+        return '';
+    }
+    
+  }
 
   return (
     <>
@@ -769,6 +786,7 @@ export default function NftInformation(props) {
                 <span className="text">
                   Current Price:&nbsp;
                   <span className="nft-value">
+                    {blockchainCheck(blockchain)}
                     {salesInfo?.price}&nbsp;{salesInfo?.currency}
                   </span>
                 </span>
