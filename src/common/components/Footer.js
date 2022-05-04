@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "../../assets/styles/Notification.css";
 import { addEmail } from "../../services/UserMicroService";
-import { ToastContainer } from "react-toastify";
 import discordIcon from "../../assets/images/discord.svg";
 import hoverDiscord from "../../assets/images/hoverDiscord.svg";
 import instaIcon from "../../assets/images/insta.svg";
@@ -306,7 +305,7 @@ function Footer() {
               </p>
               <p>
                 <a href="/Terms-Condition" className="footersubtitle">
-                  Terms and Conditon
+                  Terms and Conditons
                 </a>
               </p>
             </div>

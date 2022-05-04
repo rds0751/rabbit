@@ -8,14 +8,6 @@ import NoItem from "../../assets/images/Noitems.svg";
 import Spinner from "../../common/components/Spinner";
 
 import profileImage from "../../assets/images/NoProfile.svg";
-// import './Top_collection.css'
-import {
-  LeaderBoardApi,
-  LeaderBoardApi2,
-  LeaderBoardApi3,
-  LeaderBoardApi4,
-  LeaderBoardApi5,
-} from "../../constants/LeaderBoardApi";
 import { getTopSellers } from "../../services/sellAndPurchaseMicroService";
 import { Link } from "react-router-dom";
 // MUI select code
@@ -384,13 +376,6 @@ function TopSeller() {
             </div>
           ))}
       </div>
-
-      {/* {topSellers.length === 0 && (
-
-        <div className="spinnerloader">{<Spinner />}
-
-
-        </div>)} */}
     </Container>
   );
 }

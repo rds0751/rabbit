@@ -139,7 +139,7 @@ const [compressedUrl,setCompressedUrl]=useState("");
             return ;
           }
           else if(err.code === "file-invalid-type"){
-            toast.error("File type not acceptable. Please use JPG,JPEG, PNG, GIF file");
+            toast.error("File type not acceptable. Please use JPG, JPEG, PNG, GIF file");
             setisLoader(false);
             return ;
           }
@@ -183,22 +183,9 @@ const [compressedUrl,setCompressedUrl]=useState("");
           setCompressedUrl(ipfsRes.compressedURL);
           setisLoader(false);
           setIsFileSelected(true);
-          // if (
-          //   name.current != ""  &&
-          //   price.current != "" &&
-          //   description.current !=""
-          //   // cdnUrl != "" 
-          //   // selectFile !="" 
-          // ) {
-          //   setcheckDisable(false);
-          // } 
-          // else{
-          //   setcheckDisable(true);
-          // }
         }
       })();
 
-      // setLogoPresent(true);
     },
   });
   const onDrop = useCallback((acceptedFiles) => {
@@ -323,7 +310,7 @@ const [compressedUrl,setCompressedUrl]=useState("");
       price.current=+priceValue;
       price.current = price.current.toString();
     }
-
+//switch value
     if(selectedOption?.value==="ETH")
     blockchain.current="ETHEREUM"
     else if(selectedOption?.value === "MATIC")
@@ -345,11 +332,7 @@ const [compressedUrl,setCompressedUrl]=useState("");
 
       const addIPFS = async () => {
         console.log(selectFile, "<<<selectedFile");
-        // alert(contractAddress)
-        // alert(collectionId)
-        // alert(contractAddress)
         props.createNftHandler({
-          // nftFile: selectFile,
           ipfsUrl: ipfsUrl,
           cdnUrl: cdnUrl,
           compressedURL:compressedUrl,
@@ -362,7 +345,6 @@ const [compressedUrl,setCompressedUrl]=useState("");
           contractAddress: contractAddress,
           ownerAddress: walletAddress.address,
         });
-        // setloader(false)
         setOpenMintodal(true);
       };
       addIPFS();
@@ -371,18 +353,6 @@ const [compressedUrl,setCompressedUrl]=useState("");
       scrollToRef(myRef) 
       return null;
     }
-    
-    
-
-    console.log(
-      price.current,
-      name.current,
-      description.current,
-      "<<<<price current "
-    );
-    
-    
-    
   };
   
   
@@ -408,12 +378,7 @@ const enabled=  nameError=="" && error=="" && royalityError=="" && fileError==""
                     >
                       Complete your minting
                     </div>
-                    {/* <div
-                      onClick={() => setOpenMintodal(false)}
-                      className="completelistin"
-                    >
-                      <img src={Close} width="12px" height="12px" />
-                    </div> */}
+                    
                   </div>
 
                   <div className="abstractillusion">
@@ -422,7 +387,6 @@ const enabled=  nameError=="" && error=="" && royalityError=="" && fileError==""
                       <div className="abstracttitle">{name.current}</div>
                       {/* <div className="abstractposter"> </div> */}
                       <div className="ethprice">{price.current}ETH</div>
-                      {/* <div className="ethprice">$162.09</div> */}
                     </div>
                   </div>
                   <div className="checkpostcontainer">
@@ -580,13 +544,7 @@ const enabled=  nameError=="" && error=="" && royalityError=="" && fileError==""
                        
                       }}
                     />
-                    {/* <span className="draganddropboxinnerdivtextspan">
-                    Drag and Drop or
-                    <span className="draganddropboxinnerdivtextspanbrowse">
-                      {" "}
-                      Browse
-                    </span>
-                  </span> */}
+                   
                   </div>) : (
                     <div className="" style={{ margin: "auto 0" }}>
                       {" "}
@@ -631,21 +589,13 @@ const enabled=  nameError=="" && error=="" && royalityError=="" && fileError==""
                     </Link>
                   </div>
                 </div>
-                {/* <Link>Create</Link> */}
                 <select
                   onChange={(e) => {
-                    // checkChanges();
-                    // setCollectionId(e.target.value);
+                   
                     const addressId = e.target.value.split(",")
                     setCollectionId(addressId[0]);
-                    // alert(contractAddress);
                     setContractAddress(addressId[1]);
-                    // alert(collectionId);
-                    // alert(contractAddress);
-
-                  
-
-
+                 
                   }}
                   className="form-control-1 category-select"
                 >
@@ -845,4 +795,3 @@ const mapStateToProps = (state) => {
   };
 };
 export default CreateSingleNFT;
-// export default connect(mapStateToProps)(CreateSingleNFT);
