@@ -68,6 +68,7 @@ import PageNotFound from "./common/components/pageNotFound";
 import Blog from "./modules/blogs/blog";
 import Privacy from "./modules/company/privacy";
 import TermsAndCondition from "./modules/company/termsAndCondition";
+import BlogDetail from "./modules/blogs/blogDetail";
 function App() {
 
   useEffect(() => {
@@ -211,6 +212,7 @@ function App() {
             <Route path="/blogs" element={<Blog />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/Terms-Condition" element={<TermsAndCondition />} />
+            <Route path="/blog-detail" element={<BlogDetail />} />
             <Route path="/page-not-found" element={<PageNotFound />} />
           </Routes>
           {/* </Switch> */}
