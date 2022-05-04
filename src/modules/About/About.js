@@ -20,64 +20,6 @@ function About() {
   }, []);
   return (
     <>
-      {/* <div className="container">
-        <div className="text-center mt-5 ml-0 mr-0">
-          <p className="font-32 font-weight-700">{aboutData.title}</p>
-          <p className="font-16 mt-4">
-            {
-              // aboutData.description
-              "Anafto is an NFT Marketplace for the new age decentralised world. The Anafto tribe can create NFTs on this dedicated marketplace to showcase their Art or they can choose to sell their NFTs. NFTs of any category can be listed on this platform. So, what are you waiting for .... Go Mint,Sell, Buy and Explore... Happy NFTing."
-            }
-          </p>
-        
-          <h6 className="font-18 font-weight-700 mt-4">
-            NFT marketplace in numbers
-          </h6>
-        </div>
-      </div>
-      <div className="container">
-        <div className="row text-center mt-5">
-          <div className="col-sm-3"></div>
-          <div className="col-sm-2 col-12">
-            <p className="text-primary font-weight-700 font-22 ">$274M</p>
-            <p className="font-16">Trading volume</p>
-          </div>
-          <div className="col-sm-2 col-12">
-            <p className="text-primary font-weight-700 font-22">405K</p>
-            <p className="font-16">NFTs created</p>
-          </div>
-          <div className="col-sm-2 col-12">
-            <p className="text-primary font-weight-700 font-22">1.6M</p>
-            <p className="font-16">Total users</p>
-          </div>
-          <div className="col-sm-3"></div>
-        </div>
-        <div className="row mt-5">
-          <div className="col-sm-4"></div>
-          <div className="col-sm-4">
-            <div
-              className="card cardmob"
-              style={{ borderRadius: "7px", width: "300px" }}
-            >
-              <h6 className="text-center font-14 font-weight-700 mt-2">
-                <MailOutlineIcon
-                  style={{ fontSize: "35px" }}
-                  className="text-primary"
-                />
-                Contact Us:{" "}
-                <a href="">
-                  {
-                    // aboutData.contactEmail
-                    "hello@anafto.com"
-                  }
-                </a>
-              </h6>
-            </div>
-          </div>
-          <div className="col-sm-4"></div>
-        </div>
-      </div> */}
-
       <div className="mainDiv" >
         <div className="HeadingTag">
           <h2>About NFT marketplace</h2>
@@ -117,20 +59,15 @@ function About() {
                 <span>
                 <a href="">
                   {
-                    // aboutData.contactEmail
                     "hello@anafto.com"
                   }
-                 
                 </a>
                 </span>
               </h6>
             </div>
           </div>
-          {/* <div className="col-sm-4"></div> */}
         </div>
       </div>
-
-         
         </div>
       </div>
     </>
