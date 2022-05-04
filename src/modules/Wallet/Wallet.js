@@ -11,6 +11,8 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { ManageNotiSideBar, ManageWalletSideBar, logOut } from "../../reducers/Action";
 import Snackbar from "@mui/material/Snackbar";
 import styled from "styled-components";
+import {useNavigate} from 'react-router-dom';
+
 
 const CustomSnack = styled(Snackbar)`
   @media (min-width: 969px) {
@@ -29,6 +31,7 @@ const CustomSnack = styled(Snackbar)`
 `;
 
 function Wallet() {
+
   const [humburger, setHumburger] = useState(false);
   const [errorMssg, setErrorMssg] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
@@ -38,7 +41,7 @@ function Wallet() {
   //   open: false,
   //   Transition: Fade,
   // });
-
+  const navigate = useNavigate();
   // const ethereum = window.ethereum;
   // console.log("ethereum : ", ethereum);
   const { user, sideBar } = useSelector((state) => state);
@@ -125,9 +128,10 @@ function Wallet() {
   };
 
   const handleLogOut = async () => {
-    dispatch(logOut());
-    toast.success("Successfully Logged Out");
-    // window.location.href = "/add-wallet";
+    await dispatch(logOut());
+    toast.success("Successfully Logged Out");  
+    
+    navigate('/');
   }
 
   return (

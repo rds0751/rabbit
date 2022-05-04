@@ -64,6 +64,7 @@ import BuyPage from "./modules/Resources/Buying/index";
 import SellPage from "./modules/Resources/Selling/index";
 import ScrollToTop from "./ScrollToTop";
 import SearchResults from "./common/components/searchResults";
+import PageNotFound from "./common/components/pageNotFound";
 import Blog from "./modules/blogs/blog";
 import Privacy from "./modules/company/privacy";
 import TermsAndCondition from "./modules/company/termsAndCondition";
@@ -95,7 +96,7 @@ function App() {
           {/* <Switch> */}
           <Routes>
             <Route path="/FAQs" element={<FAQsPage />} />
-            <Route path="/nfts" element={<NftPage />} />
+            <Route exact path="/nfts" element={<NftPage />} />
             <Route path="/" element={<Home />} />
 
             {/* <Route
@@ -209,14 +210,16 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/search-results" element={<SearchResults />} />
             <Route path="/blogs" element={<Blog />} />
-            <Route path="/privacy" element={<Privacy />} />.
+            <Route path="/privacy" element={<Privacy />} />
             <Route path="/Terms-Condition" element={<TermsAndCondition />} />
             <Route path="/blog-detail" element={<BlogDetail />} />
+            <Route path="/page-not-found" element={<PageNotFound />} />
           </Routes>
           {/* </Switch> */}
+          <Wallet />
         </Router>
         <Footer />
-        <Wallet />
+        
         <Notification />
       </div>
     </Provider>
