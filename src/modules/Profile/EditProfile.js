@@ -18,6 +18,7 @@ import { AuthToken } from "../../services/UserAuthToken";
 import $ from 'jquery';
 import noProfile from '../../assets/images/NoProfile.svg'
 import { format } from "util";
+import { borderRadius } from "@mui/system";
 
 const Button = styled.button``;
 
@@ -243,9 +244,18 @@ function EditProfile(props) {
     } else {
       console.log("ddddddddddddddddddddd",result.message)
       // toast.error("invalid request");
-      toast.error(result.message, {
-        position: toast.POSITION.TOP_RIGHT
-      });
+      if(imageUrl!=""){
+        toast.error(result.message, {
+          position: toast.POSITION.TOP_RIGHT
+        });
+
+      }
+      else {
+        toast.error("image is required", {
+          position: toast.POSITION.TOP_RIGHT
+        });
+      }
+     
 
     }
   };
@@ -273,9 +283,8 @@ function EditProfile(props) {
     });
   }, [])
 
-
   
-const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 && nameError=="" && descriptionError=="" && portfiloError=="";
+const enabled=useruserName?.length > 0 && bio?.length > 0 &&  portfilo?.length > 0 && nameError=="" && descriptionError=="" && portfiloError=="";
   return (
     <>
       <ToastContainer
@@ -306,7 +315,7 @@ const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 
           <div className="chooseProfilePicInnerContainer ">
             <div className="editprofile-image">
               <img
-                src={imageUrl?.compressedURL!=""?imageUrl.compressedURL:profileImage}
+                src={typeof(imageUrl)!=="object" && imageUrl!=""? imageUrl :(typeof(imageUrl)!== "string" ? imageUrl.compressedURL : profileImage)}
               />
             </div>
             {console.log("image urlllll",imageUrl)}
@@ -318,6 +327,9 @@ const enabled=useruserName.length > 0 && bio.length > 0 &&  portfilo.length > 0 
               // onChange={(e) => handleChange(e)}
               >
                 <span className="choosefile">Choose File</span>
+              </Button>
+              <Button style={{display:"block",marginTop:"10px",border:"1px solid red"}}   className=" btn-choose-file" onClick={()=>setImageUrl("")}>
+              <span className="choosefile" style={{color:"red"}}> Remove File</span> 
               </Button>
             </div>
 
