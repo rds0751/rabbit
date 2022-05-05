@@ -16,12 +16,14 @@ export default function ComplexGrid() {
     setIsLoading(true);
     async function fetchData() {
       setIsLoading(true);
-      await getBlogs().then((res) => setBlogs(res));
+      await getBlogs().then((response) => {
+        if (response.success) setBlogs(response.responseData)
+        else setBlogs([])
+      })
       setIsLoading(false);
-    }
+    } 
     fetchData();
   }, []);
-  console.log("test11", blogs);
   const loadMoreHandler = () => {
     <div className="spinnerloader">{isLoading && <Spinner />}</div>;
     setVisibleBlogs((prevVisibleBlogs) => prevVisibleBlogs + 4);
