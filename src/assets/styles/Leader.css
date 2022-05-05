@@ -1318,7 +1318,7 @@ thead {
   color: white;
   margin-right: 2rem;
   background-color: #366eff;
-  texttransform: none;
+  textTransform: none;
 }
 .nft-detail .grap-area ul {
   display: flex;
@@ -1817,8 +1817,12 @@ td {
 .copy-button {
   border: none;
   background: transparent;
-  width: 197px;
+}
+.copy-url-button {
+  border: none;
+  background: transparent;
   text-align: left;
+  width: 196px;
 }
 /* @media only screen and (min-width:0px) and  (max-width:599px){
   .css-1arijsr-MuiSnackbar-root {
@@ -1899,57 +1903,58 @@ td {
   background: none;
   border: none;
 }
-.sellerName a:hover {
+.sellerName a:hover{
   color: blue;
 }
-.leader-viewmore .seller-name a:hover {
+.leader-viewmore .seller-name a:hover{
   color: blue;
 }
-.buy-offer-btn button:hover {
+ .buy-offer-btn button:hover{
   background-color: rgb(10, 74, 212);
   color: rgb(253, 253, 253);
-  border: 1px solid grey;
+  border:1px solid grey;
   box-shadow: rgb(4 17 29 / 25%) 0px 0px 8px 0px;
   transition: all 0.1s ease 0s;
 }
-.load-more:hover {
+.load-more:hover{
   color: white;
-  background-color: #336eef;
+  background-color:#336eef;
+  
 }
-.no-item-image {
+.no-item-image{
   filter: opacity(0.4) drop-shadow(0 0 0 grey);
 }
-.Noitemdiv .no-image {
+.Noitemdiv .no-image{
   filter: opacity(0.4) drop-shadow(0 0 0 grey);
 }
-.image-contanier {
+.image-contanier{
   position: relative;
   display: inline-block;
 }
-.loaderNft {
+.loaderNft{
   position: absolute;
   top: 0;
   left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: lightgray;
+  background-color:lightgray;
 }
-.table-icon {
+.table-icon{
   height: 20px;
   width: 20px;
   margin-right: 5px;
 }
-.main-card-box .card:hover {
+.main-card-box .card:hover{
   box-shadow: rgb(4 17 29 / 25%) 0px 0px 8px 0px;
   transition: all 0.1s ease 0s;
   border: none;
 }
-.profileImg-Container-userProfile {
+.profileImg-Container-userProfile{
   overflow: hidden;
   position: relative;
   display: inline-block;
 }
-.DetailPage-Table-Data {
+.DetailPage-Table-Data{
   border: none;
 }
