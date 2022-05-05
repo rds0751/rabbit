@@ -72,7 +72,7 @@ class Index extends BaseComponent {
       },
       salesInfo: {
         price: data?.price || 0,
-        currency: "ETH"
+        currency: data?.currency,
       },
       //TO do need to pass user (owner) _id
       ownedBy: data?.createdBy,
