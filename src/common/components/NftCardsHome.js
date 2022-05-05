@@ -36,7 +36,6 @@ function NftCardsHome({ nft }) {
       setHandleLike(!handleLike);      
     } else {
       toast.error("Not logged in")
-      // navigate("/add-wallet");
     }    
   };
   // const difftime = (timestamp1, timestamp2) => {

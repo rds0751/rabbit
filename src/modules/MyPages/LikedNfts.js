@@ -9,7 +9,14 @@ import { ShimmerThumbnail } from "react-shimmer-effects";
 import { addLikeNft } from "../../services/webappMicroservice";
 function LikedNfts({ nft }) {
   const { user } = useSelector((state) => state);
-  const { _id, cdnUrl, name, salesInfo ,compressedURL} = nft;
+  let _id, cdnUrl, name, salesInfo, compressedURL
+  if (nft.userLikedNfts !== undefined) {
+    _id = nft.userLikedNfts._id
+    cdnUrl = nft.userLikedNfts.cdnUrl
+    name  = nft.userLikedNfts.name
+    salesInfo  = nft.userLikedNfts.salesInfo
+    compressedURL  = nft.userLikedNfts.compressedURL
+  }
   const [handleLike, setHandleLike] = useState(true);
   const route = "/nft-information/" + _id;
   const likeNft = (id) => {

@@ -148,11 +148,12 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
 
 function NftPage(props) {
   const { user } = useSelector((state) => state);
-
+  const { loggedInUser } = user;
   const [filterReq, setFilterReq] = useState({
     minPrice: "",
     maxPrice: "",
     sort: "-1",
+    userId: loggedInUser?._id,
   });
   const [nfts, setNfts] = useState([]);
   const [toggleNft, setToggleNft] = useState(true);
@@ -163,15 +164,12 @@ function NftPage(props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const ref = useRef();
 
-  // if (user?.loggedInUser) {
-  //   setFilterReq({...filterReq, userId: user?.loggedInUser?._id})
-  // }
-
   useEffect(() => {
     if (user?.loggedInUser !== null) {
-      setFilterReq({ ...filterReq, userId: user?.loggedInUser?._id });
+      setFilterReq({...filterReq, userId: loggedInUser?._id})
     }
-  }, [user?.loggedInUser]);
+  }, [loggedInUser]);
+
   useEffect(() => {
     setIsLoading(true);
     async function fetchData() {
