@@ -16,6 +16,9 @@ import Easy from "../../assets/images/Easy.svg";
 import Offers from "../../assets/images/Offers.svg";
 import Stats from "../../assets/images/Stats.svg";
 import { RedirectTo } from "../../reducers/Action";
+import Ethereum from "../../assets/images/ether.svg";
+import Polygon from "../../assets/images/ploygon.svg";
+import Binance from "../../assets/images/binance.svg";
 // import { Link, useLocation } from "react-router-dom";
 // import Card from '@mui/material/Card';
 import Avatar from "@mui/material/Avatar";
@@ -97,6 +100,20 @@ function Home() {
   const onImageLoad = () => {
     setImageLoading({ ...imageLoading, loaded: true });
   };
+  const blockchainCheck=(blockchain)=>{
+    switch(blockchain){
+      case 'Ethereum':
+      return <img className="currency-sign" src={Ethereum}></img>
+      case 'Polygon':
+      return <img  className="currency-sign" src={Polygon}></img>
+      case 'Binance':
+      return <img className="currency-sign" src={Binance}></img>
+      default:
+        return '';
+    }
+    
+  }
+
 
   return (
     <>
@@ -208,6 +225,7 @@ function Home() {
                                           </h3>
                                           {/* {let n = nft?.description.split(' ')} */}
                                           <span className="nftTileEachDetailsFirstContainerValue">
+                                             {blockchainCheck(nft?.blockchain)}
                                             {`${nft?.salesInfo?.price}  ${nft?.salesInfo?.currency}`}
                                           </span>
                                           {/* <p className="description">{nft?.description}</p> */}
@@ -326,6 +344,7 @@ function Home() {
                                             </h3>
 
                                             <span className="nftTileEachDetailsFirstContainerValue">
+                                              {blockchainCheck(nft?.blockchain)}
                                               {`${nft?.salesInfo?.price}  ${nft?.salesInfo?.currency}`}
                                             </span>
                                           </div>
