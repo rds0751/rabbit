@@ -38,7 +38,7 @@ export default function ComplexGrid() {
         {isLoading ? (
           <Spinner />
         ) : (
-          blogs.length === 0 && (
+          blogs?.length === 0 && (
             <div className="Noitemdiv">
               {/* <img className="no-image" src={NoItem} alt="No-items" /> */}
               <p className="textitem">No items available</p>
@@ -46,7 +46,7 @@ export default function ComplexGrid() {
           ) 
         )}
       </div>
-      {blogs.length > 0 && blogs.slice(0, visibleBlogs).map((data) => {
+      {blogs?.length > 0 && blogs?.slice(0, visibleBlogs).map((data) => {
         return (
           <>
             <Paper
@@ -66,7 +66,7 @@ export default function ComplexGrid() {
                     height: "240px",
                     objectFit: "fill",
                   }}
-                  src={banner}
+                  src={data?.coverUrl}
                 ></img>
               </div>
               <div style={{ padding: "32px" }}>
@@ -79,7 +79,7 @@ export default function ComplexGrid() {
                   </p>
                 </div>
                 <div>
-                  <p className="blog-content">{parse(data.content)}</p>
+                  <p className="blog-content">{parse(data.content.slice(0,100))}</p>
                 </div>
                 <Link to="/blog-detail" state={{ data }}>
                   <button className="blog-read">Read more</button>
@@ -90,8 +90,8 @@ export default function ComplexGrid() {
         );
       })}
 
-{visibleBlogs >= blogs.length ? (
-            visibleBlogs >= blogs.length && !isLoading ? (
+{visibleBlogs >= blogs?.length ? (
+            visibleBlogs >= blogs?.length && !isLoading ? (
               <div style={{ textAlignLast: "center" }}>
                 <button className="endButton"> End </button>
               </div>
