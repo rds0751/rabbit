@@ -311,7 +311,7 @@ function Navbar() {
     getNotificationListById(userId).then((response) =>
       setNotifications(response)
     );
-  }, [notifications]);
+  }, []);
   // const notificationId = notifications._id;
   //   useEffect(() => {
   //     getNotificationCountById(notificationId).then((response) =>
