@@ -47,7 +47,7 @@ export const getBlogs = async () => {
         const url = `${BASE_URL1}/api/v1/blogs`;
         const res = await fetch(url, { headers: AuthToken });
         const result = await res.json();
-        return result.responseData;
+        return result;
       } catch (err) {
         console.log(err);
       }
