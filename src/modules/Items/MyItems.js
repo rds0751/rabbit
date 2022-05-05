@@ -91,7 +91,7 @@ function MyItems() {
           {toggleSelect ?
             <button type="submit" className="add-item-button p-0 bord-rad-4">
               <Link
-                to="/create-nft"
+                to="/create-single-nft"
                 style={{ textDecoration: "none", color: '#FFFFFF' }}>
                 Add item
               </Link>
