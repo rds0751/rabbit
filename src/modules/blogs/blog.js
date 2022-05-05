@@ -38,15 +38,15 @@ export default function ComplexGrid() {
         {isLoading ? (
           <Spinner />
         ) : (
-          data.length === 0 && (
+          blogs.length === 0 && (
             <div className="Noitemdiv">
               {/* <img className="no-image" src={NoItem} alt="No-items" /> */}
               <p className="textitem">No items available</p>
             </div>
-          )
+          ) 
         )}
       </div>
-      {blogs.slice(0, visibleBlogs).map((data) => {
+      {blogs.length > 0 && blogs.slice(0, visibleBlogs).map((data) => {
         return (
           <>
             <Paper
@@ -89,11 +89,29 @@ export default function ComplexGrid() {
           </>
         );
       })}
-      <div style={{ textAlignLast: "center" }}>
+
+{visibleBlogs >= blogs.length ? (
+            visibleBlogs >= blogs.length && !isLoading ? (
+              <div style={{ textAlignLast: "center" }}>
+                <button className="endButton"> End </button>
+              </div>
+            ) : (
+              ""
+            )
+          ) : (
+            <div style={{ textAlignLast: "center" }}>
+              <button className="load-more" onClick={loadMoreHandler}>
+                Load More
+              </button>
+            </div>
+            
+          )}
+
+      {/* <div style={{ textAlignLast: "center" }}>
         <button className="load-more" onClick={loadMoreHandler}>
           Load More
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -468,7 +468,7 @@ export default function NftInformation(props) {
                     <li className="list-item" >
                       <CopyToClipboard text={url}>
                       <button
-                        className="copy-button"
+                        className="copy-url-button"
                         onClick={handleClick({
                           vertical: "top",
                           horizontal: "right",
@@ -647,7 +647,7 @@ export default function NftInformation(props) {
                           {" "}
                           <CopyToClipboard text={url}>
                           <button
-                            className="copy-button"
+                            className="copy-url-button"
                             onClick={handleClick({
                               vertical: "top",
                               horizontal: "right",
