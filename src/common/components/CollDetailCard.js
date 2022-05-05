@@ -4,7 +4,10 @@ import Like from "../../assets/images/Like.svg";
 import likes from "../../assets/images/likes.svg";
 import { useSelector } from "react-redux";
 import Spinner from "../../common/components/Spinner";
-import { ShimmerCircularImage, ShimmerThumbnail } from "react-shimmer-effects";
+import { ShimmerThumbnail } from "react-shimmer-effects";
+import Ethereum from "../../assets/images/ether.svg";
+import Polygon from "../../assets/images/ploygon.svg";
+import Binance from "../../assets/images/binance.svg";
 import {
   getNfts,
   addLikeNft,
@@ -13,7 +16,7 @@ import {
 function CollDetailCard({ nft }) {
   const navigate = useNavigate();
   const { user, sideBar } = useSelector((state) => state);
-  const { _id, cdnUrl, name, biddingDetails, salesInfo } = nft;
+  const { _id, cdnUrl, name, biddingDetails, salesInfo,blockchain } = nft;
   const [handleLike, setHandleLike] = useState(true);
 
   const diffTime = (timestamp1, timestamp2) => {
@@ -52,6 +55,20 @@ function CollDetailCard({ nft }) {
 
   const onImageLoad=()=>{
     setImageLoading({...imageLoading,loaded:true});
+  }
+  
+  const blockchainCheck=(blockchain)=>{
+    switch(blockchain){
+      case 'Ethereum':
+      return <img className="currency-sign" src={Ethereum}></img>
+      case 'Polygon':
+      return <img  className="currency-sign" src={Polygon}></img>
+      case 'Binance':
+      return <img className="currency-sign" src={Binance}></img>
+      default:
+        return '';
+    }
+    
   }
 
 
@@ -106,7 +123,8 @@ function CollDetailCard({ nft }) {
                 color: "#16AB6E",
               }}
             >
-              {salesInfo?.price + salesInfo?.currency}
+               {blockchainCheck(blockchain)}
+              {salesInfo?.price} {salesInfo?.currency}
             </span>
           </div>
           <div
