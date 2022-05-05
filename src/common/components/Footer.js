@@ -275,16 +275,16 @@ function Footer() {
                   Suggestions
                 </a>
               </p>
-            </div>
-            <div className="fs-18 d-flex flex-column">
-              <a href="/about" className="footertitle">
-                Company
-              </a>
               <p>
                 <a href="/blogs" className="footersubtitle">
                   Blogs
                 </a>
               </p>
+            </div>
+            <div className="fs-18 d-flex flex-column">
+              <a href="/about" className="footertitle">
+                Company
+              </a>
               <p>
                 <a href="/about" className="footersubtitle">
                   About
@@ -373,6 +373,11 @@ function Footer() {
                   Suggestions
                 </a>
               </p>
+              <p>
+                <a href="/blogs" className="footersubtitle">
+                  Blogs
+                </a>
+              </p>
             </div>
             <div className="col-5 mt-3">
               <h3 className="fs-18 fw-b">
@@ -380,11 +385,6 @@ function Footer() {
                   Company
                 </a>
               </h3>
-              <p>
-                <a href="/blogs" className="footersubtitle">
-                  Blogs
-                </a>
-              </p>
               <p>
                 <a href="/about" className="footersubtitle">
                   About
