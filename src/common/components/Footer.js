@@ -210,20 +210,12 @@ function Footer() {
             </h3>
             <div className="d-none d-sm-none d-md-block d-lg-block fs-16 aboutdes">
               <p style={{ marginBottom: "0", cursor: "default" }}>
-                Anafto is an NFT Marketplace for the new age decentralised
-                world. The Anafto tribe can create NFTs on this dedicated
-                marketplace to showcase their Art or they can choose to sell
-                their NFTs. So, what are you waiting for .... Go Mint,Sell, Buy
-                and Explore... Happy NFTing.{" "}
+              Anafto is a decentralized NFT marketplace for new-age NFT enthusiasts. Users can easily create, buy, sell, store, and manage their NFTs on Anafto. Explore the marketplace and start trading your valuable digital assets.{" "}
               </p>
             </div>
             <div className="d-sm-block d-md-none d-lg-none fs-16">
               <p className=" footerdes">
-                Anafto is an NFT Marketplace for the new age decentralised
-                world. The Anafto tribe can create NFTs on this dedicated
-                marketplace to showcase their Art or they can choose to sell
-                their NFTs. So, what are you waiting for .... Go Mint,Sell, Buy
-                and Explore... Happy NFTing.
+              Anafto is a decentralized NFT marketplace for new-age NFT enthusiasts. Users can easily create, buy, sell, store, and manage their NFTs on Anafto. Explore the marketplace and start trading your valuable digital assets.
               </p>
             </div>
           </div>
