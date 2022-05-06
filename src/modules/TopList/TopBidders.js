@@ -342,12 +342,12 @@ function TopBidders() {
             <Collection className="row">
               <NameColumn className="col">
 
-                {buyer.photo == "" || !buyer.photo ? (
+                {buyer.photo == "" || !buyer.photo  ? (
                   <Image src={profileImage} alt="pic" />
 
 
                 ) : (
-                  <Image src={buyer.photo} alt="pic" />
+                  <Image src={typeof(buyer.photo) !== "object" ? buyer?.photo : buyer?.photo?.compressedURL} alt="pic" />
 
                 )}
 

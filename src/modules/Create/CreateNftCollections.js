@@ -48,11 +48,13 @@ function CreateNftCollections(props) {
   const navigation = useNavigate();
   const { loggedInUser, walletAddress } = user;
   const [specialchar,setSpecialChar]=useState("")
+  const [defaultCategories, setDefaultCategories] = useState([]);
   const [Categories, setCategories] = useState([]);
+  const [tenantCategories, setTenantCategories] = useState([]);
   const [selectCategory,setSelectCategory]=useState("");
 
   useEffect(() => {
-    getCategories().then((response) => setCategories(response));
+    getCategories().then((response) => setDefaultCategories(response));
   }, []);
 
 
@@ -81,12 +83,6 @@ function CreateNftCollections(props) {
       navigation("/add-wallet");
     }
   });
-
-  useEffect(() => {
-    getCategories((res) => {
-      setCategories(res.responseData);
-    });
-  }, []);
 
   useEffect(()=>{
     $(document).ready(function(){
@@ -318,15 +314,30 @@ function CreateNftCollections(props) {
 
   // Blockchain option
   const [selectedOption, setSelectedOption] = useState(null);
-  const blockchainOption = [];
+  const [blockchainOption, setBlockchainOption] = useState([]);
   const [blockchains, setBlockChains] = useState([])
  
   useEffect(() => {
     async function fetchData() {
-      await getTenantData().then(response => setBlockChains(response?.blockchains));
+      const response = await getTenantData()
+      setBlockChains(response?.blockchains)
+      setTenantCategories(response?.categories)
+      // await getTenantData().then(response => setBlockChains(response?.blockchains));
     }
     fetchData();
-  }, [selectCategory]);
+  }, []);
+
+  useEffect(() => {}, [selectCategory]);
+
+
+  useEffect(() => {
+    const selectedCategories = defaultCategories.filter((item) => {
+      if (tenantCategories.find((item2) => item2 == item._id)) {
+        return item;
+      } else return;
+    });
+    setCategories(selectedCategories);
+  }, [tenantCategories, defaultCategories]);
 
   useEffect(() => {
     for (let eachItem of blockchains) {
@@ -468,20 +479,14 @@ function CreateNftCollections(props) {
                 style={{border:nameError!=""?"1px solid red":"1px solid #C8C8C8"}}
                 placeholder="Write your collection name"
                 onChange={(e) => {
-                  var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
-                  if(format.test(e.target.value)){
-                    SetNameError("( No Special Character Allowed )");
-                  }
-                  else if(e.target.value.length == 0){
-                    SetNameError("( Name is required )")
-                  } else if(+e.target.value.length < 3){
-                    SetNameError("( Name should be atleast 3 character )")
-                  }
-                  else {
-                  SetNameError("");
-                  }
-                  
                   name.current = e.target.value;
+                  var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
+                  if(!format.test(name.current))
+                  SetNameError("")
+                  else if(name.current.length != 0)
+                  SetNameError("")
+                  else if(!name.current.length < 3)
+                  SetNameError("( Name should be atleast 3 character )")
                   //checkReqFieldFun();
                 }}
               />
@@ -497,7 +502,24 @@ function CreateNftCollections(props) {
                 className="input-box-1 mb-0"
                 style={{border:DesError!=""?"1px solid red":"1px solid #C8C8C8"}}
                 value={description.current}
+                onFocus={(e)=>{
+                  var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
+                  if(format.test(name.current))
+                    SetNameError("( No Special Character Allowed )");
+                  
+                  else if(name.current.length == 0)
+                    SetNameError("( Name is required )")
+                 else if(name.current.length < 3)
+                    SetNameError("( Name should be atleast 3 character )")
+                  
+                  else 
+                  SetNameError("");
+                  
+                  
+                }}
                 onChange={(e) => {
+
+                  
                   if(e.target.value.length==0){
                     SetDesError("(Description is required)")
                   }else

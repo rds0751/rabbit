@@ -116,3 +116,11 @@
     margin: 0 auto;
   }
 }
+.collectionCardEachTotalitems .total-nft-collection{
+  margin-left: 3px;
+}
+.card-lower .container__up .myItemNFT{
+width: 60%;
+color: #191919;
+overflow: hidden;
+}

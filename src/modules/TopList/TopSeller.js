@@ -340,7 +340,7 @@ function TopSeller() {
 
 
                 ) : (
-                  <Image src={topSellers.photo} alt="pic" />
+                  <Image src={typeof(topSellers?.photo) !== "object" ?topSellers?.photo : topSellers?.photo?.compressedURL} alt="pic" />
 
                 )}
 

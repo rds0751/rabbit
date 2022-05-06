@@ -1,8 +1,30 @@
-import * as React from "react";
+import  React, { useState, useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import "../../assets/styles/Leader.css";
 import banner from "../../assets/images/Banner.png";
+import * as moment from 'moment'
+import Spinner from "../../common/components/Spinner";
+import {getBlogs} from "../../services/clientConfigMicroService"
+import { data } from "jquery";
 export default function ComplexGrid() {
+  const [blogs, setBlogs] = useState([])
+  const [visibleBlogs, setVisibleBlogs] = useState(4);
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    setIsLoading(true);
+    async function fetchData() {
+      setIsLoading(true);
+      await getBlogs().then((res) => setBlogs(res));
+      setIsLoading(false);
+    }
+    fetchData();    
+  }, []);
+  console.log("test11", blogs)
+  const loadMoreHandler = () => {
+    <div className="spinnerloader">{isLoading && <Spinner />}</div>;
+    setVisibleBlogs((prevVisibleBlogs) => prevVisibleBlogs + 4);
+  };
+
   return (
     <div>
       <div className="hero-image">
@@ -10,7 +32,22 @@ export default function ComplexGrid() {
           <p>Blogs</p>
         </div>
       </div>
-      <Paper
+      <div className="spinnerloader">
+            {isLoading ? (
+              <Spinner />
+            ) : (
+              data.length === 0 && (
+                <div className="Noitemdiv">
+                  {/* <img className="no-image" src={NoItem} alt="No-items" /> */}
+                  <p className="textitem">No items available</p>
+                </div>
+              )
+            )}
+          </div>
+      {blogs.slice(0, visibleBlogs).map((data) => {
+      return( 
+        <>
+         <Paper
         sx={{
           margin: "auto",
           marginTop: "81px",
@@ -30,35 +67,31 @@ export default function ComplexGrid() {
             src={banner}
           ></img>
         </div>
-      </Paper>
-      <Paper
-        sx={{
-          p: 2,
-          margin: "auto",
-          maxWidth: 960,
-          flexGrow: 1,
-          backgroundColor: (theme) =>
-            theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-        }}
-      >
+        <div style={{padding:"32px"}}>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <p className="blog-title">What is NFT?</p>
-          <p className="blog-date">2 March 2021</p>
+          <p className="blog-title">{data.postTitle}</p>
+          <p className="blog-date">{moment(data.addedOn).format('DD MMMM YYYY')}
+</p>
         </div>
         <div>
           <p className="blog-content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididuntLorem ipsum dolor sit amet, consectetur
-            adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in
+          {data.content}
           </p>
         </div>
         <button className="blog-read">
           Read more
         </button>
+        </div>
       </Paper>
+      </>   )})}
+      <div style={{ textAlignLast: "center" }}>
+              <button className="load-more" onClick={loadMoreHandler}>
+                Load More
+              </button>
+            </div>
+
+ 
+    
     </div>
   );
 }

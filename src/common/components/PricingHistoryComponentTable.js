@@ -10,10 +10,12 @@ import TableHead from "@mui/material/TableHead";
 import Information from "../../assets/images/No-Info-Icon.svg";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import MultiSelect from "react-multiple-select-dropdown-lite";
 import "react-multiple-select-dropdown-lite/dist/index.css";
 import styled from "styled-components";
 import SplitFrom from "./splitFrom";
+import Snackbar from "@mui/material/Snackbar";
 import SplitTo from "./splitTo";
 import {
   getActivities,
@@ -106,6 +108,23 @@ const TableDiv = styled.div`
   border-radius: 0px 0px 3px 3px;
   opacity: 1;
 `;
+const CustomSnack = styled(Snackbar)`
+  @media (min-width: 992px) {
+    position: absolute !important;
+    top: 1159px !important;
+    right: auto !important;
+    left: 372px !important;
+
+    min-width: 112px !important;
+  }
+  @media only screen and (min-width: 0px) and (max-width: 991px) {
+    position: absolute !important;
+    top: 1872px !important;
+    left: auto !important;
+
+    min-width: 112px !important;
+  }
+`;
 function createData(Event, Price, From, To, Date) {
   return { Event, Price, From, To, Date };
 }
@@ -179,7 +198,25 @@ export default function PricingHistoryComponentTable(props) {
       setMinted(!minted);
     }
   };
+  const isDataCopied = () => {
+    // walletTogglePopup(false);
+    // toast.success("Text Copied");
+  };
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+  });
 
+  const { vertical, horizontal, open } = state;
+
+  const handleClick = (newState) => () => {
+    setState({ open: true, ...newState });
+  };
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
   useEffect(() => {
     getPricingHistory();
   }, []);
@@ -203,8 +240,6 @@ export default function PricingHistoryComponentTable(props) {
 
   let toArray = [];
 
-
-
   return (
     <MainContainer className="pricing-history">
       <Title>Activities</Title>
@@ -217,6 +252,15 @@ export default function PricingHistoryComponentTable(props) {
           options={options}
         />
       </FilterContainer>
+      <CustomSnack
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        onClose={handleClose}
+        message="Copied"
+        key={vertical + horizontal}
+        autoHideDuration={2000}
+        className="custom-snack"
+      />
       <TableDiv>
         {activities.length > 0 ? (
           <TableContainerCustom component={Paper} elevation={0}>
@@ -311,24 +355,37 @@ export default function PricingHistoryComponentTable(props) {
                       >
                         {row.price}
                       </TableCell>
-                      <Tooltip
-                        title={
-               row.walletAddress
-                        }
-                      >
+
+                      <Tooltip title={row.walletAddress}>
                         <TableCell
                           style={{
                             borderBottom: "1px solid #C8C8C8",
                           }}
                         >
-                          {row.userName
-                            ? row.userName.substr(0, 6)
-                            : <SplitFrom address = {row.walletAddress} />}
+                          {" "}
+                          <CopyToClipboard text={row?.walletAddress}>
+                            <button
+                              className="copy-button"
+                              onClick={handleClick({
+                                vertical: "top",
+                                horizontal: "right",
+                              })}
+                            >
+                              {row.userName ? (
+                                row.userName.substr(0, 6)
+                              ) : (
+                                <SplitFrom address={row.walletAddress} />
+                              )}
+                            </button>
+                          </CopyToClipboard>
                         </TableCell>
                       </Tooltip>
+
                       <Tooltip
                         title={
-                          row?.to[0]?.wallet_address ? row?.to[0]?.wallet_address : "--"
+                          row?.to[0]?.wallet_address
+                            ? row?.to[0]?.wallet_address
+                            : "--"
                         }
                       >
                         <TableCell
@@ -336,12 +393,26 @@ export default function PricingHistoryComponentTable(props) {
                             borderBottom: "1px solid #C8C8C8",
                           }}
                         >
+                                                    <CopyToClipboard text={row?.walletAddress} >
+                            <button
+                              className="copy-button"
+                              onClick={handleClick({
+                                vertical: "top",
+                                horizontal: "right",
+                              })}
+                            >
                           {console.log(row, "username")}
-                          {row?.to.length > 0
-                            ? row?.to[0]?.userName
-                              ? row?.to[0]?.userName.substr(0, 7)
-                              : <SplitTo address={row?.to[0]?.wallet_address}/>
-                            : "---"}
+                          {row?.to.length > 0 ? (
+                            row?.to[0]?.userName ? (
+                              row?.to[0]?.userName.substr(0, 7)
+                            ) : (
+                              <SplitTo address={row?.to[0]?.wallet_address} />
+                            )
+                          ) : (
+                            "---"
+                          )}
+                                                     </button>
+                          </CopyToClipboard>
                         </TableCell>
                       </Tooltip>
                       <TableCell

@@ -145,7 +145,7 @@ function Wallet() {
       <div className="empty_div" onClick={() => handleChange()}></div>
       <div className="wallet_div">
         <div className="imgwallet">
-          <img src={loggedInUser?.photo ? loggedInUser?.photo : image} alt="" />
+          <img src={typeof(loggedInUser?.photo) === "object" ? loggedInUser?.photo?.compressedURL : (typeof(loggedInUser?.photo) === "string" && loggedInUser.photo !=""? loggedInUser?.photo:image)} alt="" />
         </div>
         <div className="walletAddressContainer walleth2">
           <div className="walletAddress fontwallet">
