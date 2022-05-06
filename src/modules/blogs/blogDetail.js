@@ -31,7 +31,7 @@ console.log(from,"location")
               height: "240px",
               objectFit: "fill",
             }}
-            src={banner}
+            src={from?.data?.coverUrl}
           ></img>
         </div>
         <div style={{padding:"32px"}}>
