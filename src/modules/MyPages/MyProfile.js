@@ -137,7 +137,11 @@ function MyProfile() {
   useEffect(() => {
     if (loggedInUser == null) {
       navigate("/my-profile");
-      navigate("/add-wallet");
+      
+      if(!localStorage.getItem('has_wallet')){
+        navigate("/add-wallet");
+      }
+
     } else {
       setIsloading(true);
       getCreatedByNft();

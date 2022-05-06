@@ -216,6 +216,7 @@ function Navbar() {
     setDisplay(!display);
   };
   const handleWalletClick = () => {
+    console.log('called wallet')
     setDisplay(true);
     if (walletAddress == null) {
       navigate("/add-wallet");
@@ -229,6 +230,7 @@ function Navbar() {
     }
   };
   const handleNotiSideBar = () => {
+    console.log('called sidebar')
     setDisplay(true);
     console.log(isOpenNoti, "<<<isopen noti");
     if (loggedInUser == null) {
