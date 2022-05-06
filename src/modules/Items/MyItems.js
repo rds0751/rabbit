@@ -9,6 +9,9 @@ import { getNftOwnedByUser } from "../../services/contentMicroservice";
 import { getCollectionOwnedByUser } from "../../services/contentMicroservice";
 import { useSelector } from "react-redux";
 import NoItem from "../../assets/images/Noitems.svg"
+import Ethereum from "../../assets/images/ether.svg";
+import Polygon from "../../assets/images/ploygon.svg";
+import Binance from "../../assets/images/binance.svg";
 function MyItems() {
 
   const [activeInActive, setActiveInActive] = useState("active");
@@ -30,6 +33,20 @@ function MyItems() {
   useEffect(async () => {
     await getCollectionOwnedByUser(userId).then(res => setownedCollection(res));
   }, []);
+
+  const blockchainCheck=(blockchain)=>{
+    switch(blockchain){
+      case 'Ethereum':
+      return <img className="currency-sign" src={Ethereum}></img>
+      case 'Polygon':
+      return <img  className="currency-sign" src={Polygon}></img>
+      case 'Binance':
+      return <img className="currency-sign" src={Binance}></img>
+      default:
+        return '';
+    }
+    
+  }
 
 
   return (
@@ -74,7 +91,7 @@ function MyItems() {
           {toggleSelect ?
             <button type="submit" className="add-item-button p-0 bord-rad-4">
               <Link
-                to="/create-nft"
+                to="/create-single-nft"
                 style={{ textDecoration: "none", color: '#FFFFFF' }}>
                 Add item
               </Link>
@@ -82,7 +99,7 @@ function MyItems() {
             :
             <button type="submit" className="add-item-button p-0 bord-rad-4">
               <Link
-                to="/create-nft" style={{ textDecoration: "none", color: '#FFFFFF' }}>
+                to="/create-nft-collection" style={{ textDecoration: "none", color: '#FFFFFF' }}>
                 Create Collection
               </Link>
             </button>
@@ -96,7 +113,7 @@ function MyItems() {
 
             {ownedNft.length > 1 ?(
               ownedNft.map((curElem) => {
-                const { cdnUrl, name, _id,salesInfo,likes,compressedURL} =
+                const { cdnUrl, name, _id,salesInfo,likes,compressedURL,blockchain} =
                   curElem;
                 const route = "/nft-information/" + _id;
                 return (
@@ -123,7 +140,10 @@ function MyItems() {
                           >
                             {name}
                           </div>
-                         <span className="priceTag"> {`${salesInfo?.price}  ${salesInfo?.currency}`}</span>
+                         <span className="priceTag"> 
+                         {blockchainCheck(blockchain)}
+                         {`${salesInfo?.price}  ${salesInfo?.currency}`}
+                         </span>
                          
                         </div>
                         <div className="likeCount" title="Like Count">

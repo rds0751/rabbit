@@ -347,6 +347,7 @@ const [compressedUrl,setCompressedUrl]=useState("");
           compressedURL:compressedUrl,
           nftName: name.current,
           price: price.current,
+          currency:selectedOption?.value,
           description: description.current,
           blockchain: blockchain.current,
           createdBy: loggedInUser._id,

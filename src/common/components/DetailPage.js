@@ -23,6 +23,19 @@ const TableDiv = styled.div`
   border: 1px solid #c8c8c8;
   border-radius: 0px 0px 3px 3px;
   opacity: 1;
+  
+`;
+const TableContainerCustom = styled(TableContainer)`
+  height: 288px !important;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 1px solid #c8c8c8;
+  border-radius: 0px 0px 3px 3px;
+  opacity: 1;
+  ::-webkit-scrollbar {
+    /* WebKit */
+    width: 0;
+    height: 0;
+  }
 `;
 
 export default function DetailPage(props) {
@@ -30,8 +43,8 @@ export default function DetailPage(props) {
 
   console.log(props.nft.blockchain, props.length, nft, nft?.length, "<<<props");
   return (
-    <TableContainer elevation={0}>
-      <TableDiv>
+    <TableContainerCustom elevation={0}>
+      {/* <TableDiv> */}
         <TableDown aria-label="simple table">
           <tbody>
             <tr sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
@@ -48,7 +61,7 @@ export default function DetailPage(props) {
               >
                 Contract address
               </td>
-              <td style={{ border: "none" }}>{nft?.contractAddress}</td>
+              <td style={{ border: "none",paddingTop:"20px" }}>{nft?.contractAddress}</td>
             </tr>
             <tr sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
               <td
@@ -64,7 +77,7 @@ export default function DetailPage(props) {
               >
                 Token ID
               </td>
-              <td style={{ border: "none" }}>{nft?.tokenId}</td>
+              <td style={{ border: "none",paddingTop:"20px"}}>{nft?.tokenId}</td>
             </tr>
             <tr sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
               <td
@@ -80,7 +93,7 @@ export default function DetailPage(props) {
               >
                 Token Standard
               </td>
-              <td style={{ border: "none" }}>-</td>
+              <td style={{ border: "none",paddingTop:"20px"  }}>-</td>
             </tr>
             <tr sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
               <td
@@ -96,11 +109,11 @@ export default function DetailPage(props) {
               >
                 Blockchain
               </td>
-              <td style={{ border: "none" }}>{nft?.blockchain}</td>
+              <td style={{ border: "none",paddingTop:"20px"  }}>{nft?.blockchain}</td>
             </tr>
           </tbody>
         </TableDown>
-      </TableDiv>
-    </TableContainer>
+      {/* </TableDiv> */}
+    </TableContainerCustom>
   );
 }
