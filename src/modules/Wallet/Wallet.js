@@ -133,6 +133,7 @@ function Wallet() {
     
     navigate('/');
   }
+  const [dataCopied,setDataCopied]=useState(true);
 
   return (
     <div
@@ -147,11 +148,20 @@ function Wallet() {
         <div className="imgwallet">
           <img src={typeof(loggedInUser?.photo) === "object" ? loggedInUser?.photo?.compressedURL : (typeof(loggedInUser?.photo) === "string" && loggedInUser.photo !=""? loggedInUser?.photo:image)} alt="" />
         </div>
-        <div className="walletAddressContainer walleth2">
+        <div className="walletAddressContainer walleth2" 
+        onClick={()=>{
+          setDataCopied(false)
+          setTimeout(()=>{
+            setDataCopied(true);
+          },3000);
+        }}
+          >
           <div className="walletAddress fontwallet">
-            <SplitWalletAdd address={walletAddress?.address} />
-          </div>
+           
+            
           <CopyToClipboard text={walletAddress?.address}>
+          <span>
+            <SplitWalletAdd address={walletAddress?.address} />
             <button
               className="copy-button"
               onClick={handleClick({
@@ -172,7 +182,13 @@ function Wallet() {
                 // onClick={handleClick(Fade)}
               />
             </button>
+            </span>
           </CopyToClipboard>
+          <span className="tooltiptext">
+            {dataCopied ? "copy to clipboard" : "copied" }
+          </span>
+          </div>
+         
           {/* <ToastContainer style={{marginTop:"100px" , width: "142px", marginRight: "55px"}}/> */}
           <CustomSnack
             anchorOrigin={{ vertical, horizontal }}
@@ -190,7 +206,7 @@ function Wallet() {
             alt=""
             onClick={handleCopyToClipboard}
           /> */}
-        </div>
+        </div> 
         <div className="balancewallet textVerticalCenter">
           <div className="WalletContent">
             <h3>Total Balance</h3>
