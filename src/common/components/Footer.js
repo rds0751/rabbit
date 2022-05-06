@@ -7,6 +7,7 @@ import instaIcon from "../../assets/images/insta.svg";
 import hoverInsta from "../../assets/images/hoverInsta.svg";
 import { toast } from "react-toastify";
 import HoverImage from "react-hover-image";
+import {version} from "../../version.js"
 
 function Footer() {
   let [email, setEmailError] = useState("");
@@ -309,7 +310,7 @@ function Footer() {
           </div>
           <div className="version">
             <span className="textversion">
-              v0.01
+             {version}
             </span>
           </div>
           <div className="row footer-bottom-sm">
@@ -408,7 +409,7 @@ function Footer() {
             </div>
             <div className="versionmob">
             <span className="textversionmob">
-              v0.01
+              {version}
             </span>
           </div>
           </div>

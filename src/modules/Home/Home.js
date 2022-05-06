@@ -176,7 +176,7 @@ function Home() {
                                       <div className="homePageContainer">
                                         <Card.Img
                                           variant="top"
-                                          src={nft.compressedURL}
+                                          src={nft?.compressedURL}
                                           onLoad={onImageLoad}
                                           onMouseDown={(e) =>
                                             e.preventDefault()
@@ -434,7 +434,7 @@ function Home() {
                             >
                               <img
                                 className="nft-img"
-                                src={nft?.cdnUrl}
+                                src={nft?.compressedURL}
                                 onMouseDown={(e) => e.preventDefault()}
                                 onContextMenu={(e) => e.preventDefault()}
                               ></img>
@@ -454,14 +454,17 @@ function Home() {
                             <div style={{ display: "flex" }}>
                               <Avatar
                                 alt="Remy Sharp"
-                                src={nft?.cdnUrl}
+                                src={nft?.compressedURL}
                                 onMouseDown={(e) => e.preventDefault()}
                                 onContextMenu={(e) => e.preventDefault()}
                               />
                               <p className="nft-carname">{nft?.name}</p>
                             </div>
 
-                            <button>{`${nft?.salesInfo?.price}  ${nft?.salesInfo?.currency}`}</button>
+                            <button>
+                              {blockchainCheck(nft?.blockchain)}
+                              {`${nft?.salesInfo?.price}  ${nft?.salesInfo?.currency}`}
+                              </button>
                           </div>
                         </div>
                       );
