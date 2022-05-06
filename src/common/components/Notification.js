@@ -122,10 +122,10 @@ const handleNotification = (_id) =>{
                           {String(owner.userName).length >= 7
                             ? !owner.userName
                               ? " "
-                              : String(owner?.userName).substring(0, 6) + "..."
+                              : String(owner?.userName).substring(0, 15)
                             : String(owner?.userName) === ""
-                            ? String(owner?.wallet_address).substring(0, 6)
-                            : String(owner?.userName).substring(0, 6)}
+                            ? String(owner?.wallet_address).substring(0, 10) + "..."
+                            : String(owner?.userName).substring(0, 20)}
                         </span>
                       </a>
                       &nbsp;{type}d&nbsp;your&nbsp;
@@ -133,7 +133,7 @@ const handleNotification = (_id) =>{
                         style={{ textDecoration: "none" }}
                         href={"/nft-information/" + content?._id}
                       >
-                        <span style={{ color: "#366EEF" }}>{String(content.name).substring(0,8) + "..."}</span>
+                        <span style={{ color: "#366EEF" }}>{String(content.name).substring(0,20) }</span>
                       </a>
                     </div>
                   ) : type == "buy" ? (
@@ -146,10 +146,10 @@ const handleNotification = (_id) =>{
                         {String(owner.userName).length >= 7
                           ? !owner.userName
                             ? " "
-                            : String(owner?.userName).substring(0, 6) + "..."
+                            : String(owner?.userName).substring(0, 15)
                           : String(owner?.userName) === ""
-                          ? String(owner?.wallet_address).substring(0, 6)
-                          : String(owner?.userName).substring(0, 6)}
+                          ? String(owner?.wallet_address).substring(0, 10) + "..."
+                          : String(owner?.userName).substring(0, 15)}
                       </span>
                     </a>
                     &nbsp;bought&nbsp;your&nbsp;
@@ -157,7 +157,7 @@ const handleNotification = (_id) =>{
                       style={{ textDecoration: "none" }}
                       href={"/nft-information/" + content?._id}
                     >
-                      <span style={{ color: "#366EEF" }}>{String(content.name).substring(0,8) + "..."}</span>
+                      <span style={{ color: "#366EEF" }}>{String(content.name).substring(0,20)}</span>
                     </a>
                   </div>
                   ) : type == "reportNFT" ? (
@@ -170,10 +170,10 @@ const handleNotification = (_id) =>{
                         {String(owner.userName).length >= 7
                           ? !owner.userName
                             ? " "
-                            : String(owner?.userName).substring(0, 5) + "..."
+                            : String(owner?.userName).substring(0, 15)
                           : String(owner?.userName) === ""
-                          ? String(owner?.wallet_address).substring(0, 5)
-                          : String(owner?.userName).substring(0, 5)}
+                          ? String(owner?.wallet_address).substring(0, 10) + "..."
+                          : String(owner?.userName).substring(0, 15)}
                       </span>
                     </a>
                     &nbsp;reported&nbsp;your&nbsp;
@@ -181,7 +181,7 @@ const handleNotification = (_id) =>{
                       style={{ textDecoration: "none" }}
                       href={"/nft-information/" + content?._id}
                     >
-                      <span style={{ color: "#366EEF" }}>{String(content.name).substring(0,5) + "..."}</span>
+                      <span style={{ color: "#366EEF" }}>{String(content.name).substring(0,20)}</span>
                     </a>
                   </div>
                   ) : (

@@ -16,6 +16,9 @@ import Easy from "../../assets/images/Easy.svg";
 import Offers from "../../assets/images/Offers.svg";
 import Stats from "../../assets/images/Stats.svg";
 import { RedirectTo } from "../../reducers/Action";
+import Ethereum from "../../assets/images/ether.svg";
+import Polygon from "../../assets/images/ploygon.svg";
+import Binance from "../../assets/images/binance.svg";
 // import { Link, useLocation } from "react-router-dom";
 // import Card from '@mui/material/Card';
 import Avatar from "@mui/material/Avatar";
@@ -97,6 +100,20 @@ function Home() {
   const onImageLoad = () => {
     setImageLoading({ ...imageLoading, loaded: true });
   };
+  const blockchainCheck=(blockchain)=>{
+    switch(blockchain){
+      case 'Ethereum':
+      return <img className="currency-sign" src={Ethereum}></img>
+      case 'Polygon':
+      return <img  className="currency-sign" src={Polygon}></img>
+      case 'Binance':
+      return <img className="currency-sign" src={Binance}></img>
+      default:
+        return '';
+    }
+    
+  }
+
 
   return (
     <>
@@ -159,7 +176,7 @@ function Home() {
                                       <div className="homePageContainer">
                                         <Card.Img
                                           variant="top"
-                                          src={nft.compressedURL}
+                                          src={nft?.compressedURL}
                                           onLoad={onImageLoad}
                                           onMouseDown={(e) =>
                                             e.preventDefault()
@@ -208,6 +225,7 @@ function Home() {
                                           </h3>
                                           {/* {let n = nft?.description.split(' ')} */}
                                           <span className="nftTileEachDetailsFirstContainerValue">
+                                             {blockchainCheck(nft?.blockchain)}
                                             {`${nft?.salesInfo?.price}  ${nft?.salesInfo?.currency}`}
                                           </span>
                                           {/* <p className="description">{nft?.description}</p> */}
@@ -326,6 +344,7 @@ function Home() {
                                             </h3>
 
                                             <span className="nftTileEachDetailsFirstContainerValue">
+                                              {blockchainCheck(nft?.blockchain)}
                                               {`${nft?.salesInfo?.price}  ${nft?.salesInfo?.currency}`}
                                             </span>
                                           </div>
@@ -415,7 +434,7 @@ function Home() {
                             >
                               <img
                                 className="nft-img"
-                                src={nft?.cdnUrl}
+                                src={nft?.compressedURL}
                                 onMouseDown={(e) => e.preventDefault()}
                                 onContextMenu={(e) => e.preventDefault()}
                               ></img>
@@ -435,14 +454,17 @@ function Home() {
                             <div style={{ display: "flex" }}>
                               <Avatar
                                 alt="Remy Sharp"
-                                src={nft?.cdnUrl}
+                                src={nft?.compressedURL}
                                 onMouseDown={(e) => e.preventDefault()}
                                 onContextMenu={(e) => e.preventDefault()}
                               />
                               <p className="nft-carname">{nft?.name}</p>
                             </div>
 
-                            <button>{`${nft?.salesInfo?.price}  ${nft?.salesInfo?.currency}`}</button>
+                            <button>
+                              {blockchainCheck(nft?.blockchain)}
+                              {`${nft?.salesInfo?.price}  ${nft?.salesInfo?.currency}`}
+                              </button>
                           </div>
                         </div>
                       );

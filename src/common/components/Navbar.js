@@ -35,7 +35,6 @@ import Anafto from "../../assets/images/ANAFTO.svg";
 import { WHITE_LABEL_TOKEN } from "../../reducers/Constants";
 const queryString = require("query-string");
 function Navbar() {
-  console.log('render nav')
   const navigate = useNavigate();
   const [humburger, setHumburger] = useState(false);
   const [toggleEffect, setToggleEffect] = useState(false);
@@ -52,6 +51,7 @@ function Navbar() {
   const [showModal, setShowModal] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [Count, setCount] = useState([]);
+  const [inputValue, setInputValue] = useState("");
   const [searchNft, setSearchNft] = useState({
     searchByName: "",
     limit: 4,
@@ -244,6 +244,13 @@ function Navbar() {
   const reqObj = queryString.stringify(searchNft);
   const reqObj1 = queryString.stringify(searchCollection);
   useEffect(() => {
+    if (searchNft.searchByName.length > 0) {
+      setShowModal(true);
+      setDisplay(false);
+    } else {
+      setShowModal(false);
+      setDisplay(true);
+    }
     setIsLoading(true);
     setNfts([]);
     setCollections([]);
@@ -273,22 +280,26 @@ function Navbar() {
   //   document.body.style.top = '';
 
   // }
-  const handleSearch = async (e) => {
-    if (searchNft.searchByName.length > 0) {
-      setShowModal(true);
-      setDisplay(false);
-    } else {
-      setShowModal(false);
-      setDisplay(true);
-    }
-    // showModal? setDisplay(false):setDisplay(true);
-    setSearchNft({ ...searchNft, [e.target.name]: e.target.value });
-    setSearchCollection({
-      ...searchCollection,
-      [e.target.name]: e.target.value,
-    });
-  };
-  let [scroll, setScroll] = useState(true);
+
+  useEffect(() => {
+    setSearchNft({ ...searchNft, "searchByName": inputValue });
+    setSearchCollection({ ...searchCollection, "searchByName": inputValue });
+  }, [inputValue])
+
+  // const handleSearch = async (e) => {
+  //   inputValue = e.target.value;
+  //   setSearchNft({ ...searchNft, [e.target.name]: e.target.value });
+  //   setSearchCollection({ ...searchCollection, [e.target.name]: e.target.value });
+  //   if (searchNft.searchByName.length > 0) {
+  //     setShowModal(true);
+  //     setDisplay(false);
+  //   } else {
+  //     setShowModal(false);
+  //     setDisplay(true);
+  //   }
+  //   showModal? setDisplay(false):setDisplay(true);    
+  // };
+
   const closeWalletAndNoti = () => {
     document.body.className = "overflow-hidden";
     setDisplay(true);
@@ -313,7 +324,7 @@ function Navbar() {
     getNotificationListById(userId).then((response) =>
       setNotifications(response)
     );
-  }, [notifications]);
+  }, []);
   // const notificationId = notifications._id;
   //   useEffect(() => {
   //     getNotificationCountById(notificationId).then((response) =>
@@ -362,7 +373,7 @@ function Navbar() {
                       type="search"
                       name="searchByName"
                       placeholder="Search items and collections"
-                      onChange={(e) => handleSearch(e)}
+                      onChange={(e) => setInputValue(e.target.value)}
                       autoComplete="off"
                       className="search-input"
                     />
@@ -485,7 +496,7 @@ function Navbar() {
               <Form.Control
                 type="search"
                 name="searchByName"
-                onChange={(e) => handleSearch(e)}
+                onChange={(e) => setInputValue(e.target.value)}
                 autoComplete="off"
                 className="search-input"
                 placeholder="Search items and collections"

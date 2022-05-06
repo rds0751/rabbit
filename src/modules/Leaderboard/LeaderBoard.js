@@ -1064,7 +1064,7 @@ function LeaderBoard() {
             for="topNft-sales"
             className="fs-20 fw-sb c-b pb-16 d-sm-block d-md-none"
           >
-            Top NFT sales
+            Top NFT Sales
           </label>
 
           <div className="d-flex align-items-center">
@@ -1072,7 +1072,7 @@ function LeaderBoard() {
               for="topNft-sales"
               className="fs-20 fw-sb c-b pr-12 d-none d-sm-none d-md-block"
             >
-              Top NFT sales
+              Top NFT Sales
             </label>
 
             {/* <select id="topNft-sales" className="sales-selector fs-14 fw-m" onChange={(e) => ChangeNFTDuration(e)} name="duration">

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Like from "../../assets/images/Like.svg";
+import Ethereum from "../../assets/images/ether.svg";
+import Polygon from "../../assets/images/ploygon.svg";
+import Binance from "../../assets/images/binance.svg";
 import likes from "../../assets/images/likes.svg";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-// import { useHistory } from "react-router-dom";
 import "../../assets/styles/common.css"
-import Spinner from "../../common/components/Spinner";
 import { ShimmerThumbnail } from "react-shimmer-effects";
 import {
   getNfts,
@@ -18,7 +19,7 @@ function NftCardsHome({ nft }) {
 
   const navigate = useNavigate();
   const { user, sideBar } = useSelector((state) => state);
-  const { _id, cdnUrl, name, biddingDetails, salesInfo, isLiked,compressedURL } = nft;
+  const { _id, cdnUrl, name, biddingDetails, salesInfo, isLiked,compressedURL,blockchain } = nft;
   const [handleLike, setHandleLike] = useState(true);
   // const currDate = new Date();
   // const endDate = biddingDetails.endDate;
@@ -35,7 +36,6 @@ function NftCardsHome({ nft }) {
       setHandleLike(!handleLike);      
     } else {
       toast.error("Not logged in")
-      // navigate("/add-wallet");
     }    
   };
   // const difftime = (timestamp1, timestamp2) => {
@@ -83,6 +83,20 @@ function NftCardsHome({ nft }) {
 
   const onImageLoad=()=>{
    setImageLoading({...imageLoading,loaded:true});
+  }
+
+  const blockchainCheck=(blockchain)=>{
+    switch(blockchain){
+      case 'Ethereum':
+      return <img className="currency-sign" src={Ethereum}></img>
+      case 'Polygon':
+      return <img  className="currency-sign" src={Polygon}></img>
+      case 'Binance':
+      return <img className="currency-sign" src={Binance}></img>
+      default:
+        return '';
+    }
+    
   }
 
   return (
@@ -148,6 +162,7 @@ function NftCardsHome({ nft }) {
             <span
               className="nftTileEachDetailsFirstContainerValue"
             >
+              {blockchainCheck(blockchain)}
               {`${salesInfo?.price}  ${salesInfo?.currency}`}
             </span>
           </div>

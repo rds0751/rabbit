@@ -32,6 +32,9 @@ import styled from "styled-components";
 import ListingsTable from "../../common/components/ListingTable";
 import DetailPage from "../../common/components/DetailPage";
 import CopyToClipboard from "react-copy-to-clipboard";
+import Ethereum from "../../assets/images/ether.svg";
+import Polygon from "../../assets/images/ploygon.svg";
+import Binance from "../../assets/images/binance.svg";
 toast.configure();
 const CustomSnack = styled(Snackbar)`
   @media (min-width: 992px) {
@@ -104,9 +107,9 @@ export default function NftInformation(props) {
   const { id } = useParams();
   const nft = props?.responseData;
 
-  console.log('nft data', nft)
+ 
 
-  const { owner, creator, salesInfo } = nft;
+  const { owner, creator, salesInfo,blockchain } = nft;
   const [openReportModal, setOpenReportModal] = useState(false);
   const [saleModal, setsaleModal] = useState(false);
   const [putOnSaleModal, setPutOnSaleModal] = useState(false);
@@ -322,8 +325,22 @@ export default function NftInformation(props) {
   let createdBy = creator?.userName
     ? creator?.userName
     : creator?.wallet_address;
-
   const url = window.location.href;
+
+
+  const blockchainCheck=(blockchain)=>{
+    switch(blockchain){
+      case 'Ethereum':
+      return <img className="currency-sign-nftinformation" src={Ethereum}></img>
+      case 'Polygon':
+      return <img className="currency-sign-nftinformation" src={Polygon}></img>
+      case 'Binance':
+      return <img className="currency-sign-nftinformation" src={Binance}></img>
+      default:
+        return '';
+    }
+    
+  }
 
   return (
     <>
@@ -451,7 +468,7 @@ export default function NftInformation(props) {
                     <li className="list-item" >
                       <CopyToClipboard text={url}>
                       <button
-                        className="copy-button"
+                        className="copy-url-button"
                         onClick={handleClick({
                           vertical: "top",
                           horizontal: "right",
@@ -630,7 +647,7 @@ export default function NftInformation(props) {
                           {" "}
                           <CopyToClipboard text={url}>
                           <button
-                            className="copy-button"
+                            className="copy-url-button"
                             onClick={handleClick({
                               vertical: "top",
                               horizontal: "right",
@@ -769,6 +786,7 @@ export default function NftInformation(props) {
                 <span className="text">
                   Current Price:&nbsp;
                   <span className="nft-value">
+                    {blockchainCheck(blockchain)}
                     {salesInfo?.price}&nbsp;{salesInfo?.currency}
                   </span>
                 </span>
@@ -790,7 +808,8 @@ export default function NftInformation(props) {
                       style={{ textDecoration: "none" }}
                     >
                       <span className="text-name fw-b">
-                        {ownedBy}
+                        {/* {ownedBy} */}
+                        {owner?.wallet_address === user?.walletAddress?.address ? "You" : ownedBy}
                         {/* {(String(ownedBy).length >= 7) ? (!ownedBy ? " " : (String(ownedBy).substring(0, 8) + "...")) : (String(ownedBy) === undefined ? "" : ownedBy)}                     */}
                       </span>
                     </Link>
@@ -804,7 +823,8 @@ export default function NftInformation(props) {
                       style={{ textDecoration: "none" }}
                     >
                       <span className="text-name fw-b">
-                        {createdBy}
+                        {/* {createdBy} */}
+                        {creator?.wallet_address === user?.walletAddress?.address ? "You" : createdBy}
                         {/* {(String(createdBy).length >= 7) ? (!createdBy ? " " : (String(createdBy).substring(0, 8) + "...")) : (String(createdBy) === undefined ? "" : createdBy)}                     */}
                       </span>
                     </Link>

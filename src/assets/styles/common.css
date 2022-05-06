@@ -29,3 +29,11 @@
     box-shadow: rgb(4 17 29 / 25%) 0px 0px 8px 0px;
     transition: all 0.1s ease 0s;
   }
+  .currency-sign{
+    margin-right: 2px;
+    margin-left: 2px;
+  }
+  .currency-sign-nftinformation{
+    margin-right: 2px;
+    margin-left: 5px;
+  }

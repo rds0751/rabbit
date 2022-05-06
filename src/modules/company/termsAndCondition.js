@@ -1,6 +1,4 @@
-import banner from "../../assets/images/Banner.png";
 import * as React from "react";
-import Paper from "@mui/material/Paper";
 import "../../assets/styles/Leader.css";
 import styled from "styled-components";
 

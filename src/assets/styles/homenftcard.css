@@ -60,15 +60,18 @@
   -webkit-box-orient: vertical;
 }
 .nftTileEachDetailsFirstContainerValue {
-  border: 1px solid #16ab6e;
+  /* border: 1px solid #16ab6e; */
   border-radius: 6px;
   padding: 6px 5px 2px 5px;
   font-size: 14px;
+  white-space: nowrap;
   line-height: 21px;
+  display: flex;
   color: #16ab6e;
   font-family: "poppins-semibold";
   background-color: #ffffff00;
-  min-width: 68px;
+  /* min-width: 68px; */
+  max-width: 100%;
   /* margin-right: 1em; */
 }
 .nftTileEachDetailsSecondContainerValueHighest {

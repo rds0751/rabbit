@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.caa7c007.css",
-    "main.js": "/static/js/main.5fc2ba6d.js",
+    "main.css": "/static/css/main.f61143e1.css",
+    "main.js": "/static/js/main.f46a6147.js",
     "static/media/Banner.png": "/static/media/Banner.112c32a6f604149b0d83.png",
     "static/media/Abstraction.png": "/static/media/Abstraction.010c4cc892910d63a5b1.png",
     "static/media/Poppins-Regular.ttf": "/static/media/Poppins-Regular.35d26b781dc5fda684cc.ttf",
@@ -13,6 +13,7 @@
     "static/media/whiskeygirls.ttf": "/static/media/whiskeygirls.25a2ff6b76bdeaa92a61.ttf",
     "static/media/circle.png": "/static/media/circle.9fb3b5100187c815d775.png",
     "static/media/Metamask.svg": "/static/media/Metamask.3737b9d1e6ec19bde908675ba3c35281.svg",
+    "static/media/Nopagefound.svg": "/static/media/Nopagefound.02d98fac9afdb118fe8d21ac03df6604.svg",
     "static/media/Collection-home.svg": "/static/media/Collection-home.6523b05f61ede5e0ae72e7777dda1554.svg",
     "static/media/ANAFTO.svg": "/static/media/ANAFTO.ae04af4efe1daa0c67cc5126431de892.svg",
     "index.html": "/index.html",
@@ -22,13 +23,15 @@
     "static/media/createCollection.svg": "/static/media/createCollection.5d1b3d38c380b862830217715bfd25f0.svg",
     "static/media/Easy.svg": "/static/media/Easy.1ed7c0d675c2eaa1cabdcf3dbe19ab91.svg",
     "static/media/Offers.svg": "/static/media/Offers.d8e534e224c9b4a271087d741295e713.svg",
-    "static/media/No-Info-Icon.svg": "/static/media/No-Info-Icon.be287affad004c922843bd02b43153be.svg",
+    "static/media/No-Info-Icon.svg": "/static/media/No-Info-Icon.2052b3a5ae411bccf0ae744b8ecc7c2f.svg",
     "static/media/hoverDiscord.svg": "/static/media/hoverDiscord.7167e13686793cfb219f8ebf482d1bf2.svg",
+    "static/media/ether.svg": "/static/media/ether.9f60a980ef8ea0877a14347e6a403c65.svg",
     "static/media/Sale.svg": "/static/media/Sale.208a897cbaadff40f591d8946f936cd2.svg",
     "static/media/collection.svg": "/static/media/collection.3423e7a57f035a0f01cb89b807e260e3.svg",
     "static/media/imagep.svg": "/static/media/imagep.e0028a70dd56d053e13de7dd2ef9c9ea.svg",
     "static/media/img-format.svg": "/static/media/img-format.e0028a70dd56d053e13de7dd2ef9c9ea.svg",
     "static/media/discord.svg": "/static/media/discord.7f6995b70d1d9c062c1771b4a09979ab.svg",
+    "static/media/ploygon.svg": "/static/media/ploygon.e5e2471faa19603018f4ed32ac11f4cb.svg",
     "static/media/hoverInsta.svg": "/static/media/hoverInsta.ca62492f984c3309fc22e459ef83d0e7.svg",
     "static/media/Activity.svg": "/static/media/Activity.533324f6e137f4bf053782311bf09127.svg",
     "static/media/single.svg": "/static/media/single.65b6fc10870bec09e2821ec8dc5f1689.svg",
@@ -53,6 +56,7 @@
     "static/media/share.svg": "/static/media/share.d9324655498db5209ce73c832c00369e.svg",
     "static/media/Mint.svg": "/static/media/Mint.7792b8ad19d198d08b72231b69286d02.svg",
     "static/media/profile.svg": "/static/media/profile.2a92e8a7d24d73b3ccba15fae3479d04.svg",
+    "static/media/binance.svg": "/static/media/binance.26225722e49bb0a600beb201c1ece0ab.svg",
     "static/media/ProfileReplace.svg": "/static/media/ProfileReplace.eec185e3f03c31f2c7048ca9d0743a3a.svg",
     "static/media/likes.svg": "/static/media/likes.6fa17a8317ce7b2998975873c859876c.svg",
     "static/media/Transfer.svg": "/static/media/Transfer.c1ba88e9730218e42f5639580cc663d0.svg",
@@ -62,11 +66,11 @@
     "static/media/drop-down-arrow.svg": "/static/media/drop-down-arrow.252c67d09c66c766f99a.svg",
     "static/media/Edit.svg": "/static/media/Edit.adfd6c934476ae588248e2026354da45.svg",
     "static/media/coverImage.svg": "/static/media/coverImage.7cc8a61314efed2824b3ef2b04371775.svg",
-    "main.caa7c007.css.map": "/static/css/main.caa7c007.css.map",
-    "main.5fc2ba6d.js.map": "/static/js/main.5fc2ba6d.js.map"
+    "main.f61143e1.css.map": "/static/css/main.f61143e1.css.map",
+    "main.f46a6147.js.map": "/static/js/main.f46a6147.js.map"
   },
   "entrypoints": [
-    "static/css/main.caa7c007.css",
-    "static/js/main.5fc2ba6d.js"
+    "static/css/main.f61143e1.css",
+    "static/js/main.f46a6147.js"
   ]
 }

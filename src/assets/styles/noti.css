@@ -52,7 +52,7 @@
 }
 .single-noti {
   width: 100%;
-  height: 47px;
+  height: 50px;
   overflow: hidden;
   display: flex;
   justify-content: space-between;
@@ -86,6 +86,7 @@
 }
 
 .noti-text {
+  width: 222px;
   font-size: 14px;
   margin-left: 16px;
   color: #191919;
@@ -99,9 +100,11 @@
   border-radius: 50%;
 }
 .time {
+  width: 67px;
   font-size: 10px;
   font-family: "poppins";
   color: #c4c4c4;
+  padding-left: 8px;
 }
 .no-notification {
   text-align: center;

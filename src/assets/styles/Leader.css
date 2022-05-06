@@ -1818,6 +1818,12 @@ td {
   border: none;
   background: transparent;
 }
+.copy-url-button {
+  border: none;
+  background: transparent;
+  text-align: left;
+  width: 196px;
+}
 /* @media only screen and (min-width:0px) and  (max-width:599px){
   .css-1arijsr-MuiSnackbar-root {
       top: 153px !important;
@@ -1888,6 +1894,10 @@ td {
   opacity: 1;
   text-align: justify;
 }
+.blog-content>img {
+  width: 100% !important;
+}
+
 .blog-read {
   font-size: 16px;
   font-family: "poppins";

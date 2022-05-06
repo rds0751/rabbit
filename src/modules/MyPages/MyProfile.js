@@ -34,62 +34,51 @@ import NonftText from "../../common/components/NonftText";
 import { updateBannerByUserId } from "../../services/UserMicroService";
 import SplitWalletAdd from "../../common/components/SplitWalletAdd";
 import NoItem from "../../assets/images/Noitems.svg";
-import Snackbar from '@mui/material/Snackbar';
+import Snackbar from "@mui/material/Snackbar";
 import LikedNfts from "./LikedNfts";
 import { ShimmerCircularImage, ShimmerThumbnail } from "react-shimmer-effects";
 
-
 const CustomSnack = styled(Snackbar)`
-// @media only screen and (min-width:0px) and  (max-width:599px){
+  // @media only screen and (min-width:0px) and  (max-width:599px){
 
-//       top: 153px !important;
-//       left: auto !important;
+  //       top: 153px !important;
+  //       left: auto !important;
 
+  //   }
 
-//   }
-
-
-@media (min-width: 969px){
-  position: absolute !important;
-      top: 458px !important;
-      left: 58% !important;
+  @media (min-width: 969px) {
+    position: absolute !important;
+    top: 458px !important;
+    left: 58% !important;
   }
-  
-    @media only screen and (min-width:770px) and  (max-width:968px){
-      position: absolute !important;
-      top: 454px !important;
-      left: auto !important;
-      right: 226px !important;
-  
-  
+
+  @media only screen and (min-width: 770px) and (max-width: 968px) {
+    position: absolute !important;
+    top: 454px !important;
+    left: auto !important;
+    right: 226px !important;
   }
-  @media only screen and (min-width:521px) and  (max-width:769px){
+  @media only screen and (min-width: 521px) and (max-width: 769px) {
     position: absolute !important;
     top: 423px !important;
     left: auto !important;
     right: 140px !important;
-  
-  
-  
   }
-  @media only screen and (min-width:0px) and  (max-width:520px){
+  @media only screen and (min-width: 0px) and (max-width: 520px) {
     position: absolute !important;
     top: 388px !important;
-      left: auto !important;
-      right: 46px !important;
-  
-  
-  
+    left: auto !important;
+    right: 46px !important;
   }
-    `
-
-
+`;
 
 function MyProfile() {
   let { user } = useSelector((state) => state);
   let { loggedInUser } = user;
 
-  const [userId, setUserId] = useState( loggedInUser ? loggedInUser._id : localStorage.userId)
+  const [userId, setUserId] = useState(
+    loggedInUser ? loggedInUser._id : localStorage.userId
+  );
 
   // if (loggedInUser) {
   //   localStorage.setItem("userId", loggedInUser._id);
@@ -128,12 +117,6 @@ function MyProfile() {
 
   const [typeofProfilePost, setTypeofProfilePost] = useState("on-sale");
 
-  useEffect(()=>{
-    if(loggedInUser!== null){
-      setUserId(loggedInUser._id)
-    }
-  },[loggedInUser])
-
   useEffect(() => {
     if (loggedInUser == null) {
       navigate("/my-profile");
@@ -142,39 +125,100 @@ function MyProfile() {
         navigate("/add-wallet");
       }
 
-    } else {
-      setIsloading(true);
-      getCreatedByNft();
-      getOwnedByNft();
-      getLikedNft();
-      getOnSaleNft();
+    } else setUserId(loggedInUser._id);
+  }, [loggedInUser]);
 
-      setIsloading(false);
+  useEffect(() => {
+    async function fetchData() {
+      switch (typeofProfilePost) {
+        case "on-sale":
+          setNfts([]);
+          setIsloading(true);
+          await NftSellByUser(
+            (response) => {
+              if (response.success) setNfts(response.responseData)
+              else setNfts([])
+            },
+            userId
+          );
+          setIsloading(false);
+          break;
+        case "owned":
+          setNfts([]);
+          setIsloading(true);
+          await NftOwnedByUser(
+            (response) => {
+              if (response.success) setNfts(response.responseData)
+              else setNfts([])
+            },
+            userId
+          );
+          setIsloading(false);
+          break;
+        case "created":
+          setNfts([]);
+          setIsloading(true);
+          await NftCreatedByUser(
+            (response) => {
+              if (response.success) setNfts(response.responseData)
+              else setNfts([])
+            },
+            userId
+          );
+          setIsloading(false);
+          break;
+        case "liked":
+          setNfts([]);
+          setIsloading(true);
+          await NftLikedByUser(
+            (response) => setNfts(response.responseData),
+            userId
+          );
+          setIsloading(false);
+          break;
+        default:
+          break;
+      }
     }
+    fetchData();
+  }, [loggedInUser, typeofProfilePost]);
 
-    // setNfts(onSaleNft);
-    // setTypeofProfilePost("on-sale");
-  }, [window.ethereum, checkClick]);
+  // useEffect(() => {
+  //   if (loggedInUser == null) {
+  //     navigate("/my-profile");
+  //     navigate("/add-wallet");
+  //   } else {
+  //     setIsloading(true);
+  //     getCreatedByNft();
+  //     getOwnedByNft();
+  //     getLikedNft();
+  //     getOnSaleNft();
 
-  const handleUserDetails = () => {
-      setIsloading(true);
-      getCreatedByNft();
-      getOwnedByNft();
-      getLikedNft();
-      getOnSaleNft();
+  //     setIsloading(false);
+  //   }
 
-      setIsloading(false);
-  }
+  //   // setNfts(onSaleNft);
+  //   // setTypeofProfilePost("on-sale");
+  // }, [window.ethereum, checkClick]);
 
+  // const handleUserDetails = () => {
+  //     setIsloading(true);
+  //     getCreatedByNft();
+  //     getOwnedByNft();
+  //     getLikedNft();
+  //     getOnSaleNft();
 
-  useEffect(()=>{
-    // window.ethereum?.on("accountsChanged", handleUserDetails);
+  //     setIsloading(false);
+  // }
 
-    if(userId){
-      handleUserDetails()
-    }
+  // useEffect(()=>{
+  //   // window.ethereum?.on("accountsChanged", handleUserDetails);
 
-  },[userId])
+  //   if(userId){
+  //     handleUserDetails()
+  //   }
+
+  // },[userId])
 
   // ------------------------------- Calling apis --------------------- to get user data
 
@@ -191,15 +235,13 @@ function MyProfile() {
 
   const isDataCopied = () => {
     // walletTogglePopup(false);
-
     // toast.success("Copied");
   };
 
-
   const [state, setState] = React.useState({
     open: false,
-    vertical: 'top',
-    horizontal: 'center',
+    vertical: "top",
+    horizontal: "center",
   });
 
   const { vertical, horizontal, open } = state;
@@ -211,7 +253,6 @@ function MyProfile() {
   const handleClose = () => {
     setState({ ...state, open: false });
   };
-
 
   const getCreatedByNft = () => {
     NftCreatedByUser((response) => {
@@ -251,9 +292,11 @@ function MyProfile() {
     }, userId);
     // setonSaleNft([]);
   };
-  const getLikedNft = () => {
-    NftLikedByUser((response) => {
-      console.log(response, "likednft");
+  const getLikedNft = async () => {
+    setTypeofProfilePost("liked");
+    setIsloading(true);
+    setNfts([]);
+    await NftLikedByUser((response) => {
       if (response.success) {
         setlikedNft(response.responseData);
       } else {
@@ -261,7 +304,8 @@ function MyProfile() {
         toast.error(response.msg);
       }
     }, userId);
-    // setlikedNft([]);
+    funcLikedNft();
+    setIsloading(false);
   };
 
   // -----------------------
@@ -308,25 +352,32 @@ function MyProfile() {
   splitAddress("akshay");
 
   let array = [];
-  const funcLikedNft=()=>{
-    if(likedNft.length > 0){
-    for (let i = 0; i < likedNft.length; i++) 
-      array.push(likedNft[i].userLikedNfts);
-      setTypeofProfilePost("liked");
+  const funcLikedNft = async () => {
+    if (likedNft.length > 0) {
+      for (let i = 0; i < likedNft.length; i++) {
+        await new Promise((next) => {
+          array.push(likedNft[i].userLikedNfts);
+          next();
+        });
+      }
       setNfts(array);
     }
-    else {
-      setTypeofProfilePost("liked");
-    }
-  }
-  let [imageLoading,setImageLoading]=useState({src:loggedInUser?.photo,loaded:false })
-  let [bannerImage,setBannerLoading]=useState({src:loggedInUser?.coverPhoto,loaded:false })
-  const onImageLoad=()=>{
-    setImageLoading({...imageLoading,loaded:true});
-  }
-  const onBannerLoad=()=>{
-    setBannerLoading({...bannerImage,loaded:true});
-  }
+  };
+
+  let [imageLoading, setImageLoading] = useState({
+    src: loggedInUser?.photo,
+    loaded: false,
+  });
+  let [bannerImage, setBannerLoading] = useState({
+    src: loggedInUser?.coverPhoto,
+    loaded: false,
+  });
+  const onImageLoad = () => {
+    setImageLoading({ ...imageLoading, loaded: true });
+  };
+  const onBannerLoad = () => {
+    setBannerLoading({ ...bannerImage, loaded: true });
+  };
   return (
     <>
       <div>
@@ -340,12 +391,17 @@ function MyProfile() {
             }
             alt=""
             onLoad={onBannerLoad}
-            onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
+            onMouseDown={(e) => e.preventDefault()}
+            onContextMenu={(e) => e.preventDefault()}
           />
-            {!bannerImage.loaded && (
-            <div className="bannerLoader"> 
-              <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
-              </div>
+          {!bannerImage.loaded && (
+            <div className="bannerLoader">
+              <ShimmerThumbnail
+                className="thumbnail"
+                fitOnFrame={true}
+                rounded
+              />
+            </div>
           )}
           <input
             type="file"
@@ -360,24 +416,36 @@ function MyProfile() {
           </Link>
         </div>
         <Link to="/edit-profile" className="editTextAnchor">
-        <span className="edit-text">Edit</span>
+          <span className="edit-text">Edit</span>
         </Link>
         <div className="profileavatar  absolute">
           <div className="profileImg-Container-myprofile">
-          <img
-            src={typeof(loggedInUser?.photo) != "string" ? loggedInUser?.photo?.compressedURL : (typeof(loggedInUser?.photo) !="object" && loggedInUser?.photo !=""? loggedInUser.photo:profileImage)}
-            alt=""
-            className="user-img"
-            onLoad={onImageLoad} 
-            onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
-          />
-              {!imageLoading.loaded && (
-            <div className="profileImageLoader"> 
-               <ShimmerCircularImage className="thumbnailCirular" fitOnFrame={true} rounded />
+            <img
+              src={
+                typeof loggedInUser?.photo != "string"
+                  ? loggedInUser?.photo?.compressedURL
+                  : typeof loggedInUser?.photo != "object" &&
+                    loggedInUser?.photo != ""
+                  ? loggedInUser.photo
+                  : profileImage
+              }
+              alt=""
+              className="user-img"
+              onLoad={onImageLoad}
+              onMouseDown={(e) => e.preventDefault()}
+              onContextMenu={(e) => e.preventDefault()}
+            />
+            {!imageLoading.loaded && (
+              <div className="profileImageLoader">
+                <ShimmerCircularImage
+                  className="thumbnailCirular"
+                  fitOnFrame={true}
+                  rounded
+                />
               </div>
-          )}
+            )}
           </div>
-         
+
           {/* <h2>{ethereum && ethereum.selectedAddress}</h2> */}
           {/* <h2>{window.ethereum && defaultAccount}</h2> */}
           {/* {defaultAccount} */}
@@ -386,29 +454,35 @@ function MyProfile() {
             <div className="wallet-address-text">
               {/* {loggedInUser?.wallet_address} */}
 
-              <p className="addressText"><SplitWalletAdd address={loggedInUser?.wallet_address} /></p>
+              <p className="addressText">
+                <SplitWalletAdd address={loggedInUser?.wallet_address} />
+              </p>
             </div>
             <CopyToClipboard text={walletAddress?.address}>
-            <button  className="copy-button"        onClick={handleClick({
-          vertical: 'top',
-          horizontal: 'center',
-        })}>
-              <img
-                src={copy}
-                className="copyButton"
-                alt=""
-                onClick={isDataCopied}
-              /></button>
+              <button
+                className="copy-button"
+                onClick={handleClick({
+                  vertical: "top",
+                  horizontal: "center",
+                })}
+              >
+                <img
+                  src={copy}
+                  className="copyButton"
+                  alt=""
+                  onClick={isDataCopied}
+                />
+              </button>
             </CopyToClipboard>
             <CustomSnack
-        anchorOrigin={{ vertical, horizontal }}
-        open={open}
-        onClose={handleClose}
-        message="Copied"
-        key={vertical + horizontal}
-        autoHideDuration={2000}
-        className="custom-snack"
-      />
+              anchorOrigin={{ vertical, horizontal }}
+              open={open}
+              onClose={handleClose}
+              message="Copied"
+              key={vertical + horizontal}
+              autoHideDuration={2000}
+              className="custom-snack"
+            />
           </div>
 
           <p className="profile-description">{loggedInUser?.bio}</p>
@@ -433,11 +507,11 @@ function MyProfile() {
               className={`postTypeProfile ${
                 typeofProfilePost === "on-sale" && "postTypeProfile--active"
               }`}
-              // onClick={() => setTypeofProfilePost("on-sale")}
-              onClick={() => {
-                setNfts(onSaleNft);
-                setTypeofProfilePost("on-sale");
-              }}
+              onClick={() => setTypeofProfilePost("on-sale")}
+              // onClick={() => {
+              //   setNfts(onSaleNft);
+              //   setTypeofProfilePost("on-sale");
+              // }}
             >
               On sale
             </div>
@@ -445,12 +519,12 @@ function MyProfile() {
               className={`postTypeProfile ${
                 typeofProfilePost === "owned" && "postTypeProfile--active"
               }`}
-              // onClick={() => setTypeofProfilePost("owned")}
-              onClick={() => {
-                setNfts(ownedNft);
-                console.log(ownedNft, "<<<<<<ownedNft");
-                setTypeofProfilePost("owned");
-              }}
+              onClick={() => setTypeofProfilePost("owned")}
+              // onClick={() => {
+              //   setNfts(ownedNft);
+              //   console.log(ownedNft, "<<<<<<ownedNft");
+              //   setTypeofProfilePost("owned");
+              // }}
             >
               Owned
             </div>
@@ -458,11 +532,11 @@ function MyProfile() {
               className={`postTypeProfile ${
                 typeofProfilePost === "created" && "postTypeProfile--active"
               }`}
-              // onClick={() => setTypeofProfilePost("created")}
-              onClick={() => {
-                setNfts(createdNft);
-                setTypeofProfilePost("created");
-              }}
+              onClick={() => setTypeofProfilePost("created")}
+              // onClick={() => {
+              //   setNfts(createdNft);
+              //   setTypeofProfilePost("created");
+              // }}
             >
               Created
             </div>
@@ -470,56 +544,64 @@ function MyProfile() {
               className={`postTypeProfile ${
                 typeofProfilePost === "liked" && "postTypeProfile--active"
               }`}
-              // onClick={() => setTypeofProfilePost("liked")}
-              onClick={() => funcLikedNft()}
+              onClick={() => setTypeofProfilePost("liked")}
+              // onClick={() => getLikedNft()}
             >
               Liked
             </div>
           </div>
           {/* <hr /> */}
           {/* <div className="profileNftContainer row mx-0 text-center p-0 cards-gap image1"> */}
-          <div
-            className="nftTileContainer row ntf_row"
-            style={{ justifyContent: "start" }}
-          >
-            {isloading && <Spinner />}
-            {(() => {
-              if (!isloading && Nfts.length < 1) {
-                return (
-                  <div>
-                    <div className="Noitemdiv">
-                      <img className="no-item-image" src={NoItem} />
-                      <p className="textitem">No items available</p>
-                    </div>
+          {isloading && (
+            <>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Spinner />
+              </div>
+            </>
+          )}
+          {Nfts.length > 0 ? (
+            <div
+              className="nftTileContainer row ntf_row"
+              style={{ justifyContent: "start" }}
+            >
+              {typeofProfilePost !== "liked" ? (
+                <>
+                  {Nfts.map((curElem) => {
+                    return (
+                      <>
+                        <NftCardHome nft={curElem} />
+                      </>
+                    );
+                  })}
+                </>
+              ) : (
+                <>
+                  {Nfts.map((curElem) => {
+                    return (
+                      <>
+                        <LikedNfts nft={curElem} />
+                      </>
+                    );
+                  })}
+                </>
+              )}
+            </div>
+          ) : (
+            <>
+              {!isloading && (
+                <div>
+                  <div className="Noitemdiv">
+                    <img
+                      className="no-item-image"
+                      src={NoItem}
+                      alt="No-items"
+                    />
+                    <p className="textitem">No items available</p>
                   </div>
-                );
-              }
-            })()}
-
-            {(typeofProfilePost !== "liked") ? (
-              <>
-                {Nfts.map((curElem) => {
-                  return (
-                    <>
-                      <NftCardHome nft={curElem} />                  
-                    </>
-                  );
-                })} 
-              </>
-            ) : (
-              <>
-                {Nfts.map((curElem) => {
-                  return (
-                    <>
-                      <LikedNfts nft={curElem} />                  
-                    </>
-                  );
-                })} 
-              </>
-            ) }
-
-            
-          </div>
+                </div>
+              )}
+            </>
+          )}
         </div>
       </div>
     </>
@@ -527,4 +609,3 @@ function MyProfile() {
 }
 
 export default MyProfile;
-//   https://image.shutterstock.com/image-vector/background-water-droplets-on-surface-260nw-274829663.jpg

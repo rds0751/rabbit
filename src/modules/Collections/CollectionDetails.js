@@ -24,6 +24,7 @@ import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled'
 import PopperUnstyled from '@mui/base/PopperUnstyled';
 import { styled } from '@mui/system';
 import { ShimmerCircularImage, ShimmerThumbnail } from "react-shimmer-effects";
+
 const blue = {
   100: '#DAECFF',
   200: '#99CCF3',
@@ -194,7 +195,7 @@ function CollectionDetails() {
     fetchData();
   }, [filter]);
 
-  const { _id, imageUrl, coverUrl, name, description } = collection;
+  const { _id, imageUrl, coverUrl, name, description,blockchain } = collection;
   const handleLike = () => {
     setcheckLike(!checkLike);
   };
@@ -226,6 +227,8 @@ function CollectionDetails() {
     setImageLoading({...bannerImage,loaded:true});
   }
 
+
+  
   return (
     <>
       <div>
