@@ -823,7 +823,8 @@ export default function NftInformation(props) {
                       style={{ textDecoration: "none" }}
                     >
                       <span className="text-name fw-b">
-                        {createdBy}
+                        {/* {createdBy} */}
+                        {creator?.wallet_address === user?.walletAddress?.address ? "You" : createdBy}
                         {/* {(String(createdBy).length >= 7) ? (!createdBy ? " " : (String(createdBy).substring(0, 8) + "...")) : (String(createdBy) === undefined ? "" : createdBy)}                     */}
                       </span>
                     </Link>
