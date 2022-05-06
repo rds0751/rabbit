@@ -98,26 +98,22 @@ function Wallet() {
   //   // }, 1000);
   // };
 
-  const isDataCopied = () => {
-    // walletTogglePopup(false);
-    // toast.success("Text Copied");
-  };
 
-  const [state, setState] = React.useState({
-    open: false,
-    vertical: "top",
-    horizontal: "center",
-  });
+  // const [state, setState] = React.useState({
+  //   open: false,
+  //   vertical: "top",
+  //   horizontal: "center",
+  // });
 
-  const { vertical, horizontal, open } = state;
+  // const { vertical, horizontal, open } = state;
 
-  const handleClick = (newState) => () => {
-    setState({ open: true, ...newState });
-  };
+  // const handleClick = (newState) => () => {
+  //   setState({ open: true, ...newState });
+  // };
 
-  const handleClose = () => {
-    setState({ ...state, open: false });
-  };
+  // const handleClose = () => {
+  //   setState({ ...state, open: false });
+  // };
 
   const dispatch = useDispatch();
   const handleChange = (e) => {
@@ -164,10 +160,10 @@ function Wallet() {
             <SplitWalletAdd address={walletAddress?.address} />
             <button
               className="copy-button"
-              onClick={handleClick({
-                vertical: "top",
-                horizontal: "right",
-              })}
+              // onClick={handleClick({
+              //   vertical: "top",
+              //   horizontal: "right",
+              // })}
             >
               <img
                 style={{
@@ -177,7 +173,6 @@ function Wallet() {
                 }}
                 src={copy}
                 alt=""
-                onClick={isDataCopied}
                 // onClick={() => { handleClick(Fade);}}
                 // onClick={handleClick(Fade)}
               />
@@ -190,7 +185,7 @@ function Wallet() {
           </div>
          
           {/* <ToastContainer style={{marginTop:"100px" , width: "142px", marginRight: "55px"}}/> */}
-          <CustomSnack
+          {/* <CustomSnack
             anchorOrigin={{ vertical, horizontal }}
             open={open}
             onClose={handleClose}
@@ -198,7 +193,7 @@ function Wallet() {
             key={vertical + horizontal}
             autoHideDuration={2000}
             className="custom-snack"
-          />
+          /> */}
 
           {/* <img
             style={{ width: "21.47px", height: "21.47px", cursor: "pointer" }}

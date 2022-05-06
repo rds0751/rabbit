@@ -113,7 +113,7 @@
 .tooltiptext{
   visibility: hidden;
   width: 182px;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.681);
   color: #fff;
   text-align: center;
   border-radius: 6px;
@@ -134,7 +134,7 @@
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: transparent transparent black transparent;
+  border-color: transparent transparent  rgba(0, 0, 0, 0.681) transparent;
 }
 
 .walleth2:hover .tooltiptext {
