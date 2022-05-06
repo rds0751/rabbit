@@ -107,7 +107,7 @@ export default function NftInformation(props) {
   const { id } = useParams();
   const nft = props?.responseData;
 
-  console.log('nft data', nft)
+ 
 
   const { owner, creator, salesInfo,blockchain } = nft;
   const [openReportModal, setOpenReportModal] = useState(false);
@@ -325,8 +325,8 @@ export default function NftInformation(props) {
   let createdBy = creator?.userName
     ? creator?.userName
     : creator?.wallet_address;
-
   const url = window.location.href;
+
 
   const blockchainCheck=(blockchain)=>{
     switch(blockchain){
@@ -808,7 +808,8 @@ export default function NftInformation(props) {
                       style={{ textDecoration: "none" }}
                     >
                       <span className="text-name fw-b">
-                        {ownedBy}
+                        {/* {ownedBy} */}
+                        {owner?.wallet_address === user?.walletAddress?.address ? "You" : ownedBy}
                         {/* {(String(ownedBy).length >= 7) ? (!ownedBy ? " " : (String(ownedBy).substring(0, 8) + "...")) : (String(ownedBy) === undefined ? "" : ownedBy)}                     */}
                       </span>
                     </Link>
