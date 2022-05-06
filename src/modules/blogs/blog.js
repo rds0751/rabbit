@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Paper from "@mui/material/Paper";
+import Information from "../../assets/images/No-Info-Icon.svg";
 import "../../assets/styles/Leader.css";
 import banner from "../../assets/images/Banner.png";
 import * as moment from "moment";
+import { AuthToken } from "../../services/UserAuthToken";
 import Spinner from "../../common/components/Spinner";
 import { getBlogs } from "../../services/clientConfigMicroService";
 import { data } from "jquery";
@@ -28,7 +30,7 @@ export default function ComplexGrid() {
     <div className="spinnerloader">{isLoading && <Spinner />}</div>;
     setVisibleBlogs((prevVisibleBlogs) => prevVisibleBlogs + 4);
   };
-
+console.log(AuthToken,"auth")
   return (
     <div>
       <div className="hero-image">
@@ -41,10 +43,10 @@ export default function ComplexGrid() {
           <Spinner />
         ) : (
           blogs?.length === 0 && (
-            <div className="Noitemdiv">
-              {/* <img className="no-image" src={NoItem} alt="No-items" /> */}
-              <p className="textitem">No items available</p>
-            </div>
+            <div className="no-data no-data-found ">
+            <img src={Information}></img>
+            <p>No Blogs available</p>
+          </div>
           ) 
         )}
       </div>
@@ -91,7 +93,8 @@ export default function ComplexGrid() {
           </>
         );
       })}
-
+      {blogs?.length === 0 ? "" : 
+<div>
 {visibleBlogs >= blogs?.length ? (
             visibleBlogs >= blogs?.length && !isLoading ? (
               <div style={{ textAlignLast: "center" }}>
@@ -108,6 +111,7 @@ export default function ComplexGrid() {
             </div>
             
           )}
+          </div>}
 
       {/* <div style={{ textAlignLast: "center" }}>
         <button className="load-more" onClick={loadMoreHandler}>

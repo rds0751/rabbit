@@ -52,3 +52,17 @@ export const getBlogs = async () => {
         console.log(err);
       }
 };
+
+export const getBlogsId = async (id) => {
+  try {
+      const url = `${BASE_URL1}/api/v1/blog/${id}`;
+      const res = await fetch(url, { headers: AuthToken });
+      const result = await res.json();
+      return result;
+    } catch (err) {
+      console.log(err);
+    }
+};
+
+
+

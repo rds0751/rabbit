@@ -1,20 +1,37 @@
-import  React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import ReactHtmlParser from "react-html-parser";
 import * as moment from "moment";
 import Paper from "@mui/material/Paper";
 import "../../assets/styles/Leader.css";
-import banner from "../../assets/images/Banner.png";
-import {useLocation} from 'react-router-dom';
-import parse from "html-react-parser";
+import { useLocation } from "react-router-dom";
+import Spinner from "../../common/components/Spinner";
+import { getBlogsId } from "../../services/clientConfigMicroService";
+
 export default function BlogDetail() {
-    const location = useLocation();
-    const from = location?.state;
-console.log(from,"location")
+  const [blogs, setBlogs] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const location = useLocation();
+  const from = location?.state;
+  const id = location?.state?.data?._id;
+  console.log(from, "id");
+
+  useEffect(() => {
+    setIsLoading(true);
+    async function fetchData() {
+      setIsLoading(true);
+      await getBlogsId(id).then((response) => {
+        if (response.success) setBlogs(response.responseData)
+        else setBlogs([])
+      })
+      setIsLoading(false);
+    } 
+    fetchData();
+  }, []);
+  console.log(blogs, "location");
+  let data = blogs;
   return (
     <div>
-
-   
-
-         <Paper
+      <Paper
         sx={{
           margin: "auto",
           marginTop: "81px",
@@ -24,6 +41,7 @@ console.log(from,"location")
             theme.palette.mode === "dark" ? "#1A2027" : "#fff",
         }}
       >
+        <div className="spinnerloader">{isLoading ? <Spinner /> : ""}</div>
         <div>
           <img
             style={{
@@ -31,27 +49,22 @@ console.log(from,"location")
               height: "240px",
               objectFit: "fill",
             }}
-            src={from?.data?.coverUrl}
+            src={blogs?.coverUrl}
           ></img>
         </div>
-        <div style={{padding:"32px"}}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <p className="blog-title">{from?.data?.postTitle}</p>
-          <p className="blog-date"> {moment(from?.data?.addedOn).format("DD MMMM YYYY")}
-</p>
-        </div>
-        <div>
-          <p className="blog-content">
-          {parse(from?.data?.content)}
-          </p>
-        </div>
-
+        <div style={{ padding: "32px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <p className="blog-title">{blogs?.postTitle}</p>
+            <p className="blog-date">
+              {" "}
+              {moment(blogs?.addedOn).format("DD MMMM YYYY")}
+            </p>
+          </div>
+          <div>
+            <p className="blog-content">{ReactHtmlParser(blogs?.content)}</p>
+          </div>
         </div>
       </Paper>
-  
-
- 
-    
     </div>
   );
 }
