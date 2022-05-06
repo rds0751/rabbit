@@ -23,6 +23,7 @@ import {
 } from "./Constants";
 import { ADD_USER, GET_ERRORS, ALL_USERS } from "./Constants";
 import axios from "axios";
+import { ethers } from "ethers";
 
 export const addUseraction = (data) => (dispatch) => {
   axios
@@ -65,6 +66,21 @@ export const AddWalletDetails = (data) => (dispatch) => {
 export const addUserData = (data) => (dispatch) => {
   console.log(data, "<<<data from addUserdata");
   dispatch({ type: LOGGED_IN_UER_DETAILS, payload: data });
+
+  let address = data.wallet_address;
+
+  window.ethereum.request({
+    method: "eth_getBalance",
+    params: [address, "latest"],
+  }).then((wallet_balance) => {
+    const balance = ethers.utils.formatEther(wallet_balance);
+    dispatch(
+      AddWalletDetails({
+        address,
+        balance,
+      })
+    );
+  })
 };
 
 export const allUseraction = () => (dispatch) => {
@@ -106,10 +122,10 @@ export const searchNav = (data) => (dispatch) => {
 };
 
 export const logOut = () => (dispatch) => new Promise((resolve, refect) => {
-    dispatch({ type: LOG_OUT });
-    dispatch({ type: OPEN_WALLET, payload: false })
-    localStorage.removeItem(WHITE_LABEL_TOKEN);
-    localStorage.setItem('has_wallet', false)
+  dispatch({ type: LOG_OUT });
+  dispatch({ type: OPEN_WALLET, payload: false })
+  localStorage.removeItem(WHITE_LABEL_TOKEN);
+  localStorage.setItem('has_wallet', false)
 
-    resolve(true);
+  resolve(true);
 });

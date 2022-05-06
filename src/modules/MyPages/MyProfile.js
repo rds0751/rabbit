@@ -119,7 +119,12 @@ function MyProfile() {
 
   useEffect(() => {
     if (loggedInUser == null) {
-      navigate("/add-wallet");
+      navigate("/my-profile");
+      
+      if(!localStorage.getItem('has_wallet')){
+        navigate("/add-wallet");
+      }
+
     } else setUserId(loggedInUser._id);
   }, [loggedInUser]);
 
