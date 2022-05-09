@@ -61,7 +61,12 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
         // this.setState({ loaderState: true })
         let blockchainRes;
 
-        const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS
+        let contractAddress;
+
+        if(data?.blockchain ==="Polygon")
+        contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS_POLYGON
+        else if(data?.blockchain === "Ethereum")
+        contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
 
         console.log("--sssssssssssssssss-", data?.newOwnerAddress)
 
@@ -202,10 +207,18 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
 
     };
 
-    sellNowNft = async () => {
+    sellNowNft = async ({blockchain}) => {
         console.log("daaaaaaaaaa", this.state?.responseData?.contractAddress)
         // this.setState({ loaderState: true })
-        const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS
+        let contractAddress;
+
+        if(blockchain ==="Polygon")
+        contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS_POLYGON
+        else if(blockchain === "Ethereum")
+        contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
+
+        console.log(blockchain,contractAddress,"<<<ContractAddress")
+      
 
         console.log("jjjjj", this.state.responseData.tokenId);
         if (this.state?.responseData?.contractAddress > 0) {
@@ -230,6 +243,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
 
         else {
 
+    
             const [blockchainError, blockchainRes] = await Utils.parseResponse(
                 BlockchainService.putOnSaleNft({
                     tokenId: this.state.responseData?.tokenId,
@@ -272,9 +286,15 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
         }
     };
 
-    removeNftFromSale = async (data) => {
+    removeNftFromSale = async ({blockchain}) => {
         // this.setState({ loaderState: true })
-        const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS
+        let contractAddress;
+
+        if(blockchain ==="Polygon")
+        contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS_POLYGON
+        else if(blockchain === "Ethereum")
+        contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
+        //process.env.REACT_APP_CONTRACT_ADDRESS
 
         console.log("removeNftFromSale");
         if (this.state?.responseData?.contractAddress > 0) {

@@ -67,6 +67,9 @@ function CreateNftCollections(props) {
   const categoryId = useRef("");
   const hiddenFileInputImage = useRef(null);
   const hiddenFileInputBanner = useRef(null);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [blockchainOption, setBlockchainOption] = useState([]);
+  const [blockchains, setBlockChains] = useState([])
   const handleClickImage = (event) => {
     hiddenFileInputImage.current.click();
   };
@@ -179,6 +182,18 @@ function CreateNftCollections(props) {
     setDesLength(description.current.length);
   };
 
+  function blockchainValue(value){
+    switch(value){
+      case 'ETH':
+       return 'Ethereum'
+       case 'MATIC':
+       return "Polygon"
+       case "BNB":
+       return "Binance"
+       default:
+       return ""
+    }
+  }
   const handleSubmit = async (e) => {
     var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
     setloaderState(true);
@@ -229,6 +244,7 @@ function CreateNftCollections(props) {
     //   // categoryId:categoryId.current,
     // };
     //---------------------
+    blockchain.current=blockchainValue(selectedOption?.value);
 
     const data = {
       coverUrl: bannerCdn,
@@ -249,7 +265,8 @@ function CreateNftCollections(props) {
       const [blockchainError, blockchainRes] = await Utils.parseResponse(
         BlockchainServices.createCollections({
           name: name.current,
-          symbol: 'WL'
+          symbol: 'WL',
+          blockchain:blockchain.current
 
         })
       );
@@ -313,9 +330,7 @@ function CreateNftCollections(props) {
   let location = useLocation();
 
   // Blockchain option
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [blockchainOption, setBlockchainOption] = useState([]);
-  const [blockchains, setBlockChains] = useState([])
+ 
  
   useEffect(() => {
     async function fetchData() {
