@@ -211,6 +211,7 @@ export default function NftInformation(props) {
       // saleData:response.salesInfo,
       // tokenId:response.tokenId,
       // nftId:response._id,
+      blockchain:nft?.blockchain
     });
     // setPutOnSaleModal(false)
   };
@@ -223,6 +224,7 @@ export default function NftInformation(props) {
       // saleData:response.salesInfo,
       // tokenId:response.tokenId,
       // nftId:response._id,
+      blockchain:nft?.blockchain
     });
     // setRemoveFromSale(false)
   };
@@ -231,6 +233,7 @@ export default function NftInformation(props) {
       props?.BuyNowNft({
         buyerId: loggedInUser?._id,
         newOwnerAddress: walletAddress?.address,
+        blockchain:nft?.blockchain
       });
       setOpenLoadingModal(true);
     } else {

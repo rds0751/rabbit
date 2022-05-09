@@ -145,27 +145,40 @@ class Index extends BaseComponent {
 
 
     else {
-      const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS
+       let contractAddress;
+       // = "0xCDe6A5fccf0cCaF7bc51D35C1f8Efe3BbC5c8057"
+      // //-ethreum
+
+      if(data?.blockchain === "Polygon")
+      contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS_POLYGON
+      else if(data?.blockchain === "Ethereum")
+      contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS
+     
 
       const [blockchainError, blockchainResult] = await Utils.parseResponse(
         BlockchainServices.mintNFT({
           tokenURI: data.ipfsUrl,
           price: data.price,
           tokenId,
-          contractAddress: contractAddress
+          contractAddress: contractAddress,
+          blockchain:data?.blockchain
         })
       );
       console.log("blockchainError", blockchainError)
       console.log("blockchainResult", blockchainResult)
+
+
       if (blockchainError || !blockchainResult) {
         console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
         this.setState({ loaderState: false });
+        console.log(  blockchainError?.data?.message || blockchainError?.message || blockchainError ,"<<<BlockchainRes")
 
         return this.showToast('error',
           blockchainError?.data?.message || blockchainError?.message || blockchainError || "Unable to Mint NFT on blockchain"
         );
       }
       blockchainRes = blockchainResult
+      console.log(blockchainRes,"<<<blockchainRes")
     }
 
 
