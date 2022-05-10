@@ -120,14 +120,15 @@ function MyProfile() {
 
   useEffect(() => {
     if (loggedInUser == null) {
-      navigate("/my-profile");
-      
-      if(!localStorage.getItem('has_wallet')){
+         console.log('null wallet')
+      if(!localStorage.getItem('has_wallet')){      
         navigate("/add-wallet");
       }
 
+      navigate("/my-profile");   
+
     } else setUserId(loggedInUser._id);
-  }, [loggedInUser]);
+  }, [JSON.stringify(loggedInUser)]);
 
   useEffect(() => {
     async function fetchData() {

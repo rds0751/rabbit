@@ -11,6 +11,7 @@ import "../../assets/styles/Notification.css";
 import {
   addUserData,
   AddWalletDetails,
+  logOut,
   ManageNotiSideBar,
   ManageWalletSideBar,
   RedirectTo,
@@ -121,7 +122,7 @@ function Navbar() {
                   }
                 });
             })
-            .catch((e) => {});
+            .catch((e) => { });
         } else {
           return null;
         }
@@ -130,14 +131,25 @@ function Navbar() {
     }
   };
   const accountChangeHandler = (newAccount) => {
-    setDefaultAccount(newAccount[0]);
-    getUserBalance(newAccount[0]);
-    dispatch(AddWalletDetails({ address: newAccount[0], balance: getBalance }));
-    CheckUserByWalletAddress(newAccount[0], (res) => {
-      dispatch(addUserData(res));
-      localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
-      setToggleEffect(!toggleEffect);
-    });
+
+    console.log(newAccount, 'account changed')
+
+    if (newAccount.length > 0) {
+      setDefaultAccount(newAccount[0]);
+      getUserBalance(newAccount[0]);
+
+      dispatch(AddWalletDetails({ address: newAccount[0], balance: getBalance }));
+      CheckUserByWalletAddress(newAccount[0], (res) => {
+        dispatch(addUserData(res));
+        localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
+        setToggleEffect(!toggleEffect);
+      });
+
+    }else{
+      localStorage.setItem('has_wallet', false)
+      navigate('/')
+      dispatch(logOut())
+    }
   };
   const getUserBalance = (address) => {
     window.ethereum
@@ -147,10 +159,13 @@ function Navbar() {
       });
   };
 
-  
+
   let location = useLocation();
 
   const manageNavigation = (name) => {
+
+    console.log('called manage navigation', name)
+
     setDisplay(true);
     if (name == "myitems") {
       dispatch(ManageNotiSideBar(false));
@@ -186,7 +201,7 @@ function Navbar() {
       dispatch(ManageNotiSideBar(false));
       dispatch(ManageWalletSideBar(false));
       if (walletAddress == null) {
-        dispatch(RedirectTo("profile"));
+        // dispatch(RedirectTo("profile"));
         navigate("/add-wallet");
         toast.error("Connect your wallet", {
           position: toast.POSITION.TOP_RIGHT,
@@ -210,13 +225,18 @@ function Navbar() {
     setDisplay(!display);
   };
   const handleWalletClick = () => {
-    console.log('called wallet')
+    console.log('called wallet local')
     setDisplay(true);
     if (walletAddress == null) {
+      
+      if(localStorage.getItem('has_wallet') === 'false'){
+        toast.error("Connect your wallet", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
+
       navigate("/add-wallet");
-      toast.error("Connect your wallet", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
+
     } else {
       dispatch(ManageWalletSideBar(!isOpenWallet));
       dispatch(ManageNotiSideBar(false));
@@ -321,6 +341,7 @@ function Navbar() {
   let userId = loggedInUser ? loggedInUser._id : localStorage.userId;
 
   useEffect(() => {
+    console.log('called usenavbar')
     getNotificationListById(userId).then((response) =>
       setNotifications(response)
     );
@@ -334,9 +355,13 @@ function Navbar() {
   // console.log(Count,"count")
 
 
-  useEffect(()=>{
+  useEffect(() => {
     window.ethereum?.on("accountsChanged", accountChangeHandler);
-  },[])
+
+    window.ethereum?.on('disconnect', () => {
+      console.log('Account Disconnect')
+    });
+  }, [])
 
 
   return (
@@ -634,11 +659,11 @@ function Navbar() {
                   <li
                     className={
                       location.pathname.includes("/nfts") &&
-                      !location.pathname.includes("leader-board") &&
-                      !location.pathname.includes("resource") &&
-                      !location.pathname.includes("create-nft") &&
-                      !location.pathname.includes("help-center") &&
-                      !location.pathname.includes("suggestion")
+                        !location.pathname.includes("leader-board") &&
+                        !location.pathname.includes("resource") &&
+                        !location.pathname.includes("create-nft") &&
+                        !location.pathname.includes("help-center") &&
+                        !location.pathname.includes("suggestion")
                         ? "nav-items li_underline marketplace"
                         : "nav-items marketplace"
                     }
@@ -647,11 +672,11 @@ function Navbar() {
                     <Link
                       className={
                         location.pathname.includes("/nfts") &&
-                        !location.pathname.includes("leader-board") &&
-                        !location.pathname.includes("resource") &&
-                        !location.pathname.includes("create-nft") &&
-                        !location.pathname.includes("help-center") &&
-                        !location.pathname.includes("suggestion")
+                          !location.pathname.includes("leader-board") &&
+                          !location.pathname.includes("resource") &&
+                          !location.pathname.includes("create-nft") &&
+                          !location.pathname.includes("help-center") &&
+                          !location.pathname.includes("suggestion")
                           ? "nav-link navlink_active"
                           : "nav-link"
                       }
@@ -689,7 +714,7 @@ function Navbar() {
                     style={{ padding: "0" }}
                     className={
                       location.pathname.includes("help-center") ||
-                      location.pathname.includes("suggestion")
+                        location.pathname.includes("suggestion")
                         ? "nav-items dropdown li_underline resource nav-link navlink_active resource"
                         : "nav-items dropdown resource"
                     }

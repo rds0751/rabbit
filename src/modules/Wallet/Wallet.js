@@ -124,7 +124,8 @@ function Wallet() {
   };
 
   const handleLogOut = async () => {
-    await dispatch(logOut());
+    console.log('called logout')
+    dispatch(logOut());
     toast.success("Successfully Logged Out");  
     
     navigate('/');
