@@ -473,7 +473,7 @@ function Navbar() {
                               <Link
                                 to="/search-results"
                                 state={{
-                                  value: searchNft.searchByName,
+                                  value: inputValue,
                                 }}
                               >
                                 <button className="show-more-btn">
@@ -606,7 +606,7 @@ function Navbar() {
                             <Link
                               to="/search-results"
                               state={{
-                                value: searchNft.searchByName,
+                                value: inputValue,
                               }}
                             >
                               <button className="show-more-btn">
