@@ -3,6 +3,7 @@ import { httpService } from "../utility/httpService";
 import { AuthToken } from "./UserAuthToken";
 import axios from "axios";
 import { BASE_URL1 } from "../reducers/Constants";
+import { WHITE_LABEL_TOKEN } from "../reducers/Constants";
 
 export function getCategories(requestData) {
   let url =
@@ -31,9 +32,14 @@ export function getCategories(requestData) {
 }
 
 export async function getTenantData() {
+  const token = {
+    "Access-Control-Allow-Origin": "*",
+    "Content-type": "Application/json",
+    "x-access-token": `${localStorage.getItem(WHITE_LABEL_TOKEN)}`,
+  };
   try {
     const url = `${BASE_URL1}/api/v1/tenant/624fcce73cfee400358f2cef`;
-    const res = await fetch(url, { headers: AuthToken });
+    const res = await fetch(url, { headers: token });
     const result = await res.json();
     const tenantData = result.responseData;
     return tenantData;
