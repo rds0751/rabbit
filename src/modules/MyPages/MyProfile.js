@@ -114,12 +114,18 @@ function MyProfile() {
   const [checkClick, setcheckClick] = useState(false);
   const [getBalance, setGetBalance] = useState("");
   const dispatch = useDispatch();
+  const [dataCopied,setDataCopied]=useState(true);
 
   const [typeofProfilePost, setTypeofProfilePost] = useState("on-sale");
 
   useEffect(() => {
     if (loggedInUser == null) {
-      navigate("/add-wallet");
+      navigate("/my-profile");
+      
+      if(!localStorage.getItem('has_wallet')){
+        navigate("/add-wallet");
+      }
+
     } else setUserId(loggedInUser._id);
   }, [loggedInUser]);
 
@@ -445,7 +451,17 @@ function MyProfile() {
           {/* <h2>{window.ethereum && defaultAccount}</h2> */}
           {/* {defaultAccount} */}
           <div className="profile-user">{loggedInUser?.userName}</div>
-          <div className="add-cover">
+          <div className="add-cover" 
+          onClick={()=>{
+          setDataCopied(false)
+          setTimeout(()=>{
+            setDataCopied(true);
+          },3000);
+        }}>
+            
+            <CopyToClipboard text={walletAddress?.address}>
+              <span className="Container-clipboard">
+
             <div className="wallet-address-text">
               {/* {loggedInUser?.wallet_address} */}
 
@@ -453,7 +469,6 @@ function MyProfile() {
                 <SplitWalletAdd address={loggedInUser?.wallet_address} />
               </p>
             </div>
-            <CopyToClipboard text={walletAddress?.address}>
               <button
                 className="copy-button"
                 onClick={handleClick({
@@ -468,6 +483,7 @@ function MyProfile() {
                   onClick={isDataCopied}
                 />
               </button>
+              </span>
             </CopyToClipboard>
             <CustomSnack
               anchorOrigin={{ vertical, horizontal }}
@@ -478,6 +494,7 @@ function MyProfile() {
               autoHideDuration={2000}
               className="custom-snack"
             />
+             <span className="tooltiptext-myprofile"> {dataCopied ? "copy to clipboard" : "copied" }</span>
           </div>
 
           <p className="profile-description">{loggedInUser?.bio}</p>
