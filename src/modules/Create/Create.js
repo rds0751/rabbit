@@ -144,9 +144,14 @@ function Create() {
       });
   };
 
-  window.ethereum?.on("accountsChanged", accountChangeHandler);
+  useEffect(()=>{
+    window.ethereum?.on("accountsChanged", accountChangeHandler);
+  },[])
+
+  
   console.log(loggedInUser, "<<<<<this iser user detail");
   console.log("mffffffmmmmmsmmmmmffffffff",toggleEffect)
+
 
   return (
     <>
