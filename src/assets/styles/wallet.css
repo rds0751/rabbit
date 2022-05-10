@@ -90,6 +90,7 @@
   font-family: "poppins-medium";
   margin-top: 24px;
   font-weight: 600px;
+  cursor: pointer;
 }
 .balance-button {
   width: 78.4%;
@@ -110,6 +111,7 @@
 }
 .walleth2{
   position: relative;
+  cursor: pointer;
 }
 
 .tooltiptext{

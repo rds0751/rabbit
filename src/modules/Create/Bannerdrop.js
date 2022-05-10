@@ -10,7 +10,7 @@ import BlockchainServices from "../../services/blockchainService";
 import getCollection from "../../services/contentMicroservice";
 import { Oval } from "react-loader-spinner";
 
-function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs}) {
+function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs,setCompressedUrl}) {
 
 
 
@@ -70,7 +70,7 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs}) {
 
           setbannerIpfs(ipfsRes.ipfsUrl);
           setbannerCdn(ipfsRes.cdnUrl);
-          // setCompressedUrl(ipfsRes.compressedURL)
+          setCompressedUrl(ipfsRes.compressedURL)
           setisLoader(false);
           setisBannerSelected(true);
         }

@@ -474,11 +474,12 @@
   margin: 0 0 0 26px;
   transition: transform .2s; /* Animation */
 }
-.browse-img:hover {
-  -ms-transform: scale(1.5); /* IE 9 */
-  -webkit-transform: scale(1.5); /* Safari 3-8 */
+
+/* .browse-img:hover {
+  -ms-transform: scale(1.5);
+  -webkit-transform: scale(1.5); 
   transform: scale(1.5); 
-}
+} */
 
 
 .nft-img{
@@ -558,4 +559,10 @@ margin-left: 10px;
   background: linear-gradient(to right, white 8%, #f0f0f0 18%, lightgray 33%);
   animation: shimmer 4.2s linear infinite forwards;
   transition: all .4s;
+}
+.card-home-page:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    box-shadow: rgb(4 17 29 / 25%) 0px 0px 8px 0px;
+    transition: all 0.1s ease 0s;
 }

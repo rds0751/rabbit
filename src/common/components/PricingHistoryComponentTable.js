@@ -145,6 +145,8 @@ export default function PricingHistoryComponentTable(props) {
   const [buy, setBuy] = useState(false);
   const [minted, setMinted] = useState(false);
   const [activities, setActivities] = useState("");
+  let [dataCopied,setDataCopied]=useState(true);
+  let [dataCopiedTo,setDataCopiedTo]=useState(true);
   // const [type, setType] = useState(defaultReq);
   const [type, setType] = useState([]);
 
@@ -356,65 +358,85 @@ export default function PricingHistoryComponentTable(props) {
                         {row.price}
                       </TableCell>
 
-                      <Tooltip title={row.walletAddress}>
+                      
                         <TableCell
                           style={{
                             borderBottom: "1px solid #C8C8C8",
                           }}
+                          onClick={()=>{
+                            setDataCopied(false)
+                            setTimeout(()=>{
+                              setDataCopied(true);
+                            },1000);
+                          }}
                         >
                           {" "}
                           <CopyToClipboard text={row?.walletAddress}>
-                            <button
-                              className="copy-button"
-                              onClick={handleClick({
-                                vertical: "top",
-                                horizontal: "right",
-                              })}
-                            >
+                             <span className="Activity-From">
                               {row.userName ? (
                                 row.userName.substr(0, 6)
                               ) : (
                                 <SplitFrom address={row.walletAddress} />
                               )}
-                            </button>
+                               <span className="activityTooltip">
+                               {dataCopied ? "copy to clipboard" : "copied" }
+                                 </span>
+                               </span>
                           </CopyToClipboard>
                         </TableCell>
-                      </Tooltip>
+                   
 
-                      <Tooltip
+                      {/* <Tooltip
                         title={
                           row?.to[0]?.wallet_address
                             ? row?.to[0]?.wallet_address
                             : "--"
                         }
-                      >
+                      > */}
                         <TableCell
                           style={{
                             borderBottom: "1px solid #C8C8C8",
                           }}
+                          onClick={()=>{
+                            setDataCopiedTo(false)
+                            setTimeout(()=>{
+                              setDataCopiedTo(true);
+                            },1000);
+                          }}
                         >
-                                                    <CopyToClipboard text={row?.walletAddress} >
-                            <button
+                        <CopyToClipboard text={row?.to[0]?.wallet_address} >
+                        <span className="Activity-From">
+                            {/* <button
                               className="copy-button"
                               onClick={handleClick({
                                 vertical: "top",
                                 horizontal: "right",
                               })}
-                            >
-                          {console.log(row, "username")}
+                            > 
+                             {console.log(row, "username")}
+                            */}
+                         
                           {row?.to.length > 0 ? (
                             row?.to[0]?.userName ? (
                               row?.to[0]?.userName.substr(0, 7)
                             ) : (
+                              <span>
                               <SplitTo address={row?.to[0]?.wallet_address} />
+                              <span className="activityTooltip">
+                              {dataCopiedTo ? "copy to clipboard" : "copied" }
+                                </span>
+                                </span>
                             )
                           ) : (
                             "---"
                           )}
-                                                     </button>
-                          </CopyToClipboard>
+                         
+
+                        {/* </button> */}
+                        </span>
+                       </CopyToClipboard>
                         </TableCell>
-                      </Tooltip>
+                      {/* </Tooltip> */}
                       <TableCell
                         style={{
                           borderBottom: "1px solid #C8C8C8",

@@ -469,23 +469,23 @@ function MyProfile() {
                 <SplitWalletAdd address={loggedInUser?.wallet_address} />
               </p>
             </div>
-              <button
+              {/* <button
                 className="copy-button"
                 onClick={handleClick({
                   vertical: "top",
                   horizontal: "center",
                 })}
-              >
+              > */}
                 <img
                   src={copy}
                   className="copyButton"
                   alt=""
                   onClick={isDataCopied}
                 />
-              </button>
+              {/* </button> */}
               </span>
             </CopyToClipboard>
-            <CustomSnack
+            {/* <CustomSnack
               anchorOrigin={{ vertical, horizontal }}
               open={open}
               onClose={handleClose}
@@ -493,7 +493,7 @@ function MyProfile() {
               key={vertical + horizontal}
               autoHideDuration={2000}
               className="custom-snack"
-            />
+            /> */}
              <span className="tooltiptext-myprofile"> {dataCopied ? "copy to clipboard" : "copied" }</span>
           </div>
 

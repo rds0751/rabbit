@@ -18,6 +18,9 @@ import SelectUnstyled, { selectUnstyledClasses } from '@mui/base/SelectUnstyled'
 import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled';
 import PopperUnstyled from '@mui/base/PopperUnstyled';
 import { styled } from '@mui/system';
+import Ethereum from "../../assets/images/ether.svg";
+import Polygon from "../../assets/images/ploygon.svg";
+import Binance from "../../assets/images/binance.svg";
 const blue = {
   100: '#DAECFF',
   200: '#99CCF3',
@@ -211,6 +214,19 @@ function Collections_tile() {
     setVisibleBlogs(prevVisibleBlogs => prevVisibleBlogs + 4)
 
   }
+  const blockchainCheck=(blockchain)=>{
+    switch(blockchain){
+      case 'Ethereum':
+      return <img className="currency-sign" src={Ethereum}></img>
+      case 'Polygon':
+      return <img  className="currency-sign" src={Polygon}></img>
+      case 'Binance':
+      return <img className="currency-sign" src={Binance}></img>
+      default:
+        return '';
+    }
+    
+  }
   return (
     <>
       <div className="ntf_div">
@@ -301,10 +317,11 @@ function Collections_tile() {
           {/* nfts.slice(0, visibleBlogs).map((nft) =>  */}
 
           {collections.slice(0, visibleBlogs).map((collection) => {
-            const { _id, imageUrl, name, nftCount } = collection;
+            const { _id, imageUrl, name, nftCount,blockchain,compressedURL } = collection;
             const route = "/collection-details/" + _id;
             return (
               <div className="collectionCardEach col-md-6 col-lg-3 col-sm-12 mt-5 nft_card">
+               
                 <Link to={route}>
                   <div
                     className=" nft-card-radius collection-card border-radius pt-4 cardmob"
@@ -314,7 +331,7 @@ function Collections_tile() {
                     <div className="text-center">
                       <img
                         className="img-fluid border-radius collection-img-card-radius collection_imgmob"
-                        src={imageUrl}
+                        src={compressedURL?.length === 0 ? imageUrl: (!compressedURL ? imageUrl:compressedURL)}
                         alt=""
                         style={{
                           width: "100px",
@@ -324,6 +341,7 @@ function Collections_tile() {
                       />
                     </div>
                     <div className="text-center pt-3">
+                    <span>{blockchainCheck(blockchain)} </span>
                       <p
                         className="collectionCardEachName text-center font-weight-900"
                         style={{ color: "#191919" }}
