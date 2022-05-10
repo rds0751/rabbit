@@ -45,6 +45,7 @@ function CreateSingleNFT(props) {
   const [collectionData, setCollectionData] = useState([]);
   const [selectFile, setSelectFile] = useState("");
   const [collectionId, setCollectionId] = useState("");
+  const  [collectionName,setCollectionName]=useState("");
   const [contractAddress, setContractAddress] = useState("");
 
   const [ipfsUrl, setIpfsUrl] = useState("");
@@ -334,10 +335,9 @@ const [compressedUrl,setCompressedUrl]=useState("");
     let nftDescriptionValidation=descriptionValidation(description.current);
     let nftFileValidation=fileValidation();
     let nftBlockchain=blockchainValidation(blockchain.current);
-    console.log(blockchain.current,selectedOption,"<<<blockchain")
+    console.log(collectionId.length,collectionName,"<<<CollectionName")
  
     if(nftNameValidation && nftPriceValidation && nftDescriptionValidation && nftFileValidation && nftBlockchain){
-     
 
       const addIPFS = async () => {
         console.log(selectFile, "<<<selectedFile");
@@ -351,7 +351,8 @@ const [compressedUrl,setCompressedUrl]=useState("");
           description: description.current,
           blockchain: blockchain.current,
           createdBy: loggedInUser._id,
-          collection: collectionId,
+          collectionId: collectionId,
+          collectionName:collectionName,
           contractAddress: contractAddress,
           ownerAddress: walletAddress.address,
         });
@@ -619,13 +620,14 @@ const enabled=  nameError=="" && error=="" && royalityError=="" && fileError==""
                     const addressId = e.target.value.split(",")
                     setCollectionId(addressId[0]);
                     setContractAddress(addressId[1]);
+                    setCollectionName(addressId[2]);
                  
                   }}
                   className="form-control-1 category-select"
                 >
                   <option className="color82">ANAFTO Collection</option>
                   {collectionData.map((item, index) => (
-                    <option className="option color82" value={[item._id, item.contractAddress]} >
+                    <option className="option color82" value={[item._id, item.contractAddress,item.name]} >
                       {item?.name}
                     </option>
                   ))}

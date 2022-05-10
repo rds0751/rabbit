@@ -19,7 +19,7 @@ function NftCardsHome({ nft }) {
 
   const navigate = useNavigate();
   const { user, sideBar } = useSelector((state) => state);
-  const { _id, cdnUrl, name, biddingDetails, salesInfo, isLiked,compressedURL,blockchain } = nft;
+  const { _id, cdnUrl, name, biddingDetails, salesInfo, isLiked,compressedURL,blockchain,collectionName } = nft;
   const [handleLike, setHandleLike] = useState(true);
   // const currDate = new Date();
   // const endDate = biddingDetails.endDate;
@@ -166,6 +166,7 @@ function NftCardsHome({ nft }) {
               {`${salesInfo?.price}  ${salesInfo?.currency}`}
             </span>
           </div>
+          <div>{collectionName}</div>
           <div
             className="nftTileEachDetailsSecondContainerValueHighest"
           // style={{ marginLeft: "1em" }}

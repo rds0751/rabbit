@@ -75,6 +75,7 @@ function UserProfilePage() {
   const [checkClick, setcheckClick] = useState(false);
   const [getBalance, setGetBalance] = useState("");
   const dispatch = useDispatch();
+  const [dataCopied,setDataCopied]=useState(true);
   
 
   const [typeofProfilePost, setTypeofProfilePost] = useState("on-sale");
@@ -324,25 +325,35 @@ const onBannerLoad=()=>{
           {/* <h2>{window.ethereum && defaultAccount}</h2> */}
           {/* {defaultAccount} */}
           <div className="profile-user">{userData?.userName}</div>
-          <div className="add-cover">
+          <div className="add-cover"  
+          onClick={()=>{
+          setDataCopied(false)
+          setTimeout(()=>{
+            setDataCopied(true);
+          },3000);
+        }}>
             <div className="wallet-address-text">
               {/* {loggedInUser?.wallet_address} */}
 
               <SplitWalletAdd address={userData?.wallet_address} />
             </div>
-            <CopyToClipboard text={walletAddress?.address}>
-            <button  className="copy-button"        onClick={handleClick({
+            <CopyToClipboard text={userData?.wallet_address}>
+
+               <span className="Container-clipboard">
+            {/* <button  className="copy-button"        onClick={handleClick({
              vertical: 'top',
              horizontal: 'center',
-            })}>
+            })}> */}
               <img
                 src={copy}
                 className="copyButton"
                 alt=""
                 
-              /></button>
+              />
+              {/* </button> */}
+              </span>
             </CopyToClipboard>
-            <CustomSnack
+            {/* <CustomSnack
         anchorOrigin={{ vertical, horizontal }}
         open={open}
         onClose={handleClose}
@@ -350,7 +361,8 @@ const onBannerLoad=()=>{
         key={vertical + horizontal}
         autoHideDuration={2000}
         className="custom-snack"
-      />
+      /> */}
+      <span className="tooltiptext-myprofile"> {dataCopied ? "copy to clipboard" : "copied" }</span>
           </div>
 
           <p className="profile-description">

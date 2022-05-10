@@ -58,7 +58,8 @@ class Index extends BaseComponent {
       transactionHash: blockchainRes?.transactionHash || "",
       name: data?.nftName || "",
       //TO DO  need to pass collection _id
-      collectionId: data.collection, // to do
+      collectionId: data?.collectionId, // to do
+      collectionName:data?.collectionName!="" ? data?.collectionName : "ANAFTO Collection",
       ipfsUrl: data?.ipfsUrl || "",
       cdnUrl: data?.cdnUrl || "",
       compressedURL:data?.compressedURL|| "",
@@ -149,10 +150,14 @@ class Index extends BaseComponent {
        // = "0xCDe6A5fccf0cCaF7bc51D35C1f8Efe3BbC5c8057"
       // //-ethreum
 
-      if(data?.blockchain === "Polygon")
+      if(data?.blockchain === "Polygon"){
       contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS_POLYGON
-      else if(data?.blockchain === "Ethereum")
+      data.contractAddress=contractAddress;
+    }
+      else if(data?.blockchain === "Ethereum"){
       contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS
+      data.contractAddress=contractAddress;
+      }
      
 
       const [blockchainError, blockchainResult] = await Utils.parseResponse(

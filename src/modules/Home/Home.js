@@ -535,7 +535,7 @@ function Home() {
           <h2 className="heading-why">Why this Marketplace</h2>
           <div className="inner-width">
             <div className="d-flex justify-content-lg-start justify-content-md-center flex-wrap">
-              <div className="d-flex align-items-center justify-content-left media">
+              <div className="d-flex align-items-center justify-content-left media card-home-page">
                 <img
                   src={Category}
                   alt="Category"
@@ -546,7 +546,7 @@ function Home() {
 
                 <p className="browse-text">Browse by Category</p>
               </div>
-              <div className="d-flex align-items-center justify-content-left media">
+              <div className="d-flex align-items-center justify-content-left media card-home-page">
                 <img
                   src={Stats}
                   alt="Stats"
@@ -557,7 +557,7 @@ function Home() {
 
                 <p className="browse-text">Stats to show pricing history</p>
               </div>
-              <div className="d-flex align-items-center justify-content-left media">
+              <div className="d-flex align-items-center justify-content-left media card-home-page">
                 <img
                   src={Easy}
                   alt="Easy"
@@ -568,7 +568,7 @@ function Home() {
 
                 <p className="browse-text">Easy to sell and buy NFT</p>
               </div>
-              <div className="d-flex align-items-center justify-content-left media">
+              <div className="d-flex align-items-center justify-content-left media card-home-page">
                 <img
                   src={Offers}
                   alt="Offers"
@@ -579,7 +579,7 @@ function Home() {
 
                 <p className="browse-text"> Make offers on NFTs</p>
               </div>
-              <div className="d-flex align-items-center justify-content-left media">
+              <div className="d-flex align-items-center justify-content-left media card-home-page">
                 <img
                   src={Activity}
                   alt="Activity"

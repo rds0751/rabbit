@@ -250,8 +250,7 @@ function CreateNftCollections(props) {
       coverUrl: bannerCdn,
       // contractAddress: blockchainRes.contract_address,
       imageUrl: logoCdn,
-      // compressedLogo:compressedLogo,
-      // compressedBanner:compressedBanner,
+      compressedURL:compressedLogo,
       name: name.current,
       description: description.current,
       blockchain: blockchain.current,
@@ -462,8 +461,8 @@ function CreateNftCollections(props) {
             setbannerCdn={setlogoCdn}
             bannerIpfs={logoipfs}
             setbannerIpfs={setlogoipfs}
-            // compressedUrl={compressedLogo}
-            // setCompressedUrl={setCompressedLogo}
+            compressedUrl={compressedLogo}
+            setCompressedUrl={setCompressedLogo}
           />
         </div>
         <div>
@@ -475,8 +474,8 @@ function CreateNftCollections(props) {
             setbannerCdn={setbannerCdn}
             bannerIpfs={bannerIpfs}
             setbannerIpfs={setbannerIpfs}
-            // compressedUrl={compressedBanner}
-            // setCompressedUrl={setcompressedBanner}
+             compressedUrl={compressedBanner}
+             setCompressedUrl={setcompressedBanner}
           />
 
           {/* ----------------------------- */}

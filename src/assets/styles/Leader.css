@@ -1962,3 +1962,40 @@ td {
 .DetailPage-Table-Data{
   border: none;
 }
+.Activity-From{
+  position: relative;
+  cursor: pointer;
+}
+
+.activityTooltip{
+  visibility: hidden;
+  width: 132px;
+  background-color: rgba(0, 0, 0, 0.788);
+  color: #fff;
+  text-align: center;
+  font-size: 0.7rem;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: 123%;
+  left: 47%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 1s;
+}
+.Activity-From .activityTooltip::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent  rgba(0, 0, 0, 0.788) transparent;
+}
+
+.Activity-From:hover .activityTooltip {
+  visibility: visible;
+  opacity: 1;
+}
