@@ -38,7 +38,8 @@ export async function getTenantData() {
     "x-access-token": `${localStorage.getItem(WHITE_LABEL_TOKEN)}`,
   };
   try {
-    const url = `${BASE_URL1}/api/v1/tenant/624fcce73cfee400358f2cef`;
+    let address = localStorage.getItem("walletAddress") ? localStorage.getItem("walletAddress") : "0x9affb1cf8e276657f857e0b6c982e093bdb50968";
+    const url = `${BASE_URL1}/api/v1/tenant/wallet/${address}`;
     const res = await fetch(url, { headers: token });
     const result = await res.json();
     const tenantData = result.responseData;

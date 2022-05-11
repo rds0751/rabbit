@@ -71,6 +71,7 @@ function Create() {
         .request({ method: "eth_requestAccounts" })
         .then((newAccount) => {
           const address = newAccount[0];
+          localStorage.setItem("walletAddress", address);
           // alert("connecting");
           window.ethereum
             .request({ method: "eth_getBalance", params: [address, "latest"] })
