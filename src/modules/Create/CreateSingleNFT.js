@@ -618,14 +618,23 @@ const enabled=  nameError=="" && error=="" && royalityError=="" && fileError==""
                   onChange={(e) => {
                    
                     const addressId = e.target.value.split(",")
+                  
+                   
+                  
                     setCollectionId(addressId[0]);
                     setContractAddress(addressId[1]);
-                    setCollectionName(addressId[2]);
+                    setCollectionName(addressId[2])
+                    //setCollectionName(addressId[2]);
+                     console.log(addressId[0],addressId[2],"CollectionCheck")
+
+                   
+                  
                  
                   }}
                   className="form-control-1 category-select"
                 >
-                  <option className="color82">ANAFTO Collection</option>
+                    <option className="color82" value="-1" hidden>Select Collection</option>
+                  <option className="color82" value="">ANAFTO Collection</option>
                   {collectionData.map((item, index) => (
                     <option className="option color82" value={[item._id, item.contractAddress,item.name]} >
                       {item?.name}

@@ -33,6 +33,7 @@ const BlockchainServices = {
 export default BlockchainServices;
 
 async function mintNFT({ tokenURI, price, tokenId, contractAddress ,blockchain}) {
+    console.log(window.ethereum.networkVersion , blockchain,"dattttttttttttttttt");
 
     if (!window.ethereum)
         return Promise.reject("Please install metamask")
@@ -72,8 +73,9 @@ async function mintNFT({ tokenURI, price, tokenId, contractAddress ,blockchain})
         
     }
     else
+    return Promise.reject("Please Select Valid Network in the metamask")
         // console.log("kkkkkkkkkkkkkkkkkkkkkk network swutch")
-        return Promise.reject("Please Select Valid Network in the metamask")
+   
    
 }
 

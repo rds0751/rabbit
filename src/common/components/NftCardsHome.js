@@ -19,7 +19,7 @@ function NftCardsHome({ nft }) {
 
   const navigate = useNavigate();
   const { user, sideBar } = useSelector((state) => state);
-  const { _id, cdnUrl, name, biddingDetails, salesInfo, isLiked,compressedURL,blockchain,collectionName } = nft;
+  const { _id, cdnUrl, name, biddingDetails, salesInfo, isLiked,compressedURL,blockchain,collectionName,collectionId } = nft;
   const [handleLike, setHandleLike] = useState(true);
   // const currDate = new Date();
   // const endDate = biddingDetails.endDate;
@@ -166,7 +166,20 @@ function NftCardsHome({ nft }) {
               {`${salesInfo?.price}  ${salesInfo?.currency}`}
             </span>
           </div>
-          <div>{collectionName}</div>
+          <div className="collectionName" title={collectionName ?collectionName :"Anafto Collection"}>
+
+          <Link
+           style={{ textDecoration: 'none' }}
+            to={
+            '/collection-details/' + collectionId
+            }
+            >
+              {undefined !== collectionName &&
+              collectionName.length > 20 ? collectionName.slice(0,20)+"...":(collectionName?.length===0 ? "Anafto Collection" :collectionName)}
+           
+             </Link>
+             </div>
+            
           <div
             className="nftTileEachDetailsSecondContainerValueHighest"
           // style={{ marginLeft: "1em" }}
