@@ -59,7 +59,7 @@ class Index extends BaseComponent {
       name: data?.nftName || "",
       //TO DO  need to pass collection _id
       collectionId: data?.collectionId, // to do
-      collectionName:data?.collectionName!="" ? data?.collectionName : "ANAFTO Collection",
+      collectionName:data?.collectionName==undefined ? "ANAFTO Collection" : data?.collectionName,
       ipfsUrl: data?.ipfsUrl || "",
       cdnUrl: data?.cdnUrl || "",
       compressedURL:data?.compressedURL|| "",
@@ -86,8 +86,20 @@ class Index extends BaseComponent {
   createNftHandler = async (data) => {
     let blockchainRes;
     this.setState({ loaderState: true });
-    console.log(data?.ownerAddress, "dattttttttttttttttt");
+    console.log(data?.blockchain, "dattttttttttttttttt");
+    let contractAddress;
+    // = "0xCDe6A5fccf0cCaF7bc51D35C1f8Efe3BbC5c8057"
+   // //-ethreum
 
+   if(data?.blockchain === "Polygon"){
+   contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS_POLYGON
+   data.contractAddress=contractAddress;
+ }
+   else if(data?.blockchain === "Ethereum"){
+   contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS
+   data.contractAddress=contractAddress;
+   }
+    
     // if (!data || Object.keys(data).length < 1 || !data.nftFile){
     //   this.setState({loaderState:false})
 
@@ -128,7 +140,8 @@ class Index extends BaseComponent {
           tokenURI: data.ipfsUrl,
           price: data.price,
           tokenId,
-          contractAddress: data.contractAddress
+          contractAddress: data.contractAddress,
+          blockchain:data?.blockchain
         })
       );
       console.log("blockchainError", blockchainError)
@@ -146,19 +159,12 @@ class Index extends BaseComponent {
 
 
     else {
-       let contractAddress;
-       // = "0xCDe6A5fccf0cCaF7bc51D35C1f8Efe3BbC5c8057"
-      // //-ethreum
-
-      if(data?.blockchain === "Polygon"){
-      contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS_POLYGON
-      data.contractAddress=contractAddress;
-    }
-      else if(data?.blockchain === "Ethereum"){
-      contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS
-      data.contractAddress=contractAddress;
-      }
      
+
+      
+     
+      console.log(data?.blockchain, "blockchainValue");
+
 
       const [blockchainError, blockchainResult] = await Utils.parseResponse(
         BlockchainServices.mintNFT({
@@ -189,7 +195,7 @@ class Index extends BaseComponent {
 
 
     console.log(
-      this.getRequestDataForSaveNftContent(tokenId, data, blockchainRes)
+      this.getRequestDataForSaveNftContent(tokenId, data, blockchainRes) ,"DATA ON Blockchian"
     );
 
     // save NFT data on DB

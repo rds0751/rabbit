@@ -489,7 +489,7 @@ function Home() {
           <h2 className="heading">Create and sell your NFTs</h2>
           <div className="inner-width">
             <div className="d-flex justify-content-center flex-wrap">
-              <Card>
+              <Card className="first-card-nft">
                 <img className="icon-hover" variant="top" src={Wallet} />
                 <Card.Body>
                   <Card.Title>Create Wallet</Card.Title>
@@ -498,7 +498,7 @@ function Home() {
                   </Card.Text>
                 </Card.Body>
               </Card>
-              <Card>
+              <Card  className="first-card-nft">
                 <img className="icon-hover" variant="top" src={Collection} />
                 <Card.Body>
                   <Card.Title>Create Collection</Card.Title>
@@ -508,7 +508,7 @@ function Home() {
                   </Card.Text>
                 </Card.Body>
               </Card>
-              <Card>
+              <Card  className="first-card-nft">
                 <img className="icon-hover" variant="top" src={NFTs} />
                 <Card.Body>
                   <Card.Title>Add NFTs</Card.Title>
@@ -518,7 +518,7 @@ function Home() {
                   </Card.Text>
                 </Card.Body>
               </Card>
-              <Card>
+              <Card  className="first-card-nft">
                 <img className="icon-hover" variant="top" src={Sale} />
                 <Card.Body>
                   <Card.Title>List them for sale</Card.Title>

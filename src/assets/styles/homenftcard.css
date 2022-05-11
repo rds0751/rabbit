@@ -51,7 +51,7 @@
   /* padding-top: 4%; */
 }
 .nftTileEachDetailsFirstContainerName {
-  min-height: 48px;
+  /* min-height: 48px; */
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -262,3 +262,11 @@
 /* .dropdown-img{
   background-image: url("/whitelablenft-webapp/src/assets/images/drop-down-arrow.svg") no-repeat right #ffffff;
 } */
+.collectionName{
+  font-size: 0.8rem;
+  color: blue;
+  margin-top: 10px;
+  display: flex;
+  width: 58%;
+  
+}
