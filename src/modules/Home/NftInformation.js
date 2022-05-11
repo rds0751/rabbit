@@ -188,7 +188,7 @@ export default function NftInformation(props) {
       });
     }
     fetchData();
-  }, );
+  },[nft]);
 
 
   // alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
