@@ -26,6 +26,9 @@ import { styled } from '@mui/system';
 import { ShimmerCircularImage, ShimmerThumbnail } from "react-shimmer-effects";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FlagIcon from '@mui/icons-material/Flag';
+import Ethereum from "../../assets/images/ether.svg";
+import Polygon from "../../assets/images/ploygon.svg";
+import Binance from "../../assets/images/binance.svg";
 
 const blue = {
   100: '#DAECFF',
@@ -231,6 +234,19 @@ function CollectionDetails() {
   const onBannerLoad=()=>{
     setImageLoading({...bannerImage,loaded:true});
   }
+  const blockchainCheck=(blockchain)=>{
+    switch(blockchain){
+      case 'Ethereum':
+      return <img className="currency-sign" src={Ethereum}></img>
+      case 'Polygon':
+      return <img  className="currency-sign" src={Polygon}></img>
+      case 'Binance':
+      return <img className="currency-sign" src={Binance}></img>
+      default:
+        return '';
+    }
+    
+  }
 
   const sendReport = async () => {
     alert("hello")
@@ -300,7 +316,9 @@ function CollectionDetails() {
           )}
             </div>
           </div>
+          <span>{blockchainCheck(blockchain)} </span>
           <div className="colusername">{name}</div>
+
           <div className="coluserdes" title={description}>
             {undefined !== description && description.length >512 ? description.slice(0,512)+"...":description}
           </div>

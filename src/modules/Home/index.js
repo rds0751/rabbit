@@ -9,6 +9,10 @@ import { addNftTx, updateTxStatus } from "../../services/sellAndPurchaseMicroSer
 import ContentService from "../../services/contentMicroservice";
 // import {history} from "../../managers/history";
 import { getNft } from "../../services/webappMicroservice";
+import {
+    getCollection,
+    getNftsByCollectionId,
+  } from "../../services/webappMicroservice";
 import { useParams } from "react-router-dom";
 // import {connect} from "react-redux";
 import { eventConstants } from "../../constants";
@@ -26,7 +30,8 @@ export default class NftDetail extends BaseComponent {
             refreshPage: false,
             buySuccess :false,
             saleSuccess :false,
-            removeSuccess :false
+            removeSuccess :false,
+            collectionNFt:[]
 
 
 
@@ -36,6 +41,7 @@ export default class NftDetail extends BaseComponent {
 
     componentDidMount() {
         this.getNftDetail();
+        this.getNftsBycollectionID();
     }
     getNftDetail = async () => {
         // const { id } = useParams();
@@ -56,6 +62,28 @@ export default class NftDetail extends BaseComponent {
             console.log("----------", this.state.responseData);
         });
     };
+
+    getNftsBycollectionID=async ()=>{
+        const queryString = require('query-string');
+        const defaultFilter = {
+            searchByName: "",
+            status: "",
+            sortBy: "",
+            minPrice: "",
+            maxPrice: "",
+          }
+      
+              const reqObj = queryString.stringify(defaultFilter);
+              await getNftsByCollectionId( (this.state?.responseData?.collectionId, reqObj),(response)=>{
+                  console.lof(response,"<<<response of data")
+                this.setState({collectionNFt:response[0]});
+            });         
+              
+        
+        }
+               
+        
+    
     BuyNowNft = async (data) => {
 console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.contractAddress)
         // this.setState({ loaderState: true })

@@ -281,7 +281,7 @@ function CreateNftCollections(props) {
         setloaderState(false);
 
         return toast.error(
-          blockchainError.message || "Unable to Create Collection on blockchain",{autoClose:7000,theme:"colored"}
+          blockchainError.message || "Please Select valid Network in metamask",{autoClose:7000,theme:"colored"}
         );
       }
       else {

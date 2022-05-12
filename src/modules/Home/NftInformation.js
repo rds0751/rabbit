@@ -35,6 +35,11 @@ import CopyToClipboard from "react-copy-to-clipboard";
 import Ethereum from "../../assets/images/ether.svg";
 import Polygon from "../../assets/images/ploygon.svg";
 import Binance from "../../assets/images/binance.svg";
+import {
+  getCollection,
+  getNftsByCollectionId,
+} from "../../services/webappMicroservice";
+import NftCardsHome from "../../common/components/NftCardsHome";
 toast.configure();
 const CustomSnack = styled(Snackbar)`
   @media (min-width: 992px) {
@@ -105,9 +110,17 @@ export default function NftInformation(props) {
   const [isOpenForSell, setisOpenForSell] = useState(null);
   const { loggedInUser, walletAddress } = user;
   const { id } = useParams();
-  const nft = props?.responseData;
+  
 
- 
+  const nft = props?.responseData;
+  
+  const defaultFilter = {
+    searchByName: "",
+    status: "",
+    sortBy: "",
+    minPrice: "",
+    maxPrice: "",
+  }
 
   const { owner, creator, salesInfo,blockchain } = nft;
   const [openReportModal, setOpenReportModal] = useState(false);
@@ -121,6 +134,8 @@ export default function NftInformation(props) {
   const [tab, setTab] = useState(1);
   const [toShow, settoShow] = useState(true);
   const [makeOfferModal, setMakeOfferModal] = useState(false);
+  const [filter, setFilter] = useState(defaultFilter);
+  const [moreNft ,setMoreNfts]=useState([]);
 
   const [state, setState] = React.useState({
     open: false,
@@ -162,6 +177,18 @@ export default function NftInformation(props) {
   } else {
     document.body.classList.remove("active-modal");
   }
+
+  useEffect(() => {
+    async function fetchData() {
+     // setIsLoading(true);
+      const reqObj = queryString.stringify(filter);
+      await getNftsByCollectionId(nft?.collectionId, reqObj).then((res) => {
+        setMoreNfts(res.nftContent);
+       // setIsLoading(false);
+      });
+    }
+    fetchData();
+  },[nft]);
 
 
   // alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
@@ -979,11 +1006,75 @@ export default function NftInformation(props) {
               </div>
             </div>
           </div>
+        
           <div className="row mt-4 activities">
             <div className="col-xl-5 col-lg-5 col-md-12 col-sm-12">
               <PricingHistoryComponentTable id={id} />
             </div>
+              <label>More from this collection</label>
+          <div className="MoreFromNFt">
+        
+            {
+              moreNft.map((nft) => {
+                const { name, _id,salesInfo,likes,compressedURL,blockchain,collectionName,collectionId} =
+                nft;
+              const route = "/nft-information/" + _id;
+              return (
+
+                <div className=" col-md-6 col-lg-3  col-sm-12 nft_card my-item-card p-0" >
+                  <div className="card nft-card-radius border-radius cardmob">
+                    <Link to={route} style={{ textDecoration: "none" }}>
+                      <img
+                        className="nftTileEachImage img-fluid border-radius card_imgmob"
+                        src={compressedURL}
+                        alt="nft-img"
+                        style={{ height: "187px", borderTopLeftRadius: '13px', borderTopRightRadius: '13px' }}
+                      />
+                    </Link>
+                    <div
+                      className="nftTileEachDetails card-lower"
+                      style={{
+                        padding: "0px 14px 0px 12px",
+                      }}
+                    >
+                      <div className="nftTileEachDetailsFirstContainer container__up">
+                        <div
+                          className="nftTileEachDetailsFirstContainerName myItemNFT"
+                        >
+                          {name}
+                        </div>
+                       <span className="priceTag"> 
+                       {blockchainCheck(blockchain)}
+                       {`${salesInfo?.price}  ${salesInfo?.currency}`}
+                       </span>
+                       
+                      </div>
+                      <div className="collectionName" title={collectionName ?collectionName :"Anafto Collection"}>
+
+                      
+                    </div>
+                      <div className="likeCount" title="Like Count">
+                      {likes?.length}
+                      <i
+                        className="fa-solid fa-heart"
+                        style={{ color: "#ef3643",marginLeft:"8.5px"}}
+                      />
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                
+
+              );
+            
+                
+                
+              })
+            }
+            
           </div>
+          </div>
+        
 
           {/* <div className="row mt-4">
                 <PricingHistoryComponentTable id={id} />
