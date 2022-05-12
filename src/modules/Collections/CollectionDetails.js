@@ -24,6 +24,8 @@ import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled'
 import PopperUnstyled from '@mui/base/PopperUnstyled';
 import { styled } from '@mui/system';
 import { ShimmerCircularImage, ShimmerThumbnail } from "react-shimmer-effects";
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import FlagIcon from '@mui/icons-material/Flag';
 import Ethereum from "../../assets/images/ether.svg";
 import Polygon from "../../assets/images/ploygon.svg";
 import Binance from "../../assets/images/binance.svg";
@@ -176,6 +178,9 @@ function CollectionDetails() {
   const [sort, setSort] = useState("");
   const [filter, setFilter] = useState(defaultFilter);
   const [isLoading, setIsLoading] = useState(false);
+  const [reportIconClicked, setReportIconClicked] = useState(false);
+  const [openReportModal, setOpenReportModal] = useState(false);
+  const [reason, setReason] = useState("");
   
   useEffect(() => {
     async function fetchData() {
@@ -243,6 +248,23 @@ function CollectionDetails() {
     
   }
 
+  const sendReport = async () => {
+    alert("hello")
+    // let report = {
+    //   contentId: id,
+    //   addedBy: loggedInUser?._id,
+    //   reason: `${reason}`,
+    // };
+    // const reportObj = queryString.stringify(report);
+    // await addNftReport(reportObj, (response) => {
+    //   if (response.success) {
+    //     toast.success(response.message);
+    //   } else {
+    //     toast.error("This Nft is already reported");
+    //   }
+    //   setOpenReportModal(false);
+    // });
+  };
 
   
   return (
@@ -257,6 +279,32 @@ function CollectionDetails() {
           )}
         </div>
         <div className="coldet-bio">
+          <div className="coldet-avatar">
+            <img className="col-avatar" src={imageUrl} onLoad={onImageLoad} alt="" />
+              {!imageLoading.loaded && (
+              <div className="collectionDetailLoader"> 
+                <ShimmerCircularImage className="thumbnailCirular" fitOnFrame={true} rounded />
+              </div>
+            )}
+          </div>
+          <div className="more-hori-div" onClick={() => setReportIconClicked(!reportIconClicked)}>
+            <MoreHorizIcon/>
+            {reportIconClicked && (
+            <>
+              <div className="report-text-div" onClick={() => setOpenReportModal(true)}>
+                <FlagIcon/>
+                Report
+              </div>
+            </>
+            )}
+          </div>
+          
+          <div className="colusername">{name}</div>
+          <div className="coluserdes" title={description}>
+            {undefined !== description && description.length >512 ? description.slice(0,512)+"...":description}
+          </div>
+        </div>
+        {/* <div className="coldet-bio">
           <div className="coldet-avatar">
           <div className="collectionDetailContainer">
             
@@ -274,26 +322,7 @@ function CollectionDetails() {
           <div className="coluserdes" title={description}>
             {undefined !== description && description.length >512 ? description.slice(0,512)+"...":description}
           </div>
-        </div>
-
-        {/* <li>
-          <a
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <i style={{ color: "#afafaf" }} className="fas fa-ellipsis-h"></i>
-          </a>
-          <ul>
-            <li>
-              <Link to="/Report">
-                <i></i> Report
-              </Link>
-            </li>
-          </ul>
-        </li> */}
+        </div> */}
         <div className="collection-body">
           <div className="collfilters">
             <div className="colleftfilter">
@@ -399,6 +428,47 @@ function CollectionDetails() {
               })
             )}
 
+          </div>
+        </div>
+      </div>
+      <div
+        className="report-outer"
+        style={{ display: openReportModal ? "block" : "none" }}
+      >
+        <div className="report-abs-modal">
+          <div className="report-modal">
+            <div className="report-inner" style={{ opacity: "1" }}>
+              <div className="reportthisitem">
+                <h3 className="report-text poppins-normal">Report this collection</h3>
+                <i
+                  className="fa-solid fa-xmark cross-icon icrossicon"
+                  onClick={() => setOpenReportModal(false)}
+                ></i>
+              </div>
+              <div className="singlerowmodal">
+                <h3 className="reason-text"> Reason</h3>
+                <select
+                  className="select-box"
+                  onChange={(e) => setReason(e.target.value)}
+                >
+                  <option>Select reason</option>
+                  <option value="Fake collection or possible scam">
+                    Fake collection or possible scam
+                  </option>
+                  <option value="Explicit and sensitive content">
+                    Explicit and sensitive content
+                  </option>
+                  <option value="Might be stolen">Might be stolen</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <button
+                className="btn btn-primary report-btn"
+                onClick={sendReport}
+              >
+                Report
+              </button>
+            </div>
           </div>
         </div>
       </div>
