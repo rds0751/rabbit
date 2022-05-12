@@ -63,8 +63,10 @@
   color: rgb(112, 122, 131);
   font-size: 24px;
 }
-.colusername {
+.coll-blockchain{
   margin-top: 30px;
+}
+.colusername {  
   font-size: 20px;
   font-weight: 600;
   color: #191919;
@@ -316,8 +318,8 @@
   background: #FFFFFF 0% 0% no-repeat padding-box;
   width: 113px;
   height: 39px;
-  top: 16px;
-  right: 40px;
+  top: 40px;
+  right: 30px;
   font-size: 14px;
   font-weight: 600;
 }

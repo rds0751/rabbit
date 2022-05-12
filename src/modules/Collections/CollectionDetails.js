@@ -301,7 +301,7 @@ function CollectionDetails() {
             )}
           </div>
           <div className="more-hori-div" onClick={() => setReportIconClicked(!reportIconClicked)}>
-            <MoreHorizIcon/>
+            <MoreHorizIcon sx={{ color: "#AFAFAF", fontSize:"40px" }} />
             {reportIconClicked && (
             <>
               <div className="report-text-div" onClick={() => setOpenReportModal(true)}>
@@ -311,7 +311,7 @@ function CollectionDetails() {
             </>
             )}
           </div>
-          
+          <div className="coll-blockchain">{blockchainCheck(blockchain)} </div>
           <div className="colusername">{name}</div>
           <div className="coluserdes" title={description}>
             {undefined !== description && description.length >512 ? description.slice(0,512)+"...":description}
