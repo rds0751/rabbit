@@ -270,8 +270,10 @@ function CollectionDetails() {
       await addCollectionReport(reportObj, (response) => {
         if (response.success) {
           toast.success(response.message);
+          setOpenReportModal(false)
         } else {
           toast.error(response.message);
+          setOpenReportModal(false)
         }
       });
     } else {
