@@ -34,9 +34,15 @@ import profileImg from "../../assets/images/profile.svg";
 import wallet from "../../assets/images/wallet.svg";
 import Anafto from "../../assets/images/ANAFTO.svg";
 import { WHITE_LABEL_TOKEN } from "../../reducers/Constants";
+import { Helmet } from "react-helmet";
+import { fetchPalletsColor } from "../../utility/global";
 const queryString = require("query-string");
 function Navbar() {
+
+  const customize = useSelector(state=> state.customize);
+
   const navigate = useNavigate();
+
   const [humburger, setHumburger] = useState(false);
   const [toggleEffect, setToggleEffect] = useState(false);
   const [errorMssg, setErrorMssg] = useState(null);
@@ -66,12 +72,26 @@ function Navbar() {
   const [collections, setCollections] = useState([]);
   const [tenantData, setTenantData] = useState("");
   const [permissionToUploadNft, setPermissionToUploadNft] = useState("");
+
+  const handleMouseOver = (e) => {
+    let tempDiv = e.target;
+    tempDiv.style.color = fetchPalletsColor(customize.appearance.colorPalette)
+
+  }
+
+  const handleMouseOut = (e) => {
+    let tempDiv = e.target;
+    tempDiv.style.color = "#818181"
+  }
+
   useEffect(() => {
+    console.log('called navbar')
     async function fetchData() {
       getTenantData().then((response) => setTenantData(response));
     }
     fetchData();
   }, []);
+
 
   useEffect(() => {
     setPermissionToUploadNft(tenantData?.permissionToUploadNft);
@@ -366,6 +386,11 @@ function Navbar() {
 
   return (
     <>
+
+      <Helmet>
+        <title>{customize?.storeName}</title>
+      </Helmet>
+
       <div className="navbar-width">
         <nav className="navbarborder navbar navbar-expand-lg">
           <div
@@ -376,14 +401,14 @@ function Navbar() {
               <Link
                 className="navbrand"
                 to="/"
-                style={{ marginRight: "20px", textDecoration: "none" }}
+                style={{ marginRight: "30px", textDecoration: "none" }}
                 onClick={() => {
                   closeWalletAndNoti();
                 }}
               >
                 <img
-                  src={tenantData?.companyLogo}
-                  style={{ width: "100px" }}
+                  src={customize.storeLogo ? customize.storeLogo : Anafto}
+                  style={{ width: "60px" }}
                   alt=""
                 />
                 {/* <span className="store-name">{tenantData?.storeName}</span> */}
@@ -682,6 +707,7 @@ function Navbar() {
                       }
                       aria-current="page"
                       to="/nfts"
+                      onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}
                     >
                       Marketplace
                     </Link>
@@ -702,6 +728,7 @@ function Navbar() {
                       }
                       exact
                       to="/leader-board"
+                      onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}
                     >
                       Leaderboard
                     </Link>
@@ -718,6 +745,7 @@ function Navbar() {
                         ? "nav-items dropdown li_underline resource nav-link navlink_active resource"
                         : "nav-items dropdown resource"
                     }
+                    onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}
                   >
                     <NavDropdown.Item onClick={() => navigate("/help-center")}>
                       Help Center
@@ -763,7 +791,9 @@ function Navbar() {
                       </li>
                     </ul>
                   </li> */}
-                  <li
+                  {
+                    customize.permissionToUploadNft === 'Everyone' ?
+                    <li
                     style={{ marginRight: "28px" }}
                     onClick={() => {
                       closeWalletAndNoti();
@@ -773,9 +803,11 @@ function Navbar() {
                     {/* <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}
                     > */}
-                    <button className="create-btn">Create</button>
+                    <button style={{backgroundColor: `${fetchPalletsColor(customize.appearance.colorPalette)}`}} className="create-btn">Create</button>
                     {/* </Link> */}
                   </li>
+                  : null
+                  }
                   <li className="removeinmob"></li>
                 </ul>
 

@@ -1,7 +1,7 @@
 .homepage .banner {
   background-image: url("../images/Banner.png");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover !important;
   padding-top: 115px;
   padding-bottom: 95px;
   margin-bottom: 177px;
@@ -564,8 +564,37 @@ margin-left: 10px;
 .card-home-page:hover {
  cursor: pointer;
 }
-.first-card-nft:hover .icon-hover{
+.first-card-nft:hover svg{
   -ms-transform: scale(1.5); /* IE 9 */
   -webkit-transform: scale(1.5) ; /* Safari 3-8 */
   transform: scale(1.5) ; 
 }
+
+
+/* custom css */
+.Solid{
+  background-color: #ffffff !important;
+  color: #141520 !important;
+}
+
+.Solid:hover{
+  background: transparent !important;
+  color: #ffffff !important;
+}
+
+.inner-width .card-home-page:hover svg {
+  -ms-transform: scale(1.5); /* IE 9 */
+  -webkit-transform: scale(1.5) ; /* Safari 3-8 */
+  transform: scale(1.5) ; 
+}
+
+.inner-width svg{
+  transition: transform .2s;
+  margin-left: 5px;
+}
+
+.first-card-nft svg{
+  margin: 0 auto;
+  transition: transform .2s;
+}
+
