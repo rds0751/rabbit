@@ -39,7 +39,9 @@ import {
   getCollection,
   getNftsByCollectionId,
 } from "../../services/webappMicroservice";
+import LikedNfts from "../../modules/MyPages/LikedNfts";
 import NftCardsHome from "../../common/components/NftCardsHome";
+import "../../assets/styles/myProfile.css"
 toast.configure();
 const CustomSnack = styled(Snackbar)`
   @media (min-width: 992px) {
@@ -189,6 +191,10 @@ export default function NftInformation(props) {
     }
     fetchData();
   },[nft]);
+
+  useEffect(()=>{
+
+  },[nft.cdnUrl])
 
 
   // alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
@@ -1011,60 +1017,24 @@ export default function NftInformation(props) {
             <div className="col-xl-5 col-lg-5 col-md-12 col-sm-12">
               <PricingHistoryComponentTable id={id} />
             </div>
-              <label>More from this collection</label>
-          <div className="MoreFromNFt">
+          </div>
+
+          
+          <div className="more-Collection-div" style={{display:moreNft?.length > 0 ? "block":"none"}}>
+          <label className="MoreCollection">More from this collection</label>
+          <div className="nftTileContainer ntf_row scroll-nft-card" 
+          style={{justifyContent:"start",
+          overflowX:moreNft?.length>4?"scroll":"hidden"
+        }}>
         
             {
               moreNft.map((nft) => {
-                const { name, _id,salesInfo,likes,compressedURL,blockchain,collectionName,collectionId} =
-                nft;
-              const route = "/nft-information/" + _id;
-              return (
-
-                <div className=" col-md-6 col-lg-3  col-sm-12 nft_card my-item-card p-0" >
-                  <div className="card nft-card-radius border-radius cardmob">
-                    <Link to={route} style={{ textDecoration: "none" }}>
-                      <img
-                        className="nftTileEachImage img-fluid border-radius card_imgmob"
-                        src={compressedURL}
-                        alt="nft-img"
-                        style={{ height: "187px", borderTopLeftRadius: '13px', borderTopRightRadius: '13px' }}
-                      />
-                    </Link>
-                    <div
-                      className="nftTileEachDetails card-lower"
-                      style={{
-                        padding: "0px 14px 0px 12px",
-                      }}
-                    >
-                      <div className="nftTileEachDetailsFirstContainer container__up">
-                        <div
-                          className="nftTileEachDetailsFirstContainerName myItemNFT"
-                        >
-                          {name}
-                        </div>
-                       <span className="priceTag"> 
-                       {blockchainCheck(blockchain)}
-                       {`${salesInfo?.price}  ${salesInfo?.currency}`}
-                       </span>
-                       
-                      </div>
-                      <div className="collectionName" title={collectionName ?collectionName :"Anafto Collection"}>
-
-                      
-                    </div>
-                      <div className="likeCount" title="Like Count">
-                      {likes?.length}
-                      <i
-                        className="fa-solid fa-heart"
-                        style={{ color: "#ef3643",marginLeft:"8.5px"}}
-                      />
-                        </div>
-                    </div>
-                  </div>
-                </div>
                 
-
+              return (
+                <>
+                  <NftCardsHome nft={nft} />
+                
+                </>
               );
             
                 

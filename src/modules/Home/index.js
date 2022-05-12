@@ -41,7 +41,7 @@ export default class NftDetail extends BaseComponent {
 
     componentDidMount() {
         this.getNftDetail();
-        this.getNftsBycollectionID();
+    
     }
     getNftDetail = async () => {
         // const { id } = useParams();
@@ -63,24 +63,6 @@ export default class NftDetail extends BaseComponent {
         });
     };
 
-    getNftsBycollectionID=async ()=>{
-        const queryString = require('query-string');
-        const defaultFilter = {
-            searchByName: "",
-            status: "",
-            sortBy: "",
-            minPrice: "",
-            maxPrice: "",
-          }
-      
-              const reqObj = queryString.stringify(defaultFilter);
-              await getNftsByCollectionId( (this.state?.responseData?.collectionId, reqObj),(response)=>{
-                  console.lof(response,"<<<response of data")
-                this.setState({collectionNFt:response[0]});
-            });         
-              
-        
-        }
                
         
     
