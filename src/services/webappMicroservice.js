@@ -261,6 +261,18 @@ export const addNftReport = async (requestData, successCallBack) => {
     const { data } = await axios.post(url, requestData);
     successCallBack(data);
   } catch (e) {
+    console.log(e)
+  }
+};
+
+export const addCollectionReport = async (requestData, successCallBack) => {
+  try {
+    const url =
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/reported/collection";
+    const { data } = await axios.post(url, requestData);
+    successCallBack(data);
+  } catch (e) {
+    console.log(e)
   }
 };
 

@@ -9,7 +9,7 @@ import { AbstractApi } from "../../constants/LeaderBoardApi copy";
 import { useParams } from "react-router-dom";
 import {
   getCollection,
-  getNftsByCollectionId,
+  getNftsByCollectionId, addCollectionReport
 } from "../../services/webappMicroservice";
 import search from "../../assets/images/search.svg";
 import dropdown from "../../assets/images/dropdown.svg";
@@ -29,6 +29,10 @@ import FlagIcon from '@mui/icons-material/Flag';
 import Ethereum from "../../assets/images/ether.svg";
 import Polygon from "../../assets/images/ploygon.svg";
 import Binance from "../../assets/images/binance.svg";
+import Select from 'react-select';
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+
 
 const blue = {
   100: '#DAECFF',
@@ -158,6 +162,7 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
 const queryString = require('query-string');
 
 function CollectionDetails() {
+  const { user } = useSelector((state) => state);
   const defaultFilter = {
     searchByName: "",
     status: "",
@@ -248,22 +253,30 @@ function CollectionDetails() {
     
   }
 
+  const options = [
+    { value: 'Fake collection or possible scam', label: 'Fake collection or possible scam' },
+    { value: 'Explicit and sensitive content', label: 'Explicit and sensitive content' },
+    { value: 'Might be stolen', label: 'Might be stolen' }
+  ]
+
   const sendReport = async () => {
-    alert("hello")
-    // let report = {
-    //   contentId: id,
-    //   addedBy: loggedInUser?._id,
-    //   reason: `${reason}`,
-    // };
-    // const reportObj = queryString.stringify(report);
-    // await addNftReport(reportObj, (response) => {
-    //   if (response.success) {
-    //     toast.success(response.message);
-    //   } else {
-    //     toast.error("This Nft is already reported");
-    //   }
-    //   setOpenReportModal(false);
-    // });
+    if (reason.value !== undefined){
+      let report = {
+        collectionId: _id,
+        addedBy: user?.loggedInUser?._id,
+        reason: `${reason.value}`
+      };
+      const reportObj = queryString.stringify(report);
+      await addCollectionReport(reportObj, (response) => {
+        if (response.success) {
+          toast.success(response.message);
+        } else {
+          toast.error(response.message);
+        }
+      });
+    } else {
+      toast.error("Please select a reason")
+    }
   };
 
   
@@ -447,20 +460,11 @@ function CollectionDetails() {
               </div>
               <div className="singlerowmodal">
                 <h3 className="reason-text"> Reason</h3>
-                <select
-                  className="select-box"
-                  onChange={(e) => setReason(e.target.value)}
-                >
-                  <option>Select reason</option>
-                  <option value="Fake collection or possible scam">
-                    Fake collection or possible scam
-                  </option>
-                  <option value="Explicit and sensitive content">
-                    Explicit and sensitive content
-                  </option>
-                  <option value="Might be stolen">Might be stolen</option>
-                  <option value="Other">Other</option>
-                </select>
+                <Select
+                  onChange={setReason}
+                  options={options}
+                  isSearchable
+                />
               </div>
               <button
                 className="btn btn-primary report-btn"
