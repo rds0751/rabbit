@@ -93,11 +93,9 @@ class Index extends BaseComponent {
 
    if(data?.blockchain === "Polygon"){
    contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS_POLYGON
-   data.contractAddress=contractAddress;
  }
    else if(data?.blockchain === "Ethereum"){
    contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS
-   data.contractAddress=contractAddress;
    }
     
     // if (!data || Object.keys(data).length < 1 || !data.nftFile){
@@ -140,7 +138,7 @@ class Index extends BaseComponent {
           tokenURI: data.ipfsUrl,
           price: data.price,
           tokenId,
-          contractAddress: data.contractAddress,
+          contractAddress: contractAddress,
           blockchain:data?.blockchain
         })
       );

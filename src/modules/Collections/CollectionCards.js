@@ -190,12 +190,12 @@ function Collections_tile() {
     fetchData();
   }, [filterData]);
 
-  const handleFilter = (e) => {
+  const handleCategory = (e) => {
     //const { name, value } = e.target;
     setFilterData({ ...filterData, 'categoryId': e });
   };
 
-  const handlefilter = (e) => {
+  const handleSort = (e) => {
     //const { name, value } = e.target;
     setFilterData({ ...filterData, 'sort': e });
   };
@@ -276,7 +276,7 @@ function Collections_tile() {
               <CustomSelect
                 name="categoryId"
                 id="sale"
-                onChange={(e) => handleFilter(e)}
+                onChange={(e) => handleCategory(e)}
                 value={filterData.categoryName}
                 defaultValue=""
               >
@@ -309,15 +309,15 @@ function Collections_tile() {
               <CustomSelect
                 name="sort"
                 id="sale"
-                onChange={(e) => handlefilter(e)}
+                onChange={(e) => handleSort(e)}
                 value={filterData.sort}
                 defaultValue=""
               >
-                <StyledOption value="" hidden>Sort By All</StyledOption>
+                <StyledOption value="" hidden>Sort by</StyledOption>
                 <StyledOption value="" >All</StyledOption>
                 <StyledOption value="-1">Recently added</StyledOption>
-                <StyledOption value="3">Items low to high</StyledOption>
-                <StyledOption value="2">Items high to low</StyledOption>
+                <StyledOption value="3">Items: Low to High</StyledOption>
+                <StyledOption value="2">Items: High to Low</StyledOption>
               </CustomSelect>
             </div>
           </div>

@@ -83,6 +83,7 @@ function CreateSingleNFT(props) {
   const [nameError, SetNameError] = useState("");
   const [fileError, setFileError] = useState("");
   const [blockchainError, setBlockChainError] = useState("");
+  const [collectionError, setCollectionError] = useState("");
   // const { userDetails, loggedInUser, walletAddress } = user;
 
   if (loggedInUser) {
@@ -273,17 +274,43 @@ function CreateSingleNFT(props) {
     if (nftPrice.length == 0) {
       setError("( price is required)");
       return false;
-    } else if (nftPrice < 0.004 || nftPrice == 0) {
+    } else if (collectionBlockchain==="Ethereum" && nftPrice < 0.004) {
       setError(
         "( Minimum listing price for an NFT should be more than 0.004 ETH )"
       );
       return false;
-    } else if (nftPrice > 1000000000) {
+    } 
+    else if (collectionBlockchain==="Polygon" && nftPrice < 11.71) {
+      setError(
+        "( Minimum listing price for an NFT should be more than 11.71 MATIC )"
+      );
+      return false;
+    }
+    else if (collectionBlockchain==="Binance" && nftPrice < 0.027) {
+      setError(
+        "( Minimum listing price for an NFT should be more than 0.027 BNB )"
+      );
+      return false;
+    }
+    else if (collectionBlockchain=== "Ethereum" && nftPrice > 1000000000) {
       setError(
         "( Maximum listing price for an NFT should be less than 1,000,000,000 ETH )"
       );
       return false;
-    } else setError("");
+    }
+    else if (collectionBlockchain === "Polygon" && nftPrice > 2929880265000) {
+      setError(
+        "( Maximum listing price for an NFT should be less than 2,929,880,265,000 MATIC )"
+      );
+      return false;
+    }
+    else if (collectionBlockchain=== "Binance" && nftPrice > 6841316000) {
+      setError(
+        "( Maximum listing price for an NFT should be less than 6,841,316,000 BNB )"
+      );
+      return false;
+    }
+     else setError("");
     return true;
   };
 
@@ -336,6 +363,17 @@ function CreateSingleNFT(props) {
     }
   }
 
+  function currencyValue(value) {
+    switch (value) {
+      case "Ethereum":
+        return "Eth";
+      case "Polygon":
+        return "MATIC";
+      case "Binance":
+        return "BNB";
+    }
+  }
+
   const handleSubmit = async (e) => {
     var priceValue = price.current;
 
@@ -356,7 +394,6 @@ function CreateSingleNFT(props) {
     let nftDescriptionValidation = descriptionValidation(description.current);
     let nftFileValidation = fileValidation();
     let nftBlockchain = blockchainValidation(blockchain.current);
-
     if (
       nftNameValidation &&
       nftPriceValidation &&
@@ -372,7 +409,7 @@ function CreateSingleNFT(props) {
           compressedURL: compressedUrl,
           nftName: name.current,
           price: price.current,
-          currency: selectedOption?.value,
+          currency: currencyValue(collectionBlockchain),
           description: description.current,
           blockchain: blockchain.current,
           createdBy: loggedInUser._id,
@@ -681,6 +718,7 @@ function CreateSingleNFT(props) {
                 </div>
                 <select
                   onChange={(e) => {
+                   
                     const addressId = e.target.value.split(",");
                     addressId[2] =
                       addressId[2] === undefined
@@ -690,6 +728,9 @@ function CreateSingleNFT(props) {
                     setContractAddress(addressId[1]);
                     setCollectionName(addressId[2]);
                     setCollectionBlockchain(addressId[3]);
+                    console.log(addressId[1], "<<<BlockchainOption");
+
+                 
                   }}
                   className="form-control-1 category-select"
                 >
@@ -713,6 +754,7 @@ function CreateSingleNFT(props) {
                     </option>
                   ))}
                 </select>
+                {collectionError}
               </div>
 
               <div className="mb-4" ref={myRef}>
@@ -731,12 +773,18 @@ function CreateSingleNFT(props) {
                     placeholder="Select Blockchain"
                     value={
                       collectionBlockchain === "Ethereum"
-                        ? blockchainOption[0]
+                        ? blockchainOption.filter((ele) => {
+                            return ele.value === "ETH";
+                          })
                         : collectionBlockchain === "Polygon"
-                          ? blockchainOption[1]
-                          : collectionBlockchain === "Binance"
-                            ? blockchainOption[3]
-                            : selectedOption
+                        ? blockchainOption.filter((ele) => {
+                            return ele.value === "MATIC";
+                          })
+                        : collectionBlockchain === "Binance"
+                        ? blockchainOption.filter((ele) => {
+                            return ele.value === "BNB";
+                          })
+                        : selectedOption
                     } //when user select a option from the list
                     isDisabled={
                       collectionName === "Anafto Collection" ? false : true
