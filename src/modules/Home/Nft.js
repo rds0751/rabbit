@@ -20,6 +20,8 @@ import OptionUnstyled, {
 } from "@mui/base/OptionUnstyled";
 import PopperUnstyled from "@mui/base/PopperUnstyled";
 import { styled } from "@mui/system";
+import Select from "react-select";
+
 const blue = {
   100: "#DAECFF",
   200: "#99CCF3",
@@ -146,6 +148,13 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
   return <SelectUnstyled {...props} ref={ref} components={components} />;
 });
 
+const options = [
+  { value: "-1", label: "Recently added" },
+  { value: "3", label: "Price: Low to High" },
+  { value: "2", label: "Price: High to Low" },
+  { value: "1", label: "Oldest" },
+];
+
 function NftPage(props) {
   const { user } = useSelector((state) => state);
   const { loggedInUser } = user;
@@ -166,7 +175,7 @@ function NftPage(props) {
 
   useEffect(() => {
     if (user?.loggedInUser !== null) {
-      setFilterReq({...filterReq, userId: loggedInUser?._id})
+      setFilterReq({ ...filterReq, userId: loggedInUser?._id });
     }
   }, [loggedInUser]);
 
@@ -305,22 +314,32 @@ function NftPage(props) {
               </div>
             </div>
           </div>
-          <div className="mobilenftTilePageThirdSelect dropdown price-range-dropdown">
-            <CustomSelect
+          {/* <div className="mobilenftTilePageThirdSelect"> */}
+          <Select
+            className="select-element"
+            onChange={(e) => handleSort(e.value)}
+            options={options}
+            placeholder="Sort by"
+            theme={(theme) => ({
+              ...theme,
+              colors: {
+                ...theme.colors,
+                neutral50: "#191919", // Placeholder color
+              },
+            })}
+          />
+          {/* <CustomSelect
               name="sort"
               id="sale"
               onChange={(e) => handleSort(e)}
               value={filterReq.sort}
               defaultValue="all"
             >
-              <StyledOption value="-1" hidden>
-                Sort By
-              </StyledOption>
-              {/* <StyledOption value="all">All</StyledOption> */}
+              <StyledOption value="-1" hidden>Sort By</StyledOption>
               <StyledOption value="1">Ascending Order</StyledOption>
               <StyledOption value="-1">Descending Order</StyledOption>
-            </CustomSelect>
-          </div>
+            </CustomSelect> */}
+          {/* </div> */}
         </div>
         <div
           className="nftTileContainer row   ntf_row"
