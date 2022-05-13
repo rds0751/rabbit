@@ -235,7 +235,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
             const [blockchainError, blockchainRes] = await Utils.parseResponse(
                 BlockchainService.putOnSaleNft({
                     tokenId: this.state.responseData?.tokenId,
-                    contractAddress: this.state?.responseData?.contractAddress
+                    contractAddress: contractAddress,
                 })
             );
             console.log("blockchainEsssssrror=sellNowNft=", blockchainError);
