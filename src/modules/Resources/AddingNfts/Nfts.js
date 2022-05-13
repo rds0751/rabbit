@@ -4,6 +4,8 @@ import NftsItem from "./NftsItem";
 import { Link } from "react-router-dom";
 import "../../../assets/styles/buying.css"
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { fetchPalletsColor } from "../../../utility/global";
 
 const MainContainer = styled.div`
   display: flex;
@@ -127,6 +129,9 @@ const Question = styled.h1`
 const Nfts = (props) => {
   const [query ,setQuery]=useState("")
   const navigate=useNavigate();
+
+  const appearance = useSelector(state => state.customize.appearance);
+
   const BuyList = [
     {
       id: 0,
@@ -159,8 +164,9 @@ const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(
             </Link>
           </li>
           <li
-            className="breadcrumb-item active text-primary"
+            className="breadcrumb-item active"
             aria-current="page"
+            style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}}
           >
             Adding Nft
           </li>

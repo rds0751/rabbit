@@ -11,6 +11,8 @@ import NftCardsHome from "../../common/components/NftCardsHome";
 import dropdown from "../../assets/images/dropdown.svg";
 import { Button } from "react-bootstrap";
 import NoItem from "../../assets/images/Noitems.svg";
+
+import {fetchPalletsColor} from "../../utility/global"
 // MUI select code
 import SelectUnstyled, {
   selectUnstyledClasses,
@@ -148,6 +150,8 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
 
 function NftPage(props) {
   const { user } = useSelector((state) => state);
+  const appearance = useSelector(state => state.customize.appearance);
+
   const { loggedInUser } = user;
   const [filterReq, setFilterReq] = useState({
     minPrice: "",
@@ -222,10 +226,27 @@ function NftPage(props) {
     setVisibleBlogs((prevVisibleBlogs) => prevVisibleBlogs + 4);
   };
 
+  const handleLoadOut = (e, type=false) => {
+    const button = e.target;
+
+    button.style.color = fetchPalletsColor(appearance.colorPalette);
+
+    if(type) button.style.background = '#ffffff'
+    else button.style.background = '#edf2fd 0% 0% no-repeat padding-box'
+  }
+
+  const handleLoadHover = (e) => {
+    const button = e.target;
+
+    button.style.color = "#ffffff";
+    button.style.background = fetchPalletsColor(appearance.colorPalette);
+  }
+  
+
   return (
     <>
       <div className="ntf_div">
-        <NftToggle toggleNft={toggleNft} />
+        <NftToggle toggleNft={toggleNft} appearance={appearance} />
         <div className="lower__homepage" style={{ width: "100%" }}>
           <div
             id="filters filter-large"
@@ -288,6 +309,8 @@ function NftPage(props) {
                         type="submit"
                         onClick={(e) => clearPriceFilter(e)}
                         variant="outline-primary"
+                        onMouseOver={(e)=>handleLoadHover(e)} onMouseOut={(e)=>handleLoadOut(e, true)}
+                        style={{color: `${fetchPalletsColor(appearance.colorPalette)}`, border: `1px solid ${fetchPalletsColor(appearance.colorPalette)}`}}
                       >
                         Clear
                       </Button>
@@ -296,6 +319,8 @@ function NftPage(props) {
                       <Button
                         onClick={(e) => handlePriceFilter(e)}
                         variant="outline-primary"
+                        onMouseOver={(e)=>handleLoadHover(e)} onMouseOut={(e)=>handleLoadOut(e, true)}
+                        style={{color: `${fetchPalletsColor(appearance.colorPalette)}`, border: `1px solid ${fetchPalletsColor(appearance.colorPalette)}`}}
                       >
                         Apply
                       </Button>
@@ -343,7 +368,7 @@ function NftPage(props) {
             nfts.slice(0, visibleBlogs).map((nft) => {
               return (
                 <>
-                  <NftCardsHome nft={nft} />
+                  <NftCardsHome nft={nft} appearance={appearance} />
                 </>
               );
             })}
@@ -356,8 +381,8 @@ function NftPage(props) {
               ""
             )
           ) : (
-            <div style={{ textAlignLast: "center" }}>
-              <button className="load-more" onClick={loadMoreHandler}>
+            <div style={{ textAlignLast: "center"}}>
+              <button onMouseOver={(e)=>handleLoadHover(e)} onMouseOut={(e)=>handleLoadOut(e)} style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}} className="load-more" onClick={loadMoreHandler}>
                 Load More
               </button>
             </div>

@@ -3,6 +3,8 @@ import styled from "styled-components";
 import BuyItem from "./BuyItem";
 import { Link, useNavigate } from "react-router-dom";
 import "../../../assets/styles/buying.css";
+import { useSelector } from "react-redux";
+import { fetchPalletsColor } from "../../../utility/global";
 
 
 const MainContainer = styled.div`
@@ -127,6 +129,9 @@ const Question = styled.h1`
 const Buy = (props) => {
   const [query ,setQuery]=useState("")
   const navigate=useNavigate();
+
+  const appearance = useSelector(state => state.customize.appearance);
+
   const BuyList = [
     {
       id: 0,
@@ -166,8 +171,9 @@ const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(
             </Link>
           </li>
           <li
-            className="breadcrumb-item active text-primary"
+            className="breadcrumb-item active"
             aria-current="page"
+            style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}}
           >
             Buying
           </li>

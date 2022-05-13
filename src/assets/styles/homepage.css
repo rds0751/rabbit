@@ -598,3 +598,7 @@ margin-left: 10px;
   transition: transform .2s;
 }
 
+.padding-0{
+  padding: 0 !important; 
+}
+

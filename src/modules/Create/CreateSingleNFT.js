@@ -36,11 +36,15 @@ import { getTenantData } from "../../services/clientConfigMicroService";
 import Ethereum from "../../assets/images/ether.svg";
 import Polygon from "../../assets/images/ploygon.svg";
 import Binance from "../../assets/images/binance.svg";
+import { fetchPalletsColor } from "../../utility/global";
 
 // import "../../assets/styles/Leader.css"
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 const Button = styled.button``;
 function CreateSingleNFT(props) {
+
+  const customize = useSelector(state => state.customize);
+
   const [collectionData, setCollectionData] = useState([]);
   const [selectFile, setSelectFile] = useState("");
   const [collectionId, setCollectionId] = useState("");
@@ -564,20 +568,34 @@ function CreateSingleNFT(props) {
 
                   {!isloader ? (
                     <div className="draganddropboxinnerdiv">
-                      <img
-                        src={cdnUrl != "" ? cdnUrl : Image}
-                        className="nft-image"
-                        style={
-                          {
-                            // maxWidth: "100px",
-                            // width: "70%",
-                            // marginTop: "3em",
-                          }
-                        }
-                      />
+                      {
+                        cdnUrl === "" ?
+                          <svg xmlns="http://www.w3.org/2000/svg" width="110" height="110" viewBox="0 0 110 110">
+                            <g id="image" transform="translate(-372 -618)">
+                              <rect id="Rectangle_271" data-name="Rectangle 271" width="110" height="110" transform="translate(372 618)" fill="none" />
+                              <g id="Icon_feather-image" data-name="Icon feather-image" transform="translate(380 626)">
+                                <path id="Path_34" data-name="Path 34" d="M15.053,4.5H88.926A10.553,10.553,0,0,1,99.479,15.053V88.926A10.553,10.553,0,0,1,88.926,99.479H15.053A10.553,10.553,0,0,1,4.5,88.926V15.053A10.553,10.553,0,0,1,15.053,4.5Z" transform="translate(-4.5 -4.5)" fill="none" stroke={fetchPalletsColor(customize.appearance.colorPalette)} stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                                <path id="Path_35" data-name="Path 35" d="M26.33,18.415A7.915,7.915,0,1,1,18.415,10.5,7.915,7.915,0,0,1,26.33,18.415Z" transform="translate(10.607 10.607)" fill="none" stroke={fetchPalletsColor(customize.appearance.colorPalette)} stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                                <path id="Path_36" data-name="Path 36" d="M91.926,41.383,65.543,15,7.5,73.043" transform="translate(3.053 21.936)" fill="none" stroke={fetchPalletsColor(customize.appearance.colorPalette)} stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                              </g>
+                            </g>
+                          </svg>
+                          : <img
+                            src={cdnUrl}
+                            className="nft-image"
+                            style={
+                              {
+                                // maxWidth: "100px",
+                                // width: "70%",
+                                // marginTop: "3em",
+                              }
+                            }
+                          />
+                      }
+
                       <span className="draganddropboxinnerdivtextspan">
                         Drag and Drop or
-                        <span className="draganddropboxinnerdivtextspanbrowse">
+                        <span className="draganddropboxinnerdivtextspanbrowse" style={{color: `${fetchPalletsColor(customize.appearance.colorPalette)}`}}>
                           {" "}
                           Browse
                         </span>
@@ -651,8 +669,10 @@ function CreateSingleNFT(props) {
                       state={{
                         data: true,
                       }}
+
+                      style={{textDecoration: 'none'}}
                     >
-                      <span className="color36 font-16 poppins-normal create-text">
+                      <span className="color36 font-16 poppins-normal create-text" style={{color: `${fetchPalletsColor(customize.appearance.colorPalette)}`}}>
                         {" "}
                         Create
                       </span>
@@ -713,10 +733,10 @@ function CreateSingleNFT(props) {
                       collectionBlockchain === "Ethereum"
                         ? blockchainOption[0]
                         : collectionBlockchain === "Polygon"
-                        ? blockchainOption[1]
-                        : collectionBlockchain === "Binance"
-                        ? blockchainOption[3]
-                        : selectedOption
+                          ? blockchainOption[1]
+                          : collectionBlockchain === "Binance"
+                            ? blockchainOption[3]
+                            : selectedOption
                     } //when user select a option from the list
                     isDisabled={
                       collectionName === "Anafto Collection" ? false : true
@@ -833,8 +853,8 @@ function CreateSingleNFT(props) {
               <div className="input-name">
                 <label htmlFor="email" className=" input-label">
                   Royalty{" "}
-                  <span style={{ color: "blue", fontWeight: "bold" }}>
-                    ( Coming Soon){" "}
+                  <span style={{ color: `${fetchPalletsColor(customize.appearance.colorPalette)}`, fontWeight: "bold" }}>
+                    ( Coming Soon ){" "}
                   </span>
                 </label>
                 <p className="headingRoyality">
@@ -870,9 +890,9 @@ function CreateSingleNFT(props) {
               <button
                 type="submit"
                 onClick={handleSubmit}
-                className="submit-button"
-                style={{ opacity: !enabled ? 0.6 : 1 }}
+                className="submit-button"                
                 disabled={!enabled}
+                style={{opacity: !enabled ? 0.6 : 1, backgroundColor: `${fetchPalletsColor(customize.appearance.colorPalette)}`}}
               >
                 Create
               </button>

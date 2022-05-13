@@ -27,10 +27,14 @@ import { getCategories } from "../../services/clientConfigMicroService";
 import Select from 'react-select';
 import $ from 'jquery';
 import { getTenantData } from "../../services/clientConfigMicroService";
+import { fetchPalletsColor } from "../../utility/global";
 
 const Button = styled.button``;
 
 function CreateNftCollections(props) {
+
+  const customize = useSelector(state => state.customize);
+
   const navigate = useNavigate();
   const { user } = useSelector((state) => state);
   const [logoCdn, setlogoCdn] = useState("");
@@ -463,6 +467,7 @@ function CreateNftCollections(props) {
             setbannerIpfs={setlogoipfs}
             compressedUrl={compressedLogo}
             setCompressedUrl={setCompressedLogo}
+            appearance={customize.appearance}
           />
         </div>
         <div>
@@ -476,6 +481,7 @@ function CreateNftCollections(props) {
             setbannerIpfs={setbannerIpfs}
              compressedUrl={compressedBanner}
              setCompressedUrl={setcompressedBanner}
+             appearance={customize.appearance}
           />
 
           {/* ----------------------------- */}
@@ -602,7 +608,7 @@ function CreateNftCollections(props) {
               disabled={//checkReqField
                 !enabled}
               className="submit-button"
-              style={{ opacity: enabled ? "1" : "0.5" }}
+              style={{ opacity: enabled ? "1" : "0.5", background: `${fetchPalletsColor(customize.appearance.colorPalette)}`}}
             >
               Create
             </button>

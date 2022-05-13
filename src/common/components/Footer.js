@@ -69,6 +69,19 @@ function Footer() {
     tempDiv.style.color = "#818181"
   }
 
+  const handleRedirect = (url) => {    
+
+    try{
+      let urlObj = new URL(url);
+
+      window.open(url)
+    }
+    catch(error){
+      window.open( url.replace('www.','http://') );
+    }
+
+  }
+
   return (
     <>
       <div
@@ -88,7 +101,7 @@ function Footer() {
               {
                 customize.socailMedia.length > 0 ?
                   customize.socailMedia.map((item, index) => (
-                    <a key={index} href={item.url} target="_blank" className="footerAnchor">
+                    <a onClick={()=>handleRedirect(item.url)} key={index} target="_blank" className="footerAnchor">
                       <i className={`fa-brands fa-${item.name.toLowerCase()} Icon`} onMouseOut={handleMouseOut} onMouseOver={handleMouseOver} />
                     </a>
                   ))

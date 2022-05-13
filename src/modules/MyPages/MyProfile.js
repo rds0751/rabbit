@@ -37,6 +37,7 @@ import NoItem from "../../assets/images/Noitems.svg";
 import Snackbar from "@mui/material/Snackbar";
 import LikedNfts from "./LikedNfts";
 import { ShimmerCircularImage, ShimmerThumbnail } from "react-shimmer-effects";
+import { fetchPalletsColor } from "../../utility/global";
 
 const CustomSnack = styled(Snackbar)`
   // @media only screen and (min-width:0px) and  (max-width:599px){
@@ -74,6 +75,8 @@ const CustomSnack = styled(Snackbar)`
 
 function MyProfile() {
   let { user } = useSelector((state) => state);
+  const appearance = useSelector(state => state.customize.appearance)
+
   let { loggedInUser } = user;
 
   const [userId, setUserId] = useState(
@@ -414,7 +417,7 @@ function MyProfile() {
           />
           <img className="pencilicon" width="16px" height="16px" src={pencil} />
           <Link to="/edit-profile" className="textdecornone">
-            <button className="profileeditbutton">Edit Profile</button>
+            <button style={{color: `${fetchPalletsColor(appearance.colorPalette)}`, border: `1px solid ${fetchPalletsColor(appearance.colorPalette)}`}} className="profileeditbutton">Edit Profile</button>
           </Link>
         </div>
         <Link to="/edit-profile" className="editTextAnchor">
@@ -582,7 +585,7 @@ function MyProfile() {
                   {Nfts.map((curElem) => {
                     return (
                       <>
-                        <NftCardHome nft={curElem} />
+                        <NftCardHome nft={curElem} appearance={appearance} />
                       </>
                     );
                   })}

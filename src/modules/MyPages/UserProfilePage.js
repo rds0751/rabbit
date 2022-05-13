@@ -39,6 +39,9 @@ import styled from "styled-components";
 import { ShimmerCircularImage, ShimmerThumbnail } from "react-shimmer-effects";
 function UserProfilePage() {
   let { user } = useSelector((state) => state);
+
+  const appearance = useSelector(state=> state.customize.appearance)
+
   let { loggedInUser } = user;
 
   // if(loggedInUser){ localStorage.setItem('userId', loggedInUser._id); }
@@ -460,7 +463,7 @@ const onBannerLoad=()=>{
               } = curElem;
               return (
                 <>
-                  <NftCardHome nft={curElem} />
+                  <NftCardHome nft={curElem} appearance={appearance} />
                   {/* <div className="col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
                     <img
                       className="nftTileEachImage"
