@@ -4,6 +4,8 @@ import CollectionItem from "./CollectionItem";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import "../../../assets/styles/buying.css"
 import { post } from "jquery";
+import { fetchPalletsColor } from "../../../utility/global";
+import { useSelector } from "react-redux";
 
 const MainContainer = styled.div`
   display: flex;
@@ -127,6 +129,9 @@ const Question = styled.h1`
 const CreateCollection = (props) => {
   const [query ,setQuery]=useState("")
   const navigate=useNavigate();
+
+  const appearance = useSelector(state => state.customize.appearance);
+
   const BuyList = [
     {
       id: 0,
@@ -166,8 +171,9 @@ const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(
             </Link>
           </li>
           <li
-            className="breadcrumb-item active text-primary"
+            className="breadcrumb-item active"
             aria-current="page"
+            style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}}
           >
             Create collection
           </li>
