@@ -30,13 +30,13 @@ margin-top:26.76px;
 `;
 
 
-function pageNotFound() {
+function PageNotFound() {
   return(
     <MainDiv>
-        <img src={NoPageFound}/> 
+        <img src={NoPageFound} alt="noPageFound"/> 
         <Text>Oops no page found</Text>
     </MainDiv>
   )
 }
 
-export default pageNotFound;
+export default PageNotFound;
