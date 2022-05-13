@@ -331,6 +331,16 @@ function CreateSingleNFT(props) {
         return "";
     }
   }
+  function currencyValue(value){
+    switch (value) {
+      case "Ethereum":
+        return "Eth";
+      case "Polygon":
+        return "MATIC";
+      case "Binance":
+        return "BNB";
+    }
+  }
 
   const handleSubmit = async (e) => {
     var priceValue = price.current;
@@ -346,12 +356,15 @@ function CreateSingleNFT(props) {
     if (collectionName === "Anafto Collection")
       blockchain.current = blockchainValue(selectedOption?.value);
     else blockchain.current = blockchainValue(collectionBlockchain);
+    console.log("blockchainCurrent",collectionBlockchain,selectedOption?.value)
 
     let nftNameValidation = nameValidation(name.current);
     let nftPriceValidation = priceValidation(price.current);
     let nftDescriptionValidation = descriptionValidation(description.current);
     let nftFileValidation = fileValidation();
     let nftBlockchain = blockchainValidation(blockchain.current);
+
+    console.log("")
 
     if (
       nftNameValidation &&
@@ -368,7 +381,7 @@ function CreateSingleNFT(props) {
           compressedURL: compressedUrl,
           nftName: name.current,
           price: price.current,
-          currency: selectedOption?.value,
+          currency: currencyValue(collectionBlockchain),
           description: description.current,
           blockchain: blockchain.current,
           createdBy: loggedInUser._id,
