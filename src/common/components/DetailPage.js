@@ -93,7 +93,9 @@ export default function DetailPage(props) {
               >
                 Token Standard
               </td>
-              <td style={{ border: "none",paddingTop:"20px"  }}>-</td>
+              <td style={{ border: "none",paddingTop:"20px"  }}>
+                {nft?.tokenStandard ? nft?.tokenStandard :"ERC-721"}
+              </td>
             </tr>
             <tr sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
               <td

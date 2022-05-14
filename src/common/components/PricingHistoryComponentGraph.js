@@ -28,6 +28,8 @@ export default function PricingHistoryComponent(props) {
     );
   }, [reqObj]);
 
+  console.log(nftPricingHistory,"<<<NFTpricing History")
+
   let prices = nftPricingHistory.map((each) => each.totalVolume);
  let number = prices
 
@@ -124,7 +126,7 @@ console.log(integer, "iteger")
       <div className="">
         <div className="d-flex justify-content-around align-items-center py-4">
           <h5 className="avg-price">
-            Average Price: <span>{average}</span>
+            Average Price: <span>{average} {props.currency}</span>
           </h5>
           <select
             name="duration"
