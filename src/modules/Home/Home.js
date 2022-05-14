@@ -205,16 +205,14 @@ function Home() {
                           {nfts.length &&
                             nfts.slice(0, 4).map((nft) => {
                               // const { _id, cdnUrl, name, biddingDetails, salesInfo } = nft;
+                              const route = "/nft-information/" + nft._id;
 
                               return (
                                 <>
                                   {/* <img src={nft?.cdnUrl}></img> */}
                                   {console.log(nft, 'nft')}
                                   <Card>
-                                    <Link
-                                      to={"/nft-information/" + nft?._id}
-                                      style={{ textDecoration: "none" }}
-                                    >
+                                  <Link to={route} style={{ textDecoration: "none" }}>
                                       <div className="homePageContainer">
                                         <Card.Img
                                           variant="top"
