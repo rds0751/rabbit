@@ -159,14 +159,15 @@ const options = [
 
 function NftPage(props) {
   const { user } = useSelector((state) => state);
-  const appearance = useSelector(state => state.customize.appearance);
-
   const { loggedInUser } = user;
+  const appearance = useSelector(state => state.customize.appearance);
+  const [limit, setLimit] = useState(8)  
   const [filterReq, setFilterReq] = useState({
     minPrice: "",
     maxPrice: "",
     sort: "-1",
     userId: loggedInUser?._id,
+    limit: limit,
   });
   const [nfts, setNfts] = useState([]);
   const [toggleNft, setToggleNft] = useState(true);
@@ -198,7 +199,7 @@ function NftPage(props) {
       });
     }
     fetchData();
-  }, [filterReq]);
+  }, [filterReq, limit]);
 
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
@@ -232,7 +233,9 @@ function NftPage(props) {
 
   const loadMoreHandler = () => {
     <div className="spinnerloader">{isLoading && <Spinner />}</div>;
-    setVisibleBlogs((prevVisibleBlogs) => prevVisibleBlogs + 4);
+    // setVisibleBlogs((prevVisibleBlogs) => prevVisibleBlogs + 4);
+    setLimit((prevLimit) => prevLimit + 8);
+    setFilterReq({ ...filterReq, limit: limit });
   };
 
   const handleLoadOut = (e, type=false) => {
@@ -384,14 +387,19 @@ function NftPage(props) {
           </div>
 
           {nfts.length > 0 &&
-            nfts.slice(0, visibleBlogs).map((nft) => {
+            nfts.map((nft) => {
               return (
                 <>
                   <NftCardsHome nft={nft} appearance={appearance} />
                 </>
               );
             })}
-          {visibleBlogs >= nfts.length ? (
+            <div style={{textAlign: "center"}}>
+            <button onMouseOver={(e)=>handleLoadHover(e)} onMouseOut={(e)=>handleLoadOut(e)} style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}} className="load-more" onClick={loadMoreHandler}>
+              Load More
+            </button>
+            </div>
+          {/* {visibleBlogs >= nfts.length ? (
             visibleBlogs >= nfts.length && !isLoading ? (
               <div style={{ textAlignLast: "center" }}>
                 <button className="endButton"> End </button>
@@ -405,7 +413,7 @@ function NftPage(props) {
                 Load More
               </button>
             </div>
-          )}
+          )} */}
         </div>
       </div>
       <ToastContainer
