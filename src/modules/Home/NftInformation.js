@@ -1008,7 +1008,7 @@ export default function NftInformation(props) {
                     Offers
                   </li> */}
                 </ul>
-                {tab === 1 ? <PricingHistoryComponentGraph id={id} /> : ""}
+                {tab === 1 ? <PricingHistoryComponentGraph id={id}  currency={nft?.salesInfo?.currency}/> : ""}
                 {tab === 2 ? <ListingsTable id={id} /> : ""}
                 {tab === 3 ? <ListingsTable id={id} /> : ""}
                 {tab === 4 ? <DetailPage nft={nft} /> : ""}

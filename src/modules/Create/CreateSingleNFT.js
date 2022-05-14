@@ -310,8 +310,10 @@ function CreateSingleNFT(props) {
       );
       return false;
     }
-     else setError("");
+     else{ 
+    setError("");
     return true;
+  }
   };
 
   const descriptionValidation = (nftDes) => {
@@ -373,8 +375,7 @@ function CreateSingleNFT(props) {
         return "BNB";
     }
   }
-
-  const handleSubmit = async (e) => {
+   const handleSubmit = async (e) => {
     var priceValue = price.current;
 
     if (priceValue.toString().slice(0, 1) == ".") {
@@ -390,7 +391,7 @@ function CreateSingleNFT(props) {
     else blockchain.current = blockchainValue(collectionBlockchain);
 
     let nftNameValidation = nameValidation(name.current);
-    let nftPriceValidation = priceValidation(price.current);
+    let nftPriceValidation = priceValidation(price.current,selectedOption?.value);
     let nftDescriptionValidation = descriptionValidation(description.current);
     let nftFileValidation = fileValidation();
     let nftBlockchain = blockchainValidation(blockchain.current);
@@ -409,7 +410,7 @@ function CreateSingleNFT(props) {
           compressedURL: compressedUrl,
           nftName: name.current,
           price: price.current,
-          currency: currencyValue(collectionBlockchain),
+          currency: collectionName === "Anafto Collection" ? selectedOption?.value:currencyValue(collectionBlockchain),
           description: description.current,
           blockchain: blockchain.current,
           createdBy: loggedInUser._id,
@@ -727,7 +728,7 @@ function CreateSingleNFT(props) {
                     setCollectionId(addressId[0]);
                     setContractAddress(addressId[1]);
                     setCollectionName(addressId[2]);
-                    setCollectionBlockchain(addressId[3]);
+                    setCollectionBlockchain(addressId[3]); 
                     console.log(addressId[1], "<<<BlockchainOption");
 
                  
@@ -747,7 +748,7 @@ function CreateSingleNFT(props) {
                         item._id,
                         item.contractAddress,
                         item.name,
-                        item.blockchain,
+                        item.blockchain
                       ]}
                     >
                       {item?.name}
