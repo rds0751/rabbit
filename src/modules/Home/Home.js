@@ -199,13 +199,17 @@ function Home() {
                       items={1}
                     >
                       <div className="item">
-                        {/* {console.log("kkkkkkkkkkkkkkkkkkkkk",nfts)} */}
-
                         <div className="d-flex flex-wrap">
                           {nfts.length &&
                             nfts.slice(0, 4).map((nft) => {
                               // const { _id, cdnUrl, name, biddingDetails, salesInfo } = nft;
-                              const route = "/nft-information/" + nft._id;
+                              let route;
+                              if (nft.contentId != ""){
+                                route = "/nft-information/" + nft.contentId;
+                              } else {
+                                route = "/nft-information/" + nft._id;
+                              }
+                              
 
                               return (
                                 <>
