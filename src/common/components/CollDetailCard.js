@@ -109,7 +109,7 @@ function CollDetailCard({ nft }) {
               className="nftTileEachDetailsFirstContainerName"
               style={{
                 color: "#191919",
-                height: "20px",
+                // height: "20px",
                 overflow: "hidden",
               }}
             >
