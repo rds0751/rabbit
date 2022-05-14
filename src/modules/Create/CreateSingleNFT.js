@@ -36,11 +36,15 @@ import { getTenantData } from "../../services/clientConfigMicroService";
 import Ethereum from "../../assets/images/ether.svg";
 import Polygon from "../../assets/images/ploygon.svg";
 import Binance from "../../assets/images/binance.svg";
+import { fetchPalletsColor } from "../../utility/global";
 
 // import "../../assets/styles/Leader.css"
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 const Button = styled.button``;
 function CreateSingleNFT(props) {
+
+  const customize = useSelector(state => state.customize);
+
   const [collectionData, setCollectionData] = useState([]);
   const [selectFile, setSelectFile] = useState("");
   const [collectionId, setCollectionId] = useState("");
@@ -79,6 +83,7 @@ function CreateSingleNFT(props) {
   const [nameError, SetNameError] = useState("");
   const [fileError, setFileError] = useState("");
   const [blockchainError, setBlockChainError] = useState("");
+  const [collectionError, setCollectionError] = useState("");
   // const { userDetails, loggedInUser, walletAddress } = user;
 
   if (loggedInUser) {
@@ -269,18 +274,46 @@ function CreateSingleNFT(props) {
     if (nftPrice.length == 0) {
       setError("( price is required)");
       return false;
-    } else if (nftPrice < 0.004 || nftPrice == 0) {
+    } else if (collectionBlockchain==="Ethereum" && nftPrice < 0.004) {
       setError(
         "( Minimum listing price for an NFT should be more than 0.004 ETH )"
       );
       return false;
-    } else if (nftPrice > 1000000000) {
+    } 
+    else if (collectionBlockchain==="Polygon" && nftPrice < 11.71) {
+      setError(
+        "( Minimum listing price for an NFT should be more than 11.71 MATIC )"
+      );
+      return false;
+    }
+    else if (collectionBlockchain==="Binance" && nftPrice < 0.027) {
+      setError(
+        "( Minimum listing price for an NFT should be more than 0.027 BNB )"
+      );
+      return false;
+    }
+    else if (collectionBlockchain=== "Ethereum" && nftPrice > 1000000000) {
       setError(
         "( Maximum listing price for an NFT should be less than 1,000,000,000 ETH )"
       );
       return false;
-    } else setError("");
+    }
+    else if (collectionBlockchain === "Polygon" && nftPrice > 2929880265000) {
+      setError(
+        "( Maximum listing price for an NFT should be less than 2,929,880,265,000 MATIC )"
+      );
+      return false;
+    }
+    else if (collectionBlockchain=== "Binance" && nftPrice > 6841316000) {
+      setError(
+        "( Maximum listing price for an NFT should be less than 6,841,316,000 BNB )"
+      );
+      return false;
+    }
+     else{ 
+    setError("");
     return true;
+  }
   };
 
   const descriptionValidation = (nftDes) => {
@@ -331,7 +364,8 @@ function CreateSingleNFT(props) {
         return "";
     }
   }
-  function currencyValue(value){
+
+  function currencyValue(value) {
     switch (value) {
       case "Ethereum":
         return "Eth";
@@ -341,8 +375,7 @@ function CreateSingleNFT(props) {
         return "BNB";
     }
   }
-
-  const handleSubmit = async (e) => {
+   const handleSubmit = async (e) => {
     var priceValue = price.current;
 
     if (priceValue.toString().slice(0, 1) == ".") {
@@ -356,16 +389,12 @@ function CreateSingleNFT(props) {
     if (collectionName === "Anafto Collection")
       blockchain.current = blockchainValue(selectedOption?.value);
     else blockchain.current = blockchainValue(collectionBlockchain);
-    console.log("blockchainCurrent",collectionBlockchain,selectedOption?.value)
 
     let nftNameValidation = nameValidation(name.current);
-    let nftPriceValidation = priceValidation(price.current);
+    let nftPriceValidation = priceValidation(price.current,selectedOption?.value);
     let nftDescriptionValidation = descriptionValidation(description.current);
     let nftFileValidation = fileValidation();
     let nftBlockchain = blockchainValidation(blockchain.current);
-
-    console.log("")
-
     if (
       nftNameValidation &&
       nftPriceValidation &&
@@ -381,7 +410,7 @@ function CreateSingleNFT(props) {
           compressedURL: compressedUrl,
           nftName: name.current,
           price: price.current,
-          currency: currencyValue(collectionBlockchain),
+          currency: collectionName === "Anafto Collection" ? selectedOption?.value:currencyValue(collectionBlockchain),
           description: description.current,
           blockchain: blockchain.current,
           createdBy: loggedInUser._id,
@@ -577,20 +606,34 @@ function CreateSingleNFT(props) {
 
                   {!isloader ? (
                     <div className="draganddropboxinnerdiv">
-                      <img
-                        src={cdnUrl != "" ? cdnUrl : Image}
-                        className="nft-image"
-                        style={
-                          {
-                            // maxWidth: "100px",
-                            // width: "70%",
-                            // marginTop: "3em",
-                          }
-                        }
-                      />
+                      {
+                        cdnUrl === "" ?
+                          <svg xmlns="http://www.w3.org/2000/svg" width="110" height="110" viewBox="0 0 110 110">
+                            <g id="image" transform="translate(-372 -618)">
+                              <rect id="Rectangle_271" data-name="Rectangle 271" width="110" height="110" transform="translate(372 618)" fill="none" />
+                              <g id="Icon_feather-image" data-name="Icon feather-image" transform="translate(380 626)">
+                                <path id="Path_34" data-name="Path 34" d="M15.053,4.5H88.926A10.553,10.553,0,0,1,99.479,15.053V88.926A10.553,10.553,0,0,1,88.926,99.479H15.053A10.553,10.553,0,0,1,4.5,88.926V15.053A10.553,10.553,0,0,1,15.053,4.5Z" transform="translate(-4.5 -4.5)" fill="none" stroke={fetchPalletsColor(customize.appearance.colorPalette)} stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                                <path id="Path_35" data-name="Path 35" d="M26.33,18.415A7.915,7.915,0,1,1,18.415,10.5,7.915,7.915,0,0,1,26.33,18.415Z" transform="translate(10.607 10.607)" fill="none" stroke={fetchPalletsColor(customize.appearance.colorPalette)} stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                                <path id="Path_36" data-name="Path 36" d="M91.926,41.383,65.543,15,7.5,73.043" transform="translate(3.053 21.936)" fill="none" stroke={fetchPalletsColor(customize.appearance.colorPalette)} stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                              </g>
+                            </g>
+                          </svg>
+                          : <img
+                            src={cdnUrl}
+                            className="nft-image"
+                            style={
+                              {
+                                // maxWidth: "100px",
+                                // width: "70%",
+                                // marginTop: "3em",
+                              }
+                            }
+                          />
+                      }
+
                       <span className="draganddropboxinnerdivtextspan">
                         Drag and Drop or
-                        <span className="draganddropboxinnerdivtextspanbrowse">
+                        <span className="draganddropboxinnerdivtextspanbrowse" style={{color: `${fetchPalletsColor(customize.appearance.colorPalette)}`}}>
                           {" "}
                           Browse
                         </span>
@@ -664,8 +707,10 @@ function CreateSingleNFT(props) {
                       state={{
                         data: true,
                       }}
+
+                      style={{textDecoration: 'none'}}
                     >
-                      <span className="color36 font-16 poppins-normal create-text">
+                      <span className="color36 font-16 poppins-normal create-text" style={{color: `${fetchPalletsColor(customize.appearance.colorPalette)}`}}>
                         {" "}
                         Create
                       </span>
@@ -674,6 +719,7 @@ function CreateSingleNFT(props) {
                 </div>
                 <select
                   onChange={(e) => {
+                   
                     const addressId = e.target.value.split(",");
                     addressId[2] =
                       addressId[2] === undefined
@@ -682,7 +728,10 @@ function CreateSingleNFT(props) {
                     setCollectionId(addressId[0]);
                     setContractAddress(addressId[1]);
                     setCollectionName(addressId[2]);
-                    setCollectionBlockchain(addressId[3]);
+                    setCollectionBlockchain(addressId[3]); 
+                    console.log(addressId[1], "<<<BlockchainOption");
+
+                 
                   }}
                   className="form-control-1 category-select"
                 >
@@ -699,13 +748,14 @@ function CreateSingleNFT(props) {
                         item._id,
                         item.contractAddress,
                         item.name,
-                        item.blockchain,
+                        item.blockchain
                       ]}
                     >
                       {item?.name}
                     </option>
                   ))}
                 </select>
+                {collectionError}
               </div>
 
               <div className="mb-4" ref={myRef}>
@@ -724,11 +774,17 @@ function CreateSingleNFT(props) {
                     placeholder="Select Blockchain"
                     value={
                       collectionBlockchain === "Ethereum"
-                        ? blockchainOption[0]
+                        ? blockchainOption.filter((ele) => {
+                            return ele.value === "ETH";
+                          })
                         : collectionBlockchain === "Polygon"
-                        ? blockchainOption[1]
+                        ? blockchainOption.filter((ele) => {
+                            return ele.value === "MATIC";
+                          })
                         : collectionBlockchain === "Binance"
-                        ? blockchainOption[3]
+                        ? blockchainOption.filter((ele) => {
+                            return ele.value === "BNB";
+                          })
                         : selectedOption
                     } //when user select a option from the list
                     isDisabled={
@@ -846,8 +902,8 @@ function CreateSingleNFT(props) {
               <div className="input-name">
                 <label htmlFor="email" className=" input-label">
                   Royalty{" "}
-                  <span style={{ color: "blue", fontWeight: "bold" }}>
-                    ( Coming Soon){" "}
+                  <span style={{ color: `${fetchPalletsColor(customize.appearance.colorPalette)}`, fontWeight: "bold" }}>
+                    ( Coming Soon ){" "}
                   </span>
                 </label>
                 <p className="headingRoyality">
@@ -883,9 +939,9 @@ function CreateSingleNFT(props) {
               <button
                 type="submit"
                 onClick={handleSubmit}
-                className="submit-button"
-                style={{ opacity: !enabled ? 0.6 : 1 }}
+                className="submit-button"                
                 disabled={!enabled}
+                style={{opacity: !enabled ? 0.6 : 1, backgroundColor: `${fetchPalletsColor(customize.appearance.colorPalette)}`}}
               >
                 Create
               </button>

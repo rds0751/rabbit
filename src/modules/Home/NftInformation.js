@@ -105,6 +105,9 @@ const Option = styled.option`
 `;
 const queryString = require("query-string");
 export default function NftInformation(props) {
+
+  const appearance = useSelector(state => state.customize.appearance);
+
   const navigate = useNavigate();
   const [activeInActive, setActiveInActive] = useState("active");
   const { user } = useSelector((state) => state);
@@ -1005,7 +1008,7 @@ export default function NftInformation(props) {
                     Offers
                   </li> */}
                 </ul>
-                {tab === 1 ? <PricingHistoryComponentGraph id={id} /> : ""}
+                {tab === 1 ? <PricingHistoryComponentGraph id={id}  currency={nft?.salesInfo?.currency}/> : ""}
                 {tab === 2 ? <ListingsTable id={id} /> : ""}
                 {tab === 3 ? <ListingsTable id={id} /> : ""}
                 {tab === 4 ? <DetailPage nft={nft} /> : ""}
@@ -1032,7 +1035,7 @@ export default function NftInformation(props) {
                 
               return (
                 <>
-                  <NftCardsHome nft={nft} />
+                  <NftCardsHome nft={nft} appearance={appearance} />
                 
                 </>
               );

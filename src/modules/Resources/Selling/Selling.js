@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Link,useNavigate } from "react-router-dom";
 import SellItem from "./SellItem";
 import "../../../assets/styles/buying.css";
+import { useSelector } from 'react-redux';
+import { fetchPalletsColor } from '../../../utility/global';
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -119,6 +121,9 @@ const Question = styled.h1`
 export default function Selling() {
     const [query ,setQuery]=useState("")
     const navigate=useNavigate();
+
+    const appearance = useSelector(state => state.customize.appearance);
+
     const BuyList = [
       {
         id: 0,
@@ -158,8 +163,9 @@ export default function Selling() {
             </Link>
           </li>
           <li
-            className="breadcrumb-item active text-primary"
+            className="breadcrumb-item active"
             aria-current="page"
+            style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}}
           >
             Selling
           </li>

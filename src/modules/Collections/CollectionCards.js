@@ -21,6 +21,9 @@ import { styled } from '@mui/system';
 import Ethereum from "../../assets/images/ether.svg";
 import Polygon from "../../assets/images/ploygon.svg";
 import Binance from "../../assets/images/binance.svg";
+import { useSelector } from "react-redux";
+import { fetchPalletsColor } from "../../utility/global"
+
 const blue = {
   100: '#DAECFF',
   200: '#99CCF3',
@@ -149,6 +152,9 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
 
 const queryString = require('query-string');
 function Collections_tile() {
+
+  const appearance = useSelector(state => state.customize.appearance);
+
   const initialFilterData = {
     sort: "",
     categoryId: "",
@@ -184,12 +190,12 @@ function Collections_tile() {
     fetchData();
   }, [filterData]);
 
-  const handleFilter = (e) => {
+  const handleCategory = (e) => {
     //const { name, value } = e.target;
     setFilterData({ ...filterData, 'categoryId': e });
   };
 
-  const handlefilter = (e) => {
+  const handleSort = (e) => {
     //const { name, value } = e.target;
     setFilterData({ ...filterData, 'sort': e });
   };
@@ -214,23 +220,39 @@ function Collections_tile() {
     setVisibleBlogs(prevVisibleBlogs => prevVisibleBlogs + 4)
 
   }
-  const blockchainCheck=(blockchain)=>{
-    switch(blockchain){
+  const blockchainCheck = (blockchain) => {
+    switch (blockchain) {
       case 'Ethereum':
-      return <img className="currency-sign" src={Ethereum}></img>
+        return <img className="currency-sign" src={Ethereum}></img>
       case 'Polygon':
-      return <img  className="currency-sign" src={Polygon}></img>
+        return <img className="currency-sign" src={Polygon}></img>
       case 'Binance':
-      return <img className="currency-sign" src={Binance}></img>
+        return <img className="currency-sign" src={Binance}></img>
       default:
         return '';
     }
-    
+
   }
+
+  const handleLoadOut = (e) => {
+    const button = e.target;
+
+    button.style.color = fetchPalletsColor(appearance.colorPalette);
+    button.style.background = '#edf2fd 0% 0% no-repeat padding-box'
+  }
+
+  const handleLoadHover = (e) => {
+    const button = e.target;
+
+    button.style.color = "#ffffff";
+    button.style.background = fetchPalletsColor(appearance.colorPalette);
+  }
+
+
   return (
     <>
       <div className="ntf_div">
-        <NftToggle toggleNft={toggleNft} />
+        <NftToggle toggleNft={toggleNft} appearance={appearance} />
         {/* <Lower__homepage /> */}
         {/* <CollectionNftFilter /> */}
         {/* -------------Nft Filter */}
@@ -254,7 +276,7 @@ function Collections_tile() {
               <CustomSelect
                 name="categoryId"
                 id="sale"
-                onChange={(e) => handleFilter(e)}
+                onChange={(e) => handleCategory(e)}
                 value={filterData.categoryName}
                 defaultValue=""
               >
@@ -287,15 +309,15 @@ function Collections_tile() {
               <CustomSelect
                 name="sort"
                 id="sale"
-                onChange={(e) => handlefilter(e)}
+                onChange={(e) => handleSort(e)}
                 value={filterData.sort}
                 defaultValue=""
               >
-                <StyledOption value="" hidden>Sort By All</StyledOption>
+                <StyledOption value="" hidden>Sort by</StyledOption>
                 <StyledOption value="" >All</StyledOption>
                 <StyledOption value="-1">Recently added</StyledOption>
-                <StyledOption value="3">Items low to high</StyledOption>
-                <StyledOption value="2">Items high to low</StyledOption>
+                <StyledOption value="3">Items: Low to High</StyledOption>
+                <StyledOption value="2">Items: High to Low</StyledOption>
               </CustomSelect>
             </div>
           </div>
@@ -317,11 +339,11 @@ function Collections_tile() {
           {/* nfts.slice(0, visibleBlogs).map((nft) =>  */}
 
           {collections.slice(0, visibleBlogs).map((collection) => {
-            const { _id, imageUrl, name, nftCount,blockchain,compressedURL } = collection;
+            const { _id, imageUrl, name, nftCount, blockchain, compressedURL } = collection;
             const route = "/collection-details/" + _id;
             return (
               <div className="collectionCardEach col-md-6 col-lg-3 col-sm-12 mt-5 nft_card">
-               
+
                 <Link to={route}>
                   <div
                     className=" nft-card-radius collection-card border-radius pt-4 cardmob"
@@ -331,7 +353,7 @@ function Collections_tile() {
                     <div className="text-center">
                       <img
                         className="img-fluid border-radius collection-img-card-radius collection_imgmob"
-                        src={compressedURL?.length === 0 ? imageUrl: (!compressedURL ? imageUrl:compressedURL)}
+                        src={compressedURL?.length === 0 ? imageUrl : (!compressedURL ? imageUrl : compressedURL)}
                         alt=""
                         style={{
                           width: "100px",
@@ -341,7 +363,7 @@ function Collections_tile() {
                       />
                     </div>
                     <div className="text-center pt-3">
-                    <span>{blockchainCheck(blockchain)} </span>
+                      <span>{blockchainCheck(blockchain)} </span>
                       <p
                         className="collectionCardEachName text-center font-weight-900"
                         style={{ color: "#191919" }}
@@ -350,8 +372,7 @@ function Collections_tile() {
                       </p>
                       <p className="collectionCardEachTotalitems">
                         <span className=" font-14 text-dark">
-                          Total Items:
-                          <span className="text-primary">{nftCount}</span>
+                          Total Items: <span style={{ color: `${fetchPalletsColor(appearance.colorPalette)}` }}>{nftCount}</span>
                         </span>
                       </p>
                     </div>
@@ -369,7 +390,10 @@ function Collections_tile() {
           {
             visibleBlogs >= collections.length ? (visibleBlogs >= collections.length && !isLoading) ? <div style={{ textAlignLast: "center" }}><button className="endButton"> End </button></div> : "" :
               (
-                <div style={{ textAlignLast: "center" }}><button className="load-more" onClick={loadMoreHandler}>Load More</button></div>)
+                <div style={{ textAlignLast: "center" }}>
+                  <button onMouseOver={(e)=>handleLoadHover(e)} onMouseOut={(e)=>handleLoadOut(e)} style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}} className="load-more" onClick={loadMoreHandler}>Load More</button>
+                </div>
+              )
           }
         </div>
       </div>

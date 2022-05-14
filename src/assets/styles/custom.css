@@ -1313,3 +1313,13 @@ input[type="search"]::-webkit-search-cancel-button{
   background-color: lightgrey;
   display: inline-block; 
 }
+.select-element{
+  width: 260px;
+  height: 42px;
+  color: #191919;
+}
+@media only screen and (max-width:767px){
+  .select-element{
+    width:100%;
+  }
+}

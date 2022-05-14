@@ -38,6 +38,8 @@ import SelectUnstyled, { selectUnstyledClasses } from '@mui/base/SelectUnstyled'
 import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled'
 import PopperUnstyled from '@mui/base/PopperUnstyled'
 import { styled } from '@mui/system'
+import { useSelector } from 'react-redux';
+import { fetchPalletsColor, handleLoadHoverText, handleLoadOutText } from '../../utility/global';
 const blue = {
   100: '#DAECFF',
   200: '#99CCF3',
@@ -171,6 +173,9 @@ const queryString = require('query-string')
 //import { borderRadius } from "@mui/system";
 
 function LeaderBoard() {
+
+  const appearance = useSelector(state => state.customize.appearance);
+
   const [topNftSales, setTopNftSales] = useState([])
 
   const [topSellers, setTopSellers] = useState([])
@@ -463,13 +468,15 @@ function LeaderBoard() {
                                 <Link
                                   style={{ textDecoration: 'null' }}
                                   to={'/user-profile/' + buyer._id}
+                                  onMouseOver={(e)=>handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
+                                  onMouseOut={(e)=>handleLoadOutText(e, '#191919')}
                                 >
                                   {buyer?.userName}
                                 </Link>{' '}
                               </h2>
                             )}
 
-                            <p className="volumeData">
+                            <p className="volumeData" style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}}>
                               {result} ETH
                               {/* <span className="ethValue">({"$"})</span> */}
                             </p>
@@ -494,7 +501,10 @@ function LeaderBoard() {
               </div>
 
               <div className="card-footer view-more">
-                <Link className="view" to="/top-bidder">
+                <Link className="view" to="/top-bidder"
+                onMouseOver={(e)=>handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
+                onMouseOut={(e)=>handleLoadOutText(e, '#191919')}
+                >
                   {' '}
                   View More
                 </Link>
@@ -646,13 +656,16 @@ function LeaderBoard() {
                               </h2>
                             ) : (
                               <h2 className="sellerName">
-                                <Link to={'/user-profile/' + topSellers._id}>
+                                <Link to={'/user-profile/' + topSellers._id}
+                                  onMouseOver={(e)=>handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
+                                  onMouseOut={(e)=>handleLoadOutText(e, '#191919')}
+                                >
                                   {topSellers.userName}
                                 </Link>
                               </h2>
                             )}
 
-                            <p className="volumeData">
+                            <p className="volumeData" style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}}>
                               {result} ETH
                               {/* <span className="ethValue">({"$"})</span> */}
                             </p>
@@ -677,7 +690,10 @@ function LeaderBoard() {
               </div>
 
               <div className="card-footer view-more">
-                <Link className="view" to="/top-seller">
+                <Link className="view" to="/top-seller"
+                onMouseOver={(e)=>handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
+                onMouseOut={(e)=>handleLoadOutText(e, '#191919')}
+                >
                   {' '}
                   View More
                 </Link>
@@ -833,13 +849,15 @@ function LeaderBoard() {
                                   to={
                                     '/collection-details/' + collection[0]._id
                                   }
+                                  onMouseOver={(e)=>handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
+                                  onMouseOut={(e)=>handleLoadOutText(e, '#191919')}
                                 >
                                   {collection[0].name}
                                 </Link>
                               </h2>
                             )}
 
-                            <p className="volumeData">
+                            <p className="volumeData" style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}}>
                               {items} items
                               {/* <span className="ethValue">({"$"})</span> */}
                             </p>
@@ -864,7 +882,10 @@ function LeaderBoard() {
               </div>
 
               <div className="card-footer view-more">
-                <Link className="view" to="/top-collection">
+                <Link className="view" to="/top-collection"
+                onMouseOver={(e)=>handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
+                onMouseOut={(e)=>handleLoadOutText(e, '#191919')}
+                >
                   {' '}
                   View More
                 </Link>
@@ -1170,7 +1191,7 @@ function LeaderBoard() {
                                 : owner[0].wallet_address}
                           </span>
                           &nbsp;for
-                          <span className="ethCurrency">
+                          <span className="ethCurrency" style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}}>
                             &nbsp; {content.salesInfo.price}&nbsp;
                             {content.salesInfo.currency.toUpperCase()}
                           </span>
@@ -1183,7 +1204,7 @@ function LeaderBoard() {
                             marginTop: '3px',
                           }}
                         >
-                          <h6 className="value__k">
+                          <h6 className="value__k" style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}}>
                             {/* {daysLeft}{" "} */}
 
                             {likes.length}{" "}

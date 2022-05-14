@@ -36,7 +36,14 @@ import Anafto from "../../assets/images/ANAFTO.svg";
 import { WHITE_LABEL_TOKEN } from "../../reducers/Constants";
 import { Helmet } from "react-helmet";
 import { fetchPalletsColor } from "../../utility/global";
+import { padding } from "@mui/system";
 const queryString = require("query-string");
+
+
+const activeMarketplace = ['/nfts'];
+const activeLeaderboard = ['/leader-board'];
+const activeResource = ['/help-center', '/suggestion'];
+
 function Navbar() {
 
   const customize = useSelector(state=> state.customize);
@@ -383,6 +390,9 @@ function Navbar() {
     });
   }, [])
 
+  const navLink = {
+    borderBottom: `3px solid ${fetchPalletsColor(customize.appearance.colorPalette)}`
+  }
 
   return (
     <>
@@ -689,9 +699,9 @@ function Navbar() {
                         !location.pathname.includes("create-nft") &&
                         !location.pathname.includes("help-center") &&
                         !location.pathname.includes("suggestion")
-                        ? "nav-items li_underline marketplace"
+                        ? "nav-items marketplace"
                         : "nav-items marketplace"
-                    }
+                    }                   
                     onClick={closeWalletAndNoti}
                   >
                     <Link
@@ -705,6 +715,7 @@ function Navbar() {
                           ? "nav-link navlink_active"
                           : "nav-link"
                       }
+                      style={activeMarketplace.includes(location.pathname) ? navLink : {}}
                       aria-current="page"
                       to="/nfts"
                       onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}
@@ -715,7 +726,7 @@ function Navbar() {
                   <li
                     className={
                       location.pathname.includes("leader-board")
-                        ? "nav-items li_underline leaderboard"
+                        ? "nav-items leaderboard"
                         : "nav-items leaderboard"
                     }
                     onClick={closeWalletAndNoti}
@@ -728,6 +739,7 @@ function Navbar() {
                       }
                       exact
                       to="/leader-board"
+                      style={activeLeaderboard.includes(location.pathname) ? navLink : {}}
                       onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}
                     >
                       Leaderboard
@@ -737,15 +749,15 @@ function Navbar() {
                   <NavDropdown
                     onClick={closeWalletAndNoti}
                     title="Resource"
-                    id="navbarScrollingDropdown"
-                    style={{ padding: "0" }}
+                    id="navbarScrollingDropdown"                  
                     className={
                       location.pathname.includes("help-center") ||
                         location.pathname.includes("suggestion")
-                        ? "nav-items dropdown li_underline resource nav-link navlink_active resource"
-                        : "nav-items dropdown resource"
+                        ? "nav-items dropdown resource nav-link navlink_active resource padding-0"
+                        : "nav-items dropdown resource padding-0"
                     }
                     onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}
+                    style={activeResource.includes(location.pathname) ? navLink : {}}
                   >
                     <NavDropdown.Item onClick={() => navigate("/help-center")}>
                       Help Center

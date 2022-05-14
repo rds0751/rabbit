@@ -4,7 +4,12 @@ import { addSuggestion } from "../../services/contentMicroservice";
 import { ToastContainer } from "react-toastify";
 
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { fetchPalletsColor } from "../../utility/global";
 function Suggestion() {
+
+  const appearance = useSelector(state => state.customize.appearance);
+
   const [formData, setFormData] = useState({
     email: "",
     title: "",
@@ -104,6 +109,7 @@ function Suggestion() {
                   className="send-button"
                   style={{
                     opacity: checkButtonStatus ? 0.8 : 1,
+                    backgroundColor: `${fetchPalletsColor(appearance.colorPalette)}`
                   }}
                   disabled={checkButtonStatus}
                 >

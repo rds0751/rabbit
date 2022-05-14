@@ -24,3 +24,15 @@ export const fetchPalletsColor = (type) => {
 
     }
 }
+
+export const handleLoadOutText = (e, color="#366EEF") => {
+    const button = e.target;
+
+    button.style.color = color;    
+}
+
+export const handleLoadHoverText = (e, color="#366EEF") => {
+    const button = e.target;
+
+    button.style.color = color;
+}
