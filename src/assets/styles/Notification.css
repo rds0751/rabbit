@@ -627,7 +627,7 @@ height: 47px;
 
 .nav-link:focus,
 .nav-link:hover {
-  color: #366EEF !important;
+  color: #366EEF;
 }
 
 .nav-link.navlink_active {
@@ -648,7 +648,7 @@ height: 47px;
   /* z-index: 99; */
   padding-top: 0px;
   padding-bottom: 0px;
-  height: 70px;
+  height: auto;
   /* position: fixed; */
   top: 0;
   width: 100%;
@@ -1016,6 +1016,7 @@ height: 47px;
 }
 .dropdown-menu .dropdown-item{
   padding: 20px;
+  background: #ffffff;
 }
 .LeftNavBar{
   margin-left: 5.5%;
@@ -1212,7 +1213,7 @@ opacity: 1;
 }
 .allicon{
 display: flex;
-justify-content: space-between;
+justify-content: start;
 width: 87%;
 }
 .Icon{
@@ -1467,6 +1468,7 @@ display:none
 }
 .footerAnchor{
   color: #818181;
+  margin-right: 10px;
 }
 .mainContainer{
   padding-left: 0;

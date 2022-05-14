@@ -7,9 +7,14 @@ import instaIcon from "../../assets/images/insta.svg";
 import hoverInsta from "../../assets/images/hoverInsta.svg";
 import { toast } from "react-toastify";
 import HoverImage from "react-hover-image";
-import {version} from "../../version.js"
+import { version } from "../../version.js"
+import { useSelector } from "react-redux";
+import { fetchPalletsColor } from "../../utility/global"
 
 function Footer() {
+
+  const customize = useSelector(state => state.customize);
+
   let [email, setEmailError] = useState("");
   let [displayTimeout, setDisplayTimeout] = useState(false);
 
@@ -53,6 +58,30 @@ function Footer() {
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleMouseOver = (e) => {
+    let tempDiv = e.target;
+    tempDiv.style.color = fetchPalletsColor(customize.appearance.colorPalette)
+
+  }
+
+  const handleMouseOut = (e) => {
+    let tempDiv = e.target;
+    tempDiv.style.color = "#818181"
+  }
+
+  const handleRedirect = (url) => {    
+
+    try{
+      let urlObj = new URL(url);
+
+      window.open(url)
+    }
+    catch(error){
+      window.open( url.replace('www.','http://') );
+    }
+
+  }
+
   return (
     <>
       <div
@@ -69,94 +98,26 @@ function Footer() {
           <div className="footer-top">
             <p className="fs-18">Join our community</p>
             <div className="allicon">
-              <a
-                href="https://www.instagram.com/"
-                target="_blank"
-                className="footerAnchor"
-              >
-                <HoverImage
-                  src={instaIcon}
-                  hoverSrc={hoverInsta}
-                  className="Icon"
-                />
-              </a>
-              <a
-                href="https://twitter.com/"
-                target="_blank"
-                className="footerAnchor"
-              >
-                <i className="fab fa-twitter  Icon twittericon"></i>
-              </a>
-              <a
-                href="https://www.reddit.com/"
-                target="_blank"
-                className="footerAnchor"
-              >
-                <i className="fab fa-reddit  Icon hideicon "></i>
-              </a>
-              <a
-                href="https://telegram.org/"
-                target="_blank"
-                className="footerAnchor"
-              >
-                <i className="fab fa-telegram  Icon hideicon"></i>
-              </a>
-              <a
-                href="https://www.facebook.com/"
-                target="_blank"
-                className="footerAnchor"
-              >
-                <i class="fa-brands fa-facebook-f Icon"></i>
-              </a>
-              <a
-                href="https://www.linkedin.com/feed/"
-                target="_blank"
-                className="footerAnchor"
-              >
-                <i className="fab fa-linkedin  Icon hideicon"></i>
-              </a>
-              <a
-                href="https://discord.com/"
-                target="_blank"
-                className="footerAnchor"
-              >
-                <HoverImage
-                  src={discordIcon}
-                  hoverSrc={hoverDiscord}
-                  className="Icon hideicon discordIcon"
-                />
-                {/* <i className="fab fa-discord  Icon hideicon"></i> */}
-              </a>
-              <a
-                href="https://www.youtube.com/"
-                target="_blank"
-                className="footerAnchor"
-              >
-                <i className="fab fa-youtube  Icon hideicon"></i>
-              </a>
+              {
+                customize.socailMedia.length > 0 ?
+                  customize.socailMedia.map((item, index) => (
+                    <a onClick={()=>handleRedirect(item.url)} key={index} target="_blank" className="footerAnchor">
+                      <i className={`fa-brands fa-${item.name.toLowerCase()} Icon`} onMouseOut={handleMouseOut} onMouseOver={handleMouseOver} />
+                    </a>
+                  ))
+                  : null
+              }
             </div>
             <div className="mobicon">
-              <a
-                href="https://www.facebook.com/"
-                target="_blank"
-                className="footerAnchor"
-              >
-                <i class="fa-brands fa-facebook-f Icon"></i>
-              </a>
-              <a
-                href="https://twitter.com/"
-                target="_blank"
-                className="footerAnchor"
-              >
-                <i className="fab fa-twitter  Icon twittericon"></i>
-              </a>
-              <a
-                href="https://www.instagram.com/"
-                target="_blank"
-                className="footerAnchor"
-              >
-                <i className="fa-brands fa-instagram Icon"></i>
-              </a>
+              {
+                customize.socailMedia.length > 0 ?
+                  customize.socailMedia.map((item, index) => (
+                    <a key={index} href={item.url} target="_blank" className="footerAnchor">
+                      <i className={`fa-brands fa-${item.name.toLowerCase()} Icon`} onMouseOut={handleMouseOut} onMouseOver={handleMouseOver} />
+                    </a>
+                  ))
+                  : null
+              }
             </div>
             <p className="subscribe">
               Subscribe to our newsletter for the latest NFTs
@@ -184,10 +145,8 @@ function Footer() {
                   onClick={AddEmail}
                   className="btn btn-primary submitbuttonfooter"
                   // type="button"
+                  style={{ backgroundColor: `${fetchPalletsColor(customize.appearance.colorPalette)}`, zIndex: "0", border: 'none' }}
                   id="button-addon2"
-                  style={{
-                    zIndex: "0",
-                  }}
                 >
                   {" "}
                   Submit
@@ -205,18 +164,18 @@ function Footer() {
               {email}
             </div>
             <h3 className="about">
-              <a className="aboutText" href="/about">
-                About Anafto's Marketplace
+              <a className="aboutText" href="/about" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                {customize.about.title}
               </a>
             </h3>
             <div className="d-none d-sm-none d-md-block d-lg-block fs-16 aboutdes">
-              <p style={{ marginBottom: "0", cursor: "default" }}>
-              Anafto is a decentralized NFT marketplace for new-age NFT enthusiasts. Users can easily create, buy, sell, store, and manage their NFTs on Anafto. Explore the marketplace and start trading your valuable digital assets.{" "}
+              <p style={{ marginBottom: "0", cursor: "default" }} >
+                {customize.about.description}
               </p>
             </div>
             <div className="d-sm-block d-md-none d-lg-none fs-16">
               <p className=" footerdes">
-              Anafto is a decentralized NFT marketplace for new-age NFT enthusiasts. Users can easily create, buy, sell, store, and manage their NFTs on Anafto. Explore the marketplace and start trading your valuable digital assets.
+                {customize.about.description}
               </p>
             </div>
           </div>
@@ -226,78 +185,78 @@ function Footer() {
                 className="fs-18 d-flex flex-column"
                 style={{ color: "#8F8F8F" }}
               >
-                <a href="/nfts" className="footertitle">
+                <a href="/nfts" className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Marketplace
                 </a>
-                <a href="/nfts" className="footersubtitle">
+                <a href="/nfts" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   NFT
                 </a>
-                <a href="/collections-tile" className="footersubtitle">
+                <a href="/collections-tile" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Collections
                 </a>
               </div>
               <div className="fs-18 d-flex flex-column">
-                <a href="/leader-board" className="footertitle">
+                <a href="/leader-board" className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Leaderboard
                 </a>
                 <p>
-                  <a href="/top-seller" className="footersubtitle">
+                  <a href="/top-seller" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                     Top Seller
                   </a>
                 </p>
                 <p>
-                  <a href="/top-bidder" className="footersubtitle">
+                  <a href="/top-bidder" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                     Top Buyer
                   </a>
                 </p>
                 <p>
-                  <a href="/top-collection" className="footersubtitle">
+                  <a href="/top-collection" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                     Top Collections
                   </a>
                 </p>
               </div>
             </div>
             <div className="fs-18 d-flex flex-column">
-              <a href="/help-center" className="footertitle">
+              <a href="/help-center" className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                 Community
               </a>
               <p>
-                <a href="/help-center" className="footersubtitle">
+                <a href="/help-center" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Help Centers
                 </a>
               </p>
               <p>
-                <a href="/FAQs" className="footersubtitle">
+                <a href="/FAQs" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   FAQs
                 </a>
               </p>
               <p>
-                <a href="/suggestion" className="footersubtitle">
+                <a href="/suggestion" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Suggestions
                 </a>
               </p>
               <p>
-                <a href="/blogs" className="footersubtitle">
+                <a href="/blogs" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Blogs
                 </a>
               </p>
             </div>
             <div className="fs-18 d-flex flex-column">
-              <a href="/about" className="footertitle">
+              <a href="/about" className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                 Company
               </a>
               <p>
-                <a href="/about" className="footersubtitle">
+                <a href="/about" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   About
                 </a>
               </p>
               <p>
-                <a href="/privacy" className="footersubtitle">
+                <a href="/privacy" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Privacy Policy
                 </a>
               </p>
               <p>
-                <a href="/Terms-Condition" className="footersubtitle">
+                <a href="/Terms-Condition" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Terms and Conditons
                 </a>
               </p>
@@ -310,94 +269,94 @@ function Footer() {
           </div>
           <div className="version">
             <span className="textversion">
-             {version}
+              {version}
             </span>
           </div>
           <div className="row footer-bottom-sm">
             <div className="col-7">
               <h3 className="fs-18 fw-b">
-                <a href="/nfts" className="footertitle">
+                <a href="/nfts" className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Marketplace
                 </a>
               </h3>
               <p>
-                <a href="/nfts" className="footersubtitle">
+                <a href="/nfts" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Nft
                 </a>
               </p>
               <p>
-                <a href="/collections-tile" className="footersubtitle">
+                <a href="/collections-tile" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Collections
                 </a>
               </p>
             </div>
             <div className="col-5">
               <h3 className="fs-18 fw-b">
-                <a className="footertitle" href="/leader-board">
+                <a className="footertitle" href="/leader-board" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Leaderboard
                 </a>
               </h3>
               <p>
-                <a href="/top-seller" className="footersubtitle">
+                <a href="/top-seller" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Top Seller
                 </a>
               </p>
               <p>
-                <a href="/top-bidder" className="footersubtitle">
+                <a href="/top-bidder" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Top Buyer
                 </a>
               </p>
               <p>
-                <a href="/top-collection" className="footersubtitle">
+                <a href="/top-collection" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Top Collections
                 </a>
               </p>
             </div>
             <div className="col-7 mt-3">
               <h3 className="fs-18 fw-b">
-                <a className="footertitle" href="/help-center">
+                <a className="footertitle" href="/help-center" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Community
                 </a>
               </h3>
               <p>
-                <a href="/help-center" className="footersubtitle">
+                <a href="/help-center" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Help Centers
                 </a>
               </p>
               <p>
-                <a href="/FAQs" className="footersubtitle">
+                <a href="/FAQs" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   FAQs
                 </a>
               </p>
               <p>
-                <a href="/suggestion" className="footersubtitle">
+                <a href="/suggestion" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Suggestions
                 </a>
               </p>
               <p>
-                <a href="/blogs" className="footersubtitle">
+                <a href="/blogs" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Blogs
                 </a>
               </p>
             </div>
             <div className="col-5 mt-3">
               <h3 className="fs-18 fw-b">
-                <a href="/about" className="footertitle">
+                <a href="/about" className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Company
                 </a>
               </h3>
               <p>
-                <a href="/about" className="footersubtitle">
+                <a href="/about" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   About
                 </a>
               </p>
               <p>
-                <a href="/about" className="footersubtitle">
+                <a href="/about" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Privacy Policy
                 </a>
               </p>
               <p>
-                <a href="/about" className="footersubtitle">
+                <a href="/about" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Terms and Conditon
                 </a>
               </p>
@@ -408,10 +367,10 @@ function Footer() {
               </span>{" "}
             </div>
             <div className="versionmob">
-            <span className="textversionmob">
-              {version}
-            </span>
-          </div>
+              <span className="textversionmob">
+                {version}
+              </span>
+            </div>
           </div>
         </div>
       </div>

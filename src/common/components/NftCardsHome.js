@@ -14,7 +14,8 @@ import {
   addLikeNft,
   getNFtsData,
 } from "../../services/webappMicroservice";
-function NftCardsHome({ nft }) {
+import { fetchPalletsColor } from "../../utility/global";
+function NftCardsHome({ nft, appearance }) {
   // let history = useHistory();
 
   const navigate = useNavigate();
@@ -169,7 +170,7 @@ function NftCardsHome({ nft }) {
           <div className="collectionName" title={collectionName ?collectionName :"Anafto Collection"}>
 
           <Link
-           style={{ textDecoration: 'none' }}
+           style={{ textDecoration: 'none' , color: `${fetchPalletsColor(appearance.colorPalette)}`}}
             to={
             '/collection-details/' + collectionId
             }

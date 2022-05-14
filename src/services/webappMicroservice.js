@@ -105,31 +105,39 @@ export function getCollections(requestData) {
     });
 }
 
-export function getCollection(requestData) {
-  let url =
-    process.env.REACT_APP_WEBAPP_MICROSERVICE +
-    "api/v1/collection/" +
-    requestData;
-  return httpService(
-    httpConstants.METHOD_TYPE.GET,
-    // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
-    AuthToken,
-    {},
-    url
-  )
-    .then((response) => {
-      if (
-        !response.success ||
-        response.responseCode !== 200 ||
-        !response.responseData ||
-        response.responseData.length === 0
-      )
-        return Promise.reject();
-      return Promise.resolve(response.responseData);
-    })
-    .catch(function (err) {
-      return Promise.reject(err);
-    });
+export async function getCollection(requestData, successCallBack) {
+  try {
+    const url =
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/collection/" + requestData;
+    const { data } = await axios.get(url);
+    successCallBack(data);
+  } catch (e) {
+    console.log(e)
+  }
+  // let url =
+  //   process.env.REACT_APP_WEBAPP_MICROSERVICE +
+  //   "api/v1/collection/" +
+  //   requestData;
+  // return httpService(
+  //   httpConstants.METHOD_TYPE.GET,
+  //   // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+  //   AuthToken,
+  //   {},
+  //   url
+  // )
+  //   .then((response) => {
+  //     if (
+  //       !response.success ||
+  //       response.responseCode !== 200 ||
+  //       !response.responseData ||
+  //       response.responseData.length === 0
+  //     )
+  //       return Promise.reject();
+  //     return Promise.resolve(response.responseData);
+  //   })
+  //   .catch(function (err) {
+  //     return Promise.reject(err);
+  //   });
 }
 
 export function getNftsByCollectionId(id, requestData) {
@@ -261,6 +269,18 @@ export const addNftReport = async (requestData, successCallBack) => {
     const { data } = await axios.post(url, requestData);
     successCallBack(data);
   } catch (e) {
+    console.log(e)
+  }
+};
+
+export const addCollectionReport = async (requestData, successCallBack) => {
+  try {
+    const url =
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/reported/collection";
+    const { data } = await axios.post(url, requestData);
+    successCallBack(data);
+  } catch (e) {
+    console.log(e)
   }
 };
 

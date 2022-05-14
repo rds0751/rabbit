@@ -28,30 +28,34 @@ import "../../assets/styles/createSingleNft.css";
 import "../../assets/styles/MintModal.css";
 import UploadSingleNft from "./CreateSingleUploadFile";
 import Close from "../../assets/images/close.png";
-import Select from 'react-select';
+import Select from "react-select";
 import { PrintDisabled } from "@mui/icons-material";
-import $ from 'jquery';
+import $ from "jquery";
 import { errors } from "ethers";
 import { getTenantData } from "../../services/clientConfigMicroService";
 import Ethereum from "../../assets/images/ether.svg";
 import Polygon from "../../assets/images/ploygon.svg";
 import Binance from "../../assets/images/binance.svg";
+import { fetchPalletsColor } from "../../utility/global";
 
 // import "../../assets/styles/Leader.css"
 // import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 const Button = styled.button``;
 function CreateSingleNFT(props) {
 
+  const customize = useSelector(state => state.customize);
+
   const [collectionData, setCollectionData] = useState([]);
   const [selectFile, setSelectFile] = useState("");
   const [collectionId, setCollectionId] = useState("");
-  const  [collectionName,setCollectionName]=useState("");
+  const [collectionName, setCollectionName] = useState("");
+  const [collectionBlockchain, setCollectionBlockchain] = useState("");
   const [contractAddress, setContractAddress] = useState("");
 
   const [ipfsUrl, setIpfsUrl] = useState("");
   const [myProfileUrl, setmyProfileUrl] = useState("");
-  const [DesError,SetDesError]=useState("");
-  const [royalityError,setRoyalityError]=useState("");
+  const [DesError, SetDesError] = useState("");
+  const [royalityError, setRoyalityError] = useState("");
 
   const [cdnUrl, setcdnUrl] = useState("");
   const [uploadFileObj, setUploadFileObj] = useState("");
@@ -64,7 +68,7 @@ function CreateSingleNFT(props) {
   const [checkDisable, setcheckDisable] = useState(true);
   const [isFileSelected, setIsFileSelected] = useState(false);
   const [isloader, setisLoader] = useState(false);
-  const[specialChar,setSpecialChar]=useState("");
+  const [specialChar, setSpecialChar] = useState("");
   // console.log(user.addUserData._id, "<<<< user data");
   // -------------------------------
   const name = useRef("");
@@ -75,23 +79,28 @@ function CreateSingleNFT(props) {
   const createdBy = loggedInUser?._id;
 
   const [desLength, setDesLength] = useState(0);
-  const[error,setError]=useState('');
-  const [nameError,SetNameError]=useState('');
-  const[fileError,setFileError]=useState('');
-  const [blockchainError,setBlockChainError]=useState("");
+  const [error, setError] = useState("");
+  const [nameError, SetNameError] = useState("");
+  const [fileError, setFileError] = useState("");
+  const [blockchainError, setBlockChainError] = useState("");
+  const [collectionError, setCollectionError] = useState("");
   // const { userDetails, loggedInUser, walletAddress } = user;
 
-  if (loggedInUser) { localStorage.setItem('userId', loggedInUser._id); }
-  let userId = (loggedInUser) ? loggedInUser._id : localStorage.userId;
+  if (loggedInUser) {
+    localStorage.setItem("userId", loggedInUser._id);
+  }
+  let userId = loggedInUser ? loggedInUser._id : localStorage.userId;
   const [selectedOption, setSelectedOption] = useState(null);
   const [blockchainOption, setBlockchainOption] = useState([]);
-  const [blockchains, setBlockChains] = useState([])
-  const myRef = useRef(null)
-  const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)  
- 
+  const [blockchains, setBlockChains] = useState([]);
+  const myRef = useRef(null);
+  const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+
   useEffect(() => {
     async function fetchData() {
-      await getTenantData().then(response => setBlockChains(response?.blockchains));
+      await getTenantData().then((response) =>
+        setBlockChains(response?.blockchains)
+      );
     }
     fetchData();
   }, []);
@@ -99,14 +108,35 @@ function CreateSingleNFT(props) {
   useEffect(() => {
     for (let eachItem of blockchains) {
       if (eachItem === "Ethereum") {
-        blockchainOption.push({ value: 'ETH', label: <div><img src={ethereum} height="32px" alt=""/> Ethereum</div> })
+        blockchainOption.push({
+          value: "ETH",
+          label: (
+            <div>
+              <img src={ethereum} height="32px" alt="" /> Ethereum
+            </div>
+          ),
+        });
       } else if (eachItem === "Polygon") {
-        blockchainOption.push({ value: 'MATIC', label: <div><img src={polygon} height="32px" alt=""/> Polygon</div> })
+        blockchainOption.push({
+          value: "MATIC",
+          label: (
+            <div>
+              <img src={polygon} height="32px" alt="" /> Polygon
+            </div>
+          ),
+        });
       } else if (eachItem === "Binance") {
-        blockchainOption.push({ value: 'BNB', label: <div><img src={binance} height="32px" alt=""/> Binance</div> })
+        blockchainOption.push({
+          value: "BNB",
+          label: (
+            <div>
+              <img src={binance} height="32px" alt="" /> Binance
+            </div>
+          ),
+        });
       }
-   }
-  }, [blockchains])
+    }
+  }, [blockchains]);
 
   // ----------------------------------------------states end-------------
   useEffect(async () => {
@@ -115,11 +145,11 @@ function CreateSingleNFT(props) {
     // };
 
     // this code will check if user already connected wallet from localstorage
-    if(!localStorage.getItem('has_wallet')){
+    if (!localStorage.getItem("has_wallet")) {
       navigation("/add-wallet");
     }
-  
-    setmyProfileUrl("/nft-information/")
+
+    setmyProfileUrl("/nft-information/");
     // const collections = await getCollectionBySingleUser(userId);
     // setCollectionData(collections);
   }, []);
@@ -128,32 +158,32 @@ function CreateSingleNFT(props) {
     const collections = await getCollectionBySingleUser(userId);
     setCollectionData(collections);
   }, []);
-const [compressedUrl,setCompressedUrl]=useState("");
+  const [compressedUrl, setCompressedUrl] = useState("");
   // --------------------------------React Drop Zone---------------------
   const { getRootProps, getInputProps } = useDropzone({
     accept: ".png,.jpg,.jpeg,.gif",
     maxSize: "40485760",
-    onDrop: (acceptedFiles,fileRejections) => {
+    onDrop: (acceptedFiles, fileRejections) => {
       setisLoader(true);
-      fileRejections.forEach((file)=>{
-        file.errors.forEach((err)=>{
-          if(err.code === "file-too-large"){
-            toast.error("Image file size should be less than 40 mb")
+      fileRejections.forEach((file) => {
+        file.errors.forEach((err) => {
+          if (err.code === "file-too-large") {
+            toast.error("Image file size should be less than 40 mb");
             setisLoader(false);
-            return ;
-          }
-          else if(err.code === "file-invalid-type"){
-            toast.error("File type not acceptable. Please use JPG, JPEG, PNG, GIF file");
+            return;
+          } else if (err.code === "file-invalid-type") {
+            toast.error(
+              "File type not acceptable. Please use JPG, JPEG, PNG, GIF file"
+            );
             setisLoader(false);
-            return ;
-          }
-          else{
+            return;
+          } else {
             toast.error("Image file size should be greater than ……. pxl");
             setisLoader(false);
-            return ;
+            return;
           }
-        })
-      })
+        });
+      });
       setSelectFile(
         acceptedFiles.map((file) =>
           Object.assign(file, {
@@ -189,7 +219,6 @@ const [compressedUrl,setCompressedUrl]=useState("");
           setIsFileSelected(true);
         }
       })();
-
     },
   });
   const onDrop = useCallback((acceptedFiles) => {
@@ -208,186 +237,251 @@ const [compressedUrl,setCompressedUrl]=useState("");
     setUploadFileObj(event);
   };
 
-  useEffect(()=>{
-    $(document).ready(function(){
-
+  useEffect(() => {
+    $(document).ready(function () {
       var lines = 20;
-      var linesUsed = $('#linesUsed');
-  
-      $('#test').keydown(function(e) {
-  
-          let newLines = $(this).val().split("\n").length;
-          linesUsed.text(newLines);
-  
-          if(e.keyCode == 13 && newLines >= lines) {
-              
-              return false;
-          }
-          
-      });
-  });
-  },[])
+      var linesUsed = $("#linesUsed");
 
-  const nameValidation=(nftName)=>{
+      $("#test").keydown(function (e) {
+        let newLines = $(this).val().split("\n").length;
+        linesUsed.text(newLines);
+
+        if (e.keyCode == 13 && newLines >= lines) {
+          return false;
+        }
+      });
+    });
+  }, []);
+
+  const nameValidation = (nftName) => {
     var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
-    if(format.test(nftName)){
-      SetNameError("(No Special Character Allowed)")
+    if (format.test(nftName)) {
+      SetNameError("(No Special Character Allowed)");
       return false;
-    }
-    else if(nftName.length===0){
+    } else if (nftName.length === 0) {
       SetNameError("Name is required");
       return false;
-    }
-    else if(nftName.length < 3){
+    } else if (nftName.length < 3) {
       SetNameError("Name  should be atleast 3 character");
       return false;
-    }
-    else {
-      SetNameError("")
+    } else {
+      SetNameError("");
       return true;
-  }
-  }
+    }
+  };
 
-
- const priceValidation=(nftPrice)=>{
-  if(nftPrice.length == 0){
-    setError("( price is required)")
-    return false;
-  }
-  else if(nftPrice < 0.004 || nftPrice ==0){
-    setError("( Minimum listing price for an NFT should be more than 0.004 ETH )")
-    return false;
-  }
-  else if(nftPrice > 1000000000){
-    setError("( Maximum listing price for an NFT should be less than 1,000,000,000 ETH )")
-    return false;
-  }
-  else
+  const priceValidation = (nftPrice) => {
+    if (nftPrice.length == 0) {
+      setError("( price is required)");
+      return false;
+    } else if (collectionBlockchain==="Ethereum" && nftPrice < 0.004) {
+      setError(
+        "( Minimum listing price for an NFT should be more than 0.004 ETH )"
+      );
+      return false;
+    } 
+    else if (collectionBlockchain==="Polygon" && nftPrice < 11.71) {
+      setError(
+        "( Minimum listing price for an NFT should be more than 11.71 MATIC )"
+      );
+      return false;
+    }
+    else if (collectionBlockchain==="Binance" && nftPrice < 0.027) {
+      setError(
+        "( Minimum listing price for an NFT should be more than 0.027 BNB )"
+      );
+      return false;
+    }
+    else if (collectionBlockchain=== "Ethereum" && nftPrice > 1000000000) {
+      setError(
+        "( Maximum listing price for an NFT should be less than 1,000,000,000 ETH )"
+      );
+      return false;
+    }
+    else if (collectionBlockchain === "Polygon" && nftPrice > 2929880265000) {
+      setError(
+        "( Maximum listing price for an NFT should be less than 2,929,880,265,000 MATIC )"
+      );
+      return false;
+    }
+    else if (collectionBlockchain=== "Binance" && nftPrice > 6841316000) {
+      setError(
+        "( Maximum listing price for an NFT should be less than 6,841,316,000 BNB )"
+      );
+      return false;
+    }
+     else{ 
     setError("");
     return true;
   }
+  };
 
-  const descriptionValidation=(nftDes)=>{
-    if(nftDes.length==0){
-      SetDesError("( Description is required )")
+  const descriptionValidation = (nftDes) => {
+    if (nftDes.length == 0) {
+      SetDesError("( Description is required )");
       return false;
-    }else{
-    SetDesError("")
-    return true;
-    }
-  }
-
-
-  const fileValidation=()=>{
-    if(selectFile!=""){
-      setFileError("")
+    } else {
+      SetDesError("");
       return true;
     }
-    else{
-      setFileError("( file is required )")
+  };
+
+  const fileValidation = () => {
+    if (selectFile != "") {
+      setFileError("");
+      return true;
+    } else {
+      setFileError("( file is required )");
       return false;
     }
-  }
+  };
 
-  const blockchainValidation=(blockchain)=>{
-
-    if(blockchain.length!=0){
+  const blockchainValidation = (blockchain) => {
+    if (blockchain.length != 0) {
       setBlockChainError("");
       return true;
-    }
-    else {
-      setBlockChainError("( Blockchain is required )")
+    } else {
+      setBlockChainError("( Blockchain is required )");
       return false;
+    }
+  };
+
+  function blockchainValue(value) {
+    switch (value) {
+      case "ETH":
+        return "Ethereum";
+      case "MATIC":
+        return "Polygon";
+      case "BNB":
+        return "Binance";
+      case "Ethereum":
+        return "Ethereum";
+      case "Polygon":
+        return "Polygon";
+      case "Binance":
+        return "Binance";
+      default:
+        return "";
     }
   }
 
-   function blockchainValue(value){
-     switch(value){
-       case 'ETH':
-        return 'Ethereum'
-        case 'MATIC':
-        return "Polygon"
-        case "BNB":
-        return "Binance"
-        default:
-        return ""
-     }
-
-
-   }
-  const handleSubmit = async (e) => {
-    
-    var priceValue=price.current;
-
-    if(priceValue.toString().slice(0,1)=="."){
-     priceValue="0"+priceValue;
-     price.current=priceValue;
+  function currencyValue(value) {
+    switch (value) {
+      case "Ethereum":
+        return "Eth";
+      case "Polygon":
+        return "MATIC";
+      case "Binance":
+        return "BNB";
     }
-    else{
-      price.current=+priceValue;
+  }
+   const handleSubmit = async (e) => {
+    var priceValue = price.current;
+
+    if (priceValue.toString().slice(0, 1) == ".") {
+      priceValue = "0" + priceValue;
+      price.current = priceValue;
+    } else {
+      price.current = +priceValue;
       price.current = price.current.toString();
     }
 
-    blockchain.current=blockchainValue(selectedOption?.value);
-  
-    let nftNameValidation=nameValidation(name.current);
-    let nftPriceValidation=priceValidation(price.current);
-    let nftDescriptionValidation=descriptionValidation(description.current);
-    let nftFileValidation=fileValidation();
-    let nftBlockchain=blockchainValidation(blockchain.current);
-    console.log(collectionId.length,collectionName,"<<<CollectionName")
- 
-    if(nftNameValidation && nftPriceValidation && nftDescriptionValidation && nftFileValidation && nftBlockchain){
+    if (collectionName === "Anafto Collection")
+      blockchain.current = blockchainValue(selectedOption?.value);
+    else blockchain.current = blockchainValue(collectionBlockchain);
 
+    let nftNameValidation = nameValidation(name.current);
+    let nftPriceValidation = priceValidation(price.current,selectedOption?.value);
+    let nftDescriptionValidation = descriptionValidation(description.current);
+    let nftFileValidation = fileValidation();
+    let nftBlockchain = blockchainValidation(blockchain.current);
+    if (
+      nftNameValidation &&
+      nftPriceValidation &&
+      nftDescriptionValidation &&
+      nftFileValidation &&
+      nftBlockchain
+    ) {
       const addIPFS = async () => {
         console.log(selectFile, "<<<selectedFile");
         props.createNftHandler({
           ipfsUrl: ipfsUrl,
           cdnUrl: cdnUrl,
-          compressedURL:compressedUrl,
+          compressedURL: compressedUrl,
           nftName: name.current,
           price: price.current,
-          currency:selectedOption?.value,
+          currency: collectionName === "Anafto Collection" ? selectedOption?.value:currencyValue(collectionBlockchain),
           description: description.current,
           blockchain: blockchain.current,
           createdBy: loggedInUser._id,
           collectionId: collectionId,
-          collectionName:collectionName,
+          collectionName: collectionName,
           contractAddress: contractAddress,
           ownerAddress: walletAddress.address,
         });
         setOpenMintodal(true);
       };
       addIPFS();
-  }
-    else {
-      scrollToRef(myRef) 
+    } else {
+      scrollToRef(myRef);
       return null;
     }
   };
 
-  const priceWithCurrency=(blockchain)=>{
-    switch(blockchain){
-      case 'ETH':
-      return <span><img className="currency-sign-nftinformation" src={Ethereum}></img>ETH</span>
-      case 'MATIC':
-      return <span><img className="currency-sign-nftinformation" src={Polygon}></img>MATIC</span>
-      case 'BNB':
-      return <span><img className="currency-sign-nftinformation" src={Binance}></img>BNB</span>
+  const priceWithCurrency = (blockchain) => {
+    switch (blockchain) {
+      case "ETH":
+        return (
+          <span>
+            <img className="currency-sign-nftinformation" src={Ethereum}></img>
+            ETH
+          </span>
+        );
+      case "MATIC":
+        return (
+          <span>
+            <img className="currency-sign-nftinformation" src={Polygon}></img>
+            MATIC
+          </span>
+        );
+      case "BNB":
+        return (
+          <span>
+            <img className="currency-sign-nftinformation" src={Binance}></img>
+            BNB
+          </span>
+        );
+      case "Ethereum":
+        return (
+          <span>
+            <img className="currency-sign-nftinformation" src={Ethereum}></img>
+            ETH
+          </span>
+        );
+      case "Polygon":
+        return (
+          <span>
+            <img className="currency-sign-nftinformation" src={Polygon}></img>
+            MATIC
+          </span>
+        );
+      case "Binance":
+        return (
+          <span>
+            <img className="currency-sign-nftinformation" src={Binance}></img>
+            BNB
+          </span>
+        );
       default:
-        return '';
+        return "";
     }
-    
-  }
-  
-  
-const enabled=  nameError=="" && error=="" && royalityError=="" && fileError=="";
+  };
 
-
+  const enabled =
+    nameError == "" && error == "" && royalityError == "" && fileError == "";
 
   return (
     <>
-
       {props?.loaderState ? (
         <div className="mint-mod-outer">
           <div className="mint-abs">
@@ -403,7 +497,6 @@ const enabled=  nameError=="" && error=="" && royalityError=="" && fileError==""
                     >
                       Complete your minting
                     </div>
-                    
                   </div>
 
                   <div className="abstractillusion">
@@ -424,11 +517,9 @@ const enabled=  nameError=="" && error=="" && royalityError=="" && fileError==""
                       )}
                       <div className="checkposttext">
                         <div className="heading">
-                          {props.isFileSelected === 'true' ? (
-                            'Uploading'
-                          ) : (
-                            'Upload'
-                          )}
+                          {props.isFileSelected === "true"
+                            ? "Uploading"
+                            : "Upload"}
                         </div>
                         <div className="description">
                           Uploading all media assets and metadata to IPFS
@@ -445,7 +536,8 @@ const enabled=  nameError=="" && error=="" && royalityError=="" && fileError==""
                             horizontal="center"
                             color="#00BFFF"
                             height={30}
-                            width={30} />
+                            width={30}
+                          />
                         </div>
                       )}
                       {/* {!props.isMintSuccess && (
@@ -453,13 +545,11 @@ const enabled=  nameError=="" && error=="" && royalityError=="" && fileError==""
                         )} */}
                       <div className="checkposttext">
                         <div className="heading">
-                          {props.isMintSuccess === 'true' ? (
-                            'Mint'
-                          ) : (
-                            'Minting'
-                          )}
+                          {props.isMintSuccess === "true" ? "Mint" : "Minting"}
                         </div>
-                        <div className="description">Send Transaction to Create your NFT</div>
+                        <div className="description">
+                          Send Transaction to Create your NFT
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -472,12 +562,8 @@ const enabled=  nameError=="" && error=="" && royalityError=="" && fileError==""
         ""
       )}
 
-
       {/* ----------------------------- */}
-      {props?.isNftCreated ?
-        navigation(myProfileUrl + props?.mintedNftId) : (
-          ""
-        )}
+      {props?.isNftCreated ? navigation(myProfileUrl + props?.mintedNftId) : ""}
 
       <ToastContainer
         position="top-center"
@@ -502,11 +588,13 @@ const enabled=  nameError=="" && error=="" && royalityError=="" && fileError==""
               }
             }
           >
-            <div className="nft-file-upload" >
+            <div className="nft-file-upload">
               <label htmlFor="email" className="form-key">
-                Upload File* <span style={{color:"red",fontSize:"15px"}}>{fileError}</span>
+                Upload File*{" "}
+                <span style={{ color: "red", fontSize: "15px" }}>
+                  {fileError}
+                </span>
               </label>
-              
 
               <div className="inpput-image-wrap"></div>
 
@@ -518,59 +606,40 @@ const enabled=  nameError=="" && error=="" && royalityError=="" && fileError==""
 
                   {!isloader ? (
                     <div className="draganddropboxinnerdiv">
-                      <img
-                        src={cdnUrl != "" ? cdnUrl : Image}
-                        className="nft-image"
-                        style={{
-                          // maxWidth: "100px",
-                          // width: "70%",
-                          // marginTop: "3em",
-                      
-                        }}
-                      />
+                      {
+                        cdnUrl === "" ?
+                          <svg xmlns="http://www.w3.org/2000/svg" width="110" height="110" viewBox="0 0 110 110">
+                            <g id="image" transform="translate(-372 -618)">
+                              <rect id="Rectangle_271" data-name="Rectangle 271" width="110" height="110" transform="translate(372 618)" fill="none" />
+                              <g id="Icon_feather-image" data-name="Icon feather-image" transform="translate(380 626)">
+                                <path id="Path_34" data-name="Path 34" d="M15.053,4.5H88.926A10.553,10.553,0,0,1,99.479,15.053V88.926A10.553,10.553,0,0,1,88.926,99.479H15.053A10.553,10.553,0,0,1,4.5,88.926V15.053A10.553,10.553,0,0,1,15.053,4.5Z" transform="translate(-4.5 -4.5)" fill="none" stroke={fetchPalletsColor(customize.appearance.colorPalette)} stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                                <path id="Path_35" data-name="Path 35" d="M26.33,18.415A7.915,7.915,0,1,1,18.415,10.5,7.915,7.915,0,0,1,26.33,18.415Z" transform="translate(10.607 10.607)" fill="none" stroke={fetchPalletsColor(customize.appearance.colorPalette)} stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                                <path id="Path_36" data-name="Path 36" d="M91.926,41.383,65.543,15,7.5,73.043" transform="translate(3.053 21.936)" fill="none" stroke={fetchPalletsColor(customize.appearance.colorPalette)} stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                              </g>
+                            </g>
+                          </svg>
+                          : <img
+                            src={cdnUrl}
+                            className="nft-image"
+                            style={
+                              {
+                                // maxWidth: "100px",
+                                // width: "70%",
+                                // marginTop: "3em",
+                              }
+                            }
+                          />
+                      }
+
                       <span className="draganddropboxinnerdivtextspan">
                         Drag and Drop or
-                        <span className="draganddropboxinnerdivtextspanbrowse">
+                        <span className="draganddropboxinnerdivtextspanbrowse" style={{color: `${fetchPalletsColor(customize.appearance.colorPalette)}`}}>
                           {" "}
                           Browse
                         </span>
                       </span>
                     </div>
                   ) : (
-                    <div className="" style={{ margin: "auto 0" }} >
-                      {" "}
-                      <Oval
-                        vertical="top"
-                        horizontal="center"
-                        color="#00BFFF"
-                        height={30}
-                        width={30}
-
-                      />
-                    </div>
-                  )}
-
-                </div>
-              )}
-
-              {isFileSelected && (
-                <div className="draganddropbox" {...getRootProps()}>
-                  <input {...getInputProps()} />
-
-                  {!isloader ? (<div className="draganddropboxinnerdiv">
-                    <img
-                      src={cdnUrl != "" ? cdnUrl : Image}
-                      style={{
-                        width: "100%",
-                        // marginTop: "3em",
-                        height: "100%",
-                        color: "#366EEF",
-                        objectFit:"cover",
-                       
-                      }}
-                    />
-                   
-                  </div>) : (
                     <div className="" style={{ margin: "auto 0" }}>
                       {" "}
                       <Oval
@@ -582,7 +651,38 @@ const enabled=  nameError=="" && error=="" && royalityError=="" && fileError==""
                       />
                     </div>
                   )}
+                </div>
+              )}
 
+              {isFileSelected && (
+                <div className="draganddropbox" {...getRootProps()}>
+                  <input {...getInputProps()} />
+
+                  {!isloader ? (
+                    <div className="draganddropboxinnerdiv">
+                      <img
+                        src={cdnUrl != "" ? cdnUrl : Image}
+                        style={{
+                          width: "100%",
+                          // marginTop: "3em",
+                          height: "100%",
+                          color: "#366EEF",
+                          objectFit: "cover",
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <div className="" style={{ margin: "auto 0" }}>
+                      {" "}
+                      <Oval
+                        vertical="top"
+                        horizontal="center"
+                        color="#00BFFF"
+                        height={30}
+                        width={30}
+                      />
+                    </div>
+                  )}
                 </div>
               )}
               {/* ----------------- */}
@@ -591,7 +691,7 @@ const enabled=  nameError=="" && error=="" && royalityError=="" && fileError==""
               </div>
             </div>
             <div className="single-form">
-            <div className="">
+              <div className="">
                 <div className="create-collection">
                   <div
                     htmlFor="collection"
@@ -603,11 +703,14 @@ const enabled=  nameError=="" && error=="" && royalityError=="" && fileError==""
                   <div>
                     <Link
                       to={"/create-nft-collection"}
-                        // pathname:"/create-nft-collection",
-                        state={{
-                          data:true}}>
-                    
-                      <span className="color36 font-16 poppins-normal create-text">
+                      // pathname:"/create-nft-collection",
+                      state={{
+                        data: true,
+                      }}
+
+                      style={{textDecoration: 'none'}}
+                    >
+                      <span className="color36 font-16 poppins-normal create-text" style={{color: `${fetchPalletsColor(customize.appearance.colorPalette)}`}}>
                         {" "}
                         Create
                       </span>
@@ -617,42 +720,94 @@ const enabled=  nameError=="" && error=="" && royalityError=="" && fileError==""
                 <select
                   onChange={(e) => {
                    
-                    const addressId = e.target.value.split(",")
-                  
-                   
-                  
+                    const addressId = e.target.value.split(",");
+                    addressId[2] =
+                      addressId[2] === undefined
+                        ? "Anafto Collection"
+                        : addressId[2];
                     setCollectionId(addressId[0]);
                     setContractAddress(addressId[1]);
-                    setCollectionName(addressId[2])
-                    //setCollectionName(addressId[2]);
-                     console.log(addressId[0],addressId[2],"CollectionCheck")
+                    setCollectionName(addressId[2]);
+                    setCollectionBlockchain(addressId[3]); 
+                    console.log(addressId[1], "<<<BlockchainOption");
 
-                   
-                  
                  
                   }}
                   className="form-control-1 category-select"
                 >
-                    <option className="color82" value="-1" hidden>Select Collection</option>
-                  <option className="color82" value="">ANAFTO Collection</option>
+                  <option className="color82" value="-1" hidden>
+                    Select Collection
+                  </option>
+                  <option className="color82" value="">
+                    ANAFTO Collection
+                  </option>
                   {collectionData.map((item, index) => (
-                    <option className="option color82" value={[item._id, item.contractAddress,item.name]} >
+                    <option
+                      className="option color82"
+                      value={[
+                        item._id,
+                        item.contractAddress,
+                        item.name,
+                        item.blockchain
+                      ]}
+                    >
                       {item?.name}
                     </option>
                   ))}
                 </select>
+                {collectionError}
+              </div>
 
+              <div className="mb-4" ref={myRef}>
+                <label htmlFor="email" className="input-label">
+                  Blockchain*
+                </label>
+                <div style={{ color: "red", fontSize: "15px" }}>
+                  {blockchainError}
+                </div>
+                <div className="block-chain-right">
+                  <Select
+                    className="input-box-1 rm-border blockchainSelect"
+                    defaultValue={blockchainOption[0]}
+                    onChange={setSelectedOption}
+                    options={blockchainOption} //options there
+                    placeholder="Select Blockchain"
+                    value={
+                      collectionBlockchain === "Ethereum"
+                        ? blockchainOption.filter((ele) => {
+                            return ele.value === "ETH";
+                          })
+                        : collectionBlockchain === "Polygon"
+                        ? blockchainOption.filter((ele) => {
+                            return ele.value === "MATIC";
+                          })
+                        : collectionBlockchain === "Binance"
+                        ? blockchainOption.filter((ele) => {
+                            return ele.value === "BNB";
+                          })
+                        : selectedOption
+                    } //when user select a option from the list
+                    isDisabled={
+                      collectionName === "Anafto Collection" ? false : true
+                    }
+                  ></Select>
+                </div>
               </div>
 
               <div className="input-name">
                 <label htmlFor="email" className=" input-label">
                   Name*
                 </label>
-                <div style={{color:"red",fontSize:"15px"}}>{nameError}</div>
+                <div style={{ color: "red", fontSize: "15px" }}>
+                  {nameError}
+                </div>
                 <input
                   type="text"
                   className="form-control-1"
-                  style={{border:nameError!=""?"1px solid red":"1px solid #C8C8C8"}}
+                  style={{
+                    border:
+                      nameError != "" ? "1px solid red" : "1px solid #C8C8C8",
+                  }}
                   name="email"
                   placeholder="Enter name"
                   autoComplete="off"
@@ -661,147 +816,132 @@ const enabled=  nameError=="" && error=="" && royalityError=="" && fileError==""
                   onChange={(e) => {
                     name.current = e.target.value;
                     var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
-                     if(!format.test(e.target.value))
-                        SetNameError("")
-                     else if(e.target.value.length !=0)
-                        SetNameError("");
-                      else if(e.target.value.length > 3)
-                        SetNameError("");
-                      else 
-                        SetNameError("")
-                       
+                    if (!format.test(e.target.value)) SetNameError("");
+                    else if (e.target.value.length != 0) SetNameError("");
+                    else if (e.target.value.length > 3) SetNameError("");
+                    else SetNameError("");
                   }}
                 />
-               
               </div>
-              <div className="mb-4" ref={myRef}>
-                <label htmlFor="email" className="input-label">
-                  Blockchain*  
-                </label>
-                <div style={{color:"red",fontSize:"15px"}}>{blockchainError}</div>
-                <div className="block-chain-right" >
-                  <Select
-                    className="input-box-1 rm-border blockchainSelect"
-                    defaultValue={blockchainOption[0]}
-                    onChange={setSelectedOption}
-                    options={blockchainOption}
-                    placeholder="Select Blockchain"
-                    value={selectedOption}
-                  >
-                  </Select>
-                </div>
-              </div>
+
               <div className="input-price">
                 <label htmlFor="price" className=" input-label">
                   Price*
                 </label>
-                <div style={{color:"red",fontSize:"15px"}}>{error}</div>
-                <div class="input-group" >
-             
+                <div style={{ color: "red", fontSize: "15px" }}>{error}</div>
+                <div class="input-group">
                   <input
                     className="form-control"
                     type="number"
                     title=" "
                     placeholder="0"
                     autoComplete="off"
-                    style={{border:error!=""?"1px solid red":"1px solid #C8C8C8"}}
-                    onWheel={(e)=>e.target.blur()}
+                    style={{
+                      border:
+                        error != "" ? "1px solid red" : "1px solid #C8C8C8",
+                    }}
+                    onWheel={(e) => e.target.blur()}
                     onChange={(e) => {
                       price.current = e.target.value;
-                      if(e.target.value.length != 0)
-                      setError("")
-                      else if(e.target.value > "0.004" || !e.target.value=="0")
-                      setError("")
-                      else if(!price.current > "1000000000")
-                      setError("")
+                      if (e.target.value.length != 0) setError("");
+                      else if (
+                        e.target.value > "0.004" ||
+                        !e.target.value == "0"
+                      )
+                        setError("");
+                      else if (!price.current > "1000000000") setError("");
 
                       // checkChanges();
-                     
                     }}
                   />
                   <span class="input-group-text">
-                    
-                  {priceWithCurrency(selectedOption?.value)}
-              
-                    </span>
-                 
+                    {collectionName === "Anafto Collection"
+                      ? priceWithCurrency(selectedOption?.value)
+                      : priceWithCurrency(collectionBlockchain)}
+                  </span>
                 </div>
-                
               </div>
               <div className="input-description">
                 <label htmlFor="comment" className="input-label pb-2">
                   Description*
                 </label>
-                <div style={{color:"Red" ,fontSize:"15px"}}>{DesError}</div>
-               
+                <div style={{ color: "Red", fontSize: "15px" }}>{DesError}</div>
+
                 <textarea
                   className="form-control-1 text-area-input"
                   rows="4"
                   id="test"
                   style={{
-                    
-                    border:DesError!=""?"1px solid red":"1px solid #C8C8C8"
+                    border:
+                      DesError != "" ? "1px solid red" : "1px solid #C8C8C8",
                   }}
                   maxLength="1000"
                   name="text"
                   placeholder="Write description"
                   value={description.current}
                   onChange={(e) => {
-                    if(e.target.value!=0)
-                    SetDesError("")
-                   
+                    if (e.target.value != 0) SetDesError("");
+
                     if (desLength < 1000) {
-                      
                       // checkChanges();
-                      let x=e.target.value.replace(/\s+/g, '').length
+                      let x = e.target.value.replace(/\s+/g, "").length;
                       description.current = e.target.value;
                       setDesLength(description.current.length);
-                      
                     }
                   }}
                 ></textarea>
                 <span className="color82">
-                  {desLength} of 1000 characters and 
-                  <span> <span id="linesUsed">0</span> of 20 Lines.</span>
+                  {desLength} of 1000 characters and
+                  <span>
+                    {" "}
+                    <span id="linesUsed">0</span> of 20 Lines.
+                  </span>
                 </span>
               </div>
 
               <div className="input-name">
                 <label htmlFor="email" className=" input-label">
-                  Royalty <span style={{color:"blue",fontWeight:"bold"}}>( Coming Soon) </span>
+                  Royalty{" "}
+                  <span style={{ color: `${fetchPalletsColor(customize.appearance.colorPalette)}`, fontWeight: "bold" }}>
+                    ( Coming Soon ){" "}
+                  </span>
                 </label>
-                <p className="headingRoyality">Write down the percentage you want from this sale of this NFT</p>
-                <div style={{color:"red",fontSize:"15px"}}>{royalityError}</div> 
+                <p className="headingRoyality">
+                  Write down the percentage you want from this sale of this NFT
+                </p>
+                <div style={{ color: "red", fontSize: "15px" }}>
+                  {royalityError}
+                </div>
                 <input
                   type="number"
                   id="royality"
                   className="form-control-1"
-                  onWheel={(e)=>e.target.blur()}
+                  onWheel={(e) => e.target.blur()}
                   placeholder="Enter Royalty"
                   autoComplete="off"
                   maxLength="100"
                   style={{
-                    border:royalityError!=""?"1px solid red":"1px solid #C8C8C8"
+                    border:
+                      royalityError != ""
+                        ? "1px solid red"
+                        : "1px solid #C8C8C8",
                   }}
                   title=" "
                   disabled={true}
-                  onChange={(e)=>{
-                    if(+e.target.value > 50)
-                    setRoyalityError("( Royalty can not be more than 50% )")
-                    else
-                    setRoyalityError("")
+                  onChange={(e) => {
+                    if (+e.target.value > 50)
+                      setRoyalityError("( Royalty can not be more than 50% )");
+                    else setRoyalityError("");
                   }}
                 />
-               
               </div>
-              
-              
+
               <button
                 type="submit"
                 onClick={handleSubmit}
-                className="submit-button"
-                 style={{ opacity: !enabled ? 0.6 : 1 }}
-                 disabled={!enabled}
+                className="submit-button"                
+                disabled={!enabled}
+                style={{opacity: !enabled ? 0.6 : 1, backgroundColor: `${fetchPalletsColor(customize.appearance.colorPalette)}`}}
               >
                 Create
               </button>
@@ -811,7 +951,6 @@ const enabled=  nameError=="" && error=="" && royalityError=="" && fileError==""
       </div>
       {/* ---------------- */}
       {/* <div className="mint-mod-outer"> */}
-
     </>
   );
 }

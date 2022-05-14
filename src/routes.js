@@ -1,6 +1,6 @@
 import "./App.css";
 import react, { useEffect } from "react";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import { store } from "./reducers/store";
 import Navbar from "./common/components/Navbar";
 import NftPage from "./modules/Home/Nft";
@@ -69,7 +69,10 @@ import Blog from "./modules/blogs/blog";
 import Privacy from "./modules/company/privacy";
 import TermsAndCondition from "./modules/company/termsAndCondition";
 import BlogDetail from "./modules/blogs/blogDetail";
+import { getTenantData } from "./services/clientConfigMicroService";
 function App() {
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const checkWalletAddress = localStorage.getItem(
@@ -85,8 +88,25 @@ function App() {
     // alert(`${checkWalletAddress}`);
   }, []);
 
+
+  useEffect( ()=>{
+    
+    if(localStorage.getItem('WHITE_LABEL_TOKEN') !== null){
+
+      getTenantData()
+        .then(response=>{
+          dispatch({type: 'ADD_CUSTOMIZE_DATA', payload: response})
+        })
+        .catch(error=>{
+
+        })
+
+    }
+
+  },[])
+
   return (
-    <Provider store={store} >
+    
       <div className="App" >
 
         <Router>
@@ -222,7 +242,7 @@ function App() {
         
         <Notification />
       </div>
-    </Provider>
+    
   );
 }
 

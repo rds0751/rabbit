@@ -16,7 +16,7 @@ import {
 function CollDetailCard({ nft }) {
   const navigate = useNavigate();
   const { user, sideBar } = useSelector((state) => state);
-  const { _id, cdnUrl, name, biddingDetails, salesInfo,blockchain } = nft;
+  const { _id, cdnUrl, name, biddingDetails, salesInfo,blockchain ,compressedURL} = nft;
   const [handleLike, setHandleLike] = useState(true);
 
   const diffTime = (timestamp1, timestamp2) => {
@@ -81,7 +81,7 @@ function CollDetailCard({ nft }) {
         <div className="image-container">
           <img
             className="nftTileEachImage img-fluid border-radius nft-img-radius card_imgmob"
-            src={cdnUrl}
+            src={compressedURL?.length === 0 ? cdnUrl : compressedURL}
             alt="Nft"
             onLoad={onImageLoad}  />
             

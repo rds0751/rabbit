@@ -15,6 +15,8 @@ import SelectUnstyled, { selectUnstyledClasses } from '@mui/base/SelectUnstyled'
 import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled'
 import PopperUnstyled from '@mui/base/PopperUnstyled'
 import { styled} from '@mui/system'
+import { useSelector } from "react-redux";
+import { fetchPalletsColor } from "../../utility/global";
 
 const blue = {
   100: '#DAECFF',
@@ -263,6 +265,8 @@ color:'filter: opacity(0.4) drop-shadow(0 0 0 grey)'
 `;
 function TopSeller() {
 
+  const appearance = useSelector(state => state.customize.appearance)
+
   const [topSellers, setTopSellers] = useState([]);
   const [sellerDuration, setSellerDuration] = useState({
     duration: "all",
@@ -357,7 +361,7 @@ function TopSeller() {
 
               </NameColumn>
               <VolumeColumn className="col">
-                <Span>{result} ETH
+                <Span style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}}>{result} ETH
                   {/* <Volume>({"$"})</Volume> */}
                 </Span>
 

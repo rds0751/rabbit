@@ -34,9 +34,22 @@ import profileImg from "../../assets/images/profile.svg";
 import wallet from "../../assets/images/wallet.svg";
 import Anafto from "../../assets/images/ANAFTO.svg";
 import { WHITE_LABEL_TOKEN } from "../../reducers/Constants";
+import { Helmet } from "react-helmet";
+import { fetchPalletsColor } from "../../utility/global";
+import { padding } from "@mui/system";
 const queryString = require("query-string");
+
+
+const activeMarketplace = ['/nfts'];
+const activeLeaderboard = ['/leader-board'];
+const activeResource = ['/help-center', '/suggestion'];
+
 function Navbar() {
+
+  const customize = useSelector(state=> state.customize);
+
   const navigate = useNavigate();
+
   const [humburger, setHumburger] = useState(false);
   const [toggleEffect, setToggleEffect] = useState(false);
   const [errorMssg, setErrorMssg] = useState(null);
@@ -66,12 +79,26 @@ function Navbar() {
   const [collections, setCollections] = useState([]);
   const [tenantData, setTenantData] = useState("");
   const [permissionToUploadNft, setPermissionToUploadNft] = useState("");
+
+  const handleMouseOver = (e) => {
+    let tempDiv = e.target;
+    tempDiv.style.color = fetchPalletsColor(customize.appearance.colorPalette)
+
+  }
+
+  const handleMouseOut = (e) => {
+    let tempDiv = e.target;
+    tempDiv.style.color = "#818181"
+  }
+
   useEffect(() => {
+    console.log('called navbar')
     async function fetchData() {
       getTenantData().then((response) => setTenantData(response));
     }
     fetchData();
   }, []);
+
 
   useEffect(() => {
     setPermissionToUploadNft(tenantData?.permissionToUploadNft);
@@ -363,9 +390,17 @@ function Navbar() {
     });
   }, [])
 
+  const navLink = {
+    borderBottom: `3px solid ${fetchPalletsColor(customize.appearance.colorPalette)}`
+  }
 
   return (
     <>
+
+      <Helmet>
+        <title>{customize?.storeName}</title>
+      </Helmet>
+
       <div className="navbar-width">
         <nav className="navbarborder navbar navbar-expand-lg">
           <div
@@ -376,14 +411,14 @@ function Navbar() {
               <Link
                 className="navbrand"
                 to="/"
-                style={{ marginRight: "20px", textDecoration: "none" }}
+                style={{ marginRight: "30px", textDecoration: "none" }}
                 onClick={() => {
                   closeWalletAndNoti();
                 }}
               >
                 <img
-                  src={tenantData?.companyLogo}
-                  style={{ width: "100px" }}
+                  src={customize.storeLogo ? customize.storeLogo : Anafto}
+                  style={{ width: "60px" }}
                   alt=""
                 />
                 {/* <span className="store-name">{tenantData?.storeName}</span> */}
@@ -664,9 +699,9 @@ function Navbar() {
                         !location.pathname.includes("create-nft") &&
                         !location.pathname.includes("help-center") &&
                         !location.pathname.includes("suggestion")
-                        ? "nav-items li_underline marketplace"
+                        ? "nav-items marketplace"
                         : "nav-items marketplace"
-                    }
+                    }                   
                     onClick={closeWalletAndNoti}
                   >
                     <Link
@@ -680,8 +715,10 @@ function Navbar() {
                           ? "nav-link navlink_active"
                           : "nav-link"
                       }
+                      style={activeMarketplace.includes(location.pathname) ? navLink : {}}
                       aria-current="page"
                       to="/nfts"
+                      onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}
                     >
                       Marketplace
                     </Link>
@@ -689,7 +726,7 @@ function Navbar() {
                   <li
                     className={
                       location.pathname.includes("leader-board")
-                        ? "nav-items li_underline leaderboard"
+                        ? "nav-items leaderboard"
                         : "nav-items leaderboard"
                     }
                     onClick={closeWalletAndNoti}
@@ -702,6 +739,8 @@ function Navbar() {
                       }
                       exact
                       to="/leader-board"
+                      style={activeLeaderboard.includes(location.pathname) ? navLink : {}}
+                      onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}
                     >
                       Leaderboard
                     </Link>
@@ -710,14 +749,15 @@ function Navbar() {
                   <NavDropdown
                     onClick={closeWalletAndNoti}
                     title="Resource"
-                    id="navbarScrollingDropdown"
-                    style={{ padding: "0" }}
+                    id="navbarScrollingDropdown"                  
                     className={
                       location.pathname.includes("help-center") ||
                         location.pathname.includes("suggestion")
-                        ? "nav-items dropdown li_underline resource nav-link navlink_active resource"
-                        : "nav-items dropdown resource"
+                        ? "nav-items dropdown resource nav-link navlink_active resource padding-0"
+                        : "nav-items dropdown resource padding-0"
                     }
+                    onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}
+                    style={activeResource.includes(location.pathname) ? navLink : {}}
                   >
                     <NavDropdown.Item onClick={() => navigate("/help-center")}>
                       Help Center
@@ -763,7 +803,9 @@ function Navbar() {
                       </li>
                     </ul>
                   </li> */}
-                  <li
+                  {
+                    customize.permissionToUploadNft === 'Everyone' ?
+                    <li
                     style={{ marginRight: "28px" }}
                     onClick={() => {
                       closeWalletAndNoti();
@@ -773,9 +815,11 @@ function Navbar() {
                     {/* <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}
                     > */}
-                    <button className="create-btn">Create</button>
+                    <button style={{backgroundColor: `${fetchPalletsColor(customize.appearance.colorPalette)}`}} className="create-btn">Create</button>
                     {/* </Link> */}
                   </li>
+                  : null
+                  }
                   <li className="removeinmob"></li>
                 </ul>
 
