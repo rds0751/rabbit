@@ -454,3 +454,8 @@ margin-right: 5.3%;
     width: 100%;
 }
 }
+.collection-error-message{
+  text-align: center;
+  color: red;
+  font-size: 0.9rem;
+}
