@@ -84,6 +84,7 @@ function CreateSingleNFT(props) {
   const [fileError, setFileError] = useState("");
   const [blockchainError, setBlockChainError] = useState("");
   const [collectionError, setCollectionError] = useState("");
+  let collectionValue;
   // const { userDetails, loggedInUser, walletAddress } = user;
 
   if (loggedInUser) {
@@ -270,41 +271,41 @@ function CreateSingleNFT(props) {
     }
   };
 
-  const priceValidation = (nftPrice) => {
+  const priceValidation = (nftPrice,xy) => {
     if (nftPrice.length == 0) {
       setError("( price is required)");
       return false;
-    } else if (collectionBlockchain==="Ethereum" && nftPrice < 0.004) {
+    } else if (collectionValue==="Ethereum" && nftPrice < 0.004) {
       setError(
         "( Minimum listing price for an NFT should be more than 0.004 ETH )"
       );
       return false;
     } 
-    else if (collectionBlockchain==="Polygon" && nftPrice < 11.71) {
+    else if (collectionValue==="Polygon" && nftPrice < 11.71) {
       setError(
         "( Minimum listing price for an NFT should be more than 11.71 MATIC )"
       );
       return false;
     }
-    else if (collectionBlockchain==="Binance" && nftPrice < 0.027) {
+    else if (collectionValue==="Binance" && nftPrice < 0.027) {
       setError(
         "( Minimum listing price for an NFT should be more than 0.027 BNB )"
       );
       return false;
     }
-    else if (collectionBlockchain=== "Ethereum" && nftPrice > 1000000000) {
+    else if (collectionValue=== "Ethereum" && nftPrice > 1000000000) {
       setError(
         "( Maximum listing price for an NFT should be less than 1,000,000,000 ETH )"
       );
       return false;
     }
-    else if (collectionBlockchain === "Polygon" && nftPrice > 2929880265000) {
+    else if (collectionValue === "Polygon" && nftPrice > 2929880265000) {
       setError(
         "( Maximum listing price for an NFT should be less than 2,929,880,265,000 MATIC )"
       );
       return false;
     }
-    else if (collectionBlockchain=== "Binance" && nftPrice > 6841316000) {
+    else if (collectionValue=== "Binance" && nftPrice > 6841316000) {
       setError(
         "( Maximum listing price for an NFT should be less than 6,841,316,000 BNB )"
       );
@@ -368,13 +369,14 @@ function CreateSingleNFT(props) {
   function currencyValue(value) {
     switch (value) {
       case "Ethereum":
-        return "Eth";
+        return "ETH";
       case "Polygon":
         return "MATIC";
       case "Binance":
         return "BNB";
     }
   }
+  
    const handleSubmit = async (e) => {
     var priceValue = price.current;
 
@@ -386,12 +388,18 @@ function CreateSingleNFT(props) {
       price.current = price.current.toString();
     }
 
-    if (collectionName === "Anafto Collection")
+    
+
+    if (collectionName === "Anafto Collection"){
       blockchain.current = blockchainValue(selectedOption?.value);
-    else blockchain.current = blockchainValue(collectionBlockchain);
+      collectionValue=blockchain.current;
+    }
+    else{ blockchain.current = blockchainValue(collectionBlockchain);
+      collectionValue=blockchain.current;
+    }
 
     let nftNameValidation = nameValidation(name.current);
-    let nftPriceValidation = priceValidation(price.current,selectedOption?.value);
+    let nftPriceValidation = priceValidation(price.current,collectionValue);
     let nftDescriptionValidation = descriptionValidation(description.current);
     let nftFileValidation = fileValidation();
     let nftBlockchain = blockchainValidation(blockchain.current);
@@ -721,14 +729,28 @@ function CreateSingleNFT(props) {
                   onChange={(e) => {
                    
                     const addressId = e.target.value.split(",");
-                    addressId[2] =
-                      addressId[2] === undefined
-                        ? "Anafto Collection"
-                        : addressId[2];
-                    setCollectionId(addressId[0]);
-                    setContractAddress(addressId[1]);
-                    setCollectionName(addressId[2]);
-                    setCollectionBlockchain(addressId[3]); 
+
+                    if(addressId[2] === undefined){
+                      
+                      addressId[2] ="Anafto Collection"
+                      setCollectionName(addressId[2]);
+                      setCollectionBlockchain("");
+                      setCollectionId(""); 
+                      setContractAddress("");
+                      
+                      
+                    }
+                    else{
+                      setCollectionId(addressId[0]);
+                      setContractAddress(addressId[1]);
+                      setCollectionName(addressId[2]);
+                      setCollectionBlockchain(addressId[3]); 
+
+                    }
+                  
+                      
+                        
+                 
                     console.log(addressId[1], "<<<BlockchainOption");
 
                  
@@ -940,8 +962,8 @@ function CreateSingleNFT(props) {
                 type="submit"
                 onClick={handleSubmit}
                 className="submit-button"                
-                disabled={!enabled}
-                style={{opacity: !enabled ? 0.6 : 1, backgroundColor: `${fetchPalletsColor(customize.appearance.colorPalette)}`}}
+                // disabled={!enabled}
+                // style={{opacity: !enabled ? 0.6 : 1, backgroundColor: `${fetchPalletsColor(customize.appearance.colorPalette)}`}}
               >
                 Create
               </button>
