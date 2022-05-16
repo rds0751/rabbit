@@ -43,6 +43,32 @@ export const CustomizeReducer = (state = initialState, action) => {
                 permissionToUploadNft: payload.permissionToUploadNft
             }
 
+        case 'RESET_APPEARENCE':
+            return {
+                storeName: 'ANFTO',
+                storeFee: 0,
+                storeLogo: false,
+                about: {
+                    title: "About Anafto's Marketplace",
+                    subTitle: "NFT marketplace in numbers",
+                    description: "",
+                    contactEmail: ""
+                },
+                appearance: {
+                    colorPalette: 1,
+                    coverImageUrl: false,
+                    coverPosition: "center",
+                    heading: false,
+                    description: false,
+                    buttons: [],
+                    featuredAssets: []
+                },
+                categories: [],
+                privacyUrl: false,
+                socailMedia: [],
+                permissionToUploadNft: false
+            }
+
         default:
             return state
     }

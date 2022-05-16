@@ -12,7 +12,11 @@ import NoItem from "../../assets/images/Noitems.svg"
 import Ethereum from "../../assets/images/ether.svg";
 import Polygon from "../../assets/images/ploygon.svg";
 import Binance from "../../assets/images/binance.svg";
+import { fetchPalletsColor } from "../../utility/global";
+
 function MyItems() {
+
+  const appearance = useSelector(state =>  state.customize.appearance);
 
   const [activeInActive, setActiveInActive] = useState("active");
   const [toggleSelect, setToggleSelect] = useState(true);
@@ -67,7 +71,7 @@ function MyItems() {
               style={{
 
                 color: toggleSelect ? "#191919" : "#828282",
-                borderBottom: toggleSelect ? "3px solid #366EEF" : "none",
+                borderBottom: toggleSelect ? `3px solid ${fetchPalletsColor(appearance.colorPalette)}` : "none",
                 cursor: "pointer",
                 borderRadius: "2px",
               }}
@@ -80,7 +84,7 @@ function MyItems() {
               style={{
                 marginLeft: "18px",
                 color: !toggleSelect ? "#191919" : "#828282",
-                borderBottom: !toggleSelect ? "3px solid #366EEF" : "none",
+                borderBottom: !toggleSelect ? `3px solid ${fetchPalletsColor(appearance.colorPalette)}` : "none",
                 cursor: "pointer",
                 borderRadius:"3px",
               }}
@@ -89,7 +93,7 @@ function MyItems() {
             </div>
           </div>
           {toggleSelect ?
-            <button type="submit" className="add-item-button p-0 bord-rad-4">
+            <button type="submit" className="add-item-button p-0 bord-rad-4" style={{background: `${fetchPalletsColor(appearance.colorPalette)}`}}>
               <Link
                 to="/create-single-nft"
                 style={{ textDecoration: "none", color: '#FFFFFF' }}>
@@ -97,7 +101,7 @@ function MyItems() {
               </Link>
             </button>
             :
-            <button type="submit" className="add-item-button p-0 bord-rad-4">
+            <button type="submit" className="add-item-button p-0 bord-rad-4" style={{background: `${fetchPalletsColor(appearance.colorPalette)}`}}>
               <Link
                 to="/create-nft-collection" style={{ textDecoration: "none", color: '#FFFFFF' }}>
                 Create Collection

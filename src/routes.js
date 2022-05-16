@@ -234,11 +234,14 @@ function App() {
             <Route path="/Terms-Condition" element={<TermsAndCondition />} />
             <Route path="/blog-detail" element={<BlogDetail />} />
             <Route path="/page-not-found" element={<PageNotFound />} />
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
           {/* </Switch> */}
           <Wallet />
+
+          <Footer />
         </Router>
-        <Footer />
+        
         
         <Notification />
       </div>

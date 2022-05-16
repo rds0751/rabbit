@@ -17,12 +17,15 @@ import { CheckUserByWalletAddress } from "../../services/UserMicroService";
 import { WEB_APP_USER_WALLET_ADDRESS } from "../../reducers/Constants";
 import Metamask from "../../assets/images/Metamask.svg"
 function Create() {
+
+  const customize = useSelector(state => state.customize)
+
   const history = useNavigate();
   const [humburger, setHumburger] = useState(false);
   const ethereum = window.ethereum;
   const [errorMssg, setErrorMssg] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
-  console.log("ethereum ", ethereum && ethereum);
+  
   const { user, sideBar } = useSelector((state) => state);
   const [checkClick, setcheckClick] = useState(false);
   const [getBalance, setGetBalance] = useState(null);
@@ -30,8 +33,7 @@ function Create() {
   const { userDetails, loggedInUser, redirectUrl } = user;
   const { isOpenWallet } = sideBar;
   const [toggleEffect, setToggleEffect] = useState(false);
-  console.log("ttttttttttttttttttttttttttttt",toggleEffect)
-  console.log("redireurl-----",redirectUrl)
+  
   useEffect(() => {
     if (loggedInUser != null) {
       toast.success("Wallet connected");
@@ -45,8 +47,7 @@ function Create() {
         if (redirectUrl == "profile") {
           history("/my-profile");
         }
-        if (redirectUrl == "create") {
-          console.log("s")
+        if (redirectUrl == "create") {          
           history("/create-nft");
         }
         if (redirectUrl == "wallet") {
@@ -77,8 +78,7 @@ function Create() {
             .request({ method: "eth_getBalance", params: [address, "latest"] })
             .then((wallet_balance) => {
               // setGetBalance(ethers.utils.formatEther(balance));
-              const balance = ethers.utils.formatEther(wallet_balance);
-              console.log(getBalance, "<<< balance");
+              const balance = ethers.utils.formatEther(wallet_balance);              
               // -----------------
               dispatch(
                 AddWalletDetails({
@@ -87,7 +87,7 @@ function Create() {
                 })
               );
               CheckUserByWalletAddress(address, (res) => {
-                console.log(res, "<<<< Account changed");
+                
                 dispatch(addUserData(res));
                 localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
                 // console.log("dmmmmmmmmmmmmmmm")
@@ -122,12 +122,10 @@ function Create() {
       .request({ method: "eth_getBalance", params: [address, "latest"] })
       .then((wallet_balalnce) => {
         // setGetBalance(ethers.utils.formatEther(wallet_balalnce));
-        const balance = ethers.utils.formatEther(wallet_balalnce); //balance
-        console.log(getBalance, "<<< balance");
+        const balance = ethers.utils.formatEther(wallet_balalnce); //balance        
         // --------------------------------------------------------setting it to reducer
         dispatch(AddWalletDetails({ address, balance }));
-        CheckUserByWalletAddress(address, (res) => {
-          console.log(res, "<<<< Account changed");
+        CheckUserByWalletAddress(address, (res) => {          
           dispatch(addUserData(res));
           localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
 
@@ -140,18 +138,27 @@ function Create() {
     window.ethereum
       .request({ method: "eth_getBalance", params: [address, "latest"] })
       .then((balance) => {
-        setGetBalance(ethers.utils.formatEther(balance));
-        console.log(getBalance, "<<< balance");
+        setGetBalance(ethers.utils.formatEther(balance));        
       });
   };
 
   useEffect(()=>{
-    window.ethereum?.on("accountsChanged", accountChangeHandler);
+    window.ethereum?.on("accountsChanged", accountChangeHandler); 
+
   },[])
 
-  
-  console.log(loggedInUser, "<<<<<this iser user detail");
-  console.log("mffffffmmmmmsmmmmmffffffff",toggleEffect)
+
+  useEffect(()=>{
+    console.log(customize.permissionToUploadNft, 'ony me')
+
+    if(customize.permissionToUploadNft === 'Only me'){
+      history("/");
+
+      toast.warning("You are not allowed to access this location", {
+        position: toast.POSITION.TOP_RIGHT
+      });
+    }
+  },[customize.permissionToUploadNft])
 
 
   return (

@@ -92,7 +92,7 @@ function Navbar() {
   }
 
   useEffect(() => {
-    console.log('called navbar')
+
     async function fetchData() {
       getTenantData().then((response) => setTenantData(response));
     }
@@ -159,8 +159,6 @@ function Navbar() {
   };
   const accountChangeHandler = (newAccount) => {
 
-    console.log(newAccount, 'account changed')
-
     if (newAccount.length > 0) {
       setDefaultAccount(newAccount[0]);
       getUserBalance(newAccount[0]);
@@ -190,8 +188,6 @@ function Navbar() {
   let location = useLocation();
 
   const manageNavigation = (name) => {
-
-    console.log('called manage navigation', name)
 
     setDisplay(true);
     if (name == "myitems") {
@@ -252,7 +248,7 @@ function Navbar() {
     setDisplay(!display);
   };
   const handleWalletClick = () => {
-    console.log('called wallet local')
+    
     setDisplay(true);
     if (walletAddress == null) {
       
@@ -271,7 +267,7 @@ function Navbar() {
     }
   };
   const handleNotiSideBar = () => {
-    console.log('called sidebar')
+    
     setDisplay(true);
 
     if (loggedInUser == null) {
@@ -368,7 +364,7 @@ function Navbar() {
   let userId = loggedInUser ? loggedInUser._id : localStorage.userId;
 
   useEffect(() => {
-    console.log('called usenavbar')
+    
     getNotificationListById(userId).then((response) =>
       setNotifications(response)
     );
@@ -385,9 +381,6 @@ function Navbar() {
   useEffect(() => {
     window.ethereum?.on("accountsChanged", accountChangeHandler);
 
-    window.ethereum?.on('disconnect', () => {
-      console.log('Account Disconnect')
-    });
   }, [])
 
   const navLink = {
@@ -498,7 +491,7 @@ function Navbar() {
                                         />
                                         <p className="coll-name">
                                           {collection.name}
-                                          <span className="item-count">
+                                          <span className="item-count" style={{color: `${fetchPalletsColor(customize.appearance.colorPalette)}`}}>
                                             {collection.nftCount} items
                                           </span>
                                         </p>
@@ -538,7 +531,7 @@ function Navbar() {
                                   value: inputValue,
                                 }}
                               >
-                                <button className="show-more-btn">
+                                <button className="show-more-btn" style={{color: `${fetchPalletsColor(customize.appearance.colorPalette)}`}}>
                                   show more
                                 </button>
                               </Link>
@@ -804,7 +797,7 @@ function Navbar() {
                     </ul>
                   </li> */}
                   {
-                    customize.permissionToUploadNft === 'Everyone' ?
+                    customize.permissionToUploadNft !== 'Only me' ?
                     <li
                     style={{ marginRight: "28px" }}
                     onClick={() => {

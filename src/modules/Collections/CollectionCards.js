@@ -10,7 +10,7 @@ import { getALLCollectionById } from "../../services/contentMicroservice";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import Spinner from "../../common/components/Spinner";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NoItem from "../../assets/images/Noitems.svg"
 import dropdown from "../../assets/images/dropdown.svg";
 // MUI select code
@@ -154,6 +154,9 @@ const queryString = require('query-string');
 function Collections_tile() {
 
   const appearance = useSelector(state => state.customize.appearance);
+  const customize = useSelector(state => state.customize);
+
+  const navigate = useNavigate();
 
   const initialFilterData = {
     sort: "",
@@ -206,8 +209,7 @@ function Collections_tile() {
     // ----get all nfts by collection--------
     getALLCollectionById(collectionId, (res) => {
       if (res.success) {
-        setCollections(res.responseData);
-        console.log(res, "<<<<<<<<collections", collections);
+        setCollections(res.responseData);        
         setIsLoading(false);
       } else {
         toast.error("Error While Fetching Data");
@@ -248,6 +250,15 @@ function Collections_tile() {
     button.style.background = fetchPalletsColor(appearance.colorPalette);
   }
 
+  useEffect(()=>{
+    if(customize.permissionToUploadNft === 'Only me'){
+      navigate("/");
+
+      toast.warning("You are not allowed to access this location", {
+        position: toast.POSITION.TOP_RIGHT
+      });
+    }
+  },[customize.permissionToUploadNft])
 
   return (
     <>

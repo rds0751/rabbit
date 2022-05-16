@@ -19,11 +19,14 @@ import $ from 'jquery';
 import noProfile from '../../assets/images/NoProfile.svg'
 import { format } from "util";
 import { borderRadius } from "@mui/system";
+import { fetchPalletsColor } from "../../utility/global";
 
 const Button = styled.button``;
 
 function EditProfile(props) {
   let { user } = useSelector((state) => state);
+  const appearance = useSelector(state => state.customize.appearance)
+
   let { loggedInUser } = user;
 
   if (loggedInUser) { localStorage.setItem('userId', loggedInUser._id); }
@@ -33,7 +36,7 @@ function EditProfile(props) {
   if (loggedInUser == null) {
     loggedInUser = localStorage.getItem('loggedInDetails')
   }
-  console.log("ooooooosooooooooooo", loggedInUser)
+  
   const navigate = useNavigate();
   const hiddenFileInput = useRef(null);
   const [desLength, setDesLength] = useState(0);
@@ -60,7 +63,7 @@ function EditProfile(props) {
 
   const [portfiloError, SetPortfiloError] = useState('');
   const [disabledButton, setDisabledButton] = useState(false);
-  console.log(user.loggedInUser, "<<<loggedin");
+  
   // const photo = useRef(user?.loggedInUser?.photo);
   // const bio = useRef(user?.loggedInUser?.bio);
   // const userName = useRef(user?.loggedInUser?.userName);
@@ -70,8 +73,7 @@ function EditProfile(props) {
     hiddenFileInput.current.click();
     // console.log("hidden file input",hiddenFileInput)
   };
-  console.log(localStorage.getItem(WHITE_LABEL_TOKEN), "<<<this is token");
-
+  
   const handleChange = async (event) => {
     try{
       var filesize=event.target.files[0].size;
@@ -156,7 +158,6 @@ function EditProfile(props) {
       setPortfilo(loggedInUser.portfolio)
       setImageUrl(loggedInUser.photo)
 
-      console.log("ddddddddddddddddddd", imageUrl)
       // userPublicProfile((res) => {
         // console.log("jjjjjjjjjjjjjj")
         // console.log(res, "filterResponse");
@@ -324,9 +325,12 @@ const enabled=useruserName?.length > 0 && bio?.length > 0 &&  portfilo?.length >
                 onClick={handleClick}
                 className=" btn-choose-file"
               // style={{ marginTop: "4em" }}
-              // onChange={(e) => handleChange(e)}
+              // onChange={(e) => handleChange(e)}              
+              style={{border: `1px solid ${fetchPalletsColor(appearance.colorPalette)}`}}
               >
-                <span className="choosefile">Choose File</span>
+                <span className="choosefile"
+                  style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}}
+                >Choose File</span>
               </Button>
               <Button style={{display:"block",marginTop:"10px",border:"1px solid red"}}   className=" btn-choose-file" onClick={()=>setImageUrl("")}>
               <span className="choosefile" style={{color:"red"}}> Remove File</span> 
@@ -435,7 +439,7 @@ const enabled=useruserName?.length > 0 && bio?.length > 0 &&  portfilo?.length >
             </button>
             <button type="submit" className="editprofileSubmitButton"
               disabled={!enabled}
-               style={{ opacity: !enabled ? 0.6 : 1 }}
+               style={{ opacity: !enabled ? 0.6 : 1, background: `${fetchPalletsColor(appearance.colorPalette)}` }}
               onClick={(e) => handleSubmit(e)}>
               <span className="updateProfile">Update Profile</span>
             </button>

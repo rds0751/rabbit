@@ -369,6 +369,19 @@ function CreateNftCollections(props) {
    }
   }, [blockchains]) 
 
+
+  useEffect(()=>{
+
+    if(customize.permissionToUploadNft === 'Only me'){
+      navigate("/");
+
+      toast.warning("You are not allowed to access this location", {
+        position: toast.POSITION.TOP_RIGHT
+      });
+    }
+
+  },[customize.permissionToUploadNft])
+
   let enabled=name?.current.length > 0 && description?.current.length > 0  && nameError=="" && bannerCdn!="" && logoCdn!="" && DesError=="" && selectCategory?.length >0; 
   return (
     <>
