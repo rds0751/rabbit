@@ -10,8 +10,11 @@ import HoverImage from "react-hover-image";
 import { version } from "../../version.js"
 import { useSelector } from "react-redux";
 import { fetchPalletsColor } from "../../utility/global"
+import { Link, useNavigate } from "react-router-dom";
 
 function Footer() {
+
+  const navigate = useNavigate();
 
   const customize = useSelector(state => state.customize);
 
@@ -80,6 +83,10 @@ function Footer() {
       window.open( url.replace('www.','http://') );
     }
 
+  }
+
+  const handleRedirectLink = (url) => {
+    navigate(url)
   }
 
   return (
@@ -164,7 +171,7 @@ function Footer() {
               {email}
             </div>
             <h3 className="about">
-              <a className="aboutText" href="/about" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+              <a className="aboutText" onClick={()=>handleRedirectLink('/about')} onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                 {customize.about.title}
               </a>
             </h3>
@@ -185,80 +192,80 @@ function Footer() {
                 className="fs-18 d-flex flex-column"
                 style={{ color: "#8F8F8F" }}
               >
-                <a href="/nfts" className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <a onClick={()=>handleRedirectLink('/nfts')} className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Marketplace
                 </a>
-                <a href="/nfts" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <a onClick={()=>handleRedirectLink('/nfts')} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   NFT
                 </a>
-                <a href="/collections-tile" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <a onClick={()=>handleRedirectLink('/collections-tile')} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Collections
                 </a>
               </div>
               <div className="fs-18 d-flex flex-column">
-                <a href="/leader-board" className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <a onClick={()=>handleRedirectLink('/leader-board')} className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Leaderboard
                 </a>
                 <p>
-                  <a href="/top-seller" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                  <a onClick={()=>handleRedirectLink('/top-seller')} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                     Top Seller
                   </a>
                 </p>
                 <p>
-                  <a href="/top-bidder" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                  <a onClick={()=>handleRedirectLink('/top-bidder')} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                     Top Buyer
                   </a>
                 </p>
                 <p>
-                  <a href="/top-collection" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                  <a onClick={()=>handleRedirectLink('/top-collection')} href="/top-collection" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                     Top Collections
                   </a>
                 </p>
               </div>
             </div>
             <div className="fs-18 d-flex flex-column">
-              <a href="/help-center" className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+              <Link to="/help-center" className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                 Community
-              </a>
+              </Link>
               <p>
-                <a href="/help-center" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to="/help-center" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Help Centers
-                </a>
+                </Link>
               </p>
               <p>
-                <a href="/FAQs" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to="/FAQs" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   FAQs
-                </a>
+                </Link>
               </p>
               <p>
-                <a href="/suggestion" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to="/suggestion" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Suggestions
-                </a>
+                </Link>
               </p>
               <p>
-                <a href="/blogs" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to="/blogs" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Blogs
-                </a>
+                </Link>
               </p>
             </div>
             <div className="fs-18 d-flex flex-column">
-              <a href="/about" className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+              <Link to="/about" className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                 Company
-              </a>
+              </Link>
               <p>
-                <a href="/about" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to="/about" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   About
-                </a>
+                </Link>
               </p>
               <p>
-                <a href="/privacy" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to="/privacy" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Privacy Policy
-                </a>
+                </Link>
               </p>
               <p>
-                <a href="/Terms-Condition" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to="/Terms-Condition" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Terms and Conditons
-                </a>
+                </Link>
               </p>
             </div>
           </div>
@@ -275,90 +282,90 @@ function Footer() {
           <div className="row footer-bottom-sm">
             <div className="col-7">
               <h3 className="fs-18 fw-b">
-                <a href="/nfts" className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to="/nfts" className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Marketplace
-                </a>
+                </Link>
               </h3>
               <p>
-                <a href="/nfts" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to="/nfts" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Nft
-                </a>
+                </Link>
               </p>
               <p>
-                <a href="/collections-tile" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to="/collections-tile" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Collections
-                </a>
+                </Link>
               </p>
             </div>
             <div className="col-5">
               <h3 className="fs-18 fw-b">
-                <a className="footertitle" href="/leader-board" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link className="footertitle" to="/leader-board" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Leaderboard
-                </a>
+                </Link>
               </h3>
               <p>
-                <a href="/top-seller" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to="/top-seller" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Top Seller
-                </a>
+                </Link>
               </p>
               <p>
-                <a href="/top-bidder" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to="/top-bidder" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Top Buyer
-                </a>
+                </Link>
               </p>
               <p>
-                <a href="/top-collection" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to="/top-collection" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Top Collections
-                </a>
+                </Link>
               </p>
             </div>
             <div className="col-7 mt-3">
               <h3 className="fs-18 fw-b">
-                <a className="footertitle" href="/help-center" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link className="footertitle" to="/help-center" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Community
-                </a>
+                </Link>
               </h3>
               <p>
-                <a href="/help-center" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to="/help-center" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Help Centers
-                </a>
+                </Link>
               </p>
               <p>
-                <a href="/FAQs" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to="/FAQs" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   FAQs
-                </a>
+                </Link>
               </p>
               <p>
-                <a href="/suggestion" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to="/suggestion" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Suggestions
-                </a>
+                </Link>
               </p>
               <p>
-                <a href="/blogs" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to="/blogs" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Blogs
-                </a>
+                </Link>
               </p>
             </div>
             <div className="col-5 mt-3">
               <h3 className="fs-18 fw-b">
-                <a href="/about" className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to="/about" className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Company
-                </a>
+                </Link>
               </h3>
               <p>
-                <a href="/about" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to="/about" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   About
-                </a>
+                </Link>
               </p>
               <p>
-                <a href="/about" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to="/about" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Privacy Policy
-                </a>
+                </Link>
               </p>
               <p>
-                <a href="/about" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to="/about" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   Terms and Conditon
-                </a>
+                </Link>
               </p>
             </div>
             <div className="copyrightDivMob">

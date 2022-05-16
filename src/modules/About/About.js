@@ -4,9 +4,14 @@ import axios from "axios";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { BASE_URL2, WHITE_LABEL_TOKEN } from "../../reducers/Constants";
 import "../../assets/styles/about.css";
+import { useSelector } from "react-redux";
+import { fetchPalletsColor } from "../../utility/global";
 const dev_url = "https://goi4mbj86f.execute-api.us-east-1.amazonaws.com/dev/"; // need to store it in .env file
 
 function About() {
+
+  const appearance = useSelector(state => state.customize.appearance);
+
   const [aboutData, setAboutData] = useState([]);
   useEffect(() => {
     (async () => {
@@ -31,15 +36,15 @@ function About() {
         <div className="descriptionTag">
           {/* <div clasName="col-sm-3"></div> */}
           <div className="first-div ">
-            <p className="valueText">$274M</p>
+            <p className="valueText" style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}}>$274M</p>
             <p className="TitleText">Trading volume</p>
           </div>
           <div className="second-div ">
-            <p className="valueText">405K</p>
+            <p className="valueText" style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}}>405K</p>
             <p className="TitleText">NFTs created</p>
           </div>
           <div className="third-div ">
-            <p className="valueText">1.6M</p>
+            <p className="valueText" style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}}>1.6M</p>
             <p className="TitleText">Total users</p>
           </div>
           {/* <div className="col-sm-3"></div> */}
@@ -52,12 +57,11 @@ function About() {
             >
               <h6 className="text-center font-14 font-weight-700 mt-2">
                 <MailOutlineIcon
-                  style={{ fontSize: "35px" }}
-                  className="text-primary"
+                  style={{ fontSize: "35px", color: `${fetchPalletsColor(appearance.colorPalette)}` }}                  
                 />
                 Contact Us:{" "}
                 <span>
-                <a href="">
+                <a href="mailto:hello@anafto.com" style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}}>
                   {
                     "hello@anafto.com"
                   }

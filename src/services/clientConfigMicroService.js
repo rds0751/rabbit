@@ -31,15 +31,16 @@ export function getCategories(requestData) {
     });
 }
 
-export async function getTenantData() {
+export async function getTenantData(paramToken=false, paramAddress=false) {
   const token = {
     "Access-Control-Allow-Origin": "*",
     "Content-type": "Application/json",
-    "x-access-token": `${localStorage.getItem(WHITE_LABEL_TOKEN)}`,
+    "x-access-token": `${paramToken || localStorage.getItem(WHITE_LABEL_TOKEN)}`,
   };
   try {
     let address = localStorage.getItem("walletAddress") ? localStorage.getItem("walletAddress") : "0x9affb1cf8e276657f857e0b6c982e093bdb50968";
-    const url = `${BASE_URL1}/api/v1/tenant/wallet/${address}`;
+    let loggedAddres = paramAddress || address
+    const url = `${BASE_URL1}/api/v1/tenant/wallet/${loggedAddres}`;
     const res = await fetch(url, { headers: token });
     const result = await res.json();
     const tenantData = result.responseData;

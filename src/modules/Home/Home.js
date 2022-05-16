@@ -204,7 +204,7 @@ function Home() {
                             nfts.slice(0, 4).map((nft) => {
                               // const { _id, cdnUrl, name, biddingDetails, salesInfo } = nft;
                               let route;
-                              if (nft.contentId != ""){
+                              if (nft.hasOwnProperty('contentId') && nft.contentId != ""){
                                 route = "/nft-information/" + nft.contentId;
                               } else {
                                 route = "/nft-information/" + nft._id;
@@ -262,7 +262,8 @@ function Home() {
                                               to={
                                                 "/nft-information/" + nft?._id
                                               }
-                                              style={{ textDecoration: "none" }}
+                                              style={{ textDecoration: "none", color: `${fetchPalletsColor(customize.appearance.colorPalette)}` }}
+                                              
                                             >
                                               {nft?.name}
                                             </Link>
@@ -387,6 +388,7 @@ function Home() {
                                                     }
                                                     style={{
                                                       textDecoration: "none",
+                                                      color: `${fetchPalletsColor(customize.appearance.colorPalette)}`
                                                     }}
                                                   >
                                                     {nft?.name}

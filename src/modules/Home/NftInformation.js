@@ -42,6 +42,7 @@ import {
 import LikedNfts from "../../modules/MyPages/LikedNfts";
 import NftCardsHome from "../../common/components/NftCardsHome";
 import "../../assets/styles/myProfile.css"
+import { fetchPalletsColor } from "../../utility/global";
 toast.configure();
 const CustomSnack = styled(Snackbar)`
   @media (min-width: 992px) {
@@ -115,10 +116,10 @@ export default function NftInformation(props) {
   const [isOpenForSell, setisOpenForSell] = useState(null);
   const { loggedInUser, walletAddress } = user;
   const { id } = useParams();
-  
+
 
   const nft = props?.responseData;
-  
+
   const defaultFilter = {
     searchByName: "",
     status: "",
@@ -127,7 +128,7 @@ export default function NftInformation(props) {
     maxPrice: "",
   }
 
-  const { owner, creator, salesInfo,blockchain } = nft;
+  const { owner, creator, salesInfo, blockchain } = nft;
   const [openReportModal, setOpenReportModal] = useState(false);
   const [saleModal, setsaleModal] = useState(false);
   const [putOnSaleModal, setPutOnSaleModal] = useState(false);
@@ -140,7 +141,7 @@ export default function NftInformation(props) {
   const [toShow, settoShow] = useState(true);
   const [makeOfferModal, setMakeOfferModal] = useState(false);
   const [filter, setFilter] = useState(defaultFilter);
-  const [moreNft ,setMoreNfts]=useState([]);
+  const [moreNft, setMoreNfts] = useState([]);
 
   const [state, setState] = React.useState({
     open: false,
@@ -185,19 +186,19 @@ export default function NftInformation(props) {
 
   useEffect(() => {
     async function fetchData() {
-     // setIsLoading(true);
+      // setIsLoading(true);
       const reqObj = queryString.stringify(filter);
       await getNftsByCollectionId(nft?.collectionId, reqObj).then((res) => {
         setMoreNfts(res.nftContent);
-       // setIsLoading(false);
+        // setIsLoading(false);
       });
     }
     fetchData();
-  },[nft]);
+  }, [nft]);
 
-  useEffect(()=>{
+  useEffect(() => {
 
-  },[nft.cdnUrl])
+  }, [nft.cdnUrl])
 
 
   // alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
@@ -247,7 +248,7 @@ export default function NftInformation(props) {
       // saleData:response.salesInfo,
       // tokenId:response.tokenId,
       // nftId:response._id,
-      blockchain:nft?.blockchain
+      blockchain: nft?.blockchain
     });
     // setPutOnSaleModal(false)
   };
@@ -260,7 +261,7 @@ export default function NftInformation(props) {
       // saleData:response.salesInfo,
       // tokenId:response.tokenId,
       // nftId:response._id,
-      blockchain:nft?.blockchain
+      blockchain: nft?.blockchain
     });
     // setRemoveFromSale(false)
   };
@@ -269,7 +270,7 @@ export default function NftInformation(props) {
       props?.BuyNowNft({
         buyerId: loggedInUser?._id,
         newOwnerAddress: walletAddress?.address,
-        blockchain:nft?.blockchain
+        blockchain: nft?.blockchain
       });
       setOpenLoadingModal(true);
     } else {
@@ -367,18 +368,18 @@ export default function NftInformation(props) {
   const url = window.location.href;
 
 
-  const blockchainCheck=(blockchain)=>{
-    switch(blockchain){
+  const blockchainCheck = (blockchain) => {
+    switch (blockchain) {
       case 'Ethereum':
-      return <img className="currency-sign-nftinformation" src={Ethereum}></img>
+        return <img className="currency-sign-nftinformation" src={Ethereum}></img>
       case 'Polygon':
-      return <img className="currency-sign-nftinformation" src={Polygon}></img>
+        return <img className="currency-sign-nftinformation" src={Polygon}></img>
       case 'Binance':
-      return <img className="currency-sign-nftinformation" src={Binance}></img>
+        return <img className="currency-sign-nftinformation" src={Binance}></img>
       default:
         return '';
     }
-    
+
   }
 
   return (
@@ -506,16 +507,16 @@ export default function NftInformation(props) {
                   >
                     <li className="list-item" >
                       <CopyToClipboard text={url}>
-                      <button
-                        className="copy-url-button"
-                        onClick={handleClick({
-                          vertical: "top",
-                          horizontal: "right",
-                        })}
-                      >
-                        <img  src={copyIcon} alt="icon" className="icon" />
-                        <span  className="icon-text">Copy link</span>
-                      </button>
+                        <button
+                          className="copy-url-button"
+                          onClick={handleClick({
+                            vertical: "top",
+                            horizontal: "right",
+                          })}
+                        >
+                          <img src={copyIcon} alt="icon" className="icon" />
+                          <span className="icon-text">Copy link</span>
+                        </button>
                       </CopyToClipboard>
                     </li>
                     <li className="list-item">
@@ -557,20 +558,66 @@ export default function NftInformation(props) {
             />
             <div className="col-xl-5 col-lg-5 col-md-12">
               <div className="nftdetail-img">
-                <img
-                  onMouseDown={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()}
-                  // src={nft.cdnUrl}
-                  src={nft.cdnUrl === "" ? nft.ipfsUrl : (nft.cdnUrl ? nft.cdnUrl : Imagep)}
-                  // src={Imagep}
-                  alt="nft"
-                  className="border-radius imginfo_mob"
-                  style={{
-                    maxWidth: "100%",
-                    // height: "837px",
-                    borderRadius: "8px",
 
-                  }}
-                />
+                {
+                  nft.cdnUrl === "" ?
+                    <img
+                      onMouseDown={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()}
+                      // src={nft.cdnUrl}
+                      src={nft.ipfsUrl}
+                      // src={Imagep}
+                      alt="nft"
+                      className="border-radius imginfo_mob"
+                      style={{
+                        maxWidth: "100%",
+                        // height: "837px",
+                        borderRadius: "8px",
+
+                      }}
+                    />
+                    : nft.cdnUrl ?
+                      <img
+                        onMouseDown={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()}
+                        // src={nft.cdnUrl}
+                        src={nft.cdnUrl}
+                        // src={Imagep}
+                        alt="nft"
+                        className="border-radius imginfo_mob"
+                        style={{
+                          maxWidth: "100%",
+                          // height: "837px",
+                          borderRadius: "8px",
+
+                        }}
+                      /> : <svg xmlns="http://www.w3.org/2000/svg" width="110" height="110" viewBox="0 0 110 110">
+                        <g id="image" transform="translate(-372 -618)">
+                          <rect id="Rectangle_271" data-name="Rectangle 271" width="110" height="110" transform="translate(372 618)" fill="none" />
+                          <g id="Icon_feather-image" data-name="Icon feather-image" transform="translate(380 626)">
+                            <path id="Path_34" data-name="Path 34" d="M15.053,4.5H88.926A10.553,10.553,0,0,1,99.479,15.053V88.926A10.553,10.553,0,0,1,88.926,99.479H15.053A10.553,10.553,0,0,1,4.5,88.926V15.053A10.553,10.553,0,0,1,15.053,4.5Z" transform="translate(-4.5 -4.5)" fill="none" stroke={`${fetchPalletsColor(appearance.colorPalette)}`} stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                            <path id="Path_35" data-name="Path 35" d="M26.33,18.415A7.915,7.915,0,1,1,18.415,10.5,7.915,7.915,0,0,1,26.33,18.415Z" transform="translate(10.607 10.607)" fill="none" stroke={`${fetchPalletsColor(appearance.colorPalette)}`} stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                            <path id="Path_36" data-name="Path 36" d="M91.926,41.383,65.543,15,7.5,73.043" transform="translate(3.053 21.936)" fill="none" stroke={`${fetchPalletsColor(appearance.colorPalette)}`} stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                          </g>
+                        </g>
+                      </svg>
+
+                }
+
+                {/*
+                  <img
+                    onMouseDown={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()}
+                    // src={nft.cdnUrl}
+                    src={nft.cdnUrl === "" ? nft.ipfsUrl : nft.cdnUrl ? nft.cdnUrl : Imagep}
+                    // src={Imagep}
+                    alt="nft"
+                    className="border-radius imginfo_mob"
+                    style={{
+                      maxWidth: "100%",
+                      // height: "837px",
+                      borderRadius: "8px",
+
+                    }}
+                  />
+                  */}
               </div>
               <div className="row mt-4 desktop-acti">
                 <PricingHistoryComponentTable id={id} />
@@ -681,20 +728,20 @@ export default function NftInformation(props) {
                       >
                         <li
                           className="list-item"
-                         
+
                         >
                           {" "}
                           <CopyToClipboard text={url}>
-                          <button
-                            className="copy-url-button"
-                            onClick={handleClick({
-                              vertical: "top",
-                              horizontal: "right",
-                            })}
-                          >
-                            <img src={copyIcon} alt="icon" className="icon" />
-                            <span className="icon-text">Copy link</span>
-                          </button>
+                            <button
+                              className="copy-url-button"
+                              onClick={handleClick({
+                                vertical: "top",
+                                horizontal: "right",
+                              })}
+                            >
+                              <img src={copyIcon} alt="icon" className="icon" />
+                              <span className="icon-text">Copy link</span>
+                            </button>
                           </CopyToClipboard>
                         </li>
                         <li className="list-item">
@@ -874,7 +921,7 @@ export default function NftInformation(props) {
               <div className="fourth-text">
                 <div style={{ marginRight: "20px" }}>
                   <VisibilityIcon
-                    style={{ fontSize: "21px", color: "#366EEF" }}
+                    style={{ fontSize: "21px", color: `${fetchPalletsColor(appearance.colorPalette)}` }}
                   />
                   <span className="text fw-b" style={{ marginLeft: "0.5em" }}>
                     {nft.viewsCount}
@@ -895,10 +942,10 @@ export default function NftInformation(props) {
               </div>
 
               {/*  IF nft is not created by logged in user these buttons will be shown */}
-              
+
               <div className="buy-offer-btn">
 
-                
+
                 <Button
                   style={{
                     display:
@@ -906,6 +953,7 @@ export default function NftInformation(props) {
                         props?.responseData?.salesInfo?.isOpenForSale
                         ? "block"
                         : "none",
+                    background: `${fetchPalletsColor(appearance.colorPalette)}`
 
                   }}
                   onClick={buyNft}
@@ -923,10 +971,10 @@ export default function NftInformation(props) {
                         props?.responseData?.salesInfo?.isOpenForSale
                         ? "block"
                         : "none",
-                    color: "#366EEF",
+                    color: `${fetchPalletsColor(appearance.colorPalette)}`,
                     backgroundColor: "white",
                     textTransform: "none",
-                    border: "1px solid #366EEF",
+                    border: `1px solid ${fetchPalletsColor(appearance.colorPalette)}`,
                   }}
                   onClick={makeOffer}
                   className="makeOfferButton"
@@ -1008,46 +1056,47 @@ export default function NftInformation(props) {
                     Offers
                   </li> */}
                 </ul>
-                {tab === 1 ? <PricingHistoryComponentGraph id={id}  currency={nft?.salesInfo?.currency}/> : ""}
+                {tab === 1 ? <PricingHistoryComponentGraph id={id} currency={nft?.salesInfo?.currency} /> : ""}
                 {tab === 2 ? <ListingsTable id={id} /> : ""}
                 {tab === 3 ? <ListingsTable id={id} /> : ""}
                 {tab === 4 ? <DetailPage nft={nft} /> : ""}
               </div>
             </div>
           </div>
-        
+
           <div className="row mt-4 activities">
             <div className="col-xl-5 col-lg-5 col-md-12 col-sm-12">
               <PricingHistoryComponentTable id={id} />
             </div>
           </div>
 
-          
-          <div className="more-Collection-div" style={{display:moreNft?.length > 0 ? "block":"none"}}>
-          <label className="MoreCollection">More from this collection</label>
-          <div className="nftTileContainer ntf_row scroll-nft-card" 
-          style={{justifyContent:"start",
-          overflowX:moreNft?.length>4?"scroll":"hidden"
-        }}>
-        
-            {
-              moreNft.map((nft) => {
-                
-              return (
-                <>
-                  <NftCardsHome nft={nft} appearance={appearance} />
-                
-                </>
-              );
-            
-                
-                
-              })
-            }
-            
+
+          <div className="more-Collection-div" style={{ display: moreNft?.length > 0 ? "block" : "none" }}>
+            <label className="MoreCollection">More from this collection</label>
+            <div className="nftTileContainer ntf_row scroll-nft-card"
+              style={{
+                justifyContent: "start",
+                overflowX: moreNft?.length > 4 ? "scroll" : "hidden"
+              }}>
+
+              {
+                moreNft.map((nft) => {
+
+                  return (
+                    <>
+                      <NftCardsHome nft={nft} appearance={appearance} />
+
+                    </>
+                  );
+
+
+
+                })
+              }
+
+            </div>
           </div>
-          </div>
-        
+
 
           {/* <div className="row mt-4">
                 <PricingHistoryComponentTable id={id} />

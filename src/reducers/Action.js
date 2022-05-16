@@ -24,6 +24,7 @@ import {
 import { ADD_USER, GET_ERRORS, ALL_USERS } from "./Constants";
 import axios from "axios";
 import { ethers } from "ethers";
+import { getTenantData } from "../services/clientConfigMicroService";
 
 export const addUseraction = (data) => (dispatch) => {
   axios
@@ -64,8 +65,17 @@ export const AddWalletDetails = (data) => (dispatch) => {
 };
 
 export const addUserData = (data) => (dispatch) => {
-  console.log(data, "<<<data from addUserdata");
+  console.log('account connected')
   dispatch({ type: LOGGED_IN_UER_DETAILS, payload: data });
+
+  // Fetch Tenent data
+  getTenantData(data.token, data.wallet_address)
+    .then(response => {
+      dispatch({ type: 'ADD_CUSTOMIZE_DATA', payload: response })
+    })
+    .catch(error => {
+
+    })
 
   let address = data.wallet_address;
 
@@ -124,6 +134,8 @@ export const searchNav = (data) => (dispatch) => {
 export const logOut = () => (dispatch) => new Promise((resolve, refect) => {
   dispatch({ type: LOG_OUT });
   dispatch({ type: OPEN_WALLET, payload: false })
+  dispatch({type: 'RESET_APPEARENCE'})
+
   localStorage.removeItem(WHITE_LABEL_TOKEN);
   localStorage.setItem('has_wallet', false)
 

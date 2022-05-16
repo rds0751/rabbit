@@ -360,7 +360,6 @@ function Navbar() {
   let userId = loggedInUser ? loggedInUser._id : localStorage.userId;
 
   useEffect(() => {
-
     getNotificationListById(userId).then((response) =>
       setNotifications(response)
     );
@@ -490,7 +489,7 @@ function Navbar() {
                                         />
                                         <p className="coll-name">
                                           {collection.name}
-                                          <span className="item-count">
+                                          <span className="item-count" style={{color: `${fetchPalletsColor(customize.appearance.colorPalette)}`}}>
                                             {collection.nftCount} items
                                           </span>
                                         </p>
@@ -530,7 +529,7 @@ function Navbar() {
                                   value: inputValue,
                                 }}
                               >
-                                <button className="show-more-btn">
+                                <button className="show-more-btn" style={{color: `${fetchPalletsColor(customize.appearance.colorPalette)}`}}>
                                   show more
                                 </button>
                               </Link>

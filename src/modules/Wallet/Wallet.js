@@ -12,6 +12,7 @@ import { ManageNotiSideBar, ManageWalletSideBar, logOut } from "../../reducers/A
 import Snackbar from "@mui/material/Snackbar";
 import styled from "styled-components";
 import {useNavigate} from 'react-router-dom';
+import { fetchPalletsColor } from "../../utility/global";
 
 
 const CustomSnack = styled(Snackbar)`
@@ -31,6 +32,8 @@ const CustomSnack = styled(Snackbar)`
 `;
 
 function Wallet() {
+
+  const appearance = useSelector(state => state.customize.appearance)
 
   const [humburger, setHumburger] = useState(false);
   const [errorMssg, setErrorMssg] = useState(null);
@@ -209,7 +212,9 @@ function Wallet() {
             <h4>{walletAddress?.balance}</h4>
           </div>
         </div>
-        <button className="btnwallet" onClick={() => handleLogOut()}>Log Out</button>
+        <button className="btnwallet" onClick={() => handleLogOut()} style={{background: `${fetchPalletsColor(appearance.colorPalette)}`}}>
+          Log Out
+          </button>
         {/* <button className="btnwallet">Add Balance</button> */}
       </div>
     </div>
