@@ -412,9 +412,9 @@ export default function NftInformation(props) {
       ) : (
         ""
       )} */}
-      {!props.isNftValid && <PageNotFound />}
+      {/* {!props.isNftValid && <PageNotFound />} */}
 
-      {props.isNftValid && (<>
+      {props.isNftValid ? (<>
       <div className="nft-detail">
         <div className="container info-container">
           <div className="row" style={{ marginTop: "44px" }}>
@@ -1488,7 +1488,9 @@ export default function NftInformation(props) {
       </div>
       
       
-      </>)}
+      </>)
+    :(<PageNotFound />)  
+    }
      
     </>
   );
