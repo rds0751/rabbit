@@ -21,6 +21,7 @@ import closeIcon from "../../assets/images/closeIcon.svg";
 import { Button } from "@mui/material";
 import { getNft, addNftReport } from "../../services/webappMicroservice";
 import { useSelector } from "react-redux";
+import Spinner from '../../common/components/Spinner'
 import {
   put_NftOpenForSale,
   RemoveNftFromSale,
@@ -42,6 +43,8 @@ import {
 import LikedNfts from "../../modules/MyPages/LikedNfts";
 import NftCardsHome from "../../common/components/NftCardsHome";
 import "../../assets/styles/myProfile.css"
+import PageNotFound from "../../common/components/pageNotFound";
+import { ShimmerThumbnail } from "react-shimmer-effects";
 import { fetchPalletsColor } from "../../utility/global";
 toast.configure();
 const CustomSnack = styled(Snackbar)`
@@ -381,6 +384,11 @@ export default function NftInformation(props) {
     }
 
   }
+  let [imageLoading,setImageLoading]=useState({src:nft.cdnUrl,loaded:false })
+  const onImageLoad=()=>{
+    setImageLoading({...imageLoading,loaded:true});
+   }
+   
 
   return (
     <>
@@ -390,7 +398,7 @@ export default function NftInformation(props) {
         : setTimeout(() => {
           window.location.reload(true);
         }, 1000)}
-
+        
       {/* {props?.loaderState ? (
         <div className="center">
           {" "}
@@ -405,6 +413,9 @@ export default function NftInformation(props) {
       ) : (
         ""
       )} */}
+      {/* {!props.isNftValid && <PageNotFound />} */}
+
+      {props.isNftValid ? (<>
       <div className="nft-detail">
         <div className="container info-container">
           <div className="row" style={{ marginTop: "44px" }}>
@@ -1512,6 +1523,12 @@ export default function NftInformation(props) {
           </div>
         </div>
       </div>
+      
+      
+      </>)
+    :(<PageNotFound />)  
+    }
+     
     </>
   );
 }

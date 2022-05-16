@@ -31,7 +31,7 @@ export default class NftDetail extends BaseComponent {
             buySuccess :false,
             saleSuccess :false,
             removeSuccess :false,
-            collectionNFt:[]
+            isNftValid:true,
 
 
 
@@ -53,13 +53,26 @@ export default class NftDetail extends BaseComponent {
         // getNft("620e7b4107515b002ab23afe", (response) => {
         await getNft(id, (response) => {
             console.log(response, "<<<< response of nft");
-            this.setState({
-                responseData: response[0],
-                createdBy: response?.createdBy,
-                salesInfo: response?.salesInfo,
-                // createdBy: "61de9sf37905a9s3863300611d",
-            });
-            console.log("----------", this.state.responseData);
+            if(response.success){
+            
+                this.setState({
+                    responseData: response?.responseData[0],
+                    createdBy: response?.responseData[0].createdBy,
+                    salesInfo: response?.responseData[0].salesInfo,
+                    isNftValid:true,
+
+                    // createdBy: "61de9sf37905a9s3863300611d",
+                });
+                
+            }
+            else{
+             
+                this.setState({
+                    isNftValid:false,
+                })
+            }
+           
+            console.log("----------test", this.state.responseData);
         });
     };
 
@@ -373,6 +386,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
                     buySuccess={this.state.buySuccess}
                     saleSuccess={this.state.saleSuccess}
                     removeSuccess={this.state.removeSuccess}
+                    isNftValid={this.state.isNftValid}
 
                     BuyNowNft={this.BuyNowNft}
                     refreshPage={this.state.refreshPage}

@@ -98,6 +98,33 @@ function CreateSingleNFT(props) {
   const [blockchains, setBlockChains] = useState([]);
   const myRef = useRef(null);
   const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+  const [defaultValueBlockChain,setDefaultValueBlockchain]=useState(
+    [
+      {
+      value: "ETH",
+      label: (
+      <div>
+        <img src={ethereum} height="32px" alt="" /> Ethereum
+      </div>
+    ),
+  },{
+    value: "MATIC",
+    label: (
+      <div>
+        <img src={polygon} height="32px" alt="" /> Polygon
+      </div>
+    ),
+
+  },{
+    value: "BNB",
+    label: (
+      <div>
+        <img src={binance} height="32px" alt="" /> Binance
+      </div>
+      )
+
+  }
+]);
 
   useEffect(() => {
     async function fetchData() {
@@ -487,7 +514,8 @@ function CreateSingleNFT(props) {
     error == "" &&
     royalityError == "" &&
     fileError == "" &&
-    collectionError == "" && !isloader;
+    collectionError == "" &&
+    !isloader;
 
 
     useEffect(()=>{
@@ -825,9 +853,10 @@ function CreateSingleNFT(props) {
                         : setCollectionError(
                             "( The NFTS in this collection can not be minted as this platform has temporarily stopped minting on Ethereum. )"
                           );
-                      setCollectionBlockchain("");
-                      setCollectionId("");
-                      setContractAddress("");
+                          setCollectionId(addressId[0]);
+                          setContractAddress(addressId[1]);
+                          setCollectionName(addressId[2]);
+                          setCollectionBlockchain(addressId[3]);
                     } else if (addressId[3] === "Polygon") {
                       checkValueOnCollection = blockchainOption.some(
                         (el) => el.value === "MATIC"
@@ -837,9 +866,10 @@ function CreateSingleNFT(props) {
                         : setCollectionError(
                             "( The NFTS in this collection can not be minted as this platform has temporarily stopped minting on Polygon.)"
                           );
-                      setCollectionBlockchain("");
-                      setCollectionId("");
-                      setContractAddress("");
+                          setCollectionId(addressId[0]);
+                          setContractAddress(addressId[1]);
+                          setCollectionName(addressId[2]);
+                          setCollectionBlockchain(addressId[3]);
                     } else if (addressId[3] === "Binance") {
                       checkValueOnCollection = blockchainOption.some(
                         (el) => el.value === "BNB"
@@ -849,15 +879,13 @@ function CreateSingleNFT(props) {
                         : setCollectionError(
                             "( The NFTS in this collection can not be minted as this platform has temporarily stopped minting on Binance.)"
                           );
-                      setCollectionBlockchain("");
-                      setCollectionId("");
-                      setContractAddress("");
+                          setCollectionId(addressId[0]);
+                          setContractAddress(addressId[1]);
+                          setCollectionName(addressId[2]);
+                          setCollectionBlockchain(addressId[3]);
                     }
                     if (checkValueOnCollection) {
-                      setCollectionId(addressId[0]);
-                      setContractAddress(addressId[1]);
-                      setCollectionName(addressId[2]);
-                      setCollectionBlockchain(addressId[3]);
+                     
                     }
 
                     console.log(addressId[1], "<<<BlockchainOption");
@@ -899,23 +927,22 @@ function CreateSingleNFT(props) {
                 <div className="block-chain-right">
                   <Select
                     className="input-box-1 rm-border blockchainSelect"
-                    defaultValue={blockchainOption[0]}
+                    style={{
+                      border:
+                        collectionError != ""
+                          ? "1px solid red"
+                          : "1px solid #C8C8C8",
+                    }}
                     onChange={setSelectedOption}
                     options={blockchainOption} //options there
                     placeholder="Select Blockchain"
                     value={
                       collectionBlockchain === "Ethereum"
-                        ? blockchainOption.filter((ele) => {
-                            return ele.value === "ETH";
-                          })
+                        ? defaultValueBlockChain[0]
                         : collectionBlockchain === "Polygon"
-                        ? blockchainOption.filter((ele) => {
-                            return ele.value === "MATIC";
-                          })
+                        ? defaultValueBlockChain[1]
                         : collectionBlockchain === "Binance"
-                        ? blockchainOption.filter((ele) => {
-                            return ele.value === "BNB";
-                          })
+                        ? defaultValueBlockChain[2]
                         : selectedOption
                     } //when user select a option from the list
                     isDisabled={
