@@ -83,10 +83,17 @@ const Button = styled.button`
 const TableContainerCustom = styled(TableContainer)`
   height: 218px !important;
   ::-webkit-scrollbar {
-    /* WebKit */
-    width: 0;
-    height: 0;
+    height: 5px;
   }
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+    width: 2px;
+  }
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
 `;
 const TableUp = styled(Table)`
   height: 0px;
