@@ -485,7 +485,7 @@ function CreateSingleNFT(props) {
     error == "" &&
     royalityError == "" &&
     fileError == "" &&
-    collectionError == "";
+    collectionError == "" && !isloader;
 
   return (
     <>
