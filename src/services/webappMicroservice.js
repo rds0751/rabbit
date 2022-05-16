@@ -50,8 +50,8 @@ export const getNft = async (requestData, successCallBack) => {
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v2/nfts/" + requestData;
   const { data } = await axios.get(url, { headers: AuthToken });
-  if (data.success) {
-    successCallBack(data.responseData);
+  if (data) {
+    successCallBack(data);
   } else {
 
   }

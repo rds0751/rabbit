@@ -7,15 +7,19 @@ import { toast } from "react-toastify";
 import "../../assets/styles/common.css";
 import { ShimmerThumbnail } from "react-shimmer-effects";
 import { addLikeNft } from "../../services/webappMicroservice";
+import Ethereum from "../../assets/images/ether.svg";
+import Polygon from "../../assets/images/ploygon.svg";
+import Binance from "../../assets/images/binance.svg";
 function LikedNfts({ nft }) {
   const { user } = useSelector((state) => state);
-  let _id, cdnUrl, name, salesInfo, compressedURL
+  let _id, cdnUrl, name, salesInfo, compressedURL,blockchain;
   if (nft.userLikedNfts !== undefined) {
     _id = nft.userLikedNfts._id
     cdnUrl = nft.userLikedNfts.cdnUrl
     name  = nft.userLikedNfts.name
     salesInfo  = nft.userLikedNfts.salesInfo
     compressedURL  = nft.userLikedNfts.compressedURL
+    blockchain=nft.userLikedNfts.blockchain
   }
   const [handleLike, setHandleLike] = useState(true);
   const route = "/nft-information/" + _id;
@@ -65,6 +69,20 @@ function LikedNfts({ nft }) {
     setImageLoading({ ...imageLoading, loaded: true });
   };
 
+  const blockchainCheck=(blockchain)=>{
+    switch(blockchain){
+      case 'Ethereum':
+      return <img className="currency-sign" src={Ethereum}></img>
+      case 'Polygon':
+      return <img  className="currency-sign" src={Polygon}></img>
+      case 'Binance':
+      return <img className="currency-sign" src={Binance}></img>
+      default:
+        return '';
+    }
+    
+  }
+
   return (
     <div className="nftCardEach col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
       <div className="card nft-card-radius border-radius cardmob h-100">
@@ -111,6 +129,7 @@ function LikedNfts({ nft }) {
               {name}
             </div>
             <span className="nftTileEachDetailsFirstContainerValue">
+               {blockchainCheck(blockchain)}
               {`${salesInfo?.price}  ${salesInfo?.currency}`}
             </span>
           </div>

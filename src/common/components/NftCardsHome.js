@@ -176,7 +176,7 @@ function NftCardsHome({ nft, appearance }) {
             }
             >
               {undefined !== collectionName &&
-              collectionName.length > 20 ? collectionName.slice(0,20)+"...":(collectionName?.length===0 ? "Anafto Collection" :collectionName)}
+              collectionName.length > 30 ? collectionName.slice(0,30)+"...":(collectionName?.length===0 ? "Anafto Collection" :collectionName)}
            
              </Link>
              </div>

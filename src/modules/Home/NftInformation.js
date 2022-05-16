@@ -21,6 +21,7 @@ import closeIcon from "../../assets/images/closeIcon.svg";
 import { Button } from "@mui/material";
 import { getNft, addNftReport } from "../../services/webappMicroservice";
 import { useSelector } from "react-redux";
+import Spinner from '../../common/components/Spinner'
 import {
   put_NftOpenForSale,
   RemoveNftFromSale,
@@ -42,6 +43,8 @@ import {
 import LikedNfts from "../../modules/MyPages/LikedNfts";
 import NftCardsHome from "../../common/components/NftCardsHome";
 import "../../assets/styles/myProfile.css"
+import PageNotFound from "../../common/components/pageNotFound";
+import { ShimmerThumbnail } from "react-shimmer-effects";
 toast.configure();
 const CustomSnack = styled(Snackbar)`
   @media (min-width: 992px) {
@@ -380,6 +383,11 @@ export default function NftInformation(props) {
     }
     
   }
+  let [imageLoading,setImageLoading]=useState({src:nft.cdnUrl,loaded:false })
+  const onImageLoad=()=>{
+    setImageLoading({...imageLoading,loaded:true});
+   }
+   
 
   return (
     <>
@@ -389,7 +397,7 @@ export default function NftInformation(props) {
         : setTimeout(() => {
           window.location.reload(true);
         }, 1000)}
-
+        
       {/* {props?.loaderState ? (
         <div className="center">
           {" "}
@@ -404,6 +412,9 @@ export default function NftInformation(props) {
       ) : (
         ""
       )} */}
+      {!props.isNftValid && <PageNotFound />}
+
+      {props.isNftValid && (<>
       <div className="nft-detail">
         <div className="container info-container">
           <div className="row" style={{ marginTop: "44px" }}>
@@ -557,20 +568,32 @@ export default function NftInformation(props) {
             />
             <div className="col-xl-5 col-lg-5 col-md-12">
               <div className="nftdetail-img">
+              <div className="nft-information-image-container">
                 <img
                   onMouseDown={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()}
                   // src={nft.cdnUrl}
                   src={nft.cdnUrl === "" ? nft.ipfsUrl : (nft.cdnUrl ? nft.cdnUrl : Imagep)}
+                  onLoad={onImageLoad}
                   // src={Imagep}
                   alt="nft"
                   className="border-radius imginfo_mob"
                   style={{
                     maxWidth: "100%",
+                    width:"100%",
+                    height: "100%",
                     // height: "837px",
                     borderRadius: "8px",
 
                   }}
+                  
                 />
+
+            {!imageLoading.loaded && (
+            <div className="loaderNftInformation "> 
+             <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
+              </div>
+          )}
+          </div>
               </div>
               <div className="row mt-4 desktop-acti">
                 <PricingHistoryComponentTable id={id} />
@@ -1463,6 +1486,10 @@ export default function NftInformation(props) {
           </div>
         </div>
       </div>
+      
+      
+      </>)}
+     
     </>
   );
 }
