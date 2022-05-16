@@ -21,11 +21,22 @@ function CreateNFT() {
   const ethereum = window.ethereum;
   const [errorMssg, setErrorMssg] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null); // defaultAccount having the wallet address
-  console.log("ethereum ", ethereum && ethereum);
+  
   const [checkClick, setcheckClick] = useState(false);
 
   const [getBalance, setGetBalance] = useState(null);
   const dispatch = useDispatch();
+
+
+  useEffect(()=>{
+    if(customize.permissionToUploadNft === 'Only me'){
+      navigate("/");
+
+      toast.warning("You are not allowed to access this location", {
+        position: toast.POSITION.TOP_RIGHT
+      });
+    }
+  },[customize.permissionToUploadNft])
 
 
   return (

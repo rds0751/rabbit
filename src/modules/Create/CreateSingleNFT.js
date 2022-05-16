@@ -44,6 +44,8 @@ const Button = styled.button``;
 function CreateSingleNFT(props) {
   const customize = useSelector((state) => state.customize);
 
+  const navigate = useNavigate();
+
   const [collectionData, setCollectionData] = useState([]);
   const [selectFile, setSelectFile] = useState("");
   const [collectionId, setCollectionId] = useState("");
@@ -514,6 +516,19 @@ function CreateSingleNFT(props) {
     fileError == "" &&
     collectionError == "" &&
     !isloader;
+
+
+    useEffect(()=>{
+
+      if(customize.permissionToUploadNft === 'Only me'){
+        navigate("/");
+  
+        toast.warning("You are not allowed to access this location", {
+          position: toast.POSITION.TOP_RIGHT
+        });
+      }
+
+    },[customize.permissionToUploadNft])
 
   return (
     <>

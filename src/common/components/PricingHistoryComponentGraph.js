@@ -28,23 +28,22 @@ export default function PricingHistoryComponent(props) {
     );
   }, [reqObj]);
 
-  console.log(nftPricingHistory,"<<<NFTpricing History")
+  console.log(nftPricingHistory, "<<<NFTpricing History");
 
   let prices = nftPricingHistory.map((each) => each.totalVolume);
- let number = prices
+  // let number = prices;
 
-if (number == Math.floor(number)) {
-let integer = number + 1
-console.log(integer, "iteger")
-} else {
-  let decimal = number + 0.01
-  console.log(decimal, "decimal")
-
-}
-  // let prices = [20];
+  // if (number == Math.floor(number)) {
+  //   let integer = number + 1;
+  //   console.log(integer, "iteger");
+  // } else {
+  //   let decimal = number + 0.01;
+  //   console.log(decimal, "decimal");
+  // }
+  // let prices = [0.06];
   let dates = nftPricingHistory.map((each) => each?.addedOn);
-    // let dates = nftPricingHistory.map((each) => each?.addedOn);
-  console.log(nftPricingHistory.addedOn,"addedon")
+  // let dates = nftPricingHistory.map((each) => each?.addedOn);
+  console.log(nftPricingHistory.addedOn, "addedon");
   //   let dates = nftPricingHistory.map((each) =>
   //     moment(new Date(each?.addedOn)).format("D MMM YY")
   //   );
@@ -80,6 +79,8 @@ console.log(integer, "iteger")
     average = total / nftPricingHistory.length;
   }
 
+  let x = prices[0] <= 0.4 ? prices[0] + 0.3 : prices[0] <= 1 ? prices[0] + 1 :  prices[0] <= 5 ? prices[0] + 3 : prices[0] <= 100  ? prices[0] + 30 : prices[0] <= 1000  ? prices[0] + 100 : prices[0] + 500;
+
   const object = {
     series: [
       {
@@ -110,13 +111,10 @@ console.log(integer, "iteger")
       yaxis: {
         tickAmount: 4,
         // max: prices[0] + 0.01,
-        max: prices[0] + 1,
+        max: x,
       },
       xaxis: {
-      
-
         categories: dates,
-
       },
     },
   };
@@ -126,7 +124,10 @@ console.log(integer, "iteger")
       <div className="">
         <div className="d-flex justify-content-around align-items-center py-4">
           <h5 className="avg-price">
-            Average Price: <span>{average} {props.currency}</span>
+            Average Price:{" "}
+            <span>
+              {average} {props.currency}
+            </span>
           </h5>
           <select
             name="duration"

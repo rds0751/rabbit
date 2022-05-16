@@ -43,6 +43,7 @@ function Notification() {
       setNotifications(response)
     );
   }, []);
+
   const [state, setState] = React.useState({
     top: false,
     left: false,

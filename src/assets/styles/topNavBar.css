@@ -75,6 +75,7 @@
 .overflow {
   overflow: hidden !important;
   position: fixed !important;
+  width: 100%;
 }
 .overflow-hidden {
   overflow: auto;
