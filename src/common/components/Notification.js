@@ -42,7 +42,8 @@ function Notification() {
     getNotificationListById(userId).then((response) =>
       setNotifications(response)
     );
-  }, []);
+  }, [notifications]);
+
   const [state, setState] = React.useState({
     top: false,
     left: false,

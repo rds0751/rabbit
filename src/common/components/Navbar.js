@@ -39,14 +39,12 @@ import { fetchPalletsColor } from "../../utility/global";
 import { padding } from "@mui/system";
 const queryString = require("query-string");
 
-
-const activeMarketplace = ['/nfts'];
-const activeLeaderboard = ['/leader-board'];
-const activeResource = ['/help-center', '/suggestion'];
+const activeMarketplace = ["/nfts"];
+const activeLeaderboard = ["/leader-board"];
+const activeResource = ["/help-center", "/suggestion"];
 
 function Navbar() {
-
-  const customize = useSelector(state=> state.customize);
+  const customize = useSelector((state) => state.customize);
 
   const navigate = useNavigate();
 
@@ -82,23 +80,21 @@ function Navbar() {
 
   const handleMouseOver = (e) => {
     let tempDiv = e.target;
-    tempDiv.style.color = fetchPalletsColor(customize.appearance.colorPalette)
-
-  }
+    tempDiv.style.color = fetchPalletsColor(customize.appearance.colorPalette);
+  };
 
   const handleMouseOut = (e) => {
     let tempDiv = e.target;
-    tempDiv.style.color = "#818181"
-  }
+    tempDiv.style.color = "#818181";
+  };
 
   useEffect(() => {
-    console.log('called navbar')
+    console.log("called navbar");
     async function fetchData() {
       getTenantData().then((response) => setTenantData(response));
     }
     fetchData();
   }, []);
-
 
   useEffect(() => {
     setPermissionToUploadNft(tenantData?.permissionToUploadNft);
@@ -149,7 +145,7 @@ function Navbar() {
                   }
                 });
             })
-            .catch((e) => { });
+            .catch((e) => {});
         } else {
           return null;
         }
@@ -158,24 +154,24 @@ function Navbar() {
     }
   };
   const accountChangeHandler = (newAccount) => {
-
-    console.log(newAccount, 'account changed')
+    console.log(newAccount, "account changed");
 
     if (newAccount.length > 0) {
       setDefaultAccount(newAccount[0]);
       getUserBalance(newAccount[0]);
 
-      dispatch(AddWalletDetails({ address: newAccount[0], balance: getBalance }));
+      dispatch(
+        AddWalletDetails({ address: newAccount[0], balance: getBalance })
+      );
       CheckUserByWalletAddress(newAccount[0], (res) => {
         dispatch(addUserData(res));
         localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
         setToggleEffect(!toggleEffect);
       });
-
-    }else{
-      localStorage.setItem('has_wallet', false)
-      navigate('/')
-      dispatch(logOut())
+    } else {
+      localStorage.setItem("has_wallet", false);
+      navigate("/");
+      dispatch(logOut());
     }
   };
   const getUserBalance = (address) => {
@@ -186,12 +182,10 @@ function Navbar() {
       });
   };
 
-
   let location = useLocation();
 
   const manageNavigation = (name) => {
-
-    console.log('called manage navigation', name)
+    console.log("called manage navigation", name);
 
     setDisplay(true);
     if (name == "myitems") {
@@ -252,18 +246,16 @@ function Navbar() {
     setDisplay(!display);
   };
   const handleWalletClick = () => {
-    console.log('called wallet local')
+    console.log("called wallet local");
     setDisplay(true);
     if (walletAddress == null) {
-      
-      if(localStorage.getItem('has_wallet') === 'false'){
+      if (localStorage.getItem("has_wallet") === "false") {
         toast.error("Connect your wallet", {
           position: toast.POSITION.TOP_RIGHT,
         });
       }
 
       navigate("/add-wallet");
-
     } else {
       dispatch(ManageWalletSideBar(!isOpenWallet));
       dispatch(ManageNotiSideBar(false));
@@ -271,7 +263,7 @@ function Navbar() {
     }
   };
   const handleNotiSideBar = () => {
-    console.log('called sidebar')
+    console.log("called sidebar");
     setDisplay(true);
 
     if (loggedInUser == null) {
@@ -329,9 +321,9 @@ function Navbar() {
   // }
 
   useEffect(() => {
-    setSearchNft({ ...searchNft, "searchByName": inputValue });
-    setSearchCollection({ ...searchCollection, "searchByName": inputValue });
-  }, [inputValue])
+    setSearchNft({ ...searchNft, searchByName: inputValue });
+    setSearchCollection({ ...searchCollection, searchByName: inputValue });
+  }, [inputValue]);
 
   // const handleSearch = async (e) => {
   //   inputValue = e.target.value;
@@ -344,7 +336,7 @@ function Navbar() {
   //     setShowModal(false);
   //     setDisplay(true);
   //   }
-  //   showModal? setDisplay(false):setDisplay(true);    
+  //   showModal? setDisplay(false):setDisplay(true);
   // };
 
   const closeWalletAndNoti = () => {
@@ -368,11 +360,11 @@ function Navbar() {
   let userId = loggedInUser ? loggedInUser._id : localStorage.userId;
 
   useEffect(() => {
-    console.log('called usenavbar')
+
     getNotificationListById(userId).then((response) =>
       setNotifications(response)
     );
-  }, []);
+  }, [notifications]);
   // const notificationId = notifications._id;
   //   useEffect(() => {
   //     getNotificationCountById(notificationId).then((response) =>
@@ -381,22 +373,22 @@ function Navbar() {
   //   }, []);
   // console.log(Count,"count")
 
-
   useEffect(() => {
     window.ethereum?.on("accountsChanged", accountChangeHandler);
 
-    window.ethereum?.on('disconnect', () => {
-      console.log('Account Disconnect')
+    window.ethereum?.on("disconnect", () => {
+      console.log("Account Disconnect");
     });
-  }, [])
+  }, []);
 
   const navLink = {
-    borderBottom: `3px solid ${fetchPalletsColor(customize.appearance.colorPalette)}`
-  }
+    borderBottom: `3px solid ${fetchPalletsColor(
+      customize.appearance.colorPalette
+    )}`,
+  };
 
   return (
     <>
-
       <Helmet>
         <title>{customize?.storeName}</title>
       </Helmet>
@@ -694,31 +686,36 @@ function Navbar() {
                   <li
                     className={
                       location.pathname.includes("/nfts") &&
-                        !location.pathname.includes("leader-board") &&
-                        !location.pathname.includes("resource") &&
-                        !location.pathname.includes("create-nft") &&
-                        !location.pathname.includes("help-center") &&
-                        !location.pathname.includes("suggestion")
+                      !location.pathname.includes("leader-board") &&
+                      !location.pathname.includes("resource") &&
+                      !location.pathname.includes("create-nft") &&
+                      !location.pathname.includes("help-center") &&
+                      !location.pathname.includes("suggestion")
                         ? "nav-items marketplace"
                         : "nav-items marketplace"
-                    }                   
+                    }
                     onClick={closeWalletAndNoti}
                   >
                     <Link
                       className={
                         location.pathname.includes("/nfts") &&
-                          !location.pathname.includes("leader-board") &&
-                          !location.pathname.includes("resource") &&
-                          !location.pathname.includes("create-nft") &&
-                          !location.pathname.includes("help-center") &&
-                          !location.pathname.includes("suggestion")
+                        !location.pathname.includes("leader-board") &&
+                        !location.pathname.includes("resource") &&
+                        !location.pathname.includes("create-nft") &&
+                        !location.pathname.includes("help-center") &&
+                        !location.pathname.includes("suggestion")
                           ? "nav-link navlink_active"
                           : "nav-link"
                       }
-                      style={activeMarketplace.includes(location.pathname) ? navLink : {}}
+                      style={
+                        activeMarketplace.includes(location.pathname)
+                          ? navLink
+                          : {}
+                      }
                       aria-current="page"
                       to="/nfts"
-                      onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}
+                      onMouseOut={handleMouseOut}
+                      onMouseOver={handleMouseOver}
                     >
                       Marketplace
                     </Link>
@@ -739,8 +736,13 @@ function Navbar() {
                       }
                       exact
                       to="/leader-board"
-                      style={activeLeaderboard.includes(location.pathname) ? navLink : {}}
-                      onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}
+                      style={
+                        activeLeaderboard.includes(location.pathname)
+                          ? navLink
+                          : {}
+                      }
+                      onMouseOut={handleMouseOut}
+                      onMouseOver={handleMouseOver}
                     >
                       Leaderboard
                     </Link>
@@ -749,15 +751,18 @@ function Navbar() {
                   <NavDropdown
                     onClick={closeWalletAndNoti}
                     title="Resource"
-                    id="navbarScrollingDropdown"                  
+                    id="navbarScrollingDropdown"
                     className={
                       location.pathname.includes("help-center") ||
-                        location.pathname.includes("suggestion")
+                      location.pathname.includes("suggestion")
                         ? "nav-items dropdown resource nav-link navlink_active resource padding-0"
                         : "nav-items dropdown resource padding-0"
                     }
-                    onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}
-                    style={activeResource.includes(location.pathname) ? navLink : {}}
+                    onMouseOut={handleMouseOut}
+                    onMouseOver={handleMouseOver}
+                    style={
+                      activeResource.includes(location.pathname) ? navLink : {}
+                    }
                   >
                     <NavDropdown.Item onClick={() => navigate("/help-center")}>
                       Help Center
@@ -803,32 +808,36 @@ function Navbar() {
                       </li>
                     </ul>
                   </li> */}
-                  {
-                    customize.permissionToUploadNft === 'Everyone' ?
+                  {customize.permissionToUploadNft === "Everyone" ? (
                     <li
-                    style={{ marginRight: "28px" }}
-                    onClick={() => {
-                      closeWalletAndNoti();
-                      manageNavigation("create");
-                    }}
-                  >
-                    {/* <Link
+                      style={{ marginRight: "28px" }}
+                      onClick={() => {
+                        closeWalletAndNoti();
+                        manageNavigation("create");
+                      }}
+                    >
+                      {/* <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}
                     > */}
-                    <button style={{backgroundColor: `${fetchPalletsColor(customize.appearance.colorPalette)}`}} className="create-btn">Create</button>
-                    {/* </Link> */}
-                  </li>
-                  : null
-                  }
+                      <button
+                        style={{
+                          backgroundColor: `${fetchPalletsColor(
+                            customize.appearance.colorPalette
+                          )}`,
+                        }}
+                        className="create-btn"
+                      >
+                        Create
+                      </button>
+                      {/* </Link> */}
+                    </li>
+                  ) : null}
                   <li className="removeinmob"></li>
                 </ul>
 
                 <ul className="right_section_nav mb-0">
                   <li>
-                    <Badge
-                      badgeContent={notifications?.unreadCount}
-                      color="primary"
-                    >
+                    {loggedInUser == null ? (
                       <img
                         onClick={handleNotiSideBar}
                         className={
@@ -837,7 +846,21 @@ function Navbar() {
                         src={bellicon}
                         alt="notification"
                       ></img>
-                    </Badge>
+                    ) : (
+                      <Badge
+                        badgeContent={notifications?.unreadCount}
+                        color="primary"
+                      >
+                        <img
+                          onClick={handleNotiSideBar}
+                          className={
+                            !isOpenNoti ? "notification-icon" : "hover-icon"
+                          }
+                          src={bellicon}
+                          alt="notification"
+                        ></img>
+                      </Badge>
+                    )}
                   </li>
 
                   <li className="nav-item dropdown">

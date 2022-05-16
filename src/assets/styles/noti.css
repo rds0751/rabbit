@@ -17,7 +17,7 @@
 }
 .noti-outer {
   padding-left: 17px;
-  width: 367px;
+  width: 430px;
   /* width: 19.12%; */
   height: 100%;
   display: flex;
@@ -86,7 +86,7 @@
 }
 
 .noti-text {
-  width: 222px;
+  width: 238px;
   font-size: 14px;
   margin-left: 16px;
   color: #191919;
