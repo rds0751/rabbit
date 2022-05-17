@@ -40,8 +40,7 @@ const TableContainerCustom = styled(TableContainer)`
 
 export default function DetailPage(props) {
   const nft = props.nft;
-  console.log(nft, "nft");
-  console.log(props.nft.blockchain, props.length, nft, nft?.length, "<<<props");
+
   return (
     <TableContainerCustom elevation={0}>
       {/* <TableDiv> */}
@@ -65,19 +64,31 @@ export default function DetailPage(props) {
             <td style={{ border: "none", paddingTop: "20px" }}>
               {" "}
               {nft?.blockchain == "Ethereum" ? (
-                <a style={{ textDecoration: "none" }} href={"https://etherscan.io/address/" + nft?.contractAddress}>
+                <a
+                  style={{ textDecoration: "none" }}
+                  href={"https://etherscan.io/address/" + nft?.contractAddress}
+                >
                   {nft?.contractAddress}{" "}
                 </a>
               ) : nft?.blockchain == "Binance" ? (
-                <a style={{ textDecoration: "none" }} href={"https://bscscan.com/address/" + nft?.contractAddress}>
+                <a
+                  style={{ textDecoration: "none" }}
+                  href={"https://bscscan.com/address/" + nft?.contractAddress}
+                >
                   {nft?.contractAddress}{" "}
                 </a>
               ) : nft?.blockchain == "Polygon" ? (
-                <a style={{ textDecoration: "none" }} href={"https://polygonscan.com/" + nft?.contractAddress}>
+                <a
+                  style={{ textDecoration: "none" }}
+                  href={"https://polygonscan.com/" + nft?.contractAddress}
+                >
                   {nft?.contractAddress}{" "}
                 </a>
               ) : nft?.blockchain == "Avalanche" ? (
-                <a style={{ textDecoration: "none" }} href={"https://snowtrace.io/address/" + nft?.contractAddress}>
+                <a
+                  style={{ textDecoration: "none" }}
+                  href={"https://snowtrace.io/address/" + nft?.contractAddress}
+                >
                   {nft?.contractAddress}{" "}
                 </a>
               ) : (
