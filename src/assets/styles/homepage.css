@@ -602,3 +602,6 @@ margin-left: 10px;
   padding: 0 !important; 
 }
 
+.false-button{
+  display: none !important;
+}
