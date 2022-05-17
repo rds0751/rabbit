@@ -68,8 +68,8 @@ function Home() {
 
           if (res.success) {
             // prevArray => [...prevArray, newValue]
-            if (customize.appearance.featuredAssets.length > 0) {
-              setNfts(customize.appearance.featuredAssets);
+            if (customize.bannerNftData.length > 0) {
+              setNfts(customize.bannerNftData);
             } else {
               setNfts(res?.responseData?.nftContent);
             }
@@ -92,10 +92,10 @@ function Home() {
 
 
   useEffect(() => {
-    if (customize.appearance.featuredAssets.length > 0) {
-      setNfts(customize.appearance.featuredAssets);
+    if (customize.bannerNftData.length > 0) {
+      setNfts(customize.bannerNftData);
     }
-  }, [customize.appearance.featuredAssets.length])
+  }, [customize.bannerNftData.length])
 
   // setInterval(() => {
 
