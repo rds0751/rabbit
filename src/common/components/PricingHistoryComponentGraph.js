@@ -79,7 +79,20 @@ export default function PricingHistoryComponent(props) {
     average = total / nftPricingHistory.length;
   }
 
-  let x = prices[0] <= 0.4 ? prices[0] + 0.3 : prices[0] <= 1 ? prices[0] + 1 :  prices[0] <= 5 ? prices[0] + 3 : prices[0] <= 100  ? prices[0] + 30 : prices[0] <= 1000  ? prices[0] + 100 : prices[0] + 500;
+  let x =
+    prices[0] <= 0.009
+      ? prices[0] + 0.02
+      : prices[0] <= 0.4
+      ? prices[0] + 0.3
+      : prices[0] <= 1
+      ? prices[0] + 1
+      : prices[0] <= 5
+      ? prices[0] + 3
+      : prices[0] <= 100
+      ? prices[0] + 30
+      : prices[0] <= 1000
+      ? prices[0] + 100
+      : prices[0] + 500;
 
   const object = {
     series: [
