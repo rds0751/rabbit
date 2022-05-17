@@ -20,7 +20,8 @@ const initialState = {
     categories: [],
     privacyUrl: false,
     socailMedia: [],
-    permissionToUploadNft: false
+    permissionToUploadNft: false,
+    bannerNftData: []
 }
 
 
@@ -42,6 +43,12 @@ export const CustomizeReducer = (state = initialState, action) => {
                 socailMedia: payload.socialMediaConnection,
                 permissionToUploadNft: payload.permissionToUploadNft
             }
+
+        case 'ADD_BANNER_NFTS':
+            return{
+                ...state,
+                bannerNftData: payload
+            }    
 
         case 'RESET_APPEARENCE':
             return {
@@ -66,7 +73,8 @@ export const CustomizeReducer = (state = initialState, action) => {
                 categories: [],
                 privacyUrl: false,
                 socailMedia: [],
-                permissionToUploadNft: false
+                permissionToUploadNft: false,
+                bannerNftData: []
             }
 
         default:

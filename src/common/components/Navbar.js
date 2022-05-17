@@ -91,7 +91,7 @@ function Navbar() {
   useEffect(() => {
     console.log("called navbar");
     async function fetchData() {
-      getTenantData().then((response) => setTenantData(response));
+      getTenantData().then((response) => setTenantData(response[0]));
     }
     fetchData();
   }, []);
