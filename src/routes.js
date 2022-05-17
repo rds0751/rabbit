@@ -95,7 +95,8 @@ function App() {
 
       getTenantData()
         .then(response=>{
-          dispatch({type: 'ADD_CUSTOMIZE_DATA', payload: response})
+          dispatch({type: 'ADD_CUSTOMIZE_DATA', payload: response[0]})
+          dispatch({type: 'ADD_BANNER_NFTS', payload: response[1]})
         })
         .catch(error=>{
 
