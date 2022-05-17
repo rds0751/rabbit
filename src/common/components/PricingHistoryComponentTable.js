@@ -17,6 +17,7 @@ import styled from "styled-components";
 import SplitFrom from "./splitFrom";
 import Snackbar from "@mui/material/Snackbar";
 import SplitTo from "./splitTo";
+import {  Link } from "react-router-dom";
 import {
   getActivities,
   getPricingHistory,
@@ -248,7 +249,7 @@ export default function PricingHistoryComponentTable(props) {
   ];
 
   let toArray = [];
-
+console.log(activities,"activities")
   return (
     <MainContainer className="pricing-history">
       <Title>Activities</Title>
@@ -379,6 +380,10 @@ export default function PricingHistoryComponentTable(props) {
                         >
                           {" "}
                           <CopyToClipboard text={row?.walletAddress}>
+                          <Link
+                      to={"/user-profile/" + row?.createdBy}
+                      style={{ textDecoration: "none" }}
+                    >
                              <span className="Activity-From">
                               {row.userName ? (
                                 row.userName.substr(0, 6)
@@ -389,6 +394,7 @@ export default function PricingHistoryComponentTable(props) {
                                {dataCopied ? "copy to clipboard" : "copied" }
                                  </span>
                                </span>
+                               </Link>
                           </CopyToClipboard>
                         </TableCell>
                    
@@ -412,6 +418,10 @@ export default function PricingHistoryComponentTable(props) {
                           }}
                         >
                         <CopyToClipboard text={row?.to[0]?.wallet_address} >
+                        <Link
+                      to={"/user-profile/" + row?.to[0]?._id}
+                      style={{ textDecoration: "none" }}
+                    >
                         <span className="Activity-From">
                             {/* <button
                               className="copy-button"
@@ -441,6 +451,7 @@ export default function PricingHistoryComponentTable(props) {
 
                         {/* </button> */}
                         </span>
+                        </Link>
                        </CopyToClipboard>
                         </TableCell>
                       {/* </Tooltip> */}

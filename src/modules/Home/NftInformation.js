@@ -145,7 +145,8 @@ export default function NftInformation(props) {
   const [makeOfferModal, setMakeOfferModal] = useState(false);
   const [filter, setFilter] = useState(defaultFilter);
   const [moreNft, setMoreNfts] = useState([]);
-
+{console.log(moreNft,"1111111")}
+{console.log(owner?._id,"1111111")}
   const [state, setState] = React.useState({
     open: false,
     vertical: "top",
