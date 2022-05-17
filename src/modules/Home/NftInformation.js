@@ -1002,7 +1002,7 @@ export default function NftInformation(props) {
                       setTab(1);
                     }}
                     style={{
-                      borderBottom: tab === 1 ? "2px solid #366EEF" : "",
+                      borderBottom: tab === 1 ? `2px solid ${fetchPalletsColor(appearance?.colorPalette)}` : "",
                       color: tab === 1 ? "#000000" : "#828282",
                       fontWeight: tab === 1 ? 600 : "",
                       marginRight: "16px",
@@ -1016,7 +1016,7 @@ export default function NftInformation(props) {
                       setTab(2);
                     }}
                     style={{
-                      borderBottom: tab === 2 ? "2px solid #366EEF" : "",
+                      borderBottom: tab === 2 ? `2px solid ${fetchPalletsColor(appearance?.colorPalette)}` : "",
                       color: tab === 2 ? "#000000" : "#828282",
                       fontWeight: tab === 2 ? 600 : "",
                       marginRight: "16px",
@@ -1030,7 +1030,7 @@ export default function NftInformation(props) {
                       setTab(3);
                     }}
                     style={{
-                      borderBottom: tab === 3 ? "2px solid #366EEF" : "",
+                      borderBottom: tab === 3 ? `2px solid ${fetchPalletsColor(appearance?.colorPalette)}` : "",
                       color: tab === 3 ? "#000000" : "#828282",
                       fontWeight: tab === 3 ? 600 : "",
                       marginRight: "16px",
@@ -1044,7 +1044,7 @@ export default function NftInformation(props) {
                       setTab(4);
                     }}
                     style={{
-                      borderBottom: tab === 4 ? "2px solid #366EEF" : "",
+                      borderBottom: tab === 4 ? `2px solid ${fetchPalletsColor(appearance?.colorPalette)}` : "",
                       color: tab === 4 ? "#000000" : "#828282",
                       fontWeight: tab === 4 ? 600 : "",
                       marginRight: "16px",
