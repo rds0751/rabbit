@@ -161,7 +161,7 @@ function NftPage(props) {
   const { user } = useSelector((state) => state);
   const { loggedInUser } = user;
   const appearance = useSelector(state => state.customize.appearance);
-  const [limit, setLimit] = useState(8)  
+  const [limit, setLimit] = useState(16)
   const [filterReq, setFilterReq] = useState({
     minPrice: "",
     maxPrice: "",
@@ -234,7 +234,7 @@ function NftPage(props) {
   const loadMoreHandler = () => {
     <div className="spinnerloader">{isLoading && <Spinner />}</div>;
     // setVisibleBlogs((prevVisibleBlogs) => prevVisibleBlogs + 4);
-    setLimit((prevLimit) => prevLimit + 8);
+    setLimit((prevLimit) => prevLimit + 16);
     setFilterReq({ ...filterReq, limit: limit });
   };
 
