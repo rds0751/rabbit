@@ -807,7 +807,7 @@ function Navbar() {
                       </li>
                     </ul>
                   </li> */}
-                  {customize.permissionToUploadNft === "Everyone" ? (
+                  {customize.permissionToUploadNft !== "Only me" ? (
                     <li
                       style={{ marginRight: "28px" }}
                       onClick={() => {

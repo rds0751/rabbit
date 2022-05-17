@@ -43,7 +43,7 @@ export async function getTenantData(paramToken=false, paramAddress=false) {
     const url = `${BASE_URL1}/api/v1/tenant/wallet/${loggedAddres}`;
     const res = await fetch(url, { headers: token });
     const result = await res.json();
-    const tenantData = result.responseData;
+    const tenantData = result.responseData[0];
     return tenantData;
   } catch (err) {
     console.log(err);
