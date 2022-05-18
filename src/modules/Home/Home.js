@@ -164,10 +164,10 @@ function Home() {
                     </p>
                     <div style={{ display: "flex" }}>
                       <Button
-                        href={customize.appearance.buttons.length > 0 ? customize.appearance.buttons[0].link : '/nft' }
+                        href={customize.appearance.buttons.length > 0 ? customize.appearance.buttons[0].link : '/nft'}
                         variant="custom"
                         target={customize.appearance.buttons.length > 0 ? customize.appearance.buttons[0].isNewTab ? '_blank' : '' : ''}
-                        className={`${customize.appearance.buttons.length > 0 ? customize.appearance.buttons[0].style+' '+customize.appearance.buttons[0].status+'-button' : ''} button-hide`}
+                        className={`${customize.appearance.buttons.length > 0 ? customize.appearance.buttons[0].style + ' ' + customize.appearance.buttons[0].status + '-button' : ''} button-hide`}
                       >
                         {
                           customize.appearance.buttons.length > 0 ?
@@ -178,7 +178,7 @@ function Home() {
                       <Button
                         onClick={() => createHandle(customize.appearance.buttons)}
                         variant="custom"
-                        className={`${customize.appearance.buttons.length > 1 ? customize.appearance.buttons[1].style+' '+customize.appearance.buttons[1].status+'-button' : ''} button-hide`}
+                        className={`${customize.appearance.buttons.length > 1 ? customize.appearance.buttons[1].style + ' ' + customize.appearance.buttons[1].status + '-button' : ''} button-hide`}
                       >
                         {
                           customize.appearance.buttons.length > 1 ?
@@ -202,19 +202,19 @@ function Home() {
                             nfts.slice(0, 4).map((nft) => {
                               // const { _id, cdnUrl, name, biddingDetails, salesInfo } = nft;
                               let route;
-                              if (nft.hasOwnProperty('contentId') && nft.contentId != ""){
+                              if (nft.hasOwnProperty('contentId') && nft.contentId != "") {
                                 route = "/nft-information/" + nft.contentId;
                               } else {
                                 route = "/nft-information/" + nft._id;
                               }
-                              
+
 
                               return (
                                 <>
                                   {/* <img src={nft?.cdnUrl}></img> */}
                                   {console.log(nft, 'nft')}
                                   <Card>
-                                  <Link to={route} style={{ textDecoration: "none" }}>
+                                    <Link to={route} style={{ textDecoration: "none" }}>
                                       <div className="homePageContainer">
                                         <Card.Img
                                           variant="top"
@@ -261,7 +261,7 @@ function Home() {
                                                 "/nft-information/" + nft?._id
                                               }
                                               style={{ textDecoration: "none", color: `${fetchPalletsColor(customize.appearance.colorPalette)}` }}
-                                              
+
                                             >
                                               {nft?.name}
                                             </Link>
@@ -277,6 +277,12 @@ function Home() {
                                           }
                                           {/* <p className="description">{nft?.description}</p> */}
                                         </div>
+                                      </div>
+
+                                      <div className="flex-grow-1 ms-2 card1 card-collection">
+                                        <Link style={{color: `${fetchPalletsColor(customize?.appearance?.colorPalette)}`}} to={`/collection-details/${nft?.collectionId ? nft?.collectionId : '62823cab6df787009ba1882b'}`}>
+                                          {nft.collectionName ? nft.collectionName : "Anafto Collection"}
+                                        </Link>
                                       </div>
                                     </Card.Body>
                                   </Card>
@@ -691,7 +697,7 @@ function Home() {
                 <p className="browse-text"> Make offers on NFTs</p>
               </div>
               <div className="d-flex align-items-center justify-content-left media card-home-page">
-              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
                   <g id="Activity" transform="translate(-816 -2368)">
                     <rect id="Rectangle_997" data-name="Rectangle 997" width="60" height="60" transform="translate(816 2368)" fill="none" />
                     <g id="Group_652" data-name="Group 652" transform="translate(-69 4)">

@@ -70,9 +70,13 @@ import Privacy from "./modules/company/privacy";
 import TermsAndCondition from "./modules/company/termsAndCondition";
 import BlogDetail from "./modules/blogs/blogDetail";
 import { getTenantData } from "./services/clientConfigMicroService";
+import { useState } from "react";
+import Spinner from "./common/components/Spinner";
 function App() {
 
   const dispatch = useDispatch();
+
+  const [loader, setLoader] = useState(true)
 
   useEffect(() => {
     const checkWalletAddress = localStorage.getItem(
@@ -97,9 +101,11 @@ function App() {
         .then(response=>{
           dispatch({type: 'ADD_CUSTOMIZE_DATA', payload: response[0]})
           dispatch({type: 'ADD_BANNER_NFTS', payload: response[1]})
+
+          setLoader(false)
         })
         .catch(error=>{
-
+          setLoader(false);
         })
 
     }
@@ -109,6 +115,10 @@ function App() {
   return (
     
       <div className="App" >
+
+        {
+         loader && <div className="loader-spinner"><Spinner/></div>
+        }
 
         <Router>
         <ScrollToTop />

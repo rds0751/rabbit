@@ -605,3 +605,13 @@ margin-left: 10px;
 .false-button{
   display: none !important;
 }
+
+.card-collection{
+  margin-top: 20px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.card-collection a{
+  text-decoration: none;
+}
