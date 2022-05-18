@@ -90,6 +90,9 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
         contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS_POLYGON
         else if(data?.blockchain === "Ethereum")
         contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
+        else if(data?.blockchain === "Binance")
+        contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS_BINANCE;
+
 
         console.log("--sssssssssssssssss-", data?.newOwnerAddress)
 
@@ -134,14 +137,17 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
                     //TO do
                     tokenId: this.state.responseData?.tokenId,
                     price: this.state?.responseData?.salesInfo?.price,
-                    contractAddress: this.state?.responseData?.contractAddress
+                    contractAddress: this.state?.responseData?.contractAddress,
+                    message: this.state.responseData.salesInfo.message,
+                    address:this.state.responseData.salesInfo.address,
+                    signature:this.state.responseData.salesInfo.signature,
 
                 })
             );
             console.log("blockchainError====", blockchainError)
             console.log("blockchainRes====", blockchainResult)
             if (blockchainError || !blockchainResult) {
-                this.setState({ loaderState: false })
+                // this.setState({ loaderState: false })
                 if (!this.state.responseData._id) return;
                 let [txFailErr, txFailResult] = await Utils.parseResponse(
                     updateTxStatus({ status: "failed" }, result._id)
@@ -159,14 +165,17 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
                     //TO do
                     tokenId: this.state.responseData?.tokenId,
                     price: this.state?.responseData?.salesInfo?.price,
-                    contractAddress: contractAddress
+                    contractAddress: contractAddress,
+                    message: this.state.responseData.salesInfo.message,
+                    address:this.state.responseData.salesInfo.address,
+                    signature:this.state.responseData.salesInfo.signature,
 
                 })
             );
             console.log("blockchainError====", blockchainError)
             console.log("blockchainRes====", blockchainResult)
             if (blockchainError || !blockchainResult) {
-                this.setState({ loaderState: false })
+                // this.setState({ loaderState: false })
                 if (!this.state.responseData._id) return;
                 let [txFailErr, txFailResult] = await Utils.parseResponse(
                     updateTxStatus({ status: "failed" }, result._id)
@@ -214,7 +223,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
         );
         console.log("--buy nFT ressssssi;t-", res);
         if (err || !res) {
-            this.setState({ loaderState: false })
+            // this.setState({ loaderState: false })
 
             return toast.error(err || "Unable to update Nft ownership.",{autoClose:7000,theme:"colored"});
         }
@@ -230,62 +239,98 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
 
     };
 
-    sellNowNft = async ({blockchain}) => {
+    sellNowNft = async ({blockchain,expiryTime,expiryDate,price}) => {
         console.log("daaaaaaaaaa", this.state?.responseData?.contractAddress)
-        // this.setState({ loaderState: true })
-        let contractAddress;
+        console.log(expiryDate,expiryTime,"<<<Period")
 
+        let contractAddress;
         if(blockchain ==="Polygon")
         contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS_POLYGON
         else if(blockchain === "Ethereum")
         contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
+        else if(blockchain === "Binance")
+        contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS_BINANCE;
+        
+
+        // this.setState({ loaderState: true })
+
+        var signMsg = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < 7000; i++ ) {
+          signMsg += characters.charAt(Math.floor(Math.random() * 
+        charactersLength));
+       }
+       signMsg+='!'+this.state.responseData?.tokenId;
+
+       const [signError, signRes] = await Utils.parseResponse(
+        BlockchainService.signcheck({signMsg})
+    );
+      if(signError || !signRes){
+        this.setState({ loaderState: false })
+        return toast.error(signError || "Unable to generate signature");
+       }
+    else{
+        console.log(signRes,"<<<signRes");
+    }
+
+
+        
 
         console.log(blockchain,contractAddress,"<<<ContractAddress")
+
+
       
 
         console.log("jjjjj", this.state.responseData.tokenId);
-        if (this.state?.responseData?.contractAddress > 0) {
-            const [blockchainError, blockchainRes] = await Utils.parseResponse(
-                BlockchainService.putOnSaleNft({
-                    tokenId: this.state.responseData?.tokenId,
-                    contractAddress: contractAddress,
-                })
-            );
-            console.log("blockchainEsssssrror=sellNowNft=", blockchainError);
-            console.log("blockchainRes==sellNowNft=", blockchainRes);
-            if (blockchainError || !blockchainRes) {
-                this.setState({ loaderState: false })
+        // if (this.state?.responseData?.contractAddress > 0) {
+        //     const [blockchainError, blockchainRes] = await Utils.parseResponse(
+        //         BlockchainService.putOnSaleNft({
+        //             tokenId: this.state.responseData?.tokenId,
+        //             contractAddress: contractAddress,
+        //         })
+        //     );
+        //     console.log("blockchainEsssssrror=sellNowNft=", blockchainError);
+        //     console.log("blockchainRes==sellNowNft=", blockchainRes);
+        //     if (blockchainError || !blockchainRes) {
+        //         // this.setState({ loaderState: false })
 
-                return toast.error(
-                    blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to sell NFT on blockchain",{autoClose:5000}
-                );
-            }
-        }
+        //         return toast.error(
+        //             blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to sell NFT on blockchain",{autoClose:5000}
+        //         );
+        //     }
+        // }
 
 
 
-        else {
+        // else {
 
     
-            const [blockchainError, blockchainRes] = await Utils.parseResponse(
-                BlockchainService.putOnSaleNft({
-                    tokenId: this.state.responseData?.tokenId,
-                    contractAddress: contractAddress,
-                })
-            );
-            console.log("blockchainwwwwwwwError=sellNowNft=", blockchainError);
-            console.log("blockchainRes==sellNowNft=", blockchainRes);
-            if (blockchainError || !blockchainRes) {
-                // alert(blockchainError?.data?.message)
-                this.setState({ loaderState: false })
+        //     const [blockchainError, blockchainRes] = await Utils.parseResponse(
+        //         BlockchainService.putOnSaleNft({
+        //             tokenId: this.state.responseData?.tokenId,
+        //             contractAddress: contractAddress,
+        //         })
+        //     );
+        //     console.log("blockchainwwwwwwwError=sellNowNft=", blockchainError);
+        //     console.log("blockchainRes==sellNowNft=", blockchainRes);
+        //     if (blockchainError || !blockchainRes) {
+        //         // alert(blockchainError?.data?.message)
+        //         // this.setState({ loaderState: false })
 
-                return toast.error(
-                    blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to sell NFT on blockchain",{autoClose:5000}
-                );
-            }
-        }
+        //         return toast.error(
+        //             blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to sell NFT on blockchain",{autoClose:5000}
+        //         );
+        //     }
+        // }
         let requestData = {
             _id: this.state?.responseData?._id,
+            signature:signRes.signature,
+            message:signRes.signMsg,
+            address:signRes.address,
+            expiryTime:expiryTime,
+            expiryDate:expiryDate,
+            price:price,
         };
         // console.log("nannnn",requestData)
         // this.updateNftDataInDb(requestData, eventConstants.SELL,this.state.responseData._id || '')
@@ -295,15 +340,13 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
         );
         console.log("-nnnnnnnnnnnnnnssssssssnnnn--", result);
         if (error || !result) {
-            this.setState({ loaderState: false })
-
+             this.setState({ loaderState: false })
             return toast.error(error || "Unable to update Nft content.",{autoClose:5000});
         }
         else {
             this.setState({ loaderState: false })
             this.setState({ refreshPage: true })
             this.setState({ saleSuccess: true });
-
             this.setState({ nftDetails: result });
             toast.success("NFT has been put on sale",{autoClose:7000,theme:"colored"});
         }
@@ -317,6 +360,11 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
         contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS_POLYGON
         else if(blockchain === "Ethereum")
         contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
+        else if(blockchain === "Binance")
+        contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS_BINANCE;
+
+        
+
         //process.env.REACT_APP_CONTRACT_ADDRESS
 
         console.log("removeNftFromSale");
@@ -325,6 +373,12 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
                 BlockchainService.removeFromSaleNft({
                     tokenId: this.state.responseData?.tokenId,
                     contractAddress: this.state?.responseData?.contractAddress,
+                    blockchain:blockchain,
+                    message: this.state.responseData.salesInfo.message,
+                    address:this.state.responseData.salesInfo.address,
+                    signature:this.state.responseData.salesInfo.signature,
+
+                    
                 })
             );
             if (blockchainError || !blockchainRes) {
@@ -338,6 +392,10 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
                 BlockchainService.removeFromSaleNft({
                     tokenId: this.state.responseData?.tokenId,
                     contractAddress: contractAddress,
+                    blockchain:blockchain,
+                    message: this.state.responseData.salesInfo.message,
+                    address:this.state.responseData.salesInfo.address,
+                    signature:this.state.responseData.salesInfo.signature,
                 })
             );
             if (blockchainError || !blockchainRes) {

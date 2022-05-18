@@ -145,6 +145,13 @@ export default function NftInformation(props) {
   const [makeOfferModal, setMakeOfferModal] = useState(false);
   const [filter, setFilter] = useState(defaultFilter);
   const [moreNft, setMoreNfts] = useState([]);
+  
+let period={
+    expiryDate:"",
+    expiryTime:"",
+    price:"",
+   }
+ 
 
   const [state, setState] = React.useState({
     open: false,
@@ -251,7 +258,10 @@ export default function NftInformation(props) {
       // saleData:response.salesInfo,
       // tokenId:response.tokenId,
       // nftId:response._id,
-      blockchain: nft?.blockchain
+      blockchain: nft?.blockchain,
+      expiryTime:period.expiryTime,
+      expiryDate:period.expiryDate,
+      price:period.price,
     });
     // setPutOnSaleModal(false)
   };
@@ -388,6 +398,7 @@ export default function NftInformation(props) {
   const onImageLoad=()=>{
     setImageLoading({...imageLoading,loaded:true});
    }
+
    
 
   return (
@@ -482,7 +493,21 @@ export default function NftInformation(props) {
                       Remove From Sale
                     </Button>
                   </div>
+                 
                   <span className="nft-name">{nft.name}</span>
+                  <div className="" title={nft.collectionName ?nft.collectionName :"Anafto Collection"}>
+
+                    <Link
+                    style={{ textDecoration: 'none' , color: `${fetchPalletsColor(appearance.colorPalette)}`}}
+                      to={
+                      '/collection-details/' + nft?.collectionId
+                      }
+                      >
+                        {undefined !== nft?.collectionName &&
+                        nft?.collectionName? nft?.collectionName :(nft?.collectionName?.length===0 ? "Anafto Collection" :nft?.collectionName)}
+
+                      </Link>
+                      </div>
                 </div>
                 <div className=" d-flex align-items-center">
                   <a
@@ -702,7 +727,21 @@ export default function NftInformation(props) {
                         Remove from Sale
                       </Button>
                     </div>
+                  
                     <span className="nft-name">{nft.name}</span>
+                    <div className="" title={nft.collectionName ?nft.collectionName :"Anafto Collection"}>
+
+                      <Link
+                      style={{ textDecoration: 'none' , color: `${fetchPalletsColor(appearance.colorPalette)}`}}
+                        to={
+                        '/collection-details/' + nft?.collectionId
+                        }
+                        >
+                          {undefined !== nft?.collectionName &&
+                          nft?.collectionName ? nft?.collectionName:(nft?.collectionName?.length===0 ? "Anafto Collection" :nft?.collectionName)}
+
+                        </Link>
+                        </div>
                   </div>
                   <div className="col-xl-2 col-lg-2 col-md-3 col-sm-3 d-flex align-items-center">
                     <div>
@@ -1176,9 +1215,12 @@ export default function NftInformation(props) {
                   className="form-control-1"
                   min="0"
                   type="number"
+                  placeholder={salesInfo?.price}
                   autoComplete="off"
-                  value={salesInfo?.price}
-                  readonly
+                  onChange={(e)=>{
+                    period.price=e.target.value;
+                    
+                  }}
                 // onChange={(e) => {
                 //   price.current = e.target.value;
                 //   checkChanges();
@@ -1191,6 +1233,11 @@ export default function NftInformation(props) {
                   // min="0"
                   // type="date"
                   autoComplete="off"
+                  onChange={(e)=>{
+                 period.expiryDate=e.target.value;
+                  console.log(period  );
+                  }}
+
                 // value="23"
                 // onChange={(e) => {
                 //   price.current = e.target.value;
@@ -1202,6 +1249,10 @@ export default function NftInformation(props) {
                   // min="0"
                   type="time"
                   autoComplete="off"
+                  onChange={(e)=>{
+                    period.expiryTime=e.target.value;
+                    console.log(period);
+                  }}
                 // value="23"
                 // onChange={(e) => {
                 //   price.current = e.target.value;
@@ -1245,7 +1296,6 @@ export default function NftInformation(props) {
                 <div className="abstractillusion">
                   <img src={nft.cdnUrl} />
                   <div className="abstractillusioncontent">
-                    <div className="abstracttitle"></div>
                     <div className="abstractposter"> {nft.name}</div>
                     <div className="ethprice">{`${salesInfo?.price}  ${salesInfo?.currency}`}</div>
                   </div>
@@ -1374,7 +1424,7 @@ export default function NftInformation(props) {
                 <div className="abstractillusion">
                   <img src={nft.cdnUrl} />
                   <div className="abstractillusioncontent">
-                    <div className="abstracttitle"></div>
+                   
                     <div className="abstractposter"> {nft.name}</div>
                     <div className="ethprice">{`${salesInfo?.price}  ${salesInfo?.currency}`}</div>
                   </div>
@@ -1441,7 +1491,7 @@ export default function NftInformation(props) {
                 <div className="abstractillusion">
                   <img src={nft.cdnUrl} />
                   <div className="abstractillusioncontent">
-                    <div className="abstracttitle"></div>
+                    
                     <div className="abstractposter"> {nft.name}</div>
                     <div className="ethprice">{`${salesInfo?.price}  ${salesInfo?.currency}`}</div>
                   </div>

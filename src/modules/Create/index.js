@@ -75,6 +75,7 @@ class Index extends BaseComponent {
         price: data?.price || 0,
         currency: data?.currency,
       },
+      royality:data?.royality,
       //TO do need to pass user (owner) _id
       ownedBy: data?.createdBy,
       createdBy: data?.createdBy,
@@ -97,6 +98,9 @@ class Index extends BaseComponent {
    else if(data?.blockchain === "Ethereum"){
    contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS
    }
+   else if(data?.blockchain === "Binance"){
+    contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS_BINANCE
+    }
     
     // if (!data || Object.keys(data).length < 1 || !data.nftFile){
     //   this.setState({loaderState:false})
@@ -132,6 +136,7 @@ class Index extends BaseComponent {
     const tokenId = Utils.generateRandomNumber();
     // create NFT on blockchai
     if (data.contractAddress.length > 0) {
+      console.log(data?.blockchain, "blockchainValue");
 
       const [blockchainError, blockchainResult] = await Utils.parseResponse(
         BlockchainServices.mintNFT({
@@ -139,6 +144,7 @@ class Index extends BaseComponent {
           price: data.price,
           tokenId,
           contractAddress: contractAddress,
+          royalty:data.royality,
           blockchain:data?.blockchain
         })
       );
@@ -153,6 +159,7 @@ class Index extends BaseComponent {
         );
       }
       blockchainRes = blockchainResult
+      console.log(blockchainRes,"<<<blockchainRes")
     }
 
 
@@ -170,7 +177,8 @@ class Index extends BaseComponent {
           price: data.price,
           tokenId,
           contractAddress: contractAddress,
-          blockchain:data?.blockchain
+          blockchain:data?.blockchain,
+          royalty:data.royality,
         })
       );
       console.log("blockchainError", blockchainError)

@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 import contractABI from "../assets/abi/abi.json";
 import contractPolygonABI from "../assets/abi/abi.json";
+import contractbuyAndRemoveABI from '../assets/abi/removeSaleAndBuy.json'
 import contractCollectionABI from "../assets/abi/collectionAbi.json";
 
 import { toast } from "react-toastify";
@@ -27,13 +28,15 @@ const BlockchainServices = {
     buyNFT,
     removeFromSaleNft,
     putOnSaleNft,
-    createCollections
+    createCollections,
+    signcheck
 };
+
 
 export default BlockchainServices;
 
-async function mintNFT({ tokenURI, price, tokenId, contractAddress ,blockchain}) {
-    console.log(window.ethereum.networkVersion , blockchain,"dattttttttttttttttt");
+async function mintNFT({ tokenURI, price, tokenId, contractAddress ,royalty,blockchain}) {
+    console.log(window.ethereum.networkVersion , blockchain,price,royalty,tokenId,tokenURI,"dattttttttttttttttt");
 
     if (!window.ethereum)
         return Promise.reject("Please install metamask")
@@ -45,7 +48,8 @@ async function mintNFT({ tokenURI, price, tokenId, contractAddress ,blockchain})
         const result = await contractData.mint(
             tokenURI,
             tokenId,
-            ethers.utils.parseEther(price.toString())
+            ethers.utils.parseEther(price.toString()),
+            royalty,
         );
         let res = await result.wait();
         return {
@@ -62,7 +66,27 @@ async function mintNFT({ tokenURI, price, tokenId, contractAddress ,blockchain})
         const result = await contractData.mint(
             tokenURI,
             tokenId,
-            ethers.utils.parseEther(price.toString())
+            ethers.utils.parseEther(price.toString()),
+            royalty,
+        );
+        let res = await result.wait();
+        return {
+            ...res,
+            chainId: provider?._network?.chainId || "",
+            name: provider?._network?.name || "",
+        };
+        
+    }
+    else if (window.ethereum.networkVersion == 97 && blockchain=="Binance"){
+        //etherum
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const contractData = new ethers.Contract(contractAddress, contractABI, signer);
+        const result = await contractData.mint(
+            tokenURI,
+            tokenId,
+            ethers.utils.parseEther(price.toString()),
+            royalty,
         );
         let res = await result.wait();
         return {
@@ -77,6 +101,41 @@ async function mintNFT({ tokenURI, price, tokenId, contractAddress ,blockchain})
         // console.log("kkkkkkkkkkkkkkkkkkkkkk network swutch")
    
    
+}
+
+async function signcheck({signMsg}) {
+    try{
+    if (!window.ethereum)
+    return Promise.reject("Please install metamask")
+    await window.ethereum.send("eth_requestAccounts");
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const signature=await signer.signMessage(signMsg);
+    const address=await signer.getAddress();
+        return{
+            signMsg,
+            signature,
+            address
+        }
+    }
+    catch(err){
+        Promise.reject(err);
+    }
+}
+
+async function signverfiy({message,address,signature}){
+
+    try{
+        if (!window.ethereum)
+    return Promise.reject("Please install metamask")
+    const signerAddr=await ethers.utils.verifyMessage(message,signature);
+    if(signerAddr !== address){
+        return false;
+    }
+    return true ;
+    }catch(err){
+        Promise.reject(err);
+    }
 }
 
 //price should be in wei
@@ -106,18 +165,27 @@ async function changeListedPrice({ tokenId, price, contractAddress }) {
     };
 }
 
-async function removeFromSaleNft({ tokenId, contractAddress }) {
+async function removeFromSaleNft({ tokenId, contractAddress ,blockchain ,message,address,signature }) {
+
+   let Ethereum= "0x3124f1f72eca189b7fd5EE602F3ADFEb7a83763f";
+   let Polygon =  "0x6C626D2226C2415Ab32989660ea7f2C6265f230c";
+   let Binance  = "0x52CDde738d71568F79379FB1d671C4Eaef33d638";
+
     if (!window.ethereum)
         return Promise.reject("Please install metamask")
-    if (window.ethereum.networkVersion == 80001) {
+    if (window.ethereum.networkVersion == 80001 && blockchain== "Polygon") {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contractData = new ethers.Contract(
-        contractAddress,
-        contractABI,
+        Polygon,
+        contractbuyAndRemoveABI,
         signer
     );
-    const result = await contractData.updateListingStatus(tokenId, false);
+    const result = await contractData.updateListingStatus(
+        tokenId,
+        message,
+        signature,
+        contractAddress);
     let res = await result.wait();
     return {
         ...res,
@@ -126,12 +194,34 @@ async function removeFromSaleNft({ tokenId, contractAddress }) {
     };
 
      }
-     else if(window.ethereum.networkVersion == 4){
+     else if(window.ethereum.networkVersion == 4  && blockchain== "Ethereum"){
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         const contractData = new ethers.Contract(
+            Ethereum,
+            contractbuyAndRemoveABI,
+            signer
+        );
+        const result = await contractData.updateListingStatus(
+            tokenId, 
+            message,
+            signature,
             contractAddress,
-            contractABI,
+            );
+        let res = await result.wait();
+        return {
+            ...res,
+            chainId: provider?._network?.chainId || "",
+            name: provider?._network?.name || "",
+        };
+
+     }
+     else if(window.ethereum.networkVersion == 97  && blockchain== "Binance"){
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const contractData = new ethers.Contract(
+            Binance,
+            contractbuyAndRemoveABI,
             signer
         );
         const result = await contractData.updateListingStatus(tokenId, false);
@@ -163,19 +253,35 @@ async function removeFromSaleNft({ tokenId, contractAddress }) {
 // }
 
 //1bnb=0.136ether
-async function buyNFT({ tokenId, price, contractAddress }) {
-    console.log("kdkkkkkkkkkkkk",contractAddress)
+async function buyNFT({ tokenId, price, contractAddress ,message,signature}) {
+   let  RinkebyAddress ="0x3124f1f72eca189b7fd5EE602F3ADFEb7a83763f";
+let PolygonAddress = "0x6C626D2226C2415Ab32989660ea7f2C6265f230c";
+let BinanceAddress = "0x52CDde738d71568F79379FB1d671C4Eaef33d638";
+alert(contractAddress);
+alert(tokenId);
+alert(message);
+alert(signature);
+
+
+    console.log("kdkkkkkkkkkkkk",contractAddress,tokenId,message,signature);
     if (!window.ethereum)
         return Promise.reject("Please install metamask")
     if (window.ethereum.networkVersion == 80001) { 
         const provider = new ethers.providers.Web3Provider(window.ethereum);
-
         const signer = provider.getSigner();
         const contractData = new ethers.Contract(
-            contractAddress,
-            contractABI,
+            PolygonAddress,
+            contractbuyAndRemoveABI,
             signer
+            
         );
+        const resultBuy= await contractData.buy(
+             tokenId,
+             message,
+             signature,
+            contractAddress
+        )
+        console.log("<<<result Buy",resultBuy)
         const amount = ethers.utils.parseUnits(price.toString(), 18);
         const accounts = await provider.send("eth_requestAccounts", []);
     
@@ -204,10 +310,57 @@ async function buyNFT({ tokenId, price, contractAddress }) {
 
         const signer = provider.getSigner();
         const contractData = new ethers.Contract(
-            contractAddress,
-            contractABI,
+            RinkebyAddress,
+            contractbuyAndRemoveABI,
             signer
         );
+        const resultBuy= await contractData.buy(
+            tokenId,
+            message,
+            signature,
+            contractAddress
+        )
+        console.log("<<<result Buy",resultBuy)
+        const amount = ethers.utils.parseUnits(price.toString(), 18);
+        const accounts = await provider.send("eth_requestAccounts", []);
+    
+    
+        const balance = await provider.getBalance(accounts[0])
+        if (ethers.utils.formatUnits(balance, 18) < ethers.utils.formatUnits(amount, 18))
+            return Promise.reject("Insufficient fund")
+    
+    
+        const options = { value: ethers.utils.parseEther(price.toString()) };
+    
+        const result = await contractData.buy(tokenId, options);
+        console.log("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",result)
+    
+        let res = await result.wait();
+    
+        return {
+            ...res,
+            chainId: provider?._network?.chainId || "",
+            name: provider?._network?.name || "",
+        };
+
+
+    }
+    else if(window.ethereum.networkVersion == 97){
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+        const signer = provider.getSigner();
+        const contractData = new ethers.Contract(
+            BinanceAddress,
+            contractbuyAndRemoveABI,
+            signer
+        );
+        const resultBuy= await contractData.buy(
+            tokenId,
+            message,
+            signature,
+            contractAddress
+        )
+        console.log("<<<result Buy",resultBuy)
         const amount = ethers.utils.parseUnits(price.toString(), 18);
         const accounts = await provider.send("eth_requestAccounts", []);
     
@@ -301,8 +454,10 @@ async function createCollections({ name, symbol,blockchain }) {
     let contractCollectionAddress;
     if(blockchain === "Polygon")
     contractCollectionAddress= process.env.REACT_APP_CONTRACT_COLLECTION_ADDRESS_POLYGON;
-    else 
+    else if(blockchain=="Ethereum")
     contractCollectionAddress=process.env.REACT_APP_CONTRACT_COLLECTION_ADDRESS;
+    else if(blockchain === "Binance")
+    contractCollectionAddress=process.env.REACT_APP_CONTRACT_COLLECTION_ADDRESS_BINANCE;
 
     console.log(blockchain,"<<<BlockChainmetamask")
 
@@ -333,6 +488,30 @@ async function createCollections({ name, symbol,blockchain }) {
 
     }
     else if(window.ethereum.networkVersion == 4  && blockchain === "Ethereum"){
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const contractData = new ethers.Contract(
+            contractCollectionAddress,
+            contractCollectionABI,
+            signer
+        );
+        const result = await contractData.createCollection(name, symbol);
+    
+        let res = await result.wait();
+        console.log("---------ssss----")
+        // console.log("000000000000000000000000", pp.logs)
+        // console.log("000000wwww000000000000000000",)
+        const getReceipt = await provider.getTransactionReceipt(res.transactionHash)
+        // console.log("lssssssss",getReceipt.logs[0].address)
+        return {
+            ...res,
+            contract_address: getReceipt.logs[0].address,
+            chainId: provider?._network?.chainId || "",
+            name: provider?._network?.name || "",
+        };
+
+    }
+    else if(window.ethereum.networkVersion == 97  && blockchain === "Binance"){
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         const contractData = new ethers.Contract(

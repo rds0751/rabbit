@@ -367,7 +367,7 @@ function CollectionDetails() {
                 )}
               </div>
               <div className="coll-blockchain">
-                {blockchainCheck(blockchain)}{" "}
+                {blockchainCheck(blockchain)}
               </div>
               <div className="colusername">{name}</div>
               <div className="coluserdes" title={description}>
