@@ -15,6 +15,7 @@ import Activity from "../../assets/images/Activity.svg";
 import Easy from "../../assets/images/Easy.svg";
 import Offers from "../../assets/images/Offers.svg";
 import Stats from "../../assets/images/Stats.svg";
+import userDefault from "../../assets/images2/profile.png"
 import { RedirectTo } from "../../reducers/Action";
 import Ethereum from "../../assets/images/ether.svg";
 import Polygon from "../../assets/images/ploygon.svg";
@@ -240,9 +241,12 @@ function Home() {
                                     </Link>
                                     <Card.Body className="smallCard-details">
                                       <div className="d-flex align-items-start media">
+                                        {
+                                          console.log(nft.hasOwnProperty('creator') ? nft.creator.hasOwnProperty('compressedURL') ? nft?.creator?.compressedURL : userDefault : userDefault, 'image data')
+                                        }
                                         <div className="flex-shrink-0">
                                           <img
-                                            src={nft.hasOwnProperty('compressedURL') ? nft?.compressedURL : nft.link}
+                                            src={nft.hasOwnProperty('creator') ? nft.creator.hasOwnProperty('compressedURL') ? nft?.creator?.compressedURL : userDefault : userDefault}
                                             width="38px"
                                             height="38px"
                                             className="profile-img"

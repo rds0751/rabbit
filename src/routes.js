@@ -108,6 +108,8 @@ function App() {
           setLoader(false);
         })
 
+    }else{
+      setLoader(false)
     }
 
   },[])
