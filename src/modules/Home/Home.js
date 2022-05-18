@@ -37,8 +37,6 @@ function Home() {
 
   const customize = useSelector(state => state.customize);
 
-  console.log(customize.appearance.heading, 'banner cs')
-
   const { user, sideBar } = useSelector((state) => state);
   const { userDetails, loggedInUser, walletAddress } = user;
   const [nfts, setNfts] = useState([]);
@@ -111,9 +109,9 @@ function Home() {
 
       if (buttons.length > 1) {
         if (buttons[1].isNewTab) {
-          window.open('/create-nft')
+          window.open(buttons[1]?.link)
         } else {
-          navigate("/create-nft");
+          navigate(buttons[1]?.link);
         }
       } else {
         navigate("/create-nft");
@@ -166,10 +164,10 @@ function Home() {
                     </p>
                     <div style={{ display: "flex" }}>
                       <Button
-                        href="/nfts"
+                        href={customize.appearance.buttons.length > 0 ? customize.appearance.buttons[0].link : '/nft' }
                         variant="custom"
                         target={customize.appearance.buttons.length > 0 ? customize.appearance.buttons[0].isNewTab ? '_blank' : '' : ''}
-                        className={`${customize.appearance.buttons.length > 0 ? customize.appearance.buttons[0].style : ''} button-hide`}
+                        className={`${customize.appearance.buttons.length > 0 ? customize.appearance.buttons[0].style+' '+customize.appearance.buttons[0].status+'-button' : ''} button-hide`}
                       >
                         {
                           customize.appearance.buttons.length > 0 ?
@@ -180,7 +178,7 @@ function Home() {
                       <Button
                         onClick={() => createHandle(customize.appearance.buttons)}
                         variant="custom"
-                        className={`${customize.appearance.buttons.length > 1 ? customize.appearance.buttons[1].style : ''} button-hide`}
+                        className={`${customize.appearance.buttons.length > 1 ? customize.appearance.buttons[1].style+' '+customize.appearance.buttons[1].status+'-button' : ''} button-hide`}
                       >
                         {
                           customize.appearance.buttons.length > 1 ?
