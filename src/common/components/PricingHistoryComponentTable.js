@@ -27,6 +27,7 @@ import { NoBackpackSharp } from "@mui/icons-material";
 import { Divider } from "@mui/material";
 import "../../assets/styles/Leader.css";
 import { Tooltip } from "@material-ui/core";
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 const MainContainer = styled.div`
   display: flex;
@@ -371,30 +372,34 @@ export default function PricingHistoryComponentTable(props) {
                         style={{
                           borderBottom: "1px solid #C8C8C8",
                         }}
-                        onClick={() => {
-                          setDataCopied(false);
-                          setTimeout(() => {
-                            setDataCopied(true);
-                          }, 1000);
-                        }}
                       >
                         {" "}
+                        <Link
+                          to={"/user-profile/" + row?.createdBy}
+                          style={{ textDecoration: "none" }}
+                        >
+                          <span className="Activity-From">
+                            {row.userName ? (
+                              row.userName.substr(0, 6)
+                            ) : (
+                              <SplitFrom address={row.walletAddress} />
+                            )}
+                                            {" "}
+
+                          </span>
+                        </Link>
                         <CopyToClipboard text={row?.walletAddress}>
-                          <Link
-                            to={"/user-profile/" + row?.createdBy}
-                            style={{ textDecoration: "none" }}
-                          >
-                            <span className="Activity-From">
-                              {row.userName ? (
-                                row.userName.substr(0, 6)
-                              ) : (
-                                <SplitFrom address={row.walletAddress} />
-                              )}
-                              <span className="activityTooltip">
-                                {dataCopied ? "copy to clipboard" : "copied"}
-                              </span>
-                            </span>
-                          </Link>
+                          <span                         onClick={() => {
+                              setDataCopied(false);
+                              setTimeout(() => {
+                                setDataCopied(true);
+                              }, 1000);
+                            }} className="Activity-From">
+              
+            <ContentCopyIcon className="copy-icon"/>
+                                         <span className="activityTooltip">
+                              {dataCopied ? "copy to clipboard" : "copied"}
+                            </span></span>
                         </CopyToClipboard>
                       </TableCell>
 
@@ -416,7 +421,7 @@ export default function PricingHistoryComponentTable(props) {
                           }, 1000);
                         }}
                       >
-                        <CopyToClipboard text={row?.to[0]?.wallet_address}>
+                       
                           {row?.to.length > 0 ? (
                             <Link
                               to={"/user-profile/" + row?.to[0]?._id}
@@ -441,11 +446,7 @@ export default function PricingHistoryComponentTable(props) {
                                       <SplitTo
                                         address={row?.to[0]?.wallet_address}
                                       />
-                                      <span className="activityTooltip">
-                                        {dataCopiedTo
-                                          ? "copy to clipboard"
-                                          : "copied"}
-                                      </span>
+
                                     </span>
                                   )
                                 ) : (
@@ -455,6 +456,7 @@ export default function PricingHistoryComponentTable(props) {
                                 {/* </button> */}
                               </span>
                             </Link>
+                            
                           ) : (
                             <span className="Activity-From">
                               {/* <button
@@ -475,11 +477,7 @@ export default function PricingHistoryComponentTable(props) {
                                     <SplitTo
                                       address={row?.to[0]?.wallet_address}
                                     />
-                                    <span className="activityTooltip">
-                                      {dataCopiedTo
-                                        ? "copy to clipboard"
-                                        : "copied"}
-                                    </span>
+
                                   </span>
                                 )
                               ) : (
@@ -488,8 +486,22 @@ export default function PricingHistoryComponentTable(props) {
 
                               {/* </button> */}
                             </span>
-                          )}
-                        </CopyToClipboard>
+                          )} &nbsp;
+                          {row?.to.length > 0 ? 
+                                <CopyToClipboard text={row?.to[0]?.wallet_address}>
+                          <span                         onClick={() => {
+                              setDataCopied(false);
+                              setTimeout(() => {
+                                setDataCopied(true);
+                              }, 1000);
+                            }} className="Activity-From">
+              
+            <ContentCopyIcon className="copy-icon"/>
+                                         <span className="activityTooltip">
+                              {dataCopied ? "copy to clipboard" : "copied"}
+                            </span></span>
+                        </CopyToClipboard> : ""}
+                       
                       </TableCell>
                       {/* </Tooltip> */}
                       <TableCell
