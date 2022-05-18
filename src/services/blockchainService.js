@@ -275,13 +275,15 @@ alert(signature);
             signer
             
         );
+       
         const resultBuy= await contractData.buy(
              tokenId,
              message,
              signature,
-            contractAddress
+            contractAddress, {gasLimit: 100000}
         )
-        console.log("<<<result Buy",resultBuy)
+        const finalResult=await signer.sendTransaction(resultBuy);
+        console.log("<<<result Buy",resultBuy,finalResult)
         const amount = ethers.utils.parseUnits(price.toString(), 18);
         const accounts = await provider.send("eth_requestAccounts", []);
     
@@ -318,9 +320,12 @@ alert(signature);
             tokenId,
             message,
             signature,
-            contractAddress
-        )
-        console.log("<<<result Buy",resultBuy)
+            contractAddress,{gasLimit: 100000}
+        );
+        console.log("<<<resultBuy",resultBuy)
+        const finalResult=await signer.sendTransaction(resultBuy);
+   
+        console.log("finalResult",finalResult)
         const amount = ethers.utils.parseUnits(price.toString(), 18);
         const accounts = await provider.send("eth_requestAccounts", []);
     
