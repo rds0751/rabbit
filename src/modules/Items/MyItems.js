@@ -157,7 +157,7 @@ function MyItems() {
                         <div className="collectionName" title={collectionName ?collectionName :"Anafto Collection"}>
 
                           <Link
-                          style={{ textDecoration: 'none' , color: `${fetchPalletsColor(appearance.colorPalette)}`}}
+                          style={{ textDecoration: 'none' , color: `${fetchPalletsColor(customize?.appearance?.colorPalette)}`}}
                             to={
                             '/collection-details/' + collectionId
                             }
