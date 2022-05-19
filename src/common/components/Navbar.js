@@ -37,14 +37,13 @@ import { WHITE_LABEL_TOKEN } from "../../reducers/Constants";
 import { Helmet } from "react-helmet";
 import { fetchPalletsColor } from "../../utility/global";
 import { padding } from "@mui/system";
-import Skeleton from "react-loading-skeleton";
 const queryString = require("query-string");
 
 const activeMarketplace = ["/nfts"];
 const activeLeaderboard = ["/leader-board"];
 const activeResource = ["/help-center", "/suggestion"];
 
-function Navbar({loader}) {
+function Navbar({ loader }) {
   const customize = useSelector((state) => state.customize);
 
   const navigate = useNavigate();
@@ -146,7 +145,7 @@ function Navbar({loader}) {
                   }
                 });
             })
-            .catch((e) => {});
+            .catch((e) => { });
         } else {
           return null;
         }
@@ -393,11 +392,7 @@ function Navbar({loader}) {
         <title>{customize?.storeName}</title>
       </Helmet>
 
-      {
-        loader ?  
-          <Skeleton height="60px" />
-        : 
-        <div className="navbar-width">
+      <div className="navbar-width">
         <nav className="navbarborder navbar navbar-expand-lg">
           <div
             className="container-fluid mainContainer"
@@ -494,7 +489,7 @@ function Navbar({loader}) {
                                         />
                                         <p className="coll-name">
                                           {collection.name}
-                                          <span className="item-count" style={{color: `${fetchPalletsColor(customize.appearance.colorPalette)}`}}>
+                                          <span className="item-count" style={{ color: `${fetchPalletsColor(customize.appearance.colorPalette)}` }}>
                                             {collection.nftCount} items
                                           </span>
                                         </p>
@@ -534,7 +529,7 @@ function Navbar({loader}) {
                                   value: inputValue,
                                 }}
                               >
-                                <button className="show-more-btn" style={{color: `${fetchPalletsColor(customize.appearance.colorPalette)}`}}>
+                                <button className="show-more-btn" style={{ color: `${fetchPalletsColor(customize.appearance.colorPalette)}` }}>
                                   show more
                                 </button>
                               </Link>
@@ -690,11 +685,11 @@ function Navbar({loader}) {
                   <li
                     className={
                       location.pathname.includes("/nfts") &&
-                      !location.pathname.includes("leader-board") &&
-                      !location.pathname.includes("resource") &&
-                      !location.pathname.includes("create-nft") &&
-                      !location.pathname.includes("help-center") &&
-                      !location.pathname.includes("suggestion")
+                        !location.pathname.includes("leader-board") &&
+                        !location.pathname.includes("resource") &&
+                        !location.pathname.includes("create-nft") &&
+                        !location.pathname.includes("help-center") &&
+                        !location.pathname.includes("suggestion")
                         ? "nav-items marketplace"
                         : "nav-items marketplace"
                     }
@@ -703,11 +698,11 @@ function Navbar({loader}) {
                     <Link
                       className={
                         location.pathname.includes("/nfts") &&
-                        !location.pathname.includes("leader-board") &&
-                        !location.pathname.includes("resource") &&
-                        !location.pathname.includes("create-nft") &&
-                        !location.pathname.includes("help-center") &&
-                        !location.pathname.includes("suggestion")
+                          !location.pathname.includes("leader-board") &&
+                          !location.pathname.includes("resource") &&
+                          !location.pathname.includes("create-nft") &&
+                          !location.pathname.includes("help-center") &&
+                          !location.pathname.includes("suggestion")
                           ? "nav-link navlink_active"
                           : "nav-link"
                       }
@@ -758,7 +753,7 @@ function Navbar({loader}) {
                     id="navbarScrollingDropdown"
                     className={
                       location.pathname.includes("help-center") ||
-                      location.pathname.includes("suggestion")
+                        location.pathname.includes("suggestion")
                         ? "nav-items dropdown resource nav-link navlink_active resource padding-0"
                         : "nav-items dropdown resource padding-0"
                     }
@@ -963,7 +958,7 @@ function Navbar({loader}) {
           </div>
         </div>
       </div>
-      }
+
     </>
   );
 }
