@@ -76,6 +76,7 @@ function CreateSingleNFT(props) {
   const price = useRef("");
   const description = useRef("");
   const blockchain = useRef("");
+  const royality = useRef("");
   // const ipfsUrl = useRef("");
   const createdBy = loggedInUser?._id;
 
@@ -191,7 +192,7 @@ function CreateSingleNFT(props) {
   const [compressedUrl, setCompressedUrl] = useState("");
   // --------------------------------React Drop Zone---------------------
   const { getRootProps, getInputProps } = useDropzone({
-    accept: ".png,.jpg,.jpeg,.gif",
+    accept: ".png,.jpg,.jpeg,.gif,.mp4",
     maxSize: "40485760",
     onDrop: (acceptedFiles, fileRejections) => {
       setisLoader(true);
@@ -444,6 +445,7 @@ function CreateSingleNFT(props) {
               ? selectedOption?.value
               : currencyValue(collectionBlockchain),
           description: description.current,
+          royality:royality.current,
           blockchain: blockchain.current,
           createdBy: loggedInUser._id,
           collectionId: collectionId,
@@ -516,6 +518,7 @@ function CreateSingleNFT(props) {
     fileError == "" &&
     collectionError == "" &&
     !isloader;
+    console.log("SetFile",selectFile);
 
 
     useEffect(()=>{
@@ -1059,17 +1062,7 @@ function CreateSingleNFT(props) {
 
               <div className="input-name">
                 <label htmlFor="email" className=" input-label">
-                  Royalty{" "}
-                  <span
-                    style={{
-                      color: `${fetchPalletsColor(
-                        customize.appearance.colorPalette
-                      )}`,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    ( Coming Soon ){" "}
-                  </span>
+                  Royalty
                 </label>
                 <p className="headingRoyality">
                   Write down the percentage you want from this sale of this NFT
@@ -1092,11 +1085,12 @@ function CreateSingleNFT(props) {
                         : "1px solid #C8C8C8",
                   }}
                   title=" "
-                  disabled={true}
                   onChange={(e) => {
                     if (+e.target.value > 50)
                       setRoyalityError("( Royalty can not be more than 50% )");
                     else setRoyalityError("");
+                    royality.current=e.target.value;
+
                   }}
                 />
               </div>

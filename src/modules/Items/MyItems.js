@@ -120,7 +120,7 @@ function MyItems() {
 
             {ownedNft.length > 1 ?(
               ownedNft.map((curElem) => {
-                const { cdnUrl, name, _id,salesInfo,likes,compressedURL,blockchain} =
+                const { cdnUrl, name, _id,salesInfo,likes,compressedURL,blockchain,collectionName,collectionId} =
                   curElem;
                 const route = "/nft-information/" + _id;
                 return (
@@ -151,8 +151,22 @@ function MyItems() {
                          {blockchainCheck(blockchain)}
                          {`${salesInfo?.price}  ${salesInfo?.currency}`}
                          </span>
+
                          
                         </div>
+                        <div className="collectionName" title={collectionName ?collectionName :"Anafto Collection"}>
+
+                          <Link
+                          style={{ textDecoration: 'none' , color: `${fetchPalletsColor(customize?.appearance?.colorPalette)}`}}
+                            to={
+                            '/collection-details/' + collectionId
+                            }
+                            >
+                              {undefined !== collectionName &&
+                              collectionName.length > 30 ? collectionName.slice(0,30)+"...":(collectionName?.length===0 ? "Anafto Collection" :collectionName)}
+                          
+                            </Link>
+                            </div>
                         <div className="likeCount" title="Like Count">
                         {likes?.length}
                         <i
@@ -183,7 +197,7 @@ function MyItems() {
           <div style={{ marginLeft: 'auto', rowGap: "50px",marginBottom: "107px" }} className="row">
             {ownedCollection.length > 1 ? (
               ownedCollection.map((curElem) => {
-                const { imageUrl, name, _id,nftCount } =
+                const { imageUrl, name, _id,nftCount,blockchain } =
                   curElem;
                 const collection = "/collection-details/" + _id;
                 return (
@@ -210,11 +224,14 @@ function MyItems() {
                       <div className="text-center pt-3">
                         <p
                           className="collectionCardEachName text-center font-weight-900"
-                          style={{ color: "#191919" }}
+                          style={{ color: "#191919",margin:0 }}
                         >
                           {name}
                         </p>
                         <div>
+                        <div className="coll-blockchain" style={{margin:"0"}}>
+                          {blockchainCheck(blockchain)}
+                          </div>
                         <p className="collectionCardEachTotalitems">
                           <span className=" font-14 text-dark">
                             Total Items:

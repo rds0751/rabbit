@@ -144,6 +144,12 @@ export default function NftInformation(props) {
   const [filter, setFilter] = useState(defaultFilter);
   const [moreNft, setMoreNfts] = useState([]);
 
+  let period = {
+    expiryDate: "",
+    expiryTime: "",
+    price: "",
+  };
+
   const [state, setState] = React.useState({
     open: false,
     vertical: "top",
@@ -246,6 +252,9 @@ export default function NftInformation(props) {
       // tokenId:response.tokenId,
       // nftId:response._id,
       blockchain: nft?.blockchain,
+      expiryTime: period.expiryTime,
+      expiryDate: period.expiryDate,
+      price: period.price,
     });
     // setPutOnSaleModal(false)
   };
@@ -483,6 +492,31 @@ export default function NftInformation(props) {
                         </Button>
                       </div>
                       <span className="nft-name">{nft.name}</span>
+                      <div
+                        className=""
+                        title={
+                          nft.collectionName
+                            ? nft.collectionName
+                            : "Anafto Collection"
+                        }
+                      >
+                        <Link
+                          style={{
+                            textDecoration: "none",
+                            color: `${fetchPalletsColor(
+                              appearance.colorPalette
+                            )}`,
+                          }}
+                          to={"/collection-details/" + nft?.collectionId}
+                        >
+                          {undefined !== nft?.collectionName &&
+                          nft?.collectionName
+                            ? nft?.collectionName
+                            : nft?.collectionName?.length === 0
+                            ? "Anafto Collection"
+                            : nft?.collectionName}
+                        </Link>
+                      </div>
                     </div>
                     <div className=" d-flex align-items-center">
                       <a
@@ -737,7 +771,9 @@ export default function NftInformation(props) {
                                     ? "block"
                                     : "none",
                                 color: "white",
-                                backgroundColor: `${fetchPalletsColor(appearance?.colorPalette)}`,
+                                backgroundColor: `${fetchPalletsColor(
+                                  appearance?.colorPalette
+                                )}`,
                                 marginRight: "1rem",
                                 textTransform: "none",
                               }}
@@ -755,7 +791,9 @@ export default function NftInformation(props) {
                                   ? "block"
                                   : "none",
                               color: "white",
-                              backgroundColor: `${fetchPalletsColor(appearance?.colorPalette)}`,
+                              backgroundColor: `${fetchPalletsColor(
+                                appearance?.colorPalette
+                              )}`,
                               textTransform: "none",
                             }}
                             onClick={() => setOpenRemoveSale(true)}
@@ -764,6 +802,31 @@ export default function NftInformation(props) {
                           </Button>
                         </div>
                         <span className="nft-name">{nft.name}</span>
+                        <div
+                          className=""
+                          title={
+                            nft.collectionName
+                              ? nft.collectionName
+                              : "Anafto Collection"
+                          }
+                        >
+                          <Link
+                            style={{
+                              textDecoration: "none",
+                              color: `${fetchPalletsColor(
+                                appearance.colorPalette
+                              )}`,
+                            }}
+                            to={"/collection-details/" + nft?.collectionId}
+                          >
+                            {undefined !== nft?.collectionName &&
+                            nft?.collectionName
+                              ? nft?.collectionName
+                              : nft?.collectionName?.length === 0
+                              ? "Anafto Collection"
+                              : nft?.collectionName}
+                          </Link>
+                        </div>
                       </div>
                       <div className="col-xl-2 col-lg-2 col-md-3 col-sm-3 d-flex align-items-center">
                         <div>
@@ -1087,7 +1150,12 @@ export default function NftInformation(props) {
                           setTab(1);
                         }}
                         style={{
-                          borderBottom: tab === 1 ? `2px solid ${fetchPalletsColor(appearance?.colorPalette)}` : "",
+                          borderBottom:
+                            tab === 1
+                              ? `2px solid ${fetchPalletsColor(
+                                  appearance?.colorPalette
+                                )}`
+                              : "",
                           color: tab === 1 ? "#000000" : "#828282",
                           fontWeight: tab === 1 ? 600 : "",
                           marginRight: "16px",
@@ -1101,7 +1169,12 @@ export default function NftInformation(props) {
                           setTab(2);
                         }}
                         style={{
-                          borderBottom: tab === 2 ? `2px solid ${fetchPalletsColor(appearance?.colorPalette)}` : "",
+                          borderBottom:
+                            tab === 2
+                              ? `2px solid ${fetchPalletsColor(
+                                  appearance?.colorPalette
+                                )}`
+                              : "",
                           color: tab === 2 ? "#000000" : "#828282",
                           fontWeight: tab === 2 ? 600 : "",
                           marginRight: "16px",
@@ -1115,7 +1188,12 @@ export default function NftInformation(props) {
                           setTab(3);
                         }}
                         style={{
-                          borderBottom: tab === 3 ? `2px solid ${fetchPalletsColor(appearance?.colorPalette)}` : "",
+                          borderBottom:
+                            tab === 3
+                              ? `2px solid ${fetchPalletsColor(
+                                  appearance?.colorPalette
+                                )}`
+                              : "",
                           color: tab === 3 ? "#000000" : "#828282",
                           fontWeight: tab === 3 ? 600 : "",
                           marginRight: "16px",
@@ -1129,7 +1207,12 @@ export default function NftInformation(props) {
                           setTab(4);
                         }}
                         style={{
-                          borderBottom: tab === 4 ? `2px solid ${fetchPalletsColor(appearance?.colorPalette)}` : "",
+                          borderBottom:
+                            tab === 4
+                              ? `2px solid ${fetchPalletsColor(
+                                  appearance?.colorPalette
+                                )}`
+                              : "",
                           color: tab === 4 ? "#000000" : "#828282",
                           fontWeight: tab === 4 ? 600 : "",
                           marginRight: "16px",
@@ -1269,8 +1352,12 @@ export default function NftInformation(props) {
                       min="0"
                       type="number"
                       autoComplete="off"
-                      value={salesInfo?.price}
-                      readonly
+                      placeholder={salesInfo?.price}
+                      onchange={(e)=>{
+                        period.price=e.target.value;
+
+                      }}
+                     
                       // onChange={(e) => {
                       //   price.current = e.target.value;
                       //   checkChanges();
@@ -1283,6 +1370,9 @@ export default function NftInformation(props) {
                       // min="0"
                       // type="date"
                       autoComplete="off"
+                      onChange={(e)=>{
+                        period.expiryDate=e.target.value;
+                      }}
                       // value="23"
                       // onChange={(e) => {
                       //   price.current = e.target.value;
@@ -1294,6 +1384,9 @@ export default function NftInformation(props) {
                       // min="0"
                       type="time"
                       autoComplete="off"
+                      onChange={(e)=>{
+                        period.expiryTime=e.target.value;
+                      }}
                       // value="23"
                       // onChange={(e) => {
                       //   price.current = e.target.value;
