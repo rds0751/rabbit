@@ -212,8 +212,6 @@ function Home() {
 
                               return (
                                 <>
-                                  {/* <img src={nft?.cdnUrl}></img> */}
-                                  {console.log(nft, 'nft')}
                                   <Card>
                                     <Link to={route} style={{ textDecoration: "none" }}>
                                       <div className="homePageContainer">
@@ -241,12 +239,10 @@ function Home() {
                                     </Link>
                                     <Card.Body className="smallCard-details">
                                       <div className="d-flex align-items-start media">
-                                        {
-                                          console.log(nft.hasOwnProperty('creator') ? nft.creator.hasOwnProperty('compressedURL') ? nft?.creator?.compressedURL : userDefault : userDefault, 'image data')
-                                        }
+
                                         <div className="flex-shrink-0">
                                           <img
-                                            src={nft.hasOwnProperty('creator') ? nft.creator.hasOwnProperty('compressedURL') ? nft?.creator?.compressedURL : userDefault : userDefault}
+                                            src={nft.hasOwnProperty('creator') ? nft.creator.hasOwnProperty('compressedURL') ? nft?.creator?.compressedURL !== "" ? nft?.creator?.compressedURL : userDefault : userDefault : userDefault}
                                             width="38px"
                                             height="38px"
                                             className="profile-img"
@@ -284,7 +280,7 @@ function Home() {
                                       </div>
 
                                       <div className="flex-grow-1 ms-2 card1 card-collection">
-                                        <Link style={{color: `${fetchPalletsColor(customize?.appearance?.colorPalette)}`}} to={`/collection-details/${nft?.collectionId ? nft?.collectionId : '62823cab6df787009ba1882b'}`}>
+                                        <Link style={{ color: `${fetchPalletsColor(customize?.appearance?.colorPalette)}` }} to={`/collection-details/${nft?.collectionId ? nft?.collectionId : '62823cab6df787009ba1882b'}`}>
                                           {nft.collectionName ? nft.collectionName : "Anafto Collection"}
                                         </Link>
                                       </div>
@@ -376,7 +372,7 @@ function Home() {
                                           <div className="d-flex align-items-start media">
                                             <div className="flex-shrink-0 titleChar">
                                               <img
-                                                src={nft.hasOwnProperty('compressedURL') ? nft?.compressedURL : nft.link}
+                                                src={nft.hasOwnProperty('creator') ? nft.creator.hasOwnProperty('compressedURL') ? nft?.creator?.compressedURL !== "" ? nft?.creator?.compressedURL : userDefault : userDefault : userDefault}
                                                 width="38px"
                                                 height="38px"
                                                 className="profile-img"
@@ -414,6 +410,12 @@ function Home() {
                                               </div>
                                               {/* <p className="description">{nft?.salesInfo.price} </p> */}
                                             </div>
+                                          </div>
+
+                                          <div className="flex-grow-1 ms-2 card1 card-collection">
+                                            <Link style={{ color: `${fetchPalletsColor(customize?.appearance?.colorPalette)}` }} to={`/collection-details/${nft?.collectionId ? nft?.collectionId : '62823cab6df787009ba1882b'}`}>
+                                              {nft.collectionName ? nft.collectionName : "Anafto Collection"}
+                                            </Link>
                                           </div>
                                         </Card.Body>
                                       </Card>
