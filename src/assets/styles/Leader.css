@@ -1999,3 +1999,7 @@ td {
   visibility: visible;
   opacity: 1;
 }
+.copy-icon{
+  width: 18px !important;
+  color: grey !important;
+}

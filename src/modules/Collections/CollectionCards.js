@@ -250,15 +250,15 @@ function Collections_tile() {
     button.style.background = fetchPalletsColor(appearance.colorPalette);
   }
 
-  useEffect(()=>{
-    if(customize.permissionToUploadNft === 'Only me'){
-      navigate("/");
+  // useEffect(()=>{
+  //   if(customize.permissionToUploadNft === 'Only me'){
+  //     navigate("/");
 
-      toast.warning("You are not allowed to access this location", {
-        position: toast.POSITION.TOP_RIGHT
-      });
-    }
-  },[customize.permissionToUploadNft])
+  //     toast.warning("You are not allowed to access this location", {
+  //       position: toast.POSITION.TOP_RIGHT
+  //     });
+  //   }
+  // },[customize.permissionToUploadNft])
 
   return (
     <>

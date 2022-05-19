@@ -16,7 +16,7 @@ import { fetchPalletsColor } from "../../utility/global";
 
 function MyItems() {
 
-  const appearance = useSelector(state =>  state.customize.appearance);
+  const customize = useSelector(state =>  state.customize);
 
   const [activeInActive, setActiveInActive] = useState("active");
   const [toggleSelect, setToggleSelect] = useState(true);
@@ -71,7 +71,7 @@ function MyItems() {
               style={{
 
                 color: toggleSelect ? "#191919" : "#828282",
-                borderBottom: toggleSelect ? `3px solid ${fetchPalletsColor(appearance.colorPalette)}` : "none",
+                borderBottom: toggleSelect ? `3px solid ${fetchPalletsColor(customize?.appearance?.colorPalette)}` : "none",
                 cursor: "pointer",
                 borderRadius: "2px",
               }}
@@ -84,7 +84,7 @@ function MyItems() {
               style={{
                 marginLeft: "18px",
                 color: !toggleSelect ? "#191919" : "#828282",
-                borderBottom: !toggleSelect ? `3px solid ${fetchPalletsColor(appearance.colorPalette)}` : "none",
+                borderBottom: !toggleSelect ? `3px solid ${fetchPalletsColor(customize?.appearance?.colorPalette)}` : "none",
                 cursor: "pointer",
                 borderRadius:"3px",
               }}
@@ -93,20 +93,23 @@ function MyItems() {
             </div>
           </div>
           {toggleSelect ?
-            <button type="submit" className="add-item-button p-0 bord-rad-4" style={{background: `${fetchPalletsColor(appearance.colorPalette)}`}}>
+            customize.permissionToUploadNft !== "Only me" ?
+            <button type="submit" className="add-item-button p-0 bord-rad-4" style={{background: `${fetchPalletsColor(customize?.appearance?.colorPalette)}`}}>
               <Link
                 to="/create-single-nft"
                 style={{ textDecoration: "none", color: '#FFFFFF' }}>
                 Add item
               </Link>
-            </button>
+            </button> : null
             :
-            <button type="submit" className="add-item-button p-0 bord-rad-4" style={{background: `${fetchPalletsColor(appearance.colorPalette)}`}}>
+
+            customize.permissionToUploadNft !== "Only me" ?
+            <button type="submit" className="add-item-button p-0 bord-rad-4" style={{background: `${fetchPalletsColor(customize?.appearance?.colorPalette)}`}}>
               <Link
                 to="/create-nft-collection" style={{ textDecoration: "none", color: '#FFFFFF' }}>
                 Create Collection
               </Link>
-            </button>
+            </button> : null
           }
         </div>
 

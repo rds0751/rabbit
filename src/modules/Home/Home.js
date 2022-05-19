@@ -15,6 +15,7 @@ import Activity from "../../assets/images/Activity.svg";
 import Easy from "../../assets/images/Easy.svg";
 import Offers from "../../assets/images/Offers.svg";
 import Stats from "../../assets/images/Stats.svg";
+import userDefault from "../../assets/images2/profile.png"
 import { RedirectTo } from "../../reducers/Action";
 import Ethereum from "../../assets/images/ether.svg";
 import Polygon from "../../assets/images/ploygon.svg";
@@ -36,8 +37,6 @@ import { fetchPalletsColor } from "../../utility/global";
 function Home() {
 
   const customize = useSelector(state => state.customize);
-
-  console.log(customize.appearance.heading, 'banner cs')
 
   const { user, sideBar } = useSelector((state) => state);
   const { userDetails, loggedInUser, walletAddress } = user;
@@ -68,8 +67,8 @@ function Home() {
 
           if (res.success) {
             // prevArray => [...prevArray, newValue]
-            if (customize.appearance.featuredAssets.length > 0) {
-              setNfts(customize.appearance.featuredAssets);
+            if (customize.bannerNftData.length > 0) {
+              setNfts(customize.bannerNftData);
             } else {
               setNfts(res?.responseData?.nftContent);
             }
@@ -92,10 +91,10 @@ function Home() {
 
 
   useEffect(() => {
-    if (customize.appearance.featuredAssets.length > 0) {
-      setNfts(customize.appearance.featuredAssets);
+    if (customize.bannerNftData.length > 0) {
+      setNfts(customize.bannerNftData);
     }
-  }, [customize.appearance.featuredAssets.length])
+  }, [customize.bannerNftData.length])
 
   // setInterval(() => {
 
@@ -111,9 +110,9 @@ function Home() {
 
       if (buttons.length > 1) {
         if (buttons[1].isNewTab) {
-          window.open('/create-nft')
+          window.open(buttons[1]?.link)
         } else {
-          navigate("/create-nft");
+          navigate(buttons[1]?.link);
         }
       } else {
         navigate("/create-nft");
@@ -166,10 +165,10 @@ function Home() {
                     </p>
                     <div style={{ display: "flex" }}>
                       <Button
-                        href="/nfts"
+                        href={customize.appearance.buttons.length > 0 ? customize.appearance.buttons[0].link : '/nft'}
                         variant="custom"
                         target={customize.appearance.buttons.length > 0 ? customize.appearance.buttons[0].isNewTab ? '_blank' : '' : ''}
-                        className={`${customize.appearance.buttons.length > 0 ? customize.appearance.buttons[0].style : ''} button-hide`}
+                        className={`${customize.appearance.buttons.length > 0 ? customize.appearance.buttons[0].style + ' ' + customize.appearance.buttons[0].status + '-button' : ''} button-hide`}
                       >
                         {
                           customize.appearance.buttons.length > 0 ?
@@ -180,7 +179,7 @@ function Home() {
                       <Button
                         onClick={() => createHandle(customize.appearance.buttons)}
                         variant="custom"
-                        className={`${customize.appearance.buttons.length > 1 ? customize.appearance.buttons[1].style : ''} button-hide`}
+                        className={`${customize.appearance.buttons.length > 1 ? customize.appearance.buttons[1].style + ' ' + customize.appearance.buttons[1].status + '-button' : ''} button-hide`}
                       >
                         {
                           customize.appearance.buttons.length > 1 ?
@@ -204,19 +203,19 @@ function Home() {
                             nfts.slice(0, 4).map((nft) => {
                               // const { _id, cdnUrl, name, biddingDetails, salesInfo } = nft;
                               let route;
-                              if (nft.hasOwnProperty('contentId') && nft.contentId != ""){
+                              if (nft.hasOwnProperty('contentId') && nft.contentId != "") {
                                 route = "/nft-information/" + nft.contentId;
                               } else {
                                 route = "/nft-information/" + nft._id;
                               }
-                              
+
 
                               return (
                                 <>
                                   {/* <img src={nft?.cdnUrl}></img> */}
                                   {console.log(nft, 'nft')}
                                   <Card>
-                                  <Link to={route} style={{ textDecoration: "none" }}>
+                                    <Link to={route} style={{ textDecoration: "none" }}>
                                       <div className="homePageContainer">
                                         <Card.Img
                                           variant="top"
@@ -242,9 +241,12 @@ function Home() {
                                     </Link>
                                     <Card.Body className="smallCard-details">
                                       <div className="d-flex align-items-start media">
+                                        {
+                                          console.log(nft.hasOwnProperty('creator') ? nft.creator.hasOwnProperty('compressedURL') ? nft?.creator?.compressedURL : userDefault : userDefault, 'image data')
+                                        }
                                         <div className="flex-shrink-0">
                                           <img
-                                            src={nft.hasOwnProperty('compressedURL') ? nft?.compressedURL : nft.link}
+                                            src={nft.hasOwnProperty('creator') ? nft.creator.hasOwnProperty('compressedURL') ? nft?.creator?.compressedURL : userDefault : userDefault}
                                             width="38px"
                                             height="38px"
                                             className="profile-img"
@@ -263,7 +265,7 @@ function Home() {
                                                 "/nft-information/" + nft?._id
                                               }
                                               style={{ textDecoration: "none", color: `${fetchPalletsColor(customize.appearance.colorPalette)}` }}
-                                              
+
                                             >
                                               {nft?.name}
                                             </Link>
@@ -279,6 +281,12 @@ function Home() {
                                           }
                                           {/* <p className="description">{nft?.description}</p> */}
                                         </div>
+                                      </div>
+
+                                      <div className="flex-grow-1 ms-2 card1 card-collection">
+                                        <Link style={{color: `${fetchPalletsColor(customize?.appearance?.colorPalette)}`}} to={`/collection-details/${nft?.collectionId ? nft?.collectionId : '62823cab6df787009ba1882b'}`}>
+                                          {nft.collectionName ? nft.collectionName : "Anafto Collection"}
+                                        </Link>
                                       </div>
                                     </Card.Body>
                                   </Card>
@@ -693,7 +701,7 @@ function Home() {
                 <p className="browse-text"> Make offers on NFTs</p>
               </div>
               <div className="d-flex align-items-center justify-content-left media card-home-page">
-              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
                   <g id="Activity" transform="translate(-816 -2368)">
                     <rect id="Rectangle_997" data-name="Rectangle 997" width="60" height="60" transform="translate(816 2368)" fill="none" />
                     <g id="Group_652" data-name="Group 652" transform="translate(-69 4)">

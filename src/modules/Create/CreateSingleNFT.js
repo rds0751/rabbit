@@ -130,7 +130,7 @@ function CreateSingleNFT(props) {
   useEffect(() => {
     async function fetchData() {
       await getTenantData().then((response) =>
-        setBlockChains(response?.blockchains)
+        setBlockChains(response[0]?.blockchains)
       );
     }
     fetchData();

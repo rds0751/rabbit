@@ -69,13 +69,13 @@ export const addUserData = (data) => (dispatch) => {
   dispatch({ type: LOGGED_IN_UER_DETAILS, payload: data });
 
   // Fetch Tenent data
-  getTenantData(data.token, data.wallet_address)
-    .then(response => {
-      dispatch({ type: 'ADD_CUSTOMIZE_DATA', payload: response })
-    })
-    .catch(error => {
+  // getTenantData(data.token, data.wallet_address)
+  //   .then(response => {
+  //     dispatch({ type: 'ADD_CUSTOMIZE_DATA', payload: response[0] })
+  //   })
+  //   .catch(error => {
 
-    })
+  //   })
 
   let address = data.wallet_address;
 
@@ -134,7 +134,7 @@ export const searchNav = (data) => (dispatch) => {
 export const logOut = () => (dispatch) => new Promise((resolve, refect) => {
   dispatch({ type: LOG_OUT });
   dispatch({ type: OPEN_WALLET, payload: false })
-  dispatch({type: 'RESET_APPEARENCE'})
+  // dispatch({type: 'RESET_APPEARENCE'})
 
   localStorage.removeItem(WHITE_LABEL_TOKEN);
   localStorage.setItem('has_wallet', false)

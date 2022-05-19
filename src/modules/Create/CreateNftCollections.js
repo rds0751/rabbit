@@ -338,8 +338,8 @@ function CreateNftCollections(props) {
   useEffect(() => {
     async function fetchData() {
       const response = await getTenantData()
-      setBlockChains(response?.blockchains)
-      setTenantCategories(response?.categories)
+      setBlockChains(response[0]?.blockchains)
+      setTenantCategories(response[0]?.categories)
       // await getTenantData().then(response => setBlockChains(response?.blockchains));
     }
     fetchData();

@@ -37,13 +37,14 @@ import { WHITE_LABEL_TOKEN } from "../../reducers/Constants";
 import { Helmet } from "react-helmet";
 import { fetchPalletsColor } from "../../utility/global";
 import { padding } from "@mui/system";
+import Skeleton from "react-loading-skeleton";
 const queryString = require("query-string");
 
 const activeMarketplace = ["/nfts"];
 const activeLeaderboard = ["/leader-board"];
 const activeResource = ["/help-center", "/suggestion"];
 
-function Navbar() {
+function Navbar({loader}) {
   const customize = useSelector((state) => state.customize);
 
   const navigate = useNavigate();
@@ -91,7 +92,7 @@ function Navbar() {
   useEffect(() => {
     console.log("called navbar");
     async function fetchData() {
-      getTenantData().then((response) => setTenantData(response));
+      getTenantData().then((response) => setTenantData(response[0]));
     }
     fetchData();
   }, []);
@@ -392,7 +393,11 @@ function Navbar() {
         <title>{customize?.storeName}</title>
       </Helmet>
 
-      <div className="navbar-width">
+      {
+        loader ?  
+          <Skeleton height="60px" />
+        : 
+        <div className="navbar-width">
         <nav className="navbarborder navbar navbar-expand-lg">
           <div
             className="container-fluid mainContainer"
@@ -958,6 +963,7 @@ function Navbar() {
           </div>
         </div>
       </div>
+      }
     </>
   );
 }

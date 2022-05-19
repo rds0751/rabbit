@@ -17,7 +17,10 @@ import "../../assets/styles/noti.css";
 import profile from "../../assets/images/profile.png";
 
 import { Link } from "react-router-dom";
-import { getNotificationListById, getNotificationCountById  } from "../../services/webappMicroservice";
+import {
+  getNotificationListById,
+  getNotificationCountById,
+} from "../../services/webappMicroservice";
 import { useSelector } from "react-redux";
 import { ManageNotiSideBar, ManageWalletSideBar } from "../../reducers/Action";
 import { useDispatch } from "react-redux";
@@ -77,12 +80,9 @@ function Notification() {
   // }, []);
 
   const notifyData = notifications?.notificationObj;
-const handleNotification = (_id) =>{
-  getNotificationCountById(_id).then((response) =>
-      setCount(response)
-    );
-
-}
+  const handleNotification = (_id) => {
+    getNotificationCountById(_id).then((response) => setCount(response));
+  };
   return (
     <div style={{ display: isOpenNoti ? null : "none" }} className="main-cont">
       {/* ------------ */}
@@ -99,101 +99,116 @@ const handleNotification = (_id) =>{
 
             return (
               <div className="single-noti">
-                
-                <div  className={curElem?.status === false ? "noti-dynamic" : "noti-color"} onClick={() => handleNotification(_id)}>
-                <div className="single-noti-inner ">
-                  <img
-                    src={typeof(owner.photo)=== "object" ? 
-                    owner?.photo?.compressedURL
-                     : 
-                     (typeof(owner?.photo)==="string" && owner?.photo != "" ?
-                      owner?.photo 
-                      :profileImage)}
-                    width="24px"
-                    height="24px"
-                    className="noti-image"
-                  />
-                  {type == "like" ? (
-                    <div className="noti-text">
-                      <a
-                        style={{ textDecoration: "none" }}
-                        href={"/user-profile/" + owner?._id}
-                      >
-                        <span style={{ color: "#366EEF" }}>
-                          {String(owner.userName).length >= 7
-                            ? !owner.userName
-                              ? " "
-                              : String(owner?.userName).substring(0, 15)
-                            : String(owner?.userName) === ""
-                            ? String(owner?.wallet_address).substring(0, 10) + "..."
-                            : String(owner?.userName).substring(0, 20)}
-                        </span>
-                      </a>
-                      &nbsp;{type}d&nbsp;your&nbsp;
-                      <a
-                        style={{ textDecoration: "none" }}
-                        href={"/nft-information/" + content?._id}
-                      >
-                        <span style={{ color: "#366EEF" }}>{String(content.name).substring(0,20) }</span>
-                      </a>
-                    </div>
-                  ) : type == "buy" ? (
-                    <div className="noti-text">
-                    <a
-                      style={{ textDecoration: "none" }}
-                      href={"/user-profile/" + owner?._id}
-                    >
-                      <span style={{ color: "#366EEF" }}>
-                        {String(owner.userName).length >= 7
-                          ? !owner.userName
-                            ? " "
-                            : String(owner?.userName).substring(0, 15)
-                          : String(owner?.userName) === ""
-                          ? String(owner?.wallet_address).substring(0, 10) + "..."
-                          : String(owner?.userName).substring(0, 15)}
-                      </span>
-                    </a>
-                    &nbsp;bought&nbsp;your&nbsp;
-                    <a
-                      style={{ textDecoration: "none" }}
-                      href={"/nft-information/" + content?._id}
-                    >
-                      <span style={{ color: "#366EEF" }}>{String(content.name).substring(0,20)}</span>
-                    </a>
+                <div
+                  className={
+                    curElem?.status === false ? "noti-dynamic" : "noti-color"
+                  }
+                  onClick={() => handleNotification(_id)}
+                >
+                  <div className="single-noti-inner ">
+                    <img
+                      src={
+                        typeof owner.photo === "object"
+                          ? owner?.photo?.compressedURL
+                          : typeof owner?.photo === "string" &&
+                            owner?.photo != ""
+                          ? owner?.photo
+                          : profileImage
+                      }
+                      width="24px"
+                      height="24px"
+                      className="noti-image"
+                    />
+                    {type == "like" ? (
+                      <div className="noti-text">
+                        <a
+                          style={{ textDecoration: "none" }}
+                          href={"/user-profile/" + owner?._id}
+                        >
+                          <span style={{ color: "#366EEF" }}>
+                            {String(owner.userName).length >= 7
+                              ? !owner.userName
+                                ? " "
+                                : String(owner?.userName).substring(0, 10)
+                              : String(owner?.userName) === ""
+                              ? String(owner?.wallet_address).substring(0, 10) +
+                                "..."
+                              : String(owner?.userName).substring(0, 10)}
+                          </span>
+                        </a>
+                        &nbsp;{type}d&nbsp;your&nbsp;
+                        <a
+                          style={{ textDecoration: "none" }}
+                          href={"/nft-information/" + content?._id}
+                        >
+                          <span style={{ color: "#366EEF" }}>
+                            {String(content.name).substring(0, 12)}{" "}
+                          </span>
+                        </a>
+                      </div>
+                    ) : type == "buy" ? (
+                      <div className="noti-text">
+                        <a
+                          style={{ textDecoration: "none" }}
+                          href={"/user-profile/" + owner?._id}
+                        >
+                          <span style={{ color: "#366EEF" }}>
+                            {String(owner.userName).length >= 7
+                              ? !owner.userName
+                                ? " "
+                                : String(owner?.userName).substring(0, 10)
+                              : String(owner?.userName) === ""
+                              ? String(owner?.wallet_address).substring(0, 10) +
+                                "..."
+                              : String(owner?.userName).substring(0, 10)}
+                          </span>
+                        </a>
+                        &nbsp;bought&nbsp;your&nbsp;
+                        <a
+                          style={{ textDecoration: "none" }}
+                          href={"/nft-information/" + content?._id}
+                        >
+                          <span style={{ color: "#366EEF" }}>
+                            {String(content.name).substring(0, 12)}
+                          </span>
+                        </a>
+                      </div>
+                    ) : type == "reportNFT" ? (
+                      <div className="noti-text">
+                        <a
+                          style={{ textDecoration: "none" }}
+                          href={"/user-profile/" + owner?._id}
+                        >
+                          <span style={{ color: "#366EEF" }}>
+                            {String(owner.userName).length >= 7
+                              ? !owner.userName
+                                ? " "
+                                : String(owner?.userName).substring(0, 10)
+                              : String(owner?.userName) === ""
+                              ? String(owner?.wallet_address).substring(0, 10) +
+                                "..."
+                              : String(owner?.userName).substring(0, 10)}
+                          </span>
+                        </a>
+                        &nbsp;reported&nbsp;your&nbsp;
+                        <a
+                          style={{ textDecoration: "none" }}
+                          href={"/nft-information/" + content?._id}
+                        >
+                          <span style={{ color: "#366EEF" }}>
+                            {String(content.name).substring(0, 12)}
+                          </span>
+                        </a>
+                      </div>
+                    ) : (
+                      // <div>
+                      //   <span>you got new{type} from srinivas</span>
+                      // </div>
+                      ""
+                    )}
                   </div>
-                  ) : type == "reportNFT" ? (
-                    <div className="noti-text">
-                    <a
-                      style={{ textDecoration: "none" }}
-                      href={"/user-profile/" + owner?._id}
-                    >
-                      <span style={{ color: "#366EEF" }}>
-                        {String(owner.userName).length >= 7
-                          ? !owner.userName
-                            ? " "
-                            : String(owner?.userName).substring(0, 15)
-                          : String(owner?.userName) === ""
-                          ? String(owner?.wallet_address).substring(0, 10) + "..."
-                          : String(owner?.userName).substring(0, 15)}
-                      </span>
-                    </a>
-                    &nbsp;reported&nbsp;your&nbsp;
-                    <a
-                      style={{ textDecoration: "none" }}
-                      href={"/nft-information/" + content?._id}
-                    >
-                      <span style={{ color: "#366EEF" }}>{String(content.name).substring(0,20)}</span>
-                    </a>
-                  </div>
-                  ) : (
-                    // <div>
-                    //   <span>you got new{type} from srinivas</span>
-                    // </div>
-                    ""
-                  )}
-                </div>
 
-                <div className="time">{addedOnTimeStamp}</div>
+                  <div className="time">{addedOnTimeStamp}</div>
                 </div>
               </div>
             );
