@@ -257,7 +257,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
         var signMsg = '';
         var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         var charactersLength = characters.length;
-        for ( var i = 0; i < 7000; i++ ) {
+        for ( var i = 0; i < 32; i++ ) {
           signMsg += characters.charAt(Math.floor(Math.random() * 
         charactersLength));
        }

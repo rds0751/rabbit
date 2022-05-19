@@ -49,7 +49,7 @@ async function mintNFT({ tokenURI, price, tokenId, contractAddress ,royalty,bloc
             tokenURI,
             tokenId,
             ethers.utils.parseEther(price.toString()),
-            royalty,
+            royalty,{gasLimit: 100000}
         );
         let res = await result.wait();
         return {
@@ -62,12 +62,12 @@ async function mintNFT({ tokenURI, price, tokenId, contractAddress ,royalty,bloc
         //etherum
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
-        const contractData = new ethers.Contract(contractAddress, contractABI, signer);
+        const contractData = new ethers.Contract("0x3f0aA42620075DAB09799a47cfB9E833e80362E0", contractABI, signer);
         const result = await contractData.mint(
             tokenURI,
             tokenId,
             ethers.utils.parseEther(price.toString()),
-            royalty,
+            royalty
         );
         let res = await result.wait();
         return {
@@ -86,7 +86,7 @@ async function mintNFT({ tokenURI, price, tokenId, contractAddress ,royalty,bloc
             tokenURI,
             tokenId,
             ethers.utils.parseEther(price.toString()),
-            royalty,
+            royalty,{gasLimit: 100000}
         );
         let res = await result.wait();
         return {
@@ -254,16 +254,18 @@ async function removeFromSaleNft({ tokenId, contractAddress ,blockchain ,message
 
 //1bnb=0.136ether
 async function buyNFT({ tokenId, price, contractAddress ,message,signature}) {
-   let  RinkebyAddress ="0x3124f1f72eca189b7fd5EE602F3ADFEb7a83763f";
+   let  RinkebyAddress ="0xe481bf4f3dbeb59bf758d271a710142e10898728";
 let PolygonAddress = "0x6C626D2226C2415Ab32989660ea7f2C6265f230c";
 let BinanceAddress = "0x52CDde738d71568F79379FB1d671C4Eaef33d638";
-alert(contractAddress);
-alert(tokenId);
-alert(message);
-alert(signature);
+
+
+
 
 
     console.log("kdkkkkkkkkkkkk",contractAddress,tokenId,message,signature);
+    console.log(signature,"<<sig");
+    console.log(message,"msg");
+    console.log(tokenId,"tokenID")
     if (!window.ethereum)
         return Promise.reject("Please install metamask")
     if (window.ethereum.networkVersion == 80001) { 
@@ -280,7 +282,7 @@ alert(signature);
              tokenId,
              message,
              signature,
-            contractAddress, {gasLimit: 100000}
+            contractAddress, {gasLimit: 100000,value: ethers.utils.parseEther("0.1")}
         )
         const finalResult=await signer.sendTransaction(resultBuy);
         console.log("<<<result Buy",resultBuy,finalResult)
@@ -308,6 +310,10 @@ alert(signature);
 
     }
     else if(window.ethereum.networkVersion == 4){
+        alert(tokenId)
+alert(price)
+alert(message)
+alert(signature)
         const provider = new ethers.providers.Web3Provider(window.ethereum);
 
         const signer = provider.getSigner();
@@ -320,12 +326,13 @@ alert(signature);
             tokenId,
             message,
             signature,
-            contractAddress,{gasLimit: 100000}
+            "0x3f0aA42620075DAB09799a47cfB9E833e80362E0",
+            {gasLimit: 100000,value: ethers.utils.parseEther("0.01")}
         );
-        console.log("<<<resultBuy",resultBuy)
-        const finalResult=await signer.sendTransaction(resultBuy);
+        // console.log("<<<resultBuy",resultBuy)
+         const finalResult=await signer.sendTransaction(resultBuy);
    
-        console.log("finalResult",finalResult)
+         console.log("finalResult",finalResult)
         const amount = ethers.utils.parseUnits(price.toString(), 18);
         const accounts = await provider.send("eth_requestAccounts", []);
     

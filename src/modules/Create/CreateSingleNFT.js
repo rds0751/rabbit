@@ -192,7 +192,7 @@ function CreateSingleNFT(props) {
   const [compressedUrl, setCompressedUrl] = useState("");
   // --------------------------------React Drop Zone---------------------
   const { getRootProps, getInputProps } = useDropzone({
-    accept: ".png,.jpg,.jpeg,.gif",
+    accept: ".png,.jpg,.jpeg,.gif,.mp4",
     maxSize: "40485760",
     onDrop: (acceptedFiles, fileRejections) => {
       setisLoader(true);
@@ -518,6 +518,7 @@ function CreateSingleNFT(props) {
     fileError == "" &&
     collectionError == "" &&
     !isloader;
+    console.log("SetFile",selectFile);
 
 
     useEffect(()=>{
