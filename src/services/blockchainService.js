@@ -79,7 +79,7 @@ async function mintNFT({
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contractData = new ethers.Contract(
-      "0x3f0aA42620075DAB09799a47cfB9E833e80362E0",
+      contractAddress,
       contractABI,
       signer
     );
@@ -218,7 +218,7 @@ async function removeFromSaleNft({
       contractbuyAndRemoveABI,
       signer
     );
-    const result = await contractData.updateListingStatus(
+    const result = await contractData.cancel(
       tokenId,
       message,
       signature,
@@ -328,34 +328,32 @@ async function buyNFT({ tokenId, price, contractAddress, message, signature }) {
     );
     const resultBuy = await contractData.buy(
       tokenId,
-      message,
+      message.toString(),
       signature,
-      "0x3f0aA42620075DAB09799a47cfB9E833e80362E0",
-      { gasLimit: 100000, value: ethers.utils.parseEther("0.01") }
+      contractAddress,
+      { value: ethers.utils.parseEther(price.toString()) }
     );
     // console.log("<<<resultBuy",resultBuy)
-    const finalResult = await signer.sendTransaction(resultBuy);
 
-    console.log("finalResult", finalResult);
-    const amount = ethers.utils.parseUnits(price.toString(), 18);
-    const accounts = await provider.send("eth_requestAccounts", []);
+    // const amount = ethers.utils.parseUnits(price.toString(), 18);
+    // const accounts = await provider.send("eth_requestAccounts", []);
 
-    const balance = await provider.getBalance(accounts[0]);
-    if (
-      ethers.utils.formatUnits(balance, 18) <
-      ethers.utils.formatUnits(amount, 18)
-    )
-      return Promise.reject("Insufficient fund");
+    // const balance = await provider.getBalance(accounts[0]);
+    // if (
+    //   ethers.utils.formatUnits(balance, 18) <
+    //   ethers.utils.formatUnits(amount, 18)
+    // )
+    //   return Promise.reject("Insufficient fund");
 
-    const options = { value: ethers.utils.parseEther(price.toString()) };
+    // const options = { value: ethers.utils.parseEther(price.toString()) };
 
-    const result = await contractData.buy(tokenId, options);
-    console.log(
-      "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
-      result
-    );
+    // const result = await contractData.buy(tokenId, options);
+    // console.log(
+    //   "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
+    //   result
+    // );
 
-    let res = await result.wait();
+    let res = await resultBuy.wait();
 
     return {
       ...res,

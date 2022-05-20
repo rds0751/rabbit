@@ -192,7 +192,7 @@ function CreateSingleNFT(props) {
   const [compressedUrl, setCompressedUrl] = useState("");
   // --------------------------------React Drop Zone---------------------
   const { getRootProps, getInputProps } = useDropzone({
-    accept: ".png,.jpg,.jpeg,.gif,.mp4",
+    accept:"image/*,audio/*,video/*",
     maxSize: "40485760",
     onDrop: (acceptedFiles, fileRejections) => {
       setisLoader(true);
@@ -632,6 +632,8 @@ function CreateSingleNFT(props) {
       <div className="full-content-margin">
         <div className="create-nft-text">Create NFT</div>
 
+
+
         <div className="create-single-nft-outer">
           <div
             className="create-nft-form"
@@ -650,6 +652,36 @@ function CreateSingleNFT(props) {
               </label>
 
               <div className="inpput-image-wrap"></div>
+
+              {/* Audio Div */}
+
+              <div className="AudioDiv">
+             
+                  <audio controls controlslist="nodownload" 
+                   loop preload="auto"
+                   style={{width:"100%",background:"#E7E7E7 0% 0% no-repeat padding-box"}}
+                   >
+                   <source src="" />
+
+                  </audio>
+
+                
+                <div className="changeTextDiv"  {...getRootProps()}><p className="changeText" >    <input {...getInputProps()} />Change</p></div>
+
+              </div>
+
+               {/* Video Div */}
+              <div className="AudioDiv" style={{marginTop:"10px"}}>
+             
+              <video  style={{width:"100%",background:"#E7E7E7 0% 0% no-repeat padding-box"}} controls>
+              <source src="" type="video/mp4" />
+             </video>
+
+           
+           <div className="changeTextDiv"  {...getRootProps()}><p className="changeText" >    <input {...getInputProps()} />Change</p></div>
+
+         </div>
+
 
               {/* -----------------------NEW DRA GAND DROP */}
 

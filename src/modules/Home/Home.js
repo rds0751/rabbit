@@ -885,6 +885,20 @@ function Home({ loaderState }) {
                   }
                 </p>
               </div>
+
+              <div className="d-flex align-items-center justify-content-left media card-home-page">
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+              <g id="Blockchain" transform="translate(-1302 -2368)">
+                <rect id="Rectangle_997" data-name="Rectangle 997" width="60" height="60" transform="translate(1302 2368)" fill="#fff"/>
+                <g id="Group_735" data-name="Group 735" transform="translate(262.914 970.801)">
+                  <path id="Path_765" data-name="Path 765" d="M172.72,86.488a5.1,5.1,0,0,0-3.083,1.037l-3.614-3.613a10.67,10.67,0,0,0-1.049-14.567l3.316-3.316a4.437,4.437,0,1,0-.69-.714L164.217,68.7a10.658,10.658,0,0,0-13.21.12l-4.459-4.459a3.283,3.283,0,1,0-.749.655l4.462,4.461a10.661,10.661,0,0,0-1.1,14.165l-3.043,3.043a3.845,3.845,0,0,0-5.436,5.436,3.956,3.956,0,0,0,.363.339,3.845,3.845,0,0,0,5.7-5l3.054-3.053a10.673,10.673,0,0,0,15.566.246l3.544,3.544a5.126,5.126,0,1,0,3.812-1.709Zm-15.031.422a9.725,9.725,0,1,1,9.725-9.724A9.735,9.735,0,0,1,157.69,86.91Z" transform="translate(910.469 1349.953)" fill="#366eef"/>
+                  <path id="Path_766" data-name="Path 766" d="M264.019,183.551a8.547,8.547,0,1,1-8.547-8.546,8.547,8.547,0,0,1,8.547,8.546" transform="translate(812.676 1243.548)" fill="#366eef"/>
+                </g>
+              </g>
+            </svg>
+
+                <p className="browse-text">Multiple Blockchain Support</p>
+              </div>
             </div>
           </div>
         </div>

@@ -1353,8 +1353,9 @@ export default function NftInformation(props) {
                       type="number"
                       autoComplete="off"
                       placeholder={salesInfo?.price}
-                      onchange={(e)=>{
+                      onChange={(e)=>{
                         period.price=e.target.value;
+                       
 
                       }}
                      
@@ -1386,6 +1387,7 @@ export default function NftInformation(props) {
                       autoComplete="off"
                       onChange={(e)=>{
                         period.expiryTime=e.target.value;
+                        console.log(period);
                       }}
                       // value="23"
                       // onChange={(e) => {
