@@ -137,7 +137,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
                     //TO do
                     tokenId: this.state.responseData?.tokenId,
                     price: this.state?.responseData?.salesInfo?.price,
-                    contractAddress: this.state?.responseData?.contractAddress,
+                    contractAddress: contractAddress,
                     message: this.state.responseData.salesInfo.message,
                     address:this.state.responseData.salesInfo.address,
                     signature:this.state.responseData.salesInfo.signature,
@@ -175,7 +175,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
             console.log("blockchainError====", blockchainError)
             console.log("blockchainRes====", blockchainResult)
             if (blockchainError || !blockchainResult) {
-                // this.setState({ loaderState: false })
+                 this.setState({ loaderState: false })
                 if (!this.state.responseData._id) return;
                 let [txFailErr, txFailResult] = await Utils.parseResponse(
                     updateTxStatus({ status: "failed" }, result._id)
@@ -223,7 +223,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
         );
         console.log("--buy nFT ressssssi;t-", res);
         if (err || !res) {
-            // this.setState({ loaderState: false })
+            this.setState({ loaderState: false })
 
             return toast.error(err || "Unable to update Nft ownership.",{autoClose:7000,theme:"colored"});
         }
@@ -241,7 +241,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
 
     sellNowNft = async ({blockchain,expiryTime,expiryDate,price}) => {
         console.log("daaaaaaaaaa", this.state?.responseData?.contractAddress)
-        console.log(expiryDate,expiryTime,"<<<Period")
+        console.log(expiryDate,expiryTime,price,"<<<Period")
 
         let contractAddress;
         if(blockchain ==="Polygon")
@@ -372,7 +372,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
             const [blockchainError, blockchainRes] = await Utils.parseResponse(
                 BlockchainService.removeFromSaleNft({
                     tokenId: this.state.responseData?.tokenId,
-                    contractAddress: this.state?.responseData?.contractAddress,
+                    contractAddress: contractAddress,
                     blockchain:blockchain,
                     message: this.state.responseData.salesInfo.message,
                     address:this.state.responseData.salesInfo.address,
