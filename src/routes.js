@@ -118,21 +118,21 @@ function App() {
 
     <div className="App" >
 
-      {
+      {/* {
          loader && <div className="loader-spinner"><Spinner/></div>
-        }
+        } */}
 
       <Router>
         <ScrollToTop />
 
-        <Navbar />
+        <Navbar loader={loader} />
 
         {/* <Tile__homepage /> */}
         {/* <Switch> */}
         <Routes>
           <Route path="/FAQs" element={<FAQsPage />} />
           <Route exact path="/nfts" element={<NftPage />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home loaderState={loader} />} />
 
           {/* <Route
               exact
@@ -254,7 +254,7 @@ function App() {
         {/* </Switch> */}
         <Wallet />
 
-        <Footer />
+        <Footer loader={loader} />
       </Router>
 
 

@@ -1503,3 +1503,8 @@ display:none
 background-color:lightgrey;
 border-radius: 50%;
 }
+
+/* custom css */
+.nav-mr-15{
+  margin-right: 15px;
+}
