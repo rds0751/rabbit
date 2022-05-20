@@ -93,172 +93,174 @@ function App() {
   }, []);
 
 
-  useEffect( ()=>{
-    
-    if(localStorage.getItem('WHITE_LABEL_TOKEN') !== null){
+  useEffect(() => {
+
+    if (localStorage.getItem('WHITE_LABEL_TOKEN') !== null) {
 
       getTenantData()
-        .then(response=>{
-          dispatch({type: 'ADD_CUSTOMIZE_DATA', payload: response[0]})
-          dispatch({type: 'ADD_BANNER_NFTS', payload: response[1]})
+        .then(response => {
+          dispatch({ type: 'ADD_CUSTOMIZE_DATA', payload: response[0] })
+          dispatch({ type: 'ADD_BANNER_NFTS', payload: response[1] })
 
           setLoader(false)
         })
-        .catch(error=>{
+        .catch(error => {
           setLoader(false);
         })
 
-    }else{
+    } else {
       setLoader(false)
     }
 
-  },[])
+  }, [])
 
   return (
-    
-      <div className="App" >
 
-        {
+    <div className="App" >
+
+      {/* {
          loader && <div className="loader-spinner"><Spinner/></div>
-        }
+        } */}
 
-        <Router>
+      <Router>
         <ScrollToTop />
-          <Navbar />
-          {/* <Tile__homepage /> */}
-          {/* <Switch> */}
-          <Routes>
-            <Route path="/FAQs" element={<FAQsPage />} />
-            <Route exact path="/nfts" element={<NftPage />} />
-            <Route path="/" element={<Home />} />
 
-            {/* <Route
+        <Navbar loader={loader} />
+
+        {/* <Tile__homepage /> */}
+        {/* <Switch> */}
+        <Routes>
+          <Route path="/FAQs" element={<FAQsPage />} />
+          <Route exact path="/nfts" element={<NftPage />} />
+          <Route path="/" element={<Home loaderState={loader} />} />
+
+          {/* <Route
               exact
               path="/my-profile/nft-information/:id"
               element={<NftInformation />}
             /> */}
-            <Route
-              exact
-              path="/nft-information/:id"
-              element={<NftInformation />}
-            />
+          <Route
+            exact
+            path="/nft-information/:id"
+            element={<NftInformation />}
+          />
 
-            {/* <Route
+          {/* <Route
               exact
               path="/nft-information_1/:id"
               element={<NftInformation1 />}
             /> */}
-            <Route
-              // exact
-              path="/nft-information_2"
-              element={<NftInformation2 />}
-            />
+          <Route
+            // exact
+            path="/nft-information_2"
+            element={<NftInformation2 />}
+          />
 
-            <Route
-              exact
-              path="/nft-information_Offer_1"
-              element={<NftInformationOffer1 />}
-            />
-            <Route exact path="/help-center" element={<HelpCenter />} />
-            <Route exact path="/suggestion" element={<Suggestion />} />
-             <Route exact path="/selling" element={<SellPage />} /> 
-             <Route exact path="/resource-collection" element={<CollectionPage />} /> 
-             <Route exact path="/adding-nfts" element={<NftsPage />} /> 
-            {/* ------------------ */}
-            <Route exact path="/top-collection" element={<Top_collection />} />
-            <Route exact path="/top-bidder" element={<TopBidders />} />
-            <Route exact path="/top-seller" element={<TopSeller />} />
-            {/* ----------- */}
-            <Route exact path="/leader-board" element={<LeaderBoard />} />
-            <Route exact path="/buying" element={<BuyPage />} />
-            <Route exact path="/my-items" element={<MyItems />} />
-            <Route
-              exact
-              path="/my-items-collection"
-              element={<MyItems_Collection />}
-            />
-            <Route exact path="/create" element={<Create />} />
-            <Route exact path="/notification" element={<Notification />} />
-            <Route exact path="/create-nft" element={<CreateNFT />} />
-            <Route
-              exact
-              path="/collection-details/:id"
-              element={<CollectionDetails />}
-            />
+          <Route
+            exact
+            path="/nft-information_Offer_1"
+            element={<NftInformationOffer1 />}
+          />
+          <Route exact path="/help-center" element={<HelpCenter />} />
+          <Route exact path="/suggestion" element={<Suggestion />} />
+          <Route exact path="/selling" element={<SellPage />} />
+          <Route exact path="/resource-collection" element={<CollectionPage />} />
+          <Route exact path="/adding-nfts" element={<NftsPage />} />
+          {/* ------------------ */}
+          <Route exact path="/top-collection" element={<Top_collection />} />
+          <Route exact path="/top-bidder" element={<TopBidders />} />
+          <Route exact path="/top-seller" element={<TopSeller />} />
+          {/* ----------- */}
+          <Route exact path="/leader-board" element={<LeaderBoard />} />
+          <Route exact path="/buying" element={<BuyPage />} />
+          <Route exact path="/my-items" element={<MyItems />} />
+          <Route
+            exact
+            path="/my-items-collection"
+            element={<MyItems_Collection />}
+          />
+          <Route exact path="/create" element={<Create />} />
+          <Route exact path="/notification" element={<Notification />} />
+          <Route exact path="/create-nft" element={<CreateNFT />} />
+          <Route
+            exact
+            path="/collection-details/:id"
+            element={<CollectionDetails />}
+          />
 
-            <Route exact path="/edit-items/:id" element={<EditItem />} />
-            <Route
-              exact
-              path="/collections-tile"
-              element={<CollectionCards />}
-            />
-            <Route
-              exact
-              path="/create-single-nft"
-              element={<CreateSingleNFT />}
-            />
-            <Route
-              exact
-              path="/create-nft-collection"
-              element={<CreateNftCollections />}
-            />
-            <Route exact path="/add-wallet" element={<Create />} />
-            <Route eaxct path="/my-profile" element={<MyProfile />} />
-            <Route eaxct path="/user-profile/:id" element={<UserProfilePage />} />
+          <Route exact path="/edit-items/:id" element={<EditItem />} />
+          <Route
+            exact
+            path="/collections-tile"
+            element={<CollectionCards />}
+          />
+          <Route
+            exact
+            path="/create-single-nft"
+            element={<CreateSingleNFT />}
+          />
+          <Route
+            exact
+            path="/create-nft-collection"
+            element={<CreateNftCollections />}
+          />
+          <Route exact path="/add-wallet" element={<Create />} />
+          <Route eaxct path="/my-profile" element={<MyProfile />} />
+          <Route eaxct path="/user-profile/:id" element={<UserProfilePage />} />
 
-            <Route exact path="/edit-profile" element={<EditProfile />} />
-            <Route exact path="/about" element={<About />} />
-            <Route exact path="/wallet" element={<Wallet />} />
+          <Route exact path="/edit-profile" element={<EditProfile />} />
+          <Route exact path="/about" element={<About />} />
+          <Route exact path="/wallet" element={<Wallet />} />
 
-            <Route
-              exact
-              path="/nft-information-fixed-price"
-              element={<NftInformationFixedPrice />}
-            />
-            {/* <Route eaxct path="/MyProfile" element={<MyProfile />} /> */}
-            {/* <Route exact path="/MyProfile" element={<MyProfile />} /> */}
+          <Route
+            exact
+            path="/nft-information-fixed-price"
+            element={<NftInformationFixedPrice />}
+          />
+          {/* <Route eaxct path="/MyProfile" element={<MyProfile />} /> */}
+          {/* <Route exact path="/MyProfile" element={<MyProfile />} /> */}
 
-            {/* <Route
+          {/* <Route
                 exact
                 path="/CollectionDetails"
                 element={<CollectionDetails />}
               /> */}
-            <Route exact path="/fixed-price" element={<FixedPrice />} />
-            {/* <Route exact path="/CreateNFT" element={<CreateNFT />} /> */}
-            {/* <Route
+          <Route exact path="/fixed-price" element={<FixedPrice />} />
+          {/* <Route exact path="/CreateNFT" element={<CreateNFT />} /> */}
+          {/* <Route
                 exact
                 path="/CollectionDetails"
                 element={<CollectionDetails />}
               /> */}
-            {/* <Route exact path="/Highest_Bid" element={<Highest_Bid />} /> */}
-            {/* <Route exact path="/ToggleSwitch" element={<ToggleSwitch />} /> */}
-            {/* <Route path="/" element={<NftToggle />} /> */}
-            {/* <Route path="/" element={<Lower__homepage />} /> */}
-            {/* <Route
+          {/* <Route exact path="/Highest_Bid" element={<Highest_Bid />} /> */}
+          {/* <Route exact path="/ToggleSwitch" element={<ToggleSwitch />} /> */}
+          {/* <Route path="/" element={<NftToggle />} /> */}
+          {/* <Route path="/" element={<Lower__homepage />} /> */}
+          {/* <Route
               exact
               path="/Collection_HomeNftFilters"
               element={<Collection_HomeNftFilters />}
             /> */}
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/search-results" element={<SearchResults />} />
-            <Route path="/blogs" element={<Blog />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/Terms-Condition" element={<TermsAndCondition />} />
-            <Route path="/blog-detail" element={<BlogDetail />} />
-            <Route path="/page-not-found" element={<PageNotFound />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-          {/* </Switch> */}
-          <Wallet />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/search-results" element={<SearchResults />} />
+          <Route path="/blogs" element={<Blog />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/Terms-Condition" element={<TermsAndCondition />} />
+          <Route path="/blog-detail" element={<BlogDetail />} />
+          <Route path="/page-not-found" element={<PageNotFound />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+        {/* </Switch> */}
+        <Wallet />
 
-          <Footer />
-        </Router>
-        
-        
-        <Notification />
-      </div>
-    
+        <Footer loader={loader} />
+      </Router>
+
+
+      <Notification />
+    </div>
+
   );
 }
 

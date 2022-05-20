@@ -8,8 +8,8 @@ function Spinner() {
 
   return (
     <div>
-      <div class="spinner-border" style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}} role="status">
-        <span class="sr-only">Loading...</span>
+      <div className="spinner-border" style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}} role="status">
+        <span className="sr-only">Loading...</span>
       </div>
     </div>
   );

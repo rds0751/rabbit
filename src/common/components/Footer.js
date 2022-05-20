@@ -11,8 +11,9 @@ import { version } from "../../version.js"
 import { useSelector } from "react-redux";
 import { fetchPalletsColor } from "../../utility/global"
 import { Link, useNavigate } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
 
-function Footer() {
+function Footer({ loader }) {
 
   const navigate = useNavigate();
 
@@ -72,15 +73,15 @@ function Footer() {
     tempDiv.style.color = "#818181"
   }
 
-  const handleRedirect = (url) => {    
+  const handleRedirect = (url) => {
 
-    try{
+    try {
       let urlObj = new URL(url);
 
       window.open(url)
     }
-    catch(error){
-      window.open( url.replace('www.','http://') );
+    catch (error) {
+      window.open(url.replace('www.', 'http://'));
     }
 
   }
@@ -103,12 +104,14 @@ function Footer() {
       >
         <div className="row footer-cont">
           <div className="footer-top">
-            <p className="fs-18">Join our community</p>
+            <p className="fs-18">
+              {loader ? <Skeleton /> : 'Join our community'}
+            </p>
             <div className="allicon">
               {
                 customize.socailMedia.length > 0 ?
                   customize.socailMedia.map((item, index) => (
-                    <a onClick={()=>handleRedirect(item.url)} key={index} target="_blank" className="footerAnchor">
+                    <a onClick={() => handleRedirect(item.url)} key={index} target="_blank" className="footerAnchor">
                       <i className={`fa-brands fa-${item.name.toLowerCase()} Icon`} onMouseOut={handleMouseOut} onMouseOver={handleMouseOver} />
                     </a>
                   ))
@@ -127,38 +130,46 @@ function Footer() {
               }
             </div>
             <p className="subscribe">
-              Subscribe to our newsletter for the latest NFTs
+              {
+                loader ? <Skeleton count={2} /> : 'Subscribe to our newsletter for the latest NFTs'
+              }
             </p>
             <div
               className="input-group-lg input-group  footerinputbox"
               style={{ marginBottom: displayTimeout ? "15px" : "37px" }}
             >
-              <input
-                type="email"
-                name="email"
-                className="form-control ib "
-                value={formData.email}
-                onChange={(e) => handleChange(e.target.name, e.target.value)}
-                placeholder="Your email"
-                aria-label="Recipient's username"
-                aria-describedby="button-addon2"
-                style={{
-                  borderTopLeftRadius: "0.2em",
-                  borderBottomLeftRadius: "0.2em",
-                }}
-              />
-              <div className="input-group-append inputfooter">
-                <button
-                  onClick={AddEmail}
-                  className="btn btn-primary submitbuttonfooter"
-                  // type="button"
-                  style={{ backgroundColor: `${fetchPalletsColor(customize.appearance.colorPalette)}`, zIndex: "0", border: 'none' }}
-                  id="button-addon2"
-                >
-                  {" "}
-                  Submit
-                </button>
-              </div>
+              {
+                loader ? <Skeleton height="40px" width="300px" />  :
+                  <>
+                    <input
+                      type="email"
+                      name="email"
+                      className="form-control ib "
+                      value={formData.email}
+                      onChange={(e) => handleChange(e.target.name, e.target.value)}
+                      placeholder="Your email"
+                      aria-label="Recipient's username"
+                      aria-describedby="button-addon2"
+                      style={{
+                        borderTopLeftRadius: "0.2em",
+                        borderBottomLeftRadius: "0.2em",
+                      }}
+                    />
+                    <div className="input-group-append inputfooter">
+                      <button
+                        onClick={AddEmail}
+                        className="btn btn-primary submitbuttonfooter"
+                        // type="button"
+                        style={{ backgroundColor: `${fetchPalletsColor(customize.appearance.colorPalette)}`, zIndex: "0", border: 'none' }}
+                        id="button-addon2"
+                      >
+                        {" "}
+                        Submit
+                      </button>
+                    </div>
+                  </>
+              }
+
             </div>
             <div
               style={{
@@ -171,18 +182,24 @@ function Footer() {
               {email}
             </div>
             <h3 className="about">
-              <a className="aboutText" onClick={()=>handleRedirectLink('/about')} onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                {customize.about.title}
+              <a className="aboutText" onClick={() => handleRedirectLink('/about')} onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                {
+                  loader ? <Skeleton /> : customize.about.title
+                }
               </a>
             </h3>
             <div className="d-none d-sm-none d-md-block d-lg-block fs-16 aboutdes">
               <p style={{ marginBottom: "0", cursor: "default" }} >
-                {customize.about.description}
+                {
+                  loader ? <Skeleton count={4} /> : customize.about.description
+                }
               </p>
             </div>
             <div className="d-sm-block d-md-none d-lg-none fs-16">
               <p className=" footerdes">
-                {customize.about.description}
+                {
+                  loader ? <Skeleton count={4} /> : customize.about.description
+                }
               </p>
             </div>
           </div>
@@ -192,79 +209,79 @@ function Footer() {
                 className="fs-18 d-flex flex-column"
                 style={{ color: "#8F8F8F" }}
               >
-                <a onClick={()=>handleRedirectLink('/nfts')} className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  Marketplace
+                <a onClick={() => handleRedirectLink('/nfts')} className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                  {loader ? <Skeleton width={'200px'} /> : 'Marketplace'}
                 </a>
-                <a onClick={()=>handleRedirectLink('/nfts')} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  NFT
+                <a onClick={() => handleRedirectLink('/nfts')} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                  {loader ? <Skeleton width={'150px'} /> : 'NFT'}
                 </a>
-                <a onClick={()=>handleRedirectLink('/collections-tile')} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  Collections
+                <a onClick={() => handleRedirectLink('/collections-tile')} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                  {loader ? <Skeleton width={'150px'} /> : 'Collections'}
                 </a>
               </div>
               <div className="fs-18 d-flex flex-column">
-                <a onClick={()=>handleRedirectLink('/leader-board')} className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  Leaderboard
+                <a onClick={() => handleRedirectLink('/leader-board')} className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                  {loader ? <Skeleton width={'200px'} /> : 'Leaderboard'}
                 </a>
                 <p>
-                  <a onClick={()=>handleRedirectLink('/top-seller')} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                    Top Seller
+                  <a onClick={() => handleRedirectLink('/top-seller')} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                    {loader ? <Skeleton width={'150px'} /> : 'Top Seller'}
                   </a>
                 </p>
                 <p>
-                  <a onClick={()=>handleRedirectLink('/top-bidder')} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                    Top Buyer
+                  <a onClick={() => handleRedirectLink('/top-bidder')} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                    {loader ? <Skeleton width={'150px'} /> : 'Top Buyer'}
                   </a>
                 </p>
                 <p>
-                  <a onClick={()=>handleRedirectLink('/top-collection')} href="/top-collection" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                    Top Collections
+                  <a onClick={() => handleRedirectLink('/top-collection')} href="/top-collection" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                    {loader ? <Skeleton width={'150px'} /> : 'Top Collections'}
                   </a>
                 </p>
               </div>
             </div>
             <div className="fs-18 d-flex flex-column">
               <Link to="/help-center" className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                Community
+                {loader ? <Skeleton width={'200px'} /> : 'Community'}
               </Link>
               <p>
                 <Link to="/help-center" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  Help Centers
+                  {loader ? <Skeleton width={'150px'} /> : 'Help Centers'}
                 </Link>
               </p>
               <p>
                 <Link to="/FAQs" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  FAQs
+                  {loader ? <Skeleton width={'150px'} /> : 'FAQs'}
                 </Link>
               </p>
               <p>
                 <Link to="/suggestion" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  Suggestions
+                  {loader ? <Skeleton width={'150px'} /> : 'Suggestions'}
                 </Link>
               </p>
               <p>
                 <Link to="/blogs" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  Blogs
+                  {loader ? <Skeleton width={'150px'} /> : 'Blogs'}
                 </Link>
               </p>
             </div>
             <div className="fs-18 d-flex flex-column">
               <Link to="/about" className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                Company
+                {loader ? <Skeleton width={'200px'} /> : 'Company'}
               </Link>
               <p>
                 <Link to="/about" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  About
+                  {loader ? <Skeleton width={'150px'} /> : 'About'}
                 </Link>
               </p>
               <p>
                 <Link to="/privacy" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  Privacy Policy
+                  {loader ? <Skeleton width={'150px'} /> : 'Privacy Policy'}
                 </Link>
               </p>
               <p>
                 <Link to="/Terms-Condition" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  Terms and Conditons
+                  {loader ? <Skeleton width={'150px'} /> : 'Terms and Conditons'}
                 </Link>
               </p>
             </div>
@@ -283,88 +300,88 @@ function Footer() {
             <div className="col-7">
               <h3 className="fs-18 fw-b">
                 <Link to="/nfts" className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  Marketplace
+                  {loader ? <Skeleton width={'150px'} /> : 'Marketplace'}
                 </Link>
               </h3>
               <p>
                 <Link to="/nfts" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  Nft
+                  {loader ? <Skeleton width={'150px'} /> : 'Nft'}
                 </Link>
               </p>
               <p>
                 <Link to="/collections-tile" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  Collections
+                  {loader ? <Skeleton width={'150px'} /> : 'Collections'}
                 </Link>
               </p>
             </div>
             <div className="col-5">
               <h3 className="fs-18 fw-b">
                 <Link className="footertitle" to="/leader-board" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  Leaderboard
+                  {loader ? <Skeleton width={'150px'} /> : 'Leaderboard'}
                 </Link>
               </h3>
               <p>
                 <Link to="/top-seller" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  Top Seller
+                  {loader ? <Skeleton width={'150px'} /> : 'Top Seller'}
                 </Link>
               </p>
               <p>
                 <Link to="/top-bidder" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  Top Buyer
+                  {loader ? <Skeleton width={'150px'} /> : 'Top Buyer'}
                 </Link>
               </p>
               <p>
                 <Link to="/top-collection" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  Top Collections
+                  {loader ? <Skeleton width={'150px'} /> : 'Top Collections'}
                 </Link>
               </p>
             </div>
             <div className="col-7 mt-3">
               <h3 className="fs-18 fw-b">
                 <Link className="footertitle" to="/help-center" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  Community
+                  {loader ? <Skeleton width={'150px'} /> : 'Community'}
                 </Link>
               </h3>
               <p>
                 <Link to="/help-center" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  Help Centers
+                  {loader ? <Skeleton width={'150px'} /> : 'Help Centers'}
                 </Link>
               </p>
               <p>
                 <Link to="/FAQs" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  FAQs
+                  {loader ? <Skeleton width={'150px'} /> : 'FAQs'}
                 </Link>
               </p>
               <p>
                 <Link to="/suggestion" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  Suggestions
+                  {loader ? <Skeleton width={'150px'} /> : 'Suggestions'}
                 </Link>
               </p>
               <p>
                 <Link to="/blogs" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  Blogs
+                  {loader ? <Skeleton width={'150px'} /> : 'Blogs'}
                 </Link>
               </p>
             </div>
             <div className="col-5 mt-3">
               <h3 className="fs-18 fw-b">
                 <Link to="/about" className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  Company
+                  {loader ? <Skeleton width={'150px'} /> : 'Company'}
                 </Link>
               </h3>
               <p>
                 <Link to="/about" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  About
+                  {loader ? <Skeleton width={'150px'} /> : 'About'}
                 </Link>
               </p>
               <p>
                 <Link to="/about" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  Privacy Policy
+                  {loader ? <Skeleton width={'150px'} /> : 'Privacy Policy'}
                 </Link>
               </p>
               <p>
                 <Link to="/about" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  Terms and Conditon
+                  {loader ? <Skeleton width={'150px'} /> : 'Terms and Conditon'}
                 </Link>
               </p>
             </div>
