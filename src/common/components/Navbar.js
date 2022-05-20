@@ -37,6 +37,8 @@ import { WHITE_LABEL_TOKEN } from "../../reducers/Constants";
 import { Helmet } from "react-helmet";
 import { fetchPalletsColor } from "../../utility/global";
 import { padding } from "@mui/system";
+import Skeleton from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css';
 const queryString = require("query-string");
 
 const activeMarketplace = ["/nfts"];
@@ -407,28 +409,36 @@ function Navbar({ loader }) {
                   closeWalletAndNoti();
                 }}
               >
-                <img
-                  src={customize.storeLogo ? customize.storeLogo : Anafto}
-                  style={{ width: "60px" }}
-                  alt=""
-                />
+                {
+                  loader ? <Skeleton width="60px" /> :
+                    <img
+                      src={customize.storeLogo ? customize.storeLogo : Anafto}
+                      style={{ width: "60px" }}
+                      alt=""
+                    />
+                }
                 {/* <span className="store-name">{tenantData?.storeName}</span> */}
               </Link>
               <div>
                 <div className="search-div" style={{ display: "flex" }}>
-                  <div>
-                    <img src={searchIcon} alt="" className="search-icon" />
-                  </div>
-                  <div>
-                    <input
-                      type="search"
-                      name="searchByName"
-                      placeholder="Search items and collections"
-                      onChange={(e) => setInputValue(e.target.value)}
-                      autoComplete="off"
-                      className="search-input"
-                    />
-                  </div>
+                  {
+                    loader ? <Skeleton />
+                      : <>
+                        <div>
+                          <img src={searchIcon} alt="" className="search-icon" />
+                        </div>
+                        <div>
+                          <input
+                            type="search"
+                            name="searchByName"
+                            placeholder="Search items and collections"
+                            onChange={(e) => setInputValue(e.target.value)}
+                            autoComplete="off"
+                            className="search-input"
+                          />
+                        </div>
+                      </>
+                  }
                 </div>
                 {searchNft.searchByName.length > 0 && (
                   <>
@@ -695,29 +705,32 @@ function Navbar({ loader }) {
                     }
                     onClick={closeWalletAndNoti}
                   >
-                    <Link
-                      className={
-                        location.pathname.includes("/nfts") &&
-                          !location.pathname.includes("leader-board") &&
-                          !location.pathname.includes("resource") &&
-                          !location.pathname.includes("create-nft") &&
-                          !location.pathname.includes("help-center") &&
-                          !location.pathname.includes("suggestion")
-                          ? "nav-link navlink_active"
-                          : "nav-link"
-                      }
-                      style={
-                        activeMarketplace.includes(location.pathname)
-                          ? navLink
-                          : {}
-                      }
-                      aria-current="page"
-                      to="/nfts"
-                      onMouseOut={handleMouseOut}
-                      onMouseOver={handleMouseOver}
-                    >
-                      Marketplace
-                    </Link>
+                    {
+                      loader ? <Skeleton width="100px" height="20px" /> :
+                        <Link
+                          className={
+                            location.pathname.includes("/nfts") &&
+                              !location.pathname.includes("leader-board") &&
+                              !location.pathname.includes("resource") &&
+                              !location.pathname.includes("create-nft") &&
+                              !location.pathname.includes("help-center") &&
+                              !location.pathname.includes("suggestion")
+                              ? "nav-link navlink_active"
+                              : "nav-link"
+                          }
+                          style={
+                            activeMarketplace.includes(location.pathname)
+                              ? navLink
+                              : {}
+                          }
+                          aria-current="page"
+                          to="/nfts"
+                          onMouseOut={handleMouseOut}
+                          onMouseOver={handleMouseOver}
+                        >
+                          Marketplace
+                        </Link>
+                    }
                   </li>
                   <li
                     className={
@@ -727,29 +740,32 @@ function Navbar({ loader }) {
                     }
                     onClick={closeWalletAndNoti}
                   >
-                    <Link
-                      className={
-                        location.pathname.includes("leader-board")
-                          ? "nav-link navlink_active"
-                          : "nav-link"
-                      }
-                      exact
-                      to="/leader-board"
-                      style={
-                        activeLeaderboard.includes(location.pathname)
-                          ? navLink
-                          : {}
-                      }
-                      onMouseOut={handleMouseOut}
-                      onMouseOver={handleMouseOver}
-                    >
-                      Leaderboard
-                    </Link>
+                    {
+                      loader ? <Skeleton width="100px" height="20px" />
+                        : <Link
+                          className={
+                            location.pathname.includes("leader-board")
+                              ? "nav-link navlink_active"
+                              : "nav-link"
+                          }
+                          exact
+                          to="/leader-board"
+                          style={
+                            activeLeaderboard.includes(location.pathname)
+                              ? navLink
+                              : {}
+                          }
+                          onMouseOut={handleMouseOut}
+                          onMouseOver={handleMouseOver}
+                        >
+                          Leaderboard
+                        </Link>
+                    }
                   </li>
 
                   <NavDropdown
                     onClick={closeWalletAndNoti}
-                    title="Resource"
+                    title={loader ? <Skeleton width="100px" height="20px" /> : 'Resource'}
                     id="navbarScrollingDropdown"
                     className={
                       location.pathname.includes("help-center") ||
@@ -818,16 +834,19 @@ function Navbar({ loader }) {
                       {/* <Link
                       to={walletAddress == null ? "/add-wallet" : "/create-nft"}
                     > */}
-                      <button
-                        style={{
-                          backgroundColor: `${fetchPalletsColor(
-                            customize.appearance.colorPalette
-                          )}`,
-                        }}
-                        className="create-btn"
-                      >
-                        Create
-                      </button>
+                      {
+                        loader ? <Skeleton width={'146px'} height={'42px'} />
+                          : <button
+                            style={{
+                              backgroundColor: `${fetchPalletsColor(
+                                customize.appearance.colorPalette
+                              )}`,
+                            }}
+                            className="create-btn"
+                          >
+                            Create
+                          </button>
+                      }
                       {/* </Link> */}
                     </li>
                   ) : null}
@@ -837,7 +856,7 @@ function Navbar({ loader }) {
                 <ul className="right_section_nav mb-0">
                   <li>
                     {loggedInUser == null ? (
-                      <img
+                      loader ? <Skeleton containerClassName="nav-mr-15" width={'31px'} height={'31px'} /> : <img
                         onClick={handleNotiSideBar}
                         className={
                           !isOpenNoti ? "notification-icon" : "hover-icon"
@@ -850,14 +869,17 @@ function Navbar({ loader }) {
                         badgeContent={notifications?.unreadCount}
                         color="primary"
                       >
-                        <img
-                          onClick={handleNotiSideBar}
-                          className={
-                            !isOpenNoti ? "notification-icon" : "hover-icon"
-                          }
-                          src={bellicon}
-                          alt="notification"
-                        ></img>
+                        {
+                          loader ? <Skeleton containerClassName="nav-mr-15" width={'31px'} height={'31px'} />
+                            : <img
+                              onClick={handleNotiSideBar}
+                              className={
+                                !isOpenNoti ? "notification-icon" : "hover-icon"
+                              }
+                              src={bellicon}
+                              alt="notification"
+                            ></img>
+                        }
                       </Badge>
                     )}
                   </li>
@@ -871,13 +893,16 @@ function Navbar({ loader }) {
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      <img
-                        onClick={closeWalletAndNoti}
-                        className="btnnav_mob1 profileimg profile-icon"
-                        src={profileImg}
-                        alt="profile"
-                        style={{}}
-                      ></img>
+                      {
+                        loader ? <Skeleton containerClassName="nav-mr-15" width={'31px'} height={'31px'} /> :
+                          <img
+                            onClick={closeWalletAndNoti}
+                            className="btnnav_mob1 profileimg profile-icon"
+                            src={profileImg}
+                            alt="profile"
+                            style={{}}
+                          ></img>
+                      }
                     </a>
                     <ul
                       className="dropdown-menu profilemenu"
@@ -910,19 +935,22 @@ function Navbar({ loader }) {
                     </ul>
                   </li>
                   <li>
-                    <img
-                      onClick={() => {
-                        handleWalletClick();
-                        walletHandler();
-                      }}
-                      className={!isOpenWallet ? "wallet-icon" : "hover-icon"}
-                      src={wallet}
-                      alt="wallet"
-                      style={{
-                        color: "gray",
-                        cursor: "pointer",
-                      }}
-                    ></img>
+                    {
+                      loader ? <Skeleton containerClassName="nav-mr-15" width={`31px`} height={`31px`} /> :
+                        <img
+                          onClick={() => {
+                            handleWalletClick();
+                            walletHandler();
+                          }}
+                          className={!isOpenWallet ? "wallet-icon" : "hover-icon"}
+                          src={wallet}
+                          alt="wallet"
+                          style={{
+                            color: "gray",
+                            cursor: "pointer",
+                          }}
+                        ></img>
+                    }
                   </li>
                   <button
                     type="button"

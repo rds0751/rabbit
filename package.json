@@ -45,6 +45,7 @@
     "react-images-upload": "^1.2.8",
     "react-is": "^18.0.0",
     "react-loader-spinner": "^5.1.4",
+    "react-loading-skeleton": "^3.1.0",
     "react-material-toast": "^16.1.7",
     "react-multiple-select-dropdown-lite": "^2.0.5",
     "react-owl-carousel": "^2.3.3",

@@ -66,11 +66,11 @@
 .homepage .right-slider .card .title {
   font-family: "poppins-semibold";
   font-size: 13px;
-  line-height: 22px;
+  line-height: 28px;
   color: #585858;
   margin-bottom: 2px;
   text-align: left;
-  min-height: 45px;
+  /* min-height: 45px; */
 }
 .homepage .right-slider .card .description {
   font-family: "poppins-semibold";
@@ -518,7 +518,7 @@ margin-left: 10px;
 }
 .card1{
   display: flex;
-   align-items: flex-start;
+   align-items: center;
   justify-content: space-between;
 }
 
@@ -550,7 +550,7 @@ margin-left: 10px;
   border-bottom-right-radius: 12px;
 }
 .card1 .homePageNft{
-  width: 60%;
+  width: 55%;
 }
 .thumbnail-homepage-shimmer{
   background: linear-gradient(to right, white 8%, #f0f0f0 18%, lightgray 33%);
@@ -615,4 +615,19 @@ margin-left: 10px;
 
 .card-collection a{
   text-decoration: none;
+}
+
+
+/* custom css */
+.remove-border{
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.btn-loader{
+  margin-right: 20px;
+}
+
+.margin-svg{
+  margin-left: 10px;
 }
