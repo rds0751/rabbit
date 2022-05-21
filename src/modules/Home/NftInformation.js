@@ -615,7 +615,71 @@ export default function NftInformation(props) {
                 />
                 <div className="col-xl-5 col-lg-5 col-md-12">
                   <div className="nftdetail-img">
-                    {nft.cdnUrl === "" ? (
+                    {nft?.fileExtension?.includes("audio") ? (
+                      <>
+                      <img
+                      onMouseDown={(e) => e.preventDefault()}
+                      onContextMenu={(e) => e.preventDefault()}
+                      // src={nft.cdnUrl}
+                      src={nft.previewImage}
+                      // src={Imagep}
+                      alt="nft"
+                      className="border-radius imginfo_mob"
+                      style={{
+                        maxWidth: "100%",
+                        // height: "837px",
+                        borderRadius: "8px",
+                      }}
+                    />
+                       <audio controls controlslist="nodownload" 
+                       onMouseDown={(e) => e.preventDefault()}
+                       onContextMenu={(e) => e.preventDefault()}
+                       // src={nft.cdnUrl}
+                       // src={Imagep}
+                       alt="nft"
+                       className="border-radius imginfo_mob"
+                       style={{
+                         maxWidth: "100%",
+                         // height: "837px",
+                         borderRadius: "8px",
+                       }}>
+                         <source src={nft?.cdnUrl}></source>
+                     </audio>
+                     </>
+                    ):(nft?.fileExtension?.includes("video") ?(
+                      <>
+                      <img
+                      onMouseDown={(e) => e.preventDefault()}
+                      onContextMenu={(e) => e.preventDefault()}
+                      // src={nft.cdnUrl}
+                      src={nft.previewImage}
+                      // src={Imagep}
+                      alt="nft"
+                      className="border-radius imginfo_mob"
+                      style={{
+                        maxWidth: "100%",
+                        // height: "837px",
+                        borderRadius: "8px",
+                      }}
+                    />
+                       <video  controls autoPlay
+                       onMouseDown={(e) => e.preventDefault()}
+                       onContextMenu={(e) => e.preventDefault()}
+                       // src={nft.cdnUrl}
+                       // src={Imagep}
+                       alt="nft"
+                       className="border-radius imginfo_mob"
+                       style={{
+                         maxWidth: "100%",
+                         // height: "837px",
+                         borderRadius: "8px",
+                       }}>
+                         <source src={nft.cdnUrl}></source>
+                     </video>
+                     </>
+                    ) :(
+                      <>
+                      {nft.cdnUrl === "" ? (
                       <img
                         onMouseDown={(e) => e.preventDefault()}
                         onContextMenu={(e) => e.preventDefault()}
@@ -632,19 +696,16 @@ export default function NftInformation(props) {
                       />
                     ) : nft.cdnUrl ? (
                       <img
-                        onMouseDown={(e) => e.preventDefault()}
-                        onContextMenu={(e) => e.preventDefault()}
-                        // src={nft.cdnUrl}
-                        src={nft.cdnUrl}
-                        // src={Imagep}
-                        alt="nft"
+                      src={nft?.cdnUrl}
+                       
                         className="border-radius imginfo_mob"
                         style={{
                           maxWidth: "100%",
                           // height: "837px",
                           borderRadius: "8px",
-                        }}
-                      />
+                        }}>
+                          
+                      </img>
                     ) : (
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -709,7 +770,10 @@ export default function NftInformation(props) {
                         </g>
                       </svg>
                     )}
+                      </>
 
+                    ))}
+                   
                     {/*
                   <img
                     onMouseDown={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()}
