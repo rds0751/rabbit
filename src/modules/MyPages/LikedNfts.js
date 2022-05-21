@@ -12,14 +12,16 @@ import Polygon from "../../assets/images/ploygon.svg";
 import Binance from "../../assets/images/binance.svg";
 function LikedNfts({ nft }) {
   const { user } = useSelector((state) => state);
-  let _id, cdnUrl, name, salesInfo, compressedURL,blockchain;
+  let _id, cdnUrl, name, salesInfo, compressedURL, blockchain,collectionName,collectionId;
   if (nft.userLikedNfts !== undefined) {
-    _id = nft.userLikedNfts._id
-    cdnUrl = nft.userLikedNfts.cdnUrl
-    name  = nft.userLikedNfts.name
-    salesInfo  = nft.userLikedNfts.salesInfo
-    compressedURL  = nft.userLikedNfts.compressedURL
-    blockchain=nft.userLikedNfts.blockchain
+    _id = nft.userLikedNfts._id;
+    cdnUrl = nft.userLikedNfts.cdnUrl;
+    name = nft.userLikedNfts.name;
+    salesInfo = nft.userLikedNfts.salesInfo;
+    compressedURL = nft.userLikedNfts.compressedURL;
+    blockchain = nft.userLikedNfts.blockchain;
+    collectionId=nft.userLikedNfts.collectionId;
+    collectionName=nft?.userLikedNfts?.collectionName;
   }
   const [handleLike, setHandleLike] = useState(true);
   const route = "/nft-information/" + _id;
@@ -69,19 +71,18 @@ function LikedNfts({ nft }) {
     setImageLoading({ ...imageLoading, loaded: true });
   };
 
-  const blockchainCheck=(blockchain)=>{
-    switch(blockchain){
-      case 'Ethereum':
-      return <img className="currency-sign" src={Ethereum}></img>
-      case 'Polygon':
-      return <img  className="currency-sign" src={Polygon}></img>
-      case 'Binance':
-      return <img className="currency-sign" src={Binance}></img>
+  const blockchainCheck = (blockchain) => {
+    switch (blockchain) {
+      case "Ethereum":
+        return <img className="currency-sign" src={Ethereum}></img>;
+      case "Polygon":
+        return <img className="currency-sign" src={Polygon}></img>;
+      case "Binance":
+        return <img className="currency-sign" src={Binance}></img>;
       default:
-        return '';
+        return "";
     }
-    
-  }
+  };
 
   return (
     <div className="nftCardEach col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
@@ -99,7 +100,12 @@ function LikedNfts({ nft }) {
 
             {!imageLoading.loaded && (
               <div className="loaderNft ">
-                <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />;
+                <ShimmerThumbnail
+                  className="thumbnail"
+                  fitOnFrame={true}
+                  rounded
+                />
+                ;
               </div>
             )}
           </div>
@@ -129,9 +135,26 @@ function LikedNfts({ nft }) {
               {name}
             </div>
             <span className="nftTileEachDetailsFirstContainerValue">
-               {blockchainCheck(blockchain)}
+              {blockchainCheck(blockchain)}
               {`${salesInfo?.price}  ${salesInfo?.currency}`}
             </span>
+          </div>
+          <div
+            className="collectionName"
+            title={collectionName ? collectionName : "Anafto Collection"}
+          >
+            <Link
+              style={{
+                textDecoration: "none",
+              }}
+              to={"/collection-details/" + collectionId}
+            >
+              {undefined !== collectionName && collectionName.length > 30
+                ? collectionName.slice(0, 30) + "..."
+                : collectionName?.length === 0
+                ? "Anafto Collection"
+                : collectionName}
+            </Link>
           </div>
           <div className="nftTileEachDetailsSecondContainerValueHighest">
             <div>

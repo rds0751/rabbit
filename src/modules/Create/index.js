@@ -81,6 +81,8 @@ class Index extends BaseComponent {
       createdBy: data?.createdBy,
       updatedBy: data?.createdBy,
       ownerAddress: data?.ownerAddress || "", // put metamask address
+      previewImage:data?.previewImage,
+      fileExtension:data?.fileExtension,
     };
   };
 

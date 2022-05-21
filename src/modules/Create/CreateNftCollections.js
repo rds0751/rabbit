@@ -492,8 +492,8 @@ function CreateNftCollections(props) {
             setbannerCdn={setbannerCdn}
             bannerIpfs={bannerIpfs}
             setbannerIpfs={setbannerIpfs}
-             compressedUrl={compressedBanner}
-             setCompressedUrl={setcompressedBanner}
+            compressedUrl={compressedBanner}
+            setCompressedUrl={setcompressedBanner}
              appearance={customize.appearance}
           />
 

@@ -1229,6 +1229,7 @@ thead {
 .nft-detail .nftdetail-img {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   min-height: 400px;
   /* background-color: #f3f3f3; */
