@@ -6,7 +6,8 @@ import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { fetchPalletsColor } from "../../utility/global";
-function Suggestion() {
+import Skeleton from "react-loading-skeleton";
+function Suggestion({ loader }) {
 
   const appearance = useSelector(state => state.customize.appearance);
 
@@ -63,58 +64,77 @@ function Suggestion() {
       />
       <div className="suggestion-body ">
         <div className="suggestion suggestionmob">
-          <h4 className="make-suggestion">Make a Suggestion</h4>
+          <h4 className="make-suggestion">
+            {loader ? <Skeleton width="200px" height="35px" /> : 'Make a Suggestion'}
+          </h4>
           <div className="form-box">
             <div className="form-inner">
               <div className="">
-                <label for="email" className="label-key">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={(e) => handleChange(e.target.name, e.target.value)}
-                  className="sugg-input"
-                  placeholder="Write your email address"
-                />
+                {
+                  loader ? <Skeleton style={{ marginBottom: "20px" }} height="80px" /> :
+                    <>
+                      <label for="email" className="label-key">
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={(e) => handleChange(e.target.name, e.target.value)}
+                        className="sugg-input"
+                        placeholder="Write your email address"
+                      />
+                    </>
+                }
               </div>
               <div className="">
-                <label for="pwd" className="label-key">
-                  Title
-                </label>
-                <input
-                  name="title"
-                  value={formData.title}
-                  onChange={(e) => handleChange(e.target.name, e.target.value)}
-                  className="sugg-input"
-                  placeholder="A short descriptive title"
-                />
+                {
+                  loader ? <Skeleton style={{ marginBottom: "20px" }} height="80px" /> : <>
+                    <label for="pwd" className="label-key">
+                      Title
+                    </label>
+                    <input
+                      name="title"
+                      value={formData.title}
+                      onChange={(e) => handleChange(e.target.name, e.target.value)}
+                      className="sugg-input"
+                      placeholder="A short descriptive title"
+                    />
+                  </>
+                }
               </div>
-              <label for="comment" className="label-key">
-                Detail
-              </label>
-              <textarea
-                name="detail"
-                value={formData.detail}
-                onChange={(e) => handleChange(e.target.name, e.target.value)}
-                className="sugg-input text-area"
-                rows="4"
-                placeholder="Write comment"
-              ></textarea>
+
+              {
+                loader ? <Skeleton style={{ marginBottom: "20px" }} height="120px" /> :
+                  <><label for="comment" className="label-key">
+                    Detail
+                  </label>
+                    <textarea
+                      name="detail"
+                      value={formData.detail}
+                      onChange={(e) => handleChange(e.target.name, e.target.value)}
+                      className="sugg-input text-area"
+                      rows="4"
+                      placeholder="Write comment"
+                    ></textarea></>
+              }
+
               <div className="butt-outer">
-                <button
-                  onClick={PostSuggestion}
-                  // type="submit"
-                  className="send-button"
-                  style={{
-                    opacity: checkButtonStatus ? 0.8 : 1,
-                    backgroundColor: `${fetchPalletsColor(appearance.colorPalette)}`
-                  }}
-                  disabled={checkButtonStatus}
-                >
-                  Send
-                </button>
+                {
+                  loader ? <Skeleton width="150px" height="45px" /> :
+                    <button
+                      onClick={PostSuggestion}
+                      // type="submit"
+                      className="send-button"
+                      style={{
+                        opacity: checkButtonStatus ? 0.8 : 1,
+                        backgroundColor: `${fetchPalletsColor(appearance.colorPalette)}`
+                      }}
+                      disabled={checkButtonStatus}
+                    >
+                      Send
+                    </button>
+                }
               </div>
             </div>
           </div>

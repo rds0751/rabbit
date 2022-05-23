@@ -23,6 +23,7 @@ import Polygon from "../../assets/images/ploygon.svg";
 import Binance from "../../assets/images/binance.svg";
 import { useSelector } from "react-redux";
 import { fetchPalletsColor } from "../../utility/global"
+import Skeleton from "react-loading-skeleton";
 
 const blue = {
   100: '#DAECFF',
@@ -151,7 +152,7 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
 
 
 const queryString = require('query-string');
-function Collections_tile() {
+function Collections_tile(props) {
 
   const appearance = useSelector(state => state.customize.appearance);
   const customize = useSelector(state => state.customize);
@@ -209,7 +210,7 @@ function Collections_tile() {
     // ----get all nfts by collection--------
     getALLCollectionById(collectionId, (res) => {
       if (res.success) {
-        setCollections(res.responseData);        
+        setCollections(res.responseData);
         setIsLoading(false);
       } else {
         toast.error("Error While Fetching Data");
@@ -263,7 +264,7 @@ function Collections_tile() {
   return (
     <>
       <div className="ntf_div">
-        <NftToggle toggleNft={toggleNft} appearance={appearance} />
+        <NftToggle toggleNft={toggleNft} appearance={appearance} loader={props.loader} />
         {/* <Lower__homepage /> */}
         {/* <CollectionNftFilter /> */}
         {/* -------------Nft Filter */}
@@ -284,19 +285,22 @@ function Collections_tile() {
                   return <option value={item._id}>{item.name}</option>;
                 })}
               </select> */}
-              <CustomSelect
-                name="categoryId"
-                id="sale"
-                onChange={(e) => handleCategory(e)}
-                value={filterData.categoryName}
-                defaultValue=""
-              >
-                <StyledOption value="" hidden>Categories All</StyledOption>
-                <StyledOption value="" >All</StyledOption>
-                {Categories.map((item, key) => {
-                  return <StyledOption value={item._id}>{item.name}</StyledOption>;
-                })}
-              </CustomSelect>
+              {
+                props.loader ? <Skeleton width={`250px`} height={`36px`} /> :
+                  <CustomSelect
+                    name="categoryId"
+                    id="sale"
+                    onChange={(e) => handleCategory(e)}
+                    value={filterData.categoryName}
+                    defaultValue=""
+                  >
+                    <StyledOption value="" hidden>Categories All</StyledOption>
+                    <StyledOption value="" >All</StyledOption>
+                    {Categories.map((item, key) => {
+                      return <StyledOption value={item._id}>{item.name}</StyledOption>;
+                    })}
+                  </CustomSelect>
+              }
             </div>
           </div>
           <div className="filter">
@@ -317,19 +321,22 @@ function Collections_tile() {
                 <option value="2">Items high to low</option>
               </select> */}
 
-              <CustomSelect
-                name="sort"
-                id="sale"
-                onChange={(e) => handleSort(e)}
-                value={filterData.sort}
-                defaultValue=""
-              >
-                <StyledOption value="" hidden>Sort by</StyledOption>
-                <StyledOption value="" >All</StyledOption>
-                <StyledOption value="-1">Recently added</StyledOption>
-                <StyledOption value="3">Items: Low to High</StyledOption>
-                <StyledOption value="2">Items: High to Low</StyledOption>
-              </CustomSelect>
+              {
+                props.loader ? <Skeleton width={`250px`} height={`36px`} /> :
+                  <CustomSelect
+                    name="sort"
+                    id="sale"
+                    onChange={(e) => handleSort(e)}
+                    value={filterData.sort}
+                    defaultValue=""
+                  >
+                    <StyledOption value="" hidden>Sort by</StyledOption>
+                    <StyledOption value="" >All</StyledOption>
+                    <StyledOption value="-1">Recently added</StyledOption>
+                    <StyledOption value="3">Items: Low to High</StyledOption>
+                    <StyledOption value="2">Items: High to Low</StyledOption>
+                  </CustomSelect>
+              }
             </div>
           </div>
         </div>
@@ -362,29 +369,35 @@ function Collections_tile() {
                   // style={{ marginLeft: "1em", backgroundColor: "#F8F8F8" }}
                   >
                     <div className="text-center">
-                      <img
-                        className="img-fluid border-radius collection-img-card-radius collection_imgmob"
-                        src={compressedURL?.length === 0 ? imageUrl : (!compressedURL ? imageUrl : compressedURL)}
-                        alt=""
-                        style={{
-                          width: "100px",
-                          height: "100px",
-                          textDecoration: "none",
-                        }}
-                      />
+                      {
+                        props.loader ? <Skeleton width={`100px`} height={`100px`} circle={true} /> :
+                          <img
+                            className="img-fluid border-radius collection-img-card-radius collection_imgmob"
+                            src={compressedURL?.length === 0 ? imageUrl : (!compressedURL ? imageUrl : compressedURL)}
+                            alt=""
+                            style={{
+                              width: "100px",
+                              height: "100px",
+                              textDecoration: "none",
+                            }}
+                          />
+                      }
                     </div>
                     <div className="text-center pt-3">
-                      <span>{blockchainCheck(blockchain)} </span>
+                      <span>{props.loader ? <Skeleton width={`25px`} height={`25px`} /> : blockchainCheck(blockchain)}</span>
                       <p
                         className="collectionCardEachName text-center font-weight-900"
                         style={{ color: "#191919" }}
                       >
-                        {name}
+                        {props.loader ? <Skeleton width={`200px`} /> : name}
                       </p>
                       <p className="collectionCardEachTotalitems">
-                        <span className=" font-14 text-dark">
-                          Total Items: <span style={{ color: `${fetchPalletsColor(appearance.colorPalette)}` }}>{nftCount}</span>
-                        </span>
+                        {
+                          props.loader ? <Skeleton width={`150px`} /> :
+                            <span className=" font-14 text-dark">
+                              Total Items: <span style={{ color: `${fetchPalletsColor(appearance.colorPalette)}` }}>{nftCount}</span>
+                            </span>
+                        }
                       </p>
                     </div>
                   </div>
@@ -402,7 +415,10 @@ function Collections_tile() {
             visibleBlogs >= collections.length ? (visibleBlogs >= collections.length && !isLoading) ? <div style={{ textAlignLast: "center" }}><button className="endButton"> End </button></div> : "" :
               (
                 <div style={{ textAlignLast: "center" }}>
-                  <button onMouseOver={(e)=>handleLoadHover(e)} onMouseOut={(e)=>handleLoadOut(e)} style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}} className="load-more" onClick={loadMoreHandler}>Load More</button>
+                  {
+                    props.loader ? <Skeleton className="load-more" style={{ background: '#ededed' }} /> :
+                      <button onMouseOver={(e) => handleLoadHover(e)} onMouseOut={(e) => handleLoadOut(e)} style={{ color: `${fetchPalletsColor(appearance.colorPalette)}` }} className="load-more" onClick={loadMoreHandler}>Load More</button>
+                  }
                 </div>
               )
           }

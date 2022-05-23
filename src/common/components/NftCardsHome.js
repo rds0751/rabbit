@@ -15,7 +15,8 @@ import {
   getNFtsData,
 } from "../../services/webappMicroservice";
 import { fetchPalletsColor } from "../../utility/global";
-function NftCardsHome({ nft, appearance }) {
+import Skeleton from "react-loading-skeleton";
+function NftCardsHome({ nft, appearance, loader }) {
   // let history = useHistory();
 
   const navigate = useNavigate();
@@ -34,10 +35,10 @@ function NftCardsHome({ nft, appearance }) {
         addedBy: user?.loggedInUser?._id,
       };
       addLikeNft(data);
-      setHandleLike(!handleLike);      
+      setHandleLike(!handleLike);
     } else {
       toast.error("Not logged in")
-    }    
+    }
   };
   // const difftime = (timestamp1, timestamp2) => {
   //   var difference = timestamp1 - timestamp2;
@@ -80,24 +81,24 @@ function NftCardsHome({ nft, appearance }) {
     showDateSection = false;
   }
 
-  let [imageLoading,setImageLoading]=useState({src:cdnUrl,loaded:false })
+  let [imageLoading, setImageLoading] = useState({ src: cdnUrl, loaded: false })
 
-  const onImageLoad=()=>{
-   setImageLoading({...imageLoading,loaded:true});
+  const onImageLoad = () => {
+    setImageLoading({ ...imageLoading, loaded: true });
   }
 
-  const blockchainCheck=(blockchain)=>{
-    switch(blockchain){
+  const blockchainCheck = (blockchain) => {
+    switch (blockchain) {
       case 'Ethereum':
-      return <img className="currency-sign" src={Ethereum}></img>
+        return <img className="currency-sign" src={Ethereum}></img>
       case 'Polygon':
-      return <img  className="currency-sign" src={Polygon}></img>
+        return <img className="currency-sign" src={Polygon}></img>
       case 'Binance':
-      return <img className="currency-sign" src={Binance}></img>
+        return <img className="currency-sign" src={Binance}></img>
       default:
         return '';
     }
-    
+
   }
 
   return (
@@ -106,83 +107,90 @@ function NftCardsHome({ nft, appearance }) {
         <Link to={route} style={{ textDecoration: "none" }}>
           {fileExtension?.toString().includes("audio") ? (
             <div className="image-container">
-            <img
-              className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
-              src={previewImage}
-              alt="nft-img"
-              onLoad={onImageLoad} 
-              onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()} />
-  
-          {!imageLoading.loaded && (
-              <div className="loaderNft "> 
-                <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
-                </div>
-            )}
-            
-            </div>
-          ):( fileExtension?.toString().includes("video") ?
-            
-              <div className="image-container">
-              <img
-                className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
-                src={previewImage}
-                alt="nft-img"
-                onLoad={onImageLoad} 
-                onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()} />
+              {
+                loader ? <Skeleton height={`187px`} /> :
+                  <img
+                    className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
+                    src={previewImage}
+                    alt="nft-img"
+                    onLoad={onImageLoad}
+                    onMouseDown={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()} />
+              }
 
-                
-    
-            {!imageLoading.loaded && (
-                <div className="loaderNft "> 
+              {!imageLoading.loaded && (
+                <div className="loaderNft ">
                   <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
-                  </div>
-              )}
-              
-              </div>
-            :(
-              
-            <div className="image-container">
-            <img
-              className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
-              src={compressedURL}
-              alt="nft-img"
-              onLoad={onImageLoad} 
-              onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()} />
-  
-          {!imageLoading.loaded && (
-              <div className="loaderNft "> 
-                <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
                 </div>
-            )}
-            
+              )}
+
             </div>
+          ) : (fileExtension?.toString().includes("video") ?
+
+            <div className="image-container">
+              {
+                loader ? <Skeleton height={`187px`} /> :
+                  <img
+                    className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
+                    src={previewImage}
+                    alt="nft-img"
+                    onLoad={onImageLoad}
+                    onMouseDown={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()} />
+              }
+
+              {!imageLoading.loaded && (
+                <div className="loaderNft ">
+                  <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
+                </div>
+              )}
+
+            </div>
+            : (
+
+              <div className="image-container">
+                {
+                  loader ? <Skeleton height={`187px`} /> :
+                    <img
+                      className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
+                      src={compressedURL}
+                      alt="nft-img"
+                      onLoad={onImageLoad}
+                      onMouseDown={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()} />
+                }
+
+                {!imageLoading.loaded && (
+                  <div className="loaderNft ">
+                    <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
+                  </div>
+                )}
+
+              </div>
 
             )
 
           )}
-          
-           
-         
-          </Link>
-         
-          
-        
-        <span >
-          {isLiked?(
-                  <img
-                  id="unlike_icon"
-                  src={handleLike ? likes : Like}
-                  alt="like"
-                  onClick={() => likeNft(_id)}
-                />
 
-          ):(
+
+
+        </Link>
+
+
+
+        <span >
+          {isLiked ? (
             <img
-            id="like_icon"
-            src={handleLike ? Like : likes}
-            alt="like"
-            onClick={() => likeNft(_id)}
-          />
+              id="unlike_icon"
+              src={handleLike ? likes : Like}
+              alt="like"
+              onClick={() => likeNft(_id)}
+            />
+
+          ) : (
+            <img
+              id="like_icon"
+              src={handleLike ? Like : likes}
+              alt="like"
+              onClick={() => likeNft(_id)}
+            />
 
           )}
         </span>
@@ -202,29 +210,35 @@ function NftCardsHome({ nft, appearance }) {
               }}
               title={name}
             >
-              {name}
+              {loader ? <Skeleton /> : name}
             </div>
-            <span
-              className="nftTileEachDetailsFirstContainerValue"
-            >
-              {blockchainCheck(blockchain)}
-              {`${salesInfo?.price}  ${salesInfo?.currency}`}
-            </span>
-          </div>
-          <div className="collectionName" title={collectionName ?collectionName :"Anafto Collection"}>
-
-          <Link
-           style={{ textDecoration: 'none' , color: `${fetchPalletsColor(appearance.colorPalette)}`}}
-            to={
-            '/collection-details/' + collectionId
+            {
+              loader ? <Skeleton width={`80px`} /> :
+                <span
+                  className="nftTileEachDetailsFirstContainerValue"
+                >
+                  {blockchainCheck(blockchain)}
+                  {`${salesInfo?.price}  ${salesInfo?.currency}`}
+                </span>
             }
-            >
-              {undefined !== collectionName &&
-              collectionName.length > 30 ? collectionName.slice(0,30)+"...":(collectionName?.length===0 ? "Anafto Collection" :collectionName)}
-           
-             </Link>
-             </div>
-            
+          </div>
+          <div className="collectionName" title={collectionName ? collectionName : "Anafto Collection"}>
+
+            {
+              loader ? <Skeleton width={`200px`} /> :
+                <Link
+                  style={{ textDecoration: 'none', color: `${fetchPalletsColor(appearance.colorPalette)}` }}
+                  to={
+                    '/collection-details/' + collectionId
+                  }
+                >
+                  {undefined !== collectionName &&
+                    collectionName.length > 30 ? collectionName.slice(0, 30) + "..." : (collectionName?.length === 0 ? "Anafto Collection" : collectionName)}
+
+                </Link>
+            }
+          </div>
+
           <div
             className="nftTileEachDetailsSecondContainerValueHighest"
           // style={{ marginLeft: "1em" }}
@@ -236,7 +250,7 @@ function NftCardsHome({ nft, appearance }) {
             </div> */}
             <div>
               {(showDateSection) ? <span className="" style={{ color: "#000", marginRight: "4px" }}>
-                <i className="far fa-clock" style={{ color: "#f54", fontSize: "13.36px"}}></i>
+                <i className="far fa-clock" style={{ color: "#f54", fontSize: "13.36px" }}></i>
 
                 <span className="poppins-normal blackish font-14">
                   &nbsp;{message}

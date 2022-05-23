@@ -12,7 +12,7 @@ import dropdown from "../../assets/images/dropdown.svg";
 import { Button } from "react-bootstrap";
 import NoItem from "../../assets/images/Noitems.svg";
 
-import {fetchPalletsColor} from "../../utility/global"
+import { fetchPalletsColor } from "../../utility/global"
 // MUI select code
 import SelectUnstyled, {
   selectUnstyledClasses,
@@ -23,6 +23,7 @@ import OptionUnstyled, {
 import PopperUnstyled from "@mui/base/PopperUnstyled";
 import { styled } from "@mui/system";
 import Select from "react-select";
+import Skeleton from "react-loading-skeleton";
 
 const blue = {
   100: "#DAECFF",
@@ -238,12 +239,12 @@ function NftPage(props) {
     setFilterReq({ ...filterReq, limit: limit });
   };
 
-  const handleLoadOut = (e, type=false) => {
+  const handleLoadOut = (e, type = false) => {
     const button = e.target;
 
     button.style.color = fetchPalletsColor(appearance.colorPalette);
 
-    if(type) button.style.background = '#ffffff'
+    if (type) button.style.background = '#ffffff'
     else button.style.background = '#edf2fd 0% 0% no-repeat padding-box'
   }
 
@@ -253,109 +254,115 @@ function NftPage(props) {
     button.style.color = "#ffffff";
     button.style.background = fetchPalletsColor(appearance.colorPalette);
   }
-  
+
 
   return (
     <>
       <div className="ntf_div">
-        <NftToggle toggleNft={toggleNft} appearance={appearance} />
+        <NftToggle toggleNft={toggleNft} appearance={appearance} loader={props.loaderState} />
         <div className="lower__homepage" style={{ width: "100%" }}>
-          <div
-            id="filters filter-large"
-            className="filter"
-            style={{ gap: "30px" }}
-          >
-            <div
-              className="mobilenftTilePageSecondSelect dropdown"
-              ref={ref}
-              style={{
-                border: "1px solid #d2d2d2",
-                padding: "9px 12px 9px 12px",
-              }}
-            >
-              <p className="mb-0 sale-type">Price range</p>
-              <div className="filter-drop">
+          {
+            props.loaderState ? <Skeleton width={`250px`} height={`36px`} /> :
+              <div
+                id="filters filter-large"
+                className="filter"
+                style={{ gap: "30px" }}
+              >
                 <div
-                  onClick={() => setIsMenuOpen((oldState) => !oldState)}
-                  className="d-flex justify-content-between w-100"
+                  className="mobilenftTilePageSecondSelect dropdown"
+                  ref={ref}
+                  style={{
+                    border: "1px solid #d2d2d2",
+                    padding: "9px 12px 9px 12px",
+                  }}
                 >
-                  <div className="text">All</div>
-                  <div>
-                    <img
-                      alt=""
-                      src={dropdown}
-                      style={{ height: "17px", marginLeft: "8px" }}
-                    />
-                  </div>
-                </div>
-                <div
-                  className="filter-item"
-                  style={{ display: isMenuOpen ? "block" : "none" }}
-                >
-                  <div className="row mb-3 align-items-center">
-                    <div className="col-5">
-                      <input
-                        type="number"
-                        className="form-control"
-                        placeholder="Min"
-                        value={minPrice}
-                        onChange={(e) => setMinPrice(e.target.value)}
-                      />
+                  <p className="mb-0 sale-type">Price range</p>
+                  <div className="filter-drop">
+                    <div
+                      onClick={() => setIsMenuOpen((oldState) => !oldState)}
+                      className="d-flex justify-content-between w-100"
+                    >
+                      <div className="text">All</div>
+                      <div>
+                        <img
+                          alt=""
+                          src={dropdown}
+                          style={{ height: "17px", marginLeft: "8px" }}
+                        />
+                      </div>
                     </div>
-                    <div className="col-2 text-center">
-                      <span className="to">to</span>
-                    </div>
-                    <div className="col-5">
-                      <input
-                        type="number"
-                        className="form-control"
-                        placeholder="Max"
-                        value={maxPrice}
-                        onChange={(e) => setMaxPrice(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-6">
-                      <Button
-                        type="submit"
-                        onClick={(e) => clearPriceFilter(e)}
-                        variant="outline-primary"
-                        onMouseOver={(e)=>handleLoadHover(e)} onMouseOut={(e)=>handleLoadOut(e, true)}
-                        style={{color: `${fetchPalletsColor(appearance.colorPalette)}`, border: `1px solid ${fetchPalletsColor(appearance.colorPalette)}`}}
-                      >
-                        Clear
-                      </Button>
-                    </div>
-                    <div className="col-6">
-                      <Button
-                        onClick={(e) => handlePriceFilter(e)}
-                        variant="outline-primary"
-                        onMouseOver={(e)=>handleLoadHover(e)} onMouseOut={(e)=>handleLoadOut(e, true)}
-                        style={{color: `${fetchPalletsColor(appearance.colorPalette)}`, border: `1px solid ${fetchPalletsColor(appearance.colorPalette)}`}}
-                      >
-                        Apply
-                      </Button>
+                    <div
+                      className="filter-item"
+                      style={{ display: isMenuOpen ? "block" : "none" }}
+                    >
+                      <div className="row mb-3 align-items-center">
+                        <div className="col-5">
+                          <input
+                            type="number"
+                            className="form-control"
+                            placeholder="Min"
+                            value={minPrice}
+                            onChange={(e) => setMinPrice(e.target.value)}
+                          />
+                        </div>
+                        <div className="col-2 text-center">
+                          <span className="to">to</span>
+                        </div>
+                        <div className="col-5">
+                          <input
+                            type="number"
+                            className="form-control"
+                            placeholder="Max"
+                            value={maxPrice}
+                            onChange={(e) => setMaxPrice(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-6">
+                          <Button
+                            type="submit"
+                            onClick={(e) => clearPriceFilter(e)}
+                            variant="outline-primary"
+                            onMouseOver={(e) => handleLoadHover(e)} onMouseOut={(e) => handleLoadOut(e, true)}
+                            style={{ color: `${fetchPalletsColor(appearance.colorPalette)}`, border: `1px solid ${fetchPalletsColor(appearance.colorPalette)}` }}
+                          >
+                            Clear
+                          </Button>
+                        </div>
+                        <div className="col-6">
+                          <Button
+                            onClick={(e) => handlePriceFilter(e)}
+                            variant="outline-primary"
+                            onMouseOver={(e) => handleLoadHover(e)} onMouseOut={(e) => handleLoadOut(e, true)}
+                            style={{ color: `${fetchPalletsColor(appearance.colorPalette)}`, border: `1px solid ${fetchPalletsColor(appearance.colorPalette)}` }}
+                          >
+                            Apply
+                          </Button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+          }
           {/* <div className="mobilenftTilePageThirdSelect"> */}
-          <Select
-            className="select-element"
-            onChange={(e) => handleSort(e.value)}
-            options={options}
-            placeholder="Sort by"
-            theme={(theme) => ({
-              ...theme,
-              colors: {
-                ...theme.colors,
-                neutral50: "#191919", // Placeholder color
-              },
-            })}
-          />
+          {
+            props.loaderState ? <Skeleton width={`250px`} height={`36px`} /> :
+              <Select
+                className="select-element"
+                onChange={(e) => handleSort(e.value)}
+                options={options}
+                placeholder="Sort by"
+                theme={(theme) => ({
+                  ...theme,
+                  colors: {
+                    ...theme.colors,
+                    neutral50: "#191919", // Placeholder color
+                  },
+                })}
+              />
+          }
           {/* <CustomSelect
               name="sort"
               id="sale"
@@ -390,15 +397,18 @@ function NftPage(props) {
             nfts.map((nft) => {
               return (
                 <>
-                  <NftCardsHome nft={nft} appearance={appearance} />
+                  <NftCardsHome nft={nft} appearance={appearance} loader={props.loaderState} />
                 </>
               );
             })}
-            <div style={{textAlign: "center"}}>
-            <button onMouseOver={(e)=>handleLoadHover(e)} onMouseOut={(e)=>handleLoadOut(e)} style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}} className="load-more" onClick={loadMoreHandler}>
-              Load More
-            </button>
-            </div>
+          <div style={{ textAlign: "center" }}>
+            {
+              props.loaderState ? <Skeleton className="load-more" style={{background: '#ededed'}} /> :
+                <button onMouseOver={(e) => handleLoadHover(e)} onMouseOut={(e) => handleLoadOut(e)} style={{ color: `${fetchPalletsColor(appearance.colorPalette)}` }} className="load-more" onClick={loadMoreHandler}>
+                  Load More
+                </button>
+            }
+          </div>
           {/* {visibleBlogs >= nfts.length ? (
             visibleBlogs >= nfts.length && !isLoading ? (
               <div style={{ textAlignLast: "center" }}>
