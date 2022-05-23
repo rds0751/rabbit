@@ -24,7 +24,6 @@ import Binance from "../../assets/images/binance.svg";
 // import Card from '@mui/material/Card';
 import Avatar from "@mui/material/Avatar";
 // import Button from '@mui/material/Button'
-import { ShimmerThumbnail } from "react-shimmer-effects";
 import {
   getNfts,
   addLikeNft,
@@ -35,7 +34,7 @@ import AwesomeSlider from "react-awesome-slider";
 import "react-awesome-slider/dist/styles.css";
 import { fetchPalletsColor } from "../../utility/global";
 
-import defaultCover from "../../assets/images/coverImage.svg"
+import defaultCover from "../../assets/images/bannerLoader.png"
 import Skeleton from "react-loading-skeleton";
 
 function Home({ loaderState }) {
@@ -46,6 +45,7 @@ function Home({ loaderState }) {
 
   const { user, sideBar } = useSelector((state) => state);
   const { userDetails, loggedInUser, walletAddress } = user;
+  const [coverImage, setCoverImage] = useState(defaultCover)
   const [nfts, setNfts] = useState([]);
   const navigate = useNavigate();
 
@@ -148,17 +148,17 @@ function Home({ loaderState }) {
   }
 
 
-  useEffect(()=>{
-    if(loaderState === false){
+  useEffect(() => {
+    if (loaderState === false) {
       setLoader(loaderState);
     }
-  },[loaderState])
+  }, [loaderState])
 
 
   return (
     <>
       <div className="homepage">
-        <div className="banner" style={customize?.appearance?.coverImageUrl ? { background: `url(${customize?.appearance?.coverImageUrl})`, backgroundPosition: `${customize?.appearance?.coverPosition}` } : {}}>
+        <div className="banner" style={loader ? {background: `url(${defaultCover})`} : customize?.appearance?.coverImageUrl ? { background: `url(${customize?.appearance?.coverImageUrl})`, backgroundPosition: `${customize?.appearance?.coverPosition}` } : {}}>
           <div className="inner-width">
             <Container fluid>
               <Row>
@@ -305,9 +305,9 @@ function Home({ loaderState }) {
                                             <br />
                                             {
                                               loader === false ?
-                                                <Link title={nft.collectionName ? nft.collectionName : "Anafto Collection"} style={{textDecoration: 'none', color: `${fetchPalletsColor(customize?.appearance?.colorPalette)}` }} to={`/collection-details/${nft?.collectionId ? nft?.collectionId : '62823cab6df787009ba1882b'}`}>
+                                                <Link title={nft.collectionName ? nft.collectionName : "Anafto Collection"} style={{ textDecoration: 'none', color: `${fetchPalletsColor(customize?.appearance?.colorPalette)}` }} to={`/collection-details/${nft?.collectionId ? nft?.collectionId : '62823cab6df787009ba1882b'}`}>
                                                   {nft.collectionName ? nft.collectionName : "Anafto Collection"}
-                                                </Link> :null
+                                                </Link> : null
                                             }
                                           </h3>
 
@@ -431,68 +431,68 @@ function Home({ loaderState }) {
                                           </div>
                                         </Link>
                                         <Card.Body className="smallCard-details">
-                                      <div className="d-flex align-items-center media">
+                                          <div className="d-flex align-items-center media">
 
-                                        <div className="flex-shrink-0">
-                                          {
-                                            loader ? <Skeleton circle="true" width="38px" height="38px" /> :
-                                              <img
-                                                src={nft.hasOwnProperty('creator') ? nft.creator.hasOwnProperty('compressedURL') ? nft?.creator?.compressedURL !== "" ? nft?.creator?.compressedURL : userDefault : userDefault : userDefault}
-                                                width="38px"
-                                                height="38px"
-                                                className="profile-img"
-                                                onMouseDown={(e) =>
-                                                  e.preventDefault()
-                                                }
-                                                onContextMenu={(e) =>
-                                                  e.preventDefault()
-                                                }
-                                              />
-                                          }
-                                        </div>
-                                        <div className="flex-grow-1 ms-2 card1">
-                                          <h3 className="title homePageNft text-truncate">
-                                            {
-                                              loader ? <Skeleton count={2} width={'80px'} /> :
-                                                <Link
-                                                  title={nft?.name}
-                                                  to={
-                                                    "/nft-information/" + nft?._id
-                                                  }
-                                                  style={{ textDecoration: "none", color: `#585858` }}
-
-                                                >
-                                                  {nft?.name}
-                                                </Link>
-                                            }
-                                            <br />
-                                            {
-                                              loader === false ?
-                                                <Link title={nft.collectionName ? nft.collectionName : "Anafto Collection"} style={{textDecoration: 'none', color: `${fetchPalletsColor(customize?.appearance?.colorPalette)}` }} to={`/collection-details/${nft?.collectionId ? nft?.collectionId : '62823cab6df787009ba1882b'}`}>
-                                                  {nft.collectionName ? nft.collectionName : "Anafto Collection"}
-                                                </Link> :null
-                                            }
-                                          </h3>
-
-                                          {/* {let n = nft?.description.split(' ')} */}
-                                          {
-                                            nft.hasOwnProperty('blockchain') ?
-                                              <span className="nftTileEachDetailsFirstContainerValue">
+                                            <div className="flex-shrink-0">
+                                              {
+                                                loader ? <Skeleton circle="true" width="38px" height="38px" /> :
+                                                  <img
+                                                    src={nft.hasOwnProperty('creator') ? nft.creator.hasOwnProperty('compressedURL') ? nft?.creator?.compressedURL !== "" ? nft?.creator?.compressedURL : userDefault : userDefault : userDefault}
+                                                    width="38px"
+                                                    height="38px"
+                                                    className="profile-img"
+                                                    onMouseDown={(e) =>
+                                                      e.preventDefault()
+                                                    }
+                                                    onContextMenu={(e) =>
+                                                      e.preventDefault()
+                                                    }
+                                                  />
+                                              }
+                                            </div>
+                                            <div className="flex-grow-1 ms-2 card1">
+                                              <h3 className="title homePageNft text-truncate">
                                                 {
-                                                  loader ? <Skeleton width={'80px'} height={'20px'} /> :
-                                                    <>
-                                                      {blockchainCheck(nft?.blockchain)}
-                                                      {`${nft?.salesInfo?.price}  ${nft?.salesInfo?.currency}`}
-                                                    </>
-                                                }
-                                              </span>
-                                              : null
-                                          }
-                                          {/* <p className="description">{nft?.description}</p> */}
-                                        </div>
-                                      </div>
+                                                  loader ? <Skeleton count={2} width={'80px'} /> :
+                                                    <Link
+                                                      title={nft?.name}
+                                                      to={
+                                                        "/nft-information/" + nft?._id
+                                                      }
+                                                      style={{ textDecoration: "none", color: `#585858` }}
 
-                                      {/* <div className="flex-grow-1 ms-2 card1 card-collection">
+                                                    >
+                                                      {nft?.name}
+                                                    </Link>
+                                                }
+                                                <br />
+                                                {
+                                                  loader === false ?
+                                                    <Link title={nft.collectionName ? nft.collectionName : "Anafto Collection"} style={{ textDecoration: 'none', color: `${fetchPalletsColor(customize?.appearance?.colorPalette)}` }} to={`/collection-details/${nft?.collectionId ? nft?.collectionId : '62823cab6df787009ba1882b'}`}>
+                                                      {nft.collectionName ? nft.collectionName : "Anafto Collection"}
+                                                    </Link> : null
+                                                }
+                                              </h3>
+
+                                              {/* {let n = nft?.description.split(' ')} */}
+                                              {
+                                                nft.hasOwnProperty('blockchain') ?
+                                                  <span className="nftTileEachDetailsFirstContainerValue">
+                                                    {
+                                                      loader ? <Skeleton width={'80px'} height={'20px'} /> :
+                                                        <>
+                                                          {blockchainCheck(nft?.blockchain)}
+                                                          {`${nft?.salesInfo?.price}  ${nft?.salesInfo?.currency}`}
+                                                        </>
+                                                    }
+                                                  </span>
+                                                  : null
+                                              }
+                                              {/* <p className="description">{nft?.description}</p> */}
+                                            </div>
+                                          </div>
+
+                                          {/* <div className="flex-grow-1 ms-2 card1 card-collection">
                                         {
                                           loader ? <Skeleton width="200px" /> :
                                             <Link style={{ color: `${fetchPalletsColor(customize?.appearance?.colorPalette)}` }} to={`/collection-details/${nft?.collectionId ? nft?.collectionId : '62823cab6df787009ba1882b'}`}>
@@ -500,7 +500,7 @@ function Home({ loaderState }) {
                                             </Link>
                                         }
                                       </div> */}
-                                    </Card.Body>
+                                        </Card.Body>
                                       </Card>
                                       {/* <Card>
                             <Card.Img variant="top" src={Image1} />
@@ -673,7 +673,7 @@ function Home({ loaderState }) {
                   </Card.Title>
                   <Card.Text>
                     {
-                      loader ? <Skeleton count={5} /> : 'Create your wallet on the platform to buy-sell NFTs.'
+                      loader ? <Skeleton count={4} /> : 'Create your wallet on the platform to buy-sell NFTs.'
                     }
                   </Card.Text>
                 </Card.Body>
@@ -712,7 +712,7 @@ function Home({ loaderState }) {
                   </Card.Title>
                   <Card.Text>
                     {
-                      loader ? <Skeleton count={5} /> : 'Create on-chain personalised collections to mint NFTs in those collections.'
+                      loader ? <Skeleton count={4} /> : 'Create on-chain personalised collections to mint NFTs in those collections.'
                     }
                   </Card.Text>
                 </Card.Body>
@@ -739,7 +739,7 @@ function Home({ loaderState }) {
                   </Card.Title>
                   <Card.Text>
                     {
-                      loader ? <Skeleton count={5} /> : 'Create on-chain NFTs to showcase your Art to the world or Sell to the community.'
+                      loader ? <Skeleton count={4} /> : 'Create on-chain NFTs to showcase your Art to the world or Sell to the community.'
                     }
                   </Card.Text>
                 </Card.Body>
@@ -765,7 +765,7 @@ function Home({ loaderState }) {
                   </Card.Title>
                   <Card.Text>
                     {
-                      loader ? <Skeleton count={5} /> : 'List your NFTs for sale or as collectibles.'
+                      loader ? <Skeleton count={4} /> : 'List your NFTs for sale or as collectibles.'
                     }
                   </Card.Text>
                 </Card.Body>
@@ -782,7 +782,7 @@ function Home({ loaderState }) {
 
           </h2>
           <div className="inner-width">
-            <div className="d-flex justify-content-lg-start justify-content-md-center flex-wrap">
+            <div className="d-flex justify-content-md-center flex-wrap">
               <div className="d-flex align-items-center justify-content-left media card-home-page">
                 {
                   loader ? <Skeleton className="margin-svg" width={"60px"} height={'60px'} /> :
@@ -887,17 +887,24 @@ function Home({ loaderState }) {
               </div>
 
               <div className="d-flex align-items-center justify-content-left media card-home-page">
-              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
-              <g id="Blockchain" transform="translate(-1302 -2368)">
-                <rect id="Rectangle_997" data-name="Rectangle 997" width="60" height="60" transform="translate(1302 2368)" fill="#fff"/>
-                <g id="Group_735" data-name="Group 735" transform="translate(262.914 970.801)">
-                  <path id="Path_765" data-name="Path 765" d="M172.72,86.488a5.1,5.1,0,0,0-3.083,1.037l-3.614-3.613a10.67,10.67,0,0,0-1.049-14.567l3.316-3.316a4.437,4.437,0,1,0-.69-.714L164.217,68.7a10.658,10.658,0,0,0-13.21.12l-4.459-4.459a3.283,3.283,0,1,0-.749.655l4.462,4.461a10.661,10.661,0,0,0-1.1,14.165l-3.043,3.043a3.845,3.845,0,0,0-5.436,5.436,3.956,3.956,0,0,0,.363.339,3.845,3.845,0,0,0,5.7-5l3.054-3.053a10.673,10.673,0,0,0,15.566.246l3.544,3.544a5.126,5.126,0,1,0,3.812-1.709Zm-15.031.422a9.725,9.725,0,1,1,9.725-9.724A9.735,9.735,0,0,1,157.69,86.91Z" transform="translate(910.469 1349.953)" fill="#366eef"/>
-                  <path id="Path_766" data-name="Path 766" d="M264.019,183.551a8.547,8.547,0,1,1-8.547-8.546,8.547,8.547,0,0,1,8.547,8.546" transform="translate(812.676 1243.548)" fill="#366eef"/>
-                </g>
-              </g>
-            </svg>
+                {
+                  loader ? <Skeleton className="margin-svg" width="60px" height="60px" /> :
+                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+                      <g id="Blockchain" transform="translate(-1302 -2368)">
+                        <rect id="Rectangle_997" data-name="Rectangle 997" width="60" height="60" transform="translate(1302 2368)" fill="#fff" />
+                        <g id="Group_735" data-name="Group 735" transform="translate(262.914 970.801)">
+                          <path id="Path_765" data-name="Path 765" d="M172.72,86.488a5.1,5.1,0,0,0-3.083,1.037l-3.614-3.613a10.67,10.67,0,0,0-1.049-14.567l3.316-3.316a4.437,4.437,0,1,0-.69-.714L164.217,68.7a10.658,10.658,0,0,0-13.21.12l-4.459-4.459a3.283,3.283,0,1,0-.749.655l4.462,4.461a10.661,10.661,0,0,0-1.1,14.165l-3.043,3.043a3.845,3.845,0,0,0-5.436,5.436,3.956,3.956,0,0,0,.363.339,3.845,3.845,0,0,0,5.7-5l3.054-3.053a10.673,10.673,0,0,0,15.566.246l3.544,3.544a5.126,5.126,0,1,0,3.812-1.709Zm-15.031.422a9.725,9.725,0,1,1,9.725-9.724A9.735,9.735,0,0,1,157.69,86.91Z" transform="translate(910.469 1349.953)" fill={fetchPalletsColor(customize?.appearance?.colorPalette)} />
+                          <path id="Path_766" data-name="Path 766" d="M264.019,183.551a8.547,8.547,0,1,1-8.547-8.546,8.547,8.547,0,0,1,8.547,8.546" transform="translate(812.676 1243.548)" fill={fetchPalletsColor(customize?.appearance?.colorPalette)} />
+                        </g>
+                      </g>
+                    </svg>
+                }
 
-                <p className="browse-text">Multiple Blockchain Support</p>
+                <p className="browse-text">
+                  {
+                    loader ? <Skeleton width={"250px"} /> : 'Multiple Blockchain Support'
+                  }
+                </p>
               </div>
             </div>
           </div>

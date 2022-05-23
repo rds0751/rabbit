@@ -40,6 +40,7 @@ import PopperUnstyled from '@mui/base/PopperUnstyled'
 import { styled } from '@mui/system'
 import { useSelector } from 'react-redux';
 import { fetchPalletsColor, handleLoadHoverText, handleLoadOutText } from '../../utility/global';
+import Skeleton from 'react-loading-skeleton';
 const blue = {
   100: '#DAECFF',
   200: '#99CCF3',
@@ -172,7 +173,7 @@ const queryString = require('query-string')
 
 //import { borderRadius } from "@mui/system";
 
-function LeaderBoard() {
+function LeaderBoard({ loader }) {
 
   const appearance = useSelector(state => state.customize.appearance);
 
@@ -187,8 +188,6 @@ function LeaderBoard() {
   // }, []);
 
   var limitSellers = topSellers.slice(0, 4)
-
-  console.log('topSellers', topSellers)
 
   const [topBuyers, setTopBuyers] = useState([])
   const [state, setState] = useState(LeaderBoardApi);
@@ -234,12 +233,11 @@ function LeaderBoard() {
 
   var limitBuyers = topBuyers.slice(0, 4)
 
-  console.log('topBuyers', topBuyers)
 
   useEffect(async () => {
     setTopSellers([])
     setIsloadingForSeller(true)
-    await getTopSellers(sellerReqObj).then((response) =>{
+    await getTopSellers(sellerReqObj).then((response) => {
       setTopSellers(response);
       setIsloadingForSeller(false);
 
@@ -249,7 +247,7 @@ function LeaderBoard() {
   useEffect(async () => {
     setTopCollections([])
     setIsloadingForCollection(true)
-    await getTopCollections(collectionReqObj).then((response) =>{
+    await getTopCollections(collectionReqObj).then((response) => {
       setTopCollections(response);
       setIsloadingForCollection(false)
     }
@@ -257,8 +255,6 @@ function LeaderBoard() {
   }, [collectionDuration])
 
   var limitCollections = topCollections.slice(0, 4)
-
-  console.log('topCollesssssssssssssssctions', topCollections)
 
   // const [topNftSales, setTopNftSales] = useState([]);
 
@@ -277,7 +273,7 @@ function LeaderBoard() {
     'pending',
   )
 
- 
+
 
 
 
@@ -303,7 +299,9 @@ function LeaderBoard() {
 
      leader-container"
     >
-      <h1 className="leader">Leaderboard</h1>
+      <h1 className="leader">
+        {loader ? <Skeleton width={`200px`} height={`45px`} /> : 'Leaderboard'}
+      </h1>
 
       {/* 3 Tables */}
 
@@ -317,7 +315,9 @@ function LeaderBoard() {
               <div className="card-body p-0">
                 <div className="leaderboardTitle">
                   <div className="col" style={{ fontSize: '16px' }}>
-                    Top Buyers
+                    {
+                      loader ? <Skeleton width="120px" height="30px" /> : 'Top Buyers'
+                    }
                   </div>
 
                   {/* <select className="top-dropdown" onChange={(e) => ChangeBuyerDuration(e)} name="duration">
@@ -332,17 +332,20 @@ function LeaderBoard() {
 
                   </select> */}
 
-                  <CustomSelect
-                    name="duration"
-                    onChange={(e) => ChangeBuyerDuration(e)}
-                    value={buyerDuration.duration}
-                    defaultValue="all"
-                  >
-                    <StyledOption value="all">All</StyledOption>
-                    <StyledOption value="weekly">Weekly</StyledOption>
-                    <StyledOption value="monthly">Monthly</StyledOption>
-                    <StyledOption value="yearly">Yearly</StyledOption>
-                  </CustomSelect>
+                  {
+                    loader ? <Skeleton width="120px" height="43px" /> :
+                      <CustomSelect
+                        name="duration"
+                        onChange={(e) => ChangeBuyerDuration(e)}
+                        value={buyerDuration.duration}
+                        defaultValue="all"
+                      >
+                        <StyledOption value="all">All</StyledOption>
+                        <StyledOption value="weekly">Weekly</StyledOption>
+                        <StyledOption value="monthly">Monthly</StyledOption>
+                        <StyledOption value="yearly">Yearly</StyledOption>
+                      </CustomSelect>
+                  }
 
                   {/* <div className="dropdown col leaderboardDropdown">
 
@@ -405,15 +408,10 @@ function LeaderBoard() {
                     </select>
 
                   </div> */}
-                  {console.log("ddddddddddd", topBuyers)}
                 </div>
 
                 <div className="leaderboardTopDetails">
                   {limitBuyers.map((curElem) => {
-                    {
-                      console.log('jjjjjjjjjjjjjjjj', curElem.buyer)
-                    }
-
                     const {
                       cdnUrl,
                       firstName,
@@ -432,52 +430,66 @@ function LeaderBoard() {
                     return (
                       <>
                         <div className="leaderboardTopDetailsRow">
-                          {buyer?.photo?.compressedURL?.length === 0 || !buyer?.photo || !buyer?.photo?.cdnUrl?.length===0? (
-                            <img
-                              className="top-img"
-                              style={{ width: '52px', height: '52px' }}
-                              src={NoProfile}
-                              alt=""
-                            />
+                          {buyer?.photo?.compressedURL?.length === 0 || !buyer?.photo || !buyer?.photo?.cdnUrl?.length === 0 ? (
+
+                            loader ? <Skeleton width="52px" height="52px" circle={true} /> :
+                              <img
+                                className="top-img"
+                                style={{ width: '52px', height: '52px' }}
+                                src={NoProfile}
+                                alt=""
+                              />
+
                           ) : (
-                            <img
-                              className="top-img"
-                              style={{ width: '52px', height: '52px' }}
-                              src={buyer?.photo?.compressedURL? buyer?.photo?.compressedURL : buyer?.photo}
-                              alt=""
-                            />
+                            loader ? <Skeleton width="52px" height="52px" circle={true} /> :
+                              <img
+                                className="top-img"
+                                style={{ width: '52px', height: '52px' }}
+                                src={buyer?.photo?.compressedURL ? buyer?.photo?.compressedURL : buyer?.photo}
+                                alt=""
+                              />
                           )}
 
                           <div className="descriptiontopSeller">
                             {buyer.userName == '' ? (
                               <h2 className="sellerName">
                                 {' '}
-                                <Link
-                                  style={{ textDecoration: 'null' }}
-                                  to={'/user-profile/' + buyer._id}
-                                >
-                                  {buyer.wallet_address.substring(0, 4)}...
-                                  {buyer.wallet_address.slice(
-                                    buyer.wallet_address.length - 4,
-                                  )}
-                                </Link>
+                                {
+                                  loader ? <Skeleton width="100px" /> :
+                                    <Link
+                                      style={{ textDecoration: 'null' }}
+                                      to={'/user-profile/' + buyer._id}
+                                    >
+                                      {buyer.wallet_address.substring(0, 4)}...
+                                      {buyer.wallet_address.slice(
+                                        buyer.wallet_address.length - 4,
+                                      )}
+                                    </Link>
+                                }
                               </h2>
                             ) : (
                               <h2 className="sellerName">
                                 {' '}
-                                <Link
-                                  style={{ textDecoration: 'null' }}
-                                  to={'/user-profile/' + buyer._id}
-                                  onMouseOver={(e)=>handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
-                                  onMouseOut={(e)=>handleLoadOutText(e, '#191919')}
-                                >
-                                  {buyer?.userName}
-                                </Link>{' '}
+                                {
+                                  loader ? <Skeleton width="100px" /> :
+                                    <Link
+                                      style={{ textDecoration: 'null' }}
+                                      to={'/user-profile/' + buyer._id}
+                                      onMouseOver={(e) => handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
+                                      onMouseOut={(e) => handleLoadOutText(e, '#191919')}
+                                    >
+                                      {buyer?.userName}
+                                    </Link>
+                                }
+                                {' '}
                               </h2>
                             )}
 
-                            <p className="volumeData" style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}}>
-                              {result} ETH
+                            <p className="volumeData" style={{ color: `${fetchPalletsColor(appearance.colorPalette)}` }}>
+                              {
+                                loader ? <Skeleton width="60px" /> : `${result} ETH`
+                              }
+                              {/* {result} ETH */}
                               {/* <span className="ethValue">({"$"})</span> */}
                             </p>
                           </div>
@@ -502,11 +514,13 @@ function LeaderBoard() {
 
               <div className="card-footer view-more">
                 <Link className="view" to="/top-bidder"
-                onMouseOver={(e)=>handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
-                onMouseOut={(e)=>handleLoadOutText(e, '#191919')}
+                  onMouseOver={(e) => handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
+                  onMouseOut={(e) => handleLoadOutText(e, '#191919')}
                 >
                   {' '}
-                  View More
+                  {
+                    loader ? <Skeleton width={'100px'} /> : 'View More'
+                  }
                 </Link>
               </div>
             </div>
@@ -517,7 +531,9 @@ function LeaderBoard() {
               <div className="card-body p-0">
                 <div className="leaderboardTitle">
                   <div className="col" style={{ fontSize: '16px' }}>
-                    Top Sellers
+                    {
+                      loader ? <Skeleton width="120px" height="30px" /> : 'Top Sellers'
+                    }
                   </div>
 
                   {/* <select className="top-dropdown" name="duration" onChange={(e) => ChangeSellerDuration(e)}>
@@ -531,17 +547,20 @@ function LeaderBoard() {
                     <option value="yearly">Yearly</option>
 
                   </select> */}
-                  <CustomSelect
-                    name="duration"
-                    onChange={(e) => ChangeSellerDuration(e)}
-                    value={sellerDuration.duration}
-                    defaultValue="all"
-                  >
-                    <StyledOption value="all">All</StyledOption>
-                    <StyledOption value="weekly">Weekly</StyledOption>
-                    <StyledOption value="monthly">Monthly</StyledOption>
-                    <StyledOption value="yearly">Yearly</StyledOption>
-                  </CustomSelect>
+                  {
+                    loader ? <Skeleton width="120px" height="43px" /> :
+                      <CustomSelect
+                        name="duration"
+                        onChange={(e) => ChangeSellerDuration(e)}
+                        value={sellerDuration.duration}
+                        defaultValue="all"
+                      >
+                        <StyledOption value="all">All</StyledOption>
+                        <StyledOption value="weekly">Weekly</StyledOption>
+                        <StyledOption value="monthly">Monthly</StyledOption>
+                        <StyledOption value="yearly">Yearly</StyledOption>
+                      </CustomSelect>
+                  }
 
                   {/* <div className="dropdown col leaderboardDropdown">
 
@@ -628,45 +647,56 @@ function LeaderBoard() {
                       <>
                         <div className="leaderboardTopDetailsRow">
                           {topSellers.photo == '' || !topSellers.photo ? (
-                            <img
-                              className="top-img"
-                              style={{ width: '52px', height: '52px' }}
-                              src={NoProfile}
-                              alt=""
-                            />
+                            loader ? <Skeleton width="52px" height="52px" circle={true} /> :
+                              <img
+                                className="top-img"
+                                style={{ width: '52px', height: '52px' }}
+                                src={NoProfile}
+                                alt=""
+                              />
                           ) : (
-                            <img
-                              className="top-img"
-                              style={{ width: '52px', height: '52px' }}
-                              src={topSellers?.photo?.compressedURL ? topSellers.photo.compressedURL : topSellers?.photo}
-                              alt=""
-                            />
+                            loader ? <Skeleton width="52px" height="52px" circle={true} /> :
+                              <img
+                                className="top-img"
+                                style={{ width: '52px', height: '52px' }}
+                                src={topSellers?.photo?.compressedURL ? topSellers.photo.compressedURL : topSellers?.photo}
+                                alt=""
+                              />
                           )}
 
                           <div className="descriptiontopSeller">
                             {topSellers.userName == '' ? (
                               <h2 className="sellerName">
                                 {' '}
-                                <Link to={'/user-profile/' + topSellers._id}>
-                                  {topSellers.wallet_address.substring(0, 4)}...
-                                  {topSellers.wallet_address.slice(
-                                    topSellers.wallet_address.length - 4,
-                                  )}
-                                </Link>
+                                {
+                                  loader ? <Skeleton width="100px" /> :
+                                    <Link to={'/user-profile/' + topSellers._id}>
+                                      {topSellers.wallet_address.substring(0, 4)}...
+                                      {topSellers.wallet_address.slice(
+                                        topSellers.wallet_address.length - 4,
+                                      )}
+                                    </Link>
+                                }
                               </h2>
                             ) : (
                               <h2 className="sellerName">
-                                <Link to={'/user-profile/' + topSellers._id}
-                                  onMouseOver={(e)=>handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
-                                  onMouseOut={(e)=>handleLoadOutText(e, '#191919')}
-                                >
-                                  {topSellers.userName}
-                                </Link>
+                                {
+                                  loader ? <Skeleton width="80px" /> :
+                                    <Link to={'/user-profile/' + topSellers._id}
+                                      onMouseOver={(e) => handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
+                                      onMouseOut={(e) => handleLoadOutText(e, '#191919')}
+                                    >
+                                      {topSellers.userName}
+                                    </Link>
+                                }
                               </h2>
                             )}
 
-                            <p className="volumeData" style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}}>
-                              {result} ETH
+                            <p className="volumeData" style={{ color: `${fetchPalletsColor(appearance.colorPalette)}` }}>
+                              {
+                                loader ? <Skeleton width="80px" /> : `${result} ETH`
+                              }
+                              {/* {result} ETH */}
                               {/* <span className="ethValue">({"$"})</span> */}
                             </p>
                           </div>
@@ -691,11 +721,13 @@ function LeaderBoard() {
 
               <div className="card-footer view-more">
                 <Link className="view" to="/top-seller"
-                onMouseOver={(e)=>handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
-                onMouseOut={(e)=>handleLoadOutText(e, '#191919')}
+                  onMouseOver={(e) => handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
+                  onMouseOut={(e) => handleLoadOutText(e, '#191919')}
                 >
                   {' '}
-                  View More
+                  {
+                    loader ? <Skeleton width="100px" /> : 'View More'
+                  }
                 </Link>
               </div>
             </div>
@@ -706,7 +738,9 @@ function LeaderBoard() {
               <div className="card-body p-0">
                 <div className="leaderboardTitle">
                   <div className="col" style={{ fontSize: '16px' }}>
-                    Top Collections
+                    {
+                      loader ? <Skeleton width="120px" height="30px" /> : 'Top Collections'
+                    }
                   </div>
 
                   {/* <select className="top-dropdown" name="duration" onChange={(e) => ChangeCollectionDuration(e)}>
@@ -720,17 +754,20 @@ function LeaderBoard() {
                     <option value='yearly'>Yearly</option>
 
                   </select> */}
-                  <CustomSelect
-                    name="duration"
-                    onChange={(e) => ChangeCollectionDuration(e)}
-                    value={collectionDuration.duration}
-                    defaultValue="all"
-                  >
-                    <StyledOption value="all">All</StyledOption>
-                    <StyledOption value="weekly">Weekly</StyledOption>
-                    <StyledOption value="monthly">Monthly</StyledOption>
-                    <StyledOption value="yearly">Yearly</StyledOption>
-                  </CustomSelect>
+                  {
+                    loader ? <Skeleton width="120px" height="43px" /> :
+                      <CustomSelect
+                        name="duration"
+                        onChange={(e) => ChangeCollectionDuration(e)}
+                        value={collectionDuration.duration}
+                        defaultValue="all"
+                      >
+                        <StyledOption value="all">All</StyledOption>
+                        <StyledOption value="weekly">Weekly</StyledOption>
+                        <StyledOption value="monthly">Monthly</StyledOption>
+                        <StyledOption value="yearly">Yearly</StyledOption>
+                      </CustomSelect>
+                  }
 
                   {/* <div className="dropdown col leaderboardDropdown">
 
@@ -807,58 +844,68 @@ function LeaderBoard() {
                         <div className="leaderboardTopDetailsRow">
                           {collection[0].imageUrl == '' ||
                             !collection[0].imageUrl ? (
-                            <img
-                              className="top-img"
-                              style={{ width: '52px', height: '52px' }}
-                              src={NoProfile}
-                              alt=""
-                            />
+                            loader ? <Skeleton width="52px" height="52px" circle={true} /> :
+                              <img
+                                className="top-img"
+                                style={{ width: '52px', height: '52px' }}
+                                src={NoProfile}
+                                alt=""
+                              />
                           ) : (
-                            <img
-                              className="top-img"
-                              style={{ width: '52px', height: '52px' }}
-                              src={collection[0].imageUrl}
-                              alt=""
-                            />
+                            loader ? <Skeleton width="52px" height="52px" circle={true} /> :
+                              <img
+                                className="top-img"
+                                style={{ width: '52px', height: '52px' }}
+                                src={collection[0].imageUrl}
+                                alt=""
+                              />
                           )}
 
                           <div className="descriptiontopSeller">
                             {collection[0].name == '' || !collection[0].name ? (
                               <h2 className="sellerName">
                                 {' '}
-                                <Link
-                                  style={{ textDecoration: 'null' }}
-                                  to={
-                                    '/collection-details/' + collection[0]._id
-                                  }
-                                >
-                                  {collection[0].contractAddress.substring(
-                                    0,
-                                    4,
-                                  )}
-                                  ...
-                                  {collection[0].contractAddress.slice(
-                                    collection[0].contractAddress.length - 4,
-                                  )}
-                                </Link>
+                                {
+                                  loader ? <Skeleton width="100px" /> :
+                                    <Link
+                                      style={{ textDecoration: 'null' }}
+                                      to={
+                                        '/collection-details/' + collection[0]._id
+                                      }
+                                    >
+                                      {collection[0].contractAddress.substring(
+                                        0,
+                                        4,
+                                      )}
+                                      ...
+                                      {collection[0].contractAddress.slice(
+                                        collection[0].contractAddress.length - 4,
+                                      )}
+                                    </Link>
+                                }
                               </h2>
                             ) : (
                               <h2 className="sellerName">
-                                <Link
-                                  style={{ textDecoration: 'null' }}
-                                  to={
-                                    '/collection-details/' + collection[0]._id
-                                  }
-                                  onMouseOver={(e)=>handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
-                                  onMouseOut={(e)=>handleLoadOutText(e, '#191919')}
-                                >
-                                  {collection[0].name}
-                                </Link>
+                                {
+                                  loader ? <Skeleton width={`100px`} /> : <Link
+                                    style={{ textDecoration: 'null' }}
+                                    to={
+                                      '/collection-details/' + collection[0]._id
+                                    }
+                                    onMouseOver={(e) => handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
+                                    onMouseOut={(e) => handleLoadOutText(e, '#191919')}
+                                  >
+                                    {collection[0].name}
+                                  </Link>
+                                }
                               </h2>
                             )}
 
-                            <p className="volumeData" style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}}>
-                              {items} items
+                            <p className="volumeData" style={{ color: `${fetchPalletsColor(appearance.colorPalette)}` }}>
+                              {
+                                loader ? <Skeleton width="80px" /> : `${items} items`
+                              }
+                              {/* {items} items */}
                               {/* <span className="ethValue">({"$"})</span> */}
                             </p>
                           </div>
@@ -883,11 +930,13 @@ function LeaderBoard() {
 
               <div className="card-footer view-more">
                 <Link className="view" to="/top-collection"
-                onMouseOver={(e)=>handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
-                onMouseOut={(e)=>handleLoadOutText(e, '#191919')}
+                  onMouseOver={(e) => handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
+                  onMouseOut={(e) => handleLoadOutText(e, '#191919')}
                 >
                   {' '}
-                  View More
+                  {
+                    loader ? <Skeleton width="100px" /> : 'View More'
+                  }
                 </Link>
               </div>
             </div>
@@ -916,7 +965,9 @@ function LeaderBoard() {
               }}
             >
               <li className="nav-item">
-                <a
+                {
+                  loader ? <Skeleton width="50px" /> :
+                  <a
                   className="nav-link active"
                   id="pills-pending-tab"
                   data-toggle="pill"
@@ -937,6 +988,7 @@ function LeaderBoard() {
                     }}
                   />
                 </a>
+                }
               </li>
 
               <li className="nav-item">
@@ -1004,7 +1056,7 @@ function LeaderBoard() {
             <option value='yearly'>Yearly</option>
 
           </select> */}
-          
+
           <div className='clearfix'></div>
           <div
             className="small-leaderboard-body"
@@ -1012,21 +1064,21 @@ function LeaderBoard() {
           >
             <div>
               {PendingAcceptedCreated === 'pending' ? (
-              <>
-                <CustomSelect
-                  name="duration"
-                  onChange={(e) => ChangeBuyerDuration(e)}
-                  value={buyerDuration.duration}
-                  defaultValue="all"
-                  className="mobFilterButton"
-                >
-                  <StyledOption value="all">All</StyledOption>
-                  <StyledOption value="weekly">Weekly</StyledOption>
-                  <StyledOption value="monthly">Monthly</StyledOption>
-                  <StyledOption value="yearly">Yearly</StyledOption>
-                </CustomSelect>
-                <BuildPendingAcceptedRejectedBlock apiData={limitBuyers} isloading ={isloadingForBuyers}  />
-              </>
+                <>
+                  <CustomSelect
+                    name="duration"
+                    onChange={(e) => ChangeBuyerDuration(e)}
+                    value={buyerDuration.duration}
+                    defaultValue="all"
+                    className="mobFilterButton"
+                  >
+                    <StyledOption value="all">All</StyledOption>
+                    <StyledOption value="weekly">Weekly</StyledOption>
+                    <StyledOption value="monthly">Monthly</StyledOption>
+                    <StyledOption value="yearly">Yearly</StyledOption>
+                  </CustomSelect>
+                  <BuildPendingAcceptedRejectedBlock apiData={limitBuyers} isloading={isloadingForBuyers} />
+                </>
               ) : (
                 <></>
               )}
@@ -1047,7 +1099,7 @@ function LeaderBoard() {
                     <StyledOption value="monthly">Monthly</StyledOption>
                     <StyledOption value="yearly">Yearly</StyledOption>
                   </CustomSelect>
-                  <BuildAcceptedBlock apiData={limitSellers} isloading ={isloadingForSeller} />
+                  <BuildAcceptedBlock apiData={limitSellers} isloading={isloadingForSeller} />
                 </>
               ) : (
                 <></>
@@ -1069,7 +1121,7 @@ function LeaderBoard() {
                     <StyledOption value="monthly">Monthly</StyledOption>
                     <StyledOption value="yearly">Yearly</StyledOption>
                   </CustomSelect>
-                  <BuildRejectedBlock apiData={limitCollections} isloading ={isloadingForCollection} />
+                  <BuildRejectedBlock apiData={limitCollections} isloading={isloadingForCollection} />
                 </>
               ) : (
                 <></>
@@ -1085,7 +1137,9 @@ function LeaderBoard() {
             for="topNft-sales"
             className="fs-20 fw-sb c-b pb-16 d-sm-block d-md-none"
           >
-            Top NFT Sales
+            {
+              loader ? <Skeleton width="200px" height="45px" /> : 'Top NFT Sales'
+            }
           </label>
 
           <div className="d-flex align-items-center">
@@ -1093,7 +1147,9 @@ function LeaderBoard() {
               for="topNft-sales"
               className="fs-20 fw-sb c-b pr-12 d-none d-sm-none d-md-block"
             >
-              Top NFT Sales
+              {
+                loader ? <Skeleton width="200px" height="45px" /> : 'Top NFT Sales'
+              }
             </label>
 
             {/* <select id="topNft-sales" className="sales-selector fs-14 fw-m" onChange={(e) => ChangeNFTDuration(e)} name="duration">
@@ -1107,17 +1163,20 @@ function LeaderBoard() {
               <option value="yearly">yearly</option>
 
             </select> */}
-            <CustomSelect
-              name="duration"
-              onChange={(e) => ChangeNFTDuration(e)}
-              value={NFTDuration.duration}
-              defaultValue="all"
-            >
-              <StyledOption value="all">All</StyledOption>
-              <StyledOption value="weekly">Weekly</StyledOption>
-              <StyledOption value="monthly">Monthly</StyledOption>
-              <StyledOption value="yearly">Yearly</StyledOption>
-            </CustomSelect>
+            {
+              loader ? <Skeleton width="120px" height="43px" /> :
+                <CustomSelect
+                  name="duration"
+                  onChange={(e) => ChangeNFTDuration(e)}
+                  value={NFTDuration.duration}
+                  defaultValue="all"
+                >
+                  <StyledOption value="all">All</StyledOption>
+                  <StyledOption value="weekly">Weekly</StyledOption>
+                  <StyledOption value="monthly">Monthly</StyledOption>
+                  <StyledOption value="yearly">Yearly</StyledOption>
+                </CustomSelect>
+            }
           </div>
         </div>
 
@@ -1125,9 +1184,8 @@ function LeaderBoard() {
           {/* <div className="col-md-3 col-lg-3 col-sm-6 col-11 images"> */}
 
           {topNftSales.map((curElem) => {
-            console.log("kggggggggggggggggggg", curElem)
 
-            const { cdnUrl, name, owner, maxPrice2, daysLeft, likes, _id, content} = curElem
+            const { cdnUrl, name, owner, maxPrice2, daysLeft, likes, _id, content } = curElem
 
 
             const route = '/nft-information/' + _id
@@ -1136,104 +1194,116 @@ function LeaderBoard() {
               <div className="nftCard col-md-6 col-lg-3 col-sm-12 nft_card card-mar">
                 <div className="card nft-card-radius border-radius cardmob">
                   <Link to={route} style={{ textDecoration: 'none' }}>
-                    <img
+                    {
+                      loader ? <Skeleton width="100%" height="187px" /> : 
+                      <img
                       // id="nft__photo"
-
                       className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
                       src={content?.compressedURL}
                       alt="nft"
                       onError="this.onerror=null;this.src='/images/image.svg';"
                     />
-              
+                    }
 
-                  {/* <img id='like_icon' src={require('../asset//images/')} /> */}
+                    {/* <img id='like_icon' src={require('../asset//images/')} /> */}
 
-                  <div
-                    className="nftTileEachDetails card-lower"
-                    style={{
-                      padding: '0px 14px 0px 12px',
-                    }}
-                  >
-                    <div className="tile__details">
-                      <div
-                        className="container__up"
-                        style={{ paddingTop: '4px' }}
-                      >
-                        <h6 className="sellerName1">
-                          <Link style={{ textDecoration: 'null' }} to={route}>
-                            {content.name}
-                          </Link>
-                        </h6>
-                      </div>
-
-                      <div className="container__down">
-                        <h6
-                          className="value__high"
-                          style={{ margin: 'inherit' }}
-                        >
-                          Sold to&nbsp;
-                          <span className="namesold">
-                            {/* {buyer.wallet_address.slice(buyer.wallet_address.length - 4)} */}
-
-                            {String(owner[0].wallet_address).length >= 7
-                              ? !owner[0].wallet_address
-                                ? ' '
-                                : String(owner[0].wallet_address).substring(
-                                  0,
-                                  4,
-                                ) +
-                                '...' +
-                                String(owner[0].wallet_address).slice(
-                                  String(owner[0].wallet_address).length - 4,
-                                )
-                              : String(owner[0].wallet_address) === undefined
-                                ? ''
-                                : owner[0].wallet_address}
-                          </span>
-                          &nbsp;for
-                          <span className="ethCurrency" style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}}>
-                            &nbsp; {content.salesInfo.price}&nbsp;
-                            {content.salesInfo.currency.toUpperCase()}
-                          </span>
-                        </h6>
-
+                    <div
+                      className="nftTileEachDetails card-lower"
+                      style={{
+                        padding: '0px 14px 0px 12px',
+                      }}
+                    >
+                      <div className="tile__details">
                         <div
-                          style={{
-                            display: 'flex',
-                            height: 'auto',
-                            marginTop: '3px',
-                          }}
+                          className="container__up"
+                          style={{ paddingTop: '4px' }}
                         >
-                          <h6 className="value__k" style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}}>
-                            {/* {daysLeft}{" "} */}
-
-                            {likes.length}{" "}
-
-                            {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
+                          <h6 className="sellerName1">
+                            {
+                              loader ? <Skeleton width="100px" /> :
+                                <Link style={{ textDecoration: 'null' }} to={route}>
+                                  {content.name}
+                                </Link>
+                            }
                           </h6>
+                        </div>
+
+                        <div className="container__down">
+                          {
+                            loader ? <Skeleton count={2} width="130px" /> :
+                              <h6
+                                className="value__high"
+                                style={{ margin: 'inherit' }}
+                              >
+                                Sold to&nbsp;
+                                <span className="namesold">
+                                  {/* {buyer.wallet_address.slice(buyer.wallet_address.length - 4)} */}
+
+                                  {String(owner[0].wallet_address).length >= 7
+                                    ? !owner[0].wallet_address
+                                      ? ' '
+                                      : String(owner[0].wallet_address).substring(
+                                        0,
+                                        4,
+                                      ) +
+                                      '...' +
+                                      String(owner[0].wallet_address).slice(
+                                        String(owner[0].wallet_address).length - 4,
+                                      )
+                                    : String(owner[0].wallet_address) === undefined
+                                      ? ''
+                                      : owner[0].wallet_address}
+                                </span>
+                                &nbsp;for
+                                <span className="ethCurrency" style={{ color: `${fetchPalletsColor(appearance.colorPalette)}` }}>
+                                  &nbsp; {content.salesInfo.price}&nbsp;
+                                  {content.salesInfo.currency.toUpperCase()}
+                                </span>
+                              </h6>
+                          }
 
                           <div
                             style={{
-                              background: '#FFFFFF 0% 0% no-repeat padding-box',
-                              border: '1px solid #FFFFFF',
-                              borderRadius: '22px',
-                              width: '19px',
-                              height: '19px',
                               display: 'flex',
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                              marginLeft: '8.38px',
+                              height: 'auto',
+                              marginTop: '3px',
                             }}
                           >
-                            <i
-                              className="fa-solid fa-heart"
-                              style={{ color: '#ef3643' }}
-                            ></i>
+                            {
+                              loader ? <Skeleton width="20px" /> :
+                                <h6 className="value__k" style={{ color: `${fetchPalletsColor(appearance.colorPalette)}` }}>
+                                  {/* {daysLeft}{" "} */}
+
+                                  {likes.length}{" "}
+
+                                  {/* <i className="far fa-clock" style={{ color: "#f54" }}></i> */}
+                                </h6>
+                            }
+
+                            <div
+                              style={{
+                                background: '#FFFFFF 0% 0% no-repeat padding-box',
+                                border: '1px solid #FFFFFF',
+                                borderRadius: '22px',
+                                width: '19px',
+                                height: '19px',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                marginLeft: '8.38px',
+                              }}
+                            >
+                              {
+                                loader ? <Skeleton width="20px" /> : <i
+                                  className="fa-solid fa-heart"
+                                  style={{ color: '#ef3643' }}
+                                ></i>
+                              }
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
                   </Link>
                 </div>
               </div>
@@ -1246,7 +1316,7 @@ function LeaderBoard() {
           {isloadingForNfts ? <Spinner /> :
             (topNftSales.length === 0 && (
               <div className="Noitemdiv">
-                <img  className="no-image" src={NoItem} />
+                <img className="no-image" src={NoItem} />
                 <p className="textitem">No items available</p>
               </div>
             ))}
@@ -1260,7 +1330,7 @@ function LeaderBoard() {
   )
 }
 
-const BuildPendingAcceptedRejectedBlock = ({ apiData ,isloading}) => {
+const BuildPendingAcceptedRejectedBlock = ({ apiData, isloading }) => {
   console.log("ppppppppppppppppppp", isloading)
   return (
     <div>
@@ -1291,7 +1361,7 @@ const BuildPendingAcceptedRejectedBlock = ({ apiData ,isloading}) => {
                   <img
                     className="top-img"
                     style={{ width: '52px', height: '52px' }}
-                    src={buyer?.photo?.compressedURL ? buyer?.photo?.compressedURL :buyer?.photo}
+                    src={buyer?.photo?.compressedURL ? buyer?.photo?.compressedURL : buyer?.photo}
                     alt=""
                   />
                 )}
@@ -1356,7 +1426,7 @@ const BuildPendingAcceptedRejectedBlock = ({ apiData ,isloading}) => {
   )
 }
 
-const BuildAcceptedBlock = ({ apiData , isloading }) => {
+const BuildAcceptedBlock = ({ apiData, isloading }) => {
   return (
     <div>
       <div className="leaderboardTopDetails">
@@ -1446,7 +1516,7 @@ const BuildAcceptedBlock = ({ apiData , isloading }) => {
   )
 }
 
-const BuildRejectedBlock = ({ apiData ,isloading}) => {
+const BuildRejectedBlock = ({ apiData, isloading }) => {
   return (
     <div>
       <div className="leaderboardTopDetails">

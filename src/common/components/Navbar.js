@@ -776,7 +776,7 @@ function Navbar({ loader }) {
                     onMouseOut={handleMouseOut}
                     onMouseOver={handleMouseOver}
                     style={
-                      activeResource.includes(location.pathname) ? navLink : {}
+                      activeResource.includes(location.pathname) && loader ===false ? navLink : {}
                     }
                   >
                     <NavDropdown.Item onClick={() => navigate("/help-center")}>

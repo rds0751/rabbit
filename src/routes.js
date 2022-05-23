@@ -131,7 +131,7 @@ function App() {
         {/* <Switch> */}
         <Routes>
           <Route path="/FAQs" element={<FAQsPage />} />
-          <Route exact path="/nfts" element={<NftPage />} />
+          <Route exact path="/nfts" element={<NftPage loaderState={loader} />} />
           <Route path="/" element={<Home loaderState={loader} />} />
 
           {/* <Route
@@ -161,8 +161,8 @@ function App() {
             path="/nft-information_Offer_1"
             element={<NftInformationOffer1 />}
           />
-          <Route exact path="/help-center" element={<HelpCenter />} />
-          <Route exact path="/suggestion" element={<Suggestion />} />
+          <Route exact path="/help-center" element={<HelpCenter loader={loader} />} />
+          <Route exact path="/suggestion" element={<Suggestion loader={loader} />} />
           <Route exact path="/selling" element={<SellPage />} />
           <Route exact path="/resource-collection" element={<CollectionPage />} />
           <Route exact path="/adding-nfts" element={<NftsPage />} />
@@ -171,7 +171,7 @@ function App() {
           <Route exact path="/top-bidder" element={<TopBidders />} />
           <Route exact path="/top-seller" element={<TopSeller />} />
           {/* ----------- */}
-          <Route exact path="/leader-board" element={<LeaderBoard />} />
+          <Route exact path="/leader-board" element={<LeaderBoard loader={loader} />} />
           <Route exact path="/buying" element={<BuyPage />} />
           <Route exact path="/my-items" element={<MyItems />} />
           <Route
@@ -181,7 +181,7 @@ function App() {
           />
           <Route exact path="/create" element={<Create />} />
           <Route exact path="/notification" element={<Notification />} />
-          <Route exact path="/create-nft" element={<CreateNFT />} />
+          <Route exact path="/create-nft" element={<CreateNFT loader={loader} />} />
           <Route
             exact
             path="/collection-details/:id"
@@ -192,7 +192,7 @@ function App() {
           <Route
             exact
             path="/collections-tile"
-            element={<CollectionCards />}
+            element={<CollectionCards loader={loader} />}
           />
           <Route
             exact
