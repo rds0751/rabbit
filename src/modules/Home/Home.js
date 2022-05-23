@@ -24,6 +24,7 @@ import Binance from "../../assets/images/binance.svg";
 // import Card from '@mui/material/Card';
 import Avatar from "@mui/material/Avatar";
 // import Button from '@mui/material/Button'
+import { ShimmerThumbnail } from "react-shimmer-effects";
 import {
   getNfts,
   addLikeNft,
@@ -45,7 +46,6 @@ function Home({ loaderState }) {
 
   const { user, sideBar } = useSelector((state) => state);
   const { userDetails, loggedInUser, walletAddress } = user;
-  const [coverImage, setCoverImage] = useState(defaultCover)
   const [nfts, setNfts] = useState([]);
   const navigate = useNavigate();
 
@@ -436,18 +436,54 @@ function Home({ loaderState }) {
                                             <div className="flex-shrink-0">
                                               {
                                                 loader ? <Skeleton circle="true" width="38px" height="38px" /> :
-                                                  <img
-                                                    src={nft.hasOwnProperty('creator') ? nft.creator.hasOwnProperty('compressedURL') ? nft?.creator?.compressedURL !== "" ? nft?.creator?.compressedURL : userDefault : userDefault : userDefault}
-                                                    width="38px"
-                                                    height="38px"
-                                                    className="profile-img"
-                                                    onMouseDown={(e) =>
-                                                      e.preventDefault()
-                                                    }
-                                                    onContextMenu={(e) =>
-                                                      e.preventDefault()
-                                                    }
-                                                  />
+                                                  nft?.fileExtension?.includes("audio") ? (
+                                                    <img
+                                                      src={nft.hasOwnProperty('creator') ? nft.creator.hasOwnProperty('compressedURL') ? nft?.creator?.compressedURL !== "" ? nft?.creator?.compressedURL : userDefault : userDefault : userDefault}
+                                                      width="38px"
+                                                      height="38px"
+                                                      className="profile-img"
+                                                      onMouseDown={(e) =>
+                                                        e.preventDefault()
+                                                      }
+                                                      onContextMenu={(e) =>
+                                                        e.preventDefault()
+                                                      }
+                                                    />
+
+                                                  ) : (
+                                                    nft?.fileExtension?.includes("video") ? (
+                                                      <img
+                                                        src={nft.hasOwnProperty('creator') ? nft.creator.hasOwnProperty('compressedURL') ? nft?.creator?.compressedURL !== "" ? nft?.creator?.compressedURL : userDefault : userDefault : userDefault}
+                                                        width="38px"
+                                                        height="38px"
+                                                        className="profile-img"
+                                                        onMouseDown={(e) =>
+                                                          e.preventDefault()
+                                                        }
+                                                        onContextMenu={(e) =>
+                                                          e.preventDefault()
+                                                        }
+                                                      />
+
+                                                    ) : (
+                                                      <img
+                                                        src={nft.hasOwnProperty('creator') ? nft.creator.hasOwnProperty('compressedURL') ? nft?.creator?.compressedURL !== "" ? nft?.creator?.compressedURL : userDefault : userDefault : userDefault}
+                                                        width="38px"
+                                                        height="38px"
+                                                        className="profile-img"
+                                                        onMouseDown={(e) =>
+                                                          e.preventDefault()
+                                                        }
+                                                        onContextMenu={(e) =>
+                                                          e.preventDefault()
+                                                        }
+                                                      />
+
+                                                    )
+
+
+                                                  )
+
                                               }
                                             </div>
                                             <div className="flex-grow-1 ms-2 card1">
@@ -888,7 +924,7 @@ function Home({ loaderState }) {
 
               <div className="d-flex align-items-center justify-content-left media card-home-page">
                 {
-                  loader ? <Skeleton className="margin-svg" width="60px" height="60px" /> :
+                  loader ? <Skeleton className="margin-svg" width={"60px"} height={'60px'} /> :
                     <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
                       <g id="Blockchain" transform="translate(-1302 -2368)">
                         <rect id="Rectangle_997" data-name="Rectangle 997" width="60" height="60" transform="translate(1302 2368)" fill="#fff" />

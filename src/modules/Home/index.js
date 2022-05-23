@@ -448,7 +448,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
 
                     BuyNowNft={this.BuyNowNft}
                     refreshPage={this.state.refreshPage}
-
+                    getNftDetail={this.getNftDetail}
                     sellNowNft={this.sellNowNft}
                     removeNftFromSale={this.removeNftFromSale}
                 />

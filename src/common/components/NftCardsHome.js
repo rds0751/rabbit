@@ -21,7 +21,7 @@ function NftCardsHome({ nft, appearance, loader }) {
 
   const navigate = useNavigate();
   const { user, sideBar } = useSelector((state) => state);
-  const { _id, cdnUrl, name, biddingDetails, salesInfo, isLiked, compressedURL, blockchain, collectionName, collectionId } = nft;
+  const { _id, cdnUrl, name, biddingDetails, salesInfo, isLiked,compressedURL,previewImage, fileExtension,blockchain,collectionName,collectionId } = nft;
   const [handleLike, setHandleLike] = useState(true);
   // const currDate = new Date();
   // const endDate = biddingDetails.endDate;
@@ -105,24 +105,72 @@ function NftCardsHome({ nft, appearance, loader }) {
     <div className="nftCardEach col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
       <div className="card nft-card-radius border-radius cardmob h-100">
         <Link to={route} style={{ textDecoration: "none" }}>
-          <div className="image-container">
-            {
-              loader ? <Skeleton height={`187px`} /> :
-                <img
-                  className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
-                  src={compressedURL}
-                  alt="nft-img"
-                  onLoad={onImageLoad}
-                  onMouseDown={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()} />
-            }
+          {fileExtension?.toString().includes("audio") ? (
+            <div className="image-container">
+              {
+                loader ? <Skeleton height={`187px`} /> :
+                  <img
+                    className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
+                    src={previewImage}
+                    alt="nft-img"
+                    onLoad={onImageLoad}
+                    onMouseDown={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()} />
+              }
 
-            {!imageLoading.loaded && (
-              <div className="loaderNft ">
-                <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
+              {!imageLoading.loaded && (
+                <div className="loaderNft ">
+                  <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
+                </div>
+              )}
+
+            </div>
+          ) : (fileExtension?.toString().includes("video") ?
+
+            <div className="image-container">
+              {
+                loader ? <Skeleton height={`187px`} /> :
+                  <img
+                    className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
+                    src={previewImage}
+                    alt="nft-img"
+                    onLoad={onImageLoad}
+                    onMouseDown={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()} />
+              }
+
+              {!imageLoading.loaded && (
+                <div className="loaderNft ">
+                  <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
+                </div>
+              )}
+
+            </div>
+            : (
+
+              <div className="image-container">
+                {
+                  loader ? <Skeleton height={`187px`} /> :
+                    <img
+                      className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
+                      src={compressedURL}
+                      alt="nft-img"
+                      onLoad={onImageLoad}
+                      onMouseDown={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()} />
+                }
+
+                {!imageLoading.loaded && (
+                  <div className="loaderNft ">
+                    <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
+                  </div>
+                )}
+
               </div>
-            )}
 
-          </div>
+            )
+
+          )}
+
+
+
         </Link>
 
 

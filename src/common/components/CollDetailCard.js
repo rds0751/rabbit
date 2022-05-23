@@ -16,7 +16,7 @@ import {
 function CollDetailCard({ nft }) {
   const navigate = useNavigate();
   const { user, sideBar } = useSelector((state) => state);
-  const { _id, cdnUrl, name, biddingDetails, salesInfo,blockchain ,compressedURL} = nft;
+  const { _id, cdnUrl, name, biddingDetails, salesInfo,blockchain ,compressedURL,previewImage,fileExtension} = nft;
   const [handleLike, setHandleLike] = useState(true);
 
   const diffTime = (timestamp1, timestamp2) => {
@@ -78,19 +78,53 @@ function CollDetailCard({ nft }) {
     >
       <div className="card nft-card-radius border-radius cardmob">
         <Link to={route} style={{ textDecoration: "none" }}>
-        <div className="image-container">
-          <img
-            className="nftTileEachImage img-fluid border-radius nft-img-radius card_imgmob"
-            src={compressedURL?.length === 0 ? cdnUrl : compressedURL}
-            alt="Nft"
-            onLoad={onImageLoad}  />
-            
-        {!imageLoading.loaded && (
-            <div className="loaderNft "> 
-             <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
-              </div>
-          )}
-          </div>
+
+        {fileExtension?.toString().includes("audio") ? (
+           <div className="image-container">
+           <img
+             className="nftTileEachImage img-fluid border-radius nft-img-radius card_imgmob"
+             src={previewImage}
+             alt="Nft"
+             onLoad={onImageLoad}  />
+             
+         {!imageLoading.loaded && (
+             <div className="loaderNft "> 
+              <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
+               </div>
+           )}
+           </div>
+
+        ):( fileExtension?.toString().includes("video") ?(
+          <div className="image-container">
+           <img
+             className="nftTileEachImage img-fluid border-radius nft-img-radius card_imgmob"
+             src={previewImage}
+             alt="Nft"
+             onLoad={onImageLoad}  />
+             
+         {!imageLoading.loaded && (
+             <div className="loaderNft "> 
+              <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
+               </div>
+           )}
+           </div>
+
+        ):(<div className="image-container">
+        <img
+          className="nftTileEachImage img-fluid border-radius nft-img-radius card_imgmob"
+          src={compressedURL?.length === 0 ? cdnUrl : compressedURL}
+          alt="Nft"
+          onLoad={onImageLoad}  />
+          
+      {!imageLoading.loaded && (
+          <div className="loaderNft "> 
+           <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
+            </div>
+        )}
+        </div>)
+
+        )}
+        
         </Link>
         <img
           id="like_icon"

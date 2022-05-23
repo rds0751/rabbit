@@ -203,7 +203,10 @@ export default function NftInformation(props) {
     fetchData();
   }, [nft]);
 
-  useEffect(() => {}, [nft.cdnUrl]);
+   useEffect(() => {
+     if(id)
+     props.getNftDetail();
+   }, [id,nft.cdnUrl]);
 
   // alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
 
@@ -631,6 +634,7 @@ export default function NftInformation(props) {
                         borderRadius: "8px",
                       }}
                     />
+                    
                        <audio controls controlslist="nodownload" 
                        onMouseDown={(e) => e.preventDefault()}
                        onContextMenu={(e) => e.preventDefault()}
