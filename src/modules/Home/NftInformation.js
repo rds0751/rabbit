@@ -203,7 +203,10 @@ export default function NftInformation(props) {
     fetchData();
   }, [nft]);
 
-  //  useEffect(() => {}, [nft?.cdnUrl]);
+   useEffect(() => {
+     if(id)
+     props.getNftDetail();
+   }, [id,nft.cdnUrl]);
 
   // alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
 

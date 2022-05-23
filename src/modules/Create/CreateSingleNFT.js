@@ -100,33 +100,32 @@ function CreateSingleNFT(props) {
   const [blockchains, setBlockChains] = useState([]);
   const myRef = useRef(null);
   const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
-  const [defaultValueBlockChain,setDefaultValueBlockchain]=useState(
-    [
-      {
+  const [defaultValueBlockChain, setDefaultValueBlockchain] = useState([
+    {
       value: "ETH",
       label: (
-      <div>
-        <img src={ethereum} height="32px" alt="" /> Ethereum
-      </div>
-    ),
-  },{
-    value: "MATIC",
-    label: (
-      <div>
-        <img src={polygon} height="32px" alt="" /> Polygon
-      </div>
-    ),
-
-  },{
-    value: "BNB",
-    label: (
-      <div>
-        <img src={binance} height="32px" alt="" /> Binance
-      </div>
-      )
-
-  }
-]);
+        <div>
+          <img src={ethereum} height="32px" alt="" /> Ethereum
+        </div>
+      ),
+    },
+    {
+      value: "MATIC",
+      label: (
+        <div>
+          <img src={polygon} height="32px" alt="" /> Polygon
+        </div>
+      ),
+    },
+    {
+      value: "BNB",
+      label: (
+        <div>
+          <img src={binance} height="32px" alt="" /> Binance
+        </div>
+      ),
+    },
+  ]);
 
   useEffect(() => {
     async function fetchData() {
@@ -191,17 +190,17 @@ function CreateSingleNFT(props) {
     setCollectionData(collections);
   }, []);
   const [compressedUrl, setCompressedUrl] = useState("");
-  const [imageFile,setImageFile]=useState(false);
-  const [audioFile,setAudioFile]=useState(false);
-  const [videoFile,setVideoFile]=useState(false);
-  const [cdnPreviewUrl,setcdnPreviewUrl]=useState("")
-  const [ipfsPreviewUrl,setIpfsPreviewUrl]=useState("")
-  const [previewCompressedURL,setPreviewCompressedURl]=useState("");
-  const [extension,setExtension]=useState("");
+  const [imageFile, setImageFile] = useState(false);
+  const [audioFile, setAudioFile] = useState(false);
+  const [videoFile, setVideoFile] = useState(false);
+  const [cdnPreviewUrl, setcdnPreviewUrl] = useState("");
+  const [ipfsPreviewUrl, setIpfsPreviewUrl] = useState("");
+  const [previewCompressedURL, setPreviewCompressedURl] = useState("");
+  const [extension, setExtension] = useState("");
   // --------------------------------React Drop Zone---------------------
 
   const { getRootProps, getInputProps } = useDropzone({
-    accept:"image/*,audio/*,video/*",
+    accept: "image/*,audio/*,video/*",
     maxSize: "40485760",
     onDrop: (acceptedFiles, fileRejections) => {
       setisLoader(true);
@@ -225,28 +224,25 @@ function CreateSingleNFT(props) {
         });
       });
 
-      acceptedFiles.map((file) =>{
-        console.log(file,"<<<File");
-        if(file.type.includes("video")){
+      acceptedFiles.map((file) => {
+        console.log(file, "<<<File");
+        if (file.type.includes("video")) {
           setVideoFile(true);
           setAudioFile(false);
           setImageFile(false);
           setExtension(file.type);
-        }
-        else if(file.type.includes("audio")){
-         
+        } else if (file.type.includes("audio")) {
           setVideoFile(false);
           setAudioFile(true);
           setImageFile(false);
           setExtension(file.type);
-        }
-        else if(file.type.includes("image")){
+        } else if (file.type.includes("image")) {
           setVideoFile(false);
           setAudioFile(false);
           setImageFile(true);
           setExtension(file.type);
         }
-      })
+      });
       setSelectFile(
         acceptedFiles.map((file) =>
           Object.assign(file, {
@@ -477,15 +473,15 @@ function CreateSingleNFT(props) {
               ? selectedOption?.value
               : currencyValue(collectionBlockchain),
           description: description.current,
-          royality:royality.current,
+          royality: royality.current,
           blockchain: blockchain.current,
           createdBy: loggedInUser._id,
           collectionId: collectionId,
           collectionName: collectionName,
           contractAddress: contractAddress,
           ownerAddress: walletAddress.address,
-          previewImage:previewCompressedURL,
-          fileExtension:extension,
+          previewImage: previewCompressedURL,
+          fileExtension: extension,
         });
         setOpenMintodal(true);
       };
@@ -552,20 +548,17 @@ function CreateSingleNFT(props) {
     fileError == "" &&
     collectionError == "" &&
     !isloader;
-    console.log("SetFile",selectFile);
+  console.log("SetFile", selectFile);
 
+  useEffect(() => {
+    if (customize.permissionToUploadNft === "Only me") {
+      navigate("/");
 
-    useEffect(()=>{
-
-      if(customize.permissionToUploadNft === 'Only me'){
-        navigate("/");
-  
-        toast.warning("You are not allowed to access this location", {
-          position: toast.POSITION.TOP_RIGHT
-        });
-      }
-
-    },[customize.permissionToUploadNft])
+      toast.warning("You are not allowed to access this location", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  }, [customize.permissionToUploadNft]);
 
   return (
     <>
@@ -666,8 +659,6 @@ function CreateSingleNFT(props) {
       <div className="full-content-margin">
         <div className="create-nft-text">Create NFT</div>
 
-
-
         <div className="create-single-nft-outer">
           <div
             className="create-nft-form"
@@ -689,15 +680,12 @@ function CreateSingleNFT(props) {
 
               {/* Audio Div */}
 
-            
-
-               {/* Video Div */}
-             
-
+              {/* Video Div */}
 
               {/* -----------------------NEW DRA GAND DROP */}
 
               {!isFileSelected && (
+                <>
                 <div className="draganddropbox" {...getRootProps()}>
                   <input {...getInputProps()} />
 
@@ -808,103 +796,194 @@ function CreateSingleNFT(props) {
                     </div>
                   )}
                 </div>
-              )}
-
-               
-
-
-                {isFileSelected  && imageFile && !isloader &&(
-                  
-                    
-                <div className="draganddropbox" {...getRootProps()}>
-                  <input {...getInputProps()} />
-                   <div className="draganddropboxinnerdiv">
-                        <img
-                        src={cdnUrl != "" ? cdnUrl : Image}
-                        style={{
-                          width: "100%",
-                          // marginTop: "3em",
-                          height: "100%",
-                          color: "#366EEF",
-                          objectFit: "cover",
-                        }}
-                      />
-                </div>     
+                  <div className="draganddropboxmsg ">
+                  Supported(JPG,JPEG, PNG, GIF,MP3,Mp4) <br></br>Max size: 40 mb
                 </div>
-                
-              )}
-
-                {isFileSelected && audioFile && !isloader &&(
-                  <>
-               
-                  <div className="AudioDiv">
-             
-                  <audio controls controlslist="nodownload" 
-                   loop preload="auto"
-                    style={{width:"100%",background:"#E7E7E7 0% 0% no-repeat padding-box"}}
-                   >
-                    <source src={cdnUrl} />
-  
-                   </audio>
-  
-                  
-                  <div className="changeTextDiv"  {...getRootProps()}><p className="changeText" >    <input {...getInputProps()} />Change</p></div>
-  
-                </div>
-
-                <div className="max-width-250">
-         
-                <Bannerdrop
-                  bannerCdn={cdnPreviewUrl}
-                  setbannerCdn={setcdnPreviewUrl}
-                  bannerIpfs={ipfsPreviewUrl}
-                  setbannerIpfs={setIpfsPreviewUrl}
-                  compressedUrl={previewCompressedURL}
-                  setCompressedUrl={setPreviewCompressedURl}
-                  appearance={customize.appearance}
-                />
-              </div>
-               
-                    </>
-
-                )}
-                {isFileSelected && videoFile && !isloader &&(
-                  <>
-                  
-                  <div className="AudioDiv" style={{marginTop:"10px"}}>
-             
-                  <video  style={{width:"100%",background:"#E7E7E7 0% 0% no-repeat padding-box"}} controls>
-                  <source src={cdnUrl} type="video/mp4" />
-                  </video>
-
-                
-                <div className="changeTextDiv"  {...getRootProps()}><p className="changeText" >    <input {...getInputProps()} />Change</p></div>
-
-              </div>
-          
-
-                <div className="max-width-250">
-         
-                <Bannerdrop
-                  bannerCdn={cdnPreviewUrl}
-                  setbannerCdn={setcdnPreviewUrl}
-                  bannerIpfs={ipfsPreviewUrl}
-                  setbannerIpfs={setIpfsPreviewUrl}
-                  compressedUrl={previewCompressedURL}
-                  setCompressedUrl={setPreviewCompressedURl}
-                  appearance={customize.appearance}
-                />
-              </div>
-
                 </>
-                )}
-                
+              )}
 
-           
+              {isFileSelected && imageFile && (
+                <>
+                  {!isloader ? (
+                    <>
+                      <div className="draganddropbox" {...getRootProps()}>
+                        <input {...getInputProps()} />
+                        <div className="draganddropboxinnerdiv">
+                          <img
+                            src={cdnUrl != "" ? cdnUrl : Image}
+                            style={{
+                              width: "100%",
+                              // marginTop: "3em",
+                              height: "100%",
+                              color: "#366EEF",
+                              objectFit: "cover",
+                            }}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="draganddropboxmsg">
+                        Supported(JPG,JPEG, PNG, GIF,MP3,Mp4) <br></br>Max size: 40 mb
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                    <div className="draganddropbox">
+                      <div className="" style={{ margin: "auto 0" }}>
+                        {" "}
+                        <Oval
+                          vertical="top"
+                          horizontal="center"
+                          color="#00BFFF"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </div>
+                    <div className="draganddropboxmsg ">
+                    Supported(JPG,JPEG, PNG, GIF,,MP3,Mp4) <br></br>Max size: 40 mb
+                  </div>
+                  </>
+                  )}
+                </>
+              )}
+
+              {isFileSelected && audioFile && (
+                <>
+                  {!isloader ? (
+                    <>
+                      <div className="AudioDiv">
+                        <audio
+                          controls
+                          controlslist="nodownload"
+                          loop
+                          preload="auto"
+                          style={{
+                            width: "100%",
+                            background: "#E7E7E7 0% 0% no-repeat padding-box",
+                          }}
+                        >
+                          <source src={cdnUrl} />
+                        </audio>
+
+                        <div className="changeTextDiv" {...getRootProps()}>
+                          <p className="changeText">
+                            {" "}
+                            <input {...getInputProps()} />
+                            Change
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="draganddropboxmsg ">
+                        Supported(JPG,JPEG, PNG, GIF,,MP3,Mp4) <br></br>Max size: 40 mb
+                      </div>
+
+                      <div className="max-width-250">
+                        <Bannerdrop
+                          bannerCdn={cdnPreviewUrl}
+                          setbannerCdn={setcdnPreviewUrl}
+                          bannerIpfs={ipfsPreviewUrl}
+                          setbannerIpfs={setIpfsPreviewUrl}
+                          compressedUrl={previewCompressedURL}
+                          setCompressedUrl={setPreviewCompressedURl}
+                          appearance={customize.appearance}
+                        />
+                        <div className="draganddropboxmsg">
+                          You’ll need to provide an image (PNG, JPG, or GIF) for
+                          the card display of your item.
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                    <div className="draganddropbox">
+                      <div className="" style={{ margin: "auto 0" }}>
+                        {" "}
+                        <Oval
+                          vertical="top"
+                          horizontal="center"
+                          color="#00BFFF"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </div>
+                    <div className="draganddropboxmsg ">
+                    Supported(JPG,JPEG, PNG, GIF,,MP3,Mp4) <br></br>Max size: 40 mb
+                  </div>
+                  </>
+                  )}
+                </>
+              )}
+
+              {isFileSelected && videoFile && (
+                <>
+                  {!isloader ? (
+                    <>
+                      <div className="AudioDiv" style={{ marginTop: "10px" }}>
+                        <video
+                          style={{
+                            width: "100%",
+                            background: "#E7E7E7 0% 0% no-repeat padding-box",
+                          }}
+                          controls
+                        >
+                          <source src={cdnUrl} type="video/mp4" />
+                        </video>
+
+                        <div className="changeTextDiv" {...getRootProps()}>
+                          <p className="changeText">
+                            {" "}
+                            <input {...getInputProps()} />
+                            Change
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="draganddropboxmsg">
+                        Supported(JPG,JPEG, PNG, GIF,MP3,Mp4) <br></br>Max size: 40 mb
+                      </div>
+
+                      <div className="max-width-250">
+                        <Bannerdrop
+                          bannerCdn={cdnPreviewUrl}
+                          setbannerCdn={setcdnPreviewUrl}
+                          bannerIpfs={ipfsPreviewUrl}
+                          setbannerIpfs={setIpfsPreviewUrl}
+                          compressedUrl={previewCompressedURL}
+                          setCompressedUrl={setPreviewCompressedURl}
+                          appearance={customize.appearance}
+                        />
+                         <div className="draganddropboxmsg">
+                          You’ll need to provide an image (PNG, JPG, or GIF) for
+                          the card display of your item.
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                    <div className="draganddropbox">
+                      <div className="" style={{ margin: "auto 0" }}>
+                        {" "}
+                        <Oval
+                          vertical="top"
+                          horizontal="center"
+                          color="#00BFFF"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </div>
+                    <div className="draganddropboxmsg ">
+                    Supported(JPG,JPEG, PNG, GIF,MP3,Mp4) <br></br>Max size: 40 mb
+                  </div>
+                    </>
+                  )}
+                </>
+              )}
+
               {/* ----------------- */}
-              <div className="draganddropboxmsg">
-                Supported(JPG,JPEG, PNG, GIF) <br></br>Max size: 40 mb
-              </div>
             </div>
             <div className="single-form">
               <div className="">
@@ -960,10 +1039,10 @@ function CreateSingleNFT(props) {
                         : setCollectionError(
                             "( The NFTS in this collection can not be minted as this platform has temporarily stopped minting on Ethereum. )"
                           );
-                          setCollectionId(addressId[0]);
-                          setContractAddress(addressId[1]);
-                          setCollectionName(addressId[2]);
-                          setCollectionBlockchain(addressId[3]);
+                      setCollectionId(addressId[0]);
+                      setContractAddress(addressId[1]);
+                      setCollectionName(addressId[2]);
+                      setCollectionBlockchain(addressId[3]);
                     } else if (addressId[3] === "Polygon") {
                       checkValueOnCollection = blockchainOption.some(
                         (el) => el.value === "MATIC"
@@ -973,10 +1052,10 @@ function CreateSingleNFT(props) {
                         : setCollectionError(
                             "( The NFTS in this collection can not be minted as this platform has temporarily stopped minting on Polygon.)"
                           );
-                          setCollectionId(addressId[0]);
-                          setContractAddress(addressId[1]);
-                          setCollectionName(addressId[2]);
-                          setCollectionBlockchain(addressId[3]);
+                      setCollectionId(addressId[0]);
+                      setContractAddress(addressId[1]);
+                      setCollectionName(addressId[2]);
+                      setCollectionBlockchain(addressId[3]);
                     } else if (addressId[3] === "Binance") {
                       checkValueOnCollection = blockchainOption.some(
                         (el) => el.value === "BNB"
@@ -986,13 +1065,12 @@ function CreateSingleNFT(props) {
                         : setCollectionError(
                             "( The NFTS in this collection can not be minted as this platform has temporarily stopped minting on Binance.)"
                           );
-                          setCollectionId(addressId[0]);
-                          setContractAddress(addressId[1]);
-                          setCollectionName(addressId[2]);
-                          setCollectionBlockchain(addressId[3]);
+                      setCollectionId(addressId[0]);
+                      setContractAddress(addressId[1]);
+                      setCollectionName(addressId[2]);
+                      setCollectionBlockchain(addressId[3]);
                     }
                     if (checkValueOnCollection) {
-                     
                     }
 
                     console.log(addressId[1], "<<<BlockchainOption");
@@ -1193,8 +1271,7 @@ function CreateSingleNFT(props) {
                     if (+e.target.value > 50)
                       setRoyalityError("( Royalty can not be more than 50% )");
                     else setRoyalityError("");
-                    royality.current=e.target.value;
-
+                    royality.current = e.target.value;
                   }}
                 />
               </div>
