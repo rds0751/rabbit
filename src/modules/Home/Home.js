@@ -436,6 +436,7 @@ function Home({ loaderState }) {
                                         <div className="flex-shrink-0">
                                           {
                                             loader ? <Skeleton circle="true" width="38px" height="38px" /> :
+                                            nft?.fileExtension?.includes("audio") ? (
                                               <img
                                                 src={nft.hasOwnProperty('creator') ? nft.creator.hasOwnProperty('compressedURL') ? nft?.creator?.compressedURL !== "" ? nft?.creator?.compressedURL : userDefault : userDefault : userDefault}
                                                 width="38px"
@@ -448,6 +449,41 @@ function Home({ loaderState }) {
                                                   e.preventDefault()
                                                 }
                                               />
+
+                                            ):(
+                                              nft?.fileExtension?.includes("video") ? (
+                                                <img
+                                                src={nft.hasOwnProperty('creator') ? nft.creator.hasOwnProperty('compressedURL') ? nft?.creator?.compressedURL !== "" ? nft?.creator?.compressedURL : userDefault : userDefault : userDefault}
+                                                width="38px"
+                                                height="38px"
+                                                className="profile-img"
+                                                onMouseDown={(e) =>
+                                                  e.preventDefault()
+                                                }
+                                                onContextMenu={(e) =>
+                                                  e.preventDefault()
+                                                }
+                                              />
+
+                                              ):(
+                                                <img
+                                                src={nft.hasOwnProperty('creator') ? nft.creator.hasOwnProperty('compressedURL') ? nft?.creator?.compressedURL !== "" ? nft?.creator?.compressedURL : userDefault : userDefault : userDefault}
+                                                width="38px"
+                                                height="38px"
+                                                className="profile-img"
+                                                onMouseDown={(e) =>
+                                                  e.preventDefault()
+                                                }
+                                                onContextMenu={(e) =>
+                                                  e.preventDefault()
+                                                }
+                                              />
+
+                                              )
+
+                                             
+                                            )
+                                              
                                           }
                                         </div>
                                         <div className="flex-grow-1 ms-2 card1">

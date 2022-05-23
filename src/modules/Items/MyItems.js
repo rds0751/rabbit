@@ -120,7 +120,7 @@ function MyItems() {
 
             {ownedNft.length > 1 ?(
               ownedNft.map((curElem) => {
-                const { cdnUrl, name, _id,salesInfo,likes,compressedURL,blockchain,collectionName,collectionId} =
+                const { cdnUrl, name, _id,salesInfo,likes,compressedURL,blockchain,collectionName,collectionId,fileExtension,previewImage} =
                   curElem;
                 const route = "/nft-information/" + _id;
                 return (
@@ -128,12 +128,35 @@ function MyItems() {
                   <div className=" col-md-6 col-lg-3  col-sm-12 nft_card my-item-card p-0" >
                     <div className="card nft-card-radius border-radius cardmob">
                       <Link to={route} style={{ textDecoration: "none" }}>
+
+                      {fileExtension?.toString().includes("audio") ? (
+                            <img
+                            className="nftTileEachImage img-fluid border-radius card_imgmob"
+                            src={previewImage}
+                            alt="nft-img"
+                            style={{ height: "187px", borderTopLeftRadius: '13px', borderTopRightRadius: '13px' }}
+                          />
+
+                      ):( fileExtension?.toString().includes("video") ?(
                         <img
-                          className="nftTileEachImage img-fluid border-radius card_imgmob"
-                          src={compressedURL}
-                          alt="nft-img"
-                          style={{ height: "187px", borderTopLeftRadius: '13px', borderTopRightRadius: '13px' }}
-                        />
+                        className="nftTileEachImage img-fluid border-radius card_imgmob"
+                        src={previewImage}
+                        alt="nft-img"
+                        style={{ height: "187px", borderTopLeftRadius: '13px', borderTopRightRadius: '13px' }}
+                      />
+                      ):(
+                        <img
+                        className="nftTileEachImage img-fluid border-radius card_imgmob"
+                        src={compressedURL}
+                        alt="nft-img"
+                        style={{ height: "187px", borderTopLeftRadius: '13px', borderTopRightRadius: '13px' }}
+                      />
+                      )
+                     
+
+                      )}
+
+                       
                       </Link>
                       <div
                         className="nftTileEachDetails card-lower"
