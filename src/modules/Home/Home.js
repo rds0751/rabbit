@@ -38,6 +38,8 @@ import { fetchPalletsColor } from "../../utility/global";
 import defaultCover from "../../assets/images/bannerLoader.png"
 import Skeleton from "react-loading-skeleton";
 
+let preivewFiles = ['video/mp4', 'audio/mpeg'];
+
 function Home({ loaderState }) {
 
   const [loader, setLoader] = useState(loaderState);
@@ -245,7 +247,7 @@ function Home({ loaderState }) {
                                           loader ? <Skeleton className="remove-border" width="100%" height="273px" /> :
                                             <Card.Img
                                               variant="top"
-                                              src={nft.hasOwnProperty('compressedURL') ? nft?.compressedURL : nft.link}
+                                              src={preivewFiles.includes(nft.fileExtension) ? nft?.previewImage : nft.hasOwnProperty('compressedURL') ? nft?.compressedURL : nft.link}
                                               onLoad={onImageLoad}
                                               onMouseDown={(e) =>
                                                 e.preventDefault()
@@ -408,7 +410,7 @@ function Home({ loaderState }) {
                                               loader ? <Skeleton className="remove-border" width="100%" height="273px" /> :
                                                 <Card.Img
                                                   variant="top"
-                                                  src={nft.hasOwnProperty('compressedURL') ? nft?.compressedURL : nft.link}
+                                                  src={preivewFiles.includes(nft.fileExtension) ? nft?.previewImage : nft.hasOwnProperty('compressedURL') ? nft?.compressedURL : nft.link}
                                                   onLoad={onImageLoad}
                                                   onMouseDown={(e) =>
                                                     e.preventDefault()
