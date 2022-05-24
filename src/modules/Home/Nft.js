@@ -24,6 +24,7 @@ import PopperUnstyled from "@mui/base/PopperUnstyled";
 import { styled } from "@mui/system";
 import Select from "react-select";
 import Skeleton from "react-loading-skeleton";
+import NftCartLoader from "./NftCardLoader";
 
 const blue = {
   100: "#DAECFF",
@@ -160,6 +161,8 @@ const options = [
 
 function NftPage(props) {
   const { user } = useSelector((state) => state);
+
+  const [loader, setLoader] = useState(props.loaderState)
   const { loggedInUser } = user;
   const appearance = useSelector(state => state.customize.appearance);
   const [limit, setLimit] = useState(16)
@@ -192,10 +195,30 @@ function NftPage(props) {
         setIsLoading(true);
         if (res.success) {
           setNfts(res.responseData.nftContent);
+          setIsLoading(false);        
+        } else {
+          toast.error(res.message);
+          setIsLoading(false);        
+        }
+      });
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    setIsLoading(true);
+    setLoader(true);
+    async function fetchData() {
+      await getNFtsData(filterReq, (res) => {
+        setIsLoading(true);
+        if (res.success) {
+          setNfts(res.responseData.nftContent);
           setIsLoading(false);
+          setLoader(false);
         } else {
           toast.error(res.message);
           setIsLoading(false);
+          setLoader(false);
         }
       });
     }
@@ -381,8 +404,13 @@ function NftPage(props) {
           style={{ justifyContent: "start" }}
         >
           <div className="spinnerloader">
-            {isLoading ? (
-              <Spinner />
+            {isLoading || props.loaderState ? (            
+              <>
+                <NftCartLoader key={`nft-1`} mr={'5%'} />
+                <NftCartLoader key={`nft-2`} />
+                <NftCartLoader key={`nft-3`} />
+                <NftCartLoader key={`nft-4`} mr={0} />
+              </>
             ) : (
               nfts.length === 0 && (
                 <div className="Noitemdiv">
@@ -397,7 +425,7 @@ function NftPage(props) {
             nfts.map((nft) => {
               return (
                 <>
-                  <NftCardsHome nft={nft} appearance={appearance} loader={props.loaderState} />
+                  <NftCardsHome nft={nft} appearance={appearance} loader={loader || props.loaderState ? true : false} />
                 </>
               );
             })}

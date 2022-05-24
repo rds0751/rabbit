@@ -142,7 +142,7 @@ function App() {
           <Route
             exact
             path="/nft-information/:id"
-            element={<NftInformation />}
+            element={<NftInformation loader={loader} />}
           />
 
           {/* <Route
@@ -173,7 +173,7 @@ function App() {
           {/* ----------- */}
           <Route exact path="/leader-board" element={<LeaderBoard loader={loader} />} />
           <Route exact path="/buying" element={<BuyPage />} />
-          <Route exact path="/my-items" element={<MyItems />} />
+          <Route exact path="/my-items" element={<MyItems loader={loader} />} />
           <Route
             exact
             path="/my-items-collection"
@@ -197,19 +197,19 @@ function App() {
           <Route
             exact
             path="/create-single-nft"
-            element={<CreateSingleNFT />}
+            element={<CreateSingleNFT loader={loader} />}
           />
           <Route
             exact
             path="/create-nft-collection"
-            element={<CreateNftCollections />}
+            element={<CreateNftCollections loader={loader} />}
           />
           <Route exact path="/add-wallet" element={<Create />} />
-          <Route eaxct path="/my-profile" element={<MyProfile />} />
+          <Route eaxct path="/my-profile" element={<MyProfile loader={loader} />} />
           <Route eaxct path="/user-profile/:id" element={<UserProfilePage />} />
 
           <Route exact path="/edit-profile" element={<EditProfile />} />
-          <Route exact path="/about" element={<About />} />
+          <Route exact path="/about" element={<About loader={loader} />} />
           <Route exact path="/wallet" element={<Wallet />} />
 
           <Route

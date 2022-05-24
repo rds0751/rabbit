@@ -38,6 +38,8 @@ import Snackbar from "@mui/material/Snackbar";
 import LikedNfts from "./LikedNfts";
 import { ShimmerCircularImage, ShimmerThumbnail } from "react-shimmer-effects";
 import { fetchPalletsColor } from "../../utility/global";
+import NftCartLoader from "../Home/NftCardLoader";
+import Skeleton from "react-loading-skeleton";
 
 const CustomSnack = styled(Snackbar)`
   // @media only screen and (min-width:0px) and  (max-width:599px){
@@ -73,7 +75,7 @@ const CustomSnack = styled(Snackbar)`
   }
 `;
 
-function MyProfile() {
+function MyProfile({ loader }) {
   let { user } = useSelector((state) => state);
   const appearance = useSelector(state => state.customize.appearance)
 
@@ -117,18 +119,18 @@ function MyProfile() {
   const [checkClick, setcheckClick] = useState(false);
   const [getBalance, setGetBalance] = useState("");
   const dispatch = useDispatch();
-  const [dataCopied,setDataCopied]=useState(true);
+  const [dataCopied, setDataCopied] = useState(true);
 
   const [typeofProfilePost, setTypeofProfilePost] = useState("on-sale");
 
   useEffect(() => {
     if (loggedInUser == null) {
-         console.log('null wallet')
-      if(!localStorage.getItem('has_wallet')){      
+      console.log('null wallet')
+      if (!localStorage.getItem('has_wallet')) {
         navigate("/add-wallet");
       }
 
-      navigate("/my-profile");   
+      navigate("/my-profile");
 
     } else setUserId(loggedInUser._id);
   }, [JSON.stringify(loggedInUser)]);
@@ -417,7 +419,10 @@ function MyProfile() {
           />
           <img className="pencilicon" width="16px" height="16px" src={pencil} />
           <Link to="/edit-profile" className="textdecornone">
-            <button style={{color: `${fetchPalletsColor(appearance.colorPalette)}`, border: `1px solid ${fetchPalletsColor(appearance.colorPalette)}`}} className="profileeditbutton">Edit Profile</button>
+            {
+              loader ? <Skeleton className="profileeditbutton" width="145px" height="42px" style={{ border: 'none', background: '#ebebeb' }} /> :
+                <button style={{ color: `${fetchPalletsColor(appearance.colorPalette)}`, border: `1px solid ${fetchPalletsColor(appearance.colorPalette)}` }} className="profileeditbutton">Edit Profile</button>
+            }
           </Link>
         </div>
         <Link to="/edit-profile" className="editTextAnchor">
@@ -431,8 +436,8 @@ function MyProfile() {
                   ? loggedInUser?.photo?.compressedURL
                   : typeof loggedInUser?.photo != "object" &&
                     loggedInUser?.photo != ""
-                  ? loggedInUser.photo
-                  : profileImage
+                    ? loggedInUser.photo
+                    : profileImage
               }
               alt=""
               className="user-img"
@@ -454,39 +459,44 @@ function MyProfile() {
           {/* <h2>{ethereum && ethereum.selectedAddress}</h2> */}
           {/* <h2>{window.ethereum && defaultAccount}</h2> */}
           {/* {defaultAccount} */}
-          <div className="profile-user">{loggedInUser?.userName}</div>
-          <div className="add-cover" 
-          onClick={()=>{
-          setDataCopied(false)
-          setTimeout(()=>{
-            setDataCopied(true);
-          },3000);
-        }}>
-            
+          <div className="profile-user">{loader ? <Skeleton width="150px" /> : loggedInUser?.userName}</div>
+          <div className="add-cover"
+            onClick={() => {
+              setDataCopied(false)
+              setTimeout(() => {
+                setDataCopied(true);
+              }, 3000);
+            }}>
+
             <CopyToClipboard text={walletAddress?.address}>
               <span className="Container-clipboard">
 
-            <div className="wallet-address-text">
-              {/* {loggedInUser?.wallet_address} */}
+                {
+                  loader ? <Skeleton width="200px" height="40px" /> :
+                    <div className="wallet-address-text">
+                      {/* {loggedInUser?.wallet_address} */}
 
-              <p className="addressText">
-                <SplitWalletAdd address={loggedInUser?.wallet_address} />
-              </p>
-            </div>
-              {/* <button
+                      <p className="addressText">
+                        <SplitWalletAdd address={loggedInUser?.wallet_address} />
+                      </p>
+                    </div>
+                }
+                {/* <button
                 className="copy-button"
                 onClick={handleClick({
                   vertical: "top",
                   horizontal: "center",
                 })}
               > */}
-                <img
-                  src={copy}
-                  className="copyButton"
-                  alt=""
-                  onClick={isDataCopied}
-                />
-              {/* </button> */}
+                {
+                  loader === false ? <img
+                    src={copy}
+                    className="copyButton"
+                    alt=""
+                    onClick={isDataCopied}
+                  /> : null
+                }
+                {/* </button> */}
               </span>
             </CopyToClipboard>
             {/* <CustomSnack
@@ -498,17 +508,19 @@ function MyProfile() {
               autoHideDuration={2000}
               className="custom-snack"
             /> */}
-             <span className="tooltiptext-myprofile"> {dataCopied ? "copy to clipboard" : "copied" }</span>
+            <span className="tooltiptext-myprofile"> {dataCopied ? "copy to clipboard" : "copied"}</span>
           </div>
 
-          <p className="profile-description">{loggedInUser?.bio}</p>
+          <p className="profile-description">{loader ? <Skeleton count={2} width="150px" /> : loggedInUser?.bio}</p>
           {/* <p style={{ marginBottom: "0px" }}>
             main focus in art is to make digital abstract painting
           </p> */}
-          <h6 className="profile-portfolio">
-            <img className="globalImg" src={globe} alt="" />
-            {loggedInUser?.portfolio}
-          </h6>
+          {
+            loader === false ? <h6 className="profile-portfolio">
+              <img className="globalImg" src={globe} alt="" />
+              {loggedInUser?.portfolio}
+            </h6> : null
+          }
           <Link to="/edit-profile" className="bottombutton">
             <button className="profileeditbuttonatbottom">Edit Profile</button>
           </Link>
@@ -520,48 +532,44 @@ function MyProfile() {
         <div className="profileItemContainer">
           <div className="postTypeProfileContainer collectionsales MyProfilesales">
             <div
-              className={`postTypeProfile ${
-                typeofProfilePost === "on-sale" && "postTypeProfile--active"
-              }`}
+              className={`postTypeProfile ${typeofProfilePost === "on-sale" && "postTypeProfile--active"
+                }`}
               onClick={() => setTypeofProfilePost("on-sale")}
-              // onClick={() => {
-              //   setNfts(onSaleNft);
-              //   setTypeofProfilePost("on-sale");
-              // }}
+            // onClick={() => {
+            //   setNfts(onSaleNft);
+            //   setTypeofProfilePost("on-sale");
+            // }}
             >
               On sale
             </div>
             <div
-              className={`postTypeProfile ${
-                typeofProfilePost === "owned" && "postTypeProfile--active"
-              }`}
+              className={`postTypeProfile ${typeofProfilePost === "owned" && "postTypeProfile--active"
+                }`}
               onClick={() => setTypeofProfilePost("owned")}
-              // onClick={() => {
-              //   setNfts(ownedNft);
-              //   console.log(ownedNft, "<<<<<<ownedNft");
-              //   setTypeofProfilePost("owned");
-              // }}
+            // onClick={() => {
+            //   setNfts(ownedNft);
+            //   console.log(ownedNft, "<<<<<<ownedNft");
+            //   setTypeofProfilePost("owned");
+            // }}
             >
               Owned
             </div>
             <div
-              className={`postTypeProfile ${
-                typeofProfilePost === "created" && "postTypeProfile--active"
-              }`}
+              className={`postTypeProfile ${typeofProfilePost === "created" && "postTypeProfile--active"
+                }`}
               onClick={() => setTypeofProfilePost("created")}
-              // onClick={() => {
-              //   setNfts(createdNft);
-              //   setTypeofProfilePost("created");
-              // }}
+            // onClick={() => {
+            //   setNfts(createdNft);
+            //   setTypeofProfilePost("created");
+            // }}
             >
               Created
             </div>
             <div
-              className={`postTypeProfile ${
-                typeofProfilePost === "liked" && "postTypeProfile--active"
-              }`}
+              className={`postTypeProfile ${typeofProfilePost === "liked" && "postTypeProfile--active"
+                }`}
               onClick={() => setTypeofProfilePost("liked")}
-              // onClick={() => getLikedNft()}
+            // onClick={() => getLikedNft()}
             >
               Liked
             </div>
@@ -571,7 +579,10 @@ function MyProfile() {
           {isloading && (
             <>
               <div style={{ display: "flex", justifyContent: "center" }}>
-                <Spinner />
+                <NftCartLoader mr="5%" />
+                <NftCartLoader />
+                <NftCartLoader />
+                <NftCartLoader mr="0" />
               </div>
             </>
           )}
