@@ -1,7 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.684c9d01.css",
-    "main.js": "/static/js/main.5447fcad.js",
+    "main.css": "/static/css/main.d119c06a.css",
+    "main.js": "/static/js/main.646f3cc7.js",
+    "static/js/845.3e1bb2c9.chunk.js": "/static/js/845.3e1bb2c9.chunk.js",
     "static/media/Banner.png": "/static/media/Banner.112c32a6f604149b0d83.png",
     "static/media/Abstraction.png": "/static/media/Abstraction.010c4cc892910d63a5b1.png",
     "static/media/Poppins-Regular.ttf": "/static/media/Poppins-Regular.35d26b781dc5fda684cc.ttf",
@@ -11,6 +12,7 @@
     "static/media/polygon.png": "/static/media/polygon.1140771b39c8269a6d1b.png",
     "static/media/binance.png": "/static/media/binance.92643887cb735977d3b9.png",
     "static/media/whiskeygirls.ttf": "/static/media/whiskeygirls.25a2ff6b76bdeaa92a61.ttf",
+    "static/media/sound.mp3": "/static/media/sound.ae2de8e7e136703f3626.mp3",
     "static/media/circle.png": "/static/media/circle.9fb3b5100187c815d775.png",
     "static/media/Metamask.svg": "/static/media/Metamask.3737b9d1e6ec19bde908675ba3c35281.svg",
     "static/media/Nopagefound.svg": "/static/media/Nopagefound.02d98fac9afdb118fe8d21ac03df6604.svg",
@@ -66,11 +68,12 @@
     "static/media/drop-down-arrow.svg": "/static/media/drop-down-arrow.252c67d09c66c766f99a.svg",
     "static/media/Edit.svg": "/static/media/Edit.adfd6c934476ae588248e2026354da45.svg",
     "static/media/coverImage.svg": "/static/media/coverImage.7cc8a61314efed2824b3ef2b04371775.svg",
-    "main.684c9d01.css.map": "/static/css/main.684c9d01.css.map",
-    "main.5447fcad.js.map": "/static/js/main.5447fcad.js.map"
+    "main.d119c06a.css.map": "/static/css/main.d119c06a.css.map",
+    "main.646f3cc7.js.map": "/static/js/main.646f3cc7.js.map",
+    "845.3e1bb2c9.chunk.js.map": "/static/js/845.3e1bb2c9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.684c9d01.css",
-    "static/js/main.5447fcad.js"
+    "static/css/main.d119c06a.css",
+    "static/js/main.646f3cc7.js"
   ]
 }
