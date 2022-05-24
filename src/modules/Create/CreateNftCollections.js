@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useNavigate,useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import { useDropzone } from "react-dropzone";
@@ -28,6 +28,7 @@ import Select from 'react-select';
 import $ from 'jquery';
 import { getTenantData } from "../../services/clientConfigMicroService";
 import { fetchPalletsColor } from "../../utility/global";
+import CollectionNftShimmer from "./CollectionNftShimmer";
 
 const Button = styled.button``;
 
@@ -41,8 +42,8 @@ function CreateNftCollections(props) {
   const [bannerCdn, setbannerCdn] = useState("");
   const [logoipfs, setlogoipfs] = useState("");
   const [bannerIpfs, setbannerIpfs] = useState("");
-  const [compressedLogo,setCompressedLogo]=useState("")
-  const [compressedBanner,setcompressedBanner]=useState("")
+  const [compressedLogo, setCompressedLogo] = useState("")
+  const [compressedBanner, setcompressedBanner] = useState("")
   const [isLogoSelected, setisLogoSelected] = useState(false);
   const [isBannerSelected, setisBannerSelected] = useState(false);
   const [clickedOn, setClickedOn] = useState("");
@@ -51,11 +52,11 @@ function CreateNftCollections(props) {
   const [loaderState, setloaderState] = useState(false);
   const navigation = useNavigate();
   const { loggedInUser, walletAddress } = user;
-  const [specialchar,setSpecialChar]=useState("")
+  const [specialchar, setSpecialChar] = useState("")
   const [defaultCategories, setDefaultCategories] = useState([]);
   const [Categories, setCategories] = useState([]);
   const [tenantCategories, setTenantCategories] = useState([]);
-  const [selectCategory,setSelectCategory]=useState("");
+  const [selectCategory, setSelectCategory] = useState("");
 
   useEffect(() => {
     getCategories().then((response) => setDefaultCategories(response));
@@ -86,31 +87,31 @@ function CreateNftCollections(props) {
     // };
 
     // this code will check if user already connected wallet from localstorage
-    if(!localStorage.getItem('has_wallet')){
+    if (!localStorage.getItem('has_wallet')) {
       navigation("/add-wallet");
     }
   });
 
-  useEffect(()=>{
-    $(document).ready(function(){
+  useEffect(() => {
+    $(document).ready(function () {
 
       var lines = 20;
       var linesUsed = $('#linesUsed');
-  
-      $('#test').keydown(function(e) {
-  
-          let newLines = $(this).val().split("\n").length;
-          linesUsed.text(newLines);
-  
-          if(e.keyCode == 13 && newLines >= lines) {
-              
-              return false;
-          }
-          
+
+      $('#test').keydown(function (e) {
+
+        let newLines = $(this).val().split("\n").length;
+        linesUsed.text(newLines);
+
+        if (e.keyCode == 13 && newLines >= lines) {
+
+          return false;
+        }
+
       });
-  });
-  },[])
-  
+    });
+  }, [])
+
 
   // ------------------drag and drop
   const { getRootProps, getInputProps } = useDropzone({
@@ -144,8 +145,8 @@ function CreateNftCollections(props) {
   });
   // -------------
   const [desLEngth, setDesLEngth] = useState(0);
-  const [nameError,SetNameError]=useState("");
-  const [DesError,SetDesError]=useState("");
+  const [nameError, SetNameError] = useState("");
+  const [DesError, SetDesError] = useState("");
   const handleChangeImage = async (event) => {
     const fileUploaded = event.target.files[0];
     // alert("onchage");
@@ -186,16 +187,16 @@ function CreateNftCollections(props) {
     setDesLength(description.current.length);
   };
 
-  function blockchainValue(value){
-    switch(value){
+  function blockchainValue(value) {
+    switch (value) {
       case 'ETH':
-       return 'Ethereum'
-       case 'MATIC':
-       return "Polygon"
-       case "BNB":
-       return "Binance"
-       default:
-       return ""
+        return 'Ethereum'
+      case 'MATIC':
+        return "Polygon"
+      case "BNB":
+        return "Binance"
+      default:
+        return ""
     }
   }
   const handleSubmit = async (e) => {
@@ -224,12 +225,12 @@ function CreateNftCollections(props) {
       toast.error("Fill the required field");
       return null;
     }
-    if(format.test(name.current)){
+    if (format.test(name.current)) {
       toast.error("Name should be not contain special character");
       setloaderState(false);
       return null;
     }
-    if(name.current.length < 3){
+    if (name.current.length < 3) {
       toast.error("Name Length must be 3 character");
       setloaderState(false);
       return null;
@@ -248,18 +249,18 @@ function CreateNftCollections(props) {
     //   // categoryId:categoryId.current,
     // };
     //---------------------
-    blockchain.current=blockchainValue(selectedOption?.value);
+    blockchain.current = blockchainValue(selectedOption?.value);
 
     const data = {
       coverUrl: bannerCdn,
       // contractAddress: blockchainRes.contract_address,
       imageUrl: logoCdn,
-      compressedURL:compressedLogo,
+      compressedURL: compressedLogo,
       name: name.current,
       description: description.current,
       blockchain: blockchain.current,
       addedBy: user.loggedInUser._id,
-      categoryId:categoryId.current,
+      categoryId: categoryId.current,
     };
 
     //-----------------------
@@ -269,7 +270,7 @@ function CreateNftCollections(props) {
         BlockchainServices.createCollections({
           name: name.current,
           symbol: 'WL',
-          blockchain:blockchain.current
+          blockchain: blockchain.current
 
         })
       );
@@ -285,7 +286,7 @@ function CreateNftCollections(props) {
         setloaderState(false);
 
         return toast.error(
-          blockchainError.message || "Please Select valid Network in metamask",{autoClose:7000,theme:"colored"}
+          blockchainError.message || "Please Select valid Network in metamask", { autoClose: 7000, theme: "colored" }
         );
       }
       else {
@@ -298,15 +299,15 @@ function CreateNftCollections(props) {
         console.log("no error blockchain side", txStatus)
 
         setloaderState(false);
-        if(location?.state?.data){
-          navigate("/create-single-nft");  
+        if (location?.state?.data) {
+          navigate("/create-single-nft");
         }
-        else{
-        navigate("/collection-details/"+result.responseData._id);
+        else {
+          navigate("/collection-details/" + result.responseData._id);
         }
         // navigate("/collections-tile");
         return toast.success(
-          "Collection created",{autoClose:7000,theme:"colored"}
+          "Collection created", { autoClose: 7000, theme: "colored" }
         );
         // toast.success("Collection created");
 
@@ -320,7 +321,7 @@ function CreateNftCollections(props) {
       // toast.success("Collection created");
       // navigate("/collections-tile");
     } else {
-      toast.error(result.message,{autoClose:7000,theme:"colored"});
+      toast.error(result.message, { autoClose: 7000, theme: "colored" });
       setloaderState(false);
     }
 
@@ -329,12 +330,12 @@ function CreateNftCollections(props) {
 
     // console.log(result, ">>> submit nftCollection");
   };
-  
+
   let location = useLocation();
 
   // Blockchain option
- 
- 
+
+
   useEffect(() => {
     async function fetchData() {
       const response = await getTenantData()
@@ -345,7 +346,7 @@ function CreateNftCollections(props) {
     fetchData();
   }, []);
 
-  useEffect(() => {}, [selectCategory]);
+  useEffect(() => { }, [selectCategory]);
 
 
   useEffect(() => {
@@ -360,19 +361,19 @@ function CreateNftCollections(props) {
   useEffect(() => {
     for (let eachItem of blockchains) {
       if (eachItem === "Ethereum") {
-        blockchainOption.push({ value: 'ETH', label: <div><img src={ethereum} height="32px" alt=""/> Ethereum</div> })
+        blockchainOption.push({ value: 'ETH', label: <div><img src={ethereum} height="32px" alt="" /> Ethereum</div> })
       } else if (eachItem === "Polygon") {
-        blockchainOption.push({ value: 'MATIC', label: <div><img src={polygon} height="32px" alt=""/> Polygon</div> })
+        blockchainOption.push({ value: 'MATIC', label: <div><img src={polygon} height="32px" alt="" /> Polygon</div> })
       } else if (eachItem === "Binance") {
-        blockchainOption.push({ value: 'BNB', label: <div><img src={binance} height="32px" alt=""/> Binance</div> })
+        blockchainOption.push({ value: 'BNB', label: <div><img src={binance} height="32px" alt="" /> Binance</div> })
       }
-   }
-  }, [blockchains]) 
+    }
+  }, [blockchains])
 
 
-  useEffect(()=>{
+  useEffect(() => {
 
-    if(customize.permissionToUploadNft === 'Only me'){
+    if (customize.permissionToUploadNft === 'Only me') {
       navigate("/");
 
       toast.warning("You are not allowed to access this location", {
@@ -380,9 +381,9 @@ function CreateNftCollections(props) {
       });
     }
 
-  },[customize.permissionToUploadNft])
+  }, [customize.permissionToUploadNft])
 
-  let enabled=name?.current.length > 0 && description?.current.length > 0  && nameError=="" && bannerCdn!="" && logoCdn!="" && DesError=="" && selectCategory?.length >0; 
+  let enabled = name?.current.length > 0 && description?.current.length > 0 && nameError == "" && bannerCdn != "" && logoCdn != "" && DesError == "" && selectCategory?.length > 0;
   return (
     <>
       {loaderState ? (
@@ -436,11 +437,11 @@ function CreateNftCollections(props) {
                         <div className="heading">Creating Collection</div>
                         <div className="description"></div>
                       </div>
-                    </div> 
+                    </div>
                   </div>
 
 
-                  
+
                 </div>
               </div>
             </div>
@@ -449,144 +450,146 @@ function CreateNftCollections(props) {
       ) : (
         ""
       )}
-      <div className="main-container">
-        <h1 className="fs-32 fw-b c-b title">Create your collection</h1>
-        <p className="fs-16 fw-600 c-b pt-50">Upload Collection Image*</p>
-        <div className="max-width-250">
-          {/*{!isLogoSelected && (*/}
-          {/*    <div*/}
-          {/*      onClick={() => setClickedOn("logo")}*/}
-          {/*      className="img-div"*/}
-          {/*      {...getRootProps()}*/}
-          {/*    >*/}
-          {/*      <input*/}
-          {/*        {...getInputProps()}*/}
-          {/*        name="logo"*/}
-          {/*        onChange={() => setClickedOn("logo")}*/}
-          {/*      />*/}
-          {/*        <img*/}
-          {/*          src={logoCdn != "" ? logoCdn : Image}*/}
-          {/*          alt="upload-icon"*/}
-          {/*          className="upload-icon"*/}
-          {/*        />*/}
-          {/*        <p className="fs-14 fw-b pt-20">Drag & Drop or <span style={{color:"#366EEF"}}>Browse</span></p>*/}
-          {/*    </div>*/}
-          {/*)}*/}
-         
-          <Bannerdrop
-            bannerCdn={logoCdn}
-            setbannerCdn={setlogoCdn}
-            bannerIpfs={logoipfs}
-            setbannerIpfs={setlogoipfs}
-            compressedUrl={compressedLogo}
-            setCompressedUrl={setCompressedLogo}
-            appearance={customize.appearance}
-          />
-        </div>
-        <div>
-          {/* ---------------------------OLD BANNER UPLOAD----------------- */}
-          <div className="fs-16 fw-600 c-b pt-20 pb-20">Upload Collection Banner*</div>
+      {
+        props.loader ? <CollectionNftShimmer /> :
+          <div className="main-container">
+            <h1 className="fs-32 fw-b c-b title">Create your collection</h1>
+            <p className="fs-16 fw-600 c-b pt-50">Upload Collection Image*</p>
+            <div className="max-width-250">
+              {/*{!isLogoSelected && (*/}
+              {/*    <div*/}
+              {/*      onClick={() => setClickedOn("logo")}*/}
+              {/*      className="img-div"*/}
+              {/*      {...getRootProps()}*/}
+              {/*    >*/}
+              {/*      <input*/}
+              {/*        {...getInputProps()}*/}
+              {/*        name="logo"*/}
+              {/*        onChange={() => setClickedOn("logo")}*/}
+              {/*      />*/}
+              {/*        <img*/}
+              {/*          src={logoCdn != "" ? logoCdn : Image}*/}
+              {/*          alt="upload-icon"*/}
+              {/*          className="upload-icon"*/}
+              {/*        />*/}
+              {/*        <p className="fs-14 fw-b pt-20">Drag & Drop or <span style={{color:"#366EEF"}}>Browse</span></p>*/}
+              {/*    </div>*/}
+              {/*)}*/}
 
-          <Bannerdrop
-            bannerCdn={bannerCdn}
-            setbannerCdn={setbannerCdn}
-            bannerIpfs={bannerIpfs}
-            setbannerIpfs={setbannerIpfs}
-            compressedUrl={compressedBanner}
-            setCompressedUrl={setcompressedBanner}
-             appearance={customize.appearance}
-          />
-
-          {/* ----------------------------- */}
-        </div>
-        <div>
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <div>
-              <p className="fs-16 fw-b c-b pt-4">Collection Name*</p>
-              <div style={{color:"Red" ,fontSize:"13px"}}>{nameError}</div>
-              <input
-                type="name"
-                name="name"
-                maxLength="400"
-                className="input-box-1"
-                style={{border:nameError!=""?"1px solid red":"1px solid #C8C8C8"}}
-                placeholder="Write your collection name"
-                onChange={(e) => {
-                  name.current = e.target.value;
-                  var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
-                  if(!format.test(name.current))
-                  SetNameError("")
-                  else if(name.current.length != 0)
-                  SetNameError("")
-                  else if(!name.current.length < 3)
-                  SetNameError("( Name should be atleast 3 character )")
-                  //checkReqFieldFun();
-                }}
+              <Bannerdrop
+                bannerCdn={logoCdn}
+                setbannerCdn={setlogoCdn}
+                bannerIpfs={logoipfs}
+                setbannerIpfs={setlogoipfs}
+                compressedUrl={compressedLogo}
+                setCompressedUrl={setCompressedLogo}
+                appearance={customize.appearance}
               />
             </div>
             <div>
-              <p className="fs-16 fw-b c-b pt-3">Description*</p>
-              <div style={{color:"Red" ,fontSize:"13px"}}>{DesError}</div>
-              <textarea
-                rows="4"
-                id="test"
-                name="Description"
-                placeholder="Write description"
-                className="input-box-1 mb-0"
-                style={{border:DesError!=""?"1px solid red":"1px solid #C8C8C8"}}
-                value={description.current}
-                onFocus={(e)=>{
-                  var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
-                  if(format.test(name.current))
-                    SetNameError("( No Special Character Allowed )");
-                  
-                  else if(name.current.length == 0)
-                    SetNameError("( Name is required )")
-                 else if(name.current.length < 3)
-                    SetNameError("( Name should be atleast 3 character )")
-                  
-                  else 
-                  SetNameError("");
-                  
-                  
-                }}
-                onChange={(e) => {
+              {/* ---------------------------OLD BANNER UPLOAD----------------- */}
+              <div className="fs-16 fw-600 c-b pt-20 pb-20">Upload Collection Banner*</div>
 
-                  
-                  if(e.target.value.length==0){
-                    SetDesError("(Description is required)")
-                  }else
-                  SetDesError("")
+              <Bannerdrop
+                bannerCdn={bannerCdn}
+                setbannerCdn={setbannerCdn}
+                bannerIpfs={bannerIpfs}
+                setbannerIpfs={setbannerIpfs}
+                compressedUrl={compressedBanner}
+                setCompressedUrl={setcompressedBanner}
+                appearance={customize.appearance}
+              />
 
-                  if (DesLength < 1000) {
-                    description.current = e.target.value;
-                    onChangeDes();
-                   // checkReqFieldFun();
-                  }
-                }}
-              ></textarea>
-              <span className="fs-14" style={{ color: "#707070" }}>{DesLength} of 1000 characters and 
-              <span> <span id="linesUsed">0</span> of 20 Lines.</span></span>
+              {/* ----------------------------- */}
             </div>
             <div>
-              <div className="fs-16 fw-b c-b pt-3 pb-3">Category</div>
-              {/* <Link>Create</Link> */}
-              <select
-                className="input-box-1"
-                onChange={(e) => (categoryId.current = e.target.value,setSelectCategory(e.target.value))}
-              >
-                <option style={{ color: "#707070" }}>Select Category</option>
-                {Categories.map((item, key) => {
-                  return <option value={item?._id} style={{ color: "#707070" }}>{item?.name}</option>;
-                })}
-                {/* <option>2</option>
+              <form onSubmit={(e) => handleSubmit(e)}>
+                <div>
+                  <p className="fs-16 fw-b c-b pt-4">Collection Name*</p>
+                  <div style={{ color: "Red", fontSize: "13px" }}>{nameError}</div>
+                  <input
+                    type="name"
+                    name="name"
+                    maxLength="400"
+                    className="input-box-1"
+                    style={{ border: nameError != "" ? "1px solid red" : "1px solid #C8C8C8" }}
+                    placeholder="Write your collection name"
+                    onChange={(e) => {
+                      name.current = e.target.value;
+                      var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
+                      if (!format.test(name.current))
+                        SetNameError("")
+                      else if (name.current.length != 0)
+                        SetNameError("")
+                      else if (!name.current.length < 3)
+                        SetNameError("( Name should be atleast 3 character )")
+                      //checkReqFieldFun();
+                    }}
+                  />
+                </div>
+                <div>
+                  <p className="fs-16 fw-b c-b pt-3">Description*</p>
+                  <div style={{ color: "Red", fontSize: "13px" }}>{DesError}</div>
+                  <textarea
+                    rows="4"
+                    id="test"
+                    name="Description"
+                    placeholder="Write description"
+                    className="input-box-1 mb-0"
+                    style={{ border: DesError != "" ? "1px solid red" : "1px solid #C8C8C8" }}
+                    value={description.current}
+                    onFocus={(e) => {
+                      var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
+                      if (format.test(name.current))
+                        SetNameError("( No Special Character Allowed )");
+
+                      else if (name.current.length == 0)
+                        SetNameError("( Name is required )")
+                      else if (name.current.length < 3)
+                        SetNameError("( Name should be atleast 3 character )")
+
+                      else
+                        SetNameError("");
+
+
+                    }}
+                    onChange={(e) => {
+
+
+                      if (e.target.value.length == 0) {
+                        SetDesError("(Description is required)")
+                      } else
+                        SetDesError("")
+
+                      if (DesLength < 1000) {
+                        description.current = e.target.value;
+                        onChangeDes();
+                        // checkReqFieldFun();
+                      }
+                    }}
+                  ></textarea>
+                  <span className="fs-14" style={{ color: "#707070" }}>{DesLength} of 1000 characters and
+                    <span> <span id="linesUsed">0</span> of 20 Lines.</span></span>
+                </div>
+                <div>
+                  <div className="fs-16 fw-b c-b pt-3 pb-3">Category</div>
+                  {/* <Link>Create</Link> */}
+                  <select
+                    className="input-box-1"
+                    onChange={(e) => (categoryId.current = e.target.value, setSelectCategory(e.target.value))}
+                  >
+                    <option style={{ color: "#707070" }}>Select Category</option>
+                    {Categories.map((item, key) => {
+                      return <option value={item?._id} style={{ color: "#707070" }}>{item?.name}</option>;
+                    })}
+                    {/* <option>2</option>
                 <option>3</option>
                 <option>4</option> */}
-              </select>
-            </div>
-            <div>
-              <div className="fs-16 fw-b c-b pt-3 pb-3">Blockchain*</div>
-              {/* <div className="block-chain-container">
+                  </select>
+                </div>
+                <div>
+                  <div className="fs-16 fw-b c-b pt-3 pb-3">Blockchain*</div>
+                  {/* <div className="block-chain-container">
                 <div>
                   <img src={ethereum} height="32px" />
                 </div>
@@ -604,30 +607,31 @@ function CreateNftCollections(props) {
                   </select>
                 </div>
               </div> */}
-                <div className="block-chain-right">
-                  <Select
-                    className="input-box-1 rm-border blockchainSelect"
-                    defaultValue={blockchainOption[0]}
-                    onChange={setSelectedOption}
-                    options={blockchainOption}
-                    placeholder="Select Blockchain"
-                    value={selectedOption}
-                  >
-                  </Select>
+                  <div className="block-chain-right">
+                    <Select
+                      className="input-box-1 rm-border blockchainSelect"
+                      defaultValue={blockchainOption[0]}
+                      onChange={setSelectedOption}
+                      options={blockchainOption}
+                      placeholder="Select Blockchain"
+                      value={selectedOption}
+                    >
+                    </Select>
+                  </div>
                 </div>
+                <button
+                  type="submit"
+                  disabled={//checkReqField
+                    !enabled}
+                  className="submit-button"
+                  style={{ opacity: enabled ? "1" : "0.5", background: `${fetchPalletsColor(customize.appearance.colorPalette)}` }}
+                >
+                  Create
+                </button>
+              </form>
             </div>
-            <button
-              type="submit"
-              disabled={//checkReqField
-                !enabled}
-              className="submit-button"
-              style={{ opacity: enabled ? "1" : "0.5", background: `${fetchPalletsColor(customize.appearance.colorPalette)}`}}
-            >
-              Create
-            </button>
-          </form>
-        </div>
-      </div>
+          </div>
+      }
       <ToastContainer
         position="top-center"
         autoClose={5000}

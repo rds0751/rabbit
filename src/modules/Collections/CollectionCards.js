@@ -24,6 +24,7 @@ import Binance from "../../assets/images/binance.svg";
 import { useSelector } from "react-redux";
 import { fetchPalletsColor } from "../../utility/global"
 import Skeleton from "react-loading-skeleton";
+import CollectionCardLoader from "./CollectionCardLoader";
 
 const blue = {
   100: '#DAECFF',
@@ -154,6 +155,7 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
 const queryString = require('query-string');
 function Collections_tile(props) {
 
+  const [loader, setLoader] = useState(false);
   const appearance = useSelector(state => state.customize.appearance);
   const customize = useSelector(state => state.customize);
 
@@ -183,12 +185,17 @@ function Collections_tile(props) {
   }, []);
 
   useEffect(() => {
+    setLoader(true);
     async function fetchData() {
       setIsLoading(true);
       const reqObj = queryString.stringify(filterData);
       await getCollections(reqObj).then((res) => {
         setCollections(res);
         setIsLoading(false);
+        setLoader(false);
+      })
+      .catch(error=>{
+        setLoader(false);
       });
     }
     fetchData();
@@ -346,7 +353,12 @@ function Collections_tile(props) {
           style={{ justifyContent: "start" }}
         >
           <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
-            {isLoading ? <Spinner /> :
+            {isLoading || props.loader ? <>
+              <CollectionCardLoader mr="5%" />
+              <CollectionCardLoader />
+              <CollectionCardLoader />
+              <CollectionCardLoader mr="0" />
+            </> :
               (collections.length === 0 && (<div>
                 <div className="Noitemdiv">
                   <img className="no-item-image" src={NoItem} />
@@ -370,7 +382,7 @@ function Collections_tile(props) {
                   >
                     <div className="text-center">
                       {
-                        props.loader ? <Skeleton width={`100px`} height={`100px`} circle={true} /> :
+                        props.loader || loader ? <Skeleton width={`100px`} height={`100px`} circle={true} /> :
                           <img
                             className="img-fluid border-radius collection-img-card-radius collection_imgmob"
                             src={compressedURL?.length === 0 ? imageUrl : (!compressedURL ? imageUrl : compressedURL)}
@@ -384,16 +396,16 @@ function Collections_tile(props) {
                       }
                     </div>
                     <div className="text-center pt-3">
-                      <span>{props.loader ? <Skeleton width={`25px`} height={`25px`} /> : blockchainCheck(blockchain)}</span>
+                      <span>{props.loader || loader ? <Skeleton width={`25px`} height={`25px`} /> : blockchainCheck(blockchain)}</span>
                       <p
                         className="collectionCardEachName text-center font-weight-900"
                         style={{ color: "#191919" }}
                       >
-                        {props.loader ? <Skeleton width={`200px`} /> : name}
+                        {props.loader || loader ? <Skeleton width={`200px`} /> : name}
                       </p>
                       <p className="collectionCardEachTotalitems">
                         {
-                          props.loader ? <Skeleton width={`150px`} /> :
+                          props.loader || loader ? <Skeleton width={`150px`} /> :
                             <span className=" font-14 text-dark">
                               Total Items: <span style={{ color: `${fetchPalletsColor(appearance.colorPalette)}` }}>{nftCount}</span>
                             </span>
@@ -416,7 +428,7 @@ function Collections_tile(props) {
               (
                 <div style={{ textAlignLast: "center" }}>
                   {
-                    props.loader ? <Skeleton className="load-more" style={{ background: '#ededed' }} /> :
+                    props.loader || loader ? <Skeleton className="load-more" style={{ background: '#ededed' }} /> :
                       <button onMouseOver={(e) => handleLoadHover(e)} onMouseOut={(e) => handleLoadOut(e)} style={{ color: `${fetchPalletsColor(appearance.colorPalette)}` }} className="load-more" onClick={loadMoreHandler}>Load More</button>
                   }
                 </div>

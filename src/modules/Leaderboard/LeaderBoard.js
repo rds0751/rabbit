@@ -41,6 +41,8 @@ import { styled } from '@mui/system'
 import { useSelector } from 'react-redux';
 import { fetchPalletsColor, handleLoadHoverText, handleLoadOutText } from '../../utility/global';
 import Skeleton from 'react-loading-skeleton';
+import LeaderBoardCard from './LeaderBoardCard';
+import LeaderBoardNftCard from './LeaderBoardNftCard';
 const blue = {
   100: '#DAECFF',
   200: '#99CCF3',
@@ -501,15 +503,15 @@ function LeaderBoard({ loader }) {
                   })}
                 </div>
 
-                <div className="spinnerloader">
-                  {isloadingForBuyers ? <Spinner /> :
+                {/* <div className="spinnerloader"> */}
+                  {isloadingForBuyers || loader ? <><LeaderBoardCard/> </> :
                     (topBuyers.length === 0 && (
                       <div className="Noitemdiv">
                         <img className="no-image" src={NoItem} />
                         <p className="textitem">No items available</p>
                       </div>
                     ))}
-                </div>
+                {/* </div> */}
               </div>
 
               <div className="card-footer view-more">
@@ -708,15 +710,15 @@ function LeaderBoard({ loader }) {
                   })}
                 </div>
 
-                <div className="spinnerloader">
-                  {isloadingForSeller ? <Spinner /> :
+                {/* <div className="spinnerloader"> */}
+                  {isloadingForSeller || loader ? <LeaderBoardCard/> :
                     (topSellers.length === 0 && (
                       <div className="Noitemdiv">
                         <img className="no-image" src={NoItem} />
                         <p className="textitem">No items available</p>
                       </div>
                     ))}
-                </div>
+                {/* </div> */}
               </div>
 
               <div className="card-footer view-more">
@@ -917,15 +919,15 @@ function LeaderBoard({ loader }) {
                   })}
                 </div>
 
-                <div className="spinnerloader">
-                  {isloadingForCollection ? <Spinner /> :
+                {/* <div className="spinnerloader"> */}
+                  {isloadingForCollection || loader ? <LeaderBoardCard/>  :
                     (limitCollections.length === 0 && (
                       <div className="Noitemdiv">
                         <img className="no-image" src={NoItem} />
                         <p className="textitem">No items available</p>
                       </div>
                     ))}
-                </div>
+                {/* </div> */}
               </div>
 
               <div className="card-footer view-more">
@@ -1313,7 +1315,7 @@ function LeaderBoard({ loader }) {
           {/* My Commit */}
         </div>
         <div className="spinnerloader">
-          {isloadingForNfts ? <Spinner /> :
+          {isloadingForNfts ? <><LeaderBoardNftCard /> <LeaderBoardNftCard /> <LeaderBoardNftCard /> <LeaderBoardNftCard /></> :
             (topNftSales.length === 0 && (
               <div className="Noitemdiv">
                 <img className="no-image" src={NoItem} />

@@ -254,6 +254,7 @@ class Index extends BaseComponent {
 
           isMintSuccess={this.state.isMintSuccess}
           isOpenMintModal={this.state.isOpenMintModal}
+          loader={this.props.loader}
         />
         {/* <FooterComponent /> */}
       </>
