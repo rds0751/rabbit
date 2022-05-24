@@ -214,6 +214,8 @@ function NftCardsHome({ nft, appearance, loader }) {
             {loader ? (
               <Skeleton height={`187px`} />
             ) : (
+              <>
+               <Link to={route} style={{ textDecoration: "none" }}>
               <img
                 className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
                 src={compressedURL}
@@ -222,6 +224,8 @@ function NftCardsHome({ nft, appearance, loader }) {
                 onMouseDown={(e) => e.preventDefault()}
                 onContextMenu={(e) => e.preventDefault()}
               />
+              </Link>
+              </>
             )}
 
             {!imageLoading.loaded && (
