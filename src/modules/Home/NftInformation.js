@@ -46,6 +46,7 @@ import "../../assets/styles/myProfile.css";
 import PageNotFound from "../../common/components/pageNotFound";
 import { ShimmerThumbnail } from "react-shimmer-effects";
 import { fetchPalletsColor } from "../../utility/global";
+import ReactPlayer from "react-player";
 toast.configure();
 const CustomSnack = styled(Snackbar)`
   @media (min-width: 992px) {
@@ -143,6 +144,7 @@ export default function NftInformation(props) {
   const [makeOfferModal, setMakeOfferModal] = useState(false);
   const [filter, setFilter] = useState(defaultFilter);
   const [moreNft, setMoreNfts] = useState([]);
+  
 
   let period = {
     expiryDate: "",
@@ -400,6 +402,7 @@ export default function NftInformation(props) {
   const onImageLoad = () => {
     setImageLoading({ ...imageLoading, loaded: true });
   };
+  const [display,setDisplay]=useState(false);
 
   return (
     <>
@@ -634,21 +637,22 @@ export default function NftInformation(props) {
                         borderRadius: "8px",
                       }}
                     />
+
+                    <button onClick={()=>setDisplay(!display)}>play</button>
+
+                    <div style={{display:display ? "block" :"none"}}>
+                    <ReactPlayer
+                    className="react-player"
+                    width="100%"
+                    height={0}
+                    playing={display}
+                    url={nft?.cdnUrl}
+                    />
+
+                    </div>
                     
-                       <audio controls controlslist="nodownload" 
-                       onMouseDown={(e) => e.preventDefault()}
-                       onContextMenu={(e) => e.preventDefault()}
-                       // src={nft.cdnUrl}
-                       // src={Imagep}
-                       alt="nft"
-                       className="border-radius imginfo_mob"
-                       style={{
-                         maxWidth: "100%",
-                         // height: "837px",
-                         borderRadius: "8px",
-                       }}>
-                         <source src={nft?.cdnUrl}></source>
-                     </audio>
+                 
+                
                      </>
                     ):(nft?.fileExtension?.includes("video") ?(
                       <>
@@ -666,20 +670,18 @@ export default function NftInformation(props) {
                         borderRadius: "8px",
                       }}
                     />
-                       <video  controls autoPlay
-                       onMouseDown={(e) => e.preventDefault()}
-                       onContextMenu={(e) => e.preventDefault()}
-                       // src={nft.cdnUrl}
-                       // src={Imagep}
-                       alt="nft"
-                       className="border-radius imginfo_mob"
-                       style={{
-                         maxWidth: "100%",
-                         // height: "837px",
-                         borderRadius: "8px",
-                       }}>
-                         <source src={nft.cdnUrl}></source>
-                     </video>
+                     <button onClick={()=>setDisplay(!display)}>play</button>
+                        <div style={{display:display ? "block" :"none"}}>
+                    <ReactPlayer
+                    className="react-player"
+                    width="100%"
+                    height={187}
+                    controls
+                    playing={display}
+                    url={nft?.cdnUrl}
+                    />
+
+                    </div>
                      </>
                     ) :(
                       <>
