@@ -17,9 +17,12 @@ import {
 import { fetchPalletsColor } from "../../utility/global";
 import Skeleton from "react-loading-skeleton";
 import ReactPlayer from "react-player";
+import useSound from 'use-sound';
+import sound from "../../assets/sound.mp3"
 function NftCardsHome({ nft, appearance, loader }) {
   // let history = useHistory();
 
+  
   const navigate = useNavigate();
   const { user, sideBar } = useSelector((state) => state);
   const {
@@ -118,6 +121,18 @@ function NftCardsHome({ nft, appearance, loader }) {
     }
   };
   const [videoDisplay, setVideoDisplay] = useState(false);
+  const soundUrl = sound;
+  const [playbackRate, setPlaybackRate] = React.useState(0.75);
+
+  const [play] = useSound(soundUrl, {
+    playbackRate,
+    volume: 0.2,
+  });
+
+  const handleClick = () => {
+    setPlaybackRate(playbackRate + 0.1);
+    play();
+  };
 
   return (
     <div className="nftCardEach col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
@@ -214,6 +229,8 @@ function NftCardsHome({ nft, appearance, loader }) {
             {loader ? (
               <Skeleton height={`187px`} />
             ) : (
+              <>
+               <Link to={route} style={{ textDecoration: "none" }}>
               <img
                 className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
                 src={compressedURL}
@@ -222,6 +239,8 @@ function NftCardsHome({ nft, appearance, loader }) {
                 onMouseDown={(e) => e.preventDefault()}
                 onContextMenu={(e) => e.preventDefault()}
               />
+              </Link>
+              </>
             )}
 
             {!imageLoading.loaded && (
@@ -242,14 +261,15 @@ function NftCardsHome({ nft, appearance, loader }) {
               id="unlike_icon"
               src={handleLike ? likes : Like}
               alt="like"
-              onClick={() => likeNft(_id)}
+              
+              onClick={() => {likeNft(_id) ;handleClick();}}
             />
           ) : (
             <img
               id="like_icon"
               src={handleLike ? Like : likes}
               alt="like"
-              onClick={() => likeNft(_id)}
+              onClick={() => {likeNft(_id) ;handleClick();}}
             />
           )}
         </span>
