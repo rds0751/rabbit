@@ -3,44 +3,18 @@ import playImage from "../../assets/images/Play.svg";
 import pauseImage from "../../assets/images/Pause.svg";
 import ReactPlayer from "react-player";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Container, Row, Col, Card } from "react-bootstrap";
+import {  Card } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import "../../assets/styles/homepage.css";
-import Wallet from "../../assets/images/Wallet-home.svg";
-import Sale from "../../assets/images/Sale.svg";
-import NFTs from "../../assets/images/NFTs.svg";
-import Collection from "../../assets/images/Collection-home.svg";
-import Category from "../../assets/images/Category.svg";
-import Activity from "../../assets/images/Activity.svg";
-import Easy from "../../assets/images/Easy.svg";
-import Offers from "../../assets/images/Offers.svg";
-import Stats from "../../assets/images/Stats.svg";
 import userDefault from "../../assets/images2/profile.png";
-import { RedirectTo } from "../../reducers/Action";
 import Ethereum from "../../assets/images/ether.svg";
 import Polygon from "../../assets/images/ploygon.svg";
 import Binance from "../../assets/images/binance.svg";
-// import { Link, useLocation } from "react-router-dom";
-// import Card from '@mui/material/Card';
-import Avatar from "@mui/material/Avatar";
-// import Button from '@mui/material/Button'
-import { ShimmerThumbnail } from "react-shimmer-effects";
-import {
-  getNfts,
-  addLikeNft,
-  getNFtsData,
-} from "../../services/webappMicroservice";
-import { toast } from "react-toastify";
-import AwesomeSlider from "react-awesome-slider";
 import "react-awesome-slider/dist/styles.css";
 import { fetchPalletsColor } from "../../utility/global";
-
-import defaultCover from "../../assets/images/bannerLoader.png";
 import Skeleton from "react-loading-skeleton";
-import NftCards from "./NftCards";
 
 let preivewFiles = ["video/mp4", "audio/mpeg"];
 
@@ -103,7 +77,7 @@ const NftCardsHome = (props) => {
                   />
                 </Link>
 
-                <div style={{ display: videoDisplay ? "block" : "none",background:"grey"}}>
+                <div style={{ display: videoDisplay ? "block" : "none",background:"white"}}>
                   <ReactPlayer
                     className="react-player"
                     controls={false}

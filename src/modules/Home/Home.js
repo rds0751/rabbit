@@ -163,15 +163,6 @@ function Home({ loaderState }) {
   }, [loaderState])
 
 
-
-  const x=()=>{
-    console.log(videoDisplay)
-    setVideoDisplay(true);
-    console.log(videoDisplay)
-    alert("x");
-  }
-
-
   return (
     <>
       <div className="homepage">
