@@ -46,8 +46,10 @@ import "../../assets/styles/myProfile.css";
 import PageNotFound from "../../common/components/pageNotFound";
 import { ShimmerThumbnail } from "react-shimmer-effects";
 import { fetchPalletsColor } from "../../utility/global";
-import ReactPlayer from "react-player";
+
 import NftInfoShimmer from "./NftInfoShimmer";
+
+import ReactPlayer from "react-player";
 toast.configure();
 const CustomSnack = styled(Snackbar)`
   @media (min-width: 992px) {
@@ -123,8 +125,6 @@ export default function NftInformation(props) {
 
   const nft = props?.responseData;
 
-  console.log(nft.length, 'nft data')
-
   const defaultFilter = {
     searchByName: "",
     status: "",
@@ -147,7 +147,7 @@ export default function NftInformation(props) {
   const [makeOfferModal, setMakeOfferModal] = useState(false);
   const [filter, setFilter] = useState(defaultFilter);
   const [moreNft, setMoreNfts] = useState([]);
-
+  
 
   let period = {
     expiryDate: "",
@@ -208,10 +208,10 @@ export default function NftInformation(props) {
     fetchData();
   }, [nft]);
 
-  useEffect(() => {
-    if (id)
-      props.getNftDetail();
-  }, [id, nft.cdnUrl]);
+   useEffect(() => {
+     if(id)
+     props.getNftDetail();
+   }, [id,nft.cdnUrl]);
 
   // alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
 
@@ -405,7 +405,7 @@ export default function NftInformation(props) {
   const onImageLoad = () => {
     setImageLoading({ ...imageLoading, loaded: true });
   };
-  const [display, setDisplay] = useState(false);
+  const [display,setDisplay]=useState(false);
 
   return (
     <>
@@ -413,8 +413,8 @@ export default function NftInformation(props) {
       {props?.loaderState
         ? ""
         : setTimeout(() => {
-          window.location.reload(true);
-        }, 1000)}
+            window.location.reload(true);
+          }, 1000)}
 
       {/* {props?.loaderState ? (
         <div className="center">
@@ -435,15 +435,14 @@ export default function NftInformation(props) {
       {props.isNftValid ? (
         <>
           {
-            props.loader || nft.length===0 ? <NftInfoShimmer /> :
-              <div className="nft-detail">
-                <div className="container info-container">
-                  <div className="row" style={{ marginTop: "44px" }}>
-                    <div className="d-sm-block d-md-block d-lg-none mb-2">
-                      <div id="share_info">
-                        <div className="">
-                          <div className="edit-sell-button">
-                            {/* <Button
+            props.loader || nft.length===0 ? <NftInfoShimmer /> : <div className="nft-detail">
+            <div className="container info-container">
+              <div className="row" style={{ marginTop: "44px" }}>
+                <div className="d-sm-block d-md-block d-lg-none mb-2">
+                  <div id="share_info">
+                    <div className="">
+                      <div className="edit-sell-button">
+                        {/* <Button
                       style={{
                         display:
                           props?.responseData?.ownerAddress == loggedInUser?.wallet_address
@@ -465,327 +464,328 @@ export default function NftInformation(props) {
                         Edit
                       </Link>
                     </Button> */}
-                            <Button
-                              // className="btn btn-primary mt-3"
-                              // data-bs-toggle="modal"
-                              // data-bs-target="#myModalShare"
-                              style={{
-                                display:
-                                  props?.responseData?.ownerAddress ==
-                                    loggedInUser?.wallet_address &&
-                                    !props?.responseData?.salesInfo?.isOpenForSale
-                                    ? "block"
-                                    : "none",
-                                color: "white",
-                                backgroundColor: "#366eff",
-                                marginRight: "1rem",
-                                textTransform: "none",
-                              }}
-                              onClick={openSaleModal}
-                            >
-                              sale
-                            </Button>
-                            <Button
-                              style={{
-                                display:
-                                  props?.responseData?.ownerAddress ==
-                                    loggedInUser?.wallet_address &&
-                                    props?.responseData?.salesInfo?.isOpenForSale
-                                    ? "block"
-                                    : "none",
-                                color: "white",
-                                backgroundColor: "#366eff",
-                                textTransform: "none",
-                              }}
-                              onClick={() => setOpenRemoveSale(true)}
-                            >
-                              Remove From Sale
-                            </Button>
-                          </div>
-                          <span className="nft-name">{nft.name}</span>
-                          <div
-                            className=""
-                            title={
-                              nft.collectionName
-                                ? nft.collectionName
-                                : "Anafto Collection"
-                            }
-                          >
-                            <Link
-                              style={{
-                                textDecoration: "none",
-                                color: `${fetchPalletsColor(
-                                  appearance.colorPalette
-                                )}`,
-                              }}
-                              to={"/collection-details/" + nft?.collectionId}
-                            >
-                              {undefined !== nft?.collectionName &&
-                                nft?.collectionName
-                                ? nft?.collectionName
-                                : nft?.collectionName?.length === 0
-                                  ? "Anafto Collection"
-                                  : nft?.collectionName}
-                            </Link>
-                          </div>
-                        </div>
-                        <div className=" d-flex align-items-center">
-                          <a
-                            className="nav-link dropdown"
-                            href="#"
-                            id="navbarDropdown"
-                            role="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                          >
-                            <img
-                              alt="share"
-                              src={share}
-                              style={{
-                                width: "31px",
-                                height: "31px",
-                                marginRight: "20px",
-                              }}
-                            />
-                          </a>
-                          <ul
-                            className="dropdown-menu profilemenu"
-                            aria-labelledby="navbarDropdown"
-                            style={{
-                              width: "220px",
-                              position: "absolute",
-                              marginLeft: "30px",
-                              boxShadow: "0px 3px 6px #00000012",
-                              border: "1px solid #F4F4F4",
-                              borderRadius: "6px",
-                              background: "#FFFFFF",
-                            }}
-                          >
-                            <li className="list-item">
-                              <CopyToClipboard text={url}>
-                                <button
-                                  className="copy-url-button"
-                                  onClick={handleClick({
-                                    vertical: "top",
-                                    horizontal: "right",
-                                  })}
-                                >
-                                  <img src={copyIcon} alt="icon" className="icon" />
-                                  <span className="icon-text">Copy link</span>
-                                </button>
-                              </CopyToClipboard>
-                            </li>
-                            <li className="list-item">
-                              {/* <img src={facebookIcon} alt="icon" className="icon" />
-                        <span className="icon-text">Share on Facebook</span> */}
-                              <FacebookShareButton url={url}>
-                                <img
-                                  src={facebookIcon}
-                                  alt="icon"
-                                  className="icon"
-                                />
-                                <span className="icon-text">Share on Facebook</span>
-                              </FacebookShareButton>
-                            </li>
-                            <li className="list-item">
-                              {/* <img src={twitterIcon} alt="icon" className="icon" />
-                        <span className="icon-text">Share on Twitter</span> */}
-                              <TwitterShareButton url={url}>
-                                <img
-                                  src={twitterIcon}
-                                  alt="icon"
-                                  className="icon"
-                                />
-                                <span className="icon-text">Share on Twitter</span>{" "}
-                              </TwitterShareButton>
-                            </li>
-                          </ul>
-
-                          <img
-                            src={info}
-                            alt="info"
-                            style={{
-                              width: "31px",
-                              height: "31px",
-                              cursor: "pointer",
-                            }}
-                            // data-bs-toggle="modal"
-                            onClick={() => setOpenReportModal(true)}
-                          />
-                        </div>
+                        <Button
+                          // className="btn btn-primary mt-3"
+                          // data-bs-toggle="modal"
+                          // data-bs-target="#myModalShare"
+                          style={{
+                            display:
+                              props?.responseData?.ownerAddress ==
+                                loggedInUser?.wallet_address &&
+                              !props?.responseData?.salesInfo?.isOpenForSale
+                                ? "block"
+                                : "none",
+                            color: "white",
+                            backgroundColor: "#366eff",
+                            marginRight: "1rem",
+                            textTransform: "none",
+                          }}
+                          onClick={openSaleModal}
+                        >
+                          sale
+                        </Button>
+                        <Button
+                          style={{
+                            display:
+                              props?.responseData?.ownerAddress ==
+                                loggedInUser?.wallet_address &&
+                              props?.responseData?.salesInfo?.isOpenForSale
+                                ? "block"
+                                : "none",
+                            color: "white",
+                            backgroundColor: "#366eff",
+                            textTransform: "none",
+                          }}
+                          onClick={() => setOpenRemoveSale(true)}
+                        >
+                          Remove From Sale
+                        </Button>
+                      </div>
+                      <span className="nft-name">{nft.name}</span>
+                      <div
+                        className=""
+                        title={
+                          nft.collectionName
+                            ? nft.collectionName
+                            : "Anafto Collection"
+                        }
+                      >
+                        <Link
+                          style={{
+                            textDecoration: "none",
+                            color: `${fetchPalletsColor(
+                              appearance.colorPalette
+                            )}`,
+                          }}
+                          to={"/collection-details/" + nft?.collectionId}
+                        >
+                          {undefined !== nft?.collectionName &&
+                          nft?.collectionName
+                            ? nft?.collectionName
+                            : nft?.collectionName?.length === 0
+                            ? "Anafto Collection"
+                            : nft?.collectionName}
+                        </Link>
                       </div>
                     </div>
-                    <CustomSnack2
-                      anchorOrigin={{ vertical, horizontal }}
-                      open={open}
-                      onClose={handleClose}
-                      message="Copied"
-                      key={vertical + horizontal}
-                      autoHideDuration={2000}
-                      className="custom-snack"
+                    <div className=" d-flex align-items-center">
+                      <a
+                        className="nav-link dropdown"
+                        href="#"
+                        id="navbarDropdown"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        <img
+                          alt="share"
+                          src={share}
+                          style={{
+                            width: "31px",
+                            height: "31px",
+                            marginRight: "20px",
+                          }}
+                        />
+                      </a>
+                      <ul
+                        className="dropdown-menu profilemenu"
+                        aria-labelledby="navbarDropdown"
+                        style={{
+                          width: "220px",
+                          position: "absolute",
+                          marginLeft: "30px",
+                          boxShadow: "0px 3px 6px #00000012",
+                          border: "1px solid #F4F4F4",
+                          borderRadius: "6px",
+                          background: "#FFFFFF",
+                        }}
+                      >
+                        <li className="list-item">
+                          <CopyToClipboard text={url}>
+                            <button
+                              className="copy-url-button"
+                              onClick={handleClick({
+                                vertical: "top",
+                                horizontal: "right",
+                              })}
+                            >
+                              <img src={copyIcon} alt="icon" className="icon" />
+                              <span className="icon-text">Copy link</span>
+                            </button>
+                          </CopyToClipboard>
+                        </li>
+                        <li className="list-item">
+                          {/* <img src={facebookIcon} alt="icon" className="icon" />
+                        <span className="icon-text">Share on Facebook</span> */}
+                          <FacebookShareButton url={url}>
+                            <img
+                              src={facebookIcon}
+                              alt="icon"
+                              className="icon"
+                            />
+                            <span className="icon-text">Share on Facebook</span>
+                          </FacebookShareButton>
+                        </li>
+                        <li className="list-item">
+                          {/* <img src={twitterIcon} alt="icon" className="icon" />
+                        <span className="icon-text">Share on Twitter</span> */}
+                          <TwitterShareButton url={url}>
+                            <img
+                              src={twitterIcon}
+                              alt="icon"
+                              className="icon"
+                            />
+                            <span className="icon-text">Share on Twitter</span>{" "}
+                          </TwitterShareButton>
+                        </li>
+                      </ul>
+
+                      <img
+                        src={info}
+                        alt="info"
+                        style={{
+                          width: "31px",
+                          height: "31px",
+                          cursor: "pointer",
+                        }}
+                        // data-bs-toggle="modal"
+                        onClick={() => setOpenReportModal(true)}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <CustomSnack2
+                  anchorOrigin={{ vertical, horizontal }}
+                  open={open}
+                  onClose={handleClose}
+                  message="Copied"
+                  key={vertical + horizontal}
+                  autoHideDuration={2000}
+                  className="custom-snack"
+                />
+                <div className="col-xl-5 col-lg-5 col-md-12">
+                  <div className="nftdetail-img">
+                    {nft?.fileExtension?.includes("audio") ? (
+                      <>
+                      <img
+                      onMouseDown={(e) => e.preventDefault()}
+                      onContextMenu={(e) => e.preventDefault()}
+                      // src={nft.cdnUrl}
+                      src={nft.previewImage}
+                      // src={Imagep}
+                      alt="nft"
+                      className="border-radius imginfo_mob"
+                      style={{
+                        maxWidth: "100%",
+                        // height: "837px",
+                        borderRadius: "8px",
+                      }}
                     />
-                    <div className="col-xl-5 col-lg-5 col-md-12">
-                      <div className="nftdetail-img">
-                        {nft?.fileExtension?.includes("audio") ? (
-                          <>
-                            <img
-                              onMouseDown={(e) => e.preventDefault()}
-                              onContextMenu={(e) => e.preventDefault()}
-                              // src={nft.cdnUrl}
-                              src={nft.previewImage}
-                              // src={Imagep}
-                              alt="nft"
-                              className="border-radius imginfo_mob"
-                              style={{
-                                maxWidth: "100%",
-                                // height: "837px",
-                                borderRadius: "8px",
-                              }}
+{/* 
+                    <button onClick={()=>setDisplay(!display)}>play</button> */}
+
+                    <div style={{width:"100%",height:"fit-content"}}>
+                    <ReactPlayer
+                    className="react-player"
+                    controls
+                    width="100%"
+                    height={61}
+                    
+                    playing={display}
+                    url={nft?.cdnUrl}
+                    />
+
+                    </div>
+                    
+                 
+                
+                     </>
+                    ):(nft?.fileExtension?.includes("video") ?(
+                      <>
+                      {/* <img
+                      onMouseDown={(e) => e.preventDefault()}
+                      onContextMenu={(e) => e.preventDefault()}
+                      // src={nft.cdnUrl}
+                      src={nft.previewImage}
+                      // src={Imagep}
+                      alt="nft"
+                      className="border-radius imginfo_mob"
+                      style={{
+                        maxWidth: "100%",
+                        // height: "837px",
+                        borderRadius: "8px",
+                      }}
+                    /> */}
+                     {/* <button onClick={()=>setDisplay(!display)}>play</button> */}
+                    <div style={{width:"auto" ,height:"auto"}}>
+                    <ReactPlayer
+                    className="react-player"
+                    width="100%"
+                    height={187}
+                    controls
+                    url={nft?.cdnUrl}
+                    />
+
+                    </div>
+                     </>
+                    ) :(
+                      <>
+                      {nft.cdnUrl === "" ? (
+                      <img
+                        onMouseDown={(e) => e.preventDefault()}
+                        onContextMenu={(e) => e.preventDefault()}
+                        // src={nft.cdnUrl}
+                        src={nft.ipfsUrl}
+                        // src={Imagep}
+                        alt="nft"
+                        className="border-radius imginfo_mob"
+                        style={{
+                          maxWidth: "100%",
+                          // height: "837px",
+                          borderRadius: "8px",
+                        }}
+                      />
+                    ) : nft.cdnUrl ? (
+                      <img
+                      src={nft?.cdnUrl}
+                       
+                        className="border-radius imginfo_mob"
+                        style={{
+                          maxWidth: "100%",
+                          // height: "837px",
+                          borderRadius: "8px",
+                        }}>
+                          
+                      </img>
+                    ) : (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="110"
+                        height="110"
+                        viewBox="0 0 110 110"
+                      >
+                        <g id="image" transform="translate(-372 -618)">
+                          <rect
+                            id="Rectangle_271"
+                            data-name="Rectangle 271"
+                            width="110"
+                            height="110"
+                            transform="translate(372 618)"
+                            fill="none"
+                          />
+                          <g
+                            id="Icon_feather-image"
+                            data-name="Icon feather-image"
+                            transform="translate(380 626)"
+                          >
+                            <path
+                              id="Path_34"
+                              data-name="Path 34"
+                              d="M15.053,4.5H88.926A10.553,10.553,0,0,1,99.479,15.053V88.926A10.553,10.553,0,0,1,88.926,99.479H15.053A10.553,10.553,0,0,1,4.5,88.926V15.053A10.553,10.553,0,0,1,15.053,4.5Z"
+                              transform="translate(-4.5 -4.5)"
+                              fill="none"
+                              stroke={`${fetchPalletsColor(
+                                appearance.colorPalette
+                              )}`}
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="5"
                             />
-
-                            <button onClick={() => setDisplay(!display)}>play</button>
-
-                            <div style={{ display: display ? "block" : "none" }}>
-                              <ReactPlayer
-                                className="react-player"
-                                width="100%"
-                                height={0}
-                                playing={display}
-                                url={nft?.cdnUrl}
-                              />
-
-                            </div>
-
-
-
-                          </>
-                        ) : (nft?.fileExtension?.includes("video") ? (
-                          <>
-                            <img
-                              onMouseDown={(e) => e.preventDefault()}
-                              onContextMenu={(e) => e.preventDefault()}
-                              // src={nft.cdnUrl}
-                              src={nft.previewImage}
-                              // src={Imagep}
-                              alt="nft"
-                              className="border-radius imginfo_mob"
-                              style={{
-                                maxWidth: "100%",
-                                // height: "837px",
-                                borderRadius: "8px",
-                              }}
+                            <path
+                              id="Path_35"
+                              data-name="Path 35"
+                              d="M26.33,18.415A7.915,7.915,0,1,1,18.415,10.5,7.915,7.915,0,0,1,26.33,18.415Z"
+                              transform="translate(10.607 10.607)"
+                              fill="none"
+                              stroke={`${fetchPalletsColor(
+                                appearance.colorPalette
+                              )}`}
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="5"
                             />
-                            <button onClick={() => setDisplay(!display)}>play</button>
-                            <div style={{ display: display ? "block" : "none" }}>
-                              <ReactPlayer
-                                className="react-player"
-                                width="100%"
-                                height={187}
-                                controls
-                                playing={display}
-                                url={nft?.cdnUrl}
-                              />
+                            <path
+                              id="Path_36"
+                              data-name="Path 36"
+                              d="M91.926,41.383,65.543,15,7.5,73.043"
+                              transform="translate(3.053 21.936)"
+                              fill="none"
+                              stroke={`${fetchPalletsColor(
+                                appearance.colorPalette
+                              )}`}
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="5"
+                            />
+                          </g>
+                        </g>
+                      </svg>
+                    )}
+                      </>
 
-                            </div>
-                          </>
-                        ) : (
-                          <>
-                            {nft.cdnUrl === "" ? (
-                              <img
-                                onMouseDown={(e) => e.preventDefault()}
-                                onContextMenu={(e) => e.preventDefault()}
-                                // src={nft.cdnUrl}
-                                src={nft.ipfsUrl}
-                                // src={Imagep}
-                                alt="nft"
-                                className="border-radius imginfo_mob"
-                                style={{
-                                  maxWidth: "100%",
-                                  // height: "837px",
-                                  borderRadius: "8px",
-                                }}
-                              />
-                            ) : nft.cdnUrl ? (
-                              <img
-                                src={nft?.cdnUrl}
-
-                                className="border-radius imginfo_mob"
-                                style={{
-                                  maxWidth: "100%",
-                                  // height: "837px",
-                                  borderRadius: "8px",
-                                }}>
-
-                              </img>
-                            ) : (
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="110"
-                                height="110"
-                                viewBox="0 0 110 110"
-                              >
-                                <g id="image" transform="translate(-372 -618)">
-                                  <rect
-                                    id="Rectangle_271"
-                                    data-name="Rectangle 271"
-                                    width="110"
-                                    height="110"
-                                    transform="translate(372 618)"
-                                    fill="none"
-                                  />
-                                  <g
-                                    id="Icon_feather-image"
-                                    data-name="Icon feather-image"
-                                    transform="translate(380 626)"
-                                  >
-                                    <path
-                                      id="Path_34"
-                                      data-name="Path 34"
-                                      d="M15.053,4.5H88.926A10.553,10.553,0,0,1,99.479,15.053V88.926A10.553,10.553,0,0,1,88.926,99.479H15.053A10.553,10.553,0,0,1,4.5,88.926V15.053A10.553,10.553,0,0,1,15.053,4.5Z"
-                                      transform="translate(-4.5 -4.5)"
-                                      fill="none"
-                                      stroke={`${fetchPalletsColor(
-                                        appearance.colorPalette
-                                      )}`}
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="5"
-                                    />
-                                    <path
-                                      id="Path_35"
-                                      data-name="Path 35"
-                                      d="M26.33,18.415A7.915,7.915,0,1,1,18.415,10.5,7.915,7.915,0,0,1,26.33,18.415Z"
-                                      transform="translate(10.607 10.607)"
-                                      fill="none"
-                                      stroke={`${fetchPalletsColor(
-                                        appearance.colorPalette
-                                      )}`}
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="5"
-                                    />
-                                    <path
-                                      id="Path_36"
-                                      data-name="Path 36"
-                                      d="M91.926,41.383,65.543,15,7.5,73.043"
-                                      transform="translate(3.053 21.936)"
-                                      fill="none"
-                                      stroke={`${fetchPalletsColor(
-                                        appearance.colorPalette
-                                      )}`}
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="5"
-                                    />
-                                  </g>
-                                </g>
-                              </svg>
-                            )}
-                          </>
-
-                        ))}
-
-                        {/*
+                    ))}
+                   
+                    {/*
                   <img
                     onMouseDown={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()}
                     // src={nft.cdnUrl}
@@ -801,17 +801,17 @@ export default function NftInformation(props) {
                     }}
                   />
                   */}
-                      </div>
-                      <div className="row mt-4 desktop-acti">
-                        <PricingHistoryComponentTable id={id} />
-                      </div>
-                    </div>
-                    <div className="col-xl-7 col-lg-7 col-md-12 details-section">
-                      <div className="d-none d-sm-none d-md-none d-lg-block">
-                        <div className="row" id="share_info">
-                          <div className="col-xl-10 col-lg-10 col-md-9 col-sm-9">
-                            <div className="edit-sell-button">
-                              {/* <Button
+                  </div>
+                  <div className="row mt-4 desktop-acti">
+                    <PricingHistoryComponentTable id={id} />
+                  </div>
+                </div>
+                <div className="col-xl-7 col-lg-7 col-md-12 details-section">
+                  <div className="d-none d-sm-none d-md-none d-lg-block">
+                    <div className="row" id="share_info">
+                      <div className="col-xl-10 col-lg-10 col-md-9 col-sm-9">
+                        <div className="edit-sell-button">
+                          {/* <Button
                         style={{
                           display:
                             props?.responseData?.ownerAddress == loggedInUser?.wallet_address
@@ -833,470 +833,470 @@ export default function NftInformation(props) {
                           Edit
                         </Link>
                       </Button> */}
-                              {nft.length !== 0 ? (
-                                <Button
-                                  // className="btn btn-primary mt-3"
-                                  // data-bs-toggle="modal"
-                                  // data-bs-target="#myModalShare"
-                                  style={{
-                                    display:
-                                      props?.responseData?.ownerAddress ==
-                                        loggedInUser?.wallet_address &&
-                                        !props?.responseData?.salesInfo?.isOpenForSale
-                                        ? "block"
-                                        : "none",
-                                    color: "white",
-                                    backgroundColor: `${fetchPalletsColor(
-                                      appearance?.colorPalette
-                                    )}`,
-                                    marginRight: "1rem",
-                                    textTransform: "none",
-                                  }}
-                                  onClick={openSaleModal}
-                                >
-                                  Put it on sale
-                                </Button>
-                              ) : null}
-                              <Button
-                                style={{
-                                  display:
-                                    props?.responseData?.ownerAddress ==
-                                      loggedInUser?.wallet_address &&
-                                      props?.responseData?.salesInfo?.isOpenForSale
-                                      ? "block"
-                                      : "none",
-                                  color: "white",
-                                  backgroundColor: `${fetchPalletsColor(
-                                    appearance?.colorPalette
-                                  )}`,
-                                  textTransform: "none",
-                                }}
-                                onClick={() => setOpenRemoveSale(true)}
-                              >
-                                Remove from Sale
-                              </Button>
-                            </div>
-                            <span className="nft-name">{nft.name}</span>
-                            <div
-                              className=""
-                              title={
-                                nft.collectionName
-                                  ? nft.collectionName
-                                  : "Anafto Collection"
-                              }
+                          {nft.length !== 0 ? (
+                            <Button
+                              // className="btn btn-primary mt-3"
+                              // data-bs-toggle="modal"
+                              // data-bs-target="#myModalShare"
+                              style={{
+                                display:
+                                  props?.responseData?.ownerAddress ==
+                                    loggedInUser?.wallet_address &&
+                                  !props?.responseData?.salesInfo?.isOpenForSale
+                                    ? "block"
+                                    : "none",
+                                color: "white",
+                                backgroundColor: `${fetchPalletsColor(
+                                  appearance?.colorPalette
+                                )}`,
+                                marginRight: "1rem",
+                                textTransform: "none",
+                              }}
+                              onClick={openSaleModal}
                             >
-                              <Link
-                                style={{
-                                  textDecoration: "none",
-                                  color: `${fetchPalletsColor(
-                                    appearance.colorPalette
-                                  )}`,
-                                }}
-                                to={"/collection-details/" + nft?.collectionId}
-                              >
-                                {undefined !== nft?.collectionName &&
-                                  nft?.collectionName
-                                  ? nft?.collectionName
-                                  : nft?.collectionName?.length === 0
-                                    ? "Anafto Collection"
-                                    : nft?.collectionName}
-                              </Link>
-                            </div>
-                          </div>
-                          <div className="col-xl-2 col-lg-2 col-md-3 col-sm-3 d-flex align-items-center">
-                            <div>
-                              <a
-                                className="nav-link dropdown"
-                                href="#"
-                                id="navbarDropdown"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
-                                <img
-                                  alt="share"
-                                  src={share}
-                                  style={{
-                                    width: "31px",
-                                    height: "31px",
-                                    marginRight: "0px",
-                                  }}
-                                />
-                              </a>
-                              <ul
-                                className="dropdown-menu profilemenu"
-                                aria-labelledby="navbarDropdown"
-                                style={{
-                                  width: "220px",
-                                  position: "absolute",
-                                  marginLeft: "30px",
-                                  boxShadow: "0px 3px 6px #00000012",
-                                  border: "1px solid #F4F4F4",
-                                  borderRadius: "6px",
-                                  background: "#FFFFFF",
-                                }}
-                              >
-                                <li className="list-item">
-                                  {" "}
-                                  <CopyToClipboard text={url}>
-                                    <button
-                                      className="copy-url-button"
-                                      onClick={handleClick({
-                                        vertical: "top",
-                                        horizontal: "right",
-                                      })}
-                                    >
-                                      <img
-                                        src={copyIcon}
-                                        alt="icon"
-                                        className="icon"
-                                      />
-                                      <span className="icon-text">Copy link</span>
-                                    </button>
-                                  </CopyToClipboard>
-                                </li>
-                                <li className="list-item">
-                                  {/* <img src={facebookIcon} alt="icon" className="icon" />
-                          <span className="icon-text">Share on Facebook</span> */}
-                                  <FacebookShareButton url={url}>
-                                    <img
-                                      src={facebookIcon}
-                                      alt="icon"
-                                      className="icon"
-                                    />
-                                    <span className="icon-text">
-                                      Share on Facebook
-                                    </span>
-                                  </FacebookShareButton>
-                                </li>
-                                <li className="list-item">
-                                  <TwitterShareButton url={url}>
-                                    <img
-                                      src={twitterIcon}
-                                      alt="icon"
-                                      className="icon"
-                                    />
-                                    <span className="icon-text">
-                                      Share on Twitter
-                                    </span>{" "}
-                                  </TwitterShareButton>
-                                </li>
-                              </ul>
-                            </div>
-                            <CustomSnack
-                              anchorOrigin={{ vertical, horizontal }}
-                              open={open}
-                              onClose={handleClose}
-                              message="Copied"
-                              key={vertical + horizontal}
-                              // autoHideDuration={2000}
-                              className="custom-snack"
-                            />
+                              Put it on sale
+                            </Button>
+                          ) : null}
+                          <Button
+                            style={{
+                              display:
+                                props?.responseData?.ownerAddress ==
+                                  loggedInUser?.wallet_address &&
+                                props?.responseData?.salesInfo?.isOpenForSale
+                                  ? "block"
+                                  : "none",
+                              color: "white",
+                              backgroundColor: `${fetchPalletsColor(
+                                appearance?.colorPalette
+                              )}`,
+                              textTransform: "none",
+                            }}
+                            onClick={() => setOpenRemoveSale(true)}
+                          >
+                            Remove from Sale
+                          </Button>
+                        </div>
+                        <span className="nft-name">{nft.name}</span>
+                        <div
+                          className=""
+                          title={
+                            nft.collectionName
+                              ? nft.collectionName
+                              : "Anafto Collection"
+                          }
+                        >
+                          <Link
+                            style={{
+                              textDecoration: "none",
+                              color: `${fetchPalletsColor(
+                                appearance.colorPalette
+                              )}`,
+                            }}
+                            to={"/collection-details/" + nft?.collectionId}
+                          >
+                            {undefined !== nft?.collectionName &&
+                            nft?.collectionName
+                              ? nft?.collectionName
+                              : nft?.collectionName?.length === 0
+                              ? "Anafto Collection"
+                              : nft?.collectionName}
+                          </Link>
+                        </div>
+                      </div>
+                      <div className="col-xl-2 col-lg-2 col-md-3 col-sm-3 d-flex align-items-center">
+                        <div>
+                          <a
+                            className="nav-link dropdown"
+                            href="#"
+                            id="navbarDropdown"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
                             <img
-                              src={info}
-                              alt="info"
+                              alt="share"
+                              src={share}
                               style={{
                                 width: "31px",
                                 height: "31px",
-                                cursor: "pointer",
-                              }}
-                              // data-bs-toggle="modal"
-                              // data-bs-target="#myModalReport"
-                              onClick={() => {
-                                setOpenReportModal(true);
+                                marginRight: "0px",
                               }}
                             />
-                            {/* <!-- The Modal --> */}
-                            <div className="modal" id="myModalReport">
-                              <div className="modal-dialog">
-                                <div
-                                  className="modal-content"
-                                  style={{
-                                    borderRadius: "10px",
-                                    paddingRight: "10px",
-                                  }}
+                          </a>
+                          <ul
+                            className="dropdown-menu profilemenu"
+                            aria-labelledby="navbarDropdown"
+                            style={{
+                              width: "220px",
+                              position: "absolute",
+                              marginLeft: "30px",
+                              boxShadow: "0px 3px 6px #00000012",
+                              border: "1px solid #F4F4F4",
+                              borderRadius: "6px",
+                              background: "#FFFFFF",
+                            }}
+                          >
+                            <li className="list-item">
+                              {" "}
+                              <CopyToClipboard text={url}>
+                                <button
+                                  className="copy-url-button"
+                                  onClick={handleClick({
+                                    vertical: "top",
+                                    horizontal: "right",
+                                  })}
                                 >
-                                  {/* <!-- Modal Header --> */}
-                                  <div className="modal-header">
-                                    <h4 className="modal-title font-15 font-weight-700 text-dark">
-                                      Report this item
-                                    </h4>
-                                    <button
-                                      type="button"
-                                      className="btn-close"
-                                      data-bs-dismiss="modal"
-                                      style={{
-                                        width: "10px",
-                                        height: "10px",
-                                        boxShadow: "none",
-                                      }}
-                                    ></button>
-                                  </div>
+                                  <img
+                                    src={copyIcon}
+                                    alt="icon"
+                                    className="icon"
+                                  />
+                                  <span className="icon-text">Copy link</span>
+                                </button>
+                              </CopyToClipboard>
+                            </li>
+                            <li className="list-item">
+                              {/* <img src={facebookIcon} alt="icon" className="icon" />
+                          <span className="icon-text">Share on Facebook</span> */}
+                              <FacebookShareButton url={url}>
+                                <img
+                                  src={facebookIcon}
+                                  alt="icon"
+                                  className="icon"
+                                />
+                                <span className="icon-text">
+                                  Share on Facebook
+                                </span>
+                              </FacebookShareButton>
+                            </li>
+                            <li className="list-item">
+                              <TwitterShareButton url={url}>
+                                <img
+                                  src={twitterIcon}
+                                  alt="icon"
+                                  className="icon"
+                                />
+                                <span className="icon-text">
+                                  Share on Twitter
+                                </span>{" "}
+                              </TwitterShareButton>
+                            </li>
+                          </ul>
+                        </div>
+                        <CustomSnack
+                          anchorOrigin={{ vertical, horizontal }}
+                          open={open}
+                          onClose={handleClose}
+                          message="Copied"
+                          key={vertical + horizontal}
+                          // autoHideDuration={2000}
+                          className="custom-snack"
+                        />
+                        <img
+                          src={info}
+                          alt="info"
+                          style={{
+                            width: "31px",
+                            height: "31px",
+                            cursor: "pointer",
+                          }}
+                          // data-bs-toggle="modal"
+                          // data-bs-target="#myModalReport"
+                          onClick={() => {
+                            setOpenReportModal(true);
+                          }}
+                        />
+                        {/* <!-- The Modal --> */}
+                        <div className="modal" id="myModalReport">
+                          <div className="modal-dialog">
+                            <div
+                              className="modal-content"
+                              style={{
+                                borderRadius: "10px",
+                                paddingRight: "10px",
+                              }}
+                            >
+                              {/* <!-- Modal Header --> */}
+                              <div className="modal-header">
+                                <h4 className="modal-title font-15 font-weight-700 text-dark">
+                                  Report this item
+                                </h4>
+                                <button
+                                  type="button"
+                                  className="btn-close"
+                                  data-bs-dismiss="modal"
+                                  style={{
+                                    width: "10px",
+                                    height: "10px",
+                                    boxShadow: "none",
+                                  }}
+                                ></button>
+                              </div>
 
-                                  {/* <!-- Modal body --> */}
-                                  <div className="modal-body">
-                                    <h5
-                                      className="font-14 font-weight-700 text-dark"
-                                      style={{ marginLeft: "-0.6em" }}
+                              {/* <!-- Modal body --> */}
+                              <div className="modal-body">
+                                <h5
+                                  className="font-14 font-weight-700 text-dark"
+                                  style={{ marginLeft: "-0.6em" }}
+                                >
+                                  Reason
+                                </h5>
+                                <div
+                                  className="input-group mt-3"
+                                  style={{ marginLeft: "-0.6em" }}
+                                >
+                                  <select
+                                    className="form-select"
+                                    id="inputGroupSelect02"
+                                    onChange={(e) => handleChange(e)}
+                                  >
+                                    <option
+                                      value="Fake collection or possible scam"
+                                      selected
                                     >
-                                      Reason
-                                    </h5>
-                                    <div
-                                      className="input-group mt-3"
-                                      style={{ marginLeft: "-0.6em" }}
-                                    >
-                                      <select
-                                        className="form-select"
-                                        id="inputGroupSelect02"
-                                        onChange={(e) => handleChange(e)}
-                                      >
-                                        <option
-                                          value="Fake collection or possible scam"
-                                          selected
-                                        >
-                                          Fake collection or possible scam
-                                        </option>
-                                        <option value="Explicit and sensitive content">
-                                          Explicit and sensitive content
-                                        </option>
-                                        <option value="Spam">Spam</option>
-                                        <option value="Might be stolen">
-                                          Might be stolen
-                                        </option>
-                                        <option value="Other">Other</option>
-                                      </select>
-                                    </div>
-                                  </div>
-
-                                  {/* <!-- Modal footer --> */}
-                                  <div className="modal-footer mb-4">
-                                    <button
-                                      type="button"
-                                      className="btn btn-primary w-100"
-                                      data-bs-dismiss="modal"
-                                      style={{ marginLeft: "1.1em" }}
-                                    // onClick={makeReport}
-                                    >
-                                      Make Offer
-                                    </button>
-                                  </div>
+                                      Fake collection or possible scam
+                                    </option>
+                                    <option value="Explicit and sensitive content">
+                                      Explicit and sensitive content
+                                    </option>
+                                    <option value="Spam">Spam</option>
+                                    <option value="Might be stolen">
+                                      Might be stolen
+                                    </option>
+                                    <option value="Other">Other</option>
+                                  </select>
                                 </div>
+                              </div>
+
+                              {/* <!-- Modal footer --> */}
+                              <div className="modal-footer mb-4">
+                                <button
+                                  type="button"
+                                  className="btn btn-primary w-100"
+                                  data-bs-dismiss="modal"
+                                  style={{ marginLeft: "1.1em" }}
+                                  // onClick={makeReport}
+                                >
+                                  Make Offer
+                                </button>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div className="second-text align-row">
-                        <span className="text">
-                          Current Price:&nbsp;
-                          <span className="nft-value">
-                            {blockchainCheck(blockchain)}
-                            {salesInfo?.price}&nbsp;{salesInfo?.currency}
-                          </span>
-                        </span>
-                        {showDateSection ? (
-                          <span className="align-row">
-                            <i className="far fa-clock clock-icon"></i>
-                            <span className="time">{message} </span>
-                          </span>
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                      <div className="row third-text">
-                        <div className="col-lg-6 col-sm-12">
-                          <span className="text">
-                            Owned by:&nbsp;
-                            <Link
-                              to={"/user-profile/" + owner?._id}
-                              style={{ textDecoration: "none" }}
-                            >
-                              <span className="text-name fw-b">
-                                {/* {ownedBy} */}
-                                {owner?.wallet_address ===
-                                  user?.walletAddress?.address
-                                  ? "You"
-                                  : ownedBy}
-                                {/* {(String(ownedBy).length >= 7) ? (!ownedBy ? " " : (String(ownedBy).substring(0, 8) + "...")) : (String(ownedBy) === undefined ? "" : ownedBy)}                     */}
-                              </span>
-                            </Link>
-                          </span>
-                        </div>
-                        <div className="col-lg-6 col-sm-12">
-                          <span className="text">
-                            Created by:&nbsp;
-                            <Link
-                              to={"/user-profile/" + owner?._id}
-                              style={{ textDecoration: "none" }}
-                            >
-                              <span className="text-name fw-b">
-                                {/* {createdBy} */}
-                                {creator?.wallet_address ===
-                                  user?.walletAddress?.address
-                                  ? "You"
-                                  : createdBy}
-                                {/* {(String(createdBy).length >= 7) ? (!createdBy ? " " : (String(createdBy).substring(0, 8) + "...")) : (String(createdBy) === undefined ? "" : createdBy)}                     */}
-                              </span>
-                            </Link>
-                            <span className="text-name fw-b"></span>
-                          </span>
-                        </div>
-                      </div>
-                      <div className="fourth-text">
-                        <div style={{ marginRight: "20px" }}>
-                          <VisibilityIcon
-                            style={{
-                              fontSize: "21px",
-                              color: `${fetchPalletsColor(
-                                appearance.colorPalette
-                              )}`,
-                            }}
-                          />
-                          <span
-                            className="text fw-b"
-                            style={{ marginLeft: "0.5em" }}
-                          >
-                            {nft.viewsCount}
-                          </span>
-                        </div>
-                        <div>
-                          <FavoriteIcon
-                            style={{ fontSize: "17px", color: "#EF3643" }}
-                          />
-                          <span
-                            className="text fw-b"
-                            style={{ marginLeft: "0.5em" }}
-                          >
-                            {nft?.likes?.length}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="">
-                        <h4 className="title">Description</h4>
-                        <p className="description">{nft.description}</p>
-                      </div>
-
-                      {/*  IF nft is not created by logged in user these buttons will be shown */}
-
-                      <div className="buy-offer-btn">
-                        <Button
-                          style={{
-                            display:
-                              props?.responseData?.ownedBy != userIdLocal &&
-                                props?.responseData?.salesInfo?.isOpenForSale
-                                ? "block"
-                                : "none",
-                            background: `${fetchPalletsColor(
-                              appearance.colorPalette
-                            )}`,
-                          }}
-                          onClick={buyNft}
+                    </div>
+                  </div>
+                  <div className="second-text align-row">
+                    <span className="text">
+                      Current Price:&nbsp;
+                      <span className="nft-value">
+                        {blockchainCheck(blockchain)}
+                        {salesInfo?.price}&nbsp;{salesInfo?.currency}
+                      </span>
+                    </span>
+                    {showDateSection ? (
+                      <span className="align-row">
+                        <i className="far fa-clock clock-icon"></i>
+                        <span className="time">{message} </span>
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div className="row third-text">
+                    <div className="col-lg-6 col-sm-12">
+                      <span className="text">
+                        Owned by:&nbsp;
+                        <Link
+                          to={"/user-profile/" + owner?._id}
+                          style={{ textDecoration: "none" }}
                         >
-                          Buy Now
-                        </Button>
-
-                        <Button
-                          data-bs-toggle="modal"
-                          data-bs-target="#myModalShare"
-                          style={{
-                            display:
-                              props?.responseData?.createdBy != userIdLocal &&
-                                props?.responseData?.salesInfo?.isOpenForSale
-                                ? "block"
-                                : "none",
-                            color: `${fetchPalletsColor(appearance.colorPalette)}`,
-                            backgroundColor: "white",
-                            textTransform: "none",
-                            border: `1px solid ${fetchPalletsColor(
-                              appearance.colorPalette
-                            )}`,
-                          }}
-                          onClick={makeOffer}
-                          className="makeOfferButton"
+                          <span className="text-name fw-b">
+                            {/* {ownedBy} */}
+                            {owner?.wallet_address ===
+                            user?.walletAddress?.address
+                              ? "You"
+                              : ownedBy}
+                            {/* {(String(ownedBy).length >= 7) ? (!ownedBy ? " " : (String(ownedBy).substring(0, 8) + "...")) : (String(ownedBy) === undefined ? "" : ownedBy)}                     */}
+                          </span>
+                        </Link>
+                      </span>
+                    </div>
+                    <div className="col-lg-6 col-sm-12">
+                      <span className="text">
+                        Created by:&nbsp;
+                        <Link
+                          to={"/user-profile/" + owner?._id}
+                          style={{ textDecoration: "none" }}
                         >
-                          <span>Make Offer</span>
-                        </Button>
-                      </div>
+                          <span className="text-name fw-b">
+                            {/* {createdBy} */}
+                            {creator?.wallet_address ===
+                            user?.walletAddress?.address
+                              ? "You"
+                              : createdBy}
+                            {/* {(String(createdBy).length >= 7) ? (!createdBy ? " " : (String(createdBy).substring(0, 8) + "...")) : (String(createdBy) === undefined ? "" : createdBy)}                     */}
+                          </span>
+                        </Link>
+                        <span className="text-name fw-b"></span>
+                      </span>
+                    </div>
+                  </div>
+                  <div className="fourth-text">
+                    <div style={{ marginRight: "20px" }}>
+                      <VisibilityIcon
+                        style={{
+                          fontSize: "21px",
+                          color: `${fetchPalletsColor(
+                            appearance.colorPalette
+                          )}`,
+                        }}
+                      />
+                      <span
+                        className="text fw-b"
+                        style={{ marginLeft: "0.5em" }}
+                      >
+                        {nft.viewsCount}
+                      </span>
+                    </div>
+                    <div>
+                      <FavoriteIcon
+                        style={{ fontSize: "17px", color: "#EF3643" }}
+                      />
+                      <span
+                        className="text fw-b"
+                        style={{ marginLeft: "0.5em" }}
+                      >
+                        {nft?.likes?.length}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="">
+                    <h4 className="title">Description</h4>
+                    <p className="description">{nft.description}</p>
+                  </div>
 
-                      <div className="grap-area">
-                        <ul>
-                          <li
-                            onClick={() => {
-                              setTab(1);
-                            }}
-                            style={{
-                              borderBottom:
-                                tab === 1
-                                  ? `2px solid ${fetchPalletsColor(
-                                    appearance?.colorPalette
-                                  )}`
-                                  : "",
-                              color: tab === 1 ? "#000000" : "#828282",
-                              fontWeight: tab === 1 ? 600 : "",
-                              marginRight: "16px",
-                              fontFamily: tab === 1 ? "poppins-bold" : "poppins",
-                            }}
-                          >
-                            Pricing History
-                          </li>
-                          <li
-                            onClick={() => {
-                              setTab(2);
-                            }}
-                            style={{
-                              borderBottom:
-                                tab === 2
-                                  ? `2px solid ${fetchPalletsColor(
-                                    appearance?.colorPalette
-                                  )}`
-                                  : "",
-                              color: tab === 2 ? "#000000" : "#828282",
-                              fontWeight: tab === 2 ? 600 : "",
-                              marginRight: "16px",
-                              fontFamily: tab === 2 ? "poppins-bold" : "poppins",
-                            }}
-                          >
-                            Listings
-                          </li>
-                          <li
-                            onClick={() => {
-                              setTab(3);
-                            }}
-                            style={{
-                              borderBottom:
-                                tab === 3
-                                  ? `2px solid ${fetchPalletsColor(
-                                    appearance?.colorPalette
-                                  )}`
-                                  : "",
-                              color: tab === 3 ? "#000000" : "#828282",
-                              fontWeight: tab === 3 ? 600 : "",
-                              marginRight: "16px",
-                              fontFamily: tab === 3 ? "poppins-bold" : "poppins",
-                            }}
-                          >
-                            Offers
-                          </li>
-                          <li
-                            onClick={() => {
-                              setTab(4);
-                            }}
-                            style={{
-                              borderBottom:
-                                tab === 4
-                                  ? `2px solid ${fetchPalletsColor(
-                                    appearance?.colorPalette
-                                  )}`
-                                  : "",
-                              color: tab === 4 ? "#000000" : "#828282",
-                              fontWeight: tab === 4 ? 600 : "",
-                              marginRight: "16px",
-                              fontFamily: tab === 4 ? "poppins-bold" : "poppins",
-                            }}
-                          >
-                            Details
-                          </li>
-                          {/* <li
+                  {/*  IF nft is not created by logged in user these buttons will be shown */}
+
+                  <div className="buy-offer-btn">
+                    <Button
+                      style={{
+                        display:
+                          props?.responseData?.ownedBy != userIdLocal &&
+                          props?.responseData?.salesInfo?.isOpenForSale
+                            ? "block"
+                            : "none",
+                        background: `${fetchPalletsColor(
+                          appearance.colorPalette
+                        )}`,
+                      }}
+                      onClick={buyNft}
+                    >
+                      Buy Now
+                    </Button>
+
+                    <Button
+                      data-bs-toggle="modal"
+                      data-bs-target="#myModalShare"
+                      style={{
+                        display:
+                          props?.responseData?.createdBy != userIdLocal &&
+                          props?.responseData?.salesInfo?.isOpenForSale
+                            ? "block"
+                            : "none",
+                        color: `${fetchPalletsColor(appearance.colorPalette)}`,
+                        backgroundColor: "white",
+                        textTransform: "none",
+                        border: `1px solid ${fetchPalletsColor(
+                          appearance.colorPalette
+                        )}`,
+                      }}
+                      onClick={makeOffer}
+                      className="makeOfferButton"
+                    >
+                      <span>Make Offer</span>
+                    </Button>
+                  </div>
+
+                  <div className="grap-area">
+                    <ul>
+                      <li
+                        onClick={() => {
+                          setTab(1);
+                        }}
+                        style={{
+                          borderBottom:
+                            tab === 1
+                              ? `2px solid ${fetchPalletsColor(
+                                  appearance?.colorPalette
+                                )}`
+                              : "",
+                          color: tab === 1 ? "#000000" : "#828282",
+                          fontWeight: tab === 1 ? 600 : "",
+                          marginRight: "16px",
+                          fontFamily: tab === 1 ? "poppins-bold" : "poppins",
+                        }}
+                      >
+                        Pricing History
+                      </li>
+                      <li
+                        onClick={() => {
+                          setTab(2);
+                        }}
+                        style={{
+                          borderBottom:
+                            tab === 2
+                              ? `2px solid ${fetchPalletsColor(
+                                  appearance?.colorPalette
+                                )}`
+                              : "",
+                          color: tab === 2 ? "#000000" : "#828282",
+                          fontWeight: tab === 2 ? 600 : "",
+                          marginRight: "16px",
+                          fontFamily: tab === 2 ? "poppins-bold" : "poppins",
+                        }}
+                      >
+                        Listings
+                      </li>
+                      <li
+                        onClick={() => {
+                          setTab(3);
+                        }}
+                        style={{
+                          borderBottom:
+                            tab === 3
+                              ? `2px solid ${fetchPalletsColor(
+                                  appearance?.colorPalette
+                                )}`
+                              : "",
+                          color: tab === 3 ? "#000000" : "#828282",
+                          fontWeight: tab === 3 ? 600 : "",
+                          marginRight: "16px",
+                          fontFamily: tab === 3 ? "poppins-bold" : "poppins",
+                        }}
+                      >
+                        Offers
+                      </li>
+                      <li
+                        onClick={() => {
+                          setTab(4);
+                        }}
+                        style={{
+                          borderBottom:
+                            tab === 4
+                              ? `2px solid ${fetchPalletsColor(
+                                  appearance?.colorPalette
+                                )}`
+                              : "",
+                          color: tab === 4 ? "#000000" : "#828282",
+                          fontWeight: tab === 4 ? 600 : "",
+                          marginRight: "16px",
+                          fontFamily: tab === 4 ? "poppins-bold" : "poppins",
+                        }}
+                      >
+                        Details
+                      </li>
+                      {/* <li
                     onClick={() => {
                       setTab(3);
                     }}
@@ -1309,57 +1309,57 @@ export default function NftInformation(props) {
                   >
                     Offers
                   </li> */}
-                        </ul>
-                        {tab === 1 ? (
-                          <PricingHistoryComponentGraph
-                            id={id}
-                            currency={nft?.salesInfo?.currency}
-                          />
-                        ) : (
-                          ""
-                        )}
-                        {tab === 2 ? <ListingsTable id={id} /> : ""}
-                        {tab === 3 ? <ListingsTable id={id} /> : ""}
-                        {tab === 4 ? <DetailPage nft={nft} /> : ""}
-                      </div>
-                    </div>
+                    </ul>
+                    {tab === 1 ? (
+                      <PricingHistoryComponentGraph
+                        id={id}
+                        currency={nft?.salesInfo?.currency}
+                      />
+                    ) : (
+                      ""
+                    )}
+                    {tab === 2 ? <ListingsTable id={id} /> : ""}
+                    {tab === 3 ? <ListingsTable id={id} /> : ""}
+                    {tab === 4 ? <DetailPage nft={nft} /> : ""}
                   </div>
-
-                  <div className="row mt-4 activities">
-                    <div className="col-xl-5 col-lg-5 col-md-12 col-sm-12">
-                      <PricingHistoryComponentTable id={id} />
-                    </div>
-                  </div>
-
-                  <div
-                    className="more-Collection-div"
-                    style={{ display: moreNft?.length > 0 ? "block" : "none" }}
-                  >
-                    <label className="MoreCollection">
-                      More from this collection
-                    </label>
-                    <div
-                      className="nftTileContainer ntf_row scroll-nft-card"
-                      style={{
-                        justifyContent: "start",
-                        overflowX: moreNft?.length > 4 ? "scroll" : "hidden",
-                      }}
-                    >
-                      {moreNft.map((nft) => {
-                        return (
-                          <>
-                            <NftCardsHome nft={nft} appearance={appearance} />
-                          </>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  {/* <div className="row mt-4">
-                <PricingHistoryComponentTable id={id} />
-              </div> */}
                 </div>
               </div>
+
+              <div className="row mt-4 activities">
+                <div className="col-xl-5 col-lg-5 col-md-12 col-sm-12">
+                  <PricingHistoryComponentTable id={id} />
+                </div>
+              </div>
+
+              <div
+                className="more-Collection-div"
+                style={{ display: moreNft?.length > 0 ? "block" : "none" }}
+              >
+                <label className="MoreCollection">
+                  More from this collection
+                </label>
+                <div
+                  className="nftTileContainer ntf_row scroll-nft-card"
+                  style={{
+                    justifyContent: "start",
+                    overflowX: moreNft?.length > 4 ? "scroll" : "hidden",
+                  }}
+                >
+                  {moreNft.map((nft) => {
+                    return (
+                      <>
+                        <NftCardsHome nft={nft} appearance={appearance} />
+                      </>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* <div className="row mt-4">
+                <PricingHistoryComponentTable id={id} />
+              </div> */}
+            </div>
+          </div>
           }
           <div
             className="report-outer"
@@ -1429,16 +1429,16 @@ export default function NftInformation(props) {
                       type="number"
                       autoComplete="off"
                       placeholder={salesInfo?.price}
-                      onChange={(e) => {
-                        period.price = e.target.value;
-
+                      onChange={(e)=>{
+                        period.price=e.target.value;
+                       
 
                       }}
-
-                    // onChange={(e) => {
-                    //   price.current = e.target.value;
-                    //   checkChanges();
-                    // }}
+                     
+                      // onChange={(e) => {
+                      //   price.current = e.target.value;
+                      //   checkChanges();
+                      // }}
                     />
                     <h3 className="reason-text"> Keep it on sale until :</h3>
                     <input
@@ -1447,29 +1447,29 @@ export default function NftInformation(props) {
                       // min="0"
                       // type="date"
                       autoComplete="off"
-                      onChange={(e) => {
-                        period.expiryDate = e.target.value;
+                      onChange={(e)=>{
+                        period.expiryDate=e.target.value;
                       }}
-                    // value="23"
-                    // onChange={(e) => {
-                    //   price.current = e.target.value;
-                    //   checkChanges();
-                    // }}
+                      // value="23"
+                      // onChange={(e) => {
+                      //   price.current = e.target.value;
+                      //   checkChanges();
+                      // }}
                     />
                     <input
                       className="form-control-1"
                       // min="0"
                       type="time"
                       autoComplete="off"
-                      onChange={(e) => {
-                        period.expiryTime = e.target.value;
+                      onChange={(e)=>{
+                        period.expiryTime=e.target.value;
                         console.log(period);
                       }}
-                    // value="23"
-                    // onChange={(e) => {
-                    //   price.current = e.target.value;
-                    //   checkChanges();
-                    // }}
+                      // value="23"
+                      // onChange={(e) => {
+                      //   price.current = e.target.value;
+                      //   checkChanges();
+                      // }}
                     />
                     {/* <select className="select-box" onChange={(e) => handleChange(e)}>
                     <option>Select reason</option>
