@@ -77,7 +77,7 @@ const NftCardsHome = (props) => {
                   />
                 </Link>
 
-                <div style={{ display: videoDisplay ? "block" : "none",background:"white"}}>
+                <div style={{ display: videoDisplay ? "block" : "none",background:"white",borderTopLeftRadius:"12px",borderTopRightRadius:"12px"}}>
                   <ReactPlayer
                     className="react-player"
                     controls={false}
