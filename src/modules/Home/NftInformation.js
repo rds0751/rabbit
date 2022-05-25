@@ -46,6 +46,9 @@ import "../../assets/styles/myProfile.css";
 import PageNotFound from "../../common/components/pageNotFound";
 import { ShimmerThumbnail } from "react-shimmer-effects";
 import { fetchPalletsColor } from "../../utility/global";
+
+import NftInfoShimmer from "./NftInfoShimmer";
+
 import ReactPlayer from "react-player";
 toast.configure();
 const CustomSnack = styled(Snackbar)`
@@ -431,7 +434,8 @@ export default function NftInformation(props) {
 
       {props.isNftValid ? (
         <>
-          <div className="nft-detail">
+          {
+            props.loader || nft.length===0 ? <NftInfoShimmer /> : <div className="nft-detail">
             <div className="container info-container">
               <div className="row" style={{ marginTop: "44px" }}>
                 <div className="d-sm-block d-md-block d-lg-none mb-2">
@@ -1356,6 +1360,7 @@ export default function NftInformation(props) {
               </div> */}
             </div>
           </div>
+          }
           <div
             className="report-outer"
             style={{ display: openReportModal ? "block" : "none" }}

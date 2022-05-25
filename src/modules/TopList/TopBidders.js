@@ -21,6 +21,9 @@ import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled'
 import PopperUnstyled from '@mui/base/PopperUnstyled'
 import { styled } from '@mui/system'
 import { makeStyles } from "@mui/material";
+import { fetchPalletsColor } from "../../utility/global";
+import { useSelector } from "react-redux";
+import TopListShimmer from "./TopListShimmer";
 
 const blue = {
   100: '#DAECFF',
@@ -263,7 +266,10 @@ const Volume = style.span`
   line-height: 25px;
   color: #818181;
 `;
-function TopBidders() {
+function TopBidders({loader}) {
+
+  const appearance = useSelector(state => state.customize.appearance)
+
   const [topBuyers, setTopBuyers] = useState([]);
   const [buyerDuration, setBuyerDuration] = useState({
     duration: "all",
@@ -273,22 +279,23 @@ function TopBidders() {
   useEffect(() => {
     const buyerReqObj = queryString.stringify(buyerDuration);
 
-     function fetchData() {
+    function fetchData() {
       setIsloading(true)
       setTopBuyers([])
 
 
-       getTopBuyers(buyerReqObj).then((response) => {
-         setTopBuyers(response);
-         setIsloading(false);
-        });
-      
+      getTopBuyers(buyerReqObj).then((response) => {
+        setTopBuyers(response);
+        setIsloading(false);
+      });
+
 
     }
 
     fetchData();
 
   }, [buyerDuration]);
+  
   // useEffect(async() => {
   //   async function fetchData() {
 
@@ -301,7 +308,7 @@ function TopBidders() {
 
 
   // }, [buyerDuration,isloading]);
-  console.log("topBuyers", topBuyers);
+
   const ChangeBuyerDuration = (e) => {
     setBuyerDuration({ ...buyerDuration, duration: e })
   }
@@ -332,7 +339,7 @@ function TopBidders() {
           <Column className="col itembought">Items bought</Column>
         </div>
       </Body>
-      {topBuyers.map((curElem) => {
+      { loader===false && topBuyers.map((curElem) => {
         const { img, name, volume, itemsbought, itemsSold, buyer } =
           curElem;
         var precise = volume.toPrecision(4);
@@ -342,12 +349,12 @@ function TopBidders() {
             <Collection className="row">
               <NameColumn className="col">
 
-                {buyer.photo == "" || !buyer.photo  ? (
+                {buyer.photo == "" || !buyer.photo ? (
                   <Image src={profileImage} alt="pic" />
 
 
                 ) : (
-                  <Image src={typeof(buyer.photo) !== "object" ? buyer?.photo : buyer?.photo?.compressedURL} alt="pic" />
+                  <Image src={typeof (buyer.photo) !== "object" ? buyer?.photo : buyer?.photo?.compressedURL} alt="pic" />
 
                 )}
 
@@ -356,13 +363,16 @@ function TopBidders() {
 
                 ) : (
                   <h2 className="seller-name" title={buyer.userName}><Link style={{ textDecoration: "null" }} to={"/user-profile/" + buyer._id}>
-                    {buyer.userName.length >13 ?(
-                      buyer.userName.substring(0,8)+"..."
-                    ):(
-                      buyer.userName
-                    )}
-                      </Link>
-                     </h2>
+                    {
+                      buyer.hasOwnProperty('userName') ?
+                        buyer.userName.length > 13 ? (
+                          buyer.userName.substring(0, 8) + "..."
+                        ) : (
+                          buyer.userName
+                        ) : null
+                    }
+                  </Link>
+                  </h2>
 
                 )}
 
@@ -370,7 +380,7 @@ function TopBidders() {
 
               </NameColumn>
               <VolumeColumn className="col">
-                <Span>{result} ETH
+                <Span style={{color: `${fetchPalletsColor(appearance?.colorPalette)}`}}>{result} ETH
                   {/* <Volume>({"$"})</Volume>  */}
                 </Span>
 
@@ -380,15 +390,15 @@ function TopBidders() {
           </div>
         );
       })}
-      <div className="spinnerloader">
-        {isloading ? <Spinner /> :
+      {/* <div className="spinnerloader"> */}
+        {isloading || loader ? <TopListShimmer /> :
           (topBuyers.length === 0 && (
             <div className="Noitemdiv">
-              <img style={{filter: "opacity(0.4) drop-shadow(0 0 0 grey)"}} src={NoItem} />
+              <img style={{ filter: "opacity(0.4) drop-shadow(0 0 0 grey)" }} src={NoItem} />
               <p className="textitem">No items available</p>
             </div>
           ))}
-      </div>
+      {/* </div> */}
       {/* {topBuyers.length === 0 && (
 
         <div className="spinnerloader">{<Spinner />}

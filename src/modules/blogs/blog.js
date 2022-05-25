@@ -10,7 +10,13 @@ import { getBlogs } from "../../services/clientConfigMicroService";
 import { data } from "jquery";
 import { Link } from "react-router-dom";
 import parse from "html-react-parser";
-export default function ComplexGrid() {
+import { fetchPalletsColor } from "../../utility/global";
+import Skeleton from "react-loading-skeleton";
+import { useSelector } from "react-redux";
+export default function ComplexGrid({ loader }) {
+
+  const customize = useSelector(state => state.customize);
+
   const [blogs, setBlogs] = useState([]);
   const [visibleBlogs, setVisibleBlogs] = useState(4);
   const [isLoading, setIsLoading] = useState(false);
@@ -23,31 +29,38 @@ export default function ComplexGrid() {
         else setBlogs([])
       })
       setIsLoading(false);
-    } 
+    }
     fetchData();
   }, []);
   const loadMoreHandler = () => {
     <div className="spinnerloader">{isLoading && <Spinner />}</div>;
     setVisibleBlogs((prevVisibleBlogs) => prevVisibleBlogs + 4);
   };
-console.log(AuthToken,"auth")
+  console.log(AuthToken, "auth")
   return (
     <div>
-      <div className="hero-image">
-        <div className="hero-text">
-          <p>Blogs</p>
-        </div>
-      </div>
-      <div className="spinnerloader">
-        {isLoading ? (
-          <Spinner />
+
+      {
+        loader ? <Skeleton height="300px" /> :
+          <div className="hero-image" style={{ background: `${fetchPalletsColor(customize?.appearance?.colorPalette)}` }}>
+            <div className="hero-text">
+              <p>Blogs</p>
+            </div>
+          </div>
+      }
+
+      <div className="text-center" style={{margin: '30px 0'}}>
+        {isLoading || loader ? (
+          <>
+            <Skeleton count={3} width="50%" height="250px" />
+          </>
         ) : (
           blogs?.length === 0 && (
             <div className="no-data no-data-found ">
-            <img src={Information}></img>
-            <p>No Blogs available</p>
-          </div>
-          ) 
+              <img src={Information}></img>
+              <p>No Blogs available</p>
+            </div>
+          )
         )}
       </div>
       {blogs?.length > 0 && blogs?.slice(0, visibleBlogs).map((data) => {
@@ -83,7 +96,7 @@ console.log(AuthToken,"auth")
                   </p>
                 </div>
                 <div>
-                  <p className="blog-content">{parse(data.content.slice(0,100))}</p>
+                  <p className="blog-content">{parse(data.content.slice(0, 100))}</p>
                 </div>
                 <Link to="/blog-detail" state={{ data }}>
                   <button className="blog-read">Read more</button>
@@ -93,9 +106,9 @@ console.log(AuthToken,"auth")
           </>
         );
       })}
-      {blogs?.length === 0 ? "" : 
-<div>
-{visibleBlogs >= blogs?.length ? (
+      {blogs?.length === 0 ? "" :
+        <div>
+          {visibleBlogs >= blogs?.length ? (
             visibleBlogs >= blogs?.length && !isLoading ? (
               <div style={{ textAlignLast: "center" }}>
                 <button className="endButton"> End </button>
@@ -109,9 +122,9 @@ console.log(AuthToken,"auth")
                 Load More
               </button>
             </div>
-            
+
           )}
-          </div>}
+        </div>}
 
       {/* <div style={{ textAlignLast: "center" }}>
         <button className="load-more" onClick={loadMoreHandler}>

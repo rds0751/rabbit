@@ -167,9 +167,9 @@ function App() {
           <Route exact path="/resource-collection" element={<CollectionPage />} />
           <Route exact path="/adding-nfts" element={<NftsPage />} />
           {/* ------------------ */}
-          <Route exact path="/top-collection" element={<Top_collection />} />
-          <Route exact path="/top-bidder" element={<TopBidders />} />
-          <Route exact path="/top-seller" element={<TopSeller />} />
+          <Route exact path="/top-collection" element={<Top_collection loader={loader} />} />
+          <Route exact path="/top-bidder" element={<TopBidders loader={loader} />} />
+          <Route exact path="/top-seller" element={<TopSeller loader={loader} />} />
           {/* ----------- */}
           <Route exact path="/leader-board" element={<LeaderBoard loader={loader} />} />
           <Route exact path="/buying" element={<BuyPage />} />
@@ -185,7 +185,7 @@ function App() {
           <Route
             exact
             path="/collection-details/:id"
-            element={<CollectionDetails />}
+            element={<CollectionDetails loader={loader} />}
           />
 
           <Route exact path="/edit-items/:id" element={<EditItem />} />
@@ -208,7 +208,7 @@ function App() {
           <Route eaxct path="/my-profile" element={<MyProfile loader={loader} />} />
           <Route eaxct path="/user-profile/:id" element={<UserProfilePage />} />
 
-          <Route exact path="/edit-profile" element={<EditProfile />} />
+          <Route exact path="/edit-profile" element={<EditProfile loader={loader} />} />
           <Route exact path="/about" element={<About loader={loader} />} />
           <Route exact path="/wallet" element={<Wallet />} />
 
@@ -244,9 +244,9 @@ function App() {
           <Route path="/menu" element={<Menu />} />
           <Route path="/home" element={<Home />} />
           <Route path="/search-results" element={<SearchResults />} />
-          <Route path="/blogs" element={<Blog />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/Terms-Condition" element={<TermsAndCondition />} />
+          <Route path="/blogs" element={<Blog loader={loader} />} />
+          <Route path="/privacy" element={<Privacy loader={loader} />} />
+          <Route path="/Terms-Condition" element={<TermsAndCondition loader={loader} />} />
           <Route path="/blog-detail" element={<BlogDetail />} />
           <Route path="/page-not-found" element={<PageNotFound />} />
           <Route path="*" element={<PageNotFound />} />

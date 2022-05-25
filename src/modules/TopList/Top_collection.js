@@ -11,6 +11,9 @@ import SelectUnstyled, { selectUnstyledClasses } from '@mui/base/SelectUnstyled'
 import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled'
 import PopperUnstyled from '@mui/base/PopperUnstyled'
 import { styled } from '@mui/system'
+import TopListShimmer from "./TopListShimmer";
+import { fetchPalletsColor } from "../../utility/global";
+import { useSelector } from "react-redux";
 
 const blue = {
   100: '#DAECFF',
@@ -260,7 +263,10 @@ const Volume = style.span`
   color: #818181;
 `;
 
-function Top_collection() {
+function Top_collection({loader}) {
+
+  const appearance = useSelector(state => state.customize.appearance)
+
   const [topCollections, setTopCollections] = useState([]);
   const [collectionDuration, setCollectionDuration] = useState({
     duration: "all",
@@ -314,7 +320,7 @@ function Top_collection() {
           <Column className="col">Items</Column>
         </div>
       </Body>
-      {topCollections.map((curElem, index) => {
+      {loader===false && topCollections.map((curElem, index) => {
         const { collectionPhoto, collection, totalVolume, items } =
           curElem;
         var precise = totalVolume.toPrecision(4);
@@ -355,7 +361,7 @@ function Top_collection() {
                 {/* <Name>{collection[0].name}</Name> */}
               </NameColumn>
               <VolumeColumn className="col">
-                <Span>{result} ETH
+                <Span style={{color: `${fetchPalletsColor(appearance?.colorPalette)}`}}>{result} ETH
                   {/* <Volume>({"$"})</Volume> */}
                 </Span>
 
@@ -374,15 +380,15 @@ function Top_collection() {
       })}
 
 
-          <div className="spinnerloader">
-            {isloading ? <Spinner /> :
+          {/* <div className="spinnerloader"> */}
+            {isloading || loader ? <TopListShimmer /> :
               (topCollections.length === 0 && (
                 <div className="Noitemdiv">
                    <img style={{filter:"opacity(0.4) drop-shadow(0 0 0 grey)"}} src={NoItem} />
                   <p className="textitem">No items available</p>
                 </div>
             ))}
-          </div>
+          {/* </div> */}
     </Container>
   );
 

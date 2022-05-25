@@ -451,6 +451,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
                     getNftDetail={this.getNftDetail}
                     sellNowNft={this.sellNowNft}
                     removeNftFromSale={this.removeNftFromSale}
+                    loader={this.props.loader}
                 />
             </>
         );

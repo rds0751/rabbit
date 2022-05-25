@@ -21,7 +21,9 @@ const initialState = {
     privacyUrl: false,
     socailMedia: [],
     permissionToUploadNft: false,
-    bannerNftData: []
+    bannerNftData: [],
+    privacyPolicy: false,
+    termsAndConditions: false
 }
 
 
@@ -41,7 +43,9 @@ export const CustomizeReducer = (state = initialState, action) => {
                 categories: payload.categories,
                 privacyUrl: payload.siteUrl,
                 socailMedia: payload.socialMediaConnection,
-                permissionToUploadNft: payload.permissionToUploadNft
+                permissionToUploadNft: payload.permissionToUploadNft,
+                privacyPolicy: payload.privacyPolicy,
+                termsAndConditions: payload.termsAndConditions
             }
 
         case 'ADD_BANNER_NFTS':

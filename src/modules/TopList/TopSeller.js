@@ -17,6 +17,7 @@ import PopperUnstyled from '@mui/base/PopperUnstyled'
 import { styled} from '@mui/system'
 import { useSelector } from "react-redux";
 import { fetchPalletsColor } from "../../utility/global";
+import TopListShimmer from "./TopListShimmer";
 
 const blue = {
   100: '#DAECFF',
@@ -263,7 +264,7 @@ const Volume = style.span`
 const noItemImage=style.img`
 color:'filter: opacity(0.4) drop-shadow(0 0 0 grey)'
 `;
-function TopSeller() {
+function TopSeller({loader}) {
 
   const appearance = useSelector(state => state.customize.appearance)
 
@@ -321,7 +322,7 @@ function TopSeller() {
           <Column className="col">Items sold</Column>
         </div>
       </Body>
-      {topSellers.map((curElem) => {
+      {loader===false && topSellers.map((curElem) => {
         const { image, sellerFirstName, sellerLastName, itemsSold, totalPurchasedValue, topSellers, volume } = curElem;
         // console.log("fffffff",curElem.topSellers)
         var precise = volume.toPrecision(4);
@@ -371,15 +372,15 @@ function TopSeller() {
           </div>
         );
       })}
-      <div className="spinnerloader">
-        {isloading ? <Spinner /> :
+      {/* <div className="spinnerloader"> */}
+        {isloading || loader ? <TopListShimmer /> :
           (topSellers.length === 0 && (
             <div className="Noitemdiv">
                <img style={{filter:"opacity(0.4) drop-shadow(0 0 0 grey)"}} src={NoItem} />
               <p className="textitem">No items available</p>
             </div>
           ))}
-      </div>
+      {/* </div> */}
     </Container>
   );
 }

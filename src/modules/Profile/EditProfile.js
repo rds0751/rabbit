@@ -20,6 +20,7 @@ import noProfile from '../../assets/images/NoProfile.svg'
 import { format } from "util";
 import { borderRadius } from "@mui/system";
 import { fetchPalletsColor } from "../../utility/global";
+import Skeleton from "react-loading-skeleton";
 
 const Button = styled.button``;
 
@@ -36,7 +37,7 @@ function EditProfile(props) {
   if (loggedInUser == null) {
     loggedInUser = localStorage.getItem('loggedInDetails')
   }
-  
+
   const navigate = useNavigate();
   const hiddenFileInput = useRef(null);
   const [desLength, setDesLength] = useState(0);
@@ -63,7 +64,7 @@ function EditProfile(props) {
 
   const [portfiloError, SetPortfiloError] = useState('');
   const [disabledButton, setDisabledButton] = useState(false);
-  
+
   // const photo = useRef(user?.loggedInUser?.photo);
   // const bio = useRef(user?.loggedInUser?.bio);
   // const userName = useRef(user?.loggedInUser?.userName);
@@ -73,74 +74,75 @@ function EditProfile(props) {
     hiddenFileInput.current.click();
     // console.log("hidden file input",hiddenFileInput)
   };
-  
+
   const handleChange = async (event) => {
-    try{
-      var filesize=event.target.files[0].size;
-      const filename=event.target.files[0].name.replace(/[^a-zA-Z0-9.]/g,'');
-      const fileextenstion=filename.split('.').pop().toLowerCase();
-      const originalfileSize=Math.round(filesize/1024);
-      const extensionArray=['jpeg','png','jpg','gif'];
-      let flag=false;
-      if(event.target.value.length ==0 ){
+    try {
+      var filesize = event.target.files[0].size;
+      const filename = event.target.files[0].name.replace(/[^a-zA-Z0-9.]/g, '');
+      const fileextenstion = filename.split('.').pop().toLowerCase();
+      const originalfileSize = Math.round(filesize / 1024);
+      const extensionArray = ['jpeg', 'png', 'jpg', 'gif'];
+      let flag = false;
+      if (event.target.value.length == 0) {
         toast.error("No File is Selected Please Select a File.");
       }
-      else{
-        for(let i=0;i<extensionArray.length;i++){
-          if(fileextenstion.localeCompare(extensionArray[i])==0){
-            flag=true;
+      else {
+        for (let i = 0; i < extensionArray.length; i++) {
+          if (fileextenstion.localeCompare(extensionArray[i]) == 0) {
+            flag = true;
           }
         }
-        if(flag == false)
-           toast.error("File type not acceptable. Please use JPEG PNG JPG GIF file");
-        else if(originalfileSize > 10000)  {
+        if (flag == false)
+          toast.error("File type not acceptable. Please use JPEG PNG JPG GIF file");
+        else if (originalfileSize > 10000) {
           toast.error("Image file size should be less than 10 mb")
         }
-        
-        if(flag){
-        extensionArray.map(async (data)=>{
-          if((originalfileSize < 10000) && (fileextenstion == data 
-            )){
+
+        if (flag) {
+          extensionArray.map(async (data) => {
+            if ((originalfileSize < 10000) && (fileextenstion == data
+            )) {
               const fileUploaded = event.target.files[0];
               console.log(fileUploaded);
               let formData = new FormData();
               formData.append("folderName", "collections");
-          
+
               formData.append("createdBy", `${user?.loggedInUser?._id}`);
               formData.append("attachment", fileUploaded);
-          
+
               const res = await fetch(`${BASE_URL2}/api/v2/upload-documents`, {
                 method: httpConstants.METHOD_TYPE.POST,
                 body: formData,
                 // headers: AuthToken,
               });
-             
+
               const result = await res.json();
-              console.log(res,result, "<<<<edit profile response");
+              console.log(res, result, "<<<<edit profile response");
               if (result.success) {
-                setFormData({ ...formData, photo: result.responseData.cdnUrl,compressedURL:result.responseData.compressedURL});
+                setFormData({ ...formData, photo: result.responseData.cdnUrl, compressedURL: result.responseData.compressedURL });
               } else {
                 toast.error("Unable to change image", {
                   position: toast.POSITION.TOP_RIGHT
                 });
               }
-          
+
               // else toast.error("")
               console.log(result);
               setImageUrl(result.responseData);
 
-            
-             flag=false;
+
+              flag = false;
             }
+          }
+
+          )
         }
-        
-        )}
       }
-    }catch(e){
+    } catch (e) {
       console.log(e);
     }
-   
-   
+
+
     // Edit.handleFile(fileUploaded);
   };
   //------------------------------------------------------------------------
@@ -159,22 +161,22 @@ function EditProfile(props) {
       setImageUrl(loggedInUser.photo)
 
       // userPublicProfile((res) => {
-        // console.log("jjjjjjjjjjjjjj")
-        // console.log(res, "filterResponse");
-        // setIsloading(true);
-        // if (res.success) {
-        //   console.log("fkfsffksfsw", res.responseData)
+      // console.log("jjjjjjjjjjjjjj")
+      // console.log(res, "filterResponse");
+      // setIsloading(true);
+      // if (res.success) {
+      //   console.log("fkfsffksfsw", res.responseData)
 
-        //   // prevArray => [...prevArray, newValue]
-        //   setUserData(res.responseData);
+      //   // prevArray => [...prevArray, newValue]
+      //   setUserData(res.responseData);
 
 
-          // setNfts([nfts,res.responseData.nftContent]);
-          // setIsloading(false);
-        // } else {
-        //   toast.error(res.message);
-        //   // setIsloading(false);
-        // }
+      // setNfts([nfts,res.responseData.nftContent]);
+      // setIsloading(false);
+      // } else {
+      //   toast.error(res.message);
+      //   // setIsloading(false);
+      // }
 
       // }, loggedInUser._id);
     }
@@ -243,9 +245,9 @@ function EditProfile(props) {
       // window.location.href = '/my-profile';
       // navigate(-1);
     } else {
-      console.log("ddddddddddddddddddddd",result.message)
+      console.log("ddddddddddddddddddddd", result.message)
       // toast.error("invalid request");
-      if(imageUrl!=""){
+      if (imageUrl != "") {
         toast.error(result.message, {
           position: toast.POSITION.TOP_RIGHT
         });
@@ -256,7 +258,7 @@ function EditProfile(props) {
           position: toast.POSITION.TOP_RIGHT
         });
       }
-     
+
 
     }
   };
@@ -284,8 +286,8 @@ function EditProfile(props) {
     });
   }, [])
 
-  
-const enabled=useruserName?.length > 0 && bio?.length > 0 &&  portfilo?.length > 0 && nameError=="" && descriptionError=="" && portfiloError=="";
+
+  const enabled = useruserName?.length > 0 && bio?.length > 0 && portfilo?.length > 0 && nameError == "" && descriptionError == "" && portfiloError == "";
   return (
     <>
       <ToastContainer
@@ -303,10 +305,9 @@ const enabled=useruserName?.length > 0 && bio?.length > 0 &&  portfilo?.length >
         <div className="editProfileTopHeading top-heading">
           <div className="editProfileHeadingTitle">
             <p className="title">
-              Edit Profile
+              {props.loader ? <Skeleton width="200px" height="40px" /> : 'Edit Profile'}
             </p>
           </div>
-          {console.log("namedddddddddddddddd",useruserName)}
 
           {/* <h3 className=" input-heading generalsettingl">
             General Setting
@@ -315,32 +316,37 @@ const enabled=useruserName?.length > 0 && bio?.length > 0 &&  portfilo?.length >
         <div className="chooseProfilePicContainer">
           <div className="chooseProfilePicInnerContainer ">
             <div className="editprofile-image">
-              <img
-                src={typeof(imageUrl)!=="object" && imageUrl!=""? imageUrl :(typeof(imageUrl)!== "string" ? imageUrl.compressedURL : profileImage)}
-              />
+              {
+                props.loader ? <Skeleton width="150px" height="150px" circle={true} /> :
+                  <img src={typeof (imageUrl) !== "object" && imageUrl != "" ? imageUrl : (typeof (imageUrl) !== "string" ? imageUrl.compressedURL : profileImage)}
+                  />
+              }
             </div>
-            {console.log("image urlllll",imageUrl)}
             <div className="editprofile-button-outer">
-              <Button
-                onClick={handleClick}
-                className=" btn-choose-file"
-              // style={{ marginTop: "4em" }}
-              // onChange={(e) => handleChange(e)}              
-              style={{border: `1px solid ${fetchPalletsColor(appearance.colorPalette)}`}}
-              >
-                <span className="choosefile"
-                  style={{color: `${fetchPalletsColor(appearance.colorPalette)}`}}
-                >Choose File</span>
-              </Button>
-              <Button style={{display:"block",marginTop:"10px",border:"1px solid red"}}   className=" btn-choose-file" onClick={()=>setImageUrl("")}>
-              <span className="choosefile" style={{color:"red"}}> Remove File</span> 
-              </Button>
+              {
+                props.loader ? <Skeleton width="95px" height="30px" /> :
+                  <Button
+                    onClick={handleClick}
+                    className=" btn-choose-file"
+                    style={{ border: `1px solid ${fetchPalletsColor(appearance.colorPalette)}` }}
+                  >
+                    <span className="choosefile"
+                      style={{ color: `${fetchPalletsColor(appearance.colorPalette)}` }}
+                    >Choose File</span>
+                  </Button>
+              }
+              {
+                props.loader ? <Skeleton width="95px" height="30px" /> :
+                  <Button style={{ display: "block", marginTop: "10px", border: "1px solid red" }} className=" btn-choose-file" onClick={() => setImageUrl("")}>
+                    <span className="choosefile" style={{ color: "red" }}> Remove File</span>
+                  </Button>
+              }
             </div>
 
             <input
               type="file"
               className="edit-input-box"
-              placeholder="Write your name"             
+              placeholder="Write your name"
               // name=""
               style={{ display: "none" }}
               ref={hiddenFileInput}
@@ -348,106 +354,115 @@ const enabled=useruserName?.length > 0 && bio?.length > 0 &&  portfilo?.length >
             />
           </div>
         </div>
-        <div className="editProfileFormContainer singlenft-form-box">
-         
-            <div className="">
-              <label
-                htmlFor="username"
-                className=" label-heading userheading"
-              >
-                Username<span style={{color:"red",fontSize:"13px"}}>{nameError}</span>
-              </label>
-              <input
-                type="text"
-                className="editProfileFormContainerEachInput "
-                name="userName"
-                id="userName"
-                value={useruserName}
-                // value={userName.current}
-                onChange={(e) => {
-                  setUserName(e.target.value);
-                 
-                  var format = /[!@$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]+/;
-                  if(format.test(e.target.value)){
-                    SetNameError("(No Special Character Allowed)");
-                    
-                  }  else if(e.target.value.length==0){
-                  SetNameError("(Name is required)");
-                }
-                else {
-                  SetNameError("");
+        {
+          props.loader ? 
+          <>
+            <Skeleton height="50px" style={{marginTop: '20px'}} />
+            <Skeleton height="150px" style={{marginTop: '20px'}} />
+            <Skeleton height="50px" style={{marginTop: '20px'}} />
+            <Skeleton height="50px" style={{marginTop: '20px'}} />
+          </> :
+            <div className="editProfileFormContainer singlenft-form-box">
 
-                }
-                handleForm(e);
+              <div className="">
+                <label
+                  htmlFor="username"
+                  className=" label-heading userheading"
+                >
+                  Username<span style={{ color: "red", fontSize: "13px" }}>{nameError}</span>
+                </label>
+                <input
+                  type="text"
+                  className="editProfileFormContainerEachInput "
+                  name="userName"
+                  id="userName"
+                  value={useruserName}
+                  // value={userName.current}
+                  onChange={(e) => {
+                    setUserName(e.target.value);
 
-              }}
-            />
-          </div>
-            <div className="" style={{marginBottom:"28px"}}>
-              <label htmlFor="comment" className="label-heading">
-                Bio<span style={{color:"red",fontSize:"13px"}}>{descriptionError}</span>
-              </label>
-              <textarea
-                className="editProfileFormContainerEachInput mb-0"
-                rows="4"
-                id="test"
-            
-                // name="text"
-                name="bio"
-                value={bio}
-                // value={userName.current}
-                onChange={(e) => {
-                  setBio(e.target.value);
-                  let bioval=(e.target.value.length==0)?(SetDesError("(Description is required)")):(SetDesError(""));
-                  if (desLength < 1000) {
+                    var format = /[!@$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]+/;
+                    if (format.test(e.target.value)) {
+                      SetNameError("(No Special Character Allowed)");
+
+                    } else if (e.target.value.length == 0) {
+                      SetNameError("(Name is required)");
+                    }
+                    else {
+                      SetNameError("");
+
+                    }
                     handleForm(e);
-                  }
-                }}
-                placeholder="Write description"
+
+                  }}
+                />
+              </div>
+              <div className="" style={{ marginBottom: "28px" }}>
+                <label htmlFor="comment" className="label-heading">
+                  Bio<span style={{ color: "red", fontSize: "13px" }}>{descriptionError}</span>
+                </label>
+                <textarea
+                  className="editProfileFormContainerEachInput mb-0"
+                  rows="4"
+                  id="test"
+
+                  // name="text"
+                  name="bio"
+                  value={bio}
+                  // value={userName.current}
+                  onChange={(e) => {
+                    setBio(e.target.value);
+                    let bioval = (e.target.value.length == 0) ? (SetDesError("(Description is required)")) : (SetDesError(""));
+                    if (desLength < 1000) {
+                      handleForm(e);
+                    }
+                  }}
+                  placeholder="Write description"
                 // onChange={(e) => (bio.current = e.target.value)}
-              ></textarea>
-              <div className="clearfix"></div>
-              <span className="input-down-text">
-              {desLength} of 1000 characters and
-              <span> <span id="linesUsed">0</span> of 20 Lines.</span>
-              </span>
+                ></textarea>
+                <div className="clearfix"></div>
+                <span className="input-down-text">
+                  {desLength} of 1000 characters and
+                  <span> <span id="linesUsed">0</span> of 20 Lines.</span>
+                </span>
+              </div>
+              <div className="portfilodiv">
+                <label htmlFor="email" className="label-heading">
+                  Personal site or Portfolio<span style={{ color: "red", fontSize: "13px" }}>{portfiloError}</span>
+                </label>
+                <input
+                  type="name"
+                  id="portfilo"
+                  className="editProfileFormContainerEachInput form-control"
+                  placeholder="www.example.com"
+                  name="portfolio"
+                  value={portfilo}
+                  // value={userName.current}
+                  onChange={(e) => {
+                    setPortfilo(e.target.value);
+                    (e.target.value.length == 0) ? SetPortfiloError("(Portifilo is required)") : SetPortfiloError("");
+                    handleForm(e);
+                  }}
+                />
+                {console.log("kffffffffffffffffffggggggggg", formData.portfolio)}
+                {console.log("kffffffffffffffffffggggggggg", user)}
+              </div>
+              <div className="buttonGroup">
+                <button className="editprofileCancelButton" onClick={() => navigate(-1)}>
+                  <span className="cancelbutton" >Cancel</span>
+                </button>
+                <button type="submit" className="editprofileSubmitButton"
+                  disabled={!enabled}
+                  style={{ opacity: !enabled ? 0.6 : 1, background: `${fetchPalletsColor(appearance.colorPalette)}` }}
+                  onClick={(e) => handleSubmit(e)}>
+                  <span className="updateProfile">Update Profile</span>
+                </button>
+
+              </div>
+
+
             </div>
-            <div className="portfilodiv">
-              <label htmlFor="email" className="label-heading">
-                Personal site or Portfolio<span style={{color:"red",fontSize:"13px"}}>{portfiloError}</span>
-              </label>
-              <input
-                type="name"
-                id="portfilo"
-                className="editProfileFormContainerEachInput form-control"
-                placeholder="www.example.com"
-                name="portfolio"
-                value={portfilo}
-                // value={userName.current}
-                onChange={(e) => {
-                  setPortfilo(e.target.value);
-                  (e.target.value.length==0)?SetPortfiloError("(Portifilo is required)"):SetPortfiloError("");
-                  handleForm(e);
-                 }}
-              />
-              {console.log("kffffffffffffffffffggggggggg",formData.portfolio)}
-              {console.log("kffffffffffffffffffggggggggg",user)}
-            </div>
-            <div className="buttonGroup">
-            <button  className="editprofileCancelButton" onClick={() => navigate(-1)}>
-              <span className="cancelbutton" >Cancel</span>
-            </button>
-            <button type="submit" className="editprofileSubmitButton"
-              disabled={!enabled}
-               style={{ opacity: !enabled ? 0.6 : 1, background: `${fetchPalletsColor(appearance.colorPalette)}` }}
-              onClick={(e) => handleSubmit(e)}>
-              <span className="updateProfile">Update Profile</span>
-            </button>
-
-          </div>
-
-
-        </div>
+        }
       </div>
     </>
   );
