@@ -17,12 +17,13 @@ import {
 import { fetchPalletsColor } from "../../utility/global";
 import Skeleton from "react-loading-skeleton";
 import ReactPlayer from "react-player";
-import useSound from 'use-sound';
-import sound from "../../assets/sound.mp3"
+import useSound from "use-sound";
+import sound from "../../assets/sound.mp3";
+import playImage from "../../assets/images/Play.svg";
+import pauseImage from "../../assets/images/Pause.svg";
 function NftCardsHome({ nft, appearance, loader }) {
   // let history = useHistory();
 
-  
   const navigate = useNavigate();
   const { user, sideBar } = useSelector((state) => state);
   const {
@@ -166,7 +167,20 @@ function NftCardsHome({ nft, appearance, loader }) {
                   />
                 </div>
 
-                <div onClick={() => setVideoDisplay(!videoDisplay)}>play</div>
+                <div
+                  onClick={() => setVideoDisplay(true)}
+                  className="musicIcon"
+                  style={{ display: videoDisplay ? "none":"block"}}
+                >
+                  <img src={playImage}></img>
+                </div>
+                <div
+                  onClick={() => setVideoDisplay(false)}
+                  className="musicIcon"
+                  style={{ display: videoDisplay ? "block":"none"}}
+                >
+                  <img src={pauseImage}></img>
+                </div>
               </>
             )}
 
@@ -203,14 +217,28 @@ function NftCardsHome({ nft, appearance, loader }) {
                 >
                   <ReactPlayer
                     className="react-player"
-                    controls={true}
+                    controls={false}
                     playing={videoDisplay}
                     width="100%"
                     height={187}
                     url={cdnUrl}
                   />
                 </div>
-                <div onClick={() => setVideoDisplay(!videoDisplay)}>play</div>
+                <div
+                  onClick={() => setVideoDisplay(true)}
+                  className="musicIcon"
+                  style={{ display: videoDisplay ? "none":"block"}}
+                >
+                  <img src={playImage}></img>
+                </div>
+                <div
+                  onClick={() => setVideoDisplay(false)}
+                  className="musicIcon"
+                  style={{ display: videoDisplay ? "block":"none"}}
+                >
+                  <img src={pauseImage}></img>
+                </div>
+              
               </>
             )}
 
@@ -230,16 +258,16 @@ function NftCardsHome({ nft, appearance, loader }) {
               <Skeleton height={`187px`} />
             ) : (
               <>
-               <Link to={route} style={{ textDecoration: "none" }}>
-              <img
-                className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
-                src={compressedURL}
-                alt="nft-img"
-                onLoad={onImageLoad}
-                onMouseDown={(e) => e.preventDefault()}
-                onContextMenu={(e) => e.preventDefault()}
-              />
-              </Link>
+                <Link to={route} style={{ textDecoration: "none" }}>
+                  <img
+                    className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
+                    src={compressedURL}
+                    alt="nft-img"
+                    onLoad={onImageLoad}
+                    onMouseDown={(e) => e.preventDefault()}
+                    onContextMenu={(e) => e.preventDefault()}
+                  />
+                </Link>
               </>
             )}
 
@@ -261,15 +289,20 @@ function NftCardsHome({ nft, appearance, loader }) {
               id="unlike_icon"
               src={handleLike ? likes : Like}
               alt="like"
-              
-              onClick={() => {likeNft(_id) ;handleClick();}}
+              onClick={() => {
+                likeNft(_id);
+                handleClick();
+              }}
             />
           ) : (
             <img
               id="like_icon"
               src={handleLike ? Like : likes}
               alt="like"
-              onClick={() => {likeNft(_id) ;handleClick();}}
+              onClick={() => {
+                likeNft(_id);
+                handleClick();
+              }}
             />
           )}
         </span>

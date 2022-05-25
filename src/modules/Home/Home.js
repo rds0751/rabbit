@@ -37,10 +37,16 @@ import { fetchPalletsColor } from "../../utility/global";
 
 import defaultCover from "../../assets/images/bannerLoader.png"
 import Skeleton from "react-loading-skeleton";
+import playImage from "../../assets/images/Play.svg";
+import pauseImage from "../../assets/images/Pause.svg";
+import ReactPlayer from "react-player";
+import NftCards from "./NftCards"
 
 let preivewFiles = ['video/mp4', 'audio/mpeg'];
 
 function Home({ loaderState }) {
+  const [audioDisplay,setaudioDisplay]=useState(false);
+  const [videoDisplay,setVideoDisplay]=useState(false);
 
   const [loader, setLoader] = useState(loaderState);
 
@@ -157,6 +163,15 @@ function Home({ loaderState }) {
   }, [loaderState])
 
 
+
+  const x=()=>{
+    console.log(videoDisplay)
+    setVideoDisplay(true);
+    console.log(videoDisplay)
+    alert("x");
+  }
+
+
   return (
     <>
       <div className="homepage">
@@ -236,111 +251,12 @@ function Home({ loaderState }) {
                               } else {
                                 route = "/nft-information/" + nft._id;
                               }
+                             
 
 
                               return (
                                 <>
-                                  <Card>
-                                    <Link to={route} style={{ textDecoration: "none" }}>
-                                      <div className="homePageContainer">
-                                        {
-                                          loader ? <Skeleton className="remove-border" width="100%" height="273px" /> :
-                                            <Card.Img
-                                              variant="top"
-                                              src={preivewFiles.includes(nft.fileExtension) ? nft?.previewImage : nft.hasOwnProperty('compressedURL') ? nft?.compressedURL : nft.link}
-                                              onLoad={onImageLoad}
-                                              onMouseDown={(e) =>
-                                                e.preventDefault()
-                                              }
-                                              onContextMenu={(e) =>
-                                                e.preventDefault()
-                                              }
-                                            />
-                                        }
-                                        {/* {!imageLoading.loaded && (
-                                          <div className="homeNftShimmer">
-                                            <ShimmerThumbnail
-                                              className="thumbnail-homepage-shimmer"
-                                              fitOnFrame={true}
-                                              rounded
-                                            />
-                                          </div>
-                                        )} */}
-
-                                      </div>
-                                    </Link>
-                                    <Card.Body className="smallCard-details">
-                                      <div className="d-flex align-items-center media">
-
-                                        <div className="flex-shrink-0">
-                                          {
-                                            loader ? <Skeleton circle="true" width="38px" height="38px" /> :
-                                              <img
-                                                src={nft.hasOwnProperty('creator') ? nft.creator.hasOwnProperty('compressedURL') ? nft?.creator?.compressedURL !== "" ? nft?.creator?.compressedURL : userDefault : userDefault : userDefault}
-                                                width="38px"
-                                                height="38px"
-                                                className="profile-img"
-                                                onMouseDown={(e) =>
-                                                  e.preventDefault()
-                                                }
-                                                onContextMenu={(e) =>
-                                                  e.preventDefault()
-                                                }
-                                              />
-                                          }
-                                        </div>
-                                        <div className="flex-grow-1 ms-2 card1">
-                                          <h3 className="title homePageNft text-truncate">
-                                            {
-                                              loader ? <Skeleton count={2} width={'80px'} /> :
-                                                <Link
-                                                  title={nft?.name}
-                                                  to={
-                                                    "/nft-information/" + nft?._id
-                                                  }
-                                                  style={{ textDecoration: "none", color: `#585858` }}
-
-                                                >
-                                                  {nft?.name}
-                                                </Link>
-                                            }
-                                            <br />
-                                            {
-                                              loader === false ?
-                                                <Link title={nft.collectionName ? nft.collectionName : "Anafto Collection"} style={{ textDecoration: 'none', color: `${fetchPalletsColor(customize?.appearance?.colorPalette)}` }} to={`/collection-details/${nft?.collectionId ? nft?.collectionId : '62823cab6df787009ba1882b'}`}>
-                                                  {nft.collectionName ? nft.collectionName : "Anafto Collection"}
-                                                </Link> : null
-                                            }
-                                          </h3>
-
-                                          {/* {let n = nft?.description.split(' ')} */}
-                                          {
-                                            nft.hasOwnProperty('blockchain') ?
-                                              <span className="nftTileEachDetailsFirstContainerValue">
-                                                {
-                                                  loader ? <Skeleton width={'80px'} height={'20px'} /> :
-                                                    <>
-                                                      {blockchainCheck(nft?.blockchain)}
-                                                      {`${nft?.salesInfo?.price}  ${nft?.salesInfo?.currency}`}
-                                                    </>
-                                                }
-                                              </span>
-                                              : null
-                                          }
-                                          {/* <p className="description">{nft?.description}</p> */}
-                                        </div>
-                                      </div>
-
-                                      {/* <div className="flex-grow-1 ms-2 card1 card-collection">
-                                        {
-                                          loader ? <Skeleton width="200px" /> :
-                                            <Link style={{ color: `${fetchPalletsColor(customize?.appearance?.colorPalette)}` }} to={`/collection-details/${nft?.collectionId ? nft?.collectionId : '62823cab6df787009ba1882b'}`}>
-                                              {nft.collectionName ? nft.collectionName : "Anafto Collection"}
-                                            </Link>
-                                        }
-                                      </div> */}
-                                    </Card.Body>
-                                  </Card>
+                                 <NftCards nft={nft} loader={loader}></NftCards>
 
                                   {/* <Card>
                             <Card.Img variant="top" src={Image2} /> 
@@ -403,143 +319,8 @@ function Home({ loaderState }) {
                                   }
                                   return (
                                     <>
-                                      <Card>
-                                        <Link to={route} style={{ textDecoration: "none" }}>
-                                          <div className="homePageContainer">
-                                            {
-                                              loader ? <Skeleton className="remove-border" width="100%" height="273px" /> :
-                                                <Card.Img
-                                                  variant="top"
-                                                  src={preivewFiles.includes(nft.fileExtension) ? nft?.previewImage : nft.hasOwnProperty('compressedURL') ? nft?.compressedURL : nft.link}
-                                                  onLoad={onImageLoad}
-                                                  onMouseDown={(e) =>
-                                                    e.preventDefault()
-                                                  }
-                                                  onContextMenu={(e) =>
-                                                    e.preventDefault()
-                                                  }
-                                                />
-                                            }
-                                            {/* {!imageLoading.loaded && (
-                                          <div className="homeNftShimmer">
-                                            <ShimmerThumbnail
-                                              className="thumbnail-homepage-shimmer"
-                                              fitOnFrame={true}
-                                              rounded
-                                            />
-                                          </div>
-                                        )} */}
-
-                                          </div>
-                                        </Link>
-                                        <Card.Body className="smallCard-details">
-                                          <div className="d-flex align-items-center media">
-
-                                            <div className="flex-shrink-0">
-                                              {
-                                                loader ? <Skeleton circle="true" width="38px" height="38px" /> :
-                                                  nft?.fileExtension?.includes("audio") ? (
-                                                    <img
-                                                      src={nft.hasOwnProperty('creator') ? nft.creator.hasOwnProperty('compressedURL') ? nft?.creator?.compressedURL !== "" ? nft?.creator?.compressedURL : userDefault : userDefault : userDefault}
-                                                      width="38px"
-                                                      height="38px"
-                                                      className="profile-img"
-                                                      onMouseDown={(e) =>
-                                                        e.preventDefault()
-                                                      }
-                                                      onContextMenu={(e) =>
-                                                        e.preventDefault()
-                                                      }
-                                                    />
-
-                                                  ) : (
-                                                    nft?.fileExtension?.includes("video") ? (
-                                                      <img
-                                                        src={nft.hasOwnProperty('creator') ? nft.creator.hasOwnProperty('compressedURL') ? nft?.creator?.compressedURL !== "" ? nft?.creator?.compressedURL : userDefault : userDefault : userDefault}
-                                                        width="38px"
-                                                        height="38px"
-                                                        className="profile-img"
-                                                        onMouseDown={(e) =>
-                                                          e.preventDefault()
-                                                        }
-                                                        onContextMenu={(e) =>
-                                                          e.preventDefault()
-                                                        }
-                                                      />
-
-                                                    ) : (
-                                                      <img
-                                                        src={nft.hasOwnProperty('creator') ? nft.creator.hasOwnProperty('compressedURL') ? nft?.creator?.compressedURL !== "" ? nft?.creator?.compressedURL : userDefault : userDefault : userDefault}
-                                                        width="38px"
-                                                        height="38px"
-                                                        className="profile-img"
-                                                        onMouseDown={(e) =>
-                                                          e.preventDefault()
-                                                        }
-                                                        onContextMenu={(e) =>
-                                                          e.preventDefault()
-                                                        }
-                                                      />
-
-                                                    )
-
-
-                                                  )
-
-                                              }
-                                            </div>
-                                            <div className="flex-grow-1 ms-2 card1">
-                                              <h3 className="title homePageNft text-truncate">
-                                                {
-                                                  loader ? <Skeleton count={2} width={'80px'} /> :
-                                                    <Link
-                                                      title={nft?.name}
-                                                      to={
-                                                        "/nft-information/" + nft?._id
-                                                      }
-                                                      style={{ textDecoration: "none", color: `#585858` }}
-
-                                                    >
-                                                      {nft?.name}
-                                                    </Link>
-                                                }
-                                                <br />
-                                                {
-                                                  loader === false ?
-                                                    <Link title={nft.collectionName ? nft.collectionName : "Anafto Collection"} style={{ textDecoration: 'none', color: `${fetchPalletsColor(customize?.appearance?.colorPalette)}` }} to={`/collection-details/${nft?.collectionId ? nft?.collectionId : '62823cab6df787009ba1882b'}`}>
-                                                      {nft.collectionName ? nft.collectionName : "Anafto Collection"}
-                                                    </Link> : null
-                                                }
-                                              </h3>
-
-                                              {/* {let n = nft?.description.split(' ')} */}
-                                              {
-                                                nft.hasOwnProperty('blockchain') ?
-                                                  <span className="nftTileEachDetailsFirstContainerValue">
-                                                    {
-                                                      loader ? <Skeleton width={'80px'} height={'20px'} /> :
-                                                        <>
-                                                          {blockchainCheck(nft?.blockchain)}
-                                                          {`${nft?.salesInfo?.price}  ${nft?.salesInfo?.currency}`}
-                                                        </>
-                                                    }
-                                                  </span>
-                                                  : null
-                                              }
-                                              {/* <p className="description">{nft?.description}</p> */}
-                                            </div>
-                                          </div>
-
-                                          {/* <div className="flex-grow-1 ms-2 card1 card-collection">
-                                        {
-                                          loader ? <Skeleton width="200px" /> :
-                                            <Link style={{ color: `${fetchPalletsColor(customize?.appearance?.colorPalette)}` }} to={`/collection-details/${nft?.collectionId ? nft?.collectionId : '62823cab6df787009ba1882b'}`}>
-                                              {nft.collectionName ? nft.collectionName : "Anafto Collection"}
-                                            </Link>
-                                        }
-                                      </div> */}
-                                        </Card.Body>
-                                      </Card>
+                                      <NftCards nft={nft} loader={loader}></NftCards>
+                                      
                                       {/* <Card>
                             <Card.Img variant="top" src={Image1} />
                             <Card.Body>

@@ -37,6 +37,16 @@
     margin-right: 2px;
     margin-left: 5px;
   }
+  .musicIcon{
+    position: absolute;
+    top: 45%;
+    left: 83%;
+  }
+  .homePageContainer .musicIcon{
+    position: absolute;
+    top: 66%;
+    left: 83%;
+  }
   /* .videoDiv {
     position: relative;
     padding-top: 56.25% 

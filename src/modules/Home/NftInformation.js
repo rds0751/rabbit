@@ -637,14 +637,16 @@ export default function NftInformation(props) {
                         borderRadius: "8px",
                       }}
                     />
+{/* 
+                    <button onClick={()=>setDisplay(!display)}>play</button> */}
 
-                    <button onClick={()=>setDisplay(!display)}>play</button>
-
-                    <div style={{display:display ? "block" :"none"}}>
+                    <div style={{width:"100%",height:"fit-content"}}>
                     <ReactPlayer
                     className="react-player"
+                    controls
                     width="100%"
-                    height={0}
+                    height={61}
+                    
                     playing={display}
                     url={nft?.cdnUrl}
                     />
@@ -656,7 +658,7 @@ export default function NftInformation(props) {
                      </>
                     ):(nft?.fileExtension?.includes("video") ?(
                       <>
-                      <img
+                      {/* <img
                       onMouseDown={(e) => e.preventDefault()}
                       onContextMenu={(e) => e.preventDefault()}
                       // src={nft.cdnUrl}
@@ -669,15 +671,14 @@ export default function NftInformation(props) {
                         // height: "837px",
                         borderRadius: "8px",
                       }}
-                    />
-                     <button onClick={()=>setDisplay(!display)}>play</button>
-                        <div style={{display:display ? "block" :"none"}}>
+                    /> */}
+                     {/* <button onClick={()=>setDisplay(!display)}>play</button> */}
+                    <div style={{width:"auto" ,height:"auto"}}>
                     <ReactPlayer
                     className="react-player"
                     width="100%"
                     height={187}
                     controls
-                    playing={display}
                     url={nft?.cdnUrl}
                     />
 
