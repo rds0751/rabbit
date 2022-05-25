@@ -234,7 +234,7 @@ function Footer({ loader }) {
                   </a>
                 </p>
                 <p>
-                  <a onClick={() => handleRedirectLink('/top-collection')} href="/top-collection" className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                  <a onClick={() => handleRedirectLink('/top-collection')} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                     {loader ? <Skeleton width={'150px'} /> : 'Top Collections'}
                   </a>
                 </p>

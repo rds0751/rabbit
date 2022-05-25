@@ -38,6 +38,8 @@ import Binance from "../../assets/images/binance.svg";
 import Select from "react-select";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import Skeleton from "react-loading-skeleton";
+import NftCartLoader from "../Home/NftCardLoader";
 
 const blue = {
   100: "#DAECFF",
@@ -166,7 +168,7 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
 
 const queryString = require("query-string");
 
-function CollectionDetails() {
+function CollectionDetails({ loader }) {
   const { user } = useSelector((state) => state);
   const defaultFilter = {
     searchByName: "",
@@ -367,13 +369,15 @@ function CollectionDetails() {
                 )}
               </div>
               <div className="coll-blockchain">
-                {blockchainCheck(blockchain)}
+                {loader ? <Skeleton width="30px" height="30px" /> : blockchainCheck(blockchain)}
               </div>
-              <div className="colusername">{name}</div>
+              <div className="colusername">{loader ? <Skeleton width="200px" height="35px" /> : name}</div>
               <div className="coluserdes" title={description}>
-                {undefined !== description && description.length > 512
-                  ? description.slice(0, 512) + "..."
-                  : description}
+                {
+                  loader ? <Skeleton width="300px" count={5} /> : undefined !== description && description.length > 512
+                    ? description.slice(0, 512) + "..."
+                    : description
+                }
               </div>
             </div>
             {/* <div className="coldet-bio">
@@ -515,8 +519,13 @@ function CollectionDetails() {
                     justifyContent: "center",
                   }}
                 >
-                  {isLoading ? (
-                    <Spinner />
+                  {isLoading || loader ? (
+                    <>
+                      <NftCartLoader mr="5%" />
+                      <NftCartLoader />
+                      <NftCartLoader />
+                      <NftCartLoader mr="0" />
+                    </>
                   ) : (
                     nfts.length === 0 && (
                       <div className="Noitemdiv">
@@ -527,7 +536,7 @@ function CollectionDetails() {
                   )}
                 </div>
 
-                {nfts.length > 0 &&
+                {loader===false && isLoading === false && nfts.length > 0 &&
                   nfts.map((nft) => {
                     return <CollDetailCard nft={nft} />;
                   })}
