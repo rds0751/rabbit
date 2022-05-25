@@ -233,6 +233,11 @@ function Home({ loaderState }) {
                     >
                       <div className="item">
                         <div className="d-flex flex-wrap">
+
+                          {
+                            nfts.length === 0 ? <><NftCards nft={{}} loader={true} /> <NftCards nft={{}} loader={true} /> <NftCards nft={{}} loader={true} /> <NftCards nft={{}} loader={true} /></> : null
+                          }
+
                           {nfts.length &&
                             nfts.slice(0, 4).map((nft) => {
                               // const { _id, cdnUrl, name, biddingDetails, salesInfo } = nft;
