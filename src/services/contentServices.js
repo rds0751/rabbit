@@ -1,5 +1,6 @@
 import { httpConstants } from "../constants";
 import { BASE_URL2 } from "../reducers/Constants";
+import { getParamTenantId } from "../utility/global";
 import { AuthToken } from "./UserAuthToken";
 
 export const uploadDocs = async (data) => {
@@ -10,7 +11,7 @@ export const uploadDocs = async (data) => {
   form_data.append("createdBy", data.createdBy);
   form_data.append("attachment", data.attachment);
 
-  const res = await fetch(`${BASE_URL2}/api/v1/upload-documents`, {
+  const res = await fetch(`${BASE_URL2}/api/v1/upload-documents${getParamTenantId()}`, {
     method: httpConstants.METHOD_TYPE.POST,
     // headers: {
     //   'Content-Type': httpConstants.CONTENT_TYPE.MULTIPART_FORM_DATA,
@@ -23,7 +24,7 @@ export const uploadDocs = async (data) => {
 
 export const getCollection = async () => {
   try {
-    const res = await fetch(`${BASE_URL2}/api/v1/collections`);
+    const res = await fetch(`${BASE_URL2}/api/v1/collections${getParamTenantId()}`);
     const result = await res.json();
     const collectionData = result.responseData;
     return collectionData;
@@ -34,7 +35,7 @@ export const getCollection = async () => {
 
 export const getCollectionBySingleUser = async (userId) => {
   try {
-    const res = await fetch(`${BASE_URL2}/api/v1/users/${userId}/collections`);
+    const res = await fetch(`${BASE_URL2}/api/v1/users/${userId}/collections${getParamTenantId()}`);
     const result = await res.json();
     const collectionData = result.responseData;
     return collectionData;
@@ -45,7 +46,7 @@ export const getCollectionBySingleUser = async (userId) => {
 
 export const put_NftOpenForSale = async (_id) => {
   try {
-    const res = await fetch(`${BASE_URL2}/api/v1/open-for-sale`, {
+    const res = await fetch(`${BASE_URL2}/api/v1/open-for-sale${getParamTenantId()}`, {
       method: httpConstants.METHOD_TYPE.PUT,
       headers: {
         "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON,
@@ -61,7 +62,7 @@ export const put_NftOpenForSale = async (_id) => {
 };
 export const RemoveNftFromSale = async (_id) => {
   try {
-    const res = await fetch(`${BASE_URL2}/api/v1/remove-nft-from-sale`, {
+    const res = await fetch(`${BASE_URL2}/api/v1/remove-nft-from-sale${getParamTenantId()}`, {
       method: httpConstants.METHOD_TYPE.PUT,
       headers: AuthToken,
       // headers: {

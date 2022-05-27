@@ -4,10 +4,11 @@ import { BASE_URL } from "../reducers/Constants";
 import axios from "axios";
 import { AuthToken } from "./UserAuthToken";
 import { duration } from "moment";
+import { getParamTenantId } from "../utility/global";
 
 export function getNfts(requestData) {
   let url =
-    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts?" + requestData;
+    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts"+ getParamTenantId()+ "&" + requestData;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -34,7 +35,7 @@ export function getNfts(requestData) {
 // --------------------get nfts -----
 export const getNFtsData = async (filterObj, successCallBack) => {
   try {
-    const url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts?";
+    const url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts"+getParamTenantId();
     const { data } = await axios.get(url, { params: filterObj });
     successCallBack(data);
   } catch (e) {
@@ -48,7 +49,7 @@ export const getNft = async (requestData, successCallBack) => {
   // alert("clled getNft")
   // console.log(req)
   let url =
-    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v2/nfts/" + requestData;
+    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v2/nfts/" + requestData + getParamTenantId();
   const { data } = await axios.get(url, { headers: AuthToken });
   if (data) {
     successCallBack(data);
@@ -80,7 +81,7 @@ export const getNft = async (requestData, successCallBack) => {
 export function getCollections(requestData) {
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
-    "api/v1/collections?" +
+    "api/v1/collections"+ getParamTenantId()+'&' +
     requestData;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
@@ -171,7 +172,7 @@ export function getNftsByCollectionId(id, requestData) {
 export function getTopNftSales(duration, requestData) {
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
-    "api/v1/get-top-nfts?" +
+    "api/v1/get-top-nfts"+ getParamTenantId()+ "&" +
     duration;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
@@ -197,7 +198,7 @@ export function getTopNftSales(duration, requestData) {
 
 export async function getNameImageOfUser(_id) {
   try {
-    const res = await fetch(`${BASE_URL}/api/v1/user/${_id}`);
+    const res = await fetch(`${BASE_URL}/api/v1/user/${_id}${getParamTenantId()}`);
     const result = await res.json();
     const user = result.responseData;
     return {
@@ -212,7 +213,7 @@ export function getNotificationListById(requestData) {
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
     "api/v1/notification/" +
-    requestData;
+    requestData + getParamTenantId();
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -239,7 +240,7 @@ export function getNotificationListById(requestData) {
 export function getNotificationCountById(_id) {
   // console.log(notificationId,"sachin1111")
   let url =
-  process.env.REACT_APP_WEBAPP_MICROSERVICE + `api/v1/notification/${_id}/read`;
+  process.env.REACT_APP_WEBAPP_MICROSERVICE + `api/v1/notification/${_id}/read${getParamTenantId}`;
   return httpService(
     httpConstants.METHOD_TYPE.POST,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -265,7 +266,7 @@ export function getNotificationCountById(_id) {
 export const addNftReport = async (requestData, successCallBack) => {
   try {
     const url =
-      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/reports/nfts";
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/reports/nfts"+getParamTenantId();
     const { data } = await axios.post(url, requestData);
     successCallBack(data);
   } catch (e) {
@@ -276,7 +277,7 @@ export const addNftReport = async (requestData, successCallBack) => {
 export const addCollectionReport = async (requestData, successCallBack) => {
   try {
     const url =
-      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/reported/collection";
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/reported/collection" + getParamTenantId();
     const { data } = await axios.post(url, requestData);
     successCallBack(data);
   } catch (e) {
@@ -298,7 +299,7 @@ export const addCollectionReport = async (requestData, successCallBack) => {
 // };
 
 export function addLikeNft(requestData) {
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft/like";
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft/like" + getParamTenantId();
   return httpService(
     httpConstants.METHOD_TYPE.POST,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -324,7 +325,7 @@ export function addLikeNft(requestData) {
 export function getPricingHistory(requestData) {
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
-    "api/v1/pricing-history?" +
+    "api/v1/pricing-history"+ getParamTenantId() + '&' +
     requestData;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
@@ -351,7 +352,7 @@ export function updateCollectionTxStatus(requestData, _id) {
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
     "api/v1/collections/" +
     _id +
-    "/status";
+    "/status"+getParamTenantId();
 
   return httpService(
     httpConstants.METHOD_TYPE.PUT,
@@ -379,7 +380,7 @@ export function getActivities(reqObj, id) {
 
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
-    `api/v1/activities/${id}?type=${reqObj}`;
+    `api/v1/activities/${id}${getParamTenantId()}?type=${reqObj}`;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -405,7 +406,7 @@ export function getActivities(reqObj, id) {
 export function getList(reqType, id) {
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
-    `api/v1/activities/${id}?` +
+    `api/v1/activities/${id}${getParamTenantId()}&` +
     "type=" +
     "list";
   return httpService(

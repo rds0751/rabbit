@@ -35,7 +35,7 @@ import wallet from "../../assets/images/wallet.svg";
 import Anafto from "../../assets/images/ANAFTO.svg";
 import { WHITE_LABEL_TOKEN } from "../../reducers/Constants";
 import { Helmet } from "react-helmet";
-import { fetchPalletsColor } from "../../utility/global";
+import { fetchPalletsColor, getParamTenantId } from "../../utility/global";
 import { padding } from "@mui/system";
 import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -99,7 +99,7 @@ function Navbar({ loader }) {
   }, []);
 
   useEffect(() => {
-    setPermissionToUploadNft(tenantData?.permissionToUploadNft);
+    // setPermissionToUploadNft(tenantData?.permissionToUploadNft);
   }, [tenantData]);
 
   useEffect(() => {
@@ -195,12 +195,12 @@ function Navbar({ loader }) {
       dispatch(ManageWalletSideBar(false));
       if (walletAddress == null) {
         dispatch(RedirectTo("myitems"));
-        navigate("/add-wallet");
+        navigate(`/add-wallet${getParamTenantId()}`);
         toast.error("Connect your wallet", {
           position: toast.POSITION.TOP_RIGHT,
         });
       } else {
-        navigate("/my-items");
+        navigate(`/my-items${getParamTenantId()}`);
       }
     }
     if (name == "create") {
@@ -210,13 +210,13 @@ function Navbar({ loader }) {
         dispatch(ManageNotiSideBar(false));
         dispatch(ManageWalletSideBar(false));
         if (walletAddress == null) {
-          dispatch(RedirectTo("create"));
-          navigate("/add-wallet");
+          dispatch(RedirectTo(`create`));
+          navigate(`/add-wallet${getParamTenantId()}`);
           toast.error("Connect your wallet", {
             position: toast.POSITION.TOP_RIGHT,
           });
         } else {
-          navigate("/create-nft");
+          navigate(`/create-nft${getParamTenantId()}`);
         }
       }
     }
@@ -225,14 +225,14 @@ function Navbar({ loader }) {
       dispatch(ManageWalletSideBar(false));
       if (walletAddress == null) {
         // dispatch(RedirectTo("profile"));
-        navigate("/add-wallet");
+        navigate(`/add-wallet${getParamTenantId()}`);
         toast.error("Connect your wallet", {
           position: toast.POSITION.TOP_RIGHT,
         });
         // toast.error("Connect your wallet");
         // navigate("/my-profile");
       } else {
-        navigate("/my-profile");
+        navigate(`/my-profile${getParamTenantId()}`);
       }
     }
   };
@@ -257,7 +257,7 @@ function Navbar({ loader }) {
         });
       }
 
-      navigate("/add-wallet");
+      navigate(`/add-wallet${getParamTenantId()}`);
     } else {
       dispatch(ManageWalletSideBar(!isOpenWallet));
       dispatch(ManageNotiSideBar(false));
@@ -269,7 +269,7 @@ function Navbar({ loader }) {
     setDisplay(true);
 
     if (loggedInUser == null) {
-      navigate("/add-wallet");
+      navigate(`/add-wallet${getParamTenantId()}`);
       toast.error("Connect your wallet", {
         position: toast.POSITION.TOP_RIGHT,
       });
@@ -403,7 +403,7 @@ function Navbar({ loader }) {
             <div className="left_navbar d-flex align-items-center LeftNavBar">
               <Link
                 className="navbrand"
-                to="/"
+                to={`/${getParamTenantId()}`}
                 style={{ marginRight: "30px", textDecoration: "none" }}
                 onClick={() => {
                   closeWalletAndNoti();
@@ -485,7 +485,7 @@ function Navbar({ loader }) {
                                 <p className="coll-title">Collections</p>
                                 {collections.map((collection) => {
                                   const route =
-                                    "/collection-details/" + collection._id;
+                                    "/collection-details/" + collection._id + getParamTenantId();
                                   return (
                                     <Link
                                       to={route}
@@ -513,7 +513,7 @@ function Navbar({ loader }) {
                               <div>
                                 <p className="coll-title">NFTs</p>
                                 {nfts.map((nft) => {
-                                  const route = "/nft-information/" + nft._id;
+                                  const route = "/nft-information/" + nft._id + getParamTenantId();
                                   return (
                                     <Link
                                       to={route}
@@ -534,7 +534,7 @@ function Navbar({ loader }) {
                             )}
                             <div className="btn-div d-flex">
                               <Link
-                                to="/search-results"
+                                to={`/search-results${getParamTenantId()}`}
                                 state={{
                                   value: inputValue,
                                 }}
@@ -618,7 +618,7 @@ function Navbar({ loader }) {
                               <p className="coll-title">Collections</p>
                               {collections.map((collection) => {
                                 const route =
-                                  "/collection-details/" + collection._id;
+                                  "/collection-details/" + collection._id + getParamTenantId();
                                 return (
                                   <Link
                                     to={route}
@@ -646,7 +646,7 @@ function Navbar({ loader }) {
                             <div>
                               <p className="coll-title">NFTs</p>
                               {nfts.map((nft) => {
-                                const route = "/nft-information/" + nft._id;
+                                const route = "/nft-information/" + nft._id + getParamTenantId();
                                 return (
                                   <Link
                                     to={route}
@@ -667,7 +667,7 @@ function Navbar({ loader }) {
                           )}
                           <div className="btn-div d-flex">
                             <Link
-                              to="/search-results"
+                              to={`/search-results${getParamTenantId()}`}
                               state={{
                                 value: inputValue,
                               }}
@@ -724,7 +724,7 @@ function Navbar({ loader }) {
                               : {}
                           }
                           aria-current="page"
-                          to="/nfts"
+                          to={`/nfts${getParamTenantId()}`}
                           onMouseOut={handleMouseOut}
                           onMouseOver={handleMouseOver}
                         >
@@ -749,7 +749,7 @@ function Navbar({ loader }) {
                               : "nav-link"
                           }
                           exact
-                          to="/leader-board"
+                          to={`/leader-board${getParamTenantId()}`}
                           style={
                             activeLeaderboard.includes(location.pathname)
                               ? navLink
@@ -779,10 +779,10 @@ function Navbar({ loader }) {
                       activeResource.includes(location.pathname) && loader ===false ? navLink : {}
                     }
                   >
-                    <NavDropdown.Item onClick={() => navigate("/help-center")}>
+                    <NavDropdown.Item onClick={() => navigate(`/help-center${getParamTenantId()}`)}>
                       Help Center
                     </NavDropdown.Item>
-                    <NavDropdown.Item onClick={() => navigate("/suggestion")}>
+                    <NavDropdown.Item onClick={() => navigate(`/suggestion${getParamTenantId()}`)}>
                       Suggestions
                     </NavDropdown.Item>
                   </NavDropdown>

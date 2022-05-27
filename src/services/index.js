@@ -5,6 +5,7 @@
 
 import { httpConstants } from "../constants";
 import { BASE_URL, BASE_URL2 } from "../reducers/Constants";
+import { getParamTenantId } from "../utility/global";
 import { httpService } from "../utility/httpService";
 import { AuthToken } from "./UserAuthToken";
 
@@ -34,7 +35,7 @@ export const addWalletAddress = async (wallet_address) => {
 export const updateUserProfile = async (data, userId) => {
   try {
     console.log(AuthToken,"<<<Auth");
-    const res = await fetch(`${BASE_URL}/api/v1/user/${userId}`, {
+    const res = await fetch(`${BASE_URL}/api/v1/user/${userId}${getParamTenantId()}`, {
       method: httpConstants.METHOD_TYPE.PUT,
       headers: AuthToken,
       body: JSON.stringify(data),

@@ -33,7 +33,7 @@ import {
 import { toast } from "react-toastify";
 import AwesomeSlider from "react-awesome-slider";
 import "react-awesome-slider/dist/styles.css";
-import { fetchPalletsColor } from "../../utility/global";
+import { fetchPalletsColor, getParamTenantId } from "../../utility/global";
 
 import defaultCover from "../../assets/images/bannerLoader.png"
 import Skeleton from "react-loading-skeleton";
@@ -243,9 +243,9 @@ function Home({ loaderState }) {
                               // const { _id, cdnUrl, name, biddingDetails, salesInfo } = nft;
                               let route;
                               if (nft.hasOwnProperty('contentId') && nft.contentId != "") {
-                                route = "/nft-information/" + nft.contentId;
+                                route = "/nft-information/" + nft.contentId + getParamTenantId();
                               } else {
-                                route = "/nft-information/" + nft._id;
+                                route = "/nft-information/" + nft._id + getParamTenantId();
                               }
                              
 
@@ -309,9 +309,9 @@ function Home({ loaderState }) {
                                 nfts.slice(4, 8).map((nft) => {
                                   let route;
                                   if (nft.hasOwnProperty('contentId') && nft.contentId != "") {
-                                    route = "/nft-information/" + nft.contentId;
+                                    route = "/nft-information/" + nft.contentId + getParamTenantId();
                                   } else {
-                                    route = "/nft-information/" + nft._id;
+                                    route = "/nft-information/" + nft._id + getParamTenantId();
                                   }
                                   return (
                                     <>
@@ -395,7 +395,7 @@ function Home({ loaderState }) {
                           <div>
                             {" "}
                             <Link
-                              to={"/nft-information/" + nft?._id}
+                              to={"/nft-information/" + nft?._id + getParamTenantId()}
                               style={{ textDecoration: "none" }}
                             >
                               <img

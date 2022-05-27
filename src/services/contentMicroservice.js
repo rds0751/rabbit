@@ -5,6 +5,7 @@ import { httpServiceFileUpload } from "../utility/httpServiceFileUpload";
 import axios from "axios";
 import { AuthToken } from "./UserAuthToken";
 import { WHITE_LABEL_TOKEN } from "../reducers/Constants";
+import { getParamTenantId } from "../utility/global";
 
 const dev_url = "https://goi4mbj86f.execute-api.us-east-1.amazonaws.com/dev/"; // need to store it in .env file
 
@@ -29,7 +30,7 @@ function getHeaders() {
 
 async function addIpfs(requestdata) {
   // let url = "http://localhost:3001" + "/add-file-ipfs";
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/add-file-ipfs";
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/add-file-ipfs"+getParamTenantId();
 
   return httpServiceFileUpload(
     httpConstants.METHOD_TYPE.POST,
@@ -79,7 +80,7 @@ async function addIpfs(requestdata) {
 //     });
 // }
 async function createNftContent(requestdata) {
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft";
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft"+getParamTenantId();
   // console.log(requestdata, "<<<<<<<<", url, "<<<<< createnfft response");
   return httpService(
     httpConstants.METHOD_TYPE.POST,
@@ -108,7 +109,7 @@ async function createNftContent(requestdata) {
 //   return httpService(httpConstants.METHOD_TYPE.PUT, headers, requestData, url)
 //     .then((response) => {
 async function openForSale(requestData) {
-  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/open-for-sale";
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/open-for-sale"+getParamTenantId();
   let headers = getHeaders();
   return httpService(httpConstants.METHOD_TYPE.PUT, headers, requestData, url)
     .then((response) => {
@@ -144,7 +145,7 @@ export const NftCreatedByUser = async (successCallBack, _id) => {
   console.log("jjjjjjjjjjjjjjjjjjjjjjjj", _id)
   try {
     const url =
-      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/" + _id + "/created";
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/" + _id + "/created"+getParamTenantId();
     const { data } = await axios.get(url);
     if (data.success) {
       successCallBack(data);
@@ -160,7 +161,7 @@ export const NftCreatedByUser = async (successCallBack, _id) => {
 export const NftOwnedByUser = async (successCallBack, _id) => {
   try {
     const url =
-      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/" + _id + "/owned";
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/" + _id + "/owned"+getParamTenantId();
     const { data } = await axios.get(url);
     if (data.success) {
       successCallBack(data);
@@ -177,7 +178,7 @@ export function getNftOwnedByUser(requestData) {
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
     "api/v1/nfts/" +
-    requestData + "/owned";
+    requestData + "/owned"+getParamTenantId();
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -205,7 +206,7 @@ export function getCollectionOwnedByUser(requestData) {
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
     "api/v1/users/" +
-    requestData + "/collections";
+    requestData + "/collections"+getParamTenantId();
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -234,7 +235,7 @@ export function getCollectionOwnedByUser(requestData) {
 export const NftLikedByUser = async (successCallBack, _id) => {
   try {
     const url =
-      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/" + _id + "/liked";
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/" + _id + "/liked"+getParamTenantId();
     const { data } = await axios.get(url);
     if (data.success) {
       successCallBack(data);
@@ -251,7 +252,7 @@ export const NftLikedByUser = async (successCallBack, _id) => {
 export const NftSellByUser = async (successCallBack, userId) => {
   try {
     const url =
-      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/" + userId + "/onsale";
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/" + userId + "/onsale"+getParamTenantId();
     const { data } = await axios.get(url);
     if (data.success) {
       successCallBack(data);
@@ -269,7 +270,7 @@ export const getALLCollectionById = async (id, successCallBack) => {
   try {
     const url =
       process.env.REACT_APP_WEBAPP_MICROSERVICE +
-      `api/v1/collection/${id}/nfts`;
+      `api/v1/collection/${id}/nfts${getParamTenantId()}`;
     const { data } = await axios.get(url);
 
     successCallBack(data);
@@ -281,7 +282,7 @@ export const getALLCollectionById = async (id, successCallBack) => {
 
 async function removeFromSale(requestData) {
   let url =
-    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/remove-nft-from-sale";
+    process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/remove-nft-from-sale"+getParamTenantId();
   let headers = getHeaders();
   return httpService(httpConstants.METHOD_TYPE.PUT, headers, requestData, url)
     .then((response) => {
@@ -298,7 +299,7 @@ async function ownershipTransfer(requestData, contentId) {
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
     "api/v1/nft/transfer/" +
-    contentId;
+    contentId + getParamTenantId();
   let headers = getHeaders();
   return httpService(httpConstants.METHOD_TYPE.PUT, headers, requestData, url)
     .then((response) => {
@@ -315,7 +316,7 @@ async function ownershipTransfer(requestData, contentId) {
 export const addSuggestion = async (bodyData, successCallback) => {
   try {
     const url =
-      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/add-suggestion";
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/add-suggestion" + getParamTenantId();
     const { data } = await axios.post(url, bodyData, { headers: AuthToken });
     if (data.success) {
       successCallback(data.responseData);
@@ -326,7 +327,7 @@ export const addSuggestion = async (bodyData, successCallback) => {
 };
 
 export const getAboutData = async (id, successCallBack) => {
-  const url = `${dev_url}api/v1/about/61f7b7a4c017de6244c51144`;
+  const url = `${dev_url}api/v1/about/61f7b7a4c017de6244c51144${getParamTenantId()}`;
   const { data } = await axios.get(url);
   console.log(data, "<<<dataabout");
   if (data.success) {
@@ -340,7 +341,7 @@ export const getAboutData = async (id, successCallBack) => {
 export const EditNft = async (id, reqData, successCallBack) => {
   try {
     const url =
-      process.env.REACT_APP_WEBAPP_MICROSERVICE + `api/v1/nfts/${id}`;
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + `api/v1/nfts/${id}${getParamTenantId()}`;
     const { data } = await axios.put(url, reqData, { headers: AuthToken });
     console.log(data, "<<<<data while updating nft");
     successCallBack(data);

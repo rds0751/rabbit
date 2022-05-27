@@ -28,6 +28,7 @@ import { Divider } from "@mui/material";
 import "../../assets/styles/Leader.css";
 import { Tooltip } from "@material-ui/core";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { getParamTenantId } from "../../utility/global";
 
 const MainContainer = styled.div`
   display: flex;
@@ -375,7 +376,7 @@ export default function PricingHistoryComponentTable(props) {
                       >
                         {" "}
                         <Link
-                          to={"/user-profile/" + row?.createdBy}
+                          to={"/user-profile/" + row?.createdBy + getParamTenantId()}
                           style={{ textDecoration: "none" }}
                         >
                           <span className="Activity-From">
@@ -424,7 +425,7 @@ export default function PricingHistoryComponentTable(props) {
                        
                           {row?.to.length > 0 ? (
                             <Link
-                              to={"/user-profile/" + row?.to[0]?._id}
+                              to={"/user-profile/" + row?.to[0]?._id + getParamTenantId()}
                               style={{ textDecoration: "none" }}
                             >
                               <span className="Activity-From">

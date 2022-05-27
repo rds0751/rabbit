@@ -4,11 +4,12 @@ import { AuthToken } from "./UserAuthToken";
 import axios from "axios";
 import { BASE_URL1 } from "../reducers/Constants";
 import { WHITE_LABEL_TOKEN } from "../reducers/Constants";
+import { getParamTenantId } from "../utility/global";
 
 export function getCategories(requestData) {
   let url =
     process.env.REACT_APP_WEBAPP_CLIENT_CONFIG_MICROSERVICE +
-    "api/v1/categories";
+    "api/v1/categories"+getParamTenantId();
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -40,7 +41,7 @@ export async function getTenantData(paramToken=false, paramAddress=false) {
   try {
     let address = localStorage.getItem("walletAddress") ? localStorage.getItem("walletAddress") : "0x9affb1cf8e276657f857e0b6c982e093bdb50968";
     let loggedAddres = paramAddress || address
-    const url = `${BASE_URL1}/api/v1/tenant/wallet/${loggedAddres}`;
+    const url = `${BASE_URL1}/api/v1/tenant/wallet/${loggedAddres}${getParamTenantId()}`;
     const res = await fetch(url, { headers: token });
     const result = await res.json();
     const tenantData = result.responseData;
@@ -52,7 +53,7 @@ export async function getTenantData(paramToken=false, paramAddress=false) {
 
 export const getBlogs = async () => {
     try {
-        const url = `${BASE_URL1}/api/v1/blogs`;
+        const url = `${BASE_URL1}/api/v1/blogs${getParamTenantId()}`;
         const res = await fetch(url, { headers: AuthToken });
         const result = await res.json();
         return result;
@@ -63,7 +64,7 @@ export const getBlogs = async () => {
 
 export const getBlogsId = async (id) => {
   try {
-      const url = `${BASE_URL1}/api/v1/blog/${id}`;
+      const url = `${BASE_URL1}/api/v1/blog/${id}${getParamTenantId()}`;
       const res = await fetch(url, { headers: AuthToken });
       const result = await res.json();
       return result;

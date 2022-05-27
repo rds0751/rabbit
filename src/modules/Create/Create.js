@@ -16,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
 import { WEB_APP_USER_WALLET_ADDRESS } from "../../reducers/Constants";
 import Metamask from "../../assets/images/Metamask.svg"
+import { getParamTenantId } from "../../utility/global";
 function Create() {
 
   const customize = useSelector(state => state.customize)
@@ -39,16 +40,16 @@ function Create() {
       toast.success("Wallet connected");
       // dispatch(ManageWalletSideBar(!isOpenWallet));
       if (redirectUrl != "") {
-        history("/my-profile");
+        history("/my-profile"+getParamTenantId());
         // history(redirectUrl);
         if (redirectUrl == "myitems") {
-          history("/my-items");
+          history("/my-items"+getParamTenantId());
         }
         if (redirectUrl == "profile") {
-          history("/my-profile");
+          history("/my-profile"+getParamTenantId());
         }
         if (redirectUrl == "create") {          
-          history("/create-nft");
+          history("/create-nft"+getParamTenantId());
         }
         if (redirectUrl == "wallet") {
           document.body.style.overflow = "hidden";
@@ -59,7 +60,7 @@ function Create() {
         }
         // alert(`${redirectUrl}`);
       } else {
-        history("/my-profile");
+        history("/my-profile"+getParamTenantId());
       }
     } else {
       // toast.error("Choose the wallet");
@@ -152,11 +153,11 @@ function Create() {
     console.log(customize.permissionToUploadNft, 'ony me')
 
     if(customize.permissionToUploadNft === 'Only me'){
-      history("/");
+      // history("/");
 
-      toast.warning("You are not allowed to access this location", {
-        position: toast.POSITION.TOP_RIGHT
-      });
+      // toast.warning("You are not allowed to access this location", {
+      //   position: toast.POSITION.TOP_RIGHT
+      // });
     }
   },[customize.permissionToUploadNft])
 

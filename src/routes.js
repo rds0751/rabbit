@@ -72,6 +72,12 @@ import BlogDetail from "./modules/blogs/blogDetail";
 import { getTenantData } from "./services/clientConfigMicroService";
 import { useState } from "react";
 import Spinner from "./common/components/Spinner";
+
+const url = new URL( window.location.href);
+const tenantId = url.searchParams.get("id");
+
+localStorage.setItem('tenantId', tenantId);
+
 function App() {
 
   const dispatch = useDispatch();
@@ -95,7 +101,7 @@ function App() {
 
   useEffect(() => {
 
-    if (localStorage.getItem('WHITE_LABEL_TOKEN') !== null) {
+    // if (localStorage.getItem('WHITE_LABEL_TOKEN') !== null) {
 
       getTenantData()
         .then(response => {
@@ -108,9 +114,9 @@ function App() {
           setLoader(false);
         })
 
-    } else {
-      setLoader(false)
-    }
+    // } else {
+    //   setLoader(false)
+    // }
 
   }, [])
 
