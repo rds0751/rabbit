@@ -581,11 +581,15 @@ function CreateSingleNFT(props) {
                   </div>
 
                   <div className="abstractillusion">
-                    <img src={cdnUrl != "" ? cdnUrl : Image} />
+                    <img src={previewCompressedURL !="" ? previewCompressedURL : (cdnUrl!="" ? cdnUrl : Image )} />
                     <div className="abstractillusioncontent">
                       <div className="abstracttitle">{name.current}</div>
                       {/* <div className="abstractposter"> </div> */}
-                      <div className="ethprice">{price.current}ETH</div>
+                      <div className="ethprice">{price.current}
+                      {   collectionName === "Anafto Collection"
+                        ? selectedOption?.value
+                        : currencyValue(collectionBlockchain)}
+                        </div>
                     </div>
                   </div>
                   <div className="checkpostcontainer">

@@ -9,10 +9,16 @@ import { ShimmerThumbnail } from "react-shimmer-effects";
 import { addLikeNft } from "../../services/webappMicroservice";
 import Ethereum from "../../assets/images/ether.svg";
 import Polygon from "../../assets/images/ploygon.svg";
+import Skeleton from "react-loading-skeleton";
+import ReactPlayer from "react-player";
+import useSound from "use-sound";
+import sound from "../../assets/sound.mp3";
+import playImage from "../../assets/images/Play.svg";
+import pauseImage from "../../assets/images/Pause.svg";
 import Binance from "../../assets/images/binance.svg";
 function LikedNfts({ nft }) {
   const { user } = useSelector((state) => state);
-  let _id, cdnUrl, name, salesInfo, compressedURL, blockchain,collectionName,collectionId;
+  let _id, cdnUrl, name, salesInfo, compressedURL, blockchain,collectionName,collectionId,previewImage,fileExtension;
   if (nft.userLikedNfts !== undefined) {
     _id = nft.userLikedNfts._id;
     cdnUrl = nft.userLikedNfts.cdnUrl;
@@ -22,8 +28,11 @@ function LikedNfts({ nft }) {
     blockchain = nft.userLikedNfts.blockchain;
     collectionId=nft.userLikedNfts.collectionId;
     collectionName=nft?.userLikedNfts?.collectionName;
+    previewImage=nft?.userLikedNfts.previewImage;
+    fileExtension=nft?.userLikedNfts.fileExtension;
   }
   const [handleLike, setHandleLike] = useState(true);
+  const [videoDisplay, setVideoDisplay] = useState(false);
   const route = "/nft-information/" + _id;
   const likeNft = (id) => {
     if (user?.loggedInUser?._id) {
@@ -87,16 +96,50 @@ function LikedNfts({ nft }) {
   return (
     <div className="nftCardEach col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
       <div className="card nft-card-radius border-radius cardmob h-100">
-        <Link to={route} style={{ textDecoration: "none" }}>
+      <div className="card nft-card-radius border-radius cardmob h-100">
+        {fileExtension?.toString().includes("audio") ? (
           <div className="image-container">
-            <img
-              className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
-              src={compressedURL}
-              alt="nft-img"
-              onLoad={onImageLoad}
-              onMouseDown={(e) => e.preventDefault()}
-              onContextMenu={(e) => e.preventDefault()}
-            />
+            
+              <>
+                <Link to={route} style={{ textDecoration: "none" }}>
+                  <img
+                    className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
+                    src={previewImage}
+                    alt="nft-img"
+                    onLoad={onImageLoad}
+                    onMouseDown={(e) => e.preventDefault()}
+                    onContextMenu={(e) => e.preventDefault()}
+                  />
+                </Link>
+                <div
+                  className="videoDiv"
+                  style={{ display: videoDisplay ? "block" : "none" }}
+                >
+                  <ReactPlayer
+                    className="react-player"
+                    height={0}
+                    width="100%"
+                    playing={videoDisplay}
+                    url={cdnUrl}
+                  />
+                </div>
+
+                <div
+                  onClick={() => setVideoDisplay(true)}
+                  className="musicIcon"
+                  style={{ display: videoDisplay ? "none":"block"}}
+                >
+                  <img src={playImage}></img>
+                </div>
+                <div
+                  onClick={() => setVideoDisplay(false)}
+                  className="musicIcon"
+                  style={{ display: videoDisplay ? "block":"none"}}
+                >
+                  <img src={pauseImage}></img>
+                </div>
+              </>
+            
 
             {!imageLoading.loaded && (
               <div className="loaderNft ">
@@ -105,11 +148,93 @@ function LikedNfts({ nft }) {
                   fitOnFrame={true}
                   rounded
                 />
-                ;
               </div>
             )}
           </div>
-        </Link>
+        ) : fileExtension?.toString().includes("video") ? (
+          <div className="image-container">
+           
+              <>
+                <Link to={route} style={{ textDecoration: "none" }}>
+                  <img
+                    className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
+                    src={previewImage}
+                    style={{ display: videoDisplay ? "none" : "block" }}
+                    alt="nft-img"
+                    onLoad={onImageLoad}
+                    onMouseDown={(e) => e.preventDefault()}
+                    onContextMenu={(e) => e.preventDefault()}
+                  />
+                </Link>
+                <div
+                  className="videoDiv"
+                  style={{ display: videoDisplay ? "block" : "none" }}
+                >
+                  <ReactPlayer
+                    className="react-player"
+                    controls={false}
+                    playing={videoDisplay}
+                    width="100%"
+                    height={187}
+                    url={cdnUrl}
+                  />
+                </div>
+                <div
+                  onClick={() => setVideoDisplay(true)}
+                  className="musicIcon"
+                  style={{ display: videoDisplay ? "none":"block"}}
+                >
+                  <img src={playImage}></img>
+                </div>
+                <div
+                  onClick={() => setVideoDisplay(false)}
+                  className="musicIcon"
+                  style={{ display: videoDisplay ? "block":"none"}}
+                >
+                  <img src={pauseImage}></img>
+                </div>
+              
+              </>
+           
+
+            {!imageLoading.loaded && (
+              <div className="loaderNft ">
+                <ShimmerThumbnail
+                  className="thumbnail"
+                  fitOnFrame={true}
+                  rounded
+                />
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="image-container">
+           
+              <>
+                <Link to={route} style={{ textDecoration: "none" }}>
+                  <img
+                    className="nftTileEachImage  border-radius nft-img-radius card_imgmob"
+                    src={compressedURL}
+                    alt="nft-img"
+                    onLoad={onImageLoad}
+                    onMouseDown={(e) => e.preventDefault()}
+                    onContextMenu={(e) => e.preventDefault()}
+                  />
+                </Link>
+              </>
+           
+
+            {!imageLoading.loaded && (
+              <div className="loaderNft ">
+                <ShimmerThumbnail
+                  className="thumbnail"
+                  fitOnFrame={true}
+                  rounded
+                />
+              </div>
+            )}
+          </div>
+        )}
         <span>
           <img
             id="like_icon"
@@ -179,6 +304,7 @@ function LikedNfts({ nft }) {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }
