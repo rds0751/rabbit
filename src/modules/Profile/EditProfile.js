@@ -19,7 +19,7 @@ import $ from 'jquery';
 import noProfile from '../../assets/images/NoProfile.svg'
 import { format } from "util";
 import { borderRadius } from "@mui/system";
-import { fetchPalletsColor } from "../../utility/global";
+import { fetchPalletsColor, getParamTenantId } from "../../utility/global";
 import Skeleton from "react-loading-skeleton";
 
 const Button = styled.button``;
@@ -239,7 +239,7 @@ function EditProfile(props) {
       // window.location.reload(true);
       // console.log("jsgg")
       setTimeout(() => {
-        window.location.href = '/my-profile';
+        window.location.href = '/my-profile'+getParamTenantId();
       }, 2000)
       // setTimeout(window.location.href = '/my-profile',9000)
       // window.location.href = '/my-profile';

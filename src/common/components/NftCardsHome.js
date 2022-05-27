@@ -14,7 +14,7 @@ import {
   addLikeNft,
   getNFtsData,
 } from "../../services/webappMicroservice";
-import { fetchPalletsColor } from "../../utility/global";
+import { fetchPalletsColor, getParamTenantId } from "../../utility/global";
 import Skeleton from "react-loading-skeleton";
 import ReactPlayer from "react-player";
 import useSound from "use-sound";
@@ -45,7 +45,7 @@ function NftCardsHome({ nft, appearance, loader }) {
   // const endDate = biddingDetails.endDate;
   // const daysleft = new Date(endDate - currDate).getDate() - 1;
   // console.log(daysleft, "<<<daysleft");
-  const route = "/nft-information/" + _id;
+  const route = "/nft-information/" + _id + getParamTenantId();
   const likeNft = (id) => {
     if (user?.loggedInUser?._id) {
       const data = {
@@ -345,7 +345,7 @@ function NftCardsHome({ nft, appearance, loader }) {
                   textDecoration: "none",
                   color: `${fetchPalletsColor(appearance.colorPalette)}`,
                 }}
-                to={"/collection-details/" + collectionId}
+                to={"/collection-details/" + collectionId + getParamTenantId()}
               >
                 {undefined !== collectionName && collectionName.length > 30
                   ? collectionName.slice(0, 30) + "..."

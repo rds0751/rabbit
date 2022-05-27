@@ -1,10 +1,11 @@
 import { httpService } from "../utility/httpService";
 import { httpConstants } from "../constants";
 import { AuthToken } from "./UserAuthToken";
+import { getParamTenantId } from "../utility/global";
 
 export function getTopSellers(duration, requestData) {
   console.log("APIcall")
-  let url = process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/top-sellers?" + duration + "&limit=40&skip=0";
+  let url = process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/top-sellers"+ getParamTenantId() +"&" + duration + "&limit=40&skip=0";
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -29,7 +30,7 @@ export function getTopSellers(duration, requestData) {
 }
 export function getTopBuyers(duration, requestData) {
   console.log("jjjjjjjjjjjsssssjjjj", duration)
-  let url = process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/top-buyers?" + duration + "&limit=40&skip=0";
+  let url = process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/top-buyers"+ getParamTenantId() +"&" + duration + "&limit=40&skip=0";
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -53,7 +54,7 @@ export function getTopBuyers(duration, requestData) {
 }
 
 export function getTopCollections(duration,requestData) {
-  let url = process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/top-collections?limit=40&skip=0&" + duration;
+  let url = process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/top-collections"+getParamTenantId() +"&limit=40&skip=0&" + duration;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -79,7 +80,7 @@ export function getTopCollections(duration,requestData) {
 export function pricingHistoryGraphOfNft(reqId, reqObj) {
   let url =
     // process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "sold-price-graphs-of-particular-nft";
-    process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + `api/v1/sold-price-graphs-of-particular-nft/${reqId?.contentId}?`+reqObj;
+    process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + `api/v1/sold-price-graphs-of-particular-nft/${reqId?.contentId}${getParamTenantId()}&`+reqObj;
     console.log(url,"1111")
   return httpService(
     httpConstants.METHOD_TYPE.GET,
@@ -104,7 +105,7 @@ export function pricingHistoryGraphOfNft(reqId, reqObj) {
 }
 export function addNftTx(requestData) {
   let url =
-    process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/add-transaction";
+    process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/add-transaction"+getParamTenantId();
   return httpService(
     httpConstants.METHOD_TYPE.POST,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -131,7 +132,7 @@ export function updateTxStatus(requestData, requestId) {
   // console.log("requestData--",requestData)
 
   let url =
-    process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/transactions/" + requestId + "/status";
+    process.env.REACT_APP_SELL_AND_PURCHASE_MICROSERVICE + "api/v1/transactions/" + requestId + "/status"+ getParamTenantId();
   // console.log("url------------",url)
   return httpService(
     httpConstants.METHOD_TYPE.POST,

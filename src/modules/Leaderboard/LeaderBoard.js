@@ -39,7 +39,7 @@ import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled'
 import PopperUnstyled from '@mui/base/PopperUnstyled'
 import { styled } from '@mui/system'
 import { useSelector } from 'react-redux';
-import { fetchPalletsColor, handleLoadHoverText, handleLoadOutText } from '../../utility/global';
+import { fetchPalletsColor, getParamTenantId, handleLoadHoverText, handleLoadOutText } from '../../utility/global';
 import Skeleton from 'react-loading-skeleton';
 import LeaderBoardCard from './LeaderBoardCard';
 import LeaderBoardNftCard from './LeaderBoardNftCard';
@@ -460,7 +460,7 @@ function LeaderBoard({ loader }) {
                                   loader ? <Skeleton width="100px" /> :
                                     <Link
                                       style={{ textDecoration: 'null' }}
-                                      to={'/user-profile/' + buyer._id}
+                                      to={'/user-profile/' + buyer._id + getParamTenantId()}
                                     >
                                       {buyer.wallet_address.substring(0, 4)}...
                                       {buyer.wallet_address.slice(
@@ -476,7 +476,7 @@ function LeaderBoard({ loader }) {
                                   loader ? <Skeleton width="100px" /> :
                                     <Link
                                       style={{ textDecoration: 'null' }}
-                                      to={'/user-profile/' + buyer._id}
+                                      to={'/user-profile/' + buyer._id + getParamTenantId()}
                                       onMouseOver={(e) => handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
                                       onMouseOut={(e) => handleLoadOutText(e, '#191919')}
                                     >
@@ -515,7 +515,7 @@ function LeaderBoard({ loader }) {
               </div>
 
               <div className="card-footer view-more">
-                <Link className="view" to="/top-bidder"
+                <Link className="view" to={`/top-bidder${getParamTenantId()}`}
                   onMouseOver={(e) => handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
                   onMouseOut={(e) => handleLoadOutText(e, '#191919')}
                 >
@@ -672,7 +672,7 @@ function LeaderBoard({ loader }) {
                                 {' '}
                                 {
                                   loader ? <Skeleton width="100px" /> :
-                                    <Link to={'/user-profile/' + topSellers._id}>
+                                    <Link to={'/user-profile/' + topSellers._id+ getParamTenantId()}>
                                       {topSellers.wallet_address.substring(0, 4)}...
                                       {topSellers.wallet_address.slice(
                                         topSellers.wallet_address.length - 4,
@@ -684,7 +684,7 @@ function LeaderBoard({ loader }) {
                               <h2 className="sellerName">
                                 {
                                   loader ? <Skeleton width="80px" /> :
-                                    <Link to={'/user-profile/' + topSellers._id}
+                                    <Link to={'/user-profile/' + topSellers._id+ getParamTenantId()}
                                       onMouseOver={(e) => handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
                                       onMouseOut={(e) => handleLoadOutText(e, '#191919')}
                                     >
@@ -722,7 +722,7 @@ function LeaderBoard({ loader }) {
               </div>
 
               <div className="card-footer view-more">
-                <Link className="view" to="/top-seller"
+                <Link className="view" to={`/top-seller${getParamTenantId}`}
                   onMouseOver={(e) => handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
                   onMouseOut={(e) => handleLoadOutText(e, '#191919')}
                 >
@@ -872,7 +872,7 @@ function LeaderBoard({ loader }) {
                                     <Link
                                       style={{ textDecoration: 'null' }}
                                       to={
-                                        '/collection-details/' + collection[0]._id
+                                        '/collection-details/' + collection[0]._id + getParamTenantId()
                                       }
                                     >
                                       {collection[0].contractAddress.substring(
@@ -892,7 +892,7 @@ function LeaderBoard({ loader }) {
                                   loader ? <Skeleton width={`100px`} /> : <Link
                                     style={{ textDecoration: 'null' }}
                                     to={
-                                      '/collection-details/' + collection[0]._id
+                                      '/collection-details/' + collection[0]._id + getParamTenantId()
                                     }
                                     onMouseOver={(e) => handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
                                     onMouseOut={(e) => handleLoadOutText(e, '#191919')}
@@ -931,7 +931,7 @@ function LeaderBoard({ loader }) {
               </div>
 
               <div className="card-footer view-more">
-                <Link className="view" to="/top-collection"
+                <Link className="view" to={"/top-collection"+ getParamTenantId()}
                   onMouseOver={(e) => handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
                   onMouseOut={(e) => handleLoadOutText(e, '#191919')}
                 >
@@ -1190,7 +1190,7 @@ function LeaderBoard({ loader }) {
             const { cdnUrl, name, owner, maxPrice2, daysLeft, likes, _id, content } = curElem
 
 
-            const route = '/nft-information/' + _id
+            const route = '/nft-information/' + _id + getParamTenantId();
 
             return (
               <div className="nftCard col-md-6 col-lg-3 col-sm-12 nft_card card-mar">
@@ -1374,7 +1374,7 @@ const BuildPendingAcceptedRejectedBlock = ({ apiData, isloading }) => {
                       {' '}
                       <Link
                         style={{ textDecoration: 'null' }}
-                        to={'/user-profile/' + buyer._id}
+                        to={'/user-profile/' + buyer._id + getParamTenantId()}
                       >
                         {buyer.wallet_address.substring(0, 4)}...
                         {buyer.wallet_address.slice(
@@ -1387,7 +1387,7 @@ const BuildPendingAcceptedRejectedBlock = ({ apiData, isloading }) => {
                       {' '}
                       <Link
                         style={{ textDecoration: 'null' }}
-                        to={'/user-profile/' + buyer._id}
+                        to={'/user-profile/' + buyer._id+getParamTenantId()}
                       >
                         {buyer.userName}
                       </Link>{' '}
@@ -1419,7 +1419,7 @@ const BuildPendingAcceptedRejectedBlock = ({ apiData, isloading }) => {
       </div>
 
       <div className="card-footer view-more">
-        <Link className="view" to="/top-bidder">
+        <Link className="view" to={"/top-bidder"+getParamTenantId()}>
           {' '}
           View More
         </Link>
@@ -1470,7 +1470,7 @@ const BuildAcceptedBlock = ({ apiData, isloading }) => {
                   {topSellers.userName == '' ? (
                     <h2 className="sellerName">
                       {' '}
-                      <Link to={'/user-profile/' + topSellers._id}>
+                      <Link to={'/user-profile/' + topSellers._id+ getParamTenantId()}>
                         {topSellers.wallet_address.substring(0, 4)}...
                         {topSellers.wallet_address.slice(
                           topSellers.wallet_address.length - 4,
@@ -1479,7 +1479,7 @@ const BuildAcceptedBlock = ({ apiData, isloading }) => {
                     </h2>
                   ) : (
                     <h2 className="sellerName">
-                      <Link to={'/user-profile/' + topSellers._id}>
+                      <Link to={'/user-profile/' + topSellers._id+getParamTenantId()}>
                         {topSellers.userName}
                       </Link>
                     </h2>
@@ -1509,7 +1509,7 @@ const BuildAcceptedBlock = ({ apiData, isloading }) => {
       </div>
 
       <div className="card-footer view-more">
-        <Link className="view" to="/top-seller">
+        <Link className="view" to={"/top-seller"+getParamTenantId()}>
           {' '}
           View More
         </Link>
@@ -1550,7 +1550,7 @@ const BuildRejectedBlock = ({ apiData, isloading }) => {
                       {' '}
                       <Link
                         style={{ textDecoration: 'null' }}
-                        to={'/collection-details/' + collection[0]._id}
+                        to={'/collection-details/' + collection[0]._id + getParamTenantId()}
                       >
                         {collection[0].contractAddress.substring(0, 4)}...
                         {collection[0].contractAddress.slice(
@@ -1562,7 +1562,7 @@ const BuildRejectedBlock = ({ apiData, isloading }) => {
                     <h2 className="sellerName">
                       <Link
                         style={{ textDecoration: 'null' }}
-                        to={'/collection-details/' + collection[0]._id}
+                        to={'/collection-details/' + collection[0]._id + getParamTenantId()}
                       >
                         {collection[0].name}
                       </Link>
@@ -1590,7 +1590,7 @@ const BuildRejectedBlock = ({ apiData, isloading }) => {
       </div>
 
       <div className="card-footer view-more">
-        <Link className="view" to="/top-collection">
+        <Link className="view" to={"/top-collection"+getParamTenantId()}>
           {' '}
           View More
         </Link>

@@ -8,7 +8,7 @@ import { AddWalletDetails } from "../../reducers/Action";
 import { toast, ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
 import "../../assets/styles/createnft.css";
-import { fetchPalletsColor } from "../../utility/global";
+import { fetchPalletsColor, getParamTenantId } from "../../utility/global";
 import Skeleton from "react-loading-skeleton";
 
 function CreateNFT({ loader }) {
@@ -31,7 +31,7 @@ function CreateNFT({ loader }) {
 
   useEffect(() => {
     if (customize.permissionToUploadNft === 'Only me') {
-      navigate("/");
+      navigate(`/${getParamTenantId()}`);
 
       toast.warning("You are not allowed to access this location", {
         position: toast.POSITION.TOP_RIGHT
@@ -54,7 +54,7 @@ function CreateNFT({ loader }) {
         </div>
         <div className="row justify-content-center">
           <div className="col-md-3 col-lg-3 col-sm-6 col-12 main-card-box">
-            <Link to="/create-single-nft">
+            <Link to={`/create-single-nft${getParamTenantId()}`}>
               <div className="card card-border card-width">
                 <div className="card-body text-center">
 
@@ -87,7 +87,7 @@ function CreateNFT({ loader }) {
             </div>
           </div>
           <div className="col-md-3 col-lg-3 col-sm-6 col-12 main-card-box">
-            <Link to="/create-nft-collection">
+            <Link to={`/create-nft-collection${getParamTenantId()}`}>
               <div className="card card-border card-width">
                 <div className="card-body text-center">
 

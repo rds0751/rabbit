@@ -12,7 +12,7 @@ import { ManageNotiSideBar, ManageWalletSideBar, logOut } from "../../reducers/A
 import Snackbar from "@mui/material/Snackbar";
 import styled from "styled-components";
 import {useNavigate} from 'react-router-dom';
-import { fetchPalletsColor } from "../../utility/global";
+import { fetchPalletsColor, getParamTenantId } from "../../utility/global";
 
 
 const CustomSnack = styled(Snackbar)`
@@ -131,7 +131,7 @@ function Wallet() {
     dispatch(logOut());
     toast.success("Successfully Logged Out");  
     
-    navigate('/');
+    navigate('/'+getParamTenantId());
   }
   const [dataCopied,setDataCopied]=useState(true);
 
