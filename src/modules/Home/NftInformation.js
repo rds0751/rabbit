@@ -679,15 +679,16 @@ export default function NftInformation(props) {
                         borderRadius: "8px",
                       }}
                     /> */}
-                          {/* <button onClick={()=>setDisplay(!display)}>play</button> */}
-                          <div style={{ width: "auto", height: "auto" }}>
-                            <ReactPlayer
-                              className="react-player"
-                              width="100%"
-                              height={187}
-                              controls
-                              url={nft?.cdnUrl}
-                            />
+                     {/* <button onClick={()=>setDisplay(!display)}>play</button> */}
+                    <div style={{width:"auto" ,height:"auto"}}>
+                    <ReactPlayer
+                    className="react-player"
+                    width="100%"
+                    height={187}
+                    light={nft?.previewImage}
+                    controls
+                    url={nft?.cdnUrl}
+                    />
 
                           </div>
                         </>
@@ -1512,7 +1513,7 @@ export default function NftInformation(props) {
                       <div className="completelistin">Removing From Sale</div>
                     </div>
                     <div className="abstractillusion">
-                      <img src={nft.cdnUrl} />
+                      <img src={nft.previewImage ? nft?.previewImage :(nft?.cdnUrl!="" ? nft.cdnUrl:nft.ipfsUrl)}/>
                       <div className="abstractillusioncontent">
                         <div className="abstracttitle"></div>
                         <div className="abstractposter"> {nft.name}</div>
@@ -1643,7 +1644,7 @@ export default function NftInformation(props) {
                       </div>
                     </div>
                     <div className="abstractillusion">
-                      <img src={nft.cdnUrl} />
+                      <img src={nft.previewImage ? nft?.previewImage :(nft?.cdnUrl!="" ? nft.cdnUrl:nft.ipfsUrl)} />
                       <div className="abstractillusioncontent">
                         <div className="abstracttitle"></div>
                         <div className="abstractposter"> {nft.name}</div>
@@ -1713,7 +1714,7 @@ export default function NftInformation(props) {
                       <div className="completelistin">Complete your Buying</div>
                     </div>
                     <div className="abstractillusion">
-                      <img src={nft.cdnUrl} />
+                      <img src={nft.previewImage ? nft?.previewImage :(nft?.cdnUrl!="" ? nft.cdnUrl:nft.ipfsUrl)} />
                       <div className="abstractillusioncontent">
                         <div className="abstracttitle"></div>
                         <div className="abstractposter"> {nft.name}</div>
