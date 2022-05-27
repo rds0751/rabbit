@@ -36,7 +36,7 @@ import { getTenantData } from "../../services/clientConfigMicroService";
 import Ethereum from "../../assets/images/ether.svg";
 import Polygon from "../../assets/images/ploygon.svg";
 import Binance from "../../assets/images/binance.svg";
-import { fetchPalletsColor } from "../../utility/global";
+import { fetchPalletsColor, getParamTenantId } from "../../utility/global";
 import Bannerdrop from "./Bannerdrop";
 import SingleNftShimmer from "./SingleNftShimmer";
 
@@ -553,7 +553,7 @@ function CreateSingleNFT(props) {
 
   useEffect(() => {
     if (customize.permissionToUploadNft === "Only me") {
-      navigate("/");
+      navigate(`/${getParamTenantId()}`);
 
       toast.warning("You are not allowed to access this location", {
         position: toast.POSITION.TOP_RIGHT,
@@ -1000,7 +1000,7 @@ function CreateSingleNFT(props) {
 
                       <div>
                         <Link
-                          to={"/create-nft-collection"}
+                          to={`/create-nft-collection${getParamTenantId()}`}
                           // pathname:"/create-nft-collection",
                           state={{
                             data: true,

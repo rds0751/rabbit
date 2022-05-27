@@ -37,7 +37,7 @@ import NoItem from "../../assets/images/Noitems.svg";
 import Snackbar from "@mui/material/Snackbar";
 import LikedNfts from "./LikedNfts";
 import { ShimmerCircularImage, ShimmerThumbnail } from "react-shimmer-effects";
-import { fetchPalletsColor } from "../../utility/global";
+import { fetchPalletsColor, getParamTenantId } from "../../utility/global";
 import NftCartLoader from "../Home/NftCardLoader";
 import Skeleton from "react-loading-skeleton";
 
@@ -127,10 +127,10 @@ function MyProfile({ loader }) {
     if (loggedInUser == null) {
       console.log('null wallet')
       if (!localStorage.getItem('has_wallet')) {
-        navigate("/add-wallet");
+        navigate("/add-wallet"+getParamTenantId());
       }
 
-      navigate("/my-profile");
+      navigate("/my-profile"+getParamTenantId());
 
     } else setUserId(loggedInUser._id);
   }, [JSON.stringify(loggedInUser)]);
@@ -418,14 +418,14 @@ function MyProfile({ loader }) {
             style={{ border: "5px solid white", zIndex: "99", opacity: "0" }}
           />
           <img className="pencilicon" width="16px" height="16px" src={pencil} />
-          <Link to="/edit-profile" className="textdecornone">
+          <Link to={`/edit-profile${getParamTenantId()}`} className="textdecornone">
             {
               loader ? <Skeleton className="profileeditbutton" width="145px" height="42px" style={{ border: 'none', background: '#ebebeb' }} /> :
                 <button style={{ color: `${fetchPalletsColor(appearance.colorPalette)}`, border: `1px solid ${fetchPalletsColor(appearance.colorPalette)}` }} className="profileeditbutton">Edit Profile</button>
             }
           </Link>
         </div>
-        <Link to="/edit-profile" className="editTextAnchor">
+        <Link to={`/edit-profile${getParamTenantId()}`} className="editTextAnchor">
           <span className="edit-text">Edit</span>
         </Link>
         <div className="profileavatar  absolute">
@@ -521,7 +521,7 @@ function MyProfile({ loader }) {
               {loggedInUser?.portfolio}
             </h6> : null
           }
-          <Link to="/edit-profile" className="bottombutton">
+          <Link to={`/edit-profile${getParamTenantId()}`} className="bottombutton">
             <button className="profileeditbuttonatbottom">Edit Profile</button>
           </Link>
         </div>

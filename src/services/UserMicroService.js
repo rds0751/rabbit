@@ -3,6 +3,7 @@ import { httpService } from "../utility/httpService";
 import { BASE_URL, WHITE_LABEL_TOKEN } from "../reducers/Constants";
 import axios from "axios";
 import { addUseraction, addUserData } from "../reducers/Action";
+import { getParamTenantId } from "../utility/global";
 const dev_url = "https://goi4mbj86f.execute-api.us-east-1.amazonaws.com/dev/"; // need to store it in .env file
 const AuthToken = {
   headers: {
@@ -16,7 +17,7 @@ export const CheckUserByWalletAddress = async (
   walletAddress,
   successCallBack
 ) => {
-  let url = BASE_URL + "/api/v1/wallet-address";
+  let url = BASE_URL + `/api/v1/wallet-address${getParamTenantId()}`;
 
   const { data } = await axios.put(
     url,
@@ -59,7 +60,7 @@ export const CheckUserByWalletAddress = async (
 };
 export const addEmail = async (bodyData, successCallback) => {
   try {
-    const url = process.env.REACT_APP_WEBAPP_USER_MICROSERVICE + "api/v1/email";
+    const url = process.env.REACT_APP_WEBAPP_USER_MICROSERVICE + "api/v1/email" + getParamTenantId();
     const { data } = await axios.post(url, bodyData, { headers: AuthToken });
     if (data.success) {
       successCallback(data.responseData);
@@ -92,7 +93,7 @@ export function getUser(requestData) {
 }
 
 export const getCategories = async (successCallBack) => {
-  const url = dev_url + "api/v1/categories";
+  const url = dev_url + "api/v1/categories" + getParamTenantId();
 
   const { data } = await axios.get(url, { headers: AuthToken });
   if (data.success && data.responseCode == 200) {
@@ -104,7 +105,7 @@ export const getCategories = async (successCallBack) => {
 export const updateUser = async (userData, successCallBack) => {
   try {
     const url =
-      process.env.REACT_APP_USER_MICROSERVICE + `api/v1/user/${userData._id}`;
+      process.env.REACT_APP_USER_MICROSERVICE + `api/v1/user/${userData._id}${getParamTenantId()}`;
     const { data } = await axios.put(url, { userData }, { headers: AuthToken });
   } catch (e) {}
 };
@@ -117,7 +118,7 @@ export const updateBannerByUserId = async (
   try {
     const url =
       process.env.REACT_APP_WEBAPP_USER_MICROSERVICE +
-      `api/v1/edit-banner/${userId}`;
+      `api/v1/edit-banner/${userId}${getParamTenantId()}`;
     const { data } = await axios.post(url, formData);
     successCallBack(data);
   } catch (e) {}
@@ -128,7 +129,7 @@ export const updateBannerByUserId = async (
 export const userPublicProfile = async (successCallBack, userId) => {
   try {
     const url =
-      process.env.REACT_APP_WEBAPP_USER_MICROSERVICE + "api/v1/users/" + userId;
+      process.env.REACT_APP_WEBAPP_USER_MICROSERVICE + "api/v1/users/" + userId + getParamTenantId();
 
     const { data } = await axios.get(url);
     if (data.success) {

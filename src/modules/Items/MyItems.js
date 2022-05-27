@@ -12,7 +12,7 @@ import NoItem from "../../assets/images/Noitems.svg"
 import Ethereum from "../../assets/images/ether.svg";
 import Polygon from "../../assets/images/ploygon.svg";
 import Binance from "../../assets/images/binance.svg";
-import { fetchPalletsColor } from "../../utility/global";
+import { fetchPalletsColor, getParamTenantId } from "../../utility/global";
 import Skeleton from "react-loading-skeleton";
 
 function MyItems(props) {
@@ -105,7 +105,7 @@ function MyItems(props) {
             customize.permissionToUploadNft !== "Only me" && props.loader === false ?
               <button type="submit" className="add-item-button p-0 bord-rad-4" style={{ background: `${fetchPalletsColor(customize?.appearance?.colorPalette)}` }}>
                 <Link
-                  to="/create-single-nft"
+                  to={"/create-single-nft"+getParamTenantId()}
                   style={{ textDecoration: "none", color: '#FFFFFF' }}>
                   Add item
                 </Link>
@@ -115,7 +115,7 @@ function MyItems(props) {
             customize.permissionToUploadNft !== "Only me" && props.loader === false ?
               <button type="submit" className="add-item-button p-0 bord-rad-4" style={{ background: `${fetchPalletsColor(customize?.appearance?.colorPalette)}` }}>
                 <Link
-                  to="/create-nft-collection" style={{ textDecoration: "none", color: '#FFFFFF' }}>
+                  to={"/create-nft-collection"+getParamTenantId()} style={{ textDecoration: "none", color: '#FFFFFF' }}>
                   Create Collection
                 </Link>
               </button> : null
@@ -131,7 +131,7 @@ function MyItems(props) {
               ownedNft.map((curElem) => {
                 const { cdnUrl, name, _id, salesInfo, likes, compressedURL, blockchain, collectionName, collectionId, fileExtension, previewImage } =
                   curElem;
-                const route = "/nft-information/" + _id;
+                const route = "/nft-information/" + _id + getParamTenantId();
                 return (
 
                   <div className=" col-md-6 col-lg-3  col-sm-12 nft_card my-item-card p-0" >
@@ -191,7 +191,7 @@ function MyItems(props) {
                           <Link
                             style={{ textDecoration: 'none', color: `${fetchPalletsColor(customize?.appearance?.colorPalette)}` }}
                             to={
-                              '/collection-details/' + collectionId
+                              '/collection-details/' + collectionId + getParamTenantId()
                             }
                           >
                             {undefined !== collectionName &&
@@ -233,7 +233,7 @@ function MyItems(props) {
               ownedCollection.map((curElem) => {
                 const { imageUrl, name, _id, nftCount, blockchain } =
                   curElem;
-                const collection = "/collection-details/" + _id;
+                const collection = "/collection-details/" + _id + getParamTenantId();
                 return (
                   <div className="col-md-6 col-lg-3 col-sm-12 mt-5 my-item-card p-0 collectioncard">
                     < div

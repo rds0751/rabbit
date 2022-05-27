@@ -36,3 +36,10 @@ export const handleLoadHoverText = (e, color="#366EEF") => {
 
     button.style.color = color;
 }
+
+
+export const getParamTenantId = () => {
+
+    if(localStorage.getItem('tenantId') != 'null') return `?id=${localStorage.getItem('tenantId')}`
+    else return '?id=624fcce73cfee400358f2cef'
+}

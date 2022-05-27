@@ -2,7 +2,7 @@ import React, { Component, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { Link } from "react-router-dom";
 import "../../assets/styles/Notification.css";
-import { fetchPalletsColor } from "../../utility/global";
+import { fetchPalletsColor, getParamTenantId } from "../../utility/global";
 
 
 function NftToggle({ toggleNft, appearance, loader }) {
@@ -30,7 +30,7 @@ function NftToggle({ toggleNft, appearance, loader }) {
                       // color: "#000",
                       fontFamily: toggleNft ? "poppins-semibold" : "poppins",
                     }}
-                    to="/nfts"
+                    to={`/nfts${getParamTenantId()}`}
                   >
                     {/* <div onClick={() => setToggleNft(true)}>NFTS</div> */}
                     NFTS
@@ -55,7 +55,7 @@ function NftToggle({ toggleNft, appearance, loader }) {
                       // marginLeft: "2em",
                       width: "120px",
                     }}
-                    to="/collections-tile"
+                    to={`/collections-tile${getParamTenantId()}`}
                   >
                     {/* <div onClick={() => setToggleNft(false)}>Collections</div> */}
                     Collections

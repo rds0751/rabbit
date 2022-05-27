@@ -13,7 +13,7 @@ import Ethereum from "../../assets/images/ether.svg";
 import Polygon from "../../assets/images/ploygon.svg";
 import Binance from "../../assets/images/binance.svg";
 import "react-awesome-slider/dist/styles.css";
-import { fetchPalletsColor } from "../../utility/global";
+import { fetchPalletsColor, getParamTenantId } from "../../utility/global";
 import Skeleton from "react-loading-skeleton";
 
 let preivewFiles = ["video/mp4", "audio/mpeg"];
@@ -31,9 +31,9 @@ const NftCardsHome = (props) => {
   const [videoDisplay, setVideoDisplay] = useState(false);
   let route;
   if (nft.hasOwnProperty("contentId") && nft.contentId != "") {
-    route = "/nft-information/" + nft.contentId;
+    route = "/nft-information/" + nft.contentId + getParamTenantId();
   } else {
-    route = "/nft-information/" + nft._id;
+    route = "/nft-information/" + nft._id + getParamTenantId();
   }
   const x = () => {
     console.log(videoDisplay);
@@ -190,7 +190,7 @@ const NftCardsHome = (props) => {
               ) : (
                 <Link
                   title={nft?.name}
-                  to={"/nft-information/" + nft?._id}
+                  to={"/nft-information/" + nft?._id + getParamTenantId()}
                   style={{ textDecoration: "none", color: `#585858` }}
                 >
                   {nft?.name}
@@ -214,7 +214,7 @@ const NftCardsHome = (props) => {
                     nft?.collectionId
                       ? nft?.collectionId
                       : "62823cab6df787009ba1882b"
-                  }`}
+                  }${getParamTenantId()}`}
                 >
                   {nft.collectionName
                     ? nft.collectionName
