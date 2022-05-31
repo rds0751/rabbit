@@ -14,7 +14,7 @@ import {
   addLikeNft,
   getNFtsData,
 } from "../../services/webappMicroservice";
-import { fetchPalletsColor, getParamTenantId } from "../../utility/global";
+import { calculateExpireSale, fetchPalletsColor, getParamTenantId } from "../../utility/global";
 import Skeleton from "react-loading-skeleton";
 import ReactPlayer from "react-player";
 import useSound from "use-sound";
@@ -170,14 +170,14 @@ function NftCardsHome({ nft, appearance, loader }) {
                 <div
                   onClick={() => setVideoDisplay(true)}
                   className="musicIcon"
-                  style={{ display: videoDisplay ? "none":"block"}}
+                  style={{ display: videoDisplay ? "none" : "block" }}
                 >
                   <img src={playImage}></img>
                 </div>
                 <div
                   onClick={() => setVideoDisplay(false)}
                   className="musicIcon"
-                  style={{ display: videoDisplay ? "block":"none"}}
+                  style={{ display: videoDisplay ? "block" : "none" }}
                 >
                   <img src={pauseImage}></img>
                 </div>
@@ -227,18 +227,18 @@ function NftCardsHome({ nft, appearance, loader }) {
                 <div
                   onClick={() => setVideoDisplay(true)}
                   className="musicIcon"
-                  style={{ display: videoDisplay ? "none":"block"}}
+                  style={{ display: videoDisplay ? "none" : "block" }}
                 >
                   <img src={playImage}></img>
                 </div>
                 <div
                   onClick={() => setVideoDisplay(false)}
                   className="musicIcon"
-                  style={{ display: videoDisplay ? "block":"none"}}
+                  style={{ display: videoDisplay ? "block" : "none" }}
                 >
                   <img src={pauseImage}></img>
                 </div>
-              
+
               </>
             )}
 
@@ -340,25 +340,36 @@ function NftCardsHome({ nft, appearance, loader }) {
             {loader ? (
               <Skeleton width={`200px`} />
             ) : (
-              <Link
-                style={{
-                  textDecoration: "none",
-                  color: `${fetchPalletsColor(appearance.colorPalette)}`,
-                }}
-                to={"/collection-details/" + collectionId + getParamTenantId()}
-              >
-                {undefined !== collectionName && collectionName.length > 30
-                  ? collectionName.slice(0, 30) + "..."
-                  : collectionName?.length === 0
-                  ? "Anafto Collection"
-                  : collectionName}
-              </Link>
+              <>
+                <Link
+                  style={{
+                    textDecoration: "none",
+                    color: `${fetchPalletsColor(appearance.colorPalette)}`,
+                  }}
+                  className="text-overflow-collection"
+                  to={"/collection-details/" + collectionId + getParamTenantId()}
+                >
+                  {undefined !== collectionName && collectionName.length > 30
+                    ? collectionName.slice(0, 30) + "..."
+                    : collectionName?.length === 0
+                      ? "Anafto Collection"
+                      : collectionName}
+                </Link>
+
+                {
+                  salesInfo?.expiryDate ?
+                    <a style={{ color: '#191919' }}><i className="far fa-clock clock-icon" style={{ width: '18px' }} />
+                      {calculateExpireSale(salesInfo?.expiryDate) ? `${calculateExpireSale(salesInfo?.expiryDate)} days left` : 'Expires today'}
+                    </a>
+                    : null
+                }
+              </>
             )}
           </div>
 
           <div
             className="nftTileEachDetailsSecondContainerValueHighest"
-            // style={{ marginLeft: "1em" }}
+          // style={{ marginLeft: "1em" }}
           >
             {/* <div>
               {" "}

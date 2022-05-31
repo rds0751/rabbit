@@ -82,6 +82,10 @@ function CreateSingleNFT(props) {
   // const ipfsUrl = useRef("");
   const createdBy = loggedInUser?._id;
 
+  const [mintStatus, setMintStatus] = useState(false);
+  const [saleStatus, setSaleStatus] = useState(false);
+  const [mintMessageStatus, setMintMessageStatus] = useState(false);
+
   const [desLength, setDesLength] = useState(0);
   const [error, setError] = useState("");
   const [nameError, SetNameError] = useState("");
@@ -172,13 +176,13 @@ function CreateSingleNFT(props) {
 
   // ----------------------------------------------states end-------------
   useEffect(async () => {
-    // if (walletAddress == null) {
-    //   navigation("/add-wallet");
-    // };
+    if (walletAddress == null) {
+      navigation("/add-wallet");
+    };
 
     // this code will check if user already connected wallet from localstorage
     if (!localStorage.getItem("has_wallet")) {
-      navigation("/add-wallet");
+      // navigation("/add-wallet");
     }
 
     setmyProfileUrl("/nft-information/");
@@ -581,15 +585,15 @@ function CreateSingleNFT(props) {
                   </div>
 
                   <div className="abstractillusion">
-                    <img src={previewCompressedURL !="" ? previewCompressedURL : (cdnUrl!="" ? cdnUrl : Image )} />
+                    <img src={previewCompressedURL != "" ? previewCompressedURL : (cdnUrl != "" ? cdnUrl : Image)} />
                     <div className="abstractillusioncontent">
                       <div className="abstracttitle">{name.current}</div>
                       {/* <div className="abstractposter"> </div> */}
                       <div className="ethprice">{price.current}
-                      {   collectionName === "Anafto Collection"
-                        ? selectedOption?.value
-                        : currencyValue(collectionBlockchain)}
-                        </div>
+                        {collectionName === "Anafto Collection"
+                          ? selectedOption?.value
+                          : currencyValue(collectionBlockchain)}
+                      </div>
                     </div>
                   </div>
                   <div className="checkpostcontainer">
@@ -1090,7 +1094,7 @@ function CreateSingleNFT(props) {
                       <option className="color82" value="">
                         ANAFTO Collection
                       </option>
-                      {collectionData.map((item, index) => (
+                      {collectionData.length > 0 && collectionData.map((item, index) => (
                         <option
                           className="option color82"
                           value={[
@@ -1249,6 +1253,19 @@ function CreateSingleNFT(props) {
                     </span>
                   </div>
 
+                  <div className="input-description">
+                    <label htmlFor="email" className="input-label" style={{display: 'flex', alignItems: 'center', position: 'relative'}}>
+                      Free Minting
+                      <span className="mint-mark" onMouseEnter={()=>setMintMessageStatus(true)} onMouseLeave={()=>setMintMessageStatus(false)}>?</span>
+                      <span className="tooltiptext-myprofile" style={{opacity: `${mintMessageStatus ? '1' : '0'}`}}>Buyer will pay gas fees for minting</span>
+                      <div onClick={()=>setMintStatus(!mintStatus)} className={`${mintStatus ? 'myStoreSocialMediaToggleButtonActive' : 'myStoreSocialMediaToggleButton'}`}><div className={`${mintStatus ? 'myStoreSocialMediaTogglerActive' : 'myStoreSocialMediaToggler'}`}></div></div>
+                    </label>
+                    <p className="headingRoyality">
+                      Buyer will pay gas fees for minting
+                    </p>
+                  </div>
+
+
                   <div className="input-name">
                     <label htmlFor="email" className=" input-label">
                       Royalty
@@ -1281,6 +1298,16 @@ function CreateSingleNFT(props) {
                         royality.current = e.target.value;
                       }}
                     />
+                  </div>
+
+                  <div className="input-description">
+                    <label htmlFor="email" className="input-label" style={{display: 'flex', alignItems: 'center'}}>
+                      Put it on sale                      
+                      <div onClick={()=>setSaleStatus(!saleStatus)} style={{marginLeft: '115px'}} className={`${saleStatus ? 'myStoreSocialMediaToggleButtonActive' : 'myStoreSocialMediaToggleButton'}`}><div className={`${saleStatus ? 'myStoreSocialMediaTogglerActive' : 'myStoreSocialMediaToggler'}`}></div></div>
+                    </label>
+                    <p className="headingRoyality">
+                      Buyer will pay gas fees for minting
+                    </p>
                   </div>
 
                   <button
