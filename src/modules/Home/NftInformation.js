@@ -45,7 +45,7 @@ import NftCardsHome from "../../common/components/NftCardsHome";
 import "../../assets/styles/myProfile.css";
 import PageNotFound from "../../common/components/pageNotFound";
 import { ShimmerThumbnail } from "react-shimmer-effects";
-import { fetchPalletsColor, getParamTenantId } from "../../utility/global";
+import { calculateExpireSale, fetchPalletsColor, getParamTenantId } from "../../utility/global";
 
 import NftInfoShimmer from "./NftInfoShimmer";
 
@@ -1098,14 +1098,21 @@ export default function NftInformation(props) {
                           {salesInfo?.price}&nbsp;{salesInfo?.currency}
                         </span>
                       </span>
-                      {showDateSection ? (
-                        <span className="align-row">
+                      <span className="text">
+                        Royalty:&nbsp;
+                        <span className="nft-value" style={{color: '#191919'}}>
+                          15%
+                        </span>
+                      </span>
+                      {salesInfo?.expiryDate ? (
+                        <span className="text">
                           <i className="far fa-clock clock-icon"></i>
-                          <span className="time">{message} </span>
+                          <span className="time">{calculateExpireSale(salesInfo?.expiryDate) ? `${calculateExpireSale(salesInfo?.expiryDate)} days left` : 'Expires today'}</span>
                         </span>
                       ) : (
                         ""
-                      )}
+                      )}                    
+
                     </div>
                     <div className="row third-text">
                       <div className="col-lg-6 col-sm-12">
