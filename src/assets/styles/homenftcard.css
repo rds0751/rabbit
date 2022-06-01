@@ -2,9 +2,11 @@
 #upper__home {
   margin-top: 36px;
 }
+
 #upper__home h1 {
   font-family: "poppins-semibold";
 }
+
 /* css for filters */
 .nftTilePageSecondSelect {
   margin-left: 3%;
@@ -12,6 +14,7 @@
   font-size: 0.9vw;
   width: 100%;
 }
+
 .nftTilePageSecondSelect select {
   border: none !important;
   width: 90% !important;
@@ -24,16 +27,19 @@
   font-size: 0.9vw;
   width: 260px;
 }
+
 .price-range-dropdown select {
   /* border: none !important; */
   width: 260px;
   cursor: pointer;
 }
+
 @media only screen and (min-width: 300px) and (max-width: 1000px) {
   .price-range-dropdown select {
     width: 100%;
   }
 }
+
 /* css for NFt cards */
 .nftTileEachImage {
   box-sizing: border-box;
@@ -43,6 +49,7 @@
   object-fit: cover;
   width: 100%;
 }
+
 .nftTileEachDetailsFirstContainer {
   width: 100%;
   font-size: 1vw !important;
@@ -50,15 +57,18 @@
   align-items: flex-start;
   /* padding-top: 4%; */
 }
+
 .nftTileEachDetailsFirstContainerName {
   /* min-height: 48px; */
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   font: normal normal bold 16px/25px Poppins;
-  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-line-clamp: 2;
+  /* number of lines to show */
   -webkit-box-orient: vertical;
 }
+
 .nftTileEachDetailsFirstContainerValue {
   /* border: 1px solid #16ab6e; */
   border-radius: 6px;
@@ -74,6 +84,7 @@
   max-width: 100%;
   /* margin-right: 1em; */
 }
+
 .nftTileEachDetailsSecondContainerValueHighest {
   font-family: "poppins";
   font-size: 0.9vw;
@@ -84,6 +95,7 @@
   /* margin: 4% 0px; */
   margin-top: 16px;
 }
+
 .clockNftDetails {
   margin-right: 1% !important;
 }
@@ -105,18 +117,21 @@
   padding: 0% 1% 0% 5%;
   position: relative;
 }
+
 @media only screen and (min-width: 425px) and (max-width: 767px) {
   .ntf_div .filter-drop {
     width: 76%;
     padding: 0% 1% 0% 0%;
   }
 }
+
 @media only screen and (min-width: 375px) and (max-width: 424px) {
   .ntf_div .filter-drop {
     width: 72%;
     padding: 0% 1% 0% 0%;
   }
 }
+
 @media only screen and (min-width: 320px) and (max-width: 374px) {
   .ntf_div .filter-drop {
     width: 66%;
@@ -132,6 +147,7 @@
   line-height: 21px;
   color: #858585;
 }
+
 .ntf_div .filter-drop .filter-item {
   position: absolute;
   top: 45px;
@@ -145,12 +161,14 @@
   border-radius: 4px;
   padding: 12px;
 }
+
 .ntf_div .filter-drop .filter-item .to {
   font-family: "poppins-medium";
   font-size: 14px;
   line-height: 21px;
   color: #191919;
 }
+
 .ntf_div .filter-drop .filter-item .btn-outline-primary {
   font-family: "poppins-medium";
   font-size: 16px;
@@ -160,6 +178,7 @@
   border-radius: 4px;
   width: 100%;
 }
+
 .ntf_div .filter-drop .filter-item .btn-outline-primary:hover {
   color: #fff;
   background-color: #0d6efd;
@@ -173,28 +192,34 @@
     margin-left: 4px;
   }
 }
+
 @media only screen and (max-width: 1024px) {
   .nftTilePageSecondSelect {
     font-size: 1.9vw;
   }
+
   .nftTileEachDetailsFirstContainer {
     font-size: 2vw !important;
   }
+
   /* .nftTileEachDetailsFirstContainerValue {
     font-size: 1.87vw;
   } */
   .nftTileEachDetailsSecondContainerValueHighest {
     font-size: 1.9vw;
   }
+
   .nftTileEachImage {
     height: 19.81vw;
   }
+
   .mobilenftTilePageFirstSelect {
     display: flex !important;
     align-items: center !important;
     /* justify-content: space-between !important; */
     /* justify-content: space-between !important; */
   }
+
   /* .mobilenftTilePageSecondSelect {
     margin-left: 0px !important;
     margin-top: -1% !important;
@@ -207,18 +232,22 @@
   .ntf_div .filter-drop .filter-item .form-control {
     width: 100%;
   }
+
   .ntf_div .filter-drop .filter-item .row {
     --bs-gutter-x: 16px;
   }
 }
+
 @media only screen and (width: 768px) {
   .nftTilePageSecondSelect {
     margin-left: 7%;
   }
+
   #upper__home {
     margin-top: 41px;
   }
 }
+
 @media only screen and (max-width: 767px) {
   .mobilenftTilePageThirdSelect {
     margin-left: 0px !important;
@@ -227,42 +256,51 @@
     width: 100% !important;
   }
 }
+
 @media only screen and (max-width: 480px) {
   .nftTilePageSecondSelect {
     font-size: 3.9vw;
   }
+
   .nftTileEachDetailsFirstContainer {
     font-size: 4vw !important;
   }
+
   .nftTileEachDetailsFirstContainerValue {
     font-size: 10px;
     width: 31%;
     height: 33px;
     text-align-last: center;
   }
+
   .nftTileEachDetailsSecondContainerValueHighest {
     font-size: 3.9vw;
   }
+
   .nftTileEachImage {
     height: 52.81vw;
   }
+
   .mobilenftTilePageFirstSelect {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
   }
+
   .mobilenftTilePageSecondSelect {
     margin-left: 0px !important;
     margin-top: -1% !important;
   }
+
   #upper__home {
     margin-top: 52px;
   }
 }
+
 /* .dropdown-img{
   background-image: url("/whitelablenft-webapp/src/assets/images/drop-down-arrow.svg") no-repeat right #ffffff;
 } */
-.collectionName{
+.collectionName {
   font-size: 0.9rem;
   color: blue;
   margin-top: 10px;
@@ -273,5 +311,6 @@
   left: 17px;
   max-width: 90%;
   width: 88%;
-  
+  display: flex;
+  justify-content: space-between;
 }

@@ -49,6 +49,7 @@ function Home({ loaderState }) {
   const [videoDisplay,setVideoDisplay]=useState(false);
 
   const [loader, setLoader] = useState(loaderState);
+  const [loadNfts, setLoadNfts] = useState(true);
 
   const customize = useSelector(state => state.customize);
 
@@ -94,6 +95,8 @@ function Home({ loaderState }) {
             toast.error(res.message);
             // setIsloading(false);
           }
+
+          setLoadNfts(false);
         });
       }
     } catch (error) { }
