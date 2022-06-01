@@ -4,7 +4,7 @@ import {history} from "../managers/history";
 export const httpService = (method, headers, data, url) => {
     const requestOptions = {
         method: method,
-        headers: headers || {'Content-Type': 'application/json'}
+        headers: headers || {'Content-Type': 'application/json', 'Accept': 'application/json'},
     };
 
     if (method !== httpConstants.METHOD_TYPE.GET)

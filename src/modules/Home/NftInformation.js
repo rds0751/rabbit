@@ -301,7 +301,7 @@ export default function NftInformation(props) {
     //   } else toast.error(response.message);
   };
   const makeOffer = async () => {
-    //setMakeOfferModal(true);
+    setMakeOfferModal(true);
   };
   const openSaleModal = async () => {
     // alert("kkkk")

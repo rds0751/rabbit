@@ -33,23 +33,22 @@ const BlockchainServices = {
 
 export default BlockchainServices;
 
-async function mintNFT({
-  tokenURI,
-  price,
-  tokenId,
-  contractAddress,
-  royalty,
+async function mintNFT({tokenURI,price, tokenId,contractAddress, royalty, blockchain,}) {
+
+const accounts=await window.ethereum.request({
+  method:"eth_requestAccounts"
+});
+console.log(
+  window.ethereum.networkVersion,
   blockchain,
-}) {
-  console.log(
-    window.ethereum.networkVersion,
-    blockchain,
-    price,
-    royalty,
-    tokenId,
-    tokenURI,
-    "dattttttttttttttttt"
-  );
+  price,
+  royalty,
+  tokenId,
+  tokenURI,
+  accounts[0],
+  "dattttttttttttttttt"
+);
+
 
   if (!window.ethereum) return Promise.reject("Please install metamask");
   if (window.ethereum.networkVersion == 80001 && blockchain == "Polygon") {

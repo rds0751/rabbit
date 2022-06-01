@@ -94,15 +94,32 @@ class Index extends BaseComponent {
     // = "0xCDe6A5fccf0cCaF7bc51D35C1f8Efe3BbC5c8057"
    // //-ethreum
 
-   if(data?.blockchain === "Polygon"){
+   if(data?.blockchain === "Polygon")
    contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS_POLYGON
- }
-   else if(data?.blockchain === "Ethereum"){
+   else if(data?.blockchain === "Ethereum")
    contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS
+   else if(data?.blockchain === "Binance")
+   contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS_BINANCE
+
+   let IpfsObject={
+     name:data?.nftName,
+     description:data?.description,
+     image:data?.cdnUrl,
+     external_link:123,
+     seller_fee_basis_points:0,
+     fee_recipient:1
    }
-   else if(data?.blockchain === "Binance"){
-    contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS_BINANCE
-    }
+   
+  
+
+   const [err, ipfsRes] = await Utils.parseResponse(
+    getCollection.addIpfsObject(IpfsObject)
+  );
+
+  console.log(ipfsRes,"<<<ipfsRes");
+  
+
+
     
     // if (!data || Object.keys(data).length < 1 || !data.nftFile){
     //   this.setState({loaderState:false})
