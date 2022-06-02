@@ -135,7 +135,7 @@ async function batchMintNFT({tokenId,amount,data,contractAddress,blockchain}){
   let ArrayTokenID=Array(5).fill(tokenId);
   let ArrayAmount=Array(5).fill(amount);
 
-  console.log(tokenId,amount,contractAddress,blockchain,ArrayTokenID,ArrayAmount);
+  console.log(ArrayTokenID.toString(),ArrayAmount);
 
   const accounts=await window.ethereum.request({
     method:"eth_requestAccounts"
@@ -154,8 +154,8 @@ async function batchMintNFT({tokenId,amount,data,contractAddress,blockchain}){
       const result = await contractData.mint(
         //tokenURI,
         accounts[0],
-        BigNumber.from(ArrayTokenID),
-        BigNumber.from(ArrayAmount),
+        ArrayTokenID.toString(),
+        ArrayAmount.toString(),
        // ethers.utils.parseEther(price.toString()),
        // royalty,
        accounts[0],
