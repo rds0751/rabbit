@@ -245,7 +245,7 @@ function Home({ loaderState }) {
                             nfts.slice(0, 4).map((nft) => {
                               // const { _id, cdnUrl, name, biddingDetails, salesInfo } = nft;
                               let route;
-                              if (nft.hasOwnProperty('contentId') && nft.contentId != "") {
+                              if (nft && nft.contentId) {
                                 route = "/nft-information/" + nft.contentId + getParamTenantId();
                               } else {
                                 route = "/nft-information/" + nft._id + getParamTenantId();
