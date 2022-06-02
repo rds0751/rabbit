@@ -1257,7 +1257,7 @@ function CreateSingleNFT(props) {
                     <label htmlFor="email" className="input-label" style={{display: 'flex', alignItems: 'center', position: 'relative'}}>
                       Free Minting
                       <span className="mint-mark" onMouseEnter={()=>setMintMessageStatus(true)} onMouseLeave={()=>setMintMessageStatus(false)}>?</span>
-                      <span className="tooltiptext-myprofile" style={{opacity: `${mintMessageStatus ? '1' : '0'}`}}>Buyer will pay gas fees for minting</span>
+                      <span className="tooltiptext-myprofile" style={{opacity: `${mintMessageStatus ? '1' : '0'}`}}> Your NFT will not be minted until some buyer purchases it. On purchase it will be minted and you will be the first owner.</span>
                       <div onClick={()=>setMintStatus(!mintStatus)} className={`${mintStatus ? 'myStoreSocialMediaToggleButtonActive' : 'myStoreSocialMediaToggleButton'}`}><div className={`${mintStatus ? 'myStoreSocialMediaTogglerActive' : 'myStoreSocialMediaToggler'}`}></div></div>
                     </label>
                     <p className="headingRoyality">
@@ -1306,7 +1306,7 @@ function CreateSingleNFT(props) {
                       <div onClick={()=>setSaleStatus(!saleStatus)} style={{marginLeft: '115px'}} className={`${saleStatus ? 'myStoreSocialMediaToggleButtonActive' : 'myStoreSocialMediaToggleButton'}`}><div className={`${saleStatus ? 'myStoreSocialMediaTogglerActive' : 'myStoreSocialMediaToggler'}`}></div></div>
                     </label>
                     <p className="headingRoyality">
-                      Buyer will pay gas fees for minting
+                    The NFT will be available for Sale in the marketplace
                     </p>
                   </div>
 
