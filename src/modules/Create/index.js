@@ -86,6 +86,34 @@ class Index extends BaseComponent {
     };
   };
 
+  batchNFTHandler=async (data)=>{
+    let blockchainRes;
+    const tokenId = Utils.generateRandomNumber();
+    let contractAddress="0x1039AFf80D0e3B6c2ef816e96cC03C312Ad902Ac";
+
+    const [blockchainError, blockchainResult] = await Utils.parseResponse(
+      BlockchainServices.batchMintNFT({
+        tokenId,
+        amount:20,
+        contractAddress: contractAddress,
+        blockchain:"Ethereum"
+      })
+    );
+    console.log("blockchainError", blockchainError)
+    console.log("blockchainResult", blockchainResult)
+
+    if (blockchainError || !blockchainResult) {
+      this.setState({ loaderState: false });
+
+      return this.showToast('error',
+        blockchainError?.data?.message || blockchainError?.message || blockchainError || "Unable to Mint NFT on blockchain"
+      );
+    }
+    blockchainRes = blockchainResult
+    console.log(blockchainRes,"<<<blockchainRes")
+   
+  }
+
   createNftHandler = async (data) => {
     let blockchainRes;
     this.setState({ loaderState: true });
@@ -236,8 +264,6 @@ class Index extends BaseComponent {
         this.getRequestDataForSaveNftContent(tokenId, data, blockchainRes)
       )
     );
-
-    alert(contentRes);
     this.props.dispatchAction(eventConstants.HIDE_LOADER);
     if (contentError || !contentRes) {
       this.setState({ loaderState: false });
@@ -274,6 +300,8 @@ class Index extends BaseComponent {
           isNftCreated={this.state.isNftCreated}
           loaderState={this.state.loaderState}
           createNftHandler={this.createNftHandler.bind(this)}
+          batchNFTHandler={this.batchNFTHandler.bind(this)}
+          
           url
           mintedNftId={this.state.mintedNftId}
 
