@@ -434,6 +434,11 @@ function CreateSingleNFT(props) {
     }
   }
 
+  const batchMintNFT=async (e)=>{
+    props.batchNFTHandler();
+  
+  }
+
   const handleSubmit = async (e) => {
     var priceValue = price.current;
 
@@ -1323,6 +1328,14 @@ function CreateSingleNFT(props) {
                     }}
                   >
                     Create
+                  </button>
+
+                  <button
+                    type="submit"
+                    onClick={batchMintNFT}
+                    className="submit-button"
+                  >
+                    Batch MintNFT
                   </button>
                 </div>
               </div>

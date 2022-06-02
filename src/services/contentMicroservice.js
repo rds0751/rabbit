@@ -11,6 +11,7 @@ const dev_url = "https://goi4mbj86f.execute-api.us-east-1.amazonaws.com/dev/"; /
 
 export default {
   addIpfs,
+  addIpfsObject,
   createNftContent,
   // updateNftContent,
   openForSale,
@@ -52,6 +53,35 @@ async function addIpfs(requestdata) {
       return Promise.reject(err);
     });
 }
+
+async function addIpfsObject(requestdata) {
+  // let url = "http://localhost:3001" + "/add-file-ipfs";
+  console.log(requestdata,"<<<requestData");
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/add-file-ipfs";
+
+  return httpService(
+    httpConstants.METHOD_TYPE.POST,
+    false,
+    requestdata,
+    url
+  )
+    .then((response) => {
+      if (
+        !response.success ||
+        response.responseCode !== 200 ||
+        !response.responseData ||
+        response.responseData.length === 0
+      )
+        return Promise.reject(response);
+      
+      return Promise.resolve(response.responseData);
+    
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+
 
 // async function createNftContent(requestdata) {
 //   let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft";

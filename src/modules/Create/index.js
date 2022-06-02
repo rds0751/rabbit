@@ -86,6 +86,34 @@ class Index extends BaseComponent {
     };
   };
 
+  batchNFTHandler=async (data)=>{
+    let blockchainRes;
+    const tokenId = Utils.generateRandomNumber();
+    let contractAddress="0x1039AFf80D0e3B6c2ef816e96cC03C312Ad902Ac";
+
+    const [blockchainError, blockchainResult] = await Utils.parseResponse(
+      BlockchainServices.batchMintNFT({
+        tokenId,
+        amount:20,
+        contractAddress: contractAddress,
+        blockchain:"Ethereum"
+      })
+    );
+    console.log("blockchainError", blockchainError)
+    console.log("blockchainResult", blockchainResult)
+
+    if (blockchainError || !blockchainResult) {
+      this.setState({ loaderState: false });
+
+      return this.showToast('error',
+        blockchainError?.data?.message || blockchainError?.message || blockchainError || "Unable to Mint NFT on blockchain"
+      );
+    }
+    blockchainRes = blockchainResult
+    console.log(blockchainRes,"<<<blockchainRes")
+   
+  }
+
   createNftHandler = async (data) => {
     let blockchainRes;
     this.setState({ loaderState: true });
@@ -94,15 +122,36 @@ class Index extends BaseComponent {
     // = "0xCDe6A5fccf0cCaF7bc51D35C1f8Efe3BbC5c8057"
    // //-ethreum
 
-   if(data?.blockchain === "Polygon"){
+   if(data?.blockchain === "Polygon")
    contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS_POLYGON
- }
-   else if(data?.blockchain === "Ethereum"){
+   else if(data?.blockchain === "Ethereum")
    contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS
+   else if(data?.blockchain === "Binance")
+   contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS_BINANCE
+
+   let IpfsObject={
+     name:data?.nftName,
+     description:data?.description,
+     image:data?.cdnUrl,
+     external_link:123,
+     seller_fee_basis_points:0,
+     fee_recipient:1
    }
-   else if(data?.blockchain === "Binance"){
-    contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS_BINANCE
-    }
+   
+  
+
+   const [err, ipfsRes] = await Utils.parseResponse(
+    getCollection.addIpfsObject(IpfsObject)
+  );
+  console.log(ipfsRes,"<<<ipfsRes")
+  if (!ipfsRes) {
+    toast.error("unable to upload data");
+  } else {
+    toast.success("successfully data uploaded ipfs");
+  }
+  
+
+
     
     // if (!data || Object.keys(data).length < 1 || !data.nftFile){
     //   this.setState({loaderState:false})
@@ -147,7 +196,8 @@ class Index extends BaseComponent {
           tokenId,
           contractAddress: contractAddress,
           royalty:data.royality,
-          blockchain:data?.blockchain
+          blockchain:data?.blockchain,
+          ipfsUrl:ipfsRes,
         })
       );
       console.log("blockchainError", blockchainError)
@@ -181,6 +231,7 @@ class Index extends BaseComponent {
           contractAddress: contractAddress,
           blockchain:data?.blockchain,
           royalty:data.royality,
+          ipfsUrl:ipfsRes,
         })
       );
       console.log("blockchainError", blockchainError)
@@ -249,6 +300,8 @@ class Index extends BaseComponent {
           isNftCreated={this.state.isNftCreated}
           loaderState={this.state.loaderState}
           createNftHandler={this.createNftHandler.bind(this)}
+          batchNFTHandler={this.batchNFTHandler.bind(this)}
+          
           url
           mintedNftId={this.state.mintedNftId}
 

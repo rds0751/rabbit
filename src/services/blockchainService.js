@@ -1,4 +1,4 @@
-import { ethers } from "ethers";
+import { ethers,BigNumber } from "ethers";
 import contractABI from "../assets/abi/abi.json";
 import contractPolygonABI from "../assets/abi/abi.json";
 import contractbuyAndRemoveABI from "../assets/abi/removeSaleAndBuy.json";
@@ -29,29 +29,32 @@ const BlockchainServices = {
   putOnSaleNft,
   createCollections,
   signcheck,
+  batchMintNFT
 };
 
 export default BlockchainServices;
 
-async function mintNFT({
-  tokenURI,
-  price,
-  tokenId,
-  contractAddress,
-  royalty,
+async function mintNFT({tokenURI,price, tokenId,contractAddress, royalty, blockchain,ipfsUrl}) {
+
+const accounts=await window.ethereum.request({
+  method:"eth_requestAccounts"
+});
+console.log(
+  window.ethereum.networkVersion,
   blockchain,
-}) {
-  console.log(
-    window.ethereum.networkVersion,
-    blockchain,
-    price,
-    royalty,
-    tokenId,
-    tokenURI,
-    "dattttttttttttttttt"
-  );
+  price,
+  royalty,
+  tokenId,
+  tokenURI,
+  accounts[0],
+  "dattttttttttttttttt"
+);
+
+
+
 
   if (!window.ethereum) return Promise.reject("Please install metamask");
+
   if (window.ethereum.networkVersion == 80001 && blockchain == "Polygon") {
     //polygon
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -66,6 +69,7 @@ async function mintNFT({
       tokenId,
       ethers.utils.parseEther(price.toString()),
       royalty,
+      ipfsUrl,
       { gasLimit: 100000 }
     );
     let res = await result.wait();
@@ -84,10 +88,13 @@ async function mintNFT({
       signer
     );
     const result = await contractData.mint(
-      tokenURI,
+      //tokenURI,
+      accounts[0],
       tokenId,
-      ethers.utils.parseEther(price.toString()),
-      royalty
+      20,
+     // ethers.utils.parseEther(price.toString()),
+     // royalty,
+     accounts[0],
     );
     let res = await result.wait();
     return {
@@ -119,6 +126,48 @@ async function mintNFT({
     };
   } else return Promise.reject("Please Select Valid Network in the metamask");
   // console.log("kkkkkkkkkkkkkkkkkkkkkk network swutch")
+}
+
+async function batchMintNFT({tokenId,amount,data,contractAddress,blockchain}){
+
+
+
+  let ArrayTokenID=Array(5).fill(tokenId);
+  let ArrayAmount=Array(5).fill(amount);
+
+  console.log(tokenId,amount,contractAddress,blockchain,ArrayTokenID,ArrayAmount);
+
+  const accounts=await window.ethereum.request({
+    method:"eth_requestAccounts"
+  });
+  
+    if (!window.ethereum) return Promise.reject("Please install metamask");
+   if (window.ethereum.networkVersion == 4 && blockchain == "Ethereum") {
+      //etherum
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const contractData = new ethers.Contract(
+        contractAddress,
+        contractABI,
+        signer
+      );
+      const result = await contractData.mint(
+        //tokenURI,
+        accounts[0],
+        BigNumber.from(ArrayTokenID),
+        BigNumber.from(ArrayAmount),
+       // ethers.utils.parseEther(price.toString()),
+       // royalty,
+       accounts[0],
+      );
+      let res = await result.wait();
+      return {
+        ...res,
+        chainId: provider?._network?.chainId || "",
+        name: provider?._network?.name || "",
+      };
+    } 
+     else return Promise.reject("Please Select Valid Network in the metamask");
 }
 
 async function signcheck({ signMsg }) {
