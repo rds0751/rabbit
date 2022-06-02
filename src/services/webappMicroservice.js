@@ -109,7 +109,7 @@ export function getCollections(requestData) {
 export async function getCollection(requestData, successCallBack) {
   try {
     const url =
-      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/collection/" + requestData+ getParamTenantId();
+      process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/collection/" + requestData + getParamTenantId();
     const { data } = await axios.get(url);
     successCallBack(data);
   } catch (e) {
@@ -146,7 +146,7 @@ export function getNftsByCollectionId(id, requestData) {
     process.env.REACT_APP_WEBAPP_MICROSERVICE +
     "api/v1/collection/" +
     id +
-    "/nfts" + getParamTenantId()+
+    "/nfts" + getParamTenantId() +"&" +
     requestData;
   return httpService(
     httpConstants.METHOD_TYPE.GET,

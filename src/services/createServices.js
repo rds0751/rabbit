@@ -1,5 +1,6 @@
 import { httpConstants } from '../constants';
 import { BASE_URL, BASE_URL2 } from '../reducers/Constants';
+import { getParamTenantId } from '../utility/global';
 import { AuthToken } from './UserAuthToken';
 
 export const createSingleNft = async data => {
@@ -22,7 +23,7 @@ export const createSingleNft = async data => {
 
 export const createCollection = async data => {
   try {
-    const res = await fetch(`${BASE_URL2}/api/v1/collections`, {
+    const res = await fetch(`${BASE_URL2}/api/v1/collections${getParamTenantId()}`, {
       method: httpConstants.METHOD_TYPE.POST,
       // headers: {
       //   'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON,

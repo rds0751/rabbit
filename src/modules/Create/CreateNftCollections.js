@@ -350,12 +350,12 @@ function CreateNftCollections(props) {
 
 
   useEffect(() => {
-    const selectedCategories = defaultCategories.filter((item) => {
-      if (tenantCategories.find((item2) => item2 == item._id)) {
-        return item;
-      } else return;
-    });
-    setCategories(selectedCategories);
+    // const selectedCategories = defaultCategories.filter((item) => {
+    //   if (tenantCategories.find((item2) => item2 == item._id)) {
+    //     return item;
+    //   } else return;
+    // });
+    setCategories(defaultCategories);
   }, [tenantCategories, defaultCategories]);
 
   useEffect(() => {
