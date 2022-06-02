@@ -115,8 +115,12 @@ class Index extends BaseComponent {
    const [err, ipfsRes] = await Utils.parseResponse(
     getCollection.addIpfsObject(IpfsObject)
   );
-
-  console.log(ipfsRes,"<<<ipfsRes");
+  console.log(ipfsRes,"<<<ipfsRes")
+  if (!ipfsRes) {
+    toast.error("unable to upload data");
+  } else {
+    toast.success("successfully data uploaded ipfs");
+  }
   
 
 
@@ -164,7 +168,8 @@ class Index extends BaseComponent {
           tokenId,
           contractAddress: contractAddress,
           royalty:data.royality,
-          blockchain:data?.blockchain
+          blockchain:data?.blockchain,
+          ipfsUrl:ipfsRes,
         })
       );
       console.log("blockchainError", blockchainError)
@@ -198,6 +203,7 @@ class Index extends BaseComponent {
           contractAddress: contractAddress,
           blockchain:data?.blockchain,
           royalty:data.royality,
+          ipfsUrl:ipfsRes,
         })
       );
       console.log("blockchainError", blockchainError)
@@ -230,6 +236,8 @@ class Index extends BaseComponent {
         this.getRequestDataForSaveNftContent(tokenId, data, blockchainRes)
       )
     );
+
+    alert(contentRes);
     this.props.dispatchAction(eventConstants.HIDE_LOADER);
     if (contentError || !contentRes) {
       this.setState({ loaderState: false });

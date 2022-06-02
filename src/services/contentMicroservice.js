@@ -61,7 +61,7 @@ async function addIpfsObject(requestdata) {
 
   return httpService(
     httpConstants.METHOD_TYPE.POST,
-    {},
+    false,
     requestdata,
     url
   )
@@ -71,16 +71,11 @@ async function addIpfsObject(requestdata) {
         response.responseCode !== 200 ||
         !response.responseData ||
         response.responseData.length === 0
-      ){
-        alert("x");
-        console.log(response,"resonsefailure");
+      )
         return Promise.reject(response);
-      }
-      else{
-      alert("y");
-      console.log("responseSuccess",response);
+      
       return Promise.resolve(response.responseData);
-    }
+    
     })
     .catch(function (err) {
       return Promise.reject(err);

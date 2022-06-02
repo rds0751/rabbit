@@ -33,7 +33,7 @@ const BlockchainServices = {
 
 export default BlockchainServices;
 
-async function mintNFT({tokenURI,price, tokenId,contractAddress, royalty, blockchain,}) {
+async function mintNFT({tokenURI,price, tokenId,contractAddress, royalty, blockchain,ipfsUrl}) {
 
 const accounts=await window.ethereum.request({
   method:"eth_requestAccounts"
@@ -51,6 +51,7 @@ console.log(
 
 
   if (!window.ethereum) return Promise.reject("Please install metamask");
+
   if (window.ethereum.networkVersion == 80001 && blockchain == "Polygon") {
     //polygon
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -65,6 +66,7 @@ console.log(
       tokenId,
       ethers.utils.parseEther(price.toString()),
       royalty,
+      ipfsUrl,
       { gasLimit: 100000 }
     );
     let res = await result.wait();
@@ -83,10 +85,13 @@ console.log(
       signer
     );
     const result = await contractData.mint(
-      tokenURI,
-      tokenId,
-      ethers.utils.parseEther(price.toString()),
-      royalty
+      //tokenURI,
+      accounts[0],
+      "0x"+tokenId,
+      20,
+     // ethers.utils.parseEther(price.toString()),
+     // royalty,
+      ipfsUrl
     );
     let res = await result.wait();
     return {
