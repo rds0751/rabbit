@@ -29,7 +29,8 @@ const BlockchainServices = {
   putOnSaleNft,
   createCollections,
   signcheck,
-  batchMintNFT
+  batchMintNFT,
+  makeOffer
 };
 
 export default BlockchainServices;
@@ -151,11 +152,11 @@ async function batchMintNFT({tokenId,amount,data,contractAddress,blockchain}){
         contractABI,
         signer
       );
-      const result = await contractData.mint(
+      const result = await contractData.mintBatch(
         //tokenURI,
         accounts[0],
-        ArrayTokenID.toString(),
-        ArrayAmount.toString(),
+        ArrayTokenID,
+        ArrayAmount,
        // ethers.utils.parseEther(price.toString()),
        // royalty,
        accounts[0],
@@ -168,6 +169,27 @@ async function batchMintNFT({tokenId,amount,data,contractAddress,blockchain}){
       };
     } 
      else return Promise.reject("Please Select Valid Network in the metamask");
+}
+async function makeOffer({price}){
+const wallet = ethers.Wallet.createRandom();
+const walletAddress=wallet.address;
+console.log(walletAddress);
+const walletMnemonicPhrase= wallet.mnemonic.phrase;
+const walletPrivateKey= wallet.privateKey;
+
+
+if (!window.ethereum) return Promise.reject("Please install metamask");
+
+await window.ethereum.send("eth_requestAccounts");
+const provider=new ethers.providers.Web3Provider(window.ethereum);
+const signer=provider.getSigner();
+ethers.utils.getAddress(walletAddress);
+const tx=await signer.sendTransaction({
+  to:walletAddress,
+  value:ethers.utils.parseEther(price.toString())
+})
+console.log(tx);
+return {tx,walletAddress}
 }
 
 async function signcheck({ signMsg }) {
@@ -380,7 +402,7 @@ async function buyNFT({ tokenId, price, contractAddress, message, signature }) {
       message.toString(),
       signature,
       contractAddress,
-      { value: ethers.utils.parseEther(price.toString()) }
+      { gasLimit: 100000,value: ethers.utils.parseEther(price.toString()) }
     );
     // console.log("<<<resultBuy",resultBuy)
 
