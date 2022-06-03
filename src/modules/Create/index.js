@@ -30,8 +30,8 @@ class Index extends BaseComponent {
   }
 
   async componentDidMount() {
-    const checkvalue = await this.getCollectionsForNft();
-    console.log(checkvalue, "<<<<checkvalue");
+    // const checkvalue = await this.getCollectionsForNft();
+    // console.log(checkvalue, "<<<<checkvalue");
   }
    
  showToast = ( type = "success", msg, autoClose = 7000, className = "primaryColor", position = this.defaultPosition ) => {
@@ -118,7 +118,7 @@ class Index extends BaseComponent {
   createNftHandler = async (data) => {
     let blockchainRes;
     this.setState({ loaderState: true });
-    console.log(data?.blockchain, "dattttttttttttttttt");
+    console.log(data, "dattttttttttttttttt");
     let contractAddress;
     // = "0xCDe6A5fccf0cCaF7bc51D35C1f8Efe3BbC5c8057"
    // //-ethreum
@@ -265,6 +265,9 @@ class Index extends BaseComponent {
         this.getRequestDataForSaveNftContent(tokenId, data, blockchainRes)
       )
     );
+
+    console.log(contentError, contentRes, 'nft response')
+
     this.props.dispatchAction(eventConstants.HIDE_LOADER);
     if (contentError || !contentRes) {
       this.setState({ loaderState: false });

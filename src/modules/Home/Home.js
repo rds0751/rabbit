@@ -81,10 +81,14 @@ function Home({ loaderState }) {
           // console.log(res, "filterResponse");
 
           if (res.success) {
+            console.log(res?.responseData?.nftContent, 'nft')
+            console.log(customize.bannerNftData, 'banner data')
             // prevArray => [...prevArray, newValue]
             if (customize.bannerNftData.length > 0) {
+              console.log('if block');
               setNfts(customize.bannerNftData);
             } else {
+              console.log('else block');
               setNfts(res?.responseData?.nftContent);
             }
             setChangeState(false);
@@ -161,9 +165,12 @@ function Home({ loaderState }) {
 
   useEffect(() => {
     if (loaderState === false) {
+      console.log(loaderState, 'loaderstate')
       setLoader(loaderState);
     }
   }, [loaderState])
+
+  console.log('loader', loader);
 
 
   return (
@@ -255,7 +262,7 @@ function Home({ loaderState }) {
 
                               return (
                                 <>
-                                 <NftCards nft={nft} loader={loader}></NftCards>
+                                 <NftCards nft={nft} loader={false}></NftCards>
 
                                   {/* <Card>
                             <Card.Img variant="top" src={Image2} /> 
@@ -318,7 +325,7 @@ function Home({ loaderState }) {
                                   }
                                   return (
                                     <>
-                                      <NftCards nft={nft} loader={loader}></NftCards>
+                                      <NftCards nft={nft} loader={false}></NftCards>
                                       
                                       {/* <Card>
                             <Card.Img variant="top" src={Image1} />
