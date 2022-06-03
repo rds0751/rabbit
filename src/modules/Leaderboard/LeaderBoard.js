@@ -838,13 +838,14 @@ function LeaderBoard({ loader }) {
                   {limitCollections.map((curElem, index) => {
                     // console.log("ddddddddddddddd", curElem.collection[index].name)
                     const { collection, items, collectionPhoto } = curElem
+                    {console.log(collection)}
                     // var precise = totalVolume.toPrecision(4);
 
                     // var result = parseFloat(precise);
                     return (
-                      <>
-                        <div className="leaderboardTopDetailsRow">
-                          {collection[0].imageUrl == '' ||
+                      <>                
+                        <div className="leaderboardTopDetailsRow">                      
+                          {collection.length > 0 ? collection[0].imageUrl == '' ||
                             !collection[0].imageUrl ? (
                             loader ? <Skeleton width="52px" height="52px" circle={true} /> :
                               <img
@@ -861,10 +862,10 @@ function LeaderBoard({ loader }) {
                                 src={collection[0].imageUrl}
                                 alt=""
                               />
-                          )}
+                          ): null}
 
                           <div className="descriptiontopSeller">
-                            {collection[0].name == '' || !collection[0].name ? (
+                            {collection.length > 0 ? collection[0].name == '' || !collection[0].name ? (
                               <h2 className="sellerName">
                                 {' '}
                                 {
@@ -901,7 +902,7 @@ function LeaderBoard({ loader }) {
                                   </Link>
                                 }
                               </h2>
-                            )}
+                            ): null}
 
                             <p className="volumeData" style={{ color: `${fetchPalletsColor(appearance.colorPalette)}` }}>
                               {
@@ -1528,7 +1529,7 @@ const BuildRejectedBlock = ({ apiData, isloading }) => {
           return (
             <>
               <div className="leaderboardTopDetailsRow">
-                {collection[0].imageUrl == '' || !collection[0].imageUrl ? (
+                {collection.length >0 ? collection[0].imageUrl == '' || !collection[0].imageUrl ? (
                   <img
                     className="top-img"
                     style={{ width: '52px', height: '52px' }}
@@ -1542,10 +1543,10 @@ const BuildRejectedBlock = ({ apiData, isloading }) => {
                     src={collection[0].imageUrl}
                     alt=""
                   />
-                )}
+                ): null}
 
                 <div className="LeaderboardInsideDetails">
-                  {collection[0].name == '' || !collection[0].name ? (
+                  {collection.length > 0 ? collection[0].name == '' || !collection[0].name ? (
                     <h2 className="sellerName">
                       {' '}
                       <Link
@@ -1567,7 +1568,7 @@ const BuildRejectedBlock = ({ apiData, isloading }) => {
                         {collection[0].name}
                       </Link>
                     </h2>
-                  )}
+                  ): null}
 
                   <p style={{ display: 'flex' }}>{items} items</p>
                 </div>
