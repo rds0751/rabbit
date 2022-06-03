@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FacebookShareButton } from "react-share";
 import { TwitterShareButton } from "react-share";
 import share from "../../assets/images/share.svg";
+import Utils from "../../utility";
 import info from "../../assets/images/report.svg";
 import copyIcon from "../../assets/images/copy.png";
 import Imagep from "../../assets/images/imagep.svg";
@@ -134,6 +135,8 @@ export default function NftInformation(props) {
   };
 
   const { owner, creator, salesInfo, blockchain } = nft;
+
+  const [makeOfferPrice,setMakeOfferPrice]=useState("");
   const [openReportModal, setOpenReportModal] = useState(false);
   const [saleModal, setsaleModal] = useState(false);
   const [putOnSaleModal, setPutOnSaleModal] = useState(false);
@@ -252,6 +255,8 @@ export default function NftInformation(props) {
     // setCopiedText(false);
     // }, 1000);
   };
+ 
+
   const demoHandleSell = async () => {
     setsaleModal(false);
     setPutOnSaleModal(true);
@@ -409,6 +414,14 @@ export default function NftInformation(props) {
     setImageLoading({ ...imageLoading, loaded: true });
   };
   const [display, setDisplay] = useState(false);
+
+  const SubmitMakeOffer= async ()=>{
+
+    const result= props?.makeOffer({
+        price:makeOfferPrice
+      }) 
+
+  }
 
   return (
     <>
@@ -1598,6 +1611,7 @@ export default function NftInformation(props) {
                         title=" "
                         placeholder="0 ETH"
                         autoComplete="off"
+                        onChange={(e)=>setMakeOfferPrice(e.target.value)}
                         onWheel={(e) => e.target.blur()}
                       />
                     </div>
@@ -1620,7 +1634,7 @@ export default function NftInformation(props) {
                     </div>
 
                     <div className="div-offer-button">
-                      <button className="offer-button">Make Offer</button>
+                      <button className="offer-button" onClick={SubmitMakeOffer}>Make Offer</button>
                     </div>
                   </div>
                 </div>

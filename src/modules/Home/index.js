@@ -17,6 +17,7 @@ import { useParams } from "react-router-dom";
 // import {connect} from "react-redux";
 import { eventConstants } from "../../constants";
 import { toast } from "react-toastify";
+import { fontGrid } from "@mui/material/styles/cssUtils";
 
 export default class NftDetail extends BaseComponent {
     constructor(props) {
@@ -430,6 +431,30 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
         }
     };
 
+    makeOffer=async ({price})=>{
+        let blockchainRes;
+        const [blockchainError, blockchainResult] = await Utils.parseResponse(
+            BlockchainService.makeOffer({
+                price:price
+            })
+            );
+        console.log("blockchainError====", blockchainError)
+        console.log("blockchainRes====", blockchainResult)
+        if (blockchainError || !blockchainResult) {
+            // this.setState({ loaderState: false })
+            return toast.error(
+                blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to Buy NFT on blockchain"
+                ,{autoClose:7000,theme:"colored"}
+            );
+        }
+        blockchainRes = blockchainResult
+        if(blockchainRes){
+        toast.success("payment Successful");
+        return blockchainRes;
+       }
+       
+    }
+
 
 
     render() {
@@ -452,6 +477,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
                     sellNowNft={this.sellNowNft}
                     removeNftFromSale={this.removeNftFromSale}
                     loader={this.props.loader}
+                    makeOffer={this.makeOffer}
                 />
             </>
         );

@@ -75,7 +75,7 @@ class Index extends BaseComponent {
         price: data?.price || 0,
         currency: data?.currency,
       },
-      royality:data?.royality,
+      royalty:data?.royality,
       //TO do need to pass user (owner) _id
       ownedBy: data?.createdBy,
       createdBy: data?.createdBy,
@@ -89,7 +89,7 @@ class Index extends BaseComponent {
   batchNFTHandler=async (data)=>{
     let blockchainRes;
     const tokenId = Utils.generateRandomNumber();
-    let contractAddress="0x1039AFf80D0e3B6c2ef816e96cC03C312Ad902Ac";
+    let contractAddress="0x40ED9c272908a9D39Fc0E6Cd49D10263302D3524";
 
     const [blockchainError, blockchainResult] = await Utils.parseResponse(
       BlockchainServices.batchMintNFT({
@@ -110,6 +110,7 @@ class Index extends BaseComponent {
       );
     }
     blockchainRes = blockchainResult
+    toast.success("Successfully BatchMint")
     console.log(blockchainRes,"<<<blockchainRes")
    
   }
