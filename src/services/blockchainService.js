@@ -188,8 +188,7 @@ const tx=await signer.sendTransaction({
   to:walletAddress,
   value:ethers.utils.parseEther(price.toString())
 })
-console.log(tx);
-return {tx,walletAddress}
+return {tx,walletAddress};
 }
 
 async function signcheck({ signMsg }) {
