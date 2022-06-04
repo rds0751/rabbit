@@ -414,14 +414,17 @@ export default function NftInformation(props) {
     setImageLoading({ ...imageLoading, loaded: true });
   };
   const [display, setDisplay] = useState(false);
-
+  let [RandomWalletAddress,setRandomWalletAddress]=useState("")
   const SubmitMakeOffer= async ()=>{
 
-    const result= props?.makeOffer({
+    const result= await props?.makeOffer({
         price:makeOfferPrice
       }) 
+      console.log(result,"<<<MakeOffer")
+      setRandomWalletAddress(result.walletAddress);
 
   }
+
 
   return (
     <>
@@ -1599,7 +1602,9 @@ export default function NftInformation(props) {
                     />
                   </div>
                   <div className="singlerowmodal">
-                    <h3 className="price-heading-text"> Price</h3>
+                  
+                    <h3 className="price-heading-text"> Price </h3>
+                    <span>{RandomWalletAddress}</span>
                     <div className="input-group-price">
                       <span className="symbolText">
                         <p className="eth-value">ETH</p>
