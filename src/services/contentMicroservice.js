@@ -17,6 +17,7 @@ export default {
   openForSale,
   removeFromSale,
   ownershipTransfer,
+  makeOffer
 };
 // export default getCollection;
 function getHeaders() {
@@ -142,6 +143,29 @@ async function openForSale(requestData) {
   let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/open-for-sale"+getParamTenantId();
   let headers = getHeaders();
   return httpService(httpConstants.METHOD_TYPE.PUT, headers, requestData, url)
+    .then((response) => {
+      console.log("------ssss", response.responseData);
+
+      if (!response.success || !response.responseData) return Promise.reject();
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+async function makeOffer(requestData) {
+
+  
+  if(localStorage.getItem('tenantId') != 'null')
+    requestData.tenantId=localStorage.getItem('tenantId')
+  else
+    requestData.tenantId='624fcce73cfee400358f2cef'
+
+  console.log(requestData);
+  
+  let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/offers"+getParamTenantId();
+  let headers = getHeaders();
+  return httpService(httpConstants.METHOD_TYPE.POST, headers, requestData, url)
     .then((response) => {
       console.log("------ssss", response.responseData);
 
