@@ -1,4 +1,4 @@
-import { ethers,BigNumber } from "ethers";
+import { ethers, BigNumber } from "ethers";
 import contractABI from "../assets/abi/abi.json";
 import contractPolygonABI from "../assets/abi/abi.json";
 import contractbuyAndRemoveABI from "../assets/abi/removeSaleAndBuy.json";
@@ -30,29 +30,32 @@ const BlockchainServices = {
   createCollections,
   signcheck,
   batchMintNFT,
-  makeOffer
+  makeOffer,
+  acceptOffer,
 };
 
 export default BlockchainServices;
 
-async function mintNFT({tokenURI,price, tokenId,contractAddress, royalty, blockchain,ipfsUrl}) {
-
-const accounts=await window.ethereum.request({
-  method:"eth_requestAccounts"
-});
-console.log(
-  window.ethereum.networkVersion,
-  blockchain,
-  price,
-  royalty,
-  tokenId,
+async function mintNFT({
   tokenURI,
-  accounts[0],
-  "dattttttttttttttttt"
-);
-
-
-
+  price,
+  tokenId,
+  contractAddress,
+  royalty,
+  blockchain,
+  ipfsUrl,
+}) {
+  const accounts = await window.ethereum.request({
+    method: "eth_requestAccounts",
+  });
+  console.log(
+    window.ethereum.networkVersion,
+    tokenId,
+    price,
+    royalty,
+    ipfsUrl,
+    "dattttttttttttttttt"
+  );
 
   if (!window.ethereum) return Promise.reject("Please install metamask");
 
@@ -89,13 +92,14 @@ console.log(
       signer
     );
     const result = await contractData.mint(
-      //tokenURI,
-      accounts[0],
+      ipfsUrl,
+      // tokenURI,
+      // accounts[0],
       tokenId,
-      20,
-     // ethers.utils.parseEther(price.toString()),
-     // royalty,
-     accounts[0],
+      // 20,
+      ethers.utils.parseEther(price.toString()),
+      royalty
+      // accounts[0]
     );
     let res = await result.wait();
     return {
@@ -129,66 +133,151 @@ console.log(
   // console.log("kkkkkkkkkkkkkkkkkkkkkk network swutch")
 }
 
-async function batchMintNFT({tokenId,amount,data,contractAddress,blockchain}){
+async function batchMintNFT({
+  tokenId,
+  amount,
+  data,
+  contractAddress,
+  blockchain,
+}) {
+  let ArrayTokenID = [];
+  for (let i = 0; i < 5; i++) {
+    tokenId = tokenId + 1;
+    ArrayTokenID.push(tokenId);
+  }
 
+  let ArrayAmount = Array(5).fill(amount);
 
+  console.log(ArrayTokenID, ArrayAmount);
 
-  let ArrayTokenID=Array(5).fill(tokenId);
-  let ArrayAmount=Array(5).fill(amount);
-
-  console.log(ArrayTokenID.toString(),ArrayAmount);
-
-  const accounts=await window.ethereum.request({
-    method:"eth_requestAccounts"
+  const accounts = await window.ethereum.request({
+    method: "eth_requestAccounts",
   });
-  
-    if (!window.ethereum) return Promise.reject("Please install metamask");
-   if (window.ethereum.networkVersion == 4 && blockchain == "Ethereum") {
-      //etherum
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-      const contractData = new ethers.Contract(
-        contractAddress,
-        contractABI,
-        signer
-      );
-      const result = await contractData.mintBatch(
-        //tokenURI,
-        accounts[0],
-        ArrayTokenID,
-        ArrayAmount,
-       // ethers.utils.parseEther(price.toString()),
-       // royalty,
-       accounts[0],
-      );
-      let res = await result.wait();
-      return {
-        ...res,
-        chainId: provider?._network?.chainId || "",
-        name: provider?._network?.name || "",
-      };
-    } 
-     else return Promise.reject("Please Select Valid Network in the metamask");
+
+  if (!window.ethereum) return Promise.reject("Please install metamask");
+  if (window.ethereum.networkVersion == 4 && blockchain == "Ethereum") {
+    //etherum
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contractData = new ethers.Contract(
+      contractAddress,
+      contractABI,
+      signer
+    );
+    const result = await contractData.mintBatch(
+      //tokenURI,
+      accounts[0],
+      ArrayTokenID,
+      ArrayAmount,
+      // ethers.utils.parseEther(price.toString()),
+      // royalty,
+      accounts[0]
+    );
+    let res = await result.wait();
+    return {
+      ...res,
+      chainId: provider?._network?.chainId || "",
+      name: provider?._network?.name || "",
+    };
+  } else return Promise.reject("Please Select Valid Network in the metamask");
 }
-async function makeOffer({price}){
-const wallet = ethers.Wallet.createRandom();
-const walletAddress=wallet.address;
-console.log(walletAddress);
-const walletMnemonicPhrase= wallet.mnemonic.phrase;
-const walletPrivateKey= wallet.privateKey;
+async function makeOffer({ price }) {
+  const accounts = await window.ethereum.request({
+    method: "eth_requestAccounts",
+  });
+  let creatorWalletAddress = accounts[0];
+
+  const wallet = ethers.Wallet.createRandom();
+  const walletAddress = wallet.address;
+  console.log(walletAddress);
+  const walletMnemonicPhrase = wallet.mnemonic.phrase;
+  const walletPrivateKey = wallet.privateKey;
+
+  if (!window.ethereum) return Promise.reject("Please install metamask");
+
+  await window.ethereum.send("eth_requestAccounts");
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
+  ethers.utils.getAddress(walletAddress);
+  const tx = await signer.sendTransaction({
+    to: walletAddress,
+    value: ethers.utils.parseEther(price.toString()),
+  });
+  return {
+    tx,
+    walletAddress,
+    walletPrivateKey,
+    walletMnemonicPhrase,
+    creatorWalletAddress,
+  };
+}
+async function acceptOffer({
+  signMsg,
+  tokenId,
+  contractAddress,
+  receiverAddress,
+  price,
+}) {
+  console.log(signMsg, tokenId, contractAddress, receiverAddress, price);
+  try {
+    if (!window.ethereum) return Promise.reject("Please install metamask");
+    await window.ethereum.send("eth_requestAccounts");
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const signature = await signer.signMessage(signMsg);
+    const address = await signer.getAddress();
+    let signMg = {
+      signMsg,
+      signature,
+      address,
+    };
+alert("x")
+    //buy with offer
+
+var providerx = ethers.providers.getDefaultProvider("https://rinkeby.infura.io/v3/04456733dcca43d2b2991398598e00c4");
+console.log("xyz")
+var addressx  = '0xaA0842869e1a627B749bE2795d5D699d86F4dfc9';
+var privateKey = '0x41559d28e936dc92104ff30691519693fc753ffbee6251a611b9aa1878f12a4d';
+var walletx = new ethers.Wallet(privateKey,providerx);
+console.log("xyz")
+var contract = new ethers.Contract(addressx,contractbuyAndRemoveABI,walletx);
+console.log("xyz")
+var sendPromise = contract.buy(
+  tokenId,
+  signMsg.toString(),
+  signature,
+  contractAddress,
+  receiverAddress,
+  { value: ethers.utils.parseEther(price.toString()) }
+);
+console.log("xyz")
+
+let res = await sendPromise.wait();
+console.log(res,"xyz");
+let x=await sendPromise.then(function(transaction){
+  console.log(transaction,"xyc");
+});
+console.log(x,"xyz");
 
 
-if (!window.ethereum) return Promise.reject("Please install metamask");
 
-await window.ethereum.send("eth_requestAccounts");
-const provider=new ethers.providers.Web3Provider(window.ethereum);
-const signer=provider.getSigner();
-ethers.utils.getAddress(walletAddress);
-const tx=await signer.sendTransaction({
-  to:walletAddress,
-  value:ethers.utils.parseEther(price.toString())
-})
-return {tx,walletAddress};
+  //   let private_key ="41559d28e936dc92104ff30691519693fc753ffbee6251a611b9aa1878f12a4d";
+  //  window.ethersProvider = new ethers.providers.InfuraProvider("https://rinkeby.infura.io/v3/04456733dcca43d2b2991398598e00c4");
+  //   let infura=  new ethers.providers.InfuraProvider("https://rinkeby.infura.io/v3/04456733dcca43d2b2991398598e00c4");
+  //  const Secondsigner = new ethers.Wallet(private_key, infura);
+  //   let send_token_amount = "1";
+  //   let to_address = "0x4c10D2734Fb76D3236E522509181CC3Ba8DE0e80";
+  //   let send_address = "0xda27a282B5B6c5229699891CfA6b900A716539E6";
+  //   let gas_limit = "0x100000";
+  //   let wallet = new ethers.Wallet(private_key);
+  //   let walletSigner = wallet.connect(window.ethersProvider);
+  //   let contract_address = "";
+  
+    
+
+  } catch (err) {
+    Promise.reject(err);
+  }
 }
 
 async function signcheck({ signMsg }) {
@@ -199,6 +288,7 @@ async function signcheck({ signMsg }) {
     const signer = provider.getSigner();
     const signature = await signer.signMessage(signMsg);
     const address = await signer.getAddress();
+
     return {
       signMsg,
       signature,
@@ -333,7 +423,15 @@ async function removeFromSaleNft({
 // }
 
 //1bnb=0.136ether
-async function buyNFT({ tokenId, price, contractAddress, message, signature }) {
+async function buyNFT({
+  tokenId,
+  price,
+  contractAddress,
+  message,
+  signature,
+  receiverAddress,
+}) {
+  alert("p");
   let RinkebyAddress = "0xe481bf4f3dbeb59bf758d271a710142e10898728";
   let PolygonAddress = "0x6C626D2226C2415Ab32989660ea7f2C6265f230c";
   let BinanceAddress = "0x52CDde738d71568F79379FB1d671C4Eaef33d638";
@@ -387,7 +485,6 @@ async function buyNFT({ tokenId, price, contractAddress, message, signature }) {
       name: provider?._network?.name || "",
     };
   } else if (window.ethereum.networkVersion == 4) {
-  
     const provider = new ethers.providers.Web3Provider(window.ethereum);
 
     const signer = provider.getSigner();
@@ -401,7 +498,8 @@ async function buyNFT({ tokenId, price, contractAddress, message, signature }) {
       message.toString(),
       signature,
       contractAddress,
-      { gasLimit: 100000,value: ethers.utils.parseEther(price.toString()) }
+      receiverAddress,
+      { gasLimit: 100000, value: ethers.utils.parseEther(price.toString()) }
     );
     // console.log("<<<resultBuy",resultBuy)
 

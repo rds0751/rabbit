@@ -32,6 +32,7 @@ import { Oval } from "react-loader-spinner";
 import Snackbar from "@mui/material/Snackbar";
 import styled from "styled-components";
 import ListingsTable from "../../common/components/ListingTable";
+import Offer from "../../common/components/Offer";
 import DetailPage from "../../common/components/DetailPage";
 import CopyToClipboard from "react-copy-to-clipboard";
 import Ethereum from "../../assets/images/ether.svg";
@@ -134,9 +135,15 @@ export default function NftInformation(props) {
     maxPrice: "",
   };
 
-  const { owner, creator, salesInfo, blockchain } = nft;
+  const { owner, creator, salesInfo, blockchain,offers } = nft;
 
-  const [makeOfferPrice,setMakeOfferPrice]=useState("");
+ 
+  let [makeOfferDetails,setMakeOfferDetails]=useState({
+    price:0,
+    dateTime:""
+  })
+
+
   const [openReportModal, setOpenReportModal] = useState(false);
   const [saleModal, setsaleModal] = useState(false);
   const [putOnSaleModal, setPutOnSaleModal] = useState(false);
@@ -418,7 +425,8 @@ export default function NftInformation(props) {
   const SubmitMakeOffer= async ()=>{
 
     const result= await props?.makeOffer({
-        price:makeOfferPrice
+        price:makeOfferDetails.price,
+        dateTime:makeOfferDetails.dateTime,
       }) 
       console.log(result,"<<<MakeOffer")
       setRandomWalletAddress(result.walletAddress);
@@ -1346,7 +1354,7 @@ export default function NftInformation(props) {
                         ""
                       )}
                       {tab === 2 ? <ListingsTable id={id} /> : ""}
-                      {tab === 3 ? <ListingsTable id={id} /> : ""}
+                      {tab === 3 ? <Offer id={id} offer={offers} function={props?.sellNowNft} nft={nft} period={period} /> : ""}
                       {tab === 4 ? <DetailPage nft={nft} /> : ""}
                     </div>
                   </div>
@@ -1616,7 +1624,7 @@ export default function NftInformation(props) {
                         title=" "
                         placeholder="0 ETH"
                         autoComplete="off"
-                        onChange={(e)=>setMakeOfferPrice(e.target.value)}
+                        onChange={(e)=>setMakeOfferDetails({...makeOfferDetails,price:e.target.value})}
                         onWheel={(e) => e.target.blur()}
                       />
                     </div>
@@ -1634,7 +1642,7 @@ export default function NftInformation(props) {
                         </Select>
                         <span style={{ border: "0.2px ridge #C8C8C8" }}></span>
 
-                        <input type="time" className="filter-time" />
+                        <input type="time" className="filter-time"   onChange={(e)=>setMakeOfferDetails({...makeOfferDetails,dateTime:e.target.value})} />
                       </div>
                     </div>
 

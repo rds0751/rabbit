@@ -90,7 +90,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
         if(data?.blockchain ==="Polygon")
         contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS_POLYGON
         else if(data?.blockchain === "Ethereum")
-        contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
+        contractAddress ="0xaA0842869e1a627B749bE2795d5D699d86F4dfc9";
         else if(data?.blockchain === "Binance")
         contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS_BINANCE;
 
@@ -142,6 +142,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
                     message: this.state.responseData.salesInfo.message,
                     address:this.state.responseData.salesInfo.address,
                     signature:this.state.responseData.salesInfo.signature,
+                    receiveAddress:this.state.responseData.offers.receiveAddress,
 
                 })
             );
@@ -170,6 +171,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
                     message: this.state.responseData.salesInfo.message,
                     address:this.state.responseData.salesInfo.address,
                     signature:this.state.responseData.salesInfo.signature,
+                    receiveAddress:this.state.responseData.offers.receiverAddress,
 
                 })
             );
@@ -431,7 +433,8 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
         }
     };
 
-    makeOffer=async ({price})=>{
+    makeOffer=async ({price,dateTime})=>{
+        console.log(price,dateTime);
         let blockchainRes;
         const [blockchainError, blockchainResult] = await Utils.parseResponse(
             BlockchainService.makeOffer({
@@ -443,15 +446,41 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
         if (blockchainError || !blockchainResult) {
             // this.setState({ loaderState: false })
             return toast.error(
-                blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to Buy NFT on blockchain"
+                blockchainError?.data?.message || blockchainError?.message ||blockchainError|| "Unable to Buy NFT on blockchain"
                 ,{autoClose:7000,theme:"colored"}
             );
         }
         blockchainRes = blockchainResult
-        if(blockchainRes){
-        toast.success("payment Successful");
-        return blockchainRes;
-       }
+
+        let requestData = {
+            tokenId: this?.state?.responseData?.tokenId,
+            contentId: this.state?.responseData?._id,
+            offerPrice:price,
+            addedBy:localStorage.getItem("userId"),
+            expiryDateTime:1653997819995,
+            receiverAddress: blockchainRes.creatorWalletAddress,
+            // privateKey:blockchainRes.walletPrivateKey,
+            currency:this.state?.responseData?.salesInfo?.currency,
+        };
+        // console.log("nannnn",requestData)
+        // this.updateNftDataInDb(requestData, eventConstants.SELL,this.state.responseData._id || '')
+        if (!this.state?.responseData?._id) return;
+        let [error, result] = await Utils.parseResponse(
+            ContentService.makeOffer(requestData)
+        );
+        console.log("-nnnnnnnnnnnnnnssssssssnnnn--", result);
+        if (error || !result) {
+            //  this.setState({ loaderState: false })
+            return toast.error(error || "Unable to update Nft content.",{autoClose:5000});
+        }
+        else {
+            // this.setState({ loaderState: false })
+            this.setState({ refreshPage: true })
+            this.setState({ saleSuccess: true });
+            this.setState({ nftDetails: result });
+            toast.success("Successful make offer ",{autoClose:7000,theme:"colored"});
+        }
+       
        
     }
 
@@ -470,7 +499,6 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
                     saleSuccess={this.state.saleSuccess}
                     removeSuccess={this.state.removeSuccess}
                     isNftValid={this.state.isNftValid}
-
                     BuyNowNft={this.BuyNowNft}
                     refreshPage={this.state.refreshPage}
                     getNftDetail={this.getNftDetail}
