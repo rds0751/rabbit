@@ -59,7 +59,10 @@ function Create() {
           dispatch(ManageNotiSideBar(true));
         }
         // alert(`${redirectUrl}`);
-      } else {
+      } else if(redirectUrl.length === 0){
+        history("/create-nft"+getParamTenantId());
+      }
+      else {
         history("/my-profile"+getParamTenantId());
       }
     } else {
