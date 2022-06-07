@@ -90,7 +90,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
         if(data?.blockchain ==="Polygon")
         contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS_POLYGON
         else if(data?.blockchain === "Ethereum")
-        contractAddress ="0xaA0842869e1a627B749bE2795d5D699d86F4dfc9";
+        contractAddress =process.env.REACT_APP_CONTRACT_ADDRESS;
         else if(data?.blockchain === "Binance")
         contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS_BINANCE;
 
@@ -125,7 +125,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
         );
         console.log("--buy nFT resi;t-", result);
         if (error || !result) {
-            this.setState({ loaderState: false })
+            // this.setState({ loaderState: false })
 
             return toast.error(error || "Unable to update Nft tx.",{autoClose:7000,theme:"colored"})
         }
@@ -142,7 +142,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
                     message: this.state.responseData.salesInfo.message,
                     address:this.state.responseData.salesInfo.address,
                     signature:this.state.responseData.salesInfo.signature,
-                    receiveAddress:this.state.responseData.offers.receiveAddress,
+                    receiveAddress:this.state.responseData.offers[0].receiverAddress,
 
                 })
             );
@@ -171,7 +171,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
                     message: this.state.responseData.salesInfo.message,
                     address:this.state.responseData.salesInfo.address,
                     signature:this.state.responseData.salesInfo.signature,
-                    receiveAddress:this.state.responseData.offers.receiverAddress,
+                    receiveAddress:this.state.responseData.offers[0].receiverAddress,
 
                 })
             );
@@ -253,7 +253,10 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
         contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
         else if(blockchain === "Binance")
         contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS_BINANCE;
-        
+
+
+        console.log(new Date(expiryDate).getTime(),"<<<xyz")
+        let unixTimeZone=new Date(expiryDate).getTime();
 
         // this.setState({ loaderState: true })
 
@@ -264,7 +267,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
           signMsg += characters.charAt(Math.floor(Math.random() * 
         charactersLength));
        }
-       signMsg+='!'+this.state.responseData?.tokenId;
+       signMsg+='!'+unixTimeZone;
 
        const [signError, signRes] = await Utils.parseResponse(
         BlockchainService.signcheck({signMsg})
@@ -459,7 +462,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
             addedBy:localStorage.getItem("userId"),
             expiryDateTime:1653997819995,
             receiverAddress: blockchainRes.creatorWalletAddress,
-            // privateKey:blockchainRes.walletPrivateKey,
+            privateKey:blockchainRes.walletPrivateKey,
             currency:this.state?.responseData?.salesInfo?.currency,
         };
         // console.log("nannnn",requestData)

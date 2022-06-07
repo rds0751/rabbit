@@ -1,6 +1,89 @@
 [
   {
     "inputs": [
+      { "internalType": "uint256", "name": "_id", "type": "uint256" },
+      { "internalType": "string", "name": "message", "type": "string" },
+      { "internalType": "bytes", "name": "_signature", "type": "bytes" },
+      {
+        "internalType": "address",
+        "name": "contractAddress",
+        "type": "address"
+      },
+      { "internalType": "address", "name": "receiver", "type": "address" }
+    ],
+    "name": "acceptOffer",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_id", "type": "uint256" },
+      { "internalType": "string", "name": "message", "type": "string" },
+      { "internalType": "bytes", "name": "_signature", "type": "bytes" },
+      {
+        "internalType": "address",
+        "name": "contractAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address payable",
+        "name": "receiver",
+        "type": "address"
+      }
+    ],
+    "name": "buy",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_id", "type": "uint256" },
+      { "internalType": "string", "name": "message", "type": "string" },
+      { "internalType": "bytes", "name": "_signature", "type": "bytes" },
+      {
+        "internalType": "address",
+        "name": "contractAddress",
+        "type": "address"
+      }
+    ],
+    "name": "cancel",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address payable",
+        "name": "_changeAdminAddress",
+        "type": "address"
+      }
+    ],
+    "name": "changeAdminAddress",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "fees", "type": "uint256" }
+    ],
+    "name": "changeCommision",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "makeOffer",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
       { "internalType": "uint256", "name": "commision1", "type": "uint256" },
       { "internalType": "address payable", "name": "admin1", "type": "address" }
     ],
@@ -58,61 +141,6 @@
     "name": "asciiToInteger",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "pure",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "uint256", "name": "_id", "type": "uint256" },
-      { "internalType": "string", "name": "message", "type": "string" },
-      { "internalType": "bytes", "name": "_signature", "type": "bytes" },
-      {
-        "internalType": "address",
-        "name": "contractAddress",
-        "type": "address"
-      },
-      { "internalType": "address", "name": "receiver", "type": "address" }
-    ],
-    "name": "buy",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "uint256", "name": "_id", "type": "uint256" },
-      { "internalType": "string", "name": "message", "type": "string" },
-      { "internalType": "bytes", "name": "_signature", "type": "bytes" },
-      {
-        "internalType": "address",
-        "name": "contractAddress",
-        "type": "address"
-      }
-    ],
-    "name": "cancel",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address payable",
-        "name": "_changeAdminAddress",
-        "type": "address"
-      }
-    ],
-    "name": "changeAdminAddress",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "uint256", "name": "fees", "type": "uint256" }
-    ],
-    "name": "changeCommision",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
