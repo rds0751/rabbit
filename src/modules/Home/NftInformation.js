@@ -294,6 +294,10 @@ export default function NftInformation(props) {
     });
     // setRemoveFromSale(false)
   };
+  const BuyerInfo={
+    buyerId: loggedInUser?._id,
+    newOwnerAddress: walletAddress?.address,
+  }
   const buyNft = async () => {
     if (user.loggedInUser != null) {
       props?.BuyNowNft({
@@ -1354,7 +1358,7 @@ export default function NftInformation(props) {
                         ""
                       )}
                       {tab === 2 ? <ListingsTable id={id} /> : ""}
-                      {tab === 3 ? <Offer id={id} offer={offers} function={props?.sellNowNft} nft={nft} period={period} /> : ""}
+                      {tab === 3 ? <Offer id={id} offer={offers} function={props?.sellNowNft} nft={nft} period={period} buyerInfo={BuyerInfo} /> : ""}
                       {tab === 4 ? <DetailPage nft={nft} /> : ""}
                     </div>
                   </div>
@@ -1477,7 +1481,7 @@ export default function NftInformation(props) {
                     />
                     <h3 className="reason-text"> Keep it on sale until :</h3>
                     <input
-                      type="date"
+                      type="datetime-local"
                       className="form-control-1"
                       // min="0"
                       // type="date"
