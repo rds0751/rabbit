@@ -211,8 +211,8 @@ function App() {
             element={<CreateNftCollections loader={loader} />}
           />
           <Route exact path="/add-wallet" element={<Create />} />
-          <Route eaxct path="/my-profile" element={<MyProfile loader={loader} />} />
-          <Route eaxct path="/user-profile/:id" element={<UserProfilePage />} />
+          <Route exact path="/my-profile" element={<MyProfile loader={loader} />} />
+          <Route exact path="/user-profile/:id" element={<UserProfilePage loader={loader} />} />
 
           <Route exact path="/edit-profile" element={<EditProfile loader={loader} />} />
           <Route exact path="/about" element={<About loader={loader} />} />

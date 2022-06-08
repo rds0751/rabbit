@@ -37,10 +37,11 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import Snackbar from '@mui/material/Snackbar';
 import styled from "styled-components";
 import { ShimmerCircularImage, ShimmerThumbnail } from "react-shimmer-effects";
-function UserProfilePage() {
+import Skeleton from "react-loading-skeleton";
+function UserProfilePage({ loader }) {
   let { user } = useSelector((state) => state);
 
-  const appearance = useSelector(state=> state.customize.appearance)
+  const appearance = useSelector(state => state.customize.appearance)
 
   let { loggedInUser } = user;
 
@@ -56,10 +57,10 @@ function UserProfilePage() {
     "https://png.pngtree.com/background/20210714/original/pngtree-blood-drop-halloween-blood-background-black-background-picture-image_1220404.jpg";
   const defaultPic =
     "https://th.bing.com/th/id/R.e1189efa9cd3aee29c0e1f7dbed689bf?rik=YRidGY7NPM2n3A&riu=http%3a%2f%2fwww.clipartbest.com%2fcliparts%2f7ca%2fpeo%2f7capeoboi.png&ehk=MwVRL6ome8bAroWEn5dLYQgaXLxrafgcwcIQX7N48CM%3d&risl=&pid=ImgRaw&r=0";
-  
+
   const [Nfts, setNfts] = useState([]);
   const userId = useParams();
-// console.log("kkkkkkkkkkhhhhhhhhhhh",userId)
+  // console.log("kkkkkkkkkkhhhhhhhhhhh",userId)
   const [createdNft, setcreatedNft] = useState([]);
   const [isloading, setIsloading] = useState(false);
   const [ownedNft, setownedNft] = useState([]);
@@ -78,8 +79,8 @@ function UserProfilePage() {
   const [checkClick, setcheckClick] = useState(false);
   const [getBalance, setGetBalance] = useState("");
   const dispatch = useDispatch();
-  const [dataCopied,setDataCopied]=useState(true);
-  
+  const [dataCopied, setDataCopied] = useState(true);
+
 
   const [typeofProfilePost, setTypeofProfilePost] = useState("on-sale");
 
@@ -116,25 +117,25 @@ function UserProfilePage() {
     //   navigate("/my-profile");
     //   navigate("/add-wallet");
     // }
-      
-      userPublicProfile((response) => {
-        console.log(response, "myprofile");
-        if (response.success) {
-          setUserData(response.responseData);
-          // setNfts(response.responseData);
-          // setTypeofProfilePost("on-sale");
-        } else {
-          toast.error(response.msg);
-        }
-      }, userId.id);
-      setIsloading(true);
-      // getCreatedByNft();
 
-      // getOwnedByNft();
-      getLikedNft();
-      getOnSaleNft();
-      setIsloading(false);
-    
+    userPublicProfile((response) => {
+      console.log(response, "myprofile");
+      if (response.success) {
+        setUserData(response.responseData);
+        // setNfts(response.responseData);
+        // setTypeofProfilePost("on-sale");
+      } else {
+        toast.error(response.msg);
+      }
+    }, userId.id);
+    setIsloading(true);
+    // getCreatedByNft();
+
+    // getOwnedByNft();
+    getLikedNft();
+    getOnSaleNft();
+    setIsloading(false);
+
 
     // setNfts(onSaleNft);
     // setTypeofProfilePost("on-sale");
@@ -143,7 +144,7 @@ function UserProfilePage() {
 
 
   // ------------------------------- Calling apis --------------------- to get user data
-console.log("userrrrrrrrrrrrrrrrdataa",userData)
+  console.log("userrrrrrrrrrrrrrrrdataa", userData)
   const handleCopyToClipboard = () => {
     const { wallet_address } = loggedInUser;
     navigator.clipboard.writeText(`${wallet_address}`);
@@ -243,120 +244,140 @@ console.log("userrrrrrrrrrrrrrrrdataa",userData)
     console.log(sub, "<<<split address");
   };
   splitAddress("akshay");
-  let array=[];
-const likedNftModule=()=>{
-    if(likedNft.length > 0){
-      for (let i = 0; i < likedNft.length; i++) 
+  let array = [];
+  const likedNftModule = () => {
+    if (likedNft.length > 0) {
+      for (let i = 0; i < likedNft.length; i++)
         array.push(likedNft[i].userLikedNfts);
-        setTypeofProfilePost("liked");
-        setNfts(array);
-      }
-      else {
-        setTypeofProfilePost("liked");
-      }
-}
-const [state, setState] = React.useState({
-  open: false,
-  vertical: 'top',
-  horizontal: 'center',
-});
-const { vertical, horizontal, open } = state;
-const handleClick = (newState) => () => {
-  setState({ open: true, ...newState });
-};
-const handleClose = () => {
-  setState({ ...state, open: false });
-};
-let [imageLoading,setImageLoading]=useState({src:userData?.photo,loaded:false })
-let [bannerImage,setBannerLoading]=useState({src:userData?.coverPhoto,loaded:false })
-const onImageLoad=()=>{
-  setImageLoading({...imageLoading,loaded:true});
-}
-const onBannerLoad=()=>{
-  setBannerLoading({...bannerImage,loaded:true});
-}
+      setTypeofProfilePost("liked");
+      setNfts(array);
+    }
+    else {
+      setTypeofProfilePost("liked");
+    }
+  }
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+  });
+  const { vertical, horizontal, open } = state;
+  const handleClick = (newState) => () => {
+    setState({ open: true, ...newState });
+  };
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
+  let [imageLoading, setImageLoading] = useState({ src: userData?.photo, loaded: false })
+  let [bannerImage, setBannerLoading] = useState({ src: userData?.coverPhoto, loaded: false })
+  const onImageLoad = () => {
+    setImageLoading({ ...imageLoading, loaded: true });
+  }
+  const onBannerLoad = () => {
+    setBannerLoading({ ...bannerImage, loaded: true });
+  }
 
   return (
     <>
-    {(userData.length!=0)?
-      <div>
-        <div className="position-relative relative">
-          <img
-            className="profilecover"
-            src={
-              userData?.coverPhoto != ""
-                ? userData?.coverPhoto
-                : coverImage
-            }
-            alt=""
-            onLoad={onBannerLoad}
-            onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
-          />
-          {!imageLoading.loaded && (
-            <div className="bannerLoader"> 
-              <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
+      {true ?
+        <div>
+          <div className="position-relative relative">
+            {/*             
+            {!imageLoading.loaded && (
+              <div className="bannerLoader">
+                <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
               </div>
-          )}
-          
-          {/* <input
+            )} */}
+
+            {
+              loader ? <div className="profilecover">
+                <ShimmerThumbnail className="thumbnail" fitOnFrame={true} rounded />
+              </div>
+                : <img
+                  className="profilecover"
+                  src={
+                    userData?.coverPhoto != ""
+                      ? userData?.coverPhoto
+                      : coverImage
+                  }
+                  alt=""
+                  onLoad={onBannerLoad}
+                  onMouseDown={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()}
+                />
+            }
+
+            {/* <input
             type="file"
             className="pencilicon"
             // onChange={updateBanner}
             style={{ border: "5px solid white", zIndex: "99", opacity: "0" }}
           /> */}
-          {/* <img className="pencilicon" width="16px" height="16px" src={pencil} /> */}
-          {/* <Link to="/edit-profile" className="textdecornone">
+            {/* <img className="pencilicon" width="16px" height="16px" src={pencil} /> */}
+            {/* <Link to="/edit-profile" className="textdecornone">
             <button className="profileeditbutton">Edit Profile</button>
           </Link> */}
-        </div>
-        <div className="profileavatar  absolute">
-        <div className="profileImg-Container-userProfile">
-          <img
-            src={typeof(userData.photo)=== "object" ? userData?.photo?.compressedURL : (typeof(userData?.photo)==="string" && userData?.photo != "" ? userData?.photo :profileImage)}
-            alt=""
-            className="user-img"
-            onLoad={onImageLoad} 
-            onMouseDown={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()}
-          />
-          {!imageLoading.loaded && (
-            <div className="profileImageLoader"> 
-               <ShimmerCircularImage className="thumbnailCirular" fitOnFrame={true} rounded />
-              </div>
-          )}
           </div>
-          {/* <h2>{ethereum && ethereum.selectedAddress}</h2> */}
-          {/* <h2>{window.ethereum && defaultAccount}</h2> */}
-          {/* {defaultAccount} */}
-          <div className="profile-user">{userData?.userName}</div>
-          <div className="add-cover"  
-          onClick={()=>{
-          setDataCopied(false)
-          setTimeout(()=>{
-            setDataCopied(true);
-          },3000);
-        }}>
-            <div className="wallet-address-text">
-              {/* {loggedInUser?.wallet_address} */}
+          <div className="profileavatar  absolute">
+            <div className="profileImg-Container-userProfile">
 
-              <SplitWalletAdd address={userData?.wallet_address} />
+              {!imageLoading.loaded && (
+                <div className="profileImageLoader">
+                  <ShimmerCircularImage className="thumbnailCirular" fitOnFrame={true} rounded />
+                </div>
+              )}
+
+              {
+                loader ? <div className="user-img">
+                  <ShimmerCircularImage className="thumbnailCirular" fitOnFrame={true} rounded />
+                </div> :
+                  <img
+                    src={typeof (userData.photo) === "object" ? userData?.photo?.compressedURL : (typeof (userData?.photo) === "string" && userData?.photo != "" ? userData?.photo : profileImage)}
+                    alt=""
+                    className="user-img"
+                    onLoad={onImageLoad}
+                    onMouseDown={(e) => e.preventDefault()} onContextMenu={(e) => e.preventDefault()}
+                  />
+              }
             </div>
-            <CopyToClipboard text={userData?.wallet_address}>
+            {/* <h2>{ethereum && ethereum.selectedAddress}</h2> */}
+            {/* <h2>{window.ethereum && defaultAccount}</h2> */}
+            {/* {defaultAccount} */}
+            {
+              loader ? <Skeleton width="120px" /> : <div className="profile-user">
+              {userData?.userName}
+              </div>
+            }
+            {
+              loader ? <Skeleton width="250px" height="40px" /> : 
+              <div className="add-cover"
+              onClick={() => {
+                setDataCopied(false)
+                setTimeout(() => {
+                  setDataCopied(true);
+                }, 3000);
+              }}>
+              <div className="wallet-address-text">
+                {/* {loggedInUser?.wallet_address} */}
 
-               <span className="Container-clipboard">
-            {/* <button  className="copy-button"        onClick={handleClick({
+                <SplitWalletAdd address={userData?.wallet_address} />
+              </div>
+              <CopyToClipboard text={userData?.wallet_address}>
+
+                <span className="Container-clipboard">
+                  {/* <button  className="copy-button"        onClick={handleClick({
              vertical: 'top',
              horizontal: 'center',
             })}> */}
-              <img
-                src={copy}
-                className="copyButton"
-                alt=""
-                
-              />
-              {/* </button> */}
-              </span>
-            </CopyToClipboard>
-            {/* <CustomSnack
+                  <img
+                    src={copy}
+                    className="copyButton"
+                    alt=""
+
+                  />
+                  {/* </button> */}
+                </span>
+              </CopyToClipboard>
+              {/* <CustomSnack
         anchorOrigin={{ vertical, horizontal }}
         open={open}
         onClose={handleClose}
@@ -365,41 +386,42 @@ const onBannerLoad=()=>{
         autoHideDuration={2000}
         className="custom-snack"
       /> */}
-      <span className="tooltiptext-myprofile"> {dataCopied ? "copy to clipboard" : "copied" }</span>
-          </div>
+              <span className="tooltiptext-myprofile"> {dataCopied ? "copy to clipboard" : "copied"}</span>
+            </div>
+            }
 
-          <p className="profile-description">
-            {userData?.bio}
-          </p>
-          {/* <p style={{ marginBottom: "0px" }}>
+            <p className="profile-description">
+              {userData?.bio}
+            </p>
+            {/* <p style={{ marginBottom: "0px" }}>
             main focus in art is to make digital abstract painting
           </p> */}
-          <h6 className="profile-portfolio">
-            <img style={{ height: "30px" }} src={globe} alt="" />
-            {userData?.portfolio}
-          </h6>
-          {/* <Link to="/edit-profile" className="textdecornone">
+            <h6 className="profile-portfolio">
+              <img style={{ height: "30px" }} src={globe} alt="" />
+              {userData?.portfolio}
+            </h6>
+            {/* <Link to="/edit-profile" className="textdecornone">
             <button className="profileeditbuttonatbottom">Edit Profile</button>
           </Link> */}
-        </div>
+          </div>
 
-        {/* <div className="position-absolute absolute2">
+          {/* <div className="position-absolute absolute2">
       <img style={{height :"30px"}} src={pencil} alt="" />
       </div> */}
-        <div className="profileItemContainer">
-          <div className="postTypeProfileContainer collectionsales MyProfilesales">
-            <div
-              className={`postTypeProfile ${typeofProfilePost === "on-sale" && "postTypeProfile--active"
-                }`}
-              // onClick={() => setTypeofProfilePost("on-sale")}
-              onClick={() => {
-                setNfts(onSaleNft);
-                setTypeofProfilePost("on-sale");
-              }}
-            >
-              On sale
-            </div>
-            {/* <div
+          <div className="profileItemContainer">
+            <div className="postTypeProfileContainer collectionsales MyProfilesales">
+              <div
+                className={`postTypeProfile ${typeofProfilePost === "on-sale" && "postTypeProfile--active"
+                  }`}
+                // onClick={() => setTypeofProfilePost("on-sale")}
+                onClick={() => {
+                  setNfts(onSaleNft);
+                  setTypeofProfilePost("on-sale");
+                }}
+              >
+                On sale
+              </div>
+              {/* <div
               className={`postTypeProfile ${typeofProfilePost === "owned" && "postTypeProfile--active"
                 }`}
               // onClick={() => setTypeofProfilePost("owned")}
@@ -410,7 +432,7 @@ const onBannerLoad=()=>{
             >
               Owned
             </div> */}
-            {/* <div
+              {/* <div
               className={`postTypeProfile ${typeofProfilePost === "created" && "postTypeProfile--active"
                 }`}
               // onClick={() => setTypeofProfilePost("created")}
@@ -421,50 +443,50 @@ const onBannerLoad=()=>{
             >
               Created
             </div> */}
-            <div
-              className={`postTypeProfile ${typeofProfilePost === "liked" && "postTypeProfile--active"
-                }`}
-              // onClick={() => setTypeofProfilePost("liked")}
-              onClick={() => likedNftModule()}
-            >
-              Liked
+              <div
+                className={`postTypeProfile ${typeofProfilePost === "liked" && "postTypeProfile--active"
+                  }`}
+                // onClick={() => setTypeofProfilePost("liked")}
+                onClick={() => likedNftModule()}
+              >
+                Liked
+              </div>
             </div>
-          </div>
-          {/* <hr /> */}
-          {/* <div className="profileNftContainer row mx-0 text-center p-0 cards-gap image1"> */}
-          <div className="nftTileContainer row ntf_row" style={{ justifyContent: "start", }}>
-            {/* <div className="spinner-border text-primary" role="status">
+            {/* <hr /> */}
+            {/* <div className="profileNftContainer row mx-0 text-center p-0 cards-gap image1"> */}
+            <div className="nftTileContainer row ntf_row" style={{ justifyContent: "start", }}>
+              {/* <div className="spinner-border text-primary" role="status">
               <span className="sr-only">Loading...</span>
             </div> */}
-            {/* {[...AbstractApi, , ...AbstractApi].map((curElem) => { */}
+              {/* {[...AbstractApi, , ...AbstractApi].map((curElem) => { */}
 
-            {isloading && <Spinner />}
-            {(() => {
-              if (!isloading && Nfts.length < 1) {
-                return <div>
-                  <div className="Noitemdiv">
-                    <img src={NoItem}/>
-                    <p className="textitem">No items available</p>
+              {isloading && <Spinner />}
+              {(() => {
+                if (!isloading && Nfts.length < 1) {
+                  return <div>
+                    <div className="Noitemdiv">
+                      <img src={NoItem} />
+                      <p className="textitem">No items available</p>
                     </div>
                   </div>
-              }
-            })()}
-            
-            {Nfts.map((curElem) => {
-              const {
-                cdnUrl,
-                name,
-                price,
-                salesInfo,
-                maxPrice,
-                maxPrice2,
-                daysLeft,
-                likesCount,
-              } = curElem;
-              return (
-                <>
-                  <NftCardHome nft={curElem} appearance={appearance} />
-                  {/* <div className="col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
+                }
+              })()}
+
+              {Nfts.map((curElem) => {
+                const {
+                  cdnUrl,
+                  name,
+                  price,
+                  salesInfo,
+                  maxPrice,
+                  maxPrice2,
+                  daysLeft,
+                  likesCount,
+                } = curElem;
+                return (
+                  <>
+                    <NftCardHome nft={curElem} appearance={appearance} loader={loader} />
+                    {/* <div className="col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
                     <img
                       className="nftTileEachImage"
                       src={cdnUrl}
@@ -496,13 +518,13 @@ const onBannerLoad=()=>{
                       </div>
                     </div>
                   </div> */}
-                </>
-              );
-            })}
+                  </>
+                );
+              })}
+            </div>
           </div>
         </div>
-      </div>
-:""}
+        : ""}
       <ToastContainer
         position="top-center"
         autoClose={2000}
@@ -523,7 +545,7 @@ const onBannerLoad=()=>{
 
 
 
-  
+
 }
 
 export default UserProfilePage;
