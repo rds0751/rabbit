@@ -45,8 +45,8 @@ import NftCards from "./NftCards"
 let preivewFiles = ['video/mp4', 'audio/mpeg'];
 
 function Home({ loaderState }) {
-  const [audioDisplay,setaudioDisplay]=useState(false);
-  const [videoDisplay,setVideoDisplay]=useState(false);
+  const [audioDisplay, setaudioDisplay] = useState(false);
+  const [videoDisplay, setVideoDisplay] = useState(false);
 
   const [loader, setLoader] = useState(loaderState);
   const [loadNfts, setLoadNfts] = useState(true);
@@ -176,7 +176,7 @@ function Home({ loaderState }) {
   return (
     <>
       <div className="homepage">
-        <div className="banner" style={loader ? {background: `url(${defaultCover})`} : customize?.appearance?.coverImageUrl ? { background: `url(${customize?.appearance?.coverImageUrl})`, backgroundPosition: `${customize?.appearance?.coverPosition}` } : {}}>
+        <div className="banner" style={loader ? { background: `url(${defaultCover})` } : customize?.appearance?.coverImageUrl ? { background: `url(${customize?.appearance?.coverImageUrl})`, backgroundPosition: `${customize?.appearance?.coverPosition}` } : {}}>
           <div className="inner-width">
             <Container fluid>
               <Row>
@@ -249,63 +249,10 @@ function Home({ loaderState }) {
                           }
 
                           {nfts.length &&
-                            nfts.slice(0, 4).map((nft) => {
-                              // const { _id, cdnUrl, name, biddingDetails, salesInfo } = nft;
-                              let route;
-                              if (nft && nft.contentId) {
-                                route = "/nft-information/" + nft.contentId + getParamTenantId();
-                              } else {
-                                route = "/nft-information/" + nft._id + getParamTenantId();
-                              }
-                             
-
-
+                            nfts.slice(0, 4).map((nft) => {                             
                               return (
                                 <>
-                                 <NftCards nft={nft} loader={false}></NftCards>
-
-                                  {/* <Card>
-                            <Card.Img variant="top" src={Image2} /> 
-                            <Card.Body>
-                              <div className="d-flex align-items-start media">
-                                <div className="flex-shrink-0">
-                                  <img src={Image2} alt="Image1" width="38px" height="38px" className="profile-img" />
-                                </div>
-                                <div className="flex-grow-1 ms-2">
-                                  <h3 className="title">Revenge of the Val</h3>
-                                  <p className="description">Mr Lazy</p>
-                                </div>
-                              </div>
-                            </Card.Body>
-                          </Card>
-                          <Card>
-                            <Card.Img variant="top" src={Image3} />
-                            <Card.Body>
-                              <div className="d-flex align-items-start media">
-                                <div className="flex-shrink-0">
-                                  <img src={Image3} alt="Image1" width="38px" height="38px" className="profile-img" />
-                                </div>
-                                <div className="flex-grow-1 ms-2">
-                                  <h3 className="title">Magic crystal</h3>
-                                  <p className="description">Xwarrior</p>
-                                </div>
-                              </div>
-                            </Card.Body>
-                          </Card>
-                          <Card>
-                            <Card.Img variant="top" src={Image4} />
-                            <Card.Body>
-                              <div className="d-flex align-items-start media">
-                                <div className="flex-shrink-0">
-                                  <img src={Image4} alt="Image1" width="38px" height="38px" className="profile-img" />
-                                </div>
-                                <div className="flex-grow-1 ms-2">
-                                  <h3 className="title">The Gang</h3>
-                                  <p className="description">Mr Lazy</p>
-                                </div>
-                              </div>
-                            </Card.Body>
-                          </Card> */}
+                                  { nft!=null ? <NftCards nft={nft} loader={false}></NftCards> : null }
                                 </>
                               );
                             })}
@@ -316,73 +263,10 @@ function Home({ loaderState }) {
                           <div className="item">
                             <div className="d-flex flex-wrap">
                               {nfts.length &&
-                                nfts.slice(4, 8).map((nft) => {
-                                  let route;
-                                  if (nft.hasOwnProperty('contentId') && nft.contentId != "") {
-                                    route = "/nft-information/" + nft.contentId + getParamTenantId();
-                                  } else {
-                                    route = "/nft-information/" + nft._id + getParamTenantId();
-                                  }
+                                nfts.slice(4, 8).map((nft) => {                                  
                                   return (
                                     <>
-                                      <NftCards nft={nft} loader={false}></NftCards>
-                                      
-                                      {/* <Card>
-                            <Card.Img variant="top" src={Image1} />
-                            <Card.Body>
-                              <div className="d-flex align-items-start media">
-                                <div className="flex-shrink-0">
-                                  <img src={Image1} alt="Image1" width="38px" height="38px" className="profile-img" />
-                                </div>
-                                <div className="flex-grow-1 ms-2">
-                                  <h3 className="title">Swoard Art online</h3>
-                                  <p className="description">Xwarrior</p>
-                                </div>
-                              </div>
-                            </Card.Body>
-                          </Card> */}
-                                      {/* <Card>
-                            <Card.Img variant="top" src={Image2} />
-                            <Card.Body>
-                              <div className="d-flex align-items-start media">
-                                <div className="flex-shrink-0">
-                                  <img src={Image2} alt="Image1" width="38px" height="38px" className="profile-img" />
-                                </div>
-                                <div className="flex-grow-1 ms-2">
-                                  <h3 className="title">Revenge of the Val</h3>
-                                  <p className="description">Mr Lazy</p>
-                                </div>
-                              </div>
-                            </Card.Body>
-                          </Card>
-                          <Card>
-                            <Card.Img variant="top" src={Image3} />
-                            <Card.Body>
-                              <div className="d-flex align-items-start media">
-                                <div className="flex-shrink-0">
-                                  <img src={Image3} alt="Image1" width="38px" height="38px" className="profile-img" />
-                                </div>
-                                <div className="flex-grow-1 ms-2">
-                                  <h3 className="title">Magic crystal</h3>
-                                  <p className="description">Xwarrior</p>
-                                </div>
-                              </div>
-                            </Card.Body>
-                          </Card>
-                          <Card>
-                            <Card.Img variant="top" src={Image4} />
-                            <Card.Body>
-                              <div className="d-flex align-items-start media">
-                                <div className="flex-shrink-0">
-                                  <img src={Image4} alt="Image1" width="38px" height="38px" className="profile-img" />
-                                </div>
-                                <div className="flex-grow-1 ms-2">
-                                  <h3 className="title">The Gang</h3>
-                                  <p className="description">Mr Lazy</p>
-                                </div>
-                              </div>
-                            </Card.Body>
-                          </Card> */}
+                                      { nft!=null ? <NftCards nft={nft} loader={false}></NftCards> : null }
                                     </>
                                   );
                                 })}
