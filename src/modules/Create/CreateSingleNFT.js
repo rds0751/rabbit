@@ -178,7 +178,7 @@ function CreateSingleNFT(props) {
   useEffect(async () => {
     if (walletAddress == null) {
       navigation("/add-wallet");
-    };
+    }
 
     // this code will check if user already connected wallet from localstorage
     if (!localStorage.getItem("has_wallet")) {
@@ -434,10 +434,9 @@ function CreateSingleNFT(props) {
     }
   }
 
-  const batchMintNFT=async (e)=>{
+  const batchMintNFT = async (e) => {
     props.batchNFTHandler();
-  
-  }
+  };
 
   const handleSubmit = async (e) => {
     var priceValue = price.current;
@@ -492,6 +491,7 @@ function CreateSingleNFT(props) {
           ownerAddress: walletAddress.address,
           previewImage: previewCompressedURL,
           fileExtension: extension,
+          isLazyMintingEnabled:mintStatus,
         });
         setOpenMintodal(true);
       };
@@ -590,11 +590,20 @@ function CreateSingleNFT(props) {
                   </div>
 
                   <div className="abstractillusion">
-                    <img src={previewCompressedURL != "" ? previewCompressedURL : (cdnUrl != "" ? cdnUrl : Image)} />
+                    <img
+                      src={
+                        previewCompressedURL != ""
+                          ? previewCompressedURL
+                          : cdnUrl != ""
+                          ? cdnUrl
+                          : Image
+                      }
+                    />
                     <div className="abstractillusioncontent">
                       <div className="abstracttitle">{name.current}</div>
                       {/* <div className="abstractposter"> </div> */}
-                      <div className="ethprice">{price.current}
+                      <div className="ethprice">
+                        {price.current}
                         {collectionName === "Anafto Collection"
                           ? selectedOption?.value
                           : currencyValue(collectionBlockchain)}
@@ -670,136 +679,184 @@ function CreateSingleNFT(props) {
         draggable
         pauseOnHover
       />
-      {
-        props.loader ? <SingleNftShimmer /> :
-          <div className="full-content-margin">
-            <div className="create-nft-text">Create NFT</div>
+      {props.loader ? (
+        <SingleNftShimmer />
+      ) : (
+        <div className="full-content-margin">
+          <div className="create-nft-text">Create NFT</div>
 
-            <div className="create-single-nft-outer">
-              <div
-                className="create-nft-form"
-                style={
-                  {
-                    // flexDirection: "column",
-                  }
+          <div className="create-single-nft-outer">
+            <div
+              className="create-nft-form"
+              style={
+                {
+                  // flexDirection: "column",
                 }
-              >
-                <div className="nft-file-upload">
-                  <label htmlFor="email" className="form-key">
-                    Upload File*{" "}
-                    <span style={{ color: "red", fontSize: "15px" }}>
-                      {fileError}
-                    </span>
-                  </label>
+              }
+            >
+              <div className="nft-file-upload">
+                <label htmlFor="email" className="form-key">
+                  Upload File*{" "}
+                  <span style={{ color: "red", fontSize: "15px" }}>
+                    {fileError}
+                  </span>
+                </label>
 
-                  <div className="inpput-image-wrap"></div>
+                <div className="inpput-image-wrap"></div>
 
-                  {/* Audio Div */}
+                {/* Audio Div */}
 
-                  {/* Video Div */}
+                {/* Video Div */}
 
-                  {/* -----------------------NEW DRA GAND DROP */}
+                {/* -----------------------NEW DRA GAND DROP */}
 
-                  {!isFileSelected && (
-                    <>
-                      <div className="draganddropbox" {...getRootProps()}>
-                        <input {...getInputProps()} />
+                {!isFileSelected && (
+                  <>
+                    <div className="draganddropbox" {...getRootProps()}>
+                      <input {...getInputProps()} />
 
-                        {!isloader ? (
-                          <div className="draganddropboxinnerdiv">
-                            {cdnUrl === "" ? (
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="110"
-                                height="110"
-                                viewBox="0 0 110 110"
-                              >
-                                <g id="image" transform="translate(-372 -618)">
-                                  <rect
-                                    id="Rectangle_271"
-                                    data-name="Rectangle 271"
-                                    width="110"
-                                    height="110"
-                                    transform="translate(372 618)"
+                      {!isloader ? (
+                        <div className="draganddropboxinnerdiv">
+                          {cdnUrl === "" ? (
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="110"
+                              height="110"
+                              viewBox="0 0 110 110"
+                            >
+                              <g id="image" transform="translate(-372 -618)">
+                                <rect
+                                  id="Rectangle_271"
+                                  data-name="Rectangle 271"
+                                  width="110"
+                                  height="110"
+                                  transform="translate(372 618)"
+                                  fill="none"
+                                />
+                                <g
+                                  id="Icon_feather-image"
+                                  data-name="Icon feather-image"
+                                  transform="translate(380 626)"
+                                >
+                                  <path
+                                    id="Path_34"
+                                    data-name="Path 34"
+                                    d="M15.053,4.5H88.926A10.553,10.553,0,0,1,99.479,15.053V88.926A10.553,10.553,0,0,1,88.926,99.479H15.053A10.553,10.553,0,0,1,4.5,88.926V15.053A10.553,10.553,0,0,1,15.053,4.5Z"
+                                    transform="translate(-4.5 -4.5)"
                                     fill="none"
+                                    stroke={fetchPalletsColor(
+                                      customize.appearance.colorPalette
+                                    )}
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="5"
                                   />
-                                  <g
-                                    id="Icon_feather-image"
-                                    data-name="Icon feather-image"
-                                    transform="translate(380 626)"
-                                  >
-                                    <path
-                                      id="Path_34"
-                                      data-name="Path 34"
-                                      d="M15.053,4.5H88.926A10.553,10.553,0,0,1,99.479,15.053V88.926A10.553,10.553,0,0,1,88.926,99.479H15.053A10.553,10.553,0,0,1,4.5,88.926V15.053A10.553,10.553,0,0,1,15.053,4.5Z"
-                                      transform="translate(-4.5 -4.5)"
-                                      fill="none"
-                                      stroke={fetchPalletsColor(
-                                        customize.appearance.colorPalette
-                                      )}
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="5"
-                                    />
-                                    <path
-                                      id="Path_35"
-                                      data-name="Path 35"
-                                      d="M26.33,18.415A7.915,7.915,0,1,1,18.415,10.5,7.915,7.915,0,0,1,26.33,18.415Z"
-                                      transform="translate(10.607 10.607)"
-                                      fill="none"
-                                      stroke={fetchPalletsColor(
-                                        customize.appearance.colorPalette
-                                      )}
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="5"
-                                    />
-                                    <path
-                                      id="Path_36"
-                                      data-name="Path 36"
-                                      d="M91.926,41.383,65.543,15,7.5,73.043"
-                                      transform="translate(3.053 21.936)"
-                                      fill="none"
-                                      stroke={fetchPalletsColor(
-                                        customize.appearance.colorPalette
-                                      )}
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="5"
-                                    />
-                                  </g>
+                                  <path
+                                    id="Path_35"
+                                    data-name="Path 35"
+                                    d="M26.33,18.415A7.915,7.915,0,1,1,18.415,10.5,7.915,7.915,0,0,1,26.33,18.415Z"
+                                    transform="translate(10.607 10.607)"
+                                    fill="none"
+                                    stroke={fetchPalletsColor(
+                                      customize.appearance.colorPalette
+                                    )}
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="5"
+                                  />
+                                  <path
+                                    id="Path_36"
+                                    data-name="Path 36"
+                                    d="M91.926,41.383,65.543,15,7.5,73.043"
+                                    transform="translate(3.053 21.936)"
+                                    fill="none"
+                                    stroke={fetchPalletsColor(
+                                      customize.appearance.colorPalette
+                                    )}
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="5"
+                                  />
                                 </g>
-                              </svg>
-                            ) : (
-                              <img
-                                src={cdnUrl}
-                                className="nft-image"
-                                style={
-                                  {
-                                    // maxWidth: "100px",
-                                    // width: "70%",
-                                    // marginTop: "3em",
-                                  }
+                              </g>
+                            </svg>
+                          ) : (
+                            <img
+                              src={cdnUrl}
+                              className="nft-image"
+                              style={
+                                {
+                                  // maxWidth: "100px",
+                                  // width: "70%",
+                                  // marginTop: "3em",
                                 }
-                              />
-                            )}
+                              }
+                            />
+                          )}
 
-                            <span className="draganddropboxinnerdivtextspan">
-                              Drag and Drop or
-                              <span
-                                className="draganddropboxinnerdivtextspanbrowse"
-                                style={{
-                                  color: `${fetchPalletsColor(
-                                    customize.appearance.colorPalette
-                                  )}`,
-                                }}
-                              >
-                                {" "}
-                                Browse
-                              </span>
+                          <span className="draganddropboxinnerdivtextspan">
+                            Drag and Drop or
+                            <span
+                              className="draganddropboxinnerdivtextspanbrowse"
+                              style={{
+                                color: `${fetchPalletsColor(
+                                  customize.appearance.colorPalette
+                                )}`,
+                              }}
+                            >
+                              {" "}
+                              Browse
                             </span>
+                          </span>
+                        </div>
+                      ) : (
+                        <div className="" style={{ margin: "auto 0" }}>
+                          {" "}
+                          <Oval
+                            vertical="top"
+                            horizontal="center"
+                            color="#00BFFF"
+                            height={30}
+                            width={30}
+                          />
+                        </div>
+                      )}
+                    </div>
+                    <div className="draganddropboxmsg ">
+                      Supported(JPG,JPEG, PNG, GIF,MP3,Mp4) <br></br>Max size:
+                      40 mb
+                    </div>
+                  </>
+                )}
+
+                {isFileSelected && imageFile && (
+                  <>
+                    {!isloader ? (
+                      <>
+                        <div className="draganddropbox" {...getRootProps()}>
+                          <input {...getInputProps()} />
+                          <div className="draganddropboxinnerdiv">
+                            <img
+                              src={cdnUrl != "" ? cdnUrl : Image}
+                              style={{
+                                width: "100%",
+                                // marginTop: "3em",
+                                height: "100%",
+                                color: "#366EEF",
+                                objectFit: "cover",
+                              }}
+                            />
                           </div>
-                        ) : (
+                        </div>
+
+                        <div className="draganddropboxmsg">
+                          Supported(JPG,JPEG, PNG, GIF,MP3,Mp4) <br></br>Max
+                          size: 40 mb
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="draganddropbox">
                           <div className="" style={{ margin: "auto 0" }}>
                             {" "}
                             <Oval
@@ -810,296 +867,257 @@ function CreateSingleNFT(props) {
                               width={30}
                             />
                           </div>
-                        )}
-                      </div>
-                      <div className="draganddropboxmsg ">
-                        Supported(JPG,JPEG, PNG, GIF,MP3,Mp4) <br></br>Max size: 40 mb
-                      </div>
-                    </>
-                  )}
+                        </div>
+                        <div className="draganddropboxmsg ">
+                          Supported(JPG,JPEG, PNG, GIF,,MP3,Mp4) <br></br>Max
+                          size: 40 mb
+                        </div>
+                      </>
+                    )}
+                  </>
+                )}
 
-                  {isFileSelected && imageFile && (
-                    <>
-                      {!isloader ? (
-                        <>
-                          <div className="draganddropbox" {...getRootProps()}>
-                            <input {...getInputProps()} />
-                            <div className="draganddropboxinnerdiv">
-                              <img
-                                src={cdnUrl != "" ? cdnUrl : Image}
-                                style={{
-                                  width: "100%",
-                                  // marginTop: "3em",
-                                  height: "100%",
-                                  color: "#366EEF",
-                                  objectFit: "cover",
-                                }}
-                              />
-                            </div>
-                          </div>
-
-                          <div className="draganddropboxmsg">
-                            Supported(JPG,JPEG, PNG, GIF,MP3,Mp4) <br></br>Max size: 40 mb
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div className="draganddropbox">
-                            <div className="" style={{ margin: "auto 0" }}>
-                              {" "}
-                              <Oval
-                                vertical="top"
-                                horizontal="center"
-                                color="#00BFFF"
-                                height={30}
-                                width={30}
-                              />
-                            </div>
-                          </div>
-                          <div className="draganddropboxmsg ">
-                            Supported(JPG,JPEG, PNG, GIF,,MP3,Mp4) <br></br>Max size: 40 mb
-                          </div>
-                        </>
-                      )}
-                    </>
-                  )}
-
-                  {isFileSelected && audioFile && (
-                    <>
-                      {!isloader ? (
-                        <>
-                          <div className="AudioDiv">
-                            <audio
-                              controls
-                              controlslist="nodownload"
-                              loop
-                              preload="auto"
-                              style={{
-                                width: "100%",
-                                background: "#E7E7E7 0% 0% no-repeat padding-box",
-                              }}
-                            >
-                              <source src={cdnUrl} />
-                            </audio>
-
-                            <div className="changeTextDiv" {...getRootProps()}>
-                              <p className="changeText">
-                                {" "}
-                                <input {...getInputProps()} />
-                                Change
-                              </p>
-                            </div>
-                          </div>
-
-                          <div className="draganddropboxmsg ">
-                            Supported(JPG,JPEG, PNG, GIF,,MP3,Mp4) <br></br>Max size: 40 mb
-                          </div>
-
-                          <div className="max-width-250">
-                            <Bannerdrop
-                              bannerCdn={cdnPreviewUrl}
-                              setbannerCdn={setcdnPreviewUrl}
-                              bannerIpfs={ipfsPreviewUrl}
-                              setbannerIpfs={setIpfsPreviewUrl}
-                              compressedUrl={previewCompressedURL}
-                              setCompressedUrl={setPreviewCompressedURl}
-                              appearance={customize.appearance}
-                            />
-                            <div className="draganddropboxmsg">
-                              You’ll need to provide an image (PNG, JPG, or GIF) for
-                              the card display of your item.
-                            </div>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div className="draganddropbox">
-                            <div className="" style={{ margin: "auto 0" }}>
-                              {" "}
-                              <Oval
-                                vertical="top"
-                                horizontal="center"
-                                color="#00BFFF"
-                                height={30}
-                                width={30}
-                              />
-                            </div>
-                          </div>
-                          <div className="draganddropboxmsg ">
-                            Supported(JPG,JPEG, PNG, GIF,,MP3,Mp4) <br></br>Max size: 40 mb
-                          </div>
-                        </>
-                      )}
-                    </>
-                  )}
-
-                  {isFileSelected && videoFile && (
-                    <>
-                      {!isloader ? (
-                        <>
-                          <div className="AudioDiv" style={{ marginTop: "10px" }}>
-                            <video
-                              style={{
-                                width: "100%",
-                                background: "#E7E7E7 0% 0% no-repeat padding-box",
-                              }}
-                              controls
-                            >
-                              <source src={cdnUrl} type="video/mp4" />
-                            </video>
-
-                            <div className="changeTextDiv" {...getRootProps()}>
-                              <p className="changeText">
-                                {" "}
-                                <input {...getInputProps()} />
-                                Change
-                              </p>
-                            </div>
-                          </div>
-
-                          <div className="draganddropboxmsg">
-                            Supported(JPG,JPEG, PNG, GIF,MP3,Mp4) <br></br>Max size: 40 mb
-                          </div>
-
-                          <div className="max-width-250">
-                            <Bannerdrop
-                              bannerCdn={cdnPreviewUrl}
-                              setbannerCdn={setcdnPreviewUrl}
-                              bannerIpfs={ipfsPreviewUrl}
-                              setbannerIpfs={setIpfsPreviewUrl}
-                              compressedUrl={previewCompressedURL}
-                              setCompressedUrl={setPreviewCompressedURl}
-                              appearance={customize.appearance}
-                            />
-                            <div className="draganddropboxmsg">
-                              You’ll need to provide an image (PNG, JPG, or GIF) for
-                              the card display of your item.
-                            </div>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div className="draganddropbox">
-                            <div className="" style={{ margin: "auto 0" }}>
-                              {" "}
-                              <Oval
-                                vertical="top"
-                                horizontal="center"
-                                color="#00BFFF"
-                                height={30}
-                                width={30}
-                              />
-                            </div>
-                          </div>
-                          <div className="draganddropboxmsg ">
-                            Supported(JPG,JPEG, PNG, GIF,MP3,Mp4) <br></br>Max size: 40 mb
-                          </div>
-                        </>
-                      )}
-                    </>
-                  )}
-
-                  {/* ----------------- */}
-                </div>
-                <div className="single-form">
-                  <div className="">
-                    <div className="create-collection">
-                      <div
-                        htmlFor="collection"
-                        className="input-label collection-label"
-                      >
-                        Collection
-                      </div>
-
-                      <div>
-                        <Link
-                          to={`/create-nft-collection${getParamTenantId()}`}
-                          // pathname:"/create-nft-collection",
-                          state={{
-                            data: true,
-                          }}
-                          style={{ textDecoration: "none" }}
-                        >
-                          <span
-                            className="color36 font-16 poppins-normal create-text"
+                {isFileSelected && audioFile && (
+                  <>
+                    {!isloader ? (
+                      <>
+                        <div className="AudioDiv">
+                          <audio
+                            controls
+                            controlslist="nodownload"
+                            loop
+                            preload="auto"
                             style={{
-                              color: `${fetchPalletsColor(
-                                customize.appearance.colorPalette
-                              )}`,
+                              width: "100%",
+                              background: "#E7E7E7 0% 0% no-repeat padding-box",
                             }}
                           >
-                            {" "}
-                            Create
-                          </span>
-                        </Link>
-                      </div>
-                    </div>
-                    <select
-                      onChange={(e) => {
-                        const addressId = e.target.value.split(",");
+                            <source src={cdnUrl} />
+                          </audio>
 
-                        if (addressId[2] === undefined) {
-                          addressId[2] = "Anafto Collection";
-                          setCollectionName(addressId[2]);
-                          setCollectionBlockchain("");
-                          setCollectionId("");
-                          setContractAddress("");
-                          setCollectionError("");
-                        }
-                        if (addressId[3] === "Ethereum") {
-                          checkValueOnCollection = blockchainOption.some(
-                            (el) => el.value === "ETH"
-                          );
-                          checkValueOnCollection
-                            ? setCollectionError("")
-                            : setCollectionError(
+                          <div className="changeTextDiv" {...getRootProps()}>
+                            <p className="changeText">
+                              {" "}
+                              <input {...getInputProps()} />
+                              Change
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="draganddropboxmsg ">
+                          Supported(JPG,JPEG, PNG, GIF,,MP3,Mp4) <br></br>Max
+                          size: 40 mb
+                        </div>
+
+                        <div className="max-width-250">
+                          <Bannerdrop
+                            bannerCdn={cdnPreviewUrl}
+                            setbannerCdn={setcdnPreviewUrl}
+                            bannerIpfs={ipfsPreviewUrl}
+                            setbannerIpfs={setIpfsPreviewUrl}
+                            compressedUrl={previewCompressedURL}
+                            setCompressedUrl={setPreviewCompressedURl}
+                            appearance={customize.appearance}
+                          />
+                          <div className="draganddropboxmsg">
+                            You’ll need to provide an image (PNG, JPG, or GIF)
+                            for the card display of your item.
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="draganddropbox">
+                          <div className="" style={{ margin: "auto 0" }}>
+                            {" "}
+                            <Oval
+                              vertical="top"
+                              horizontal="center"
+                              color="#00BFFF"
+                              height={30}
+                              width={30}
+                            />
+                          </div>
+                        </div>
+                        <div className="draganddropboxmsg ">
+                          Supported(JPG,JPEG, PNG, GIF,,MP3,Mp4) <br></br>Max
+                          size: 40 mb
+                        </div>
+                      </>
+                    )}
+                  </>
+                )}
+
+                {isFileSelected && videoFile && (
+                  <>
+                    {!isloader ? (
+                      <>
+                        <div className="AudioDiv" style={{ marginTop: "10px" }}>
+                          <video
+                            style={{
+                              width: "100%",
+                              background: "#E7E7E7 0% 0% no-repeat padding-box",
+                            }}
+                            controls
+                          >
+                            <source src={cdnUrl} type="video/mp4" />
+                          </video>
+
+                          <div className="changeTextDiv" {...getRootProps()}>
+                            <p className="changeText">
+                              {" "}
+                              <input {...getInputProps()} />
+                              Change
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="draganddropboxmsg">
+                          Supported(JPG,JPEG, PNG, GIF,MP3,Mp4) <br></br>Max
+                          size: 40 mb
+                        </div>
+
+                        <div className="max-width-250">
+                          <Bannerdrop
+                            bannerCdn={cdnPreviewUrl}
+                            setbannerCdn={setcdnPreviewUrl}
+                            bannerIpfs={ipfsPreviewUrl}
+                            setbannerIpfs={setIpfsPreviewUrl}
+                            compressedUrl={previewCompressedURL}
+                            setCompressedUrl={setPreviewCompressedURl}
+                            appearance={customize.appearance}
+                          />
+                          <div className="draganddropboxmsg">
+                            You’ll need to provide an image (PNG, JPG, or GIF)
+                            for the card display of your item.
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="draganddropbox">
+                          <div className="" style={{ margin: "auto 0" }}>
+                            {" "}
+                            <Oval
+                              vertical="top"
+                              horizontal="center"
+                              color="#00BFFF"
+                              height={30}
+                              width={30}
+                            />
+                          </div>
+                        </div>
+                        <div className="draganddropboxmsg ">
+                          Supported(JPG,JPEG, PNG, GIF,MP3,Mp4) <br></br>Max
+                          size: 40 mb
+                        </div>
+                      </>
+                    )}
+                  </>
+                )}
+
+                {/* ----------------- */}
+              </div>
+              <div className="single-form">
+                <div className="">
+                  <div className="create-collection">
+                    <div
+                      htmlFor="collection"
+                      className="input-label collection-label"
+                    >
+                      Collection
+                    </div>
+
+                    <div>
+                      <Link
+                        to={`/create-nft-collection${getParamTenantId()}`}
+                        // pathname:"/create-nft-collection",
+                        state={{
+                          data: true,
+                        }}
+                        style={{ textDecoration: "none" }}
+                      >
+                        <span
+                          className="color36 font-16 poppins-normal create-text"
+                          style={{
+                            color: `${fetchPalletsColor(
+                              customize.appearance.colorPalette
+                            )}`,
+                          }}
+                        >
+                          {" "}
+                          Create
+                        </span>
+                      </Link>
+                    </div>
+                  </div>
+                  <select
+                    onChange={(e) => {
+                      const addressId = e.target.value.split(",");
+
+                      if (addressId[2] === undefined) {
+                        addressId[2] = "Anafto Collection";
+                        setCollectionName(addressId[2]);
+                        setCollectionBlockchain("");
+                        setCollectionId("");
+                        setContractAddress("");
+                        setCollectionError("");
+                      }
+                      if (addressId[3] === "Ethereum") {
+                        checkValueOnCollection = blockchainOption.some(
+                          (el) => el.value === "ETH"
+                        );
+                        checkValueOnCollection
+                          ? setCollectionError("")
+                          : setCollectionError(
                               "( The NFTS in this collection can not be minted as this platform has temporarily stopped minting on Ethereum. )"
                             );
-                          setCollectionId(addressId[0]);
-                          setContractAddress(addressId[1]);
-                          setCollectionName(addressId[2]);
-                          setCollectionBlockchain(addressId[3]);
-                        } else if (addressId[3] === "Polygon") {
-                          checkValueOnCollection = blockchainOption.some(
-                            (el) => el.value === "MATIC"
-                          );
-                          checkValueOnCollection
-                            ? setCollectionError("")
-                            : setCollectionError(
+                        setCollectionId(addressId[0]);
+                        setContractAddress(addressId[1]);
+                        setCollectionName(addressId[2]);
+                        setCollectionBlockchain(addressId[3]);
+                      } else if (addressId[3] === "Polygon") {
+                        checkValueOnCollection = blockchainOption.some(
+                          (el) => el.value === "MATIC"
+                        );
+                        checkValueOnCollection
+                          ? setCollectionError("")
+                          : setCollectionError(
                               "( The NFTS in this collection can not be minted as this platform has temporarily stopped minting on Polygon.)"
                             );
-                          setCollectionId(addressId[0]);
-                          setContractAddress(addressId[1]);
-                          setCollectionName(addressId[2]);
-                          setCollectionBlockchain(addressId[3]);
-                        } else if (addressId[3] === "Binance") {
-                          checkValueOnCollection = blockchainOption.some(
-                            (el) => el.value === "BNB"
-                          );
-                          checkValueOnCollection
-                            ? setCollectionError("")
-                            : setCollectionError(
+                        setCollectionId(addressId[0]);
+                        setContractAddress(addressId[1]);
+                        setCollectionName(addressId[2]);
+                        setCollectionBlockchain(addressId[3]);
+                      } else if (addressId[3] === "Binance") {
+                        checkValueOnCollection = blockchainOption.some(
+                          (el) => el.value === "BNB"
+                        );
+                        checkValueOnCollection
+                          ? setCollectionError("")
+                          : setCollectionError(
                               "( The NFTS in this collection can not be minted as this platform has temporarily stopped minting on Binance.)"
                             );
-                          setCollectionId(addressId[0]);
-                          setContractAddress(addressId[1]);
-                          setCollectionName(addressId[2]);
-                          setCollectionBlockchain(addressId[3]);
-                        }
-                        if (checkValueOnCollection) {
-                        }
+                        setCollectionId(addressId[0]);
+                        setContractAddress(addressId[1]);
+                        setCollectionName(addressId[2]);
+                        setCollectionBlockchain(addressId[3]);
+                      }
+                      if (checkValueOnCollection) {
+                      }
 
-                        console.log(addressId[1], "<<<BlockchainOption");
-                      }}
-                      className="form-control-1 category-select"
-                    >
-                      <option className="color82" value="-1" hidden>
-                        Select Collection
-                      </option>
-                      <option className="color82" value="">
-                        ANAFTO Collection
-                      </option>
-                      {collectionData.length > 0 && collectionData.map((item, index) => (
+                      console.log(addressId[1], "<<<BlockchainOption");
+                    }}
+                    className="form-control-1 category-select"
+                  >
+                    <option className="color82" value="-1" hidden>
+                      Select Collection
+                    </option>
+                    <option className="color82" value="">
+                      ANAFTO Collection
+                    </option>
+                    {collectionData.length > 0 &&
+                      collectionData.map((item, index) => (
                         <option
                           className="option color82"
                           value={[
@@ -1112,200 +1130,241 @@ function CreateSingleNFT(props) {
                           {item?.name}
                         </option>
                       ))}
-                    </select>
-                    <div className="collection-error-message">
-                      {collectionError}
-                    </div>
+                  </select>
+                  <div className="collection-error-message">
+                    {collectionError}
                   </div>
+                </div>
 
-                  <div className="mb-4" ref={myRef}>
-                    <label htmlFor="email" className="input-label">
-                      Blockchain*
-                    </label>
-                    <div style={{ color: "red", fontSize: "15px" }}>
-                      {blockchainError}
-                    </div>
-                    <div className="block-chain-right">
-                      <Select
-                        className="input-box-1 rm-border blockchainSelect"
-                        style={{
-                          border:
-                            collectionError != ""
-                              ? "1px solid red"
-                              : "1px solid #C8C8C8",
-                        }}
-                        onChange={setSelectedOption}
-                        options={blockchainOption} //options there
-                        placeholder="Select Blockchain"
-                        value={
-                          collectionBlockchain === "Ethereum"
-                            ? defaultValueBlockChain[0]
-                            : collectionBlockchain === "Polygon"
-                              ? defaultValueBlockChain[1]
-                              : collectionBlockchain === "Binance"
-                                ? defaultValueBlockChain[2]
-                                : selectedOption
-                        } //when user select a option from the list
-                        isDisabled={
-                          collectionName === "Anafto Collection" ? false : true
-                        }
-                      ></Select>
-                    </div>
+                <div className="mb-4" ref={myRef}>
+                  <label htmlFor="email" className="input-label">
+                    Blockchain*
+                  </label>
+                  <div style={{ color: "red", fontSize: "15px" }}>
+                    {blockchainError}
                   </div>
-
-                  <div className="input-name">
-                    <label htmlFor="email" className=" input-label">
-                      Name*
-                    </label>
-                    <div style={{ color: "red", fontSize: "15px" }}>
-                      {nameError}
-                    </div>
-                    <input
-                      type="text"
-                      className="form-control-1"
+                  <div className="block-chain-right">
+                    <Select
+                      className="input-box-1 rm-border blockchainSelect"
                       style={{
                         border:
-                          nameError != "" ? "1px solid red" : "1px solid #C8C8C8",
-                      }}
-                      name="email"
-                      placeholder="Enter name"
-                      autoComplete="off"
-                      maxLength="20"
-                      title=" "
-                      onChange={(e) => {
-                        name.current = e.target.value;
-                        var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
-                        if (!format.test(e.target.value)) SetNameError("");
-                        else if (e.target.value.length != 0) SetNameError("");
-                        else if (e.target.value.length > 3) SetNameError("");
-                        else SetNameError("");
-                      }}
-                    />
-                  </div>
-
-                  <div className="input-price">
-                    <label htmlFor="price" className=" input-label">
-                      Price*
-                    </label>
-                    <div style={{ color: "red", fontSize: "15px" }}>{error}</div>
-                    <div class="input-group">
-                      <input
-                        className="form-control"
-                        type="number"
-                        title=" "
-                        placeholder="0"
-                        autoComplete="off"
-                        style={{
-                          border:
-                            error != "" ? "1px solid red" : "1px solid #C8C8C8",
-                        }}
-                        onWheel={(e) => e.target.blur()}
-                        onChange={(e) => {
-                          price.current = e.target.value;
-                          if (e.target.value.length != 0) setError("");
-                          else if (
-                            e.target.value > "0.004" ||
-                            !e.target.value == "0"
-                          )
-                            setError("");
-                          else if (!price.current > "1000000000") setError("");
-
-                          // checkChanges();
-                        }}
-                      />
-                      <span class="input-group-text">
-                        {collectionName === "Anafto Collection"
-                          ? priceWithCurrency(selectedOption?.value)
-                          : priceWithCurrency(collectionBlockchain)}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="input-description">
-                    <label htmlFor="comment" className="input-label pb-2">
-                      Description*
-                    </label>
-                    <div style={{ color: "Red", fontSize: "15px" }}>{DesError}</div>
-
-                    <textarea
-                      className="form-control-1 text-area-input"
-                      rows="4"
-                      id="test"
-                      style={{
-                        border:
-                          DesError != "" ? "1px solid red" : "1px solid #C8C8C8",
-                      }}
-                      maxLength="1000"
-                      name="text"
-                      placeholder="Write description"
-                      value={description.current}
-                      onChange={(e) => {
-                        if (e.target.value != 0) SetDesError("");
-
-                        if (desLength < 1000) {
-                          // checkChanges();
-                          let x = e.target.value.replace(/\s+/g, "").length;
-                          description.current = e.target.value;
-                          setDesLength(description.current.length);
-                        }
-                      }}
-                    ></textarea>
-                    <span className="color82">
-                      {desLength} of 1000 characters and
-                      <span>
-                        {" "}
-                        <span id="linesUsed">0</span> of 20 Lines.
-                      </span>
-                    </span>
-                  </div>
-
-                  <div className="input-description">
-                    <label htmlFor="email" className="input-label" style={{display: 'flex', alignItems: 'center', position: 'relative'}}>
-                      Free Minting
-                      <span className="mint-mark" onMouseEnter={()=>setMintMessageStatus(true)} onMouseLeave={()=>setMintMessageStatus(false)}>?</span>
-                      <span className="tooltiptext-myprofile" style={{opacity: `${mintMessageStatus ? '1' : '0'}`}}> Your NFT will not be minted until some buyer purchases it. On purchase it will be minted and you will be the first owner.</span>
-                      <div onClick={()=>setMintStatus(!mintStatus)} className={`${mintStatus ? 'myStoreSocialMediaToggleButtonActive' : 'myStoreSocialMediaToggleButton'}`}><div className={`${mintStatus ? 'myStoreSocialMediaTogglerActive' : 'myStoreSocialMediaToggler'}`}></div></div>
-                    </label>
-                    <p className="headingRoyality">
-                      Buyer will pay gas fees for minting
-                    </p>
-                  </div>
-
-
-                  <div className="input-name">
-                    <label htmlFor="email" className=" input-label">
-                      Royalty
-                    </label>
-                    <p className="headingRoyality">
-                      Write down the percentage you want from this sale of this NFT
-                    </p>
-                    <div style={{ color: "red", fontSize: "15px" }}>
-                      {royalityError}
-                    </div>
-                    <input
-                      type="number"
-                      id="royality"
-                      className="form-control-1"
-                      onWheel={(e) => e.target.blur()}
-                      placeholder="Enter Royalty"
-                      autoComplete="off"
-                      maxLength="100"
-                      style={{
-                        border:
-                          royalityError != ""
+                          collectionError != ""
                             ? "1px solid red"
                             : "1px solid #C8C8C8",
                       }}
+                      onChange={setSelectedOption}
+                      options={blockchainOption} //options there
+                      placeholder="Select Blockchain"
+                      value={
+                        collectionBlockchain === "Ethereum"
+                          ? defaultValueBlockChain[0]
+                          : collectionBlockchain === "Polygon"
+                          ? defaultValueBlockChain[1]
+                          : collectionBlockchain === "Binance"
+                          ? defaultValueBlockChain[2]
+                          : selectedOption
+                      } //when user select a option from the list
+                      isDisabled={
+                        collectionName === "Anafto Collection" ? false : true
+                      }
+                    ></Select>
+                  </div>
+                </div>
+
+                <div className="input-name">
+                  <label htmlFor="email" className=" input-label">
+                    Name*
+                  </label>
+                  <div style={{ color: "red", fontSize: "15px" }}>
+                    {nameError}
+                  </div>
+                  <input
+                    type="text"
+                    className="form-control-1"
+                    style={{
+                      border:
+                        nameError != "" ? "1px solid red" : "1px solid #C8C8C8",
+                    }}
+                    name="email"
+                    placeholder="Enter name"
+                    autoComplete="off"
+                    maxLength="20"
+                    title=" "
+                    onChange={(e) => {
+                      name.current = e.target.value;
+                      var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
+                      if (!format.test(e.target.value)) SetNameError("");
+                      else if (e.target.value.length != 0) SetNameError("");
+                      else if (e.target.value.length > 3) SetNameError("");
+                      else SetNameError("");
+                    }}
+                  />
+                </div>
+
+                <div className="input-price">
+                  <label htmlFor="price" className=" input-label">
+                    Price*
+                  </label>
+                  <div style={{ color: "red", fontSize: "15px" }}>{error}</div>
+                  <div class="input-group">
+                    <input
+                      className="form-control"
+                      type="number"
                       title=" "
+                      placeholder="0"
+                      autoComplete="off"
+                      style={{
+                        border:
+                          error != "" ? "1px solid red" : "1px solid #C8C8C8",
+                      }}
+                      onWheel={(e) => e.target.blur()}
                       onChange={(e) => {
-                        if (+e.target.value > 50)
-                          setRoyalityError("( Royalty can not be more than 50% )");
-                        else setRoyalityError("");
-                        royality.current = e.target.value;
+                        price.current = e.target.value;
+                        if (e.target.value.length != 0) setError("");
+                        else if (
+                          e.target.value > "0.004" ||
+                          !e.target.value == "0"
+                        )
+                          setError("");
+                        else if (!price.current > "1000000000") setError("");
+
+                        // checkChanges();
                       }}
                     />
+                    <span class="input-group-text">
+                      {collectionName === "Anafto Collection"
+                        ? priceWithCurrency(selectedOption?.value)
+                        : priceWithCurrency(collectionBlockchain)}
+                    </span>
+                  </div>
+                </div>
+                <div className="input-description">
+                  <label htmlFor="comment" className="input-label pb-2">
+                    Description*
+                  </label>
+                  <div style={{ color: "Red", fontSize: "15px" }}>
+                    {DesError}
                   </div>
 
-                  {/* <div className="input-description">
+                  <textarea
+                    className="form-control-1 text-area-input"
+                    rows="4"
+                    id="test"
+                    style={{
+                      border:
+                        DesError != "" ? "1px solid red" : "1px solid #C8C8C8",
+                    }}
+                    maxLength="1000"
+                    name="text"
+                    placeholder="Write description"
+                    value={description.current}
+                    onChange={(e) => {
+                      if (e.target.value != 0) SetDesError("");
+
+                      if (desLength < 1000) {
+                        // checkChanges();
+                        let x = e.target.value.replace(/\s+/g, "").length;
+                        description.current = e.target.value;
+                        setDesLength(description.current.length);
+                      }
+                    }}
+                  ></textarea>
+                  <span className="color82">
+                    {desLength} of 1000 characters and
+                    <span>
+                      {" "}
+                      <span id="linesUsed">0</span> of 20 Lines.
+                    </span>
+                  </span>
+                </div>
+
+                <div className="input-description">
+                  <label
+                    htmlFor="email"
+                    className="input-label"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      position: "relative",
+                    }}
+                  >
+                    Free Minting
+                    <span
+                      className="mint-mark"
+                      onMouseEnter={() => setMintMessageStatus(true)}
+                      onMouseLeave={() => setMintMessageStatus(false)}
+                    >
+                      ?
+                    </span>
+                    <span
+                      className="tooltiptext-myprofile"
+                      style={{ opacity: `${mintMessageStatus ? "1" : "0"}` }}
+                    >
+                      {" "}
+                      Your NFT will not be minted until some buyer purchases it.
+                      On purchase it will be minted and you will be the first
+                      owner.
+                    </span>
+                    <div
+                      onClick={() => setMintStatus(!mintStatus)}
+                      className={`${
+                        mintStatus
+                          ? "myStoreSocialMediaToggleButtonActive"
+                          : "myStoreSocialMediaToggleButton"
+                      }`}
+                    >
+                      <div
+                        className={`${
+                          mintStatus
+                            ? "myStoreSocialMediaTogglerActive"
+                            : "myStoreSocialMediaToggler"
+                        }`}
+                      ></div>
+                    </div>
+                  </label>
+                  <p className="headingRoyality">
+                    Buyer will pay gas fees for minting
+                  </p>
+                </div>
+
+                <div className="input-name">
+                  <label htmlFor="email" className=" input-label">
+                    Royalty
+                  </label>
+                  <p className="headingRoyality">
+                    Write down the percentage you want from this sale of this
+                    NFT
+                  </p>
+                  <div style={{ color: "red", fontSize: "15px" }}>
+                    {royalityError}
+                  </div>
+                  <input
+                    type="number"
+                    id="royality"
+                    className="form-control-1"
+                    onWheel={(e) => e.target.blur()}
+                    placeholder="Enter Royalty"
+                    autoComplete="off"
+                    maxLength="100"
+                    style={{
+                      border:
+                        royalityError != ""
+                          ? "1px solid red"
+                          : "1px solid #C8C8C8",
+                    }}
+                    title=" "
+                    onChange={(e) => {
+                      if (+e.target.value > 50)
+                        setRoyalityError(
+                          "( Royalty can not be more than 50% )"
+                        );
+                      else setRoyalityError("");
+                      royality.current = e.target.value;
+                    }}
+                  />
+                </div>
+
+                {/* <div className="input-description">
                     <label htmlFor="email" className="input-label" style={{display: 'flex', alignItems: 'center'}}>
                       Put it on sale                      
                       <div onClick={()=>setSaleStatus(!saleStatus)} style={{marginLeft: '115px'}} className={`${saleStatus ? 'myStoreSocialMediaToggleButtonActive' : 'myStoreSocialMediaToggleButton'}`}><div className={`${saleStatus ? 'myStoreSocialMediaTogglerActive' : 'myStoreSocialMediaToggler'}`}></div></div>
@@ -1315,21 +1374,21 @@ function CreateSingleNFT(props) {
                     </p>
                   </div> */}
 
-                  <button
-                    type="submit"
-                    onClick={handleSubmit}
-                    className="submit-button"
-                    disabled={!enabled}
-                    style={{
-                      opacity: !enabled ? 0.6 : 1,
-                      backgroundColor: `${fetchPalletsColor(
-                        customize.appearance.colorPalette
-                      )}`,
-                    }}
-                  >
-                    Create
-                  </button>
-{/* 
+                <button
+                  type="submit"
+                  onClick={handleSubmit}
+                  className="submit-button"
+                  disabled={!enabled}
+                  style={{
+                    opacity: !enabled ? 0.6 : 1,
+                    backgroundColor: `${fetchPalletsColor(
+                      customize.appearance.colorPalette
+                    )}`,
+                  }}
+                >
+                  Create
+                </button>
+                {/* 
                   <button
                     type="submit"
                     onClick={batchMintNFT}
@@ -1337,11 +1396,11 @@ function CreateSingleNFT(props) {
                   >
                     Batch MintNFT
                   </button> */}
-                </div>
               </div>
             </div>
           </div>
-      }
+        </div>
+      )}
       {/* ---------------- */}
       {/* <div className="mint-mod-outer"> */}
     </>

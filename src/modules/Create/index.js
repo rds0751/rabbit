@@ -83,6 +83,7 @@ class Index extends BaseComponent {
       ownerAddress: data?.ownerAddress || "", // put metamask address
       previewImage:data?.previewImage,
       fileExtension:data?.fileExtension,
+      isLazyMintingEnabled:data?.isLazyMintingEnabled,
     };
   };
 
@@ -145,11 +146,9 @@ class Index extends BaseComponent {
     getCollection.addIpfsObject(IpfsObject)
   );
   console.log(ipfsRes,"<<<ipfsRes")
-  if (!ipfsRes) {
+  if (!ipfsRes) 
     toast.error("unable to upload data");
-  } else {
-    toast.success("successfully data uploaded ipfs");
-  }
+
   
 
 
