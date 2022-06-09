@@ -47,11 +47,12 @@ import NftCardsHome from "../../common/components/NftCardsHome";
 import "../../assets/styles/myProfile.css";
 import PageNotFound from "../../common/components/pageNotFound";
 import { ShimmerThumbnail } from "react-shimmer-effects";
-import { calculateExpireSale, fetchPalletsColor, getParamTenantId } from "../../utility/global";
+import { calculateExpireSale, calculateExpireSaleInMiniSeconds, fetchPalletsColor, getParamTenantId } from "../../utility/global";
 
 import NftInfoShimmer from "./NftInfoShimmer";
 
 import ReactPlayer from "react-player";
+import Countdown from "react-countdown";
 toast.configure();
 const CustomSnack = styled(Snackbar)`
   @media (min-width: 992px) {
@@ -114,6 +115,22 @@ const Option = styled.option`
   font-size: 14px;
 `;
 const queryString = require("query-string");
+
+const renderer = ({days, hours, minutes, seconds, completed }) => {
+  if (completed) {
+    // Render a completed state
+    return <span>Nft Expired</span>;
+  } else {
+    // Render a countdown
+    return <span>
+      {days < 10 ? `0${days}` : days}:
+      {hours < 10 ? `0${hours}` : hours}:
+      {minutes < 10 ? `0${minutes}` : minutes}:
+      {seconds < 10 ? `0${seconds}` : seconds} left
+      </span>;
+  }
+};
+
 export default function NftInformation(props) {
   const appearance = useSelector((state) => state.customize.appearance);
 
@@ -1132,10 +1149,14 @@ export default function NftInformation(props) {
                           15%
                         </span>
                       </span>
-                      {salesInfo?.expiryDate ? (
+                      {salesInfo?.isOpenForSale ? (
                         <span className="text">
                           <i className="far fa-clock clock-icon"></i>
                           <span className="time">{calculateExpireSale(salesInfo?.expiryDate) ? `${calculateExpireSale(salesInfo?.expiryDate)} days left` : 'Expires today'}</span>
+
+                          {/* <span className="time">
+                            <Countdown date={Date.now() + calculateExpireSaleInMiniSeconds(salesInfo?.expiryDate)} renderer={renderer} />
+                          </span> */}
                         </span>
                       ) : (
                         ""
