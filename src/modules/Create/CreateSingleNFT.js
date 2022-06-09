@@ -1305,7 +1305,7 @@ function CreateSingleNFT(props) {
                     />
                   </div>
 
-                  <div className="input-description">
+                  {/* <div className="input-description">
                     <label htmlFor="email" className="input-label" style={{display: 'flex', alignItems: 'center'}}>
                       Put it on sale                      
                       <div onClick={()=>setSaleStatus(!saleStatus)} style={{marginLeft: '115px'}} className={`${saleStatus ? 'myStoreSocialMediaToggleButtonActive' : 'myStoreSocialMediaToggleButton'}`}><div className={`${saleStatus ? 'myStoreSocialMediaTogglerActive' : 'myStoreSocialMediaToggler'}`}></div></div>
@@ -1313,7 +1313,7 @@ function CreateSingleNFT(props) {
                     <p className="headingRoyality">
                     The NFT will be available for Sale in the marketplace
                     </p>
-                  </div>
+                  </div> */}
 
                   <button
                     type="submit"
@@ -1329,14 +1329,14 @@ function CreateSingleNFT(props) {
                   >
                     Create
                   </button>
-
+{/* 
                   <button
                     type="submit"
                     onClick={batchMintNFT}
                     className="submit-button"
                   >
                     Batch MintNFT
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>

@@ -1143,10 +1143,11 @@ export default function NftInformation(props) {
                           {salesInfo?.price}&nbsp;{salesInfo?.currency}
                         </span>
                       </span>
-                      <span className="text">
+                     <span style={{display:"flex",justifyContent:"space-between",width:"48%"}}>
+                     <span className="text">
                         Royalty:&nbsp;
                         <span className="nft-value" style={{color: '#191919'}}>
-                          15%
+                          {nft?.royalty}
                         </span>
                       </span>
                       {salesInfo?.isOpenForSale ? (
@@ -1160,7 +1161,11 @@ export default function NftInformation(props) {
                         </span>
                       ) : (
                         ""
-                      )}                    
+                      )}   
+
+
+                     </span>
+                                      
 
                     </div>
                     <div className="row third-text">
