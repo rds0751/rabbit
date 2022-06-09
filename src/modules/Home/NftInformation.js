@@ -47,11 +47,12 @@ import NftCardsHome from "../../common/components/NftCardsHome";
 import "../../assets/styles/myProfile.css";
 import PageNotFound from "../../common/components/pageNotFound";
 import { ShimmerThumbnail } from "react-shimmer-effects";
-import { calculateExpireSale, fetchPalletsColor, getParamTenantId } from "../../utility/global";
+import { calculateExpireSale, calculateExpireSaleInMiniSeconds, fetchPalletsColor, getParamTenantId } from "../../utility/global";
 
 import NftInfoShimmer from "./NftInfoShimmer";
 
 import ReactPlayer from "react-player";
+import Countdown from "react-countdown";
 toast.configure();
 const CustomSnack = styled(Snackbar)`
   @media (min-width: 992px) {
@@ -114,6 +115,22 @@ const Option = styled.option`
   font-size: 14px;
 `;
 const queryString = require("query-string");
+
+const renderer = ({ days, hours, minutes, seconds, completed }) => {
+  if (completed) {
+    // Render a completed state
+    return <span>Nft Expired</span>;
+  } else {
+    // Render a countdown
+    return <span>
+      {days < 10 ? `0${days}` : days}:
+      {hours < 10 ? `0${hours}` : hours}:
+      {minutes < 10 ? `0${minutes}` : minutes}:
+      {seconds < 10 ? `0${seconds}` : seconds} left
+    </span>;
+  }
+};
+
 export default function NftInformation(props) {
   const appearance = useSelector((state) => state.customize.appearance);
 
@@ -135,12 +152,12 @@ export default function NftInformation(props) {
     maxPrice: "",
   };
 
-  const { owner, creator, salesInfo, blockchain,offers } = nft;
+  const { owner, creator, salesInfo, blockchain, offers } = nft;
 
- 
-  let [makeOfferDetails,setMakeOfferDetails]=useState({
-    price:0,
-    dateTime:""
+
+  let [makeOfferDetails, setMakeOfferDetails] = useState({
+    price: 0,
+    dateTime: ""
   })
 
 
@@ -262,7 +279,7 @@ export default function NftInformation(props) {
     // setCopiedText(false);
     // }, 1000);
   };
- 
+
 
   const demoHandleSell = async () => {
     setsaleModal(false);
@@ -294,7 +311,7 @@ export default function NftInformation(props) {
     });
     // setRemoveFromSale(false)
   };
-  const BuyerInfo={
+  const BuyerInfo = {
     buyerId: loggedInUser?._id,
     newOwnerAddress: walletAddress?.address,
   }
@@ -425,15 +442,15 @@ export default function NftInformation(props) {
     setImageLoading({ ...imageLoading, loaded: true });
   };
   const [display, setDisplay] = useState(false);
-  let [RandomWalletAddress,setRandomWalletAddress]=useState("")
-  const SubmitMakeOffer= async ()=>{
+  let [RandomWalletAddress, setRandomWalletAddress] = useState("")
+  const SubmitMakeOffer = async () => {
 
-    const result= await props?.makeOffer({
-        price:makeOfferDetails.price,
-        dateTime:makeOfferDetails.dateTime,
-      }) 
-      console.log(result,"<<<MakeOffer")
-      setRandomWalletAddress(result.walletAddress);
+    const result = await props?.makeOffer({
+      price: makeOfferDetails.price,
+      dateTime: makeOfferDetails.dateTime,
+    })
+    console.log(result, "<<<MakeOffer")
+    setRandomWalletAddress(result.walletAddress);
 
   }
 
@@ -707,16 +724,16 @@ export default function NftInformation(props) {
                         borderRadius: "8px",
                       }}
                     /> */}
-                     {/* <button onClick={()=>setDisplay(!display)}>play</button> */}
-                    <div style={{width:"auto" ,height:"auto"}}>
-                    <ReactPlayer
-                    className="react-player"
-                    width="100%"
-                    height={187}
-                    light={nft?.previewImage}
-                    controls
-                    url={nft?.cdnUrl}
-                    />
+                          {/* <button onClick={()=>setDisplay(!display)}>play</button> */}
+                          <div style={{ width: "auto", height: "auto" }}>
+                            <ReactPlayer
+                              className="react-player"
+                              width="100%"
+                              height={187}
+                              light={nft?.previewImage}
+                              controls
+                              url={nft?.cdnUrl}
+                            />
 
                           </div>
                         </>
@@ -1126,25 +1143,32 @@ export default function NftInformation(props) {
                           {salesInfo?.price}&nbsp;{salesInfo?.currency}
                         </span>
                       </span>
-                     <span style={{display:"flex",justifyContent:"space-between",width:"48%"}}>
-                     <span className="text">
-                        Royalty:&nbsp;
-                        <span className="nft-value" style={{color: '#191919'}}>
-                          {nft?.royalty}
-                        </span>
+                      <span style={{ display: "flex", justifyContent: "space-between", width: "48%" }}>
+                      {
+                          nft.hasOwnProperty('royalty') ?
+                            <span className="text">
+                              Royalty:&nbsp;
+                              <span className="nft-value" style={{ color: '#191919' }}>
+                                {nft?.royalty}%
+                              </span>
+                            </span>
+                            : null
+                        }
+                        {salesInfo?.isOpenForSale ? (
+                          <span className="text">
+                            <i className="far fa-clock clock-icon"></i>
+                            <span className="time">{calculateExpireSale(salesInfo?.expiryDate) ? `${calculateExpireSale(salesInfo?.expiryDate)} days left` : 'Expires today'}</span>
+                            {/* <span className="time">
+                            <Countdown date={Date.now() + calculateExpireSaleInMiniSeconds(salesInfo?.expiryDate)} renderer={renderer} />
+                          </span> */}
+                          </span>
+                        ) : (
+                          ""
+                        )}
+
+
                       </span>
-                      {salesInfo?.expiryDate ? (
-                        <span className="text">
-                          <i className="far fa-clock clock-icon"></i>
-                          <span className="time">{calculateExpireSale(salesInfo?.expiryDate) ? `${calculateExpireSale(salesInfo?.expiryDate)} days left` : 'Expires today'}</span>
-                        </span>
-                      ) : (
-                        ""
-                      )}   
 
-
-                     </span>
-                                      
 
                     </div>
                     <div className="row third-text">
@@ -1441,6 +1465,7 @@ export default function NftInformation(props) {
                   <button
                     className="btn btn-primary report-btn"
                     onClick={sendReport}
+                    style={{background: `${fetchPalletsColor(appearance?.colorPalette)}`}}
                   >
                     Report
                   </button>
@@ -1526,6 +1551,7 @@ export default function NftInformation(props) {
                   <button
                     className="btn btn-primary report-btn"
                     onClick={demoHandleSell}
+                    style={{background: `${fetchPalletsColor(appearance?.colorPalette)}`}}
                   >
                     Sale
                   </button>
@@ -1553,7 +1579,7 @@ export default function NftInformation(props) {
                       <div className="completelistin">Removing From Sale</div>
                     </div>
                     <div className="abstractillusion">
-                      <img src={nft.previewImage ? nft?.previewImage :(nft?.cdnUrl!="" ? nft.cdnUrl:nft.ipfsUrl)}/>
+                      <img src={nft.previewImage ? nft?.previewImage : (nft?.cdnUrl != "" ? nft.cdnUrl : nft.ipfsUrl)} />
                       <div className="abstractillusioncontent">
                         <div className="abstracttitle"></div>
                         <div className="abstractposter"> {nft.name}</div>
@@ -1619,7 +1645,7 @@ export default function NftInformation(props) {
                     />
                   </div>
                   <div className="singlerowmodal">
-                  
+
                     <h3 className="price-heading-text"> Price </h3>
                     <span>{RandomWalletAddress}</span>
                     <div className="input-group-price">
@@ -1633,7 +1659,7 @@ export default function NftInformation(props) {
                         title=" "
                         placeholder="0 ETH"
                         autoComplete="off"
-                        onChange={(e)=>setMakeOfferDetails({...makeOfferDetails,price:e.target.value})}
+                        onChange={(e) => setMakeOfferDetails({ ...makeOfferDetails, price: e.target.value })}
                         onWheel={(e) => e.target.blur()}
                       />
                     </div>
@@ -1651,7 +1677,7 @@ export default function NftInformation(props) {
                         </Select>
                         <span style={{ border: "0.2px ridge #C8C8C8" }}></span>
 
-                        <input type="time" className="filter-time"   onChange={(e)=>setMakeOfferDetails({...makeOfferDetails,dateTime:e.target.value})} />
+                        <input type="time" className="filter-time" onChange={(e) => setMakeOfferDetails({ ...makeOfferDetails, dateTime: e.target.value })} />
                       </div>
                     </div>
 
@@ -1687,7 +1713,7 @@ export default function NftInformation(props) {
                       </div>
                     </div>
                     <div className="abstractillusion">
-                      <img src={nft.previewImage ? nft?.previewImage :(nft?.cdnUrl!="" ? nft.cdnUrl:nft.ipfsUrl)} />
+                      <img src={nft.previewImage ? nft?.previewImage : (nft?.cdnUrl != "" ? nft.cdnUrl : nft.ipfsUrl)} />
                       <div className="abstractillusioncontent">
                         <div className="abstracttitle"></div>
                         <div className="abstractposter"> {nft.name}</div>
@@ -1757,7 +1783,7 @@ export default function NftInformation(props) {
                       <div className="completelistin">Complete your Buying</div>
                     </div>
                     <div className="abstractillusion">
-                      <img src={nft.previewImage ? nft?.previewImage :(nft?.cdnUrl!="" ? nft.cdnUrl:nft.ipfsUrl)} />
+                      <img src={nft.previewImage ? nft?.previewImage : (nft?.cdnUrl != "" ? nft.cdnUrl : nft.ipfsUrl)} />
                       <div className="abstractillusioncontent">
                         <div className="abstracttitle"></div>
                         <div className="abstractposter"> {nft.name}</div>

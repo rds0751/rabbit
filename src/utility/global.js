@@ -44,14 +44,26 @@ export const getParamTenantId = () => {
     else return '?id=624fcce73cfee400358f2cef'
 }
 
+export const getPostTenantId = () => {
+
+    if(localStorage.getItem('tenantId') != 'null') return `${localStorage.getItem('tenantId')}`
+    else return '624fcce73cfee400358f2cef'
+}
+
 
 export const calculateExpireSale = (expireData) => {
 
-    let date = new Date(expireData);
-    const date1 = new Date();
-    const date2 = new Date(date.toLocaleDateString());
+    const date1 = new Date(expireData);
+    const date2 = new Date();
+    // const date2 = new Date(date.toLocaleDateString());
     const diffTime = Math.abs(date2 - date1);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));     
 
     return diffDays;
+}
+
+export const calculateExpireSaleInMiniSeconds = (expireData) => {
+    const date1 = new Date(expireData);
+    const date2 = new Date();    
+    return Math.abs(date2 - date1);    
 }
