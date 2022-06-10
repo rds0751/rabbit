@@ -123,10 +123,10 @@ const renderer = ({ days, hours, minutes, seconds, completed }) => {
   } else {
     // Render a countdown
     return <span>
-      {days < 10 ? `0${days}` : days}:
-      {hours < 10 ? `0${hours}` : hours}:
-      {minutes < 10 ? `0${minutes}` : minutes}:
-      {seconds < 10 ? `0${seconds}` : seconds} left
+      {days > 0 ? days < 10 ? `0${days}d ` : `${days}d `: ''}
+      {hours < 10 ? `0${hours}` : hours}h{" "}
+      {minutes < 10 ? `0${minutes}` : minutes}m{" "}
+      {seconds < 10 ? `0${seconds}` : seconds}s
     </span>;
   }
 };
@@ -1157,10 +1157,10 @@ export default function NftInformation(props) {
                         {salesInfo?.isOpenForSale ? (
                           <span className="text">
                             <i className="far fa-clock clock-icon"></i>
-                            <span className="time">{calculateExpireSale(salesInfo?.expiryDate) ? `${calculateExpireSale(salesInfo?.expiryDate)} days left` : 'Expires today'}</span>
-                            {/* <span className="time">
+                            {/* <span className="time">{calculateExpireSale(salesInfo?.expiryDate) ? `${calculateExpireSale(salesInfo?.expiryDate)} days left` : 'Expires today'}</span> */}
+                            <span className="time">
                             <Countdown date={Date.now() + calculateExpireSaleInMiniSeconds(salesInfo?.expiryDate)} renderer={renderer} />
-                          </span> */}
+                          </span>
                           </span>
                         ) : (
                           ""
