@@ -722,7 +722,7 @@ function LeaderBoard({ loader }) {
               </div>
 
               <div className="card-footer view-more">
-                <Link className="view" to={`/top-seller${getParamTenantId}`}
+                <Link className="view" to={`/top-seller${getParamTenantId()}`}
                   onMouseOver={(e) => handleLoadHoverText(e, fetchPalletsColor(appearance.colorPalette))}
                   onMouseOut={(e) => handleLoadOutText(e, '#191919')}
                 >

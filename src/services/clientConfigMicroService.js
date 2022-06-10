@@ -4,7 +4,7 @@ import { AuthToken } from "./UserAuthToken";
 import axios from "axios";
 import { BASE_URL1 } from "../reducers/Constants";
 import { WHITE_LABEL_TOKEN } from "../reducers/Constants";
-import { getParamTenantId } from "../utility/global";
+import { getParamTenantId, getPostTenantId } from "../utility/global";
 
 export function getCategories(requestData) {
   let url =
@@ -32,17 +32,39 @@ export function getCategories(requestData) {
     });
 }
 
+// export async function getTenantData(paramToken=false, paramAddress=false) {
+//   const token = {
+//     "Access-Control-Allow-Origin": "*",
+//     "Content-type": "Application/json",
+//     "x-access-token": `${paramToken || localStorage.getItem(WHITE_LABEL_TOKEN)}`,
+//   };
+//   try {
+//     let address = localStorage.getItem("walletAddress") ? localStorage.getItem("walletAddress") : "0x9affb1cf8e276657f857e0b6c982e093bdb50968";
+//     let loggedAddres = paramAddress || address
+//     const url = `${BASE_URL1}/api/v1/tenant/wallet/${loggedAddres}${getParamTenantId()}`;
+//     const res = await fetch(url, { headers: token });
+//     const result = await res.json();
+//     const tenantData = result.responseData;
+//     return tenantData;
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
+
 export async function getTenantData(paramToken=false, paramAddress=false) {
   const token = {
     "Access-Control-Allow-Origin": "*",
     "Content-type": "Application/json",
     "x-access-token": `${paramToken || localStorage.getItem(WHITE_LABEL_TOKEN)}`,
   };
-  try {
-    let address = localStorage.getItem("walletAddress") ? localStorage.getItem("walletAddress") : "0x9affb1cf8e276657f857e0b6c982e093bdb50968";
-    let loggedAddres = paramAddress || address
-    const url = `${BASE_URL1}/api/v1/tenant/wallet/${loggedAddres}${getParamTenantId()}`;
-    const res = await fetch(url, { headers: token });
+
+  const body = {
+    "_id" : getPostTenantId()
+  }
+
+  try {   
+    const url = `${BASE_URL1}/api/v1/tenant-details`;
+    const res = await fetch(url, {method: 'POST', headers: token, body: JSON.stringify(body) });
     const result = await res.json();
     const tenantData = result.responseData;
     return tenantData;

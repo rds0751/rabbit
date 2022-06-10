@@ -346,7 +346,7 @@ function NftCardsHome({ nft, appearance, loader }) {
                     textDecoration: "none",
                     color: `${fetchPalletsColor(appearance.colorPalette)}`,
                   }}
-                  className="text-overflow-collection"
+                  className={`${salesInfo?.isOpenForSale ? 'text-overflow-collection' : ''}`}
                   to={"/collection-details/" + collectionId + getParamTenantId()}
                 >
                   {undefined !== collectionName && collectionName.length > 30
@@ -357,7 +357,7 @@ function NftCardsHome({ nft, appearance, loader }) {
                 </Link>
 
                 {
-                  salesInfo?.expiryDate ?
+                  salesInfo?.isOpenForSale ?
                     <a style={{ color: '#191919' }}><i className="far fa-clock clock-icon" style={{ width: '18px' }} />
                       {calculateExpireSale(salesInfo?.expiryDate) ? `${calculateExpireSale(salesInfo?.expiryDate)} days left` : 'Expires today'}
                     </a>
