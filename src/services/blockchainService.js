@@ -32,6 +32,7 @@ const BlockchainServices = {
   batchMintNFT,
   makeOffer,
   acceptOffer,
+  lazyMinting,
 };
 
 export default BlockchainServices;
@@ -131,6 +132,44 @@ async function mintNFT({
     };
   } else return Promise.reject("Please Select Valid Network in the metamask");
   // console.log("kkkkkkkkkkkkkkkkkkkkkk network swutch")
+}
+
+
+async function lazyMinting({tokenURI,tokenId,price,royality,contractAddress}){
+
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    var signMsg = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < 32; i++ ) {
+      signMsg += characters.charAt(Math.floor(Math.random() * 
+    charactersLength));
+   }
+   signMsg+='!'+tokenId;
+
+    let signGen=await signcheck({signMsg});
+    const contractData = new ethers.Contract(
+      contractAddress,
+      contractbuyAndRemoveABI,
+      signer
+    );
+    const result = await contractData.mintAndBuy(
+      tokenURI,
+      tokenId,
+      price,
+      royality,
+      signMsg,
+      signGen.signature,
+      contractAddress,
+      
+    );
+    let res = await result.wait();
+    return {
+      ...res,
+      chainId: provider?._network?.chainId || "",
+      name: provider?._network?.name || "",
+    };
 }
 
 async function batchMintNFT({

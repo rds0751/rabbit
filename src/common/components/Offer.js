@@ -1,11 +1,15 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import BlockchainService from "../.././services/blockchainService";
 import { toast } from "react-toastify";
 import Utils from "../../utility";
 import {addNftTx,updateTxStatus} from  "../.././services/sellAndPurchaseMicroService";
 import ContentService  from  "../.././services/contentMicroservice";
 
-const offer = (props) => {
+export default function Offer(props) {
+
+  const { user } = useSelector((state) => state);
+  const { loggedInUser, walletAddress } = user;
     
     const  Accept= async ()=>{
       
@@ -48,7 +52,7 @@ console.log(blockchainError);
             //   transaction: blockchainRes.transactionHash || '',
             contentId: props?.nft?._id || '',
             seller:  props?.nft?.ownedBy || '',
-            buyer: props.buyerInfo.buyerId || '',
+            buyer: props.nft.offers[0].addedBy || '',
             price:  props?.nft?.salesInfo?.price || '',
             currency:  props?.nft?.salesInfo?.currency || 'ETH',
             addedBy: props.buyerInfo.buyerId || '',
@@ -90,7 +94,7 @@ console.log(blockchainError);
 
         let requestData = {
             transactionHash: blockchainRes.transactionHash || '',
-            ownedBy: props.buyerInfo.buyerId || '',
+            ownedBy: props.nft.offers[0].addedBy || '',
             ownerAddress:  props.nft?.newOwnerAddress || '',
             updatedBy:  props.buyerInfo?.buyerId || '',
             // _id: this.state?.responseData?._id || '',
@@ -129,7 +133,7 @@ console.log(blockchainError);
 
   console.log(props, "<<<props");
   return (
-    <div>
+    <div style={{display:  props?.nft?.ownerAddress == loggedInUser?.wallet_address ? "block" :"none"}}>
       {props.offer.map((data) => (
         <div>
           {data.receiverAddress}
@@ -146,4 +150,4 @@ console.log(blockchainError);
   );
 };
 
-export default offer;
+
