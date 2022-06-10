@@ -1287,6 +1287,7 @@ thead {
   font-size: 16px;
   line-height: 25px;
   color: #191919;
+  text-transform: lowercase;
 }
 .nft-detail .text .text-name {
   font-family: "poppins-bold";
