@@ -157,6 +157,7 @@ const options = [
   { value: "3", label: "Price: Low to High" },
   { value: "2", label: "Price: High to Low" },
   { value: "1", label: "Oldest" },
+  { value: "", label: "On Sale" }
 ];
 
 function NftPage(props) {
