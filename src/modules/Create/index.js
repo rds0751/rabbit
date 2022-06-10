@@ -189,18 +189,21 @@ class Index extends BaseComponent {
     if (data.contractAddress.length > 0) {
       console.log(data?.blockchain, "blockchainValue");
 
-      const [blockchainError, blockchainResult] = await Utils.parseResponse(
-        BlockchainServices.mintNFT({
-          tokenURI: data.ipfsUrl,
-          price: data.price,
-          tokenId,
-          contractAddress: contractAddress,
-          royalty:data.royality,
-          blockchain:data?.blockchain,
-          ipfsUrl:ipfsRes,
-        })
-      );
-      console.log("blockchainError", blockchainError)
+      if(data?.isLazyMintingEnabled){
+
+        const [blockchainError,blockchainResult]=await Utils.parseResponse(
+          BlockchainServices.lazyMinting({
+            tokenURI:data.ipfsUrl,
+            tokenId,
+            price:data.price,
+            royality:data.royality,
+            blockchain:data.blockchain,
+          
+
+          })
+        )
+
+       console.log("blockchainError", blockchainError)
       console.log("blockchainResult", blockchainResult)
 
       if (blockchainError || !blockchainResult) {
@@ -212,15 +215,72 @@ class Index extends BaseComponent {
       }
       blockchainRes = blockchainResult
       console.log(blockchainRes,"<<<blockchainRes")
+
+      }
+      else {
+        const [blockchainError, blockchainResult] = await Utils.parseResponse(
+          BlockchainServices.mintNFT({
+            tokenURI: data.ipfsUrl,
+            price: data.price,
+            tokenId,
+            contractAddress: data.contractAddress,
+            royalty:data.royality,
+            blockchain:data?.blockchain,
+            ipfsUrl:ipfsRes,
+          })
+        );
+        console.log("blockchainError", blockchainError)
+        console.log("blockchainResult", blockchainResult)
+  
+        if (blockchainError || !blockchainResult) {
+          this.setState({ loaderState: false });
+  
+          return this.showToast('error',
+            blockchainError?.data?.message || blockchainError?.message || blockchainError || "Unable to Mint NFT on blockchain"
+          );
+        }
+        blockchainRes = blockchainResult
+        console.log(blockchainRes,"<<<blockchainRes")
+
+      }
+      
     }
 
 
-    else {
-     
 
-      
-     
-      console.log(data?.blockchain, "blockchainValue");
+    else {
+
+      if(data.isLazyMintingEnabled){
+        const [blockchainError,blockchainResult]=await Utils.parseResponse(
+          BlockchainServices.lazyMinting({
+            tokenURI:data.ipfsUrl,
+            tokenId,
+            price:data.price,
+            royality:data.royality,
+            contractAddress:contractAddress,
+         
+          
+
+          })
+        )
+
+       console.log("blockchainError", blockchainError)
+      console.log("blockchainResult", blockchainResult)
+
+      if (blockchainError || !blockchainResult) {
+        this.setState({ loaderState: false });
+
+        return this.showToast('error',
+          blockchainError?.data?.message || blockchainError?.message || blockchainError || "Unable to Mint NFT on blockchain"
+        );
+      }
+      blockchainRes = blockchainResult
+      console.log(blockchainRes,"<<<blockchainRes")
+
+
+      }
+      else {
+        console.log(data?.blockchain, "blockchainValue");
 
 
       const [blockchainError, blockchainResult] = await Utils.parseResponse(
@@ -249,6 +309,8 @@ class Index extends BaseComponent {
       }
       blockchainRes = blockchainResult
       console.log(blockchainRes,"<<<blockchainRes")
+
+      }
     }
 
 

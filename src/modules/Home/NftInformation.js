@@ -442,15 +442,20 @@ export default function NftInformation(props) {
     setImageLoading({ ...imageLoading, loaded: true });
   };
   const [display, setDisplay] = useState(false);
-  let [RandomWalletAddress, setRandomWalletAddress] = useState("")
-  const SubmitMakeOffer = async () => {
+  let [RandomWalletAddress,setRandomWalletAddress]=useState("")
 
-    const result = await props?.makeOffer({
-      price: makeOfferDetails.price,
-      dateTime: makeOfferDetails.dateTime,
-    })
-    console.log(result, "<<<MakeOffer")
-    setRandomWalletAddress(result.walletAddress);
+const [offerLoadingModal,setOfferLoadingModal]=useState(false);
+  const SubmitMakeOffer= async ()=>{
+    setOfferLoadingModal(true);
+
+    const result= await props?.makeOffer({
+        price:makeOfferDetails.price,
+        dateTime:makeOfferDetails.dateTime,
+      }) 
+      console.log(result,"<<<MakeOffer")
+      setOfferLoadingModal(false);
+      setMakeOfferModal(false);
+      setRandomWalletAddress(result.walletAddress);
 
   }
 
@@ -1143,7 +1148,7 @@ export default function NftInformation(props) {
                           {salesInfo?.price}&nbsp;{salesInfo?.currency}
                         </span>
                       </span>
-                      <span style={{ display: "flex", justifyContent: "space-between", width: "48%" }}>
+                      <span style={{ display: "flex", justifyContent: "space-between", width:"47.9%" }}>
                       {
                           nft.hasOwnProperty('royalty') ?
                             <span className="text">
@@ -1833,6 +1838,79 @@ export default function NftInformation(props) {
             </div>
           </div>
           {/* Buying loading modal end */}
+          {/* make offer modal */}
+
+
+          <div
+            className="mint-mod-outer"
+            style={{
+              display: offerLoadingModal ? "block" : "none",
+              zIndex:"1945",
+            }}
+          >
+            <div className="mint-abs">
+              <div className="">
+                <div className="mint-outer" style={{ opacity: "1" }}>
+                  <div className="mintbody">
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <div className="completelistin">Complete your Offer</div>
+                    </div>
+                    <div className="abstractillusion">
+                      <img src={nft.previewImage ? nft?.previewImage :(nft?.cdnUrl!="" ? nft.cdnUrl:nft.ipfsUrl)} />
+                      <div className="abstractillusioncontent">
+                        <div className="abstracttitle"></div>
+                        <div className="abstractposter"> {nft.name}</div>
+                        <div className="ethprice">{`${makeOfferDetails.price}  ${salesInfo?.currency}`}</div>
+                        <div className="ethprice">{`${makeOfferDetails.dateTime}`}</div>
+                      </div>
+                    </div>
+                    <div className="checkpostcontainer">
+                      <div className="checkpost">
+                        <img src={success} className="checkimg" />
+                        <div className="checkimg">
+                          {/* <Oval
+                        vertical="top"
+                        horizontal="center"
+                        color="#00BFFF"
+                        height={30}
+                        width={30} /> */}
+                        </div>
+                        <div className="checkposttext">
+                          <div className="heading">Approve</div>
+                          <div className="description"></div>
+                        </div>
+                      </div>
+                      <div className="checkpost">
+                        {/* <img src={success} className="checkimg" /> */}
+                        <div className="checkimg">
+                          {props?.buySuccess ? (
+                            <img src={success} className="checkimg" />
+                          ) : (
+                            <Oval
+                              vertical="top"
+                              horizontal="center"
+                              color="#00BFFF"
+                              height={30}
+                              width={30}
+                            />
+                          )}
+                        </div>
+                        <div className="checkposttext">
+                          <div className="heading">Transfer</div>
+                          <div className="description"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           {/* --------remove sale dialog ---------------*/}
 
           <div
