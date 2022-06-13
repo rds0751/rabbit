@@ -316,6 +316,9 @@ export default function NftInformation(props) {
     newOwnerAddress: walletAddress?.address,
   }
   const buyNft = async () => {
+
+
+   
     if (user.loggedInUser != null) {
       props?.BuyNowNft({
         buyerId: loggedInUser?._id,
@@ -325,7 +328,11 @@ export default function NftInformation(props) {
       setOpenLoadingModal(true);
     } else {
       navigate("/add-wallet");
+    
     }
+
+
+
 
     //   const response = await put_NftOpenForSale(nft._id);
     //   if (response.success) {
@@ -1272,11 +1279,11 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                         data-bs-toggle="modal"
                         data-bs-target="#myModalShare"
                         style={{
-                          display:
-                            props?.responseData?.createdBy != userIdLocal &&
-                              props?.responseData?.salesInfo?.isOpenForSale
-                              ? "block"
-                              : "none",
+                          // display:
+                          //   props?.responseData?.createdBy != userIdLocal &&
+                          //     props?.responseData?.salesInfo?.isOpenForSale
+                          //     ? "block"
+                          //     : "none",
                           color: `${fetchPalletsColor(appearance.colorPalette)}`,
                           backgroundColor: "white",
                           textTransform: "none",

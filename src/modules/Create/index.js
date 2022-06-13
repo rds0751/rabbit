@@ -23,31 +23,37 @@ class Index extends BaseComponent {
       loaderState: false,
       isMintSuccess: false,
       isOpenMintModal: true,
-      mintedNftId: ""
+      mintedNftId: "",
     };
-    this.showToast=this.showToast.bind(this);
-    this.defaultPosition=toast.POSITION.TOP_RIGHT;
+    this.showToast = this.showToast.bind(this);
+    this.defaultPosition = toast.POSITION.TOP_RIGHT;
   }
 
   async componentDidMount() {
     // const checkvalue = await this.getCollectionsForNft();
     // console.log(checkvalue, "<<<<checkvalue");
   }
-   
- showToast = ( type = "success", msg, autoClose = 7000, className = "primaryColor", position = this.defaultPosition ) => {
+
+  showToast = (
+    type = "success",
+    msg,
+    autoClose = 7000,
+    className = "primaryColor",
+    position = this.defaultPosition
+  ) => {
     if (type === "success") {
       toast.success(msg, {
         autoClose: autoClose === null ? 7000 : autoClose,
         className: className === null ? "primaryColor" : className,
         position: position,
-        theme:'colored',
+        theme: "colored",
       });
     } else if (type === "error") {
       toast.error(msg, {
         autoClose: autoClose === null ? 7000 : autoClose,
         className: className === null ? "primaryColor" : className,
         position: position,
-        theme:'colored',
+        theme: "colored",
       });
     }
   };
@@ -59,10 +65,13 @@ class Index extends BaseComponent {
       name: data?.nftName || "",
       //TO DO  need to pass collection _id
       collectionId: data?.collectionId, // to do
-      collectionName:data?.collectionName==undefined ? "ANAFTO Collection" : data?.collectionName,
+      collectionName:
+        data?.collectionName == undefined
+          ? "ANAFTO Collection"
+          : data?.collectionName,
       ipfsUrl: data?.ipfsUrl || "",
       cdnUrl: data?.cdnUrl || "",
-      compressedURL:data?.compressedURL|| "",
+      compressedURL: data?.compressedURL || "",
       cid: data?.cid || "",
       contractAddress: data.contractAddress || "",
       description: data?.description || "",
@@ -75,46 +84,53 @@ class Index extends BaseComponent {
         price: data?.price || 0,
         currency: data?.currency,
       },
-      royalty:data?.royality,
+      royalty: data?.royality,
       //TO do need to pass user (owner) _id
       ownedBy: data?.createdBy,
       createdBy: data?.createdBy,
       updatedBy: data?.createdBy,
       ownerAddress: data?.ownerAddress || "", // put metamask address
-      previewImage:data?.previewImage,
-      fileExtension:data?.fileExtension,
-      isLazyMintingEnabled:data?.isLazyMintingEnabled,
+      previewImage: data?.previewImage,
+      fileExtension: data?.fileExtension,
+      lazyMinting:{
+        isEnabled:data?.isLazyMintingEnabled,
+        signature:blockchainRes?.signature||"",
+        message: blockchainRes?.signMsg||"",
+      }
     };
   };
 
-  batchNFTHandler=async (data)=>{
+  batchNFTHandler = async (data) => {
     let blockchainRes;
     const tokenId = Utils.generateRandomNumber();
-    let contractAddress="0x40ED9c272908a9D39Fc0E6Cd49D10263302D3524";
+    let contractAddress = "0x40ED9c272908a9D39Fc0E6Cd49D10263302D3524";
 
     const [blockchainError, blockchainResult] = await Utils.parseResponse(
       BlockchainServices.batchMintNFT({
         tokenId,
-        amount:20,
+        amount: 20,
         contractAddress: contractAddress,
-        blockchain:"Ethereum"
+        blockchain: "Ethereum",
       })
     );
-    console.log("blockchainError", blockchainError)
-    console.log("blockchainResult", blockchainResult)
+    console.log("blockchainError", blockchainError);
+    console.log("blockchainResult", blockchainResult);
 
     if (blockchainError || !blockchainResult) {
       this.setState({ loaderState: false });
 
-      return this.showToast('error',
-        blockchainError?.data?.message || blockchainError?.message || blockchainError || "Unable to Mint NFT on blockchain"
+      return this.showToast(
+        "error",
+        blockchainError?.data?.message ||
+          blockchainError?.message ||
+          blockchainError ||
+          "Unable to Mint NFT on blockchain"
       );
     }
-    blockchainRes = blockchainResult
-    toast.success("Successfully BatchMint")
-    console.log(blockchainRes,"<<<blockchainRes")
-   
-  }
+    blockchainRes = blockchainResult;
+    toast.success("Successfully BatchMint");
+    console.log(blockchainRes, "<<<blockchainRes");
+  };
 
   createNftHandler = async (data) => {
     let blockchainRes;
@@ -122,37 +138,30 @@ class Index extends BaseComponent {
     console.log(data, "dattttttttttttttttt");
     let contractAddress;
     // = "0xCDe6A5fccf0cCaF7bc51D35C1f8Efe3BbC5c8057"
-   // //-ethreum
+    // //-ethreum
 
-   if(data?.blockchain === "Polygon")
-   contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS_POLYGON
-   else if(data?.blockchain === "Ethereum")
-   contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS
-   else if(data?.blockchain === "Binance")
-   contractAddress=process.env.REACT_APP_CONTRACT_ADDRESS_BINANCE
+    if (data?.blockchain === "Polygon")
+      contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS_POLYGON;
+    else if (data?.blockchain === "Ethereum")
+      contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
+    else if (data?.blockchain === "Binance")
+      contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS_BINANCE;
 
-   let IpfsObject={
-     name:data?.nftName,
-     description:data?.description,
-     image:data?.cdnUrl,
-     external_link:123,
-     seller_fee_basis_points:0,
-     fee_recipient:1
-   }
-   
-  
+    let IpfsObject = {
+      name: data?.nftName,
+      description: data?.description,
+      image: data?.cdnUrl,
+      external_link: 123,
+      seller_fee_basis_points: 0,
+      fee_recipient: 1,
+    };
 
-   const [err, ipfsRes] = await Utils.parseResponse(
-    getCollection.addIpfsObject(IpfsObject)
-  );
-  console.log(ipfsRes,"<<<ipfsRes")
-  if (!ipfsRes) 
-    toast.error("unable to upload data");
+    const [err, ipfsRes] = await Utils.parseResponse(
+      getCollection.addIpfsObject(IpfsObject)
+    );
+    console.log(ipfsRes, "<<<ipfsRes");
+    if (!ipfsRes) toast.error("unable to upload data");
 
-  
-
-
-    
     // if (!data || Object.keys(data).length < 1 || !data.nftFile){
     //   this.setState({loaderState:false})
 
@@ -189,152 +198,163 @@ class Index extends BaseComponent {
     if (data.contractAddress.length > 0) {
       console.log(data?.blockchain, "blockchainValue");
 
-      if(data?.isLazyMintingEnabled){
+      if (data?.isLazyMintingEnabled) {
+        var signMsg = "";
+        var characters =
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        var charactersLength = characters.length;
+        for (var i = 0; i < 32; i++) {
+          signMsg += characters.charAt(
+            Math.floor(Math.random() * charactersLength)
+          );
+        }
+        signMsg += "!" + tokenId;
 
-        const [blockchainError,blockchainResult]=await Utils.parseResponse(
-          BlockchainServices.lazyMinting({
-            tokenURI:data.ipfsUrl,
-            tokenId,
-            price:data.price,
-            royality:data.royality,
-            blockchain:data.blockchain,
-          
-
-          })
-        )
-
-       console.log("blockchainError", blockchainError)
-      console.log("blockchainResult", blockchainResult)
-
-      if (blockchainError || !blockchainResult) {
-        this.setState({ loaderState: false });
-
-        return this.showToast('error',
-          blockchainError?.data?.message || blockchainError?.message || blockchainError || "Unable to Mint NFT on blockchain"
+        const [blockchainError, blockchainResult] = await Utils.parseResponse(
+          BlockchainServices.signcheck({ signMsg })
         );
-      }
-      blockchainRes = blockchainResult
-      console.log(blockchainRes,"<<<blockchainRes")
 
-      }
-      else {
+        console.log("blockchainError", blockchainError);
+        console.log("blockchainResult", blockchainResult);
+
+        if (blockchainError || !blockchainResult) {
+          this.setState({ loaderState: false });
+
+          return this.showToast(
+            "error",
+            blockchainError?.data?.message ||
+              blockchainError?.message ||
+              blockchainError ||
+              "Unable to Mint NFT on blockchain"
+          );
+        }
+        blockchainRes = blockchainResult;
+        console.log(blockchainRes, "<<<blockchainRes");
+      } else {
         const [blockchainError, blockchainResult] = await Utils.parseResponse(
           BlockchainServices.mintNFT({
             tokenURI: data.ipfsUrl,
             price: data.price,
             tokenId,
-            contractAddress: data.contractAddress,
-            royalty:data.royality,
-            blockchain:data?.blockchain,
-            ipfsUrl:ipfsRes,
+            contractAddress: contractAddress,
+            royalty: data.royality,
+            blockchain: data?.blockchain,
+            ipfsUrl: ipfsRes,
           })
         );
-        console.log("blockchainError", blockchainError)
-        console.log("blockchainResult", blockchainResult)
-  
+        console.log("blockchainError", blockchainError);
+        console.log("blockchainResult", blockchainResult);
+
         if (blockchainError || !blockchainResult) {
           this.setState({ loaderState: false });
-  
-          return this.showToast('error',
-            blockchainError?.data?.message || blockchainError?.message || blockchainError || "Unable to Mint NFT on blockchain"
+
+          return this.showToast(
+            "error",
+            blockchainError?.data?.message ||
+              blockchainError?.message ||
+              blockchainError ||
+              "Unable to Mint NFT on blockchain"
           );
         }
-        blockchainRes = blockchainResult
-        console.log(blockchainRes,"<<<blockchainRes")
-
+        blockchainRes = blockchainResult;
+        console.log(blockchainRes, "<<<blockchainRes");
       }
-      
-    }
+    } else {
+      console.log(data?.blockchain, "blockchainValue");
 
+      if (data?.isLazyMintingEnabled) {
+        var signMsg = "";
+        var characters =
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        var charactersLength = characters.length;
+        for (var i = 0; i < 32; i++) {
+          signMsg += characters.charAt(
+            Math.floor(Math.random() * charactersLength)
+          );
+        }
+        signMsg += "!" + tokenId;
 
+        const [blockchainError, blockchainResult] = await Utils.parseResponse(
+          BlockchainServices.signcheck({ signMsg })
+        );
 
-    else {
+        console.log("blockchainError", blockchainError);
+        console.log("blockchainResult", blockchainResult);
 
-      if(data.isLazyMintingEnabled){
-        const [blockchainError,blockchainResult]=await Utils.parseResponse(
-          BlockchainServices.lazyMinting({
-            tokenURI:data.ipfsUrl,
+        if (blockchainError || !blockchainResult) {
+          this.setState({ loaderState: false });
+
+          return this.showToast(
+            "error",
+            blockchainError?.data?.message ||
+              blockchainError?.message ||
+              blockchainError ||
+              "Unable to Mint NFT on blockchain"
+          );
+        }
+        blockchainRes = blockchainResult;
+        console.log(blockchainRes, "<<<blockchainRes");
+      } else {
+        const [blockchainError, blockchainResult] = await Utils.parseResponse(
+          BlockchainServices.mintNFT({
+            tokenURI: data.ipfsUrl,
+            price: data.price,
             tokenId,
-            price:data.price,
-            royality:data.royality,
-            contractAddress:contractAddress,
-         
-          
-
+            contractAddress: contractAddress,
+            blockchain: data?.blockchain,
+            royalty: data.royality,
+            ipfsUrl: ipfsRes,
           })
-        )
-
-       console.log("blockchainError", blockchainError)
-      console.log("blockchainResult", blockchainResult)
-
-      if (blockchainError || !blockchainResult) {
-        this.setState({ loaderState: false });
-
-        return this.showToast('error',
-          blockchainError?.data?.message || blockchainError?.message || blockchainError || "Unable to Mint NFT on blockchain"
         );
-      }
-      blockchainRes = blockchainResult
-      console.log(blockchainRes,"<<<blockchainRes")
+        console.log("blockchainError", blockchainError);
+        console.log("blockchainResult", blockchainResult);
 
+        if (blockchainError || !blockchainResult) {
+          console.log(
+            "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"
+          );
+          this.setState({ loaderState: false });
+          console.log(
+            blockchainError?.data?.message ||
+              blockchainError?.message ||
+              blockchainError,
+            "<<<BlockchainRes"
+          );
 
-      }
-      else {
-        console.log(data?.blockchain, "blockchainValue");
-
-
-      const [blockchainError, blockchainResult] = await Utils.parseResponse(
-        BlockchainServices.mintNFT({
-          tokenURI: data.ipfsUrl,
-          price: data.price,
-          tokenId,
-          contractAddress: contractAddress,
-          blockchain:data?.blockchain,
-          royalty:data.royality,
-          ipfsUrl:ipfsRes,
-        })
-      );
-      console.log("blockchainError", blockchainError)
-      console.log("blockchainResult", blockchainResult)
-
-
-      if (blockchainError || !blockchainResult) {
-        console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
-        this.setState({ loaderState: false });
-        console.log(  blockchainError?.data?.message || blockchainError?.message || blockchainError ,"<<<BlockchainRes")
-
-        return this.showToast('error',
-          blockchainError?.data?.message || blockchainError?.message || blockchainError || "Unable to Mint NFT on blockchain"
-        );
-      }
-      blockchainRes = blockchainResult
-      console.log(blockchainRes,"<<<blockchainRes")
-
+          return this.showToast(
+            "error",
+            blockchainError?.data?.message ||
+              blockchainError?.message ||
+              blockchainError ||
+              "Unable to Mint NFT on blockchain"
+          );
+        }
+        blockchainRes = blockchainResult;
+        console.log(blockchainRes, "<<<blockchainRes");
       }
     }
-
-
 
     console.log(
-      this.getRequestDataForSaveNftContent(tokenId, data, blockchainRes) ,"DATA ON Blockchian"
+      this.getRequestDataForSaveNftContent(tokenId, data, blockchainRes),
+      "DATA ON Blockchian"
     );
 
     // save NFT data on DB
     const [contentError, contentRes] = await Utils.parseResponse(
-
       getCollection.createNftContent(
         this.getRequestDataForSaveNftContent(tokenId, data, blockchainRes)
       )
     );
 
-    console.log(contentError, contentRes, 'nft response')
+    console.log(contentError, contentRes, "nft response");
 
     this.props.dispatchAction(eventConstants.HIDE_LOADER);
     if (contentError || !contentRes) {
       this.setState({ loaderState: false });
       this.setState({ isMintSuccess: null });
       this.setState({ isOpenMintModal: false });
-      return this.showToast('error',
+      return this.showToast(
+        "error",
         contentError?.message || "Unable to save NFT content"
       );
     }
@@ -348,7 +368,7 @@ class Index extends BaseComponent {
       this.setState({ isMintSuccess: true });
       this.setState({ isOpenMintModal: false });
       this.setState({ mintedNftId: contentRes._id });
-      this.showToast('success',"Your NFT has been created")
+      this.showToast("success", "Your NFT has been created");
       this.setState({ isNftCreated: true });
     }
 
@@ -366,10 +386,8 @@ class Index extends BaseComponent {
           loaderState={this.state.loaderState}
           createNftHandler={this.createNftHandler.bind(this)}
           batchNFTHandler={this.batchNFTHandler.bind(this)}
-          
           url
           mintedNftId={this.state.mintedNftId}
-
           isMintSuccess={this.state.isMintSuccess}
           isOpenMintModal={this.state.isOpenMintModal}
           loader={this.props.loader}

@@ -77,6 +77,13 @@ export default class NftDetail extends BaseComponent {
         });
     };
 
+    isLazyMinted=async ()=>{
+       
+
+       
+
+    }
+
                
         
     
@@ -130,65 +137,142 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
             return toast.error(error || "Unable to update Nft tx.",{autoClose:7000,theme:"colored"})
         }
 
+        console.log("--buy nFT resi;t-", result);
+
         if (this.state?.responseData?.contractAddress > 0) {
+            console.log("--buy nFT resi;t-", result);
+
+            if(this.state.responseData?.lazyMinting?.isEnabled){
+                const [blockchainError, blockchainResult] = await Utils.parseResponse(
+                    BlockchainService.lazyMinting({
+                        tokenURI:this.state.responseData?.ipfsUrl|| '',
+                        tokenId: this.state.responseData?.tokenId || '',
+                        price: this.state?.responseData?.salesInfo?.price || '',
+                        royality:this.state?.responseData?.royalty || '',
+                        blockchain:this.state?.responseData?.blockchain || '',
+                        receiverAddress:this.state?.responseData?.ownerAddress || '',
+                        signMsg:this.state.responseData?.lazyMinting?.message || '',
+                        signature:this.state.responseData?.lazyMinting?.signature || '',
+                        contractAddress:contractAddress || '',
+                        
+                    })
+                );
+                console.log("blockchainError====", blockchainError)
+                console.log("blockchainRes====", blockchainResult)
+                if (blockchainError || !blockchainResult) {
+                    // this.setState({ loaderState: false })
+                    if (!this.state.responseData._id) return;
+                    let [txFailErr, txFailResult] = await Utils.parseResponse(
+                        updateTxStatus({ status: "failed" }, result._id)
+                    );
+                    return toast.error(
+                        blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to Buy NFT on blockchain"
+                        ,{autoClose:7000,theme:"colored"}
+                    );
+                }
+                blockchainRes = blockchainResult
+
+            }
+            else{
+                
+                const [blockchainError, blockchainResult] = await Utils.parseResponse(
+                    BlockchainService.buyNFT({
+                        //TO do
+                        tokenId: this.state.responseData?.tokenId,
+                        price: this.state?.responseData?.salesInfo?.price,
+                        contractAddress: contractAddress,
+                        message: this.state.responseData.salesInfo.message,
+                        address:this.state.responseData.salesInfo.address,
+                        signature:this.state.responseData.salesInfo.signature,
+    
+                    })
+                );
+                console.log("blockchainError====", blockchainError)
+                console.log("blockchainRes====", blockchainResult)
+                if (blockchainError || !blockchainResult) {
+                    // this.setState({ loaderState: false })
+                    if (!this.state.responseData._id) return;
+                    let [txFailErr, txFailResult] = await Utils.parseResponse(
+                        updateTxStatus({ status: "failed" }, result._id)
+                    );
+                    return toast.error(
+                        blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to Buy NFT on blockchain"
+                        ,{autoClose:7000,theme:"colored"}
+                    );
+                }
+                blockchainRes = blockchainResult
+
+            }
+
 
             //-------------------------------------------------------
-            const [blockchainError, blockchainResult] = await Utils.parseResponse(
-                BlockchainService.buyNFT({
-                    //TO do
-                    tokenId: this.state.responseData?.tokenId,
-                    price: this.state?.responseData?.salesInfo?.price,
-                    contractAddress: contractAddress,
-                    message: this.state.responseData.salesInfo.message,
-                    address:this.state.responseData.salesInfo.address,
-                    signature:this.state.responseData.salesInfo.signature,
-                    receiveAddress:this.state.responseData.offers[0].receiverAddress,
-
-                })
-            );
-            console.log("blockchainError====", blockchainError)
-            console.log("blockchainRes====", blockchainResult)
-            if (blockchainError || !blockchainResult) {
-                // this.setState({ loaderState: false })
-                if (!this.state.responseData._id) return;
-                let [txFailErr, txFailResult] = await Utils.parseResponse(
-                    updateTxStatus({ status: "failed" }, result._id)
-                );
-                return toast.error(
-                    blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to Buy NFT on blockchain"
-                    ,{autoClose:7000,theme:"colored"}
-                );
-            }
-            blockchainRes = blockchainResult
+           
         }
         else {
-            const [blockchainError, blockchainResult] = await Utils.parseResponse(
-                BlockchainService.buyNFT({
-                    //TO do
-                    tokenId: this.state.responseData?.tokenId,
-                    price: this.state?.responseData?.salesInfo?.price,
-                    contractAddress: contractAddress,
-                    message: this.state.responseData.salesInfo.message,
-                    address:this.state.responseData.salesInfo.address,
-                    signature:this.state.responseData.salesInfo.signature,
-                    receiveAddress:this.state.responseData.offers[0].receiverAddress,
+            console.log("--buy nFT resi;t-", result);
+            if(this.state.responseData?.lazyMinting?.isEnabled){
+                const [blockchainError, blockchainResult] = await Utils.parseResponse(
+                    BlockchainService.lazyMinting({
+                        tokenURI:this.state.responseData?.ipfsUrl|| '',
+                        tokenId: this.state.responseData?.tokenId || '',
+                        price: this.state?.responseData?.salesInfo?.price || '',
+                        royality:this.state?.responseData?.royalty || '',
+                        blockchain:this.state?.responseData?.blockchain || '',
+                        receiverAddress:this.state?.responseData?.ownerAddress || '',
+                        signMsg:this.state.responseData?.lazyMinting?.message || '',
+                        signature:this.state.responseData?.lazyMinting?.signature || '',
+                        contractAddress:process.env.REACT_APP_CONTRACT_ADDRESS || '',
+                        
+                    })
+                );
+                console.log("blockchainError====", blockchainError)
+                console.log("blockchainRes====", blockchainResult)
+                if (blockchainError || !blockchainResult) {
+                    // this.setState({ loaderState: false })
+                    if (!this.state.responseData._id) return;
+                    let [txFailErr, txFailResult] = await Utils.parseResponse(
+                        updateTxStatus({ status: "failed" }, result._id)
+                    );
+                    return toast.error(
+                        blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to Buy NFT on blockchain"
+                        ,{autoClose:7000,theme:"colored"}
+                    );
+                }
+                blockchainRes = blockchainResult
 
-                })
-            );
-            console.log("blockchainError====", blockchainError)
-            console.log("blockchainRes====", blockchainResult)
-            if (blockchainError || !blockchainResult) {
-                 this.setState({ loaderState: false })
-                if (!this.state.responseData._id) return;
-                let [txFailErr, txFailResult] = await Utils.parseResponse(
-                    updateTxStatus({ status: "failed" }, result._id)
+            }else{
+                const [blockchainError, blockchainResult] = await Utils.parseResponse(
+                    BlockchainService.buyNFT({
+                        //TO do
+                        tokenId: this.state.responseData?.tokenId,
+                        price: this.state?.responseData?.salesInfo?.price,
+                        contractAddress: contractAddress,
+                        message: this.state.responseData.salesInfo.message,
+                        address:this.state.responseData.salesInfo.address,
+                        signature:this.state.responseData.salesInfo.signature,
+                      
+    
+                    })
                 );
-                return toast.error(
-                    blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to Buy NFT on blockchain"
-                    ,{autoClose:7000,theme:"colored"}
-                );
+                console.log("blockchainError====", blockchainError)
+                console.log("blockchainRes====", blockchainResult)
+                if (blockchainError || !blockchainResult) {
+                    //  this.setState({ loaderState: false })
+                    if (!this.state.responseData._id) return;
+                    let [txFailErr, txFailResult] = await Utils.parseResponse(
+                        updateTxStatus({ status: "failed" }, result._id)
+                    );
+                    return toast.error(
+                        blockchainError?.data?.message ||blockchainError?.message ||blockchainError|| "Unable to Buy NFT on blockchain"
+                        ,{autoClose:7000,theme:"colored"}
+                    );
+                }
+                blockchainRes = blockchainResult
+
             }
-            blockchainRes = blockchainResult
+
+
+           
         }
 
 
@@ -499,6 +583,7 @@ console.log("kkddddddddddddddddddddddddddddddddd",this.state?.responseData?.cont
                     // salesInfo:null
                     loaderState={this.state.loaderState}
                     buySuccess={this.state.buySuccess}
+                    isLazyMinted={this.isLazyMinted}
                     saleSuccess={this.state.saleSuccess}
                     removeSuccess={this.state.removeSuccess}
                     isNftValid={this.state.isNftValid}

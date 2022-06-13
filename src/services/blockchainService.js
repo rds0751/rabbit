@@ -99,8 +99,8 @@ async function mintNFT({
       tokenId,
       // 20,
       ethers.utils.parseEther(price.toString()),
-      royalty
-      // accounts[0]
+      royalty,
+      accounts[0]
     );
     let res = await result.wait();
     return {
@@ -134,42 +134,59 @@ async function mintNFT({
   // console.log("kkkkkkkkkkkkkkkkkkkkkk network swutch")
 }
 
+async function lazyMinting({
+  tokenURI,
+  tokenId,
+  price,
+  royality,
+  contractAddress,
+  receiverAddress,
+  signature,
+  signMsg,
+}) {
+  
+  console.log(
+    tokenURI,
+    tokenId,
+    price,
+    royality,
+    contractAddress,
+    receiverAddress,
+    signature,
+    signMsg
+  );
 
-async function lazyMinting({tokenURI,tokenId,price,royality,contractAddress}){
+  alert("p");
+
+  let RinkebyAddress = "0xf2744Bd99AA185A0Fbe1E5c629D5F58A35772685";
+  let PolygonAddress = "0x6C626D2226C2415Ab32989660ea7f2C6265f230c";
+  let BinanceAddress = "0x52CDde738d71568F79379FB1d671C4Eaef33d638";
 
   const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    var signMsg = '';
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < 32; i++ ) {
-      signMsg += characters.charAt(Math.floor(Math.random() * 
-    charactersLength));
-   }
-   signMsg+='!'+tokenId;
+  const signer = provider.getSigner();
 
-    let signGen=await signcheck({signMsg});
-    const contractData = new ethers.Contract(
-      contractAddress,
-      contractbuyAndRemoveABI,
-      signer
-    );
-    const result = await contractData.mintAndBuy(
-      tokenURI,
-      tokenId,
-      price,
-      royality,
-      signMsg,
-      signGen.signature,
-      contractAddress,
-      
-    );
-    let res = await result.wait();
-    return {
-      ...res,
-      chainId: provider?._network?.chainId || "",
-      name: provider?._network?.name || "",
-    };
+  const contractData = new ethers.Contract(
+    RinkebyAddress,
+    contractbuyAndRemoveABI,
+    signer
+  );
+  const result = await contractData.mintAndBuy(
+    tokenURI,
+    tokenId,
+    royality,
+    signMsg,
+    signature,
+    "0x639f59e4B336736eF6D2D220b164759A9a9cF289",
+    receiverAddress,
+    { value: ethers.utils.parseEther(price.toString()) ,gasLimit:500000}
+    
+  );
+  let res = await result.wait();
+  return {
+    ...res,
+    chainId: provider?._network?.chainId || "",
+    name: provider?._network?.name || "",
+  };
 }
 
 async function batchMintNFT({
@@ -221,9 +238,9 @@ async function batchMintNFT({
   } else return Promise.reject("Please Select Valid Network in the metamask");
 }
 async function makeOffer({ price }) {
-   const accounts = await window.ethereum.request({
+  const accounts = await window.ethereum.request({
     method: "eth_requestAccounts",
-   });
+  });
   // let creatorWalletAddress = accounts[0];
 
   // const wallet = ethers.Wallet.createRandom();
@@ -242,8 +259,7 @@ async function makeOffer({ price }) {
   //   to: walletAddress,
   //   value: ethers.utils.parseEther(price.toString()),
   //   gasLimit:100000,
-    
-    
+
   // });
 
   const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -262,7 +278,7 @@ async function makeOffer({ price }) {
     ...res,
     chainId: provider?._network?.chainId || "",
     name: provider?._network?.name || "",
-    creatorWalletAddress:accounts[0]
+    creatorWalletAddress: accounts[0],
   };
   // return {
   //   tx,
@@ -278,10 +294,10 @@ async function acceptOffer({
   contractAddress,
   receiverAddress,
   price,
-  privateKey
+  privateKey,
 }) {
-  let inializeContract="0x1a1Af51744b38E90aA413D5a4C590037273C10Ba";
-  
+  let inializeContract = "0x1a1Af51744b38E90aA413D5a4C590037273C10Ba";
+
   try {
     if (!window.ethereum) return Promise.reject("Please install metamask");
     await window.ethereum.send("eth_requestAccounts");
@@ -301,12 +317,12 @@ async function acceptOffer({
       // ipfsUrl,
       // // tokenURI,
       // // accounts[0],
-       tokenId,
-       signMsg,
-       signature,
-       contractAddress,
-       receiverAddress,
-     
+      tokenId,
+      signMsg,
+      signature,
+      contractAddress,
+      receiverAddress
+
       // // 20,
       // ethers.utils.parseEther(price.toString()),
       // royalty
@@ -318,58 +334,51 @@ async function acceptOffer({
       chainId: provider?._network?.chainId || "",
       name: provider?._network?.name || "",
     };
-   
 
     //buy with offer
-//     console.log(signMsg)
+    //     console.log(signMsg)
 
-// var providerx = ethers.providers.getDefaultProvider("https://rinkeby.infura.io/v3/04456733dcca43d2b2991398598e00c4");
-// console.log("xyz")
-// var addressx  = '0xaA0842869e1a627B749bE2795d5D699d86F4dfc9';
-// var privateKey = '0xf0a238d060882681cbc99584a26dbfd17f7bed0839a01361a777e289e3273de4';
-// var walletx = new ethers.Wallet(privateKey,providerx);
-// console.log("xyz")
+    // var providerx = ethers.providers.getDefaultProvider("https://rinkeby.infura.io/v3/04456733dcca43d2b2991398598e00c4");
+    // console.log("xyz")
+    // var addressx  = '0xaA0842869e1a627B749bE2795d5D699d86F4dfc9';
+    // var privateKey = '0xf0a238d060882681cbc99584a26dbfd17f7bed0839a01361a777e289e3273de4';
+    // var walletx = new ethers.Wallet(privateKey,providerx);
+    // console.log("xyz")
 
-// var contract = new ethers.Contract('0x8feCBEB506aC00Fc04711da4c93CaC871673332A',contractbuyAndRemoveABI,walletx);
-// console.log("xyz")
-//  var sendPromise = contract.buy(
-//   tokenId,
-//   signMsg.toString(),
-//   signature,
-//   '0xe481bf4f3dbeb59bf758d271a710142e10898728',
-//   receiverAddress,
-//   {  gasLimit: 100000, value: ethers.utils.parseEther("0.99") }
-// );
-// console.log("xyz")
+    // var contract = new ethers.Contract('0x8feCBEB506aC00Fc04711da4c93CaC871673332A',contractbuyAndRemoveABI,walletx);
+    // console.log("xyz")
+    //  var sendPromise = contract.buy(
+    //   tokenId,
+    //   signMsg.toString(),
+    //   signature,
+    //   '0xe481bf4f3dbeb59bf758d271a710142e10898728',
+    //   receiverAddress,
+    //   {  gasLimit: 100000, value: ethers.utils.parseEther("0.99") }
+    // );
+    // console.log("xyz")
 
+    //  let xy =sendPromise.then(function(transaction){
+    //    console.log(transaction,"xyc");
+    //  });
+    // //let x = await sendPromise.wait();
+    // console.log("xyz");
+    // return {
+    //   signMsg,
+    //   signature,
+    //   address,
+    // };
 
-//  let xy =sendPromise.then(function(transaction){
-//    console.log(transaction,"xyc");
-//  });
-// //let x = await sendPromise.wait();
-// console.log("xyz");
-// return {
-//   signMsg,
-//   signature,
-//   address,
-// };
-
-
-
-  //   let private_key ="41559d28e936dc92104ff30691519693fc753ffbee6251a611b9aa1878f12a4d";
-  //  window.ethersProvider = new ethers.providers.InfuraProvider("https://rinkeby.infura.io/v3/04456733dcca43d2b2991398598e00c4");
-  //   let infura=  new ethers.providers.InfuraProvider("https://rinkeby.infura.io/v3/04456733dcca43d2b2991398598e00c4");
-  //  const Secondsigner = new ethers.Wallet(private_key, infura);
-  //   let send_token_amount = "1";
-  //   let to_address = "0x4c10D2734Fb76D3236E522509181CC3Ba8DE0e80";
-  //   let send_address = "0xda27a282B5B6c5229699891CfA6b900A716539E6";
-  //   let gas_limit = "0x100000";
-  //   let wallet = new ethers.Wallet(private_key);
-  //   let walletSigner = wallet.connect(window.ethersProvider);
-  //   let contract_address = "";
-  
-    
-
+    //   let private_key ="41559d28e936dc92104ff30691519693fc753ffbee6251a611b9aa1878f12a4d";
+    //  window.ethersProvider = new ethers.providers.InfuraProvider("https://rinkeby.infura.io/v3/04456733dcca43d2b2991398598e00c4");
+    //   let infura=  new ethers.providers.InfuraProvider("https://rinkeby.infura.io/v3/04456733dcca43d2b2991398598e00c4");
+    //  const Secondsigner = new ethers.Wallet(private_key, infura);
+    //   let send_token_amount = "1";
+    //   let to_address = "0x4c10D2734Fb76D3236E522509181CC3Ba8DE0e80";
+    //   let send_address = "0xda27a282B5B6c5229699891CfA6b900A716539E6";
+    //   let gas_limit = "0x100000";
+    //   let wallet = new ethers.Wallet(private_key);
+    //   let walletSigner = wallet.connect(window.ethersProvider);
+    //   let contract_address = "";
   } catch (err) {
     Promise.reject(err);
   }
@@ -526,16 +535,23 @@ async function buyNFT({
   signature,
   receiverAddress,
 }) {
- 
-  let RinkebyAddress = "0x1a1Af51744b38E90aA413D5a4C590037273C10Ba";
+  alert("x");
+  let RinkebyAddress = "0xf2744Bd99AA185A0Fbe1E5c629D5F58A35772685";
   let PolygonAddress = "0x6C626D2226C2415Ab32989660ea7f2C6265f230c";
   let BinanceAddress = "0x52CDde738d71568F79379FB1d671C4Eaef33d638";
 
   const receiver = await window.ethereum.request({
-       method: "eth_requestAccounts",
-     });
+    method: "eth_requestAccounts",
+  });
 
-  console.log("kdkkkkkkkkkkkk", contractAddress, tokenId, message, signature,receiver[0]);
+  console.log(
+    "kdkkkkkkkkkkkk",
+    contractAddress,
+    tokenId,
+    message,
+    signature,
+    receiver[0]
+  );
   console.log(signature, "<<sig");
   console.log(message, "msg");
   console.log(tokenId, "tokenID");
@@ -598,7 +614,7 @@ async function buyNFT({
       signature,
       contractAddress,
       receiver[0],
-      {  value: ethers.utils.parseEther(price.toString()) }
+      { value: ethers.utils.parseEther(price.toString()),gasLimit:21000 }
     );
     // console.log("<<<resultBuy",resultBuy)
 

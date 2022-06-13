@@ -52,7 +52,7 @@ console.log(blockchainError);
             //   transaction: blockchainRes.transactionHash || '',
             contentId: props?.nft?._id || '',
             seller:  props?.nft?.ownedBy || '',
-            buyer: props.nft.offers[0].addedBy || '',
+            buyer: props.nft.offers[0].addedBy || '', 
             price:  props?.nft?.salesInfo?.price || '',
             currency:  props?.nft?.salesInfo?.currency || 'ETH',
             addedBy: props.buyerInfo.buyerId || '',
