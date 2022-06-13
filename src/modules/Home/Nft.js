@@ -157,7 +157,7 @@ const options = [
   { value: "3", label: "Price: Low to High" },
   { value: "2", label: "Price: High to Low" },
   { value: "1", label: "Oldest" },
-  { value: "", label: "On Sale" }
+  { value: "sale", label: "On Sale" }
 ];
 
 function NftPage(props) {
@@ -172,7 +172,7 @@ function NftPage(props) {
     maxPrice: "",
     sort: "-1",
     userId: loggedInUser?._id,
-    limit: limit,
+    limit: limit
   });
   const [nfts, setNfts] = useState([]);
   const [toggleNft, setToggleNft] = useState(true);

@@ -67,3 +67,16 @@ export const calculateExpireSaleInMiniSeconds = (expireData) => {
     const date2 = new Date();    
     return Math.abs(date2 - date1);    
 }
+
+export const calculateExpireTime = ({ days, hours, minutes, seconds, completed }) => {
+    if (completed) {      
+      return `Nft Expired`;
+    } else {      
+      if(days > 0) return `${days} days left`
+      if(hours > 0) return `${hours} hours left`
+      if(minutes > 0) return `${minutes} minutes left`
+      if(seconds > 0) return `${seconds} seconds left`
+      
+      return 'Nft Expired'
+    }
+  };
