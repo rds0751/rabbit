@@ -1319,7 +1319,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                         >
                           Pricing History
                         </li>
-                        <li
+                        {/* <li
                           onClick={() => {
                             setTab(2);
                           }}
@@ -1337,7 +1337,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                           }}
                         >
                           Listings
-                        </li>
+                        </li> */}
                         <li
                           onClick={() => {
                             setTab(3);
@@ -1353,6 +1353,10 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                             fontWeight: tab === 3 ? 600 : "",
                             marginRight: "16px",
                             fontFamily: tab === 3 ? "poppins-bold" : "poppins",
+                            display:
+                            props?.responseData?.createdBy == userIdLocal
+                              ? "block"
+                              : "none"
                           }}
                         >
                           Offers

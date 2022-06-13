@@ -14,13 +14,16 @@ import {
   addLikeNft,
   getNFtsData,
 } from "../../services/webappMicroservice";
-import { calculateExpireSale, fetchPalletsColor, getParamTenantId } from "../../utility/global";
+import { calculateExpireSale, calculateExpireSaleInMiniSeconds, calculateExpireTime, fetchPalletsColor, getParamTenantId } from "../../utility/global";
 import Skeleton from "react-loading-skeleton";
 import ReactPlayer from "react-player";
 import useSound from "use-sound";
 import sound from "../../assets/sound.mp3";
 import playImage from "../../assets/images/Play.svg";
 import pauseImage from "../../assets/images/Pause.svg";
+import Countdown from "react-countdown";
+
+
 function NftCardsHome({ nft, appearance, loader }) {
   // let history = useHistory();
 
@@ -359,7 +362,8 @@ function NftCardsHome({ nft, appearance, loader }) {
                 {
                   salesInfo?.isOpenForSale ?
                     <a style={{ color: '#191919' }}><i className="far fa-clock clock-icon" style={{ width: '18px' }} />
-                      {calculateExpireSale(salesInfo?.expiryDate) ? `${calculateExpireSale(salesInfo?.expiryDate)} days left` : 'Expires today'}
+                      {/* {calculateExpireSale(salesInfo?.expiryDate) ? `${calculateExpireSale(salesInfo?.expiryDate)} days left` : 'Expires today'} */}
+                      <Countdown date={Date.now() + calculateExpireSaleInMiniSeconds(salesInfo?.expiryDate)} renderer={calculateExpireTime} />
                     </a>
                     : null
                 }
