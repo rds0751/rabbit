@@ -417,10 +417,9 @@ export default function NftInformation(props) {
     });
   };
 
-  let ownedBy = owner?.userName ? owner?.userName : owner?.wallet_address;
-  let createdBy = creator?.userName
-    ? creator?.userName
-    : creator?.wallet_address;
+  let ownedBy = owner != undefined ? owner[0]?.userName ? owner[0]?.userName : owner[0]?.wallet_address:"";
+  console.log(ownedBy,'1111');
+  let createdBy =  creator != undefined ?  creator[0]?.userName? creator[0]?.userName : creator[0]?.wallet_address:"";
   const url = window.location.href;
 
   const blockchainCheck = (blockchain) => {
@@ -1279,11 +1278,15 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                         data-bs-toggle="modal"
                         data-bs-target="#myModalShare"
                         style={{
-                          // display:
-                          //   props?.responseData?.createdBy != userIdLocal &&
-                          //     props?.responseData?.salesInfo?.isOpenForSale
-                          //     ? "block"
-                          //     : "none",
+                           display:
+                            //  props?.responseData?.createdBy != userIdLocal &&
+                            //    props?.responseData?.salesInfo?.isOpenForSale
+                            //    ? "block"
+                            //  : "none",
+                            props?.responseData?.ownerAddress ==
+                                     loggedInUser?.wallet_address ?"none":"block",
+                                     //&&
+                                    // props?.responseData?.salesInfo?.isOpenForSale
                           color: `${fetchPalletsColor(appearance.colorPalette)}`,
                           backgroundColor: "white",
                           textTransform: "none",

@@ -92,11 +92,11 @@ class Index extends BaseComponent {
       ownerAddress: data?.ownerAddress || "", // put metamask address
       previewImage: data?.previewImage,
       fileExtension: data?.fileExtension,
-      lazyMinting:{
-        isEnabled:data?.isLazyMintingEnabled,
-        signature:blockchainRes?.signature||"",
-        message: blockchainRes?.signMsg||"",
-      }
+      lazyMinting: {
+        isEnabled: data?.isLazyMintingEnabled,
+        signature: blockchainRes?.signature || "",
+        message: blockchainRes?.signMsg || "",
+      },
     };
   };
 
@@ -211,7 +211,10 @@ class Index extends BaseComponent {
         signMsg += "!" + tokenId;
 
         const [blockchainError, blockchainResult] = await Utils.parseResponse(
-          BlockchainServices.signcheck({ signMsg })
+          BlockchainServices.signcheck({
+            signMsg: signMsg,
+            blockchain: data?.blockchain,
+          })
         );
 
         console.log("blockchainError", blockchainError);
@@ -262,6 +265,7 @@ class Index extends BaseComponent {
     } else {
       console.log(data?.blockchain, "blockchainValue");
 
+
       if (data?.isLazyMintingEnabled) {
         var signMsg = "";
         var characters =
@@ -275,7 +279,10 @@ class Index extends BaseComponent {
         signMsg += "!" + tokenId;
 
         const [blockchainError, blockchainResult] = await Utils.parseResponse(
-          BlockchainServices.signcheck({ signMsg })
+          BlockchainServices.signcheck({
+            signMsg: signMsg,
+            blockchain: data?.blockchain,
+          })
         );
 
         console.log("blockchainError", blockchainError);

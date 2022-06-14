@@ -83,6 +83,8 @@ function Notification() {
   const handleNotification = (_id) => {
     getNotificationCountById(_id).then((response) => setCount(response));
   };
+
+  console.log(notifications,isOpenNoti,notifyData?.length,"1111");
   return (
     <div style={{ display: isOpenNoti ? null : "none" }} className="main-cont">
       {/* ------------ */}
@@ -91,7 +93,7 @@ function Notification() {
         <h3 className="notification-text">Notification</h3>
         <div
           className="all-noti"
-          style={{ display: notifyData?.length === 0 ? "none" : "block" }}
+          style={{ display: notifyData?.length === 0 || notifyData===undefined ? "none" : "block" }}
         >
           {notifyData?.map((curElem) => {
             const { _id, addedOn, type, owner, content } = curElem;
@@ -220,10 +222,10 @@ function Notification() {
             </footer>
           ) : null}
         </div>
-        {notifyData?.length === 0 && (
+        {notifyData?.length === 0 || notifyData===undefined && (
           <div
             className="no-notification"
-            style={{ display: notifyData?.length === 0 ? "block" : "none" }}
+            style={{ display: notifyData?.length === 0 || notifyData===undefined? "block" : "none" }}
           >
             <img className="no-image" src={NotificationIcon}></img>
             <p className="no-notification">No notification found</p>

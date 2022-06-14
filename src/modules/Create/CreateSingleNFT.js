@@ -434,12 +434,14 @@ function CreateSingleNFT(props) {
     }
   }
 
-  const batchMintNFT = async (e) => {
-    props.batchNFTHandler();
-  };
+
 
   const handleSubmit = async (e) => {
     var priceValue = price.current;
+
+
+    if( !!(royality.current % 1))
+    return toast.error("royalty must be number")
 
     if (priceValue.toString().slice(0, 1) == ".") {
       priceValue = "0" + priceValue;
@@ -451,11 +453,16 @@ function CreateSingleNFT(props) {
 
     if (collectionName === "Anafto Collection") {
       blockchain.current = blockchainValue(selectedOption?.value);
+      console.log(blockchain.current)
       collectionValue = blockchain.current;
     } else {
       blockchain.current = blockchainValue(collectionBlockchain);
       collectionValue = blockchain.current;
     }
+
+
+
+    
 
     let nftNameValidation = nameValidation(name.current);
     let nftPriceValidation = priceValidation(price.current, collectionValue);
