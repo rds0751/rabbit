@@ -147,6 +147,7 @@ async function lazyMinting({
   signMsg,
   blockchain
 }) {
+  alert("P")
   
   console.log(
     tokenURI,
@@ -181,7 +182,7 @@ async function lazyMinting({
     signature.toString(),
     contractAddress,
     receiverAddress,
-    { value: ethers.utils.parseEther(price.toString())}
+    { value: ethers.utils.parseEther(price.toString()) }
     
   );
   let res = await result.wait();

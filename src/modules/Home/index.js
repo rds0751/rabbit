@@ -214,7 +214,7 @@ export default class NftDetail extends BaseComponent {
         console.log("blockchainError====", blockchainError);
         console.log("blockchainRes====", blockchainResult);
         if (blockchainError || !blockchainResult) {
-           this.setState({ loaderState: false })
+          // this.setState({ loaderState: false })
           if (!this.state.responseData._id) return;
           let [txFailErr, txFailResult] = await Utils.parseResponse(
             updateTxStatus({ status: "failed" }, result._id)
