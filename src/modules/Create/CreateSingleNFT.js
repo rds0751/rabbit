@@ -439,6 +439,10 @@ function CreateSingleNFT(props) {
   const handleSubmit = async (e) => {
     var priceValue = price.current;
 
+
+    if( !!(royality.current % 1))
+    return toast.error("royalty must be number")
+
     if (priceValue.toString().slice(0, 1) == ".") {
       priceValue = "0" + priceValue;
       price.current = priceValue;
@@ -455,6 +459,10 @@ function CreateSingleNFT(props) {
       blockchain.current = blockchainValue(collectionBlockchain);
       collectionValue = blockchain.current;
     }
+
+
+
+    
 
     let nftNameValidation = nameValidation(name.current);
     let nftPriceValidation = priceValidation(price.current, collectionValue);

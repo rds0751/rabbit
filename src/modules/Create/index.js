@@ -209,12 +209,11 @@ class Index extends BaseComponent {
           );
         }
         signMsg += "!" + tokenId;
-     
 
         const [blockchainError, blockchainResult] = await Utils.parseResponse(
           BlockchainServices.signcheck({
-            signMsg:signMsg,
-            blockchain:data?.blockchain,
+            signMsg: signMsg,
+            blockchain: data?.blockchain,
           })
         );
 
@@ -266,6 +265,7 @@ class Index extends BaseComponent {
     } else {
       console.log(data?.blockchain, "blockchainValue");
 
+
       if (data?.isLazyMintingEnabled) {
         var signMsg = "";
         var characters =
@@ -279,8 +279,10 @@ class Index extends BaseComponent {
         signMsg += "!" + tokenId;
 
         const [blockchainError, blockchainResult] = await Utils.parseResponse(
-          BlockchainServices.signcheck({  signMsg:signMsg,
-            blockchain:data?.blockchain, })
+          BlockchainServices.signcheck({
+            signMsg: signMsg,
+            blockchain: data?.blockchain,
+          })
         );
 
         console.log("blockchainError", blockchainError);

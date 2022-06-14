@@ -71,7 +71,7 @@ export default class NftDetail extends BaseComponent {
     });
   };
 
-  isLazyMinted = async () => {};
+
 
   BuyNowNft = async (data) => {
     console.log(
