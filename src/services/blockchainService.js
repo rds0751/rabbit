@@ -156,7 +156,7 @@ async function lazyMinting({
     signMsg
   );
 
-  alert("p");
+
 
   let RinkebyAddress = "0x5ba6fcE01dB0f23695a5e86fA46a767671349AaB";
 
@@ -534,7 +534,7 @@ async function buyNFT({
   signature,
   receiverAddress,
 }) {
-  alert("x");
+
   let RinkebyAddress = "0x5ba6fcE01dB0f23695a5e86fA46a767671349AaB";
   let PolygonAddress = "0x6C626D2226C2415Ab32989660ea7f2C6265f230c";
   let BinanceAddress = "0x52CDde738d71568F79379FB1d671C4Eaef33d638";
