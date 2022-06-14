@@ -37,6 +37,8 @@ const BlockchainServices = {
 
 export default BlockchainServices;
 
+
+
 async function mintNFT({
   tokenURI,
   price,
@@ -143,6 +145,7 @@ async function lazyMinting({
   receiverAddress,
   signature,
   signMsg,
+  blockchain
 }) {
   
   console.log(
@@ -157,8 +160,9 @@ async function lazyMinting({
   );
 
 
+  if (window.ethereum.networkVersion == 4 && blockchain == "Ethereum") {
 
-  let RinkebyAddress = "0x5ba6fcE01dB0f23695a5e86fA46a767671349AaB";
+    let RinkebyAddress = "0x5ba6fcE01dB0f23695a5e86fA46a767671349AaB";
 
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
@@ -186,6 +190,7 @@ async function lazyMinting({
     chainId: provider?._network?.chainId || "",
     name: provider?._network?.name || "",
   };
+  }  else return Promise.reject("Please Select Valid Network in the metamask");
 }
 
 async function batchMintNFT({
@@ -236,49 +241,45 @@ async function batchMintNFT({
     };
   } else return Promise.reject("Please Select Valid Network in the metamask");
 }
-async function makeOffer({ price }) {
-  const accounts = await window.ethereum.request({
-    method: "eth_requestAccounts",
-  });
-  // let creatorWalletAddress = accounts[0];
+async function makeOffer({ price ,blockchain}) {
 
-  // const wallet = ethers.Wallet.createRandom();
-  // const walletAddress ="0x8feCBEB506aC00Fc04711da4c93CaC871673332A";
-  // console.log(walletAddress);
-  // const walletMnemonicPhrase = wallet.mnemonic.phrase;
-  // const walletPrivateKey = wallet.privateKey;
 
   if (!window.ethereum) return Promise.reject("Please install metamask");
+  if (window.ethereum.networkVersion == 4 && blockchain == "Ethereum") {
+    const accounts = await window.ethereum.request({
+      method: "eth_requestAccounts",
+    });
+    
+  
+    if (!window.ethereum) return Promise.reject("Please install metamask");
+  
+ 
+  
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contractData = new ethers.Contract(
+      "0x1a1Af51744b38E90aA413D5a4C590037273C10Ba",
+      contractbuyAndRemoveABI,
+      signer
+    );
+    const result = await contractData.makeOffer(
+      { value: ethers.utils.parseEther(price.toString()) }
+      // accounts[0]
+    );
+    let res = await result.wait();
+    return {
+      ...res,
+      chainId: provider?._network?.chainId || "",
+      name: provider?._network?.name || "",
+      creatorWalletAddress: accounts[0],
+    };
 
-  // await window.ethereum.send("eth_requestAccounts");
-  // const provider = new ethers.providers.Web3Provider(window.ethereum);
-  // const signer = provider.getSigner();
-  // ethers.utils.getAddress(walletAddress);
-  // const tx = await signer.sendTransaction({
-  //   to: walletAddress,
-  //   value: ethers.utils.parseEther(price.toString()),
-  //   gasLimit:100000,
 
-  // });
+  }else return Promise.reject("Please Select Valid Network in the metamask");
 
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const signer = provider.getSigner();
-  const contractData = new ethers.Contract(
-    "0x1a1Af51744b38E90aA413D5a4C590037273C10Ba",
-    contractbuyAndRemoveABI,
-    signer
-  );
-  const result = await contractData.makeOffer(
-    { gasLimit: 100000, value: ethers.utils.parseEther(price.toString()) }
-    // accounts[0]
-  );
-  let res = await result.wait();
-  return {
-    ...res,
-    chainId: provider?._network?.chainId || "",
-    name: provider?._network?.name || "",
-    creatorWalletAddress: accounts[0],
-  };
+
+
+ 
   // return {
   //   tx,
   //   walletAddress,
@@ -383,23 +384,34 @@ async function acceptOffer({
   }
 }
 
-async function signcheck({ signMsg }) {
+async function signcheck({ signMsg,blockchain }) {
   try {
+  
+
+
     if (!window.ethereum) return Promise.reject("Please install metamask");
+
+    if (window.ethereum.networkVersion == 4 && blockchain == "Ethereum") {
     await window.ethereum.send("eth_requestAccounts");
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const signature = await signer.signMessage(signMsg);
     const address = await signer.getAddress();
-
     return {
       signMsg,
       signature,
       address,
     };
+
+  }
+  else return Promise.reject("Please Select Valid Network in the metamask");
+
+    
+
   } catch (err) {
     Promise.reject(err);
   }
+
 }
 
 async function signverfiy({ message, address, signature }) {

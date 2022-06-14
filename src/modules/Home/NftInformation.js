@@ -418,6 +418,7 @@ export default function NftInformation(props) {
   };
 
   let ownedBy = owner?.userName ? owner?.userName : owner?.wallet_address;
+  console.log(ownedBy);
   let createdBy = creator?.userName
     ? creator?.userName
     : creator?.wallet_address;

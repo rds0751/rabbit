@@ -434,9 +434,7 @@ function CreateSingleNFT(props) {
     }
   }
 
-  const batchMintNFT = async (e) => {
-    props.batchNFTHandler();
-  };
+
 
   const handleSubmit = async (e) => {
     var priceValue = price.current;
@@ -451,6 +449,7 @@ function CreateSingleNFT(props) {
 
     if (collectionName === "Anafto Collection") {
       blockchain.current = blockchainValue(selectedOption?.value);
+      console.log(blockchain.current)
       collectionValue = blockchain.current;
     } else {
       blockchain.current = blockchainValue(collectionBlockchain);
