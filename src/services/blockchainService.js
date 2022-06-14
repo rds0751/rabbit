@@ -147,7 +147,6 @@ async function lazyMinting({
   signMsg,
   blockchain
 }) {
-  alert("P")
   
   console.log(
     tokenURI,
