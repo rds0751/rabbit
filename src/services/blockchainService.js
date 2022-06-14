@@ -158,9 +158,7 @@ async function lazyMinting({
 
   alert("p");
 
-  let RinkebyAddress = "0xf2744Bd99AA185A0Fbe1E5c629D5F58A35772685";
-  let PolygonAddress = "0x6C626D2226C2415Ab32989660ea7f2C6265f230c";
-  let BinanceAddress = "0x52CDde738d71568F79379FB1d671C4Eaef33d638";
+  let RinkebyAddress = "0x5ba6fcE01dB0f23695a5e86fA46a767671349AaB";
 
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
@@ -171,14 +169,15 @@ async function lazyMinting({
     signer
   );
   const result = await contractData.mintAndBuy(
-    tokenURI,
+    tokenURI.toString(),
     tokenId,
+    ethers.utils.parseEther(price.toString()),
     royality,
-    signMsg,
-    signature,
-    "0x639f59e4B336736eF6D2D220b164759A9a9cF289",
+    signMsg.toString(),
+    signature.toString(),
+    contractAddress,
     receiverAddress,
-    { value: ethers.utils.parseEther(price.toString()) ,gasLimit:500000}
+    { value: ethers.utils.parseEther(price.toString())}
     
   );
   let res = await result.wait();
@@ -536,7 +535,7 @@ async function buyNFT({
   receiverAddress,
 }) {
   alert("x");
-  let RinkebyAddress = "0xf2744Bd99AA185A0Fbe1E5c629D5F58A35772685";
+  let RinkebyAddress = "0x5ba6fcE01dB0f23695a5e86fA46a767671349AaB";
   let PolygonAddress = "0x6C626D2226C2415Ab32989660ea7f2C6265f230c";
   let BinanceAddress = "0x52CDde738d71568F79379FB1d671C4Eaef33d638";
 
@@ -611,10 +610,10 @@ async function buyNFT({
     const resultBuy = await contractData.buy(
       tokenId,
       message.toString(),
-      signature,
+      signature.toString(),
       contractAddress,
       receiver[0],
-      { value: ethers.utils.parseEther(price.toString()),gasLimit:21000 }
+      { value: ethers.utils.parseEther(price.toString()) }
     );
     // console.log("<<<resultBuy",resultBuy)
 
