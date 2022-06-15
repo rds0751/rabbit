@@ -401,11 +401,11 @@ export default class NftDetail extends BaseComponent {
       signature: signRes.signature,
       message: signRes.signMsg,
       address: signRes.address,
-      expiryTime: expiryTime,
-      expiryDate: expiryDate,
+      expiryDateTime: unixTimeZone,
       price: price,
     };
-    // console.log("nannnn",requestData)
+     console.log("nannnn",requestData)
+    
     // this.updateNftDataInDb(requestData, eventConstants.SELL,this.state.responseData._id || '')
     if (!this.state?.responseData?._id) return;
     let [error, result] = await Utils.parseResponse(
@@ -518,10 +518,39 @@ export default class NftDetail extends BaseComponent {
   makeOffer = async ({ price, dateTime }) => {
     console.log(price, dateTime);
     let blockchainRes;
+
+    let unixTimeZone = new Date(dateTime).getTime();
+
+    var signMsg = "";
+    var characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var charactersLength = characters.length;
+    for (var i = 0; i < 32; i++) {
+      signMsg += characters.charAt(
+        Math.floor(Math.random() * charactersLength)
+      );
+    }
+    signMsg += "!" + unixTimeZone;
+
+    const [signError, signRes] = await Utils.parseResponse(
+      BlockchainService.signcheck({
+        signMsg: signMsg,
+        blockchain: this?.state?.responseData?.blockchain,
+      })
+    );
+    if (signError || !signRes) {
+      this.setState({ loaderState: false });
+      return toast.error(signError || "Unable to generate signature");
+    } else {
+      console.log(signRes, "<<<signRes");
+    }
+
+
+
     const [blockchainError, blockchainResult] = await Utils.parseResponse(
       BlockchainService.makeOffer({
         price: price,
-        blockchain:this.state.responseData.blockchain
+        blockchain:this?.state?.responseData?.blockchain
       })
     );
     console.log("blockchainError====", blockchainError);
@@ -543,10 +572,11 @@ export default class NftDetail extends BaseComponent {
       contentId: this.state?.responseData?._id,
       offerPrice: price,
       addedBy: localStorage.getItem("userId"),
-      expiryDateTime: 1653997819995,
+      expiryDateTime: unixTimeZone,
       receiverAddress: blockchainRes.creatorWalletAddress,
-      privateKey: blockchainRes.walletPrivateKey,
       currency: this.state?.responseData?.salesInfo?.currency,
+      signature:signRes.signMsg,
+      message:signRes.signature,
     };
     // console.log("nannnn",requestData)
     // this.updateNftDataInDb(requestData, eventConstants.SELL,this.state.responseData._id || '')
