@@ -1696,7 +1696,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                         </Select>
                         <span style={{ border: "0.2px ridge #C8C8C8" }}></span>
 
-                        <input type="time" className="filter-time" onChange={(e) => setMakeOfferDetails({ ...makeOfferDetails, dateTime: e.target.value })} />
+                        <input type="datetime-local" className="filter-time" onChange={(e) => setMakeOfferDetails({ ...makeOfferDetails, dateTime: e.target.value })} />
                       </div>
                     </div>
 
