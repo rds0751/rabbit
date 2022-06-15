@@ -413,7 +413,7 @@ function Navbar({ loader }) {
                   loader ? <Skeleton width="60px" /> :
                     <img
                       src={customize.storeLogo ? customize.storeLogo : Anafto}
-                      style={{ width: "60px" }}
+                      style={{ width: "143px",maxWidth:"143px" }}
                       alt=""
                     />
                 }
