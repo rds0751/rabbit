@@ -100,7 +100,7 @@ async function mintNFT({
       // accounts[0],
       tokenId,
       // 20,
-      ethers.utils.parseEther(price.toString()),
+     ethers.utils.parseEther("0"),
       royalty,
       accounts[0]
     );
@@ -335,50 +335,7 @@ async function acceptOffer({
       name: provider?._network?.name || "",
     };
 
-    //buy with offer
-    //     console.log(signMsg)
-
-    // var providerx = ethers.providers.getDefaultProvider("https://rinkeby.infura.io/v3/04456733dcca43d2b2991398598e00c4");
-    // console.log("xyz")
-    // var addressx  = '0xaA0842869e1a627B749bE2795d5D699d86F4dfc9';
-    // var privateKey = '0xf0a238d060882681cbc99584a26dbfd17f7bed0839a01361a777e289e3273de4';
-    // var walletx = new ethers.Wallet(privateKey,providerx);
-    // console.log("xyz")
-
-    // var contract = new ethers.Contract('0x8feCBEB506aC00Fc04711da4c93CaC871673332A',contractbuyAndRemoveABI,walletx);
-    // console.log("xyz")
-    //  var sendPromise = contract.buy(
-    //   tokenId,
-    //   signMsg.toString(),
-    //   signature,
-    //   '0xe481bf4f3dbeb59bf758d271a710142e10898728',
-    //   receiverAddress,
-    //   {  gasLimit: 100000, value: ethers.utils.parseEther("0.99") }
-    // );
-    // console.log("xyz")
-
-    //  let xy =sendPromise.then(function(transaction){
-    //    console.log(transaction,"xyc");
-    //  });
-    // //let x = await sendPromise.wait();
-    // console.log("xyz");
-    // return {
-    //   signMsg,
-    //   signature,
-    //   address,
-    // };
-
-    //   let private_key ="41559d28e936dc92104ff30691519693fc753ffbee6251a611b9aa1878f12a4d";
-    //  window.ethersProvider = new ethers.providers.InfuraProvider("https://rinkeby.infura.io/v3/04456733dcca43d2b2991398598e00c4");
-    //   let infura=  new ethers.providers.InfuraProvider("https://rinkeby.infura.io/v3/04456733dcca43d2b2991398598e00c4");
-    //  const Secondsigner = new ethers.Wallet(private_key, infura);
-    //   let send_token_amount = "1";
-    //   let to_address = "0x4c10D2734Fb76D3236E522509181CC3Ba8DE0e80";
-    //   let send_address = "0xda27a282B5B6c5229699891CfA6b900A716539E6";
-    //   let gas_limit = "0x100000";
-    //   let wallet = new ethers.Wallet(private_key);
-    //   let walletSigner = wallet.connect(window.ethersProvider);
-    //   let contract_address = "";
+ 
   } catch (err) {
     Promise.reject(err);
   }
@@ -547,9 +504,10 @@ async function buyNFT({
   receiverAddress,
 }) {
 
-  let RinkebyAddress = "0x5ba6fcE01dB0f23695a5e86fA46a767671349AaB";
+  let RinkebyAddress = "0xf7AC24823B0B31d05631850B5Ab45A9Cb79D7a34";
   let PolygonAddress = "0x6C626D2226C2415Ab32989660ea7f2C6265f230c";
   let BinanceAddress = "0x52CDde738d71568F79379FB1d671C4Eaef33d638";
+
 
   const receiver = await window.ethereum.request({
     method: "eth_requestAccounts",

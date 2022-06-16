@@ -139,6 +139,7 @@ export default function NftInformation(props) {
   const { user } = useSelector((state) => state);
   const [isCurrUserNft, setIsCurrUserNft] = useState(null);
   const [isOpenForSell, setisOpenForSell] = useState(null);
+  const [error, setError] = useState("");
   const { loggedInUser, walletAddress } = user;
   const { id } = useParams();
 
@@ -280,22 +281,77 @@ export default function NftInformation(props) {
     // }, 1000);
   };
 
+  const priceValidation = (nftPrice, xy) => {
+    if (nftPrice.length == 0) {
+      setError("( price is required)");
+      return false;
+    } else if (nft.blockchain === "Ethereum" && nftPrice < 0.004) {
+      setError(
+        "( Minimum listing price for an NFT should be more than 0.004 ETH )"
+      );
+      return false;
+    } else if (nft.blockchain === "Polygon" && nftPrice < 11.71) {
+      setError(
+        "( Minimum listing price for an NFT should be more than 11.71 MATIC )"
+      );
+      return false;
+    } else if (nft.blockchain === "Binance" && nftPrice < 0.027) {
+      setError(
+        "( Minimum listing price for an NFT should be more than 0.027 BNB )"
+      );
+      return false;
+    } else if (nft.blockchain === "Ethereum" && nftPrice > 1000000000) {
+      setError(
+        "( Maximum listing price for an NFT should be less than 1,000,000,000 ETH )"
+      );
+      return false;
+    } else if (nft.blockchain === "Polygon" && nftPrice > 2929880265000) {
+      setError(
+        "( Maximum listing price for an NFT should be less than 2,929,880,265,000 MATIC )"
+      );
+      return false;
+    } else if (nft.blockchain === "Binance" && nftPrice > 6841316000) {
+      setError(
+        "( Maximum listing price for an NFT should be less than 6,841,316,000 BNB )"
+      );
+      return false;
+    } else {
+      setError("");
+      return true;
+    }
+  };
+
 
   const demoHandleSell = async () => {
-    setsaleModal(false);
-    setPutOnSaleModal(true);
 
-    props?.sellNowNft({
-      // sellerId:loggedInUser._id,
-      // buyerId:loggedInUser._id,
-      // saleData:response.salesInfo,
-      // tokenId:response.tokenId,
-      // nftId:response._id,
-      blockchain: nft?.blockchain,
-      expiryTime: period.expiryTime,
-      expiryDate: period.expiryDate,
-      price: period.price,
-    });
+    let price=priceValidation(period.price)
+   
+
+    if(price){
+      setsaleModal(false);
+      setPutOnSaleModal(true);
+
+      props?.sellNowNft({
+        // sellerId:loggedInUser._id,
+        // buyerId:loggedInUser._id,
+        // saleData:response.salesInfo,
+        // tokenId:response.tokenId,
+        // nftId:response._id,
+        blockchain: nft?.blockchain,
+        expiryTime: period.expiryTime,
+        expiryDate: period.expiryDate,
+        price: period.price,
+      });
+
+    }
+    else {
+      setsaleModal(true);
+      setPutOnSaleModal(false);
+
+    }
+    
+
+   
     // setPutOnSaleModal(false)
   };
 
@@ -1146,7 +1202,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                         </div>
                       </div>
                     </div>
-                    <div className="second-text align-row">
+                    <div className="second-text align-row" style={{display:nft?.salesInfo?.isOpenForSale ? "flex":"none"}}>
                       <span className="text">
                         Current Price:&nbsp;
                         <span className="nft-value">
@@ -1510,24 +1566,50 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                     ></i>
                   </div>
                   <div className="singlerowmodal">
-                    <h3 className="reason-text"> Price*</h3>
+
+
+
+                    <div className="input-price">
+                  <label htmlFor="price" className=" input-label">
+                    Price* <span style={{ color: "red", fontSize: "15px" }}>{error}</span>
+                  </label>
+                 
+                  <div className="input-group">
                     <input
-                      className="form-control-1"
-                      min="0"
+                      className="form-control"
                       type="number"
+                      title=" "
+                      placeholder="0"
                       autoComplete="off"
-                      placeholder={salesInfo?.price}
+                      style={{
+                       // border:
+                         // error != "" ? "1px solid red" : "1px solid #C8C8C8",
+                      }}
+                      onWheel={(e) => e.target.blur()}
                       onChange={(e) => {
                         period.price = e.target.value;
+                        // i//f (e.target.value.length != 0) setError("");
+                        // else if (
+                        //   e.target.value > "0.004" ||
+                        //   !e.target.value == "0"
+                        // )
+                        //   setError("");
+                        // else if (!price.current > "1000000000") setError("");
 
-
+                        // checkChanges();
                       }}
-
-                    // onChange={(e) => {
+                    />
+                    <span class="input-group-text">
+                      {  blockchainCheck(nft.blockchain)
+                         } </span>
+                        </div>
+                    {/*
+                     onChange={(e) => {
                     //   price.current = e.target.value;
                     //   checkChanges();
                     // }}
-                    />
+                   // /> */}
+                   </div>
                     <h3 className="reason-text"> Keep it on sale until :</h3>
                     <input
                       type="datetime-local"
@@ -1544,7 +1626,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                     //   checkChanges();
                     // }}
                     />
-                    <input
+                    {/* <input
                       className="form-control-1"
                       // min="0"
                       type="time"
@@ -1558,7 +1640,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                     //   price.current = e.target.value;
                     //   checkChanges();
                     // }}
-                    />
+                    /> */}
                     {/* <select className="select-box" onChange={(e) => handleChange(e)}>
                     <option>Select reason</option>
                     <option value="Fake collection or possible scam">Fake collection or possible scam</option>

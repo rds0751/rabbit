@@ -14,6 +14,9 @@ body.active-modal{
   width: 100%;
   height: 100%;
   backdrop-filter: blur(0px) contrast(0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .report-modal {
   position: absolute;
@@ -50,6 +53,7 @@ body.active-modal{
   margin-bottom:0px;
 }
 .reason-text{
+  margin-top: 20px;
   font-weight: bold;
   font-size: 16px;
   color: #191919;
@@ -251,8 +255,8 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   .report-modal{
     /* width: 32.8%;
     left: 35.6%; */
-    width: 50%;
-    left: 25%;
+    width: 35%;
+    /* left: 25%; */
   }
   .main-model{
     width: 36%;
