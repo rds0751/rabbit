@@ -443,13 +443,13 @@ function CreateSingleNFT(props) {
     if( !!(royality.current % 1))
     return toast.error("royalty must be number")
 
-    if (priceValue.toString().slice(0, 1) == ".") {
-      priceValue = "0" + priceValue;
-      price.current = priceValue;
-    } else {
-      price.current = +priceValue;
-      price.current = price.current.toString();
-    }
+    // if (priceValue.toString().slice(0, 1) == ".") {
+    //   priceValue = "0" + priceValue;
+    //   price.current = priceValue;
+    // } else {
+    //   price.current = +priceValue;
+    //   price.current = price.current.toString();
+    // }
 
     if (collectionName === "Anafto Collection") {
       blockchain.current = blockchainValue(selectedOption?.value);
@@ -465,13 +465,14 @@ function CreateSingleNFT(props) {
     
 
     let nftNameValidation = nameValidation(name.current);
-    let nftPriceValidation = priceValidation(price.current, collectionValue);
+    //let nftPriceValidation = priceValidation(price.current, collectionValue);
     let nftDescriptionValidation = descriptionValidation(description.current);
     let nftFileValidation = fileValidation();
     let nftBlockchain = blockchainValidation(blockchain.current);
     if (
       nftNameValidation &&
-      nftPriceValidation &&
+      //nftPriceValidation
+       
       nftDescriptionValidation &&
       nftFileValidation &&
       nftBlockchain
@@ -483,7 +484,7 @@ function CreateSingleNFT(props) {
           cdnUrl: cdnUrl,
           compressedURL: compressedUrl,
           nftName: name.current,
-          price: price.current,
+         // price: price.current,
           currency:
             collectionName === "Anafto Collection"
               ? selectedOption?.value
@@ -1208,12 +1209,11 @@ function CreateSingleNFT(props) {
                   />
                 </div>
 
-                <div className="input-price">
+               {/* <div className="input-price">
                   <label htmlFor="price" className=" input-label">
                     Price*
                   </label>
                   <div style={{ color: "red", fontSize: "15px" }}>{error}</div>
-                  <div class="input-group">
                     <input
                       className="form-control"
                       type="number"
@@ -1244,7 +1244,7 @@ function CreateSingleNFT(props) {
                         : priceWithCurrency(collectionBlockchain)}
                     </span>
                   </div>
-                </div>
+                </div>  */}
                 <div className="input-description">
                   <label htmlFor="comment" className="input-label pb-2">
                     Description*

@@ -80,10 +80,10 @@ class Index extends BaseComponent {
         chainId: blockchainRes?.chainId || "",
         name: blockchainRes?.name || "",
       },
-      salesInfo: {
-        price: data?.price || 0,
+       salesInfo: {
+       // price: data?.price || 0,
         currency: data?.currency,
-      },
+       },
       royalty: data?.royality,
       //TO do need to pass user (owner) _id
       ownedBy: data?.createdBy,

@@ -102,7 +102,7 @@ export default class NftDetail extends BaseComponent {
       price: this.state?.responseData?.salesInfo?.price || "",
       currency: this.state?.responseData?.salesInfo?.currency || "ETH",
       addedBy: data?.buyerId || "",
-      loyality: 5, // to do
+      loyality: this.state?.responseData?.royalty, // to do
       collectionId: this.state?.responseData?.collectionId || "",
       //   ownedBy: this.props?.user?.userDetails?._id || '',
       //   ownerAddress: this.props?.user?.userDetails?.userId || '',
@@ -330,6 +330,9 @@ export default class NftDetail extends BaseComponent {
     console.log(new Date(expiryDate).getTime(), "<<<xyz");
     let unixTimeZone = new Date(expiryDate).getTime();
 
+    let newPrice=price* Math.pow(10,18)
+  
+
     // this.setState({ loaderState: true })
 
     var signMsg = "";
@@ -341,7 +344,7 @@ export default class NftDetail extends BaseComponent {
         Math.floor(Math.random() * charactersLength)
       );
     }
-    signMsg += "!" + unixTimeZone;
+    signMsg += "!" + unixTimeZone+"!"+newPrice;
 
     const [signError, signRes] = await Utils.parseResponse(
       BlockchainService.signcheck({
@@ -569,8 +572,8 @@ export default class NftDetail extends BaseComponent {
 
     let requestData = {
       tokenId: this?.state?.responseData?.tokenId,
-      contentId: this.state?.responseData?._id,
-      offerPrice: price,
+      contentId: this.state?.responseData?._id,  //right
+      offerPrice: price, //right
       addedBy: localStorage.getItem("userId"),
       expiryDateTime: unixTimeZone,
       receiverAddress: blockchainRes.creatorWalletAddress,
