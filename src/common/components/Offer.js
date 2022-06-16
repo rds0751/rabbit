@@ -26,38 +26,19 @@ export default function Offer(props) {
        var utcAfter=utc+10000;
        signMsg+='!'+utcAfter;
 
-       const [blockchainError, blockchainRes] = await Utils.parseResponse(
-        BlockchainService.acceptOffer({
-            tokenId:props.nft.tokenId,
-            signMsg:signMsg,
-            contractAddress:"0x0fed614DCE3EE9F42C69fd753cd9532A522F6955",
-            receiverAddress:props?.nft?.offers[0]?.receiverAddress,
-            price:props?.nft?.salesInfo.price,
-            privateKey:props?.nft?.offers[0]?.privateKey,
-        })
-
-
-    );
-console.log(blockchainRes);
-console.log(blockchainError);
-      if(blockchainError || !blockchainRes){
-        // this.setState({ loaderState: false })
-        return toast.error(blockchainError || "Unable to generate signature");
-       }
-    else{
-        toast.success("sign successfully generated")
+      
 
         let requestDataInTx = {
             //   type: eventConstants.BUY,
             //   transaction: blockchainRes.transactionHash || '',
-            contentId: props?.nft?._id || '',
-            seller:  props?.nft?.ownedBy || '',
-            buyer: props.nft.offers[0].addedBy || '', 
-            price:  props?.nft?.salesInfo?.price || '',
-            currency:  props?.nft?.salesInfo?.currency || 'ETH',
-            addedBy: props.buyerInfo.buyerId || '',
-            loyality: 5, // to do
-            collectionId:  props?.nft?.collectionId || ''
+            contentId: props?.nft?._id || '',  //right
+            seller:  props?.nft?.ownedBy || '',  //right
+            buyer: props.nft.offers[0].addedBy || '', //right
+            price:  props?.nft?.salesInfo?.price || '', //price
+            currency:  props?.nft?.salesInfo?.currency || 'ETH', //right
+            addedBy: props.nft.offers[0].addedBy  || '',//pending
+            loyality:  props?.nft?.royalty, // to do //right
+            collectionId:  props?.nft?.collectionId || '' //right
             //   ownedBy: this.props?.user?.userDetails?._id || '',
             //   ownerAddress: this.props?.user?.userDetails?.userId || '',
             //   updatedBy: this.props?.user?.userDetails?._id || '',
@@ -78,6 +59,24 @@ console.log(blockchainError);
 
             return toast.error(error || "Unable to update Nft tx.",{autoClose:7000,theme:"colored"})
         }
+        const [blockchainError, blockchainRes] = await Utils.parseResponse(
+          BlockchainService.acceptOffer({
+              tokenId:props.nft.tokenId,
+              signMsg:signMsg,
+              contractAddress:"0x0fed614DCE3EE9F42C69fd753cd9532A522F6955",
+              receiverAddress:props?.nft?.offers[0]?.receiverAddress,
+              price:props?.nft?.salesInfo.price,
+              privateKey:props?.nft?.offers[0]?.privateKey,
+          })
+  
+  
+      );
+        console.log(blockchainRes);
+        console.log(blockchainError);
+        if(blockchainError || !blockchainRes){
+          // this.setState({ loaderState: false })
+          return toast.error(blockchainError || "Unable to generate signature");
+         }
 
 
         if (!props?.nft?._id) return;
@@ -93,12 +92,12 @@ console.log(blockchainError);
         }
 
         let requestData = {
-            transactionHash: blockchainRes.transactionHash || '',
-            ownedBy: props.nft.offers[0].addedBy || '',
-            ownerAddress:  props.nft?.newOwnerAddress || '',
-            updatedBy:  props.buyerInfo?.buyerId || '',
+            transactionHash: blockchainRes.transactionHash || '', // right
+            ownedBy: props.nft.offers[0].addedBy || '',  //right
+            ownerAddress:   props.nft.offers[0].receiverAddress || '', //pending
+            updatedBy: props.nft.offers[0].addedBy || '', //pending
             // _id: this.state?.responseData?._id || '',
-            salesInfo: {
+            salesInfo: {       //right
                 ...props.nft?.salesInfo,
                 isOpenForSale: false
             },
@@ -125,7 +124,7 @@ console.log(blockchainError);
 
 
         console.log(blockchainRes,"<<<signRes");
-     }
+     
 
 
     }
