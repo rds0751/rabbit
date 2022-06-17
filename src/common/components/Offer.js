@@ -61,7 +61,7 @@ export default function Offer(props) {
         }
         const [blockchainError, blockchainRes] = await Utils.parseResponse(
           BlockchainService.acceptOffer({
-              tokenId:props.nft.tokenId,
+              tokenId:props?.nft?.tokenId,
               signMsg:signMsg,
               contractAddress:"0x0fed614DCE3EE9F42C69fd753cd9532A522F6955",
               receiverAddress:props?.nft?.offers[0]?.receiverAddress,
