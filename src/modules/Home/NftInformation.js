@@ -181,7 +181,7 @@ export default function NftInformation(props) {
      });
    } else {
      toast.success("NFT Time OUT");
-     
+     props.getNftDetail();
    }
 
    }
