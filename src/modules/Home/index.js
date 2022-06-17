@@ -328,9 +328,7 @@ export default class NftDetail extends BaseComponent {
       contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS_BINANCE;
 
     console.log(new Date(expiryDate).getTime(), "<<<xyz");
-    let unixTimeZone = new Date(expiryDate).getTime();
-
-    let newPrice=price* Math.pow(10,18)
+  
   
 
     // this.setState({ loaderState: true })
@@ -344,6 +342,8 @@ export default class NftDetail extends BaseComponent {
         Math.floor(Math.random() * charactersLength)
       );
     }
+    let unixTimeZone = expiryDate.getTime();
+    let newPrice=price* Math.pow(10,18)
     signMsg += "!" + unixTimeZone+"!"+newPrice;
 
     const [signError, signRes] = await Utils.parseResponse(

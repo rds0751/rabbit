@@ -321,7 +321,8 @@ async function acceptOffer({
       signMsg,
       signature,
       contractAddress,
-      receiverAddress
+      receiverAddress,
+      {gasLimit:100000}
 
       // // 20,
       // ethers.utils.parseEther(price.toString()),

@@ -11,6 +11,7 @@ import twitterIcon from "../../assets/images/Twitter.png";
 import "../../assets/styles/nftReportModal.css";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import ContentService from "../../services/contentMicroservice";
 import { BidApi, OfferApi } from "../../constants/Nft_Info_Api";
 import PricingHistoryComponentTable from "../../common/components/PricingHistoryComponentTable";
 import PricingHistoryComponentGraph from "../../common/components/PricingHistoryComponentGraph";
@@ -23,6 +24,7 @@ import { Button } from "@mui/material";
 import { getNft, addNftReport } from "../../services/webappMicroservice";
 import { useSelector } from "react-redux";
 import Spinner from "../../common/components/Spinner";
+import DateTimePicker from "react-datetime-picker"
 import {
   put_NftOpenForSale,
   RemoveNftFromSale,
@@ -116,20 +118,10 @@ const Option = styled.option`
 `;
 const queryString = require("query-string");
 
-const renderer = ({ days, hours, minutes, seconds, completed }) => {
-  if (completed) {
-    // Render a completed state
-    return <span>Nft Expired</span>;
-  } else {
-    // Render a countdown
-    return <span>
-      {days > 0 ? days < 10 ? `0${days}d ` : `${days}d `: ''}
-      {hours < 10 ? `0${hours}` : hours}h{" "}
-      {minutes < 10 ? `0${minutes}` : minutes}m{" "}
-      {seconds < 10 ? `0${seconds}` : seconds}s
-    </span>;
-  }
-};
+
+
+
+
 
 export default function NftInformation(props) {
   const appearance = useSelector((state) => state.customize.appearance);
@@ -142,6 +134,7 @@ export default function NftInformation(props) {
   const [error, setError] = useState("");
   const { loggedInUser, walletAddress } = user;
   const { id } = useParams();
+  const [timeCheck,setTimeCheck]=useState(true);
 
   const nft = props?.responseData;
 
@@ -152,6 +145,50 @@ export default function NftInformation(props) {
     minPrice: "",
     maxPrice: "",
   };
+ 
+  const renderer = ({ days, hours, minutes, seconds, completed }) => {
+    if (completed) {
+      // Render a completed state
+      setTimeCheck(false);
+      return <span>NFT Expired</span>;
+    } else {
+      // Render a countdown
+      return <span>
+        {days > 0 ? days < 10 ? `0${days}d ` : `${days}d `: ''}
+        {hours < 10 ? `0${hours}` : hours}h{" "}
+        {minutes < 10 ? `0${minutes}` : minutes}m{" "}
+        {seconds < 10 ? `0${seconds}` : seconds}s
+      </span>;
+    }
+  };
+
+
+
+  useEffect(async ()=>{
+
+
+    if(!timeCheck){
+      // Render a completed state
+   let requestData = {
+     _id: nft._id,
+   };
+   let [error, result] = await Utils.parseResponse(
+     ContentService.removeFromSale(requestData)
+   );
+   if (error || !result) {
+     return toast.error(error || "Unable to update Nft content.", {
+       autoClose: 5000,
+     });
+   } else {
+     toast.success("NFT Time OUT");
+     props.getNftDetail();
+   }
+
+   }
+
+  },[!timeCheck])
+
+
 
   const { owner, creator, salesInfo, blockchain, offers } = nft;
 
@@ -175,12 +212,14 @@ export default function NftInformation(props) {
   const [makeOfferModal, setMakeOfferModal] = useState(false);
   const [filter, setFilter] = useState(defaultFilter);
   const [moreNft, setMoreNfts] = useState([]);
+  const [dateTimeValue, setDateTimeValue] = useState("");
+  const [salePrice, setSalePrice] = useState("");
 
 
   let period = {
-    expiryDate: "",
-    expiryTime: "",
-    price: "",
+    expiryDate: dateTimeValue,
+    //expiryTime: "",
+    price: salePrice
   };
 
   const [state, setState] = React.useState({
@@ -324,7 +363,9 @@ export default function NftInformation(props) {
 
   const demoHandleSell = async () => {
 
-    let price=priceValidation(period.price)
+    let price=priceValidation(period.price) 
+
+
    
 
     if(price){
@@ -338,7 +379,7 @@ export default function NftInformation(props) {
         // tokenId:response.tokenId,
         // nftId:response._id,
         blockchain: nft?.blockchain,
-        expiryTime: period.expiryTime,
+       // expiryTime: period.expiryTime,
         expiryDate: period.expiryDate,
         price: period.price,
       });
@@ -1226,7 +1267,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                             <i className="far fa-clock clock-icon"></i>
                             {/* <span className="time">{calculateExpireSale(salesInfo?.expiryDate) ? `${calculateExpireSale(salesInfo?.expiryDate)} days left` : 'Expires today'}</span> */}
                             <span className="time">
-                            <Countdown date={Date.now() + calculateExpireSaleInMiniSeconds(salesInfo?.expiryDate)} renderer={renderer} />
+                            <Countdown date={nft.salesInfo?.expiryDateTime} renderer={timeCheck && renderer} />
                           </span>
                           </span>
                         ) : (
@@ -1243,7 +1284,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                         <span className="text">
                           Owned by:&nbsp;
                           <Link
-                            to={"/user-profile/" + owner?._id + getParamTenantId()}
+                            to={"/user-profile/" + owner[0]?._id + getParamTenantId()}
                             style={{ textDecoration: "none" }}
                           >
                             <span className="text-name fw-b">
@@ -1261,7 +1302,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                         <span className="text">
                           Created by:&nbsp;
                           <Link
-                            to={"/user-profile/" + owner?._id + getParamTenantId()}
+                            to={"/user-profile/" + nft?.createdBy+ getParamTenantId()}
                             style={{ textDecoration: "none" }}
                           >
                             <span className="text-name fw-b">
@@ -1581,13 +1622,15 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                       title=" "
                       placeholder="0"
                       autoComplete="off"
+                      value={salePrice}
                       style={{
                        // border:
                          // error != "" ? "1px solid red" : "1px solid #C8C8C8",
                       }}
                       onWheel={(e) => e.target.blur()}
                       onChange={(e) => {
-                        period.price = e.target.value;
+                        setSalePrice(e.target.value);
+                       // period.price = e.target.value;
                         // i//f (e.target.value.length != 0) setError("");
                         // else if (
                         //   e.target.value > "0.004" ||
@@ -1603,51 +1646,11 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                       {  blockchainCheck(nft.blockchain)
                          } </span>
                         </div>
-                    {/*
-                     onChange={(e) => {
-                    //   price.current = e.target.value;
-                    //   checkChanges();
-                    // }}
-                   // /> */}
+                  
                    </div>
                     <h3 className="reason-text"> Keep it on sale until :</h3>
-                    <input
-                      type="datetime-local"
-                      className="form-control-1"
-                      // min="0"
-                      // type="date"
-                      autoComplete="off"
-                      onChange={(e) => {
-                        period.expiryDate = e.target.value;
-                      }}
-                    // value="23"
-                    // onChange={(e) => {
-                    //   price.current = e.target.value;
-                    //   checkChanges();
-                    // }}
-                    />
-                    {/* <input
-                      className="form-control-1"
-                      // min="0"
-                      type="time"
-                      autoComplete="off"
-                      onChange={(e) => {
-                        period.expiryTime = e.target.value;
-                        console.log(period);
-                      }}
-                    // value="23"
-                    // onChange={(e) => {
-                    //   price.current = e.target.value;
-                    //   checkChanges();
-                    // }}
-                    /> */}
-                    {/* <select className="select-box" onChange={(e) => handleChange(e)}>
-                    <option>Select reason</option>
-                    <option value="Fake collection or possible scam">Fake collection or possible scam</option>
-                    <option value="Explicit and sensitive content">Explicit and sensitive content</option>
-                    <option value="Might be stolen">Might be stolen</option>
-                    <option value="Other">Other</option>
-                  </select> */}
+                    <DateTimePicker onChange={setDateTimeValue} minDate={new Date()} disableClock={true} value={dateTimeValue} className="saleDateTime" />
+                  
                   </div>
                   <button
                     className="btn btn-primary report-btn"
@@ -1818,7 +1821,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                       <div className="abstractillusioncontent">
                         <div className="abstracttitle"></div>
                         <div className="abstractposter"> {nft.name}</div>
-                        <div className="ethprice">{`${salesInfo?.price}  ${salesInfo?.currency}`}</div>
+                        <div className="ethprice">{`${salePrice}  ${salesInfo?.currency}`}</div>
                       </div>
                     </div>
                     <div className="checkpostcontainer">

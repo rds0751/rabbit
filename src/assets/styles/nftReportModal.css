@@ -273,3 +273,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   transition: all .7s;
   cursor: pointer;
 }
+.saleDateTime{
+  width: 100%;
+}
