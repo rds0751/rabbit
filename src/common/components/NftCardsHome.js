@@ -360,7 +360,7 @@ function NftCardsHome({ nft, appearance, loader }) {
                 </Link>
 
                 {
-                  salesInfo?.isOpenForSale ?
+                  salesInfo?.expiryDateTime !== null ?
                     <a style={{ color: '#191919' }}><i className="far fa-clock clock-icon" style={{ width: '18px' }} />
                       {/* {calculateExpireSale(salesInfo?.expiryDate) ? `${calculateExpireSale(salesInfo?.expiryDate)} days left` : 'Expires today'} */}
                       <Countdown date={salesInfo?.expiryDateTime} renderer={calculateExpireTime} />
