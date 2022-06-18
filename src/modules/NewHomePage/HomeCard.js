@@ -877,7 +877,7 @@ const HomeCard = () => {
                 <button
                   className="btn btn-primary report-btn NewHomeButton"
 
-                   onClick={() => handleRedirectLink('/')}
+                   onClick={() => handleRedirectLink('/Home')}
                   //  style={{background: `${fetchPalletsColor(appearance?.colorPalette)}`}}
                 >
                   Create Store
