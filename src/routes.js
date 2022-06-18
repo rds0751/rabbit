@@ -84,8 +84,14 @@ function App() {
   const dispatch = useDispatch();
 
   const [loader, setLoader] = useState(true)
+  const [navFooter,setNavFooter]=useState(true);
 
   useEffect(() => {
+
+
+  
+
+    
     const checkWalletAddress = localStorage.getItem(
       WEB_APP_USER_WALLET_ADDRESS
     );
@@ -119,6 +125,7 @@ function App() {
     //   setLoader(false)
     // }
 
+
   }, [])
 
   return (
@@ -140,8 +147,8 @@ function App() {
         <Routes>
           <Route path="/FAQs" element={<FAQsPage />} />
           <Route exact path="/nfts" element={<NftPage loaderState={loader} />} />
-          <Route path="/Home" element={<Home loaderState={loader} />} />
-          <Route path="/" element={<NewHomePage loaderState={loader} />} />
+          <Route path="/" element={<Home loaderState={loader} />} />
+          <Route path="/Home" element={<NewHomePage loaderState={loader} />} />
 
           {/* <Route
               exact
@@ -263,7 +270,9 @@ function App() {
         {/* </Switch> */}
         <Wallet />
 
-        <Footer loader={loader} />
+        {navFooter ?  <Footer loader={loader} />:""}
+
+       
       </Router>
 
 

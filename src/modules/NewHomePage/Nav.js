@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import {  useNavigate } from "react-router-dom";
 
 const MainDiv = styled.div`
 width: 100%;
@@ -63,6 +64,7 @@ opacity: 1;
 `;
 
 const Nav = () => {
+  const navigate = useNavigate();
   return (
     <MainDiv>
       <NavDiv>
@@ -72,7 +74,7 @@ const Nav = () => {
             <Item>Pricing</Item>
             <Item>Resource</Item>
             <Item>Login</Item>
-            <CreateStore>Create Store</CreateStore>
+            <CreateStore   onClick={() => navigate('/')}>Create Store</CreateStore>
           </ItemsDiv>
 
 
