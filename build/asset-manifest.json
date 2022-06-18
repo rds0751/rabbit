@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.e80c405b.css",
-    "main.js": "/static/js/main.220e81e6.js",
+    "main.css": "/static/css/main.743604e6.css",
+    "main.js": "/static/js/main.1a0c3ae1.js",
     "static/js/845.3e1bb2c9.chunk.js": "/static/js/845.3e1bb2c9.chunk.js",
     "static/media/Banner.png": "/static/media/Banner.112c32a6f604149b0d83.png",
     "static/media/Abstraction.png": "/static/media/Abstraction.010c4cc892910d63a5b1.png",
@@ -21,6 +21,7 @@
     "index.html": "/index.html",
     "static/media/selling.svg": "/static/media/selling.46daf20c137fa83865b4b4d3f7e8ac91.svg",
     "static/media/ethereum.svg": "/static/media/ethereum.3477dbf799668d2ee5c41b4e1ee69385.svg",
+    "static/media/BannerImage.svg": "/static/media/BannerImage.cd2ff52a70e8efb3cc11.svg",
     "static/media/Wallet-home.svg": "/static/media/Wallet-home.52abb8929fd4d6ad03087a0c338db515.svg",
     "static/media/createCollection.svg": "/static/media/createCollection.5d1b3d38c380b862830217715bfd25f0.svg",
     "static/media/Easy.svg": "/static/media/Easy.1ed7c0d675c2eaa1cabdcf3dbe19ab91.svg",
@@ -70,12 +71,12 @@
     "static/media/drop-down-arrow.svg": "/static/media/drop-down-arrow.252c67d09c66c766f99a.svg",
     "static/media/Edit.svg": "/static/media/Edit.adfd6c934476ae588248e2026354da45.svg",
     "static/media/coverImage.svg": "/static/media/coverImage.7cc8a61314efed2824b3ef2b04371775.svg",
-    "main.e80c405b.css.map": "/static/css/main.e80c405b.css.map",
-    "main.220e81e6.js.map": "/static/js/main.220e81e6.js.map",
+    "main.743604e6.css.map": "/static/css/main.743604e6.css.map",
+    "main.1a0c3ae1.js.map": "/static/js/main.1a0c3ae1.js.map",
     "845.3e1bb2c9.chunk.js.map": "/static/js/845.3e1bb2c9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e80c405b.css",
-    "static/js/main.220e81e6.js"
+    "static/css/main.743604e6.css",
+    "static/js/main.1a0c3ae1.js"
   ]
 }
