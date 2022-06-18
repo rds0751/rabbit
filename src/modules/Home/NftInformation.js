@@ -150,7 +150,7 @@ export default function NftInformation(props) {
     if (completed) {
       // Render a completed state
       setTimeCheck(false);
-      return <span>NFT Expired</span>;
+      return <span>Sales Ended</span>;
     } else {
       // Render a countdown
       return <span>
@@ -180,7 +180,6 @@ export default function NftInformation(props) {
        autoClose: 5000,
      });
    } else {
-     toast.success("NFT Time OUT");
      props.getNftDetail();
    }
 

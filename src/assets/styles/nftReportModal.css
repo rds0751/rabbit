@@ -1,3 +1,4 @@
+
 body.active-modal{
   overflow-y: hidden;
 }
@@ -258,6 +259,9 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     width: 35%;
     /* left: 25%; */
   }
+  .report-abs-modal .NewHomeCard{
+    width: 581px;
+  }
   .main-model{
     width: 36%;
     left: 37%;
@@ -275,4 +279,74 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 .saleDateTime{
   width: 100%;
+}
+.report-abs-modal .NewHomeCard{
+background: #031527 0% 0% no-repeat padding-box;
+border-radius: 12px;
+opacity: 1;
+}
+.report-inner .NewHomeButton{
+  width: 100%;
+background: #FFFFFF 0% 0% no-repeat padding-box;
+border-radius: 6px;
+letter-spacing: var(--unnamed-character-spacing-0);
+font: normal normal medium 16px/25px Poppins;
+letter-spacing: 0px;
+color: #031527;
+}
+.newhometext{
+font: normal normal 600 18px/27px Poppins;
+letter-spacing: 0px;
+color: #FFFFFF;
+opacity: 1;
+}
+.input-price .newhomelabel{
+font: normal normal normal 16px/25px Poppins;
+letter-spacing: 0px;
+color: #FFFFFF;
+opacity: 1;
+margin-top: 32px;
+}
+.Address{
+  width: 420px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+background: #253C54 0% 0% no-repeat padding-box;
+border: 1px solid #00AF51;
+border-radius: 6px;
+
+}
+.WalletAddress{
+  text-align: left;
+font: normal normal normal 14px/21px Poppins;
+letter-spacing: 0px;
+color: #E8E8E8;
+}
+.sitediv{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.siteurl{
+  font: normal normal normal 14px/21px Poppins;
+  letter-spacing: 0px;
+  color: #E8E8E8;
+  opacity: 1;
+  margin-left: 5px!important;
+}
+.lastLabel{
+text-align: left;
+font: normal normal normal 12px/18px Poppins;
+letter-spacing: 0px;
+color: #E8E8E8;
+margin-top: 16px;
+}
+
+.new-abs-modal{
+  backdrop-filter: blur(0px) contrast(0.8);
 }

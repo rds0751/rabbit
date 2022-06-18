@@ -72,6 +72,7 @@ import BlogDetail from "./modules/blogs/blogDetail";
 import { getTenantData } from "./services/clientConfigMicroService";
 import { useState } from "react";
 import Spinner from "./common/components/Spinner";
+import NewHomePage from  "./modules/NewHomePage/index";
 
 const url = new URL( window.location.href);
 const tenantId = url.searchParams.get("id");
@@ -130,6 +131,7 @@ function App() {
 
       <Router>
         <ScrollToTop />
+        
 
         <Navbar loader={loader} />
 
@@ -138,7 +140,8 @@ function App() {
         <Routes>
           <Route path="/FAQs" element={<FAQsPage />} />
           <Route exact path="/nfts" element={<NftPage loaderState={loader} />} />
-          <Route path="/" element={<Home loaderState={loader} />} />
+          <Route path="/Home" element={<Home loaderState={loader} />} />
+          <Route path="/" element={<NewHomePage loaderState={loader} />} />
 
           {/* <Route
               exact
