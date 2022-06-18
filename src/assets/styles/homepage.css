@@ -6,6 +6,26 @@
   padding-bottom: 95px;
   margin-bottom: 177px;
 }
+.homepage .newbanner{
+  background-image: url("../images/BannerImage.svg");
+}
+
+.new-home-left-touch{
+  width: 64%;
+}
+.homepage .right-slider .newhomecard{
+  width: auto !important;
+}
+.homepage .left-text .newhometext{
+  line-height: 33px!important;
+}
+
+.homepage .left-text .second{
+width: 242px !important;
+height: 54px!important;
+background: #FFFFFF 0% 0% no-repeat padding-box !important;
+color: #031527!important;
+}
 .homepage .banner .inner-width {
   margin-left: 126px;
   margin-right: 100px;
