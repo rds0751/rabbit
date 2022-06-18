@@ -442,7 +442,7 @@ const NFTImages = styled.div`
   flex-direction: row;
 `;
 
-const HomeCard = ({loaderState,navFooter,setNavFooter}) => {
+const HomeCard = () => {
   const [modal, setModal] = useState(false);
 
   const navigate = useNavigate();
