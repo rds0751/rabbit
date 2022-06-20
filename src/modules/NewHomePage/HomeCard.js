@@ -17,8 +17,8 @@ import {
 } from "../../reducers/Action";
 import { toast, ToastContainer } from "react-toastify";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
-import Utils from "../../utility"
-import {getTenantByWallet}from "../../services/clientConfigMicroService"
+import Utils from "../../utility";
+import { getTenantByWallet } from "../../services/clientConfigMicroService";
 
 const MainDiv = styled.div`
   background: #031527 0% 0% no-repeat padding-box;
@@ -326,45 +326,39 @@ const How = styled.label`
   opacity: 1;
 `;
 
-
-
 const SubMainDiv = styled.div``;
 const NFTDetails = styled.div`
-background: #041628 0% 0% no-repeat padding-box;
-border-radius: 0px 6px 6px 0px;
-position: absolute;
-padding: 9px;
-top: 79%;
+  background: #041628 0% 0% no-repeat padding-box;
+  border-radius: 0px 6px 6px 0px;
+  position: absolute;
+  padding: 10px;
+  top: 78.8%;
 `;
 const Details = styled.div`
-display:flex;
-flex-direction: row;
-justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 `;
-const NamePrice = styled.div`
-text-align: center;
-font: normal normal medium 18px/27px Poppins;
-letter-spacing: 0px;
-color: #FFFFFF;
-opacity: 1;
+const NamePrice = styled.label`
+  text-align: center;
+  font: normal normal normal 1.1rem/27px Poppins;
+  letter-spacing: 0px;
+  color: #ffffff;
+  opacity: 1;
 `;
 
 const Symbol = styled.div``;
-const Currency = styled.div``;
+const Currency = styled.label``;
 const CurrencyPrice = styled.div`
-display:flex;
-justify-content: space-between;
-
+  display: flex;
+  justify-content: space-between;
 `;
-
-
-
 
 const HomeCard = () => {
   const [modal, setModal] = useState(false);
   const { user, sideBar } = useSelector((state) => state);
   const dispatch = useDispatch();
-  let address="";
+  let address = "";
 
   // console.log(data);
   const { userDetails, walletAddress } = user;
@@ -429,38 +423,25 @@ const HomeCard = () => {
     },
   ];
 
-  useEffect(()=>{
+  useEffect(() => {
     window.ethereum
-        .request({ method: "eth_requestAccounts" })
-        .then((newAccount) => {
-          address=newAccount[0];
-          localStorage.setItem("walletAddress", address);
-        })
-
+      .request({ method: "eth_requestAccounts" })
+      .then((newAccount) => {
+        address = newAccount[0];
+        localStorage.setItem("walletAddress", address);
+      });
   });
-  const checkTenant=async ()=>{
-
-    const [error,result]=await Utils.parseResponse(
-      getTenantByWallet()
-
-    );
-    if(error || !result)
-    return toast.error("Tenant Data is not fetched");
-    else if(result.responseData===null) {
+  const checkTenant = async () => {
+    const [error, result] = await Utils.parseResponse(getTenantByWallet());
+    if (error || !result) return toast.error("Tenant Data is not fetched");
+    else if (result.responseData === null) {
       console.log(result);
       setModal(true);
-     
-  
-    }
-    else if(result.responseData!==null) {
+    } else if (result.responseData !== null) {
       console.log(result);
-      return toast.success("tenant data is fetched")
-     
-  
+      return toast.success("tenant data is fetched");
     }
-
-  }
- 
+  };
 
   const MetaMaskConnector = async () => {
     if (window.ethereum) {
@@ -483,10 +464,7 @@ const HomeCard = () => {
               CheckUserByWalletAddress(address, (res) => {
                 dispatch(addUserData(res));
                 localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
-                
               });
-             
-              
             });
         })
         .catch((e) => {
@@ -496,10 +474,7 @@ const HomeCard = () => {
           });
         });
 
-
-
-
-        const data=await checkTenant();
+      const data = await checkTenant();
     } else {
       toast.error("Install Metamask and Connect Wallet", {
         position: toast.POSITION.TOP_RIGHT,
@@ -542,8 +517,15 @@ const HomeCard = () => {
                             className={`button-hide second`}
                             onClick={() => MetaMaskConnector()}
                           >
-                            <Image src="images/MetaFox.png" style={{marginRight:"5px"}}></Image>
-                            {`${localStorage.getItem("has_wallet") === "false" ? "connect to Wallet" :"Launch your store"}`}
+                            <Image
+                              src="images/MetaFox.png"
+                              style={{ marginRight: "5px" }}
+                            ></Image>
+                            {`${
+                              localStorage.getItem("has_wallet") === "false"
+                                ? "connect to Wallet"
+                                : "Launch your store"
+                            }`}
                           </Button>
                         </div>
                       </div>
@@ -559,7 +541,6 @@ const HomeCard = () => {
                             <div className="d-flex flex-wrap">
                               <Card>
                                 <div className="homePageContainer">
-
                                   <NFTDetails>
                                     <Details>
                                       <NamePrice>Holy bear</NamePrice>
@@ -794,8 +775,6 @@ const HomeCard = () => {
               <Image></Image>
             </HeadTitle>
           </CommonSection>
-
-          
         </BottomSection>
 
         <div
