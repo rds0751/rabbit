@@ -287,6 +287,7 @@ export default class NftDetail extends BaseComponent {
       },
     };
     if (!this.state.responseData._id) return;
+    
     let [err, res] = await Utils.parseResponse(
       ContentService.ownershipTransfer(
         requestData,

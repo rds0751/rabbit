@@ -5,6 +5,7 @@ import "../../assets/styles/nftReportModal.css";
 import OwlCarousel from "react-owl-carousel";
 import {  useNavigate } from "react-router-dom";
 import { fetchPalletsColor, getParamTenantId } from "../../utility/global"
+import { useSelector, useDispatch } from "react-redux";
 
 const MainDiv = styled.div`
   background: #031527 0% 0% no-repeat padding-box;
@@ -444,6 +445,11 @@ const NFTImages = styled.div`
 
 const HomeCard = () => {
   const [modal, setModal] = useState(false);
+  const { user, sideBar } = useSelector((state) => state);
+
+  // console.log(data);
+  const { userDetails, walletAddress } = user;
+  let { loggedInUser } = user;
 
   const navigate = useNavigate();
   const data = [
@@ -457,7 +463,7 @@ const HomeCard = () => {
       image: "images/Customer.svg",
       title: "Customer centric approach",
       subtitle:
-        "NFTfi is super easy for anyone as it subtracts the the complexities of",
+        "ANAFTO is super easy for anyone as it subtracts the the complexities of",
     },
     {
       image: "images/Security.svg",
@@ -507,6 +513,8 @@ const HomeCard = () => {
   const handleRedirectLink = (url) => {
     navigate(url+getParamTenantId())
   }
+
+  
   return (
     <>
       <MainDiv>
@@ -611,7 +619,7 @@ const HomeCard = () => {
 
         <BottomSection>
           <FirstSection>
-            <LabelText>Why use NFTfi</LabelText>
+            <LabelText>Why use ANAFTO</LabelText>
 
             <MainCardDiv>
               {data.map((ele) => (
@@ -640,7 +648,7 @@ const HomeCard = () => {
               <StepDetails>
                 <StepTitle>01 Connect your wallet</StepTitle>
                 <StepDes>
-                  NFTfi is super easy for anyone as it subtracts the the
+                  ANAFTO is super easy for anyone as it subtracts the the
                   complexities of
                 </StepDes>
                 <StepCreateStore>Create Store</StepCreateStore>
@@ -655,7 +663,7 @@ const HomeCard = () => {
               <StepDetails>
                 <StepTitle>02 Create your NFT store</StepTitle>
                 <StepDes>
-                  NFTfi is super easy for anyone as it subtracts the the
+                  ANAFTO is super easy for anyone as it subtracts the the
                   complexities of
                 </StepDes>
                 <StepCreateStore>Create Store</StepCreateStore>
@@ -669,7 +677,7 @@ const HomeCard = () => {
               <StepDetails>
                 <StepTitle>03 Start selling and growth</StepTitle>
                 <StepDes>
-                  NFTfi is super easy for anyone as it subtracts the the
+                  ANAFTO is super easy for anyone as it subtracts the the
                   complexities of
                 </StepDes>
                 <StepCreateStore>Create Store</StepCreateStore>
@@ -772,13 +780,13 @@ const HomeCard = () => {
 
           <CommonSection>
             <HeadTitle>
-              <CommonText>NFTfi Marketplace </CommonText>
+              <CommonText>ANAFTO Marketplace </CommonText>
 
               <Image></Image>
             </HeadTitle>
           </CommonSection>
 
-          <FooterSection>
+          {/* <FooterSection>
             <FooterDiv>
               <MarketPlaceDetail>
                 <NameText>NFTfi</NameText>
@@ -819,7 +827,7 @@ const HomeCard = () => {
                 </ThirdDiv>
               </OtherDetails>
             </FooterDiv>
-          </FooterSection>
+          </FooterSection> */}
         </BottomSection>
 
         <div
@@ -850,7 +858,7 @@ const HomeCard = () => {
                     <div className="input-group">
                       <div className="Address">
                         <label className="WalletAddress">
-                          0x74F3ae13bE4bB88c87764211d621d32DCC7f533E
+                         {walletAddress?.address}
                         </label>
                       </div>
                     </div>

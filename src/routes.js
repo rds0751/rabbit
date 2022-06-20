@@ -137,8 +137,8 @@ function App() {
         } */}
 
       <Router>
+       
         <ScrollToTop />
-        
 
         <Navbar loader={loader} />
 

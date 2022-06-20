@@ -5,7 +5,7 @@ import HomeCards from "./HomeCard"
 const index = () => {
   return (
     <>
-    <Nav />
+    {/* <Nav /> */}
     <HomeCards></HomeCards>
     </>
   )
