@@ -74,7 +74,7 @@ const Nav = () => {
             <Item>Pricing</Item>
             <Item>Resource</Item>
             <Item>Login</Item>
-            <CreateStore   onClick={() => navigate('/')}>Create Store</CreateStore>
+            <CreateStore   onClick={() => navigate('/Home')}>Create Store</CreateStore>
           </ItemsDiv>
 
 
