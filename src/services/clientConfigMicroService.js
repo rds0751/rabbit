@@ -4,7 +4,7 @@ import { AuthToken } from "./UserAuthToken";
 import axios from "axios";
 import { BASE_URL1 } from "../reducers/Constants";
 import { WHITE_LABEL_TOKEN } from "../reducers/Constants";
-import { getParamTenantId, getPostTenantId } from "../utility/global";
+import { getParamTenantId, getPostTenantId,getParamTenantWalletAddress } from "../utility/global";
 
 export function getCategories(requestData) {
   let url =
@@ -82,6 +82,16 @@ export const getBlogs = async () => {
       } catch (err) {
         console.log(err);
       }
+};
+export const getTenantByWallet = async () => {
+  try {
+      const url = `${BASE_URL1}/api/v1/get-tenant${getParamTenantWalletAddress()}`;
+      const res = await fetch(url, { headers: AuthToken,method:'GET' });
+      const result = await res.json();
+      return result;
+    } catch (err) {
+      console.log(err);
+    }
 };
 
 export const getBlogsId = async (id) => {

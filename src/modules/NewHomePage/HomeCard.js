@@ -1,11 +1,24 @@
 import React, { useState } from "react";
 import { Button, Container, Row, Col, Card } from "react-bootstrap";
+import { ethers } from "ethers";
 import styled from "styled-components";
 import "../../assets/styles/nftReportModal.css";
 import OwlCarousel from "react-owl-carousel";
-import {  useNavigate } from "react-router-dom";
-import { fetchPalletsColor, getParamTenantId } from "../../utility/global"
+import { useNavigate } from "react-router-dom";
+import { fetchPalletsColor, getParamTenantId } from "../../utility/global";
 import { useSelector, useDispatch } from "react-redux";
+import { SetMealOutlined } from "@mui/icons-material";
+import {
+  AddWalletDetails,
+  ManageWalletSideBar,
+  addUserData,
+  RedirectTo,
+  ManageNotiSideBar,
+} from "../../reducers/Action";
+import { toast, ToastContainer } from "react-toastify";
+import { CheckUserByWalletAddress } from "../../services/UserMicroService";
+import Utils from "../../utility"
+import {getTenantByWallet}from "../../services/clientConfigMicroService"
 
 const MainDiv = styled.div`
   background: #031527 0% 0% no-repeat padding-box;
@@ -312,140 +325,45 @@ const How = styled.label`
   color: #016dd9;
   opacity: 1;
 `;
-const Steps = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
 
-const FooterSection = styled.div`
-  display: flex;
-  width: 100%;
-  margin-top: 163px;
-  height: auto;
-  flex-direction: column;
-  background: #172738 0% 0% no-repeat padding-box;
-  opacity: 1;
-  padding: 74px 73px;
-`;
 
-const FooterDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-`;
-const MarketPlaceDetail = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 33%;
-`;
-const NameText = styled.label`
-  text-align: left;
-  font: normal normal normal 42px/48px Whiskey Girls Condensed;
-  letter-spacing: 0px;
-  color: #ffffff;
-  opacity: 1;
-`;
-const AboutText = styled.label`
-  text-align: left;
-  font: normal normal normal 18px/27px Poppins;
-  letter-spacing: 0px;
-  color: #ffffff;
-  opacity: 1;
-`;
-const DesText = styled.label`
-  text-align: left;
-  font: normal normal normal 16px/25px Poppins;
-  letter-spacing: 0px;
-  color: #e0e0e0;
-  opacity: 1;
-`;
-const OtherDetails = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  align-items: baseline;
-  justify-content: space-around;
-`;
-const FirstDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-const HeadingFooter = styled.p`
-  text-align: left;
-  font: normal normal bold 18px/27px Poppins;
-  letter-spacing: 0px;
-  color: #ffffff;
-`;
-const ParaText = styled.p``;
-const Link = styled.a`
-  text-align: left;
-  font: normal normal normal 18px/27px Poppins;
-  letter-spacing: 0px;
-  color: #e0e0e0;
-  text-decoration: none;
-`;
-const SecondDiv = styled.div``;
-const ThirdDiv = styled.div``;
 
-const FooterCreateStore = styled.button`
-  border: 2px solid var(--unnamed-color-ffffff);
-  background: #23194200 0% 0% no-repeat padding-box;
-  border: 2px solid #ffffff;
-  border-radius: 6px;
-  font: normal normal medium 16px/25px Poppins;
-  letter-spacing: 0px;
-  color: #ffffff;
-  width: 173px;
-  height: 40px;
-`;
 const SubMainDiv = styled.div``;
-const NFTCardDiv = styled.div`
-  width: 100%;
-  position: absolute;
-  overflow: hidden;
+const NFTDetails = styled.div`
+background: #041628 0% 0% no-repeat padding-box;
+border-radius: 0px 6px 6px 0px;
+position: absolute;
+padding: 9px;
+top: 79%;
 `;
-const BannerImage = styled.div`
-  display: flex;
-  background-image: url("./images/BannerImage.svg");
-  background-size: cover;
-  background-color: rgb(255, 255, 255);
-  background-position: center center;
-  opacity: 0.3;
-  filter: blur(8px);
-  -webkit-mask: linear-gradient(rgb(255, 255, 255), transparent);
+const Details = styled.div`
+display:flex;
+flex-direction: row;
+justify-content: space-around;
 `;
-const NFTMiddleDiv = styled.div`
-  margin: 0px auto;
-  display: flex;
-  background-color: red;
-  max-width: min(1280px, 100% - 40px);
-  width: 100%;
-  flex-wrap: wrap;
+const NamePrice = styled.div`
+text-align: center;
+font: normal normal medium 18px/27px Poppins;
+letter-spacing: 0px;
+color: #FFFFFF;
+opacity: 1;
 `;
-const NFTFirstDiv = styled.div``;
-const NFTSecondDiv = styled.div``;
 
-const NFTCardViewDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+const Symbol = styled.div``;
+const Currency = styled.div``;
+const CurrencyPrice = styled.div`
+display:flex;
+justify-content: space-between;
+
 `;
-const NFTCardDetails = styled.div``;
-const NFTName = styled.div``;
-const NFTBlockChain = styled.div``;
-const NFTCurrency = styled.div``;
-const NFTImages = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
+
+
+
 
 const HomeCard = () => {
   const [modal, setModal] = useState(false);
   const { user, sideBar } = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   // console.log(data);
   const { userDetails, walletAddress } = user;
@@ -509,12 +427,79 @@ const HomeCard = () => {
       name: "Music",
     },
   ];
+  const checkTenant=async ()=>{
+
+    const [error,result]=await Utils.parseResponse(
+      getTenantByWallet()
+
+    );
+    if(error || !result)
+    return toast.error("Tenant Data is not fetched");
+    else if(result===null) {
+      setModal(true);
+     
+  
+    }
+    else if(result!=='') {
+      return toast.success("tenant data is fetched")
+     
+  
+    }
+
+  }
+ 
+
+  const MetaMaskConnector = async () => {
+    if (window.ethereum) {
+      window.ethereum
+        .request({ method: "eth_requestAccounts" })
+        .then((newAccount) => {
+          const address = newAccount[0];
+          localStorage.setItem("walletAddress", address);
+          window.ethereum
+            .request({ method: "eth_getBalance", params: [address, "latest"] })
+            .then((wallet_balance) => {
+              const balance = ethers.utils.formatEther(wallet_balance);
+
+              dispatch(
+                AddWalletDetails({
+                  address,
+                  balance,
+                })
+              );
+              CheckUserByWalletAddress(address, (res) => {
+                dispatch(addUserData(res));
+                localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
+                
+              });
+             
+              
+            });
+        })
+        .catch((e) => {
+          setModal(false);
+          toast.error("Install Metamask and Connect Wallet", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        });
+
+
+
+
+        const data=await checkTenant();
+    } else {
+      toast.error("Install Metamask and Connect Wallet", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+
+    //  setModal(true);
+  };
 
   const handleRedirectLink = (url) => {
-    navigate(url+getParamTenantId())
-  }
+    navigate(url + getParamTenantId());
+  };
 
-  
   return (
     <>
       <MainDiv>
@@ -542,10 +527,10 @@ const HomeCard = () => {
                             //onClick={() => createHandle(customize.appearance.buttons)}
                             variant="custom connect"
                             className={`button-hide second`}
-                            onClick={() => setModal(true)}
+                            onClick={() => MetaMaskConnector()}
                           >
-                            <Image src="images/MetaFox.png"></Image>
-                            Connect to launch
+                            <Image src="images/MetaFox.png" style={{marginRight:"5px"}}></Image>
+                            {`${localStorage.getItem("has_wallet") === "false" ? "connect to Wallet" :"Launch your store"}`}
                           </Button>
                         </div>
                       </div>
@@ -561,6 +546,17 @@ const HomeCard = () => {
                             <div className="d-flex flex-wrap">
                               <Card>
                                 <div className="homePageContainer">
+
+                                  <NFTDetails>
+                                    <Details>
+                                      <NamePrice>Holy bear</NamePrice>
+                                      <CurrencyPrice>
+                                        <Currency></Currency>
+                                        <NamePrice>0.13</NamePrice>
+                                        <Symbol>ETH</Symbol>
+                                      </CurrencyPrice>
+                                    </Details>
+                                  </NFTDetails>
                                   <Card.Img
                                     variant="top"
                                     className={`newhomecard`}
@@ -786,48 +782,7 @@ const HomeCard = () => {
             </HeadTitle>
           </CommonSection>
 
-          {/* <FooterSection>
-            <FooterDiv>
-              <MarketPlaceDetail>
-                <NameText>NFTfi</NameText>
-                <AboutText>About DLT NFT marketplace</AboutText>
-                <DesText>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur.
-                </DesText>
-              </MarketPlaceDetail>
-              <OtherDetails>
-                <FirstDiv>
-                  <HeadingFooter>Company</HeadingFooter>
-                  <ParaText>
-                    <Link>About Us</Link>
-                  </ParaText>
-                  <ParaText>
-                    <Link>Pricing</Link>
-                  </ParaText>
-                </FirstDiv>
-                <SecondDiv>
-                  <HeadingFooter>Resource</HeadingFooter>
-                  <ParaText>
-                    <Link>Help Center</Link>
-                  </ParaText>
-                  <ParaText>
-                    <Link>FAQs</Link>
-                  </ParaText>
-                  <ParaText>
-                    <Link>Suggestions</Link>
-                  </ParaText>
-                </SecondDiv>
-                <ThirdDiv>
-                  <FooterCreateStore>Create Store</FooterCreateStore>
-                </ThirdDiv>
-              </OtherDetails>
-            </FooterDiv>
-          </FooterSection> */}
+          
         </BottomSection>
 
         <div
@@ -858,7 +813,7 @@ const HomeCard = () => {
                     <div className="input-group">
                       <div className="Address">
                         <label className="WalletAddress">
-                         {walletAddress?.address}
+                          {walletAddress?.address}
                         </label>
                       </div>
                     </div>
@@ -871,7 +826,11 @@ const HomeCard = () => {
 
                     <div className="input-group sitediv">
                       <div className="">
-                        <input type="text" className="Address"></input>
+                        <input
+                          type="text"
+                          className="Address"
+                          style={{ color: "white" }}
+                        ></input>
                       </div>
                       <label className="siteurl">.anafto.com</label>
                     </div>
@@ -884,8 +843,7 @@ const HomeCard = () => {
                 </div>
                 <button
                   className="btn btn-primary report-btn NewHomeButton"
-
-                   onClick={() => handleRedirectLink('/Home')}
+                  onClick={() => handleRedirectLink("/Home")}
                   //  style={{background: `${fetchPalletsColor(appearance?.colorPalette)}`}}
                 >
                   Create Store
