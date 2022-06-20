@@ -147,8 +147,8 @@ function App() {
         <Routes>
           <Route path="/FAQs" element={<FAQsPage />} />
           <Route exact path="/nfts" element={<NftPage loaderState={loader} />} />
-          <Route path="/" element={<Home loaderState={loader} />} />
-          <Route path="/Home" element={<NewHomePage loaderState={loader} />} />
+          <Route path="/Home" element={<Home loaderState={loader} />} />
+          <Route path="/" element={<NewHomePage loaderState={loader} />} />
 
           {/* <Route
               exact
