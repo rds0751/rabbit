@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container, Row, Col, Card } from "react-bootstrap";
 import { ethers } from "ethers";
 import styled from "styled-components";
@@ -364,6 +364,7 @@ const HomeCard = () => {
   const [modal, setModal] = useState(false);
   const { user, sideBar } = useSelector((state) => state);
   const dispatch = useDispatch();
+  let address="";
 
   // console.log(data);
   const { userDetails, walletAddress } = user;
@@ -427,6 +428,16 @@ const HomeCard = () => {
       name: "Music",
     },
   ];
+
+  useEffect(()=>{
+    window.ethereum
+        .request({ method: "eth_requestAccounts" })
+        .then((newAccount) => {
+          address=newAccount[0];
+          localStorage.setItem("walletAddress", address);
+        })
+
+  });
   const checkTenant=async ()=>{
 
     const [error,result]=await Utils.parseResponse(
@@ -435,12 +446,14 @@ const HomeCard = () => {
     );
     if(error || !result)
     return toast.error("Tenant Data is not fetched");
-    else if(result===null) {
+    else if(result.responseData===null) {
+      console.log(result);
       setModal(true);
      
   
     }
-    else if(result!=='') {
+    else if(result.responseData!==null) {
+      console.log(result);
       return toast.success("tenant data is fetched")
      
   
