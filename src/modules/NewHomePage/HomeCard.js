@@ -768,11 +768,11 @@ const HomeCard = () => {
             </HeadTitle>
           </CommonSection>
 
-          <CommonSection>
+          <CommonSection style={{marginBottom:"163px"}}>
             <HeadTitle>
-              <CommonText>ANAFTO Marketplace </CommonText>
+              <CommonText style={{marginBottom:"88px"}}>ANAFTO Marketplace </CommonText>
 
-              <Image></Image>
+              <Image src="./images/marketplace.png"></Image>
             </HeadTitle>
           </CommonSection>
         </BottomSection>
