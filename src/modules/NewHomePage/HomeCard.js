@@ -546,8 +546,8 @@ const HomeCard = () => {
                                       <NamePrice>Holy bear</NamePrice>
                                       <CurrencyPrice>
                                         <Currency></Currency>
-                                        <NamePrice>0.13</NamePrice>
-                                        <Symbol>ETH</Symbol>
+                                        <NamePrice>0.13 ETH</NamePrice>
+                                        
                                       </CurrencyPrice>
                                     </Details>
                                   </NFTDetails>
