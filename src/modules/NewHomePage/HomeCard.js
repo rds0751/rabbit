@@ -434,10 +434,10 @@ const HomeCard = () => {
   const checkTenant = async () => {
     const [error, result] = await Utils.parseResponse(getTenantByWallet());
     if (error || !result) return toast.error("Tenant Data is not fetched");
-    else if (result.responseData === null) {
+    else if (result.message === "Data is not available in DB") {
       console.log(result);
       setModal(true);
-    } else if (result.responseData !== null) {
+    } else if (result.responseData.length !== 0) {
       console.log(result);
       return toast.success("tenant data is fetched");
     }
