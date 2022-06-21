@@ -72,26 +72,22 @@ import BlogDetail from "./modules/blogs/blogDetail";
 import { getTenantData } from "./services/clientConfigMicroService";
 import { useState } from "react";
 import Spinner from "./common/components/Spinner";
-import NewHomePage from  "./modules/NewHomePage/index";
+import NewHomePage from "./modules/NewHomePage/index";
+import NavTwo from "./modules/NewHomePage/Nav";
+import FooterTwo from "./modules/NewHomePage/Footer";
 
-const url = new URL( window.location.href);
+const url = new URL(window.location.href);
 const tenantId = url.searchParams.get("id");
 
-localStorage.setItem('tenantId', tenantId);
+localStorage.setItem("tenantId", tenantId);
 
 function App() {
-
   const dispatch = useDispatch();
 
-  const [loader, setLoader] = useState(true)
-  const [navFooter,setNavFooter]=useState(true);
+  const [loader, setLoader] = useState(true);
+  const [navFooter, setNavFooter] = useState(true);
 
   useEffect(() => {
-
-
-  
-
-    
     const checkWalletAddress = localStorage.getItem(
       WEB_APP_USER_WALLET_ADDRESS
     );
@@ -105,39 +101,32 @@ function App() {
     // alert(`${checkWalletAddress}`);
   }, []);
 
-
   useEffect(() => {
-
     // if (localStorage.getItem('WHITE_LABEL_TOKEN') !== null) {
 
-      getTenantData()
-        .then(response => {
-          dispatch({ type: 'ADD_CUSTOMIZE_DATA', payload: response[0] })
-          dispatch({ type: 'ADD_BANNER_NFTS', payload: response[1] })
+    getTenantData()
+      .then((response) => {
+        dispatch({ type: "ADD_CUSTOMIZE_DATA", payload: response[0] });
+        dispatch({ type: "ADD_BANNER_NFTS", payload: response[1] });
 
-          setLoader(false)
-        })
-        .catch(error => {
-          setLoader(false);
-        })
+        setLoader(false);
+      })
+      .catch((error) => {
+        setLoader(false);
+      });
 
     // } else {
     //   setLoader(false)
     // }
-
-
-  }, [])
+  }, []);
 
   return (
-
-    <div className="App" >
-
+    <div className="App">
       {/* {
          loader && <div className="loader-spinner"><Spinner/></div>
         } */}
 
       <Router>
-       
         <ScrollToTop />
 
         <Navbar loader={loader} />
@@ -146,9 +135,13 @@ function App() {
         {/* <Switch> */}
         <Routes>
           <Route path="/FAQs" element={<FAQsPage />} />
-          <Route exact path="/nfts" element={<NftPage loaderState={loader} />} />
-          <Route path="/Home" element={<Home loaderState={loader} />} />
-          <Route path="/" element={<NewHomePage loaderState={loader} />} />
+          <Route
+            exact
+            path="/nfts"
+            element={<NftPage loaderState={loader} />}
+          />
+          <Route path="/" element={<Home loaderState={loader} />} />
+          
 
           {/* <Route
               exact
@@ -177,17 +170,45 @@ function App() {
             path="/nft-information_Offer_1"
             element={<NftInformationOffer1 />}
           />
-          <Route exact path="/help-center" element={<HelpCenter loader={loader} />} />
-          <Route exact path="/suggestion" element={<Suggestion loader={loader} />} />
+          <Route
+            exact
+            path="/help-center"
+            element={<HelpCenter loader={loader} />}
+          />
+          <Route
+            exact
+            path="/suggestion"
+            element={<Suggestion loader={loader} />}
+          />
           <Route exact path="/selling" element={<SellPage />} />
-          <Route exact path="/resource-collection" element={<CollectionPage />} />
+          <Route
+            exact
+            path="/resource-collection"
+            element={<CollectionPage />}
+          />
           <Route exact path="/adding-nfts" element={<NftsPage />} />
           {/* ------------------ */}
-          <Route exact path="/top-collection" element={<Top_collection loader={loader} />} />
-          <Route exact path="/top-bidder" element={<TopBidders loader={loader} />} />
-          <Route exact path="/top-seller" element={<TopSeller loader={loader} />} />
+          <Route
+            exact
+            path="/top-collection"
+            element={<Top_collection loader={loader} />}
+          />
+          <Route
+            exact
+            path="/top-bidder"
+            element={<TopBidders loader={loader} />}
+          />
+          <Route
+            exact
+            path="/top-seller"
+            element={<TopSeller loader={loader} />}
+          />
           {/* ----------- */}
-          <Route exact path="/leader-board" element={<LeaderBoard loader={loader} />} />
+          <Route
+            exact
+            path="/leader-board"
+            element={<LeaderBoard loader={loader} />}
+          />
           <Route exact path="/buying" element={<BuyPage />} />
           <Route exact path="/my-items" element={<MyItems loader={loader} />} />
           <Route
@@ -197,7 +218,11 @@ function App() {
           />
           <Route exact path="/create" element={<Create />} />
           <Route exact path="/notification" element={<Notification />} />
-          <Route exact path="/create-nft" element={<CreateNFT loader={loader} />} />
+          <Route
+            exact
+            path="/create-nft"
+            element={<CreateNFT loader={loader} />}
+          />
           <Route
             exact
             path="/collection-details/:id"
@@ -221,10 +246,22 @@ function App() {
             element={<CreateNftCollections loader={loader} />}
           />
           <Route exact path="/add-wallet" element={<Create />} />
-          <Route exact path="/my-profile" element={<MyProfile loader={loader} />} />
-          <Route exact path="/user-profile/:id" element={<UserProfilePage loader={loader} />} />
+          <Route
+            exact
+            path="/my-profile"
+            element={<MyProfile loader={loader} />}
+          />
+          <Route
+            exact
+            path="/user-profile/:id"
+            element={<UserProfilePage loader={loader} />}
+          />
 
-          <Route exact path="/edit-profile" element={<EditProfile loader={loader} />} />
+          <Route
+            exact
+            path="/edit-profile"
+            element={<EditProfile loader={loader} />}
+          />
           <Route exact path="/about" element={<About loader={loader} />} />
           <Route exact path="/wallet" element={<Wallet />} />
 
@@ -262,7 +299,10 @@ function App() {
           <Route path="/search-results" element={<SearchResults />} />
           <Route path="/blogs" element={<Blog loader={loader} />} />
           <Route path="/privacy" element={<Privacy loader={loader} />} />
-          <Route path="/Terms-Condition" element={<TermsAndCondition loader={loader} />} />
+          <Route
+            path="/Terms-Condition"
+            element={<TermsAndCondition loader={loader} />}
+          />
           <Route path="/blog-detail" element={<BlogDetail />} />
           <Route path="/page-not-found" element={<PageNotFound />} />
           <Route path="*" element={<PageNotFound />} />
@@ -270,16 +310,30 @@ function App() {
         {/* </Switch> */}
         <Wallet />
 
-        {navFooter ?  <Footer loader={loader} />:""}
-
-       
+        {navFooter ? <Footer loader={loader} /> : ""}
       </Router>
-
 
       <Notification />
     </div>
-
   );
 }
 
-export default App;
+function MarketingApp() {
+  return (
+    <div className="App">
+      <Router>
+        <ScrollToTop />
+
+        <NavTwo />
+
+        <Routes>
+          <Route path="*" element={<NewHomePage />} />
+          <Route path="/" element={<NewHomePage />} />
+        </Routes>
+        <FooterTwo />
+      </Router>
+    </div>
+  );
+}
+
+export {App,MarketingApp};

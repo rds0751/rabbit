@@ -455,7 +455,7 @@ const HomeCard = () => {
   ];
 
   // useEffect(() => {
-    
+
   //   window.ethereum
   //     .request({ method: "eth_requestAccounts" })
   //     .then((newAccount) => {
@@ -464,8 +464,11 @@ const HomeCard = () => {
   //     });
   // });
   const checkTenant = async () => {
-    const [error, result] = await Utils.parseResponse(getTenantByWallet(walletAddress?.address));
-    if (error || !result) return Utils.apiFailureToast("Tenant Data is not fetched");
+    const [error, result] = await Utils.parseResponse(
+      getTenantByWallet(walletAddress?.address)
+    );
+    if (error || !result)
+      return Utils.apiFailureToast("Tenant Data is not fetched");
     if (!result.success) {
       console.log(result);
       setModal(true);
@@ -577,7 +580,6 @@ const HomeCard = () => {
                                     <Details>
                                       <NamePrice>Holy bear</NamePrice>
                                       <CurrencyPrice>
-                                      
                                         <NamePrice>0.13 ETH</NamePrice>
                                       </CurrencyPrice>
                                     </Details>
