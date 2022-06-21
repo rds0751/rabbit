@@ -8,6 +8,36 @@ import { useNavigate } from "react-router-dom";
 import { fetchPalletsColor, getParamTenantId } from "../../utility/global";
 import { useSelector, useDispatch } from "react-redux";
 import { SetMealOutlined } from "@mui/icons-material";
+import Admin, {
+  Ball,
+  Bear,
+  BinanceBlockchain,
+  CardImg,
+  Collectivables,
+  CrossChain,
+  Customer,
+  customisable,
+  Ethereum,
+  ethereumIcon,
+  infrastructure,
+  invisible,
+  marketplace,
+  MetaFox,
+  Music,
+  NFTBuying,
+  Paint,
+  Polygon,
+  Security,
+  StepGrowth,
+  StepStore,
+  StepWallet,
+  StoreApi,
+  StoreFrontSetting,
+  Utility,
+  WarriorMonk,
+  Water,
+} from "../../common/newHomeImages";
+
 import {
   AddWalletDetails,
   ManageWalletSideBar,
@@ -19,6 +49,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
 import Utils from "../../utility";
 import { getTenantByWallet } from "../../services/clientConfigMicroService";
+import "../../assets/styles/homepage.css";
 
 const MainDiv = styled.div`
   background: #031527 0% 0% no-repeat padding-box;
@@ -264,11 +295,10 @@ const StoreButton = styled.button`
   margin-top: 92px;
   background: #016dd9 0% 0% no-repeat padding-box;
   border-radius: 12px;
+  border: none;
   opacity: 1;
-  padding: 16px 51px 13px 51px;
   width: 216px;
   height: 54px;
-  text-align: left;
   font: normal normal medium 18px/27px Poppins;
   letter-spacing: 0px;
   color: #ffffff;
@@ -352,6 +382,7 @@ const Currency = styled.label``;
 const CurrencyPrice = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-left: 5px;
 `;
 
 const HomeCard = () => {
@@ -367,25 +398,25 @@ const HomeCard = () => {
   const navigate = useNavigate();
   const data = [
     {
-      image: "images/customisable.svg",
+      image: customisable,
       title: "Fully customisable",
       subtitle:
         "Our platform offers user end to end customisation opportunity where user can customise according to their business needs",
     },
     {
-      image: "images/Customer.svg",
+      image: Customer,
       title: "Customer centric approach",
       subtitle:
         "ANAFTO is super easy for anyone as it subtracts the the complexities of",
     },
     {
-      image: "images/Security.svg",
+      image: Security,
       title: "Reliable Security",
       subtitle:
         "Our platform offers user end to end customisation opportunity where user can customise according to their business needs",
     },
     {
-      image: "images/CrossChain.svg",
+      image: CrossChain,
       title: "Cross-chain support",
       subtitle:
         "Our platform offers user end to end customisation opportunity where user can customise according to their business needs",
@@ -394,52 +425,53 @@ const HomeCard = () => {
 
   const offer = [
     {
-      img: "images/Paint.svg",
+      img: Paint,
       name: "Art",
     },
     {
-      img: "images/Ball.svg",
+      img: Ball,
       name: "Sports",
     },
     {
-      img: "images/Cards.svg",
+      img: CardImg,
       name: "Trading Cards",
     },
     {
-      img: "images/Cards.svg",
+      img: CardImg,
       name: "Photography",
     },
     {
-      img: "images/Collectivables.svg",
+      img: Collectivables,
       name: "Collectibles",
     },
     {
-      img: "images/Utility.svg",
+      img: Utility,
       name: "Utility",
     },
     {
-      img: "images/Music.svg",
+      img: Music,
       name: "Music",
     },
   ];
 
-  useEffect(() => {
-    window.ethereum
-      .request({ method: "eth_requestAccounts" })
-      .then((newAccount) => {
-        address = newAccount[0];
-        localStorage.setItem("walletAddress", address);
-      });
-  });
+  // useEffect(() => {
+    
+  //   window.ethereum
+  //     .request({ method: "eth_requestAccounts" })
+  //     .then((newAccount) => {
+  //       address = newAccount[0];
+  //       localStorage.setItem("walletAddress", address);
+  //     });
+  // });
   const checkTenant = async () => {
-    const [error, result] = await Utils.parseResponse(getTenantByWallet());
-    if (error || !result) return toast.error("Tenant Data is not fetched");
-     if (!result.success) {
+    const [error, result] = await Utils.parseResponse(getTenantByWallet(walletAddress?.address));
+    if (error || !result) return Utils.apiFailureToast("Tenant Data is not fetched");
+    if (!result.success) {
       console.log(result);
       setModal(true);
     } else if (result.success) {
       console.log(result);
-      return toast.success("tenant data is fetched");
+      return Utils.apiSuccessToast("tenant data is fetched");
     }
   };
 
@@ -518,7 +550,7 @@ const HomeCard = () => {
                             onClick={() => MetaMaskConnector()}
                           >
                             <Image
-                              src="images/MetaFox.png"
+                              src={MetaFox}
                               style={{ marginRight: "5px" }}
                             ></Image>
                             {`${
@@ -545,16 +577,15 @@ const HomeCard = () => {
                                     <Details>
                                       <NamePrice>Holy bear</NamePrice>
                                       <CurrencyPrice>
-                                        <Currency></Currency>
+                                      
                                         <NamePrice>0.13 ETH</NamePrice>
-                                        
                                       </CurrencyPrice>
                                     </Details>
                                   </NFTDetails>
                                   <Card.Img
                                     variant="top"
                                     className={`newhomecard`}
-                                    src="images/WarriorMonk.png"
+                                    src={WarriorMonk}
                                   />
                                 </div>
                               </Card>
@@ -563,7 +594,7 @@ const HomeCard = () => {
                                   <Card.Img
                                     variant="top"
                                     className={`newhomecard`}
-                                    src="images/Bear.png"
+                                    src={Bear}
                                   />
                                 </div>
                               </Card>
@@ -572,7 +603,7 @@ const HomeCard = () => {
                                   <Card.Img
                                     variant="top"
                                     className={`newhomecard`}
-                                    src="images/Water.png"
+                                    src={Water}
                                   />
                                 </div>
                               </Card>
@@ -581,7 +612,7 @@ const HomeCard = () => {
                                   <Card.Img
                                     variant="top"
                                     className={`newhomecard`}
-                                    src="images/invisible.png"
+                                    src={invisible}
                                   />
                                 </div>
                               </Card>
@@ -632,7 +663,7 @@ const HomeCard = () => {
 
             <StepDiv>
               <StepImageDiv>
-                <Image src="images/StepWallet.svg"></Image>
+                <Image src={StepWallet}></Image>
               </StepImageDiv>
 
               <StepDetails>
@@ -647,7 +678,7 @@ const HomeCard = () => {
 
             <StepDivSecond>
               <StepImageDiv>
-                <Image src="images/StepStore.png"></Image>
+                <Image src={StepStore}></Image>
               </StepImageDiv>
 
               <StepDetails>
@@ -661,7 +692,7 @@ const HomeCard = () => {
             </StepDivSecond>
             <StepDiv>
               <StepImageDiv>
-                <Image src="images/StepGrowth.svg"></Image>
+                <Image src={StepGrowth}></Image>
               </StepImageDiv>
 
               <StepDetails>
@@ -682,7 +713,7 @@ const HomeCard = () => {
               <ExperienceText>
                 Enable customer to buy NFT seamlessly
               </ExperienceText>
-              <Image src="images/NFTBuying.png"></Image>
+              <Image src={NFTBuying}></Image>
             </HeadTitle>
           </CommonSection>
 
@@ -693,7 +724,7 @@ const HomeCard = () => {
               <ExperienceText>
                 Enable customer to buy NFT seamlessly
               </ExperienceText>
-              <Image src="images/Admin.png"></Image>
+              <Image src={Admin}></Image>
             </HeadTitle>
           </CommonSection>
 
@@ -705,15 +736,15 @@ const HomeCard = () => {
 
             <BlockchainsDiv>
               <Blockchain>
-                <Image src="images/Ethereum.png"></Image>
+                <Image src={Ethereum}></Image>
                 <BlockchainText>Ethereum</BlockchainText>
               </Blockchain>
               <Blockchain>
-                <Image src="images/Polygon.svg"></Image>
+                <Image src={Polygon}></Image>
                 <BlockchainText>Polygon Matic</BlockchainText>
               </Blockchain>
               <Blockchain>
-                <Image src="images/BinanceBlockchain.svg"></Image>
+                <Image src={BinanceBlockchain}></Image>
                 <BlockchainText>Binance </BlockchainText>
               </Blockchain>
             </BlockchainsDiv>
@@ -725,7 +756,7 @@ const HomeCard = () => {
 
               <StoreFrontPage>
                 <StoreFrontDiv>
-                  <Image src="images/StoreApi.svg"></Image>
+                  <Image src={StoreApi}></Image>
                   <StoreFrontName>NFT APIs</StoreFrontName>
                   <DesStoreFrontDiv>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
@@ -733,7 +764,7 @@ const HomeCard = () => {
                   </DesStoreFrontDiv>
                 </StoreFrontDiv>
                 <StoreFrontDiv>
-                  <Image src="images/StoreFrontSetting.svg"></Image>
+                  <Image src={StoreFrontSetting}></Image>
                   <StoreFrontName>NFT Tools</StoreFrontName>
                   <DesStoreFrontDiv>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
@@ -741,7 +772,7 @@ const HomeCard = () => {
                   </DesStoreFrontDiv>
                 </StoreFrontDiv>
                 <StoreFrontDiv>
-                  <Image src="images/infrastructure.svg"></Image>
+                  <Image src={infrastructure}></Image>
                   <StoreFrontName>NFT Infrastructure</StoreFrontName>
                   <DesStoreFrontDiv>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
@@ -768,11 +799,13 @@ const HomeCard = () => {
             </HeadTitle>
           </CommonSection>
 
-          <CommonSection style={{marginBottom:"163px"}}>
+          <CommonSection style={{ marginBottom: "163px" }}>
             <HeadTitle>
-              <CommonText style={{marginBottom:"88px"}}>ANAFTO Marketplace </CommonText>
+              <CommonText style={{ marginBottom: "88px" }}>
+                ANAFTO Marketplace{" "}
+              </CommonText>
 
-              <Image src="./images/marketplace.png"></Image>
+              <Image src={marketplace}></Image>
             </HeadTitle>
           </CommonSection>
         </BottomSection>

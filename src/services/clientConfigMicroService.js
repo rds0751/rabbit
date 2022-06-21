@@ -83,9 +83,10 @@ export const getBlogs = async () => {
         console.log(err);
       }
 };
-export const getTenantByWallet = async () => {
+export const getTenantByWallet = async (address) => {
+
   try {
-      const url = `${BASE_URL1}/api/v1/get-tenant${getParamTenantWalletAddress()}`;
+      const url = `${BASE_URL1}/api/v1/get-tenant${getParamTenantWalletAddress(address)}`;
       const res = await fetch(url, { headers: AuthToken,method:'GET' });
       const result = await res.json();
       return result;
