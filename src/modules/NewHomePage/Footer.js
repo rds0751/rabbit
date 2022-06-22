@@ -5,7 +5,6 @@ import styled from 'styled-components'
 const FooterSection = styled.div`
   display: flex;
   width: 100%;
-  margin-top: 163px;
   height: auto;
   flex-direction: column;
   background: #172738 0% 0% no-repeat padding-box;
