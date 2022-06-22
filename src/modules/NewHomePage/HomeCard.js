@@ -5,9 +5,8 @@ import styled from "styled-components";
 import "../../assets/styles/nftReportModal.css";
 import OwlCarousel from "react-owl-carousel";
 import { useNavigate } from "react-router-dom";
-import { fetchPalletsColor, getParamTenantId } from "../../utility/global";
+import { getParamTenantId } from "../../utility/global";
 import { useSelector, useDispatch } from "react-redux";
-import { SetMealOutlined } from "@mui/icons-material";
 import Admin, {
   Ball,
   Bear,
@@ -45,25 +44,19 @@ import {
   RedirectTo,
   ManageNotiSideBar,
 } from "../../reducers/Action";
-import { toast, ToastContainer } from "react-toastify";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
 import Utils from "../../utility";
-import { getTenantByWallet } from "../../services/clientConfigMicroService";
+import {
+  getTenantByWallet,
+  createSubDomain,
+  getTenant,
+} from "../../services/clientConfigMicroService";
 import "../../assets/styles/homepage.css";
 
 const MainDiv = styled.div`
   background: #031527 0% 0% no-repeat padding-box;
 `;
 
-const Div = styled.div`
-  display: flex;
-  height: 911px;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  background-color: grey;
-  padding: 207px;
-`;
 const FirstSection = styled.div`
   display: flex;
   flex-direction: column;
@@ -72,48 +65,9 @@ const FirstSection = styled.div`
 `;
 const CommonSection = styled.div`
   margin-top: 154px;
-  /* display: flex;
-flex-direction:column;
-align-items: center;
-justify-content: center; */
 `;
-const FirstTitle = styled.label`
-  text-align: left;
-  font: normal normal 600 54px/81px Poppins;
-  letter-spacing: 0px;
-  color: #ffffff;
-  opacity: 1;
-`;
-const SecondTitle = styled.label`
-  text-align: left;
-  font-size: 22px;
-  line-height: 33px;
-  font-weight: normal;
-  letter-spacing: 0px;
-  color: #ffffff;
-  margin-top: 24px;
-  margin-bottom: 35px;
-  opacity: 1;
-`;
-const ThirdTitle = styled.div`
-  width: 242px;
-  height: 54px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 16px 15px 14px 13px;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 12px;
-  opacity: 1;
-`;
+
 const Image = styled.img``;
-const Text = styled.label`
-  font: normal normal medium 18px/27px Poppins;
-  letter-spacing: 0px;
-  color: #031527;
-  opacity: 1;
-`;
 
 const BottomSection = styled.div`
   width: 100%;
@@ -125,12 +79,7 @@ const BottomSection = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const HeaderSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
+
 const LabelText = styled.label`
   text-align: center;
   font: normal normal 600 54px/81px Poppins;
@@ -389,13 +338,14 @@ const HomeCard = () => {
   const [modal, setModal] = useState(false);
   const { user, sideBar } = useSelector((state) => state);
   const dispatch = useDispatch();
-  let address = "";
-
-  // console.log(data);
   const { userDetails, walletAddress } = user;
   let { loggedInUser } = user;
-
   const navigate = useNavigate();
+  const [tenantData, setTenant] = useState({
+   
+    storeName: "",
+  });
+
   const data = [
     {
       image: customisable,
@@ -463,9 +413,9 @@ const HomeCard = () => {
   //       localStorage.setItem("walletAddress", address);
   //     });
   // });
-  const checkTenant = async () => {
+  const checkTenant = async (address) => {
     const [error, result] = await Utils.parseResponse(
-      getTenantByWallet(walletAddress?.address)
+      getTenantByWallet(address)
     );
     if (error || !result)
       return Utils.apiFailureToast("Tenant Data is not fetched");
@@ -474,6 +424,7 @@ const HomeCard = () => {
       setModal(true);
     } else if (result.success) {
       console.log(result);
+      //  navigate(url + getParamTenantId());
       return Utils.apiSuccessToast("tenant data is fetched");
     }
   };
@@ -484,7 +435,9 @@ const HomeCard = () => {
         .request({ method: "eth_requestAccounts" })
         .then((newAccount) => {
           const address = newAccount[0];
+          console.log(address, "<<<address");
           localStorage.setItem("walletAddress", address);
+
           window.ethereum
             .request({ method: "eth_getBalance", params: [address, "latest"] })
             .then((wallet_balance) => {
@@ -501,26 +454,45 @@ const HomeCard = () => {
                 localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
               });
             });
+          if (address) {
+            const data = checkTenant(address);
+          }
         })
         .catch((e) => {
           setModal(false);
-          toast.error("Install Metamask and Connect Wallet", {
-            position: toast.POSITION.TOP_RIGHT,
-          });
+          Utils.apiFailureToast("Please connect with metamask");
         });
-
-      const data = await checkTenant();
     } else {
-      toast.error("Install Metamask and Connect Wallet", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
+      Utils.apiFailureToast("Please connect with metamask");
     }
 
     //  setModal(true);
   };
 
-  const handleRedirectLink = (url) => {
-    navigate(url + getParamTenantId());
+  const createStore = async () => {
+    const [error, result] = await Utils.parseResponse(getTenant(tenantData));
+    console.log(error,result,"error result")
+
+    if(result.responseCode===403){
+    Utils.apiFailureToast(result.message)
+    }
+    else if(result.success){
+      let requestData={
+        subdomain:tenantData.storeName,
+        tenantId:result.responseData._id,
+      } 
+      const [errorDomain,domainResult]=await Utils.parseResponse(createSubDomain(requestData));
+
+      if(domainResult.responseCode === 403 )
+      Utils.apiFailureToast(domainResult.message)
+      else if(domainResult.success){
+      window.open(domainResult.responseData.siteUrl);
+   
+      }
+    } 
+   
+
+   // navigate(url + getParamTenantId());
   };
 
   return (
@@ -856,6 +828,12 @@ const HomeCard = () => {
                         <input
                           type="text"
                           className="Address"
+                          onChange={(e) =>
+                            setTenant({
+                              ...tenantData,
+                              storeName: e.target.value,
+                            })
+                          }
                           style={{ color: "white" }}
                         ></input>
                       </div>
@@ -870,7 +848,7 @@ const HomeCard = () => {
                 </div>
                 <button
                   className="btn btn-primary report-btn NewHomeButton"
-                  onClick={() => handleRedirectLink("/Home")}
+                  onClick={() => createStore("/Home")}
                   //  style={{background: `${fetchPalletsColor(appearance?.colorPalette)}`}}
                 >
                   Create Store

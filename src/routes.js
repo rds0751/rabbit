@@ -4,8 +4,7 @@ import { Provider, useDispatch } from "react-redux";
 import { store } from "./reducers/store";
 import Navbar from "./common/components/Navbar";
 import NftPage from "./modules/Home/Nft";
-// import Lower__homepage from "./components/HomeNftFilters";
-// import NftToggle from "./components/NftToggle";
+
 import Footer from "./common/components/Footer";
 import LeaderBoard from "./modules/Leaderboard/LeaderBoard";
 import Notification from "./common/components/Notification";
@@ -18,8 +17,6 @@ import Create from "./modules/Create/Create";
 import MyProfile from "./modules/MyPages/MyProfile";
 import UserProfilePage from "./modules/MyPages/UserProfilePage";
 
-// import Home_2 from "./components/Home_2";
-// import Home_3 from "./components/Home_3";
 import "./assets/styles/custom.css";
 import {
   BrowserRouter as Router,
@@ -28,8 +25,7 @@ import {
   Link,
   Switch,
 } from "react-router-dom";
-// import Collection_HomeNftFilters from "./components/Collection_HomeNftFilters";
-// import ToggleSwitch from "./components/ToggleSwitch";
+
 import HelpCenter from "./modules/Resources/Help/HelpCenter";
 import Suggestion from "./modules/Resources/Suggestion";
 import Buying from "./modules/Resources/Help/Buying";
@@ -39,9 +35,7 @@ import MyItems_Collection from "./modules/MyPages/MyItemCollection";
 import CreateNFT from "./modules/Create/CreateNFT";
 import CreateSingleNFT from "./modules/Create/index";
 import About from "./modules/About/About";
-// import Menu from "./";
-// import Fixed_Price from "./modules/";
-// import Highest_Bid from "./components/Highest_Bid";
+
 import CreateNftCollections from "./modules/Create/CreateNftCollections";
 import CollectionDetails from "./modules/Collections/CollectionDetails";
 import NftInformation from "./modules/Home/index";
@@ -85,7 +79,6 @@ function App() {
   const dispatch = useDispatch();
 
   const [loader, setLoader] = useState(true);
-  const [navFooter, setNavFooter] = useState(true);
 
   useEffect(() => {
     const checkWalletAddress = localStorage.getItem(
@@ -97,13 +90,9 @@ function App() {
         addUserData(res);
       });
     }
-
-    // alert(`${checkWalletAddress}`);
   }, []);
 
   useEffect(() => {
-    // if (localStorage.getItem('WHITE_LABEL_TOKEN') !== null) {
-
     getTenantData()
       .then((response) => {
         dispatch({ type: "ADD_CUSTOMIZE_DATA", payload: response[0] });
@@ -114,10 +103,6 @@ function App() {
       .catch((error) => {
         setLoader(false);
       });
-
-    // } else {
-    //   setLoader(false)
-    // }
   }, []);
 
   return (
@@ -141,7 +126,6 @@ function App() {
             element={<NftPage loaderState={loader} />}
           />
           <Route path="/" element={<Home loaderState={loader} />} />
-          
 
           {/* <Route
               exact
@@ -310,7 +294,7 @@ function App() {
         {/* </Switch> */}
         <Wallet />
 
-        {navFooter ? <Footer loader={loader} /> : ""}
+        <Footer loader={loader} />
       </Router>
 
       <Notification />
@@ -319,6 +303,7 @@ function App() {
 }
 
 function MarketingApp() {
+  const [loader, setLoader] = useState(true);
   return (
     <div className="App">
       <Router>
@@ -327,8 +312,8 @@ function MarketingApp() {
         <NavTwo />
 
         <Routes>
-          <Route path="*" element={<NewHomePage />} />
-          <Route path="/" element={<NewHomePage />} />
+          <Route path="*" element={<NewHomePage loader={loader} />} />
+          <Route path="/" element={<NewHomePage loader={loader} />} />
         </Routes>
         <FooterTwo />
       </Router>
@@ -336,4 +321,4 @@ function MarketingApp() {
   );
 }
 
-export {App,MarketingApp};
+export { App, MarketingApp };

@@ -45,8 +45,10 @@ export const getParamTenantId = () => {
 }
 export const getParamTenantWalletAddress = (address) => {
 
-    if(localStorage.getItem('walletAddress') != 'null') return `?wallet=${address}`
-    else return ''
+    if(address)
+     return `?wallet=${address}`
+    else 
+    return ''
 }
 
 export const getPostTenantId = () => {

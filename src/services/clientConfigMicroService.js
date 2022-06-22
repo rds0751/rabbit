@@ -73,6 +73,37 @@ export async function getTenantData(paramToken=false, paramAddress=false) {
   }
 }
 
+
+export async function getTenant(reqData) {
+
+
+  try {   
+    const url = `${BASE_URL1}/api/v1/tenant`;
+    const res = await fetch(url, {method: 'POST', headers: AuthToken,body: JSON.stringify(reqData) });
+    const result = await res.json();
+
+    return result;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+}
+
+export async function createSubDomain(reqData){
+
+  try{
+    const url = `${BASE_URL1}/api/v1/create-subdomain`;
+    const res = await fetch(url, {method: 'POST', headers: AuthToken,body: JSON.stringify(reqData) });
+    const result = await res.json();
+    console.log(result);
+    return result;
+  }catch(err){
+    return err;
+
+  }
+}
+
+
 export const getBlogs = async () => {
     try {
         const url = `${BASE_URL1}/api/v1/blogs${getParamTenantId()}`;
