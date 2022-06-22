@@ -424,8 +424,9 @@ const HomeCard = () => {
       setModal(true);
     } else if (result.success) {
       console.log(result);
-      //  navigate(url + getParamTenantId());
-      return Utils.apiSuccessToast("tenant data is fetched");
+      Utils.apiSuccessToast("Your Store is Created");
+     // window.open(domainResult.responseData.siteUrl);
+      
     }
   };
 
