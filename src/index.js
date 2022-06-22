@@ -29,3 +29,14 @@ if (
     document.getElementById("root")
   );
 }
+
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <Provider store={store}>
+//       <MarketingApp />
+//     </Provider>
+//   </React.StrictMode>,
+//   document.getElementById("root")
+// );
+
+
