@@ -357,6 +357,7 @@ const HomeCard = () => {
   const { userDetails, walletAddress } = user;
   let { loggedInUser } = user;
   const navigate = useNavigate();
+  const [userData,setUserData]=useState();
 
   const [tenantData, setTenant] = useState({
     storeName: "",
@@ -423,20 +424,27 @@ const HomeCard = () => {
   ];
 
  
+  useEffect(async ()=>{
+    const [error, result] = await Utils.parseResponse(
+      getTenantByWallet(tenantData.wallet)
+    );
+  
+
+  },[userData]);
 
   const checkTenant = async (address) => {
     const [error, result] = await Utils.parseResponse(
       getTenantByWallet(address)
     );
     if (error || !result)
-      return Utils.apiFailureToast("Tenant Data is not fetched");
+      return Utils.apiFailureToast("Store not launched.");
     if (!result.success) {
       console.log(result);
       setModal(true);
     } else if (result.success) {
       console.log(result);
-      window.open(result?.responseData?.siteUrl,'_blank');
-      return Utils.apiSuccessToast("tenant data is fetched");
+      window.location.replace(result?.responseData?.siteUrl);
+      
     }
   };
 
@@ -499,9 +507,11 @@ const HomeCard = () => {
       if (domainResult.responseCode === 403)
         Utils.apiFailureToast(domainResult.message);
       else if (domainResult.success) {
-        setModal(false);
+       setModal(false);
+       setUserData(domainResult.responseData);
        setTimeout(()=>{
-        window.open(domainResult.responseData.siteUrl);
+        //window.open(domainResult.responseData.siteUrl);
+        window.location.replace(domainResult.responseData.siteUrl);
 
 
         },5000)
