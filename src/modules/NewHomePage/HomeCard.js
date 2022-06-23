@@ -7,6 +7,8 @@ import OwlCarousel from "react-owl-carousel";
 import { useNavigate } from "react-router-dom";
 import { getParamTenantId } from "../../utility/global";
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { getNFtsData } from "../../services/webappMicroservice";
 import Admin, {
   Ball,
   Bear,
@@ -337,12 +339,14 @@ const CurrencyPrice = styled.div`
 const HomeCard = () => {
   const [modal, setModal] = useState(false);
   const { user, sideBar } = useSelector((state) => state);
+  const customize = useSelector((state) => state.customize);
+  const [nfts, setNfts] = useState([]);
+  const [changeState, setChangeState] = useState(true);
   const dispatch = useDispatch();
   const { userDetails, walletAddress } = user;
   let { loggedInUser } = user;
   const navigate = useNavigate();
   const [tenantData, setTenant] = useState({
-   
     storeName: "",
   });
 
@@ -404,15 +408,31 @@ const HomeCard = () => {
     },
   ];
 
-  // useEffect(() => {
+  useEffect(async () => {
+    try {
+      if (changeState) {
+        getNFtsData({}, (res) => {
+          if (res.success) {
+            console.log(res?.responseData?.nftContent, "nft");
+            console.log(customize.bannerNftData, "banner data");
 
-  //   window.ethereum
-  //     .request({ method: "eth_requestAccounts" })
-  //     .then((newAccount) => {
-  //       address = newAccount[0];
-  //       localStorage.setItem("walletAddress", address);
-  //     });
-  // });
+            if (customize.bannerNftData.length > 0) {
+              console.log("if block");
+              setNfts(customize.bannerNftData);
+            } else {
+              console.log("else block");
+              setNfts(res?.responseData?.nftContent);
+            }
+          } else {
+            toast.error(res.message);
+          }
+
+          // setLoadNfts(false);
+        });
+      }
+    } catch (error) {}
+  }, []);
+
   const checkTenant = async (address) => {
     const [error, result] = await Utils.parseResponse(
       getTenantByWallet(address)
@@ -471,28 +491,27 @@ const HomeCard = () => {
 
   const createStore = async () => {
     const [error, result] = await Utils.parseResponse(getTenant(tenantData));
-    console.log(error,result,"error result")
+    console.log(error, result, "error result");
 
-    if(result.responseCode===403){
-    Utils.apiFailureToast(result.message)
-    }
-    else if(result.success){
-      let requestData={
-        subdomain:tenantData.storeName,
-        tenantId:result.responseData._id,
-      } 
-      const [errorDomain,domainResult]=await Utils.parseResponse(createSubDomain(requestData));
+    if (result.responseCode === 403) {
+      Utils.apiFailureToast(result.message);
+    } else if (result.success) {
+      let requestData = {
+        subdomain: tenantData.storeName,
+        tenantId: result.responseData._id,
+      };
+      const [errorDomain, domainResult] = await Utils.parseResponse(
+        createSubDomain(requestData)
+      );
 
-      if(domainResult.responseCode === 403 )
-      Utils.apiFailureToast(domainResult.message)
-      else if(domainResult.success){
-      window.open(domainResult.responseData.siteUrl);
-   
+      if (domainResult.responseCode === 403)
+        Utils.apiFailureToast(domainResult.message);
+      else if (domainResult.success) {
+        window.open(domainResult.responseData.siteUrl);
       }
-    } 
-   
+    }
 
-   // navigate(url + getParamTenantId());
+    // navigate(url + getParamTenantId());
   };
 
   return (
@@ -546,50 +565,26 @@ const HomeCard = () => {
                         >
                           <div className="item">
                             <div className="d-flex flex-wrap">
-                              <Card>
-                                <div className="homePageContainer">
-                                  <NFTDetails>
-                                    <Details>
-                                      <NamePrice>Holy bear</NamePrice>
-                                      <CurrencyPrice>
-                                        <NamePrice>0.13 ETH</NamePrice>
-                                      </CurrencyPrice>
-                                    </Details>
-                                  </NFTDetails>
-                                  <Card.Img
-                                    variant="top"
-                                    className={`newhomecard`}
-                                    src={WarriorMonk}
-                                  />
-                                </div>
-                              </Card>
-                              <Card>
-                                <div className="homePageContainer">
-                                  <Card.Img
-                                    variant="top"
-                                    className={`newhomecard`}
-                                    src={Bear}
-                                  />
-                                </div>
-                              </Card>
-                              <Card>
-                                <div className="homePageContainer">
-                                  <Card.Img
-                                    variant="top"
-                                    className={`newhomecard`}
-                                    src={Water}
-                                  />
-                                </div>
-                              </Card>
-                              <Card>
-                                <div className="homePageContainer">
-                                  <Card.Img
-                                    variant="top"
-                                    className={`newhomecard`}
-                                    src={invisible}
-                                  />
-                                </div>
-                              </Card>
+                              {
+                                nfts.slice(0, 4).map((nft) => (
+                                  <Card>
+                                    <div className="homePageContainer">
+                                      <NFTDetails>
+                                        <Details>
+                                          <NamePrice>Holy bear</NamePrice>
+                                          <CurrencyPrice>
+                                            <NamePrice>0.13 ETH</NamePrice>
+                                          </CurrencyPrice>
+                                        </Details>
+                                      </NFTDetails>
+                                      <Card.Img
+                                        variant="top"
+                                        className={`newhomecard`}
+                                        src={nft?.previewImage}
+                                      />
+                                    </div>
+                                  </Card>
+                                ))}
                             </div>
                           </div>
                         </OwlCarousel>
