@@ -3,7 +3,7 @@ const initialState = {
     storeFee: 0,
     storeLogo: false,
     about: {
-        title: "About Anafto's Marketplace",
+        title: "About NFTinger's Marketplace",
         subTitle: "NFT marketplace in numbers",
         description: "",
         contactEmail: ""

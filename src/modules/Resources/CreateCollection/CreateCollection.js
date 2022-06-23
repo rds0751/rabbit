@@ -145,7 +145,7 @@ const CreateCollection = (props) => {
       questionText:
         "How do I change the properties of my NFT?",
       answerText:
-        "It’s easy - if you’ve minted your item on ANAFTO, you can simply click on the Edit button on your NFT. As a note, you won’t be able to edit an NFT after it’s been sold.",
+        "It’s easy - if you’ve minted your item on NFTinger, you can simply click on the Edit button on your NFT. As a note, you won’t be able to edit an NFT after it’s been sold.",
     },
     {
       id: 2,

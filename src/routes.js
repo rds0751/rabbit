@@ -304,6 +304,9 @@ function App() {
 
 function MarketingApp() {
   const [loader, setLoader] = useState(true);
+
+  
+
   return (
     <div className="App">
       <Router>
