@@ -1160,6 +1160,13 @@ height: 47px;
   background-color:rgb(251, 251, 251);
   margin-top: 49px;
 }
+.newHomeCopyright{
+margin-top: 0;
+text-align: left;
+}
+.newHome{
+
+}
 
 .textCopyright{
   color: #191919;

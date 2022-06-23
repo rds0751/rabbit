@@ -50,6 +50,7 @@ const NameText = styled.label`
   letter-spacing: 0px;
   color: #ffffff;
   opacity: 1;
+  cursor: pointer;
 `;
 const AboutText = styled.label`
   text-align: left;
@@ -80,6 +81,7 @@ const FirstDiv = styled.div`
 `;
 const HeadingFooter = styled.p`
   text-align: left;
+  cursor: pointer;
   font: normal normal bold 18px/27px Poppins;
   letter-spacing: 0px;
   color: #ffffff;
@@ -128,6 +130,8 @@ const Footer = () => {
     wallet: "",
   });
 
+  
+
   const checkTenant = async (address) => {
     const [error, result] = await Utils.parseResponse(
       getTenantByWallet(address)
@@ -140,7 +144,7 @@ const Footer = () => {
     } else if (result.success) {
       console.log(result);
       window.open(result.responseData.siteUrl,'_blank');
-      return Utils.apiSuccessToast("tenant data is fetched");
+     // return Utils.apiSuccessToast("");
     }
   };
 
@@ -213,10 +217,11 @@ const Footer = () => {
     // navigate(url + getParamTenantId());
   };
   return (
+    <>
     <FooterSection>
       <FooterDiv>
         <MarketPlaceDetail>
-          <NameText>NFTinger</NameText>
+          <NameText onClick={()=>navigate("/")}>NFTinger</NameText>
           {/* <AboutText>About DLT NFT marketplace</AboutText> */}
           <DesText>
             NFTinger is a B2B Saas to launch their own white-label NFT store or
@@ -250,12 +255,6 @@ const Footer = () => {
           </ThirdDiv>
         </OtherDetails>
       </FooterDiv>
-      <div className="copyrightDiv" style={{ background: " #172738 " }}>
-        <span className="textCopyright" style={{ color: " #e0e0e0 " }}>
-          &copy;2022 NFTinger Marketplace. All Rights Reserved.
-        </span>
-      </div>
-
       <div
           className="report-outer"
           style={{ display: `${modal ? "block" : "none"}` }}
@@ -330,6 +329,13 @@ const Footer = () => {
           </div>
         </div>
     </FooterSection>
+    <hr style={{color:"red",background:"grey",position:"absolute",width:"100%"}}></hr>
+    <div className="copyrightDiv newHomeCopyright" style={{ background: " #172738 ",paddingLeft:"4.4rem"}}>
+      <span className="textCopyright newHome" style={{ color: " #e0e0e0 " }}>
+        &copy;2022 NFTinger All Rights Reserved.
+      </span>
+    </div>
+    </>
     
   );
 };

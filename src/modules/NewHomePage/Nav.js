@@ -31,8 +31,8 @@ const MainDiv = styled.div`
 `;
 
 const NavDiv = styled.div`
-  width: 95%;
-
+  width: 87vw;
+  margin-left: 5vw;
   height: 70px;
   padding: 34px;
   display: flex;
@@ -51,6 +51,7 @@ const LogoDiv = styled.div`
   font: normal normal normal 29px/33px Whiskey Girls Condensed;
   letter-spacing: 0px;
   color: #016dd9;
+  cursor: pointer;
   opacity: 1;
 `;
 const ItemsDiv = styled.div`
@@ -65,6 +66,7 @@ const Item = styled.label`
   color: #8f9ba7;
   opacity: 1;
   margin-right: 2.3rem;
+  cursor: pointer;
 `;
 const CreateStore = styled.button`
   padding: 9px 36px 9px 36px;
@@ -185,12 +187,12 @@ const Nav = () => {
   return (
     <MainDiv>
       <NavDiv>
-        <LogoDiv>NFTinger</LogoDiv>
+        <LogoDiv onClick={()=>navigate("/")}>NFTinger</LogoDiv>
         <NavItem>
           <ItemsDiv>
             <Item>Pricing</Item>
             <Item>Resource</Item>
-            <Item>Login</Item>
+            <Item onClick={() => MetaMaskConnector()}>Login</Item>
             <CreateStore onClick={() => MetaMaskConnector()}>
               Create Store
             </CreateStore>
