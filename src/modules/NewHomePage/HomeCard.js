@@ -435,7 +435,7 @@ const HomeCard = () => {
       setModal(true);
     } else if (result.success) {
       console.log(result);
-      window.open(result.responseData.siteUrl,'_blank');
+      window.open(result?.responseData?.siteUrl,'_blank');
       return Utils.apiSuccessToast("tenant data is fetched");
     }
   };
