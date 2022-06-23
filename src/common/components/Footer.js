@@ -288,7 +288,7 @@ function Footer({ loader }) {
           </div>
           <div className="copyrightDiv">
             <span className="textCopyright">
-              &copy;2022 Anafto Marketplace. All Rights Reserved.
+              &copy;2022 NFTinger Marketplace. All Rights Reserved.
             </span>
           </div>
           <div className="version">
@@ -387,7 +387,7 @@ function Footer({ loader }) {
             </div>
             <div className="copyrightDivMob">
               <span className="textCopyrightMob">
-                &copy;2022 Anafto Marketplace. All Rights Reserved.
+                &copy;2022 NFTinger Marketplace. All Rights Reserved.
               </span>{" "}
             </div>
             <div className="versionmob">

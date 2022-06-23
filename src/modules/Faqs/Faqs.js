@@ -114,9 +114,9 @@ const Faqs = (props) => {
     {
       id: 0,
       questionText:
-        "How do I use ANAFTO?",
+        "How do I use NFTinger?",
       answerText:
-        "ANAFTO is one single stop for all NFT trading. You can explore the marketplace, add your NFTs for sale, and buy any NFT of your choice. The Explore button will take you to the recently added NFT collectibles. Create your profile, connect your wallet and start trading NFTs.",
+        "NFTinger is one single stop for all NFT trading. You can explore the marketplace, add your NFTs for sale, and buy any NFT of your choice. The Explore button will take you to the recently added NFT collectibles. Create your profile, connect your wallet and start trading NFTs.",
     },
     {
       id: 1,
@@ -137,14 +137,14 @@ const Faqs = (props) => {
       questionText:
         "How do I sell my NFT?",
       answerText:
-        "Before creating an NFT, you must connect your wallet to ANAFTO. Click on Create button to add your NFT. While creating the NFT, you will get the option to put it on a fixed price sale or open auction. Select your choice and make your NFT available for purchase.",
+        "Before creating an NFT, you must connect your wallet to NFTinger. Click on Create button to add your NFT. While creating the NFT, you will get the option to put it on a fixed price sale or open auction. Select your choice and make your NFT available for purchase.",
     },
     {
       id: 4,
       questionText:
-        "What type of tokens are supported on ANAFTO?",
+        "What type of tokens are supported on NFTinger?",
       answerText:
-        "Currently, ANAFTO supports ERC721 tokens.",
+        "Currently, NFTinger supports ERC721 tokens.",
     },
   ];
   const match=faqsList.filter(val => val.questionText.toLocaleLowerCase().includes(query));

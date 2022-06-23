@@ -7,6 +7,8 @@ import OwlCarousel from "react-owl-carousel";
 import { useNavigate } from "react-router-dom";
 import { getParamTenantId } from "../../utility/global";
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { getNFtsData } from "../../services/webappMicroservice";
 import Admin, {
   Ball,
   Bear,
@@ -124,6 +126,7 @@ const SubTitle = styled.label`
   letter-spacing: 0px;
   color: #f0f0f0;
   opacity: 1;
+  margin-top: 10px;
 `;
 
 const HeadTitle = styled.div`
@@ -251,6 +254,10 @@ const StoreButton = styled.button`
   font: normal normal medium 18px/27px Poppins;
   letter-spacing: 0px;
   color: #ffffff;
+  &:hover{
+    background: white 0% 0% no-repeat padding-box;
+    color:blue;
+  }
 `;
 const StepDiv = styled.div`
   display: flex;
@@ -289,13 +296,19 @@ const StepDes = styled.label`
 `;
 
 const StepCreateStore = styled.button`
-  padding: 16px 53px 13px 51px;
+  /* padding: 16px 53px 13px 51px; */
+  border: none;
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 12px;
   opacity: 1;
   margin-top: 46px;
   width: 216px;
   height: 54px;
+
+  &:hover{
+    background-color: #016dd9;
+    color:white;
+  }
 `;
 const How = styled.label`
   text-align: center;
@@ -337,16 +350,21 @@ const CurrencyPrice = styled.div`
 const HomeCard = () => {
   const [modal, setModal] = useState(false);
   const { user, sideBar } = useSelector((state) => state);
+  const customize = useSelector((state) => state.customize);
+  const [nfts, setNfts] = useState([]);
+  const [changeState, setChangeState] = useState(true);
   const dispatch = useDispatch();
   const { userDetails, walletAddress } = user;
   let { loggedInUser } = user;
   const navigate = useNavigate();
+
   const [tenantData, setTenant] = useState({
-   
     storeName: "",
+    wallet: "",
   });
 
   const data = [
+    
     {
       image: customisable,
       title: "Fully customisable",
@@ -357,7 +375,7 @@ const HomeCard = () => {
       image: Customer,
       title: "Customer centric approach",
       subtitle:
-        "ANAFTO is super easy for anyone as it subtracts the the complexities of",
+        "NFTinger is super easy for anyone as it subtracts the the complexities of",
     },
     {
       image: Security,
@@ -404,15 +422,8 @@ const HomeCard = () => {
     },
   ];
 
-  // useEffect(() => {
+ 
 
-  //   window.ethereum
-  //     .request({ method: "eth_requestAccounts" })
-  //     .then((newAccount) => {
-  //       address = newAccount[0];
-  //       localStorage.setItem("walletAddress", address);
-  //     });
-  // });
   const checkTenant = async (address) => {
     const [error, result] = await Utils.parseResponse(
       getTenantByWallet(address)
@@ -424,9 +435,8 @@ const HomeCard = () => {
       setModal(true);
     } else if (result.success) {
       console.log(result);
-      Utils.apiSuccessToast("Your Store is Created");
-     // window.open(domainResult.responseData.siteUrl);
-      
+      window.open(result?.responseData?.siteUrl,'_blank');
+      return Utils.apiSuccessToast("tenant data is fetched");
     }
   };
 
@@ -436,6 +446,7 @@ const HomeCard = () => {
         .request({ method: "eth_requestAccounts" })
         .then((newAccount) => {
           const address = newAccount[0];
+          setTenant({ ...tenantData, wallet: address });
           console.log(address, "<<<address");
           localStorage.setItem("walletAddress", address);
 
@@ -472,28 +483,32 @@ const HomeCard = () => {
 
   const createStore = async () => {
     const [error, result] = await Utils.parseResponse(getTenant(tenantData));
-    console.log(error,result,"error result")
+    console.log(error, result, "error result");
 
-    if(result.responseCode===403){
-    Utils.apiFailureToast(result.message)
-    }
-    else if(result.success){
-      let requestData={
-        subdomain:tenantData.storeName,
-        tenantId:result.responseData._id,
-      } 
-      const [errorDomain,domainResult]=await Utils.parseResponse(createSubDomain(requestData));
+    if (result.responseCode === 403) {
+      Utils.apiFailureToast(result.message);
+    } else if (result.success) {
+      let requestData = {
+        subdomain: tenantData.storeName,
+        tenantId: result.responseData._id,
+      };
+      const [errorDomain, domainResult] = await Utils.parseResponse(
+        createSubDomain(requestData)
+      );
 
-      if(domainResult.responseCode === 403 )
-      Utils.apiFailureToast(domainResult.message)
-      else if(domainResult.success){
-      window.open(domainResult.responseData.siteUrl);
-   
+      if (domainResult.responseCode === 403)
+        Utils.apiFailureToast(domainResult.message);
+      else if (domainResult.success) {
+        setModal(false);
+       setTimeout(()=>{
+        window.open(domainResult.responseData.siteUrl);
+
+
+        },5000)
       }
-    } 
-   
+    }
 
-   // navigate(url + getParamTenantId());
+    // navigate(url + getParamTenantId());
   };
 
   return (
@@ -549,14 +564,14 @@ const HomeCard = () => {
                             <div className="d-flex flex-wrap">
                               <Card>
                                 <div className="homePageContainer">
-                                  <NFTDetails>
+                                  {/* <NFTDetails>
                                     <Details>
                                       <NamePrice>Holy bear</NamePrice>
                                       <CurrencyPrice>
                                         <NamePrice>0.13 ETH</NamePrice>
                                       </CurrencyPrice>
                                     </Details>
-                                  </NFTDetails>
+                                  </NFTDetails> */}
                                   <Card.Img
                                     variant="top"
                                     className={`newhomecard`}
@@ -615,7 +630,9 @@ const HomeCard = () => {
 
         <BottomSection>
           <FirstSection>
-            <LabelText>Why use ANAFTO</LabelText>
+            <LabelText>
+              Why use <span style={{ color: "#016dd9" }}>NFTinger</span>
+            </LabelText>
 
             <MainCardDiv>
               {data.map((ele) => (
@@ -644,10 +661,12 @@ const HomeCard = () => {
               <StepDetails>
                 <StepTitle>01 Connect your wallet</StepTitle>
                 <StepDes>
-                  ANAFTO is super easy for anyone as it subtracts the the
+                  NFTinger is super easy for anyone as it subtracts the the
                   complexities of
                 </StepDes>
-                <StepCreateStore>Create Store</StepCreateStore>
+                <StepCreateStore onClick={() => MetaMaskConnector()}>
+                  Create Store
+                </StepCreateStore>
               </StepDetails>
             </StepDiv>
 
@@ -655,14 +674,15 @@ const HomeCard = () => {
               <StepImageDiv>
                 <Image src={StepStore}></Image>
               </StepImageDiv>
-
               <StepDetails>
                 <StepTitle>02 Create your NFT store</StepTitle>
                 <StepDes>
-                  ANAFTO is super easy for anyone as it subtracts the the
+                  NFTinger is super easy for anyone as it subtracts the the
                   complexities of
                 </StepDes>
-                <StepCreateStore>Create Store</StepCreateStore>
+                <StepCreateStore onClick={() => MetaMaskConnector()}>
+                  Create Store
+                </StepCreateStore>
               </StepDetails>
             </StepDivSecond>
             <StepDiv>
@@ -673,10 +693,12 @@ const HomeCard = () => {
               <StepDetails>
                 <StepTitle>03 Start selling and growth</StepTitle>
                 <StepDes>
-                  ANAFTO is super easy for anyone as it subtracts the the
+                  NFTinger is super easy for anyone as it subtracts the the
                   complexities of
                 </StepDes>
-                <StepCreateStore>Create Store</StepCreateStore>
+                <StepCreateStore onClick={() => MetaMaskConnector()}>
+                  Create Store
+                </StepCreateStore>
               </StepDetails>
             </StepDiv>
           </CommonSection>
@@ -756,7 +778,9 @@ const HomeCard = () => {
                 </StoreFrontDiv>
               </StoreFrontPage>
 
-              <StoreButton>Create Store</StoreButton>
+              <StoreButton onClick={() => MetaMaskConnector()}>
+                Create Store
+              </StoreButton>
             </HeadTitle>
           </CommonSection>
 
@@ -777,7 +801,7 @@ const HomeCard = () => {
           <CommonSection style={{ marginBottom: "163px" }}>
             <HeadTitle>
               <CommonText style={{ marginBottom: "88px" }}>
-                ANAFTO Marketplace{" "}
+               <span style={{color:"#016dd9"}}> NFTinger </span> Marketplace
               </CommonText>
 
               <Image src={marketplace}></Image>
@@ -838,7 +862,7 @@ const HomeCard = () => {
                           style={{ color: "white" }}
                         ></input>
                       </div>
-                      <label className="siteurl">.anafto.com</label>
+                      <label className="siteurl">.NFTinger.com</label>
                     </div>
 
                     <label className="lastLabel">
@@ -849,7 +873,7 @@ const HomeCard = () => {
                 </div>
                 <button
                   className="btn btn-primary report-btn NewHomeButton"
-                  onClick={() => createStore("/Home")}
+                  onClick={() => createStore()}
                   //  style={{background: `${fetchPalletsColor(appearance?.colorPalette)}`}}
                 >
                   Create Store
@@ -864,3 +888,27 @@ const HomeCard = () => {
 };
 
 export default HomeCard;
+ // useEffect(async () => {
+  //   try {
+  //     if (changeState) {
+  //       getNFtsData({}, (res) => {
+  //         if (res.success) {
+  //           console.log(res?.responseData?.nftContent, "nft");
+  //           console.log(customize.bannerNftData, "banner data");
+
+  //           if (customize.bannerNftData.length > 0) {
+  //             console.log("if block");
+  //             setNfts(customize.bannerNftData);
+  //           } else {
+  //             console.log("else block");
+  //             setNfts(res?.responseData?.nftContent);
+  //           }
+  //         } else {
+  //           toast.error(res.message);
+  //         }
+
+  //         // setLoadNfts(false);
+  //       });
+  //     }
+  //   } catch (error) {}
+  // }, []);

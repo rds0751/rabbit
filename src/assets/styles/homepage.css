@@ -26,6 +26,10 @@ height: 54px!important;
 background: #FFFFFF 0% 0% no-repeat padding-box !important;
 color: #031527!important;
 }
+.homepage .left-text .second:hover{
+  background-color: #016dd9 !important;
+  color: white!important;
+}
 .homepage .banner .inner-width {
   margin-left: 126px;
   margin-right: 100px;
