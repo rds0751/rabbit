@@ -5,6 +5,9 @@
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-l
+  RewriteCond %{HTTP_HOST} ^www\.nftinger\.com$ [NC]
+  RewriteRule ^(.*)$ https://nftinger.com/$1 [R=301,L]
   RewriteRule . /index.html [L]
+
 
 </IfModule>
