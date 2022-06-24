@@ -98,6 +98,15 @@ const Nav = () => {
     storeName: "",
     wallet: "",
   });
+  const [userData,setUserData]=useState();
+ 
+  useEffect(async ()=>{
+    const [error, result] = await Utils.parseResponse(
+      getTenantByWallet(tenantData.wallet)
+    );
+  
+
+  },[userData]);
 
   const checkTenant = async (address) => {
     const [error, result] = await Utils.parseResponse(
@@ -175,6 +184,7 @@ const Nav = () => {
         Utils.apiFailureToast(domainResult.message);
       else if (domainResult.success) {
         setModal(false);
+        setUserData(domainResult.responseData);
         window.open(domainResult.responseData.siteUrl,'_blank');
       }
     }

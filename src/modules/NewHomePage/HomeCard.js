@@ -9,6 +9,7 @@ import { getParamTenantId } from "../../utility/global";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { getNFtsData } from "../../services/webappMicroservice";
+import Spinner from "../../common/components/Spinner";
 import Admin, {
   Ball,
   Bear,
@@ -358,6 +359,7 @@ const HomeCard = () => {
   let { loggedInUser } = user;
   const navigate = useNavigate();
   const [userData,setUserData]=useState();
+  const [loader,setLoader]=useState(false);
 
   const [tenantData, setTenant] = useState({
     storeName: "",
@@ -433,15 +435,22 @@ const HomeCard = () => {
   },[userData]);
 
   const checkTenant = async (address) => {
+    setLoader(true);
     const [error, result] = await Utils.parseResponse(
       getTenantByWallet(address)
     );
-    if (error || !result)
+    if (error || !result){
+      setLoader(false);
       return Utils.apiFailureToast("Store not launched.");
+    }
     if (!result.success) {
+      setLoader(false);
       setModal(true);
     } else if (result.success) {
-      window.location.replace(result?.responseData?.siteUrl);
+      setTimeout(()=>{
+        setLoader(false);
+        window.location.replace(result.responseData.siteUrl);
+      },5000)
       
     }
   };
@@ -487,10 +496,11 @@ const HomeCard = () => {
   };
 
   const createStore = async () => {
+   
     const [error, result] = await Utils.parseResponse(getTenant(tenantData));
-    console.log(error, result, "error result");
 
     if (result.responseCode === 403) {
+      setLoader(false);
       Utils.apiFailureToast(result.message);
     } else if (result.success) {
       let requestData = {
@@ -501,21 +511,22 @@ const HomeCard = () => {
         createSubDomain(requestData)
       );
 
-      if (domainResult.responseCode === 403)
+      if (domainResult.responseCode === 403){
+        setLoader(false);
         Utils.apiFailureToast(domainResult.message);
+      }
       else if (domainResult.success) {
+       setLoader(true)
        setModal(false);
        setUserData(domainResult.responseData);
        setTimeout(()=>{
-        //window.open(domainResult.responseData.siteUrl);
+        setLoader(false)
         window.location.replace(domainResult.responseData.siteUrl);
-
-
         },5000)
+       
       }
     }
 
-    // navigate(url + getParamTenantId());
   };
 
   return (
@@ -547,6 +558,7 @@ const HomeCard = () => {
                             className={`button-hide second`}
                             onClick={() => MetaMaskConnector()}
                           >
+                            {loader ? <Spinner></Spinner> :""}
                             <Image
                               src={MetaFox}
                               style={{ marginRight: "5px" }}

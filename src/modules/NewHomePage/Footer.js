@@ -14,6 +14,7 @@ import {
   RedirectTo,
   ManageNotiSideBar,
 } from "../../reducers/Action";
+import Spinner from "../../common/components/Spinner";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
 import Utils from "../../utility";
 import {
@@ -115,7 +116,7 @@ const FooterCreateStore = styled.button`
 `;
 const Footer = () => {
   const navigate = useNavigate();
-
+  const [userData,setUserData]=useState();
   const [modal, setModal] = useState(false);
   const { user, sideBar } = useSelector((state) => state);
   const customize = useSelector((state) => state.customize);
@@ -129,8 +130,16 @@ const Footer = () => {
     storeName: "",
     wallet: "",
   });
+  const [loader,setLoader]=useState(true);
 
+   
+  useEffect(async ()=>{
+    const [error, result] = await Utils.parseResponse(
+      getTenantByWallet(tenantData.wallet)
+    );
   
+
+  },[userData]);
 
   const checkTenant = async (address) => {
     const [error, result] = await Utils.parseResponse(
@@ -141,10 +150,9 @@ const Footer = () => {
     if (!result.success) {
       setModal(true);
     } else if (result.success) {
-      window.location.replace(result.responseData.siteUrl);
+        window.location.replace(result.responseData.siteUrl);
     }
   };
-
 
   const MetaMaskConnector = async () => {
     try{
@@ -204,6 +212,7 @@ const Footer = () => {
       if (errorDomain ||domainResult.responseCode === 403)
         Utils.apiFailureToast(domainResult.message);
       else if (domainResult.success) {
+        setUserData(domainResult.responseData);
         setModal(false);
         window.location.replace(domainResult.responseData.siteUrl);
       }
@@ -244,7 +253,9 @@ const Footer = () => {
             </ParaText>
           </SecondDiv>
           <ThirdDiv>
-            <FooterCreateStore onClick={()=>MetaMaskConnector()}>Create Store</FooterCreateStore>
+            <FooterCreateStore onClick={()=>MetaMaskConnector()}>
+              Create Store
+            </FooterCreateStore>
           </ThirdDiv>
         </OtherDetails>
       </FooterDiv>
