@@ -9,13 +9,12 @@ let parseData = window.location.host.split(".");
 
 if (
   (parseData?.length === 3 && parseData[0] === "www") ||
-  parseData?.length <= 2
+ (parseData?.length <= 2)
 ) {
   ReactDOM.render(
     <React.StrictMode>
       <Provider store={store}>
-        {/* <MarketingApp /> */}
-          <App />
+        <MarketingApp />
       </Provider>
     </React.StrictMode>,
     document.getElementById("root")
@@ -39,3 +38,5 @@ if (
 //   </React.StrictMode>,
 //   document.getElementById("root")
 // );
+
+
