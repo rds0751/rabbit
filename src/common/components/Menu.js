@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import {
-  
+
   RedirectTo,
- 
+
 } from "../../reducers/Action";
 import { useNavigate } from "react-router-dom";
 // import Upper_MyItems from "./Upper_MyItems";
@@ -36,40 +36,44 @@ function Menu(props) {
       }
     }
   };
-  console.log(props.handleHamburger,"deepak")
+  console.log(props.handleHamburger, "deepak")
   return (
     <>
       <div className="container new-container menuphone">
 
-        <div className="menuin" style={{ display:"flex",cursor:"pointer",
-                justifyContent:"space-between"}} onClick={()=>{navigate('/nfts'); props.handleHamburger();}}>
+        <div className="menuin" style={{
+          display: "flex", cursor: "pointer",
+          justifyContent: "space-between"
+        }} onClick={() => { navigate('/nfts'); props.handleHamburger(); }}>
           <h2 style={{
-                textDecoration: "none",
-                color: "black",
-                fontSize: "1.1rem",
-                fontWeight: "600",
-               
-              }}>
-          
-              Marketplace
-              
-              </h2>
-              <i className="fas fa-chevron-right"></i>
-          
-         
-        
+            textDecoration: "none",
+            color: "black",
+            fontSize: "1.1rem",
+            fontWeight: "600",
+
+          }}>
+
+            Marketplace
+
+          </h2>
+          <i className="fas fa-chevron-right"></i>
+
+
+
         </div>
-        <div className="menuin" style={{ display:"flex",cursor:"pointer",
-                justifyContent:"space-between"}} onClick={()=>{navigate('/leader-board'); props.handleHamburger();}}>
+        <div className="menuin" style={{
+          display: "flex", cursor: "pointer",
+          justifyContent: "space-between"
+        }} onClick={() => { navigate('/leader-board'); props.handleHamburger(); }}>
           <h2 style={{
-                textDecoration: "none",
-                color: "black",
-                fontSize: "1.1rem",
-                fontWeight: "600",
-              }}> 
-           
-              Leaderboard
-           
+            textDecoration: "none",
+            color: "black",
+            fontSize: "1.1rem",
+            fontWeight: "600",
+          }}>
+
+            Leaderboard
+
           </h2>
           <i className="fas fa-chevron-right"></i>
         </div>
@@ -93,12 +97,12 @@ function Menu(props) {
               aria-labelledby="navbarDropdown"
               style={{ width: "450%" }}
             >
-              <li onClick={()=>{ props.handleHamburger();}}>
+              <li onClick={() => { props.handleHamburger(); }}>
                 <Link className="dropdown-item" to="/help-center">
                   Help Center
                 </Link>
               </li>
-              <li onClick={()=>{ props.handleHamburger();}}>
+              <li onClick={() => { props.handleHamburger(); }}>
                 <Link className="dropdown-item" to="/Suggestion" >
                   Suggestions
                 </Link>
@@ -108,17 +112,17 @@ function Menu(props) {
           <i className="fas fa-chevron-right"></i>
         </div>
 
-        <button className="py-2" onClick={() => {manageNavigation("create"); props.handleHamburger();}}>
+        <button className="py-2" onClick={() => { manageNavigation("create"); props.handleHamburger(); }}>
 
-        <Link
-         to={walletAddress == null ? "/add-wallet" : "/create-nft"}
-          className="btn btn-primary btnnav"
-          style={{backgroundColor:"transparent" ,border:"none"}}
-         >
-          Create
+          <Link
+            to={walletAddress == null ? "/add-wallet" : "/create-nft"}
+            className="btn btn-primary btnnav"
+            style={{ backgroundColor: "transparent", border: "none" }}
+          >
+            Create
           </Link>
-          
-          </button>
+
+        </button>
       </div>
     </>
   );

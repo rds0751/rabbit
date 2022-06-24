@@ -1320,7 +1320,7 @@ thead {
   color: white;
   margin-right: 2rem;
   background-color: #366eff;
-  textTransform: none;
+  text-transform: none;
 }
 .nft-detail .grap-area ul {
   display: flex;

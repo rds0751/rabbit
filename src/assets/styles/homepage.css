@@ -11,7 +11,7 @@
 }
 
 .new-home-left-touch{
-  width: 64%;
+  width: 65%;
 }
 .homepage .right-slider .newhomecard{
   width: auto !important;
@@ -81,8 +81,7 @@ color: #031527!important;
 .homepage .right-slider .card-img-top {
   width: 100%;
   height: 273px;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
+  border-radius: 6px;
   object-fit: cover;
 }
 .homepage .right-slider .card .profile-img {
@@ -211,7 +210,7 @@ color: #031527!important;
 }
 @media only screen and (max-width: 1918px) {
   .homepage .right-slider .card {
-    width: 48%;
+    width: auto;
   }
   .homepage .create-sell-nft .inner-width {
     width: 87%;

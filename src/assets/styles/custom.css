@@ -40,7 +40,9 @@ ul li .rounded-circle {
 .card {
   cursor: pointer;
 }
-
+.c-8f9ba7{
+  color: #8f9ba7 !important;
+}
 .card-group {
   width: 60%;
 }
@@ -311,7 +313,10 @@ ul {
 .color36 {
   color: #366eef;
 }
-
+.bg-031527{
+  background-color: #031527 !important;
+  color:  #fff !important
+}
 .font-12 {
   font-size: 12px;
 }
@@ -326,7 +331,7 @@ ul {
   font-size: 15px;
 }
 .font-16 {
-  font-size: 16px;
+  font-size: 16px !important;
 }
 .font-17 {
   font-size: 17px;
@@ -383,7 +388,18 @@ ul {
 .suggestion-form {
   border-radius: 15px;
 }
-
+/* .column-gap-20{
+  column-gap: 25px !important;
+  row-gap: 5px !important;
+} */
+.link-footer{
+  text-align: left;
+  font: normal normal normal 18px/27px Poppins;
+  letter-spacing: 0px;
+  cursor: pointer;
+  color: #e0e0e0;
+  text-decoration: none;
+}
 .suggestion-input-box {
   background-color: #f8f8f8 !important;
 }

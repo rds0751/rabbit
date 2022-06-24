@@ -23,6 +23,7 @@ import {
   getTenant,
 } from "../../services/clientConfigMicroService";
 import "../../assets/styles/homepage.css";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 const FooterSection = styled.div`
   display: flex;
@@ -88,7 +89,7 @@ const HeadingFooter = styled.p`
   color: #ffffff;
 `;
 const ParaText = styled.p``;
-const Link = styled.a`
+const LinkText = styled.a`
   text-align: left;
   font: normal normal normal 18px/27px Poppins;
   letter-spacing: 0px;
@@ -234,22 +235,22 @@ const Footer = () => {
           <FirstDiv>
             <HeadingFooter>Company</HeadingFooter>
             <ParaText>
-              <Link>About Us</Link>
+            <Link className="link-footer"to="about">About Us</Link>
             </ParaText>
             <ParaText>
-              <Link>Pricing</Link>
+              <LinkText>Pricing</LinkText>
             </ParaText>
           </FirstDiv>
           <SecondDiv>
             <HeadingFooter>Resource</HeadingFooter>
             <ParaText>
-              <Link>Help Center</Link>
+             <Link className="link-footer"to="help-center">Help Center</Link>
             </ParaText>
             <ParaText>
-              <Link>FAQs</Link>
+            <Link className="link-footer"to="FAQs">FAQs</Link>
             </ParaText>
             <ParaText>
-              <Link>Suggestions</Link>
+            <Link className="link-footer"to="suggestion">Suggestions</Link>
             </ParaText>
           </SecondDiv>
           <ThirdDiv>
