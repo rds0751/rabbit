@@ -55,6 +55,7 @@ import {
   getTenant,
 } from "../../services/clientConfigMicroService";
 import "../../assets/styles/homepage.css";
+import { storeConstants } from "../../constants";
 
 const MainDiv = styled.div`
   background: #031527 0% 0% no-repeat padding-box;
@@ -358,8 +359,8 @@ const HomeCard = () => {
   const { userDetails, walletAddress } = user;
   let { loggedInUser } = user;
   const navigate = useNavigate();
-  const [userData,setUserData]=useState();
-  const [loader,setLoader]=useState(false);
+  const [userData, setUserData] = useState();
+  const [loader, setLoader] = useState(false);
 
   const [tenantData, setTenant] = useState({
     storeName: "",
@@ -367,7 +368,7 @@ const HomeCard = () => {
   });
 
   const data = [
-    
+
     {
       image: customisable,
       title: "Fully customisable",
@@ -425,21 +426,21 @@ const HomeCard = () => {
     },
   ];
 
- 
-  useEffect(async ()=>{
+
+  useEffect(async () => {
     const [error, result] = await Utils.parseResponse(
       getTenantByWallet(tenantData.wallet)
     );
-  
 
-  },[userData]);
+
+  }, [userData]);
 
   const checkTenant = async (address) => {
     setLoader(true);
     const [error, result] = await Utils.parseResponse(
       getTenantByWallet(address)
     );
-    if (error || !result){
+    if (error || !result) {
       setLoader(false);
       return Utils.apiFailureToast("Store not launched.");
     }
@@ -447,61 +448,62 @@ const HomeCard = () => {
       setLoader(false);
       setModal(true);
     } else if (result.success) {
-      setTimeout(()=>{
+      setTimeout(() => {
         setLoader(false);
         window.location.replace(result.responseData.siteUrl);
-      },5000)
-      
+      }, 5000)
+
     }
   };
 
   const MetaMaskConnector = async () => {
-    try{
+    try {
       if (window.ethereum) {
-       let accounts=await window.ethereum.request({method:"eth_requestAccounts"});
-       let Newaddress = accounts[0];
-       setTenant({ ...tenantData, wallet: Newaddress });
-       localStorage.setItem("walletAddress", Newaddress);
-       let balance= await window.ethereum.request({ method: "eth_getBalance", params: [Newaddress, "latest"] })
-       console.log(balance);
-       const PriceEther = ethers.utils.formatEther(balance);
-       dispatch(
-        AddWalletDetails({
-          Newaddress,
-          PriceEther,
-        })
-      );
-      CheckUserByWalletAddress(Newaddress, (res) => {
-        dispatch(addUserData(res));
-        localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
-      });
-      if (Newaddress) {
-        const data = checkTenant(Newaddress);
-      }
+        console.log("L>>>>")
+        let accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+        let Newaddress = accounts[0];
+        setTenant({ ...tenantData, wallet: Newaddress });
+        localStorage.setItem("walletAddress", Newaddress);
+        let balance = await window.ethereum.request({ method: "eth_getBalance", params: [Newaddress, "latest"] })
+        console.log(balance);
+        const PriceEther = ethers.utils.formatEther(balance);
+        dispatch(
+          AddWalletDetails({
+            Newaddress,
+            PriceEther,
+          })
+        );
+        CheckUserByWalletAddress(Newaddress, (res) => {
+          dispatch(addUserData(res));
+          localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
+        });
+        if (Newaddress) {
+          const data = checkTenant(Newaddress);
+        }
 
-      }else {
+      } else {
         Utils.apiFailureToast("Please connect with metamask");
-        setTimeout(()=>{
+        setTimeout(() => {
           window.location.reload();
-        },1000)
+        }, 1000)
       }
-    }catch(e){
+    } catch (e) {
       setModal(false);
       Utils.apiFailureToast("Please connect with metamask");
-      setTimeout(()=>{
+      setTimeout(() => {
         window.location.reload();
-      },1000)
-     
+      }, 1000)
+
     }
   };
 
   const createStore = async () => {
-   
+
     const [error, result] = await Utils.parseResponse(getTenant(tenantData));
 
     if (result.responseCode === 403) {
       setLoader(false);
-      Utils.apiFailureToast(result.message);
+      Utils.apiFailureToast(storeConstants.ALREADY_EXIST_STORE_NAME);
     } else if (result.success) {
       let requestData = {
         subdomain: tenantData.storeName,
@@ -511,19 +513,19 @@ const HomeCard = () => {
         createSubDomain(requestData)
       );
 
-      if (domainResult.responseCode === 403){
+      if (domainResult.responseCode === 403) {
         setLoader(false);
-        Utils.apiFailureToast(domainResult.message);
+        Utils.apiFailureToast(storeConstants.ALREADY_EXIST_STORE_NAME);
       }
       else if (domainResult.success) {
-       setLoader(true)
-       setModal(false);
-       setUserData(domainResult.responseData);
-       setTimeout(()=>{
-        setLoader(false)
-        window.location.replace(domainResult.responseData.siteUrl);
-        },5000)
-       
+        setLoader(true)
+        setModal(false);
+        setUserData(domainResult.responseData);
+        setTimeout(() => {
+          setLoader(false)
+          window.location.replace(domainResult.responseData.siteUrl);
+        }, 5000)
+
       }
     }
 
@@ -558,16 +560,15 @@ const HomeCard = () => {
                             className={`button-hide second`}
                             onClick={() => MetaMaskConnector()}
                           >
-                            {loader ? <Spinner></Spinner> :""}
+                            {loader ? <Spinner></Spinner> : ""}
                             <Image
                               src={MetaFox}
                               style={{ marginRight: "5px" }}
                             ></Image>
-                            {`${
-                              localStorage.getItem("has_wallet") === "false"
+                            {`${localStorage.getItem("has_wallet") === "false"
                                 ? "connect to Wallet"
                                 : "Launch your store"
-                            }`}
+                              }`}
                           </Button>
                         </div>
                       </div>
@@ -580,7 +581,7 @@ const HomeCard = () => {
                           items={1}
                         >
                           <div className="item">
-                            <div className="d-flex flex-wrap">
+                            <div className="d-flex flex-wrap column-gap-20">
                               <Card>
                                 <div className="homePageContainer">
                                   {/* <NFTDetails>
@@ -820,7 +821,7 @@ const HomeCard = () => {
           <CommonSection style={{ marginBottom: "163px" }}>
             <HeadTitle>
               <CommonText style={{ marginBottom: "88px" }}>
-               <span style={{color:"#016dd9"}}> NFTinger </span> Marketplace
+                <span style={{ color: "#016dd9" }}> NFTinger </span> Marketplace
               </CommonText>
 
               <Image src={marketplace}></Image>
@@ -893,7 +894,7 @@ const HomeCard = () => {
                 <button
                   className="btn btn-primary report-btn NewHomeButton"
                   onClick={() => createStore()}
-                  //  style={{background: `${fetchPalletsColor(appearance?.colorPalette)}`}}
+                //  style={{background: `${fetchPalletsColor(appearance?.colorPalette)}`}}
                 >
                   Create Store
                 </button>

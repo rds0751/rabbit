@@ -317,6 +317,26 @@ function MarketingApp() {
         <Routes>
           <Route path="*" element={<NewHomePage loader={loader} />} />
           <Route path="/" element={<NewHomePage loader={loader} />} />
+          <Route
+            exact
+            path="/help-center"
+            element={<HelpCenter loader={false} />}
+          />
+          <Route exact path="/buying" element={<BuyPage />} />
+          <Route exact path="/selling" element={<SellPage />} />
+          <Route
+            exact
+            path="/suggestion"
+            element={<Suggestion loader={false} />}
+          />
+           <Route
+            exact
+            path="/resource-collection"
+            element={<CollectionPage />}
+          />
+          <Route exact path="/adding-nfts" element={<NftsPage />} />
+          <Route exact path="/about" element={<About loader={false} />} />
+          <Route path="/FAQs" element={<FAQsPage />} />
         </Routes>
         <FooterTwo />
       </Router>

@@ -22,7 +22,7 @@ import {
   getTenant,
 } from "../../services/clientConfigMicroService";
 import "../../assets/styles/homepage.css";
-
+import { Link } from "react-router-dom";
 
 const MainDiv = styled.div`
   width: 100%;
@@ -69,7 +69,7 @@ const Item = styled.label`
   cursor: pointer;
 `;
 const CreateStore = styled.button`
-  padding: 9px 36px 9px 36px;
+  padding: 0 30px;
   text-align: left;
   font: normal normal medium 16px/25px Poppins;
   letter-spacing: 0px;
@@ -77,13 +77,15 @@ const CreateStore = styled.button`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 6px;
   opacity: 1;
+  width: 173px;
+height: 40px;
   &:hover{
     background-color: #016dd9;
     color:white;
   }
 `;
 
-const Nav = () => {
+const Nav = (props) => {
   const [modal, setModal] = useState(false);
   const { user, sideBar } = useSelector((state) => state);
   const customize = useSelector((state) => state.customize);
@@ -197,7 +199,36 @@ const Nav = () => {
         <NavItem>
           <ItemsDiv>
             <Item>Pricing</Item>
-            <Item>Resource</Item>
+            <Item><div className="menuin">
+          {/* <h2>Resources</h2> */}
+          <li className="nav-item dropdown list-unstyled">
+            <a
+              className="nav-link c-8f9ba7 font-16 dropdown"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Resource
+            </a>
+            <ul
+              className="dropdown-menu bg-031527"
+              aria-labelledby="navbarDropdown"
+            >
+              <li onClick={() => { props.handleHamburger(); }}>
+                <Link className="dropdown-item bg-031527" to="/help-center">
+                  Help Center
+                </Link>
+              </li>
+              <li onClick={() => { props.handleHamburger(); }}>
+                <Link className="dropdown-item bg-031527" to="/Suggestion" >
+                  Suggestions
+                </Link>
+              </li>
+            </ul>
+          </li>
+        </div></Item>
             <Item onClick={() => MetaMaskConnector()}>Login</Item>
             <CreateStore onClick={() => MetaMaskConnector()}>
               Create Store

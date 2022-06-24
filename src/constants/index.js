@@ -9,7 +9,10 @@
     SIGN_IN_SUCCESS: "SIGN_IN_SUCCESS",
     LOGOUT_SUCCESS: "LOGOUT_SUCCESS",
   };
-  
+
+  export const storeConstants = {
+    ALREADY_EXIST_STORE_NAME :"This Store name already exists. Please visit market.nftinger.com."
+  }
   
 export const httpConstants = {
     METHOD_TYPE: {
