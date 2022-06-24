@@ -7,17 +7,6 @@ import { store } from "./reducers/store";
 import { Provider } from "react-redux";
 let parseData = window.location.host.split(".");
 
-if (
-  !window.location.host.startsWith("www") &&
-  !window.location.host.startsWith("localhost")
-) {
-  window.location =
-    window.location.protocol +
-    "//" +
-    "www." +
-    window.location.host +
-    window.location.pathname;
-}
 
 if (
   (parseData?.length === 3 && parseData[0] === "www") ||
