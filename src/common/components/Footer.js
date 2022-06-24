@@ -288,7 +288,7 @@ function Footer({ loader }) {
           </div>
           <div className="copyrightDiv">
             <span className="textCopyright">
-              &copy;2022 NFTinger Marketplace. All Rights Reserved.
+              &copy; 2022 NFTinger. All Rights Reserved.
             </span>
           </div>
           <div className="version">

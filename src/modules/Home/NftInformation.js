@@ -662,7 +662,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                           title={
                             nft.collectionName
                               ? nft.collectionName
-                              : "Anafto Collection"
+                              : "NFTinger Collection"
                           }
                         >
                           <Link
@@ -678,7 +678,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                               nft?.collectionName
                               ? nft?.collectionName
                               : nft?.collectionName?.length === 0
-                                ? "Anafto Collection"
+                                ? "NFTinger Collection"
                                 : nft?.collectionName}
                           </Link>
                         </div>
@@ -1038,7 +1038,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                             title={
                               nft.collectionName
                                 ? nft.collectionName
-                                : "Anafto Collection"
+                                : "NFTinger Collection"
                             }
                           >
                             <Link
@@ -1054,7 +1054,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                                 nft?.collectionName
                                 ? nft?.collectionName
                                 : nft?.collectionName?.length === 0
-                                  ? "Anafto Collection"
+                                  ? "NFTinger Collection"
                                   : nft?.collectionName}
                             </Link>
                           </div>

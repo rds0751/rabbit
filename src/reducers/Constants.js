@@ -1,10 +1,10 @@
 //Base URL
 export const BASE_URL =
-  "https://nftinger.com:3004";
+  "https://www.nftinger.com:3004";
 export const BASE_URL1 =
-  "https://nftinger.com:3001";
+  "https://www.nftinger.com:3001";
   export const BASE_URL2 =
-  "https://nftinger.com:3002";
+  "https://www.nftinger.com:3002";
 
 export const WEB_APP_USER_WALLET_ADDRESS = "WEB_APP_USER_WALLET_ADDRESS";
 export const ADD_WALLET = "ADD_WALLET";

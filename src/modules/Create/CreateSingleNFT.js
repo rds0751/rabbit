@@ -451,7 +451,7 @@ function CreateSingleNFT(props) {
     //   price.current = price.current.toString();
     // }
 
-    if (collectionName === "Anafto Collection") {
+    if (collectionName === "NFTinger Collection") {
       blockchain.current = blockchainValue(selectedOption?.value);
       console.log(blockchain.current)
       collectionValue = blockchain.current;
@@ -486,7 +486,7 @@ function CreateSingleNFT(props) {
           nftName: name.current,
          // price: price.current,
           currency:
-            collectionName === "Anafto Collection"
+            collectionName === "NFTinger Collection"
               ? selectedOption?.value
               : currencyValue(collectionBlockchain),
           description: description.current,
@@ -612,7 +612,7 @@ function CreateSingleNFT(props) {
                       {/* <div className="abstractposter"> </div> */}
                       <div className="ethprice">
                         {price.current}
-                        {collectionName === "Anafto Collection"
+                        {collectionName === "NFTinger Collection"
                           ? selectedOption?.value
                           : currencyValue(collectionBlockchain)}
                       </div>
@@ -1064,7 +1064,7 @@ function CreateSingleNFT(props) {
                       const addressId = e.target.value.split(",");
 
                       if (addressId[2] === undefined) {
-                        addressId[2] = "Anafto Collection";
+                        addressId[2] = "NFTinger Collection";
                         setCollectionName(addressId[2]);
                         setCollectionBlockchain("");
                         setCollectionId("");
@@ -1122,7 +1122,7 @@ function CreateSingleNFT(props) {
                       Select Collection
                     </option>
                     <option className="color82" value="">
-                      ANAFTO Collection
+                      NFTinger Collection
                     </option>
                     {collectionData.length > 0 &&
                       collectionData.map((item, index) => (
@@ -1173,7 +1173,7 @@ function CreateSingleNFT(props) {
                           : selectedOption
                       } //when user select a option from the list
                       isDisabled={
-                        collectionName === "Anafto Collection" ? false : true
+                        collectionName === "NFTinger Collection" ? false : true
                       }
                     ></Select>
                   </div>
@@ -1239,7 +1239,7 @@ function CreateSingleNFT(props) {
                       }}
                     />
                     <span class="input-group-text">
-                      {collectionName === "Anafto Collection"
+                      {collectionName === "NFTinger Collection"
                         ? priceWithCurrency(selectedOption?.value)
                         : priceWithCurrency(collectionBlockchain)}
                     </span>

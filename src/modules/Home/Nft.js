@@ -189,9 +189,14 @@ function NftPage(props) {
     }
   }, [loggedInUser]);
 
+  let saleobj={
+    onSale:true
+  }
+
   useEffect(() => {
     setIsLoading(true);
     async function fetchData() {
+
       await getNFtsData(filterReq, (res) => {
         setIsLoading(true);
         if (res.success) {
@@ -210,18 +215,37 @@ function NftPage(props) {
     setIsLoading(true);
     setLoader(true);
     async function fetchData() {
-      await getNFtsData(filterReq, (res) => {
-        setIsLoading(true);
-        if (res.success) {
-          setNfts(res.responseData.nftContent);
-          setIsLoading(false);
-          setLoader(false);
-        } else {
-          toast.error(res.message);
-          setIsLoading(false);
-          setLoader(false);
-        }
-      });
+      if(filterReq.sort==="sale"){
+        await getNFtsData({onSale:true}, (res) => {
+          setIsLoading(true);
+          if (res.success) {
+            setNfts(res.responseData.nftContent);
+            setIsLoading(false);
+            setLoader(false);
+          } else {
+            toast.error(res.message);
+            setIsLoading(false);
+            setLoader(false);
+          }
+        });
+
+      }
+      else{
+        await getNFtsData(filterReq, (res) => {
+          setIsLoading(true);
+          if (res.success) {
+            setNfts(res.responseData.nftContent);
+            setIsLoading(false);
+            setLoader(false);
+          } else {
+            toast.error(res.message);
+            setIsLoading(false);
+            setLoader(false);
+          }
+        });
+
+      }
+      
     }
     fetchData();
   }, [filterReq, limit]);

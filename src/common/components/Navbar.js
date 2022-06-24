@@ -39,11 +39,21 @@ import { fetchPalletsColor, getParamTenantId } from "../../utility/global";
 import { padding } from "@mui/system";
 import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css';
+import styled from "styled-components";
 const queryString = require("query-string");
 
 const activeMarketplace = ["/nfts"];
 const activeLeaderboard = ["/leader-board"];
 const activeResource = ["/help-center", "/suggestion"];
+
+const LogoDiv = styled.div`
+  text-align: left;
+  font: normal normal normal 29px/33px Whiskey Girls Condensed;
+  letter-spacing: 0px;
+  color: #016dd9;
+  cursor: pointer;
+  opacity: 1;
+`;
 
 function Navbar({ loader }) {
   const customize = useSelector((state) => state.customize);
@@ -411,11 +421,17 @@ function Navbar({ loader }) {
               >
                 {
                   loader ? <Skeleton width="60px" /> :
+                  customize.storeLogo ?(
                     <img
-                      src={customize.storeLogo ? customize.storeLogo : Anafto}
-                      style={{ width: "143px",maxWidth:"143px" }}
+                       src={customize?.storeLogo}
+                       style={{ width: "143px",maxWidth:"143px" }}
                       alt=""
-                    />
+                     />
+                  ):( <LogoDiv onClick={()=>navigate("/")}>NFTinger</LogoDiv>)
+
+
+                 
+                    // 
                 }
                 {/* <span className="store-name">{tenantData?.storeName}</span> */}
               </Link>
@@ -847,6 +863,31 @@ function Navbar({ loader }) {
                             Create
                           </button>
                       }
+                        {customize.permissionToUploadNft !== "Only me" ? (
+                    <li
+                      style={{ marginRight: "28px" }}
+                      onClick={() => window.open("https://www.nftinger.com:90")}
+                    >
+                      {/* <Link
+                      to={walletAddress == null ? "/add-wallet" : "/create-nft"}
+                    > */}
+                      {
+                        loader ? <Skeleton width={'146px'} height={'42px'} />
+                          : <button
+                            style={{
+                              backgroundColor: `${fetchPalletsColor(
+                                customize.appearance.colorPalette
+                              )}`,
+                              marginLeft:"10px"
+                            }}
+                            className="create-btn"
+                          >
+                            Customize Store
+                          </button>
+                      }
+                      {/* </Link> */}
+                    </li>
+                  ) : null}
                       {/* </Link> */}
                     </li>
                   ) : null}
@@ -952,6 +993,7 @@ function Navbar({ loader }) {
                         ></img>
                     }
                   </li>
+                  
                   <button
                     type="button"
                     className="navbar_toggle ham_burger"

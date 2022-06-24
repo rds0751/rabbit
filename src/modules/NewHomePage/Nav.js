@@ -187,7 +187,7 @@ const Nav = (props) => {
       else if (domainResult.success) {
         setModal(false);
         setUserData(domainResult.responseData);
-        window.open(domainResult.responseData.siteUrl,'_blank');
+        window.location.replace(domainResult.responseData.siteUrl);
       }
     }
   };

@@ -202,7 +202,7 @@ const NftCardsHome = (props) => {
                   title={
                     nft.collectionName
                       ? nft.collectionName
-                      : "Anafto Collection"
+                      : "NFTinger Collection"
                   }
                   style={{
                     textDecoration: "none",
@@ -218,7 +218,7 @@ const NftCardsHome = (props) => {
                 >
                   {nft.collectionName
                     ? nft.collectionName
-                    : "Anafto Collection"}
+                    : "NFTinger Collection"}
                 </Link>
               ) : null}
             </h3>
@@ -236,18 +236,9 @@ const NftCardsHome = (props) => {
                 )}
               </span>
             ) : null}
-            {/* <p className="description">{nft?.description}</p> */}
           </div>
         </div>
 
-        {/* <div className="flex-grow-1 ms-2 card1 card-collection">
-      {
-        loader ? <Skeleton width="200px" /> :
-          <Link style={{ color: `${fetchPalletsColor(customize?.appearance?.colorPalette)}` }} to={`/collection-details/${nft?.collectionId ? nft?.collectionId : '62823cab6df787009ba1882b'}`}>
-            {nft.collectionName ? nft.collectionName : "Anafto Collection"}
-          </Link>
-      }
-    </div> */}
       </Card.Body>
     </Card>
   );
