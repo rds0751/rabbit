@@ -186,7 +186,7 @@ function MyItems(props) {
 
 
                         </div>
-                        <div className="collectionName" title={collectionName ? collectionName : "Anafto Collection"}>
+                        <div className="collectionName" title={collectionName ? collectionName : "NFTinger Collection"}>
 
                           <Link
                             style={{ textDecoration: 'none', color: `${fetchPalletsColor(customize?.appearance?.colorPalette)}` }}
@@ -195,7 +195,7 @@ function MyItems(props) {
                             }
                           >
                             {undefined !== collectionName &&
-                              collectionName.length > 30 ? collectionName.slice(0, 30) + "..." : (collectionName?.length === 0 ? "Anafto Collection" : collectionName)}
+                              collectionName.length > 30 ? collectionName.slice(0, 30) + "..." : (collectionName?.length === 0 ? "NFTinger Collection" : collectionName)}
 
                           </Link>
                         </div>

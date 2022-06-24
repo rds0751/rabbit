@@ -7,10 +7,9 @@ import { store } from "./reducers/store";
 import { Provider } from "react-redux";
 let parseData = window.location.host.split(".");
 
-
 if (
   (parseData?.length === 3 && parseData[0] === "www") ||
-  parseData?.length <= 2
+ (parseData?.length <= 2)
 ) {
   ReactDOM.render(
     <React.StrictMode>
@@ -39,3 +38,5 @@ if (
 //   </React.StrictMode>,
 //   document.getElementById("root")
 // );
+
+

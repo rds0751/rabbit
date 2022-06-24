@@ -847,6 +847,31 @@ function Navbar({ loader }) {
                             Create
                           </button>
                       }
+                        {customize.permissionToUploadNft !== "Only me" ? (
+                    <li
+                      style={{ marginRight: "28px" }}
+                      onClick={() => window.open("https://www.nftinger.com:90")}
+                    >
+                      {/* <Link
+                      to={walletAddress == null ? "/add-wallet" : "/create-nft"}
+                    > */}
+                      {
+                        loader ? <Skeleton width={'146px'} height={'42px'} />
+                          : <button
+                            style={{
+                              backgroundColor: `${fetchPalletsColor(
+                                customize.appearance.colorPalette
+                              )}`,
+                              marginLeft:"10px"
+                            }}
+                            className="create-btn"
+                          >
+                            Customize Store
+                          </button>
+                      }
+                      {/* </Link> */}
+                    </li>
+                  ) : null}
                       {/* </Link> */}
                     </li>
                   ) : null}
@@ -952,6 +977,7 @@ function Navbar({ loader }) {
                         ></img>
                     }
                   </li>
+                  
                   <button
                     type="button"
                     className="navbar_toggle ham_burger"

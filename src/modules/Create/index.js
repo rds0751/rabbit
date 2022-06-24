@@ -67,7 +67,7 @@ class Index extends BaseComponent {
       collectionId: data?.collectionId, // to do
       collectionName:
         data?.collectionName == undefined
-          ? "ANAFTO Collection"
+          ? "NFTinger Collection"
           : data?.collectionName,
       ipfsUrl: data?.ipfsUrl || "",
       cdnUrl: data?.cdnUrl || "",
