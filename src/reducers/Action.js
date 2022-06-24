@@ -58,14 +58,12 @@ export const addUseraction = (data) => (dispatch) => {
     });
 };
 export const AddWalletDetails = (data) => (dispatch) => {
-  console.log(data, "<<< data from update user detail", localStorage.getItem('has_wallet'));
   if (localStorage.getItem(WHITE_LABEL_TOKEN) !== null) {
     dispatch({ type: ADD_WALLET, payload: data });
   }
 };
 
 export const addUserData = (data) => (dispatch) => {
-  console.log('account connected')
   dispatch({ type: LOGGED_IN_UER_DETAILS, payload: data });
 
   // Fetch Tenent data
@@ -94,7 +92,6 @@ export const addUserData = (data) => (dispatch) => {
 };
 
 export const allUseraction = () => (dispatch) => {
-  console.log(1);
   axios
     .get(BASE_URL + `/api/v1/users`)
     .then((response) => {

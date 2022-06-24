@@ -12,7 +12,6 @@ let initialState = {
   navSearchValue: "",
 };
 export const SideBarReducer = (state = initialState, action) => {
-  console.log(action, "<<<< this is action");
   switch (action.type) {
     case OPEN_NOTIFICATION: {
       console.log(action.payload, "<<< this is in user.js reducer");
