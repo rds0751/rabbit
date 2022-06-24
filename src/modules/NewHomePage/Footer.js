@@ -137,58 +137,53 @@ const Footer = () => {
       getTenantByWallet(address)
     );
     if (error || !result)
-      return Utils.apiFailureToast("Tenant Data is not fetched");
+      return Utils.apiFailureToast("Store not launched");
     if (!result.success) {
-      console.log(result);
       setModal(true);
     } else if (result.success) {
-      console.log(result);
-      window.open(result.responseData.siteUrl,'_blank');
-     // return Utils.apiSuccessToast("");
+      window.location.replace(result.responseData.siteUrl);
     }
   };
 
 
   const MetaMaskConnector = async () => {
-    if (window.ethereum) {
-      window.ethereum
-        .request({ method: "eth_requestAccounts" })
-        .then((newAccount) => {
-          const address = newAccount[0];
-          setTenant({ ...tenantData, wallet: address });
-          Newaddress = newAccount[0];
-          console.log(address, "<<<address");
-          localStorage.setItem("walletAddress", address);
-
-          window.ethereum
-            .request({ method: "eth_getBalance", params: [address, "latest"] })
-            .then((wallet_balance) => {
-              const balance = ethers.utils.formatEther(wallet_balance);
-
-              dispatch(
-                AddWalletDetails({
-                  address,
-                  balance,
-                })
-              );
-              CheckUserByWalletAddress(address, (res) => {
-                dispatch(addUserData(res));
-                localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
-              });
-            });
-          if (address) {
-            const data = checkTenant(address);
-          }
+    try{
+      if (window.ethereum) {
+       let accounts=await window.ethereum.request({method:"eth_requestAccounts"});
+       let Newaddress = accounts[0];
+       setTenant({ ...tenantData, wallet: Newaddress });
+       localStorage.setItem("walletAddress", Newaddress);
+       let balance= await window.ethereum.request({ method: "eth_getBalance", params: [Newaddress, "latest"] })
+       console.log(balance);
+       const PriceEther = ethers.utils.formatEther(balance);
+       dispatch(
+        AddWalletDetails({
+          Newaddress,
+          PriceEther,
         })
-        .catch((e) => {
-          setModal(false);
-          Utils.apiFailureToast("Please connect with metamask");
-        });
-    } else {
-      Utils.apiFailureToast("Please connect with metamask");
-    }
+      );
+      CheckUserByWalletAddress(Newaddress, (res) => {
+        dispatch(addUserData(res));
+        localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
+      });
+      if (Newaddress) {
+        const data = checkTenant(Newaddress);
+      }
 
-    //  setModal(true);
+      }else {
+        Utils.apiFailureToast("Please connect with metamask");
+        setTimeout(()=>{
+          window.location.reload();
+        },1000)
+      }
+    }catch(e){
+      setModal(false);
+      Utils.apiFailureToast("Please connect with metamask");
+      setTimeout(()=>{
+        window.location.reload();
+      },1000)
+     
+    }
   };
 
   const createStore = async () => {
@@ -206,15 +201,13 @@ const Footer = () => {
         createSubDomain(requestData)
       );
 
-      if (domainResult.responseCode === 403)
+      if (errorDomain ||domainResult.responseCode === 403)
         Utils.apiFailureToast(domainResult.message);
       else if (domainResult.success) {
         setModal(false);
-        window.open(domainResult.responseData.siteUrl,'_blank');
+        window.location.replace(domainResult.responseData.siteUrl);
       }
     }
-
-    // navigate(url + getParamTenantId());
   };
   return (
     <>
