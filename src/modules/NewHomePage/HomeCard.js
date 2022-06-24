@@ -364,6 +364,11 @@ const HomeCard = () => {
   const [tenantData, setTenant] = useState({
     storeName: "",
     wallet: "",
+    blockchains: [
+      "Polygon",
+      "Ethereum",
+      "Binance"
+  ],
   });
 
   const data = [

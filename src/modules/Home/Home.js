@@ -41,7 +41,7 @@ import playImage from "../../assets/images/Play.svg";
 import pauseImage from "../../assets/images/Pause.svg";
 import ReactPlayer from "react-player";
 import NftCards from "./NftCards"
-
+import Billing from "../Billing/UpgradePlan";
 let preivewFiles = ['video/mp4', 'audio/mpeg'];
 
 function Home({ loaderState }) {
@@ -175,6 +175,8 @@ function Home({ loaderState }) {
 
   return (
     <>
+
+    <Billing></Billing>
       <div className="homepage">
         <div className="banner" style={loader ? { background: `url(${defaultCover})` } : customize?.appearance?.coverImageUrl ? { background: `url(${customize?.appearance?.coverImageUrl})`, backgroundPosition: `${customize?.appearance?.coverPosition}` } : {}}>
           <div className="inner-width">
