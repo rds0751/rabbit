@@ -350,3 +350,6 @@ margin-top: 16px;
 .new-abs-modal{
   backdrop-filter: blur(0px) contrast(0.8);
 }
+.cross-icon{
+  cursor: pointer;
+}

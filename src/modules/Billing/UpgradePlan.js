@@ -10,15 +10,15 @@ const Modal = styled.div`
   opacity: 1 !important;
   top: 100px;
   width: 80%;
-  height:auto;
-  min-height: 561px;
+  height: 561px;
+  max-height: 64%;
   border-radius: 13px;
 `;
 const ModalInner = styled.div`
   opacity: 1;
   margin: auto;
   opacity: 1;
-  width: 91.8%;
+  width: 96.8%;
 `;
 
 const UpgradePlan = () => {

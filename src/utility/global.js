@@ -41,7 +41,7 @@ export const handleLoadHoverText = (e, color="#366EEF") => {
 export const getParamTenantId = () => {
 
     if(localStorage.getItem('tenantId') != 'null') return `?id=${localStorage.getItem('tenantId')}`
-    else return '?id=624fcce73cfee400358f2cef'
+   
 }
 export const getParamTenantWalletAddress = (address) => {
 
@@ -54,7 +54,7 @@ export const getParamTenantWalletAddress = (address) => {
 export const getPostTenantId = () => {
 
     if(localStorage.getItem('tenantId') != 'null') return `${localStorage.getItem('tenantId')}`
-    else return '624fcce73cfee400358f2cef'
+  
 }
 
 

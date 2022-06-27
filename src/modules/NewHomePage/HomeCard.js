@@ -587,7 +587,7 @@ const HomeCard = () => {
                         >
                           <div className="item">
                             <div className="d-flex flex-wrap column-gap-20">
-                              <Card>
+                              <Card className="NewHomeNFTCard">
                                 <div className="homePageContainer">
                                   {/* <NFTDetails>
                                     <Details>
@@ -604,7 +604,7 @@ const HomeCard = () => {
                                   />
                                 </div>
                               </Card>
-                              <Card>
+                              <Card  className="NewHomeNFTCard">
                                 <div className="homePageContainer">
                                   <Card.Img
                                     variant="top"
@@ -613,7 +613,7 @@ const HomeCard = () => {
                                   />
                                 </div>
                               </Card>
-                              <Card>
+                              <Card  className="NewHomeNFTCard">
                                 <div className="homePageContainer">
                                   <Card.Img
                                     variant="top"
@@ -622,7 +622,7 @@ const HomeCard = () => {
                                   />
                                 </div>
                               </Card>
-                              <Card>
+                              <Card  className="NewHomeNFTCard">
                                 <div className="homePageContainer">
                                   <Card.Img
                                     variant="top"
