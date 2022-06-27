@@ -13,7 +13,6 @@ export default function BlogDetail() {
   const location = useLocation();
   const from = location?.state;
   const id = location?.state?.data?._id;
-  console.log(from, "id");
 
   useEffect(() => {
     setIsLoading(true);
@@ -27,7 +26,6 @@ export default function BlogDetail() {
     } 
     fetchData();
   }, []);
-  console.log(blogs, "location");
   let data = blogs;
   return (
     <div>

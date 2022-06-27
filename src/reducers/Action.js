@@ -30,7 +30,6 @@ export const addUseraction = (data) => (dispatch) => {
   axios
     .post(BASE_URL + `/api/v1/user`, data)
     .then((response) => {
-      console.log("response", response);
       if (response.data.responseCode === 200) {
         dispatch({
           type: ADD_USER,
@@ -48,7 +47,6 @@ export const addUseraction = (data) => (dispatch) => {
       }
     })
     .catch((error) => {
-      console.log("error", error);
       if (error && error.responseCode && error.responseCode === 403) {
         dispatch({
           type: GET_ERRORS,

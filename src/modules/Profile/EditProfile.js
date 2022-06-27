@@ -103,7 +103,6 @@ function EditProfile(props) {
             if ((originalfileSize < 10000) && (fileextenstion == data
             )) {
               const fileUploaded = event.target.files[0];
-              console.log(fileUploaded);
               let formData = new FormData();
               formData.append("folderName", "collections");
 
@@ -117,7 +116,6 @@ function EditProfile(props) {
               });
 
               const result = await res.json();
-              console.log(res, result, "<<<<edit profile response");
               if (result.success) {
                 setFormData({ ...formData, photo: result.responseData.cdnUrl, compressedURL: result.responseData.compressedURL });
               } else {
@@ -127,7 +125,7 @@ function EditProfile(props) {
               }
 
               // else toast.error("")
-              console.log(result);
+
               setImageUrl(result.responseData);
 
 
@@ -215,14 +213,11 @@ function EditProfile(props) {
     formData.bio = bio;
     formData.portfolio = portfilo;
     formData.photo = imageUrl;
-
-
-    console.log(formData, "<<<formData");
     var format = /[!@$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]+/;
     e.preventDefault();
-    console.log(user.loggedInUser, "<<user");
+
     const userName = formData.userName;
-    console.log("userName", formData.userName.length);
+
     if (format.test(userName)) {
       toast.error("UserName should be not contain special character");
       return null;
@@ -230,7 +225,7 @@ function EditProfile(props) {
 
 
     const result = await updateUserProfile(formData, user?.loggedInUser?._id);
-    console.log(result, "<<<<<< profile updated value");
+
     if (result.success) {
       // toast.success("Profile Updated");
       toast.success(result.message, {
@@ -245,7 +240,6 @@ function EditProfile(props) {
       // window.location.href = '/my-profile';
       // navigate(-1);
     } else {
-      console.log("ddddddddddddddddddddd", result.message)
       // toast.error("invalid request");
       if (imageUrl != "") {
         toast.error(result.message, {
@@ -444,8 +438,6 @@ function EditProfile(props) {
                     handleForm(e);
                   }}
                 />
-                {console.log("kffffffffffffffffffggggggggg", formData.portfolio)}
-                {console.log("kffffffffffffffffffggggggggg", user)}
               </div>
               <div className="buttonGroup">
                 <button className="editprofileCancelButton" onClick={() => navigate(-1)}>
@@ -469,7 +461,6 @@ function EditProfile(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     user: state.user.loggedInUser,
   };

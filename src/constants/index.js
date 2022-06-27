@@ -11,7 +11,7 @@
   };
 
   export const storeConstants = {
-    ALREADY_EXIST_STORE_NAME :"This Store name already exists. Please visit market.nftinger.com."
+    ALREADY_EXIST_STORE_NAME :"Store with this name already exists. Please choose other store name or visit https://market.nftinger.com/"
   }
   
 export const httpConstants = {

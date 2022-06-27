@@ -31,7 +31,6 @@ class Index extends BaseComponent {
 
   async componentDidMount() {
     // const checkvalue = await this.getCollectionsForNft();
-    // console.log(checkvalue, "<<<<checkvalue");
   }
 
   showToast = (
@@ -113,8 +112,6 @@ class Index extends BaseComponent {
         blockchain: "Ethereum",
       })
     );
-    console.log("blockchainError", blockchainError);
-    console.log("blockchainResult", blockchainResult);
 
     if (blockchainError || !blockchainResult) {
       this.setState({ loaderState: false });
@@ -129,13 +126,11 @@ class Index extends BaseComponent {
     }
     blockchainRes = blockchainResult;
     toast.success("Successfully BatchMint");
-    console.log(blockchainRes, "<<<blockchainRes");
   };
 
   createNftHandler = async (data) => {
     let blockchainRes;
     this.setState({ loaderState: true });
-    console.log(data, "dattttttttttttttttt");
     let contractAddress;
     // = "0xCDe6A5fccf0cCaF7bc51D35C1f8Efe3BbC5c8057"
     // //-ethreum
@@ -159,7 +154,6 @@ class Index extends BaseComponent {
     const [err, ipfsRes] = await Utils.parseResponse(
       getCollection.addIpfsObject(IpfsObject)
     );
-    console.log(ipfsRes, "<<<ipfsRes");
     if (!ipfsRes) toast.error("unable to upload data");
 
     // if (!data || Object.keys(data).length < 1 || !data.nftFile){
@@ -196,7 +190,6 @@ class Index extends BaseComponent {
     const tokenId = Utils.generateRandomNumber();
     // create NFT on blockchai
     if (data.contractAddress.length > 0) {
-      console.log(data?.blockchain, "blockchainValue");
 
       if (data?.isLazyMintingEnabled) {
         var signMsg = "";
@@ -217,9 +210,6 @@ class Index extends BaseComponent {
           })
         );
 
-        console.log("blockchainError", blockchainError);
-        console.log("blockchainResult", blockchainResult);
-
         if (blockchainError || !blockchainResult) {
           this.setState({ loaderState: false });
 
@@ -232,7 +222,6 @@ class Index extends BaseComponent {
           );
         }
         blockchainRes = blockchainResult;
-        console.log(blockchainRes, "<<<blockchainRes");
       } else {
         const [blockchainError, blockchainResult] = await Utils.parseResponse(
           BlockchainServices.mintNFT({
@@ -245,8 +234,6 @@ class Index extends BaseComponent {
             ipfsUrl: ipfsRes,
           })
         );
-        console.log("blockchainError", blockchainError);
-        console.log("blockchainResult", blockchainResult);
 
         if (blockchainError || !blockchainResult) {
           this.setState({ loaderState: false });
@@ -260,10 +247,10 @@ class Index extends BaseComponent {
           );
         }
         blockchainRes = blockchainResult;
-        console.log(blockchainRes, "<<<blockchainRes");
+
       }
     } else {
-      console.log(data?.blockchain, "blockchainValue");
+
 
 
       if (data?.isLazyMintingEnabled) {
@@ -285,9 +272,6 @@ class Index extends BaseComponent {
           })
         );
 
-        console.log("blockchainError", blockchainError);
-        console.log("blockchainResult", blockchainResult);
-
         if (blockchainError || !blockchainResult) {
           this.setState({ loaderState: false });
 
@@ -300,7 +284,6 @@ class Index extends BaseComponent {
           );
         }
         blockchainRes = blockchainResult;
-        console.log(blockchainRes, "<<<blockchainRes");
       } else {
         const [blockchainError, blockchainResult] = await Utils.parseResponse(
           BlockchainServices.mintNFT({
@@ -313,20 +296,11 @@ class Index extends BaseComponent {
             ipfsUrl: ipfsRes,
           })
         );
-        console.log("blockchainError", blockchainError);
-        console.log("blockchainResult", blockchainResult);
+
 
         if (blockchainError || !blockchainResult) {
-          console.log(
-            "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"
-          );
           this.setState({ loaderState: false });
-          console.log(
-            blockchainError?.data?.message ||
-              blockchainError?.message ||
-              blockchainError,
-            "<<<BlockchainRes"
-          );
+          
 
           return this.showToast(
             "error",
@@ -337,14 +311,9 @@ class Index extends BaseComponent {
           );
         }
         blockchainRes = blockchainResult;
-        console.log(blockchainRes, "<<<blockchainRes");
       }
     }
 
-    console.log(
-      this.getRequestDataForSaveNftContent(tokenId, data, blockchainRes),
-      "DATA ON Blockchian"
-    );
 
     // save NFT data on DB
     const [contentError, contentRes] = await Utils.parseResponse(
@@ -353,7 +322,6 @@ class Index extends BaseComponent {
       )
     );
 
-    console.log(contentError, contentRes, "nft response");
 
     this.props.dispatchAction(eventConstants.HIDE_LOADER);
     if (contentError || !contentRes) {

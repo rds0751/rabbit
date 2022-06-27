@@ -47,11 +47,9 @@ export default class NftDetail extends BaseComponent {
     const { pathname } = window.location;
     const pathArray = pathname.split("/");
     const id = pathArray[2];
-    console.log(id, "<<<pathname");
 
     // getNft("620e7b4107515b002ab23afe", (response) => {
     await getNft(id, (response) => {
-      console.log(response, "<<<< response of nft");
       if (response.success) {
         this.setState({
           responseData: response?.responseData[0],
@@ -67,17 +65,13 @@ export default class NftDetail extends BaseComponent {
         });
       }
 
-      console.log("----------test", this.state.responseData);
     });
   };
 
 
 
   BuyNowNft = async (data) => {
-    console.log(
-      "kkddddddddddddddddddddddddddddddddd",
-      this.state?.responseData?.contractAddress
-    );
+    
     // this.setState({ loaderState: true })
     let blockchainRes;
 
@@ -90,9 +84,6 @@ export default class NftDetail extends BaseComponent {
     else if (data?.blockchain === "Binance")
       contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS_BINANCE;
 
-    console.log("--sssssssssssssssss-", data?.newOwnerAddress);
-
-    console.log("BUY", data);
     let requestDataInTx = {
       //   type: eventConstants.BUY,
       //   transaction: blockchainRes.transactionHash || '',
@@ -113,10 +104,9 @@ export default class NftDetail extends BaseComponent {
       //       isOpenForSale: false
       //   },
     };
-    console.log("response dasssssssssssssssssta-----", requestDataInTx);
     if (!this.state.responseData._id) return;
     let [error, result] = await Utils.parseResponse(addNftTx(requestDataInTx));
-    console.log("--buy nFT resi;t-", result);
+
     if (error || !result) {
       // this.setState({ loaderState: false })
 
@@ -126,10 +116,9 @@ export default class NftDetail extends BaseComponent {
       });
     }
 
-    console.log("--buy nFT resi;t-", result);
+
 
     if (this.state?.responseData?.contractAddress > 0) {
-      console.log("--buy nFT resi;t-", result);
 
       if (this.state.responseData?.lazyMinting?.isEnabled) {
         const [blockchainError, blockchainResult] = await Utils.parseResponse(
@@ -145,8 +134,6 @@ export default class NftDetail extends BaseComponent {
             contractAddress: contractAddress || "",
           })
         );
-        console.log("blockchainError====", blockchainError);
-        console.log("blockchainRes====", blockchainResult);
         if (blockchainError || !blockchainResult) {
           this.setState({ loaderState: false });
           if (!this.state.responseData._id) return;
@@ -175,8 +162,6 @@ export default class NftDetail extends BaseComponent {
             blockchain: this.state.responseData.blockchain,
           })
         );
-        console.log("blockchainError====", blockchainError);
-        console.log("blockchainRes====", blockchainResult);
         if (blockchainError || !blockchainResult) {
           this.setState({ loaderState: false });
           if (!this.state.responseData._id) return;
@@ -196,7 +181,6 @@ export default class NftDetail extends BaseComponent {
 
       //-------------------------------------------------------
     } else {
-      console.log("--buy nFT resi;t-", result);
       if (this.state.responseData?.lazyMinting?.isEnabled) {
         const [blockchainError, blockchainResult] = await Utils.parseResponse(
           BlockchainService.lazyMinting({
@@ -211,8 +195,6 @@ export default class NftDetail extends BaseComponent {
             contractAddress: process.env.REACT_APP_CONTRACT_ADDRESS || "",
           })
         );
-        console.log("blockchainError====", blockchainError);
-        console.log("blockchainRes====", blockchainResult);
         if (blockchainError || !blockchainResult) {
           // this.setState({ loaderState: false })
           if (!this.state.responseData._id) return;
@@ -240,8 +222,6 @@ export default class NftDetail extends BaseComponent {
             signature: this.state.responseData.salesInfo.signature,
           })
         );
-        console.log("blockchainError====", blockchainError);
-        console.log("blockchainRes====", blockchainResult);
         if (blockchainError || !blockchainResult) {
           this.setState({ loaderState: false });
           if (!this.state.responseData._id) return;
@@ -265,7 +245,6 @@ export default class NftDetail extends BaseComponent {
     let [txUpdateResultErr, txUpdateResult] = await Utils.parseResponse(
       updateTxStatus({ status: "success" }, result._id)
     );
-    // console.log("----sssssssss----",txUpdateResult)
     if (txUpdateResultErr || !txUpdateResult) {
       this.setState({ loaderState: false });
 
@@ -294,7 +273,6 @@ export default class NftDetail extends BaseComponent {
         this.state?.responseData?._id
       )
     );
-    console.log("--buy nFT ressssssi;t-", res);
     if (err || !res) {
       this.setState({ loaderState: false });
 
@@ -317,8 +295,7 @@ export default class NftDetail extends BaseComponent {
   };
 
   sellNowNft = async ({ blockchain, expiryTime, expiryDate, price }) => {
-    console.log("daaaaaaaaaa", this.state?.responseData?.contractAddress);
-    console.log(expiryDate, expiryTime, price, "<<<Period");
+
 
     let contractAddress;
     if (blockchain === "Polygon")
@@ -328,7 +305,6 @@ export default class NftDetail extends BaseComponent {
     else if (blockchain === "Binance")
       contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS_BINANCE;
 
-    console.log(new Date(expiryDate).getTime(), "<<<xyz");
   
   
 
@@ -357,12 +333,8 @@ export default class NftDetail extends BaseComponent {
       this.setState({ loaderState: false });
       return toast.error(signError || "Unable to generate signature");
     } else {
-      console.log(signRes, "<<<signRes");
     }
 
-    console.log(blockchain, contractAddress, "<<<ContractAddress");
-
-    console.log("jjjjj", this.state.responseData.tokenId);
     // if (this.state?.responseData?.contractAddress > 0) {
     //     const [blockchainError, blockchainRes] = await Utils.parseResponse(
     //         BlockchainService.putOnSaleNft({
@@ -408,14 +380,12 @@ export default class NftDetail extends BaseComponent {
       expiryDateTime: unixTimeZone,
       price: price,
     };
-     console.log("nannnn",requestData)
     
     // this.updateNftDataInDb(requestData, eventConstants.SELL,this.state.responseData._id || '')
     if (!this.state?.responseData?._id) return;
     let [error, result] = await Utils.parseResponse(
       ContentService.openForSale(requestData)
     );
-    console.log("-nnnnnnnnnnnnnnssssssssnnnn--", result);
     if (error || !result) {
       this.setState({ loaderState: false });
       return toast.error(error || "Unable to update Nft content.", {
@@ -446,7 +416,6 @@ export default class NftDetail extends BaseComponent {
 
     //process.env.REACT_APP_CONTRACT_ADDRESS
 
-    console.log("removeNftFromSale");
     if (this.state?.responseData?.contractAddress > 0) {
       const [blockchainError, blockchainRes] = await Utils.parseResponse(
         BlockchainService.removeFromSaleNft({
@@ -499,7 +468,6 @@ export default class NftDetail extends BaseComponent {
     let [error, result] = await Utils.parseResponse(
       ContentService.removeFromSale(requestData)
     );
-    console.log("-remove from sellll--", result);
     if (error || !result) {
       this.setState({ loaderState: false });
 
@@ -520,7 +488,6 @@ export default class NftDetail extends BaseComponent {
   };
 
   makeOffer = async ({ price, dateTime }) => {
-    console.log(price, dateTime);
     let blockchainRes;
 
     let unixTimeZone = new Date(dateTime).getTime();
@@ -546,7 +513,6 @@ export default class NftDetail extends BaseComponent {
       this.setState({ loaderState: false });
       return toast.error(signError || "Unable to generate signature");
     } else {
-      console.log(signRes, "<<<signRes");
     }
 
 
@@ -557,8 +523,6 @@ export default class NftDetail extends BaseComponent {
         blockchain:this?.state?.responseData?.blockchain
       })
     );
-    console.log("blockchainError====", blockchainError);
-    console.log("blockchainRes====", blockchainResult);
     if (blockchainError || !blockchainResult) {
       // this.setState({ loaderState: false })
       return toast.error(
@@ -588,7 +552,6 @@ export default class NftDetail extends BaseComponent {
     let [error, result] = await Utils.parseResponse(
       ContentService.makeOffer(requestData)
     );
-    console.log("-nnnnnnnnnnnnnnssssssssnnnn--", result);
     if (error || !result) {
       //  this.setState({ loaderState: false })
       return toast.error(error || "Unable to update Nft content.", {

@@ -84,7 +84,6 @@ function Notification() {
     getNotificationCountById(_id).then((response) => setCount(response));
   };
 
-  console.log(notifications,isOpenNoti,notifyData?.length,"1111");
   return (
     <div style={{ display: isOpenNoti ? null : "none" }} className="main-cont">
       {/* ------------ */}

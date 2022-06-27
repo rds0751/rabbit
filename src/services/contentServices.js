@@ -4,7 +4,6 @@ import { getParamTenantId } from "../utility/global";
 import { AuthToken } from "./UserAuthToken";
 
 export const uploadDocs = async (data) => {
-  console.log("run uploadocs");
   const form_data = new FormData();
 
   form_data.append("folderName", data.folderName);
@@ -19,7 +18,6 @@ export const uploadDocs = async (data) => {
     body: form_data,
   });
   const result = await res.json();
-  console.log(result);
 };
 
 export const getCollection = async () => {
@@ -54,7 +52,6 @@ export const put_NftOpenForSale = async (_id) => {
       body: JSON.stringify({ _id }),
     });
     const result = await res.json();
-    console.log(result, ">>> nft-open-for-sale");
     return result;
   } catch (err) {
     console.log(err);
@@ -71,7 +68,7 @@ export const RemoveNftFromSale = async (_id) => {
       body: JSON.stringify({ _id }),
     });
     const result = await res.json();
-    console.log(result, ">>> nft-open-for-sale");
+
     return result;
   } catch (err) {
     console.log(err);

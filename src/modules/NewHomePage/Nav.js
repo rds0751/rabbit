@@ -135,7 +135,6 @@ const Nav = (props) => {
        setTenant({ ...tenantData, wallet: Newaddress });
        localStorage.setItem("walletAddress", Newaddress);
        let balance= await window.ethereum.request({ method: "eth_getBalance", params: [Newaddress, "latest"] })
-       console.log(balance);
        const PriceEther = ethers.utils.formatEther(balance);
        dispatch(
         AddWalletDetails({
@@ -169,7 +168,6 @@ const Nav = (props) => {
 
   const createStore = async () => {
     const [error, result] = await Utils.parseResponse(getTenant(tenantData));
-    console.log(error, result, "error result");
 
     if (result.responseCode === 403) {
       Utils.apiFailureToast(result.message);

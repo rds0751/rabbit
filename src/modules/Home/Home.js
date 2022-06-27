@@ -81,14 +81,13 @@ function Home({ loaderState }) {
           // console.log(res, "filterResponse");
 
           if (res.success) {
-            console.log(res?.responseData?.nftContent, 'nft')
-            console.log(customize.bannerNftData, 'banner data')
+            
             // prevArray => [...prevArray, newValue]
             if (customize.bannerNftData.length > 0) {
-              console.log('if block');
+    
               setNfts(customize.bannerNftData);
             } else {
-              console.log('else block');
+         
               setNfts(res?.responseData?.nftContent);
             }
             setChangeState(false);
@@ -165,12 +164,11 @@ function Home({ loaderState }) {
 
   useEffect(() => {
     if (loaderState === false) {
-      console.log(loaderState, 'loaderstate')
+
       setLoader(loaderState);
     }
   }, [loaderState])
 
-  console.log('loader', loader);
 
 
   return (

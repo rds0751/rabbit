@@ -230,7 +230,6 @@ function CreateSingleNFT(props) {
       });
 
       acceptedFiles.map((file) => {
-        console.log(file, "<<<File");
         if (file.type.includes("video")) {
           setVideoFile(true);
           setAudioFile(false);
@@ -274,7 +273,6 @@ function CreateSingleNFT(props) {
           toast.error("unable to upload image");
           setisLoader(false);
         } else {
-          console.log(ipfsRes, "<<<<ipfs Res");
 
           setIpfsUrl(ipfsRes.ipfsUrl);
           setcdnUrl(ipfsRes.cdnUrl);
@@ -286,8 +284,6 @@ function CreateSingleNFT(props) {
     },
   });
   const onDrop = useCallback((acceptedFiles) => {
-    console.log(acceptedFiles);
-    console.log(acceptedFiles, "<<<< accepted files");
     handleChange(acceptedFiles);
   }, []);
   const hiddenFileInput = useRef(null);
@@ -295,9 +291,9 @@ function CreateSingleNFT(props) {
     hiddenFileInput.current.click();
   };
   const handleChange = async (event) => {
-    console.log(event, "<<<<< event");
+
     // const fileUploaded = event;
-    console.log(event, "<<<<file uploaded");
+
     setUploadFileObj(event);
   };
 
@@ -453,7 +449,6 @@ function CreateSingleNFT(props) {
 
     if (collectionName === "NFTinger Collection") {
       blockchain.current = blockchainValue(selectedOption?.value);
-      console.log(blockchain.current)
       collectionValue = blockchain.current;
     } else {
       blockchain.current = blockchainValue(collectionBlockchain);
@@ -478,7 +473,6 @@ function CreateSingleNFT(props) {
       nftBlockchain
     ) {
       const addIPFS = async () => {
-        console.log(selectFile, "<<<selectedFile");
         props.createNftHandler({
           ipfsUrl: ipfsUrl,
           cdnUrl: cdnUrl,
@@ -566,7 +560,6 @@ function CreateSingleNFT(props) {
     fileError == "" &&
     collectionError == "" &&
     !isloader;
-  console.log("SetFile", selectFile);
 
   useEffect(() => {
     if (customize.permissionToUploadNft === "Only me") {
@@ -1114,7 +1107,7 @@ function CreateSingleNFT(props) {
                       if (checkValueOnCollection) {
                       }
 
-                      console.log(addressId[1], "<<<BlockchainOption");
+                
                     }}
                     className="form-control-1 category-select"
                   >
@@ -1414,7 +1407,6 @@ function CreateSingleNFT(props) {
   );
 }
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     user: state.user.addUserData,
   };

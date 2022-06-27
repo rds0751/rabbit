@@ -40,7 +40,6 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs, setCom
           }
         })
       })
-      console.log(getInputProps, "<<<<<<", getRootProps, "<<<props");
       let formData = new FormData();
       formData.append(
         "attachment",
@@ -62,11 +61,6 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs, setCom
           setisLoader(false);
           return;
         } else {
-
-          // alert("banner");
-
-          console.log(ipfsRes, "<<<<ipfs Res");
-
           setbannerIpfs(ipfsRes.ipfsUrl);
           setbannerCdn(ipfsRes.cdnUrl);
           setCompressedUrl(ipfsRes.compressedURL)

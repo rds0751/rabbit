@@ -57,7 +57,6 @@ async function addIpfs(requestdata) {
 
 async function addIpfsObject(requestdata) {
   // let url = "http://localhost:3001" + "/add-file-ipfs";
-  console.log(requestdata,"<<<requestData");
   let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/add-file-ipfs";
 
   return httpService(
@@ -112,7 +111,6 @@ async function addIpfsObject(requestdata) {
 // }
 async function createNftContent(requestdata) {
   let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nft"+getParamTenantId();
-  // console.log(requestdata, "<<<<<<<<", url, "<<<<< createnfft response");
   return httpService(
     httpConstants.METHOD_TYPE.POST,
     // { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
@@ -144,7 +142,6 @@ async function openForSale(requestData) {
   let headers = getHeaders();
   return httpService(httpConstants.METHOD_TYPE.PUT, headers, requestData, url)
     .then((response) => {
-      console.log("------ssss", response.responseData);
 
       if (!response.success || !response.responseData) return Promise.reject();
       return Promise.resolve(response.responseData);
@@ -160,14 +157,10 @@ async function makeOffer(requestData) {
     requestData.tenantId=localStorage.getItem('tenantId')
   else
     requestData.tenantId='624fcce73cfee400358f2cef'
-
-  console.log(requestData);
-  
   let url = process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/offers"+getParamTenantId();
   let headers = getHeaders();
   return httpService(httpConstants.METHOD_TYPE.POST, headers, requestData, url)
     .then((response) => {
-      console.log("------ssss", response.responseData);
 
       if (!response.success || !response.responseData) return Promise.reject();
       return Promise.resolve(response.responseData);
@@ -196,7 +189,6 @@ async function makeOffer(requestData) {
 // }
 
 export const NftCreatedByUser = async (successCallBack, _id) => {
-  console.log("jjjjjjjjjjjjjjjjjjjjjjjj", _id)
   try {
     const url =
       process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v1/nfts/" + _id + "/created"+getParamTenantId();
@@ -206,7 +198,6 @@ export const NftCreatedByUser = async (successCallBack, _id) => {
     } else {
       successCallBack({ success: false}) //msg: "Unable To Fetch Data" });
     }
-    console.log(data, "<<<<myprofile");
   } catch (e) {
     console.log(e);
   }
@@ -222,7 +213,6 @@ export const NftOwnedByUser = async (successCallBack, _id) => {
     } else {
       successCallBack({ success: false}) //msg: "Unable To Fetch Data" });
     }
-    console.log(data, "<<<<myprofile");
   } catch (e) {
     console.log(e);
   }
@@ -241,7 +231,6 @@ export function getNftOwnedByUser(requestData) {
     url
   )
     .then((response) => {
-      console.log(response, "nft owned by user")
       if (
         !response.success ||
         response.responseCode !== 200 ||
@@ -269,7 +258,6 @@ export function getCollectionOwnedByUser(requestData) {
     url
   )
     .then((response) => {
-      console.log(response, "collections owned by a user")
       if (
         !response.success ||
         response.responseCode !== 200 ||
@@ -296,7 +284,7 @@ export const NftLikedByUser = async (successCallBack, _id) => {
     } else {
       successCallBack({ success: false})// msg: "Unable To Fetch Data" });
     }
-    console.log(data, "<<<<myprofile");
+
   } catch (e) {
     console.log(e);
   }
@@ -313,7 +301,6 @@ export const NftSellByUser = async (successCallBack, userId) => {
     } else {
       successCallBack({ success: false}) //msg: "Unable To Fetch Data" });
     }
-    console.log(data, "<<<<myprofile");
   } catch (e) {
     console.log(e);
   }
@@ -340,7 +327,6 @@ async function removeFromSale(requestData) {
   let headers = getHeaders();
   return httpService(httpConstants.METHOD_TYPE.PUT, headers, requestData, url)
     .then((response) => {
-      console.log("------ssss", response.responseData);
 
       if (!response.success || !response.responseData) return Promise.reject();
       return Promise.resolve(response.responseData);
@@ -357,8 +343,6 @@ async function ownershipTransfer(requestData, contentId) {
   let headers = getHeaders();
   return httpService(httpConstants.METHOD_TYPE.PUT, headers, requestData, url)
     .then((response) => {
-      console.log("------ssss", response.responseData);
-
       if (!response.success || !response.responseData) return Promise.reject();
       return Promise.resolve(response.responseData);
     })
@@ -383,11 +367,11 @@ export const addSuggestion = async (bodyData, successCallback) => {
 export const getAboutData = async (id, successCallBack) => {
   const url = `${dev_url}api/v1/about/61f7b7a4c017de6244c51144${getParamTenantId()}`;
   const { data } = await axios.get(url);
-  console.log(data, "<<<dataabout");
+
   if (data.success) {
     successCallBack(data.responseData);
   } else {
-    console.log(data, "<<error");
+
   }
 };
 
@@ -397,7 +381,6 @@ export const EditNft = async (id, reqData, successCallBack) => {
     const url =
       process.env.REACT_APP_WEBAPP_MICROSERVICE + `api/v1/nfts/${id}${getParamTenantId()}`;
     const { data } = await axios.put(url, reqData, { headers: AuthToken });
-    console.log(data, "<<<<data while updating nft");
     successCallBack(data);
   } catch (e) {
     console.log(e);

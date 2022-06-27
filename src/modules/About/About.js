@@ -18,10 +18,8 @@ function About({ loader }) {
     (async () => {
       const url = `${dev_url}api/v1/about/61f7b7a4c017de6244c51144`;
       const { data } = await axios.get(url);
-      console.log(data, "<<<in about page");
       setAboutData(data.responseData.about);
     })();
-    console.log(localStorage.getItem(WHITE_LABEL_TOKEN), "<<<this is token");
     // return () => {};
   }, []);
   return (

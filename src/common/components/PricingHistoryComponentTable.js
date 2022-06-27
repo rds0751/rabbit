@@ -169,14 +169,11 @@ export default function PricingHistoryComponentTable(props) {
 
   const handleChange = (e) => {
     setType((oldArray) => [...type, `${e?.target?.value}`]);
-    console.log("testing", type);
   };
 
   // const handleChange = (e) => {
-  // console.log(e,"eee")
 
   //   setType({ ...type, [e.target.name]: e.target.value });
-  //   console.log(type,2222)
   //   if (e.target.value === "list") {
   //     setEvent(!list);
   //   } else if (e.target.value === "price") {
@@ -186,7 +183,6 @@ export default function PricingHistoryComponentTable(props) {
   //   } else if (e.target.value === "minted") {
   //     setMinted(!minted);
   //   }
-  //   console.log(type,1111)
   // };
   // const handleChange = (e) => {
   //   if (e.target.value === "list") {
@@ -242,7 +238,6 @@ export default function PricingHistoryComponentTable(props) {
     // setvalue(val)
     setType((type) => [`${val}`]);
   };
-  console.log(activities, "val");
 
   const options = [
     { label: "List", value: "list" },
@@ -252,7 +247,7 @@ export default function PricingHistoryComponentTable(props) {
   ];
 
   let toArray = [];
-  console.log(activities, "activities");
+
   return (
     <MainContainer className="pricing-history">
       <Title>Activities</Title>
@@ -358,8 +353,6 @@ export default function PricingHistoryComponentTable(props) {
                           ""
                         )}
                         {row.type}
-
-                        {console.log(row.type, "row.type")}
                       </TableCell>
                       <TableCell
                         style={{
@@ -436,7 +429,7 @@ export default function PricingHistoryComponentTable(props) {
                                 horizontal: "right",
                               })}
                             > 
-                             {console.log(row, "username")}
+
                             */}
 
                                 {row?.to.length > 0 ? (
@@ -467,7 +460,6 @@ export default function PricingHistoryComponentTable(props) {
                                 horizontal: "right",
                               })}
                             > 
-                             {console.log(row, "username")}
                             */}
 
                               {row?.to.length > 0 ? (

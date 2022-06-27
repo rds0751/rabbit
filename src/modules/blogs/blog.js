@@ -36,7 +36,6 @@ export default function ComplexGrid({ loader }) {
     <div className="spinnerloader">{isLoading && <Spinner />}</div>;
     setVisibleBlogs((prevVisibleBlogs) => prevVisibleBlogs + 4);
   };
-  console.log(AuthToken, "auth")
   return (
     <div>
 

@@ -323,7 +323,7 @@ function MyItems(props) {
                         <span className=" font-14 text-dark">
                           Total Items:
                           <span className="text-primary">0</span>
-                          {console.log("kkkkkkkkkkkkkk",curElem)}
+                         
                         </span>
                       </p>
                     </div>
