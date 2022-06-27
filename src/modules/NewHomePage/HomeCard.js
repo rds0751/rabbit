@@ -442,6 +442,7 @@ const HomeCard = () => {
 
   const checkTenant = async (address) => {
     setLoader(true);
+    console.log(tenantData)
     const [error, result] = await Utils.parseResponse(
       getTenantByWallet(address)
     );
@@ -467,6 +468,7 @@ const HomeCard = () => {
         let accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
         let Newaddress = accounts[0];
         setTenant({ ...tenantData, wallet: Newaddress });
+      
         localStorage.setItem("walletAddress", Newaddress);
         let balance = await window.ethereum.request({ method: "eth_getBalance", params: [Newaddress, "latest"] })
         const PriceEther = ethers.utils.formatEther(balance);
@@ -871,7 +873,7 @@ const HomeCard = () => {
                     <div className="input-group">
                       <div className="Address">
                         <label className="WalletAddress">
-                          {walletAddress?.address}
+                         {tenantData.wallet}
                         </label>
                       </div>
                     </div>
