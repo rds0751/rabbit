@@ -36,7 +36,6 @@ function Menu(props) {
       }
     }
   };
-  console.log(props.handleHamburger, "deepak")
   return (
     <>
       <div className="container new-container menuphone">

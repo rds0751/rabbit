@@ -30,7 +30,6 @@ function EditProfile(props) {
 
   const handleChange = async (event) => {
     const fileUploaded = event.target.files[0];
-    console.log(fileUploaded);
     let formData = new FormData();
     formData.append("folderName", "collections");
     formData.append("createdBy", `${props.user._id}`);
@@ -42,14 +41,12 @@ function EditProfile(props) {
     });
     const result = await res.json();
     if (result.success) cdnUrl.current = result.responseData;
-    console.log(result);
     setImageUrl(cdnUrl.current);
 
     // Edit.handleFile(fileUploaded);
   };
 
   const handleSubmit = async (e) => {
-    console.log(props);
     e.preventDefault();
     const data = {
       username: username.current,
@@ -58,7 +55,6 @@ function EditProfile(props) {
       cdnUrl: cdnUrl.current,
     };
     const result = await updateUserProfile(data, props.user._id);
-    console.log(result);
   };
 
   return (
@@ -155,7 +151,6 @@ function EditProfile(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     user: state.user.addUserData,
   };

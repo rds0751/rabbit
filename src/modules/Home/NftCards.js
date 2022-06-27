@@ -36,9 +36,7 @@ const NftCardsHome = (props) => {
     route = "/nft-information/" + nft._id + getParamTenantId();
   }
   const x = () => {
-    console.log(videoDisplay);
     setVideoDisplay(!videoDisplay);
-    console.log(videoDisplay);
   };
   const onImageLoad = () => {
     setImageLoading({ ...imageLoading, loaded: true });

@@ -388,6 +388,9 @@ ul {
 .suggestion-form {
   border-radius: 15px;
 }
+.color-red{
+  color: rgb(255, 71, 71) !important;
+}
 /* .column-gap-20{
   column-gap: 25px !important;
   row-gap: 5px !important;

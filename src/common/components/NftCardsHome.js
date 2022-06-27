@@ -47,7 +47,6 @@ function NftCardsHome({ nft, appearance, loader }) {
   // const currDate = new Date();
   // const endDate = biddingDetails.endDate;
   // const daysleft = new Date(endDate - currDate).getDate() - 1;
-  // console.log(daysleft, "<<<daysleft");
   const route = "/nft-information/" + _id + getParamTenantId();
   const likeNft = (id) => {
     if (user?.loggedInUser?._id) {
@@ -71,7 +70,6 @@ function NftCardsHome({ nft, appearance, loader }) {
   // const stamp2 = Date.now(currDate);
   // const stamp1 = Date.now(nft.biddingDetails.endDate);
   // const days = difftime(stamp1, stamp2);
-  // console.log(difftime(stamp1, stamp2),"<<<days");
 
   const difftime = (timestamp1, timestamp2) => {
     var difference = timestamp1 - timestamp2;

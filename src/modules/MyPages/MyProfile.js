@@ -115,7 +115,6 @@ function MyProfile({ loader }) {
   const ethereum = window.ethereum;
   const [errorMssg, setErrorMssg] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(""); // defaultAccount having the wallet address
-  console.log("ethereum ", ethereum && ethereum);
   const [checkClick, setcheckClick] = useState(false);
   const [getBalance, setGetBalance] = useState("");
   const dispatch = useDispatch();
@@ -125,7 +124,6 @@ function MyProfile({ loader }) {
 
   useEffect(() => {
     if (loggedInUser == null) {
-      console.log('null wallet')
       if (!localStorage.getItem('has_wallet')) {
         navigate("/add-wallet"+getParamTenantId());
       }
@@ -263,7 +261,6 @@ function MyProfile({ loader }) {
 
   const getCreatedByNft = () => {
     NftCreatedByUser((response) => {
-      console.log(response, "myprofile");
       if (response.success) {
         // setNfts(response.responseData);
         setcreatedNft(response.responseData);
@@ -275,7 +272,6 @@ function MyProfile({ loader }) {
   };
   const getOwnedByNft = () => {
     NftOwnedByUser((response) => {
-      console.log(response, "myprofile");
       if (response.success) {
         setownedNft(response.responseData);
       } else {
@@ -286,7 +282,6 @@ function MyProfile({ loader }) {
   };
   const getOnSaleNft = () => {
     NftSellByUser((response) => {
-      console.log(response, "myprofile");
       if (response.success) {
         setonSaleNft(response.responseData);
         setNfts(response.responseData);
@@ -336,7 +331,6 @@ function MyProfile({ loader }) {
   // window.ethereum?.on("accountsChanged", accountChangeHandler);
   // -----------------------
   const updateBanner = (e) => {
-    console.log(e.target.files[0], "<<<<<<<<<<update fule");
     const file = e.target.files[0];
     let formData = new FormData();
     formData.append("files", e.target.files[0]);
@@ -349,12 +343,10 @@ function MyProfile({ loader }) {
         toast.error("Unabale to updated banner");
         window.location.reload(true);
       }
-      console.log(res, "<<<<<< updated banner");
     });
   };
   const splitAddress = (address) => {
     const sub = address.substring(0, 2);
-    console.log(sub, "<<<split address");
   };
   splitAddress("akshay");
 
@@ -548,7 +540,6 @@ function MyProfile({ loader }) {
               onClick={() => setTypeofProfilePost("owned")}
             // onClick={() => {
             //   setNfts(ownedNft);
-            //   console.log(ownedNft, "<<<<<<ownedNft");
             //   setTypeofProfilePost("owned");
             // }}
             >

@@ -14,7 +14,6 @@ let initialState = {
 export const SideBarReducer = (state = initialState, action) => {
   switch (action.type) {
     case OPEN_NOTIFICATION: {
-      console.log(action.payload, "<<< this is in user.js reducer");
       return { ...state, isOpenNoti: action.payload };
     }
     case OPEN_WALLET:

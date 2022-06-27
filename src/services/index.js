@@ -12,7 +12,6 @@ import { AuthToken } from "./UserAuthToken";
 // export * from './user'
 
 export const addWalletAddress = async (wallet_address) => {
-  console.log('called wallet')
   try {
     const res = await fetch(`${BASE_URL}/api/v1/wallet-address`, {
       method: httpConstants.METHOD_TYPE.PUT,
@@ -23,7 +22,6 @@ export const addWalletAddress = async (wallet_address) => {
         wallet_address,
       }),
     });
-    console.log(res, "<<<<datawalletaddress");
     const result = await res.json();
     const user = result.responseData;
     return user;
@@ -34,14 +32,12 @@ export const addWalletAddress = async (wallet_address) => {
 
 export const updateUserProfile = async (data, userId) => {
   try {
-    console.log(AuthToken,"<<<Auth");
     const res = await fetch(`${BASE_URL}/api/v1/user/${userId}${getParamTenantId()}`, {
       method: httpConstants.METHOD_TYPE.PUT,
       headers: AuthToken,
       body: JSON.stringify(data),
     });
     const result = await res.json();
-    console.log(result, "<<<result");
     return result;
   } catch (err) {
     console.log(err);

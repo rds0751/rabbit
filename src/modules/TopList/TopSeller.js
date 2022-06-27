@@ -283,7 +283,6 @@ function TopSeller({loader}) {
 
 
     await getTopSellers(sellerReqObj).then((response) => {
-      console.log("responsessssss",response)
       setTopSellers(response);
       setIsloading(false)
     }

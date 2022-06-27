@@ -51,14 +51,7 @@ async function mintNFT({
   const accounts = await window.ethereum.request({
     method: "eth_requestAccounts",
   });
-  console.log(
-    window.ethereum.networkVersion,
-    tokenId,
-    price,
-    royalty,
-    ipfsUrl,
-    "dattttttttttttttttt"
-  );
+  
 
   if (!window.ethereum) return Promise.reject("Please install metamask");
 
@@ -147,18 +140,6 @@ async function lazyMinting({
   signMsg,
   blockchain
 }) {
-  
-  console.log(
-    tokenURI,
-    tokenId,
-    price,
-    royality,
-    contractAddress,
-    receiverAddress,
-    signature,
-    signMsg
-  );
-
 
   if (window.ethereum.networkVersion == 4 && blockchain == "Ethereum") {
 
@@ -208,7 +189,7 @@ async function batchMintNFT({
 
   let ArrayAmount = Array(5).fill(amount);
 
-  console.log(ArrayTokenID, ArrayAmount);
+
 
   const accounts = await window.ethereum.request({
     method: "eth_requestAccounts",
@@ -306,8 +287,7 @@ async function acceptOffer({
     const signature = await signer.signMessage(signMsg);
     const address = await signer.getAddress();
 
-    console.log(signature);
-    console.log(signMsg, tokenId, contractAddress, receiverAddress, price);
+    
     const contractData = new ethers.Contract(
       inializeContract,
       contractbuyAndRemoveABI,
@@ -513,18 +493,6 @@ async function buyNFT({
   const receiver = await window.ethereum.request({
     method: "eth_requestAccounts",
   });
-
-  console.log(
-    "kdkkkkkkkkkkkk",
-    contractAddress,
-    tokenId,
-    message,
-    signature,
-    receiver[0]
-  );
-  console.log(signature, "<<sig");
-  console.log(message, "msg");
-  console.log(tokenId, "tokenID");
   if (!window.ethereum) return Promise.reject("Please install metamask");
   if (window.ethereum.networkVersion == 80001) {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -543,7 +511,6 @@ async function buyNFT({
       { gasLimit: 100000, value: ethers.utils.parseEther("0.1") }
     );
     const finalResult = await signer.sendTransaction(resultBuy);
-    console.log("<<<result Buy", resultBuy, finalResult);
     const amount = ethers.utils.parseUnits(price.toString(), 18);
     const accounts = await provider.send("eth_requestAccounts", []);
 
@@ -557,10 +524,7 @@ async function buyNFT({
     const options = { value: ethers.utils.parseEther(price.toString()) };
 
     const result = await contractData.buy(tokenId, options);
-    console.log(
-      "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
-      result
-    );
+
 
     let res = await result.wait();
 
@@ -628,7 +592,6 @@ async function buyNFT({
       signature,
       contractAddress
     );
-    console.log("<<<result Buy", resultBuy);
     const amount = ethers.utils.parseUnits(price.toString(), 18);
     const accounts = await provider.send("eth_requestAccounts", []);
 
@@ -642,10 +605,7 @@ async function buyNFT({
     const options = { value: ethers.utils.parseEther(price.toString()) };
 
     const result = await contractData.buy(tokenId, options);
-    console.log(
-      "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
-      result
-    );
+   
 
     let res = await result.wait();
 
@@ -655,9 +615,7 @@ async function buyNFT({
       name: provider?._network?.name || "",
     };
   } else return Promise.reject("Please Select Valid Network in the metamask");
-  console.log(
-    "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"
-  );
+  
 }
 
 async function putOnSaleNft({ tokenId, contractAddress }) {
@@ -725,8 +683,6 @@ async function createCollections({ name, symbol, blockchain }) {
     contractCollectionAddress =
       process.env.REACT_APP_CONTRACT_COLLECTION_ADDRESS_BINANCE;
 
-  console.log(blockchain, "<<<BlockChainmetamask");
-
   if (!window.ethereum) return Promise.reject("Please install metamask");
   if (window.ethereum.networkVersion == 80001 && blockchain === "Polygon") {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -739,13 +695,11 @@ async function createCollections({ name, symbol, blockchain }) {
     const result = await contractData.createCollection(name, symbol);
 
     let res = await result.wait();
-    console.log("---------ssss----");
-    // console.log("000000000000000000000000", pp.logs)
-    // console.log("000000wwww000000000000000000",)
+
     const getReceipt = await provider.getTransactionReceipt(
       res.transactionHash
     );
-    // console.log("lssssssss",getReceipt.logs[0].address)
+
     return {
       ...res,
       contract_address: getReceipt.logs[0].address,
@@ -763,13 +717,11 @@ async function createCollections({ name, symbol, blockchain }) {
     const result = await contractData.createCollection(name, symbol);
 
     let res = await result.wait();
-    console.log("---------ssss----");
-    // console.log("000000000000000000000000", pp.logs)
-    // console.log("000000wwww000000000000000000",)
+
     const getReceipt = await provider.getTransactionReceipt(
       res.transactionHash
     );
-    // console.log("lssssssss",getReceipt.logs[0].address)
+
     return {
       ...res,
       contract_address: getReceipt.logs[0].address,
@@ -787,13 +739,10 @@ async function createCollections({ name, symbol, blockchain }) {
     const result = await contractData.createCollection(name, symbol);
 
     let res = await result.wait();
-    console.log("---------ssss----");
-    // console.log("000000000000000000000000", pp.logs)
-    // console.log("000000wwww000000000000000000",)
+
     const getReceipt = await provider.getTransactionReceipt(
       res.transactionHash
     );
-    // console.log("lssssssss",getReceipt.logs[0].address)
     return {
       ...res,
       contract_address: getReceipt.logs[0].address,

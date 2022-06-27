@@ -63,7 +63,6 @@ export const getNft = async (requestData, successCallBack) => {
   //   url
   // )
   // .then(response => {
-  //   console.log(response,"<<<< response at 40 webapp micro")
   //   if (
   //     !response.success ||
   //     response.responseCode != 200 ||
@@ -91,7 +90,6 @@ export function getCollections(requestData) {
     url
   )
     .then((response) => {
-      // console.log("response", response)
       if (
         !response.success ||
         response.responseCode !== 200 ||
