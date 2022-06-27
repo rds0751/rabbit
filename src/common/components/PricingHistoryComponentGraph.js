@@ -21,33 +21,27 @@ export default function PricingHistoryComponent(props) {
   // const reqObj = {
   //   duration: ""
   // }
-  console.log(nftPricingHistory, "sachin");
   useEffect(() => {
     pricingHistoryGraphOfNft(reqId, reqObj).then((response) =>
       setNftPricingHistory(response)
     );
   }, [reqObj]);
 
-  console.log(nftPricingHistory, "<<<NFTpricing History");
 
   let prices = nftPricingHistory.map((each) => each.totalVolume);
   // let number = prices;
 
   // if (number == Math.floor(number)) {
   //   let integer = number + 1;
-  //   console.log(integer, "iteger");
   // } else {
   //   let decimal = number + 0.01;
-  //   console.log(decimal, "decimal");
   // }
   // let prices = [0.06];
   let dates = nftPricingHistory.map((each) => each?.addedOn);
   // let dates = nftPricingHistory.map((each) => each?.addedOn);
-  console.log(nftPricingHistory.addedOn, "addedon");
   //   let dates = nftPricingHistory.map((each) =>
   //     moment(new Date(each?.addedOn)).format("D MMM YY")
   //   );
-  // console.log(prices,"price")
   //   if (filter === "month") {
   //     dates = nftPricingHistory.map((each) =>
   //       moment(new Date(each?.addedOn)).format("MMM YY")
@@ -60,7 +54,6 @@ export default function PricingHistoryComponent(props) {
   //   let dates = nftPricingHistory.map((each) =>
   //     moment(new Date(each?.addedOn)).format("D MMM YY")
   //   );
-  // console.log(prices,"price")
   //   if (filter === "month") {
   //     dates = nftPricingHistory.map((each) =>
   //       moment(new Date(each?.addedOn)).format("MMM YY")

@@ -838,7 +838,7 @@ function LeaderBoard({ loader }) {
                   {limitCollections.map((curElem, index) => {
                     // console.log("ddddddddddddddd", curElem.collection[index].name)
                     const { collection, items, collectionPhoto } = curElem
-                    {console.log(collection)}
+            
                     // var precise = totalVolume.toPrecision(4);
 
                     // var result = parseFloat(precise);
@@ -1334,7 +1334,7 @@ function LeaderBoard({ loader }) {
 }
 
 const BuildPendingAcceptedRejectedBlock = ({ apiData, isloading }) => {
-  console.log("ppppppppppppppppppp", isloading)
+
   return (
     <div>
       <div className="leaderboardTopDetails">

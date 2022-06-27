@@ -14,8 +14,8 @@ if (
   ReactDOM.render(
     <React.StrictMode>
       <Provider store={store}>
+      <MarketingApp />
        
-        <App />
       </Provider>
     </React.StrictMode>,
     document.getElementById("root")
@@ -23,8 +23,8 @@ if (
 } else {
   ReactDOM.render(
     <React.StrictMode>
-      <Provider store={store}>
-      <MarketingApp />
+      <Provider store={store}>  
+      <App />
       </Provider>
     </React.StrictMode>,
     document.getElementById("root")

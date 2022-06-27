@@ -48,12 +48,10 @@ export default function Offer(props) {
             //       isOpenForSale: false
             //   },
         }
-        console.log("response dasssssssssssssssssta-----", requestDataInTx)
         if (! props?.nft?._id) return;
         let [error, result] = await Utils.parseResponse(
             addNftTx(requestDataInTx)
         );
-        console.log("--buy nFT resi;t-", result);
         if (error || !result) {
             // this.setState({ loaderState: false })
 
@@ -71,8 +69,6 @@ export default function Offer(props) {
   
   
       );
-        console.log(blockchainRes);
-        console.log(blockchainError);
         if(blockchainError || !blockchainRes){
           // this.setState({ loaderState: false })
           return toast.error(blockchainError || "Unable to generate signature");
@@ -84,7 +80,6 @@ export default function Offer(props) {
             updateTxStatus({ status: "success" }, result._id)
 
         );
-        // console.log("----sssssssss----",txUpdateResult)
         if (txUpdateResultErr || !txUpdateResult) {
             this.setState({ loaderState: false })
 
@@ -106,7 +101,6 @@ export default function Offer(props) {
         let [err, res] = await Utils.parseResponse(
             ContentService.ownershipTransfer(requestData, props.nft._id)
         );
-        console.log("--buy nFT ressssssi;t-", res);
         if (err || !res) {
             //this.setState({ loaderState: false })
 
@@ -121,16 +115,7 @@ export default function Offer(props) {
 
             toast.success("NFT has been bought successfully",{autoClose:7000,theme:"colored"});
         }
-
-
-        console.log(blockchainRes,"<<<signRes");
-     
-
-
     }
-
-
-  console.log(props, "<<<props");
   return (
     <div style={{display:  props?.nft?.ownerAddress == loggedInUser?.wallet_address ? "block" :"none"}}>
       {props.offer.map((data) => (

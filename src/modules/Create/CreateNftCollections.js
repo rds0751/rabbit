@@ -151,7 +151,7 @@ function CreateNftCollections(props) {
     const fileUploaded = event.target.files[0];
     // alert("onchage");
     // props.handleFileImage(fileUploaded);
-    console.log(user.loggedInUser._id, "<<<");
+
 
     let formData = new FormData();
     formData.append("folderName", "collections");
@@ -163,7 +163,7 @@ function CreateNftCollections(props) {
     });
     const result = await res.json();
     if (result.success) imageUrl.current = result.responseData;
-    console.log(result, ">>> image upload");
+
   };
 
   const handleChangeBanner = async (event) => {
@@ -181,7 +181,7 @@ function CreateNftCollections(props) {
     });
     const result = await res.json();
     if (result.success) coverUrl.current = result.responseData;
-    console.log(result, ">>> banner upload");
+
   };
   const onChangeDes = () => {
     setDesLength(description.current.length);
@@ -211,14 +211,6 @@ function CreateNftCollections(props) {
       description.current == "" ||
       blockchain.current == ""
     ) {
-      console.log(
-        imageUrl.current,
-        name.current,
-        description.current,
-        blockchain.current,
-        "<<<"
-      );
-      console.log("require");
       // alert("154");
       setloaderState(false);
 
@@ -238,7 +230,6 @@ function CreateNftCollections(props) {
 
 
     // alert("here");
-    console.log("here");
     // const data = {
     //   coverUrl: bannerCdn,
     //   imageUrl: logoCdn,
@@ -282,7 +273,6 @@ function CreateNftCollections(props) {
             status: "failed"
           }, result.responseData._id)
         )
-        console.log("eroor in blockchain side", txStatusRes)
         setloaderState(false);
 
         return toast.error(
@@ -296,8 +286,6 @@ function CreateNftCollections(props) {
             status: "success"
           }, result.responseData._id)
         )
-        console.log("no error blockchain side", txStatus)
-
         setloaderState(false);
         if (location?.state?.data) {
           navigate("/create-single-nft");

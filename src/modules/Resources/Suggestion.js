@@ -25,7 +25,6 @@ function Suggestion({ loader }) {
   const [checkButtonStatus, setCheckButtonStatus] = useState(true);
   const PostSuggestion = () => {
     const { email, title, detail } = formData;
-    console.log(formData, "<<<formData");
     if (email == "" || title == "" || detail == "") {
       toast.error("Fill All Fields");
       return null;
@@ -37,7 +36,6 @@ function Suggestion({ loader }) {
     }
 
     addSuggestion(formData, (res) => {
-      console.log(res);
       toast.success("Suggestion Sent");
       setFormData({ email: "", title: "", detail: "" });
     });

@@ -92,7 +92,6 @@ function EditItem(Collection) {
 
   const handleChange = (event) => {
     const fileUploaded = event.target.files[0];
-    console.log(fileUploaded, "<<<<<");
     setEditForm({ ...editForm, files: fileUploaded });
     // Collection.handleFile(fileUploaded);
   };
@@ -114,7 +113,6 @@ function EditItem(Collection) {
   // };
   const onSubmit = async () => {
     const { blockchain, description, files, _id, name } = editForm;
-    console.log(editForm, "<<<<formData");
     // if (
     //   name?.trim() == "" ||
     //   blockchain?.trim() == "" ||
@@ -131,7 +129,7 @@ function EditItem(Collection) {
         toast.error("Error while updating NFT");
       }
     });
-    console.log(editForm, "<<<< This is edit form");
+    
   };
   return (
     <>

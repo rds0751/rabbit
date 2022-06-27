@@ -95,7 +95,6 @@ export async function createSubDomain(reqData){
     const url = `${BASE_URL1}/api/v1/create-subdomain`;
     const res = await fetch(url, {method: 'POST', headers: AuthToken,body: JSON.stringify(reqData) });
     const result = await res.json();
-    console.log(result);
     return result;
   }catch(err){
     return err;

@@ -94,12 +94,12 @@ function Create() {
                 
                 dispatch(addUserData(res));
                 localStorage.setItem("WHITE_LABEL_TOKEN", res.token);
-                // console.log("dmmmmmmmmmmmmmmm")
+
                 setToggleEffect(!toggleEffect);
 
               });
               // -------------
-              // console.log("mffffffmmmmmsmmmmmffffffff",toggleEffect)
+
 
             });
                })
@@ -119,7 +119,6 @@ function Create() {
   const accountChangeHandler = (newAccount) => {
     // setDefaultAccount(newAccount[0]);
     const address = newAccount[0];
-    // console.log(, "<<<< defaultaccount");
     // getUserBalance(newAccount[0]);
     // balance
     window.ethereum
@@ -153,7 +152,6 @@ function Create() {
 
 
   useEffect(()=>{
-    console.log(customize.permissionToUploadNft, 'ony me')
 
     if(customize.permissionToUploadNft === 'Only me'){
       // history("/");

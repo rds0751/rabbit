@@ -86,7 +86,6 @@ function App() {
     );
     if (checkWalletAddress != null) {
       CheckUserByWalletAddress(checkWalletAddress, (res) => {
-        console.log(res, "<<<< response at routes.js");
         addUserData(res);
       });
     }

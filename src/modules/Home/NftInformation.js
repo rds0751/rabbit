@@ -514,7 +514,6 @@ export default function NftInformation(props) {
   };
 
   let ownedBy = owner != undefined ? owner[0]?.userName ? owner[0]?.userName : owner[0]?.wallet_address:"";
-  console.log(ownedBy,'1111');
   let createdBy =  creator != undefined ?  creator[0]?.userName? creator[0]?.userName : creator[0]?.wallet_address:"";
   const url = window.location.href;
 
@@ -554,7 +553,6 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
         price:makeOfferDetails.price,
         dateTime:makeOfferDetails.dateTime,
       }) 
-      console.log(result,"<<<MakeOffer")
       setOfferLoadingModal(false);
       setMakeOfferModal(false);
       setRandomWalletAddress(result.walletAddress);

@@ -101,7 +101,6 @@ function Navbar({ loader }) {
   };
 
   useEffect(() => {
-    console.log("called navbar");
     async function fetchData() {
       getTenantData().then((response) => setTenantData(response[0]));
     }
@@ -166,7 +165,6 @@ function Navbar({ loader }) {
     }
   };
   const accountChangeHandler = (newAccount) => {
-    console.log(newAccount, "account changed");
 
     if (newAccount.length > 0) {
       setDefaultAccount(newAccount[0]);
@@ -197,7 +195,6 @@ function Navbar({ loader }) {
   let location = useLocation();
 
   const manageNavigation = (name) => {
-    console.log("called manage navigation", name);
 
     setDisplay(true);
     if (name == "myitems") {
@@ -258,7 +255,6 @@ function Navbar({ loader }) {
     setDisplay(!display);
   };
   const handleWalletClick = () => {
-    console.log("called wallet local");
     setDisplay(true);
     if (walletAddress == null) {
       if (localStorage.getItem("has_wallet") === "false") {
@@ -275,7 +271,6 @@ function Navbar({ loader }) {
     }
   };
   const handleNotiSideBar = () => {
-    console.log("called sidebar");
     setDisplay(true);
 
     if (loggedInUser == null) {

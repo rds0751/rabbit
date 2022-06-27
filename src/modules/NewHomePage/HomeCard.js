@@ -361,7 +361,7 @@ const HomeCard = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState();
   const [loader, setLoader] = useState(false);
-
+  const [errorMsg , setErrorMsg]= useState("")
   const [tenantData, setTenant] = useState({
     storeName: "",
     wallet: "",
@@ -464,13 +464,11 @@ const HomeCard = () => {
   const MetaMaskConnector = async () => {
     try {
       if (window.ethereum) {
-        console.log("L>>>>")
         let accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
         let Newaddress = accounts[0];
         setTenant({ ...tenantData, wallet: Newaddress });
         localStorage.setItem("walletAddress", Newaddress);
         let balance = await window.ethereum.request({ method: "eth_getBalance", params: [Newaddress, "latest"] })
-        console.log(balance);
         const PriceEther = ethers.utils.formatEther(balance);
         dispatch(
           AddWalletDetails({
@@ -509,6 +507,7 @@ const HomeCard = () => {
     if (result.responseCode === 403) {
       setLoader(false);
       Utils.apiFailureToast(storeConstants.ALREADY_EXIST_STORE_NAME);
+      setErrorMsg(storeConstants.ALREADY_EXIST_STORE_NAME)
     } else if (result.success) {
       let requestData = {
         subdomain: tenantData.storeName,
@@ -521,6 +520,8 @@ const HomeCard = () => {
       if (domainResult.responseCode === 403) {
         setLoader(false);
         Utils.apiFailureToast(storeConstants.ALREADY_EXIST_STORE_NAME);
+      setErrorMsg(storeConstants.ALREADY_EXIST_STORE_NAME)
+
       }
       else if (domainResult.success) {
         setLoader(true)
@@ -535,6 +536,14 @@ const HomeCard = () => {
     }
 
   };
+  const handleInputChange=(evt)=> {
+    const value = evt.target.value;
+    setTenant({
+      ...tenantData,
+      storeName: value,
+    })
+    setErrorMsg("")
+  }
 
   return (
     <>
@@ -878,17 +887,15 @@ const HomeCard = () => {
                         <input
                           type="text"
                           className="Address"
-                          onChange={(e) =>
-                            setTenant({
-                              ...tenantData,
-                              storeName: e.target.value,
-                            })
-                          }
+                          onChange={(e) =>handleInputChange(e)}
                           style={{ color: "white" }}
                         ></input>
                       </div>
                       <label className="siteurl">.NFTinger.com</label>
                     </div>
+                    {errorMsg && <label className="lastLabel color-red">
+                      {errorMsg}
+                    </label>}
 
                     <label className="lastLabel">
                       This is the url your customer will use to visit the

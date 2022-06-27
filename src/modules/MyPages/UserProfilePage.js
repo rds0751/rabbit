@@ -75,7 +75,6 @@ function UserProfilePage({ loader }) {
   const ethereum = window.ethereum;
   const [errorMssg, setErrorMssg] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(""); // defaultAccount having the wallet address
-  console.log("ethereum ", ethereum && ethereum);
   const [checkClick, setcheckClick] = useState(false);
   const [getBalance, setGetBalance] = useState("");
   const dispatch = useDispatch();
@@ -119,7 +118,6 @@ function UserProfilePage({ loader }) {
     // }
 
     userPublicProfile((response) => {
-      console.log(response, "myprofile");
       if (response.success) {
         setUserData(response.responseData);
         // setNfts(response.responseData);
@@ -144,7 +142,6 @@ function UserProfilePage({ loader }) {
 
 
   // ------------------------------- Calling apis --------------------- to get user data
-  console.log("userrrrrrrrrrrrrrrrdataa", userData)
   const handleCopyToClipboard = () => {
     const { wallet_address } = loggedInUser;
     navigator.clipboard.writeText(`${wallet_address}`);
@@ -178,7 +175,6 @@ function UserProfilePage({ loader }) {
   // };
   const getOnSaleNft = () => {
     NftSellByUser((response) => {
-      console.log(response, "myprofile");
       if (response.success) {
         setonSaleNft(response.responseData);
         setNfts(response.responseData);
@@ -190,9 +186,7 @@ function UserProfilePage({ loader }) {
     // setonSaleNft([]);
   };
   const getLikedNft = () => {
-    console.log("kddddddddddd")
     NftLikedByUser((response) => {
-      console.log(response, "Liked NFT");
       if (response.success) {
         setlikedNft(response.responseData);
       } else {
@@ -241,7 +235,6 @@ function UserProfilePage({ loader }) {
   // };
   const splitAddress = (address) => {
     const sub = address.substring(0, 2);
-    console.log(sub, "<<<split address");
   };
   splitAddress("akshay");
   let array = [];
