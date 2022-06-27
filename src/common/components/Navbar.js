@@ -400,9 +400,12 @@ function Navbar({ loader }) {
 
   return (
     <>
-      {/* <Helmet>
+      {
+      /*
+       <Helmet>
         <title>{customize?.storeName}</title>
-      </Helmet> */}
+        </Helmet>
+       */}
 
       <div className="navbar-width">
         <nav className="navbarborder navbar navbar-expand-lg">
