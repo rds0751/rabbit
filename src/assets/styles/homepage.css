@@ -210,7 +210,10 @@ color: #031527!important;
 }
 @media only screen and (max-width: 1918px) {
   .homepage .right-slider .card {
-    width: auto;
+    width: 48%;
+  }
+  .homepage .right-slider .NewHomeNFTCard {
+    width: auto!important;
   }
   .homepage .create-sell-nft .inner-width {
     width: 87%;

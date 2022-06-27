@@ -159,7 +159,7 @@ async function makeOffer(requestData) {
   if(localStorage.getItem('tenantId') != 'null')
     requestData.tenantId=localStorage.getItem('tenantId')
   else
-    requestData.tenantId='624fcce73cfee400358f2cef'
+    
 
   console.log(requestData);
   

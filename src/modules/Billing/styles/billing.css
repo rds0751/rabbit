@@ -14,6 +14,9 @@
   flex-direction: column;
   align-items: center;
 }
+.cross-icon{
+  cursor: pointer;
+}
 .billingPageHeading1 {
   font-size: 1.68vw;
   font-family: "poppins-bold";
