@@ -8,10 +8,9 @@ const Modal = styled.div`
   position: absolute;
   background-color: white;
   opacity: 1 !important;
-  top: 100px;
+  top: 83px;
   width: 80%;
-  height: 561px;
-  max-height: 64%;
+  height: fit-content;
   border-radius: 13px;
 `;
 const ModalInner = styled.div`
@@ -32,33 +31,61 @@ const UpgradePlan = () => {
       billingCycle: "monthly",
       createdAt: "2022-04-04T12:09:35.988Z",
       currency: "US dollar",
-      description: "description about the plan",
-      planName: "Standard",
-      price: 129,
+      description: [
+        "Gas Free Minting",
+        "ERC721 & 1155 NFT Standard",
+        "Multiple Blockchain Support",
+        "Multiple Currency Support",
+        "Intelligent Content Moderation",
+        "Fiat on-ramp",
+      ],
+      planName: "Free",
+      price: 0,
     },
     {
       billingCycle: "monthly",
       createdAt: "2022-04-04T12:09:35.988Z",
       currency: "US dollar",
-      description: "description about the plan",
+      description: [
+        "Premium Themes for store",
+        "Custom URL",
+        "Remove NFTICALLY Branding",
+        "Use your own ERC20 Token",
+        "NFT Scanner for Counterfeit",
+        "Many More",
+      ],
       planName: "Standard",
-      price: 129,
+      price: 19,
     },
     {
       billingCycle: "monthly",
       createdAt: "2022-04-04T12:09:35.988Z",
       currency: "US dollar",
-      description: "description about the plan",
-      planName: "Standard",
-      price: 129,
+      description: [
+        "Premium Themes for store",
+        "Custom URL",
+        "Remove NFTICALLY Branding",
+        "Use your own ERC20 Token",
+        "NFT Scanner for Counterfeit",
+        "Many More",
+      ],
+      planName: "Professional",
+      price: 249,
     },
     {
       billingCycle: "monthly",
       createdAt: "2022-04-04T12:09:35.988Z",
       currency: "US dollar",
-      description: "description about the plan",
-      planName: "Standard",
-      price: 129,
+      description: [
+        "Custom Theme",
+        "Custom NFT Smartcontract",
+        "Personal Account Manager",
+        "Phone Support",
+        "API Access",
+        "Staff Training",
+      ],
+      planName: "Enterprise",
+      price: 833,
     },
   ];
   const YearlyPlan = [
@@ -66,33 +93,61 @@ const UpgradePlan = () => {
       billingCycle: "monthly",
       createdAt: "2022-04-04T12:09:35.988Z",
       currency: "US dollar",
-      description: "description about the plan",
-      planName: "Standard",
-      price: 129,
+      description: [
+        "Gas Free Minting",
+        "ERC721 & 1155 NFT Standard",
+        "Multiple Blockchain Support",
+        "Multiple Currency Support",
+        "Intelligent Content Moderation",
+        "Fiat on-ramp",
+      ],
+      planName: "Free",
+      price: 0,
     },
     {
       billingCycle: "monthly",
       createdAt: "2022-04-04T12:09:35.988Z",
       currency: "US dollar",
-      description: "description about the plan",
+      description: [
+        "Premium Themes for store",
+        "Custom URL",
+        "Remove NFTICALLY Branding",
+        "Use your own ERC20 Token",
+        "NFT Scanner for Counterfeit",
+        "Many More",
+      ],
       planName: "Standard",
-      price: 129,
+      price: 29,
     },
     {
       billingCycle: "monthly",
       createdAt: "2022-04-04T12:09:35.988Z",
       currency: "US dollar",
-      description: "description about the plan",
-      planName: "Standard",
-      price: 129,
+      description: [
+        "Premium Themes for store",
+        "Custom URL",
+        "Remove NFTICALLY Branding",
+        "Use your own ERC20 Token",
+        "NFT Scanner for Counterfeit",
+        "Many More",
+      ],
+      planName: "Professional",
+      price:299,
     },
     {
       billingCycle: "monthly",
       createdAt: "2022-04-04T12:09:35.988Z",
       currency: "US dollar",
-      description: "description about the plan",
-      planName: "Standard",
-      price: 129,
+      description: [
+        "Custom Theme",
+        "Custom NFT Smartcontract",
+        "Personal Account Manager",
+        "Phone Support",
+        "API Access",
+        "Staff Training",
+      ],
+      planName: "Enterprise",
+      price: 999,
     },
   ];
 
@@ -143,20 +198,30 @@ const UpgradePlan = () => {
               <div className="plansContainer">
                 {MonthlyPlan?.map((item, key) => {
                   return (
-                    <NavLink
-                      to="/my-store/general-settings"
-                      className="plansEach"
-                    >
-                      <div className="plansEachCircle"></div>
-                      <div className="plansHeading">{item.planName}</div>
-                      <div className="plansHeading2">
-                        ${item.price}/{item.billingCycle}
-                      </div>
-                      <div className="chooseplanButton">CHOOSE PLAN</div>
-                      <div className="planFeature">{item.description}</div>
-                      {/* <div className="planFeature">Lorem ipsum dolor sit</div>
+                    <>
+                      <div
+                        //to="/"
+                        className="plansEach"
+                      >
+                        <div className="plansEachCircle"></div>
+                        <div className="plansHeading">{item.planName}</div>
+                        <div className="plansHeading2">
+                          ${item.price}/{item.billingCycle}
+                        </div>
+                        <div className="chooseplanButton">CHOOSE PLAN</div>
+                        <div className="planFeature">
+                         
+                            {item?.description.map((ele) => (
+                              <>
+                              <p className="DescriptionPlan">{ele}</p>
+                              </>
+                            ))}
+                         
+                        </div>
+                        {/* <div className="planFeature">Lorem ipsum dolor sit</div>
                   <div className="planFeature">Lorem ipsum dolor sit</div> */}
-                    </NavLink>
+                      </div>
+                    </>
                   );
                 })}
                 <div className="Nodata">
@@ -169,20 +234,21 @@ const UpgradePlan = () => {
               <div className="plansContainer">
                 {YearlyPlan?.map((item, key) => {
                   return (
-                    <NavLink
-                      to="/my-store/general-settings"
-                      className="plansEach"
-                    >
+                    <div to="/my-store/general-settings" className="plansEach">
                       <div className="plansEachCircle"></div>
                       <div className="plansHeading">{item.planName}</div>
                       <div className="plansHeading2">
                         ${item.price}/{item.billingCycle}
                       </div>
                       <div className="chooseplanButton">CHOOSE PLAN</div>
-                      <div className="planFeature">{item.description}</div>
+                      <div className="planFeature">
+                        {item?.description.map((ele) => (
+                          <p className="DescriptionPlan">{ele}</p>
+                        ))}
+                      </div>
                       {/* <div className="planFeature">Lorem ipsum dolor sit</div>
                   <div className="planFeature">Lorem ipsum dolor sit</div> */}
-                    </NavLink>
+                    </div>
                   );
                 })}
 

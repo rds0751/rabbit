@@ -86,14 +86,16 @@
   flex-direction: row;
   /* justify-content: space-between; */
   justify-content: start;
-  /* flex-wrap: wrap; */
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  /* flex-wrap: nowrap; */
   gap: 4.9%;
 }
 .plansEach {
   margin-top: 5vh;
   width: 15.625vw;
-  height: 16.51vw;
+  /* height: 16.51vw; */
+  height:auto;
+  margin-bottom: 10px;
   background-color: #f3f5f9;
   border-radius: 7px;
   overflow: hidden;
@@ -244,12 +246,13 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+     /* justify-content: center ; */
   }
   .plansEach {
     margin-top: 5vh;
     width: 25vw;
-    height: 27vw;
+    /* height: 27vw; */
+    height: auto;
     background-color: #f3f5f9;
     border-radius: 7px;
     overflow: hidden;
@@ -492,4 +495,11 @@
     align-items: center;
     justify-content: center;
   }
+}
+.DescriptionPlan{
+  font-weight: bold;
+}
+.BlueCircle{
+  width:50px;
+  border-radius: 50%;
 }
