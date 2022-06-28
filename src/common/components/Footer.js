@@ -104,7 +104,7 @@ function Footer({ loader }) {
       >
         <div className="row footer-cont">
           <div className="footer-top">
-            <p className="fs-18">
+            <p className="fs-18" style={{cursor: "default" }}>
               {loader ? <Skeleton /> : 'Join our community'}
             </p>
             <div className="allicon">
@@ -129,7 +129,7 @@ function Footer({ loader }) {
                   : null
               }
             </div>
-            <p className="subscribe">
+            <p className="subscribe" style={{ cursor: "default" }}>
               {
                 loader ? <Skeleton count={2} /> : 'Subscribe to our newsletter for the latest NFTs'
               }
