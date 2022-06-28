@@ -55,7 +55,7 @@ const LogoDiv = styled.div`
   opacity: 1;
 `;
 
-function Navbar({ loader }) {
+function Navbar({ loader,Modal }) {
   const customize = useSelector((state) => state.customize);
 
   const navigate = useNavigate();
@@ -861,31 +861,7 @@ function Navbar({ loader }) {
                             Create
                           </button>
                       }
-                        {customize.permissionToUploadNft !== "Only me" ? (
-                    <li
-                      style={{ marginRight: "28px" }}
-                      onClick={() => window.open("https://www.nftinger.com:90")}
-                    >
-                      {/* <Link
-                      to={walletAddress == null ? "/add-wallet" : "/create-nft"}
-                    > */}
-                      {
-                        loader ? <Skeleton width={'146px'} height={'42px'} />
-                          : <button
-                            style={{
-                              backgroundColor: `${fetchPalletsColor(
-                                customize.appearance.colorPalette
-                              )}`,
-                              marginLeft:"10px"
-                            }}
-                            className="create-btn"
-                          >
-                            Customize Store
-                          </button>
-                      }
-                      {/* </Link> */}
-                    </li>
-                  ) : null}
+                       
                       {/* </Link> */}
                     </li>
                   ) : null}
@@ -971,6 +947,22 @@ function Navbar({ loader }) {
                       >
                         My Items
                       </li>
+                      {Modal ? (
+                        <div>
+                        <hr className="dropdown-divider" />
+                      
+                        <li
+                          className="profileitem"
+                          style={{ padding: "13.25px 15px 7px 13px" }}
+                          onClick={() => window.open("https://www.nftinger.com:90")}
+                        >
+                          Manage Store
+                        </li>
+                        </div>
+
+                      )
+                      :""}
+                      
                     </ul>
                   </li>
                   <li>

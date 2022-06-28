@@ -700,7 +700,7 @@ const HomeCard = () => {
                   complexities of
                 </StepDes>
                 <StepCreateStore onClick={() => MetaMaskConnector()}>
-                  Create Store
+                  Connect Wallet
                 </StepCreateStore>
               </StepDetails>
             </StepDiv>
@@ -921,27 +921,3 @@ const HomeCard = () => {
 };
 
 export default HomeCard;
- // useEffect(async () => {
-  //   try {
-  //     if (changeState) {
-  //       getNFtsData({}, (res) => {
-  //         if (res.success) {
-  //           (res?.responseData?.nftContent, "nft");
-  //           (customize.bannerNftData, "banner data");
-
-  //           if (customize.bannerNftData.length > 0) {
-  //             ("if block");
-  //             setNfts(customize.bannerNftData);
-  //           } else {
-  //             ("else block");
-  //             setNfts(res?.responseData?.nftContent);
-  //           }
-  //         } else {
-  //           toast.error(res.message);
-  //         }
-
-  //         // setLoadNfts(false);
-  //       });
-  //     }
-  //   } catch (error) {}
-  // }, []);

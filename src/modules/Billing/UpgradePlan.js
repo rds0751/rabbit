@@ -1,8 +1,15 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "../../assets/styles/nftReportModal.css";
 import styled from "styled-components";
 import "./styles/billing.css";
-import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import Utils from "../../utility";
+import {
+  getTenantByWallet,
+  createSubDomain,
+  getTenant,
+} from "../../services/clientConfigMicroService";
 
 const Modal = styled.div`
   position: absolute;
@@ -20,12 +27,13 @@ const ModalInner = styled.div`
   width: 96.8%;
 `;
 
-const UpgradePlan = () => {
-  const [modal, setModal] = useState(true);
+const UpgradePlan = (props) => {
+  const [modal, setModal] = useState(false);
   const [billingPeriod, setBillingPeriod] = useState("monthly");
-  const [Allplans, setAllplans] = useState([]);
-  const [monthlyPlan, setmonthlyPlan] = useState([]);
-  const [yearlyPlan, setyearlyPlan] = useState([]);
+   const { user, sideBar } = useSelector((state) => state);
+  const { userDetails, loggedInUser, walletAddress } = user;
+  
+
   const MonthlyPlan = [
     {
       billingCycle: "monthly",
@@ -96,6 +104,7 @@ const UpgradePlan = () => {
       price: 833,
     },
   ];
+
   const YearlyPlan = [
     {
       billingCycle: "monthly",
@@ -172,7 +181,7 @@ const UpgradePlan = () => {
   return (
     <div
       className="report-outer"
-      style={{ display: `${modal ? "block" : "none"}` }}
+      style={{ display: `${props?.Modal ? "block" : "none"}` }}
     >
       <div className="report-abs-modal">
         <Modal>
@@ -186,7 +195,7 @@ const UpgradePlan = () => {
               <h3 className="report-text poppins-normal">Upgrade Your Plan</h3>
               <i
                 className="fa-solid fa-xmark cross-icon"
-                onClick={() => setModal(false)}
+                onClick={() => props?.setModal(false)}
               ></i>
             </div>
             <div className="billingPeriodContainer">
