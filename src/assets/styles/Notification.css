@@ -1203,12 +1203,16 @@ text-align: left;
   margin-top: 18px;
   margin-bottom: 37px;
 }
+.community{
+  cursor: default;
+}
 .subscribe{
 margin-top: 18px;
 text-align: left;
 font: normal normal normal 18px/27px Poppins;
 letter-spacing: 0px;
 color: #8F8F8F;
+cursor: default;
 opacity: 1;
 }
 

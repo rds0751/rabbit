@@ -956,7 +956,7 @@ function Navbar({ loader,Modal }) {
                           style={{ padding: "13.25px 15px 7px 13px" }}
                           onClick={() => window.open("https://www.nftinger.com:90")}
                         >
-                          Customize Store
+                          Manage Store
                         </li>
                         </div>
 

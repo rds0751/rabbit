@@ -178,36 +178,6 @@ const UpgradePlan = (props) => {
     },
   ];
 
-  // useEffect(async ()=>{
-  //   if (walletAddress == null) {
-  //     alert("ty");
-  //     if (localStorage.getItem("has_wallet") === "false") {
-  //       setModal(false);
-  //     }
-  //   }
-  //   else {
-  //     alert("x");
-  //     const [error, result] = await Utils.parseResponse(
-  //       getTenantByWallet(walletAddress.address)
-  //     );
-  //     if (error || !result) {
-  //       setModal(false);
-  //     }
-  //     if (!result.success) {
-  //       alert("gh")
-  //       setModal(false);
-      
-  //     } else if (result.success) {
-  //        setTimeout(() => {
-  //        setModal(true);
-  //        }, 10000)
-  
-  //     }
-
-
-  //   }
-  // },[walletAddress?.address])
-
   return (
     <div
       className="report-outer"
