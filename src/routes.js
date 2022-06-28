@@ -69,16 +69,27 @@ import Spinner from "./common/components/Spinner";
 import NewHomePage from "./modules/NewHomePage/index";
 import NavTwo from "./modules/NewHomePage/Nav";
 import FooterTwo from "./modules/NewHomePage/Footer";
-
+import {
+  getTenantByWallet,
+  createSubDomain,
+  getTenant,
+} from "./services/clientConfigMicroService";
+import {  useSelector } from "react-redux";
+import Utils from "./utility";
+import Billing from "./modules/Billing/UpgradePlan";
 const url = new URL(window.location.href);
 const tenantId = url.searchParams.get("id");
+
 
 localStorage.setItem("tenantId", tenantId);
 
 function App() {
   const dispatch = useDispatch();
+  const { user, sideBar } = useSelector((state) => state);
+  const { userDetails, loggedInUser, walletAddress } = user;
 
   const [loader, setLoader] = useState(true);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     const checkWalletAddress = localStorage.getItem(
@@ -103,6 +114,36 @@ function App() {
         setLoader(false);
       });
   }, []);
+  useEffect(async ()=>{
+    if (walletAddress == null) {
+      alert("ty");
+      if (localStorage.getItem("has_wallet") === "false") {
+        setModal(false);
+      }
+    }
+    else {
+      alert("x");
+      const [error, result] = await Utils.parseResponse(
+        getTenantByWallet(walletAddress.address)
+      );
+      if (error || !result) {
+        setModal(false);
+      }
+      if (!result.success) {
+        alert("gh")
+        setModal(false);
+      
+      } else if (result.success) {
+        alert("disp")
+         setTimeout(() => {
+         setModal(true);
+         }, 10000)
+  
+      }
+
+
+    }
+  },[walletAddress?.address])
 
   return (
     <div className="App">
@@ -114,6 +155,7 @@ function App() {
         <ScrollToTop />
 
         <Navbar loader={loader} />
+        <Billing Modal={modal} setModal={setModal}></Billing>
 
         {/* <Tile__homepage /> */}
         {/* <Switch> */}

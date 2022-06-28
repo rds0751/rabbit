@@ -98,6 +98,7 @@
   background-color: #f3f5f9;
   border-radius: 7px;
   overflow: hidden;
+  cursor: pointer;
   text-decoration: none;
 }
 .plansEach:hover {
