@@ -25,6 +25,7 @@ import { styled } from "@mui/system";
 import Select from "react-select";
 import Skeleton from "react-loading-skeleton";
 import NftCartLoader from "./NftCardLoader";
+import Navbar from "../../common/components/Navbar";
 
 const blue = {
   100: "#DAECFF",

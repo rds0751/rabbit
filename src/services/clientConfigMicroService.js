@@ -124,7 +124,17 @@ export const getTenantByWallet = async (address) => {
       console.log(err);
     }
 };
+export const getTenantByStoreName = async (name) => {
 
+  try {
+      const url = `${BASE_URL1}/api/v1/get-tenant?storeName=${name}`;
+      const res = await fetch(url, { headers: AuthToken,method:'GET' });
+      const result = await res.json();
+      return result;
+    } catch (err) {
+      console.log(err);
+    }
+};
 export const getBlogsId = async (id) => {
   try {
       const url = `${BASE_URL1}/api/v1/blog/${id}${getParamTenantId()}`;

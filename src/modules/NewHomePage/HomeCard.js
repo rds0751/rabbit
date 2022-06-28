@@ -442,7 +442,6 @@ const HomeCard = () => {
 
   const checkTenant = async (address) => {
     setLoader(true);
-    console.log(tenantData)
     const [error, result] = await Utils.parseResponse(
       getTenantByWallet(address)
     );
@@ -487,14 +486,14 @@ const HomeCard = () => {
         }
 
       } else {
-        Utils.apiFailureToast("Please connect with metamask");
+        Utils.apiFailureToast("Please connect your metamask wallet");
         setTimeout(() => {
           window.location.reload();
         }, 1000)
       }
     } catch (e) {
       setModal(false);
-      Utils.apiFailureToast("Please connect with metamask");
+      Utils.apiFailureToast("Please connect your metamask wallet");
       setTimeout(() => {
         window.location.reload();
       }, 1000)
@@ -701,7 +700,10 @@ const HomeCard = () => {
                   complexities of
                 </StepDes>
                 <StepCreateStore onClick={() => MetaMaskConnector()}>
+                  <div className="display-loader-left">
+                {loader ? <Spinner></Spinner> : ""}
                   Create Store
+                  </div>
                 </StepCreateStore>
               </StepDetails>
             </StepDiv>
@@ -717,7 +719,10 @@ const HomeCard = () => {
                   complexities of
                 </StepDes>
                 <StepCreateStore onClick={() => MetaMaskConnector()}>
+                <div className="display-loader-left">
+                  {loader ? <Spinner></Spinner> : ""}
                   Create Store
+                  </div>
                 </StepCreateStore>
               </StepDetails>
             </StepDivSecond>
@@ -727,13 +732,16 @@ const HomeCard = () => {
               </StepImageDiv>
 
               <StepDetails>
-                <StepTitle>03 Start selling and growth</StepTitle>
+                <StepTitle>03 Start selling and grow</StepTitle>
                 <StepDes>
                   NFTinger is super easy for anyone as it subtracts the the
                   complexities of
                 </StepDes>
                 <StepCreateStore onClick={() => MetaMaskConnector()}>
+                <div className="display-loader-left">
+                  {loader ? <Spinner></Spinner> : ""}
                   Create Store
+                  </div>
                 </StepCreateStore>
               </StepDetails>
             </StepDiv>
@@ -815,7 +823,10 @@ const HomeCard = () => {
               </StoreFrontPage>
 
               <StoreButton onClick={() => MetaMaskConnector()}>
-                Create Store
+              <div className="display-loader-left">
+                  {loader ? <Spinner></Spinner> : ""}
+                  Create Store
+                  </div>
               </StoreButton>
             </HeadTitle>
           </CommonSection>
@@ -910,7 +921,10 @@ const HomeCard = () => {
                   onClick={() => createStore()}
                 //  style={{background: `${fetchPalletsColor(appearance?.colorPalette)}`}}
                 >
+                    <div className="display-loader-left">
+                  {loader ? <Spinner></Spinner> : ""}
                   Create Store
+                  </div>
                 </button>
               </div>
             </div>
