@@ -69,7 +69,7 @@ export async function getTenantData(paramToken=false, paramAddress=false) {
     const tenantData = result.responseData;
     return tenantData;
   } catch (err) {
-    (err);
+    
   }
 }
 
@@ -84,7 +84,7 @@ export async function getTenant(reqData) {
 
     return result;
   } catch (err) {
-    (err);
+    
     return err;
   }
 }
@@ -110,7 +110,7 @@ export const getBlogs = async () => {
         const result = await res.json();
         return result;
       } catch (err) {
-        (err);
+        
       }
 };
 export const getTenantByWallet = async (address) => {
@@ -121,7 +121,7 @@ export const getTenantByWallet = async (address) => {
       const result = await res.json();
       return result;
     } catch (err) {
-      (err);
+      
     }
 };
 export const getTenantByStoreName = async (name) => {
@@ -132,7 +132,7 @@ export const getTenantByStoreName = async (name) => {
       const result = await res.json();
       return result;
     } catch (err) {
-      console.log(err);
+      
     }
 };
 export const getBlogsId = async (id) => {
@@ -142,7 +142,7 @@ export const getBlogsId = async (id) => {
       const result = await res.json();
       return result;
     } catch (err) {
-      (err);
+      
     }
 };
 
