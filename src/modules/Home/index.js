@@ -342,8 +342,8 @@ export default class NftDetail extends BaseComponent {
     //             contractAddress: contractAddress,
     //         })
     //     );
-    //     console.log("blockchainEsssssrror=sellNowNft=", blockchainError);
-    //     console.log("blockchainRes==sellNowNft=", blockchainRes);
+    //     ("blockchainEsssssrror=sellNowNft=", blockchainError);
+    //     ("blockchainRes==sellNowNft=", blockchainRes);
     //     if (blockchainError || !blockchainRes) {
     //         // this.setState({ loaderState: false })
 
@@ -361,8 +361,8 @@ export default class NftDetail extends BaseComponent {
     //             contractAddress: contractAddress,
     //         })
     //     );
-    //     console.log("blockchainwwwwwwwError=sellNowNft=", blockchainError);
-    //     console.log("blockchainRes==sellNowNft=", blockchainRes);
+    //     ("blockchainwwwwwwwError=sellNowNft=", blockchainError);
+    //     ("blockchainRes==sellNowNft=", blockchainRes);
     //     if (blockchainError || !blockchainRes) {
     //         // alert(blockchainError?.data?.message)
     //         // this.setState({ loaderState: false })
@@ -546,7 +546,7 @@ export default class NftDetail extends BaseComponent {
       signature:signRes.signMsg,
       message:signRes.signature,
     };
-    // console.log("nannnn",requestData)
+    // ("nannnn",requestData)
     // this.updateNftDataInDb(requestData, eventConstants.SELL,this.state.responseData._id || '')
     if (!this.state?.responseData?._id) return;
     let [error, result] = await Utils.parseResponse(

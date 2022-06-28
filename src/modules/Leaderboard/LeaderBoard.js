@@ -629,7 +629,7 @@ function LeaderBoard({ loader }) {
 
                 <div className="leaderboardTopDetails">
                   {limitSellers.map((curElem) => {
-                    // {console.log("jjjjjjjjjjjjjjjj",curElem.)}
+                    // {("jjjjjjjjjjjjjjjj",curElem.)}
 
                     const {
                       cdnUrl,
@@ -836,7 +836,7 @@ function LeaderBoard({ loader }) {
 
                 <div className="leaderboardTopDetails">
                   {limitCollections.map((curElem, index) => {
-                    // console.log("ddddddddddddddd", curElem.collection[index].name)
+                    // ("ddddddddddddddd", curElem.collection[index].name)
                     const { collection, items, collectionPhoto } = curElem
             
                     // var precise = totalVolume.toPrecision(4);

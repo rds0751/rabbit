@@ -178,7 +178,7 @@ async function makeOffer(requestData) {
 //   let headers = getHeaders();
 //   return httpService(httpConstants.METHOD_TYPE.GET, headers, requestData, url)
 //     .then((response) => {
-//       console.log("------ssss", response.responseData);
+//       ("------ssss", response.responseData);
 
 //       if (!response.success || !response.responseData) return Promise.reject();
 //       return Promise.resolve(response.responseData);
@@ -199,7 +199,7 @@ export const NftCreatedByUser = async (successCallBack, _id) => {
       successCallBack({ success: false}) //msg: "Unable To Fetch Data" });
     }
   } catch (e) {
-    console.log(e);
+    ;
   }
 };
 // ------nft owned by user
@@ -214,7 +214,7 @@ export const NftOwnedByUser = async (successCallBack, _id) => {
       successCallBack({ success: false}) //msg: "Unable To Fetch Data" });
     }
   } catch (e) {
-    console.log(e);
+    ;
   }
 };
 
@@ -286,7 +286,7 @@ export const NftLikedByUser = async (successCallBack, _id) => {
     }
 
   } catch (e) {
-    console.log(e);
+    ;
   }
 };
 
@@ -302,7 +302,7 @@ export const NftSellByUser = async (successCallBack, userId) => {
       successCallBack({ success: false}) //msg: "Unable To Fetch Data" });
     }
   } catch (e) {
-    console.log(e);
+    ;
   }
 };
 
@@ -316,7 +316,7 @@ export const getALLCollectionById = async (id, successCallBack) => {
 
     successCallBack(data);
   } catch (e) {
-    console.log(e);
+    ;
   }
 };
 // ----
@@ -360,7 +360,7 @@ export const addSuggestion = async (bodyData, successCallback) => {
       successCallback(data.responseData);
     }
   } catch (e) {
-    console.log(e);
+    ;
   }
 };
 
@@ -383,6 +383,6 @@ export const EditNft = async (id, reqData, successCallBack) => {
     const { data } = await axios.put(url, reqData, { headers: AuthToken });
     successCallBack(data);
   } catch (e) {
-    console.log(e);
+    ;
   }
 };

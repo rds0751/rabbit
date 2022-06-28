@@ -323,7 +323,7 @@ function TopSeller({loader}) {
       </Body>
       {loader===false && topSellers.map((curElem) => {
         const { image, sellerFirstName, sellerLastName, itemsSold, totalPurchasedValue, topSellers, volume } = curElem;
-        // console.log("fffffff",curElem.topSellers)
+        // ("fffffff",curElem.topSellers)
         var precise = volume.toPrecision(4);
         var result = parseFloat(precise);
         return (

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container, Row, Col, Card } from "react-bootstrap";
 import { ethers } from "ethers";
-import styled from "styled-components";
+import styled from "styled-components"; 
 import "../../assets/styles/nftReportModal.css";
 import OwlCarousel from "react-owl-carousel";
 import { useNavigate } from "react-router-dom";
@@ -442,7 +442,6 @@ const HomeCard = () => {
 
   const checkTenant = async (address) => {
     setLoader(true);
-    console.log(tenantData)
     const [error, result] = await Utils.parseResponse(
       getTenantByWallet(address)
     );
@@ -927,14 +926,14 @@ export default HomeCard;
   //     if (changeState) {
   //       getNFtsData({}, (res) => {
   //         if (res.success) {
-  //           console.log(res?.responseData?.nftContent, "nft");
-  //           console.log(customize.bannerNftData, "banner data");
+  //           (res?.responseData?.nftContent, "nft");
+  //           (customize.bannerNftData, "banner data");
 
   //           if (customize.bannerNftData.length > 0) {
-  //             console.log("if block");
+  //             ("if block");
   //             setNfts(customize.bannerNftData);
   //           } else {
-  //             console.log("else block");
+  //             ("else block");
   //             setNfts(res?.responseData?.nftContent);
   //           }
   //         } else {

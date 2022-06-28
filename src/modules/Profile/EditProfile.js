@@ -72,7 +72,7 @@ function EditProfile(props) {
 
   const handleClick = (event) => {
     hiddenFileInput.current.click();
-    // console.log("hidden file input",hiddenFileInput)
+    // ("hidden file input",hiddenFileInput)
   };
 
   const handleChange = async (event) => {
@@ -137,7 +137,7 @@ function EditProfile(props) {
         }
       }
     } catch (e) {
-      console.log(e);
+      ;
     }
 
 
@@ -159,11 +159,11 @@ function EditProfile(props) {
       setImageUrl(loggedInUser.photo)
 
       // userPublicProfile((res) => {
-      // console.log("jjjjjjjjjjjjjj")
-      // console.log(res, "filterResponse");
+      // ("jjjjjjjjjjjjjj")
+      // (res, "filterResponse");
       // setIsloading(true);
       // if (res.success) {
-      //   console.log("fkfsffksfsw", res.responseData)
+      //   ("fkfsffksfsw", res.responseData)
 
       //   // prevArray => [...prevArray, newValue]
       //   setUserData(res.responseData);
@@ -180,13 +180,13 @@ function EditProfile(props) {
     }
     // }
     // else{
-    //   console.log("its else statement")
+    //   ("its else statement")
     // }
   }, [loggedInUser._id]);
 
   //-----------------------------------------------------------------------
   // useEffect(() => {
-  //   console.log(localStorage.getItem(WHITE_LABEL_TOKEN), "<<<this is token");
+  //   (localStorage.getItem(WHITE_LABEL_TOKEN), "<<<this is token");
   //   if (user.loggedInUser?.photo != "") {
   //     setImageUrl(user?.loggedInUser?.photo);
   //   }
@@ -232,7 +232,7 @@ function EditProfile(props) {
         position: toast.POSITION.TOP_RIGHT
       });
       // window.location.reload(true);
-      // console.log("jsgg")
+      // ("jsgg")
       setTimeout(() => {
         window.location.href = '/my-profile'+getParamTenantId();
       }, 2000)
