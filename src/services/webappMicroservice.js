@@ -17,7 +17,7 @@ export function getNfts(requestData) {
     url
   )
     .then((response) => {
-      // console.log(response, "<<<< response");
+      // (response, "<<<< response");
       if (
         !response.success ||
         response.responseCode !== 200 ||
@@ -47,7 +47,7 @@ export const getNFtsData = async (filterObj, successCallBack) => {
 
 export const getNft = async (requestData, successCallBack) => {
   // alert("clled getNft")
-  // console.log(req)
+  // (req)
   let url =
     process.env.REACT_APP_WEBAPP_MICROSERVICE + "api/v2/nfts/" + requestData + getParamTenantId();
   const { data } = await axios.get(url, { headers: AuthToken });
@@ -111,7 +111,7 @@ export async function getCollection(requestData, successCallBack) {
     const { data } = await axios.get(url);
     successCallBack(data);
   } catch (e) {
-    console.log(e)
+    
   }
   // let url =
   //   process.env.REACT_APP_WEBAPP_MICROSERVICE +
@@ -204,7 +204,6 @@ export async function getNameImageOfUser(_id) {
       imageUrl: user.cdnUrl,
     };
   } catch (err) {
-    console.log(err);
   }
 }
 export function getNotificationListById(requestData) {
@@ -236,7 +235,7 @@ export function getNotificationListById(requestData) {
 }
 
 export function getNotificationCountById(_id) {
-  // console.log(notificationId,"sachin1111")
+  // (notificationId,"sachin1111")
   let url =
   process.env.REACT_APP_WEBAPP_MICROSERVICE + `api/v1/notification/${_id}/read${getParamTenantId}`;
   return httpService(
@@ -268,7 +267,7 @@ export const addNftReport = async (requestData, successCallBack) => {
     const { data } = await axios.post(url, requestData);
     successCallBack(data);
   } catch (e) {
-    console.log(e)
+    
   }
 };
 
@@ -279,7 +278,7 @@ export const addCollectionReport = async (requestData, successCallBack) => {
     const { data } = await axios.post(url, requestData);
     successCallBack(data);
   } catch (e) {
-    console.log(e)
+    
   }
 };
 
@@ -292,7 +291,7 @@ export const addCollectionReport = async (requestData, successCallBack) => {
 //     const collectionData = result.responseData;
 //     return collectionData;
 //   } catch (err) {
-//     console.log(err);
+//     (err);
 //   }
 // };
 

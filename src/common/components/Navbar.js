@@ -377,13 +377,13 @@ function Navbar({ loader }) {
   //       setCount(response)
   //     );
   //   }, []);
-  // console.log(Count,"count")
+  // (Count,"count")
 
   useEffect(() => {
     window.ethereum?.on("accountsChanged", accountChangeHandler);
 
     window.ethereum?.on("disconnect", () => {
-      console.log("Account Disconnect");
+      ("Account Disconnect");
     });
   }, []);
 

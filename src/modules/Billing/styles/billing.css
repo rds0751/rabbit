@@ -14,7 +14,7 @@
   flex-direction: column;
   align-items: center;
 }
-.cross-icon{
+.cross-icon {
   cursor: pointer;
 }
 .billingPageHeading1 {
@@ -55,30 +55,29 @@
   /* font-size: 18px; */
   font-size: 18px;
 }
-.myItemsBox .myNFTS{
+.myItemsBox .myNFTS {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
-.myNFTS .ButtonDiv .MyNFTsButton{
+.myNFTS .ButtonDiv .MyNFTsButton {
   padding: 9px 28px 8px 29px;
-  background: #016DD9 0% 0% no-repeat padding-box;
+  background: #016dd9 0% 0% no-repeat padding-box;
   border-radius: 4px;
   border: none;
-  color: #FFFFFF;
+  color: #ffffff;
   font: normal normal 600 16px/25px Poppins;
 }
-.myNFTS .ButtonDiv .MyBulkNFTsButton{
+.myNFTS .ButtonDiv .MyBulkNFTsButton {
   padding: 9px 28px 8px 29px;
-  background: #016DD9 0% 0% no-repeat padding-box;
+  background: #016dd9 0% 0% no-repeat padding-box;
   border-radius: 4px;
   border: none;
   margin-right: 5px;
-  color: #FFFFFF;
+  color: #ffffff;
   font: normal normal 600 16px/25px Poppins;
 }
-
 
 .plansContainer {
   width: 100%;
@@ -92,9 +91,9 @@
 }
 .plansEach {
   margin-top: 5vh;
-  width: 15.625vw;
+  width: 17.625vw;
   /* height: 16.51vw; */
-  height:auto;
+  height: auto;
   margin-bottom: 10px;
   background-color: #f3f5f9;
   border-radius: 7px;
@@ -115,11 +114,12 @@
   top: -1.9vw;
   left: 9.6vw;
 }
-.Nodata{
-  display:flex;
-  justify-content:space-between;
-  margin:auto;
+.Nodata {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
 }
+
 
 .plansHeading {
   font-family: "poppins-bold";
@@ -142,6 +142,22 @@
 }
 .plansEach:hover .plansHeading2 {
   color: white;
+}
+.chooseplanButtonWhite {
+  background-color: lightgrey;
+  color: Black;
+  font-family: "poppins-medium";
+  border-radius: 6px;
+  position: relative;
+  font-size: 0.833vw;
+  top: -4.15vw;
+  width: 85%;
+  margin: 0px auto;
+  box-sizing: border-box;
+  padding: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .chooseplanButton {
   /* border: 2px solid red; */
@@ -246,7 +262,7 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-     /* justify-content: center ; */
+    /* justify-content: center ; */
   }
   .plansEach {
     margin-top: 5vh;
@@ -496,10 +512,29 @@
     justify-content: center;
   }
 }
-.DescriptionPlan{
-  font-weight: bold;
+.ulDes{
+  margin-top: 16px;
 }
-.BlueCircle{
-  width:50px;
+.DescriptionPlan {
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  list-style: none;
+  color:black
+}
+.BlueCircle {
+  width: 13px;
+  height: 13px;
+  background: black;
   border-radius: 50%;
+  margin-right: 10px;
+}
+.planTitle {
+  font-family: "poppins-bold";
+  font-size: 13px;
+  color: black;
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+  line-height: inherit;
 }

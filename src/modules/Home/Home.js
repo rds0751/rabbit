@@ -68,7 +68,7 @@ function Home({ loaderState }) {
     try {
       if (changeState) {
         getNFtsData({}, (res) => {
-          // console.log(res, "filterResponse");
+          // (res, "filterResponse");
 
           if (res.success) {
             
@@ -95,7 +95,7 @@ function Home({ loaderState }) {
     } catch (error) {}
     // }
     // else{
-    //   console.log("its else statement")
+    //   ("its else statement")
     // }
   }, []);
 

@@ -26,13 +26,13 @@
 //   useEffect(() => {
 //     getNft(nftId)
 //       .then(async (response) => {
-//         console.log(response,"<<<< nft response")
+//         (response,"<<<< nft response")
 //         const ownedBy = await getNameImageOfUser(response.ownedBy);
 //         const createdBy = await getNameImageOfUser(response.createdBy);
 //         setOwnedBy(ownedBy);
 //         setNft(response);
 //       })
-//       .catch((err) => console.log(err));
+//       .catch((err) => (err));
 //   }, []);
 
 //   const handleSell = async () => {

@@ -303,8 +303,8 @@ function CreateNftCollections(props) {
       }
 
       // setloaderState(false);
-      // console.log("odddddddddddd",result)
-      // console.log("odddddddddddd",result.responseData._id)
+      // ("odddddddddddd",result)
+      // ("odddddddddddd",result.responseData._id)
 
       // toast.success("Collection created");
       // navigate("/collections-tile");
@@ -316,7 +316,7 @@ function CreateNftCollections(props) {
 
 
 
-    // console.log(result, ">>> submit nftCollection");
+    // (result, ">>> submit nftCollection");
   };
 
   let location = useLocation();

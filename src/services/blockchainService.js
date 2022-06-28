@@ -126,7 +126,7 @@ async function mintNFT({
       name: provider?._network?.name || "",
     };
   } else return Promise.reject("Please Select Valid Network in the metamask");
-  // console.log("kkkkkkkkkkkkkkkkkkkkkk network swutch")
+  // ("kkkkkkkkkkkkkkkkkkkkkk network swutch")
 }
 
 async function lazyMinting({
@@ -463,7 +463,7 @@ async function removeFromSaleNft({
 
 // async function putOnSaleNft({tokenId}) {
 //     const contractData = new ethers.Contract(contractAddress, contractABI, signer);
-//     console.log("blockchain fn",contractData)
+//     ("blockchain fn",contractData)
 
 //     const result = await contractData.updateListingStatus(tokenId,true)
 
@@ -550,7 +550,7 @@ async function buyNFT({
       receiver[0],
       { value: ethers.utils.parseEther(price.toString()) }
     );
-    // console.log("<<<resultBuy",resultBuy)
+    // ("<<<resultBuy",resultBuy)
 
     // const amount = ethers.utils.parseUnits(price.toString(), 18);
     // const accounts = await provider.send("eth_requestAccounts", []);
@@ -565,7 +565,7 @@ async function buyNFT({
     // const options = { value: ethers.utils.parseEther(price.toString()) };
 
     // const result = await contractData.buy(tokenId, options);
-    // console.log(
+    // (
     //   "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
     //   result
     // );

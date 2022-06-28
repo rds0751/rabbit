@@ -76,7 +76,7 @@ function trackEvent(event, eventData) {
   //     else
   //         mixpanel.track(event, eventData);
   // } catch (err) {
-  //     console.log(err)
+  //     (err)
   // }
 }
 
@@ -551,7 +551,6 @@ function getCompanyObject(propsOfComponent) {
 
 function isCompanyBalanceLow(company) {
   if (!company || !company.tokenEconomy || !company.tokenEconomy) {
-    console.log('return false');
     return false;
   }
   let remainingMonth =
@@ -753,7 +752,6 @@ function getTimestampFromDate(year, month, date = 0) {
 }
 
 function extractDate(date, getType) {
-  console.log('date', typeof date, 'getType', getType);
   switch (getType) {
     case 'DAY':
       return new Date(date.toString()).getDate();
@@ -775,7 +773,6 @@ function changeDateFormat(date, newFormat) {
 }
 
 function getAggregatedPercWercQueryObject(start, end, skip, id) {
-  console.log(start, end, skip, id);
   return [
     {
       $match: {
