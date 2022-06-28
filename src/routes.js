@@ -90,6 +90,7 @@ function App() {
 
   const [loader, setLoader] = useState(true);
   const [modal, setModal] = useState(false);
+  const [customizeStore,setCustomizeStore]=useState(false);
 
   useEffect(() => {
     const checkWalletAddress = localStorage.getItem(
@@ -116,25 +117,24 @@ function App() {
   }, []);
   useEffect(async ()=>{
     if (walletAddress == null) {
-      alert("ty");
       if (localStorage.getItem("has_wallet") === "false") {
         setModal(false);
       }
     }
     else {
-      alert("x");
       const [error, result] = await Utils.parseResponse(
         getTenantByWallet(walletAddress.address)
       );
       if (error || !result) {
         setModal(false);
+        setCustomizeStore(false);
       }
       if (!result.success) {
-        alert("gh")
         setModal(false);
+        setCustomizeStore(false);
       
       } else if (result.success) {
-        alert("disp")
+        setCustomizeStore(true);
          setTimeout(() => {
          setModal(true);
          }, 10000)
@@ -154,8 +154,8 @@ function App() {
       <Router>
         <ScrollToTop />
 
-        <Navbar loader={loader} />
-        <Billing Modal={modal} setModal={setModal}></Billing>
+        <Navbar loader={loader} Modal={customizeStore} setModal={setCustomizeStore} />
+        <Billing Modal={modal} setModal={setModal} />
 
         {/* <Tile__homepage /> */}
         {/* <Switch> */}
