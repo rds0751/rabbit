@@ -739,7 +739,7 @@ height: 47px;
   }
 }
 
-@media only screen and (max-width: 1168px) {
+@media only screen and (max-width: 1250px) {
   .right_section_nav .ham_burger {
     display: flex;
   }
@@ -1203,12 +1203,16 @@ text-align: left;
   margin-top: 18px;
   margin-bottom: 37px;
 }
+.community{
+  cursor: default;
+}
 .subscribe{
 margin-top: 18px;
 text-align: left;
 font: normal normal normal 18px/27px Poppins;
 letter-spacing: 0px;
 color: #8F8F8F;
+cursor: default;
 opacity: 1;
 }
 
@@ -1301,7 +1305,7 @@ font: normal normal bold 18px/27px Poppins;
 letter-spacing: 0px;
 color: #8F8F8F;
 opacity: 1;
-cursor: default;
+cursor: pointer;
 text-decoration: none;
 text-decoration: none;
 padding-bottom: 16px;
@@ -1310,6 +1314,7 @@ padding-bottom: 16px;
 text-align: left;
 font: normal normal normal 18px/27px Poppins;
 letter-spacing: 0px;
+cursor:pointer;
 color: #8F8F8F;
 opacity: 1;
 padding-bottom: 16px;

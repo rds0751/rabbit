@@ -60,7 +60,7 @@ function UserProfilePage({ loader }) {
 
   const [Nfts, setNfts] = useState([]);
   const userId = useParams();
-  // console.log("kkkkkkkkkkhhhhhhhhhhh",userId)
+  // ("kkkkkkkkkkhhhhhhhhhhh",userId)
   const [createdNft, setcreatedNft] = useState([]);
   const [isloading, setIsloading] = useState(false);
   const [ownedNft, setownedNft] = useState([]);
@@ -154,7 +154,7 @@ function UserProfilePage({ loader }) {
   };
   // const getCreatedByNft = () => {
   //   NftCreatedByUser((response) => {
-  //     console.log(response, "myprofile");
+  //     (response, "myprofile");
   //     if (response.success) {
   //       // setNfts(response.responseData);
   //       setcreatedNft(response.responseData);
@@ -165,7 +165,7 @@ function UserProfilePage({ loader }) {
   // };
   // const getOwnedByNft = () => {
   //   NftOwnedByUser((response) => {
-  //     console.log(response, "myprofile");
+  //     (response, "myprofile");
   //     if (response.success) {
   //       setownedNft(response.responseData);
   //     } else {
@@ -211,13 +211,13 @@ function UserProfilePage({ loader }) {
   //       dispatch(AddWalletDetails({ address, balance: getBalance }));
   //       dispatch(addUserData(user));
   //     })
-  //     .catch((err) => console.log(err));
+  //     .catch((err) => (err));
   // };
 
   // window.ethereum?.on("accountsChanged", accountChangeHandler);
   // -----------------------
   // const updateBanner = (e) => {
-  //   console.log(e.target.files[0], "<<<<<<<<<<update fule");
+  //   (e.target.files[0], "<<<<<<<<<<update fule");
   //   const file = e.target.files[0];
   //   let formData = new FormData();
   //   formData.append("files", e.target.files[0]);
@@ -230,7 +230,7 @@ function UserProfilePage({ loader }) {
   //       toast.error("Unabale to updated banner");
   //       window.location.reload(true);
   //     }
-  //     console.log(res, "<<<<<< updated banner");
+  //     (res, "<<<<<< updated banner");
   //   });
   // };
   const splitAddress = (address) => {

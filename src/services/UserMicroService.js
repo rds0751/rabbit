@@ -44,7 +44,7 @@ export const CheckUserByWalletAddress = async (
   //   url
   // )
   //   .then((response) => {
-  //     console.log(response, "<<<<getting userDAta");
+  //     (response, "<<<<getting userDAta");
   //     if (
   //       !response.success ||
   //       response.responseCode !== 200 ||

@@ -325,7 +325,7 @@ function MyProfile({ loader }) {
         dispatch(AddWalletDetails({ address, balance: getBalance }));
         dispatch(addUserData(user));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => (err));
   };
 
   // window.ethereum?.on("accountsChanged", accountChangeHandler);

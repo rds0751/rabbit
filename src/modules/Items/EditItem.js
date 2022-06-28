@@ -65,12 +65,12 @@ function EditItem(Collection) {
     fetchData();
   }, []);
 
-  // console.log("editItem.js", editForm)
+  // ("editItem.js", editForm)
   // useEffect(async () => {
-  //   console.log(id, "<<<<<params");
+  //   (id, "<<<<<params");
   //   getNft(id, (response) => {
   //     // const { responseData } = response;
-  //     console.log(response, "<<<< response of nft");
+  //     (response, "<<<< response of nft");
 
   //     setEditForm({
   //       name: response.name,
@@ -81,7 +81,7 @@ function EditItem(Collection) {
   //       _id: response._id,
   //       contentType: "content",
   //     });
-  //     // console.log("----------", this.state.responseData);
+  //     // ("----------", this.state.responseData);
   //   });
   //   // getCategories((res) => {
   //   //   setCategories(res.responseData);

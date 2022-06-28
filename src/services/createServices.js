@@ -16,7 +16,7 @@ export const createSingleNft = async data => {
     const result = res.json();
     return result;
   } catch (error) {
-    console.log(error);
+    
   }
 };
 
@@ -34,7 +34,6 @@ export const createCollection = async data => {
 
     return result;
   } catch (err) {
-    console.log(err);
   }
 };
 export const collectionStatus = async data => {
@@ -51,6 +50,6 @@ export const collectionStatus = async data => {
 
     return result;
   } catch (err) {
-    console.log(err);
+   
   }
 };

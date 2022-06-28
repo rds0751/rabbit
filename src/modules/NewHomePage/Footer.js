@@ -286,7 +286,7 @@ const Footer = () => {
                     <div className="input-group">
                       <div className="Address">
                         <label className="WalletAddress">
-                          {walletAddress?.address}
+                        {tenantData.wallet}
                         </label>
                       </div>
                     </div>

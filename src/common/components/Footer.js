@@ -104,7 +104,7 @@ function Footer({ loader }) {
       >
         <div className="row footer-cont">
           <div className="footer-top">
-            <p className="fs-18">
+            <p className="fs-18 community">
               {loader ? <Skeleton /> : 'Join our community'}
             </p>
             <div className="allicon">

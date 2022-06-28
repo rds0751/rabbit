@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "../../assets/styles/nftReportModal.css";
 import styled from "styled-components";
 import "./styles/billing.css";
-import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import Utils from "../../utility";
+import {
+  getTenantByWallet,
+  createSubDomain,
+  getTenant,
+} from "../../services/clientConfigMicroService";
 
 const Modal = styled.div`
   position: absolute;
   background-color: white;
   opacity: 1 !important;
-  top: 83px;
-  width: 80%;
+  top: 37px;
+  width: 90%;
   height: fit-content;
   border-radius: 13px;
 `;
@@ -20,12 +27,13 @@ const ModalInner = styled.div`
   width: 96.8%;
 `;
 
-const UpgradePlan = () => {
-  const [modal, setModal] = useState(true);
+const UpgradePlan = (props) => {
+  const [modal, setModal] = useState(false);
   const [billingPeriod, setBillingPeriod] = useState("monthly");
-  const [Allplans, setAllplans] = useState([]);
-  const [monthlyPlan, setmonthlyPlan] = useState([]);
-  const [yearlyPlan, setyearlyPlan] = useState([]);
+   const { user, sideBar } = useSelector((state) => state);
+  const { userDetails, loggedInUser, walletAddress } = user;
+  
+
   const MonthlyPlan = [
     {
       billingCycle: "monthly",
@@ -39,7 +47,9 @@ const UpgradePlan = () => {
         "Intelligent Content Moderation",
         "Fiat on-ramp",
       ],
+      planTitle: "Key Feature",
       planName: "Free",
+      planActive: "Current",
       price: 0,
     },
     {
@@ -49,12 +59,14 @@ const UpgradePlan = () => {
       description: [
         "Premium Themes for store",
         "Custom URL",
-        "Remove NFTICALLY Branding",
+        "Remove NFTinger Branding",
         "Use your own ERC20 Token",
         "NFT Scanner for Counterfeit",
         "Many More",
       ],
+      planTitle: "Everything in Free, plus:",
       planName: "Standard",
+      planActive: "Upgrade",
       price: 19,
     },
     {
@@ -67,9 +79,11 @@ const UpgradePlan = () => {
         "Marketing Automation",
         "Token Gated Link/NFT Utility",
         "Premium Reports",
-        "Metaverse Shop & Store"
+        "Metaverse Shop & Store",
       ],
+      planTitle: "Everything in Standard ,plus:",
       planName: "Professional",
+      planActive: "Upgrade",
       price: 249,
     },
     {
@@ -84,10 +98,13 @@ const UpgradePlan = () => {
         "API Access",
         "Staff Training",
       ],
+      planTitle: "Everything in Professional, plus:",
       planName: "Enterprise",
+      planActive: "Upgrade",
       price: 833,
     },
   ];
+
   const YearlyPlan = [
     {
       billingCycle: "monthly",
@@ -101,7 +118,9 @@ const UpgradePlan = () => {
         "Intelligent Content Moderation",
         "Fiat on-ramp",
       ],
+      planTitle: "Key Feature",
       planName: "Free",
+      planActive: "Current",
       price: 0,
     },
     {
@@ -111,12 +130,14 @@ const UpgradePlan = () => {
       description: [
         "Premium Themes for store",
         "Custom URL",
-        "Remove NFTICALLY Branding",
+        "Remove NFTinger Branding",
         "Use your own ERC20 Token",
         "NFT Scanner for Counterfeit",
         "Many More",
       ],
+      planTitle: "Everything in Free, plus:",
       planName: "Standard",
+      planActive: "Upgrade",
       price: 29,
     },
     {
@@ -129,10 +150,13 @@ const UpgradePlan = () => {
         "Marketing Automation",
         "Token Gated Link/NFT Utility",
         "Premium Reports",
-        "Metaverse Shop & Store"
+        "Metaverse Shop & Store",
       ],
+
+      planTitle: "Everything in Standard ,plus:",
       planName: "Professional",
-      price:299,
+      planActive: "Upgrade",
+      price: 299,
     },
     {
       billingCycle: "monthly",
@@ -146,7 +170,10 @@ const UpgradePlan = () => {
         "API Access",
         "Staff Training",
       ],
+
+      planTitle: "Everything in Professional, plus:",
       planName: "Enterprise",
+      planActive: "Upgrade",
       price: 999,
     },
   ];
@@ -154,7 +181,7 @@ const UpgradePlan = () => {
   return (
     <div
       className="report-outer"
-      style={{ display: `${modal ? "block" : "none"}` }}
+      style={{ display: `${props?.Modal ? "block" : "none"}` }}
     >
       <div className="report-abs-modal">
         <Modal>
@@ -168,7 +195,7 @@ const UpgradePlan = () => {
               <h3 className="report-text poppins-normal">Upgrade Your Plan</h3>
               <i
                 className="fa-solid fa-xmark cross-icon"
-                onClick={() => setModal(false)}
+                onClick={() => props?.setModal(false)}
               ></i>
             </div>
             <div className="billingPeriodContainer">
@@ -208,15 +235,25 @@ const UpgradePlan = () => {
                         <div className="plansHeading2">
                           ${item.price}/{item.billingCycle}
                         </div>
-                        <div className="chooseplanButton">CHOOSE PLAN</div>
+                        <div
+                          className={
+                            item.planActive == "Current"
+                              ? "chooseplanButtonWhite"
+                              : "chooseplanButton"
+                          }
+                        >
+                          {item.planActive}
+                        </div>
                         <div className="planFeature">
-                         
+                          <div className="planTitle">{item.planTitle}</div>
+                          <ul className="ulDes">
                             {item?.description.map((ele) => (
-                              <>
-                              <p className="DescriptionPlan">{ele}</p>
-                              </>
+                              <li className="DescriptionPlan">
+                                <span class="BlueCircle"></span>
+                                {ele}
+                              </li>
                             ))}
-                         
+                          </ul>
                         </div>
                         {/* <div className="planFeature">Lorem ipsum dolor sit</div>
                   <div className="planFeature">Lorem ipsum dolor sit</div> */}
@@ -240,11 +277,26 @@ const UpgradePlan = () => {
                       <div className="plansHeading2">
                         ${item.price}/{item.billingCycle}
                       </div>
-                      <div className="chooseplanButton">CHOOSE PLAN</div>
+                      <div
+                        className={
+                          item.planActive == "Current"
+                            ? "chooseplanButtonWhite"
+                            : "chooseplanButton"
+                        }
+                      >
+                        {" "}
+                        {item.planActive}
+                      </div>
                       <div className="planFeature">
-                        {item?.description.map((ele) => (
-                          <p className="DescriptionPlan">{ele}</p>
-                        ))}
+                        <div className="planTitle">{item.planTitle}</div>
+                        <ul className="ulDes">
+                          {item?.description.map((ele) => (
+                            <li className="DescriptionPlan">
+                              <span class="BlueCircle"></span>
+                              {ele}
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                       {/* <div className="planFeature">Lorem ipsum dolor sit</div>
                   <div className="planFeature">Lorem ipsum dolor sit</div> */}

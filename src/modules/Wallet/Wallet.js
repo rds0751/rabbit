@@ -46,10 +46,10 @@ function Wallet() {
   // });
   const navigate = useNavigate();
   // const ethereum = window.ethereum;
-  // console.log("ethereum : ", ethereum);
+  // ("ethereum : ", ethereum);
   const { user, sideBar } = useSelector((state) => state);
 
-  // console.log(data);
+  // (data);
   const { userDetails, walletAddress } = user;
   let { loggedInUser } = user;
   const { isOpenWallet } = sideBar;
@@ -62,11 +62,11 @@ function Wallet() {
     //     .request({ method: "eth_requestAccounts" })
     //     .then((result) => {
     //       accountChangeHandler(result[0]); //accounts can be a array we just wanna grab first one
-    //       console.log(result[0]);
+    //       (result[0]);
     //       // window.location.pathname = "/wallet";
     //     })
     //     .catch((e) => {
-    //       console.log(e);
+    //       ;
     //     });
     // } else {
     //   alert("Install Metamask");
@@ -83,7 +83,7 @@ function Wallet() {
   //     .request({ method: "eth_getBalance", params: [address, "latest"] })
   //     .then((balance) => {
   //       setGetBalance(ethers.utils.formatEther(balance));
-  //       console.log(getBalance, "<<< balance");
+  //       (getBalance, "<<< balance");
   //     });
   // };
 

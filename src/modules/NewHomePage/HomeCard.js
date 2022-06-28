@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container, Row, Col, Card } from "react-bootstrap";
 import { ethers } from "ethers";
-import styled from "styled-components";
+import styled from "styled-components"; 
 import "../../assets/styles/nftReportModal.css";
 import OwlCarousel from "react-owl-carousel";
 import { useNavigate } from "react-router-dom";
@@ -702,7 +702,7 @@ const HomeCard = () => {
                 <StepCreateStore onClick={() => MetaMaskConnector()}>
                   <div className="display-loader-left">
                 {loader ? <Spinner></Spinner> : ""}
-                  Create Store
+                Connect Wallet
                   </div>
                 </StepCreateStore>
               </StepDetails>
@@ -936,27 +936,3 @@ const HomeCard = () => {
 };
 
 export default HomeCard;
- // useEffect(async () => {
-  //   try {
-  //     if (changeState) {
-  //       getNFtsData({}, (res) => {
-  //         if (res.success) {
-  //           console.log(res?.responseData?.nftContent, "nft");
-  //           console.log(customize.bannerNftData, "banner data");
-
-  //           if (customize.bannerNftData.length > 0) {
-  //             console.log("if block");
-  //             setNfts(customize.bannerNftData);
-  //           } else {
-  //             console.log("else block");
-  //             setNfts(res?.responseData?.nftContent);
-  //           }
-  //         } else {
-  //           toast.error(res.message);
-  //         }
-
-  //         // setLoadNfts(false);
-  //       });
-  //     }
-  //   } catch (error) {}
-  // }, []);

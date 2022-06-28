@@ -72,7 +72,7 @@ function CreateSingleNFT(props) {
   const [isFileSelected, setIsFileSelected] = useState(false);
   const [isloader, setisLoader] = useState(false);
   const [specialChar, setSpecialChar] = useState("");
-  // console.log(user.addUserData._id, "<<<< user data");
+  // (user.addUserData._id, "<<<< user data");
   // -------------------------------
   const name = useRef("");
   const price = useRef("");
