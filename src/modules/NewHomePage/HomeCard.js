@@ -507,7 +507,7 @@ const HomeCard = () => {
 
     if (result.responseCode === 403) {
       setLoader(false);
-      Utils.apiFailureToast(storeConstants.ALREADY_EXIST_STORE_NAME);
+      // Utils.apiFailureToast(storeConstants.ALREADY_EXIST_STORE_NAME );
       setErrorMsg(storeConstants.ALREADY_EXIST_STORE_NAME)
     } else if (result.success) {
       let requestData = {
@@ -520,7 +520,7 @@ const HomeCard = () => {
 
       if (domainResult.responseCode === 403) {
         setLoader(false);
-        Utils.apiFailureToast(storeConstants.ALREADY_EXIST_STORE_NAME);
+        // Utils.apiFailureToast(storeConstants.ALREADY_EXIST_STORE_NAME);
       setErrorMsg(storeConstants.ALREADY_EXIST_STORE_NAME)
 
       }
@@ -907,7 +907,11 @@ const HomeCard = () => {
                       <label className="siteurl">.NFTinger.com</label>
                     </div>
                     {errorMsg && <label className="lastLabel color-red">
-                      {errorMsg}
+                      <p>
+                      {errorMsg }&nbsp;
+                      <a href="https://market.nftinger.com/">https://market.nftinger.com/</a>
+                      </p>
+                      
                     </label>}
 
                     <label className="lastLabel">
