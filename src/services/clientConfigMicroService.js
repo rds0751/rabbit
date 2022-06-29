@@ -69,7 +69,7 @@ export async function getTenantData(paramToken=false, paramAddress=false) {
     const tenantData = result.responseData;
     return tenantData;
   } catch (err) {
-    (err);
+   return  (err);
   }
 }
 
@@ -84,7 +84,6 @@ export async function getTenant(reqData) {
 
     return result;
   } catch (err) {
-    (err);
     return err;
   }
 }
@@ -110,7 +109,7 @@ export const getBlogs = async () => {
         const result = await res.json();
         return result;
       } catch (err) {
-        (err);
+        return (err);
       }
 };
 export const getTenantByWallet = async (address) => {
@@ -121,7 +120,7 @@ export const getTenantByWallet = async (address) => {
       const result = await res.json();
       return result;
     } catch (err) {
-      (err);
+     return  (err);
     }
 };
 
@@ -132,7 +131,7 @@ export const getBlogsId = async (id) => {
       const result = await res.json();
       return result;
     } catch (err) {
-      (err);
+     return  (err);
     }
 };
 
