@@ -135,9 +135,13 @@ function App() {
       
       } else if (result.success) {
         setCustomizeStore(true);
+        let params = (new URL(document.location)).searchParams;
+        const id= params.get("id");
+        if(id ===result.responseData._id){
          setTimeout(() => {
          setModal(true);
          }, 10000)
+        }
   
       }
 

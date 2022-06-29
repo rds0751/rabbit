@@ -2,7 +2,7 @@ import { httpConstants } from "../constants";
 import { httpService } from "../utility/httpService";
 import { AuthToken } from "./UserAuthToken";
 import axios from "axios";
-import { BASE_URL1 } from "../reducers/Constants";
+import { BASE_URL1,BASE_URL3 } from "../reducers/Constants";
 import { WHITE_LABEL_TOKEN } from "../reducers/Constants";
 import { getParamTenantId, getPostTenantId,getParamTenantWalletAddress } from "../utility/global";
 
@@ -101,6 +101,20 @@ export async function createSubDomain(reqData){
 
   }
 }
+
+export async function createSubsription(reqData){
+
+  try{
+    const url = `${BASE_URL3}/api/v1/subscriptions`;
+    const res = await fetch(url, {method: 'POST', headers: AuthToken,body: JSON.stringify(reqData) });
+    const result = await res.json();
+    return result;
+  }catch(err){
+    return err;
+
+  }
+}
+
 
 
 export const getBlogs = async () => {

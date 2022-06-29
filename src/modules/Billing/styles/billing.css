@@ -44,6 +44,7 @@
   font-family: "poppins";
   color: black;
   text-decoration: none;
+  font-size: 1.158vw;
   /* width: 120px; */
 }
 .billingPeriod--active {
@@ -53,7 +54,7 @@
   font-family: "poppins-semibold";
   box-sizing: border-box;
   /* font-size: 18px; */
-  font-size: 18px;
+  font-size: 1.458vw;
 }
 .myItemsBox .myNFTS {
   display: flex;
@@ -218,6 +219,9 @@
     width: 100vw;
     box-sizing: border-box;
   }
+  .planTitle{
+    font-size: 1.6vw !important;
+  }
   .billingPageMainContainer {
     height: 95%;
     width: 82%;
@@ -316,7 +320,7 @@
   }
   .chooseplanButton {
     /* border: 2px solid red; */
-    background-color: var(--color-primary);
+    background-color: #016dd9;
     color: white;
     font-family: "poppins-medium";
     border-radius: 6px;
@@ -372,6 +376,9 @@
     height: 100vh;
     width: 100vw;
     box-sizing: border-box;
+  }
+  .planTitle{
+    font-size: 4vw !important;
   }
   .billingPageMainContainer {
     height: 95%;
@@ -539,7 +546,7 @@
 }
 .planTitle {
   font-family: "poppins-bold";
-  font-size: 13px;
+  font-size: 0.9vw;
   color: black;
   margin: 0;
   padding: 0;
