@@ -59,7 +59,7 @@ const UpgradePlan = (props) => {
       description: [
         "Premium Themes for store",
         "Custom URL",
-        "Remove NFTICALLY Branding",
+        "Remove NFTinger Branding",
         "Use your own ERC20 Token",
         "NFT Scanner for Counterfeit",
         "Many More",
@@ -130,7 +130,7 @@ const UpgradePlan = (props) => {
       description: [
         "Premium Themes for store",
         "Custom URL",
-        "Remove NFTICALLY Branding",
+        "Remove NFTinger Branding",
         "Use your own ERC20 Token",
         "NFT Scanner for Counterfeit",
         "Many More",

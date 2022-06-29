@@ -23,6 +23,8 @@ import {
 } from "../../services/clientConfigMicroService";
 import "../../assets/styles/homepage.css";
 import { Link } from "react-router-dom";
+import Spinner from "../../common/components/Spinner";
+import { storeConstants } from "../../constants";
 
 const MainDiv = styled.div`
   width: 100%;
@@ -40,7 +42,6 @@ const NavDiv = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-
 const NavItem = styled.div`
   display: flex;
   flex-direction: row;
@@ -93,6 +94,7 @@ const Nav = (props) => {
   const [changeState, setChangeState] = useState(true);
   const dispatch = useDispatch();
   const { userDetails, walletAddress } = user;
+  const [loader, setLoader] = useState(false);
   let { loggedInUser } = user;
   const navigate = useNavigate();
   let Newaddress;
@@ -111,15 +113,21 @@ const Nav = (props) => {
   },[userData]);
 
   const checkTenant = async (address) => {
+    setLoader(true);
     const [error, result] = await Utils.parseResponse(
       getTenantByWallet(address)
     );
-    if (error || !result)
-      return Utils.apiFailureToast("Store not launched");
+    if (error || !result){
+    setLoader(false)
+      return Utils.apiFailureToast("Store not launched");}
     if (!result.success) {
       setModal(true);
-    } else if (result?.responseData?.siteUrl) {
-      window.location.replace(result.responseData.siteUrl);
+      setLoader(false);
+    } else if (result?.success) {
+      setTimeout(() => {
+        setLoader(false);
+        window.location.replace(result.responseData.siteUrl);
+      }, 5000)
     }
     else {
       return Utils.apiFailureToast("Store not launched");
@@ -170,7 +178,8 @@ const Nav = (props) => {
     const [error, result] = await Utils.parseResponse(getTenant(tenantData));
 
     if (result.responseCode === 403) {
-      Utils.apiFailureToast(result.message);
+      Utils.apiFailureToast(storeConstants.ALREADY_EXIST_STORE_NAME);
+      setLoader(false)
     } else if (result.success) {
       let requestData = {
         subdomain: tenantData.storeName,
@@ -180,12 +189,18 @@ const Nav = (props) => {
         createSubDomain(requestData)
       );
 
-      if (domainResult.responseCode === 403)
+      if (domainResult.responseCode === 403){
         Utils.apiFailureToast(domainResult.message);
+        setLoader(false)
+      }
       else if (domainResult.success) {
         setModal(false);
         setUserData(domainResult.responseData);
-        window.location.replace(domainResult.responseData.siteUrl);
+        setLoader(true)
+        setTimeout(() => {
+          setLoader(false)
+          window.location.replace(domainResult.responseData.siteUrl);
+        }, 5000)
       }
     }
   };
@@ -229,7 +244,10 @@ const Nav = (props) => {
         </div></Item>
             <Item onClick={() => MetaMaskConnector()}>Login</Item>
             <CreateStore onClick={() => MetaMaskConnector()}>
-              Create Store
+            <div className="display-loader-left m-t-2">
+                  {loader ? <Spinner></Spinner> : ""}
+                  Create Store
+                  </div>
             </CreateStore>
           </ItemsDiv>
         </NavItem>
@@ -263,7 +281,7 @@ const Nav = (props) => {
                     <div className="input-group">
                       <div className="Address">
                         <label className="WalletAddress">
-                        {tenantData.wallet}
+                          {tenantData?.wallet}
                         </label>
                       </div>
                     </div>
@@ -302,7 +320,10 @@ const Nav = (props) => {
                   onClick={() => createStore()}
                   //  style={{background: `${fetchPalletsColor(appearance?.colorPalette)}`}}
                 >
+                  <div className="display-loader-left">
+                  {loader ? <Spinner></Spinner> : ""}
                   Create Store
+                  </div>
                 </button>
               </div>
             </div>

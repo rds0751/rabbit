@@ -6,10 +6,12 @@ import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import "../../assets/styles/homepage.css";
-import { RedirectTo } from "../../reducers/Action";
+import { addUseraction, addUserData } from "../../reducers/Action";
+import { RedirectTo,  } from "../../reducers/Action";
 import Ethereum from "../../assets/images/ether.svg";
 import Polygon from "../../assets/images/ploygon.svg";
 import Binance from "../../assets/images/binance.svg";
+
 // import { Link, useLocation } from "react-router-dom";
 // import Card from '@mui/material/Card';
 import Avatar from "@mui/material/Avatar";
@@ -32,6 +34,11 @@ import pauseImage from "../../assets/images/Pause.svg";
 import ReactPlayer from "react-player";
 import NftCards from "./NftCards";
 import Billing from "../Billing/UpgradePlan";
+import { getTenantByStoreName, getTenantData } from "../../services/clientConfigMicroService";
+import { CheckUserByWalletAddress } from "../../services/UserMicroService";
+import { WEB_APP_USER_WALLET_ADDRESS } from "../../reducers/Constants";
+import utility from "../../utility";
+import Navbar from "../../common/components/Navbar";
 let preivewFiles = ["video/mp4", "audio/mpeg"];
 
 function Home({ loaderState }) {
@@ -57,13 +64,17 @@ function Home({ loaderState }) {
   });
 
   useEffect(async () => {
-    // checkapi();
-    // setTimeout(6000);
+    let tenantId = await checkAndUpdatetenatId()
+    getTenantData()
+      .then((response) => {
+        dispatch({ type: "ADD_CUSTOMIZE_DATA", payload: response[0] });
+        dispatch({ type: "ADD_BANNER_NFTS", payload: response[1] });
 
-    // setIsloading(true);
-    // getNfts(defaultReq).then((response) => {
-    // if(nfts.length==0){
-    // const myTimeout = setTimeout(100000);
+        setLoader(false);
+      })
+      .catch((error) => {
+        setLoader(false);
+      });
 
     try {
       if (changeState) {
@@ -104,6 +115,36 @@ function Home({ loaderState }) {
       setNfts(customize.bannerNftData);
     }
   }, [customize.bannerNftData.length]);
+
+  const [tenant, setTenantId]
+ = useState(false) 
+  const getTenantIdByStoreName = async (storeName) => {
+    try {
+      const [error, result] = await utility.parseResponse(
+        getTenantByStoreName(storeName)
+      );
+      localStorage.setItem("tenantId", result.responseData._id)
+      setTenantId(true)
+      dispatch({type:"tenantId", payload:result.responseData._id})
+
+      return result.responseData._id
+    } catch (error) {
+      return utility.apiFailureToast("Please refresh page");
+    }
+  };
+  
+
+  const checkAndUpdatetenatId=()=>{
+    const checkWalletAddress = localStorage.getItem(
+      WEB_APP_USER_WALLET_ADDRESS
+    );
+    if (checkWalletAddress != null) {
+      CheckUserByWalletAddress(checkWalletAddress, (res) => {
+        addUserData(res);
+      });
+    }
+    return getTenantIdByStoreName("deepak");
+  }
 
   // setInterval(() => {
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getNfts, getCollections } from "../../services/webappMicroservice";
 import { getTenantData } from "../../services/clientConfigMicroService";
@@ -8,6 +8,7 @@ import Badge from "@mui/material/Badge";
 import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../../assets/styles/Notification.css";
+import { dispatchAction } from "../../utility";
 import {
   addUserData,
   AddWalletDetails,
@@ -365,7 +366,7 @@ function Navbar({ loader,Modal }) {
     localStorage.setItem("userId", loggedInUser._id);
   }
   let userId = loggedInUser ? loggedInUser._id : localStorage.userId;
-
+  let tenantId = user.tenantId ? user.tenantId: localStorage.getItem("tenantId")
   useEffect(() => {
     getNotificationListById(userId).then((response) =>
       setNotifications(response)
@@ -1022,5 +1023,8 @@ function Navbar({ loader,Modal }) {
     </>
   );
 }
+const mapStatetoProps=({user})=>{
+  return {user}
+}
 
-export default Navbar;
+export default connect(mapStatetoProps, {dispatchAction})   (Navbar);

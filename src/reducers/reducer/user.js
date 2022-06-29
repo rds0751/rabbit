@@ -17,6 +17,8 @@ let initialState = {
   allUserData: "",
   walletAddress: null,
   redirectUrl: "",
+   "tenantId"
+:""
 };
 export const UserReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -26,6 +28,12 @@ export const UserReducer = (state = initialState, action) => {
           loggedInUser: null,
           allUserData: "",
           walletAddress: null}
+      }
+    case "tenantId":
+      {
+        return {...state,
+          tenantId: action.payload
+        }
       }
     case ADD_WALLET:
       {
