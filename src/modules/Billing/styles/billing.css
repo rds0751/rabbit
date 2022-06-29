@@ -256,8 +256,8 @@
     font-family: "poppins-semibold";
   }
   .billingPeriod--active {
-    color: var(--color-primary);
-    border-bottom: 2px solid var(--color-primary);
+    color: #016dd9;
+    border-bottom: 2px solid #016dd9;
   }
   .plansContainer {
     width: 100%;
@@ -277,6 +277,9 @@
   }
   .plansEach:hover {
     background-color: #016dd9;
+  }
+  .chooseplanButtonWhite{
+    font-size: 2vw;
   }
 
   .plansEachCircle {
@@ -345,7 +348,7 @@
   .planFeature {
     position: relative;
     width: 85%;
-    top: -5.2vw;
+    top: -1.2vw;
     margin: 0px auto;
     font-family: "poppins-medium";
     font-size: 1.44vw;
@@ -409,8 +412,8 @@
     font-family: "poppins-semibold";
   }
   .billingPeriod--active {
-    color: var(--color-primary);
-    border-bottom: 2px solid var(--color-primary);
+    color: #016dd9;
+    border-bottom: 2px solid #016dd9;
   }
   .plansContainer {
     width: 100%;
@@ -422,7 +425,7 @@
   .plansEach {
     margin-top: 5vh;
     width: 45vw;
-    height: 47vw;
+    height: auto;
     background-color: #f3f5f9;
     border-radius: 7px;
     overflow: hidden;
@@ -430,6 +433,10 @@
   }
   .plansEach:hover {
     background-color: #016dd9;
+  }
+  .chooseplanButtonWhite{
+    top: -21.15vw;
+    font-size: 2vw;
   }
   .plansEachCircle {
     width: 32vw;
