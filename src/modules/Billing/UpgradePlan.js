@@ -10,6 +10,10 @@ import {
   createSubDomain,
   getTenant,
 } from "../../services/clientConfigMicroService";
+import {NFTinger} from "../../common/newHomeImages";
+
+import { sessionManager } from "../../managers/sessionManager";
+
 
 const Modal = styled.div`
   position: absolute;
@@ -150,16 +154,16 @@ const UpgradePlan = (props) => {
       createdAt: "2022-04-04T12:09:35.988Z",
       currency: "US dollar",
       description: [
-        "Gas Free Minting",
-        "ERC721 & 1155 NFT Standard",
+        "Admin Portal",
         "Multiple Blockchain Support",
-        "Multiple Currency Support",
-        "Intelligent Content Moderation",
-        "Fiat on-ramp",
+        "Multi File Formats",
+        "Filter And Ranking",
+        "Lazy Minting",
+        "Social Media Sharing"
       ],
       NFTCollection:"100 NFT | 2 Collection",
       planTitle: "Key Feature",
-      planName: "Free",
+      planName: "Free Forever",
       planActive: "Current",
       price: 0,
     },
@@ -168,56 +172,138 @@ const UpgradePlan = (props) => {
       createdAt: "2022-04-04T12:09:35.988Z",
       currency: "US dollar",
       description: [
-        "Premium Themes for store",
-        "Custom URL",
-        "Remove NFTinger Branding",
-        "Use your own ERC20 Token",
-        "NFT Scanner for Counterfeit",
+        "Admin Portal",
+        "Royalty Feature",
+        "Multiple Blockchain support",
+        "Multi File Formats",
+        "Filter and Rankings",
+        "Lazy Minting",
+        "On Chain Collection",
+        "Detailed Analytics",
+        "Blogs Management",
+        "Advanced Content Moderation",
+        "Platform Fees Mangement",
+        "Social Media Sharing",
+        "custom URL",
+        "Categories Mangement",
         "Many More",
       ],
-      NFTCollection:"100 NFT | 2 Collection",
+      NFTCollection:"500 NFT | 10 Collection",
       planTitle: "Everything in Free, plus:",
       planName: "Standard",
       planActive: "Upgrade",
-      price: 29,
+      price: 99,
     },
     {
       billingCycle: "monthly",
       createdAt: "2022-04-04T12:09:35.988Z",
       currency: "US dollar",
       description: [
-        "Bulk NFT Airdrop",
-        "Email Whitelabeling",
-        "Marketing Automation",
-        "Token Gated Link/NFT Utility",
-        "Premium Reports",
+        "Admin Portal",
+        "Royalty Feature",
+        "Multiple Blockchain support",
+        "Multi File Formats",
+        "Filter and Rankings",
+        "Lazy Minting",
         "Metaverse Shop & Store",
+        "On Chain Collection",
+        "Detailed Analytics",
+        "Blogs Management",
+        "Advanced Visitor Mangement",
+        "Training and Support",
+        "Advanced Content",
+        "Platform Fees Mangement",
+        "Social Media Sharing",
       ],
-      NFTCollection:"100 NFT | 2 Collection",
+      NFTCollection:"10000 NFT | 100 Collection",
       planTitle: "Everything in Standard ,plus:",
-      planName: "Professional",
+      planName: "Plus",
       planActive: "Upgrade",
-      price: 299,
+      price: 399,
     },
     {
       billingCycle: "monthly",
       createdAt: "2022-04-04T12:09:35.988Z",
       currency: "US dollar",
       description: [
-        "Custom Theme",
-        "Custom NFT Smartcontract",
-        "Personal Account Manager",
-        "Phone Support",
-        "API Access",
-        "Staff Training",
+        "Admin Portal",
+        "Royality Feature",
+        "Multiple Blockchain Support",
+       "Multi File Formats",
+        "Filter and Ranking",
+        "Make Offer",
+        "Lazy Minting",
+        "Bulk Minting",
+        "On Chain Collection",
+        "Detailed Analytics",
+        "Blogs Mangement",
+      "Advanced Visitor Mangement",
+       "Training and Support",
+        "Dedicated Realtionship Manger",
+       "Advanced Content Moderation",
+        "Metaverse Galleries",
+        "Conversion to NFT Portal",
+        "Platform fess mangement",
+        "Social Media Sharing",
+        "Custom Url",
+        "Categories Mangement "
       ],
-      NFTCollection:"100 NFT | 2 Collection",
+      NFTCollection:"Unlimited NFTs | Unlimited Collections",
       planTitle: "Everything in Professional, plus:",
-      planName: "Enterprise",
+      planName: "Pro",
       planActive: "Upgrade",
       price: 999,
     },
   ];
+
+
+  const loadRazorPay = () => {
+    return new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      document.body.appendChild(script);
+      script.onload = () => {
+        resolve();
+      };
+      script.onerror = () => {
+        reject();
+      };
+    });
+  };
+
+  const displayRazorPay = async () => {
+    try {
+      await loadRazorPay();
+      const options = {
+        key: process.env.REACT_APP_RAZOR_PAY_ID,
+        amount: (999) * 100 * 78, //price pending
+        currency: "INR",
+        name: "Make Payment",
+        description: "",
+        image: NFTinger, 
+        handler: async (response) => {
+          // const responseData = {
+          //   paymentId: response?.razorpay_payment_id,
+          //   totalPrice: space?.price,
+          // };
+
+        //  addSpacehandler(responseData);
+          // sessionManager.setDataInCookies(
+          //   response?.razorpay_payment_id,
+          //   cookiesConstants.RAZORPAY_PAYMENT_ID
+          // );
+         // await createEventHandler(responseData); //update subscription 
+        },
+        theme: {
+          color: "#4c84ff",
+        },
+      };
+      const rzp1 = new window.Razorpay(options);
+      rzp1.open();
+    } catch (err) {
+      Utils.apiFailureToast("Transcation Failure");
+    }
+  };
 
   return (
     <div
@@ -238,7 +324,9 @@ const UpgradePlan = (props) => {
                 className="fa-solid fa-xmark cross-icon"
                 onClick={() => props?.setModal(false)}
               ></i>
+
             </div>
+            <button onClick={()=>displayRazorPay()}>Calling</button>
             <div className="billingPeriodContainer">
               <div
                 onClick={() => {
@@ -250,6 +338,8 @@ const UpgradePlan = (props) => {
               >
                 Monthly
               </div>
+
+            
               <div
                 // className='billingPeriod'
                 onClick={() => {
