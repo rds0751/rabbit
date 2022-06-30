@@ -326,7 +326,7 @@ const UpgradePlan = (props) => {
               ></i>
 
             </div>
-            <button onClick={()=>displayRazorPay()}>Calling</button>
+            <button onClick={()=>displayRazorPay()}>Razor Pay</button>
             <div className="billingPeriodContainer">
               <div
                 onClick={() => {
