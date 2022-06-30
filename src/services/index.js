@@ -26,7 +26,7 @@ export const addWalletAddress = async (wallet_address) => {
     const user = result.responseData;
     return user;
   } catch (err) {
-    return err;
+    console.log(err);
   }
 };
 
@@ -40,7 +40,7 @@ export const updateUserProfile = async (data, userId) => {
     const result = await res.json();
     return result;
   } catch (err) {
-    return err;
+    console.log(err);
   }
 };
 
