@@ -27,7 +27,7 @@ export const getCollection = async () => {
     const collectionData = result.responseData;
     return collectionData;
   } catch (err) {
-    return (err);
+    console.log(err);
   }
 };
 
@@ -38,7 +38,7 @@ export const getCollectionBySingleUser = async (userId) => {
     const collectionData = result.responseData;
     return collectionData;
   } catch (err) {
-    return (err);
+    console.log(err);
   }
 };
 
@@ -54,7 +54,7 @@ export const put_NftOpenForSale = async (_id) => {
     const result = await res.json();
     return result;
   } catch (err) {
-    return (err);
+    console.log(err);
   }
 };
 export const RemoveNftFromSale = async (_id) => {
@@ -71,6 +71,6 @@ export const RemoveNftFromSale = async (_id) => {
 
     return result;
   } catch (err) {
-    return (err);
+    console.log(err);
   }
 };
