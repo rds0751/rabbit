@@ -180,7 +180,7 @@ export default function NftInformation(props) {
        autoClose: 5000,
      });
    } else {
-     props.getNftDetail();
+    props.getNftDetail();
    }
 
    }
@@ -277,10 +277,13 @@ export default function NftInformation(props) {
     fetchData();
   }, [nft]);
 
+  const { pathname } = window.location;
+  const pathArray = pathname.split("/");
+  let newId = pathArray[2];
   useEffect(() => {
-    if (id)
+    if (id !== newId)
       props.getNftDetail();
-  }, [id, nft.cdnUrl]);
+  }, [id!==newId]);
 
   // alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
 

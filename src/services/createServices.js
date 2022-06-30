@@ -34,6 +34,7 @@ export const createCollection = async data => {
 
     return result;
   } catch (err) {
+    return err;
   }
 };
 export const collectionStatus = async data => {
@@ -50,6 +51,6 @@ export const collectionStatus = async data => {
 
     return result;
   } catch (err) {
-   
+    return err;
   }
 };

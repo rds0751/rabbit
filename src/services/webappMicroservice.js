@@ -204,6 +204,7 @@ export async function getNameImageOfUser(_id) {
       imageUrl: user.cdnUrl,
     };
   } catch (err) {
+    return err;
   }
 }
 export function getNotificationListById(requestData) {

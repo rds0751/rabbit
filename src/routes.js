@@ -134,10 +134,14 @@ function App() {
         setCustomizeStore(false);
       
       } else if (result.success) {
-        setCustomizeStore(true);
+        let params = (new URL(document.location)).searchParams;
+        const id= params.get("id");
+        if(id === result?.responseData?._id){
+         setCustomizeStore(true);
          setTimeout(() => {
          setModal(true);
          }, 10000)
+        }
   
       }
 
@@ -154,7 +158,7 @@ function App() {
       <Router>
         <ScrollToTop />
 
-        <Navbar loader={loader} Modal={customizeStore} setModal={setCustomizeStore} />
+        <Navbar loader={loader} customizeStore={customizeStore} setModal={setModal} />
         <Billing Modal={modal} setModal={setModal} />
 
         {/* <Tile__homepage /> */}

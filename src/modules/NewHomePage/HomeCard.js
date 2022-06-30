@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container, Row, Col, Card } from "react-bootstrap";
 import { ethers } from "ethers";
-import styled from "styled-components"; 
+import styled from "styled-components";
 import "../../assets/styles/nftReportModal.css";
 import OwlCarousel from "react-owl-carousel";
 import { useNavigate } from "react-router-dom";
@@ -53,6 +53,7 @@ import {
   getTenantByWallet,
   createSubDomain,
   getTenant,
+  createSubsription,
 } from "../../services/clientConfigMicroService";
 import "../../assets/styles/homepage.css";
 import { storeConstants } from "../../constants";
@@ -256,9 +257,9 @@ const StoreButton = styled.button`
   font: normal normal medium 18px/27px Poppins;
   letter-spacing: 0px;
   color: #ffffff;
-  &:hover{
+  &:hover {
     background: white 0% 0% no-repeat padding-box;
-    color:blue;
+    color: blue;
   }
 `;
 const StepDiv = styled.div`
@@ -307,9 +308,9 @@ const StepCreateStore = styled.button`
   width: 216px;
   height: 54px;
 
-  &:hover{
+  &:hover {
     background-color: #016dd9;
-    color:white;
+    color: white;
   }
 `;
 const How = styled.label`
@@ -361,19 +362,14 @@ const HomeCard = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState();
   const [loader, setLoader] = useState(false);
-  const [errorMsg , setErrorMsg]= useState("")
+  const [errorMsg, setErrorMsg] = useState("");
   const [tenantData, setTenant] = useState({
     storeName: "",
     wallet: "",
-    blockchains: [
-      "Polygon",
-      "Ethereum",
-      "Binance"
-  ],
+    blockchains: ["Polygon", "Ethereum", "Binance"],
   });
 
   const data = [
-
     {
       image: customisable,
       title: "Fully customisable",
@@ -431,13 +427,10 @@ const HomeCard = () => {
     },
   ];
 
-
   useEffect(async () => {
     const [error, result] = await Utils.parseResponse(
       getTenantByWallet(tenantData.wallet)
     );
-
-
   }, [userData]);
 
   const checkTenant = async (address) => {
@@ -456,20 +449,24 @@ const HomeCard = () => {
       setTimeout(() => {
         setLoader(false);
         window.location.replace(result.responseData.siteUrl);
-      }, 5000)
-
+      }, 5000);
     }
   };
 
   const MetaMaskConnector = async () => {
     try {
       if (window.ethereum) {
-        let accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+        let accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
         let Newaddress = accounts[0];
         setTenant({ ...tenantData, wallet: Newaddress });
-      
+
         localStorage.setItem("walletAddress", Newaddress);
-        let balance = await window.ethereum.request({ method: "eth_getBalance", params: [Newaddress, "latest"] })
+        let balance = await window.ethereum.request({
+          method: "eth_getBalance",
+          params: [Newaddress, "latest"],
+        });
         const PriceEther = ethers.utils.formatEther(balance);
         dispatch(
           AddWalletDetails({
@@ -484,31 +481,28 @@ const HomeCard = () => {
         if (Newaddress) {
           const data = checkTenant(Newaddress);
         }
-
       } else {
         Utils.apiFailureToast("Please connect your metamask wallet");
         setTimeout(() => {
           window.location.reload();
-        }, 1000)
+        }, 1000);
       }
     } catch (e) {
       setModal(false);
       Utils.apiFailureToast("Please connect your metamask wallet");
       setTimeout(() => {
         window.location.reload();
-      }, 1000)
-
+      }, 1000);
     }
   };
 
   const createStore = async () => {
-
     const [error, result] = await Utils.parseResponse(getTenant(tenantData));
 
     if (result.responseCode === 403) {
       setLoader(false);
       // Utils.apiFailureToast(storeConstants.ALREADY_EXIST_STORE_NAME );
-      setErrorMsg(storeConstants.ALREADY_EXIST_STORE_NAME)
+      setErrorMsg(storeConstants.ALREADY_EXIST_STORE_NAME);
     } else if (result.success) {
       let requestData = {
         subdomain: tenantData.storeName,
@@ -521,30 +515,57 @@ const HomeCard = () => {
       if (domainResult.responseCode === 403) {
         setLoader(false);
         // Utils.apiFailureToast(storeConstants.ALREADY_EXIST_STORE_NAME);
-      setErrorMsg(storeConstants.ALREADY_EXIST_STORE_NAME)
+        setErrorMsg(storeConstants.ALREADY_EXIST_STORE_NAME);
+      } else if (domainResult.success) {
+        let subreqData = {
+          planName: "Free",
+          billingCycle: "monthly",
+          price: 0,
+          tenantId: domainResult?.responseData?._id,
+          walletAddress: domainResult?.responseData?.wallet,
+          features: [
+            "Admin Portal",
+            "Multiple Blockchain Support",
+            "Multi File Formats",
+            "Filter And Ranking",
+            "Lazy Minting",
+            "Social Media Sharing",
+          ],
+        };
+        const [error, result] = await Utils.parseResponse(
+          createSubsription(subreqData)
+        );
 
-      }
-      else if (domainResult.success) {
-        setLoader(true)
-        setModal(false);
-        setUserData(domainResult.responseData);
-        setTimeout(() => {
-          setLoader(false)
-          window.location.replace(domainResult.responseData.siteUrl);
-        }, 5000)
-
+        if (error || !result) {
+          Utils.apiFailureToast(error);
+          setLoader(false);
+          setModal(false);
+          return;
+        } else if (result.responseCode === 403) {
+          Utils.apiFailureToast(result.message);
+          setLoader(false);
+          setModal(false);
+          return;
+        } else {
+          setLoader(true);
+          setModal(false);
+          setUserData(domainResult.responseData);
+          setTimeout(() => {
+            setLoader(false);
+            window.location.replace(domainResult.responseData.siteUrl);
+          }, 5000);
+        }
       }
     }
-
   };
-  const handleInputChange=(evt)=> {
+  const handleInputChange = (evt) => {
     const value = evt.target.value;
     setTenant({
       ...tenantData,
       storeName: value,
-    })
-    setErrorMsg("")
-  }
+    });
+    setErrorMsg("");
+  };
 
   return (
     <>
@@ -580,10 +601,11 @@ const HomeCard = () => {
                               src={MetaFox}
                               style={{ marginRight: "5px" }}
                             ></Image>
-                            {`${localStorage.getItem("has_wallet") === "false"
+                            {`${
+                              localStorage.getItem("has_wallet") === "false"
                                 ? "connect to Wallet"
                                 : "Launch your store"
-                              }`}
+                            }`}
                           </Button>
                         </div>
                       </div>
@@ -614,7 +636,7 @@ const HomeCard = () => {
                                   />
                                 </div>
                               </Card>
-                              <Card  className="NewHomeNFTCard">
+                              <Card className="NewHomeNFTCard">
                                 <div className="homePageContainer">
                                   <Card.Img
                                     variant="top"
@@ -623,7 +645,7 @@ const HomeCard = () => {
                                   />
                                 </div>
                               </Card>
-                              <Card  className="NewHomeNFTCard">
+                              <Card className="NewHomeNFTCard">
                                 <div className="homePageContainer">
                                   <Card.Img
                                     variant="top"
@@ -632,7 +654,7 @@ const HomeCard = () => {
                                   />
                                 </div>
                               </Card>
-                              <Card  className="NewHomeNFTCard">
+                              <Card className="NewHomeNFTCard">
                                 <div className="homePageContainer">
                                   <Card.Img
                                     variant="top"
@@ -701,8 +723,8 @@ const HomeCard = () => {
                 </StepDes>
                 <StepCreateStore onClick={() => MetaMaskConnector()}>
                   <div className="display-loader-left">
-                {loader ? <Spinner></Spinner> : ""}
-                Connect Wallet
+                    {loader ? <Spinner></Spinner> : ""}
+                    Connect Wallet
                   </div>
                 </StepCreateStore>
               </StepDetails>
@@ -719,9 +741,9 @@ const HomeCard = () => {
                   complexities of
                 </StepDes>
                 <StepCreateStore onClick={() => MetaMaskConnector()}>
-                <div className="display-loader-left">
-                  {loader ? <Spinner></Spinner> : ""}
-                  Create Store
+                  <div className="display-loader-left">
+                    {loader ? <Spinner></Spinner> : ""}
+                    Create Store
                   </div>
                 </StepCreateStore>
               </StepDetails>
@@ -738,9 +760,9 @@ const HomeCard = () => {
                   complexities of
                 </StepDes>
                 <StepCreateStore onClick={() => MetaMaskConnector()}>
-                <div className="display-loader-left">
-                  {loader ? <Spinner></Spinner> : ""}
-                  Create Store
+                  <div className="display-loader-left">
+                    {loader ? <Spinner></Spinner> : ""}
+                    Create Store
                   </div>
                 </StepCreateStore>
               </StepDetails>
@@ -823,10 +845,10 @@ const HomeCard = () => {
               </StoreFrontPage>
 
               <StoreButton onClick={() => MetaMaskConnector()}>
-              <div className="display-loader-left">
+                <div className="display-loader-left">
                   {loader ? <Spinner></Spinner> : ""}
                   Create Store
-                  </div>
+                </div>
               </StoreButton>
             </HeadTitle>
           </CommonSection>
@@ -884,7 +906,7 @@ const HomeCard = () => {
                     <div className="input-group">
                       <div className="Address">
                         <label className="WalletAddress">
-                         {tenantData.wallet}
+                          {tenantData.wallet}
                         </label>
                       </div>
                     </div>
@@ -900,19 +922,22 @@ const HomeCard = () => {
                         <input
                           type="text"
                           className="Address"
-                          onChange={(e) =>handleInputChange(e)}
+                          onChange={(e) => handleInputChange(e)}
                           style={{ color: "white" }}
                         ></input>
                       </div>
                       <label className="siteurl">.NFTinger.com</label>
                     </div>
-                    {errorMsg && <label className="lastLabel color-red">
-                      <p>
-                      {errorMsg }&nbsp;
-                      <a href="https://market.nftinger.com/">https://market.nftinger.com/</a>
-                      </p>
-                      
-                    </label>}
+                    {errorMsg && (
+                      <label className="lastLabel color-red">
+                        <p>
+                          {errorMsg}&nbsp;
+                          <a href="https://market.nftinger.com/">
+                            https://market.nftinger.com/
+                          </a>
+                        </p>
+                      </label>
+                    )}
 
                     <label className="lastLabel">
                       This is the url your customer will use to visit the
@@ -923,11 +948,11 @@ const HomeCard = () => {
                 <button
                   className="btn btn-primary report-btn NewHomeButton"
                   onClick={() => createStore()}
-                //  style={{background: `${fetchPalletsColor(appearance?.colorPalette)}`}}
+                  //  style={{background: `${fetchPalletsColor(appearance?.colorPalette)}`}}
                 >
-                    <div className="display-loader-left">
-                  {loader ? <Spinner></Spinner> : ""}
-                  Create Store
+                  <div className="display-loader-left">
+                    {loader ? <Spinner></Spinner> : ""}
+                    Create Store
                   </div>
                 </button>
               </div>

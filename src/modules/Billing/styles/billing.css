@@ -44,6 +44,7 @@
   font-family: "poppins";
   color: black;
   text-decoration: none;
+  font-size: 1.158vw;
   /* width: 120px; */
 }
 .billingPeriod--active {
@@ -53,7 +54,7 @@
   font-family: "poppins-semibold";
   box-sizing: border-box;
   /* font-size: 18px; */
-  font-size: 18px;
+  font-size: 1.458vw;
 }
 .myItemsBox .myNFTS {
   display: flex;
@@ -218,6 +219,9 @@
     width: 100vw;
     box-sizing: border-box;
   }
+  .planTitle{
+    font-size: 1.6vw !important;
+  }
   .billingPageMainContainer {
     height: 95%;
     width: 82%;
@@ -256,8 +260,8 @@
     font-family: "poppins-semibold";
   }
   .billingPeriod--active {
-    color: var(--color-primary);
-    border-bottom: 2px solid var(--color-primary);
+    color: #016dd9;
+    border-bottom: 2px solid #016dd9;
   }
   .plansContainer {
     width: 100%;
@@ -277,6 +281,9 @@
   }
   .plansEach:hover {
     background-color: #016dd9;
+  }
+  .chooseplanButtonWhite{
+    font-size: 2vw;
   }
 
   .plansEachCircle {
@@ -313,7 +320,7 @@
   }
   .chooseplanButton {
     /* border: 2px solid red; */
-    background-color: var(--color-primary);
+    background-color: #016dd9;
     color: white;
     font-family: "poppins-medium";
     border-radius: 6px;
@@ -345,7 +352,7 @@
   .planFeature {
     position: relative;
     width: 85%;
-    top: -5.2vw;
+    top: -1.2vw;
     margin: 0px auto;
     font-family: "poppins-medium";
     font-size: 1.44vw;
@@ -369,6 +376,9 @@
     height: 100vh;
     width: 100vw;
     box-sizing: border-box;
+  }
+  .planTitle{
+    font-size: 4vw !important;
   }
   .billingPageMainContainer {
     height: 95%;
@@ -409,8 +419,8 @@
     font-family: "poppins-semibold";
   }
   .billingPeriod--active {
-    color: var(--color-primary);
-    border-bottom: 2px solid var(--color-primary);
+    color: #016dd9;
+    border-bottom: 2px solid #016dd9;
   }
   .plansContainer {
     width: 100%;
@@ -422,7 +432,7 @@
   .plansEach {
     margin-top: 5vh;
     width: 45vw;
-    height: 47vw;
+    height: auto;
     background-color: #f3f5f9;
     border-radius: 7px;
     overflow: hidden;
@@ -430,6 +440,10 @@
   }
   .plansEach:hover {
     background-color: #016dd9;
+  }
+  .chooseplanButtonWhite{
+    top: -21.15vw;
+    font-size: 2vw;
   }
   .plansEachCircle {
     width: 32vw;
@@ -532,7 +546,7 @@
 }
 .planTitle {
   font-family: "poppins-bold";
-  font-size: 13px;
+  font-size: 0.9vw;
   color: black;
   margin: 0;
   padding: 0;
