@@ -143,7 +143,7 @@ function Home({ loaderState }) {
         addUserData(res);
       });
     }
-    return getTenantIdByStoreName("deepak");
+    //return getTenantIdByStoreName("deepak");
   }
 
   // setInterval(() => {

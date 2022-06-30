@@ -41,11 +41,13 @@ import { padding } from "@mui/system";
 import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css';
 import styled from "styled-components";
+import {NFTinger} from "../newHomeImages";
 const queryString = require("query-string");
-
 const activeMarketplace = ["/nfts"];
 const activeLeaderboard = ["/leader-board"];
 const activeResource = ["/help-center", "/suggestion"];
+
+
 
 const LogoDiv = styled.div`
   text-align: left;
@@ -55,7 +57,7 @@ const LogoDiv = styled.div`
   cursor: pointer;
   opacity: 1;
 `;
-
+const Image = styled.img``;
 function Navbar({ loader,customizeStore,setModal }) {
   const customize = useSelector((state) => state.customize);
 
@@ -426,7 +428,9 @@ function Navbar({ loader,customizeStore,setModal }) {
                        style={{ width: "143px",maxWidth:"143px" }}
                       alt=""
                      />
-                  ):( <LogoDiv onClick={()=>navigate("/")}>NFTinger</LogoDiv>)
+                  ):( <LogoDiv onClick={()=>navigate("/")}>
+                   <Image src={NFTinger}></Image>
+                    </LogoDiv>)
 
 
                  

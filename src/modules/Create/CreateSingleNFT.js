@@ -316,15 +316,19 @@ function CreateSingleNFT(props) {
   const nameValidation = (nftName) => {
     var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
     if (format.test(nftName)) {
-      SetNameError("(No Special Character Allowed)");
+      SetNameError("(No Special Character Allowed.)");
       return false;
     } else if (nftName.length === 0) {
-      SetNameError("Name is required");
+      SetNameError("Name is required.");
       return false;
     } else if (nftName.length < 3) {
-      SetNameError("Name  should be atleast 3 character");
+      SetNameError("Name should be atleast 3 characters.");
       return false;
-    } else {
+    }else if (nftName.length > 25) {
+      SetNameError("Name cannot be greater than 20 characters.");
+      return false;
+    } 
+     else {
       SetNameError("");
       return true;
     }

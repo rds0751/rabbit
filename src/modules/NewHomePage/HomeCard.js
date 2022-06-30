@@ -369,6 +369,7 @@ const HomeCard = () => {
     blockchains: ["Polygon", "Ethereum", "Binance"],
   });
 
+
   const data = [
     {
       image: customisable,
@@ -496,70 +497,101 @@ const HomeCard = () => {
     }
   };
 
-  const createStore = async () => {
-    const [error, result] = await Utils.parseResponse(getTenant(tenantData));
-
-    if (result.responseCode === 403) {
-      setLoader(false);
-      // Utils.apiFailureToast(storeConstants.ALREADY_EXIST_STORE_NAME );
-      setErrorMsg(storeConstants.ALREADY_EXIST_STORE_NAME);
-    } else if (result.success) {
-      let requestData = {
-        subdomain: tenantData.storeName,
-        tenantId: result.responseData._id,
-      };
-      const [errorDomain, domainResult] = await Utils.parseResponse(
-        createSubDomain(requestData)
-      );
-
-      if (domainResult.responseCode === 403) {
-        setLoader(false);
-        // Utils.apiFailureToast(storeConstants.ALREADY_EXIST_STORE_NAME);
-        setErrorMsg(storeConstants.ALREADY_EXIST_STORE_NAME);
-      } else if (domainResult.success) {
-        let subreqData = {
-          planName: "Free",
-          billingCycle: "monthly",
-          price: 0,
-          tenantId: domainResult?.responseData?._id,
-          walletAddress: domainResult?.responseData?.wallet,
-          features: [
-            "Admin Portal",
-            "Multiple Blockchain Support",
-            "Multi File Formats",
-            "Filter And Ranking",
-            "Lazy Minting",
-            "Social Media Sharing",
-          ],
-        };
-        const [error, result] = await Utils.parseResponse(
-          createSubsription(subreqData)
-        );
-
-        if (error || !result) {
-          Utils.apiFailureToast(error);
-          setLoader(false);
-          setModal(false);
-          return;
-        } else if (result.responseCode === 403) {
-          Utils.apiFailureToast(result.message);
-          setLoader(false);
-          setModal(false);
-          return;
-        } else {
-          setLoader(true);
-          setModal(false);
-          setUserData(domainResult.responseData);
-          setTimeout(() => {
-            setLoader(false);
-            window.location.replace(domainResult.responseData.siteUrl);
-          }, 5000);
-        }
-      }
+  const storeValidation = (storeName) => {
+    var format = /[!@$%^&*()_+\=\[\]{};:"\\|,.<>\/?]+/;
+    if (format.test(storeName)) {
+      setErrorMsg("(No Special Character Allowed.)");
+      return false;
+    } else if (storeName.length === 0) {
+      setErrorMsg("Store Name is required.");
+      return false;
+    } else if (storeName.length < 3) {
+      setErrorMsg("Store Name should be atleast 3 characters.");
+      return false;
+    }else if (storeName.length > 25) {
+      setErrorMsg("Store Name cannot be grater than 25 characters.");
+      return false;
+    } 
+     else {
+      setErrorMsg("");
+      return true;
     }
   };
+
+  const createStore = async () => {
+
+    let validation=storeValidation(tenantData.storeName);
+    if(validation){
+      const [error, result] = await Utils.parseResponse(getTenant(tenantData));
+
+      if (result.responseCode === 403) {
+        setLoader(false);
+        // Utils.apiFailureToast(storeConstants.ALREADY_EXIST_STORE_NAME );
+        setErrorMsg(storeConstants.ALREADY_EXIST_STORE_NAME);
+      } else if (result.success) {
+        let requestData = {
+          subdomain: tenantData.storeName,
+          tenantId: result.responseData._id,
+        };
+        const [errorDomain, domainResult] = await Utils.parseResponse(
+          createSubDomain(requestData)
+        );
+  
+        if (domainResult.responseCode === 403) {
+          setLoader(false);
+          // Utils.apiFailureToast(storeConstants.ALREADY_EXIST_STORE_NAME);
+          setErrorMsg(storeConstants.ALREADY_EXIST_STORE_NAME);
+        } else if (domainResult.success) {
+          let subreqData = {
+            planName: "Free",
+            billingCycle: "monthly",
+            price: 0,
+            tenantId: domainResult?.responseData?._id,
+            walletAddress: domainResult?.responseData?.wallet,
+            features: [
+              "Admin Portal",
+              "Multiple Blockchain Support",
+              "Multi File Formats",
+              "Filter And Ranking",
+              "Lazy Minting",
+              "Social Media Sharing",
+            ],
+          };
+          const [error, result] = await Utils.parseResponse(
+            createSubsription(subreqData)
+          );
+  
+          if (error || !result) {
+            Utils.apiFailureToast(error);
+            setLoader(false);
+            setModal(false);
+            return;
+          } else if (result.responseCode === 403) {
+            Utils.apiFailureToast(result.message);
+            setLoader(false);
+            setModal(false);
+            return;
+          } else {
+            setLoader(true);
+            setModal(false);
+            setUserData(domainResult.responseData);
+            setTimeout(() => {
+              setLoader(false);
+              window.location.replace(domainResult.responseData.siteUrl);
+            }, 5000);
+          }
+        }
+      }
+
+    }
+    else {
+      //scroll
+    }
+   
+  };
   const handleInputChange = (evt) => {
-    const value = evt.target.value;
+    const value = evt.target.value.trim().replaceAll(" ", "");
+
     setTenant({
       ...tenantData,
       storeName: value,
@@ -948,6 +980,7 @@ const HomeCard = () => {
                 <button
                   className="btn btn-primary report-btn NewHomeButton"
                   onClick={() => createStore()}
+                  disabled={errorMsg?.length > 0  ? true :false}
                   //  style={{background: `${fetchPalletsColor(appearance?.colorPalette)}`}}
                 >
                   <div className="display-loader-left">

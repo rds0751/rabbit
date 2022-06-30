@@ -25,13 +25,13 @@ import "../../assets/styles/homepage.css";
 import { Link } from "react-router-dom";
 import Spinner from "../../common/components/Spinner";
 import { storeConstants } from "../../constants";
-
+import  {NFTinger} from "../../common/newHomeImages";
 const MainDiv = styled.div`
   width: 100%;
   background: #031527 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 12px #0000000f;
 `;
-
+const Image = styled.img``;
 const NavDiv = styled.div`
   width: 87vw;
   margin-left: 5vw;
@@ -208,7 +208,9 @@ const Nav = (props) => {
   return (
     <MainDiv>
       <NavDiv>
-        <LogoDiv onClick={()=>navigate("/")}>NFTinger</LogoDiv>
+        <LogoDiv onClick={()=>navigate("/")}>
+          <Image src={NFTinger}></Image>
+          </LogoDiv>
         <NavItem>
           <ItemsDiv>
             <Item>Pricing</Item>
