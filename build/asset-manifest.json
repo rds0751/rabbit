@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.f688d2a2.css",
-    "main.js": "/static/js/main.e00e48eb.js",
+    "main.js": "/static/js/main.d4b62e87.js",
     "static/js/845.3e1bb2c9.chunk.js": "/static/js/845.3e1bb2c9.chunk.js",
     "static/media/Banner.png": "/static/media/Banner.112c32a6f604149b0d83.png",
     "static/media/marketplace.png": "/static/media/marketplace.1c538b4c97761619cf63.png",
@@ -25,7 +25,7 @@
     "static/media/Metamask.svg": "/static/media/Metamask.3737b9d1e6ec19bde908675ba3c35281.svg",
     "static/media/custom.svg": "/static/media/custom.a1b3d143e0546bde6a0a4043fd6e8476.svg",
     "static/media/Nopagefound.svg": "/static/media/Nopagefound.02d98fac9afdb118fe8d21ac03df6604.svg",
-    "static/media/NFTinger.svg": "/static/media/NFTinger.bc80e2f63a12520c74c610361e423822.svg",
+    "static/media/NFTinger.svg": "/static/media/NFTinger.5fed12572db144a78c6c57ddc7a6f79d.svg",
     "static/media/ANAFTO.svg": "/static/media/ANAFTO.ae04af4efe1daa0c67cc5126431de892.svg",
     "static/media/Ball.svg": "/static/media/Ball.86c5286f4434a6f20cb4b1ed4f6f4ab3.svg",
     "index.html": "/index.html",
@@ -89,11 +89,11 @@
     "static/media/Edit.svg": "/static/media/Edit.adfd6c934476ae588248e2026354da45.svg",
     "static/media/coverImage.svg": "/static/media/coverImage.7cc8a61314efed2824b3ef2b04371775.svg",
     "main.f688d2a2.css.map": "/static/css/main.f688d2a2.css.map",
-    "main.e00e48eb.js.map": "/static/js/main.e00e48eb.js.map",
+    "main.d4b62e87.js.map": "/static/js/main.d4b62e87.js.map",
     "845.3e1bb2c9.chunk.js.map": "/static/js/845.3e1bb2c9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f688d2a2.css",
-    "static/js/main.e00e48eb.js"
+    "static/js/main.d4b62e87.js"
   ]
 }
