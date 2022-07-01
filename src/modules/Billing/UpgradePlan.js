@@ -7,13 +7,13 @@ import { toast } from "react-toastify";
 import Utils from "../../utility";
 import {
   getTenantByWallet,
-  createSubDomain,
+  getSubscription,
   getTenant,
 } from "../../services/clientConfigMicroService";
 import {NFTinger} from "../../common/newHomeImages";
 
 import { sessionManager } from "../../managers/sessionManager";
-
+import BillingCard from "./BillingCards";
 
 const Modal = styled.div`
   position: absolute;
@@ -38,6 +38,20 @@ const UpgradePlan = (props) => {
   const [billingPeriod, setBillingPeriod] = useState("monthly");
    const { user, sideBar } = useSelector((state) => state);
   const { userDetails, loggedInUser, walletAddress } = user;
+  const [billingMonthly,setBillingMonthly]=useState();
+
+  useEffect(async ()=>{
+    const [error,result]=await Utils.parseResponse(
+      getSubscription(billingPeriod)
+    );
+
+    if(error|| !result){
+      Utils.apiFailureToast("Subscription Data Not Load")
+    }
+    else{
+      setBillingMonthly(result);
+    }
+  },[])
   
 
   const MonthlyPlan = [
@@ -305,6 +319,7 @@ const UpgradePlan = (props) => {
     }
   };
 
+
   return (
     <div
       className="report-outer"
@@ -354,42 +369,9 @@ const UpgradePlan = (props) => {
             </div>
             {billingPeriod === "monthly" ? (
               <div className="plansContainer">
-                {MonthlyPlan?.map((item, key) => {
+                {billingMonthly?.map((item, key) => {
                   return (
-                    <>
-                      <div
-                        //to="/"
-                        className="plansEach"
-                      >
-                        <div className="plansEachCircle"></div>
-                        <div className="plansHeading">{item.planName}</div>
-                        <div className="plansHeading2">
-                          ${item.price}/{item.billingCycle}
-                        </div>
-                        <div
-                          className={
-                            item.planActive == "Current"
-                              ? "chooseplanButtonWhite"
-                              : "chooseplanButton"
-                          }
-                        >
-                          {item.planActive}
-                        </div>
-                        <div className="planFeature">
-                          <div className="planTitle">{item.planTitle}</div>
-                          <ul className="ulDes">
-                            {item?.description.map((ele) => (
-                              <li className="DescriptionPlan">
-                                <span class="BlueCircle"></span>
-                                {ele}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                        {/* <div className="planFeature">Lorem ipsum dolor sit</div>
-                  <div className="planFeature">Lorem ipsum dolor sit</div> */}
-                      </div>
-                    </>
+                  <BillingCard item={item}></BillingCard>
                   );
                 })}
                 <div className="Nodata">

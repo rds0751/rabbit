@@ -553,3 +553,16 @@
   font-weight: 600;
   line-height: inherit;
 }
+.NFTCollection{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid grey;
+  background: darkslateblue;
+  color: white;
+  margin-bottom: 14px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 6px;
+  font-size: 0.833vw;
+}
