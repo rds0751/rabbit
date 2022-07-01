@@ -229,7 +229,7 @@ const NftCardsHome = (props) => {
                 ) : (
                   <>
                     {blockchainCheck(nft?.blockchain)}
-                    {`${nft?.salesInfo?.price}  ${nft?.salesInfo?.currency}`}
+                    {`${nft?.salesInfo?.price !=null ? nft?.salesInfo?.price :""}  ${nft?.salesInfo?.currency}`}
                   </>
                 )}
               </span>
