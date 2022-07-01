@@ -92,6 +92,7 @@ function CreateSingleNFT(props) {
   const [fileError, setFileError] = useState("");
   const [blockchainError, setBlockChainError] = useState("");
   const [collectionError, setCollectionError] = useState("");
+  const[tenantData,setTenantData]=useState();
   let collectionValue;
   let checkValueOnCollection;
   // const { userDetails, loggedInUser, walletAddress } = user;
@@ -134,8 +135,10 @@ function CreateSingleNFT(props) {
 
   useEffect(() => {
     async function fetchData() {
-      await getTenantData().then((response) =>
-        setBlockChains(response[0]?.blockchains)
+      await getTenantData().then((response) =>{
+        setBlockChains(response[0]?.blockchains);
+        setTenantData(response[0]);
+      }
       );
     }
     fetchData();
@@ -191,9 +194,9 @@ function CreateSingleNFT(props) {
   }, []);
 
   useEffect(async () => {
-    const collections = await getCollectionBySingleUser(userId);
+    const collections = await getCollectionBySingleUser(userId,tenantData?.wallet);
     setCollectionData(collections);
-  }, []);
+  }, [tenantData]);
   const [compressedUrl, setCompressedUrl] = useState("");
   const [imageFile, setImageFile] = useState(false);
   const [audioFile, setAudioFile] = useState(false);
@@ -451,7 +454,7 @@ function CreateSingleNFT(props) {
     //   price.current = price.current.toString();
     // }
 
-    if (collectionName === "NFTinger Collection") {
+    if (collectionName === "NFTinger collection") {
       blockchain.current = blockchainValue(selectedOption?.value);
       collectionValue = blockchain.current;
     } else {
@@ -484,7 +487,7 @@ function CreateSingleNFT(props) {
           nftName: name.current,
          // price: price.current,
           currency:
-            collectionName === "NFTinger Collection"
+            collectionName === "NFTinger collection"
               ? selectedOption?.value
               : currencyValue(collectionBlockchain),
           description: description.current,
@@ -1059,13 +1062,13 @@ function CreateSingleNFT(props) {
                   <select
                     onChange={(e) => {
                       const addressId = e.target.value.split(",");
+                      console.log(addressId);
 
-                      if (addressId[2] === undefined) {
-                        addressId[2] = "NFTinger Collection";
+                      if (addressId[2] === "NFTinger collection") {
                         setCollectionName(addressId[2]);
-                        setCollectionBlockchain("");
-                        setCollectionId("");
-                        setContractAddress("");
+                        setCollectionBlockchain(addressId[3]);
+                        setCollectionId(addressId[0]);
+                        setContractAddress(addressId[1]);
                         setCollectionError("");
                       }
                       if (addressId[3] === "Ethereum") {
@@ -1118,9 +1121,7 @@ function CreateSingleNFT(props) {
                     <option className="color82" value="-1" hidden>
                       Select Collection
                     </option>
-                    <option className="color82" value="">
-                      NFTinger Collection
-                    </option>
+                    
                     {collectionData.length > 0 &&
                       collectionData.map((item, index) => (
                         <option
@@ -1170,7 +1171,7 @@ function CreateSingleNFT(props) {
                           : selectedOption
                       } //when user select a option from the list
                       isDisabled={
-                        collectionName === "NFTinger Collection" ? false : true
+                        collectionName === "NFTinger collection" ? false : true
                       }
                     ></Select>
                   </div>

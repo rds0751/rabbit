@@ -113,6 +113,17 @@ export async function createSubsription(reqData){
 
   }
 }
+export async function getSubscription(period){
+  try{
+    const url = `${BASE_URL3}/api/v1/subscriptions?billingCycle=${period}`;
+    const res = await fetch(url, {method: 'GET', headers: AuthToken });
+    const result = await res.json();
+    return result.responseData;
+  }catch(err){
+    console.log(err);
+
+  }
+}
 
 
 

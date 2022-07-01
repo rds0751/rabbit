@@ -31,9 +31,9 @@ export const getCollection = async () => {
   }
 };
 
-export const getCollectionBySingleUser = async (userId) => {
+export const getCollectionBySingleUser = async (userId,tenantWallet) => {
   try {
-    const res = await fetch(`${BASE_URL2}/api/v1/users/${userId}/collections${getParamTenantId()}`);
+    const res = await fetch(`${BASE_URL2}/api/v1/users/${userId}/collections${getParamTenantId()}&walletAddress=${tenantWallet}`);
     const result = await res.json();
     const collectionData = result.responseData;
     return collectionData;
