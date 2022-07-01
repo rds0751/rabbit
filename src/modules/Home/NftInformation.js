@@ -277,13 +277,13 @@ export default function NftInformation(props) {
     fetchData();
   }, [nft]);
 
-  const { pathname } = window.location;
-  const pathArray = pathname.split("/");
-  let newId = pathArray[2];
+  let newId=id;
   useEffect(() => {
-    if (id !== newId)
-      props.getNftDetail();
-  }, [id!==newId]);
+
+    console.log(id,newId);
+    if(id!=="")
+    props.getNftDetail();
+  }, [id]);
 
   // alert(`${loggedInUser?._id}, ${props?.responseData?.createdBy}`);
 

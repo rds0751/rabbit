@@ -39,9 +39,7 @@ export default class NftDetail extends BaseComponent {
     };
   }
 
-  componentDidMount() {
-    this.getNftDetail();
-  }
+  
   getNftDetail = async () => {
     // const { id } = useParams();
     const { pathname } = window.location;

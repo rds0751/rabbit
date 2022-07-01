@@ -577,7 +577,7 @@ function MyProfile({ loader }) {
               </div>
             </>
           )}
-          {Nfts.length > 0 ? (
+          {Nfts?.length > 0 ? (
             <div
               className="nftTileContainer row ntf_row"
               style={{ justifyContent: "start" }}
