@@ -164,7 +164,7 @@ const UpgradePlan = (props) => {
 
   const YearlyPlan = [
     {
-      billingCycle: "monthly",
+      billingCycle: "Annual",
       createdAt: "2022-04-04T12:09:35.988Z",
       currency: "US dollar",
       description: [
@@ -182,7 +182,7 @@ const UpgradePlan = (props) => {
       price: 0,
     },
     {
-      billingCycle: "monthly",
+      billingCycle: "Annual",
       createdAt: "2022-04-04T12:09:35.988Z",
       currency: "US dollar",
       description: [
@@ -206,10 +206,10 @@ const UpgradePlan = (props) => {
       planTitle: "Everything in Free, plus:",
       planName: "Standard",
       planActive: "Upgrade",
-      price: 99,
+      price: 199,
     },
     {
-      billingCycle: "monthly",
+      billingCycle: "Annual",
       createdAt: "2022-04-04T12:09:35.988Z",
       currency: "US dollar",
       description: [
@@ -233,10 +233,10 @@ const UpgradePlan = (props) => {
       planTitle: "Everything in Standard ,plus:",
       planName: "Plus",
       planActive: "Upgrade",
-      price: 399,
+      price: 1399,
     },
     {
-      billingCycle: "monthly",
+      billingCycle: "Annual",
       createdAt: "2022-04-04T12:09:35.988Z",
       currency: "US dollar",
       description: [
@@ -266,7 +266,7 @@ const UpgradePlan = (props) => {
       planTitle: "Everything in Professional, plus:",
       planName: "Pro",
       planActive: "Upgrade",
-      price: 999,
+      price: 1999,
     },
   ];
 
@@ -341,7 +341,7 @@ const UpgradePlan = (props) => {
               ></i>
 
             </div>
-            <button onClick={()=>displayRazorPay()}>Razor Pay</button>
+            {/* <button onClick={()=>displayRazorPay()}>Razor Pay</button> */}
             <div className="billingPeriodContainer">
               <div
                 onClick={() => {
