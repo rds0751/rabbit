@@ -330,7 +330,7 @@ function NftCardsHome({ nft, appearance, loader }) {
             ) : (
               <span className="nftTileEachDetailsFirstContainerValue">
                 {blockchainCheck(blockchain)}
-                {`${salesInfo?.price !=null ? salesInfo.price  :""}  ${salesInfo?.currency}`}
+                {`${salesInfo?.price !=null ? salesInfo.price  :""}  ${salesInfo?.price ? salesInfo?.currency:""}`}
               </span>
             )}
           </div>

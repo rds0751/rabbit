@@ -45,11 +45,11 @@ const UpgradePlan = (props) => {
       getSubscription(billingPeriod)
     );
 
-    if(error|| !result){
+    if(result.responsecode===403){
       Utils.apiFailureToast("Subscription Data Not Load")
     }
     else{
-      setBillingMonthly(result);
+      setBillingMonthly(result?.responseData);
     }
   },[])
   

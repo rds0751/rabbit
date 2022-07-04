@@ -27,6 +27,7 @@ import { useDispatch } from "react-redux";
 import moment from "moment";
 import NotificationIcon from "../../assets/images/Notification.svg";
 import profileImage from "../../assets/images/ProfileReplace.svg";
+import { getParamTenantId } from "../../utility/global";
 
 function Notification() {
   const { sideBar, user } = useSelector((state) => state);
@@ -124,7 +125,7 @@ function Notification() {
                       <div className="noti-text">
                         <a
                           style={{ textDecoration: "none" }}
-                          href={"/user-profile/" + owner?._id}
+                          href={"/user-profile/" + owner?._id+getParamTenantId()}
                         >
                           <span style={{ color: "#366EEF" }}>
                             {String(owner.userName).length >= 7
@@ -140,7 +141,7 @@ function Notification() {
                         &nbsp;{type}d&nbsp;your&nbsp;
                         <a
                           style={{ textDecoration: "none" }}
-                          href={"/nft-information/" + content?._id}
+                          href={"/nft-information/" + content?._id+getParamTenantId()}
                         >
                           <span style={{ color: "#366EEF" }}>
                             {String(content.name).substring(0, 12)}{" "}
@@ -151,7 +152,7 @@ function Notification() {
                       <div className="noti-text">
                         <a
                           style={{ textDecoration: "none" }}
-                          href={"/user-profile/" + owner?._id}
+                          href={"/user-profile/" + owner?._id+getParamTenantId()}
                         >
                           <span style={{ color: "#366EEF" }}>
                             {String(owner.userName).length >= 7
@@ -167,7 +168,7 @@ function Notification() {
                         &nbsp;bought&nbsp;your&nbsp;
                         <a
                           style={{ textDecoration: "none" }}
-                          href={"/nft-information/" + content?._id}
+                          href={"/nft-information/" + content?._id+getParamTenantId()}
                         >
                           <span style={{ color: "#366EEF" }}>
                             {String(content.name).substring(0, 12)}
@@ -178,7 +179,7 @@ function Notification() {
                       <div className="noti-text">
                         <a
                           style={{ textDecoration: "none" }}
-                          href={"/user-profile/" + owner?._id}
+                          href={"/user-profile/" + owner?._id+getParamTenantId()}
                         >
                           <span style={{ color: "#366EEF" }}>
                             {String(owner.userName).length >= 7
@@ -194,7 +195,7 @@ function Notification() {
                         &nbsp;reported&nbsp;your&nbsp;
                         <a
                           style={{ textDecoration: "none" }}
-                          href={"/nft-information/" + content?._id}
+                          href={"/nft-information/" + content?._id + getParamTenantId()}
                         >
                           <span style={{ color: "#366EEF" }}>
                             {String(content.name).substring(0, 12)}
