@@ -22,10 +22,9 @@ import Ethereum from "../../assets/images/ether.svg";
 import Polygon from "../../assets/images/ploygon.svg";
 import Binance from "../../assets/images/binance.svg";
 import { useSelector } from "react-redux";
-import { fetchPalletsColor } from "../../utility/global"
+import { fetchPalletsColor, getParamTenantId } from "../../utility/global"
 import Skeleton from "react-loading-skeleton";
 import CollectionCardLoader from "./CollectionCardLoader";
-
 const blue = {
   100: '#DAECFF',
   200: '#99CCF3',
@@ -370,7 +369,7 @@ function Collections_tile(props) {
 
           {collections.slice(0, visibleBlogs).map((collection) => {
             const { _id, imageUrl, name, nftCount, blockchain, compressedURL } = collection;
-            const route = "/collection-details/" + _id;
+            const route = "/collection-details/" + _id+getParamTenantId();
             return (
               <div className="collectionCardEach col-md-6 col-lg-3 col-sm-12 mt-5 nft_card">
 

@@ -1,6 +1,57 @@
 import React from 'react'
+import {NFTinger} from "../../common/newHomeImages";
+import Utils from "../../utility";
 
 const BillingCards = ({item}) => {
+
+  const loadRazorPay = () => {
+    return new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      document.body.appendChild(script);
+      script.onload = () => {
+        resolve();
+      };
+      script.onerror = () => {
+        reject();
+      };
+    });
+  };
+
+  const displayRazorPay = async () => {
+    try {
+      await loadRazorPay();
+      const options = {
+        key: process.env.REACT_APP_RAZOR_PAY_ID,
+        amount: (999) * 100 * 78, //price pending
+        currency: "INR",
+        name: "Make Payment",
+        description: "",
+        image: NFTinger, 
+        handler: async (response) => {
+          // const responseData = {
+          //   paymentId: response?.razorpay_payment_id,
+          //   totalPrice: space?.price,
+          // };
+
+        //  addSpacehandler(responseData);
+          // sessionManager.setDataInCookies(
+          //   response?.razorpay_payment_id,
+          //   cookiesConstants.RAZORPAY_PAYMENT_ID
+          // );
+         // await createEventHandler(responseData); //update subscription 
+        },
+        theme: {
+          color: "#4c84ff",
+        },
+      };
+      const rzp1 = new window.Razorpay(options);
+      rzp1.open();
+    } catch (err) {
+      Utils.apiFailureToast("Transcation Failure");
+    }
+  };
+
   return (
     <>
     <div

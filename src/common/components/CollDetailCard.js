@@ -18,6 +18,7 @@ import {
   addLikeNft,
   getNFtsData,
 } from "../../services/webappMicroservice";
+import { fetchPalletsColor, getParamTenantId } from "../../utility/global";
 function CollDetailCard({ nft }) {
   const navigate = useNavigate();
   const { user, sideBar } = useSelector((state) => state);
@@ -42,7 +43,7 @@ function CollDetailCard({ nft }) {
     showDateSection = false;
   }
 
-  const route = "/nft-information/" + _id;
+  const route = "/nft-information/" + _id+getParamTenantId();
   const likeNft = (id) => {
     if (user.loggedInUser == null) {
       navigate("/add-wallet");
@@ -252,7 +253,7 @@ function CollDetailCard({ nft }) {
               }}
             >
                {blockchainCheck(blockchain)}
-              {salesInfo?.price} {salesInfo?.currency}
+              {salesInfo?.price!=null ? salesInfo?.price :""} {salesInfo?.price ? salesInfo?.currency:""}
             </span>
           </div>
           <div

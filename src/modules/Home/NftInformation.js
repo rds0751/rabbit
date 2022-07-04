@@ -192,10 +192,7 @@ export default function NftInformation(props) {
   const { owner, creator, salesInfo, blockchain, offers } = nft;
 
 
-  let [makeOfferDetails, setMakeOfferDetails] = useState({
-    price: 0,
-    dateTime: ""
-  })
+
 
 
   const [openReportModal, setOpenReportModal] = useState(false);
@@ -213,6 +210,11 @@ export default function NftInformation(props) {
   const [moreNft, setMoreNfts] = useState([]);
   const [dateTimeValue, setDateTimeValue] = useState("");
   const [salePrice, setSalePrice] = useState("");
+  const [makeOfferDate,setMakeOfferDate]=useState("");
+  let [makeOfferDetails, setMakeOfferDetails] = useState({
+    price: 0,
+    dateTime: makeOfferDate
+  })
 
 
   let period = {
@@ -279,8 +281,6 @@ export default function NftInformation(props) {
 
   let newId=id;
   useEffect(() => {
-
-    console.log(id,newId);
     if(id!=="")
     props.getNftDetail();
   }, [id]);
@@ -1281,41 +1281,46 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                     </div>
                     <div className="row third-text">
                       <div className="col-lg-6 col-sm-12">
-                        <span className="text">
-                          Owned by:&nbsp;
+                      <div className="createdByDiv">
+                          <div className="createdByText">Owned By :</div>
+
                           <Link
-                            to={"/user-profile/" + owner[0]?._id + getParamTenantId()}
+                              to={"/user-profile/" + owner[0]?._id + getParamTenantId()}
                             style={{ textDecoration: "none" }}
+                            
                           >
-                            <span className="text-name fw-b">
-                              {/* {ownedBy} */}
-                              {owner?.wallet_address ===
+                             <div  className="createdByWallet">
+                             {owner?.wallet_address ===
                                 user?.walletAddress?.address
                                 ? "You"
                                 : ownedBy}
-                              {/* {(String(ownedBy).length >= 7) ? (!ownedBy ? " " : (String(ownedBy).substring(0, 8) + "...")) : (String(ownedBy) === undefined ? "" : ownedBy)}                     */}
-                            </span>
+                              
+                              </div>
                           </Link>
-                        </span>
+                        </div>
                       </div>
                       <div className="col-lg-6 col-sm-12">
-                        <span className="text">
-                          Created by:&nbsp;
+                        <div className="createdByDiv">
+                          <div className="createdByText">Created By :</div>
+
                           <Link
                             to={"/user-profile/" + nft?.createdBy+ getParamTenantId()}
                             style={{ textDecoration: "none" }}
+                            
                           >
-                            <span className="text-name fw-b">
-                              {/* {createdBy} */}
-                              {creator?.wallet_address ===
+                             <div  className="createdByWallet">
+                             {creator?.wallet_address ===
                                 user?.walletAddress?.address
                                 ? "You"
                                 : createdBy}
-                              {/* {(String(createdBy).length >= 7) ? (!createdBy ? " " : (String(createdBy).substring(0, 8) + "...")) : (String(createdBy) === undefined ? "" : createdBy)}                     */}
-                            </span>
+                           
+                              
+                              </div>
+
+
                           </Link>
-                          <span className="text-name fw-b"></span>
-                        </span>
+                         
+                        </div>
                       </div>
                     </div>
                     <div className="fourth-text">
@@ -1454,9 +1459,8 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                             marginRight: "16px",
                             fontFamily: tab === 3 ? "poppins-bold" : "poppins",
                             display:
-                            props?.responseData?.createdBy == userIdLocal
-                              ? "block"
-                              : "none"
+                            props?.responseData?.ownerAddress ==
+                            loggedInUser?.wallet_address ?"block":"none",
                           }}
                         >
                           Offers
@@ -1761,7 +1765,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                         className="price-input-box"
                         type="number"
                         title=" "
-                        placeholder="0 ETH"
+                        placeholder="0"
                         autoComplete="off"
                         onChange={(e) => setMakeOfferDetails({ ...makeOfferDetails, price: e.target.value })}
                         onWheel={(e) => e.target.blur()}
@@ -1770,7 +1774,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                     <div className="second-row">
                       <h3 className="heading-second-row">Expiration Date</h3>
                       <div className="expiry-div">
-                        <Select
+                        {/* <Select
                           className="selectfixing4"
                           name="type"
                           onChange={(e) => handleChange(e)}
@@ -1778,10 +1782,14 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                         >
                           <Option>A month</Option>
                           <Option value="list">A year</Option>
-                        </Select>
-                        <span style={{ border: "0.2px ridge #C8C8C8" }}></span>
+                        </Select> */}
+                        {/* <span style={{ border: "0.2px ridge #C8C8C8" }}></span> */}
+                        <DateTimePicker  onChange={setMakeOfferDate} minDate={new Date()}
+                          dayPlaceholder="DD" monthPlaceholder="MM" yearPlaceholder="YY"
+                          hourPlaceholder="HH" minutePlaceholder="MM"
+                         disableClock={true} value={makeOfferDate}  className="saleDateTime" />
 
-                        <input type="datetime-local" className="filter-time" onChange={(e) => setMakeOfferDetails({ ...makeOfferDetails, dateTime: e.target.value })} />
+                        {/* <input type="datetime-local" id="demx" className="filter-time" min={()=>disablePastDate} onChange={(e) => setMakeOfferDetails({ ...makeOfferDetails, dateTime: e.target.value })} /> */}
                       </div>
                     </div>
 

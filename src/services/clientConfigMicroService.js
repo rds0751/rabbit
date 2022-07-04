@@ -124,6 +124,18 @@ export async function getSubscription(period){
 
   }
 }
+export async function updateSubscription(reqData){
+  try{
+    const url = `${BASE_URL3}/api/v1/subscriptions/`;
+    const res = await fetch(url, {method: 'PUT', headers: AuthToken,body:JSON.stringify(reqData) });
+    const result = await res.json();
+    return result;
+  }catch(err){
+    console.log(err);
+
+  }
+}
+
 
 
 
