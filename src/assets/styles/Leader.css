@@ -2005,3 +2005,24 @@ td {
   width: 18px !important;
   color: grey !important;
 }
+
+.createdByDiv{
+display: flex;
+flex-direction: row;
+ column-gap: 5px;
+line-break: anywhere;
+}
+.createdByText{
+  white-space: nowrap;
+  color: #191919;
+  font-family: poppins-medium;
+  font-size: 16px;
+  line-height: 25px;
+  text-transform: capitalize;
+}
+.createdByWallet{
+  font-weight: bold;
+  font-family: "poppins-bold";
+  color: #191919 !important;
+
+}

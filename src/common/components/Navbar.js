@@ -398,12 +398,13 @@ function Navbar({ loader,customizeStore,setModal }) {
 
   return (
     <>
-      {
-      /*
+      
+   
        <Helmet>
-        <title>{customize?.storeName}</title>
+        <title>{customize?.storeName!="" ? customize?.storeName : "Your Store Name" }</title>
+        <link rel="icon" href={customize?.storeLogo}/>
         </Helmet>
-       */}
+       
 
       <div className="navbar-width">
         <nav className="navbarborder navbar navbar-expand-lg">
@@ -429,7 +430,8 @@ function Navbar({ loader,customizeStore,setModal }) {
                       alt=""
                      />
                   ):( <LogoDiv onClick={()=>navigate("/")}>
-                   <Image src={NFTinger}></Image>
+                   {/* <Image src={NFTinger}></Image> */}
+                   <LogoDiv>Your Logo</LogoDiv>
                     </LogoDiv>)
 
 
