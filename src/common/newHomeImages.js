@@ -27,11 +27,13 @@ import Utility from "../assets/images/Utility.svg";
 import WarriorMonk from "../assets/images/WarriorMonk.png";
 import Water from "../assets/images/Water.png";
 import NFTinger from "../assets/images/NFTinger.svg";
+import NFTingerLogo from "../assets/images/NFTingerLogo.svg";
 
 
 export {
   Ball,
   NFTinger,
+  NFTingerLogo,
   Water,
   WarriorMonk,
   Utility,

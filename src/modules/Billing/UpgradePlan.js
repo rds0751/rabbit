@@ -3,15 +3,11 @@ import "../../assets/styles/nftReportModal.css";
 import styled from "styled-components";
 import "./styles/billing.css";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
 import Utils from "../../utility";
 import {
-  getTenantByWallet,
   getSubscription,
-  getTenant,
+  getSubscriptionPlan
 } from "../../services/clientConfigMicroService";
-import {NFTinger} from "../../common/newHomeImages";
-
 import { sessionManager } from "../../managers/sessionManager";
 import BillingCard from "./BillingCards";
 
@@ -39,6 +35,9 @@ const UpgradePlan = (props) => {
    const { user, sideBar } = useSelector((state) => state);
   const { userDetails, loggedInUser, walletAddress } = user;
   const [billingMonthly,setBillingMonthly]=useState();
+  const customize = useSelector(state => state.customize);
+  const [currentPlan,setCurrentPlan]=useState()
+
 
   useEffect(async ()=>{
     const [error,result]=await Utils.parseResponse(
@@ -50,8 +49,21 @@ const UpgradePlan = (props) => {
     }
     else{
       setBillingMonthly(result?.responseData);
+      const [subError ,subscriptionUser]=await Utils.parseResponse(
+        getSubscriptionPlan(customize.id)
+      )
+      if(subscriptionUser.responseCode === 403){
+      Utils.apiFailureToast("Api Failure")
+      }
+      else {
+        setCurrentPlan(subscriptionUser.responseData);
+      } 
+      
     }
-  },[])
+  },[customize.id])
+
+  
+
   
 
   const MonthlyPlan = [
@@ -324,7 +336,7 @@ const UpgradePlan = (props) => {
               <div className="plansContainer">
                 {billingMonthly?.map((item, key) => {
                   return (
-                  <BillingCard item={item}></BillingCard>
+                  <BillingCard item={item} plan={currentPlan} />
                   );
                 })}
                 <div className="Nodata">
