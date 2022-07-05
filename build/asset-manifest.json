@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.f83132d9.css",
-    "main.js": "/static/js/main.c9019e4f.js",
+    "main.css": "/static/css/main.f00f12ce.css",
+    "main.js": "/static/js/main.24ba65cc.js",
     "static/js/845.3e1bb2c9.chunk.js": "/static/js/845.3e1bb2c9.chunk.js",
     "static/media/Banner.png": "/static/media/Banner.112c32a6f604149b0d83.png",
     "static/media/marketplace.png": "/static/media/marketplace.1c538b4c97761619cf63.png",
@@ -42,6 +42,7 @@
     "static/media/createCollection.svg": "/static/media/createCollection.5d1b3d38c380b862830217715bfd25f0.svg",
     "static/media/No-Info-Icon.svg": "/static/media/No-Info-Icon.be287affad004c922843bd02b43153be.svg",
     "static/media/Utility.svg": "/static/media/Utility.1035eb47a635cd1de183e1c48add73a4.svg",
+    "static/media/NFTingerLogo.svg": "/static/media/NFTingerLogo.bf46b5b650241220b95eb9a277c93734.svg",
     "static/media/hoverDiscord.svg": "/static/media/hoverDiscord.7167e13686793cfb219f8ebf482d1bf2.svg",
     "static/media/ether.svg": "/static/media/ether.9f60a980ef8ea0877a14347e6a403c65.svg",
     "static/media/collection.svg": "/static/media/collection.3423e7a57f035a0f01cb89b807e260e3.svg",
@@ -88,12 +89,12 @@
     "static/media/drop-down-arrow.svg": "/static/media/drop-down-arrow.252c67d09c66c766f99a.svg",
     "static/media/Edit.svg": "/static/media/Edit.adfd6c934476ae588248e2026354da45.svg",
     "static/media/coverImage.svg": "/static/media/coverImage.7cc8a61314efed2824b3ef2b04371775.svg",
-    "main.f83132d9.css.map": "/static/css/main.f83132d9.css.map",
-    "main.c9019e4f.js.map": "/static/js/main.c9019e4f.js.map",
+    "main.f00f12ce.css.map": "/static/css/main.f00f12ce.css.map",
+    "main.24ba65cc.js.map": "/static/js/main.24ba65cc.js.map",
     "845.3e1bb2c9.chunk.js.map": "/static/js/845.3e1bb2c9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f83132d9.css",
-    "static/js/main.c9019e4f.js"
+    "static/css/main.f00f12ce.css",
+    "static/js/main.24ba65cc.js"
   ]
 }
