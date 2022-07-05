@@ -124,9 +124,20 @@ export async function getSubscription(period){
 
   }
 }
-export async function updateSubscription(reqData){
+
+export async function getSubscriptionPlan(tenantId){
   try{
-    const url = `${BASE_URL3}/api/v1/subscriptions/`;
+    const url = `${BASE_URL3}/api/v1/subscriptions/${tenantId}`;
+    const res = await fetch(url, {method: 'GET', headers: AuthToken});
+    const result = await res.json();
+    return result;
+  }catch(err){
+    console.log(err);
+  }
+}
+export async function updateSubscription(reqData,tenantId){
+  try{
+    const url = `${BASE_URL3}/api/v1/subscriptions/${tenantId}`;
     const res = await fetch(url, {method: 'PUT', headers: AuthToken,body:JSON.stringify(reqData) });
     const result = await res.json();
     return result;

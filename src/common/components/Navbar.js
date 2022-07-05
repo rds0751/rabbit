@@ -41,7 +41,7 @@ import { padding } from "@mui/system";
 import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css';
 import styled from "styled-components";
-import {NFTinger} from "../newHomeImages";
+import {NFTinger,NFTingerLogo} from "../newHomeImages";
 const queryString = require("query-string");
 const activeMarketplace = ["/nfts"];
 const activeLeaderboard = ["/leader-board"];
@@ -402,7 +402,7 @@ function Navbar({ loader,customizeStore,setModal }) {
    
        <Helmet>
         <title>{customize?.storeName!="" ? customize?.storeName : "Your Store Name" }</title>
-        <link rel="icon" href={customize?.storeLogo}/>
+        <link rel="icon" href={customize?.storeLogo !="" ? customize?.storeLogo : NFTingerLogo} />
         </Helmet>
        
 
@@ -424,11 +424,19 @@ function Navbar({ loader,customizeStore,setModal }) {
                 {
                   loader ? <Skeleton width="60px" /> :
                   customize.storeLogo ?(
+                    <>
+                    <a>
+                    <div className="Logo-Image">
                     <img
                        src={customize?.storeLogo}
-                       style={{ width: "143px",maxWidth:"143px" }}
+                       className="NavBarLogo"
+                 
                       alt=""
                      />
+                    </div>
+                    </a>
+                    </>
+                   
                   ):( <LogoDiv onClick={()=>navigate("/")}>
                    {/* <Image src={NFTinger}></Image> */}
                    <LogoDiv>Your Logo</LogoDiv>
