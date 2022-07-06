@@ -15,7 +15,7 @@ const Modal = styled.div`
   position: absolute;
   background-color: white;
   opacity: 1 !important;
-  top: 37px;
+  top: 79px;
   width: 90%;
   height: fit-content;
   border-radius: 13px;
@@ -29,6 +29,21 @@ const ModalInner = styled.div`
   width: 96.8%;
 `;
 
+const Div=styled.div`
+`;
+const InnerDiv=styled.div`
+width: 100%;
+height: 100%;
+position: absolute;
+display: flex;
+justify-content: center;
+color:white;
+align-items: center;
+z-index: 999;
+background: rgba(0, 0, 0, 0.6);
+`;
+const Text=styled.label``
+
 const UpgradePlan = (props) => {
   const [modal, setModal] = useState(false);
   const [billingPeriod, setBillingPeriod] = useState("monthly");
@@ -37,6 +52,8 @@ const UpgradePlan = (props) => {
   const [billingMonthly,setBillingMonthly]=useState();
   const customize = useSelector(state => state.customize);
   const [currentPlan,setCurrentPlan]=useState()
+  const [planUpgrade,setPlanUpgrade]=useState(false);
+  const [loaderState,setLoaderState]=useState(false);
 
 
   useEffect(async ()=>{
@@ -52,15 +69,15 @@ const UpgradePlan = (props) => {
       const [subError ,subscriptionUser]=await Utils.parseResponse(
         getSubscriptionPlan(customize.id)
       )
-      if(subscriptionUser.responseCode === 403){
-      Utils.apiFailureToast("Api Failure")
+      if(subscriptionUser?.responseCode !== 200){
+      console.log(subscriptionUser.message);
       }
       else {
         setCurrentPlan(subscriptionUser.responseData);
       } 
       
     }
-  },[customize.id])
+  },[customize.id,planUpgrade])
 
   
 
@@ -286,6 +303,17 @@ const UpgradePlan = (props) => {
  
 
   return (
+    <>    
+    {loaderState ? (
+      <Div>
+        <InnerDiv>
+          <Text>
+            Loading Please Wait...Dont Refresh the Page
+          </Text>
+
+        </InnerDiv>
+      </Div>
+    ):""}
     <div
       className="report-outer"
       style={{ display: `${props?.Modal ? "block" : "none"}` }}
@@ -336,7 +364,7 @@ const UpgradePlan = (props) => {
               <div className="plansContainer">
                 {billingMonthly?.map((item, key) => {
                   return (
-                  <BillingCard item={item} plan={currentPlan} />
+                  <BillingCard item={item} plan={currentPlan} setPlanUpgrade={setPlanUpgrade} planUpgrade={planUpgrade} toggle={billingPeriod} />
                   );
                 })}
                 <div className="Nodata">
@@ -393,6 +421,8 @@ const UpgradePlan = (props) => {
         </Modal>
       </div>
     </div>
+    </>
+
   );
 };
 

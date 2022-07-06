@@ -125,7 +125,7 @@ const Title = styled.label`
 `;
 const SubTitle = styled.label`
   text-align: center;
-  font: normal normal medium 18px/32px Poppins;
+  font: normal normal normal 0.95vw/32px Poppins;
   letter-spacing: 0px;
   color: #f0f0f0;
   opacity: 1;
@@ -281,6 +281,7 @@ const StepDetails = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-top: 43px;
 `;
 const StepTitle = styled.label`
   text-align: center;
@@ -291,7 +292,7 @@ const StepTitle = styled.label`
 `;
 const StepDes = styled.label`
   text-align: left;
-  font: normal normal medium 22px/32px Poppins;
+  font: normal normal normal 1.15vw/32px Poppins;
   letter-spacing: 0px;
   color: #f0f0f0;
   margin-top: 38px;
@@ -348,6 +349,9 @@ const CurrencyPrice = styled.div`
   display: flex;
   justify-content: space-between;
   margin-left: 5px;
+`;
+const Number=styled.label`
+color: #016DD9;
 `;
 
 const HomeCard = () => {
@@ -427,6 +431,8 @@ const HomeCard = () => {
       name: "Music",
     },
   ];
+
+ 
 
   useEffect(async () => {
     const [error, result] = await Utils.parseResponse(
@@ -610,7 +616,7 @@ const HomeCard = () => {
                   <Row>
                     <Col lg={6}>
                       <div className="left-text  new-home-left-touch">
-                        <h1 className="heading">
+                        <h1 className="heading newHomeHeading">
                           Launch your NFT Marketplace in a minute
                         </h1>
                         <p className="mob-heading">
@@ -748,7 +754,7 @@ const HomeCard = () => {
               </StepImageDiv>
 
               <StepDetails>
-                <StepTitle>01 Connect your wallet</StepTitle>
+                <StepTitle><Number>01</Number> Connect your wallet</StepTitle>
                 <StepDes>
                   NFTinger is super easy for anyone as it subtracts the the
                   complexities of
@@ -767,7 +773,7 @@ const HomeCard = () => {
                 <Image src={StepStore}></Image>
               </StepImageDiv>
               <StepDetails>
-                <StepTitle>02 Create your NFT store</StepTitle>
+                <StepTitle><Number>02</Number> Create your NFT store</StepTitle>
                 <StepDes>
                   NFTinger is super easy for anyone as it subtracts the the
                   complexities of
@@ -786,7 +792,7 @@ const HomeCard = () => {
               </StepImageDiv>
 
               <StepDetails>
-                <StepTitle>03 Start selling and grow</StepTitle>
+                <StepTitle><Number>03</Number> Start selling and grow</StepTitle>
                 <StepDes>
                   NFTinger is super easy for anyone as it subtracts the the
                   complexities of

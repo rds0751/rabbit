@@ -224,7 +224,7 @@ function Home({ loaderState }) {
                       ) : customize.appearance.heading ? (
                         customize.appearance.heading
                       ) : (
-                        "Buy, Trade and Sell your NFTs"
+                        "Launch your own NFT store in minutes no technical knowledge required"
                       )}
                     </h1>
                     <p className="mob-heading">
@@ -233,7 +233,7 @@ function Home({ loaderState }) {
                       ) : customize.appearance.heading ? (
                         customize.appearance.heading
                       ) : (
-                        "Buy, Trade and Sell your NFTs"
+                        "Launch your own NFT Store/Marketplace without any technical knowledge"
                       )}
                     </p>
 

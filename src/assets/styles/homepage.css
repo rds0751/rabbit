@@ -8,6 +8,7 @@
 }
 .homepage .newbanner{
   background-image: url("../images/BannerImage.svg");
+  padding-top: 84px !important;
 }
 
 .new-home-left-touch{
@@ -43,6 +44,13 @@ color: #031527!important;
   line-height: 70px;
   color: #ffffff;
   margin-bottom: 22px;
+  padding-top: 81px;
+}
+.homepage .left-text .newHomeHeading {
+  font-size: 54px!important;
+  line-height: 81px!important;
+  color: #ffffff;
+  margin-bottom: 24px;
   padding-top: 81px;
 }
 .homepage .left-text .text {
