@@ -747,11 +747,11 @@ function Navbar({ loader,customizeStore,setModal }) {
                               ? "nav-link navlink_active"
                               : "nav-link"
                           }
-                          style={
-                            activeMarketplace.includes(location.pathname)
-                              ? navLink
-                              : {}
-                          }
+                          // style={
+                          //   activeMarketplace.includes(location.pathname)
+                          //     ? navLink
+                          //     : {}
+                          // }
                           aria-current="page"
                           to={`/nfts${getParamTenantId()}`}
                           onMouseOut={handleMouseOut}
@@ -779,11 +779,11 @@ function Navbar({ loader,customizeStore,setModal }) {
                           }
                           exact
                           to={`/leader-board${getParamTenantId()}`}
-                          style={
-                            activeLeaderboard.includes(location.pathname)
-                              ? navLink
-                              : {}
-                          }
+                          // style={
+                          //   activeLeaderboard.includes(location.pathname)
+                          //     ? navLink
+                          //     : {}
+                          // }
                           onMouseOut={handleMouseOut}
                           onMouseOver={handleMouseOver}
                         >
@@ -804,9 +804,9 @@ function Navbar({ loader,customizeStore,setModal }) {
                     }
                     onMouseOut={handleMouseOut}
                     onMouseOver={handleMouseOver}
-                    style={
-                      activeResource.includes(location.pathname) && loader ===false ? navLink : {}
-                    }
+                    // style={
+                    //   activeResource.includes(location.pathname) && loader ===false ? navLink : {}
+                    // }
                   >
                     <NavDropdown.Item onClick={() => navigate(`/help-center${getParamTenantId()}`)}>
                       Help Center
