@@ -127,7 +127,7 @@ export async function getSubscription(period){
 
 export async function getSubscriptionPlan(tenantId){
   try{
-    const url = `${BASE_URL3}/api/v1/subscriptions/${tenantId}`;
+    const url = `${BASE_URL3}/api/v1/user/subscriptions/${tenantId}`;
     const res = await fetch(url, {method: 'GET', headers: AuthToken});
     const result = await res.json();
     return result;
@@ -137,6 +137,7 @@ export async function getSubscriptionPlan(tenantId){
 }
 export async function updateSubscription(reqData,tenantId){
   try{
+    console.log(reqData);
     const url = `${BASE_URL3}/api/v1/subscriptions/${tenantId}`;
     const res = await fetch(url, {method: 'PUT', headers: AuthToken,body:JSON.stringify(reqData) });
     const result = await res.json();
@@ -144,6 +145,29 @@ export async function updateSubscription(reqData,tenantId){
   }catch(err){
     console.log(err);
 
+  }
+}
+
+export async function addTranscation(reqData){
+  try{
+    const url = `${BASE_URL3}/api/v1/transactions`;
+    const res = await fetch(url, {method: 'POST', headers: AuthToken,body:JSON.stringify(reqData) });
+    const result = await res.json();
+    return result;
+  }catch(err){
+    console.log(err);
+
+  }
+}
+export async function tenantSubscription(reqData,tenantId){
+  try{
+    console.log(reqData);
+    const url = `${BASE_URL1}/api/v1/tenant/subscriptions/${tenantId}`;
+    const res = await fetch(url, {method: 'PUT', headers: AuthToken,body:JSON.stringify(reqData) });
+    const result = await res.json();
+    return result;
+  }catch(err){
+    console.log(err);
   }
 }
 

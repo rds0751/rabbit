@@ -33,8 +33,8 @@ const MainDiv = styled.div`
 `;
 const Image = styled.img``;
 const NavDiv = styled.div`
-  width: 87vw;
-  margin-left: 5vw;
+  width: 100%;
+  margin-left: 0.6rem;
   height: 70px;
   padding: 34px;
   display: flex;
@@ -59,6 +59,7 @@ const ItemsDiv = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-right: 4.5rem;
 `;
 const Item = styled.label`
   text-align: left;

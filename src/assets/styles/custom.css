@@ -404,6 +404,9 @@ ul {
     align-items: center !important;
     justify-content: center !important;
     gap: 10px;
+    font: normal normal normal 18px/27px Poppins;
+    color: #031527;
+
 }
 /* .column-gap-20{
   column-gap: 25px !important;
