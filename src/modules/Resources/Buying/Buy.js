@@ -70,38 +70,19 @@ const Input = styled.input`
   width: 80%;
   font-size: 16px;
 `;
-
-
-
-
-
-
-
-
-
-
-
-const ListItem = styled.li`
+const ListItem = styled.div`
+  display: flex;
+  justify-content:center;
+  align-items: center;
   width: 941px;
-  text-align: center;
   background-color: #ffffff;
   box-shadow: 0px 3px 12px #0000000f;
   border: 1px solid #d5d5d5;
   border-radius: 12px;
-  padding: 30px 24px 13px 16px;
   margin-bottom: 32px;
-  @media screen and (min-width: 426px) and (max-width: 769px) {
-    padding: 30px 14px 13px 16px;
-    width: 100%;
-    
-  }
-  @media screen and (min-width: 770px) and (max-width: 955px) {
-    padding: 30px 14px 13px 16px;
-    width: 100%;
-    
-  }
-  @media screen and (max-width: 426px) {
-    padding: 32px 8px 24px 16px;
+  height:100px;
+  
+  @media screen and (max-width: 955px) {
     width: 100%;
     
   }
@@ -109,18 +90,12 @@ const ListItem = styled.li`
 const Question = styled.h1`
   font-size: 16px;
   font-weight: 600;
-  padding-bottom: 28px;
-  padding-right: 60px;
-  margin-bottom: 0px;
+  padding-bottom: 0px;
   @media screen and (min-width: 426px) and (max-width: 769px) {
     font-size: 12px;
-    padding-right: 16px;
-  }
- 
+  } 
   @media screen and (max-width: 426px) {
     font-size: 14px;
-    padding-bottom: 12px;
-    padding-right:0px;
   }
 `;
 
@@ -191,7 +166,7 @@ const match=BuyList.filter(val => val.questionText.toLocaleLowerCase().includes(
           </SearchBox>
         </Header>
         <ul>
-          {match.length==0 ? (
+          {match.length === 0 ? (
          
          <ListItem>
          

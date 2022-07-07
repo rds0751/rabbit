@@ -203,18 +203,18 @@ function LeaderBoard({ loader }) {
   const queryString = require('query-string')
 
   const [buyerDuration, setBuyerDuration] = useState({
-    duration: 'all',
+    duration: 'weekly',
   })
   const [NFTDuration, setNFTDuration] = useState({
-    duration: 'all',
+    duration: 'weekly',
   })
 
   const [sellerDuration, setSellerDuration] = useState({
-    duration: 'all',
+    duration: 'weekly',
   })
 
   const [collectionDuration, setCollectionDuration] = useState({
-    duration: 'all',
+    duration: 'weekly',
   })
 
   const buyerReqObj = queryString.stringify(buyerDuration)
@@ -340,9 +340,9 @@ function LeaderBoard({ loader }) {
                         name="duration"
                         onChange={(e) => ChangeBuyerDuration(e)}
                         value={buyerDuration.duration}
-                        defaultValue="all"
+                        defaultValue="weekly"
                       >
-                        <StyledOption value="all">All</StyledOption>
+                        {/* <StyledOption value="all">All</StyledOption> */}
                         <StyledOption value="weekly">Weekly</StyledOption>
                         <StyledOption value="monthly">Monthly</StyledOption>
                         <StyledOption value="yearly">Yearly</StyledOption>
@@ -555,9 +555,9 @@ function LeaderBoard({ loader }) {
                         name="duration"
                         onChange={(e) => ChangeSellerDuration(e)}
                         value={sellerDuration.duration}
-                        defaultValue="all"
+                        defaultValue="weekly"
                       >
-                        <StyledOption value="all">All</StyledOption>
+                        {/* <StyledOption value="all">All</StyledOption> */}
                         <StyledOption value="weekly">Weekly</StyledOption>
                         <StyledOption value="monthly">Monthly</StyledOption>
                         <StyledOption value="yearly">Yearly</StyledOption>
@@ -762,9 +762,9 @@ function LeaderBoard({ loader }) {
                         name="duration"
                         onChange={(e) => ChangeCollectionDuration(e)}
                         value={collectionDuration.duration}
-                        defaultValue="all"
+                        defaultValue="weekly"
                       >
-                        <StyledOption value="all">All</StyledOption>
+                        {/* <StyledOption value="all">All</StyledOption> */}
                         <StyledOption value="weekly">Weekly</StyledOption>
                         <StyledOption value="monthly">Monthly</StyledOption>
                         <StyledOption value="yearly">Yearly</StyledOption>
@@ -1072,10 +1072,10 @@ function LeaderBoard({ loader }) {
                     name="duration"
                     onChange={(e) => ChangeBuyerDuration(e)}
                     value={buyerDuration.duration}
-                    defaultValue="all"
+                    defaultValue="weekly"
                     className="mobFilterButton"
                   >
-                    <StyledOption value="all">All</StyledOption>
+                    {/* <StyledOption value="all">All</StyledOption> */}
                     <StyledOption value="weekly">Weekly</StyledOption>
                     <StyledOption value="monthly">Monthly</StyledOption>
                     <StyledOption value="yearly">Yearly</StyledOption>
@@ -1094,10 +1094,10 @@ function LeaderBoard({ loader }) {
                     name="duration"
                     onChange={(e) => ChangeSellerDuration(e)}
                     value={sellerDuration.duration}
-                    defaultValue="all"
+                    defaultValue="weekly"
                     className="mobFilterButton"
                   >
-                    <StyledOption value="all">All</StyledOption>
+                    {/* <StyledOption value="all">All</StyledOption> */}
                     <StyledOption value="weekly">Weekly</StyledOption>
                     <StyledOption value="monthly">Monthly</StyledOption>
                     <StyledOption value="yearly">Yearly</StyledOption>
@@ -1116,10 +1116,10 @@ function LeaderBoard({ loader }) {
                     name="duration"
                     onChange={(e) => ChangeCollectionDuration(e)}
                     value={collectionDuration.duration}
-                    defaultValue="all"
+                    defaultValue="weekly"
                     className="mobFilterButton"
                   >
-                    <StyledOption value="all">All</StyledOption>
+                    {/* <StyledOption value="all">All</StyledOption> */}
                     <StyledOption value="weekly">Weekly</StyledOption>
                     <StyledOption value="monthly">Monthly</StyledOption>
                     <StyledOption value="yearly">Yearly</StyledOption>
@@ -1172,9 +1172,9 @@ function LeaderBoard({ loader }) {
                   name="duration"
                   onChange={(e) => ChangeNFTDuration(e)}
                   value={NFTDuration.duration}
-                  defaultValue="all"
+                  defaultValue="weekly"
                 >
-                  <StyledOption value="all">All</StyledOption>
+                  {/* <StyledOption value="all">All</StyledOption> */}
                   <StyledOption value="weekly">Weekly</StyledOption>
                   <StyledOption value="monthly">Monthly</StyledOption>
                   <StyledOption value="yearly">Yearly</StyledOption>

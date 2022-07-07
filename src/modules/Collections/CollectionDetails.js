@@ -501,9 +501,9 @@ function CollectionDetails({ loader }) {
                       defaultValue=""
                     >
                       <StyledOption value="" hidden>
-                        Sort By All
+                        Sort By
                       </StyledOption>
-                      <StyledOption value="">All</StyledOption>
+                      {/* <StyledOption value="">All</StyledOption> */}
                       <StyledOption value="1">Recently added</StyledOption>
                       <StyledOption value="2">Price: High to Low</StyledOption>
                       <StyledOption value="3">Price: Low to High</StyledOption>
