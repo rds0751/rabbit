@@ -1145,7 +1145,7 @@ height: 47px;
 }
 .copyrightDivMob{
   text-align:center;
-  backgroundColor:rgb(251, 251, 251);
+  background-color:rgb(251, 251, 251);
   margin-top: 39px;
 }
 .textCopyrightMob{
@@ -1162,10 +1162,6 @@ height: 47px;
 }
 .newHomeCopyright{
 margin-top: 0;
-text-align: left;
-}
-.newHome{
-
 }
 
 .textCopyright{

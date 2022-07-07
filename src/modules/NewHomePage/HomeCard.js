@@ -129,7 +129,7 @@ const SubTitle = styled.label`
   letter-spacing: 0px;
   color: #f0f0f0;
   opacity: 1;
-  margin-top: 10px;
+  margin-top: 1rem;
 `;
 
 const HeadTitle = styled.div`
@@ -154,8 +154,9 @@ const TitleSecond = styled.label`
 `;
 const ExperienceText = styled.label`
   text-align: left;
-  margin-top: 43px;
-  font: normal normal medium 22px/33px Poppins;
+  margin-top:  2.65rem;
+  margin-bottom: 6.42rem;
+  font: normal normal normal 1.15vw/33px Poppins;
   letter-spacing: 0px;
   color: #e8e8e8;
   opacity: 1;
@@ -173,7 +174,7 @@ const OfferCard = styled.div`
   justify-content: center;
   align-items: center;
   width: 140px;
-  margin-right: 36px;
+  margin-right: 6.07rem;
   height: 150px;
   background: #19293a 0% 0% no-repeat padding-box;
   border-radius: 12px;
@@ -181,7 +182,7 @@ const OfferCard = styled.div`
 `;
 const OfferName = styled.label`
   text-align: left;
-  font: normal normal medium 18px/27px Poppins;
+  font: normal normal normal 18px/27px Poppins;
   letter-spacing: 0px;
   margin-top: 1.5rem;
   color: #e8e8e8;
@@ -230,7 +231,7 @@ const StoreFrontDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 19%;
+  width: 20%;
 `;
 const StoreFrontName = styled.label`
   text-align: center;
@@ -241,13 +242,13 @@ const StoreFrontName = styled.label`
 `;
 const DesStoreFrontDiv = styled.label`
   text-align: left;
-  font: normal normal medium 18px/27px Poppins;
+  font: normal normal normal 0.95vw/27px Poppins;
   letter-spacing: 0px;
   color: #e8e8e8;
   opacity: 1;
 `;
 const StoreButton = styled.button`
-  margin-top: 92px;
+  margin-top: 6.8rem;
   background: #016dd9 0% 0% no-repeat padding-box;
   border-radius: 12px;
   border: none;
@@ -883,7 +884,7 @@ const HomeCard = () => {
               </StoreFrontPage>
 
               <StoreButton onClick={() => MetaMaskConnector()}>
-                <div className="display-loader-left">
+                <div className="display-loader-left storefront-create-store">
                   {loader ? <Spinner></Spinner> : ""}
                   Create Store
                 </div>
@@ -908,7 +909,7 @@ const HomeCard = () => {
           <CommonSection style={{ marginBottom: "163px" }}>
             <HeadTitle>
               <CommonText style={{ marginBottom: "88px" }}>
-                <span style={{ color: "#016dd9" }}> NFTinger </span> Marketplace
+                 NFTinger  Marketplace
               </CommonText>
 
               <Image src={marketplace}></Image>
