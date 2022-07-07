@@ -126,7 +126,7 @@ function Suggestion({ loader }) {
                       className="send-button"
                       style={{
                         opacity: checkButtonStatus ? 0.8 : 1,
-                        backgroundColor: `${fetchPalletsColor(appearance.colorPalette)}`
+                        background: checkButtonStatus ?  "#9BB7F7 0% 0% no-repeat padding-box": `${fetchPalletsColor(appearance.colorPalette)}`
                       }}
                       disabled={checkButtonStatus}
                     >

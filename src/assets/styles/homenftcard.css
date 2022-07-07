@@ -130,12 +130,20 @@
     width: 72%;
     padding: 0% 1% 0% 0%;
   }
+  #upper__home h1 {
+    font-family: "poppins-semibold";
+    font-size:18px ;
+  }
 }
 
 @media only screen and (min-width: 320px) and (max-width: 374px) {
   .ntf_div .filter-drop {
     width: 66%;
     padding: 0% 1% 0% 0%;
+  }
+  #upper__home h1 {
+    font-family: "poppins-semibold";
+    font-size:18px ;
   }
 }
 

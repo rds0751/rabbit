@@ -402,7 +402,7 @@ function NftPage(props) {
                 className="select-element"
                 onChange={(e) => handleSort(e.value)}
                 options={options}
-                placeholder="Sort by"
+                placeholder="Sort by All"
                 theme={(theme) => ({
                   ...theme,
                   colors: {

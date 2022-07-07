@@ -402,6 +402,7 @@ function CollectionDetails({ loader }) {
             <div className="collection-body">
               <div className="collfilters">
                 <div className="colleftfilter">
+
                   <div className="searchboxcol">
                     <input
                       type="text"
@@ -418,8 +419,24 @@ function CollectionDetails({ loader }) {
                       <img src={search} className="searchicon" />
                     </div>
                   </div>
+                  <div>
+                    <CustomSelect
+                      name="status"
+                      onChange={(e) => handleStatus(e)}
+                      value={filter.status}
+                      defaultValue=""
+                    >
+                      <StyledOption value="" hidden>
+                        Status
+                      </StyledOption>
+                      <StyledOption value="">All</StyledOption>
+                      <StyledOption value="onsale">Open for sale</StyledOption>
+                      <StyledOption value="new">New</StyledOption>
+                    </CustomSelect>
+                  </div>
+
                   <div className="colldrop">
-                    <div className="statusText">Price range</div>
+                    <div className="statusText">Price</div>
                     <div>
                       <img
                         src={dropdown}
@@ -478,21 +495,9 @@ function CollectionDetails({ loader }) {
                       </div>
                     )}
                   </div>
-                  <div>
-                    <CustomSelect
-                      name="status"
-                      onChange={(e) => handleStatus(e)}
-                      value={filter.status}
-                      defaultValue=""
-                    >
-                      <StyledOption value="" hidden>
-                        Status
-                      </StyledOption>
-                      <StyledOption value="">All</StyledOption>
-                      <StyledOption value="onsale">Open for sale</StyledOption>
-                      <StyledOption value="new">New</StyledOption>
-                    </CustomSelect>
-                  </div>
+
+            
+
                   <div className="ms-md-auto">
                     <CustomSelect
                       name="sort"

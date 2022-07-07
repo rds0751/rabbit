@@ -55,6 +55,7 @@ const LogoDiv = styled.div`
   letter-spacing: 0px;
   color: #016dd9;
   cursor: pointer;
+  white-space: nowrap;
   opacity: 1;
 `;
 const Image = styled.img``;
