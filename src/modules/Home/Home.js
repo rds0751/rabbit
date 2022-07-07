@@ -450,7 +450,7 @@ function Home({ loaderState }) {
             <div className="d-flex justify-content-center flex-wrap">
               <Card className="first-card-nft">
                 {/* <img className="icon-hover" variant="top" src={Wallet} /> */}
-
+                <div className="svg-div">
                 {loader ? (
                   <Skeleton width="89px" height="89px" />
                 ) : (
@@ -532,7 +532,8 @@ function Home({ loaderState }) {
                     </g>
                   </svg>
                 )}
-
+                </div>
+                <div className="card-text-div">
                 <Card.Body>
                   <Card.Title>
                     {loader ? <Skeleton /> : "Create Wallet"}
@@ -545,8 +546,10 @@ function Home({ loaderState }) {
                     )}
                   </Card.Text>
                 </Card.Body>
+                </div>
               </Card>
               <Card className="first-card-nft">
+              <div className="svg-div">
                 {loader ? (
                   <Skeleton width="89px" height="89px" />
                 ) : (
@@ -714,6 +717,8 @@ function Home({ loaderState }) {
                     </g>
                   </svg>
                 )}
+                </div>
+                <div className="card-text-div">
                 <Card.Body>
                   <Card.Title>
                     {loader ? <Skeleton /> : "Create Collection"}
@@ -726,8 +731,10 @@ function Home({ loaderState }) {
                     )}
                   </Card.Text>
                 </Card.Body>
+                </div>
               </Card>
               <Card className="first-card-nft">
+              <div className="svg-div">
                 {loader ? (
                   <Skeleton width="89px" height="89px" />
                 ) : (
@@ -773,7 +780,8 @@ function Home({ loaderState }) {
                     </g>
                   </svg>
                 )}
-
+                </div>
+                <div className="card-text-div">
                 <Card.Body>
                   <Card.Title>{loader ? <Skeleton /> : "Add NFTs"}</Card.Title>
                   <Card.Text>
@@ -784,8 +792,10 @@ function Home({ loaderState }) {
                     )}
                   </Card.Text>
                 </Card.Body>
+                </div>
               </Card>
               <Card className="first-card-nft">
+              <div className="svg-div">
                 {loader ? (
                   <Skeleton width="89px" height="89px" />
                 ) : (
@@ -829,6 +839,8 @@ function Home({ loaderState }) {
                     </g>
                   </svg>
                 )}
+                </div>
+                <div className="card-text-div">
                 <Card.Body>
                   <Card.Title>
                     {loader ? <Skeleton /> : "List them for sale"}
@@ -841,6 +853,7 @@ function Home({ loaderState }) {
                     )}
                   </Card.Text>
                 </Card.Body>
+                </div>
               </Card>
             </div>
           </div>
@@ -1186,7 +1199,6 @@ function Home({ loaderState }) {
                   )}
                 </p>
               </div>
-
               <div className="d-flex align-items-center justify-content-left media card-home-page">
                 {loader ? (
                   <Skeleton

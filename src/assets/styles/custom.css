@@ -277,8 +277,8 @@ ul {
 
 .middle__homepage {
   display: flex;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 46px;
+  margin-bottom: 52px;
 }
 @media only screen and (max-width: 450px) {
   .middle__homepage {

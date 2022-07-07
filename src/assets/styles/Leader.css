@@ -9,7 +9,7 @@
   font-size: 1.3rem;
   font-family: "poppins-semibold";
   color: #191919;
-  margin-top: 3.25rem;
+  margin-top: 36px;
 }
 .leader1 {
   font-size: 1.3rem;
@@ -1769,7 +1769,7 @@ thead {
 }
 
 .load-more {
-  width: 187px;
+  width: 100%;
   height: 42px;
   /* UI Properties */
   background: #edf2fd 0% 0% no-repeat padding-box;

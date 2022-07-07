@@ -235,7 +235,7 @@ color: #031527!important;
 }
 @media only screen and (max-width: 1599px) {
   .homepage .banner {
-    margin-bottom: 77px;
+    margin-bottom: 177px;
   }
   .homepage .banner .inner-width {
     margin-left: 5%;
@@ -628,7 +628,7 @@ margin-left: 10px;
 
 .inner-width svg{
   transition: transform .2s;
-  margin-left: 5px;
+  margin-left: 16px;
 }
 
 .first-card-nft svg{
@@ -667,4 +667,11 @@ margin-left: 10px;
 
 .margin-svg{
   margin-left: 10px;
+}
+
+.svg-div{
+  height: 35%;
+}
+.card-text-div{
+  height: 65%;
 }
