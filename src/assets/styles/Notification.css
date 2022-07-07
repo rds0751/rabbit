@@ -1145,7 +1145,7 @@ height: 47px;
 }
 .copyrightDivMob{
   text-align:center;
-  backgroundColor:rgb(251, 251, 251);
+  background-color:rgb(251, 251, 251);
   margin-top: 39px;
 }
 .textCopyrightMob{
@@ -1162,10 +1162,6 @@ height: 47px;
 }
 .newHomeCopyright{
 margin-top: 0;
-text-align: left;
-}
-.newHome{
-
 }
 
 .textCopyright{
@@ -1407,6 +1403,15 @@ display:none
   opacity: 1;
   white-space: nowrap;
  }
+ .footersubtitle{
+  font: normal normal normal 16px/25px Poppins;
+  letter-spacing: 0px;
+  color: #8F8F8F;
+  
+  }
+  .footertitle{
+    font: normal normal bold 16px/25px Poppins;
+  }
  .footerdes{
   text-align: left;
   font: normal normal normal 14px/21px Poppins;

@@ -243,7 +243,7 @@ function Home({ loaderState }) {
                       ) : customize.appearance.description ? (
                         customize.appearance.description
                       ) : (
-                        "One stop solution for all types of NFTs"
+                        "Launch your own NFT Store/Marketplace without any technical knowledge"
                       )}
                     </p>
                     <div style={{ display: "flex" }}>
@@ -320,7 +320,7 @@ function Home({ loaderState }) {
                     >
                       <div className="item">
                         <div className="d-flex flex-wrap">
-                          {nfts.length === 0 ? (
+                          {nfts?.length === 0 ? (
                             <>
                               <NftCards nft={{}} loader={true} />{" "}
                               <NftCards nft={{}} loader={true} />{" "}

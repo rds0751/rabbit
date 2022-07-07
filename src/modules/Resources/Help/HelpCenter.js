@@ -59,7 +59,7 @@ function HelpCenter({ loader }) {
 
                   {
                     loader ? <Skeleton width="50px" height="50px" /> :
-                      <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 51 51">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 51 51">
                         <g id="Group_706" data-name="Group 706" transform="translate(-76 -797)">
                           <rect id="Rectangle_1035" data-name="Rectangle 1035" width="51" height="51" transform="translate(76 797)" fill="none" />
                           <g id="tag" transform="translate(84 805)">
@@ -94,7 +94,7 @@ function HelpCenter({ loader }) {
 
                   {
                     loader ? <Skeleton width="50px" height="50px" /> :
-                      <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 51 51">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 51 51">
                         <g id="Group_707" data-name="Group 707" transform="translate(-147 -797)">
                           <rect id="Rectangle_1036" data-name="Rectangle 1036" width="51" height="51" transform="translate(147 797)" fill="none" />
                           <g id="Group_219" data-name="Group 219" transform="translate(151 803)">
@@ -129,8 +129,8 @@ function HelpCenter({ loader }) {
                 <div className="">
 
                   {
-                    loader ? <Skeleton width="50px" height="50px" /> :
-                      <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 51 51">
+                    loader ? <Skeleton width="36px" height="36px" /> :
+                      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 51 51">
                         <g id="Group_708" data-name="Group 708" transform="translate(-251 -797)">
                           <rect id="Rectangle_1037" data-name="Rectangle 1037" width="51" height="51" transform="translate(251 797)" fill="none" />
                           <g id="noun_collection_2355468" transform="translate(257 803)">
@@ -164,8 +164,8 @@ function HelpCenter({ loader }) {
                 <div className="">
 
                   {
-                    loader ? <Skeleton width="50px" height="50px" /> :
-                      <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 51 51">
+                    loader ? <Skeleton width="36px" height="36px" /> :
+                      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 51 51">
                         <g id="Group_709" data-name="Group 709" transform="translate(-345 -797)">
                           <rect id="Rectangle_1038" data-name="Rectangle 1038" width="51" height="51" transform="translate(345 797)" fill="none" />
                           <g id="image_1_" data-name="image (1)" transform="translate(351 803)">

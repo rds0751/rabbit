@@ -333,7 +333,7 @@ const Footer = () => {
         </div>
     </FooterSection>
     <hr style={{color:"red",background:"grey",position:"absolute",width:"100%"}}></hr>
-    <div className="copyrightDiv newHomeCopyright" style={{ background: " #172738 ",paddingLeft:"4.4rem"}}>
+    <div className="copyrightDiv newHomeCopyright" style={{ background: " #172738 "}}>
       <span className="textCopyright newHome" style={{ color: " #e0e0e0 " }}>
         &copy; 2022 NFTinger.All Rights Reserved.
       </span>

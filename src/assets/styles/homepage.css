@@ -47,7 +47,7 @@ color: #031527!important;
   padding-top: 81px;
 }
 .homepage .left-text .newHomeHeading {
-  font-size: 54px!important;
+  font-size: 2.82vw!important;
   line-height: 81px!important;
   color: #ffffff;
   margin-bottom: 24px;
@@ -56,7 +56,7 @@ color: #031527!important;
 .homepage .left-text .text {
   font-family: "poppins-medium";
   font-size: 22px;
-  line-height: 70px;
+  line-height: 32px;
   color: #ffffff;
   margin-bottom: 45px;
 }

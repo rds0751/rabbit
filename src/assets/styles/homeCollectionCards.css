@@ -29,6 +29,16 @@
     width: 19.5931%;
     margin-right: 7.2%;
   }
+  .collectDetails{
+    padding-top: 1.63rem;
+  }
+ .collectCard{
+    height: 309px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
 /* @media only screen and (max-width: 1600px) {
   .collectionCardEach, .nftCardEach {

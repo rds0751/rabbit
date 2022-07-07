@@ -375,8 +375,9 @@ function Collections_tile(props) {
 
                 <Link to={route}>
                   <div
-                    className=" nft-card-radius collection-card border-radius pt-4 cardmob"
-                    style={{ backgroundColor: "#F8F8F8" }}
+                    className=" nft-card-radius collection-card border-radius  cardmob collectCard"
+                    // className=" nft-card-radius collection-card pt-4 border-radius  cardmob"
+                    style={{ backgroundColor: "#F8F8F8",paddingTop:"1rem"}}
                   // style={{ marginLeft: "1em", backgroundColor: "#F8F8F8" }}
                   >
                     <div className="text-center">
@@ -394,7 +395,7 @@ function Collections_tile(props) {
                           />
                       }
                     </div>
-                    <div className="text-center pt-3">
+                    <div className="text-center collectDetails">
                       <span>{props.loader || loader ? <Skeleton width={`25px`} height={`25px`} /> : blockchainCheck(blockchain)}</span>
                       <p
                         className="collectionCardEachName text-center font-weight-900"
@@ -422,7 +423,7 @@ function Collections_tile(props) {
               ( <div style={{textAlignLast: "center"}}><button className="load-more" onClick={loadMoreHandler}>Load More</button></div>
                 )
           } */}
-          {
+          {/* {
             visibleBlogs >= collections.length ? (visibleBlogs >= collections.length && !isLoading) ? <div style={{ textAlignLast: "center" }}><button className="endButton"> End </button></div> : "" :
               (
                 <div style={{ textAlignLast: "center" }}>
@@ -432,6 +433,18 @@ function Collections_tile(props) {
                   }
                 </div>
               )
+          } */}
+          {
+           
+              collections.length >= visibleBlogs && !isLoading?
+              (
+                <div style={{ textAlignLast: "center" }}>
+                  {
+                    props.loader || loader ? <Skeleton className="load-more" style={{ background: '#ededed' }} /> :
+                      <button onMouseOver={(e) => handleLoadHover(e)} onMouseOut={(e) => handleLoadOut(e)} style={{ color: `${fetchPalletsColor(appearance.colorPalette)}` }} className="load-more" onClick={loadMoreHandler}>Load More</button>
+                  }
+                </div>
+              ):""
           }
         </div>
       </div>
