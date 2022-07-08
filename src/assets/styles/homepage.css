@@ -234,9 +234,6 @@ color: #031527!important;
   }
 }
 @media only screen and (max-width: 1599px) {
-  .homepage .banner {
-    margin-bottom: 177px;
-  }
   .homepage .banner .inner-width {
     margin-left: 5%;
     margin-right: 5%;
@@ -323,7 +320,7 @@ color: #031527!important;
   }
   .homepage .create-sell-nft .card {
     width: 40%;
-    margin-bottom: 20px;
+    margin-bottom: 42px;
   }
   .homepage .create-sell-nft .card:nth-child(even) {
     margin-right: 0px;
@@ -339,6 +336,12 @@ color: #031527!important;
   }
 }
 @media only screen and (max-width: 991px) {
+  .banner {
+    margin-bottom: 48px !important;
+  }
+  .homepage .create-sell-nft .heading {
+    margin-bottom: 42px;
+  }
   .mob-heading {
     display: block;
     width: 304px;
@@ -351,9 +354,9 @@ color: #031527!important;
     color: #ffffff;
     opacity: 1;
   }
-  .heading {
+  /* .heading {
     display: none;
-  }
+  } */
   .text {
     width: 303px;
     height: 23px;
@@ -400,6 +403,9 @@ color: #031527!important;
 }
 
 @media only screen and (max-width: 600px) {
+  .homepage .create-sell-nft .heading {
+    font-size: 26px;
+  }
   .homepage .banner {
     margin-bottom: 77px;
   }

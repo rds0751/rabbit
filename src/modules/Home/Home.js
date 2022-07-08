@@ -447,7 +447,7 @@ function Home({ loaderState }) {
             )}
           </h2>
           <div className="inner-width">
-            <div className="d-flex justify-content-center flex-wrap">
+            <div className="d-flex justify-content-evenly flex-wrap">
               <Card className="first-card-nft">
                 {/* <img className="icon-hover" variant="top" src={Wallet} /> */}
                 <div className="svg-div">

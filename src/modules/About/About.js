@@ -66,7 +66,7 @@ function About({ loader }) {
               }
               {/* <div className="col-sm-3"></div> */}
             </div>
-            <div className="row mt-5">
+            <div className="row">
               {/* <div className="col-sm-4"></div> */}
               {
                 loader ? <Skeleton width="310px" height="53px" /> :
