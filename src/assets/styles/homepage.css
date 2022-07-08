@@ -404,19 +404,21 @@ color: #031527!important;
 
 @media only screen and (max-width: 600px) {
   .homepage .create-sell-nft .heading {
-    font-size: 26px;
+    font: normal normal 600 18px/27px Poppins;
   }
   .homepage .banner {
     margin-bottom: 77px;
+  }
+  .homepage .create-sell-nft .heading {
+    margin-bottom: 22px;
   }
   .homepage .create-sell-nft {
     margin-bottom: 141px;
   }
   .homepage .create-sell-nft .card {
-    width: 100%;
-  }
-  .homepage .create-sell-nft .card {
+    width: 95%;
     margin-right: 0 !important;
+    text-align: left;
   }
   .homepage .why-marketplace {
     padding-bottom: 81px;

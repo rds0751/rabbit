@@ -1274,7 +1274,7 @@ function LeaderBoard({ loader }) {
                           >
                             {
                               loader ? <Skeleton width="20px" /> :
-                                <h6 className="value__k" style={{ color: `${fetchPalletsColor(appearance.colorPalette)}` }}>
+                                <h6 className="value__k" style={{ color: `black` }}>
                                   {/* {daysLeft}{" "} */}
 
                                   {likes.length}{" "}
