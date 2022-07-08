@@ -281,7 +281,7 @@ function Footer({ loader }) {
               </p>
               <p>
                 <Link to={`/Terms-Condition${getParamTenantId()}`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
-                  {loader ? <Skeleton width={'150px'} /> : 'Terms and Conditons'}
+                  {loader ? <Skeleton width={'150px'} /> : 'Terms and Conditions'}
                 </Link>
               </p>
             </div>

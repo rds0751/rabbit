@@ -21,6 +21,9 @@
   min-height: 105px;
   resize: none;
 }
+.text-area::placeholder {
+  transform: translateY(-5px);
+}
 .sugg-input {
 /* 
   font: normal normal medium 14px/21px Poppins; */

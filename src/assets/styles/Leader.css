@@ -273,7 +273,7 @@ thead {
   /* margin-left: 70px; */
 }
 .MyProfilesales > div {
-  margin-right: 44px;
+  margin-right: 32px;
 }
 .MyProfilesales > h2 {
   margin-left: 70px;
@@ -745,10 +745,6 @@ thead {
     font-size: 8px;
     text-decoration: none;
   }
-  .leader {
-    display: flex;
-    justify-content: center;
-  }
   .CollectionItem > div > h2 {
     font-size: 10px;
     margin-bottom: 0rem;
@@ -823,6 +819,12 @@ thead {
     /* border: 1px solid red !important; */
     justify-content: space-between;
     width: 100%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .leader {
+    display: flex;
+    justify-content: center;
   }
 }
 
@@ -988,7 +990,7 @@ thead {
     margin-right: 27px;
   }
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 992px) {
   .create-nft {
     margin-top: 41px;
     margin-bottom: 59px;
