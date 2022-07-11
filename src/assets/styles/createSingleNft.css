@@ -408,7 +408,7 @@ input[type=number]::-webkit-outer-spin-button {
   cursor: pointer;
 }
 
-@media only screen and (min-width:1921px){
+@media only screen and (min-width:1800px){
   .draganddropbox{
     width: 341px;
     height: 341px;

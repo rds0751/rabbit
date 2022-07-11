@@ -4,7 +4,7 @@ import { TwitterShareButton } from "react-share";
 import share from "../../assets/images/share.svg";
 import Utils from "../../utility";
 import info from "../../assets/images/report.svg";
-import copyIcon from "../../assets/images/copy.png";
+import copyIcon from "../../assets/images/CopyIcon.svg";
 import Imagep from "../../assets/images/imagep.svg";
 import facebookIcon from "../../assets/images/facebook.png";
 import twitterIcon from "../../assets/images/Twitter.png";
@@ -1536,9 +1536,10 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                     }}
                   >
                     {moreNft.map((nft) => {
+                      let mt="mt-0";
                       return (
                         <>
-                          <NftCardsHome nft={nft} appearance={appearance} />
+                          <NftCardsHome nft={nft} appearance={appearance} mt={mt} />
                         </>
                       );
                     })}
@@ -1836,6 +1837,32 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                       <img src={nft.previewImage ? nft?.previewImage : (nft?.cdnUrl != "" ? nft.cdnUrl : nft.ipfsUrl)} />
                       <div className="abstractillusioncontent">
                         <div className="abstracttitle"></div>
+                         <div
+                          className=""
+                          title={
+                            nft.collectionName
+                              ? nft.collectionName
+                              : "NFTinger Collection"
+                          }
+                          style={{
+                           cursor:"pointer",
+                            color: `${fetchPalletsColor(
+                              appearance.colorPalette
+                            )}`,
+                          }}
+                        
+                          
+                        >
+                        
+                           
+                            {undefined !== nft?.collectionName &&     
+                              nft?.collectionName
+                              ? nft?.collectionName
+                              : nft?.collectionName?.length === 0
+                                ? "NFTinger Collection"
+                                : nft?.collectionName}
+                         
+                        </div>
                         <div className="abstractposter"> {nft.name}</div>
                         <div className="ethprice">{`${salePrice}  ${salesInfo?.currency}`}</div>
                       </div>

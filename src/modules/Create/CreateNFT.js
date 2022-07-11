@@ -97,7 +97,7 @@ function CreateNFT({ loader }) {
                         <g id="collection" transform="translate(-1417 -429)">
                           <rect id="Rectangle_272" data-name="Rectangle 272" width="160" height="160" transform="translate(1417 429)" fill="none" />
                           <g id="Group_184" data-name="Group 184" transform="translate(354.404 125.248)">
-                            <rect id="Rectangle_237" data-name="Rectangle 237" width="119.55" height="119.543" rx="8.351" transform="translate(1074.596 315.753)" fill="#fff3d8" stroke={fetchPalletsColor(customize.appearance.colorPalette)} stroke-width="2" />
+                            <rect id="Rectangle_237" data-name="Rectangle 237" width="119.55" height="119.543" rx="8.351" transform="translate(1074.596 315.753)" fill="#fff3d8" stroke="#F1BE4B" stroke-width="2" />
                             <rect id="Rectangle_238" data-name="Rectangle 238" width="119.55" height="119.543" rx="8.351" transform="translate(1091.59 332.185)" fill="#d8e4ff" stroke={fetchPalletsColor(customize.appearance.colorPalette)} stroke-width="2" />
                             <g id="Icon_feather-plus" data-name="Icon feather-plus" transform="translate(1142.094 382.687)">
                               <path id="Path_29" data-name="Path 29" d="M18,7.5V25.919" transform="translate(-8.791 -7.5)" fill="none" stroke={fetchPalletsColor(customize.appearance.colorPalette)} stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />

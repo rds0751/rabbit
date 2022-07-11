@@ -24,7 +24,7 @@ import pauseImage from "../../assets/images/Pause.svg";
 import Countdown from "react-countdown";
 
 
-function NftCardsHome({ nft, appearance, loader }) {
+function NftCardsHome({ nft, appearance, loader,mt }) {
   // let history = useHistory();
 
   const navigate = useNavigate();
@@ -137,7 +137,7 @@ function NftCardsHome({ nft, appearance, loader }) {
   };
 
   return (
-    <div className="nftCardEach col-md-6 col-lg-3  col-sm-12  mt-5 nft_card">
+    <div className={`nftCardEach col-md-6 col-lg-3  col-sm-12  ${mt?.length > 0 ? mt : "mt-5"} nft_card`}>
       <div className="card nft-card-radius border-radius cardmob h-100">
         {fileExtension?.toString().includes("audio") ? (
           <div className="image-container">

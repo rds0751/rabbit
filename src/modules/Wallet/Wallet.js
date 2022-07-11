@@ -211,7 +211,7 @@ function Wallet() {
             <h4>{walletAddress?.balance}</h4>
           </div>
         </div>
-        <button className="btnwallet" onClick={() => handleLogOut()} style={{background: `${fetchPalletsColor(appearance.colorPalette)}`}}>
+        <button className="btnwallet LogOutButton" onClick={() => handleLogOut()} style={{background: `${fetchPalletsColor(appearance.colorPalette)}`}}>
           Log Out
           </button>
         {/* <button className="btnwallet">Add Balance</button> */}
