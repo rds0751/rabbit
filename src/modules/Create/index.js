@@ -216,9 +216,9 @@ class Index extends BaseComponent {
           return this.showToast(
             "error",
             blockchainError?.data?.message ||
-              blockchainError?.message ||
+              blockchainError?.message && "The Transction has been cancelled" ||
               blockchainError ||
-              "Unable to Mint NFT on blockchain"
+              "Unable to Process your transcation"
           );
         }
         blockchainRes = blockchainResult;
@@ -241,7 +241,7 @@ class Index extends BaseComponent {
           return this.showToast(
             "error",
             blockchainError?.data?.message ||
-              blockchainError?.message ||
+            blockchainError?.message && "The Transction has been cancelled" ||
               blockchainError ||
               "Unable to Mint NFT on blockchain"
           );
@@ -277,9 +277,9 @@ class Index extends BaseComponent {
 
           return this.showToast(
             "error",
-            blockchainError?.data?.message ||
-              blockchainError?.message ||
-              blockchainError ||
+            blockchainError?.data?.message && "Something went wrong"||
+            blockchainError?.message && "The Transction has been cancelled" ||
+              blockchainError  && "Something went wrong"||
               "Unable to Mint NFT on blockchain"
           );
         }
@@ -305,8 +305,8 @@ class Index extends BaseComponent {
           return this.showToast(
             "error",
             blockchainError?.data?.message ||
-              blockchainError?.message ||
-              blockchainError ||
+            blockchainError?.message && "Transction Failed" ||
+              blockchainError  && "The Transction has been cancelled" ||
               "Unable to Mint NFT on blockchain"
           );
         }

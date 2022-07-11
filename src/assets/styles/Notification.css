@@ -83,7 +83,7 @@ height: 47px;
 .balancewallet {
   border: 1px solid gray;
   /* width: 100%; */
-  width: 90%;
+  width: 78.2%;
   height: 121px;
   /* margin: 9px; */
   /* padding: 5px; */
@@ -100,6 +100,9 @@ height: 47px;
   padding: 10px;
   /* margin-bottom: -6px; */
   /* margin-left: -6px; */
+}
+.LogOutButton{
+  width: 78.2%;
 }
 .btnwallet:hover{
   background-color: rgb(10, 74, 212);
@@ -1518,7 +1521,7 @@ display:none
 
 .dropdown[aria-expanded="true"] .profileimg {
 background-color:lightgrey;
-border-radius: 50%;
+/* border-radius: 50%; */
 }
 
 /* custom css */
