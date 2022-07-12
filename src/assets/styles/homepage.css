@@ -216,6 +216,10 @@ color: #031527!important;
 .homepage .why-marketplace .media:nth-child(3n + 3) {
   margin-right: 0px;
 }
+.homepage .why-marketplace .inner-width {
+  display: flex;
+  justify-content: center;
+}
 @media only screen and (max-width: 1918px) {
   .homepage .right-slider .card {
     width: 48%;
@@ -334,6 +338,11 @@ color: #031527!important;
   .homepage .why-marketplace .media:nth-child(odd) {
     margin-right: 30px;
   }
+  .homepage .why-marketplace .inner-width {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 @media only screen and (max-width: 991px) {
   .banner {
@@ -413,7 +422,7 @@ color: #031527!important;
     margin-bottom: 22px;
   }
   .homepage .create-sell-nft {
-    margin-bottom: 141px;
+    margin-bottom: 0px;
   }
   .homepage .create-sell-nft .card {
     width: 95%;
