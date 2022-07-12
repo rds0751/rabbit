@@ -22,7 +22,7 @@ function NftToggle({ toggleNft, appearance, loader }) {
               {
                 loader ? <Skeleton className="mr-r-10" width={`100px`} /> :
                   <Link
-                    className="font-18 text-center toggle-nft"
+                    className="font-14 text-center toggle-nft"
                     style={{
                       textDecoration: "none",
                       width: "108px",
@@ -48,7 +48,7 @@ function NftToggle({ toggleNft, appearance, loader }) {
                 loader ? <Skeleton width={`100px`} /> :
                   <Link
                     // onClick={() => setToggleNft(false)}
-                    className="font-18 text-center"
+                    className="font-14 text-center"
                     style={{
                       textDecoration: "none",
                       color: !toggleNft ? "#191919" : "#858585",

@@ -332,3 +332,12 @@
   font-size: 14px;
   font-weight: 600;
 }
+@media screen and (max-width: 450px) {
+  .homepage-noitem{
+    margin-top: 42px;
+  }
+  .mobcollection{
+    margin-top:26px!important; 
+  }
+
+}
