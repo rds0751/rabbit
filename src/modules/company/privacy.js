@@ -47,7 +47,7 @@ export default function PrivacyPage({ loader }) {
               <div className="hero-text">
                 <p style={{ marginBottom: "0px" }}>
                   {
-                    customize?.privacyPolicy ? customize?.privacyPolicy?.title : 'Privacy'
+                    customize?.privacyPolicy.title!="" ? customize?.privacyPolicy?.title : 'Privacy'
                   }
                 </p>
               </div>
@@ -58,7 +58,7 @@ export default function PrivacyPage({ loader }) {
 
           {
             loader ? <Skeleton count={5} height="150px" style={{marginBottom: '20px'}} /> :
-              customize?.privacyPolicy ? parse(customize?.privacyPolicy?.descriptions) :
+              customize?.privacyPolicy?.descriptions!="" ? parse(customize?.privacyPolicy?.descriptions) :
               <>
                 <PrivacyHeading>
                   <Heading>Privacy Policy</Heading>
