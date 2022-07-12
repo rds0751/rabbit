@@ -739,7 +739,8 @@ function Navbar({ loader,customizeStore,setModal }) {
                       loader ? <Skeleton width="100px" height="20px" /> :
                         <Link
                           className={
-                            location.pathname.includes("/nfts") &&
+                            (location.pathname.includes("/nfts") || 
+                              location.pathname.includes("/collections-tile")) &&
                               !location.pathname.includes("leader-board") &&
                               !location.pathname.includes("resource") &&
                               !location.pathname.includes("create-nft") &&
@@ -979,7 +980,7 @@ function Navbar({ loader,customizeStore,setModal }) {
                       )
                       :""}
                       {customizeStore ? (
-                        <div>
+                        <div style={{width:"max-content"}}>
                         <hr className="dropdown-divider" />
                       
                         <li

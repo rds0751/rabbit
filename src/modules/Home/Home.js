@@ -867,8 +867,8 @@ function Home({ loaderState }) {
               "Why this Marketplace"
             )}
           </h2>
-          <div className="inner-width">
-            <div className="d-flex justify-content-md-center flex-wrap">
+          <div className="inner-width flex-wrap">
+            {/* <div className="d-flex justify-content-md-center flex-wrap"> */}
               <div className="d-flex align-items-center justify-content-left media card-home-page">
                 {loader ? (
                   <Skeleton
@@ -1258,7 +1258,7 @@ function Home({ loaderState }) {
                   )}
                 </p>
               </div>
-            </div>
+            {/* </div> */}
           </div>
         </div>
       </div>
