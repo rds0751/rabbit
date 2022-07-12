@@ -381,6 +381,11 @@
   .draganddropbox{
     width: 100%;
   }
+  .create-nft-text {
+    font-family: 'poppins-semibold';
+    font-size: 18px;
+    line-height: 27px;
+}
   .AudioDiv{
     width: 100%;
 

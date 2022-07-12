@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { fetchPalletsColor } from "../../utility/global";
 import Skeleton from "react-loading-skeleton";
+import Utils from "../../utility"
 function Suggestion({ loader }) {
 
   const appearance = useSelector(state => state.customize.appearance);
@@ -26,7 +27,7 @@ function Suggestion({ loader }) {
   const PostSuggestion = () => {
     const { email, title, detail } = formData;
     if (email == "" || title == "" || detail == "") {
-      toast.error("Fill All Fields");
+      Utils.apiFailureToast("Fields are not blank");
       return null;
     }
     const checkMail = validateEmail(email);
@@ -46,6 +47,7 @@ function Suggestion({ loader }) {
       setCheckButtonStatus(false);
     }
   };
+  const enabled=formData.email != "" && formData.title != "" && formData.detail != "";
 
   return (
     <>
@@ -125,10 +127,10 @@ function Suggestion({ loader }) {
                       // type="submit"
                       className="send-button"
                       style={{
-                        opacity: checkButtonStatus ? 0.8 : 1,
-                        background: checkButtonStatus ?  "#9BB7F7 0% 0% no-repeat padding-box": `${fetchPalletsColor(appearance.colorPalette)}`
+                        opacity: !enabled ? 0.8 : 1,
+                        background: !enabled ?  "#9BB7F7 0% 0% no-repeat padding-box": `${fetchPalletsColor(appearance.colorPalette)}`
                       }}
-                      disabled={checkButtonStatus}
+                      disabled={!enabled}
                     >
                       Send
                     </button>

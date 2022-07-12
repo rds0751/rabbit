@@ -298,7 +298,7 @@ function EditProfile(props) {
       <div className="editProfileContainer container">
         <div className="editProfileTopHeading top-heading">
           <div className="editProfileHeadingTitle">
-            <p className="title">
+            <p className="title EditprofileTitle">
               {props.loader ? <Skeleton width="200px" height="40px" /> : 'Edit Profile'}
             </p>
           </div>
@@ -391,7 +391,7 @@ function EditProfile(props) {
                   }}
                 />
               </div>
-              <div className="" style={{ marginBottom: "28px" }}>
+              <div className="BioDes">
                 <label htmlFor="comment" className="label-heading">
                   Bio<span style={{ color: "red", fontSize: "13px" }}>{descriptionError}</span>
                 </label>

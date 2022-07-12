@@ -185,6 +185,11 @@
   border: 1px solid #366eef;
   border-radius: 4px;
   width: 100%;
+ 
+}
+.ntf_div .filter-drop .filter-item .accept-button {
+  background-color: #366EEF!important;
+  color: #FFFFFF !important;
 }
 
 .ntf_div .filter-drop .filter-item .btn-outline-primary:hover {

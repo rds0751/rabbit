@@ -146,7 +146,7 @@ const Container = style.div`
     margin-left: 16px;
     margin-right: 16px;
     margin-top: 52px;
-    overflow-y: scroll;
+    overflow-x: scroll;
   }
 `;
 const Header = style.div`
@@ -154,7 +154,7 @@ const Header = style.div`
   justify-content: space-between;
   align-items:center;
   @media screen and (max-width:426px) {
-    overflow: scroll;
+    // overflow: scroll;
     width: 557px;
   }
 `;
@@ -196,7 +196,7 @@ const Body = style.div`
     margin-top: 22px;
   }
   @media only screen  and (max-width:426px) {
-    overflow: scroll;
+    // overflow: scroll;
     width: 557px;
   }
 `;
@@ -215,7 +215,7 @@ const Collection = style.div`
   border: 1px solid #FCFCFC;
   border-radius: 13px;
   @media screen and (max-width:426px){
-    overflow: scroll;
+    // overflow: scroll;
     width: 557px;
   }
 `;
