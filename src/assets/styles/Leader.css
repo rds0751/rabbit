@@ -1227,6 +1227,11 @@ thead {
     padding-top: 40px;
   }
 }
+@media screen and (max-width: 992px){
+  .createdByDiv {
+    margin-top: 26px;
+  }
+}
 /* nft-information nft detail page css start*/
 .nft-detail .nftdetail-img {
   display: flex;
@@ -1738,6 +1743,16 @@ thead {
   .nav-link {
     width: 100%;
     font-size: 11px !important;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .nft-detail .buy-offer-btn button {
+    width: auto;
+    height: auto;
+    font-size: 16px;
+  }
+  .collection-name{
+    font-size: 18px;
   }
 }
 

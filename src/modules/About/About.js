@@ -76,7 +76,7 @@ function About({ loader }) {
                     >
                       <h6 className="text-center font-14 font-weight-700 mt-2">
                         <MailOutlineIcon
-                          style={{ fontSize: "35px", color: `${fetchPalletsColor(appearance.colorPalette)}` }}
+                          style={{ fontSize: "35px", color: `${fetchPalletsColor(appearance.colorPalette)}`, marginRight: "5px" }}
                         />
                         Contact Us:{" "}
                         <span>

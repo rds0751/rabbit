@@ -673,6 +673,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                                 appearance.colorPalette
                               )}`,
                             }}
+                            className="collection-name"
                             to={"/collection-details/" + nft?.collectionId + getParamTenantId()}
                           >
                             {undefined !== nft?.collectionName &&
@@ -1049,6 +1050,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                                   appearance.colorPalette
                                 )}`,
                               }}
+                              className="collection-name"
                               to={"/collection-details/" + nft?.collectionId + getParamTenantId()}
                             >
                               {undefined !== nft?.collectionName &&
@@ -1748,6 +1750,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                   <div className="offerHeading">
                     <p className="MainHeadingText">Make an offer</p>
                     <img
+                      alt=""
                       src={closeIcon}
                       className="closeIcon"
                       onClick={() => setMakeOfferModal(false)}
@@ -1775,6 +1778,11 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                     <div className="second-row">
                       <h3 className="heading-second-row">Expiration Date</h3>
                       <div className="expiry-div">
+                        <style>
+                          {`.saleDateTime div {
+                            border: none;
+                        }`}
+                        </style>
                         {/* <Select
                           className="selectfixing4"
                           name="type"

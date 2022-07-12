@@ -182,7 +182,7 @@
 .nftTileContainer {
   display: flex;
   margin-bottom: 50px;
-  
+  margin-top: -20px;  
 }
 .nftTileContainer::-webkit-scrollbar {
   height: 5px;
