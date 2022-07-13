@@ -393,7 +393,7 @@ function Collections_tile(props) {
             const { _id, imageUrl, name, nftCount, blockchain, compressedURL } = collection;
             const route = "/collection-details/" + _id+getParamTenantId();
             return (
-              <div className="collectionCardEach col-md-6 col-lg-3 col-sm-12 mt-5 nft_card">
+              <div className="collectionCardEach col-md-6 col-lg-3 col-sm-12 mt-5 nft_card mobcollection">
 
                 <Link to={route}>
                   <div

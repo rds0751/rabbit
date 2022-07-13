@@ -178,7 +178,7 @@ function NftPage(props) {
   const [nfts, setNfts] = useState([]);
   const [toggleNft, setToggleNft] = useState(true);
   const [minPrice, setMinPrice] = useState("0");
-  const [maxPrice, setMaxPrice] = useState();
+  const [maxPrice, setMaxPrice] = useState("");
   const [visibleBlogs, setVisibleBlogs] = useState(8);
   const [isLoading, setIsLoading] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -374,6 +374,7 @@ function NftPage(props) {
                             onClick={(e) => clearPriceFilter(e)}
                             variant="outline-primary"
                             onMouseOver={(e) => handleLoadHover(e)} onMouseOut={(e) => handleLoadOut(e, true)}
+                           
                             style={{ color: `${fetchPalletsColor(appearance.colorPalette)}`, border: `1px solid ${fetchPalletsColor(appearance.colorPalette)}` }}
                           >
                             Clear
@@ -383,8 +384,10 @@ function NftPage(props) {
                           <Button
                             onClick={(e) => handlePriceFilter(e)}
                             variant="outline-primary"
+                            className="accept-button"
                             onMouseOver={(e) => handleLoadHover(e)} onMouseOut={(e) => handleLoadOut(e, true)}
-                            style={{ color: `${fetchPalletsColor(appearance.colorPalette)}`, border: `1px solid ${fetchPalletsColor(appearance.colorPalette)}` }}
+                            disabled={maxPrice?.length > 0 ? false:true}
+                            style={{ color: `${fetchPalletsColor(appearance.colorPalette)}`, border: `1px solid ${fetchPalletsColor(appearance.colorPalette)}`,backgroundColor:maxPrice?.length > 0 ? "#366EEF" :"#9AB6F7" }}
                           >
                             Apply
                           </Button>
@@ -429,7 +432,7 @@ function NftPage(props) {
           className="nftTileContainer row   ntf_row"
           style={{ justifyContent: "start" }}
         >
-          <div className="spinnerloader">
+          <div className="spinnerloader homepage-noitem">
             {isLoading || props.loaderState ? (            
               <>
                 <NftCartLoader key={`nft-1`} mr={'5%'} />

@@ -45,7 +45,7 @@ export default function PrivacyPage({ loader }) {
               <div className="hero-text">
                 <p style={{ marginBottom: "0px" }}>
                   {
-                    customize?.termsAndConditions ? customize?.termsAndConditions?.title : 'Terms and Condition'
+                    customize?.termsAndConditions?.title!="" ? customize?.termsAndConditions?.title : 'Terms and Condition'
                   }
                 </p>
               </div>
@@ -56,7 +56,7 @@ export default function PrivacyPage({ loader }) {
 
           {
             loader ? <Skeleton count={5} height="150px" style={{marginBottom: '20px'}} /> :
-              customize?.termsAndConditions ? parse(customize?.termsAndConditions?.descriptions) :
+              customize?.termsAndConditions?.descriptions!="" ? parse(customize?.termsAndConditions?.descriptions) :
               <>
                 <PrivacyHeading>
                   <Heading>Terms and Conditions</Heading>
