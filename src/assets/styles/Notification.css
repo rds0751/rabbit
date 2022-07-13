@@ -1126,7 +1126,7 @@ height: 47px;
   cursor: default;
   color: #366EEF;
 }
-@media screen and (min-width:426px) and (max-width:769px){
+@media screen and (min-width:426px) and (max-width:1025px){
   .footer-main-cont{
     width:85%;
   }
@@ -1175,7 +1175,7 @@ margin-top: 0;
 
 
 /* laptop-view */
-@media screen and (min-width:769px){
+@media screen and (min-width:1025px){
   .footer-main-cont{
     width:85%;
   }

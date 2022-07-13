@@ -599,6 +599,7 @@ margin-left: 10px;
     border-top-right-radius: 12px;
 }
 .card .smallCard-details{
+  height: 79px;
   background-color: #fff!important;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;

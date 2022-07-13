@@ -57,7 +57,7 @@ const Question = styled.h1`
 const Answer = styled.p`
   font-size: 14px;
   font-weight: 500;
-  width: 759px;
+  /* width: 759px; */
   margin-bottom: 0px;
   @media screen and (min-width: 426px) and (max-width: 769px) {
     width: 90%;

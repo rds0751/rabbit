@@ -217,7 +217,7 @@ const Collection = style.div`
   border: 1px solid #FCFCFC;
   border-radius: 13px;
   @media screen and (max-width:426px){
-    overflow: scroll;
+    // overflow: scroll;
     width: 557px;
   }
 `;

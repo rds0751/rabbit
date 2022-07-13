@@ -8,7 +8,7 @@
 }
 .single-form {
   /* border: 8px solid lightblue; */
-  width: 68%;
+  width: 58.9%;
   /* margin-top: 10px; */
   /* width: 12px; */
 }
@@ -271,7 +271,8 @@
   }
   .create-nft-form {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    column-gap: 48px;
     /* border: 2px solid green; */
   }
 }
@@ -324,7 +325,7 @@
   width: 35%;
 
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1025px) {
   .full-content-margin{
     margin-top: 41px;
     margin-bottom: 17px;
@@ -533,4 +534,17 @@ margin-right: 5.3%;
   color: #366EEF;
   opacity: 1;
   cursor: pointer;
+}
+.headingFreeMinting{
+text-align: left;
+font: normal normal normal 14px/21px Poppins;
+letter-spacing: 0px;
+color: #707070;
+opacity: 1;
+}
+.BlockchainDiv{
+  margin-bottom: 28px;
+}
+.createNFtButton{
+  margin-top: 19px!important;
 }

@@ -1142,7 +1142,7 @@ function CreateSingleNFT(props) {
                   </div>
                 </div>
 
-                <div className="mb-4" ref={myRef}>
+                <div className="BlockchainDiv" ref={myRef}>
                   <label htmlFor="email" className="input-label">
                     Blockchain*
                   </label>
@@ -1327,7 +1327,7 @@ function CreateSingleNFT(props) {
                       ></div>
                     </div>
                   </label>
-                  <p className="headingRoyality">
+                  <p className="headingFreeMinting">
                     Buyer will pay gas fees for minting
                   </p>
                 </div>
@@ -1382,7 +1382,7 @@ function CreateSingleNFT(props) {
                 <button
                   type="submit"
                   onClick={handleSubmit}
-                  className="submit-button"
+                  className="submit-button createNFtButton"
                   disabled={!enabled}
                   style={{
                     opacity: !enabled ? 0.6 : 1,
