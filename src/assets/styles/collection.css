@@ -390,11 +390,15 @@
     font-size: 16px !important;
     margin-top: 3px;
   }
+  .collectiontitle{
+    text-align: center!important;
+    font: normal normal 600 18px/27px Poppins !important;
+  }
 
 }
 
 /* tab-view */
-@media screen and (min-width:426px) and (max-width:769px){
+@media screen and (min-width:426px) and (max-width:1025px){
   .main-container {
     width: 90%;
     margin: auto;

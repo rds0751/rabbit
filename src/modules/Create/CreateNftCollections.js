@@ -441,7 +441,7 @@ function CreateNftCollections(props) {
       {
         props.loader ? <CollectionNftShimmer /> :
           <div className="main-container collectionContainer">
-            <h1 className="fs-32 fw-b c-b title">Create your collection</h1>
+            <h1 className="fs-32 fw-b c-b title collectiontitle">Create your collection</h1>
             <p className="fs-16 fw-600 c-b pt-50">Upload Collection Image*</p>
             <div className="max-width-250 createCollectioDiv">
               {/*{!isLogoSelected && (*/}

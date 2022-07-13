@@ -435,6 +435,9 @@ thead {
   justify-content: center;
   align-items: center;
 }
+.nftDetail{
+  margin-top: 44px;
+}
 
 .pricingHistory > button {
   background-color: white;
@@ -524,6 +527,9 @@ thead {
   }
 } */
 @media only screen and (max-width: 500px) {
+  .toggle-common{
+    font-size: 14px!important;
+  }
   .middle__homepage {
     justify-content: center;
     border-bottom: 1px solid #c7c7c7;
