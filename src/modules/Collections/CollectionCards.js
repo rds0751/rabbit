@@ -309,7 +309,7 @@ function Collections_tile(props) {
                     value={filterData.categoryName}
                     defaultValue=""
                   >
-                    <StyledOption value="" hidden>Categories All</StyledOption>
+                    <StyledOption value="" hidden>Categories <span style={{color: '#858585'}}>All</span></StyledOption>
                     <StyledOption value="" >All</StyledOption>
                     {Categories.map((item, key) => {
                       return <StyledOption value={item._id}>{item.name}</StyledOption>;
