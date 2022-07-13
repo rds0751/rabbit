@@ -25,6 +25,9 @@ import { useSelector } from "react-redux";
 import { fetchPalletsColor, getParamTenantId } from "../../utility/global"
 import Skeleton from "react-loading-skeleton";
 import CollectionCardLoader from "./CollectionCardLoader";
+import Select from "react-select";
+
+
 const blue = {
   100: '#DAECFF',
   200: '#99CCF3',
@@ -149,6 +152,12 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
   return <SelectUnstyled {...props} ref={ref} components={components} />;
 });
 
+const options = [
+  { value: "-1", label: "Recently added" },
+  { value: "3", label: "Items: Low to High" },
+  { value: "2", label: "Items: High to Low" },
+  { value: "1", label: "Oldest" },
+];
 
 
 const queryString = require('query-string');
@@ -207,7 +216,7 @@ function Collections_tile(props) {
 
   const handleSort = (e) => {
     //const { name, value } = e.target;
-    setFilterData({ ...filterData, 'sort': e });
+    setFilterData({ ...filterData, sort: e });
   };
 
   const getCollectionById = (collectionId) => {
@@ -329,19 +338,32 @@ function Collections_tile(props) {
 
               {
                 props.loader ? <Skeleton width={`250px`} height={`36px`} /> :
-                  <CustomSelect
-                    name="sort"
-                    id="sale"
-                    onChange={(e) => handleSort(e)}
-                    value={filterData.sort}
-                    defaultValue=""
-                  >
-                    <StyledOption value="" hidden>Sort by</StyledOption>
-                    <StyledOption value="" >All</StyledOption>
-                    <StyledOption value="-1">Recently added</StyledOption>
-                    <StyledOption value="3">Items: Low to High</StyledOption>
-                    <StyledOption value="2">Items: High to Low</StyledOption>
-                  </CustomSelect>
+                  <Select
+                    className="select-element"
+                    onChange={(e) => handleSort(e.value)}
+                    options={options}
+                    placeholder="Sort by"
+                    theme={(theme) => ({
+                      ...theme,
+                      colors: {
+                        ...theme.colors,
+                        neutral50: "#191919", // Placeholder color
+                      },
+                    })}
+                  />
+                  // <CustomSelect
+                  //   name="sort"
+                  //   id="sale"
+                  //   onChange={(e) => handleSort(e)}
+                  //   value={filterData.sort}
+                  //   defaultValue=""
+                  // >
+                  //   <StyledOption value="" hidden>Sort by</StyledOption>
+                  //   <StyledOption value="" >All</StyledOption>
+                  //   <StyledOption value="-1">Recently added</StyledOption>
+                  //   <StyledOption value="3">Items: Low to High</StyledOption>
+                  //   <StyledOption value="2">Items: High to Low</StyledOption>
+                  // </CustomSelect>
               }
             </div>
           </div>
