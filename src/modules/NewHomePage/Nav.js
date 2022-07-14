@@ -137,15 +137,28 @@ const Nav = (props) => {
 
 
   const MetaMaskConnector = async () => {
-    try{
-      if (window.ethereum) {
-       let accounts=await window.ethereum.request({method:"eth_requestAccounts"});
-       let Newaddress = accounts[0];
-       setTenant({ ...tenantData, wallet: Newaddress });
-       localStorage.setItem("walletAddress", Newaddress);
-       let balance= await window.ethereum.request({ method: "eth_getBalance", params: [Newaddress, "latest"] })
-       const PriceEther = ethers.utils.formatEther(balance);
-       dispatch(
+  
+    if (typeof window.ethereum !== 'undefined') {
+    
+      try {
+      let accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      let Newaddress = accounts[0];
+      alert(Newaddress)
+      if(!Newaddress || !Newaddress.length){
+        Utils.apiFailureToast("Please Login to metamask")
+        return ;
+      }
+      setTenant({ ...tenantData, wallet: Newaddress });
+
+      localStorage.setItem("walletAddress", Newaddress);
+      let balance = await window.ethereum.request({
+        method: "eth_getBalance",
+        params: [Newaddress, "latest"],
+      });
+      const PriceEther = ethers.utils.formatEther(balance);
+      dispatch(
         AddWalletDetails({
           Newaddress,
           PriceEther,
@@ -158,22 +171,22 @@ const Nav = (props) => {
       if (Newaddress) {
         const data = checkTenant(Newaddress);
       }
-
-      }else {
-        Utils.apiFailureToast("Please connect with metamask");
-        setTimeout(()=>{
-          window.location.reload();
-        },1000)
-      }
-    }catch(e){
+    } catch (e) {
+       Utils.apiFailureToast("Please login to metamask extension");
       setModal(false);
-      Utils.apiFailureToast("Please connect with metamask");
-      setTimeout(()=>{
+      setTimeout(() => {
         window.location.reload();
-      },1000)
-     
+      }, 1000);
     }
-  };
+  } 
+    else {
+      Utils.apiFailureToast("Please login to metamask extension");
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }
+  
+};
 
   const createStore = async () => {
     const [error, result] = await Utils.parseResponse(getTenant(tenantData));
