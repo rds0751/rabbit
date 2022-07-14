@@ -336,7 +336,7 @@ function NftPage(props) {
                         <img
                           alt=""
                           src={dropdown}
-                          style={{ height: "17px", marginLeft: "8px" }}
+                          style={{ height: "13px", marginLeft: "8px" }}
                         />
                       </div>
                     </div>
