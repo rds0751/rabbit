@@ -55,7 +55,7 @@ const Question = styled.h1`
 const Answer = styled.p`
   font-size: 14px;
   font-weight: 500;
-  width: 759px;
+  /* width: 759px; */
   margin-bottom: 0px;
   padding-top:16px;
   margin-bottom:-20px;

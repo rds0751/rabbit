@@ -103,7 +103,7 @@ const CustomSnack2 = styled(Snackbar)`
 const Select = styled.select`
   border: none;
   border-radius: 4px;
-  width: 108px;
+  width: 126px;
   height: 40px;
   padding-left: 13px;
   font-family: "poppins-medium";
@@ -1245,7 +1245,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                         </div>
                       </div>
                     </div>
-                    <div className="second-text align-row" style={{display:nft?.salesInfo?.isOpenForSale ? "flex":"none"}}>
+                    <div className="second-text align-row nftDetail" style={{display:nft?.salesInfo?.isOpenForSale ? "flex":"none"}}>
                       <span className="text">
                         Current Price:&nbsp;
                         <span className="nft-value">
@@ -1265,7 +1265,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                             : null
                         }
                         {salesInfo?.isOpenForSale ? (
-                          <span className="text">
+                          <span className="text timercount">
                             <i className="far fa-clock clock-icon"></i>
                             {/* <span className="time">{calculateExpireSale(salesInfo?.expiryDate) ? `${calculateExpireSale(salesInfo?.expiryDate)} days left` : 'Expires today'}</span> */}
                             <span className="time">
@@ -1783,7 +1783,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                             border: none;
                         }`}
                         </style>
-                        {/* <Select
+                        <Select
                           className="selectfixing4"
                           name="type"
                           onChange={(e) => handleChange(e)}
@@ -1791,8 +1791,8 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                         >
                           <Option>A month</Option>
                           <Option value="list">A year</Option>
-                        </Select> */}
-                        {/* <span style={{ border: "0.2px ridge #C8C8C8" }}></span> */}
+                        </Select>
+                        <span style={{ border: "0.2px ridge #C8C8C8" }}></span>
                         <DateTimePicker  onChange={setMakeOfferDate} minDate={new Date()}
                           dayPlaceholder="DD" monthPlaceholder="MM" yearPlaceholder="YY"
                           hourPlaceholder="HH" minutePlaceholder="MM"

@@ -17,12 +17,18 @@
   text-decoration: none !important;
 }
 .collectionCardEachName {
-  margin-top: 2% !important;
+  margin-top: 1.65rem !important;
 }
 .collectionCardEachTotalitems {
   margin-top: 1% !important;
 }
-
+.collectCard{
+  height: 309px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 /* nft and collection mediaquery start */
 @media only screen and (min-width: 1790px){
   .collectionCardEach, .nftCardEach{
