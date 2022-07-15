@@ -144,7 +144,7 @@ const CardDiv = styled.div`
 const Cards = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 24px;
   @media only screen and (min-width: 320px) and (max-width: 767px) {
