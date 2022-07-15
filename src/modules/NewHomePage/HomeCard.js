@@ -271,7 +271,8 @@ const OfferCardDiv = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-top: 118px;
+  justify-content: center;
+  margin-top: 98px;
   @media only screen and (min-width: 320px) and (max-width: 767px) {
    justify-content: center;
    align-items: center;
@@ -304,6 +305,7 @@ const OfferCard = styled.div`
   background: #19293a 0% 0% no-repeat padding-box;
   border-radius: 12px;
   opacity: 1;
+  margin-top: 20px;
   @media only screen and (min-width: 320px) and (max-width: 767px) {
   margin-right: 30px;
   margin-top: 30px;
