@@ -377,6 +377,10 @@ color: #031527!important;
     color: #ffffff;
     opacity: 1;
   }
+  .newtext{
+    width: 85%;
+    text-align: center;
+  }
   .button-hide {
     display: none;
   }
