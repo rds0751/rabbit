@@ -60,6 +60,15 @@ const ItemsDiv = styled.div`
   flex-direction: row;
   align-items: center;
   margin-right: 4.5rem;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+
+  margin-right: 0;
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+   
+    margin-right: 25px;
+
+  }
 `;
 const Item = styled.label`
   text-align: left;
@@ -145,7 +154,6 @@ const Nav = (props) => {
         method: "eth_requestAccounts",
       });
       let Newaddress = accounts[0];
-      alert(Newaddress)
       if(!Newaddress || !Newaddress.length){
         Utils.apiFailureToast("Please Login to metamask")
         return ;
