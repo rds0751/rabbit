@@ -60,6 +60,10 @@ import { storeConstants } from "../../constants";
 
 const MainDiv = styled.div`
   background: #031527 0% 0% no-repeat padding-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex: 1 1 0%;
 `;
 
 const FirstSection = styled.div`
@@ -70,20 +74,20 @@ const FirstSection = styled.div`
 `;
 const CommonSection = styled.div`
   margin-top: 154px;
-  margin-bottom: ${props=>props.marginBottom};
+  margin-bottom: ${(props) => props.marginBottom};
   @media only screen and (min-width: 320px) and (max-width: 767px) {
-    margin-top: ${props=>props.marginTop};
-    width: ${props=>props.width};
-    margin-bottom: ${props=>props.mobMarginBottom};
+    margin-top: ${(props) => props.marginTop};
+    width: ${(props) => props.width};
+    margin-bottom: ${(props) => props.mobMarginBottom};
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
-    width: ${props=>props.tabWidth};
+    width: ${(props) => props.tabWidth};
   }
 `;
 
 const Image = styled.img`
-    width: ${(props) => props.originalWidth};
-    height: ${(props) => props.originalHeight};
+  width: ${(props) => props.originalWidth};
+  height: ${(props) => props.originalHeight};
   @media only screen and (min-width: 320px) and (max-width: 767px) {
     width: ${(props) => props.width};
     height: ${(props) => props.height};
@@ -136,8 +140,7 @@ const CardDiv = styled.div`
     height: 331px;
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
-    width:46.8%;
-    
+    width: 46.8%;
   }
 `;
 
@@ -167,13 +170,13 @@ const MainCardDiv = styled.div`
     margin-top: 28px;
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
-   flex-wrap: wrap;
-   /* width: 90.15%; */
-   width: 90.15%;
-   &>:nth-child(odd){
-      margin-right:2.75em;
+    flex-wrap: wrap;
+    /* width: 90.15%; */
+    width: 90.15%;
+    & > :nth-child(odd) {
+      margin-right: 2.75em;
     }
-    &>:nth-last-child(-n+2){
+    & > :nth-last-child(-n + 2) {
       margin-top: 41px;
     }
   }
@@ -192,7 +195,7 @@ const Title = styled.label`
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
     text-align: center;
-  font: normal normal 600 18px/27px Poppins;
+    font: normal normal 600 18px/27px Poppins;
   }
 `;
 const SubTitle = styled.label`
@@ -211,7 +214,7 @@ const SubTitle = styled.label`
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
     text-align: center;
-font: normal normal normal 18px/32px Poppins;
+    font: normal normal normal 18px/32px Poppins;
   }
 `;
 
@@ -227,11 +230,11 @@ const CommonText = styled.label`
   letter-spacing: 0px;
   color: #e8e8e8;
   opacity: 1;
-  margin-bottom: ${props=>props.marginBottom};
+  margin-bottom: ${(props) => props.marginBottom};
   @media only screen and (min-width: 320px) and (max-width: 767px) {
     text-align: center;
     font: normal normal 600 24px/32px Poppins;
-    margin-bottom: ${props=>props.marginTop};
+    margin-bottom: ${(props) => props.marginTop};
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
     text-align: center;
@@ -260,7 +263,7 @@ const ExperienceText = styled.label`
   @media only screen and (min-width: 320px) and (max-width: 767px) {
     text-align: center;
     font: normal normal normal 16px/24px Poppins;
-    margin:2rem 0rem;
+    margin: 2rem 0rem;
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
     font: normal normal normal 22px/33px Poppins;
@@ -274,24 +277,23 @@ const OfferCardDiv = styled.div`
   justify-content: center;
   margin-top: 98px;
   @media only screen and (min-width: 320px) and (max-width: 767px) {
-   justify-content: center;
-   align-items: center;
-   margin-top:2px;
-   & >:last-child{
-    margin-right: 0;
-   }
-   /* & >:nth-child(3n+3) { margin-right: 0; } */
-   
+    justify-content: center;
+    align-items: center;
+    margin-top: 2px;
+    & > :last-child {
+      margin-right: 0;
+    }
+    /* & >:nth-child(3n+3) { margin-right: 0; } */
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
     justify-content: center;
-   align-items: center;
-   margin-top:11px;
+    align-items: center;
+    margin-top: 11px;
 
-   & >:last-child{
-    /* margin-right: 0; */
-   }
-   /* & > :nth-child(3n+3) { margin-right: 0; } */
+    & > :last-child {
+      /* margin-right: 0; */
+    }
+    /* & > :nth-child(3n+3) { margin-right: 0; } */
   }
 `;
 const OfferCard = styled.div`
@@ -307,12 +309,12 @@ const OfferCard = styled.div`
   opacity: 1;
   margin-top: 20px;
   @media only screen and (min-width: 320px) and (max-width: 767px) {
-  margin-right: 30px;
-  margin-top: 30px;
+    margin-right: 30px;
+    margin-top: 30px;
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
-  margin-right: 97px;
-  margin-top: 48px;
+    margin-right: 97px;
+    margin-top: 48px;
   }
 `;
 const OfferName = styled.label`
@@ -334,16 +336,16 @@ const BlockchainSection = styled.div`
   flex-direction: column;
   justify-content: center;
   @media only screen and (min-width: 320px) and (max-width: 767px) {
-   margin-top: 31.08px;
-   justify-content: flex-start;
-   padding:24px 27px 0px 28px;
-   height: 345px;
+    margin-top: 31.08px;
+    justify-content: flex-start;
+    padding: 24px 27px 0px 28px;
+    height: 345px;
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
     margin-top: 78px;
-   justify-content: flex-start;
-   padding:46px 43px 0px 43px;
-   height: 517px;
+    justify-content: flex-start;
+    padding: 46px 43px 0px 43px;
+    height: 517px;
   }
 `;
 const BlockchainsDiv = styled.div`
@@ -386,9 +388,9 @@ const StoreFrontPage = styled.div`
   flex-direction: row;
   margin-top: 95px;
   @media only screen and (min-width: 320px) and (max-width: 767px) {
-   flex-direction: column;
-   width: 90%;
-   margin-top:12px;
+    flex-direction: column;
+    width: 90%;
+    margin-top: 12px;
   }
 `;
 const StoreFrontDiv = styled.div`
@@ -397,11 +399,11 @@ const StoreFrontDiv = styled.div`
   align-items: flex-start;
   width: 20%;
   @media only screen and (min-width: 320px) and (max-width: 767px) {
-  width: 100%;
-  margin-top: 26px;
+    width: 100%;
+    margin-top: 26px;
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
-  width: 26.1%;
+    width: 26.1%;
   }
 `;
 const StoreFrontName = styled.label`
@@ -429,10 +431,10 @@ const DesStoreFrontDiv = styled.label`
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
     text-align: left;
-font: normal normal normal 18px/27px Poppins;
-letter-spacing: 0px;
-color: #E8E8E8;
-opacity: 1;
+    font: normal normal normal 18px/27px Poppins;
+    letter-spacing: 0px;
+    color: #e8e8e8;
+    opacity: 1;
   }
 `;
 const StoreButton = styled.button`
@@ -452,8 +454,8 @@ const StoreButton = styled.button`
   }
   @media only screen and (min-width: 320px) and (max-width: 767px) {
     width: 242px;
-   height: 40px;
-   margin-top: 32px;
+    height: 40px;
+    margin-top: 32px;
   }
 `;
 const StepDiv = styled.div`
@@ -528,7 +530,7 @@ const StepDes = styled.label`
   opacity: 1;
   @media only screen and (min-width: 320px) and (max-width: 767px) {
     text-align: center;
-    margin-top: ${props=>props.marginTop};
+    margin-top: ${(props) => props.marginTop};
     font: normal normal normal 16px/24px Poppins;
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
@@ -552,7 +554,7 @@ const StepCreateStore = styled.button`
   }
   @media only screen and (min-width: 320px) and (max-width: 767px) {
     width: 242px;
-   height: 40px;
+    height: 40px;
   }
 `;
 const How = styled.label`
@@ -566,11 +568,14 @@ const How = styled.label`
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
     text-align: center;
-font: normal normal 600 16px/25px Poppins;
+    font: normal normal 600 16px/25px Poppins;
   }
 `;
 
-const SubMainDiv = styled.div``;
+const SubMainDiv = styled.div`
+  display: flex;
+  height: 911px;
+`;
 const NFTDetails = styled.div`
   background: #041628 0% 0% no-repeat padding-box;
   border-radius: 0px 6px 6px 0px;
@@ -602,26 +607,135 @@ const Number = styled.label`
   color: #016dd9;
   @media only screen and (min-width: 320px) and (max-width: 767px) {
     font: normal normal 600 24px/25px Poppins;
-  } 
+  }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
     font: normal normal 600 48px/72px Poppins;
   }
-  
 `;
 
-const LoaderDiv=styled.div`
-white-space: nowrap;
+const LoaderDiv = styled.div`
+  white-space: nowrap;
   display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 10px;
-    font: normal normal normal 18px/27px Poppins;
-    color: #031527;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px;
+  font: normal normal normal 18px/27px Poppins;
+  color: #031527;
 
-    @media only screen and (min-width: 320px) and (max-width: 767px) {
-      font: normal normal normal 16px/25px Poppins;
-    }
-  
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    font: normal normal normal 16px/25px Poppins;
+  }
+`;
+const FirstContainer = styled.div`
+  width: 100%;
+  position: absolute;
+  overflow: hidden;
+`;
+const BgImage = styled.div`
+  background: url("./BannerImage.svg");
+  height: 911px;
+  background-size: cover;
+  opacity: 1;
+  /* background-color: rgb(255, 255, 255);
+  background-position: center center;
+  opacity: 0.3; */
+  filter: blur(8px);
+  /* -webkit-mask: linear-gradient(rgb(255, 255, 255), transparent); */
+`;
+const SecondContainer = styled.div`
+
+  display: flex;
+  margin: 0px auto;
+  max-width: min(1280px, 100% - 40px);
+  width: 100%;
+  flex-wrap: wrap;
+  @media (min-width: 1024px) {
+   flex-wrap: nowrap;
+  }
+`;
+const FirstDiv = styled.div`
+  display: flex;
+  z-index: 2;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  width: 100%;
+  padding: 30px 20px 20px;
+  @media (min-width: 1024px) {
+    width: 50%;
+    padding: 110px 20px 44px 30px;
+    align-items: flex-start;
+  }
+`;
+const SecondDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 0px;
+  @media (min-width: 1024px) {
+    width: 54%;
+    padding: 60px 0px;
+    align-items: flex-end;
+  }
+`;
+const H1 = styled.h1`
+  text-align: center;
+  font: normal normal 600 54px/81px Poppins;
+  letter-spacing: 0px;
+  color: #ffffff;
+  opacity: 1;
+  @media (max-width:768px){
+    text-align: center;
+   font: normal normal 600 24px/40px Poppins; 
+  }
+  @media (min-width:768px) and (max-width:1024px){
+    text-align: center;
+  font: normal normal 600 32px/48px Poppins;
+  }
+  @media (min-width: 1024px) {
+    text-align: left;
+  }
+`;
+const SpanFirst = styled.span`
+  margin-top: 20px;
+  max-width: 400px;
+  /* text-align: center; */
+  z-index: 2;
+  /* font-size: 18px; */
+  color: #ffffff;
+  @media (max-width:768px){
+    text-align: center;
+    font: normal normal medium 16px/24px Poppins;
+  }
+  @media (min-width:768px) and (max-width:1024px){
+    text-align: center;
+   font: normal normal medium 16px/25px Poppins;
+  }
+  @media (min-width: 1024px) {
+    text-align: left;
+    font: normal normal normal 22px/33px Poppins;
+  }
+`;
+const FirstCardDiv=styled.div`
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+`;
+const ButtonStore = styled.button`
+width: 242px;
+height: 54px;
+border: none;
+background: #FFFFFF 0% 0% no-repeat padding-box;
+border-radius: 12px;
+cursor: pointer;
+margin-top: 35px;
+font: normal normal normal 18px/27px Poppins;
+&:hover{
+  background-color: #016dd9;
+  color: #ffffff;
+}
 `;
 
 const HomeCard = () => {
@@ -727,7 +841,7 @@ const HomeCard = () => {
     }
   };
 
-  const MetaMaskConnector = async () => {
+  const metaMaskConnector = async () => {
     console.log(window.ethereum, "+++++++++++");
 
     if (typeof window.ethereum !== "undefined") {
@@ -762,7 +876,7 @@ const HomeCard = () => {
           const data = checkTenant(Newaddress);
         }
       } catch (e) {
-        Utils.apiFailureToast("Please login to metamask extension");
+        Utils.apiFailureToast("Please login to metamask extension"); // to do
         setModal(false);
         setTimeout(() => {
           window.location.reload();
@@ -877,118 +991,74 @@ const HomeCard = () => {
     <>
       <MainDiv>
         <SubMainDiv>
-          <div className="homepage">
-            <div className="banner newbanner">
-              <div className="inner-width">
-                <Container fluid>
-                  <Row>
-                    <Col lg={6}>
-                      <div className="left-text  new-home-left-touch">
-                        <h1 className="heading newHomeHeading">
-                          Launch your NFT Marketplace in a minute
-                        </h1>
-                        <p className="mob-heading">
-                         
-                        </p>
+          <FirstContainer>
+            <BgImage></BgImage>
+          </FirstContainer>
+          <SecondContainer>
+            <FirstDiv>
+              <H1>Launch your NFT Marketplace in a minute</H1>
+              <SpanFirst>
+                Just connect your Metamask wallet to launch your store. No
+                Coding knowledge required.
+              </SpanFirst>
+              <ButtonStore
+                //onClick={() => createHandle(customize.appearance.buttons)}
+              
+                // className={`button-hide second`}
+                onClick={() => metaMaskConnector()}
+              >
+                {loader ? <Spinner></Spinner> : ""}
+                <Image src={MetaFox} style={{ marginRight: "5px" }}></Image>
+                {`${
+                  localStorage.getItem("has_wallet") === "false"
+                    ? "connect to Wallet"
+                    : "Launch your store"
+                }`}
+              </ButtonStore>
+            </FirstDiv>
+            <SecondDiv>
+              <FirstCardDiv>
+              <Card className="NewHomeNFTCard">
+                <div className="homePageContainer">
+                  <Card.Img
+                    variant="top"
+                    className={`newhomecard`}
+                    src={WarriorMonk}
+                  />
+                </div>
+              </Card>
+              <Card className="NewHomeNFTCard">
+                <div className="homePageContainer">
+                  <Card.Img
+                    variant="top"
+                    className={`newhomecard`}
+                    src={Bear}
+                  />
+                </div>
+              </Card>
+              <Card className="NewHomeNFTCard">
+                <div className="homePageContainer">
+                  <Card.Img
+                    variant="top"
+                    className={`newhomecard`}
+                    src={Water}
+                  />
+                </div>
+              </Card>
+              <Card className="NewHomeNFTCard">
+                <div className="homePageContainer">
+                  <Card.Img
+                    variant="top"
+                    className={`newhomecard`}
+                    src={invisible}
+                  />
+                </div>
+              </Card>
 
-                        <p className="text newhometext">
-                          Just connect your Metamask wallet to launch your
-                          store. No Coding knowledge required.
-                        </p>
-                        <div style={{ display: "flex" }}>
-                          <Button
-                            //onClick={() => createHandle(customize.appearance.buttons)}
-                            variant="custom connect"
-                            className={`button-hide second`}
-                            onClick={() => MetaMaskConnector()}
-                          >
-                            {loader ? <Spinner></Spinner> : ""}
-                            <Image
-                              src={MetaFox}
-                              style={{ marginRight: "5px" }}
-                            ></Image>
-                            {`${
-                              localStorage.getItem("has_wallet") === "false"
-                                ? "connect to Wallet"
-                                : "Launch your store"
-                            }`}
-                          </Button>
-                        </div>
-                      </div>
-                    </Col>
-                    <Col lg={6} className="carousel-hide">
-                      <div className="right-slider">
-                        <OwlCarousel
-                          className="owl-theme z-carousel"
-                          margin={10}
-                          items={1}
-                        >
-                          <div className="item">
-                            <div className="d-flex flex-wrap column-gap-20">
-                              <Card className="NewHomeNFTCard">
-                                <div className="homePageContainer">
-                                  {/* <NFTDetails>
-                                    <Details>
-                                      <NamePrice>Holy bear</NamePrice>
-                                      <CurrencyPrice>
-                                        <NamePrice>0.13 ETH</NamePrice>
-                                      </CurrencyPrice>
-                                    </Details>
-                                  </NFTDetails> */}
-                                  <Card.Img
-                                    variant="top"
-                                    className={`newhomecard`}
-                                    src={WarriorMonk}
-                                  />
-                                </div>
-                              </Card>
-                              <Card className="NewHomeNFTCard">
-                                <div className="homePageContainer">
-                                  <Card.Img
-                                    variant="top"
-                                    className={`newhomecard`}
-                                    src={Bear}
-                                  />
-                                </div>
-                              </Card>
-                              <Card className="NewHomeNFTCard">
-                                <div className="homePageContainer">
-                                  <Card.Img
-                                    variant="top"
-                                    className={`newhomecard`}
-                                    src={Water}
-                                  />
-                                </div>
-                              </Card>
-                              <Card className="NewHomeNFTCard">
-                                <div className="homePageContainer">
-                                  <Card.Img
-                                    variant="top"
-                                    className={`newhomecard`}
-                                    src={invisible}
-                                  />
-                                </div>
-                              </Card>
-                            </div>
-                          </div>
-                        </OwlCarousel>
-                      </div>
-                    </Col>
-                  </Row>
-                </Container>
-              </div>
-            </div>
-          </div>
-
-          {/* <NFTCardDiv>
-            <BannerImage
-              style={{ background: `url(images/BannerImage.svg)` }}
-            ></BannerImage>
-            <NFTMiddleDiv>
-              <NFTFirstDiv></NFTFirstDiv>
-              <NFTSecondDiv></NFTSecondDiv>
-            </NFTMiddleDiv>
-          </NFTCardDiv> */}
+              </FirstCardDiv>
+              
+            </SecondDiv>
+          </SecondContainer>
         </SubMainDiv>
 
         <BottomSection>
@@ -1018,7 +1088,15 @@ const HomeCard = () => {
 
             <StepDiv>
               <StepImageDiv>
-                <Image width="319px" height="318px" tabWidth="516px" tabHeight="418px"   originalWidth="541px" originalHeight="418px"src={StepWallet}></Image>
+                <Image
+                  width="319px"
+                  height="318px"
+                  tabWidth="516px"
+                  tabHeight="418px"
+                  originalWidth="541px"
+                  originalHeight="418px"
+                  src={StepWallet}
+                ></Image>
               </StepImageDiv>
 
               <StepDetails>
@@ -1029,8 +1107,8 @@ const HomeCard = () => {
                   NFTinger is super easy for anyone as it subtracts the the
                   complexities of
                 </StepDes>
-                <StepCreateStore onClick={() => MetaMaskConnector()}>
-                 <LoaderDiv >
+                <StepCreateStore onClick={() => metaMaskConnector()}>
+                  <LoaderDiv>
                     {loader ? <Spinner></Spinner> : ""}
                     Connect Wallet
                   </LoaderDiv>
@@ -1040,7 +1118,15 @@ const HomeCard = () => {
 
             <StepDivSecond>
               <StepImageDiv>
-                <Image width="319px" height="318px" tabWidth="516px" tabHeight="418px"  originalWidth="540px" originalHeight="458px"  src={StepStore}></Image>
+                <Image
+                  width="319px"
+                  height="318px"
+                  tabWidth="516px"
+                  tabHeight="418px"
+                  originalWidth="540px"
+                  originalHeight="458px"
+                  src={StepStore}
+                ></Image>
               </StepImageDiv>
               <StepDetails>
                 <StepTitle>
@@ -1050,8 +1136,8 @@ const HomeCard = () => {
                   NFTinger is super easy for anyone as it subtracts the the
                   complexities of
                 </StepDes>
-                <StepCreateStore onClick={() => MetaMaskConnector()}>
-                 <LoaderDiv>
+                <StepCreateStore onClick={() => metaMaskConnector()}>
+                  <LoaderDiv>
                     {loader ? <Spinner></Spinner> : ""}
                     Create Store
                   </LoaderDiv>
@@ -1059,10 +1145,17 @@ const HomeCard = () => {
               </StepDetails>
             </StepDivSecond>
 
-
             <StepDiv>
               <StepImageDiv>
-                <Image width="319px" height="318px" tabWidth="516px" tabHeight="418px"  originalWidth="540px" originalHeight="540px" src={StepGrowth}></Image>
+                <Image
+                  width="319px"
+                  height="318px"
+                  tabWidth="516px"
+                  tabHeight="418px"
+                  originalWidth="540px"
+                  originalHeight="540px"
+                  src={StepGrowth}
+                ></Image>
               </StepImageDiv>
 
               <StepDetails>
@@ -1073,8 +1166,8 @@ const HomeCard = () => {
                   NFTinger is super easy for anyone as it subtracts the the
                   complexities of
                 </StepDes>
-                <StepCreateStore onClick={() => MetaMaskConnector()}>
-                 <LoaderDiv>
+                <StepCreateStore onClick={() => metaMaskConnector()}>
+                  <LoaderDiv>
                     {loader ? <Spinner></Spinner> : ""}
                     Create Store
                   </LoaderDiv>
@@ -1090,7 +1183,15 @@ const HomeCard = () => {
               <ExperienceText>
                 Enable customer to buy NFT seamlessly
               </ExperienceText>
-              <Image width= "91.5%" height= "266px" tabWidth="89.60vw" tabHeight="415px" originalWidth="55.11vw" originalHeight="639px"  src={NFTBuying}></Image>
+              <Image
+                width="91.5%"
+                height="266px"
+                tabWidth="89.60vw"
+                tabHeight="415px"
+                originalWidth="55.11vw"
+                originalHeight="639px"
+                src={NFTBuying}
+              ></Image>
             </HeadTitle>
           </CommonSection>
 
@@ -1101,7 +1202,15 @@ const HomeCard = () => {
               <ExperienceText>
                 Enable customer to buy NFT seamlessly
               </ExperienceText>
-              <Image width= "91.5%" height= "267px" tabWidth="89.60vw" tabHeight="415px"originalWidth="55.11vw" originalHeight="639px" src={Admin}></Image>
+              <Image
+                width="91.5%"
+                height="267px"
+                tabWidth="89.60vw"
+                tabHeight="415px"
+                originalWidth="55.11vw"
+                originalHeight="639px"
+                src={Admin}
+              ></Image>
             </HeadTitle>
           </CommonSection>
 
@@ -1113,15 +1222,39 @@ const HomeCard = () => {
 
             <BlockchainsDiv>
               <Blockchain>
-                <Image width="72px" height= "72px" tabWidth="181px" tabHeight="181px" originalWidth="181px" originalHeight="181px" src={Ethereum}></Image>
+                <Image
+                  width="72px"
+                  height="72px"
+                  tabWidth="181px"
+                  tabHeight="181px"
+                  originalWidth="181px"
+                  originalHeight="181px"
+                  src={Ethereum}
+                ></Image>
                 <BlockchainText>Ethereum</BlockchainText>
               </Blockchain>
               <Blockchain>
-                <Image width="72px" height= "72px" tabWidth="181px" tabHeight="181px"  originalWidth="181px" originalHeight="181px" src={Polygon}></Image>
+                <Image
+                  width="72px"
+                  height="72px"
+                  tabWidth="181px"
+                  tabHeight="181px"
+                  originalWidth="181px"
+                  originalHeight="181px"
+                  src={Polygon}
+                ></Image>
                 <BlockchainText>Polygon Matic</BlockchainText>
               </Blockchain>
               <Blockchain>
-                <Image width="72px" height= "72px" tabWidth="181px" tabHeight="181px"  originalWidth="181px" originalHeight="181px" src={BinanceBlockchain}></Image>
+                <Image
+                  width="72px"
+                  height="72px"
+                  tabWidth="181px"
+                  tabHeight="181px"
+                  originalWidth="181px"
+                  originalHeight="181px"
+                  src={BinanceBlockchain}
+                ></Image>
                 <BlockchainText>Binance </BlockchainText>
               </Blockchain>
             </BlockchainsDiv>
@@ -1158,7 +1291,7 @@ const HomeCard = () => {
                 </StoreFrontDiv>
               </StoreFrontPage>
 
-              <StoreButton onClick={() => MetaMaskConnector()}>
+              <StoreButton onClick={() => metaMaskConnector()}>
                 <div className="display-loader-left storefront-create-store">
                   {loader ? <Spinner></Spinner> : ""}
                   Create Store
@@ -1181,13 +1314,26 @@ const HomeCard = () => {
             </HeadTitle>
           </CommonSection>
 
-          <CommonSection marginBottom="163px" marginTop="82px" width="97%" mobMarginBottom="95px">
+          <CommonSection
+            marginBottom="163px"
+            marginTop="82px"
+            width="97%"
+            mobMarginBottom="95px"
+          >
             <HeadTitle>
-              <CommonText  marginBottom="88px" marginTop="22px">
+              <CommonText marginBottom="88px" marginTop="22px">
                 NFTinger Marketplace
               </CommonText>
 
-              <Image width= "293px" height="173px" tabWidth="622px" tabHeight="366px"  originalWidth="63.86vw" originalHeight="722px" src={marketplace}></Image>
+              <Image
+                width="293px"
+                height="173px"
+                tabWidth="622px"
+                tabHeight="366px"
+                originalWidth="63.86vw"
+                originalHeight="722px"
+                src={marketplace}
+              ></Image>
             </HeadTitle>
           </CommonSection>
         </BottomSection>
@@ -1265,7 +1411,7 @@ const HomeCard = () => {
                   disabled={errorMsg?.length > 0 ? true : false}
                   //  style={{background: `${fetchPalletsColor(appearance?.colorPalette)}`}}
                 >
-                 <LoaderDiv>
+                  <LoaderDiv>
                     {loader ? <Spinner></Spinner> : ""}
                     Create Store
                   </LoaderDiv>
