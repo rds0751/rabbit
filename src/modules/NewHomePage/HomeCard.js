@@ -70,9 +70,29 @@ const FirstSection = styled.div`
 `;
 const CommonSection = styled.div`
   margin-top: 154px;
+  margin-bottom: ${props=>props.marginBottom};
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    margin-top: ${props=>props.marginTop};
+    width: ${props=>props.width};
+    margin-bottom: ${props=>props.mobMarginBottom};
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    width: ${props=>props.tabWidth};
+  }
 `;
 
-const Image = styled.img``;
+const Image = styled.img`
+    width: ${(props) => props.originalWidth};
+    height: ${(props) => props.originalHeight};
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    width: ${(props) => props.width};
+    height: ${(props) => props.height};
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    width: ${(props) => props.tabWidth};
+    height: ${(props) => props.tabHeight};
+  }
+`;
 
 const BottomSection = styled.div`
   width: 100%;
@@ -90,6 +110,16 @@ const LabelText = styled.label`
   font: normal normal 600 54px/81px Poppins;
   letter-spacing: 0px;
   color: #e8e8e8;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    text-align: center;
+    font: normal normal 600 24px/35px Poppins;
+    letter-spacing: 0px;
+    opacity: 1;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    font: normal normal 600 32px/48px Poppins;
+    text-align: center;
+  }
 `;
 
 const CardDiv = styled.div`
@@ -100,14 +130,30 @@ const CardDiv = styled.div`
   border-radius: 12px;
   opacity: 1;
   display: flex;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    width: 100%;
+    margin-top: 24px;
+    height: 331px;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    width:46.8%;
+    
+  }
 `;
 
 const Cards = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 24px;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    justify-content: flex-start;
+  }
 `;
 const MainCardDiv = styled.div`
   display: flex;
@@ -115,6 +161,22 @@ const MainCardDiv = styled.div`
   justify-content: space-between;
   width: 123%;
   margin-top: 67px;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    flex-direction: column;
+    width: 91.5%;
+    margin-top: 28px;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+   flex-wrap: wrap;
+   /* width: 90.15%; */
+   width: 90.15%;
+   &>:nth-child(odd){
+      margin-right:2.75em;
+    }
+    &>:nth-last-child(-n+2){
+      margin-top: 41px;
+    }
+  }
 `;
 const Title = styled.label`
   text-align: center;
@@ -122,6 +184,16 @@ const Title = styled.label`
   letter-spacing: 0px;
   color: #ffffff;
   opacity: 1;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    font: normal normal 600 16px/25px Poppins;
+    letter-spacing: 0px;
+    color: #ffffff;
+    opacity: 1;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    text-align: center;
+  font: normal normal 600 18px/27px Poppins;
+  }
 `;
 const SubTitle = styled.label`
   text-align: center;
@@ -130,6 +202,17 @@ const SubTitle = styled.label`
   color: #f0f0f0;
   opacity: 1;
   margin-top: 1rem;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    text-align: center;
+    font: normal normal normal 16px/24px Poppins;
+    letter-spacing: 0px;
+    color: #f0f0f0;
+    opacity: 1;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    text-align: center;
+font: normal normal normal 18px/32px Poppins;
+  }
 `;
 
 const HeadTitle = styled.div`
@@ -144,6 +227,16 @@ const CommonText = styled.label`
   letter-spacing: 0px;
   color: #e8e8e8;
   opacity: 1;
+  margin-bottom: ${props=>props.marginBottom};
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    text-align: center;
+    font: normal normal 600 24px/32px Poppins;
+    margin-bottom: ${props=>props.marginTop};
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    text-align: center;
+    font: normal normal 600 32px/48px Poppins;
+  }
 `;
 const TitleSecond = styled.label`
   text-align: center;
@@ -151,22 +244,55 @@ const TitleSecond = styled.label`
   letter-spacing: 0px;
   color: #e8e8e8;
   opacity: 1;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    text-align: center;
+    font: normal normal 600 24px/32px Poppins;
+  }
 `;
 const ExperienceText = styled.label`
   text-align: left;
-  margin-top:  2.65rem;
+  margin-top: 2.65rem;
   margin-bottom: 6.42rem;
-  font: normal normal normal 1.15vw/33px Poppins;
+  font: normal normal normal 22px/33px Poppins;
   letter-spacing: 0px;
   color: #e8e8e8;
   opacity: 1;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    text-align: center;
+    font: normal normal normal 16px/24px Poppins;
+    margin:2rem 0rem;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    font: normal normal normal 22px/33px Poppins;
+  }
 `;
 
 const OfferCardDiv = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-top: 118px;
+  justify-content: center;
+  margin-top: 98px;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+   justify-content: center;
+   align-items: center;
+   margin-top:2px;
+   & >:last-child{
+    margin-right: 0;
+   }
+   /* & >:nth-child(3n+3) { margin-right: 0; } */
+   
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    justify-content: center;
+   align-items: center;
+   margin-top:11px;
+
+   & >:last-child{
+    /* margin-right: 0; */
+   }
+   /* & > :nth-child(3n+3) { margin-right: 0; } */
+  }
 `;
 const OfferCard = styled.div`
   display: flex;
@@ -179,6 +305,15 @@ const OfferCard = styled.div`
   background: #19293a 0% 0% no-repeat padding-box;
   border-radius: 12px;
   opacity: 1;
+  margin-top: 20px;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  margin-right: 30px;
+  margin-top: 30px;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+  margin-right: 97px;
+  margin-top: 48px;
+  }
 `;
 const OfferName = styled.label`
   text-align: left;
@@ -198,6 +333,18 @@ const BlockchainSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+   margin-top: 31.08px;
+   justify-content: flex-start;
+   padding:24px 27px 0px 28px;
+   height: 345px;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    margin-top: 78px;
+   justify-content: flex-start;
+   padding:46px 43px 0px 43px;
+   height: 517px;
+  }
 `;
 const BlockchainsDiv = styled.div`
   margin-top: 95px;
@@ -205,6 +352,12 @@ const BlockchainsDiv = styled.div`
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    margin-top: 75px;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    margin-top: 59px;
+  }
 `;
 const Blockchain = styled.div`
   display: flex;
@@ -219,6 +372,12 @@ const BlockchainText = styled.div`
   letter-spacing: 0px;
   color: #e8e8e8;
   opacity: 1;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    font: normal normal 600 16px/32px Poppins;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    font: normal normal 600 22px/32px Poppins;
+  }
 `;
 const StoreFrontPage = styled.div`
   display: flex;
@@ -226,12 +385,24 @@ const StoreFrontPage = styled.div`
   align-items: center;
   flex-direction: row;
   margin-top: 95px;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+   flex-direction: column;
+   width: 90%;
+   margin-top:12px;
+  }
 `;
 const StoreFrontDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 20%;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  width: 100%;
+  margin-top: 26px;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+  width: 26.1%;
+  }
 `;
 const StoreFrontName = styled.label`
   text-align: center;
@@ -239,13 +410,30 @@ const StoreFrontName = styled.label`
   letter-spacing: 0px;
   color: #e8e8e8;
   opacity: 1;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    font: normal normal 600 16px/25px Poppins;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    font: normal normal 600 18px/27px Poppins;
+    text-align: left;
+  }
 `;
 const DesStoreFrontDiv = styled.label`
   text-align: left;
-  font: normal normal normal 0.95vw/27px Poppins;
+  font: normal normal normal 18px/27px Poppins;
   letter-spacing: 0px;
   color: #e8e8e8;
   opacity: 1;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    font: normal normal normal 16px/24px Poppins;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    text-align: left;
+font: normal normal normal 18px/27px Poppins;
+letter-spacing: 0px;
+color: #E8E8E8;
+opacity: 1;
+  }
 `;
 const StoreButton = styled.button`
   margin-top: 6.8rem;
@@ -262,27 +450,59 @@ const StoreButton = styled.button`
     background: white 0% 0% no-repeat padding-box;
     color: blue;
   }
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    width: 242px;
+   height: 40px;
+   margin-top: 32px;
+  }
 `;
 const StepDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin-top: 149px;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 55px;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 const StepDivSecond = styled.div`
   display: flex;
   flex-direction: row-reverse;
   justify-content: center;
   margin-top: 149px;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 32px;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 const StepImageDiv = styled.div`
   margin-right: 150px;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    margin-right: 0;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    margin-right: 0;
+  }
 `;
 const StepDetails = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   margin-top: 43px;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    align-items: center;
+  }
 `;
 const StepTitle = styled.label`
   text-align: center;
@@ -290,14 +510,30 @@ const StepTitle = styled.label`
   letter-spacing: 0px;
   color: #f0f0f0;
   opacity: 1;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    text-align: center;
+    font: normal normal 600 16px/25px Poppins;
+    color: #f0f0f0;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    font: normal normal 600 40px/60px Poppins;
+  }
 `;
 const StepDes = styled.label`
   text-align: left;
-  font: normal normal normal 1.15vw/32px Poppins;
+  font: normal normal normal 22px/32px Poppins;
   letter-spacing: 0px;
   color: #f0f0f0;
   margin-top: 38px;
   opacity: 1;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    text-align: center;
+    margin-top: ${props=>props.marginTop};
+    font: normal normal normal 16px/24px Poppins;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    font: normal normal normal 22px/32px Poppins;
+  }
 `;
 
 const StepCreateStore = styled.button`
@@ -314,6 +550,10 @@ const StepCreateStore = styled.button`
     background-color: #016dd9;
     color: white;
   }
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    width: 242px;
+   height: 40px;
+  }
 `;
 const How = styled.label`
   text-align: center;
@@ -321,6 +561,13 @@ const How = styled.label`
   letter-spacing: 0px;
   color: #016dd9;
   opacity: 1;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    font: normal normal 600 14px/21px Poppins;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    text-align: center;
+font: normal normal 600 16px/25px Poppins;
+  }
 `;
 
 const SubMainDiv = styled.div``;
@@ -351,8 +598,30 @@ const CurrencyPrice = styled.div`
   justify-content: space-between;
   margin-left: 5px;
 `;
-const Number=styled.label`
-color: #016DD9;
+const Number = styled.label`
+  color: #016dd9;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    font: normal normal 600 24px/25px Poppins;
+  } 
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    font: normal normal 600 48px/72px Poppins;
+  }
+  
+`;
+
+const LoaderDiv=styled.div`
+white-space: nowrap;
+  display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px;
+    font: normal normal normal 18px/27px Poppins;
+    color: #031527;
+
+    @media only screen and (min-width: 320px) and (max-width: 767px) {
+      font: normal normal normal 16px/25px Poppins;
+    }
+  
 `;
 
 const HomeCard = () => {
@@ -373,7 +642,6 @@ const HomeCard = () => {
     wallet: "",
     blockchains: ["Polygon", "Ethereum", "Binance"],
   });
-
 
   const data = [
     {
@@ -433,8 +701,6 @@ const HomeCard = () => {
     },
   ];
 
- 
-
   useEffect(async () => {
     const [error, result] = await Utils.parseResponse(
       getTenantByWallet(tenantData.wallet)
@@ -462,12 +728,18 @@ const HomeCard = () => {
   };
 
   const MetaMaskConnector = async () => {
-    try {
-      if (window.ethereum) {
+    console.log(window.ethereum, "+++++++++++");
+
+    if (typeof window.ethereum !== "undefined") {
+      try {
         let accounts = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
         let Newaddress = accounts[0];
+        if (!Newaddress || !Newaddress.length) {
+          Utils.apiFailureToast("Please Login to metamask");
+          return;
+        }
         setTenant({ ...tenantData, wallet: Newaddress });
 
         localStorage.setItem("walletAddress", Newaddress);
@@ -489,15 +761,15 @@ const HomeCard = () => {
         if (Newaddress) {
           const data = checkTenant(Newaddress);
         }
-      } else {
-        Utils.apiFailureToast("Please connect your metamask wallet");
+      } catch (e) {
+        Utils.apiFailureToast("Please login to metamask extension");
+        setModal(false);
         setTimeout(() => {
           window.location.reload();
         }, 1000);
       }
-    } catch (e) {
-      setModal(false);
-      Utils.apiFailureToast("Please connect your metamask wallet");
+    } else {
+      Utils.apiFailureToast("Please login to metamask extension");
       setTimeout(() => {
         window.location.reload();
       }, 1000);
@@ -515,20 +787,18 @@ const HomeCard = () => {
     } else if (storeName.length < 3) {
       setErrorMsg("Store Name should be atleast 3 characters.");
       return false;
-    }else if (storeName.length > 25) {
+    } else if (storeName.length > 25) {
       setErrorMsg("Store Name cannot be grater than 25 characters.");
       return false;
-    } 
-     else {
+    } else {
       setErrorMsg("");
       return true;
     }
   };
 
   const createStore = async () => {
-
-    let validation=storeValidation(tenantData.storeName);
-    if(validation){
+    let validation = storeValidation(tenantData.storeName);
+    if (validation) {
       const [error, result] = await Utils.parseResponse(getTenant(tenantData));
 
       if (result.responseCode === 403) {
@@ -543,7 +813,7 @@ const HomeCard = () => {
         const [errorDomain, domainResult] = await Utils.parseResponse(
           createSubDomain(requestData)
         );
-  
+
         if (domainResult.responseCode === 403) {
           setLoader(false);
           // Utils.apiFailureToast(storeConstants.ALREADY_EXIST_STORE_NAME);
@@ -567,7 +837,7 @@ const HomeCard = () => {
           const [error, result] = await Utils.parseResponse(
             createSubsription(subreqData)
           );
-  
+
           if (error || !result) {
             Utils.apiFailureToast(error);
             setLoader(false);
@@ -589,12 +859,9 @@ const HomeCard = () => {
           }
         }
       }
-
-    }
-    else {
+    } else {
       //scroll
     }
-   
   };
   const handleInputChange = (evt) => {
     const value = evt.target.value.trim().replaceAll(" ", "");
@@ -621,7 +888,7 @@ const HomeCard = () => {
                           Launch your NFT Marketplace in a minute
                         </h1>
                         <p className="mob-heading">
-                          "Buy, Trade and Sell your NFTs"
+                         
                         </p>
 
                         <p className="text newhometext">
@@ -743,7 +1010,7 @@ const HomeCard = () => {
             </MainCardDiv>
           </FirstSection>
 
-          <CommonSection>
+          <CommonSection marginTop="54px" tabWidth="74%">
             <HeadTitle>
               <How>How its Work</How>
               <CommonText>Get started in 3 simple steps </CommonText>
@@ -751,82 +1018,90 @@ const HomeCard = () => {
 
             <StepDiv>
               <StepImageDiv>
-                <Image src={StepWallet}></Image>
+                <Image width="319px" height="318px" tabWidth="516px" tabHeight="418px"   originalWidth="541px" originalHeight="418px"src={StepWallet}></Image>
               </StepImageDiv>
 
               <StepDetails>
-                <StepTitle><Number>01</Number> Connect your wallet</StepTitle>
-                <StepDes>
+                <StepTitle>
+                  <Number>01</Number> Connect your wallet
+                </StepTitle>
+                <StepDes marginTop="22px">
                   NFTinger is super easy for anyone as it subtracts the the
                   complexities of
                 </StepDes>
                 <StepCreateStore onClick={() => MetaMaskConnector()}>
-                  <div className="display-loader-left">
+                 <LoaderDiv >
                     {loader ? <Spinner></Spinner> : ""}
                     Connect Wallet
-                  </div>
+                  </LoaderDiv>
                 </StepCreateStore>
               </StepDetails>
             </StepDiv>
 
             <StepDivSecond>
               <StepImageDiv>
-                <Image src={StepStore}></Image>
+                <Image width="319px" height="318px" tabWidth="516px" tabHeight="418px"  originalWidth="540px" originalHeight="458px"  src={StepStore}></Image>
               </StepImageDiv>
               <StepDetails>
-                <StepTitle><Number>02</Number> Create your NFT store</StepTitle>
-                <StepDes>
+                <StepTitle>
+                  <Number>02</Number> Create your NFT store
+                </StepTitle>
+                <StepDes marginTop="16px">
                   NFTinger is super easy for anyone as it subtracts the the
                   complexities of
                 </StepDes>
                 <StepCreateStore onClick={() => MetaMaskConnector()}>
-                  <div className="display-loader-left">
+                 <LoaderDiv>
                     {loader ? <Spinner></Spinner> : ""}
                     Create Store
-                  </div>
+                  </LoaderDiv>
                 </StepCreateStore>
               </StepDetails>
             </StepDivSecond>
+
+
             <StepDiv>
               <StepImageDiv>
-                <Image src={StepGrowth}></Image>
+                <Image width="319px" height="318px" tabWidth="516px" tabHeight="418px"  originalWidth="540px" originalHeight="540px" src={StepGrowth}></Image>
               </StepImageDiv>
 
               <StepDetails>
-                <StepTitle><Number>03</Number> Start selling and grow</StepTitle>
-                <StepDes>
+                <StepTitle>
+                  <Number>03</Number> Start selling and grow
+                </StepTitle>
+                <StepDes marginTop="16px">
                   NFTinger is super easy for anyone as it subtracts the the
                   complexities of
                 </StepDes>
                 <StepCreateStore onClick={() => MetaMaskConnector()}>
-                  <div className="display-loader-left">
+                 <LoaderDiv>
                     {loader ? <Spinner></Spinner> : ""}
                     Create Store
-                  </div>
+                  </LoaderDiv>
                 </StepCreateStore>
               </StepDetails>
             </StepDiv>
           </CommonSection>
 
-          <CommonSection>
+          <CommonSection marginTop="76px">
             <HeadTitle>
               <CommonText>Intuitive UI & Seamless NFT Buying </CommonText>
               <TitleSecond>Experience</TitleSecond>
               <ExperienceText>
                 Enable customer to buy NFT seamlessly
               </ExperienceText>
-              <Image src={NFTBuying}></Image>
+              <Image width= "91.5%" height= "266px" tabWidth="89.60vw" tabHeight="415px" originalWidth="55.11vw" originalHeight="639px"  src={NFTBuying}></Image>
             </HeadTitle>
           </CommonSection>
 
-          <CommonSection>
+          <CommonSection marginTop="31.92px">
             <HeadTitle>
               <CommonText>Manage you marketplace </CommonText>
 
               <ExperienceText>
                 Enable customer to buy NFT seamlessly
               </ExperienceText>
-              <Image src={Admin}></Image>
+              <Image width= "91.5%" height= "267px" tabWidth="89.60vw" tabHeight="415px"originalWidth="55.11vw" originalHeight="639px" src={Admin}></Image>
             </HeadTitle>
           </CommonSection>
 
@@ -838,21 +1113,21 @@ const HomeCard = () => {
 
             <BlockchainsDiv>
               <Blockchain>
-                <Image src={Ethereum}></Image>
+                <Image width="72px" height= "72px" tabWidth="181px" tabHeight="181px" originalWidth="181px" originalHeight="181px" src={Ethereum}></Image>
                 <BlockchainText>Ethereum</BlockchainText>
               </Blockchain>
               <Blockchain>
-                <Image src={Polygon}></Image>
+                <Image width="72px" height= "72px" tabWidth="181px" tabHeight="181px"  originalWidth="181px" originalHeight="181px" src={Polygon}></Image>
                 <BlockchainText>Polygon Matic</BlockchainText>
               </Blockchain>
               <Blockchain>
-                <Image src={BinanceBlockchain}></Image>
+                <Image width="72px" height= "72px" tabWidth="181px" tabHeight="181px"  originalWidth="181px" originalHeight="181px" src={BinanceBlockchain}></Image>
                 <BlockchainText>Binance </BlockchainText>
               </Blockchain>
             </BlockchainsDiv>
           </BlockchainSection>
 
-          <CommonSection>
+          <CommonSection marginTop="54px">
             <HeadTitle>
               <CommonText>No code storefront</CommonText>
 
@@ -892,7 +1167,7 @@ const HomeCard = () => {
             </HeadTitle>
           </CommonSection>
 
-          <CommonSection>
+          <CommonSection marginTop="54px">
             <HeadTitle>
               <CommonText>NFTs our whitelabel marketplace offer </CommonText>
               <OfferCardDiv>
@@ -906,13 +1181,13 @@ const HomeCard = () => {
             </HeadTitle>
           </CommonSection>
 
-          <CommonSection style={{ marginBottom: "163px" }}>
+          <CommonSection marginBottom="163px" marginTop="82px" width="97%" mobMarginBottom="95px">
             <HeadTitle>
-              <CommonText style={{ marginBottom: "88px" }}>
-                 NFTinger  Marketplace
+              <CommonText  marginBottom="88px" marginTop="22px">
+                NFTinger Marketplace
               </CommonText>
 
-              <Image src={marketplace}></Image>
+              <Image width= "293px" height="173px" tabWidth="622px" tabHeight="366px"  originalWidth="63.86vw" originalHeight="722px" src={marketplace}></Image>
             </HeadTitle>
           </CommonSection>
         </BottomSection>
@@ -987,13 +1262,13 @@ const HomeCard = () => {
                 <button
                   className="btn btn-primary report-btn NewHomeButton"
                   onClick={() => createStore()}
-                  disabled={errorMsg?.length > 0  ? true :false}
+                  disabled={errorMsg?.length > 0 ? true : false}
                   //  style={{background: `${fetchPalletsColor(appearance?.colorPalette)}`}}
                 >
-                  <div className="display-loader-left">
+                 <LoaderDiv>
                     {loader ? <Spinner></Spinner> : ""}
                     Create Store
-                  </div>
+                  </LoaderDiv>
                 </button>
               </div>
             </div>

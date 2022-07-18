@@ -233,11 +233,11 @@ function Home({ loaderState }) {
                       ) : customize.appearance.heading ? (
                         customize.appearance.heading
                       ) : (
-                        "Launch your own NFT Store/Marketplace without any technical knowledge"
+                        ""
                       )}
                     </p>
 
-                    <p className="text">
+                    <p className="text newtext">
                       {loader ? (
                         <Skeleton count="3" />
                       ) : customize.appearance.description ? (

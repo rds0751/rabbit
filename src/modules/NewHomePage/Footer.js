@@ -33,6 +33,10 @@ const FooterSection = styled.div`
   background: #172738 0% 0% no-repeat padding-box;
   opacity: 1;
   padding: 74px 73px;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  padding: 16px 11px 93px 16px;
+
+  }
 `;
 
 const FooterDiv = styled.div`
@@ -40,11 +44,23 @@ const FooterDiv = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    flex-direction: column;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    flex-direction: column;
+  }
 `;
 const MarketPlaceDetail = styled.div`
   display: flex;
   flex-direction: column;
   width: 33%;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    width: 106%;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    width: 66.6%;
+  }
 `;
 const NameText = styled.label`
   text-align: left;
@@ -53,6 +69,9 @@ const NameText = styled.label`
   color: #ffffff;
   opacity: 1;
   cursor: pointer;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    font: normal normal normal 32px/36px Whiskey Girls Condensed;
+  }
 `;
 const AboutText = styled.label`
   text-align: left;
@@ -68,6 +87,9 @@ const DesText = styled.label`
   letter-spacing: 0px;
   color: #e0e0e0;
   opacity: 1;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    font: normal normal normal 16px/25px Poppins;
+  }
 `;
 const OtherDetails = styled.div`
   display: flex;
@@ -75,11 +97,27 @@ const OtherDetails = styled.div`
   flex-direction: row;
   align-items: baseline;
   justify-content: space-around;
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+    justify-content: flex-start;
+    column-gap: 65px;
+    margin-top: 19px;
+    flex-wrap: wrap;
+
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    justify-content: flex-start;
+    column-gap: 58px;
+    margin-top: 25px;
+
+  }
 `;
 const FirstDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: left;
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    flex-basis: 50%;
+  }
 `;
 const HeadingFooter = styled.p`
   text-align: left;
@@ -98,7 +136,16 @@ const LinkText = styled.a`
   text-decoration: none;
 `;
 const SecondDiv = styled.div``;
-const ThirdDiv = styled.div``;
+const ThirdDiv = styled.div`
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+  /* display: none; */
+  width: 100%;
+}
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    margin-left: 74px;
+    flex-basis: 50%;
+  }
+`;
 
 const FooterCreateStore = styled.button`
   background: #23194200 0% 0% no-repeat padding-box;
@@ -114,6 +161,17 @@ const FooterCreateStore = styled.button`
     color:white;
 
   }
+  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  /* display: none; */
+  width: 100%;
+  font: normal normal medium 16px/25px Poppins;
+}
+`;
+const Hr=styled.div`
+    background: grey;
+    /* position: absolute; */
+    width: 100%;
+    height: 1px;
 `;
 const Footer = () => {
   const navigate = useNavigate();
@@ -156,15 +214,27 @@ const Footer = () => {
   };
 
   const MetaMaskConnector = async () => {
-    try{
-      if (window.ethereum) {
-       let accounts=await window.ethereum.request({method:"eth_requestAccounts"});
-       let Newaddress = accounts[0];
-       setTenant({ ...tenantData, wallet: Newaddress });
-       localStorage.setItem("walletAddress", Newaddress);
-       let balance= await window.ethereum.request({ method: "eth_getBalance", params: [Newaddress, "latest"] })
-       const PriceEther = ethers.utils.formatEther(balance);
-       dispatch(
+  
+    if (typeof window.ethereum !== 'undefined') {
+    
+      try {
+      let accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      let Newaddress = accounts[0];
+      if(!Newaddress || !Newaddress.length){
+        Utils.apiFailureToast("Please Login to metamask")
+        return ;
+      }
+      setTenant({ ...tenantData, wallet: Newaddress });
+
+      localStorage.setItem("walletAddress", Newaddress);
+      let balance = await window.ethereum.request({
+        method: "eth_getBalance",
+        params: [Newaddress, "latest"],
+      });
+      const PriceEther = ethers.utils.formatEther(balance);
+      dispatch(
         AddWalletDetails({
           Newaddress,
           PriceEther,
@@ -177,22 +247,22 @@ const Footer = () => {
       if (Newaddress) {
         const data = checkTenant(Newaddress);
       }
-
-      }else {
-        Utils.apiFailureToast("Please connect with metamask");
-        setTimeout(()=>{
-          window.location.reload();
-        },1000)
-      }
-    }catch(e){
+    } catch (e) {
+       Utils.apiFailureToast("Please login to metamask extension");
       setModal(false);
-      Utils.apiFailureToast("Please connect with metamask");
-      setTimeout(()=>{
+      setTimeout(() => {
         window.location.reload();
-      },1000)
-     
+      }, 1000);
     }
-  };
+  } 
+    else {
+      Utils.apiFailureToast("Please login to metamask extension");
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }
+  
+};
 
   const createStore = async () => {
     const [error, result] = await Utils.parseResponse(getTenant(tenantData));
@@ -256,6 +326,7 @@ const Footer = () => {
               Create Store
             </FooterCreateStore>
           </ThirdDiv>
+
         </OtherDetails>
       </FooterDiv>
       <div
@@ -332,7 +403,8 @@ const Footer = () => {
           </div>
         </div>
     </FooterSection>
-    <hr style={{color:"red",background:"grey",position:"absolute",width:"100%"}}></hr>
+    <Hr></Hr>
+    {/* <hr style={{color:"red",background:"grey",position:"absolute",width:"100%"}}></hr> */}
     <div className="copyrightDiv newHomeCopyright" style={{ background: " #172738 "}}>
       <span className="textCopyright newHome" style={{ color: " #e0e0e0 " }}>
         &copy; 2022 NFTinger.All Rights Reserved.
