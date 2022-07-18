@@ -54,8 +54,6 @@ function HelpCenter({ loader }) {
 
           <Link to={data[0].link} className="link">
             <div className="single-card">
-                <div className="d-flex flex-column align-items-center">
-
                   {
                     loader ? <Skeleton width="50px" height="50px" /> :
                       <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 51 51">
@@ -72,7 +70,7 @@ function HelpCenter({ loader }) {
                   <div className="title-help">
                     {loader ? <Skeleton width="100px" /> : data[0].title}
                   </div>
-                  <div style={{ width: "101.4%", textAlign: "center"}}>
+                  <div style={{ width: "101.4%"}}>
                     {
                       loader ? <Skeleton count={4} /> : <p title={data[0].description} className="content">
                         {data[0].description.slice(0, 73) + "..."}
@@ -80,15 +78,12 @@ function HelpCenter({ loader }) {
                     }
                   </div>
 
-                </div>
             </div>
           </Link>
 
 
           <Link to={data[1].link} className="link">
             <div className="single-card">
-              <div className="d-flex flex-column align-items-center">
-
                   {
                     loader ? <Skeleton width="50px" height="50px" /> :
                       <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 51 51">
@@ -107,22 +102,18 @@ function HelpCenter({ loader }) {
                   <div className="title-help">{
                     loader ? <Skeleton width="100px" /> : data[1].title
                   }</div>
-                  <div style={{ width: "101.4%", textAlign: "center"}}>
+                  <div style={{ width: "101.4%"}}>
                     {
                       loader ? <Skeleton count={4} /> :
                         <p title={data[1].description} className="content">{data[1].description.slice(0, 73) + "..."}</p>
                     }
                   </div>
-
-                </div>
             </div>
           </Link>
 
 
           <Link to={data[2].link} className="link">
             <div className="single-card">
-            <div className="d-flex flex-column align-items-center">
-
                   {
                     loader ? <Skeleton width="36px" height="36px" /> :
                       <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 51 51">
@@ -144,18 +135,14 @@ function HelpCenter({ loader }) {
                   <div className="title-help">{
                     loader ? <Skeleton width="100px" /> : data[2].title
                   }</div>
-                  <div style={{ width: "101.4%", textAlign: "center"}}>
+                  <div style={{ width: "101.4%"}}>
                     {loader ? <Skeleton count={4} /> : <p title={data[2].description} className="content">{data[2].description.slice(0, 73) + "..."}</p>}
                   </div>
-
-                </div>
             </div>
           </Link>
 
           <Link to={data[3].link} className="link">
             <div className="single-card">
-            <div className="d-flex flex-column align-items-center">
-
                   {
                     loader ? <Skeleton width="36px" height="36px" /> :
                       <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 51 51">
@@ -173,13 +160,11 @@ function HelpCenter({ loader }) {
                   <div className="title-help">{
                     loader ? <Skeleton width={`100px`} /> : data[3].title
                   }</div>
-                  <div style={{ width: "101.4%", textAlign: "center"}}>                    
+                  <div style={{ width: "101.4%"}}>                    
                     {
                       loader ? <Skeleton count={4} /> : <p title={data[3].description} className="content">{data[3].description.slice(0, 73) + "..."}</p>
                     }
                   </div>
-
-                </div>
             </div>
           </Link>
 

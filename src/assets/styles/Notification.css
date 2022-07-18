@@ -691,7 +691,7 @@ height: 47px;
   justify-content: center;
   border: 0;
   background: transparent;
-  margin-left: 15px;
+  margin-left: 10px;
 }
 .navbar_toggle .icon-bar {
   display: flex;
@@ -1478,8 +1478,8 @@ display:none
     margin-left: 0px;
   }
   .dropdown .profileimg{
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
   }
 
 }

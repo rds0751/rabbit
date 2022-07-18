@@ -27,6 +27,9 @@ const MainContainer = styled.div`
     padding-top: 44px;
   }
 `;
+const Container = styled.div`
+  width: 100%;
+`;
 const Header = styled.div`
   display: flex;
   align-items: center;
@@ -172,7 +175,7 @@ export default function Selling() {
         </ol>
       </nav>
     <MainContainer>
-      <div>
+      <Container>
         <Header>
         <img src={require("../../../assets/images/leftarrowbuying.png")} onClick={()=>navigate(-1)} style={{marginRight:"16px",width:"26px",height:"23px"}} className="backbuying" />
           <Title>Selling</Title>
@@ -200,7 +203,7 @@ export default function Selling() {
         )
       }
         </ul>
-      </div>
+      </Container>
     </MainContainer>
     </>
   )
