@@ -31,7 +31,12 @@ const MainDiv = styled.div`
   background: #031527 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 12px #0000000f;
 `;
-const Image = styled.img``;
+const Image = styled.img`
+@media (max-width:768px){
+  width: 114px;
+  height:25px;
+}
+`;
 const NavDiv = styled.div`
   width: 100%;
   margin-left: 0.6rem;
@@ -94,6 +99,24 @@ height: 40px;
     background-color: #016dd9;
     color:white;
   }
+  @media (max-width:768px){
+  width: 113px;
+  height:40px;
+  font-size: 14px;
+  line-height: 21px;
+  font-style: normal;
+  font-variant: normal;
+}
+  
+`;
+
+const ListItem=styled.div`
+display: flex;
+flex-direction: row;
+align-items: center;
+@media (max-width:768px){
+  display: none;
+}
 `;
 
 const Nav = (props) => {
@@ -235,6 +258,9 @@ const Nav = (props) => {
           </LogoDiv>
         <NavItem>
           <ItemsDiv>
+            <ListItem>
+
+            
             <Item>Pricing</Item>
             <Item><div className="menuin">
           {/* <h2>Resources</h2> */}
@@ -267,6 +293,7 @@ const Nav = (props) => {
           </li>
         </div></Item>
             <Item onClick={() => MetaMaskConnector()}>Login</Item>
+            </ListItem>
             <CreateStore onClick={() => MetaMaskConnector()}>
             <div className="display-loader-left m-t-2">
                   {loader ? <Spinner></Spinner> : ""}
