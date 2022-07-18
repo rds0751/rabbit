@@ -223,7 +223,7 @@ function App() {
             element={<Top_collection loader={loader} />}
           />
           <Route
-            exact
+            exact 
             path="/top-bidder"
             element={<TopBidders loader={loader} />}
           />

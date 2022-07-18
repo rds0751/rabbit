@@ -7,29 +7,29 @@ const ListItem = styled.li`
   box-shadow: 0px 3px 12px #0000000f;
   border: 1px solid #d5d5d5;
   border-radius: 12px;
-  padding: 30px 24px 13px 16px;
+  padding: 30px 24px 30px 16px;
   margin-bottom: 32px;
   @media screen and (min-width: 426px) and (max-width: 701px) {
     padding: 30px 14px 13px 16px;
     width: 100%;
   }
   @media screen and (min-width: 500px) and (max-width: 605px) {
-    padding: 30px 14px 13px 16px;
+    padding: 30px 14px 30px 16px;
     width: 485px;
     
   }
   @media screen and (min-width: 605px) and (max-width: 700px) {
-    padding: 30px 14px 13px 16px;
+    padding: 30px 14px 30px 16px;
     width: 585px;
     
   }
   @media screen and (min-width: 700px) and (max-width: 955px) {
-    padding: 30px 14px 13px 16px;
+    padding: 30px 14px 30px 16px;
     width: 683px;
     
   }
   @media screen and (max-width: 426px) {
-    padding: 32px 8px 24px 16px;
+    padding: 32px 8px 32px 16px;
     width: 100%;
   }
 `;
@@ -41,7 +41,6 @@ const QuestionDiv = styled.div`
 const Question = styled.h1`
   font-size: 16px;
   font-weight: 600;
-  padding-bottom: 28px;
   padding-right: 60px;
   margin-bottom: 0px;
   @media screen and (min-width: 426px) and (max-width: 769px) {
@@ -50,7 +49,6 @@ const Question = styled.h1`
   }
   @media screen and (max-width: 426px) {
     font-size: 14px;
-    padding-bottom: 12px;
     padding-right:0px;
   }
 `;
@@ -59,6 +57,8 @@ const Answer = styled.p`
   font-weight: 500;
   /* width: 759px; */
   margin-bottom: 0px;
+  padding-top:16px;
+  margin-bottom:-20px;
   @media screen and (min-width: 426px) and (max-width: 769px) {
     width: 90%;
   }

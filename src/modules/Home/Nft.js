@@ -12,7 +12,7 @@ import dropdown from "../../assets/images/dropdown.svg";
 import { Button } from "react-bootstrap";
 import NoItem from "../../assets/images/Noitems.svg";
 
-import { fetchPalletsColor } from "../../utility/global"
+import { fetchPalletsColor } from "../../utility/global";
 // MUI select code
 import SelectUnstyled, {
   selectUnstyledClasses,
@@ -158,22 +158,22 @@ const options = [
   { value: "3", label: "Price: Low to High" },
   { value: "2", label: "Price: High to Low" },
   { value: "1", label: "Oldest" },
-  { value: "sale", label: "On Sale" }
+  { value: "sale", label: "On Sale" },
 ];
 
 function NftPage(props) {
   const { user } = useSelector((state) => state);
 
-  const [loader, setLoader] = useState(props.loaderState)
+  const [loader, setLoader] = useState(props.loaderState);
   const { loggedInUser } = user;
-  const appearance = useSelector(state => state.customize.appearance);
-  const [limit, setLimit] = useState(16)
+  const appearance = useSelector((state) => state.customize.appearance);
+  const [limit, setLimit] = useState(16);
   const [filterReq, setFilterReq] = useState({
     minPrice: "",
     maxPrice: "",
     sort: "-1",
     userId: loggedInUser?._id,
-    limit: limit
+    limit: limit,
   });
   const [nfts, setNfts] = useState([]);
   const [toggleNft, setToggleNft] = useState(true);
@@ -190,22 +190,21 @@ function NftPage(props) {
     }
   }, [loggedInUser]);
 
-  let saleobj={
-    onSale:true
-  }
+  let saleobj = {
+    onSale: true,
+  };
 
   useEffect(() => {
     setIsLoading(true);
     async function fetchData() {
-
       await getNFtsData(filterReq, (res) => {
         setIsLoading(true);
         if (res.success) {
           setNfts(res.responseData.nftContent);
-          setIsLoading(false);        
+          setIsLoading(false);
         } else {
           toast.error(res.message);
-          setIsLoading(false);        
+          setIsLoading(false);
         }
       });
     }
@@ -216,8 +215,8 @@ function NftPage(props) {
     setIsLoading(true);
     setLoader(true);
     async function fetchData() {
-      if(filterReq.sort==="sale"){
-        await getNFtsData({onSale:true}, (res) => {
+      if (filterReq.sort === "sale") {
+        await getNFtsData({ onSale: true }, (res) => {
           setIsLoading(true);
           if (res.success) {
             setNfts(res.responseData.nftContent);
@@ -229,9 +228,7 @@ function NftPage(props) {
             setLoader(false);
           }
         });
-
-      }
-      else{
+      } else {
         await getNFtsData(filterReq, (res) => {
           setIsLoading(true);
           if (res.success) {
@@ -244,9 +241,7 @@ function NftPage(props) {
             setLoader(false);
           }
         });
-
       }
-      
     }
     fetchData();
   }, [filterReq, limit]);
@@ -293,128 +288,150 @@ function NftPage(props) {
 
     button.style.color = fetchPalletsColor(appearance.colorPalette);
 
-    if (type) button.style.background = '#ffffff'
-    else button.style.background = '#edf2fd 0% 0% no-repeat padding-box'
-  }
+    if (type) button.style.background = "#ffffff";
+    else button.style.background = "#edf2fd 0% 0% no-repeat padding-box";
+  };
 
   const handleLoadHover = (e) => {
     const button = e.target;
 
     button.style.color = "#ffffff";
     button.style.background = fetchPalletsColor(appearance.colorPalette);
-  }
-
+  };
 
   return (
     <>
       <div className="ntf_div">
-        <NftToggle toggleNft={toggleNft} appearance={appearance} loader={props.loaderState} />
+        <NftToggle
+          toggleNft={toggleNft}
+          appearance={appearance}
+          loader={props.loaderState}
+        />
         <div className="lower__homepage" style={{ width: "100%" }}>
-          {
-            props.loaderState ? <Skeleton width={`250px`} height={`36px`} /> :
+          {props.loaderState ? (
+            <Skeleton width={`250px`} height={`36px`} />
+          ) : (
+            <div
+              id="filters filter-large"
+              className="filter"
+              style={{ gap: "30px" }}
+            >
               <div
-                id="filters filter-large"
-                className="filter"
-                style={{ gap: "30px" }}
+                className="mobilenftTilePageSecondSelect dropdown"
+                ref={ref}
+                style={{
+                  border: "1px solid #d2d2d2",
+                  padding: "9px 12px 9px 12px",
+                }}
               >
-                <div
-                  className="mobilenftTilePageSecondSelect dropdown"
-                  ref={ref}
-                  style={{
-                    border: "1px solid #d2d2d2",
-                    padding: "9px 12px 9px 12px",
-                  }}
-                >
-                  <p className="mb-0 sale-type">Price range</p>
-                  <div className="filter-drop">
-                    <div
-                      onClick={() => setIsMenuOpen((oldState) => !oldState)}
-                      className="d-flex justify-content-between w-100"
-                    >
-                      <div className="text">All</div>
-                      <div>
-                        <img
-                          alt=""
-                          src={dropdown}
-                          style={{ height: "17px", marginLeft: "8px" }}
+                <p className="mb-0 sale-type">Price range</p>
+                <div className="filter-drop">
+                  <div
+                    onClick={() => setIsMenuOpen((oldState) => !oldState)}
+                    className="d-flex justify-content-between w-100"
+                  >
+                    <div className="text">All</div>
+                    <div>
+                      <img
+                        alt=""
+                        src={dropdown}
+                        style={{ height: "13px", marginLeft: "8px" }}
+                      />
+                    </div>
+                  </div>
+                  <div
+                    className="filter-item"
+                    style={{ display: isMenuOpen ? "block" : "none" }}
+                  >
+                    <div className="row mb-3 align-items-center">
+                      <div className="col-5">
+                        <input
+                          type="number"
+                          className="form-control"
+                          placeholder="Min"
+                          value={minPrice}
+                          onChange={(e) => setMinPrice(e.target.value)}
+                        />
+                      </div>
+                      <div className="col-2 text-center">
+                        <span className="to">to</span>
+                      </div>
+                      <div className="col-5">
+                        <input
+                          type="number"
+                          className="form-control"
+                          placeholder="Max"
+                          value={maxPrice}
+                          onChange={(e) => setMaxPrice(e.target.value)}
                         />
                       </div>
                     </div>
-                    <div
-                      className="filter-item"
-                      style={{ display: isMenuOpen ? "block" : "none" }}
-                    >
-                      <div className="row mb-3 align-items-center">
-                        <div className="col-5">
-                          <input
-                            type="number"
-                            className="form-control"
-                            placeholder="Min"
-                            value={minPrice}
-                            onChange={(e) => setMinPrice(e.target.value)}
-                          />
-                        </div>
-                        <div className="col-2 text-center">
-                          <span className="to">to</span>
-                        </div>
-                        <div className="col-5">
-                          <input
-                            type="number"
-                            className="form-control"
-                            placeholder="Max"
-                            value={maxPrice}
-                            onChange={(e) => setMaxPrice(e.target.value)}
-                          />
-                        </div>
+                    <div className="row">
+                      <div className="col-6">
+                        <Button
+                          type="submit"
+                          onClick={(e) => clearPriceFilter(e)}
+                          variant="outline-primary"
+                          onMouseOver={(e) => handleLoadHover(e)}
+                          onMouseOut={(e) => handleLoadOut(e, true)}
+                          style={{
+                            color: `${fetchPalletsColor(
+                              appearance.colorPalette
+                            )}`,
+                            border: `1px solid ${fetchPalletsColor(
+                              appearance.colorPalette
+                            )}`,
+                          }}
+                        >
+                          Clear
+                        </Button>
                       </div>
-                      <div className="row">
-                        <div className="col-6">
-                          <Button
-                            type="submit"
-                            onClick={(e) => clearPriceFilter(e)}
-                            variant="outline-primary"
-                            onMouseOver={(e) => handleLoadHover(e)} onMouseOut={(e) => handleLoadOut(e, true)}
-                           
-                            style={{ color: `${fetchPalletsColor(appearance.colorPalette)}`, border: `1px solid ${fetchPalletsColor(appearance.colorPalette)}` }}
-                          >
-                            Clear
-                          </Button>
-                        </div>
-                        <div className="col-6">
-                          <Button
-                            onClick={(e) => handlePriceFilter(e)}
-                            variant="outline-primary"
-                            className="accept-button"
-                            onMouseOver={(e) => handleLoadHover(e)} onMouseOut={(e) => handleLoadOut(e, true)}
-                            disabled={maxPrice?.length > 0 ? false:true}
-                            style={{ color: `${fetchPalletsColor(appearance.colorPalette)}`, border: `1px solid ${fetchPalletsColor(appearance.colorPalette)}`,backgroundColor:maxPrice?.length > 0 ? "#366EEF" :"#9AB6F7" }}
-                          >
-                            Apply
-                          </Button>
-                        </div>
+                      <div className="col-6">
+                        <Button
+                          onClick={(e) => handlePriceFilter(e)}
+                          variant="outline-primary"
+                          className="accept-button"
+                          onMouseOver={(e) => handleLoadHover(e)}
+                          onMouseOut={(e) => handleLoadOut(e, true)}
+                          disabled={maxPrice?.length > 0 ? false : true}
+                          style={{
+                            color: `${fetchPalletsColor(
+                              appearance.colorPalette
+                            )}`,
+                            border: `1px solid ${fetchPalletsColor(
+                              appearance.colorPalette
+                            )}`,
+                            backgroundColor:
+                              maxPrice?.length > 0 ? "#366EEF" : "#9AB6F7",
+                          }}
+                        >
+                          Apply
+                        </Button>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-          }
+            </div>
+          )}
           {/* <div className="mobilenftTilePageThirdSelect"> */}
-          {
-            props.loaderState ? <Skeleton width={`250px`} height={`36px`} /> :
-              <Select
-                className="select-element"
-                onChange={(e) => handleSort(e.value)}
-                options={options}
-                placeholder="Sort by All"
-                theme={(theme) => ({
-                  ...theme,
-                  colors: {
-                    ...theme.colors,
-                    neutral50: "#191919", // Placeholder color
-                  },
-                })}
-              />
-          }
+          {props.loaderState ? (
+            <Skeleton width={`250px`} height={`36px`} />
+          ) : (
+            <Select
+              className="select-element"
+              onChange={(e) => handleSort(e.value)}
+              options={options}
+              placeholder="Sort by"
+              theme={(theme) => ({
+                ...theme,
+                colors: {
+                  ...theme.colors,
+                  neutral50: "#191919", // Placeholder color
+                },
+              })}
+            />
+          )}
           {/* <CustomSelect
               name="sort"
               id="sale"
@@ -433,9 +450,9 @@ function NftPage(props) {
           style={{ justifyContent: "start" }}
         >
           <div className="spinnerloader homepage-noitem">
-            {isLoading || props.loaderState ? (            
+            {isLoading || props.loaderState ? (
               <>
-                <NftCartLoader key={`nft-1`} mr={'5%'} />
+                <NftCartLoader key={`nft-1`} mr={"5%"} />
                 <NftCartLoader key={`nft-2`} />
                 <NftCartLoader key={`nft-3`} />
                 <NftCartLoader key={`nft-4`} mr={0} />
@@ -454,17 +471,33 @@ function NftPage(props) {
             nfts.map((nft) => {
               return (
                 <>
-                  <NftCardsHome nft={nft} appearance={appearance} loader={loader || props.loaderState ? true : false} />
+                  <NftCardsHome
+                    nft={nft}
+                    appearance={appearance}
+                    loader={loader || props.loaderState ? true : false}
+                  />
                 </>
               );
             })}
           <div style={{ textAlign: "center" }}>
-            {
-              props.loaderState ? <Skeleton className="load-more" style={{background: '#ededed'}} /> :
-                <button onMouseOver={(e) => handleLoadHover(e)} onMouseOut={(e) => handleLoadOut(e)} style={{ color: `${fetchPalletsColor(appearance.colorPalette)}` }} className="load-more" onClick={loadMoreHandler}>
-                  Load More
-                </button>
-            }
+            {props.loaderState ? (
+              <Skeleton
+                className="load-more"
+                style={{ background: "#ededed" }}
+              />
+            ) : (
+              <button
+                onMouseOver={(e) => handleLoadHover(e)}
+                onMouseOut={(e) => handleLoadOut(e)}
+                style={{
+                  color: `${fetchPalletsColor(appearance.colorPalette)}`,
+                }}
+                className="load-more"
+                onClick={loadMoreHandler}
+              >
+                Load More
+              </button>
+            )}
           </div>
           {/* {visibleBlogs >= nfts.length ? (
             visibleBlogs >= nfts.length && !isLoading ? (

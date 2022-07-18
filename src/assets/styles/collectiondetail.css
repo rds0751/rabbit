@@ -52,7 +52,7 @@
   display: flex;
   -webkit-box-pack: end;
   justify-content: flex-end;
-  margin-top: -44px;
+  margin-top: -100px;
   padding: 0px 18px;
   width: 100%;
   z-index: 1;
@@ -64,7 +64,7 @@
   font-size: 24px;
 }
 .coll-blockchain{
-  margin-top: 30px;
+  margin-top: 100px;
 }
 .colusername {  
   font-size: 20px;
@@ -108,7 +108,7 @@
   padding: 0% 1.5%;
   width: 303px;
 }
-@media screen and (min-width:769px){
+@media screen and (min-width:991px){
   .searchboxcol{
     margin-right:32px;
   }
@@ -215,7 +215,7 @@
   } */
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 991px) {
   .colleftfilter{
     flex-wrap: wrap;
   }
@@ -340,4 +340,9 @@
     margin-top:26px!important; 
   }
 
+}
+@media screen and (min-width:768px) and (max-width: 991px) {
+  .colldrop{
+    margin-left: 32px;
+  }
 }

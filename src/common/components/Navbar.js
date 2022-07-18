@@ -21,6 +21,7 @@ import {
 import { ethers } from "ethers";
 import "../../assets/styles/topNavBar.css";
 import searchIcon from "../../assets/images/search.svg";
+import closeIcon from "../../assets/images/closeIcon.svg";
 import {
   getNotificationListById,
   getNotificationCountById,
@@ -454,19 +455,36 @@ function Navbar({ loader,customizeStore,setModal }) {
                   {
                     loader ? <Skeleton />
                       : <>
-                        <div>
+                        <input
+                          type="text"
+                          name="searchByName"
+                          onChange={(e) => setInputValue(e.target.value)}
+                          autoComplete="off"
+                          className="search-input"
+                          placeholder="Search items and collections"
+                          value={inputValue}
+                        />
+                        
+                        <div className="searchimg">
+                          {(inputValue !== "") ? (
+                            <img src={closeIcon} alt="" className="search-icon" onClick={() => setInputValue("")} />
+                          ) : (
+                            <img src={searchIcon} alt="" className="search-icon" />
+                          )}
+                        </div>
+                        {/* <div>
                           <img src={searchIcon} alt="" className="search-icon" />
                         </div>
                         <div>
                           <input
                             type="search"
                             name="searchByName"
-                            placeholder="Search items and collections"
+                            placeholder="Ravi"
                             onChange={(e) => setInputValue(e.target.value)}
                             autoComplete="off"
                             className="search-input"
                           />
-                        </div>
+                        </div> */}
                       </>
                   }
                 </div>
@@ -481,7 +499,7 @@ function Navbar({ loader,customizeStore,setModal }) {
                         >
                           <div
                             className="search-results-box"
-                            style={{ display: display ? "none" : "block" }}
+                            // style={{ display: display ? "none" : "block" }}
                           >
                             {isLoading ? (
                               <div className="d-flex justify-content-center mt-3 mb-3">
@@ -508,7 +526,7 @@ function Navbar({ loader,customizeStore,setModal }) {
                         >
                           <div
                             className="search-results-box"
-                            style={{ display: display ? "none" : "block" }}
+                            // style={{ display: display ? "none" : "block" }}
                           >
                             {collections.length > 0 && (
                               <div>
@@ -584,13 +602,14 @@ function Navbar({ loader,customizeStore,setModal }) {
             </div>
 
             <div className="search_box order-2">
-              <Form.Control
-                type="search"
+              <input
+                type="text"
                 name="searchByName"
                 onChange={(e) => setInputValue(e.target.value)}
                 autoComplete="off"
                 className="search-input"
                 placeholder="Search items and collections"
+                value={inputValue}
               />
               {/* <div>
                   <input
@@ -603,7 +622,11 @@ function Navbar({ loader,customizeStore,setModal }) {
                   />
                 </div> */}
               <div className="searchimg">
-                <img src={searchIcon} alt="" className="search-icon" />
+                {(inputValue !== "") ? (
+                  <img src={closeIcon} alt="" className="search-icon" onClick={() => setInputValue("")} />
+                ) : (
+                  <img src={searchIcon} alt="" className="search-icon" />
+                )}
               </div>
 
               {searchNft.searchByName.length > 0 && (
