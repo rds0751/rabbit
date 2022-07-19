@@ -32,7 +32,7 @@ function Suggestion({ loader }) {
     }
     const checkMail = validateEmail(email);
     if (!checkMail) {
-      toast.error("Invalid Email");
+      toast.error("Invalid Email" ,{toastId: "customId"});
       return null;
     }
 
@@ -57,7 +57,9 @@ function Suggestion({ loader }) {
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
+        theme="colored"
         rtl={false}
+        limit={2}
         pauseOnFocusLoss
         draggable
         pauseOnHover

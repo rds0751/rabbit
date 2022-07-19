@@ -203,7 +203,7 @@ const Nav = (props) => {
         const data = checkTenant(Newaddress);
       }
     } catch (e) {
-       Utils.apiFailureToast("Please login to metamask extension");
+       Utils.apiFailureToast("Please login to metamask");
       setModal(false);
       setTimeout(() => {
         window.location.reload();
@@ -211,7 +211,7 @@ const Nav = (props) => {
     }
   } 
     else {
-      Utils.apiFailureToast("Please login to metamask extension");
+      Utils.apiFailureToast("Please login to metamask");
       setTimeout(() => {
         window.location.reload();
       }, 1000);
