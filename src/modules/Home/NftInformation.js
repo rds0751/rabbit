@@ -55,6 +55,8 @@ import NftInfoShimmer from "./NftInfoShimmer";
 
 import ReactPlayer from "react-player";
 import Countdown from "react-countdown";
+import ReactSelect from "react-select";
+
 toast.configure();
 const CustomSnack = styled(Snackbar)`
   @media (min-width: 992px) {
@@ -561,6 +563,13 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
       setRandomWalletAddress(result.walletAddress);
 
   }
+
+  const options = [
+    { value: "Fake collection or possible scam", label: "Fake collection or possible scam" },
+    { value: "Explicit and sensitive content", label: "Explicit and sensitive content" },
+    { value: "Might be stolen", label: "Might be stolen" },
+    { value: "Other", label: "Other" },
+  ];
 
 
   return (
@@ -1570,7 +1579,19 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                   </div>
                   <div className="singlerowmodal">
                     <h3 className="reason-text"> Reason</h3>
-                    <select
+                    <ReactSelect
+                      onChange={(e) => setReason(e.value)}
+                      options={options}
+                      placeholder="Select reason"
+                      theme={(theme) => ({
+                        ...theme,
+                        colors: {
+                          ...theme.colors,
+                          neutral50: "#191919", // Placeholder color
+                        },
+                      })}
+                    />
+                    {/* <select
                       className="select-box"
                       onChange={(e) => handleChange(e)}
                     >
@@ -1583,8 +1604,9 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                       </option>
                       <option value="Might be stolen">Might be stolen</option>
                       <option value="Other">Other</option>
-                    </select>
+                    </select> */}
                   </div>
+                  {(reason !== "") ? (
                   <button
                     className="btn btn-primary report-btn"
                     onClick={sendReport}
@@ -1592,6 +1614,9 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                   >
                     Report
                   </button>
+                  ) : (
+                    <button className="btn report-btn">Report</button>
+                  )}
                 </div>
               </div>
             </div>
