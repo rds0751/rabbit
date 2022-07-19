@@ -28,7 +28,9 @@ const MainContainer = styled.div`
   }
 `;
 const Container = styled.div`
-  width: 100%;
+  @media screen and (max-width: 992px) {
+    width: 100%;
+  }  
 `;
 const Header = styled.div`
   display: flex;
