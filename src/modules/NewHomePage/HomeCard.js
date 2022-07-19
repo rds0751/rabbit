@@ -876,14 +876,14 @@ const HomeCard = () => {
           const data = checkTenant(Newaddress);
         }
       } catch (e) {
-        Utils.apiFailureToast("Please login to metamask extension"); // to do
+        Utils.apiFailureToast("Please login to metamask"); // to do
         setModal(false);
         setTimeout(() => {
           window.location.reload();
         }, 1000);
       }
     } else {
-      Utils.apiFailureToast("Please login to metamask extension");
+      Utils.apiFailureToast("Please login to metamask");
       setTimeout(() => {
         window.location.reload();
       }, 1000);
