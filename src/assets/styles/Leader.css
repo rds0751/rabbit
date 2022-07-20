@@ -6,7 +6,7 @@
 }
 .leader {
   margin-bottom: 26px;
-  font-size: 1.3rem;
+  font-size: 20px;
   font-family: "poppins-semibold";
   color: #191919;
   margin-top: 36px;
@@ -817,6 +817,9 @@ thead {
   }
 }
 @media screen and (max-width: 480px) {
+  .multi-select-ele{
+    width: 100% !important;
+  }
   .dropbtm_mob {
     display: flex;
 

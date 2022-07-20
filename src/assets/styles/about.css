@@ -134,21 +134,26 @@ margin-bottom: 0px;
   }
   .marketplaceText {
     margin-top: 66px;
-    font: normal normal 600 18px/27px Poppins;
+    font-size: 18px;
+    font-weight: 600;
+    color: #191919;
   }
   .descriptionTag {
-    width: 60%;
+    width: 75%;
     margin-top: 32px;
   }
   .valueText{
-    font: normal normal medium 22px/33px Poppins;
-    margin-bottom: 7px;
+    font-size: 22px;
+    font-weight: 500;
+    color: #366EEF;
+    margin-bottom: 5px;
   }
   .TitleText{
-    font: normal normal normal 16px/25px Poppins;
+    font-size: 16px;
+    color: #000000;
   }
   .maincard {
-    margin-top: 28px;
+    margin-top: 30px;
   }
 }
 
