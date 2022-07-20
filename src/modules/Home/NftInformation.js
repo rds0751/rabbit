@@ -1534,7 +1534,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                   className="more-Collection-div"
                   style={{ display: moreNft?.length > 0 ? "block" : "none" }}
                 >
-                  <label className="MoreCollection">
+                  <label className="MoreCollection-text">
                     More from this collection
                   </label>
                   <div

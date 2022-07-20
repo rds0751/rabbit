@@ -258,6 +258,7 @@ export default function PricingHistoryComponentTable(props) {
           // onChange={() =>  handleOnchange();}}
           placeholder="filter"
           options={options}
+          className="multi-select-ele"
         />
       </FilterContainer>
       <CustomSnack
