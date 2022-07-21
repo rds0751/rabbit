@@ -1,7 +1,7 @@
 import Admin from "../assets/images/Admin.png";
 import Ball from "../assets/images/Ball.svg";
 import BannerImage from "../assets/images/BannerImage.svg";
-import Bear from "../assets/images/Bear.png";
+import Bear from "../assets/images/bear.png";
 import BinanceBlockchain from "../assets/images/BinanceBlockchain.svg";
 import CardImg from "../assets/images/Cards.svg";
 import Collectivables from "../assets/images/Collectivables.svg";
@@ -24,15 +24,17 @@ import StepWallet from "../assets/images/StepWallet.svg";
 import StoreApi from "../assets/images/StoreApi.svg";
 import StoreFrontSetting from "../assets/images/StoreFrontSetting.svg";
 import Utility from "../assets/images/Utility.svg";
-import WarriorMonk from "../assets/images/WarriorMonk.png";
-import Water from "../assets/images/Water.png";
+import WarriorMonk from "../assets/images/warriorMonk.png";
+import Water from "../assets/images/water.png";
 import NFTinger from "../assets/images/NFTinger.svg";
 import NFTingerLogo from "../assets/images/NFTingerLogo.svg";
+import HamburgerMenu from "../assets/images/IconFeatherMenu.svg";
 
 
 export {
   Ball,
   NFTinger,
+  HamburgerMenu,
   NFTingerLogo,
   Water,
   WarriorMonk,

@@ -25,16 +25,21 @@ import "../../assets/styles/homepage.css";
 import { Link } from "react-router-dom";
 import Spinner from "../../common/components/Spinner";
 import { storeConstants } from "../../constants";
-import  {NFTinger} from "../../common/newHomeImages";
+import  {NFTinger,HamburgerMenu} from "../../common/newHomeImages";
 const MainDiv = styled.div`
   width: 100%;
   background: #031527 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 12px #0000000f;
 `;
 const Image = styled.img`
-@media (max-width:768px){
-  width: 114px;
-  height:25px;
+width: ${(props)=>props.width};
+height: ${(props)=>props.height};
+display:  ${(props)=>props.display};
+@media (max-width:767px){
+  width: ${(props)=>props.mobWidth};
+  height:${(props)=>props.mobHeight};
+  display:  ${(props)=>props.mobDisplay};
+  marginLeft:  ${(props)=>props.mobMarginLeft};
 }
 `;
 const NavDiv = styled.div`
@@ -46,6 +51,13 @@ const NavDiv = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  @media (max-width:767px){
+    margin-left: 0;
+    padding-left: 16px;
+    padding-top: 8px;
+    padding-right: 16px;
+    padding-bottom: 12px;
+  }
 `;
 const NavItem = styled.div`
   display: flex;
@@ -65,7 +77,7 @@ const ItemsDiv = styled.div`
   flex-direction: row;
   align-items: center;
   margin-right: 4.5rem;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
 
   margin-right: 0;
 }
@@ -99,11 +111,14 @@ height: 40px;
     background-color: #016dd9;
     color:white;
   }
-  @media (max-width:768px){
+  @media (max-width:767px){
   width: 113px;
   height:40px;
   font-size: 14px;
   line-height: 21px;
+  white-space: nowrap;
+  padding-left: 13px;
+  padding-right: 12px;
   font-style: normal;
   font-variant: normal;
 }
@@ -114,7 +129,7 @@ const ListItem=styled.div`
 display: flex;
 flex-direction: row;
 align-items: center;
-@media (max-width:768px){
+@media (max-width:767px){
   display: none;
 }
 `;
@@ -254,7 +269,8 @@ const Nav = (props) => {
     <MainDiv>
       <NavDiv>
         <LogoDiv onClick={()=>navigate("/")}>
-          <Image src={NFTinger}></Image>
+          <Image src={NFTinger} mobWidth="114px" mobHeight="25px" />
+          <Image src={HamburgerMenu} display="none" mobDisplay="inline"  mobMarginLeft="16px" />
           </LogoDiv>
         <NavItem>
           <ItemsDiv>

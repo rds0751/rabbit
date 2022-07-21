@@ -674,7 +674,7 @@ function CreateSingleNFT(props) {
       )}
 
       {/* ----------------------------- */}
-      {props?.isNftCreated ? navigation(myProfileUrl + props?.mintedNftId) : ""}
+      {props?.isNftCreated ? navigation(myProfileUrl + props?.mintedNftId+getParamTenantId()) : ""}
 
       <ToastContainer
         position="top-center"
