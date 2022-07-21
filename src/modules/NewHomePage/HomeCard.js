@@ -75,7 +75,7 @@ const FirstSection = styled.div`
 const CommonSection = styled.div`
   margin-top: 154px;
   margin-bottom: ${(props) => props.marginBottom};
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     margin-top: ${(props) => props.marginTop};
     width: ${(props) => props.width};
     margin-bottom: ${(props) => props.mobMarginBottom};
@@ -88,7 +88,7 @@ const CommonSection = styled.div`
 const Image = styled.img`
   width: ${(props) => props.originalWidth};
   height: ${(props) => props.originalHeight};
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     width: ${(props) => props.width};
     height: ${(props) => props.height};
   }
@@ -114,7 +114,7 @@ const LabelText = styled.label`
   font: normal normal 600 54px/81px Poppins;
   letter-spacing: 0px;
   color: #e8e8e8;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     text-align: center;
     font: normal normal 600 24px/35px Poppins;
     letter-spacing: 0px;
@@ -134,7 +134,7 @@ const CardDiv = styled.div`
   border-radius: 12px;
   opacity: 1;
   display: flex;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     width: 100%;
     margin-top: 24px;
     height: 331px;
@@ -150,7 +150,7 @@ const Cards = styled.div`
   justify-content: flex-start;
   align-items: center;
   padding: 24px;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     width: 100%;
     justify-content: flex-start;
   }
@@ -164,7 +164,7 @@ const MainCardDiv = styled.div`
   justify-content: space-between;
   width: 123%;
   margin-top: 67px;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     flex-direction: column;
     width: 91.5%;
     margin-top: 28px;
@@ -187,7 +187,7 @@ const Title = styled.label`
   letter-spacing: 0px;
   color: #ffffff;
   opacity: 1;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     font: normal normal 600 16px/25px Poppins;
     letter-spacing: 0px;
     color: #ffffff;
@@ -205,7 +205,7 @@ const SubTitle = styled.label`
   color: #f0f0f0;
   opacity: 1;
   margin-top: 1rem;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     text-align: center;
     font: normal normal normal 16px/24px Poppins;
     letter-spacing: 0px;
@@ -231,7 +231,7 @@ const CommonText = styled.label`
   color: #e8e8e8;
   opacity: 1;
   margin-bottom: ${(props) => props.marginBottom};
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     text-align: center;
     font: normal normal 600 24px/32px Poppins;
     margin-bottom: ${(props) => props.marginTop};
@@ -247,7 +247,7 @@ const TitleSecond = styled.label`
   letter-spacing: 0px;
   color: #e8e8e8;
   opacity: 1;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     text-align: center;
     font: normal normal 600 24px/32px Poppins;
   }
@@ -260,7 +260,7 @@ const ExperienceText = styled.label`
   letter-spacing: 0px;
   color: #e8e8e8;
   opacity: 1;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     text-align: center;
     font: normal normal normal 16px/24px Poppins;
     margin: 2rem 0rem;
@@ -276,7 +276,7 @@ const OfferCardDiv = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 98px;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     justify-content: center;
     align-items: center;
     margin-top: 2px;
@@ -308,7 +308,7 @@ const OfferCard = styled.div`
   border-radius: 12px;
   opacity: 1;
   margin-top: 20px;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     margin-right: 30px;
     margin-top: 30px;
   }
@@ -335,7 +335,7 @@ const BlockchainSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     margin-top: 31.08px;
     justify-content: flex-start;
     padding: 24px 27px 0px 28px;
@@ -354,7 +354,7 @@ const BlockchainsDiv = styled.div`
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     margin-top: 75px;
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
@@ -374,7 +374,7 @@ const BlockchainText = styled.div`
   letter-spacing: 0px;
   color: #e8e8e8;
   opacity: 1;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     font: normal normal 600 16px/32px Poppins;
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
@@ -387,7 +387,7 @@ const StoreFrontPage = styled.div`
   align-items: center;
   flex-direction: row;
   margin-top: 95px;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     flex-direction: column;
     width: 90%;
     margin-top: 12px;
@@ -398,7 +398,7 @@ const StoreFrontDiv = styled.div`
   flex-direction: column;
   align-items: flex-start;
   width: 20%;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     width: 100%;
     margin-top: 26px;
   }
@@ -412,7 +412,7 @@ const StoreFrontName = styled.label`
   letter-spacing: 0px;
   color: #e8e8e8;
   opacity: 1;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     font: normal normal 600 16px/25px Poppins;
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
@@ -426,7 +426,7 @@ const DesStoreFrontDiv = styled.label`
   letter-spacing: 0px;
   color: #e8e8e8;
   opacity: 1;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     font: normal normal normal 16px/24px Poppins;
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
@@ -452,7 +452,7 @@ const StoreButton = styled.button`
     background: white 0% 0% no-repeat padding-box;
     color: blue;
   }
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     width: 242px;
     height: 40px;
     margin-top: 32px;
@@ -463,7 +463,7 @@ const StepDiv = styled.div`
   flex-direction: row;
   justify-content: center;
   margin-top: 149px;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     flex-direction: column;
     align-items: center;
     margin-top: 55px;
@@ -478,7 +478,7 @@ const StepDivSecond = styled.div`
   flex-direction: row-reverse;
   justify-content: center;
   margin-top: 149px;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     flex-direction: column;
     align-items: center;
     margin-top: 32px;
@@ -490,7 +490,7 @@ const StepDivSecond = styled.div`
 `;
 const StepImageDiv = styled.div`
   margin-right: 150px;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     margin-right: 0;
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
@@ -502,7 +502,7 @@ const StepDetails = styled.div`
   flex-direction: column;
   align-items: flex-start;
   margin-top: 43px;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     align-items: center;
   }
 `;
@@ -512,7 +512,7 @@ const StepTitle = styled.label`
   letter-spacing: 0px;
   color: #f0f0f0;
   opacity: 1;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     text-align: center;
     font: normal normal 600 16px/25px Poppins;
     color: #f0f0f0;
@@ -528,7 +528,7 @@ const StepDes = styled.label`
   color: #f0f0f0;
   margin-top: 38px;
   opacity: 1;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     text-align: center;
     margin-top: ${(props) => props.marginTop};
     font: normal normal normal 16px/24px Poppins;
@@ -552,7 +552,7 @@ const StepCreateStore = styled.button`
     background-color: #016dd9;
     color: white;
   }
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     width: 242px;
     height: 40px;
   }
@@ -563,7 +563,7 @@ const How = styled.label`
   letter-spacing: 0px;
   color: #016dd9;
   opacity: 1;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     font: normal normal 600 14px/21px Poppins;
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
@@ -605,7 +605,7 @@ const CurrencyPrice = styled.div`
 `;
 const Number = styled.label`
   color: #016dd9;
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     font: normal normal 600 24px/25px Poppins;
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
@@ -622,7 +622,7 @@ const LoaderDiv = styled.div`
   font: normal normal normal 18px/27px Poppins;
   color: #031527;
 
-  @media only screen and (min-width: 320px) and (max-width: 767px) {
+  @media only screen  and (max-width: 767px) {
     font: normal normal normal 16px/25px Poppins;
   }
 `;
@@ -643,14 +643,13 @@ const BgImage = styled.div`
   /* -webkit-mask: linear-gradient(rgb(255, 255, 255), transparent); */
 `;
 const SecondContainer = styled.div`
-
   display: flex;
   margin: 0px auto;
-  max-width: min(1280px, 100% - 40px);
+  max-width: min(1580px, 100% - 40px);
   width: 100%;
   flex-wrap: wrap;
   @media (min-width: 1024px) {
-   flex-wrap: nowrap;
+    flex-wrap: nowrap;
   }
 `;
 const FirstDiv = styled.div`
@@ -686,13 +685,13 @@ const H1 = styled.h1`
   letter-spacing: 0px;
   color: #ffffff;
   opacity: 1;
-  @media (max-width:768px){
+  @media (max-width: 768px) {
     text-align: center;
-   font: normal normal 600 24px/40px Poppins; 
+    font: normal normal 600 24px/40px Poppins;
   }
-  @media (min-width:768px) and (max-width:1024px){
+  @media (min-width: 768px) and (max-width: 1024px) {
     text-align: center;
-  font: normal normal 600 32px/48px Poppins;
+    font: normal normal 600 32px/48px Poppins;
   }
   @media (min-width: 1024px) {
     text-align: left;
@@ -705,36 +704,78 @@ const SpanFirst = styled.span`
   z-index: 2;
   /* font-size: 18px; */
   color: #ffffff;
-  @media (max-width:768px){
+  @media (max-width: 768px) {
     text-align: center;
     font: normal normal medium 16px/24px Poppins;
   }
-  @media (min-width:768px) and (max-width:1024px){
+  @media (min-width: 768px) and (max-width: 1024px) {
     text-align: center;
-   font: normal normal medium 16px/25px Poppins;
+    font: normal normal medium 16px/25px Poppins;
   }
   @media (min-width: 1024px) {
     text-align: left;
     font: normal normal normal 22px/33px Poppins;
   }
 `;
-const FirstCardDiv=styled.div`
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
+const FirstCardDiv = styled.div`
+      z-index: 1;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 64px 2em;
+  @media only screen and (max-width:767px){
+    justify-content: center;
+    gap: 24px 1.5em;
+    
+  }
+  @media only screen and  (min-width:767px) and (max-width:1024px){
+    justify-content: center;
+    gap: 40px 2.5em;
+  }
+  
 `;
 const ButtonStore = styled.button`
-width: 242px;
-height: 54px;
-border: none;
-background: #FFFFFF 0% 0% no-repeat padding-box;
-border-radius: 12px;
-cursor: pointer;
-margin-top: 35px;
-font: normal normal normal 18px/27px Poppins;
-&:hover{
-  background-color: #016dd9;
-  color: #ffffff;
+  width: 242px;
+  height: 54px;
+  border: none;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 35px;
+  font: normal normal normal 18px/27px Poppins;
+  &:hover {
+    background-color: #016dd9;
+    color: #ffffff;
+  }
+`;
+const NFTCardDiv = styled.div`
+  margin-right: ${(props) => props.marginRight};
+  margin-Top: ${(props) => props.marginTop};
+`;
+const NFTCardImage = styled.img`
+width: 331px;
+height: 373px;
+@media only screen and (max-width:480px){
+  width:100.3%;
+  height: 142px;
+    
+  }
+  @media (min-width:481px) and (max-width:768px){
+  width:200px;
+  height: 214px;
+    
+  }
+@media (min-width: 768px) and (max-width:1024px) {
+  width:207px;
+  height: 234px;
+}
+@media (min-width: 1024px)  {
+  width: 22vw;
+  height: 375px;
+}
+
+@media (min-width: 1600px) {
+  width:331px;
+  height:373px;
 }
 `;
 
@@ -1003,7 +1044,7 @@ const HomeCard = () => {
               </SpanFirst>
               <ButtonStore
                 //onClick={() => createHandle(customize.appearance.buttons)}
-              
+
                 // className={`button-hide second`}
                 onClick={() => metaMaskConnector()}
               >
@@ -1018,7 +1059,19 @@ const HomeCard = () => {
             </FirstDiv>
             <SecondDiv>
               <FirstCardDiv>
-              <Card className="NewHomeNFTCard">
+                <NFTCardDiv >
+                  <NFTCardImage src={WarriorMonk}></NFTCardImage>
+                </NFTCardDiv>
+                <NFTCardDiv>
+                  <NFTCardImage src={Bear}></NFTCardImage>
+                </NFTCardDiv>
+                <NFTCardDiv >
+                  <NFTCardImage src={Water}></NFTCardImage>
+                </NFTCardDiv>
+                <NFTCardDiv>
+                  <NFTCardImage src={invisible}></NFTCardImage>
+                </NFTCardDiv>
+                {/* <Card className="NewHomeNFTCard">
                 <div className="homePageContainer">
                   <Card.Img
                     variant="top"
@@ -1053,10 +1106,8 @@ const HomeCard = () => {
                     src={invisible}
                   />
                 </div>
-              </Card>
-
+              </Card> */}
               </FirstCardDiv>
-              
             </SecondDiv>
           </SecondContainer>
         </SubMainDiv>
