@@ -472,6 +472,7 @@ function CreateNftCollections(props) {
                 compressedUrl={compressedLogo}
                 setCompressedUrl={setCompressedLogo}
                 appearance={customize.appearance}
+                className="collectionImage"
               />
             </div>
             <div>
@@ -486,6 +487,7 @@ function CreateNftCollections(props) {
                 compressedUrl={compressedBanner}
                 setCompressedUrl={setcompressedBanner}
                 appearance={customize.appearance}
+                className="collectionBannerImage"
               />
 
               {/* ----------------------------- */}

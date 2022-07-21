@@ -410,8 +410,8 @@ function Collections_tile(props) {
                             src={compressedURL?.length === 0 ? imageUrl : (!compressedURL ? imageUrl : compressedURL)}
                             alt=""
                             style={{
-                              width: "100px",
-                              height: "100px",
+                              width: "138px",
+                              height: "138px",
                               textDecoration: "none",
                             }}
                           />

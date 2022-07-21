@@ -72,9 +72,9 @@ function MyItems(props) {
               props.loader ? <Skeleton className="mr-r-10" width="100px" height="30px" /> :
                 <div
                   onClick={() => setToggleSelect(true)}
-                  className="font-16 bold-bold poppins-normal singleheading"
+                  className="singleheading"
                   style={{
-
+                    font:toggleSelect ?"normal normal bold 16px/25px Poppins":"normal normal normal 16px/25px Poppins",
                     color: toggleSelect ? "#191919" : "#828282",
                     borderBottom: toggleSelect ? `3px solid ${fetchPalletsColor(customize?.appearance?.colorPalette)}` : "none",
                     cursor: "pointer",
@@ -88,8 +88,9 @@ function MyItems(props) {
               props.loader ? <Skeleton width="100px" height="30px" /> :
                 <div
                   onClick={() => setToggleSelect(false)}
-                  className="font-16 bold-bold poppins-normal collectionHeading"
+                  className="collectionHeading"
                   style={{
+                    font:!toggleSelect ?"normal normal bold 16px/25px Poppins":"normal normal normal 16px/25px Poppins",
                     marginLeft: "18px",
                     color: !toggleSelect ? "#191919" : "#828282",
                     borderBottom: !toggleSelect ? `3px solid ${fetchPalletsColor(customize?.appearance?.colorPalette)}` : "none",
