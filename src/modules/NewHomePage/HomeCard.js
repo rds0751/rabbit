@@ -114,8 +114,10 @@ const LabelText = styled.label`
   font: normal normal 600 54px/81px Poppins;
   letter-spacing: 0px;
   color: #e8e8e8;
+  margin-top: 70px;
   @media only screen  and (max-width: 767px) {
     text-align: center;
+    margin-top: 54px;
     font: normal normal 600 24px/35px Poppins;
     letter-spacing: 0px;
     opacity: 1;
@@ -123,6 +125,7 @@ const LabelText = styled.label`
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
     font: normal normal 600 32px/48px Poppins;
     text-align: center;
+    margin-top: 69px;
   }
 `;
 
@@ -438,7 +441,7 @@ const DesStoreFrontDiv = styled.label`
   }
 `;
 const StoreButton = styled.button`
-  margin-top: 6.8rem;
+  margin-top: 92px;
   background: #016dd9 0% 0% no-repeat padding-box;
   border-radius: 12px;
   border: none;
@@ -639,7 +642,7 @@ const BgImage = styled.div`
   /* background-color: rgb(255, 255, 255);
   background-position: center center;
   opacity: 0.3; */
-  filter: blur(8px);
+  filter: blur(33px);
   /* -webkit-mask: linear-gradient(rgb(255, 255, 255), transparent); */
 `;
 const SecondContainer = styled.div`
