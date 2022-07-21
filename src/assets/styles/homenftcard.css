@@ -280,8 +280,8 @@
   }
 
   .nftTileEachDetailsFirstContainerValue {
-    font-size: 10px;
-    width: 31%;
+    font-size: 14px;
+    max-width: 100%;
     height: 33px;
     text-align-last: center;
   }
