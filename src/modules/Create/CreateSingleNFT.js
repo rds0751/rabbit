@@ -1060,6 +1060,7 @@ function CreateSingleNFT(props) {
                     </div>
                   </div>
                   <select
+                 className="form-control-1 category-select collectionCategory"
                     onChange={(e) => {
                       const addressId = e.target.value.split(",");
                       console.log(addressId);
@@ -1116,7 +1117,7 @@ function CreateSingleNFT(props) {
 
                 
                     }}
-                    className="form-control-1 category-select"
+                   
                   >
                     <option className="color82" value="-1" hidden>
                       Select Collection
