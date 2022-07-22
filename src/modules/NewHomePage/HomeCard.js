@@ -283,6 +283,9 @@ const OfferCardDiv = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 2px;
+    display: grid;
+    gap: 30px 30px;
+    grid-template-columns: auto auto;
     & > :last-child {
       margin-right: 0;
     }
@@ -292,6 +295,9 @@ const OfferCardDiv = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 11px;
+    display: grid;
+    gap: 48px 97px;
+    grid-template-columns: auto auto auto;
 
     & > :last-child {
       /* margin-right: 0; */
@@ -305,18 +311,32 @@ const OfferCard = styled.div`
   justify-content: center;
   align-items: center;
   width: 140px;
+   margin-right: 6.07rem; 
   margin-right: 6.07rem;
+   margin-right: 6.07rem; 
+  margin-right: 6.07rem;
+   margin-right: 6.07rem; 
+  margin-right: 6.07rem;
+   margin-right: 6.07rem; 
+  margin-right: 6.07rem;
+   margin-right: 6.07rem; 
+  margin-right: 6.07rem;
+   margin-right: 6.07rem; 
+  margin-right: 6.07rem;
+   margin-right: 6.07rem; 
+  margin-right: 6.07rem;
+   margin-right: 6.07rem; 
   height: 150px;
   background: #19293a 0% 0% no-repeat padding-box;
   border-radius: 12px;
   opacity: 1;
   margin-top: 20px;
   @media only screen  and (max-width: 767px) {
-    margin-right: 30px;
+     margin-right: 0px; 
     margin-top: 30px;
   }
   @media only screen and (min-width: 768px) and (max-width: 1024px) {
-    margin-right: 97px;
+     margin-right: 0px; 
     margin-top: 48px;
   }
 `;
@@ -895,7 +915,7 @@ const HomeCard = () => {
         });
         let Newaddress = accounts[0];
         if (!Newaddress || !Newaddress.length) {
-          Utils.apiFailureToast("Please Login to metamask");
+          Utils.apiFailureToast("Please login to metamask");
           return;
         }
         setTenant({ ...tenantData, wallet: Newaddress });
@@ -920,7 +940,7 @@ const HomeCard = () => {
           const data = checkTenant(Newaddress);
         }
       } catch (e) {
-        Utils.apiFailureToast("Please login to metamask"); // to do
+        Utils.apiFailureToast("Please login to metamask");
         setModal(false);
         setTimeout(() => {
           window.location.reload();
