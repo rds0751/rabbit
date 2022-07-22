@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import {getParamTenantId} from "../../utility/global"
 
 import {
 
@@ -20,19 +21,19 @@ function Menu(props) {
   const manageNavigation = (name) => {
     if (name == "create") {
       if (walletAddress == null) {
-        dispatch(RedirectTo("create"));
-        navigate("/add-wallet");
+        dispatch(RedirectTo("create"+getParamTenantId()));
+        navigate("/add-wallet"+getParamTenantId());
       } else {
-        navigate("/create-nft");
+        navigate("/create-nft"+getParamTenantId());
       }
     }
     if (name == "profile") {
       if (walletAddress == null) {
-        dispatch(RedirectTo("profile"));
-        navigate("/add-wallet");
+        dispatch(RedirectTo("profile"+getParamTenantId()));
+        navigate("/add-wallet"+getParamTenantId());
         // navigate("/my-profile");
       } else {
-        navigate("/my-profile");
+        navigate("/my-profile"+getParamTenantId());
       }
     }
   };
@@ -43,7 +44,7 @@ function Menu(props) {
         <div className="menuin" style={{
           display: "flex", cursor: "pointer",
           justifyContent: "space-between"
-        }} onClick={() => { navigate('/nfts'); props.handleHamburger(); }}>
+        }} onClick={() => { navigate('/nfts'+getParamTenantId()); props.handleHamburger(); }}>
           <h2 style={{
             textDecoration: "none",
             color: "black",
@@ -63,7 +64,7 @@ function Menu(props) {
         <div className="menuin" style={{
           display: "flex", cursor: "pointer",
           justifyContent: "space-between"
-        }} onClick={() => { navigate('/leader-board'); props.handleHamburger(); }}>
+        }} onClick={() => { navigate('/leader-board'+getParamTenantId()); props.handleHamburger(); }}>
           <h2 style={{
             textDecoration: "none",
             color: "black",
@@ -77,7 +78,10 @@ function Menu(props) {
           <i className="fas fa-chevron-right"></i>
         </div>
 
-        <div className="menuin">
+        <div className="menuin" style={{
+          display: "flex", cursor: "pointer",
+          justifyContent: "space-between"
+        }}  onClick={()=>{navigate('/help-center'+getParamTenantId()) ; props.handleHamburger();}}>
           {/* <h2>Resources</h2> */}
           <li className="nav-item dropdown list-unstyled">
             <a
@@ -96,13 +100,13 @@ function Menu(props) {
               aria-labelledby="navbarDropdown"
               style={{ width: "450%" }}
             >
-              <li onClick={() => { props.handleHamburger(); }}>
-                <Link className="dropdown-item" to="/help-center">
+              <li onClick={() => {  }}>
+                <Link className="dropdown-item" to={"/help-center"+getParamTenantId()}>
                   Help Center
                 </Link>
               </li>
-              <li onClick={() => { props.handleHamburger(); }}>
-                <Link className="dropdown-item" to="/Suggestion" >
+              <li onClick={() => { }}>
+                <Link className="dropdown-item" to={"/Suggestion"+getParamTenantId()} >
                   Suggestions
                 </Link>
               </li>

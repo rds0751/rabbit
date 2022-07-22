@@ -542,7 +542,7 @@ thead {
   }
 }
 
-@media only screen and (max-width: 1170px) {
+@media only screen and (max-width: 1360px) {
   .filter > button {
     display: flex;
     justify-content: space-between;
@@ -1059,7 +1059,7 @@ thead {
   }
 }
 
-@media only screen and (max-width: 1168px) {
+@media only screen and (max-width: 1360px) {
   .menuphone {
     display: block;
     display: flex;

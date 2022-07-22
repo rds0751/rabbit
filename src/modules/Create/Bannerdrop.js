@@ -11,7 +11,7 @@ import getCollection from "../../services/contentMicroservice";
 import { Oval } from "react-loader-spinner";
 import { fetchPalletsColor } from "../../utility/global";
 
-function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs, setCompressedUrl, appearance }) {
+function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs, setCompressedUrl, appearance,className }) {
 
   const [isBannerSelected, setisBannerSelected] = useState(false);
   const [isloader, setisLoader] = useState(false);
@@ -76,7 +76,7 @@ function Bannerdrop({ bannerCdn, setbannerIpfs, setbannerCdn, bannerIpfs, setCom
       {" "}
       <div >
         {!isBannerSelected && (
-          <div className="img-sec-div" {...getRootProps()}>
+          <div className={`img-sec-div ${className}`} {...getRootProps()}>
             <input onChange={(e) => {
 
             }} {...getInputProps()} name="banner" />
