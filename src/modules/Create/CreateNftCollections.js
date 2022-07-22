@@ -442,7 +442,7 @@ function CreateNftCollections(props) {
         props.loader ? <CollectionNftShimmer /> :
           <div className="main-container collectionContainer">
             <h1 className="fs-32 fw-b c-b title collectiontitle">Create your collection</h1>
-            <p className="fs-16 fw-600 c-b pt-50">Upload Collection Image*</p>
+            <p className="fs-16 fw-600 c-b pt-50 uploadCollectionImage">Upload Collection Image*</p>
             <div className="max-width-250 createCollectioDiv">
               {/*{!isLogoSelected && (*/}
               {/*    <div*/}
@@ -477,7 +477,7 @@ function CreateNftCollections(props) {
             </div>
             <div>
               {/* ---------------------------OLD BANNER UPLOAD----------------- */}
-              <div className="fs-16 fw-600 c-b pt-20 pb-20">Upload Collection Banner*</div>
+              <div className="fs-16 fw-600 c-b pt-20 pb-20 uploadCollectionBanner">Upload Collection Banner*</div>
 
               <Bannerdrop
                 bannerCdn={bannerCdn}
@@ -494,14 +494,14 @@ function CreateNftCollections(props) {
             </div>
             <div>
               <form onSubmit={(e) => handleSubmit(e)}>
-                <div>
-                  <p className="fs-16 fw-b c-b pt-4">Collection Name*</p>
+                <div className="collectionCommonDivFirst">
+                  <p className="fs-16 fw-b c-b pt-4 heading-common-collection">Collection Name*</p>
                   <div style={{ color: "Red", fontSize: "13px" }}>{nameError}</div>
                   <input
                     type="name"
                     name="name"
                     maxLength="400"
-                    className="input-box-1"
+                    className="input-box-1 input-common-collection"
                     style={{ border: nameError != "" ? "1px solid red" : "1px solid #C8C8C8" }}
                     placeholder="Write your collection name"
                     onChange={(e) => {
@@ -517,8 +517,8 @@ function CreateNftCollections(props) {
                     }}
                   />
                 </div>
-                <div>
-                  <p className="fs-16 fw-b c-b pt-3">Description*</p>
+                <div className="collectionCommonDiv">
+                  <p className="fs-16 fw-b c-b pt-3 heading-common-collection">Description*</p>
                   <div style={{ color: "Red", fontSize: "13px" }}>{DesError}</div>
                   <textarea
                     rows="4"
@@ -561,11 +561,11 @@ function CreateNftCollections(props) {
                   <span className="fs-14" style={{ color: "#707070" }}>{DesLength} of 1000 characters and
                     <span> <span id="linesUsed">0</span> of 20 Lines.</span></span>
                 </div>
-                <div>
-                  <div className="fs-16 fw-b c-b pt-3 pb-3">Category</div>
+                <div className="collectionCommonDiv">
+                  <div className="fs-16 fw-b c-b pt-3 pb-3 heading-common-collection">Category</div>
                   {/* <Link>Create</Link> */}
                   <select
-                    className="input-box-1"
+                    className="input-box-1 input-common-collection categoryCollection"
                     onChange={(e) => (categoryId.current = e.target.value, setSelectCategory(e.target.value))}
                   >
                     <option style={{ color: "#707070" }}>Select Category</option>
@@ -577,8 +577,8 @@ function CreateNftCollections(props) {
                 <option>4</option> */}
                   </select>
                 </div>
-                <div>
-                  <div className="fs-16 fw-b c-b pt-3 pb-3">Blockchain*</div>
+                <div className="collectionCommonDiv">
+                  <div className="fs-16 fw-b c-b pt-3 pb-3 heading-common-collection">Blockchain*</div>
                   {/* <div className="block-chain-container">
                 <div>
                   <img src={ethereum} height="32px" />
@@ -599,7 +599,7 @@ function CreateNftCollections(props) {
               </div> */}
                   <div className="block-chain-right">
                     <Select
-                      className="input-box-1 rm-border blockchainSelect"
+                      className="input-box-1 rm-border"
                       defaultValue={blockchainOption[0]}
                       onChange={setSelectedOption}
                       options={blockchainOption}

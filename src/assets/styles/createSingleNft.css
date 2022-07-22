@@ -555,3 +555,12 @@ opacity: 1;
 .createNFtButton{
   margin-top: 19px!important;
 }
+
+.collectionCategory{
+  appearance: none;
+  background-image: url("../images/drop-down-arrow.svg");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 11px;
+  padding-left: 7px;
+}

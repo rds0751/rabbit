@@ -81,10 +81,11 @@ height: 47px;
   align-items: center;
 }
 .balancewallet {
-  border: 1px solid gray;
+  border: 1px solid #C8C8C8;
   /* width: 100%; */
-  width: 78.2%;
+  width: 78.5%;
   height: 121px;
+  border-radius: 4px;
   /* margin: 9px; */
   /* padding: 5px; */
   margin-bottom: 15px;
