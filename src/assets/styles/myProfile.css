@@ -404,6 +404,7 @@ color: #000000;
     letter-spacing: 0px;
     color: #191919;
     opacity: 1;
+    width: 85%;
   }
   .profile-portfolio{
   font: normal normal normal 14px/21px Poppins;
@@ -449,6 +450,11 @@ color: #000000;
     object-fit: cover;
   }
 
+}
+@media screen and (max-width: 992px){
+  .profile-description{
+    width: 65%;
+  }
 }
 
 .profileeditbutton:hover{
@@ -518,4 +524,5 @@ color: #000000;
 }
 .Container-clipboard{
   display: flex;
+  align-items: center;
 }
