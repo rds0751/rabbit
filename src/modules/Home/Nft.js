@@ -299,6 +299,13 @@ function NftPage(props) {
     button.style.background = fetchPalletsColor(appearance.colorPalette);
   };
 
+  const customStyles={
+    dropdownIndicator: base => ({
+      ...base,
+      color: "black" // Custom colour
+    })
+  }
+
   return (
     <>
       <div className="ntf_div">
@@ -424,6 +431,7 @@ function NftPage(props) {
               options={options}
               placeholder="Sort by"
               isSearchable={false}
+              styles={customStyles}
               theme={(theme) => ({
                 ...theme,
                 colors: {
