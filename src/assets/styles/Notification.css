@@ -867,9 +867,9 @@ height: 47px;
     justify-content: space-between;
     margin: 5px 0px;
   }
-  #share_info span {
+  /* #share_info span {
     margin-left: 5px !important;
-  }
+  } */
   .collectionsales {
     text-align: unset !important;
   }
