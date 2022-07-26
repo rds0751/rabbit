@@ -51,7 +51,7 @@ const UpgradePlan = (props) => {
   const { userDetails, loggedInUser, walletAddress } = user;
   const [billingMonthly,setBillingMonthly]=useState();
   const customize = useSelector(state => state.customize);
-  const [currentPlan,setCurrentPlan]=useState()
+  const [currentPlan,setCurrentPlan]=useState({})
   const [planUpgrade,setPlanUpgrade]=useState(false);
   const [loaderState,setLoaderState]=useState(false);
 
@@ -66,16 +66,19 @@ const UpgradePlan = (props) => {
     }
     else{
       setBillingMonthly(result?.responseData);
-      const [subError ,subscriptionUser]=await Utils.parseResponse(
-        getSubscriptionPlan(customize.id)
-      )
-      if(subscriptionUser?.responseCode !== 200){
-      console.log(subscriptionUser.message);
+      if(customize?.id){
+        const [subError ,subscriptionUser]=await Utils.parseResponse(
+          getSubscriptionPlan(customize?.id)
+        )
+        if(subscriptionUser?.responseCode !== 200){
+        console.log(subscriptionUser?.message);
+        }
+        else {
+          setCurrentPlan(subscriptionUser?.responseData);
+        } 
       }
-      else {
-        setCurrentPlan(subscriptionUser.responseData);
-      } 
       
+     
     }
   },[customize.id,planUpgrade])
 
@@ -364,7 +367,7 @@ const UpgradePlan = (props) => {
               <div className="plansContainer">
                 {billingMonthly?.map((item, key) => {
                   return (
-                  <BillingCard item={item} plan={currentPlan} setPlanUpgrade={setPlanUpgrade} planUpgrade={planUpgrade} toggle={billingPeriod} />
+                  <BillingCard  item={item} plan={currentPlan} setPlanUpgrade={setPlanUpgrade} planUpgrade={planUpgrade} toggle={billingPeriod} />
                   );
                 })}
                 <div className="Nodata">
@@ -377,36 +380,37 @@ const UpgradePlan = (props) => {
               <div className="plansContainer">
                 {YearlyPlan?.map((item, key) => {
                   return (
-                    <div to="/my-store/general-settings" className="plansEach">
-                      <div className="plansEachCircle"></div>
-                      <div className="plansHeading">{item.planName}</div>
-                      <div className="plansHeading2">
-                        ${item.price}/{item.billingCycle}
-                      </div>
-                      <div
-                        className={
-                          item.planActive == "Current"
-                            ? "chooseplanButtonWhite"
-                            : "chooseplanButton"
-                        }
-                      >
-                        {" "}
-                        {item.planActive}
-                      </div>
-                      <div className="planFeature">
-                        <div className="planTitle">{item.planTitle}</div>
-                        <ul className="ulDes">
-                          {item?.description.map((ele) => (
-                            <li className="DescriptionPlan">
-                              <span class="BlueCircle"></span>
-                              {ele}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      {/* <div className="planFeature">Lorem ipsum dolor sit</div>
-                  <div className="planFeature">Lorem ipsum dolor sit</div> */}
-                    </div>
+                    <BillingCard item={item} plan={currentPlan} setPlanUpgrade={setPlanUpgrade} planUpgrade={planUpgrade} toggle={billingPeriod} />
+                  //   <div to="/my-store/general-settings" className="plansEach">
+                  //     <div className="plansEachCircle"></div>
+                  //     <div className="plansHeading">{item.planName}</div>
+                  //     <div className="plansHeading2">
+                  //       ${item.price}/{item.billingCycle}
+                  //     </div>
+                  //     <div
+                  //       className={
+                  //         item.planActive == "Current"
+                  //           ? "chooseplanButtonWhite"
+                  //           : "chooseplanButton"
+                  //       }
+                  //     >
+                  //       {" "}
+                  //       {item.planActive}
+                  //     </div>
+                  //     <div className="planFeature">
+                  //       <div className="planTitle">{item.planTitle}</div>
+                  //       <ul className="ulDes">
+                  //         {item?.description.map((ele) => (
+                  //           <li className="DescriptionPlan">
+                  //             <span class="BlueCircle"></span>
+                  //             {ele}
+                  //           </li>
+                  //         ))}
+                  //       </ul>
+                  //     </div>
+                  //     {/* <div className="planFeature">Lorem ipsum dolor sit</div>
+                  // <div className="planFeature">Lorem ipsum dolor sit</div> */}
+                  //   </div>
                   );
                 })}
 

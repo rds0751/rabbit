@@ -14,8 +14,9 @@ import styled from "styled-components";
 
 
 
-const BillingCards = ({ item, plan, toogle,setPlanUpgrade,planUpgrade}) => {
+const BillingCards = ({ item, plan, toogle,setPlanUpgrade,planUpgrade,key}) => {
   const customize = useSelector((state) => state.customize);
+  const [currentPlan,setCurrentPlan]=useState(false);
 
   
 
@@ -55,8 +56,8 @@ const BillingCards = ({ item, plan, toogle,setPlanUpgrade,planUpgrade}) => {
        
             let transctionReqData = {
               subscriptionId: item._id,
-              tenantId: customize.id,
-              addedBy: customize.id,
+              tenantId: customize?.id,
+              addedBy: customize?.id,
               isPaymentSuccess:true
             };
             const [transcationFailure, transactionSuccess] =
@@ -149,16 +150,9 @@ const BillingCards = ({ item, plan, toogle,setPlanUpgrade,planUpgrade}) => {
     }
   };
 
-  const currentplan =
-    item.planName === "Free Forever" && plan?.length===0
-      ? true
-      :  item.planName === "Pro" && plan?.planName === "Pro"
-      ? true
-      :  item.planName === "Standard" && plan?.planName === "Standard"
-      ? true
-      :  item.planName === "Plus" && plan?.planName === "Plus"
-      ? true
-      : false;
+
+  const current=item.planName === plan?.planName ? true :false;
+
 
 
 
@@ -178,10 +172,10 @@ const BillingCards = ({ item, plan, toogle,setPlanUpgrade,planUpgrade}) => {
           ${item.price}/{item.billingCycle}
         </div>
         <div
-          className={currentplan ? "chooseplanButtonWhite" : "chooseplanButton"}
-          onClick={!currentplan && displayRazorPay}
+          className={current || item.planName==="Free Forever" ? "chooseplanButtonWhite" : "chooseplanButton"}
+          onClick={!current  && item.planName !=="Free Forever"  && displayRazorPay}
         >
-          {currentplan ? "Current" : "Upgrade"}
+          {current || item.planName==="Free Forever" ? "current" :"upgrade"}
         </div>
 
         <div className="planFeature">

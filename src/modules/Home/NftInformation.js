@@ -56,6 +56,8 @@ import NftInfoShimmer from "./NftInfoShimmer";
 import ReactPlayer from "react-player";
 import Countdown from "react-countdown";
 import ReactSelect from "react-select";
+// Add this import line at the top
+// import { CrossmintPayButton } from "@crossmint/client-sdk-react-ui";
 
 toast.configure();
 const CustomSnack = styled(Snackbar)`
