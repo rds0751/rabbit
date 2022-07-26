@@ -73,7 +73,7 @@ function HelpCenter({ loader }) {
                   <div style={{ width: "101.4%"}}>
                     {
                       loader ? <Skeleton count={4} /> : <p title={data[0].description} className="content">
-                        {data[0].description.slice(0, 73) + "..."}
+                        {data[0].description}
                       </p>
                     }
                   </div>
@@ -105,7 +105,7 @@ function HelpCenter({ loader }) {
                   <div style={{ width: "101.4%"}}>
                     {
                       loader ? <Skeleton count={4} /> :
-                        <p title={data[1].description} className="content">{data[1].description.slice(0, 73) + "..."}</p>
+                        <p title={data[1].description} className="content">{data[1].description}</p>
                     }
                   </div>
             </div>
@@ -136,7 +136,7 @@ function HelpCenter({ loader }) {
                     loader ? <Skeleton width="100px" /> : data[2].title
                   }</div>
                   <div style={{ width: "101.4%"}}>
-                    {loader ? <Skeleton count={4} /> : <p title={data[2].description} className="content">{data[2].description.slice(0, 73) + "..."}</p>}
+                    {loader ? <Skeleton count={4} /> : <p title={data[2].description} className="content">{data[2].description}</p>}
                   </div>
             </div>
           </Link>
@@ -162,7 +162,7 @@ function HelpCenter({ loader }) {
                   }</div>
                   <div style={{ width: "101.4%"}}>                    
                     {
-                      loader ? <Skeleton count={4} /> : <p title={data[3].description} className="content">{data[3].description.slice(0, 73) + "..."}</p>
+                      loader ? <Skeleton count={4} /> : <p title={data[3].description} className="content">{data[3].description}</p>
                     }
                   </div>
             </div>
