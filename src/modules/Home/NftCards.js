@@ -158,7 +158,7 @@ const NftCardsHome = (props) => {
       </div>
 
       <Card.Body className="smallCard-details">
-        <div className="d-flex align-items-center media">
+        <div className="d-flex align-items-center media nft-card-homePage">
           <div className="flex-shrink-0">
             {loader ? (
               <Skeleton circle="true" width="38px" height="38px" />
