@@ -327,3 +327,42 @@
   display: flex;
   justify-content: space-between;
 }
+
+.PriceRangeBoxDropDownCurrencyType {
+  border: 1px solid #D2D2D2;
+  border-radius: 4px;
+  /* width: 91.4%; */
+  width: 255px;
+  height: 42px;
+  /* margin: 2.037037037037vh auto; */
+  padding: 12px 5px 10px 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+  justify-content: space-between;
+  margin-bottom: 12px;
+  /* top: 32px; */
+  background-color: white;
+}
+.PriceRangeBoxDropDownCurrencyTypeName {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.PriceRangeBoxDropDownCurrencyTypeName img {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+.selectDisplayFlex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 3%;
+  margin-bottom: 16px;
+}
+.currency-Name{
+  font:normal normal normal 14px/21px Poppins;
+}
