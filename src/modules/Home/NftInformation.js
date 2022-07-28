@@ -57,7 +57,8 @@ import ReactPlayer from "react-player";
 import Countdown from "react-countdown";
 import ReactSelect from "react-select";
 // Add this import line at the top
-// import { CrossmintPayButton } from "@crossmint/client-sdk-react-ui";
+ //import { CrossmintPayButton } from "@crossmint/client-sdk-react-ui";
+ import "@crossmint/client-sdk-vanilla-ui";
 
 toast.configure();
 const CustomSnack = styled(Snackbar)`
@@ -631,6 +632,28 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                         Edit
                       </Link>
                     </Button> */}
+{/*                
+<CrossmintPayButton
+    collectionTitle="<TITLE_FOR_YOUR_COLLECTION>"
+    collectionDescription="<DESCRIPTION_OF_YOUR_COLLECTION>"
+    collectionPhoto="<OPT_URL_TO_PHOTO_COVER>"
+    clientId="<YOUR_CLIENT_ID>"
+    environment="<YOUR_DESIRED_ENVIRONMENT>"
+    mintConfig={{
+        count: "<NUMBER_OF_NFTS>",
+        totalPrice: "<SELECTED_PRICE>"
+        // your custom minting arguments...
+    }}
+/>  */}
+                    
+                    <crossmint-pay-button
+            collectionTitle="<TITLE_FOR_YOUR_COLLECTION>"
+    collectionDescription="<DESCRIPTION_OF_YOUR_COLLECTION>"
+    collectionPhoto="<OPT_URL_TO_PHOTO_COVER>"
+    clientId="<YOUR_CLIENT_ID>"
+    mintConfig='{"count":"<NUMBER_OF_NFTS>","totalPrice":"<SELECTED_PRICE>",/* ... your custom mint arguments... */}'
+/>
+
                           <Button
                             // className="btn btn-primary mt-3"
                             // data-bs-toggle="modal"
