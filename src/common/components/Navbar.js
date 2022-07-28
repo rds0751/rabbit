@@ -207,12 +207,12 @@ function Navbar({ loader,customizeStore,setModal }) {
       dispatch(ManageWalletSideBar(false));
       if (walletAddress == null) {
         dispatch(RedirectTo("myitems"));
-        navigate(`/add-wallet${getParamTenantId()}`);
+        navigate(`/add-wallet`);
         toast.error("Connect your wallet", {
           position: toast.POSITION.TOP_RIGHT,
         });
       } else {
-        navigate(`/my-items${getParamTenantId()}`);
+        navigate(`/my-items`);
       }
     }
     if (name == "create") {
@@ -223,12 +223,12 @@ function Navbar({ loader,customizeStore,setModal }) {
         dispatch(ManageWalletSideBar(false));
         if (walletAddress == null) {
           dispatch(RedirectTo(`create`));
-          navigate(`/add-wallet${getParamTenantId()}`);
+          navigate(`/add-wallet`);
           toast.error("Connect your wallet", {
             position: toast.POSITION.TOP_RIGHT,
           });
         } else {
-          navigate(`/create-nft${getParamTenantId()}`);
+          navigate(`/create-nft`);
         }
       }
     }
@@ -237,14 +237,14 @@ function Navbar({ loader,customizeStore,setModal }) {
       dispatch(ManageWalletSideBar(false));
       if (walletAddress == null) {
         // dispatch(RedirectTo("profile"));
-        navigate(`/add-wallet${getParamTenantId()}`);
+        navigate(`/add-wallet`);
         toast.error("Connect your wallet", {
           position: toast.POSITION.TOP_RIGHT,
         });
         // toast.error("Connect your wallet");
         // navigate("/my-profile");
       } else {
-        navigate(`/my-profile${getParamTenantId()}`);
+        navigate(`/my-profile`);
       }
     }
   };
@@ -268,7 +268,7 @@ function Navbar({ loader,customizeStore,setModal }) {
         });
       }
 
-      navigate(`/add-wallet${getParamTenantId()}`);
+      navigate(`/add-wallet`);
     } else {
       dispatch(ManageWalletSideBar(!isOpenWallet));
       dispatch(ManageNotiSideBar(false));
@@ -279,7 +279,7 @@ function Navbar({ loader,customizeStore,setModal }) {
     setDisplay(true);
 
     if (loggedInUser == null) {
-      navigate(`/add-wallet${getParamTenantId()}`);
+      navigate(`/add-wallet`);
       toast.error("Connect your wallet", {
         position: toast.POSITION.TOP_RIGHT,
       });
@@ -417,7 +417,7 @@ function Navbar({ loader,customizeStore,setModal }) {
             <div className="left_navbar d-flex align-items-center LeftNavBar">
               <Link
                 className="navbrand"
-                to={`/${getParamTenantId()}`}
+                to={`/`}
                 style={{ marginRight: "30px", textDecoration: "none" }}
                 onClick={() => {
                   closeWalletAndNoti();
@@ -533,7 +533,7 @@ function Navbar({ loader,customizeStore,setModal }) {
                                 <p className="coll-title">Collections</p>
                                 {collections.map((collection) => {
                                   const route =
-                                    "/collection-details/" + collection._id + getParamTenantId();
+                                    "/collection-details/" + collection._id;
                                   return (
                                     <Link
                                       to={route}
@@ -561,7 +561,7 @@ function Navbar({ loader,customizeStore,setModal }) {
                               <div>
                                 <p className="coll-title">NFTs</p>
                                 {nfts.map((nft) => {
-                                  const route = "/nft-information/" + nft._id + getParamTenantId();
+                                  const route = "/nft-information/" + nft._id;
                                   return (
                                     <Link
                                       to={route}
@@ -582,7 +582,7 @@ function Navbar({ loader,customizeStore,setModal }) {
                             )}
                             <div className="btn-div d-flex">
                               <Link
-                                to={`/search-results${getParamTenantId()}`}
+                                to={`/search-results`}
                                 state={{
                                   value: inputValue,
                                 }}
@@ -671,7 +671,7 @@ function Navbar({ loader,customizeStore,setModal }) {
                               <p className="coll-title">Collections</p>
                               {collections.map((collection) => {
                                 const route =
-                                  "/collection-details/" + collection._id + getParamTenantId();
+                                  "/collection-details/" + collection._id ;
                                 return (
                                   <Link
                                     to={route}
@@ -699,7 +699,7 @@ function Navbar({ loader,customizeStore,setModal }) {
                             <div>
                               <p className="coll-title">NFTs</p>
                               {nfts.map((nft) => {
-                                const route = "/nft-information/" + nft._id + getParamTenantId();
+                                const route = "/nft-information/" + nft._id;
                                 return (
                                   <Link
                                     to={route}
@@ -720,7 +720,7 @@ function Navbar({ loader,customizeStore,setModal }) {
                           )}
                           <div className="btn-div d-flex">
                             <Link
-                              to={`/search-results${getParamTenantId()}`}
+                              to={`/search-results`}
                               state={{
                                 value: inputValue,
                               }}
@@ -778,7 +778,7 @@ function Navbar({ loader,customizeStore,setModal }) {
                           //     : {}
                           // }
                           aria-current="page"
-                          to={`/nfts${getParamTenantId()}`}
+                          to={`/nfts`}
                           onMouseOut={handleMouseOut}
                           onMouseOver={handleMouseOver}
                         >
@@ -803,7 +803,7 @@ function Navbar({ loader,customizeStore,setModal }) {
                               : "nav-link"
                           }
                           exact
-                          to={`/leader-board${getParamTenantId()}`}
+                          to={`/leader-board`}
                           // style={
                           //   activeLeaderboard.includes(location.pathname)
                           //     ? navLink
@@ -833,10 +833,10 @@ function Navbar({ loader,customizeStore,setModal }) {
                     //   activeResource.includes(location.pathname) && loader ===false ? navLink : {}
                     // }
                   >
-                    <NavDropdown.Item onClick={() => navigate(`/help-center${getParamTenantId()}`)}>
+                    <NavDropdown.Item onClick={() => navigate(`/help-center`)}>
                       Help Center
                     </NavDropdown.Item>
-                    <NavDropdown.Item onClick={() => navigate(`/suggestion${getParamTenantId()}`)}>
+                    <NavDropdown.Item onClick={() => navigate(`/suggestion`)}>
                       Suggestions
                     </NavDropdown.Item>
                   </NavDropdown>

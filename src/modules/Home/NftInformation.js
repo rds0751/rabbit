@@ -1808,6 +1808,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                         <style>
                           {`.saleDateTime div {
                             border: none;
+                            padding-left:15.09px;
                         }`}
                         </style>
                         <Select

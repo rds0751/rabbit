@@ -63,7 +63,7 @@ import Blog from "./modules/blogs/blog";
 import Privacy from "./modules/company/privacy";
 import TermsAndCondition from "./modules/company/termsAndCondition";
 import BlogDetail from "./modules/blogs/blogDetail";
-import { getTenantData } from "./services/clientConfigMicroService";
+import { getTenantData,getTenantByStoreName } from "./services/clientConfigMicroService";
 import { useState } from "react";
 import Spinner from "./common/components/Spinner";
 import NewHomePage from "./modules/NewHomePage/index";
@@ -77,11 +77,17 @@ import {
 import {  useSelector } from "react-redux";
 import Utils from "./utility";
 import Billing from "./modules/Billing/UpgradePlan";
+import utility from "./utility"
+
+// const url = new URL(window.location.href);
+// const tenantId = url.searchParams.get("id");
+// localStorage.setItem("tenantId", tenantId);
+// console.log(url)
+
 const url = new URL(window.location.href);
-const tenantId = url.searchParams.get("id");
-
-
-localStorage.setItem("tenantId", tenantId);
+const storeName = url.hostname.split('.');
+localStorage.setItem("storeName", storeName[0]);
+console.log(url);
 
 function App() {
   const dispatch = useDispatch();
@@ -104,6 +110,8 @@ function App() {
   }, []);
 
   useEffect(() => {
+    let tenantDataStoreName=getTenantIdByStoreName(storeName[0]);
+    
     getTenantData()
       .then((response) => {
         dispatch({ type: "ADD_CUSTOMIZE_DATA", payload: response[0] });
@@ -115,6 +123,21 @@ function App() {
         setLoader(false);
       });
   }, []);
+
+  const getTenantIdByStoreName = async (storeName) => {
+    try {
+      const [error, result] = await utility.parseResponse(
+        getTenantByStoreName(storeName)
+      );
+      localStorage.setItem("tenantId", result.responseData._id)
+      // setTenantId(true)
+      dispatch({type:"tenantId", payload:result.responseData._id})
+
+      return result.responseData._id;
+    } catch (error) {
+      return utility.apiFailureToast("Please refresh page");
+    }
+  };
   useEffect(async ()=>{
     if (walletAddress == null) {
       if (localStorage.getItem("has_wallet") === "false") {
