@@ -380,8 +380,8 @@ function Home({ loaderState }) {
                             <Link
                               to={
                                 "/nft-information/" +
-                                nft?._id +
-                                getParamTenantId()
+                                nft?._id 
+          
                               }
                               style={{ textDecoration: "none" }}
                             >

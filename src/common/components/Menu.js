@@ -21,19 +21,19 @@ function Menu(props) {
   const manageNavigation = (name) => {
     if (name == "create") {
       if (walletAddress == null) {
-        dispatch(RedirectTo("create"+getParamTenantId()));
-        navigate("/add-wallet"+getParamTenantId());
+        dispatch(RedirectTo("create"));
+        navigate("/add-wallet");
       } else {
-        navigate("/create-nft"+getParamTenantId());
+        navigate("/create-nft");
       }
     }
     if (name == "profile") {
       if (walletAddress == null) {
-        dispatch(RedirectTo("profile"+getParamTenantId()));
-        navigate("/add-wallet"+getParamTenantId());
+        dispatch(RedirectTo("profile"));
+        navigate("/add-wallet");
         // navigate("/my-profile");
       } else {
-        navigate("/my-profile"+getParamTenantId());
+        navigate("/my-profile");
       }
     }
   };
@@ -44,7 +44,7 @@ function Menu(props) {
         <div className="menuin" style={{
           display: "flex", cursor: "pointer",
           justifyContent: "space-between"
-        }} onClick={() => { navigate('/nfts'+getParamTenantId()); props.handleHamburger(); }}>
+        }} onClick={() => { navigate('/nfts'); props.handleHamburger(); }}>
           <h2 style={{
             textDecoration: "none",
             color: "black",
@@ -64,7 +64,7 @@ function Menu(props) {
         <div className="menuin" style={{
           display: "flex", cursor: "pointer",
           justifyContent: "space-between"
-        }} onClick={() => { navigate('/leader-board'+getParamTenantId()); props.handleHamburger(); }}>
+        }} onClick={() => { navigate('/leader-board'); props.handleHamburger(); }}>
           <h2 style={{
             textDecoration: "none",
             color: "black",
@@ -81,7 +81,7 @@ function Menu(props) {
         <div className="menuin" style={{
           display: "flex", cursor: "pointer",
           justifyContent: "space-between"
-        }}  onClick={()=>{navigate('/help-center'+getParamTenantId()) ; props.handleHamburger();}}>
+        }}  onClick={()=>{navigate('/help-center') ; props.handleHamburger();}}>
           {/* <h2>Resources</h2> */}
           <li className="nav-item dropdown list-unstyled">
             <a
@@ -101,12 +101,12 @@ function Menu(props) {
               style={{ width: "450%" }}
             >
               <li onClick={() => {  }}>
-                <Link className="dropdown-item" to={"/help-center"+getParamTenantId()}>
+                <Link className="dropdown-item" to={"/help-center"}>
                   Help Center
                 </Link>
               </li>
               <li onClick={() => { }}>
-                <Link className="dropdown-item" to={"/Suggestion"+getParamTenantId()} >
+                <Link className="dropdown-item" to={"/Suggestion"} >
                   Suggestions
                 </Link>
               </li>

@@ -30,7 +30,7 @@ function NftToggle({ toggleNft, appearance, loader }) {
                       // color: "#000",
                       fontFamily: toggleNft ? "poppins-semibold" : "poppins",
                     }}
-                    to={`/nfts${getParamTenantId()}`}
+                    to={`/nfts`}
                   >
                     {/* <div onClick={() => setToggleNft(true)}>NFTS</div> */}
                     NFTS
@@ -56,7 +56,7 @@ function NftToggle({ toggleNft, appearance, loader }) {
                       // marginLeft: "2em",
                       width: "120px",
                     }}
-                    to={`/collections-tile${getParamTenantId()}`}
+                    to={`/collections-tile`}
                   >
                     {/* <div onClick={() => setToggleNft(false)}>Collections</div> */}
                     Collections

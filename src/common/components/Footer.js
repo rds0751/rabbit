@@ -87,7 +87,7 @@ function Footer({ loader }) {
   }
 
   const handleRedirectLink = (url) => {
-    navigate(url+getParamTenantId())
+    navigate(url)
   }
 
   return (
@@ -241,46 +241,46 @@ function Footer({ loader }) {
               </div>
             </div>
             <div className="fs-18 d-flex flex-column">
-              <Link to={`/help-center${getParamTenantId()}`} className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+              <Link to={`/help-center`} className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                 {loader ? <Skeleton width={'200px'} /> : 'Community'}
               </Link>
               <p>
-                <Link to={`/help-center${getParamTenantId()}`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to={`/help-center`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'Help Centers'}
                 </Link>
               </p>
               <p>
-                <Link to={`/FAQs${getParamTenantId()}`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to={`/FAQs`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'FAQs'}
                 </Link>
               </p>
               <p>
-                <Link to={`/suggestion${getParamTenantId()}`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to={`/suggestion`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'Suggestions'}
                 </Link>
               </p>
               <p>
-                <Link to={`/blogs${getParamTenantId()}`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to={`/blogs`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'Blogs'}
                 </Link>
               </p>
             </div>
             <div className="fs-18 d-flex flex-column">
-              <Link to={`/about${getParamTenantId()}`} className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+              <Link to={`/about`} className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                 {loader ? <Skeleton width={'200px'} /> : 'Company'}
               </Link>
               <p>
-                <Link to={`/about${getParamTenantId()}`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to={`/about`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'About'}
                 </Link>
               </p>
               <p>
-                <Link to={`/privacy${getParamTenantId()}`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to={`/privacy`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'Privacy Policy'}
                 </Link>
               </p>
               <p>
-                <Link to={`/Terms-Condition${getParamTenantId()}`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to={`/Terms-Condition`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'Terms and Conditions'}
                 </Link>
               </p>
@@ -299,88 +299,88 @@ function Footer({ loader }) {
           <div className="row footer-bottom-sm">
             <div className="col-7">
               <h3 className="fs-18 fw-b">
-                <Link to={`/nfts${getParamTenantId()}`} className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to={`/nfts`} className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'Marketplace'}
                 </Link>
               </h3>
               <p>
-                <Link to={`/nfts${getParamTenantId()}`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to={`/nfts`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'Nft'}
                 </Link>
               </p>
               <p>
-                <Link to={`/collections-tile${getParamTenantId()}`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to={`/collections-tile`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'Collections'}
                 </Link>
               </p>
             </div>
             <div className="col-5">
               <h3 className="fs-18 fw-b">
-                <Link className="footertitle" to={`/leader-board${getParamTenantId()}`} onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link className="footertitle" to={`/leader-board`} onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'Leaderboard'}
                 </Link>
               </h3>
               <p>
-                <Link to={`/top-seller${getParamTenantId()}`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to={`/top-seller`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'Top Seller'}
                 </Link>
               </p>
               <p>
-                <Link to={`/top-bidder${getParamTenantId()}`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to={`/top-bidder`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'Top Buyer'}
                 </Link>
               </p>
               <p>
-                <Link to={`/top-collection${getParamTenantId()}`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to={`/top-collection`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'Top Collections'}
                 </Link>
               </p>
             </div>
             <div className="col-7 mt-3">
               <h3 className="fs-18 fw-b">
-                <Link className="footertitle" to={`/help-center${getParamTenantId()}`} onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link className="footertitle" to={`/help-center`} onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'Community'}
                 </Link>
               </h3>
               <p>
-                <Link to={`/help-center${getParamTenantId()}`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to={`/help-center`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'Help Centers'}
                 </Link>
               </p>
               <p>
-                <Link to={`/FAQs${getParamTenantId()}`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to={`/FAQs`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'FAQs'}
                 </Link>
               </p>
               <p>
-                <Link to={`/suggestion${getParamTenantId()}`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to={`/suggestion`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'Suggestions'}
                 </Link>
               </p>
               <p>
-                <Link to={`/blogs${getParamTenantId()}`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to={`/blogs`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'Blogs'}
                 </Link>
               </p>
             </div>
             <div className="col-5 mt-3">
               <h3 className="fs-18 fw-b">
-                <Link to={`/about${getParamTenantId()}`} className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to={`/about`} className="footertitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'Company'}
                 </Link>
               </h3>
               <p>
-                <Link to={`/about${getParamTenantId()}`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to={`/about`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'About'}
                 </Link>
               </p>
               <p>
-                <Link to={`/about${getParamTenantId()}`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to={`/about`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'Privacy Policy'}
                 </Link>
               </p>
               <p>
-                <Link to={`/about${getParamTenantId()}`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
+                <Link to={`/about`} className="footersubtitle" onMouseOut={handleMouseOut} onMouseOver={handleMouseOver}>
                   {loader ? <Skeleton width={'150px'} /> : 'Terms and Conditon'}
                 </Link>
               </p>

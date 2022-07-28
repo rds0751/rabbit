@@ -370,7 +370,7 @@ export default function PricingHistoryComponentTable(props) {
                       >
                         {" "}
                         <Link
-                          to={"/user-profile/" + row?.createdBy + getParamTenantId()}
+                          to={"/user-profile/" + row?.createdBy}
                           style={{ textDecoration: "none" }}
                         >
                           <span className="Activity-From">
@@ -419,7 +419,7 @@ export default function PricingHistoryComponentTable(props) {
                        
                           {row?.to.length > 0 ? (
                             <Link
-                              to={"/user-profile/" + row?.to[0]?._id + getParamTenantId()}
+                              to={"/user-profile/" + row?.to[0]?._id}
                               style={{ textDecoration: "none" }}
                             >
                               <span className="Activity-From">

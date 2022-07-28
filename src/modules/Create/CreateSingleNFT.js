@@ -570,7 +570,7 @@ function CreateSingleNFT(props) {
 
   useEffect(() => {
     if (customize.permissionToUploadNft === "Only me") {
-      navigate(`/${getParamTenantId()}`);
+      navigate(`/`);
 
       toast.warning("You are not allowed to access this location", {
         position: toast.POSITION.TOP_RIGHT,
@@ -674,7 +674,7 @@ function CreateSingleNFT(props) {
       )}
 
       {/* ----------------------------- */}
-      {props?.isNftCreated ? navigation(myProfileUrl + props?.mintedNftId+getParamTenantId()) : ""}
+      {props?.isNftCreated ? navigation(myProfileUrl + props?.mintedNftId) : ""}
 
       <ToastContainer
         position="top-center"
@@ -1038,7 +1038,7 @@ function CreateSingleNFT(props) {
 
                     <div>
                       <Link
-                        to={`/create-nft-collection${getParamTenantId()}`}
+                        to={`/create-nft-collection`}
                         // pathname:"/create-nft-collection",
                         state={{
                           data: true,

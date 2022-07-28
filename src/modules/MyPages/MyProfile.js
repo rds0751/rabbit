@@ -125,10 +125,10 @@ function MyProfile({ loader }) {
   useEffect(() => {
     if (loggedInUser == null) {
       if (!localStorage.getItem('has_wallet')) {
-        navigate("/add-wallet"+getParamTenantId());
+        navigate("/add-wallet");
       }
 
-      navigate("/my-profile"+getParamTenantId());
+      navigate("/my-profile");
 
     } else setUserId(loggedInUser._id);
   }, [JSON.stringify(loggedInUser)]);
@@ -410,14 +410,14 @@ function MyProfile({ loader }) {
             style={{ border: "5px solid white", zIndex: "99", opacity: "0" }}
           />
           <img className="pencilicon" width="16px" height="16px" src={pencil} />
-          <Link to={`/edit-profile${getParamTenantId()}`} className="textdecornone">
+          <Link to={`/edit-profile`} className="textdecornone">
             {
               loader ? <Skeleton className="profileeditbutton" width="145px" height="42px" style={{ border: 'none', background: '#ebebeb' }} /> :
                 <button style={{ color: `${fetchPalletsColor(appearance.colorPalette)}`, border: `1px solid ${fetchPalletsColor(appearance.colorPalette)}` }} className="profileeditbutton">Edit Profile</button>
             }
           </Link>
         </div>
-        <Link to={`/edit-profile${getParamTenantId()}`} className="editTextAnchor">
+        <Link to={`/edit-profile`} className="editTextAnchor">
           <span className="edit-text">Edit</span>
         </Link>
         <div className="profileavatar  absolute">
@@ -513,7 +513,7 @@ function MyProfile({ loader }) {
               {loggedInUser?.portfolio}
             </h6> : null
           }
-          <Link to={`/edit-profile${getParamTenantId()}`} className="bottombutton">
+          <Link to={`/edit-profile`} className="bottombutton">
             <button className="profileeditbuttonatbottom">Edit Profile</button>
           </Link>
         </div>

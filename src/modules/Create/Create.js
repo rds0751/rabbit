@@ -40,16 +40,16 @@ function Create() {
       toast.success("Wallet connected");
       // dispatch(ManageWalletSideBar(!isOpenWallet));
       if (redirectUrl != "") {
-        history("/my-profile"+getParamTenantId());
+        history("/my-profile");
         // history(redirectUrl);
         if (redirectUrl == "myitems") {
-          history("/my-items"+getParamTenantId());
+          history("/my-items");
         }
         if (redirectUrl == "profile") {
-          history("/my-profile"+getParamTenantId());
+          history("/my-profile");
         }
         if (redirectUrl == "create") {          
-          history("/create-nft"+getParamTenantId());
+          history("/create-nft");
         }
         if (redirectUrl == "wallet") {
           document.body.style.overflow = "hidden";
@@ -60,10 +60,10 @@ function Create() {
         }
         // alert(`${redirectUrl}`);
       } else if(redirectUrl.length === 0){
-        history("/create-nft"+getParamTenantId());
+        history("/create-nft");
       }
       else {
-        history("/my-profile"+getParamTenantId());
+        history("/my-profile");
       }
     } else {
       // toast.error("Choose the wallet");

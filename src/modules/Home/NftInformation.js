@@ -685,7 +685,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                               )}`,
                             }}
                             className="collection-name"
-                            to={"/collection-details/" + nft?.collectionId + getParamTenantId()}
+                            to={"/collection-details/" + nft?.collectionId}
                           >
                             {undefined !== nft?.collectionName &&
                               nft?.collectionName
@@ -1062,7 +1062,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                                 )}`,
                               }}
                               className="collection-name"
-                              to={"/collection-details/" + nft?.collectionId + getParamTenantId()}
+                              to={"/collection-details/" + nft?.collectionId}
                             >
                               {undefined !== nft?.collectionName &&
                                 nft?.collectionName
@@ -1298,7 +1298,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                           <div className="createdByText">Owned By :</div>
 
                           <Link
-                              to={"/user-profile/" + owner[0]?._id + getParamTenantId()}
+                              to={"/user-profile/" + owner[0]?._id}
                             style={{ textDecoration: "none" }}
                             
                           >
@@ -1317,7 +1317,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                           <div className="createdByText">Created By :</div>
 
                           <Link
-                            to={"/user-profile/" + nft?.createdBy+ getParamTenantId()}
+                            to={"/user-profile/" + nft?.createdBy}
                             style={{ textDecoration: "none" }}
                             
                           >

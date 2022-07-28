@@ -125,7 +125,7 @@ function Notification() {
                       <div className="noti-text">
                         <a
                           style={{ textDecoration: "none" }}
-                          href={"/user-profile/" + owner?._id+getParamTenantId()}
+                          href={"/user-profile/" + owner?._id}
                         >
                           <span style={{ color: "#366EEF" }}>
                             {String(owner.userName).length >= 7
@@ -141,7 +141,7 @@ function Notification() {
                         &nbsp;{type}d&nbsp;your&nbsp;
                         <a
                           style={{ textDecoration: "none" }}
-                          href={"/nft-information/" + content?._id+getParamTenantId()}
+                          href={"/nft-information/" + content?._id}
                         >
                           <span style={{ color: "#366EEF" }}>
                             {String(content.name).substring(0, 12)}{" "}
@@ -152,7 +152,7 @@ function Notification() {
                       <div className="noti-text">
                         <a
                           style={{ textDecoration: "none" }}
-                          href={"/user-profile/" + owner?._id+getParamTenantId()}
+                          href={"/user-profile/" + owner?._id}
                         >
                           <span style={{ color: "#366EEF" }}>
                             {String(owner.userName).length >= 7
@@ -168,7 +168,7 @@ function Notification() {
                         &nbsp;bought&nbsp;your&nbsp;
                         <a
                           style={{ textDecoration: "none" }}
-                          href={"/nft-information/" + content?._id+getParamTenantId()}
+                          href={"/nft-information/" + content?._id}
                         >
                           <span style={{ color: "#366EEF" }}>
                             {String(content.name).substring(0, 12)}
@@ -179,7 +179,7 @@ function Notification() {
                       <div className="noti-text">
                         <a
                           style={{ textDecoration: "none" }}
-                          href={"/user-profile/" + owner?._id+getParamTenantId()}
+                          href={"/user-profile/" + owner?._id}
                         >
                           <span style={{ color: "#366EEF" }}>
                             {String(owner.userName).length >= 7
@@ -195,7 +195,7 @@ function Notification() {
                         &nbsp;reported&nbsp;your&nbsp;
                         <a
                           style={{ textDecoration: "none" }}
-                          href={"/nft-information/" + content?._id + getParamTenantId()}
+                          href={"/nft-information/" + content?._id}
                         >
                           <span style={{ color: "#366EEF" }}>
                             {String(content.name).substring(0, 12)}

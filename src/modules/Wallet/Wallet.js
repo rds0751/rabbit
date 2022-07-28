@@ -130,7 +130,7 @@ function Wallet() {
     dispatch(logOut());
     toast.success("Successfully Logged Out");  
     
-    navigate('/'+getParamTenantId());
+    navigate('/');
   }
   const [dataCopied,setDataCopied]=useState(true);
 

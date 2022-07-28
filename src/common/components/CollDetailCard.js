@@ -43,7 +43,7 @@ function CollDetailCard({ nft }) {
     showDateSection = false;
   }
 
-  const route = "/nft-information/" + _id+getParamTenantId();
+  const route = "/nft-information/" + _id
   const likeNft = (id) => {
     if (user.loggedInUser == null) {
       navigate("/add-wallet");

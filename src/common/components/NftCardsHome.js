@@ -47,7 +47,7 @@ function NftCardsHome({ nft, appearance, loader,mt }) {
   // const currDate = new Date();
   // const endDate = biddingDetails.endDate;
   // const daysleft = new Date(endDate - currDate).getDate() - 1;
-  const route = "/nft-information/" + _id + getParamTenantId();
+  const route = "/nft-information/" + _id;
   const likeNft = (id) => {
     if (user?.loggedInUser?._id) {
       const data = {
@@ -348,7 +348,7 @@ function NftCardsHome({ nft, appearance, loader,mt }) {
                     color: `${fetchPalletsColor(appearance.colorPalette)}`,
                   }}
                   className={`${salesInfo?.isOpenForSale ? 'text-overflow-collection' : ''}`}
-                  to={"/collection-details/" + collectionId + getParamTenantId()}
+                  to={"/collection-details/" + collectionId}
                 >
                   {undefined !== collectionName && collectionName.length > 30
                     ? collectionName.slice(0, 30) + "..."

@@ -31,9 +31,9 @@ const NftCardsHome = (props) => {
   const [videoDisplay, setVideoDisplay] = useState(false);
   let route;
   if (nft.hasOwnProperty("contentId") && nft.contentId != "") {
-    route = "/nft-information/" + nft.contentId + getParamTenantId();
+    route = "/nft-information/" + nft.contentId;
   } else {
-    route = "/nft-information/" + nft._id + getParamTenantId();
+    route = "/nft-information/" + nft._id;
   }
   const x = () => {
     setVideoDisplay(!videoDisplay);
@@ -188,7 +188,7 @@ const NftCardsHome = (props) => {
               ) : (
                 <Link
                   title={nft?.name}
-                  to={"/nft-information/" + nft?._id + getParamTenantId()}
+                  to={"/nft-information/" + nft?._id}
                   style={{ textDecoration: "none", color: `#585858` }}
                 >
                   {nft?.name}
@@ -212,7 +212,7 @@ const NftCardsHome = (props) => {
                     nft?.collectionId
                       ? nft?.collectionId
                       : "62823cab6df787009ba1882b"
-                  }${getParamTenantId()}`}
+                  }`}
                 >
                   {nft.collectionName
                     ? nft.collectionName

@@ -234,7 +234,7 @@ function EditProfile(props) {
       // window.location.reload(true);
       // ("jsgg")
       setTimeout(() => {
-        window.location.href = '/my-profile'+getParamTenantId();
+        window.location.href = '/my-profile';
       }, 2000)
       // setTimeout(window.location.href = '/my-profile',9000)
       // window.location.href = '/my-profile';
