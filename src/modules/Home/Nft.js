@@ -26,6 +26,11 @@ import Select from "react-select";
 import Skeleton from "react-loading-skeleton";
 import NftCartLoader from "./NftCardLoader";
 import Navbar from "../../common/components/Navbar";
+import { BsChevronDown } from "react-icons/bs";
+import { AiOutlineCheck } from "react-icons/ai";
+import EthereumIcon from "../../assets/images/Ethereum.png";
+import PolygonIcon from "../../assets/images/polygon.png";
+import BinanceIcon from "../../assets/images/binance.png";
 
 const blue = {
   100: "#DAECFF",
@@ -177,12 +182,15 @@ function NftPage(props) {
   });
   const [nfts, setNfts] = useState([]);
   const [toggleNft, setToggleNft] = useState(true);
-  const [minPrice, setMinPrice] = useState("0");
+  const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [visibleBlogs, setVisibleBlogs] = useState(8);
   const [isLoading, setIsLoading] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const ref = useRef();
+  const [priceRangeBox2, setPriceRangeBox2] = useState(false);
+  const [currencyTypeImage, setCurrencyTypeImage] = useState("EthereumIcon");
+  const [currencyType, setCurrencyType] = useState("Ether");
 
   useEffect(() => {
     if (user?.loggedInUser !== null) {
@@ -299,12 +307,18 @@ function NftPage(props) {
     button.style.background = fetchPalletsColor(appearance.colorPalette);
   };
 
-  const customStyles={
-    dropdownIndicator: base => ({
+  const customStyles = {
+    dropdownIndicator: (base) => ({
       ...base,
-      color: "black" // Custom colour
-    })
-  }
+      color: "black", // Custom colour
+    }),
+  };
+
+  const handleCurrencyType = (Image, Type) => {
+    setCurrencyTypeImage(Image);
+    setCurrencyType(Type);
+    setPriceRangeBox2(false);
+  };
 
   return (
     <>
@@ -331,18 +345,24 @@ function NftPage(props) {
                   padding: "9px 12px 9px 12px",
                 }}
               >
-                <p className="mb-0 sale-type">Price range</p>
+                <p className="mb-0 sale-type">
+                  Price range{" "}
+                  <span style={{ color: "#858585" }}>
+                    {minPrice}-{maxPrice}{" "}
+                    {currencyTypeImage === "EthereumIcon" && "ETH"}
+                    {currencyTypeImage === "PolygonIcon" && "MAT"}
+                    {currencyTypeImage === "BinanceIcon" && "BNB"}
+                  </span>{" "}
+                </p>
                 <div className="filter-drop">
-                  <div
-                    onClick={() => setIsMenuOpen((oldState) => !oldState)}
-                    className="d-flex justify-content-between w-100"
-                  >
-                    <div className="text">All</div>
+                  <div className="d-flex justify-content-between w-100">
+                    {/* <div className="text">All</div> */}
                     <div>
                       <img
                         alt=""
                         src={dropdown}
                         style={{ height: "13px", marginLeft: "8px" }}
+                        onClick={() => setIsMenuOpen((oldState) => !oldState)}
                       />
                     </div>
                   </div>
@@ -350,72 +370,139 @@ function NftPage(props) {
                     className="filter-item"
                     style={{ display: isMenuOpen ? "block" : "none" }}
                   >
-                    <div className="row mb-3 align-items-center">
-                      <div className="col-5">
-                        <input
-                          type="number"
-                          className="form-control"
-                          placeholder="Min"
-                          value={minPrice}
-                          onChange={(e) => setMinPrice(e.target.value)}
-                        />
+                    <div
+                      className="PriceRangeBoxDropDownCurrencyType"
+                      onClick={() => setPriceRangeBox2(!priceRangeBox2)}
+                    >
+                      <div className="PriceRangeBoxDropDownCurrencyTypeName">
+                        {currencyTypeImage === "EthereumIcon" && (
+                          <img src={EthereumIcon} alt="ethereum" />
+                        )}
+                        {currencyTypeImage === "PolygonIcon" && (
+                          <img src={PolygonIcon} alt="ethereum" />
+                        )}
+                        {currencyTypeImage === "BinanceIcon" && (
+                          <img src={BinanceIcon} alt="ethereum" />
+                        )}
+                        <span className="currency-Name">{currencyType}</span>
                       </div>
-                      <div className="col-2 text-center">
-                        <span className="to">to</span>
-                      </div>
-                      <div className="col-5">
-                        <input
-                          type="number"
-                          className="form-control"
-                          placeholder="Max"
-                          value={maxPrice}
-                          onChange={(e) => setMaxPrice(e.target.value)}
-                        />
-                      </div>
+                      <BsChevronDown style={{ cursor: "pointer" }} />
                     </div>
-                    <div className="row">
-                      <div className="col-6">
-                        <Button
-                          type="submit"
-                          onClick={(e) => clearPriceFilter(e)}
-                          variant="outline-primary"
-                          onMouseOver={(e) => handleLoadHover(e)}
-                          onMouseOut={(e) => handleLoadOut(e, true)}
-                          style={{
-                            color: `${fetchPalletsColor(
-                              appearance.colorPalette
-                            )}`,
-                            border: `1px solid ${fetchPalletsColor(
-                              appearance.colorPalette
-                            )}`,
-                          }}
+                    {priceRangeBox2 ? (
+                      <div className="PriceRangeBoxDropDownCurrencyTypeDropDown">
+                        <div
+                          className="selectDisplayFlex etherDiv"
+                          onClick={() =>
+                            handleCurrencyType("EthereumIcon", "Ether")
+                          }
                         >
-                          Clear
-                        </Button>
-                      </div>
-                      <div className="col-6">
-                        <Button
-                          onClick={(e) => handlePriceFilter(e)}
-                          variant="outline-primary"
-                          className="accept-button"
-                          onMouseOver={(e) => handleLoadHover(e)}
-                          onMouseOut={(e) => handleLoadOut(e, true)}
-                          disabled={maxPrice?.length > 0 ? false : true}
-                          style={{
-                            color: `${fetchPalletsColor(
-                              appearance.colorPalette
-                            )}`,
-                            border: `1px solid ${fetchPalletsColor(
-                              appearance.colorPalette
-                            )}`,
-                            backgroundColor:
-                              maxPrice?.length > 0 ? "#366EEF" : "#9AB6F7",
-                          }}
+                          <div className="PriceRangeBoxDropDownCurrencyTypeName PriceRangeBoxDropDownCurrencyTypeDropDownType">
+                            <img src={EthereumIcon} alt="ethereum" />
+                            <span className="currency-Name">Ether</span>
+                          </div>
+                          {currencyTypeImage === "EthereumIcon" && (
+                            <AiOutlineCheck style={{ color: "#366EEF" }} />
+                          )}
+                        </div>
+                        <div
+                          className="selectDisplayFlex maticDiv"
+                          onClick={() =>
+                            handleCurrencyType("PolygonIcon", "Matic")
+                          }
                         >
-                          Apply
-                        </Button>
+                          <div className="PriceRangeBoxDropDownCurrencyTypeName PriceRangeBoxDropDownCurrencyTypeDropDownType">
+                            <img src={PolygonIcon} alt="ethereum" />
+                            <span className="currency-Name">Matic</span>
+                          </div>
+                          {currencyTypeImage === "PolygonIcon" && (
+                            <AiOutlineCheck style={{ color: "#366EEF" }} />
+                          )}
+                        </div>
+                        <div
+                          className="selectDisplayFlex bnbDiv"
+                          onClick={() =>
+                            handleCurrencyType("BinanceIcon", "BNB")
+                          }
+                        >
+                          <div className="PriceRangeBoxDropDownCurrencyTypeName PriceRangeBoxDropDownCurrencyTypeDropDownType">
+                            <img src={BinanceIcon} alt="ethereum" />
+                            <span className="currency-Name">BNB</span>
+                          </div>
+                          {currencyTypeImage === "BinanceIcon" && (
+                            <AiOutlineCheck style={{ color: "#366EEF" }} />
+                          )}
+                        </div>
                       </div>
-                    </div>
+                    ) : (
+                      <>
+                        <div className="row mb-3 align-items-center">
+                          <div className="col-5">
+                            <input
+                              type="number"
+                              className="form-control"
+                              placeholder="Min"
+                              value={minPrice}
+                              onChange={(e) => setMinPrice(e.target.value)}
+                            />
+                          </div>
+                          <div className="col-2 text-center">
+                            <span className="to">to</span>
+                          </div>
+                          <div className="col-5">
+                            <input
+                              type="number"
+                              className="form-control"
+                              placeholder="Max"
+                              value={maxPrice}
+                              onChange={(e) => setMaxPrice(e.target.value)}
+                            />
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-6">
+                            <Button
+                              type="submit"
+                              onClick={(e) => clearPriceFilter(e)}
+                              variant="outline-primary"
+                              onMouseOver={(e) => handleLoadHover(e)}
+                              onMouseOut={(e) => handleLoadOut(e, true)}
+                              style={{
+                                color: `${fetchPalletsColor(
+                                  appearance.colorPalette
+                                )}`,
+                                border: `1px solid ${fetchPalletsColor(
+                                  appearance.colorPalette
+                                )}`,
+                              }}
+                            >
+                              Clear
+                            </Button>
+                          </div>
+                          <div className="col-6">
+                            <Button
+                              onClick={(e) => handlePriceFilter(e)}
+                              variant="outline-primary"
+                              className="accept-button"
+                              onMouseOver={(e) => handleLoadHover(e)}
+                              onMouseOut={(e) => handleLoadOut(e, true)}
+                              disabled={maxPrice?.length > 0 ? false : true}
+                              style={{
+                                color: `${fetchPalletsColor(
+                                  appearance.colorPalette
+                                )}`,
+                                border: `1px solid ${fetchPalletsColor(
+                                  appearance.colorPalette
+                                )}`,
+                                backgroundColor:
+                                  maxPrice?.length > 0 ? "#366EEF" : "#9AB6F7",
+                              }}
+                            >
+                              Apply
+                            </Button>
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
