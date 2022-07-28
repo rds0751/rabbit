@@ -1263,7 +1263,7 @@ function CreateSingleNFT(props) {
                     maxLength="1000"
                     name="text"
                     placeholder="Write description"
-                    value={description.current}
+                    // value={description.current}
                     onChange={(e) => {
                       if (e.target.value != 0) SetDesError("");
 
