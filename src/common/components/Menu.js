@@ -100,12 +100,12 @@ function Menu(props) {
               aria-labelledby="navbarDropdown"
               style={{ width: "450%" }}
             >
-              <li onClick={() => {  }}>
+              <li>
                 <Link className="dropdown-item" to={"/help-center"}>
                   Help Center
                 </Link>
               </li>
-              <li onClick={() => { }}>
+              <li>
                 <Link className="dropdown-item" to={"/Suggestion"} >
                   Suggestions
                 </Link>
