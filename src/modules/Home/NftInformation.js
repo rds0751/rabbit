@@ -645,14 +645,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
         // your custom minting arguments...
     }}
 />  */}
-                    
-                    <crossmint-pay-button
-            collectionTitle="<TITLE_FOR_YOUR_COLLECTION>"
-    collectionDescription="<DESCRIPTION_OF_YOUR_COLLECTION>"
-    collectionPhoto="<OPT_URL_TO_PHOTO_COVER>"
-    clientId="<YOUR_CLIENT_ID>"
-    mintConfig='{"count":"<NUMBER_OF_NFTS>","totalPrice":"<SELECTED_PRICE>",/* ... your custom mint arguments... */}'
-/>
+                              
 
                           <Button
                             // className="btn btn-primary mt-3"
@@ -692,6 +685,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                           </Button>
                         </div>
                         <span className="nft-name">{nft.name}</span>
+                        
                         <div
                           className=""
                           title={
@@ -1003,6 +997,14 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                       <div className="row" id="share_info">
                         <div className="col-xl-10 col-lg-10 col-md-9 col-sm-9">
                           <div className="edit-sell-button">
+                          <crossmint-pay-button
+            collectionTitle="<TITLE_FOR_YOUR_COLLECTION>"
+    collectionDescription="<DESCRIPTION_OF_YOUR_COLLECTION>"
+    collectionPhoto="<OPT_URL_TO_PHOTO_COVER>"
+    clientId="<YOUR_CLIENT_ID>"
+    mintConfig='{"count":"<NUMBER_OF_NFTS>","totalPrice":"<SELECTED_PRICE>",/* ... your custom mint arguments... */}'
+    environment="staging"
+/>
                             {/* <Button
                         style={{
                           display:

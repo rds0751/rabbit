@@ -1,3 +1,4 @@
+import { ethers } from "ethers";
 
 export const fetchPalletsColor = (type) => {
     switch (parseInt(type)) {
@@ -49,6 +50,30 @@ export const getParamTenantWalletAddress = (address) => {
      return `?wallet=${address}`
     else 
     return ''
+}
+export const metaMaskConnector=async ()=>{
+    if (typeof window.ethereum !== "undefined") {
+        try {
+          let accounts = await window.ethereum.request({
+            method: "eth_requestAccounts",
+          });
+          let newaddress = accounts[0];
+          localStorage.setItem("walletAddress", newaddress);
+          let balance = await window.ethereum.request({
+            method: "eth_getBalance",
+            params: [newaddress, "latest"],
+          });
+          const PriceEther = ethers.utils.formatEther(balance);
+          return {
+            newaddress,
+            PriceEther
+          }
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    
 }
 
 export const getPostTenantId = () => {

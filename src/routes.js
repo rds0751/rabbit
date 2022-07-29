@@ -78,6 +78,7 @@ import {  useSelector } from "react-redux";
 import Utils from "./utility";
 import Billing from "./modules/Billing/UpgradePlan";
 import utility from "./utility"
+import { metaMaskConnector } from "./utility/global";
 
 // const url = new URL(window.location.href);
 // const tenantId = url.searchParams.get("id");
@@ -157,18 +158,14 @@ function App() {
         setCustomizeStore(false);
       
       } else if (result.success) {
-        let params = (new URL(document.location)).searchParams;
-        const id= params.get("id");
-        if(id === result?.responseData?._id){
+        let walletData=await metaMaskConnector();
+        if(walletData?.newaddress === result?.responseData?.wallet){
          setCustomizeStore(true);
          setTimeout(() => {
          setModal(true);
          }, 10000)
         }
-  
       }
-
-
     }
   },[walletAddress?.address])
 
