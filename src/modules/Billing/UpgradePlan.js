@@ -16,17 +16,16 @@ const Modal = styled.div`
   background-color: white;
   opacity: 1 !important;
   top: 79px;
-  width: 90%;
+  /* width: 69.74%; */
   height: fit-content;
   border-radius: 13px;
-  height: 95%;
-  overflow-y: scroll;
 `;
 const ModalInner = styled.div`
   opacity: 1;
   margin: auto;
   opacity: 1;
-  width: 96.8%;
+  width: 100%;
+  padding: 32px 32px 63px 32px;
 `;
 
 const Div=styled.div`
@@ -327,10 +326,11 @@ const UpgradePlan = (props) => {
             <div
               className="reportthisitem"
               style={{
-                padding: "2% 1.0%",
+                paddingTop:"0px",
+                marginBottom:"24px"
               }}
             >
-              <h3 className="report-text poppins-normal">Upgrade Your Plan</h3>
+              <h3 className="upgrade">Upgrade Your Plan</h3>
               <i
                 className="fa-solid fa-xmark cross-icon"
                 onClick={() => props?.setModal(false)}

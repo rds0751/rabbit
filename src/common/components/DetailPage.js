@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Table from "@mui/material/Table";
+import {Table,Paper} from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -24,11 +24,21 @@ const TableDiv = styled.div`
   border: 1px solid #c8c8c8;
   border-radius: 0px 0px 3px 3px;
   opacity: 1;
+  overflow: scroll;
+    overflow-y: hidden;
+`;
+const TableCustom = styled(Table)`
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  min-width: 525px !important;
 `;
 const TableContainerCustom = styled(TableContainer)`
   height: 288px !important;
+  overflow: unset!important;
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #c8c8c8;
+  /* border: 1px solid #c8c8c8; */
   border-radius: 0px 0px 3px 3px;
   opacity: 1;
   ::-webkit-scrollbar {
@@ -42,9 +52,16 @@ export default function DetailPage(props) {
   const nft = props.nft;
 
   return (
-    <TableContainerCustom elevation={0}>
+    <TableDiv>
+    <TableContainerCustom component={Paper} elevation={0}>
       {/* <TableDiv> */}
       <TableDown aria-label="simple table">
+      <TableCustom
+              sx={{ minWidth: 650 }}
+              size="small"
+              aria-label="a dense table"
+              stickyHeader
+            >
         <tbody>
           <tr sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
             <td
@@ -151,8 +168,10 @@ export default function DetailPage(props) {
             </td>
           </tr>
         </tbody>
+        </TableCustom>
       </TableDown>
       {/* </TableDiv> */}
     </TableContainerCustom>
+    </TableDiv>
   );
 }

@@ -415,6 +415,11 @@ thead {
   .editItem {
     padding: 50px 10px 20px 10px;
   }
+  .timercount{
+    position: absolute;
+    top: -27px;
+    left: -108%;
+  }
 }
 .edititems {
   font-size: 1.5rem;

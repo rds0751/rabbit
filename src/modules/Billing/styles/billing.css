@@ -82,17 +82,13 @@
 
 .plansContainer {
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  /* justify-content: space-between; */
-  justify-content: start;
-  flex-wrap: wrap;
-  /* flex-wrap: nowrap; */
-  gap: 4.9%;
+  grid-template-columns: auto auto auto auto;
+  display: grid;
+  gap: 29px;
 }
 .plansEach {
   margin-top: 5vh;
-  width: 17.625vw;
+  width: 15.63vw;
   /* height: 16.51vw; */
   height: auto;
   margin-bottom: 10px;
@@ -265,8 +261,8 @@
   }
   .plansContainer {
     width: 100%;
-    display: flex;
-    flex-direction: row;
+    grid-template-columns: auto auto;
+    display: grid;
     /* justify-content: center ; */
   }
   .plansEach {
@@ -565,4 +561,9 @@
   text-align: center;
   border-radius: 6px;
   font-size: 0.833vw;
+}
+.upgrade{
+  font: normal normal 600 22px/33px Poppins;
+  color: #231942;
+  margin: 0px;
 }
