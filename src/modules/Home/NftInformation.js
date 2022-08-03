@@ -1289,7 +1289,7 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                           {salesInfo?.price}&nbsp;{salesInfo?.currency}
                         </span>
                       </span>
-                      <span style={{ display: "flex", justifyContent: "space-between", width:"47.9%" }}>
+                      <span style={{ display: "flex", justifyContent: "space-between", width:"47.9%",position:"relative" }}>
                       {
                           nft.hasOwnProperty('royalty') ?
                             <span className="text">
