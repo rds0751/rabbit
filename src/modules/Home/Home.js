@@ -227,7 +227,7 @@ function Home({ loaderState }) {
                         "Launch your own NFT store in minutes no technical knowledge required"
                       )}
                     </h1>
-                    <p className="mob-heading">
+                    {/* <p className="mob-heading">
                       {loader ? (
                         <Skeleton width="100px" />
                       ) : customize.appearance.heading ? (
@@ -235,7 +235,7 @@ function Home({ loaderState }) {
                       ) : (
                         ""
                       )}
-                    </p>
+                    </p> */}
 
                     <p className="text newtext">
                       {loader ? (

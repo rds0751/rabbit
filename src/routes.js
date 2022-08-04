@@ -98,6 +98,7 @@ function App() {
   const [loader, setLoader] = useState(true);
   const [modal, setModal] = useState(false);
   const [customizeStore,setCustomizeStore]=useState(false);
+  const [storedata,setStoreData]=useState("");
 
   useEffect(() => {
     const checkWalletAddress = localStorage.getItem(
@@ -110,8 +111,9 @@ function App() {
     }
   }, []);
 
-  useEffect(() => {
-    let tenantDataStoreName=getTenantIdByStoreName(storeName[0]);
+  useEffect(async() => {
+    let tenantDataStoreName=await getTenantIdByStoreName(storeName[0]);
+    setStoreData(tenantDataStoreName);
     
     getTenantData()
       .then((response) => {
