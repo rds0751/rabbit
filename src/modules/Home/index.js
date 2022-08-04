@@ -317,7 +317,7 @@ export default class NftDetail extends BaseComponent {
         Math.floor(Math.random() * charactersLength)
       );
     }
-    let unixTimeZone = expiryDate.getTime();
+    let unixTimeZone = new Date(expiryDate).getTime();
     let newPrice=price* Math.pow(10,18)
     signMsg += "!" + unixTimeZone+"!"+newPrice;
 

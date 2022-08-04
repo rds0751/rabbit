@@ -59,7 +59,7 @@ import ReactSelect from "react-select";
 // Add this import line at the top
  //import { CrossmintPayButton } from "@crossmint/client-sdk-react-ui";
  import "@crossmint/client-sdk-vanilla-ui";
-
+ import StripeCheckout from 'react-stripe-checkout';
 toast.configure();
 const CustomSnack = styled(Snackbar)`
   @media (min-width: 992px) {
@@ -367,7 +367,7 @@ export default function NftInformation(props) {
     }
   };
 
-
+console.log(new Date(dateTimeValue).getTime())
   const demoHandleSell = async () => {
 
     let price=priceValidation(period.price) 
@@ -573,6 +573,19 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
     { value: "Might be stolen", label: "Might be stolen" },
     { value: "Other", label: "Other" },
   ];
+
+  const onToken = (token) => {
+    fetch('/save-stripe-token', {
+      method: 'POST',
+      body: JSON.stringify(token),
+    }).then(response => {
+      response.json().then(data => {
+        console.log(data);
+        toast.success("well goof")
+        alert(`We are in business, ${data.email}`);
+      });
+    });
+  }
 
 
   return (
@@ -998,13 +1011,24 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                         <div className="col-xl-10 col-lg-10 col-md-9 col-sm-9">
                           <div className="edit-sell-button">
                           <crossmint-pay-button
-            collectionTitle="<TITLE_FOR_YOUR_COLLECTION>"
-    collectionDescription="<DESCRIPTION_OF_YOUR_COLLECTION>"
-    collectionPhoto="<OPT_URL_TO_PHOTO_COVER>"
-    clientId="<YOUR_CLIENT_ID>"
-    mintConfig='{"count":"<NUMBER_OF_NFTS>","totalPrice":"<SELECTED_PRICE>",/* ... your custom mint arguments... */}'
-    environment="staging"
-/>
+                          collectionTitle="<TITLE_FOR_YOUR_COLLECTION>"
+                        collectionDescription="<DESCRIPTION_OF_YOUR_COLLECTION>"
+                        collectionPhoto="<OPT_URL_TO_PHOTO_COVER>"
+                        clientId="<YOUR_CLIENT_ID>"
+                        mintConfig='{"count":"<NUMBER_OF_NFTS>","totalPrice":"<SELECTED_PRICE>",/* ... your custom mint arguments... */}'
+                        environment="staging"
+                         />
+                    <StripeCheckout
+                   
+                      name={nft?.name}
+                      amount={200 * 100} //left-convert price into dollar
+                      currency="USD"
+                      billingAddress
+                      shippingAddress
+                      token={onToken}
+                      
+                      stripeKey="pk_test_51LT0kMSBO0Bs2oOLWZN3b2P8yV4jQCAyEr3HY1Cah6jJc6pv8qRRCrc4znR4P5q0tIEDXeVPl28cNGiGQEKv9nQM00Kk2Brd2l"
+                    />
                             {/* <Button
                         style={{
                           display:
@@ -1707,8 +1731,14 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                         </div>
                   
                    </div>
+                   <div className="dateTimeContainer">
                     <h3 className="reason-text"> Keep it on sale until :</h3>
-                    <DateTimePicker onChange={setDateTimeValue} minDate={new Date()} disableClock={true} value={dateTimeValue} className="saleDateTime" />
+                    {/* <DateTimePicker onChange={setDateTimeValue} minDate={new Date()} disableClock={true} value={dateTimeValue} className="saleDateTime" />
+                   */}
+                    <div className="putsaleTimeDiv">
+                    <input className="putsaleTime" type={"datetime-local"} min={new Date().toISOString().slice(0, 16)} onChange={(e)=>setDateTimeValue(e.target.value)}  />
+                    </div>
+                    </div>
                   
                   </div>
                   <button
@@ -1745,6 +1775,32 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                       <img src={nft.previewImage ? nft?.previewImage : (nft?.cdnUrl != "" ? nft.cdnUrl : nft.ipfsUrl)} />
                       <div className="abstractillusioncontent">
                         <div className="abstracttitle"></div>
+                        <div
+                          className=""
+                          title={
+                            nft.collectionName
+                              ? nft.collectionName
+                              : "NFTinger Collection"
+                          }
+                          style={{
+                           cursor:"pointer",
+                            color: `${fetchPalletsColor(
+                              appearance.colorPalette
+                            )}`,
+                          }}
+                        
+                          
+                        >
+                        
+                           
+                            {undefined !== nft?.collectionName &&     
+                              nft?.collectionName
+                              ? nft?.collectionName
+                              : nft?.collectionName?.length === 0
+                                ? "NFTinger Collection"
+                                : nft?.collectionName}
+                         
+                        </div>
                         <div className="abstractposter"> {nft.name}</div>
                         <div className="ethprice">{`${salesInfo?.price}  ${salesInfo?.currency}`}</div>
                       </div>
@@ -1986,6 +2042,32 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                       <img src={nft.previewImage ? nft?.previewImage : (nft?.cdnUrl != "" ? nft.cdnUrl : nft.ipfsUrl)} />
                       <div className="abstractillusioncontent">
                         <div className="abstracttitle"></div>
+                        <div
+                          className=""
+                          title={
+                            nft.collectionName
+                              ? nft.collectionName
+                              : "NFTinger Collection"
+                          }
+                          style={{
+                           cursor:"pointer",
+                            color: `${fetchPalletsColor(
+                              appearance.colorPalette
+                            )}`,
+                          }}
+                        
+                          
+                        >
+                        
+                           
+                            {undefined !== nft?.collectionName &&     
+                              nft?.collectionName
+                              ? nft?.collectionName
+                              : nft?.collectionName?.length === 0
+                                ? "NFTinger Collection"
+                                : nft?.collectionName}
+                         
+                        </div>
                         <div className="abstractposter"> {nft.name}</div>
                         <div className="ethprice">{`${salesInfo?.price}  ${salesInfo?.currency}`}</div>
                       </div>
@@ -2059,6 +2141,32 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                       <img src={nft.previewImage ? nft?.previewImage :(nft?.cdnUrl!="" ? nft.cdnUrl:nft.ipfsUrl)} />
                       <div className="abstractillusioncontent">
                         <div className="abstracttitle"></div>
+                        <div
+                          className=""
+                          title={
+                            nft.collectionName
+                              ? nft.collectionName
+                              : "NFTinger Collection"
+                          }
+                          style={{
+                           cursor:"pointer",
+                            color: `${fetchPalletsColor(
+                              appearance.colorPalette
+                            )}`,
+                          }}
+                        
+                          
+                        >
+                        
+                           
+                            {undefined !== nft?.collectionName &&     
+                              nft?.collectionName
+                              ? nft?.collectionName
+                              : nft?.collectionName?.length === 0
+                                ? "NFTinger Collection"
+                                : nft?.collectionName}
+                         
+                        </div>
                         <div className="abstractposter"> {nft.name}</div>
                         <div className="ethprice">{`${makeOfferDetails.price}  ${salesInfo?.currency}`}</div>
                         <div className="ethprice">{`${makeOfferDetails.dateTime}`}</div>
