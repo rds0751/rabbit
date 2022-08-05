@@ -879,7 +879,8 @@ function Navbar({ loader,customizeStore,setModal }) {
                   </li> */}
                   {customize.permissionToUploadNft !== "Only me" ? (
                     <li
-                      style={{ marginRight: "28px" }}
+                    className="create-button-navbar"
+                    
                       onClick={() => {
                         closeWalletAndNoti();
                         manageNavigation("create");

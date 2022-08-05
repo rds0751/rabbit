@@ -98,7 +98,7 @@ function App() {
   const [loader, setLoader] = useState(true);
   const [modal, setModal] = useState(false);
   const [customizeStore,setCustomizeStore]=useState(false);
-  const [storedata,setStoreData]=useState("");
+  const [storedata,setStoreData]=useState(false);
 
   useEffect(() => {
     const checkWalletAddress = localStorage.getItem(
@@ -112,31 +112,51 @@ function App() {
   }, []);
 
   useEffect(async() => {
-    let tenantDataStoreName=await getTenantIdByStoreName(storeName[0]);
-    setStoreData(tenantDataStoreName);
-    
-    getTenantData()
-      .then((response) => {
-        dispatch({ type: "ADD_CUSTOMIZE_DATA", payload: response[0] });
-        dispatch({ type: "ADD_BANNER_NFTS", payload: response[1] });
-
-        setLoader(false);
-      })
-      .catch((error) => {
-        setLoader(false);
-      });
-  }, []);
+    let tenantDataStoreName=await getTenantIdByStoreName("market");
+    setStoreData(true);
+    console.log(tenantDataStoreName?.responseData.wallet,walletAddress.address)
+    if (walletAddress == null) {
+      if (localStorage.getItem("has_wallet") === "false") {
+        setModal(false);
+      }
+    }
+    else{
+      if(walletAddress?.address === tenantDataStoreName?.responseData.wallet){
+       setCustomizeStore(true);
+       setTimeout(() => {
+       setModal(true);
+       }, 10000)
+      }
+      else{
+        setModal(false);
+        setCustomizeStore(false);
+      }
+    }
+  }, [walletAddress?.address,storedata]);
 
   const getTenantIdByStoreName = async (storeName) => {
     try {
       const [error, result] = await utility.parseResponse(
         getTenantByStoreName(storeName)
       );
+      if(result.success){
+        //fetch tenant detail after store exist
+        getTenantData()
+        .then((response) => {
+          dispatch({ type: "ADD_CUSTOMIZE_DATA", payload: response[0] });
+          dispatch({ type: "ADD_BANNER_NFTS", payload: response[1] });
+  
+          setLoader(false);
+        })
+        .catch((error) => {
+          setLoader(false);
+        });
+      }
       localStorage.setItem("tenantId", result.responseData._id)
       // setTenantId(true)
       dispatch({type:"tenantId", payload:result.responseData._id})
 
-      return result.responseData._id;
+      return result;
     } catch (error) {
       return utility.apiFailureToast("Please refresh page");
     }
@@ -159,15 +179,7 @@ function App() {
         setModal(false);
         setCustomizeStore(false);
       
-      } else if (result.success) {
-        let walletData=await metaMaskConnector();
-        if(walletData?.newaddress === result?.responseData?.wallet){
-         setCustomizeStore(true);
-         setTimeout(() => {
-         setModal(true);
-         }, 10000)
-        }
-      }
+      } 
     }
   },[walletAddress?.address])
 
