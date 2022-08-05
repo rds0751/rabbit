@@ -466,6 +466,9 @@ const StoreButton = styled.button`
   border-radius: 12px;
   border: none;
   opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 216px;
   height: 54px;
   font: normal normal medium 18px/27px Poppins;
@@ -764,6 +767,10 @@ const ButtonStore = styled.button`
   border-radius: 12px;
   cursor: pointer;
   margin-top: 35px;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  flex-direction: row;
   font: normal normal normal 18px/27px Poppins;
   &:hover {
     background-color: #016dd9;
@@ -1368,8 +1375,9 @@ const HomeCard = () => {
               <StoreButton onClick={() => metaMaskConnector()}>
                 <div className="display-loader-left storefront-create-store">
                   {loader ? <Spinner></Spinner> : ""}
-                  Create Store
+               
                 </div>
+                Create Store
               </StoreButton>
             </HeadTitle>
           </CommonSection>

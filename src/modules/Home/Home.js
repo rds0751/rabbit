@@ -41,7 +41,7 @@ import utility from "../../utility";
 import Navbar from "../../common/components/Navbar";
 let preivewFiles = ["video/mp4", "audio/mpeg"];
 
-function Home({ loaderState }) {
+function Home({ loaderState,storeData }) {
   const [audioDisplay, setaudioDisplay] = useState(false);
   const [videoDisplay, setVideoDisplay] = useState(false);
 
@@ -65,16 +65,6 @@ function Home({ loaderState }) {
 
   useEffect(async () => {
     let tenantId = await checkAndUpdatetenatId()
-    getTenantData()
-      .then((response) => {
-        dispatch({ type: "ADD_CUSTOMIZE_DATA", payload: response[0] });
-        dispatch({ type: "ADD_BANNER_NFTS", payload: response[1] });
-
-        setLoader(false);
-      })
-      .catch((error) => {
-        setLoader(false);
-      });
 
     try {
       if (changeState) {
@@ -99,7 +89,6 @@ function Home({ loaderState }) {
             toast.error(res.message);
             // setIsloading(false);
           }
-
           setLoadNfts(false);
         });
       }

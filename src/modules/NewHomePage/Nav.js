@@ -97,7 +97,10 @@ const Item = styled.label`
   cursor: pointer;
 `;
 const CreateStore = styled.button`
-  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
   text-align: left;
   font: normal normal medium 16px/25px Poppins;
   letter-spacing: 0px;
@@ -313,8 +316,9 @@ const Nav = (props) => {
             <CreateStore onClick={() => MetaMaskConnector()}>
             <div className="display-loader-left m-t-2">
                   {loader ? <Spinner></Spinner> : ""}
-                  Create Store
+                  
                   </div>
+                  Create Store
             </CreateStore>
           </ItemsDiv>
         </NavItem>
