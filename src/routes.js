@@ -88,7 +88,6 @@ import { metaMaskConnector } from "./utility/global";
 const url = new URL(window.location.href);
 const storeName = url.hostname.split('.');
 localStorage.setItem("storeName", storeName[0]);
-console.log(url);
 
 function App() {
   const dispatch = useDispatch();
@@ -112,9 +111,8 @@ function App() {
   }, []);
 
   useEffect(async() => {
-    let tenantDataStoreName=await getTenantIdByStoreName("market");
+    let tenantDataStoreName=await getTenantIdByStoreName(storeName[0]);
     setStoreData(true);
-    console.log(tenantDataStoreName?.responseData.wallet,walletAddress.address)
     if (walletAddress == null) {
       if (localStorage.getItem("has_wallet") === "false") {
         setModal(false);
@@ -122,14 +120,17 @@ function App() {
     }
     else{
       if(walletAddress?.address === tenantDataStoreName?.responseData.wallet){
-       setCustomizeStore(true);
-       setTimeout(() => {
-       setModal(true);
-       }, 10000)
+      dispatch({type:"tenantLogin",payload:true})
+      setCustomizeStore(true);
+      setTimeout(()=>{
+        setModal(true);
+      })
+     
       }
       else{
-        setModal(false);
+        dispatch({type:"tenantLogin",payload:false})
         setCustomizeStore(false);
+        setModal(false);
       }
     }
   }, [walletAddress?.address,storedata]);
@@ -141,47 +142,50 @@ function App() {
       );
       if(result.success){
         //fetch tenant detail after store exist
-        getTenantData()
-        .then((response) => {
-          dispatch({ type: "ADD_CUSTOMIZE_DATA", payload: response[0] });
-          dispatch({ type: "ADD_BANNER_NFTS", payload: response[1] });
-  
-          setLoader(false);
-        })
-        .catch((error) => {
-          setLoader(false);
-        });
-      }
-      localStorage.setItem("tenantId", result.responseData._id)
+        localStorage.setItem("tenantId", result.responseData._id)
       // setTenantId(true)
       dispatch({type:"tenantId", payload:result.responseData._id})
+        setTimeout(()=>{
+          getTenantData( false,false,result.responseData._id) //pass 
+          .then((response) => {
+            dispatch({ type: "ADD_CUSTOMIZE_DATA", payload: response[0] });
+            dispatch({ type: "ADD_BANNER_NFTS", payload: response[1] });
+            setLoader(false);
+          })
+          .catch((error) => {
+            setLoader(false);
+          });
+        },2000)
+       
+      }
+      
 
       return result;
     } catch (error) {
       return utility.apiFailureToast("Please refresh page");
     }
   };
-  useEffect(async ()=>{
-    if (walletAddress == null) {
-      if (localStorage.getItem("has_wallet") === "false") {
-        setModal(false);
-      }
-    }
-    else {
-      const [error, result] = await Utils.parseResponse(
-        getTenantByWallet(walletAddress.address)
-      );
-      if (error || !result) {
-        setModal(false);
-        setCustomizeStore(false);
-      }
-      if (!result.success) {
-        setModal(false);
-        setCustomizeStore(false);
+  // useEffect(async ()=>{
+  //   if (walletAddress == null) {
+  //     if (localStorage.getItem("has_wallet") === "false") {
+  //       setModal(false);
+  //     }
+  //   }
+  //   else {
+  //     const [error, result] = await Utils.parseResponse(
+  //       getTenantByWallet(walletAddress.address)
+  //     );
+  //     if (error || !result) {
+  //       setModal(false);
+  //       setCustomizeStore(false);
+  //     }
+  //     if (!result.success) {
+  //       setModal(false);
+  //       setCustomizeStore(false);
       
-      } 
-    }
-  },[walletAddress?.address])
+  //     } 
+  //   }
+  // },[walletAddress?.address])
 
   return (
     <div className="App">

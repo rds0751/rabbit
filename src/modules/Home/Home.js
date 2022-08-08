@@ -36,7 +36,7 @@ import NftCards from "./NftCards";
 import Billing from "../Billing/UpgradePlan";
 import { getTenantByStoreName, getTenantData } from "../../services/clientConfigMicroService";
 import { CheckUserByWalletAddress } from "../../services/UserMicroService";
-import { WEB_APP_USER_WALLET_ADDRESS } from "../../reducers/Constants";
+import { NFTSData, WEB_APP_USER_WALLET_ADDRESS } from "../../reducers/Constants";
 import utility from "../../utility";
 import Navbar from "../../common/components/Navbar";
 let preivewFiles = ["video/mp4", "audio/mpeg"];
@@ -78,7 +78,6 @@ function Home({ loaderState,storeData }) {
     
               setNfts(customize.bannerNftData);
             } else {
-         
               setNfts(res?.responseData?.nftContent);
             }
             setChangeState(false);

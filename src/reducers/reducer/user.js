@@ -5,6 +5,8 @@ import {
   LOGGED_IN_UER_DETAILS,
   REDIRECT_URL,
   LOG_OUT,
+  NFTSData,
+  tenantLogin
 } from "../Constants";
 import { eventConstants} from "../../constants";
 
@@ -17,6 +19,8 @@ let initialState = {
   allUserData: "",
   walletAddress: null,
   redirectUrl: "",
+  nftsData:"",
+  tenantLogin:false,
    "tenantId"
 :""
 };
@@ -44,6 +48,10 @@ export const UserReducer = (state = initialState, action) => {
         ...state,
         loggedInUser: action.payload,
       };
+      case NFTSData:
+      return {...state,nftsData:action.payload}
+      case tenantLogin:
+        return {...state,tenantLogin:action.payload}
     case ALL_USERS:
       return {
         ...state,
@@ -59,6 +67,7 @@ export const UserReducer = (state = initialState, action) => {
             ...state,
             loading: false
         }
+    
 
     default:
     case REDIRECT_URL:
