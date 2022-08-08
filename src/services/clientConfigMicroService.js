@@ -51,7 +51,7 @@ export function getCategories(requestData) {
 //   }
 // }
 
-export async function getTenantData(paramToken=false, paramAddress=false) {
+export async function getTenantData(paramToken=false, paramAddress=false,tenantId) {
   const token = {
     "Access-Control-Allow-Origin": "*",
     "Content-type": "Application/json",
@@ -59,7 +59,7 @@ export async function getTenantData(paramToken=false, paramAddress=false) {
   };
 
   const body = {
-    "_id" : getPostTenantId()
+    "_id" :tenantId!=null ? tenantId :getPostTenantId() 
   }
 
   try {   

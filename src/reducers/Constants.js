@@ -11,7 +11,9 @@ export const BASE_URL1 =
 export const WEB_APP_USER_WALLET_ADDRESS = "WEB_APP_USER_WALLET_ADDRESS";
 export const ADD_WALLET = "ADD_WALLET";
 export const LOGGED_IN_UER_DETAILS = "LOGGED_IN_UER_DETAILS";
+export const NFTSData = "NFTSData";
 export const ADD_WALLET_ADDRESS = "ADD_WALLET_ADDRESS"
+export const tenantLogin="tenantLogin"
 
 export const GET_ERRORS = "GET_ERRORS";
 export const ALL_USERS = "ALL_USERS";

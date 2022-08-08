@@ -5,7 +5,7 @@ import NftToggle from "../../common/components/NftToggle";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import { getNFtsData } from "../../services/webappMicroservice";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import Spinner from "../../common/components/Spinner";
 import NftCardsHome from "../../common/components/NftCardsHome";
 import dropdown from "../../assets/images/dropdown.svg";
@@ -31,6 +31,7 @@ import { AiOutlineCheck } from "react-icons/ai";
 import EthereumIcon from "../../assets/images/Ethereum.png";
 import PolygonIcon from "../../assets/images/polygon.png";
 import BinanceIcon from "../../assets/images/binance.png";
+import { NFTSData } from "../../reducers/Constants";
 
 const blue = {
   100: "#DAECFF",
@@ -168,7 +169,7 @@ const options = [
 
 function NftPage(props) {
   const { user } = useSelector((state) => state);
-
+  const dispatch = useDispatch();
   const [loader, setLoader] = useState(props.loaderState);
   const { loggedInUser } = user;
   const appearance = useSelector((state) => state.customize.appearance);
@@ -209,6 +210,7 @@ function NftPage(props) {
         setIsLoading(true);
         if (res.success) {
           setNfts(res.responseData.nftContent);
+          dispatch({type:"NFTSData",payload:res.responseData.nftContent })
           setIsLoading(false);
         } else {
           toast.error(res.message);

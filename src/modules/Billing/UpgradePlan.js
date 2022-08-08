@@ -85,113 +85,7 @@ const UpgradePlan = (props) => {
 
   
 
-  const MonthlyPlan = [
-    {
-      billingCycle: "monthly",
-      createdAt: "2022-04-04T12:09:35.988Z",
-      currency: "US dollar",
-      description: [
-        "Admin Portal",
-        "Multiple Blockchain Support",
-        "Multi File Formats",
-        "Filter And Ranking",
-        "Lazy Minting",
-        "Social Media Sharing"
-      ],
-      NFTCollection:"100 NFT | 2 Collection",
-      planTitle: "Key Feature",
-      planName: "Free Forever",
-      planActive: "Current",
-      price: 0,
-    },
-    {
-      billingCycle: "monthly",
-      createdAt: "2022-04-04T12:09:35.988Z",
-      currency: "US dollar",
-      description: [
-        "Admin Portal",
-        "Royalty Feature",
-        "Multiple Blockchain support",
-        "Multi File Formats",
-        "Filter and Rankings",
-        "Lazy Minting",
-        "On Chain Collection",
-        "Detailed Analytics",
-        "Blogs Management",
-        "Advanced Content Moderation",
-        "Platform Fees Mangement",
-        "Social Media Sharing",
-        "custom URL",
-        "Categories Mangement",
-        "Many More",
-      ],
-      NFTCollection:"500 NFT | 10 Collection",
-      planTitle: "Everything in Free, plus:",
-      planName: "Standard",
-      planActive: "Upgrade",
-      price: 99,
-    },
-    {
-      billingCycle: "monthly",
-      createdAt: "2022-04-04T12:09:35.988Z",
-      currency: "US dollar",
-      description: [
-        "Admin Portal",
-        "Royalty Feature",
-        "Multiple Blockchain support",
-        "Multi File Formats",
-        "Filter and Rankings",
-        "Lazy Minting",
-        "Metaverse Shop & Store",
-        "On Chain Collection",
-        "Detailed Analytics",
-        "Blogs Management",
-        "Advanced Visitor Mangement",
-        "Training and Support",
-        "Advanced Content",
-        "Platform Fees Mangement",
-        "Social Media Sharing",
-      ],
-      NFTCollection:"10000 NFT | 100 Collection",
-      planTitle: "Everything in Standard ,plus:",
-      planName: "Plus",
-      planActive: "Upgrade",
-      price: 399,
-    },
-    {
-      billingCycle: "monthly",
-      createdAt: "2022-04-04T12:09:35.988Z",
-      currency: "US dollar",
-      description: [
-        "Admin Portal",
-        "Royality Feature",
-        "Multiple Blockchain Support",
-       "Multi File Formats",
-        "Filter and Ranking",
-        "Make Offer",
-        "Lazy Minting",
-        "Bulk Minting",
-        "On Chain Collection",
-        "Detailed Analytics",
-        "Blogs Mangement",
-      "Advanced Visitor Mangement",
-       "Training and Support",
-        "Dedicated Realtionship Manger",
-       "Advanced Content Moderation",
-        "Metaverse Galleries",
-        "Conversion to NFT Portal",
-        "Platform fess mangement",
-        "Social Media Sharing",
-        "Custom Url",
-        "Categories Mangement "
-      ],
-      NFTCollection:"Unlimited NFTs | Unlimited Collections",
-      planTitle: "Everything in Professional, plus:",
-      planName: "Pro",
-      planActive: "Upgrade",
-      price: 999,
-    },
-  ];
+    
 
   const YearlyPlan = [
     {
@@ -371,7 +265,7 @@ const UpgradePlan = (props) => {
                   );
                 })}
                 <div className="Nodata">
-                  {MonthlyPlan?.length == 0 && (
+                  {billingMonthly?.length == 0 && (
                     <div className="Nodata"> No Data</div>
                   )}
                 </div>
