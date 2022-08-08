@@ -158,8 +158,6 @@ function App() {
         },2000)
        
       }
-      
-
       return result;
     } catch (error) {
       return utility.apiFailureToast("Please refresh page");
