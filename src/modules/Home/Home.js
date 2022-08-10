@@ -186,7 +186,6 @@ function Home({ loaderState,storeData }) {
 
   return (
     <>
-      <Billing></Billing>
       <div className="homepage">
         <div
           className="banner"
