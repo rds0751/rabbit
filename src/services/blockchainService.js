@@ -65,12 +65,11 @@ async function mintNFT({
       signer
     );
     const result = await contractData.mint(
-      tokenURI,
-      tokenId,
-      ethers.utils.parseEther(price.toString()),
-      royalty,
       ipfsUrl,
-      { gasLimit: 100000 }
+      tokenId,
+      ethers.utils.parseEther("0"),
+      royalty,
+      accounts[0],
     );
     let res = await result.wait();
     return {
@@ -105,6 +104,7 @@ async function mintNFT({
     };
   } else if (window.ethereum.networkVersion == 97 && blockchain == "Binance") {
     //etherum
+    console.log(contractAddress)
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contractData = new ethers.Contract(
@@ -113,11 +113,11 @@ async function mintNFT({
       signer
     );
     const result = await contractData.mint(
-      tokenURI,
+      ipfsUrl,
       tokenId,
-      ethers.utils.parseEther(price.toString()),
+      ethers.utils.parseEther("0"),
       royalty,
-      { gasLimit: 100000 }
+      accounts[0]
     );
     let res = await result.wait();
     return {
@@ -342,6 +342,32 @@ async function signcheck({ signMsg,blockchain }) {
     };
 
   }
+  else if (window.ethereum.networkVersion == 80001 && blockchain == "Polygon") {
+    await window.ethereum.send("eth_requestAccounts");
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const signature = await signer.signMessage(signMsg);
+    const address = await signer.getAddress();
+    return {
+      signMsg,
+      signature,
+      address,
+    };
+
+  }
+  else if (window.ethereum.networkVersion == 97 && blockchain == "Binance") {
+    await window.ethereum.send("eth_requestAccounts");
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const signature = await signer.signMessage(signMsg);
+    const address = await signer.getAddress();
+    return {
+      signMsg,
+      signature,
+      address,
+    };
+
+  }
   else return Promise.reject("Please Select Valid Network in the metamask");
 
     
@@ -486,8 +512,8 @@ async function buyNFT({
 }) {
 
   let RinkebyAddress = "0xf7AC24823B0B31d05631850B5Ab45A9Cb79D7a34";
-  let PolygonAddress = "0x6C626D2226C2415Ab32989660ea7f2C6265f230c";
-  let BinanceAddress = "0x52CDde738d71568F79379FB1d671C4Eaef33d638";
+  let PolygonAddress = "0xE5680E66c19bAfc10F4B24b4188677a58fD5fC50";
+  let BinanceAddress = "0x6C626D2226C2415Ab32989660ea7f2C6265f230c";
 
 
   const receiver = await window.ethereum.request({
@@ -495,6 +521,7 @@ async function buyNFT({
   });
   if (!window.ethereum) return Promise.reject("Please install metamask");
   if (window.ethereum.networkVersion == 80001) {
+    alert("t")
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contractData = new ethers.Contract(
@@ -505,28 +532,29 @@ async function buyNFT({
 
     const resultBuy = await contractData.buy(
       tokenId,
-      message,
-      signature,
+      message.toString(),
+      signature.toString(),
       contractAddress,
-      { gasLimit: 100000, value: ethers.utils.parseEther("0.1") }
+      receiver[0],
+      { value: ethers.utils.parseEther(price.toString()) }
     );
-    const finalResult = await signer.sendTransaction(resultBuy);
-    const amount = ethers.utils.parseUnits(price.toString(), 18);
-    const accounts = await provider.send("eth_requestAccounts", []);
+    // const finalResult = await signer.sendTransaction(resultBuy);
+    // const amount = ethers.utils.parseUnits(price.toString(), 18);
+    //  const accounts = await provider.send("eth_requestAccounts", []);
 
-    const balance = await provider.getBalance(accounts[0]);
-    if (
-      ethers.utils.formatUnits(balance, 18) <
-      ethers.utils.formatUnits(amount, 18)
-    )
-      return Promise.reject("Insufficient fund");
+    // const balance = await provider.getBalance(accounts[0]);
+    // if (
+    //   ethers.utils.formatUnits(balance, 18) <
+    //   ethers.utils.formatUnits(amount, 18)
+    // )
+    //   return Promise.reject("Insufficient fund");
 
-    const options = { value: ethers.utils.parseEther(price.toString()) };
+    // const options = { value: ethers.utils.parseEther(price.toString()) };
 
-    const result = await contractData.buy(tokenId, options);
+    // const result = await contractData.buy(tokenId, options);
 
 
-    let res = await result.wait();
+    let res = await resultBuy.wait();
 
     return {
       ...res,
@@ -588,9 +616,11 @@ async function buyNFT({
     );
     const resultBuy = await contractData.buy(
       tokenId,
-      message,
-      signature,
-      contractAddress
+      message.toString(),
+      signature.toString(),
+      contractAddress,
+      receiver[0],
+      { value: ethers.utils.parseEther(price.toString()) }
     );
     const amount = ethers.utils.parseUnits(price.toString(), 18);
     const accounts = await provider.send("eth_requestAccounts", []);
@@ -602,12 +632,12 @@ async function buyNFT({
     )
       return Promise.reject("Insufficient fund");
 
-    const options = { value: ethers.utils.parseEther(price.toString()) };
+    // const options = { value: ethers.utils.parseEther(price.toString()) };
 
-    const result = await contractData.buy(tokenId, options);
+    // const result = await contractData.buy(tokenId, options);
    
 
-    let res = await result.wait();
+    let res = await resultBuy.wait();
 
     return {
       ...res,

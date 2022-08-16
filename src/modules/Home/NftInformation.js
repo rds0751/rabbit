@@ -367,7 +367,7 @@ export default function NftInformation(props) {
     }
   };
 
-console.log(new Date(dateTimeValue).getTime())
+
   const demoHandleSell = async () => {
 
     let price=priceValidation(period.price) 

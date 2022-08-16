@@ -1063,8 +1063,6 @@ function CreateSingleNFT(props) {
                  className="form-control-1 category-select collectionCategory"
                     onChange={(e) => {
                       const addressId = e.target.value.split(",");
-                      console.log(addressId);
-
                       if (addressId[2] === "NFTinger collection") {
                         setCollectionName(addressId[2]);
                         setCollectionBlockchain(addressId[3]);
