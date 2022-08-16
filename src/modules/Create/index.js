@@ -212,7 +212,7 @@ class Index extends BaseComponent {
 
         if (blockchainError || !blockchainResult) {
           this.setState({ loaderState: false });
-
+          console.log(   blockchainError?.message, blockchainError?.data?.message)
           return this.showToast(
             "error",
             blockchainError?.data?.message ||
@@ -237,7 +237,7 @@ class Index extends BaseComponent {
 
         if (blockchainError || !blockchainResult) {
           this.setState({ loaderState: false });
-
+          console.log(   blockchainError?.message, blockchainError?.data?.message)
           return this.showToast(
             "error",
             blockchainError?.data?.message ||
@@ -274,7 +274,7 @@ class Index extends BaseComponent {
 
         if (blockchainError || !blockchainResult) {
           this.setState({ loaderState: false });
-
+          console.log(   blockchainError?.message, blockchainError?.data?.message,blockchainError)
           return this.showToast(
             "error",
             blockchainError?.data?.message && "Something went wrong"||
@@ -300,7 +300,7 @@ class Index extends BaseComponent {
 
         if (blockchainError || !blockchainResult) {
           this.setState({ loaderState: false });
-          
+          console.log( blockchainError?.message, blockchainError?.data?.message,blockchainError)
 
           return this.showToast(
             "error",
