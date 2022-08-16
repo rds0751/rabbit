@@ -111,7 +111,7 @@ function App() {
   }, []);
 
   useEffect(async() => {
-    let tenantDataStoreName=await getTenantIdByStoreName(storeName[0]);
+    let tenantDataStoreName=await getTenantIdByStoreName("demo");
     setStoreData(true);
     if (walletAddress == null) {
       if (localStorage.getItem("has_wallet") === "false") {

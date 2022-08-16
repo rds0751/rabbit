@@ -237,7 +237,10 @@ class Index extends BaseComponent {
 
         if (blockchainError || !blockchainResult) {
           this.setState({ loaderState: false });
-          console.log(   blockchainError?.message, blockchainError?.data?.message)
+          console.log(   blockchainError?.message, blockchainError?.data?.message,blockchainError)
+          if(blockchainError === 'Please Select Valid Network in the metamask'){
+            return this.showToast(blockchainError)
+          }else{
           return this.showToast(
             "error",
             blockchainError?.data?.message ||
@@ -245,6 +248,7 @@ class Index extends BaseComponent {
               blockchainError ||
               "Unable to Mint NFT on blockchain"
           );
+          }
         }
         blockchainRes = blockchainResult;
 
@@ -275,13 +279,17 @@ class Index extends BaseComponent {
         if (blockchainError || !blockchainResult) {
           this.setState({ loaderState: false });
           console.log(   blockchainError?.message, blockchainError?.data?.message,blockchainError)
+          if(blockchainError === 'Please Select Valid Network in the metamask'){
+            return this.showToast(blockchainError)
+          }else{
           return this.showToast(
             "error",
-            blockchainError?.data?.message && "Something went wrong"||
+            blockchainError?.data?.message ||
             blockchainError?.message && "The Transction has been cancelled" ||
-              blockchainError  && "Something went wrong"||
+              blockchainError ||
               "Unable to Mint NFT on blockchain"
           );
+          }
         }
         blockchainRes = blockchainResult;
       } else {
@@ -300,15 +308,18 @@ class Index extends BaseComponent {
 
         if (blockchainError || !blockchainResult) {
           this.setState({ loaderState: false });
-          console.log( blockchainError?.message, blockchainError?.data?.message,blockchainError)
-
+          console.log(   blockchainError?.message+"1", blockchainError?.data?.message+"2",blockchainError+"3")
+          if(blockchainError === 'Please Select Valid Network in the metamask'){
+            return this.showToast("error",blockchainError)
+          }else{
           return this.showToast(
             "error",
             blockchainError?.data?.message ||
-            blockchainError?.message && "Transction Failed" ||
-              blockchainError  && "The Transction has been cancelled" ||
+            blockchainError?.message && "The Transction has been cancelled" ||
+              blockchainError ||
               "Unable to Mint NFT on blockchain"
           );
+          }
         }
         blockchainRes = blockchainResult;
       }
