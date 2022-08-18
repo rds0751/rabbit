@@ -425,8 +425,8 @@ async function removeFromSaleNft({
   signature,
 }) {
   let Ethereum = "0x3124f1f72eca189b7fd5EE602F3ADFEb7a83763f";
-  let Polygon = "0x6C626D2226C2415Ab32989660ea7f2C6265f230c";
-  let Binance = "0x52CDde738d71568F79379FB1d671C4Eaef33d638";
+  let Polygon = "0xE5680E66c19bAfc10F4B24b4188677a58fD5fC50";
+  let Binance = "0x6C626D2226C2415Ab32989660ea7f2C6265f230c";
 
   if (!window.ethereum) return Promise.reject("Please install metamask");
   if (window.ethereum.networkVersion == 80001 && blockchain == "Polygon") {
@@ -437,7 +437,7 @@ async function removeFromSaleNft({
       contractbuyAndRemoveABI,
       signer
     );
-    const result = await contractData.updateListingStatus(
+    const result = await contractData.cancel(
       tokenId,
       message,
       signature,
@@ -477,7 +477,11 @@ async function removeFromSaleNft({
       contractbuyAndRemoveABI,
       signer
     );
-    const result = await contractData.updateListingStatus(tokenId, false);
+    const result = await contractData.cancel( 
+      tokenId,
+      message,
+      signature,
+      contractAddress);
     let res = await result.wait();
     return {
       ...res,
