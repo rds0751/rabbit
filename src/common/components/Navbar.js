@@ -440,8 +440,8 @@ function Navbar({ loader,customizeStore,setModal }) {
                     </>
                    
                   ):( <LogoDiv onClick={()=>navigate("/")}>
-                   {/* <Image src={NFTinger}></Image> */}
-                   <LogoDiv>Your Logo</LogoDiv>
+                   <Image src={NFTinger}></Image>
+                   {/* <LogoDiv>Your Logo</LogoDiv> */}
                     </LogoDiv>)
 
 

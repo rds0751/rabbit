@@ -1011,13 +1011,13 @@ const [offerLoadingModal,setOfferLoadingModal]=useState(false);
                         <div className="col-xl-10 col-lg-10 col-md-9 col-sm-9">
                           <div className="edit-sell-button">
                         
-                    <StripeCheckout
+                    {/* <StripeCheckout
                       name={nft?.name}
                       amount={200 * 100} //left-convert price into dollar
                       currency="USD"
                       token={onToken}
                       stripeKey="pk_test_51LT0kMSBO0Bs2oOLWZN3b2P8yV4jQCAyEr3HY1Cah6jJc6pv8qRRCrc4znR4P5q0tIEDXeVPl28cNGiGQEKv9nQM00Kk2Brd2l"
-                    />
+                    /> */}
                             {/* <Button
                         style={{
                           display:
